@@ -134,7 +134,9 @@ export function useTable<DataType extends Data>({
 
     const loadPersistedState = async () => {
       const columnsState: ColumnState[] = await window.csdm.readTableState(persistStateKey);
-      columnOrderRef.current = columnsState.map((state) => state.id);
+      if (columnsState.length > 0) {
+        columnOrderRef.current = columnsState.map((state) => state.id);
+      }
       for (const columnState of columnsState) {
         if (columnsWidthRef.current[columnState.id]) {
           columnsWidthRef.current[columnState.id] = columnState.width;
@@ -235,16 +237,13 @@ export function useTable<DataType extends Data>({
     getRowIds: () => {
       return rows.map((row) => getRowId(row));
     },
-    getOrderedVisibleColumns: () => {
-      const visibleColumns = columns.filter((column) => {
-        return table.isColumnVisible(column.id);
-      });
-
+    getOrderedColumns: () => {
+      const orderedColumns = [...columns];
       if (columnOrderRef.current.length === 0) {
-        return visibleColumns;
+        return orderedColumns;
       }
 
-      return getOrderedColumns(visibleColumns);
+      return getOrderedColumns(orderedColumns);
     },
     getHideableColumns: () => {
       return columns.filter((column) => {

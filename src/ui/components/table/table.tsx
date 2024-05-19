@@ -10,6 +10,7 @@ type Props<DataType extends Data> = {
 
 export function Table<DataType extends Data>({ table }: Props<DataType>) {
   const rows = table.getRows();
+  const orderedColumns = table.getOrderedColumns();
   const virtualItems = table.getVirtualItems();
   const totalSize = table.getTotalSize();
   const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
@@ -18,8 +19,6 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
     '--virtualPaddingTop': `${paddingTop}px`,
     '--virtualPaddingBottom': `${paddingBottom}px`,
   } as React.CSSProperties;
-
-  const visibleColumns = table.getOrderedVisibleColumns();
 
   return (
     <div className="overflow-auto h-full will-change-scroll" {...table.getWrapperProps()}>
@@ -33,7 +32,11 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
       >
         <thead>
           <tr>
-            {visibleColumns.map((column, index) => {
+            {orderedColumns.map((column, index) => {
+              if (!table.isColumnVisible(column.id)) {
+                return null;
+              }
+
               const dragEnabled = column.allowMove !== false;
               const sortEnabled = column.allowSort !== false;
               const style: React.CSSProperties = {
@@ -115,7 +118,11 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
                 aria-rowindex={index + 1}
                 {...rowProps}
               >
-                {visibleColumns.map((column) => {
+                {orderedColumns.map((column) => {
+                  if (!table.isColumnVisible(column.id)) {
+                    return null;
+                  }
+
                   const { accessor, formatter, Cell } = column;
                   const value = typeof accessor === 'string' ? row[accessor] : accessor(row);
                   const formattedValue = typeof formatter === 'function' ? formatter(value) : (value as ReactNode);
