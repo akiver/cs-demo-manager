@@ -58,7 +58,7 @@ function getFfmpegArgs(options: ConcatenateVideoOptions) {
   if (outputParameters !== '') {
     args.push(outputParameters);
   }
-  args.push(`"${path.join(outputFolderPath, 'output.avi')}"`);
+  args.push(`"${path.join(outputFolderPath, `output.${videoContainer}`)}"`);
 
   return args;
 }
