@@ -178,7 +178,8 @@ const config: Config = {
           '-webkit-user-drag': 'none',
         },
         '.appearance-v-slider': {
-          'writing-mode': 'vertical-rl',
+          'writing-mode': 'vertical-lr',
+          'direction': 'rtl',
         },
         '.scrollbar-stable': {
           'scrollbar-gutter': 'stable',
