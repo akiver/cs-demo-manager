@@ -49,7 +49,7 @@ function getFfmpegArgs(options: ConcatenateVideoOptions) {
     args.push(`-i "${sequenceOutputFilePath}"`);
   }
   args.push(
-    `-vcodec ${videoCodec} -pix_fmt yuv420p`,
+    `-vcodec ${videoCodec}`,
     `-crf ${constantRateFactor}`,
     `-acodec ${audioCodec}`,
     `-b:a ${audioBitrate}K`,
