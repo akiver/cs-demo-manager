@@ -14,7 +14,6 @@ export function HostnameInput({ hostname, onChange, isDisabled = true }: Props) 
 
   return (
     <TextInput
-      id="hostname-input"
       label={<Trans context="Button">Hostname</Trans>}
       value={hostname}
       placeholder={_(

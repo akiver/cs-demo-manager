@@ -14,7 +14,6 @@ export function UsernameInput({ username, onChange, isDisabled = true }: Props) 
 
   return (
     <TextInput
-      id="username-input"
       label={<Trans context="Input label">Username</Trans>}
       value={username}
       placeholder={_(

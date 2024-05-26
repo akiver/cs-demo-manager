@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavigateToMatchItem } from '../../components/context-menu/items/navigate-to-match-item';
-import { CopyChecksumsItem } from '../../components/context-menu/items/copy-checksums-item';
+import { NavigateToMatchItem } from 'csdm/ui/components/context-menu/items/navigate-to-match-item';
+import { CopyChecksumsItem } from 'csdm/ui/components/context-menu/items/copy-checksums-item';
 import { NavigateToMatchesDemoItem } from 'csdm/ui/components/context-menu/items/navigate-to-matches-demo-item';
-import { UpdateMatchDemoLocationItem } from '../../components/context-menu/items/update-match-demo-location-item';
-import { TagsItem } from '../../components/context-menu/items/tags-item';
+import { UpdateMatchDemoLocationItem } from 'csdm/ui/components/context-menu/items/update-match-demo-location-item';
+import { TagsItem } from 'csdm/ui/components/context-menu/items/tags-item';
 import { ContextMenu } from 'csdm/ui/components/context-menu/context-menu';
 import { Separator } from 'csdm/ui/components/context-menu/separator';
 import { DeleteItem } from 'csdm/ui/components/context-menu/items/delete-item';
@@ -13,8 +13,8 @@ import { RevealDemoInExplorerItem } from 'csdm/ui/components/context-menu/items/
 import { RenameItem } from 'csdm/ui/components/context-menu/items/rename-item';
 import { CopyFilepathItem } from 'csdm/ui/components/context-menu/items/copy-filepath-item';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { MatchesTagsDialog } from '../dialogs/tags-dialog';
-import { RenameMatchDialog } from '../dialogs/rename-match-dialog';
+import { MatchesTagsDialog } from 'csdm/ui/matches/dialogs/tags-dialog';
+import { RenameMatchDialog } from 'csdm/ui/matches/dialogs/rename-match-dialog';
 import { UpdateDemoLocationDialog } from 'csdm/ui/dialogs/update-demo-location-dialog';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import { DeleteMatchesDialog } from 'csdm/ui/components/dialogs/delete-matches-dialog';
@@ -24,6 +24,9 @@ import { ExportMatchesItem } from 'csdm/ui/components/context-menu/items/export-
 import { WatchItem } from 'csdm/ui/components/context-menu/items/watch-item';
 import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
 import { ExportPlayersVoiceItem } from 'csdm/ui/components/context-menu/items/export-players-voice-item';
+import { UpdateTeamNamesDialog } from '../dialogs/update-team-names-dialog';
+import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
+import { Trans } from '@lingui/macro';
 
 type Props = {
   matchChecksums: string[];
@@ -64,6 +67,10 @@ export function MatchContextMenu({ selectedMatches, matchChecksums, onCommentCli
     showDialog(<UpdateDemoLocationDialog demoFilePath={demoPath} checksum={checksum} />);
   };
 
+  const onUpdateTeamNameClick = () => {
+    showDialog(<UpdateTeamNamesDialog matches={selectedMatches} />);
+  };
+
   return (
     <ContextMenu>
       <NavigateToMatchItem checksum={selectedMatch.checksum} siblingChecksums={matchChecksums} />
@@ -75,6 +82,12 @@ export function MatchContextMenu({ selectedMatches, matchChecksums, onCommentCli
       {isCounterStrikeStartable(selectedMatch.game) && <WatchItem demoPath={selectedMatch.demoFilePath} />}
       <CommentItem onClick={onCommentClick} isDisabled={selectedMatches.length !== 1} />
       <TagsItem onClick={onTagsClick} />
+      <ChangeMatchesTypeItem checksums={checksums} />
+      <ContextMenuItem onClick={onUpdateTeamNameClick}>
+        <p>
+          <Trans context="Context menu">Update team names</Trans>
+        </p>
+      </ContextMenuItem>
       <Separator />
       <ExportMatchesItem matches={selectedMatches} />
       <ExportPlayersVoiceItem demoPaths={filepaths} />
@@ -84,8 +97,6 @@ export function MatchContextMenu({ selectedMatches, matchChecksums, onCommentCli
         <CopyChecksumsItem checksums={checksums} />
         <CopyFilepathItem filepaths={filepaths} />
       </CopyItem>
-      <Separator />
-      <ChangeMatchesTypeItem checksums={checksums} />
       <Separator />
       <NavigateToMatchesDemoItem matches={selectedMatches} />
       <UpdateMatchDemoLocationItem matches={selectedMatches} />

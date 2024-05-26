@@ -14,7 +14,6 @@ export function PasswordInput({ password, onChange, isDisabled = true }: Props) 
 
   return (
     <TextInput
-      id="password-input"
       label={<Trans context="Input label">Password</Trans>}
       value={password}
       placeholder={_(

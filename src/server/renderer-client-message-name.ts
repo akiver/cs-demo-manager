@@ -2,6 +2,7 @@
 export const RendererClientMessageName = {
   InitializeApplication: 'init-application',
   IsCs2ConnectedToServer: 'is-cs2-connected-to-server',
+  AbortCurrentTask: 'abort-current-task',
   GetDatabaseSize: 'get-database-size',
   ResetDatabase: 'reset-database',
   OptimizeDatabase: 'optimize-database',
@@ -44,6 +45,7 @@ export const RendererClientMessageName = {
   UpdateDemosType: 'update-demos-type',
   ExportDemoPlayersVoice: 'export-demo-players-voice',
   UpdateMatchesType: 'update-matches-type',
+  UpdateMatchesTeamNames: 'update-matches-team-names',
   ExportMatchesToXlsx: 'export-matches-to-xslx',
   ExportMatchesToJson: 'export-matches-to-json',
   AddMap: 'add-map',

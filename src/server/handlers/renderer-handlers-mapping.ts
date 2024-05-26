@@ -177,10 +177,17 @@ import { fetchTeamHandler } from './renderer-process/team/fetch-team-handler';
 import type { FetchTeamFilters } from 'csdm/node/database/team/fetch-team-filters';
 import type { TeamProfile } from 'csdm/common/types/team-profile';
 import { fetchTeamHeatmapPointsHandler } from './renderer-process/team/fetch-team-heatmap-points-handler';
+import {
+  updateMatchesTeamNamesHandler,
+  type MatchesTeamNamesUpdatedPayload,
+  type UpdateMatchesTeamNamesPayload,
+} from './renderer-process/match/update-matches-team-names-handler';
+import { abortCurrentTaskHandler } from './renderer-process/abort-current-task-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
   [RendererClientMessageName.IsCs2ConnectedToServer]: Handler<void, boolean>;
+  [RendererClientMessageName.AbortCurrentTask]: Handler;
   [RendererClientMessageName.GetDatabaseSize]: Handler<void, string>;
   [RendererClientMessageName.ResetDatabase]: Handler;
   [RendererClientMessageName.OptimizeDatabase]: Handler<OptimizeDatabasePayload>;
@@ -215,6 +222,10 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdateDemosType]: Handler<UpdateDemosTypePayload>;
   [RendererClientMessageName.ExportDemoPlayersVoice]: Handler<ExportDemoPlayersVoicePayload>;
   [RendererClientMessageName.UpdateMatchesType]: Handler<UpdateMatchesTypePayload>;
+  [RendererClientMessageName.UpdateMatchesTeamNames]: Handler<
+    UpdateMatchesTeamNamesPayload,
+    MatchesTeamNamesUpdatedPayload
+  >;
   [RendererClientMessageName.ExportMatchesToXlsx]: Handler<ExportMatchesToXlsxPayload>;
   [RendererClientMessageName.ExportMatchesToJson]: Handler<ExportMatchesToJsonPayload>;
   [RendererClientMessageName.AddIgnoredSteamAccount]: Handler<string, IgnoredSteamAccount>;
@@ -281,6 +292,7 @@ export interface RendererMessageHandlers {
 export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.InitializeApplication]: initializeApplicationHandler,
   [RendererClientMessageName.IsCs2ConnectedToServer]: isCs2ConnectedToServerHandler,
+  [RendererClientMessageName.AbortCurrentTask]: abortCurrentTaskHandler,
   [RendererClientMessageName.GetDatabaseSize]: getDatabaseSizeHandler,
   [RendererClientMessageName.ResetDatabase]: resetDatabaseHandler,
   [RendererClientMessageName.OptimizeDatabase]: optimizeDatabaseHandler,
@@ -315,6 +327,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.UpdateDemosSource]: updateDemosSourceHandler,
   [RendererClientMessageName.ExportDemoPlayersVoice]: exportDemoPlayersVoiceHandler,
   [RendererClientMessageName.UpdateMatchesType]: updateMatchesTypeHandler,
+  [RendererClientMessageName.UpdateMatchesTeamNames]: updateMatchesTeamNamesHandler,
   [RendererClientMessageName.ExportMatchesToXlsx]: exportMatchesToXlsxHandler,
   [RendererClientMessageName.ExportMatchesToJson]: exportMatchesToJsonHandler,
   [RendererClientMessageName.AddIgnoredSteamAccount]: addIgnoredSteamAccountHandler,

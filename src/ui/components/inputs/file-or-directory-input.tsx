@@ -1,7 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/macro';
 import type { FileFilter, OpenDialogOptions, OpenDialogReturnValue } from 'electron';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { RevealFolderInExplorerButton } from '../buttons/reveal-folder-in-explorer-button';
@@ -57,20 +56,15 @@ export function FileOrDirectoryInput({
 
   return (
     <div className="flex flex-col gap-y-4">
-      <div className="flex flex-col gap-y-8">
-        <InputLabel isDisabled={isInputDisabled} htmlFor={name}>
-          {label}
-        </InputLabel>
-        <TextInput
-          id={name}
-          name={name}
-          isReadOnly={true}
-          placeholder={placeholder}
-          isDisabled={isInputDisabled}
-          value={path}
-          {...props}
-        />
-      </div>
+      <TextInput
+        label={label}
+        name={name}
+        isReadOnly={true}
+        placeholder={placeholder}
+        isDisabled={isInputDisabled}
+        value={path}
+        {...props}
+      />
       <div className="flex gap-x-8">
         <Button onClick={onChangeClick} isDisabled={isSelectButtonDisabled}>
           <Trans context="Button">Select</Trans>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import React, { useEffect, useRef, useImperativeHandle, forwardRef, useId } from 'react';
 
 export type TextInputHandlers = {
   focus: () => void;
@@ -8,7 +8,6 @@ export type TextInputHandlers = {
 };
 
 type Props = {
-  id?: string | undefined;
   name?: string | undefined;
   label?: React.ReactNode | undefined;
   value?: string | ReadonlyArray<string> | number | undefined;
@@ -30,6 +29,7 @@ export const TextInput = forwardRef(function TextInput(
   ref: React.Ref<TextInputHandlers>,
 ) {
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const id = useId();
 
   useImperativeHandle(ref, () => {
     return {
@@ -75,6 +75,7 @@ export const TextInput = forwardRef(function TextInput(
       disabled={isDisabled}
       onKeyDown={handleKeyDown}
       readOnly={isReadOnly}
+      id={id}
       {...props}
     />
   );
@@ -85,7 +86,7 @@ export const TextInput = forwardRef(function TextInput(
 
   return (
     <div className="flex flex-col gap-8">
-      <label htmlFor={props.id}>{label}</label>
+      <label htmlFor={id}>{label}</label>
       {input}
     </div>
   );

@@ -24,7 +24,6 @@ export function VideoCodecInput() {
     <TextInput
       key={settings.ffmpegSettings.videoCodec}
       label={<Trans context="Input label">Video codec</Trans>}
-      id="ffmpeg-video-codec"
       onBlur={onBlur}
       defaultValue={settings.ffmpegSettings.videoCodec}
     />

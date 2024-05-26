@@ -1,7 +1,8 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
 import type { SelectOption } from '../select';
-import { FilterValue } from '../../dropdown-filter/filter-value';
+import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
+import { uniqueArray } from 'csdm/common/array/unique-array';
 
 type Props = {
   teamNameA: string;
@@ -11,16 +12,13 @@ type Props = {
 };
 
 export function TeamsSelect({ teamNameA, teamNameB, onChange, selectedTeamNames }: Props) {
-  const options: SelectOption[] = [
-    {
-      label: teamNameA,
-      value: teamNameA,
-    },
-    {
-      label: teamNameB,
-      value: teamNameB,
-    },
-  ];
+  const teamNames = uniqueArray([teamNameA, teamNameB]);
+  const options: SelectOption[] = teamNames.map((teamName) => {
+    return {
+      label: teamName,
+      value: teamName,
+    };
+  });
 
   return (
     <div className="flex flex-col gap-y-8">

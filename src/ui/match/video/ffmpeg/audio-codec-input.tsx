@@ -24,7 +24,6 @@ export function AudioCodecInput() {
     <TextInput
       key={settings.ffmpegSettings.audioCodec}
       label={<Trans context="Input label">Audio codec</Trans>}
-      id="ffmpeg-audio-codec"
       onBlur={onBlur}
       defaultValue={settings.ffmpegSettings.audioCodec}
     />

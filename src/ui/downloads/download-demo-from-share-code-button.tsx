@@ -14,7 +14,6 @@ import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { useIsCsRunning } from 'csdm/ui/hooks/use-is-cs-running';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 
 type State = {
@@ -140,16 +139,13 @@ function DownloadDemoFromShareCodeDialog() {
       </DialogHeader>
       <DialogContent>
         <div className="flex flex-col gap-y-8">
-          <InputLabel htmlFor="sharecode">
-            <Trans>Enter a share code</Trans>
-          </InputLabel>
           <TextInput
-            id="sharecode"
             autoFocus={true}
             placeholder="CSGO-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
             value={shareCode}
             onChange={onShareCodeChange}
             isDisabled={status === Status.Loading}
+            label={<Trans>Enter a share code</Trans>}
           />
           {status === Status.Error && <ErrorMessage message={error} />}
         </div>

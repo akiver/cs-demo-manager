@@ -21,7 +21,6 @@ export function FfmpegOutputParametersInput() {
     <TextInput
       key={settings.ffmpegSettings.outputParameters}
       label={<Trans context="Input label">Output parameters</Trans>}
-      id="ffmpeg-output-parameters"
       onBlur={onBlur}
       defaultValue={settings.ffmpegSettings.outputParameters}
     />

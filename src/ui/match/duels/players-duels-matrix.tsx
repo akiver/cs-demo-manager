@@ -14,6 +14,7 @@ import { ErrorMessage } from 'csdm/ui/components/error-message';
 import type { DuelMatrixRow } from 'csdm/common/types/duel-matrix-row';
 import { Content } from 'csdm/ui/components/content';
 import { TeamIndicator } from 'csdm/ui/components/match/team-indicator';
+import { Message } from 'csdm/ui/components/message';
 
 type CellTooltipProps = {
   killerName: string;
@@ -106,9 +107,18 @@ export function PlayersDuelsMatrix() {
       rows: rows.filter(({ killerSteamId }) => killerSteamId === row.killerSteamId),
     });
   }
+  const hasKills = playersTeamCt.length > 0 && playersTeamT.length > 0;
 
   const renderPanelContent = () => {
     if (status === Status.Success) {
+      if (!hasKills) {
+        return (
+          <div className="pb-8">
+            <Message message={<Trans>No kills found between both teams.</Trans>} />
+          </div>
+        );
+      }
+
       return (
         <div className="flex flex-col w-fit" ref={chart}>
           <div className="flex mb-8">
@@ -193,7 +203,7 @@ export function PlayersDuelsMatrix() {
         <Panel
           header={
             <div>
-              {status === Status.Success && (
+              {status === Status.Success && hasKills && (
                 <ExportHtmlElementAsImageButton
                   getElement={() => chart.current}
                   fileName={`duels-matrix-${Date.now()}`}

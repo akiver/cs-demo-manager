@@ -480,6 +480,7 @@ msgid "See match"
 msgstr "Ver partida"
 
 #: src/ui/components/buttons/update-button.tsx
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Button"
 msgid "Update"
 msgstr "Atualizar"
@@ -660,6 +661,7 @@ msgstr "Você precisa instalar <0>Rosetta</0>."
 #: src/ui/match/video/generating-dialog.tsx
 #: src/ui/match/video/update-demo-location.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
 #: src/ui/matches/table/matches-table.tsx
 #: src/ui/player/load-player-error.tsx
 #: src/ui/players/players-table.tsx
@@ -3371,6 +3373,10 @@ msgstr "Detalhamento da rodada"
 msgid "<0>{killerName}</0> killed <1>{victimName}</1> <2>{killCount}</2> times"
 msgstr ""
 
+#: src/ui/match/duels/players-duels-matrix.tsx
+msgid "No kills found between both teams."
+msgstr ""
+
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
 msgid "{teamName} has +${money} more than {oppositeTeamName}"
@@ -5204,6 +5210,50 @@ msgstr "Perna esquerda"
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Right leg"
 msgstr "Perna direita"
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgid "{updateCount, plural, one {The match has been updated} other {# matches have been updated}}"
+msgstr ""
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgid "The team names must be different."
+msgstr ""
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgid "The teams have not been found."
+msgstr ""
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgid "Updating team names of match {updatedCount} out of {0}."
+msgstr ""
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgctxt "Dialog title"
+msgid "Update team names"
+msgstr ""
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgctxt "Input label"
+msgid "Team A"
+msgstr ""
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgctxt "Input label"
+msgid "Team B"
+msgstr ""
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgid "You should rename team names only to merge stats into a single team!"
+msgstr ""
+
+#: src/ui/matches/dialogs/update-team-names-dialog.tsx
+msgid "The only way to restore team names is by re-analyzing demos!"
+msgstr ""
+
+#: src/ui/matches/table/match-context-menu.tsx
+msgctxt "Context menu"
+msgid "Update team names"
+msgstr ""
 
 #: src/ui/matches/table/match-count.tsx
 msgid "{matchCount, plural, one {# match} other {# matches}}"

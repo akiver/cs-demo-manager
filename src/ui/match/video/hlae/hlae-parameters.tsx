@@ -24,7 +24,6 @@ export function HlaeParameters() {
   return (
     <TextInput
       label={<Trans context="Input label">Parameters</Trans>}
-      id="hlae-parameters"
       onChange={onChange}
       onBlur={onBlur}
       value={parameters}
