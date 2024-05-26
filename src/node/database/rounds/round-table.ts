@@ -14,8 +14,8 @@ export type RoundTable = {
   end_frame: number;
   end_officially_tick: number;
   end_officially_frame: number;
-  team_a_name: number;
-  team_b_name: number;
+  team_a_name: string;
+  team_b_name: string;
   team_a_score: number;
   team_b_score: number;
   team_b_side: TeamNumber;

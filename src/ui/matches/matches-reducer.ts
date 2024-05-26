@@ -11,6 +11,7 @@ import {
   fuzzySearchTextChanged,
   matchesTypeUpdated,
   selectedMatchesChanged,
+  teamNamesUpdated,
 } from './matches-actions';
 import { commentUpdated } from 'csdm/ui/comment/comment-actions';
 import { checksumsTagsUpdated, tagDeleted } from 'csdm/ui/tags/tags-actions';
@@ -84,6 +85,15 @@ export const matchesReducer = createReducer(initialState, (builder) => {
       const matches = state.entities.filter((match) => action.payload.checksums.includes(match.checksum));
       for (const match of matches) {
         match.tagIds = action.payload.tagIds;
+      }
+    })
+    .addCase(teamNamesUpdated, (state, action) => {
+      for (const [checksum, names] of Object.entries(action.payload)) {
+        const match = state.entities.find((match) => match.checksum === checksum);
+        if (match) {
+          match.teamAName = names.teamNameA;
+          match.teamBName = names.teamNameB;
+        }
       }
     })
     .addCase(matchesTypeUpdated, (state, action) => {

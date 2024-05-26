@@ -49,7 +49,5 @@ export function DemoNameInput({ checksum, currentName }: Props) {
     setName(event.target.value);
   };
 
-  return (
-    <TextInput label={<Trans>Name:</Trans>} id="demo-name-input" value={name} onChange={onChange} onBlur={onBlur} />
-  );
+  return <TextInput label={<Trans>Name:</Trans>} value={name} onChange={onChange} onBlur={onBlur} />;
 }

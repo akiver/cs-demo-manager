@@ -3,7 +3,6 @@ import { Trans } from '@lingui/macro';
 import { SpinnableButton } from 'csdm/ui/components/buttons/spinnable-button';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { Status } from 'csdm/common/types/status';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { CloseButton } from 'csdm/ui/components/buttons/close-button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
@@ -46,12 +45,9 @@ export function AddIgnoredSteamAccountDialog() {
             <Trans>The Steam account will be ignored from VAC ban stats.</Trans>
           </p>
           <div className="flex flex-col gap-y-8">
-            <InputLabel htmlFor="steamid">
-              <Trans context="Input label">SteamID64 or Steam community profile URL</Trans>
-            </InputLabel>
             <TextInput
               autoFocus={true}
-              id="steamid"
+              label={<Trans context="Input label">SteamID64 or Steam community profile URL</Trans>}
               placeholder="https://steamcommunity.com/id/username/ | 76561198000697560"
               value={steamIdentifier}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

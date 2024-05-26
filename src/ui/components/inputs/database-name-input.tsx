@@ -14,7 +14,6 @@ export function DatabaseNameInput({ databaseName, onChange, isDisabled = true }:
 
   return (
     <TextInput
-      id="database-name-input"
       label={<Trans context="Input label">Name</Trans>}
       value={databaseName}
       placeholder={_(

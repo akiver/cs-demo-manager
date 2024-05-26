@@ -57,6 +57,7 @@ export const RendererServerMessageName = {
   StartingGame: 'starting-game',
   ResetTablesStateSuccess: 'reset-tables-state-success',
   IgnoredSteamAccountsChanged: 'ignored-steam-accounts-changed',
+  TeamNamesUpdated: 'team-names-updated',
 } as const;
 
 export type RendererServerMessageName =
@@ -102,4 +103,5 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.StartingGame]: void;
   [RendererServerMessageName.ResetTablesStateSuccess]: void;
   [RendererServerMessageName.IgnoredSteamAccountsChanged]: void;
+  [RendererServerMessageName.TeamNamesUpdated]: number;
 }
