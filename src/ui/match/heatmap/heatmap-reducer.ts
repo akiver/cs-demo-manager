@@ -1,8 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
 import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
-import { drawDone, fetchPointsSuccess, radarLevelChanged } from './heatmap-actions';
-import { fetchMatchSuccess } from '../match-actions';
+import {
+  blurChanged,
+  fetchPointsSuccess,
+  opacityChanged,
+  radarLevelChanged,
+  radiusChanged,
+} from 'csdm/ui/match/heatmap/match-heatmap-actions';
+import { fetchMatchSuccess } from 'csdm/ui/match/match-actions';
 import { RadarLevel } from 'csdm/ui/maps/radar-level';
 
 export type MatchHeatmapState = {
@@ -34,10 +40,14 @@ export const heatmapReducer = createReducer(initialState, (builder) => {
     .addCase(radarLevelChanged, (state, action) => {
       state.radarLevel = action.payload.radarLevel;
     })
-    .addCase(drawDone, (state, action) => {
-      state.alpha = action.payload.alpha;
-      state.blur = action.payload.blur;
-      state.radius = action.payload.radius;
+    .addCase(opacityChanged, (state, action) => {
+      state.alpha = action.payload;
+    })
+    .addCase(blurChanged, (state, action) => {
+      state.blur = action.payload;
+    })
+    .addCase(radiusChanged, (state, action) => {
+      state.radius = action.payload;
     })
     .addCase(fetchPointsSuccess, (state, action) => {
       state.event = action.payload.event;

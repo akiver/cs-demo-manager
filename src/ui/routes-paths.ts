@@ -27,6 +27,7 @@ export const RoutePath = {
   DownloadsPending: 'pending',
   Ban: '/ban',
   Teams: '/teams',
+  TeamHeatmap: 'heatmap',
   TeamMatches: 'matches',
   TeamMaps: 'maps',
 } as const;

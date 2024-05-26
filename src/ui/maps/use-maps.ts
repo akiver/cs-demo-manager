@@ -1,7 +1,10 @@
+import { useMemo } from 'react';
 import { useMapsState } from './use-maps-state';
 
 export function useMaps() {
   const state = useMapsState();
 
-  return state.entities;
+  return useMemo(() => {
+    return state.entities;
+  }, [state]);
 }

@@ -330,7 +330,9 @@ msgstr "连接到远程服务器时出错。"
 #: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
+#: src/ui/demo/demo-name-input.tsx
 #: src/ui/demos/table/update-demos-type-item.tsx
+#: src/ui/dialogs/checksums-tags-dialog.tsx
 #: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
@@ -338,7 +340,7 @@ msgstr "连接到远程服务器时出错。"
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 #: src/ui/match/duels/players-duels-matrix.tsx
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
-#: src/ui/match/heatmap/heatmap-loader.tsx
+#: src/ui/match/heatmap/match-heatmap.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 #: src/ui/player/use-update-player-comment.tsx
 #: src/ui/search/filters/search-maps-input.tsx
@@ -354,6 +356,7 @@ msgstr "连接到远程服务器时出错。"
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
+#: src/ui/team/heatmap/team-heatmap.tsx
 msgid "An error occurred"
 msgstr "出现错误"
 
@@ -645,9 +648,7 @@ msgstr "您需要安装 <0>Rosetta</0>。"
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 #: src/ui/components/dialogs/rename-dialog.tsx
-#: src/ui/demo/demo-name-input.tsx
 #: src/ui/demos/table/demos-table.tsx
-#: src/ui/dialogs/checksums-tags-dialog.tsx
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/download-demos-button.tsx
@@ -909,8 +910,8 @@ msgstr "最小化"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/heatmap/export-heatmap-button.tsx
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
-#: src/ui/match/heatmap/export-button.tsx
 msgctxt "Button"
 msgid "Export"
 msgstr "导出"
@@ -1173,6 +1174,93 @@ msgstr "标签"
 msgctxt "Weapons filter label"
 msgid "Weapons"
 msgstr "武器"
+
+#: src/ui/components/heatmap/export-heatmap-button.tsx
+msgctxt "Toast"
+msgid "Heatmap exported, click here to reveal the file"
+msgstr ""
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Kills"
+msgstr "击杀数"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Deaths"
+msgstr "死亡数"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Shots"
+msgstr "射击次数"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "HE"
+msgstr "高爆手雷"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Flashbang"
+msgstr "闪光震撼弹"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Smoke"
+msgstr "烟雾弹"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Molotov"
+msgstr "燃烧弹"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Decoy"
+msgstr "诱饵弹"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+#: src/ui/search/search.tsx
+msgctxt "Input label"
+msgid "Event"
+msgstr "事件"
+
+#: src/ui/components/heatmap/heatmap-select-map.tsx
+msgctxt "Input label"
+msgid "Map"
+msgstr ""
+
+#: src/ui/components/heatmap/heatmap.tsx
+msgid "Loading map…"
+msgstr ""
+
+#: src/ui/components/heatmap/heatmap.tsx
+msgid "An error occurred while loading the map."
+msgstr ""
+
+#: src/ui/components/heatmap/heatmap.tsx
+msgid "Select a map."
+msgstr ""
+
+#: src/ui/components/heatmap/heatmap.tsx
+msgid "No data points were found for the current filters."
+msgstr ""
+
+#: src/ui/components/heatmap/input-blur.tsx
+msgctxt "Input label"
+msgid "Blur"
+msgstr "模糊"
+
+#: src/ui/components/heatmap/input-opacity.tsx
+msgctxt "Input label"
+msgid "Opacity"
+msgstr "不透明度"
+
+#: src/ui/components/heatmap/input-radius.tsx
+msgctxt "Input label"
+msgid "Radius"
+msgstr "半径"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
@@ -3548,71 +3636,6 @@ msgstr ""
 msgid "Players flashbang matrix"
 msgstr "玩家闪光弹数据矩阵"
 
-#: src/ui/match/heatmap/heatmap-loader.tsx
-msgid "Loading map…"
-msgstr ""
-
-#: src/ui/match/heatmap/input-blur.tsx
-msgctxt "Input label"
-msgid "Blur"
-msgstr "模糊"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Kills"
-msgstr "击杀数"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Deaths"
-msgstr "死亡数"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Shots"
-msgstr "射击次数"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "HE"
-msgstr "高爆手雷"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Flashbang"
-msgstr "闪光震撼弹"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Smoke"
-msgstr "烟雾弹"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Molotov"
-msgstr "燃烧弹"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Decoy"
-msgstr "诱饵弹"
-
-#: src/ui/match/heatmap/input-event.tsx
-#: src/ui/search/search.tsx
-msgctxt "Input label"
-msgid "Event"
-msgstr "事件"
-
-#: src/ui/match/heatmap/input-opacity.tsx
-msgctxt "Input label"
-msgid "Opacity"
-msgstr "不透明度"
-
-#: src/ui/match/heatmap/input-radius.tsx
-msgctxt "Input label"
-msgid "Radius"
-msgstr "半径"
-
 #: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
 msgstr "获取比赛信息中…"
@@ -3647,6 +3670,7 @@ msgid "Players"
 msgstr "玩家"
 
 #: src/ui/match/match-tabs.tsx
+#: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Heatmap"
 msgstr "热力图"

@@ -325,7 +325,9 @@ msgstr "An error occurred connecting to the WebSocket server."
 #: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
+#: src/ui/demo/demo-name-input.tsx
 #: src/ui/demos/table/update-demos-type-item.tsx
+#: src/ui/dialogs/checksums-tags-dialog.tsx
 #: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
@@ -333,7 +335,7 @@ msgstr "An error occurred connecting to the WebSocket server."
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 #: src/ui/match/duels/players-duels-matrix.tsx
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
-#: src/ui/match/heatmap/heatmap-loader.tsx
+#: src/ui/match/heatmap/match-heatmap.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 #: src/ui/player/use-update-player-comment.tsx
 #: src/ui/search/filters/search-maps-input.tsx
@@ -349,6 +351,7 @@ msgstr "An error occurred connecting to the WebSocket server."
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
+#: src/ui/team/heatmap/team-heatmap.tsx
 msgid "An error occurred"
 msgstr "An error occurred"
 
@@ -640,9 +643,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 #: src/ui/components/dialogs/rename-dialog.tsx
-#: src/ui/demo/demo-name-input.tsx
 #: src/ui/demos/table/demos-table.tsx
-#: src/ui/dialogs/checksums-tags-dialog.tsx
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/download-demos-button.tsx
@@ -904,8 +905,8 @@ msgstr "Minify"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/heatmap/export-heatmap-button.tsx
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
-#: src/ui/match/heatmap/export-button.tsx
 msgctxt "Button"
 msgid "Export"
 msgstr "Export"
@@ -1168,6 +1169,93 @@ msgstr "Tags"
 msgctxt "Weapons filter label"
 msgid "Weapons"
 msgstr "Weapons"
+
+#: src/ui/components/heatmap/export-heatmap-button.tsx
+msgctxt "Toast"
+msgid "Heatmap exported, click here to reveal the file"
+msgstr "Heatmap exported, click here to reveal the file"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Kills"
+msgstr "Kills"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Deaths"
+msgstr "Deaths"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Shots"
+msgstr "Shots"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "HE"
+msgstr "HE"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Flashbang"
+msgstr "Flashbang"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Smoke"
+msgstr "Smoke"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Molotov"
+msgstr "Molotov"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Decoy"
+msgstr "Decoy"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+#: src/ui/search/search.tsx
+msgctxt "Input label"
+msgid "Event"
+msgstr "Event"
+
+#: src/ui/components/heatmap/heatmap-select-map.tsx
+msgctxt "Input label"
+msgid "Map"
+msgstr "Map"
+
+#: src/ui/components/heatmap/heatmap.tsx
+msgid "Loading map…"
+msgstr "Loading map…"
+
+#: src/ui/components/heatmap/heatmap.tsx
+msgid "An error occurred while loading the map."
+msgstr "An error occurred while loading the map."
+
+#: src/ui/components/heatmap/heatmap.tsx
+msgid "Select a map."
+msgstr "Select a map."
+
+#: src/ui/components/heatmap/heatmap.tsx
+msgid "No data points were found for the current filters."
+msgstr "No data points were found for the current filters."
+
+#: src/ui/components/heatmap/input-blur.tsx
+msgctxt "Input label"
+msgid "Blur"
+msgstr "Blur"
+
+#: src/ui/components/heatmap/input-opacity.tsx
+msgctxt "Input label"
+msgid "Opacity"
+msgstr "Opacity"
+
+#: src/ui/components/heatmap/input-radius.tsx
+msgctxt "Input label"
+msgid "Radius"
+msgstr "Radius"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
@@ -3543,71 +3631,6 @@ msgstr "<0>{0}</0> flashed <1>{1}</1> around <2>{2}s</2>"
 msgid "Players flashbang matrix"
 msgstr "Players flashbang matrix"
 
-#: src/ui/match/heatmap/heatmap-loader.tsx
-msgid "Loading map…"
-msgstr "Loading map…"
-
-#: src/ui/match/heatmap/input-blur.tsx
-msgctxt "Input label"
-msgid "Blur"
-msgstr "Blur"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Kills"
-msgstr "Kills"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Deaths"
-msgstr "Deaths"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Shots"
-msgstr "Shots"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "HE"
-msgstr "HE"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Flashbang"
-msgstr "Flashbang"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Smoke"
-msgstr "Smoke"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Molotov"
-msgstr "Molotov"
-
-#: src/ui/match/heatmap/input-event.tsx
-msgctxt "Heatmap event"
-msgid "Decoy"
-msgstr "Decoy"
-
-#: src/ui/match/heatmap/input-event.tsx
-#: src/ui/search/search.tsx
-msgctxt "Input label"
-msgid "Event"
-msgstr "Event"
-
-#: src/ui/match/heatmap/input-opacity.tsx
-msgctxt "Input label"
-msgid "Opacity"
-msgstr "Opacity"
-
-#: src/ui/match/heatmap/input-radius.tsx
-msgctxt "Input label"
-msgid "Radius"
-msgstr "Radius"
-
 #: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
 msgstr "Fetching match…"
@@ -3642,6 +3665,7 @@ msgid "Players"
 msgstr "Players"
 
 #: src/ui/match/match-tabs.tsx
+#: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Heatmap"
 msgstr "Heatmap"

@@ -17,7 +17,7 @@ import { MatchLoader } from 'csdm/ui/match/match-loader';
 import { MatchOverview } from 'csdm/ui/match/overview/match-overview';
 import { Rounds } from 'csdm/ui/match/rounds/overview/rounds';
 import { Round } from 'csdm/ui/match/rounds/round/round';
-import { HeatmapLoader } from 'csdm/ui/match/heatmap/heatmap-loader';
+import { MatchHeatmap } from 'csdm/ui/match/heatmap/match-heatmap';
 import { MatchGrenades } from 'csdm/ui/match/grenades/match-grenades';
 import { Viewer2DLoader } from 'csdm/ui/match/viewer-2d/viewer-2d-loader';
 import { VideoLoader } from 'csdm/ui/match/video/video-loader';
@@ -46,6 +46,7 @@ import { Team } from 'csdm/ui/team/team';
 import { TeamOverview } from 'csdm/ui/team/overview/team-overview';
 import { TeamMatchesTable } from './team/matches/team-matches-table';
 import { TeamMaps } from './team/maps/team-maps';
+import { TeamHeatmap } from './team/heatmap/team-heatmap';
 
 export const router = createHashRouter(
   createRoutesFromElements(
@@ -62,7 +63,7 @@ export const router = createHashRouter(
           <Route index={true} element={<MatchPlayersLoader />} />
           <Route path=":steamId" element={<MatchPlayers />} />
         </Route>
-        <Route path={RoutePath.MatchHeatmap} element={<HeatmapLoader />} />
+        <Route path={RoutePath.MatchHeatmap} element={<MatchHeatmap />} />
         <Route path={RoutePath.MatchDuels} element={<MatchDuels />}>
           <Route index={true} element={<PlayersDuelsMatrix />} />
           <Route path={RoutePath.MatchOpeningDuelsStats} element={<OpeningDuelsStats />} />
@@ -95,6 +96,7 @@ export const router = createHashRouter(
       <Route path={`${RoutePath.Teams}/:name`} element={<Team />}>
         <Route index={true} element={<TeamOverview />} />
         <Route path={RoutePath.TeamMaps} element={<TeamMaps />} />
+        <Route path={RoutePath.TeamHeatmap} element={<TeamHeatmap />} />
         <Route path={RoutePath.TeamMatches} element={<TeamMatchesTable />} />
       </Route>
       <Route path={RoutePath.Search} element={<Search />} />

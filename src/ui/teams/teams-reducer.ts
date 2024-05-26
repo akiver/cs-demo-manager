@@ -9,7 +9,7 @@ import {
   selectionChanged,
 } from './teams-actions';
 
-export type TeamsState = {
+type TeamsState = {
   readonly status: Status;
   readonly entities: TeamTable[];
   readonly selectedTeamNames: string[];

@@ -5,10 +5,13 @@ import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
-import { useHeatmapContext } from './heatmap-context';
 
-export function HeatmapInputEvent() {
-  const { event, fetchPointsAndDraw } = useHeatmapContext();
+type Props = {
+  event: HeatmapEvent;
+  onChange: (event: HeatmapEvent) => void;
+};
+
+export function HeatmapSelectEvent({ event, onChange }: Props) {
   const _ = useI18n();
 
   const eventMessage: Record<HeatmapEvent, string> = {
@@ -68,10 +71,6 @@ export function HeatmapInputEvent() {
       value: event,
     };
   });
-
-  const onChange = (event: HeatmapEvent) => {
-    fetchPointsAndDraw({ event });
-  };
 
   return (
     <div className="flex flex-col gap-y-8">

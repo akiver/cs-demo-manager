@@ -3,8 +3,12 @@ import { Trans } from '@lingui/macro';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { useHeatmapContext } from './heatmap-context';
 
-export function HeatmapInputOpacity() {
-  const { alpha, draw } = useHeatmapContext();
+type Props = {
+  onChange: (radius: number) => void;
+};
+
+export function HeatmapInputOpacity({ onChange }: Props) {
+  const { alpha } = useHeatmapContext();
 
   return (
     <div className="flex flex-col gap-y-8">
@@ -17,8 +21,8 @@ export function HeatmapInputOpacity() {
         step={0.1}
         max="1"
         value={alpha}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          draw({ alpha: Number(event.target.value) });
+        onChange={(event) => {
+          onChange(Number(event.target.value));
         }}
       />
     </div>

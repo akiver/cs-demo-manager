@@ -1,12 +1,12 @@
 import { GrenadeName } from 'csdm/common/types/counter-strike';
 import type { Point } from 'csdm/common/types/point';
-import type { HeatmapOptions } from 'csdm/common/types/heatmap-options';
+import type { MatchHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { db } from 'csdm/node/database/database';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 
-export async function fetchGrenadePoints(options: HeatmapOptions): Promise<Point[]> {
+export async function fetchMatchGrenadePoints(filters: MatchHeatmapFilter): Promise<Point[]> {
   const grenadeNames: GrenadeName[] = [];
-  switch (options.event) {
+  switch (filters.event) {
     case HeatmapEvent.Smoke:
       grenadeNames.push(GrenadeName.Smoke);
       break;
@@ -23,26 +23,26 @@ export async function fetchGrenadePoints(options: HeatmapOptions): Promise<Point
       grenadeNames.push(GrenadeName.Molotov, GrenadeName.Incendiary);
       break;
     default:
-      throw new Error(`Unsupported grenade event: ${options.event}`);
+      throw new Error(`Unsupported grenade event: ${filters.event}`);
   }
 
   let query = db
     .selectFrom('grenade_projectiles_destroy')
     .select(['x', 'y'])
-    .where('match_checksum', '=', options.checksum)
+    .where('match_checksum', '=', filters.checksum)
     .where('grenade_name', 'in', grenadeNames);
 
-  if (options.sides.length > 0) {
-    query = query.where('thrower_side', 'in', options.sides);
+  if (filters.sides.length > 0) {
+    query = query.where('thrower_side', 'in', filters.sides);
   }
-  if (options.steamIds.length > 0) {
-    query = query.where('thrower_steam_id', 'in', options.steamIds);
+  if (filters.steamIds.length > 0) {
+    query = query.where('thrower_steam_id', 'in', filters.steamIds);
   }
-  if (options.rounds.length > 0) {
-    query = query.where('round_number', 'in', options.rounds);
+  if (filters.rounds.length > 0) {
+    query = query.where('round_number', 'in', filters.rounds);
   }
-  if (options.teamNames.length > 0) {
-    query = query.where('thrower_team_name', 'in', options.teamNames);
+  if (filters.teamNames.length > 0) {
+    query = query.where('thrower_team_name', 'in', filters.teamNames);
   }
 
   const points = query.execute();

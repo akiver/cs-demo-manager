@@ -10,7 +10,7 @@ import {
 import type { FetchMatchesTablePayload } from './renderer-process/match/fetch-matches-table-handler';
 import { fetchMatchesTableHandler } from './renderer-process/match/fetch-matches-table-handler';
 import { fetchMatchByChecksumHandler } from './renderer-process/match/fetch-match-by-checksum-handler';
-import { fetchHeatmapPointsHandler } from './renderer-process/match/fetch-heatmap-points-handler';
+import { fetchMatchHeatmapPointsHandler } from './renderer-process/match/fetch-match-heatmap-points-handler';
 import type {
   Fetch2dViewerDataPayload,
   Fetch2dViewerDataSuccessPayload,
@@ -87,7 +87,7 @@ import type { UpdateChecksumsTagsPayload } from './renderer-process/tags/update-
 import { updateChecksumsTagsHandler } from './renderer-process/tags/update-checksums-tags-handler';
 import { getCsgoTelnetConnectionStatusHandler } from './renderer-process/counter-strike/get-csgo-telnet-connection-status-handler';
 import { isCounterStrikeRunningHandler } from './renderer-process/counter-strike/is-counter-strike-running-handler';
-import type { HeatmapOptions } from 'csdm/common/types/heatmap-options';
+import type { MatchHeatmapFilter, TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import type { Demo } from 'csdm/common/types/demo';
 import type { Map } from 'csdm/common/types/map';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
@@ -176,6 +176,7 @@ import { fetchTeamsTableHandler } from './renderer-process/team/fetch-teams-tabl
 import { fetchTeamHandler } from './renderer-process/team/fetch-team-handler';
 import type { FetchTeamFilters } from 'csdm/node/database/team/fetch-team-filters';
 import type { TeamProfile } from 'csdm/common/types/team-profile';
+import { fetchTeamHeatmapPointsHandler } from './renderer-process/team/fetch-team-heatmap-points-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -185,7 +186,8 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.OptimizeDatabase]: Handler<OptimizeDatabasePayload>;
   [RendererClientMessageName.FetchMatchesTable]: Handler<FetchMatchesTablePayload, MatchTable[]>;
   [RendererClientMessageName.FetchMatchByChecksum]: Handler<string, Match>;
-  [RendererClientMessageName.FetchHeatmapPoints]: Handler<HeatmapOptions, Point[]>;
+  [RendererClientMessageName.FetchMatchHeatmapPoints]: Handler<MatchHeatmapFilter, Point[]>;
+  [RendererClientMessageName.FetchTeamHeatmapPoints]: Handler<TeamHeatmapFilter, Point[]>;
   [RendererClientMessageName.Fetch2DViewerData]: Handler<Fetch2dViewerDataPayload, Fetch2dViewerDataSuccessPayload>;
   [RendererClientMessageName.UpdateComment]: Handler<UpdateCommentPayload>;
   [RendererClientMessageName.UpdatePlayerComment]: Handler<UpdatePlayerCommentPayload>;
@@ -284,7 +286,8 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.OptimizeDatabase]: optimizeDatabaseHandler,
   [RendererClientMessageName.FetchMatchesTable]: fetchMatchesTableHandler,
   [RendererClientMessageName.FetchMatchByChecksum]: fetchMatchByChecksumHandler,
-  [RendererClientMessageName.FetchHeatmapPoints]: fetchHeatmapPointsHandler,
+  [RendererClientMessageName.FetchMatchHeatmapPoints]: fetchMatchHeatmapPointsHandler,
+  [RendererClientMessageName.FetchTeamHeatmapPoints]: fetchTeamHeatmapPointsHandler,
   [RendererClientMessageName.Fetch2DViewerData]: fetch2DViewerDataHandler,
   [RendererClientMessageName.UpdateComment]: updateCommentHandler,
   [RendererClientMessageName.UpdatePlayerComment]: updatePlayerCommentHandler,

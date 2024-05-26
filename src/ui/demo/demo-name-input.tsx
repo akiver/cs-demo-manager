@@ -38,7 +38,7 @@ export function DemoNameInput({ checksum, currentName }: Props) {
       dispatch(demoRenamed({ checksum, name }));
     } catch (error) {
       showToast({
-        content: <Trans>An error occurred.</Trans>,
+        content: <Trans>An error occurred</Trans>,
         id: 'rename-demo-error',
         type: 'error',
       });
