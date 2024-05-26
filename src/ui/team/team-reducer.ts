@@ -1,4 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
+import type { TeamNumber } from '@akiver/cs-demo-analyzer';
 import { commentUpdated } from 'csdm/ui/comment/comment-actions';
 import { deleteMatchesSuccess, matchesTypeUpdated } from 'csdm/ui/matches/matches-actions';
 import { Status } from 'csdm/common/types/status';
@@ -7,12 +8,32 @@ import type { TeamProfile } from 'csdm/common/types/team-profile';
 import { ErrorCode } from 'csdm/common/error-code';
 import { demoRenamed } from 'csdm/ui/demos/demos-actions';
 import { fetchTeamError, fetchTeamStart, fetchTeamSuccess, selectedMatchesChanged } from './team-actions';
+import { RadarLevel } from 'csdm/ui/maps/radar-level';
+import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
+import {
+  blurChanged,
+  fetchPointsSuccess,
+  opacityChanged,
+  radarLevelChanged,
+  radiusChanged,
+} from './heatmap/team-heatmap-actions';
+
+type HeatmapState = {
+  readonly mapName: string;
+  readonly radius: number;
+  readonly blur: number;
+  readonly alpha: number;
+  readonly event: HeatmapEvent;
+  readonly radarLevel: RadarLevel;
+  readonly sides: TeamNumber[]; // empty => all sides
+};
 
 type TeamState = {
   status: Status;
   errorCode: ErrorCode;
   team: TeamProfile | undefined;
   selectedMatchChecksums: string[];
+  heatmap: HeatmapState;
 };
 
 const initialState: TeamState = {
@@ -20,6 +41,15 @@ const initialState: TeamState = {
   status: Status.Idle,
   errorCode: ErrorCode.UnknownError,
   selectedMatchChecksums: [],
+  heatmap: {
+    mapName: '',
+    radius: 4,
+    blur: 20,
+    alpha: 1,
+    event: HeatmapEvent.Kills,
+    radarLevel: RadarLevel.Upper,
+    sides: [],
+  },
 };
 
 export const teamReducer = createReducer(initialState, (builder) => {
@@ -30,6 +60,14 @@ export const teamReducer = createReducer(initialState, (builder) => {
     .addCase(fetchTeamSuccess, (state, action) => {
       state.status = Status.Success;
       state.team = action.payload;
+      if (state.heatmap.mapName === '' && action.payload.mapsStats.length > 0) {
+        const firstDefuseMap = action.payload.mapsStats.find((map) => map.mapName.startsWith('de_'));
+        if (firstDefuseMap) {
+          state.heatmap.mapName = firstDefuseMap.mapName;
+        } else {
+          state.heatmap.mapName = action.payload.mapsStats[0].mapName;
+        }
+      }
     })
     .addCase(fetchTeamError, (state, action) => {
       state.status = Status.Error;
@@ -77,6 +115,23 @@ export const teamReducer = createReducer(initialState, (builder) => {
           match.name = action.payload.name;
         }
       }
+    })
+    .addCase(radarLevelChanged, (state, action) => {
+      state.heatmap.radarLevel = action.payload.radarLevel;
+    })
+    .addCase(opacityChanged, (state, action) => {
+      state.heatmap.alpha = action.payload;
+    })
+    .addCase(blurChanged, (state, action) => {
+      state.heatmap.blur = action.payload;
+    })
+    .addCase(radiusChanged, (state, action) => {
+      state.heatmap.radius = action.payload;
+    })
+    .addCase(fetchPointsSuccess, (state, action) => {
+      state.heatmap.event = action.payload.event;
+      state.heatmap.mapName = action.payload.mapName;
+      state.heatmap.sides = action.payload.sides;
     })
     .addCase(tagDeleted, () => {
       return initialState;

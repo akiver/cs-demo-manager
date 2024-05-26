@@ -37,7 +37,7 @@ export function ChecksumsTagsDialog({ checksums, defaultTagIds }: Props) {
       );
     } catch (error) {
       showToast({
-        content: <Trans>An error occurred.</Trans>,
+        content: <Trans>An error occurred</Trans>,
         id: 'checksums-tags-update-error',
         type: 'error',
       });
