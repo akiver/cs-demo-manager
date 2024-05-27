@@ -38,7 +38,7 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.Cevo;
   }
 
-  if (serverName.includes('challengermode')) {
+  if (serverName.includes('challengermode') || serverName.includes('pgl major cs2')) {
     return DemoSource.Challengermode;
   }
 
