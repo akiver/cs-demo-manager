@@ -7,6 +7,7 @@ type Options = {
   steamId: string;
   beforeDelaySeconds: number;
   afterDelaySeconds: number;
+  playerVoicesEnabled: boolean;
 };
 
 export async function generatePlayerRoundsJsonFile({
@@ -15,8 +16,13 @@ export async function generatePlayerRoundsJsonFile({
   steamId,
   beforeDelaySeconds,
   afterDelaySeconds,
+  playerVoicesEnabled,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath);
+
+  if (playerVoicesEnabled) {
+    json.addListenPlayerVoices();
+  }
 
   const beforeRoundTicks = beforeDelaySeconds > 0 ? beforeDelaySeconds * 64 : 128;
   const afterRoundTicks = afterDelaySeconds > 0 ? afterDelaySeconds * 64 : 128;

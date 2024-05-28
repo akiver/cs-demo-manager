@@ -29,7 +29,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
 
   const playDemoArgs: string[] = [];
   const settings = await getSettings();
-  const { useCustomLowlights, lowlights, useHlae } = settings.playback;
+  const { useCustomLowlights, lowlights, useHlae, playerVoicesEnabled } = settings.playback;
   const match = await getPlaybackMatch({
     demoPath,
     steamId,
@@ -66,6 +66,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
       perspective,
       beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,
       nextDelaySeconds: lowlights.afterKillDelayInSeconds,
+      playerVoicesEnabled,
     });
   }
 

@@ -7,6 +7,7 @@ type Options = {
   perspective: Perspective;
   beforeDelaySeconds: number;
   nextDelaySeconds: number;
+  playerVoicesEnabled: boolean;
 };
 
 export async function generatePlayerKillsJsonFile({
@@ -14,8 +15,14 @@ export async function generatePlayerKillsJsonFile({
   perspective,
   beforeDelaySeconds,
   nextDelaySeconds,
+  playerVoicesEnabled,
 }: Options) {
   const json = new JSONActionsFileGenerator(match.demoPath);
+
+  if (playerVoicesEnabled) {
+    json.addListenPlayerVoices();
+  }
+
   if (nextDelaySeconds < 1) {
     nextDelaySeconds = 1;
   }

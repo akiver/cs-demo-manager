@@ -19,8 +19,18 @@ async function generateVdmFile(demoPath: string, startTick?: number, steamId?: s
   await vdm.write();
 }
 
-async function generateJsonActionsFile(demoPath: string, startTick?: number, steamId?: string) {
+async function generateJsonActionsFile(
+  demoPath: string,
+  playerVoicesEnabled: boolean,
+  startTick?: number,
+  steamId?: string,
+) {
   const generator = new JSONActionsFileGenerator(demoPath);
+
+  if (playerVoicesEnabled) {
+    generator.addListenPlayerVoices();
+  }
+
   if (startTick) {
     generator.addSkipAhead(0, startTick);
   }
@@ -46,14 +56,16 @@ type Options = {
 export async function watchDemo(options: Options) {
   const { demoPath, startTick, focusSteamId } = options;
   const game = await detectDemoGame(demoPath);
+  const settings = await getSettings();
+  const { playerVoicesEnabled } = settings.playback;
+
   if (game === Game.CSGO) {
     await generateVdmFile(demoPath, startTick, focusSteamId);
   } else {
     await deleteJsonActionsFile(demoPath);
-    await generateJsonActionsFile(demoPath, startTick, focusSteamId);
+    await generateJsonActionsFile(demoPath, playerVoicesEnabled, startTick, focusSteamId);
   }
 
-  const settings = await getSettings();
   if (settings.playback.useHlae) {
     await watchDemoWithHlae({
       ...options,

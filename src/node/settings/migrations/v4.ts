@@ -7,6 +7,7 @@ const v4: Migration = {
   run: (settings: Settings) => {
     settings.teams = defaultSettings.teams;
     settings.teamProfile = defaultSettings.teamProfile;
+    settings.playback = defaultSettings.playback;
 
     return Promise.resolve(settings);
   },

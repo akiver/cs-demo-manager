@@ -13,6 +13,7 @@ import { CustomLowlights } from './custom-lowlights';
 import { WatchRoundBeforeDelay } from './watch-round-before-delay';
 import { WatchRoundAfterDelay } from './watch-round-after-delay';
 import { UseHlae } from './use-hlae';
+import { PlayerVoices } from './player-voices';
 
 export function PlaybackSettings() {
   return (
@@ -21,6 +22,7 @@ export function PlaybackSettings() {
       <GameHeight />
       <GameFullscreen />
       <LaunchParameters />
+      <PlayerVoices />
       <CustomHighlights />
       <HighlightsWatchBeforeKillDelay />
       <HighlightsWatchAfterKillDelay />

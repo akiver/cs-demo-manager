@@ -36,7 +36,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
 
   const playDemoArgs: string[] = [];
   const settings = await getSettings();
-  const { useCustomHighlights, highlights, useHlae } = settings.playback;
+  const { useCustomHighlights, highlights, useHlae, playerVoicesEnabled } = settings.playback;
   const match = await getPlaybackMatch({
     demoPath,
     steamId,
@@ -72,6 +72,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
       perspective,
       beforeDelaySeconds: highlights.beforeKillDelayInSeconds,
       nextDelaySeconds: highlights.afterKillDelayInSeconds,
+      playerVoicesEnabled,
     });
   }
 

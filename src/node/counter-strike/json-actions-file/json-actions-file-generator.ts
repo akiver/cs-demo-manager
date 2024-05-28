@@ -73,6 +73,21 @@ export class JSONActionsFileGenerator {
     return this;
   }
 
+  // Adds convars required to hear player voices from both sides.
+  public addListenPlayerVoices(tick?: number) {
+    const actionTick = this.getValidTick(tick ?? 1);
+    this.actions.push({
+      cmd: 'tv_listen_voice_indices -1',
+      tick: actionTick,
+    });
+    this.actions.push({
+      cmd: 'tv_listen_voice_indices_h -1',
+      tick: actionTick,
+    });
+
+    return this;
+  }
+
   public async write() {
     if (this.actions.length === 0) {
       return this;

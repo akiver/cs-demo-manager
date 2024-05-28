@@ -6342,6 +6342,23 @@ msgstr "Délai avant kill (pires moments)"
 msgid "How many seconds to start before a kill when watching lowlights"
 msgstr "Combien de secondes avant un kill démarrera la lecture en regardant les pires moments"
 
+#: src/ui/settings/playback/player-voices.tsx
+msgid "Listen player voices during playback"
+msgstr ""
+
+#: src/ui/settings/playback/player-voices.tsx
+msgid "Doesn't work with Valve Matchmaking demos as voice data are not available!"
+msgstr ""
+
+#: src/ui/settings/playback/player-voices.tsx
+msgid "CS2 only!"
+msgstr ""
+
+#: src/ui/settings/playback/player-voices.tsx
+msgctxt "Settings title"
+msgid "Player voices"
+msgstr ""
+
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
 msgstr ""
