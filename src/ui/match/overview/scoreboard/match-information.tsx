@@ -38,7 +38,7 @@ type FieldProps = {
 function Field({ name, value }: FieldProps) {
   return (
     <div className="flex items-center">
-      <p>{name}</p>
+      <p className="shrink-0">{name}</p>
       <p className="text-gray-900 ml-8 selectable break-all">{value}</p>
     </div>
   );
