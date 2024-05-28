@@ -76,7 +76,8 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
   }
 
   const settings = await getSettings();
-  const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds } = settings.playback.round;
+  const { round, playerVoicesEnabled } = settings.playback;
+  const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds } = round;
   if (game !== Game.CSGO) {
     await generatePlayerRoundsJsonFile({
       demoPath,
@@ -84,6 +85,7 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
       steamId,
       beforeDelaySeconds: beforeRoundDelayInSeconds,
       afterDelaySeconds: afterRoundDelayInSeconds,
+      playerVoicesEnabled,
     });
   } else {
     const tickrate = await fetchMatchTickrate(checksum);

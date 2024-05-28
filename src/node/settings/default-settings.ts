@@ -59,6 +59,7 @@ export const defaultSettings: Settings = {
     },
     launchParameters: '',
     useHlae: false,
+    playerVoicesEnabled: true,
   },
   video: {
     closeGameAfterRecording: true,

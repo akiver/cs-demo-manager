@@ -6337,6 +6337,23 @@ msgstr "Before kill delay (lowlights)"
 msgid "How many seconds to start before a kill when watching lowlights"
 msgstr "How many seconds to start before a kill when watching lowlights"
 
+#: src/ui/settings/playback/player-voices.tsx
+msgid "Listen player voices during playback"
+msgstr "Listen player voices during playback"
+
+#: src/ui/settings/playback/player-voices.tsx
+msgid "Doesn't work with Valve Matchmaking demos as voice data are not available!"
+msgstr "Doesn't work with Valve Matchmaking demos as voice data are not available!"
+
+#: src/ui/settings/playback/player-voices.tsx
+msgid "CS2 only!"
+msgstr "CS2 only!"
+
+#: src/ui/settings/playback/player-voices.tsx
+msgctxt "Settings title"
+msgid "Player voices"
+msgstr "Player voices"
+
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
 msgstr "Start Counter-Strike using HLAE configured in the <0>video settings</0>"

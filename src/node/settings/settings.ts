@@ -66,6 +66,7 @@ type PlaybackSettings = {
   };
   launchParameters: string;
   useHlae: boolean;
+  playerVoicesEnabled: boolean;
 };
 
 export type PlayerProfileSettings = {
