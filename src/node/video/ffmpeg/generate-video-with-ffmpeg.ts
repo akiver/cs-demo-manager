@@ -45,7 +45,7 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
     rawFilesPathPattern = path.join(sequenceRawFilesFolderPath, '%05d.tga');
   } else {
     const sequenceName = getSequenceName(sequence);
-    rawFilesPathPattern = path.join(sequenceRawFilesFolderPath, `${sequenceName}%04d.tga`);
+    rawFilesPathPattern = path.join(sequenceRawFilesFolderPath, `${sequenceName}%08d.tga`);
   }
 
   const args: string[] = [

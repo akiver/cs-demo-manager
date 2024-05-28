@@ -30,6 +30,10 @@ export async function createJsonActionsFileForRecording({
     'cl_hud_telemetry_ping_show 0',
     'cl_hud_telemetry_serverrecvmargin_graph_show 0',
     'r_show_build_info 0',
+    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default but we don't want to see it in
+    // the video so we call the demoui command to hide it.
+    // Note: the new convar demo_ui_mode has no effect.
+    'demoui',
   ];
   for (const command of mandatoryCommands) {
     json.addExecCommand(1, command);
