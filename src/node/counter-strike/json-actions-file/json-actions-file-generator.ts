@@ -14,6 +14,10 @@ export class JSONActionsFileGenerator {
 
   public constructor(demoPath: string) {
     this.filePath = windowsToUnixPathSeparator(`${demoPath}.json`);
+    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default but we don't want to see it so we
+    // call the demoui command to hide it.
+    // Note: the new convar demo_ui_mode has no effect.
+    this.addExecCommand(1, 'demoui');
   }
 
   public addSkipAhead(startTick: number, toTick: number) {
