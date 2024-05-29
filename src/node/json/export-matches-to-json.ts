@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fetchMatchesByChecksums } from 'csdm/node/database/matches/fetch-matches-by-checksums';
+import { fetchMatchesForJsonExport } from 'csdm/node/database/json/fetch-matches-for-json-export';
 
 type Options = {
   outputFolderPath: string;
@@ -9,7 +9,7 @@ type Options = {
 };
 
 export async function exportMatchesToJson({ outputFolderPath, checksums, minify }: Options) {
-  const matches = await fetchMatchesByChecksums(checksums);
+  const matches = await fetchMatchesForJsonExport(checksums);
 
   for (const match of matches) {
     const outputFilePath = path.join(outputFolderPath, `${match.name}.json`);

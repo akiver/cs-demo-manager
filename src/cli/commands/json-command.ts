@@ -1,5 +1,5 @@
 import { SupportedDemoSources } from 'csdm/common/types/counter-strike';
-import { exportMatchesToJson } from 'csdm/node/match/export-matches-to-json';
+import { exportMatchesToJson } from 'csdm/node/json/export-matches-to-json';
 import { ExportCommand } from './export-command';
 
 export class JsonCommand extends ExportCommand {

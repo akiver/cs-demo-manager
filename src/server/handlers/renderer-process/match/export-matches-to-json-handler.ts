@@ -1,5 +1,5 @@
 import { handleError } from '../../handle-error';
-import { exportMatchesToJson } from 'csdm/node/match/export-matches-to-json';
+import { exportMatchesToJson } from 'csdm/node/json/export-matches-to-json';
 
 export type ExportMatchesToJsonPayload = {
   outputFolderPath: string;
