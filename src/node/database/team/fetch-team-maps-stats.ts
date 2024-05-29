@@ -3,19 +3,23 @@ import { db } from 'csdm/node/database/database';
 import type { FetchTeamFilters } from './fetch-team-filters';
 import type { MapStats } from 'csdm/common/types/map-stats';
 
-type MapGlobalStats = {
+type MatchStats = {
   mapName: string;
   matchCount: number;
   winCount: number;
   lostCount: number;
   tiedCount: number;
+};
+
+type PlayerStats = {
+  mapName: string;
   killDeathRatio: number;
   averageDamagesPerRound: number;
   kast: number;
   headshotPercentage: number;
 };
 
-type MapRoundStats = {
+type RoundStats = {
   mapName: string;
   roundCount: number;
   roundCountAsCt: number;
@@ -25,6 +29,66 @@ type MapRoundStats = {
   roundWinCountAsCt: number;
   roundWinCountAsT: number;
 };
+
+function buildMatchStatsQuery({
+  name,
+  startDate,
+  endDate,
+  sources,
+  games,
+  gameModes,
+  tagIds,
+  maxRounds,
+  demoTypes,
+}: FetchTeamFilters) {
+  const { count } = db.fn;
+  let query = db
+    .selectFrom('matches')
+    .leftJoin('teams', 'teams.match_checksum', 'matches.checksum')
+    .select([
+      'matches.map_name as mapName',
+      count<number>('matches.checksum').distinct().as('matchCount'),
+      sql<number>`COUNT(CASE WHEN matches.winner_name = ${sql`${name}`} THEN 1 END)`.as('winCount'),
+      sql<number>`COUNT(CASE WHEN matches.winner_name IS NOT NULL AND matches.winner_name != ${sql`${name}`} THEN 1 END)`.as(
+        'lostCount',
+      ),
+      sql<number>`COUNT(CASE WHEN matches.winner_name IS NULL THEN 1 END)`.as('tiedCount'),
+    ])
+    .where('teams.name', '=', name)
+    .groupBy('mapName');
+
+  if (startDate !== undefined && endDate !== undefined) {
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+  }
+
+  if (sources.length > 0) {
+    query = query.where('matches.source', 'in', sources);
+  }
+
+  if (games.length > 0) {
+    query = query.where('matches.game', 'in', games);
+  }
+
+  if (demoTypes.length > 0) {
+    query = query.where('matches.type', 'in', demoTypes);
+  }
+
+  if (gameModes.length > 0) {
+    query = query.where('game_mode_str', 'in', gameModes);
+  }
+
+  if (maxRounds.length > 0) {
+    query = query.where('max_rounds', 'in', maxRounds);
+  }
+
+  if (tagIds.length > 0) {
+    query = query
+      .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
+      .where('checksum_tags.tag_id', 'in', tagIds);
+  }
+
+  return query;
+}
 
 function buildStatsQuery({
   name,
@@ -37,7 +101,7 @@ function buildStatsQuery({
   maxRounds,
   demoTypes,
 }: FetchTeamFilters) {
-  const { count, avg } = db.fn;
+  const { avg } = db.fn;
   let query = db
     .selectFrom('matches')
     .leftJoin('teams', 'teams.match_checksum', 'matches.checksum')
@@ -46,12 +110,6 @@ function buildStatsQuery({
     })
     .select([
       'matches.map_name as mapName',
-      count<number>('matches.checksum').distinct().as('matchCount'),
-      sql<number>`COUNT(DISTINCT CASE WHEN matches.winner_name = ${sql`${name}`} THEN 1 END)`.as('winCount'),
-      sql<number>`COUNT(DISTINCT CASE WHEN matches.winner_name IS NOT NULL AND matches.winner_name != ${sql`${name}`} THEN 1 END)`.as(
-        'lostCount',
-      ),
-      sql<number>`COUNT(DISTINCT CASE WHEN matches.winner_name IS NULL THEN 1 END)`.as('tiedCount'),
       avg<number>('players.kill_death_ratio').as('killDeathRatio'),
       avg<number>('players.average_damage_per_round').as('averageDamagesPerRound'),
       avg<number>('players.kast').as('kast'),
@@ -164,21 +222,27 @@ function buildRoundsQuery({
 export async function fetchTeamMapsStats(filters: FetchTeamFilters): Promise<MapStats[]> {
   const statsQuery = buildStatsQuery(filters);
   const roundsQuery = buildRoundsQuery(filters);
+  const matchStatsQuery = buildMatchStatsQuery(filters);
 
-  const [globalStats, roundsStats]: [MapGlobalStats[], MapRoundStats[]] = await Promise.all([
+  const [matchesStats, playersStats, roundsStats]: [MatchStats[], PlayerStats[], RoundStats[]] = await Promise.all([
+    matchStatsQuery.execute(),
     statsQuery.execute(),
     roundsQuery.execute(),
   ]);
 
   const stats: MapStats[] = [];
-  for (const matchStats of globalStats) {
+  for (const matchStats of matchesStats) {
     const roundStats = roundsStats.find((roundStats) => {
       return roundStats.mapName === matchStats.mapName;
     });
+    const playerStats = playersStats.find((roundStats) => {
+      return roundStats.mapName === matchStats.mapName;
+    });
 
-    if (roundStats !== undefined) {
+    if (roundStats && playerStats) {
       stats.push({
         ...matchStats,
+        ...playerStats,
         ...roundStats,
       });
     }
