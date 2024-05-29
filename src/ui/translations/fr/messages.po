@@ -8,7 +8,7 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-31 19:56\n"
+"PO-Revision-Date: 2024-05-29 00:10\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -2365,7 +2365,7 @@ msgstr "POV"
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
@@ -2879,7 +2879,7 @@ msgstr "L'exécutable de Counter-Strike est introuvable."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
-msgstr ""
+msgstr "Assurez-vous que Steam n'est pas installé via Flatpak car il ce n'est pas supporté !"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
@@ -2887,7 +2887,7 @@ msgstr "Veuillez vous assurer que CS:GO est installé en sélectionnant la branc
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Read the <0>documentation</0> for more information."
-msgstr ""
+msgstr "Lisez la <0>documentation</0> pour plus d'informations."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "{game} is not supported on your operating system"
@@ -2895,7 +2895,7 @@ msgstr "{game} n'est pas supporté sur votre système d'exploitation"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "HLAE executable not found"
-msgstr ""
+msgstr "L'exécutable de HLAE est introuvable"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
@@ -3229,7 +3229,7 @@ msgstr "Messages du chat exportés"
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
 msgid "Duels matrix"
-msgstr ""
+msgstr "Matrice des duels"
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
@@ -3371,7 +3371,7 @@ msgstr "Détails par round"
 
 #: src/ui/match/duels/players-duels-matrix.tsx
 msgid "<0>{killerName}</0> killed <1>{victimName}</1> <2>{killCount}</2> times"
-msgstr ""
+msgstr "<0>{killerName}</0> a tué <1>{victimName}</1> <2>{killCount}</2> fois"
 
 #: src/ui/match/duels/players-duels-matrix.tsx
 msgid "No kills found between both teams."
@@ -3837,7 +3837,7 @@ msgstr "Dégâts"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Damages"
-msgstr ""
+msgstr "Dégâts"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3889,7 +3889,7 @@ msgstr "Dégâts utilitaires par round"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Utility Damage per Round"
-msgstr ""
+msgstr "Dégâts utilitaires par round"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3901,7 +3901,7 @@ msgstr "Headshot"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Headshot percentage"
-msgstr ""
+msgstr "Pourcentage headshot"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3944,7 +3944,7 @@ msgstr "Dégâts totaux infligés par utilitaire"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Utility Damage"
-msgstr ""
+msgstr "Dégâts utilitaire"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first kill count"
@@ -3959,7 +3959,7 @@ msgstr "Premier kill dans un round"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Kills"
-msgstr ""
+msgstr "Premiers kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first death count"
@@ -3974,7 +3974,7 @@ msgstr "Mort en premier dans un round"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Deaths"
-msgstr ""
+msgstr "Premières morts"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade kill count"
@@ -3989,7 +3989,7 @@ msgstr "Trade Kills (Kill de vengeance dans les 5s après la mort d'un coéquipi
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Trade Kills"
-msgstr ""
+msgstr "Trade kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade death count"
@@ -4004,7 +4004,7 @@ msgstr "Trade Deaths (Mort vengée par un coéquipier dans les 5s après la mort
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Trade Deaths"
-msgstr ""
+msgstr "Trade morts"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade kill count"
@@ -4019,7 +4019,7 @@ msgstr "Premier Trade Kills (Kill de vengeance dans les 5s après la mort d'un c
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Trade Kills"
-msgstr ""
+msgstr "Premiers trade kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade death count"
@@ -4034,7 +4034,7 @@ msgstr "Premier Trade Deaths (Mort vengée par un coéquipier dans les 5s après
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Trade Deaths"
-msgstr ""
+msgstr "Premières trade morts"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header wallbang kill count"
@@ -4049,32 +4049,32 @@ msgstr "Wallbang Kill"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Wallbang Kills"
-msgstr ""
+msgstr "Wallbang Kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Collateral Kills"
-msgstr ""
+msgstr "Kills collatéraux"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header no scope kill count"
 msgid "NS"
-msgstr ""
+msgstr "NS"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "No Scope Kill"
-msgstr ""
+msgstr "No Scope kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "No Scope Kills"
-msgstr ""
+msgstr "No Scope kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Score"
-msgstr ""
+msgstr "Score"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb planted count"
@@ -4089,7 +4089,7 @@ msgstr "Bombes plantées"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Bomb Planted"
-msgstr ""
+msgstr "Bombes plantées"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb defused count"
@@ -4104,7 +4104,7 @@ msgstr "Bombes désamorcées"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Bomb Defused"
-msgstr ""
+msgstr "Bombes désamorcées"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header hostage rescued count"
@@ -4119,7 +4119,7 @@ msgstr "Otage libéré"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Hostage Rescued"
-msgstr ""
+msgstr "Otages libérés"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
@@ -5185,7 +5185,7 @@ msgstr "Tête"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Neck"
-msgstr ""
+msgstr "Cou"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Chest"
@@ -5899,71 +5899,71 @@ msgstr "Se déconnecter"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You must select at least one data to import."
-msgstr ""
+msgstr "Vous devez sélectionner au moins une donnée à importer."
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You must select a CS:DM V2 backup file."
-msgstr ""
+msgstr "Vous devez sélectionner un fichier de sauvegarde CS:DM V2."
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You need at least one folder."
-msgstr ""
+msgstr "Vous avez besoin d'au moins un dossier."
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "The backup file is invalid."
-msgstr ""
+msgstr "Le fichier de sauvegarde est invalide."
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "A required tag has not been found."
-msgstr ""
+msgstr "Un tag requis n'a pas été trouvé."
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "Select the JSON backup file generated from the CS:DM V2."
-msgstr ""
+msgstr "Sélectionnez le fichier de sauvegarde JSON généré à partir de CS:DM V2."
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
 msgid "Select backup file"
-msgstr ""
+msgstr "Sélectionner le fichier de sauvegarde"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "Import comments"
-msgstr ""
+msgstr "Importer les commentaires"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "Import statuses"
-msgstr ""
+msgstr "Importer les statuts"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "The comment and status of the demos inside the following folders will be updated:"
-msgstr ""
+msgstr "Le commentaire et statut des démos dans les dossiers suivants seront mis à jour :"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "{demoToImportCount, plural, one {<0>#</0> demo to import found in the backup file.} other {<1>#</1> demos to import found in the backup file.}}"
-msgstr ""
+msgstr "{demoToImportCount, plural, one {<0>#</0> démo à importer trouvée dans le fichier de sauvegarde.} other {<1>#</1> démos à importer trouvées dans le fichier de sauvegarde.}}"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "{demoToImportCount, plural, one {<0>{demoFoundCount}</0> demo found in folders.} other {<1>{demoFoundCount}</1> demos found in folders.}}"
-msgstr ""
+msgstr "{demoToImportCount, plural, one {<0>{demoFoundCount}</0> démo trouvée dans les dossiers.} other {<1>{demoFoundCount}</1> démos trouvées dans les dossiers.}}"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "{demoToImportCount, plural, one {<0>{updatedDemoCount}</0> demo updated:} other {<1>{updatedDemoCount}</1> demos updated:}}"
-msgstr ""
+msgstr "{demoToImportCount, plural, one {<0>{updatedDemoCount}</0> démo mise à jour:} other {<1>{updatedDemoCount}</1> démos mises à jour:}}"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Dialog title"
 msgid "Import CS:DM V2"
-msgstr ""
+msgstr "Importation CS:DM V2"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
 msgid "Import"
-msgstr ""
+msgstr "Importation"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
 msgid "Import V2 data"
-msgstr ""
+msgstr "Importer les données CS:DM V2"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Optimize database"
@@ -6361,12 +6361,12 @@ msgstr ""
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
-msgstr ""
+msgstr "Démarrer Counter-Strike en utilisant HLAE configuré dans les <0>paramètres vidéo</0>"
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgctxt "Settings title"
 msgid "Use HLAE"
-msgstr ""
+msgstr "Utiliser HLAE"
 
 #: src/ui/settings/playback/watch-before-kill-delay.tsx
 msgctxt "Input placeholder"
