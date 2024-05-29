@@ -27,6 +27,7 @@ function MapEntry({ mapStats }: EntryProps) {
         <PanelStatRow title={<Trans>Total</Trans>} value={mapStats.matchCount} />
         <PanelStatRow title={<Trans>Win</Trans>} value={mapStats.winCount} />
         <PanelStatRow title={<Trans>Lost</Trans>} value={mapStats.lostCount} />
+        <PanelStatRow title={<Trans>Tie</Trans>} value={mapStats.tiedCount} />
         <WinRate value={roundNumber((mapStats.winCount / mapStats.matchCount) * 100, 1)} />
       </Panel>
       <Panel header={<Trans context="Panel title">Rounds</Trans>} minWidth={200}>

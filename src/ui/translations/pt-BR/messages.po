@@ -1430,6 +1430,10 @@ msgid "Lost"
 msgstr ""
 
 #: src/ui/components/maps-stats.tsx
+msgid "Tie"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/rounds-panel.tsx
 msgctxt "Panel title"
 msgid "Rounds"
@@ -2053,6 +2057,10 @@ msgstr "Empates"
 msgctxt "Panel label"
 msgid "Defeats"
 msgstr "Derrotas"
+
+#: src/ui/components/panels/win-rate.tsx
+msgid "Win rate"
+msgstr ""
 
 #: src/ui/components/table/cells/bans-cell.tsx
 msgctxt "Tooltip"

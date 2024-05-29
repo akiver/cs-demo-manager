@@ -77,6 +77,7 @@ export function Heatmap() {
     }
 
     const context = radar.getContext('2d') as CanvasRenderingContext2D;
+    context.clearRect(0, 0, radar.width, radar.height);
     context.drawImage(radarImage, 0, 0, radar.width, radar.height);
 
     const scaledPoints: HeatmapPoint[] = points.map((point) => {
