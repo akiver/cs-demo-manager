@@ -1,9 +1,9 @@
-import type fs from 'node:fs';
+import type { StatsBase } from 'node:fs';
 import { crc64 } from 'crc64-ecma';
 import type { DemoHeader } from 'csdm/node/demo/get-demo-header';
 
 // ! Demos checksums are based on .dem file headers because it would be slower to read the whole file.
-export function getDemoChecksumFromFileStats(header: DemoHeader, stats: fs.Stats) {
+export function getDemoChecksumFromFileStats(header: DemoHeader, stats: StatsBase<number>) {
   let data: string;
   if (header.filestamp === 'HL2DEMO') {
     const { serverName, clientName, mapName, networkProtocol, playbackFrames, playbackTicks, signonLength } = header;

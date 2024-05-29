@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import type { Stats } from 'node:fs';
+import type { StatsBase } from 'node:fs';
 import { InvalidBackupFile } from './errors/invalid-backup-file';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { findDemosInFolders } from 'csdm/node/demo/find-demos-in-folders';
@@ -30,7 +30,7 @@ export type ImportV2BackupResult = {
   updatedDemoPaths: string[];
 };
 
-function getDemoIdV2(header: DemoHeaderSource1, stats: Stats) {
+function getDemoIdV2(header: DemoHeaderSource1, stats: StatsBase<number>) {
   const seconds = Math.trunc(
     new Date(stats.mtime.getTime() - stats.mtime.getTimezoneOffset() * 60000).getTime() / 1000,
   );
