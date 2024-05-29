@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-31 19:43\n"
+"PO-Revision-Date: 2024-05-29 20:39\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -2373,7 +2373,7 @@ msgstr "PDV"
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
@@ -2887,7 +2887,7 @@ msgstr "Executável Counter-Strike não encontrado."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
-msgstr ""
+msgstr "Certifique-se que a Steam não foi instalada através do Flatpak, pois não é suportado!"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
@@ -2895,7 +2895,7 @@ msgstr "Certifique-se que o CS:GO está instalado selecionando o ramo \"csgo_leg
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Read the <0>documentation</0> for more information."
-msgstr ""
+msgstr "Leia a <0>documentação</0> para mais informações."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "{game} is not supported on your operating system"
@@ -2903,7 +2903,7 @@ msgstr "{game} não é suportado no seu sistema operacional"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "HLAE executable not found"
-msgstr ""
+msgstr "Executável HLAE não encontrado"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
@@ -3126,7 +3126,7 @@ msgstr "Nenhum"
 #: src/ui/hooks/use-translate-economy-ban.ts
 msgctxt "Steam economy ban status"
 msgid "Probation"
-msgstr ""
+msgstr "Período de experiência"
 
 #: src/ui/hooks/use-translate-economy-ban.ts
 msgctxt "Steam economy ban status"
@@ -3237,7 +3237,7 @@ msgstr ""
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
 msgid "Duels matrix"
-msgstr ""
+msgstr "Matriz de duelos"
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
@@ -3845,7 +3845,7 @@ msgstr "Danos"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Damages"
-msgstr ""
+msgstr "Danos"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3897,7 +3897,7 @@ msgstr "Dano de utilitário por rodada"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Utility Damage per Round"
-msgstr ""
+msgstr "Dano de utilitário por rodada"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3909,7 +3909,7 @@ msgstr "Tiro na Cabeça"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Headshot percentage"
-msgstr ""
+msgstr "Porcentagem de tiros na cabeça"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3952,7 +3952,7 @@ msgstr "Dano total de utilitárias causado"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Utility Damage"
-msgstr ""
+msgstr "Dano de utilitários"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first kill count"
@@ -3967,7 +3967,7 @@ msgstr "Primeiro abate de uma rodada"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Kills"
-msgstr ""
+msgstr "Primeiras eliminações"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first death count"
@@ -3982,7 +3982,7 @@ msgstr "Primeira morte de uma rodada"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Deaths"
-msgstr ""
+msgstr "Primeiras mortes"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade kill count"
@@ -4082,7 +4082,7 @@ msgstr ""
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Score"
-msgstr ""
+msgstr "Pontuação"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb planted count"
@@ -4097,7 +4097,7 @@ msgstr "Bombas armadas"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Bomb Planted"
-msgstr ""
+msgstr "Bomba armada"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb defused count"
@@ -4112,7 +4112,7 @@ msgstr "Bombas desarmadas"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Bomb Defused"
-msgstr ""
+msgstr "Bomba desarmada"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header hostage rescued count"
