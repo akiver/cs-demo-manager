@@ -60,7 +60,7 @@ export const teamReducer = createReducer(initialState, (builder) => {
     .addCase(fetchTeamSuccess, (state, action) => {
       state.status = Status.Success;
       state.team = action.payload;
-      if (state.heatmap.mapName === '' && action.payload.mapsStats.length > 0) {
+      if (action.payload.mapsStats.length > 0) {
         const firstDefuseMap = action.payload.mapsStats.find((map) => map.mapName.startsWith('de_'));
         if (firstDefuseMap) {
           state.heatmap.mapName = firstDefuseMap.mapName;
