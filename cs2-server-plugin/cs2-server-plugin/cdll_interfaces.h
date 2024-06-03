@@ -109,8 +109,9 @@ public:
 
     virtual void _Unknown_058(void) = 0;
     virtual void _Unknown_059(void) = 0;
+    virtual void _Unknown_060(void) = 0;
 
-    virtual IDemoFile* GetDemoFile(void) = 0; //:060
+    virtual IDemoFile* GetDemoFile(void) = 0; //:061
 };
 
 enum ClientFrameStage_t
