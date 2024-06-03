@@ -18,6 +18,7 @@ export async function updateMapHandler({
   game,
   posX,
   posY,
+  thresholdZ,
   lowerRadarBase64,
   radarBase64,
   scale,
@@ -32,6 +33,7 @@ export async function updateMapHandler({
       game,
       position_x: posX,
       position_y: posY,
+      threshold_z: thresholdZ,
       scale,
     };
     const updatedMaps = await updateMap(mapToUpdate);

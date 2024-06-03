@@ -6,6 +6,7 @@ export type Map = {
   game: Game;
   posX: number;
   posY: number;
+  thresholdZ: number;
   scale: number;
   radarFilePath: string | undefined;
   lowerRadarFilePath: string | undefined;

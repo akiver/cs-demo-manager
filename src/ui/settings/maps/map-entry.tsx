@@ -34,6 +34,7 @@ export function MapEntry({ map }: Props) {
                 name: map.name,
                 posX: String(map.posX),
                 posY: String(map.posY),
+                thresholdZ: String(map.thresholdZ),
                 scale: String(map.scale),
                 radarBase64,
                 lowerRadarBase64,

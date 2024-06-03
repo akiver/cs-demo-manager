@@ -53,6 +53,7 @@ export async function getAllMigrations(): Promise<Migration[]> {
     import('./v1/create-player-comments-table'),
     import('./v1/create-downloads-history-table'),
     import('./v2/create-round-tags-table'),
+    import('./v3'),
   ]);
 
   const migrations = modules.map((module) => module.default);

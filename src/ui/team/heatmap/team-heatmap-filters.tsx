@@ -4,12 +4,7 @@ import { HeatmapInputRadius } from 'csdm/ui/components/heatmap/input-radius';
 import { HeatmapInputBlur } from 'csdm/ui/components/heatmap/input-blur';
 import { HeatmapInputOpacity } from 'csdm/ui/components/heatmap/input-opacity';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import {
-  blurChanged,
-  opacityChanged,
-  radarLevelChanged,
-  radiusChanged,
-} from 'csdm/ui/team/heatmap/team-heatmap-actions';
+import { blurChanged, opacityChanged, radiusChanged } from 'csdm/ui/team/heatmap/team-heatmap-actions';
 import { RadarLevelSelect } from 'csdm/ui/components/inputs/select/radar-level-select';
 import { useHeatmapContext } from 'csdm/ui/components/heatmap/heatmap-context';
 import { HeatmapSideSelect } from 'csdm/ui/components/heatmap/heatmap-side-select';
@@ -57,7 +52,7 @@ export function TeamHeatmapFilters() {
         mapName={mapName}
         game={game}
         onChange={(radarLevel) => {
-          dispatch(radarLevelChanged({ radarLevel }));
+          fetchPoints({ radarLevel });
         }}
         selectedRadarLevel={radarLevel}
       />

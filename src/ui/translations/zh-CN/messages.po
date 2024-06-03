@@ -6210,6 +6210,10 @@ msgid "Coordinate Y is required."
 msgstr "需要Y坐标。"
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Threshold Z is required."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Scale is required."
 msgstr "缩放必须填写"
 
@@ -6222,6 +6226,11 @@ msgstr "雷达"
 msgctxt "Input label"
 msgid "Scale"
 msgstr "缩放"
+
+#: src/ui/settings/maps/map-dialog/threshold-z-input.tsx
+msgctxt "Input label"
+msgid "Threshold Z"
+msgstr ""
 
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "Thumbnail image pixels must be smaller than {maxFileWidth}x{maxFileHeight}"

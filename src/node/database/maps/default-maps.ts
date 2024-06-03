@@ -9,6 +9,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: 4041,
       position_y: 7838,
       scale: 4.6,
+      threshold_z: 0,
     },
     {
       name: 'cs_italy',
@@ -16,6 +17,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2647,
       position_y: 2592,
       scale: 4.6,
+      threshold_z: 0,
     },
     {
       name: 'cs_militia',
@@ -23,6 +25,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -1474,
       position_y: 2296,
       scale: 4.5,
+      threshold_z: 25,
     },
     {
       name: 'cs_office',
@@ -30,6 +33,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -1838,
       position_y: 1858,
       scale: 4.1,
+      threshold_z: 0,
     },
     {
       name: 'de_ancient',
@@ -37,6 +41,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2953,
       position_y: 2164,
       scale: 5,
+      threshold_z: 0,
     },
     {
       name: 'de_anubis',
@@ -44,6 +49,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2796,
       position_y: 3328,
       scale: 5.22,
+      threshold_z: 0,
     },
     {
       name: 'de_aztec',
@@ -51,6 +57,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3200,
       position_y: 2841,
       scale: 6,
+      threshold_z: 0,
     },
     {
       name: 'de_cache',
@@ -58,6 +65,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2000,
       position_y: 3250,
       scale: 5.5,
+      threshold_z: 0,
     },
     {
       name: 'de_canals',
@@ -65,6 +73,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2496,
       position_y: 1792,
       scale: 4,
+      threshold_z: 0,
     },
     {
       name: 'de_cbble',
@@ -72,6 +81,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3840,
       position_y: 3072,
       scale: 6,
+      threshold_z: 0,
     },
     {
       name: 'de_dust',
@@ -79,6 +89,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2850,
       position_y: 4073,
       scale: 6,
+      threshold_z: 0,
     },
     {
       name: 'de_dust2',
@@ -86,6 +97,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2476,
       position_y: 3239,
       scale: 4.4,
+      threshold_z: 0,
     },
     {
       name: 'de_inferno',
@@ -93,6 +105,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2087,
       position_y: 3870,
       scale: 4.9,
+      threshold_z: 0,
     },
     {
       name: 'de_mirage',
@@ -100,6 +113,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3230,
       position_y: 1713,
       scale: 5,
+      threshold_z: 0,
     },
     {
       name: 'de_nuke',
@@ -107,6 +121,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3453,
       position_y: 2887,
       scale: 7,
+      threshold_z: -495,
     },
     {
       name: 'de_overpass',
@@ -114,6 +129,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -4831,
       position_y: 1781,
       scale: 5.2,
+      threshold_z: 0,
     },
     {
       name: 'de_train',
@@ -121,6 +137,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2477,
       position_y: 2392,
       scale: 4.7,
+      threshold_z: 0,
     },
     {
       name: 'de_vertigo',
@@ -128,6 +145,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3168,
       position_y: 1762,
       scale: 4,
+      threshold_z: 11700,
     },
   ];
 
@@ -138,6 +156,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: 4041,
       position_y: 7838,
       scale: 4.6,
+      threshold_z: 0,
     },
     {
       name: 'cs_italy',
@@ -145,6 +164,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2647,
       position_y: 2592,
       scale: 4.6,
+      threshold_z: 0,
     },
     {
       name: 'cs_militia',
@@ -152,6 +172,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -1474,
       position_y: 2296,
       scale: 4.5,
+      threshold_z: 25,
     },
     {
       name: 'cs_office',
@@ -159,6 +180,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -1838,
       position_y: 1858,
       scale: 4.1,
+      threshold_z: 0,
     },
     {
       name: 'de_ancient',
@@ -166,6 +188,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2953,
       position_y: 2164,
       scale: 5,
+      threshold_z: 0,
     },
     {
       name: 'de_anubis',
@@ -173,6 +196,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2796,
       position_y: 3328,
       scale: 5.22,
+      threshold_z: 0,
     },
     {
       name: 'de_aztec',
@@ -180,6 +204,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3200,
       position_y: 2841,
       scale: 6,
+      threshold_z: 0,
     },
     {
       name: 'de_cache',
@@ -187,6 +212,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2000,
       position_y: 3250,
       scale: 5.5,
+      threshold_z: 0,
     },
     {
       name: 'de_canals',
@@ -194,6 +220,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2496,
       position_y: 1792,
       scale: 4,
+      threshold_z: 0,
     },
     {
       name: 'de_cbble',
@@ -201,6 +228,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3840,
       position_y: 3072,
       scale: 6,
+      threshold_z: 0,
     },
     {
       name: 'de_dust',
@@ -208,6 +236,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2850,
       position_y: 4073,
       scale: 6,
+      threshold_z: 0,
     },
     {
       name: 'de_dust2',
@@ -215,6 +244,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2476,
       position_y: 3239,
       scale: 4.4,
+      threshold_z: 0,
     },
     {
       name: 'de_inferno',
@@ -222,6 +252,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2087,
       position_y: 3870,
       scale: 4.9,
+      threshold_z: 0,
     },
     {
       name: 'de_mirage',
@@ -229,6 +260,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3230,
       position_y: 1713,
       scale: 5,
+      threshold_z: 0,
     },
     {
       name: 'de_nuke',
@@ -236,6 +268,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3453,
       position_y: 2887,
       scale: 7,
+      threshold_z: -495,
     },
     {
       name: 'de_overpass',
@@ -243,6 +276,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -4831,
       position_y: 1781,
       scale: 5.2,
+      threshold_z: 0,
     },
     {
       name: 'de_train',
@@ -250,6 +284,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2477,
       position_y: 2392,
       scale: 4.7,
+      threshold_z: 0,
     },
     {
       name: 'de_vertigo',
@@ -257,6 +292,7 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3168,
       position_y: 1762,
       scale: 4,
+      threshold_z: 11700,
     },
   ];
 

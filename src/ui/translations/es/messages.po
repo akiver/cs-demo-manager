@@ -6210,6 +6210,10 @@ msgid "Coordinate Y is required."
 msgstr ""
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Threshold Z is required."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Scale is required."
 msgstr ""
 
@@ -6221,6 +6225,11 @@ msgstr ""
 #: src/ui/settings/maps/map-dialog/scale-input.tsx
 msgctxt "Input label"
 msgid "Scale"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/threshold-z-input.tsx
+msgctxt "Input label"
+msgid "Threshold Z"
 msgstr ""
 
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx

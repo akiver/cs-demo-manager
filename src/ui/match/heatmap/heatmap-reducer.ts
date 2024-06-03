@@ -5,7 +5,6 @@ import {
   blurChanged,
   fetchPointsSuccess,
   opacityChanged,
-  radarLevelChanged,
   radiusChanged,
 } from 'csdm/ui/match/heatmap/match-heatmap-actions';
 import { fetchMatchSuccess } from 'csdm/ui/match/match-actions';
@@ -37,9 +36,6 @@ const initialState: MatchHeatmapState = {
 
 export const heatmapReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(radarLevelChanged, (state, action) => {
-      state.radarLevel = action.payload.radarLevel;
-    })
     .addCase(opacityChanged, (state, action) => {
       state.alpha = action.payload;
     })
@@ -55,6 +51,7 @@ export const heatmapReducer = createReducer(initialState, (builder) => {
       state.sides = action.payload.sides;
       state.teamNames = action.payload.teamNames;
       state.steamIds = action.payload.steamIds;
+      state.radarLevel = action.payload.radarLevel;
     })
     .addCase(fetchMatchSuccess, () => {
       return initialState;

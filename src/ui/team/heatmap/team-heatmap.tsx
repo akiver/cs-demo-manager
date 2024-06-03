@@ -15,6 +15,7 @@ import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { HeatmapProvider } from 'csdm/ui/components/heatmap/heatmap-provider';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { fetchPointsSuccess } from './team-heatmap-actions';
+import { useMaps } from 'csdm/ui/maps/use-maps';
 
 export function TeamHeatmap() {
   const showToast = useShowToast();
@@ -26,22 +27,29 @@ export function TeamHeatmap() {
   const { alpha, blur, radius, event, sides, mapName, radarLevel } = useHeatmapState();
   const [points, setPoints] = useState<Point[]>([]);
   const isInitialRender = useRef(true);
+  const maps = useMaps();
 
   const fetchPoints = async (filters?: Partial<TeamHeatmapFilter>) => {
     try {
+      const newMapName = filters?.mapName ?? mapName;
+      const map = maps.find((map) => {
+        return map.name === newMapName && map.game === game;
+      });
       const payload: TeamHeatmapFilter = {
         demoTypes,
         endDate,
         event: filters?.event ?? event,
         gameModes,
         games,
-        mapName: filters?.mapName ?? mapName,
+        mapName: newMapName,
         maxRounds,
+        radarLevel: filters?.radarLevel ?? radarLevel,
         sides: filters?.sides ?? sides,
         sources: demoSources,
         startDate,
         tagIds,
         teamName,
+        thresholdZ: map?.thresholdZ ?? null,
       };
       const points = await client.send({
         name: RendererClientMessageName.FetchTeamHeatmapPoints,

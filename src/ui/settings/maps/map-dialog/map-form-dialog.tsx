@@ -15,6 +15,7 @@ import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useMapForm } from 'csdm/ui/settings/maps/map-dialog/use-map-form';
 import { Trans } from '@lingui/macro';
 import { ExternalLink } from 'csdm/ui/components/external-link';
+import { ThresholdZInput } from './threshold-z-input';
 
 function InputsRow({ children }: { children: ReactNode }) {
   return <div className="flex gap-x-12">{children}</div>;
@@ -39,6 +40,7 @@ export function MapFormDialog({ nameInput, error, onSubmit }: Props) {
         game,
         posX: Number(fields.posX.value),
         posY: Number(fields.posY.value),
+        thresholdZ: Number(fields.thresholdZ.value),
         scale: Number(fields.scale.value),
         radarBase64: fields.radarBase64.value,
         lowerRadarBase64: fields.lowerRadarBase64.value,
@@ -62,6 +64,7 @@ export function MapFormDialog({ nameInput, error, onSubmit }: Props) {
           <InputsRow>
             <CoordinateXInput />
             <CoordinateYInput />
+            <ThresholdZInput />
             <ScaleInput />
           </InputsRow>
           <InputsRow>

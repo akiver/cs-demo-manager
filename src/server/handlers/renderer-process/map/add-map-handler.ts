@@ -15,6 +15,7 @@ export async function addMapHandler({
   game,
   posX,
   posY,
+  thresholdZ,
   scale,
   lowerRadarBase64,
   radarBase64,
@@ -27,6 +28,7 @@ export async function addMapHandler({
       game,
       position_x: posX,
       position_y: posY,
+      threshold_z: thresholdZ,
       scale,
     };
     const insertedMaps = await insertMaps([mapToInsert]);

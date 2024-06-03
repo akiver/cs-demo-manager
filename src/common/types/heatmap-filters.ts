@@ -1,5 +1,6 @@
 import type { DemoSource, DemoType, Game, GameMode, TeamNumber } from 'csdm/common/types/counter-strike';
 import type { HeatmapEvent } from 'csdm/common/types/heatmap-event';
+import type { RadarLevel } from 'csdm/ui/maps/radar-level';
 
 export type MatchHeatmapFilter = {
   checksum: string;
@@ -8,6 +9,8 @@ export type MatchHeatmapFilter = {
   sides: TeamNumber[];
   steamIds: string[];
   teamNames: string[];
+  radarLevel: RadarLevel;
+  thresholdZ: number | null;
 };
 
 export type TeamHeatmapFilter = {
@@ -23,4 +26,6 @@ export type TeamHeatmapFilter = {
   startDate: string | undefined;
   tagIds: string[];
   teamName: string;
+  radarLevel: RadarLevel;
+  thresholdZ: number | null;
 };

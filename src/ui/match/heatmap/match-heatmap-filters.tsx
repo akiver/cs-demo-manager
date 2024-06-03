@@ -5,7 +5,7 @@ import { HeatmapInputBlur } from 'csdm/ui/components/heatmap/input-blur';
 import { HeatmapSideSelect } from 'csdm/ui/components/heatmap/heatmap-side-select';
 import { HeatmapInputOpacity } from 'csdm/ui/components/heatmap/input-opacity';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { blurChanged, opacityChanged, radarLevelChanged, radiusChanged } from './match-heatmap-actions';
+import { blurChanged, opacityChanged, radiusChanged } from './match-heatmap-actions';
 import { HeatmapSelectEvent } from 'csdm/ui/components/heatmap/heatmap-select-event';
 import { useHeatmapState } from './use-heatmap-state';
 import { useHeatmapContext } from 'csdm/ui/components/heatmap/heatmap-context';
@@ -50,7 +50,7 @@ export function MatchHeatmapFilters() {
         mapName={mapName}
         game={game}
         onChange={(radarLevel) => {
-          dispatch(radarLevelChanged({ radarLevel }));
+          fetchPoints({ radarLevel });
         }}
         selectedRadarLevel={radarLevel}
       />

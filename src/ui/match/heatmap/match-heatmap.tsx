@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Trans } from '@lingui/macro';
 import { Heatmap } from 'csdm/ui/components/heatmap/heatmap';
 import { MatchHeatmapFilters } from 'csdm/ui/match/heatmap/match-heatmap-filters';
 import { Content } from 'csdm/ui/components/content';
@@ -12,10 +13,11 @@ import { RendererClientMessageName } from 'csdm/server/renderer-client-message-n
 import { fetchPointsSuccess } from './match-heatmap-actions';
 import { HeatmapProvider } from 'csdm/ui/components/heatmap/heatmap-provider';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
-import { Trans } from '@lingui/macro';
+import { useCurrentMatchMap } from '../use-current-match-map';
 
 export function MatchHeatmap() {
   const match = useCurrentMatch();
+  const map = useCurrentMatchMap();
   const client = useWebSocketClient();
   const dispatch = useDispatch();
   const showToast = useShowToast();
@@ -32,6 +34,8 @@ export function MatchHeatmap() {
         sides: filters?.sides ?? sides,
         teamNames: filters?.teamNames ?? teamNames,
         steamIds: filters?.steamIds ?? steamIds,
+        radarLevel: filters?.radarLevel ?? radarLevel,
+        thresholdZ: filters?.thresholdZ ?? map?.thresholdZ ?? null,
       };
       const points = await client.send({
         name: RendererClientMessageName.FetchMatchHeatmapPoints,

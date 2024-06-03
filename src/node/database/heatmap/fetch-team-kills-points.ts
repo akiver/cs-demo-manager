@@ -3,12 +3,17 @@ import type { TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import type { Point } from 'csdm/common/types/point';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import { db } from 'csdm/node/database/database';
+import { RadarLevel } from 'csdm/ui/maps/radar-level';
 
 function buildQuery(filters: TeamHeatmapFilter) {
   let query = db
     .selectFrom('kills')
     .leftJoin('matches', 'checksum', 'match_checksum')
     .where('matches.map_name', '=', filters.mapName);
+
+  if (filters.thresholdZ) {
+    query = query.where('killer_z', filters.radarLevel === RadarLevel.Upper ? '>=' : '<', filters.thresholdZ);
+  }
 
   if (filters.startDate !== undefined && filters.endDate !== undefined) {
     query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);

@@ -43,6 +43,7 @@ export function Heatmap() {
       setMap(map);
 
       if (!radarFileSrc) {
+        setRadarImage(null);
         setStatus(Status.Success);
         return;
       }
@@ -112,6 +113,7 @@ export function Heatmap() {
 
   const onHeatmapCanvasRef = (canvas: HTMLCanvasElement | null) => {
     if (!canvas) {
+      heatmapRendererRef.current = null;
       return;
     }
 

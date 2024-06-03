@@ -6,6 +6,7 @@ export type MapPayload = {
   game: Game;
   posX: number;
   posY: number;
+  thresholdZ: number;
   scale: number;
   // Use base64 data instead of images file path so we don't have to deal with possible inexistent files
   thumbnailBase64: string;

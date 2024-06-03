@@ -8,6 +8,7 @@ export type MapTable = {
   game: Game;
   position_x: number;
   position_y: number;
+  threshold_z: number;
   scale: number;
 };
 

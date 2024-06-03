@@ -3,6 +3,7 @@ import type { Point } from 'csdm/common/types/point';
 import type { MatchHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { db } from 'csdm/node/database/database';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
+import { RadarLevel } from 'csdm/ui/maps/radar-level';
 
 export async function fetchMatchGrenadePoints(filters: MatchHeatmapFilter): Promise<Point[]> {
   const grenadeNames: GrenadeName[] = [];
@@ -31,6 +32,10 @@ export async function fetchMatchGrenadePoints(filters: MatchHeatmapFilter): Prom
     .select(['x', 'y'])
     .where('match_checksum', '=', filters.checksum)
     .where('grenade_name', 'in', grenadeNames);
+
+  if (filters.thresholdZ) {
+    query = query.where('z', filters.radarLevel === RadarLevel.Upper ? '>=' : '<', filters.thresholdZ);
+  }
 
   if (filters.sides.length > 0) {
     query = query.where('thrower_side', 'in', filters.sides);

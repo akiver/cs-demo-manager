@@ -11,6 +11,7 @@ export async function mapRowToMap(row: MapRow): Promise<Map> {
     game: row.game,
     posX: row.position_x,
     posY: row.position_y,
+    thresholdZ: row.threshold_z,
     scale: row.scale,
     radarFilePath: await getMapRadarFilePath(row.name, row.game),
     lowerRadarFilePath: await getMapLowerRadarFilePath(row.name, row.game),

@@ -10,13 +10,7 @@ import { demoRenamed } from 'csdm/ui/demos/demos-actions';
 import { fetchTeamError, fetchTeamStart, fetchTeamSuccess, selectedMatchesChanged } from './team-actions';
 import { RadarLevel } from 'csdm/ui/maps/radar-level';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
-import {
-  blurChanged,
-  fetchPointsSuccess,
-  opacityChanged,
-  radarLevelChanged,
-  radiusChanged,
-} from './heatmap/team-heatmap-actions';
+import { blurChanged, fetchPointsSuccess, opacityChanged, radiusChanged } from './heatmap/team-heatmap-actions';
 
 type HeatmapState = {
   readonly mapName: string;
@@ -116,9 +110,6 @@ export const teamReducer = createReducer(initialState, (builder) => {
         }
       }
     })
-    .addCase(radarLevelChanged, (state, action) => {
-      state.heatmap.radarLevel = action.payload.radarLevel;
-    })
     .addCase(opacityChanged, (state, action) => {
       state.heatmap.alpha = action.payload;
     })
@@ -129,6 +120,11 @@ export const teamReducer = createReducer(initialState, (builder) => {
       state.heatmap.radius = action.payload;
     })
     .addCase(fetchPointsSuccess, (state, action) => {
+      if (state.heatmap.mapName !== action.payload.mapName) {
+        state.heatmap.radarLevel = RadarLevel.Upper;
+      } else {
+        state.heatmap.radarLevel = action.payload.radarLevel;
+      }
       state.heatmap.event = action.payload.event;
       state.heatmap.mapName = action.payload.mapName;
       state.heatmap.sides = action.payload.sides;

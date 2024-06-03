@@ -8,6 +8,7 @@ export type MapFormValues = {
   name: string;
   posX: string;
   posY: string;
+  thresholdZ: string;
   scale: string;
   thumbnailBase64: string | undefined;
   radarBase64: string | undefined;
@@ -78,6 +79,15 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
       validate() {
         if (this.value === '') {
           return _(msg`Coordinate Y is required.`);
+        }
+      },
+    },
+    thresholdZ: {
+      value: initialValues?.thresholdZ ?? '0',
+      error: undefined,
+      validate() {
+        if (this.value === '') {
+          return _(msg`Threshold Z is required.`);
         }
       },
     },
