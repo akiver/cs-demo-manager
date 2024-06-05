@@ -36,6 +36,10 @@ export function matchTableRowToMatchTable(
     teamBName: row.teamBName,
     teamBScore: row.teamBScore,
     shareCode: row.share_code,
+    fiveKillCount: row.fiveKillCount,
+    fourKillCount: row.fourKillCount,
+    threeKillCount: row.threeKillCount,
+    hltvRating2: row.hltvRating2,
     tagIds,
   };
 }

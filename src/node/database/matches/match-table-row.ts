@@ -7,4 +7,8 @@ export type MatchTableRow = MatchRow & {
   teamAScore: number;
   teamBName: string;
   teamBScore: number;
+  fiveKillCount: number;
+  fourKillCount: number;
+  threeKillCount: number;
+  hltvRating2: number;
 };

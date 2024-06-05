@@ -1668,6 +1668,76 @@ msgid "Deaths"
 msgstr "死亡"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header"
+msgid "5K"
+msgstr "5杀"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "5-kill rounds"
+msgstr "5杀回合"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header"
+msgid "4K"
+msgstr "4杀"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "4-kill rounds"
+msgstr "4杀回合"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header"
+msgid "3K"
+msgstr "3杀"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "3-kill rounds"
+msgstr "3杀回合"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header"
+msgid "HLTV 2.0"
+msgstr "HLTV 2.0"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "Estimated HLTV 2.0 rating"
+msgstr "Estimated HLTV 2.0 rating"
+
+#: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Date"
@@ -2678,54 +2748,6 @@ msgstr "爆头率"
 msgctxt "Table header tooltip"
 msgid "Headshot Percentage"
 msgstr "爆头率"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header"
-msgid "3K"
-msgstr "3杀"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "3-kill rounds"
-msgstr "3杀回合"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header"
-msgid "4K"
-msgstr "4杀"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "4-kill rounds"
-msgstr "4杀回合"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header"
-msgid "5K"
-msgstr "5杀"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "5-kill rounds"
-msgstr "5杀回合"
 
 #: src/ui/downloads/pending-downloads-link.tsx
 msgctxt "Link"
@@ -3910,20 +3932,6 @@ msgstr "爆头"
 msgctxt "Dropdown column visibility"
 msgid "Headshot percentage"
 msgstr ""
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header"
-msgid "HLTV 2.0"
-msgstr "HLTV 2.0"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "Estimated HLTV 2.0 rating"
-msgstr "Estimated HLTV 2.0 rating"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts

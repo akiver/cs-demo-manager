@@ -32,4 +32,8 @@ export type MatchTable = Pick<
   teamBName: string;
   teamAScore: number;
   teamBScore: number;
+  fiveKillCount: number;
+  fourKillCount: number;
+  threeKillCount: number;
+  hltvRating2: number;
 };

@@ -327,6 +327,82 @@ export function useMatchesColumns() {
         textAlign: 'right',
       },
       {
+        id: 'fiveKillCount',
+        accessor: 'fiveKillCount',
+        headerText: _(
+          msg({
+            context: 'Table header',
+            message: '5K',
+          }),
+        ),
+        headerTooltip: _(
+          msg({
+            context: 'Table header tooltip',
+            message: '5-kill rounds',
+          }),
+        ),
+        width: 40,
+        maxWidth: 100,
+        textAlign: 'right',
+      },
+      {
+        id: 'fourKillCount',
+        accessor: 'fourKillCount',
+        headerText: _(
+          msg({
+            context: 'Table header',
+            message: '4K',
+          }),
+        ),
+        headerTooltip: _(
+          msg({
+            context: 'Table header tooltip',
+            message: '4-kill rounds',
+          }),
+        ),
+        width: 40,
+        maxWidth: 100,
+        textAlign: 'right',
+      },
+      {
+        id: 'threeKillCount',
+        accessor: 'threeKillCount',
+        headerText: _(
+          msg({
+            context: 'Table header',
+            message: '3K',
+          }),
+        ),
+        headerTooltip: _(
+          msg({
+            context: 'Table header tooltip',
+            message: '3-kill rounds',
+          }),
+        ),
+        width: 40,
+        maxWidth: 100,
+        textAlign: 'right',
+      },
+      {
+        id: 'hltv-rating-2',
+        accessor: 'hltvRating2',
+        headerText: _(
+          msg({
+            context: 'Table header',
+            message: 'HLTV 2.0',
+          }),
+        ),
+        headerTooltip: _(
+          msg({
+            context: 'Table header tooltip',
+            message: 'Estimated HLTV 2.0 rating',
+          }),
+        ),
+        width: 60,
+        maxWidth: 100,
+        textAlign: 'right',
+      },
+      {
         id: 'date',
         accessor: 'date',
         headerText: _(

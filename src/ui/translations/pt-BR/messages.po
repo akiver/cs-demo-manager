@@ -1668,6 +1668,76 @@ msgid "Deaths"
 msgstr "Mortes"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header"
+msgid "5K"
+msgstr "5A"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "5-kill rounds"
+msgstr "Rodadas de 5 abates"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header"
+msgid "4K"
+msgstr "4A"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "4-kill rounds"
+msgstr "Rodadas de 4 abates"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header"
+msgid "3K"
+msgstr "3A"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "3-kill rounds"
+msgstr "Rodadas de 3 abates"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header"
+msgid "HLTV 2.0"
+msgstr "HLTV 2.0"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "Estimated HLTV 2.0 rating"
+msgstr "Avaliação HLTV 2.0 estimada"
+
+#: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Date"
@@ -2678,54 +2748,6 @@ msgstr "% TC"
 msgctxt "Table header tooltip"
 msgid "Headshot Percentage"
 msgstr "Porcentagem de tiros na cabeça"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header"
-msgid "3K"
-msgstr "3A"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "3-kill rounds"
-msgstr "Rodadas de 3 abates"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header"
-msgid "4K"
-msgstr "4A"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "4-kill rounds"
-msgstr "Rodadas de 4 abates"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header"
-msgid "5K"
-msgstr "5A"
-
-#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "5-kill rounds"
-msgstr "Rodadas de 5 abates"
 
 #: src/ui/downloads/pending-downloads-link.tsx
 msgctxt "Link"
@@ -3910,20 +3932,6 @@ msgstr "Tiro na Cabeça"
 msgctxt "Dropdown column visibility"
 msgid "Headshot percentage"
 msgstr "Porcentagem de tiros na cabeça"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header"
-msgid "HLTV 2.0"
-msgstr "HLTV 2.0"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "Estimated HLTV 2.0 rating"
-msgstr "Avaliação HLTV 2.0 estimada"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts

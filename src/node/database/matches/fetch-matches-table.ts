@@ -12,6 +12,7 @@ import type { MatchesTableFilter } from './matches-table-filter';
 export async function fetchMatchesTable(
   filter: MatchesTableFilter & { steamId?: string; teamName?: string },
 ): Promise<MatchTable[]> {
+  const { sum } = db.fn;
   const { startDate, endDate, steamId, ranking, tagIds, sources, games, gameModes, maxRounds, demoTypes, teamName } =
     filter;
   let query = db
@@ -26,6 +27,12 @@ export async function fetchMatchesTable(
     })
     .select(['teamB.name as teamBName', 'teamB.score as teamBScore'])
     .leftJoin('players', 'players.match_checksum', 'matches.checksum')
+    .select([
+      sum<number>('players.five_kill_count').as('fiveKillCount'),
+      sum<number>('players.four_kill_count').as('fourKillCount'),
+      sum<number>('players.three_kill_count').as('threeKillCount'),
+      sql<number>`ROUND(AVG(players.hltv_rating_2)::numeric, 2)`.as('hltvRating2'),
+    ])
     .leftJoin('comments', 'comments.checksum', 'matches.checksum')
     .select('comments.comment')
     .leftJoin('player_ban_per_match', 'player_ban_per_match.match_checksum', 'matches.checksum')
