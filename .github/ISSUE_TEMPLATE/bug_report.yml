@@ -6,12 +6,12 @@ body:
       value: |
         **Please read this entire template before posting any issue. If your issue does not follow the instructions, it might be closed without notice.**
 
-        This form is only for submitting bug reports and must be written in English.
+        This form is only for submitting bug reports and **must be written in English**.
         If you have a usage question or are unsure if it's a bug, please post a question in the 
         [Discussions tab](https://github.com/akiver/cs-demo-manager/discussions).
-        If it's a feature request please use the [feature request form](https://github.com/akiver/cs-demo-manager/issues/new?template=feature_requset.yml).
+        If it's a feature request please use the [feature request form](https://github.com/akiver/cs-demo-manager/issues/new?template=feature_request.yml).
 
-        Before submitting a new bug/issue, please check the links below to see if there is a solution or question posted there already:
+        Before submitting a new bug/issue, please **make sure your application is up-to-date** and check the links below to see if there is a solution or question posted there already:
          - If it's related to CS2 please check if it's a known [CS2 limitation](https://cs-demo-manager.com/docs/cs2)
          - The [documentation](https://cs-demo-manager.com/docs), especially the [Troubleshooting](https://cs-demo-manager.com/docs/installation#troubleshooting)
          - [Open issues](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)

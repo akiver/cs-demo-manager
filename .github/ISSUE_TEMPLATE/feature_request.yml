@@ -7,7 +7,7 @@ body:
       value: |
         **Please read this entire template before posting any feature request. If your issue does not follow the instructions, it might be closed without notice.**
 
-        This form is only for submitting feature requests and must be written in English.
+        This form is only for submitting feature requests and **must be written in English**.
         If you have a usage question please post a question in the [Discussions tab](https://github.com/akiver/cs-demo-manager/discussions).
         If you encountered a bug, please use the [bug report template](https://github.com/akiver/cs-demo-manager/issues/new?assignees=&labels=&projects=&template=bug_report.yml).
 
