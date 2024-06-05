@@ -11,10 +11,13 @@ import type { Demo } from 'csdm/common/types/demo';
 import { dateSortFunction } from 'csdm/ui/components/table/date-sort-function';
 import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
+import { useGetDemoAnalysisStatus } from 'csdm/ui/analyses/use-get-demo-analysis-status';
+import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 
 export function useDemosColumns() {
   const formatDate = useFormatDate();
   const secondsToFormattedMinutes = useSecondsToFormattedMinutes();
+  const getDemoAnalysisStatus = useGetDemoAnalysisStatus();
   const _ = useI18n();
 
   const columns = useMemo(() => {
@@ -83,7 +86,29 @@ export function useDemosColumns() {
         width: 30,
         allowResize: false,
         allowMove: false,
-        allowSort: false,
+        sortFunction: (sortDirection) => {
+          const statusOrder: (AnalysisStatus | undefined)[] = [
+            undefined,
+            AnalysisStatus.Pending,
+            AnalysisStatus.Analyzing,
+            AnalysisStatus.AnalyzeSuccess,
+            AnalysisStatus.AnalyzeError,
+            AnalysisStatus.Inserting,
+            AnalysisStatus.InsertSuccess,
+            AnalysisStatus.InsertError,
+          ];
+
+          return (demoA: Demo, demoB: Demo) => {
+            const statusA = getDemoAnalysisStatus(demoA.checksum);
+            const statusB = getDemoAnalysisStatus(demoB.checksum);
+
+            if (sortDirection === 'asc') {
+              return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
+            }
+
+            return statusOrder.indexOf(statusB) - statusOrder.indexOf(statusA);
+          };
+        },
       },
       {
         id: 'game',
@@ -336,7 +361,7 @@ export function useDemosColumns() {
         width: 200,
       },
     ] as const satisfies readonly Column<Demo>[];
-  }, [_, formatDate, secondsToFormattedMinutes]);
+  }, [_, formatDate, secondsToFormattedMinutes, getDemoAnalysisStatus]);
 
   return columns;
 }
