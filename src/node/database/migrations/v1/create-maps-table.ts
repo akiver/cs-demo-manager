@@ -13,6 +13,9 @@ const createMapsTable: Migration = {
       .addColumn('position_x', 'integer', (col) => col.notNull())
       .addColumn('position_y', 'integer', (col) => col.notNull())
       .addColumn('scale', 'float4', (col) => col.notNull())
+      .addColumn('threshold_z', 'integer', (col) => {
+        return col.notNull().defaultTo(0);
+      })
       .addUniqueConstraint('maps_name_game_unique', ['name', 'game'])
       .execute();
 
