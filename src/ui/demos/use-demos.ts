@@ -11,7 +11,7 @@ export function useDemos(): Demo[] {
   const getDemoAnalysisStatus = useGetDemoAnalysisStatus();
   const { analysisStatus } = useDemosSettings();
 
-  if (!analysisStatus === undefined || analysisStatus === AnalysisStatusFilter.All) {
+  if (analysisStatus === AnalysisStatusFilter.All) {
     return demosState.entities;
   }
 

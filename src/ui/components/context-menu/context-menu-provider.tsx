@@ -60,7 +60,7 @@ export function ContextMenuProvider({ children }: Props) {
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
-    if (contextMenu === undefined || wrapper === null) {
+    if (wrapper === null) {
       return;
     }
 
@@ -77,13 +77,9 @@ export function ContextMenuProvider({ children }: Props) {
     return () => {
       window.removeEventListener('click', onWindowClick);
     };
-  }, [contextMenu, hideContextMenu]);
+  });
 
   useEffect(() => {
-    if (contextMenu === undefined) {
-      return;
-    }
-
     const onWindowKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         hideContextMenu();
@@ -95,10 +91,10 @@ export function ContextMenuProvider({ children }: Props) {
     return () => {
       window.removeEventListener('keydown', onWindowKeyDown);
     };
-  }, [contextMenu, hideContextMenu]);
+  });
 
   useLayoutEffect(() => {
-    if (!wrapperRef.current || !contextMenu === undefined) {
+    if (!wrapperRef.current) {
       return;
     }
 
@@ -115,7 +111,7 @@ export function ContextMenuProvider({ children }: Props) {
     }
 
     wrapperRef.current.setAttribute('style', `left: ${x}px; top:${y}px;`);
-  }, [contextMenu]);
+  });
 
   return (
     <ContextMenuContext.Provider

@@ -1,7 +1,7 @@
 import { ESLintUtils, ASTUtils, AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 type Options = [];
-type MessagesIds = 'useLinguiMessage' | 'transComponentMessage' | 'useI18nMessage';
+type MessagesIds = 'useLinguiMessage' | 'transComponentMessage';
 
 /**
  * - Ensure we are using the internal useI18n hook instead of the useLingui hook from the @lingui/react module.
