@@ -25,8 +25,7 @@ type SendableMessagePayload<MessageName extends MainClientMessageName> = Paramet
 type SendableMessage<MessageName extends MainClientMessageName = MainClientMessageName> = {
   name: MessageName;
 } & (SendableMessagePayload<MessageName> extends void
-  ? // eslint-disable-next-line @typescript-eslint/ban-types
-    {}
+  ? object
   : {
       payload: SendableMessagePayload<MessageName>;
     });

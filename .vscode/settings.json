@@ -6,5 +6,6 @@
   "tailwindCSS.rootFontSize": 14,
   "search.exclude": {
     "cs2-server-plugin": true
-  }
+  },
+  "eslint.experimental.useFlatConfig": true
 }

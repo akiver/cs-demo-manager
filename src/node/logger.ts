@@ -74,7 +74,9 @@ class Logger implements ILogger {
   };
 
   private logToConsole = (data: any[], level: Level) => {
-    this.shouldLogToGlobalConsole && console[level](...data);
+    if (this.shouldLogToGlobalConsole) {
+      console[level](...data);
+    }
   };
 
   private jsonStringifyReplacer = (key: any, value: any) => {

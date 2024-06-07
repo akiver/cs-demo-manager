@@ -30,8 +30,7 @@ type SendableRendererMessagePayload<MessageName extends RendererServerMessageNam
 type SendableRendererMessage<MessageName extends RendererServerMessageName = RendererServerMessageName> = {
   name: MessageName;
 } & (SendableRendererMessagePayload<MessageName> extends void
-  ? // eslint-disable-next-line @typescript-eslint/ban-types
-    {}
+  ? object
   : {
       payload: SendableRendererMessagePayload<MessageName>;
     });
@@ -40,8 +39,7 @@ type SendableMainMessagePayload<MessageName extends MainServerMessageName> = Mai
 type SendableMainMessage<MessageName extends MainServerMessageName = MainServerMessageName> = {
   name: MessageName;
 } & (SendableMainMessagePayload<MessageName> extends void
-  ? // eslint-disable-next-line @typescript-eslint/ban-types
-    {}
+  ? object
   : {
       payload: SendableMainMessagePayload<MessageName>;
     });
@@ -50,8 +48,7 @@ type SendableGameMessagePayload<MessageName extends GameServerMessageName> = Gam
 type SendableGameMessage<MessageName extends GameServerMessageName = GameServerMessageName> = {
   name: MessageName;
 } & (SendableGameMessagePayload<MessageName> extends void
-  ? // eslint-disable-next-line @typescript-eslint/ban-types
-    {}
+  ? object
   : {
       payload: SendableGameMessagePayload<MessageName>;
     });
@@ -60,8 +57,7 @@ type SharedMessagePayload<MessageName extends SharedServerMessageName> = SharedS
 type SharedMessage<MessageName extends SharedServerMessageName = SharedServerMessageName> = {
   name: MessageName;
 } & (SharedMessagePayload<MessageName> extends void
-  ? // eslint-disable-next-line @typescript-eslint/ban-types
-    {}
+  ? object
   : {
       payload: SharedMessagePayload<MessageName>;
     });

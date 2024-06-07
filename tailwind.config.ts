@@ -179,7 +179,7 @@ const config: Config = {
         },
         '.appearance-v-slider': {
           'writing-mode': 'vertical-lr',
-          'direction': 'rtl',
+          direction: 'rtl',
         },
         '.scrollbar-stable': {
           'scrollbar-gutter': 'stable',

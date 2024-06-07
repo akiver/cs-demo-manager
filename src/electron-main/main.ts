@@ -127,7 +127,9 @@ if (isFirstAppInstance) {
     }
 
     if (shouldStartMinimized) {
-      isMac && app.dock.hide(); // Will be restored when the main window is shown.
+      if (isMac) {
+        app.dock.hide(); // Will be restored when the main window is shown.
+      }
       client.send({
         name: MainClientMessageName.StartMinimizedMode,
       });

@@ -5,7 +5,7 @@ const initializeLocale: Migration = {
   schemaVersion: 1,
   run: (settings: Settings) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const electron = require('electron');
       if (electron) {
         const locale = electron.app.getLocale();

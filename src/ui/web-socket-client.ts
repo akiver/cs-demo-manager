@@ -21,8 +21,7 @@ type SendableMessagePayload<MessageName extends RendererClientMessageName> = Par
 type SendableMessage<MessageName extends RendererClientMessageName = RendererClientMessageName> = {
   name: MessageName;
 } & (SendableMessagePayload<MessageName> extends void
-  ? // eslint-disable-next-line @typescript-eslint/ban-types
-    {}
+  ? object
   : {
       payload: SendableMessagePayload<MessageName>;
     });
