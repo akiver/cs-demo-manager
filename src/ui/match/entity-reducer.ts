@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { fetchMatchSuccess, updateMatchDemoLocationSuccess } from './match-actions';
 import type { Match } from 'csdm/common/types/match';
 import { commentUpdated } from 'csdm/ui/comment/comment-actions';
-import { checksumsTagsUpdated, roundTagsUpdated } from 'csdm/ui/tags/tags-actions';
+import { checksumsTagsUpdated, playersTagsUpdated, roundTagsUpdated } from 'csdm/ui/tags/tags-actions';
 import { demoRenamed } from 'csdm/ui/demos/demos-actions';
 import { addIgnoredSteamAccountSuccess, deleteIgnoredSteamAccountSuccess } from '../ban/ban-actions';
 import { insertMatchSuccess } from '../analyses/analyses-actions';
@@ -28,6 +28,17 @@ export const entityReducer = createReducer(initialState, (builder) => {
     .addCase(checksumsTagsUpdated, (state, action) => {
       if (state !== null && action.payload.checksums.includes(state.checksum)) {
         state.tagIds = action.payload.tagIds;
+      }
+    })
+    .addCase(playersTagsUpdated, (state, action) => {
+      if (!state) {
+        return;
+      }
+
+      for (const player of state.players) {
+        if (action.payload.steamIds.includes(player.steamId)) {
+          player.tagIds = action.payload.tagIds;
+        }
       }
     })
     .addCase(roundTagsUpdated, (state, action) => {

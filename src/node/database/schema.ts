@@ -45,6 +45,7 @@ import type { IgnoredSteamAccountTable } from './steam-accounts/ignored-steam-ac
 import type { SteamAccountTable } from './steam-accounts/steam-account-table';
 import type { ChecksumTagTable } from './tags/checksum-tag-table';
 import type { RoundTagTable } from './tags/round-tag-table';
+import type { SteamAccountTagTable } from './tags/steam-account-tag-table';
 import type { TagTable } from './tags/tag-table';
 import type { TeamTable } from './teams/team-table';
 import type { TimestampTable } from './timestamps/timestamp-table';
@@ -98,6 +99,7 @@ export type Database = {
   shots: ShotTable;
   smokes_start: SmokeStartTable;
   steam_accounts: SteamAccountTable;
+  steam_account_tags: SteamAccountTagTable;
   tags: TagTable;
   teams: TeamTable;
 };

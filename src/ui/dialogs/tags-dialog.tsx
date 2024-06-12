@@ -17,7 +17,7 @@ export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
   const { hideDialog } = useDialog();
   const [selectedTags, setSelectedTags] = useState(defaultTagIds);
 
-  const onSaveClick = () => {
+  const submit = () => {
     const changed = !areArraysValuesTheSame(selectedTags, defaultTagIds);
     if (changed) {
       onTagIdsUpdated(selectedTags);
@@ -26,7 +26,7 @@ export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
   };
 
   return (
-    <Dialog onEnterPressed={hideDialog}>
+    <Dialog onEnterPressed={submit}>
       <DialogHeader>
         <DialogTitle>
           <Trans>Tags</Trans>
@@ -68,7 +68,7 @@ export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
         </div>
       </DialogContent>
       <DialogFooter>
-        <SaveButton onClick={onSaveClick} />
+        <SaveButton onClick={submit} />
         <CloseButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>

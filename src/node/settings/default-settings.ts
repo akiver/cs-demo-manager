@@ -125,6 +125,7 @@ export const defaultSettings: Settings = {
     bans: [],
     startDate: undefined,
     endDate: undefined,
+    tagIds: [],
   },
   teams: {
     startDate: undefined,

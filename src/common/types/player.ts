@@ -64,4 +64,5 @@ export type Player = {
   lastBanDate: string | null;
   crosshairShareCode: string | null;
   color: PlayerColor;
+  tagIds: string[];
 };

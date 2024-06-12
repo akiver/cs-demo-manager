@@ -1,15 +1,13 @@
 import React from 'react';
 import { Avatar } from 'csdm/ui/components/avatar';
-import { useUnsafePlayer } from './use-unsafe-player';
 import { buildPlayerSteamProfileUrl } from 'csdm/ui/shared/build-player-steam-profile-url';
+import type { PlayerProfile } from 'csdm/common/types/player-profile';
 
-export function PlayerSteamLink() {
-  const player = useUnsafePlayer();
+type Props = {
+  player: PlayerProfile;
+};
 
-  if (player === undefined) {
-    return null;
-  }
-
+export function PlayerSteamLink({ player }: Props) {
   return (
     <a
       href={buildPlayerSteamProfileUrl(player.steamId)}

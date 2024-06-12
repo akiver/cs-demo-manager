@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { msg } from '@lingui/macro';
 import { KillDeathDiffCell } from 'csdm/ui/components/table/cells/kill-death-diff-cell';
 import { RankCell } from 'csdm/ui/components/table/cells/rank-cell';
 import { getTableRowHeight } from 'csdm/ui/components/table/get-table-row-height';
@@ -11,7 +12,7 @@ import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { BansCell } from './bans-cell';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { CommentCell } from 'csdm/ui/components/table/cells/comment-cell';
-import { msg } from '@lingui/macro';
+import { TagsCell } from 'csdm/ui/components/table/cells/tags-cell';
 
 export function usePlayersColumns() {
   const formatDate = useFormatDate();
@@ -36,6 +37,28 @@ export function usePlayersColumns() {
           }),
         ),
         Cell: CommentCell,
+        width: 20,
+        allowResize: false,
+        allowMove: false,
+        allowSort: false,
+      },
+      {
+        id: 'tags',
+        accessor: 'tagIds',
+        headerText: '',
+        headerTooltip: _(
+          msg({
+            context: 'Table header tooltip',
+            message: 'Tags',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Tags',
+          }),
+        ),
+        Cell: TagsCell,
         width: 20,
         allowResize: false,
         allowMove: false,

@@ -338,6 +338,7 @@ msgstr "An error occurred connecting to the WebSocket server."
 #: src/ui/match/heatmap/match-heatmap.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 #: src/ui/player/use-update-player-comment.tsx
+#: src/ui/players/players-tags-dialogs.tsx
 #: src/ui/search/filters/search-maps-input.tsx
 #: src/ui/search/filters/search-players-input.tsx
 #: src/ui/settings/about/clear-logs-button.tsx
@@ -1480,12 +1481,14 @@ msgstr "Comment"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Tags"
 msgstr "Tags"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Tags"
 msgstr "Tags"

@@ -68,4 +68,5 @@ export type PlayerProfile = {
   hasPrivateProfile: boolean;
   isCommunityBanned: boolean;
   comment: string;
+  tagIds: string[];
 };

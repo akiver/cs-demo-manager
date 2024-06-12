@@ -4,6 +4,8 @@ import type { PlayerTable } from 'csdm/common/types/player-table';
 import { db } from 'csdm/node/database/database';
 import type { PlayersTableFilter } from './players-table-filter';
 import { BanFilter } from 'csdm/common/types/ban-filter';
+import { fetchPlayersTags } from 'csdm/node/database/tags/fetch-players-tags';
+import type { SteamAccountTagTable } from 'csdm/node/database/tags/steam-account-tag-table';
 
 type PlayersStatsResult = {
   steamId: string;
@@ -26,6 +28,7 @@ type PlayersStatsResult = {
   hltvRating2: number;
   comment: string | null;
 };
+
 type LastPlayersDataResult = {
   steamId: string;
   rank: Rank;
@@ -69,9 +72,15 @@ async function fetchPlayersStats(filter: PlayersTableFilter): Promise<PlayersSta
     .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
     .groupBy(['players.steam_id', 'player_comments.comment']);
 
-  const { startDate, endDate } = filter;
+  const { startDate, endDate, tagIds } = filter;
   if (startDate && endDate) {
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+  }
+
+  if (Array.isArray(tagIds) && tagIds.length > 0) {
+    query = query
+      .leftJoin('steam_account_tags', 'steam_account_tags.steam_id', 'players.steam_id')
+      .where('steam_account_tags.tag_id', 'in', tagIds);
   }
 
   if (filter.bans.length > 0) {
@@ -112,7 +121,7 @@ async function fetchLastPlayersData(steamIds: string[]): Promise<LastPlayersData
     return [];
   }
 
-  const lastPlayersData: LastPlayersDataResult[] = await db
+  const lastPlayersData = await db
     .selectFrom('players')
     .select(['players.steam_id as steamId', 'players.name as name', 'players.rank as rank'])
     .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'players.steam_id')
@@ -150,6 +159,7 @@ async function fetchLastPlayersData(steamIds: string[]): Promise<LastPlayersData
 function buildPlayersTable(
   playersStats: PlayersStatsResult[],
   lastPlayersData: LastPlayersDataResult[],
+  tags: SteamAccountTagTable[],
 ): PlayerTable[] {
   const players: PlayerTable[] = [];
   for (const playerStats of playersStats) {
@@ -169,6 +179,11 @@ function buildPlayersTable(
         isGameBanned: lastPlayerData.gameBanCount ? lastPlayerData.gameBanCount > 0 : false,
         isCommunityBanned: lastPlayerData.isCommunityBanned ?? false,
         comment: playerStats.comment ?? '',
+        tagIds: tags
+          .filter((row) => {
+            return row.steam_id === playerStats.steamId;
+          })
+          .map((tag) => String(tag.tag_id)),
       });
     } else {
       logger.warn(`Data for player with SteamID ${playerStats.steamId} not found while fetching players`);
@@ -181,8 +196,8 @@ function buildPlayersTable(
 export async function fetchPlayersTable(filter: PlayersTableFilter): Promise<PlayerTable[]> {
   const playersStats = await fetchPlayersStats(filter);
   const steamIds = playersStats.map((player) => player.steamId);
-  const lastPlayersData: LastPlayersDataResult[] = await fetchLastPlayersData(steamIds);
-  const players: PlayerTable[] = buildPlayersTable(playersStats, lastPlayersData);
+  const [lastPlayersData, tags] = await Promise.all([fetchLastPlayersData(steamIds), fetchPlayersTags()]);
+  const players = buildPlayersTable(playersStats, lastPlayersData, tags);
 
   return players;
 }

@@ -6,6 +6,7 @@ export function playerQueryResultToPlayer(
   row: PlayerQueryResult,
   clutchStats: PlayerClutchStats | undefined,
   collateralKillCount: number,
+  tagIds: string[],
 ): Player {
   return {
     steamId: row.steam_id,
@@ -71,5 +72,6 @@ export function playerQueryResultToPlayer(
     wallbangKillCount: row.wallbang_kill_count,
     noScopeKillCount: row.no_scope_kill_count,
     color: row.color,
+    tagIds,
   };
 }

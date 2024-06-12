@@ -10,3 +10,4 @@ export const checksumsTagsUpdated = createAction<{ checksums: string[]; tagIds: 
 export const roundTagsUpdated = createAction<{ checksum: string; roundNumber: number; tagIds: string[] }>(
   'tags/roundTagsUpdated',
 );
+export const playersTagsUpdated = createAction<{ steamIds: string[]; tagIds: string[] }>('tags/playersTagsUpdated');

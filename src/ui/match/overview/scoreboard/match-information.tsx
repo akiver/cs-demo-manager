@@ -8,6 +8,8 @@ import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { useGetMapThumbnailSrc } from 'csdm/ui/maps/use-get-map-thumbnail-src';
 import { MatchCommentInput } from 'csdm/ui/match/match-comment-input';
 import { useGetDemoSourceName } from 'csdm/ui/demos/use-demo-sources';
+import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { ChecksumsTagsDialog } from 'csdm/ui/dialogs/checksums-tags-dialog';
 
 type TeamScoresProps = {
   teamNameA: string;
@@ -53,6 +55,11 @@ export function MatchInformation({ match }: Props) {
   const formatDate = useFormatDate();
   const getMapThumbnailSrc = useGetMapThumbnailSrc();
   const getDemoSourceName = useGetDemoSourceName();
+  const { showDialog } = useDialog();
+
+  const onEditTagsClick = () => {
+    showDialog(<ChecksumsTagsDialog checksums={[match.checksum]} defaultTagIds={match.tagIds} />);
+  };
 
   return (
     <div className="flex">
@@ -67,7 +74,7 @@ export function MatchInformation({ match }: Props) {
         />
         <p className="selectable">{formatDate(match.date)}</p>
         <p className="selectable">{secondsToFormattedMinutes(match.duration)}</p>
-        <Tags tagIds={match.tagIds} checksum={match.checksum} />
+        <Tags tagIds={match.tagIds} onEditClick={onEditTagsClick} />
       </div>
       <div className="flex flex-col w-full ml-16">
         <Field name={<Trans>Source</Trans>} value={getDemoSourceName(match.source)} />

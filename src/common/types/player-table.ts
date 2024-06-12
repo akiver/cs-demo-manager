@@ -29,4 +29,5 @@ export type PlayerTable = {
   hltvRating: number;
   hltvRating2: number;
   comment: string;
+  tagIds: string[];
 };

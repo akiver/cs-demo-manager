@@ -12,6 +12,9 @@ import { buildPlayerSteamProfileUrl } from 'csdm/ui/shared/build-player-steam-pr
 import { CopySteamIdButton } from 'csdm/ui/components/buttons/copy-steamid-button';
 import { CompetitiveRank } from 'csdm/common/types/counter-strike';
 import { PremierRank } from 'csdm/ui/components/premier-rank';
+import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { PlayersTagsDialog } from 'csdm/ui/players/players-tags-dialogs';
+import { Tags } from 'csdm/ui/components/tags/tags';
 
 type Props = {
   player: Player;
@@ -19,6 +22,10 @@ type Props = {
 
 export function PlayerActionBar({ player }: Props) {
   const navigate = useNavigate();
+  const { showDialog } = useDialog();
+  const onEditTagsClick = () => {
+    showDialog(<PlayersTagsDialog steamIds={[player.steamId]} defaultTagIds={player.tagIds} />);
+  };
 
   return (
     <ActionBar
@@ -47,6 +54,7 @@ export function PlayerActionBar({ player }: Props) {
               <ShieldIcon width={20} height={20} className="text-red-600" />
             </Tooltip>
           )}
+          <Tags tagIds={player.tagIds} onEditClick={onEditTagsClick} />
         </div>
       }
       right={

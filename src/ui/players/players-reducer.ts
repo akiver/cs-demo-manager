@@ -9,6 +9,7 @@ import {
   selectionChanged,
 } from './players-actions';
 import { playerCommentUpdated } from '../player/player-actions';
+import { playersTagsUpdated } from '../tags/tags-actions';
 
 export type PlayersState = {
   readonly status: Status;
@@ -47,6 +48,14 @@ export const playersReducer = createReducer(initialState, (builder) => {
       const player = state.entities.find((p) => p.steamId === action.payload.steamId);
       if (player) {
         player.comment = action.payload.comment;
+      }
+    })
+    .addCase(playersTagsUpdated, (state, action) => {
+      const players = state.entities.filter((player) => {
+        return action.payload.steamIds.includes(player.steamId);
+      });
+      for (const player of players) {
+        player.tagIds = action.payload.tagIds;
       }
     });
 });

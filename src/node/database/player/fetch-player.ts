@@ -16,6 +16,7 @@ import type { FetchPlayerFilters } from './fetch-player-filters';
 import { fetchPlayerCollateralKillCount } from './fetch-player-collateral-kill-count';
 import { fetchPlayerClutches } from './fetch-player-clutches';
 import { fetchPlayerPremierRankHistory } from './fetch-player-premier-rank-history';
+import { fetchPlayersTagIds } from '../tags/fetch-players-tag-ids';
 
 function buildQuery({
   steamId,
@@ -184,6 +185,7 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
     mapsStats,
     collateralKillCount,
     clutches,
+    tagIds,
   ] = await Promise.all([
     fetchLastPlayerData(filters),
     fetchPlayerMatchCountStats(filters),
@@ -197,6 +199,7 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
     fetchPlayerMapsStats(filters),
     fetchPlayerCollateralKillCount(filters),
     fetchPlayerClutches(filters),
+    fetchPlayersTagIds([filters.steamId]),
   ]);
   player.name = lastPlayerData.name;
   player.avatar = lastPlayerData.avatar;
@@ -219,6 +222,7 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
   player.mapsStats = mapsStats;
   player.collateralKillCount = collateralKillCount;
   player.clutches = clutches;
+  player.tagIds = tagIds;
 
   return player;
 }

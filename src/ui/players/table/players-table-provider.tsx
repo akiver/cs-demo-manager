@@ -47,10 +47,7 @@ export function PlayersTableProvider({ children }: Props) {
   };
 
   const onContextMenu = (event: MouseEvent, table: TableInstance<PlayerTable>) => {
-    showContextMenu(
-      event,
-      <PlayerContextMenu playerSteamIds={table.getSelectedRowIds()} onCommentClick={showWidget} />,
-    );
+    showContextMenu(event, <PlayerContextMenu players={table.getSelectedRows()} onCommentClick={showWidget} />);
   };
 
   const onKeyDown = (event: KeyboardEvent) => {

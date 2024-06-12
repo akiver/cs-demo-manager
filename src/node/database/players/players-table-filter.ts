@@ -4,4 +4,5 @@ export type PlayersTableFilter = {
   bans: BanFilter[];
   startDate: string | undefined;
   endDate: string | undefined;
+  tagIds: string[];
 };

@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { commentUpdated } from 'csdm/ui/comment/comment-actions';
 import { deleteMatchesSuccess, matchesTypeUpdated } from 'csdm/ui/matches/matches-actions';
 import { Status } from 'csdm/common/types/status';
-import { checksumsTagsUpdated, tagDeleted } from 'csdm/ui/tags/tags-actions';
+import { checksumsTagsUpdated, playersTagsUpdated, tagDeleted } from 'csdm/ui/tags/tags-actions';
 import type { PlayerProfile } from 'csdm/common/types/player-profile';
 import { ErrorCode } from 'csdm/common/error-code';
 import {
@@ -79,6 +79,11 @@ export const playerReducer = createReducer(initialState, (builder) => {
         for (const match of matches) {
           match.type = action.payload.type;
         }
+      }
+    })
+    .addCase(playersTagsUpdated, (state, action) => {
+      if (state.player && action.payload.steamIds.includes(state.player.steamId)) {
+        state.player.tagIds = action.payload.tagIds;
       }
     })
     .addCase(demoRenamed, (state, action) => {

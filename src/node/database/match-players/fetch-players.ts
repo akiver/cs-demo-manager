@@ -5,6 +5,7 @@ import type { Player } from 'csdm/common/types/player';
 import type { PlayerQueryResult } from './player-query-result';
 import { fetchCollateralKillCountPerSteamId } from '../player/fetch-collateral-kill-count-per-steam-ids';
 import { fetchPlayersClutchStats } from '../clutches/fetch-players-clutch-stats';
+import { fetchPlayersTagIds } from '../tags/fetch-players-tag-ids';
 
 export async function fetchPlayers(checksum: string): Promise<Player[]> {
   const rows: PlayerQueryResult[] = await db
@@ -51,14 +52,15 @@ export async function fetchPlayers(checksum: string): Promise<Player[]> {
     .execute();
 
   const steamIds = rows.map((row) => row.steam_id);
-  const [collateralKillCountPerSteamId, playersClutchStats] = await Promise.all([
+  const [collateralKillCountPerSteamId, playersClutchStats, tagIds] = await Promise.all([
     fetchCollateralKillCountPerSteamId(checksum),
     fetchPlayersClutchStats([checksum], steamIds),
+    fetchPlayersTagIds(steamIds),
   ]);
   const players: Player[] = rows.map((row) => {
     const clutchStats = playersClutchStats.find((clutchStats) => clutchStats.clutcherSteamId === row.steam_id);
 
-    return playerQueryResultToPlayer(row, clutchStats, collateralKillCountPerSteamId[row.steam_id] ?? 0);
+    return playerQueryResultToPlayer(row, clutchStats, collateralKillCountPerSteamId[row.steam_id] ?? 0, tagIds);
   });
 
   return players;

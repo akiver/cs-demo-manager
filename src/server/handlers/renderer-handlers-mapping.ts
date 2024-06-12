@@ -183,6 +183,10 @@ import {
   type UpdateMatchesTeamNamesPayload,
 } from './renderer-process/match/update-matches-team-names-handler';
 import { abortCurrentTaskHandler } from './renderer-process/abort-current-task-handler';
+import {
+  updatePlayersTagsHandler,
+  type UpdatePlayersTagsPayload,
+} from './renderer-process/tags/update-players-tags-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -271,6 +275,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdateTag]: Handler<Tag>;
   [RendererClientMessageName.DeleteTag]: Handler<ColumnID>;
   [RendererClientMessageName.UpdateChecksumTags]: Handler<UpdateChecksumsTagsPayload>;
+  [RendererClientMessageName.UpdatePlayersTags]: Handler<UpdatePlayersTagsPayload>;
   [RendererClientMessageName.UpdateRoundTags]: Handler<UpdateRoundTagsPayload>;
   [RendererClientMessageName.IsCsRunning]: Handler<void, boolean>;
   [RendererClientMessageName.GetCsgoTelenetConnectionStatus]: Handler<void, Status>;
@@ -364,6 +369,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.UpdateTag]: updateTagHandler,
   [RendererClientMessageName.DeleteTag]: deleteTagHandler,
   [RendererClientMessageName.UpdateChecksumTags]: updateChecksumsTagsHandler,
+  [RendererClientMessageName.UpdatePlayersTags]: updatePlayersTagsHandler,
   [RendererClientMessageName.UpdateRoundTags]: updateRoundTagsHandler,
   [RendererClientMessageName.IsCsRunning]: isCounterStrikeRunningHandler,
   [RendererClientMessageName.GetCsgoTelenetConnectionStatus]: getCsgoTelnetConnectionStatusHandler,
