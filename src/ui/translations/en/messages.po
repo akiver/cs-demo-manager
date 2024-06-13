@@ -6315,6 +6315,15 @@ msgctxt "Settings title"
 msgid "Width"
 msgstr "Width"
 
+#: src/ui/settings/playback/highlights-include-damages.tsx
+msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
+msgstr "Include health damages above 40HP that did not result into a player's kill in highlights"
+
+#: src/ui/settings/playback/highlights-include-damages.tsx
+msgctxt "Settings title"
+msgid "Include damages (highlights)"
+msgstr "Include damages (highlights)"
+
 #: src/ui/settings/playback/highlights-watch-after-kill-delay.tsx
 msgctxt "Settings title"
 msgid "After kill delay (highlights)"
@@ -6346,6 +6355,15 @@ msgstr "Additional launch parameters added to the game when it starts"
 msgctxt "Settings title"
 msgid "Launch parameters"
 msgstr "Launch parameters"
+
+#: src/ui/settings/playback/lowlights-include-damages.tsx
+msgid "Include health damages above 40HP that did not result into a player's death in lowlights"
+msgstr "Include health damages above 40HP that did not result into a player's death in lowlights"
+
+#: src/ui/settings/playback/lowlights-include-damages.tsx
+msgctxt "Settings title"
+msgid "Include damages (lowlights)"
+msgstr "Include damages (lowlights)"
 
 #: src/ui/settings/playback/lowlights-watch-after-kill-delay.tsx
 msgctxt "Settings title"

@@ -1,5 +1,5 @@
 import { Game } from 'csdm/common/types/counter-strike';
-import { generatePlayerKillsVdmFile } from 'csdm/node/vdm/generate-player-kills-vdm-file';
+import { generatePlayerHighlightsVdmFile } from 'csdm/node/vdm/generate-player-highlights-vdm-file';
 import { startCounterStrike } from './start-counter-strike';
 import { detectDemoGame } from './detect-demo-game';
 import { getPlaybackMatch, type PlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
@@ -8,7 +8,7 @@ import { getSettings } from 'csdm/node/settings/get-settings';
 import { deleteVdmFile } from './delete-vdm-file';
 import { WatchType } from 'csdm/common/types/watch-type';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
-import { generatePlayerKillsJsonFile } from '../json-actions-file/generate-player-kills-json-file';
+import { generatePlayerHighlightsJsonFile } from '../json-actions-file/generate-player-highlights-json-file';
 import type { Perspective } from 'csdm/common/types/perspective';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
@@ -19,9 +19,8 @@ type Options = {
   onGameStart: () => void;
 };
 
-function assertPlayerHasKills(match: PlaybackMatch, steamId: string) {
-  const playerKills = match.kills.filter((kill) => kill.killerSteamId === steamId);
-  if (playerKills.length === 0) {
+function assertPlayerHasActions(match: PlaybackMatch) {
+  if (match.actions.length === 0) {
     throw new NoKillsFound();
   }
 }
@@ -41,6 +40,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     demoPath,
     steamId,
     type: WatchType.Highlights,
+    includeDamages: highlights.includeDamages,
   });
   if (game === Game.CSGO) {
     if (useCustomHighlights) {
@@ -48,9 +48,9 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
         // Fallback to CSGO built in highlights
         playDemoArgs.push(steamId);
       } else {
-        assertPlayerHasKills(match, steamId);
+        assertPlayerHasActions(match);
 
-        await generatePlayerKillsVdmFile({
+        await generatePlayerHighlightsVdmFile({
           match,
           steamId,
           perspective,
@@ -66,8 +66,9 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     if (match === undefined) {
       throw new NoKillsFound();
     }
-    assertPlayerHasKills(match, steamId);
-    await generatePlayerKillsJsonFile({
+
+    assertPlayerHasActions(match);
+    await generatePlayerHighlightsJsonFile({
       match,
       perspective,
       beforeDelaySeconds: highlights.beforeKillDelayInSeconds,

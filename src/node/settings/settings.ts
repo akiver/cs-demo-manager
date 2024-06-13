@@ -50,6 +50,7 @@ export type HlaeSettings = {
 type PlaybackTypeSettings = {
   beforeKillDelayInSeconds: number; // how many seconds the playback should start before a kill
   afterKillDelayInSeconds: number; // how many seconds to wait before skipping to the next kill
+  includeDamages: boolean; // When enabled, sequences where the player didn't necessarily had a kill but only a large amount of damage will be included.
 };
 
 type PlaybackSettings = {

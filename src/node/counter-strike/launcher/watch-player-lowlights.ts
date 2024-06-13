@@ -1,5 +1,5 @@
 import { Game } from 'csdm/common/types/counter-strike';
-import { generatePlayerDeathsVdmFile } from 'csdm/node/vdm/generate-player-deaths-vdm-file';
+import { generatePlayerLowlightsVdmFile } from 'csdm/node/vdm/generate-player-lowlights-vdm-file';
 import { startCounterStrike } from './start-counter-strike';
 import { detectDemoGame } from './detect-demo-game';
 import { getPlaybackMatch, type PlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
@@ -9,12 +9,11 @@ import type { WatchPlayerOptions } from 'csdm/common/types/watch-player-options'
 import { deleteVdmFile } from './delete-vdm-file';
 import { WatchType } from 'csdm/common/types/watch-type';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
-import { generatePlayerDeathsJsonFile } from '../json-actions-file/generate-player-deaths-json-file';
+import { generatePlayerLowlightsJsonFile } from '../json-actions-file/generate-player-lowlights-json-file';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
-function assertPlayerHasDeaths(match: PlaybackMatch, steamId: string) {
-  const playerDeaths = match.kills.filter((kill) => kill.victimSteamId === steamId);
-  if (playerDeaths.length === 0) {
+function assertPlayerHasActions(match: PlaybackMatch) {
+  if (match.actions.length === 0) {
     throw new NoDeathsFound();
   }
 }
@@ -34,6 +33,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
     demoPath,
     steamId,
     type: WatchType.Lowlights,
+    includeDamages: lowlights.includeDamages,
   });
   if (game === Game.CSGO) {
     if (useCustomLowlights) {
@@ -41,9 +41,9 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
         // Fallback to CSGO built in lowlights
         playDemoArgs.push(steamId, 'lowlights');
       } else {
-        assertPlayerHasDeaths(match, steamId);
+        assertPlayerHasActions(match);
 
-        await generatePlayerDeathsVdmFile({
+        await generatePlayerLowlightsVdmFile({
           match,
           steamId,
           perspective,
@@ -59,9 +59,9 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
     if (match === undefined) {
       throw new NoDeathsFound();
     }
-    assertPlayerHasDeaths(match, steamId);
+    assertPlayerHasActions(match);
 
-    await generatePlayerDeathsJsonFile({
+    await generatePlayerLowlightsJsonFile({
       match,
       perspective,
       beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,

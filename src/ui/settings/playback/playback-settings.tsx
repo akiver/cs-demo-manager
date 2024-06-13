@@ -14,6 +14,8 @@ import { WatchRoundBeforeDelay } from './watch-round-before-delay';
 import { WatchRoundAfterDelay } from './watch-round-after-delay';
 import { UseHlae } from './use-hlae';
 import { PlayerVoices } from './player-voices';
+import { HighlightsIncludeDamages } from './highlights-include-damages';
+import { LowlightsIncludeDamages } from './lowlights-include-damages';
 
 export function PlaybackSettings() {
   return (
@@ -26,9 +28,11 @@ export function PlaybackSettings() {
       <CustomHighlights />
       <HighlightsWatchBeforeKillDelay />
       <HighlightsWatchAfterKillDelay />
+      <HighlightsIncludeDamages />
       <CustomLowlights />
       <LowlightsWatchBeforeKillDelay />
       <LowlightsWatchAfterKillDelay />
+      <LowlightsIncludeDamages />
       <WatchRoundBeforeDelay />
       <WatchRoundAfterDelay />
       {window.csdm.isWindows && <UseHlae />}

@@ -3,50 +3,50 @@ import fs from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
 import { Perspective } from 'csdm/common/types/perspective';
 import type { PlaybackMatch } from '../database/watch/get-match-playback';
-import { generatePlayerDeathsVdmFile } from './generate-player-deaths-vdm-file';
+import { generatePlayerHighlightsVdmFile } from './generate-player-highlights-vdm-file';
 
-describe(`Generate player's deaths VDM file`, () => {
-  it(`should generate a VDM file that focus on player's deaths`, async () => {
-    const demoPath = fileURLToPath(new URL('player-deaths.dem', import.meta.url));
-    const fakeVictimSteamId = 'fakeVictimSteamId';
-    const fakeKillerSteamId = 'fakeKillerSteamId';
+describe(`Generate player's highlights VDM file`, () => {
+  it(`should generate a VDM file that focus on player's highlights`, async () => {
+    const demoPath = fileURLToPath(new URL('player-highlights.dem', import.meta.url));
+    const fakePlayerSteamId = 'fakePlayerSteamId';
+    const fakeOpponentSteamId = 'fakeOpponentSteamId';
     const data: PlaybackMatch = {
       checksum: 'checksum',
       steamId: '12345',
       demoPath: demoPath,
       tickrate: 1,
       tickCount: 202,
-      kills: [
+      actions: [
         {
           roundNumber: 1,
           tick: 10,
-          victimSteamId: fakeVictimSteamId,
-          killerSteamId: fakeKillerSteamId,
+          opponentSteamId: fakeOpponentSteamId,
+          playerSteamId: fakePlayerSteamId,
         },
         {
           roundNumber: 1,
           tick: 13,
-          victimSteamId: fakeVictimSteamId,
-          killerSteamId: fakeKillerSteamId,
+          opponentSteamId: fakeOpponentSteamId,
+          playerSteamId: fakePlayerSteamId,
         },
         {
           roundNumber: 1,
           tick: 50,
-          victimSteamId: fakeVictimSteamId,
-          killerSteamId: fakeKillerSteamId,
+          opponentSteamId: fakeOpponentSteamId,
+          playerSteamId: fakePlayerSteamId,
         },
         {
           roundNumber: 2,
           tick: 200,
-          victimSteamId: fakeVictimSteamId,
-          killerSteamId: fakeKillerSteamId,
+          opponentSteamId: fakeOpponentSteamId,
+          playerSteamId: fakePlayerSteamId,
         },
       ],
     };
 
-    const vdm = await generatePlayerDeathsVdmFile({
+    const vdm = await generatePlayerHighlightsVdmFile({
       match: data,
-      steamId: fakeVictimSteamId,
+      steamId: fakePlayerSteamId,
       perspective: Perspective.Player,
       beforeDelaySeconds: 2,
       nextDelaySeconds: 4,

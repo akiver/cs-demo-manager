@@ -48,10 +48,12 @@ export const defaultSettings: Settings = {
     highlights: {
       beforeKillDelayInSeconds: 5,
       afterKillDelayInSeconds: 2,
+      includeDamages: false,
     },
     lowlights: {
       beforeKillDelayInSeconds: 5,
       afterKillDelayInSeconds: 2,
+      includeDamages: false,
     },
     round: {
       beforeRoundDelayInSeconds: 0,
