@@ -33,6 +33,7 @@ import { deleteJsonActionsFile } from 'csdm/node/counter-strike/json-actions-fil
 import { moveSequencesRawFiles } from 'csdm/node/video/sequences/move-sequences-raw-files';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { VideoContainer } from 'csdm/common/types/video-container';
+import { fetchMatchPlayersSlots } from '../database/match/fetch-match-players-slots';
 
 type FfmpegSettings = {
   audioBitrate: number;
@@ -45,6 +46,7 @@ type FfmpegSettings = {
 };
 
 type Options = {
+  checksum: string;
   game: Game;
   tickrate: number;
   encoderSoftware: EncoderSoftware;
@@ -232,6 +234,7 @@ export async function generateVideos(options: Options) {
       deathNoticesDuration,
     });
   } else {
+    const playerSlots = await fetchMatchPlayersSlots(options.checksum);
     await createJsonActionsFileForRecording({
       rawFilesFolderPath,
       framerate,
@@ -241,6 +244,7 @@ export async function generateVideos(options: Options) {
       showOnlyDeathNotices,
       tickrate,
       deathNoticesDuration,
+      playerSlots,
     });
   }
 

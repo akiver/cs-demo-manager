@@ -12,7 +12,6 @@ describe(`Generate player's lowlights VDM file`, () => {
     const fakeOpponentSteamId = 'fakeOpponentSteamId';
     const data: PlaybackMatch = {
       checksum: 'checksum',
-      steamId: '12345',
       demoPath: demoPath,
       tickrate: 1,
       tickCount: 202,
@@ -22,31 +21,41 @@ describe(`Generate player's lowlights VDM file`, () => {
           tick: 10,
           opponentSteamId: fakePlayerSteamId,
           playerSteamId: fakeOpponentSteamId,
+          playerSlot: null,
+          opponentSlot: null,
         },
         {
           roundNumber: 1,
           tick: 13,
           opponentSteamId: fakePlayerSteamId,
           playerSteamId: fakeOpponentSteamId,
+          playerSlot: null,
+          opponentSlot: null,
         },
         {
           roundNumber: 1,
           tick: 50,
           opponentSteamId: fakePlayerSteamId,
           playerSteamId: fakeOpponentSteamId,
+          playerSlot: null,
+          opponentSlot: null,
         },
         {
           roundNumber: 2,
           tick: 200,
           opponentSteamId: fakePlayerSteamId,
           playerSteamId: fakeOpponentSteamId,
+          playerSlot: null,
+          opponentSlot: null,
         },
       ],
     };
 
     const vdm = await generatePlayerLowlightsVdmFile({
-      match: data,
-      steamId: fakePlayerSteamId,
+      actions: data.actions,
+      demoPath: data.demoPath,
+      tickCount: data.tickCount,
+      tickrate: data.tickrate,
       perspective: Perspective.Player,
       beforeDelaySeconds: 2,
       nextDelaySeconds: 4,

@@ -31,6 +31,7 @@ export function GenerateButton() {
   const startVideosGeneration = () => {
     const payload: GenerateVideosPayload = {
       ...settings,
+      checksum: match.checksum,
       game: match.game,
       tickrate: match.tickrate,
       demoPath: match.demoFilePath,

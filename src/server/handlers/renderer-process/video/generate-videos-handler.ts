@@ -22,6 +22,7 @@ type FfmpegSettings = {
 };
 
 export type GenerateVideosPayload = {
+  checksum: string;
   game: Game;
   tickrate: number;
   encoderSoftware: EncoderSoftware;

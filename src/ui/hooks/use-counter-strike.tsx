@@ -61,6 +61,23 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
     }
     case ErrorCode.NoKillsFound:
       return <Trans>No kills found</Trans>;
+    case ErrorCode.MissingPlayerSlot:
+      return (
+        <div>
+          <p>
+            <Trans>This demo needs to be re-analyzed to make the camera focus work.</Trans>
+          </p>
+          <p>
+            <Trans>
+              Read this{' '}
+              <ExternalLink href="https://cs-demo-manager.com/docs/guides/playback#the-camera-doesnt-focus-on-the-player">
+                documentation
+              </ExternalLink>{' '}
+              for more information
+            </Trans>
+          </p>
+        </div>
+      );
     case ErrorCode.NoRoundsFound:
       return <Trans>No rounds found</Trans>;
     case ErrorCode.NoDeathsFound:

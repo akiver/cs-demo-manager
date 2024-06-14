@@ -14,10 +14,10 @@ export class JSONActionsFileGenerator {
 
   public constructor(demoPath: string) {
     this.filePath = windowsToUnixPathSeparator(`${demoPath}.json`);
-    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default but we don't want to see it so we
-    // call the demoui command to hide it.
-    // Note: the new convar demo_ui_mode has no effect.
-    this.addExecCommand(1, 'demoui');
+  }
+
+  public hasActions() {
+    return this.actions.length > 0;
   }
 
   public addSkipAhead(startTick: number, toTick: number) {
@@ -29,21 +29,17 @@ export class JSONActionsFileGenerator {
     return this;
   }
 
-  public addSpecPlayer(tick: number, steamId: string) {
+  public addSpecPlayer(tick: number, playerSlot: number) {
+    const actionTick = this.getValidTick(tick);
     this.actions.push({
-      cmd: `spec_lock_to_accountid ${steamId}`,
-      tick: this.getValidTick(tick),
+      cmd: `spec_player ${playerSlot}`,
+      tick: actionTick,
     });
     // The camera may be stuck in free mode with some demos (probably related to a server configuration)
     // Force the first person camera mode so the camera will properly focus on the player.
     this.actions.push({
       cmd: 'spec_mode 1',
-      tick: this.getValidTick(tick),
-    });
-    // Remove the lock so users can focus the camera on other players if they want to
-    this.actions.push({
-      cmd: `spec_lock_to_accountid 0`,
-      tick: this.getValidTick(tick + 64),
+      tick: actionTick,
     });
 
     return this;
@@ -96,6 +92,11 @@ export class JSONActionsFileGenerator {
     if (this.actions.length === 0) {
       return this;
     }
+
+    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default but we don't want to see it so we
+    // call the demoui command to hide it.
+    // Note: the new convar demo_ui_mode has no effect.
+    this.addExecCommand(1, 'demoui');
 
     await fs.writeFile(this.filePath, JSON.stringify(this.actions, null, 2));
 

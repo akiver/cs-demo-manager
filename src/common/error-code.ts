@@ -25,6 +25,7 @@ export const ErrorCode = {
   AccessDenied: 423,
   TeamNotFound: 424,
   TeamsNotFound: 426,
+  MissingPlayerSlot: 427,
   InvalidDemoPath: 505,
   ChecksumsMismatch: 506,
   DuplicateTeamName: 507,

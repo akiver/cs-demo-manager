@@ -1,23 +1,33 @@
 import { Perspective } from 'csdm/common/types/perspective';
-import type { PlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
+import type { Action } from 'csdm/node/database/watch/get-match-playback';
 import { VDMGenerator } from './generator';
 
-type Options = {
-  match: PlaybackMatch;
-  steamId: string;
+function getSteamIdToFocusFromAction(isPlayerPerspective: boolean, action: Action) {
+  return isPlayerPerspective
+    ? action.opponentSteamId ?? action.playerSteamId
+    : action.playerSteamId ?? action.opponentSteamId;
+}
+
+type Parameters = {
+  demoPath: string;
+  tickrate: number;
+  tickCount: number;
+  actions: Action[];
   perspective: Perspective;
   beforeDelaySeconds: number;
   nextDelaySeconds: number;
 };
 
 export async function generatePlayerLowlightsVdmFile({
-  match,
+  demoPath,
+  actions,
+  tickCount,
+  tickrate,
   perspective,
-  steamId,
   beforeDelaySeconds,
   nextDelaySeconds,
-}: Options) {
-  const vdm = new VDMGenerator(match.demoPath);
+}: Parameters) {
+  const vdm = new VDMGenerator(demoPath);
   if (nextDelaySeconds < 1) {
     nextDelaySeconds = 1;
   }
@@ -25,36 +35,40 @@ export async function generatePlayerLowlightsVdmFile({
     beforeDelaySeconds = 1;
   }
 
-  const tickrate = match.tickrate;
   const tickBeforeDelayCount = Math.round(tickrate * beforeDelaySeconds);
   const tickNextDelayCount = Math.round(tickrate * nextDelaySeconds);
   const maxNextActionDelayInSeconds = 15;
   const maxNextActionDelayTickCount = Math.max(Math.round(tickrate * maxNextActionDelayInSeconds), tickNextDelayCount);
   const isPlayerPerspective = perspective === Perspective.Player;
-  const actions = match.actions;
 
   for (const [index, action] of actions.entries()) {
-    const isFirstAction = index === 0;
+    const isFirstAction = !vdm.hasActions();
     if (isFirstAction) {
-      // It's the first action so just skip ahead and focus the camera on the player
-      const toTick = Math.max(0, action.tick - tickBeforeDelayCount);
-      const steamIdToFocus = isPlayerPerspective ? steamId : action.playerSteamId ?? steamId;
-      vdm.addSkipAhead(0, toTick);
-      vdm.addSpecPlayer(toTick, steamIdToFocus);
+      const steamIdToFocus = getSteamIdToFocusFromAction(isPlayerPerspective, action);
+      if (steamIdToFocus) {
+        // It's the first action so just skip ahead and focus the camera on the player
+        const toTick = Math.max(0, action.tick - tickBeforeDelayCount);
+        vdm.addSkipAhead(0, toTick);
+        vdm.addSpecPlayer(toTick, steamIdToFocus);
+      }
     }
 
     const nextAction = index === actions.length - 1 ? undefined : actions[index + 1];
 
     if (nextAction === undefined) {
-      const stopTick = Math.min(match.tickCount, action.tick + tickNextDelayCount);
+      const stopTick = Math.min(tickCount, action.tick + tickNextDelayCount);
       vdm.addStopPlayback(stopTick);
     } else {
+      const steamIdToFocus = getSteamIdToFocusFromAction(isPlayerPerspective, nextAction);
+      if (!steamIdToFocus) {
+        continue;
+      }
+
       const isNextActionTooFarAway = nextAction.tick - action.tick > maxNextActionDelayTickCount;
       if (isNextActionTooFarAway) {
         const skipAheadTick = action.tick + tickNextDelayCount;
         const toTick = nextAction.tick - tickBeforeDelayCount;
         vdm.addSkipAhead(skipAheadTick, toTick);
-        const steamIdToFocus = isPlayerPerspective ? steamId : nextAction.playerSteamId ?? steamId;
         vdm.addSpecPlayer(toTick, steamIdToFocus);
 
         if (nextAction.roundNumber > action.roundNumber) {
@@ -66,7 +80,6 @@ export async function generatePlayerLowlightsVdmFile({
       } else {
         // The next action is too close, only move the camera on the victim
         const tick = Math.round(action.tick + (nextAction.tick - action.tick) / 2);
-        const steamIdToFocus = isPlayerPerspective ? steamId : nextAction.playerSteamId ?? steamId;
         vdm.addSpecPlayer(tick, steamIdToFocus);
       }
     }
