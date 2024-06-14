@@ -11,6 +11,7 @@ import { WatchType } from 'csdm/common/types/watch-type';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { generatePlayerLowlightsJsonFile } from '../json-actions-file/generate-player-lowlights-json-file';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
+import { assertPlayersSlotsAreDefined } from './assert-players-slots-are-defined';
 
 function assertPlayerHasActions(match: PlaybackMatch) {
   if (match.actions.length === 0) {
@@ -44,8 +45,10 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
         assertPlayerHasActions(match);
 
         await generatePlayerLowlightsVdmFile({
-          match,
-          steamId,
+          actions: match.actions,
+          demoPath,
+          tickCount: match.tickCount,
+          tickrate: match.tickrate,
           perspective,
           beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,
           nextDelaySeconds: lowlights.afterKillDelayInSeconds,
@@ -59,10 +62,15 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
     if (match === undefined) {
       throw new NoDeathsFound();
     }
+
     assertPlayerHasActions(match);
+    assertPlayersSlotsAreDefined(match.actions);
 
     await generatePlayerLowlightsJsonFile({
-      match,
+      actions: match.actions,
+      demoPath,
+      tickCount: match.tickCount,
+      tickrate: match.tickrate,
       perspective,
       beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,
       nextDelaySeconds: lowlights.afterKillDelayInSeconds,

@@ -4,7 +4,7 @@ import { JSONActionsFileGenerator } from './json-actions-file-generator';
 type Options = {
   demoPath: string;
   rounds: Round[];
-  steamId: string;
+  playerSlot: number;
   beforeDelaySeconds: number;
   afterDelaySeconds: number;
   playerVoicesEnabled: boolean;
@@ -13,7 +13,7 @@ type Options = {
 export async function generatePlayerRoundsJsonFile({
   demoPath,
   rounds,
-  steamId,
+  playerSlot,
   beforeDelaySeconds,
   afterDelaySeconds,
   playerVoicesEnabled,
@@ -33,11 +33,9 @@ export async function generatePlayerRoundsJsonFile({
     if (currentTick + afterRoundTicks < startTick) {
       json.addSkipAhead(currentTick, startTick);
     }
-    json.addSpecPlayer(currentTick, steamId);
+    json.addSpecPlayer(currentTick, playerSlot);
 
     if (round.deathTick !== null) {
-      // Unlock the camera when the player dies so we can spectate on other players
-      json.addSpecPlayer(round.deathTick, '-1');
       currentTick = round.deathTick + afterRoundTicks;
     } else {
       currentTick = round.tickEnd + afterRoundTicks;

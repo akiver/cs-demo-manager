@@ -1,9 +1,16 @@
 import { Perspective } from 'csdm/common/types/perspective';
-import type { PlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
+import type { Action } from 'csdm/node/database/watch/get-match-playback';
 import { JSONActionsFileGenerator } from './json-actions-file-generator';
 
-type Options = {
-  match: PlaybackMatch;
+function getSlotToFocusFromAction(isPlayerPerspective: boolean, action: Action) {
+  return isPlayerPerspective ? action.playerSlot ?? action.opponentSlot : action.opponentSlot ?? action.playerSlot;
+}
+
+type Parameters = {
+  demoPath: string;
+  tickrate: number;
+  tickCount: number;
+  actions: Action[];
   perspective: Perspective;
   beforeDelaySeconds: number;
   nextDelaySeconds: number;
@@ -11,17 +18,16 @@ type Options = {
 };
 
 export async function generatePlayerLowlightsJsonFile({
-  match,
+  demoPath,
+  actions,
+  tickCount,
+  tickrate,
   perspective,
   beforeDelaySeconds,
   nextDelaySeconds,
   playerVoicesEnabled,
-}: Options) {
-  const json = new JSONActionsFileGenerator(match.demoPath);
-
-  if (playerVoicesEnabled) {
-    json.addListenPlayerVoices();
-  }
+}: Parameters) {
+  const json = new JSONActionsFileGenerator(demoPath);
 
   if (nextDelaySeconds < 1) {
     nextDelaySeconds = 1;
@@ -30,45 +36,53 @@ export async function generatePlayerLowlightsJsonFile({
     beforeDelaySeconds = 1;
   }
 
-  const tickrate = match.tickrate;
   const tickBeforeDelayCount = Math.round(tickrate * beforeDelaySeconds);
   const tickNextDelayCount = Math.round(tickrate * nextDelaySeconds);
   const maxNextActionDelayInSeconds = 15;
   const maxNextActionDelayTickCount = Math.max(Math.round(tickrate * maxNextActionDelayInSeconds), tickNextDelayCount);
   const isPlayerPerspective = perspective === Perspective.Player;
-  const actions = match.actions;
-  const { steamId } = match;
 
   for (const [index, action] of actions.entries()) {
-    const isFirstAction = index === 0;
+    const isFirstAction = !json.hasActions();
     if (isFirstAction) {
+      const slotToFocus = getSlotToFocusFromAction(isPlayerPerspective, action);
+      if (!slotToFocus) {
+        continue;
+      }
+
       // It's the first action so just skip ahead and focus the camera on the player
       const toTick = Math.max(0, action.tick - tickBeforeDelayCount);
-      const steamIdToFocus = isPlayerPerspective ? steamId : action.playerSteamId ?? steamId;
       json.addSkipAhead(0, toTick);
-      json.addSpecPlayer(toTick, steamIdToFocus);
+      json.addSpecPlayer(toTick, slotToFocus);
     }
 
     const nextAction = index === actions.length - 1 ? undefined : actions[index + 1];
 
     if (nextAction === undefined) {
-      const stopTick = Math.min(match.tickCount, action.tick + tickNextDelayCount);
+      const stopTick = Math.min(tickCount, action.tick + tickNextDelayCount);
       json.addStopPlayback(stopTick);
     } else {
+      const slotToFocus = getSlotToFocusFromAction(isPlayerPerspective, nextAction);
+      if (!slotToFocus) {
+        continue;
+      }
+
       const isNextActionTooFarAway = nextAction.tick - action.tick > maxNextActionDelayTickCount;
       if (isNextActionTooFarAway) {
         const skipAheadTick = action.tick + tickNextDelayCount;
         const toTick = nextAction.tick - tickBeforeDelayCount;
         json.addSkipAhead(skipAheadTick, toTick);
-        const steamIdToFocus = isPlayerPerspective ? steamId : nextAction.playerSteamId ?? steamId;
-        json.addSpecPlayer(toTick, steamIdToFocus);
+        json.addSpecPlayer(toTick, slotToFocus);
       } else {
         // The next action is too close, only move the camera on the victim
         const tick = Math.round(action.tick + (nextAction.tick - action.tick) / 2);
-        const steamIdToFocus = isPlayerPerspective ? steamId : nextAction.playerSteamId ?? steamId;
-        json.addSpecPlayer(tick, steamIdToFocus);
+        json.addSpecPlayer(tick, slotToFocus);
       }
     }
+  }
+
+  if (playerVoicesEnabled) {
+    json.addListenPlayerVoices();
   }
 
   await json.write();

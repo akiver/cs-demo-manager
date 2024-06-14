@@ -11,6 +11,7 @@ import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-
 import { generatePlayerHighlightsJsonFile } from '../json-actions-file/generate-player-highlights-json-file';
 import type { Perspective } from 'csdm/common/types/perspective';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
+import { assertPlayersSlotsAreDefined } from './assert-players-slots-are-defined';
 
 type Options = {
   demoPath: string;
@@ -51,8 +52,10 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
         assertPlayerHasActions(match);
 
         await generatePlayerHighlightsVdmFile({
-          match,
-          steamId,
+          actions: match.actions,
+          demoPath,
+          tickCount: match.tickCount,
+          tickrate: match.tickrate,
           perspective,
           beforeDelaySeconds: highlights.beforeKillDelayInSeconds,
           nextDelaySeconds: highlights.afterKillDelayInSeconds,
@@ -68,8 +71,13 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     }
 
     assertPlayerHasActions(match);
+    assertPlayersSlotsAreDefined(match.actions);
+
     await generatePlayerHighlightsJsonFile({
-      match,
+      actions: match.actions,
+      demoPath,
+      tickCount: match.tickCount,
+      tickrate: match.tickrate,
       perspective,
       beforeDelaySeconds: highlights.beforeKillDelayInSeconds,
       nextDelaySeconds: highlights.afterKillDelayInSeconds,

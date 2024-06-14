@@ -12,7 +12,6 @@ describe(`Generate player's highlights VDM file`, () => {
     const fakeOpponentSteamId = 'fakeOpponentSteamId';
     const data: PlaybackMatch = {
       checksum: 'checksum',
-      steamId: '12345',
       demoPath: demoPath,
       tickrate: 1,
       tickCount: 202,
@@ -22,31 +21,41 @@ describe(`Generate player's highlights VDM file`, () => {
           tick: 10,
           opponentSteamId: fakeOpponentSteamId,
           playerSteamId: fakePlayerSteamId,
+          playerSlot: null,
+          opponentSlot: null,
         },
         {
           roundNumber: 1,
           tick: 13,
           opponentSteamId: fakeOpponentSteamId,
           playerSteamId: fakePlayerSteamId,
+          playerSlot: null,
+          opponentSlot: null,
         },
         {
           roundNumber: 1,
           tick: 50,
           opponentSteamId: fakeOpponentSteamId,
           playerSteamId: fakePlayerSteamId,
+          playerSlot: null,
+          opponentSlot: null,
         },
         {
           roundNumber: 2,
           tick: 200,
           opponentSteamId: fakeOpponentSteamId,
           playerSteamId: fakePlayerSteamId,
+          playerSlot: null,
+          opponentSlot: null,
         },
       ],
     };
 
     const vdm = await generatePlayerHighlightsVdmFile({
-      match: data,
-      steamId: fakePlayerSteamId,
+      actions: data.actions,
+      demoPath,
+      tickCount: data.tickCount,
+      tickrate: data.tickrate,
       perspective: Perspective.Player,
       beforeDelaySeconds: 2,
       nextDelaySeconds: 4,

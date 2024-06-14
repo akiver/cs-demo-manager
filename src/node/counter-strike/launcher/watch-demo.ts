@@ -6,6 +6,8 @@ import { detectDemoGame } from './detect-demo-game';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
+import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
+import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
 
 async function generateVdmFile(demoPath: string, startTick?: number, steamId?: string) {
   const vdm = new VDMGenerator(demoPath);
@@ -36,7 +38,12 @@ async function generateJsonActionsFile(
   }
 
   if (steamId !== undefined) {
-    generator.addSpecPlayer(startTick ?? 0, steamId);
+    const checksum = await getDemoChecksumFromDemoPath(demoPath);
+    const slots = await fetchMatchPlayersSlots(checksum);
+    const slot = slots[steamId];
+    if (slot) {
+      generator.addSpecPlayer(startTick ?? 0, slot);
+    }
   }
 
   await generator.write();

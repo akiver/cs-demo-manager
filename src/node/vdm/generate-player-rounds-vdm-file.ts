@@ -1,7 +1,7 @@
 import { VDMGenerator } from './generator';
 import type { Round } from '../counter-strike/launcher/watch-player-rounds';
 
-type Options = {
+type Parameters = {
   tickrate: number;
   demoPath: string;
   rounds: Round[];
@@ -17,7 +17,7 @@ export async function generatePlayerRoundsVdmFile({
   steamId,
   beforeDelaySeconds,
   afterDelaySeconds,
-}: Options) {
+}: Parameters) {
   const vdm = new VDMGenerator(demoPath);
 
   const beforeRoundTicks = beforeDelaySeconds > 0 ? beforeDelaySeconds * tickrate : 0;

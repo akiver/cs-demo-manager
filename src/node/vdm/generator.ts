@@ -18,6 +18,10 @@ export class VDMGenerator {
     this.filePath = windowsToUnixPathSeparator(`${demoPath.slice(0, -3)}vdm`);
   }
 
+  public hasActions() {
+    return this.actionCount > 1;
+  }
+
   /** @public Used for test */
   public getVdmPath() {
     return this.filePath;

@@ -11,6 +11,7 @@ type Options = {
   showOnlyDeathNotices: boolean;
   deathNoticesDuration: number;
   tickrate: number;
+  playerSlots: Record<string, number>;
 };
 
 export async function createJsonActionsFileForRecording({
@@ -20,6 +21,7 @@ export async function createJsonActionsFileForRecording({
   closeGameAfterRecording,
   showOnlyDeathNotices,
   tickrate,
+  playerSlots,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath);
   const mandatoryCommands = [
@@ -59,7 +61,10 @@ export async function createJsonActionsFileForRecording({
       .addExecCommand(sequence.endTick, 'endmovie');
 
     if (sequence.playerFocusSteamId) {
-      json.addSpecPlayer(setupSequenceTick, sequence.playerFocusSteamId);
+      const playerSlot = playerSlots[sequence.playerFocusSteamId];
+      if (playerSlot) {
+        json.addSpecPlayer(setupSequenceTick, playerSlot);
+      }
     }
 
     if (typeof sequence.cfg === 'string') {

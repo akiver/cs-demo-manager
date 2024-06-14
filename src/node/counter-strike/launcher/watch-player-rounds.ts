@@ -10,6 +10,7 @@ import { NoRoundsFound } from './errors/not-rounds-found';
 import { generatePlayerRoundsJsonFile } from '../json-actions-file/generate-player-rounds-json-file';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
+import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
 
 export type Round = {
   number: number;
@@ -79,10 +80,15 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
   const { round, playerVoicesEnabled } = settings.playback;
   const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds } = round;
   if (game !== Game.CSGO) {
+    const slots = await fetchMatchPlayersSlots(checksum);
+    const playerSlot = slots[steamId];
+    if (!playerSlot) {
+      throw new NoRoundsFound();
+    }
     await generatePlayerRoundsJsonFile({
       demoPath,
       rounds,
-      steamId,
+      playerSlot,
       beforeDelaySeconds: beforeRoundDelayInSeconds,
       afterDelaySeconds: afterRoundDelayInSeconds,
       playerVoicesEnabled,

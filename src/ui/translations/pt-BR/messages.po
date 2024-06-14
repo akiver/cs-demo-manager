@@ -2935,6 +2935,14 @@ msgid "No kills found"
 msgstr "Nenhum abate encontrado"
 
 #: src/ui/hooks/use-counter-strike.tsx
+msgid "This demo needs to be re-analyzed to make the camera focus work."
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "Read this <0>documentation</0> for more information"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
 msgid "No rounds found"
 msgstr "Nenhuma rodada encontrada"
 
