@@ -93,6 +93,14 @@ export function ContextMenuProvider({ children }: Props) {
     };
   });
 
+  useEffect(() => {
+    window.navigation?.addEventListener('navigate', hideContextMenu);
+
+    return () => {
+      window.navigation?.removeEventListener('navigate', hideContextMenu);
+    };
+  });
+
   useLayoutEffect(() => {
     if (!wrapperRef.current) {
       return;
