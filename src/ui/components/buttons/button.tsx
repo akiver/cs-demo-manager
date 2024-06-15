@@ -29,13 +29,21 @@ export const Button = forwardRef(function Button(
   ref: React.Ref<HTMLButtonElement>,
 ) {
   const className = variantsClasses[variant];
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (!onClick || event.detail > 1) {
+      return;
+    }
+
+    onClick(event);
+  };
+
   return (
     <button
       ref={ref}
       className={`px-12 leading-none whitespace-nowrap rounded border flex items-center duration-85 transition-all relative cursor-default h-[30px] aria-disabled:bg-gray-300 aria-disabled:text-gray-600 aria-disabled:border-transparent ${className}`}
       aria-disabled={isDisabled}
       type={type}
-      onClick={isDisabled ? undefined : onClick}
+      onClick={isDisabled ? undefined : handleClick}
       {...props}
     >
       {children}
