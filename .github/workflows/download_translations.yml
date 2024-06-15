@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download translations from Crowdin
-        uses: crowdin/github-action@v1
+        uses: crowdin/github-action@v2
         with:
           upload_sources: false
           upload_translations: false
