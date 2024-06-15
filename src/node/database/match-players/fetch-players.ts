@@ -11,7 +11,7 @@ export async function fetchPlayers(checksum: string): Promise<Player[]> {
   const rows: PlayerQueryResult[] = await db
     .selectFrom('players')
     .selectAll('players')
-    .innerJoin('matches', 'matches.checksum', 'match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
     .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'players.steam_id')
     .select('steam_accounts.avatar')
     .leftJoin('ignored_steam_accounts', 'ignored_steam_accounts.steam_id', 'steam_accounts.steam_id')
@@ -23,8 +23,8 @@ export async function fetchPlayers(checksum: string): Promise<Player[]> {
       ),
     )
     .leftJoin('kills', (join) => {
-      return join.on(({ or, eb, ref }) => {
-        return or([
+      return join.on(({ and, eb, ref }) => {
+        return and([
           eb('kills.killer_steam_id', '=', 'players.steam_id'),
           eb('kills.match_checksum', '=', ref('matches.checksum')),
         ]);
@@ -41,7 +41,6 @@ export async function fetchPlayers(checksum: string): Promise<Player[]> {
       ),
     )
     .where('players.match_checksum', '=', checksum)
-    .where('kills.match_checksum', '=', checksum)
     .groupBy([
       'players.id',
       'matches.date',
