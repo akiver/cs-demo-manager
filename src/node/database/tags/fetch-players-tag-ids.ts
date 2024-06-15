@@ -1,6 +1,10 @@
 import { db } from 'csdm/node/database/database';
 
 export async function fetchPlayersTagIds(steamIds: string[]) {
+  if (steamIds.length === 0) {
+    return [];
+  }
+
   const rows = await db
     .selectFrom('steam_account_tags')
     .select(['tag_id'])
