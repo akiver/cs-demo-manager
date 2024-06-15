@@ -79,6 +79,7 @@ export default [
     },
 
     rules: {
+      ...reactHooks.configs.recommended.rules,
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/ban-ts-comment': [
         'warn',
