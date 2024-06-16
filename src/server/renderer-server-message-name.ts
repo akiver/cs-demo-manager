@@ -7,10 +7,6 @@ import type { ErrorCode } from '../common/error-code';
 import type { ValveMatch } from '../common/types/valve-match';
 import type { SharedServerMessagePayload, SharedServerMessageName } from './shared-server-message-name';
 import type {
-  GenerateVideoErrorPayload,
-  GeneratingVideoFromSequencePayload,
-} from './handlers/renderer-process/video/generate-videos-handler';
-import type {
   ExportMatchesToXlsxProgressPayload,
   ExportMatchesToXlsxSuccessPayload,
 } from './handlers/renderer-process/match/export-matches-to-xlsx-handler';
@@ -19,6 +15,7 @@ import type {
   ExportDemoPlayersVoiceErrorPayload,
   ExportDemoPlayersVoiceProgressPayload,
 } from './handlers/renderer-process/demo/export-demo-players-voice-handler';
+import type { Video } from 'csdm/common/types/video';
 
 // Message names sent from the WebSocket server to the renderer Electron process.
 export const RendererServerMessageName = {
@@ -29,6 +26,9 @@ export const RendererServerMessageName = {
   NavigateToMatch: 'navigate-to-match',
   DemosAddedToAnalyses: 'demos-added-to-analyses',
   DemosRemovedFromAnalyses: 'demos-removed-from-analyses',
+  VideoAddedToQueue: 'video-added-to-queue',
+  VideosRemovedFromQueue: 'videos-removed-from-queue',
+  VideoUpdated: 'video-updated',
   AnalysisUpdated: 'analysis-status-changed',
   InsertingMatchPositions: 'inserting-match-positions',
   MatchInserted: 'match-inserted',
@@ -50,10 +50,6 @@ export const RendererServerMessageName = {
   ExportDemoPlayersVoiceProgress: 'export-demo-players-voice-progress',
   ExportDemoPlayersVoiceDone: 'export-demo-players-voice-done',
   ExportDemoPlayersVoiceError: 'export-demo-players-voice-error',
-  GeneratingVideoFromSequence: 'generating-video-from-sequence',
-  ConcatenateSequencesStart: 'concatenate-sequences-start',
-  VideosGenerationError: 'videos-generation-error',
-  VideosGenerationSuccess: 'concatenate-videos-success',
   StartingGame: 'starting-game',
   ResetTablesStateSuccess: 'reset-tables-state-success',
   IgnoredSteamAccountsChanged: 'ignored-steam-accounts-changed',
@@ -74,6 +70,9 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.NavigateToDemo]: string;
   [RendererServerMessageName.NavigateToMatch]: string;
   [RendererServerMessageName.DemosAddedToAnalyses]: Analysis[];
+  [RendererServerMessageName.VideoAddedToQueue]: Video;
+  [RendererServerMessageName.VideosRemovedFromQueue]: string[];
+  [RendererServerMessageName.VideoUpdated]: Video;
   [RendererServerMessageName.DemosRemovedFromAnalyses]: string[];
   [RendererServerMessageName.InsertingMatchPositions]: void;
   [RendererServerMessageName.AnalysisUpdated]: Analysis;
@@ -96,10 +95,6 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.ExportDemoPlayersVoiceProgress]: ExportDemoPlayersVoiceProgressPayload;
   [RendererServerMessageName.ExportDemoPlayersVoiceDone]: void;
   [RendererServerMessageName.ExportDemoPlayersVoiceError]: ExportDemoPlayersVoiceErrorPayload;
-  [RendererServerMessageName.GeneratingVideoFromSequence]: GeneratingVideoFromSequencePayload;
-  [RendererServerMessageName.ConcatenateSequencesStart]: void;
-  [RendererServerMessageName.VideosGenerationError]: GenerateVideoErrorPayload;
-  [RendererServerMessageName.VideosGenerationSuccess]: void;
   [RendererServerMessageName.StartingGame]: void;
   [RendererServerMessageName.ResetTablesStateSuccess]: void;
   [RendererServerMessageName.IgnoredSteamAccountsChanged]: void;

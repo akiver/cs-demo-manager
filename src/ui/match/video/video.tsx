@@ -3,7 +3,7 @@ import { AddNewSequenceButton } from 'csdm/ui/match/video/sequences/add-new-sequ
 import { MatchCommentInput } from 'csdm/ui/match/match-comment-input';
 import { Content } from 'csdm/ui/components/content';
 import { SequencesTimeline } from './sequences/sequences-timelines/sequences-timeline';
-import { GenerateButton } from './generate-button';
+import { AddVideoToQueueButton } from './add-video-to-queue-button';
 import { Hlae } from './hlae/hlae';
 import { VirtualDub } from './virtualdub/virtual-dub';
 import { WidthResolutionInput } from './width-resolution-input';
@@ -28,7 +28,7 @@ export function MatchVideo() {
     <Content>
       <div className="flex flex-col">
         <div className="flex items-center gap-x-8">
-          <GenerateButton />
+          <AddVideoToQueueButton />
           <AddNewSequenceButton />
           <GeneratePlayerSequencesButton />
           <ResetSettingsButton />

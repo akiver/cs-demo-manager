@@ -10,7 +10,6 @@ import { abortError } from 'csdm/node/errors/abort-error';
 import { getCounterStrikeExecutablePath } from '../get-counter-strike-executable-path';
 import { installCs2ServerPlugin } from './cs2-server-plugin';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
-import { sleep } from 'csdm/common/sleep';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
 import { getHlaeExecutablePathOrThrow } from 'csdm/node/video/hlae/hlae-location';
 
@@ -27,11 +26,25 @@ export type HlaeOptions = {
   onGameStart?: () => void;
 };
 
-async function waitForCounterStrikeExit() {
-  const checkIntervalInMs = 10_000;
+async function isHlaeErrorWindowExists() {
+  return new Promise<boolean>((resolve) => {
+    return exec('tasklist /fi "imagename eq cs2.exe" /v /nh', { windowsHide: true }, (err, stdout) => {
+      return resolve(stdout.includes('Error - AfxHookSource'));
+    });
+  });
+}
 
-  return new Promise<void>((resolve) => {
+async function waitForCounterStrikeExit() {
+  const checkIntervalInMs = 2_000;
+
+  return new Promise<void>((resolve, reject) => {
     const intervalId = setInterval(async () => {
+      const hlaeErrorDetected = await isHlaeErrorWindowExists();
+      if (hlaeErrorDetected) {
+        clearInterval(intervalId);
+        return reject(new HlaeError());
+      }
+
       const isCsRunning = await isCounterStrikeRunning();
       if (!isCsRunning) {
         clearInterval(intervalId);
@@ -69,7 +82,11 @@ async function startHlae(command: string, signal?: AbortSignal) {
         return reject(new HlaeError());
       }
 
-      await waitForCounterStrikeExit();
+      try {
+        await waitForCounterStrikeExit();
+      } catch (error) {
+        return reject(error);
+      }
 
       return resolve();
     });
@@ -85,7 +102,7 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
   assertDemoPathIsValid(demoPath, game);
 
   const hlaeExecutablePath = await getHlaeExecutablePathOrThrow();
-  const csHasBeenKilled = await killCounterStrikeProcesses();
+  await killCounterStrikeProcesses();
   const csExecutablePath = await getCounterStrikeExecutablePath(game);
   const settings = await getSettings();
   const {
@@ -125,10 +142,6 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
       `-programPath "${csExecutablePath}"`,
       `-cmdLine "${gameParameters.join(' ')}"`,
     );
-    if (csHasBeenKilled) {
-      // Wait a few seconds before installing the plugin as its files may still be locked by CS2
-      await sleep(2000);
-    }
     defineCfgFolderLocation();
     await installCs2ServerPlugin();
   } else {

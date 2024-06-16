@@ -1,14 +1,16 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { roundNumber } from 'csdm/common/math/round-number';
 import { useComputeRequiredGigabyte } from './use-compute-require-gigabyte';
 import { useSequenceForm } from './use-sequence-form';
-import { Trans } from '@lingui/macro';
+import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 
 function useComputeRequiredDiskSpace() {
   const { sequence } = useSequenceForm();
+  const match = useCurrentMatch();
   const computeRequiredGigabyte = useComputeRequiredGigabyte();
 
-  const diskSpace = computeRequiredGigabyte(Number(sequence.startTick), Number(sequence.endTick));
+  const diskSpace = computeRequiredGigabyte(Number(sequence.startTick), Number(sequence.endTick), match.tickrate);
 
   return roundNumber(diskSpace, 2);
 }

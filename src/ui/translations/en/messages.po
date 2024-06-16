@@ -353,6 +353,8 @@ msgstr "An error occurred connecting to the WebSocket server."
 #: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/team/heatmap/team-heatmap.tsx
+#: src/ui/videos/use-remove-videos.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "An error occurred"
 msgstr "An error occurred"
 
@@ -431,6 +433,7 @@ msgid "Refresh"
 msgstr "Refresh"
 
 #: src/ui/components/buttons/remove-button.tsx
+#: src/ui/videos/video-entry.tsx
 msgctxt "Button"
 msgid "Remove"
 msgstr "Remove"
@@ -444,6 +447,11 @@ msgstr "Reset"
 msgctxt "Button"
 msgid "Retry"
 msgstr "Retry"
+
+#: src/ui/components/buttons/reveal-button.tsx
+msgctxt "Button"
+msgid "Reveal"
+msgstr "Reveal"
 
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
@@ -654,7 +662,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/match/grenades/finder/grenades-finder-loader.tsx
 #: src/ui/match/match-loader.tsx
 #: src/ui/match/rounds/round/round-tags.tsx
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 #: src/ui/match/video/update-demo-location.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
@@ -864,7 +872,7 @@ msgstr "{0, plural, one {The match will be deleted only from the database not yo
 
 #: src/ui/components/dialogs/demo-not-found-dialog.tsx
 #: src/ui/demo/demo-loader.tsx
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 #: src/ui/match/video/video-loader.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Demo not found."
@@ -2900,7 +2908,7 @@ msgid "Match not found"
 msgstr "Match not found"
 
 #: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 #: src/ui/match/video/video-loader.tsx
 msgid "Counter-Strike executable not found."
 msgstr "Counter-Strike executable not found."
@@ -2946,12 +2954,12 @@ msgid "No deaths found"
 msgstr "No deaths found"
 
 #: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
 msgstr "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
 
 #: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
 msgstr "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
 
@@ -3239,6 +3247,11 @@ msgstr "Settings ({shortcut})"
 msgctxt "Tooltip"
 msgid "Teams"
 msgstr "Teams"
+
+#: src/ui/left-bar/video-queue-link.tsx
+msgctxt "Tooltip"
+msgid "Videos"
+msgstr "Videos"
 
 #: src/ui/match/chat-messages/chat-message.tsx
 msgctxt "Chat message status"
@@ -3647,6 +3660,7 @@ msgid "Average damage per round"
 msgstr "Average damage per round"
 
 #: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "Duration"
 msgstr "Duration"
 
@@ -3835,6 +3849,7 @@ msgid "Tickrate"
 msgstr "Tickrate"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "Framerate"
 msgstr "Framerate"
 
@@ -4451,6 +4466,32 @@ msgstr "Round number {roundNumber} not found."
 msgid "Overview"
 msgstr "Overview"
 
+#: src/ui/match/video/add-video-to-queue-button.tsx
+msgid "Disk space warning"
+msgstr "Disk space warning"
+
+#: src/ui/match/video/add-video-to-queue-button.tsx
+msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
+msgstr "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
+
+#: src/ui/match/video/add-video-to-queue-button.tsx
+msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
+msgstr "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
+
+#: src/ui/match/video/add-video-to-queue-button.tsx
+msgid "Are you sure you want to continue?"
+msgstr "Are you sure you want to continue?"
+
+#: src/ui/match/video/add-video-to-queue-button.tsx
+msgctxt "Button"
+msgid "Add to queue"
+msgstr "Add to queue"
+
+#: src/ui/match/video/add-video-to-queue-error-dialog.tsx
+msgctxt "Dialog title"
+msgid "Error"
+msgstr "Error"
+
 #: src/ui/match/video/close-game-after-recording-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Close the game when recording is done"
@@ -4533,27 +4574,6 @@ msgctxt "Input label"
 msgid "Video container"
 msgstr "Video container"
 
-#: src/ui/match/video/generate-button.tsx
-msgid "Disk space warning"
-msgstr "Disk space warning"
-
-#: src/ui/match/video/generate-button.tsx
-msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
-msgstr "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
-
-#: src/ui/match/video/generate-button.tsx
-msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
-msgstr "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
-
-#: src/ui/match/video/generate-button.tsx
-msgid "Are you sure you want to continue?"
-msgstr "Are you sure you want to continue?"
-
-#: src/ui/match/video/generate-button.tsx
-msgctxt "Button"
-msgid "Generate"
-msgstr "Generate"
-
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "This player has no kills."
 msgstr "This player has no kills."
@@ -4592,91 +4612,61 @@ msgctxt "Button"
 msgid "Generate player's sequences"
 msgstr "Generate player's sequences"
 
-#: src/ui/match/video/generating-dialog.tsx
-msgid "Generation in progress…"
-msgstr "Generation in progress…"
-
-#: src/ui/match/video/generating-dialog.tsx
-msgid "In-game recording in progress…"
-msgstr "In-game recording in progress…"
-
-#: src/ui/match/video/generating-dialog.tsx
-msgid "Generating video for sequence {sequenceNumber} / {sequenceCount}…"
-msgstr "Generating video for sequence {sequenceNumber} / {sequenceCount}…"
-
-#: src/ui/match/video/generating-dialog.tsx
-msgid "Concatenating sequences…"
-msgstr "Concatenating sequences…"
-
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Failed to start the game, make sure Steam is running and you are connected."
 msgstr "Failed to start the game, make sure Steam is running and you are connected."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
 msgstr "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "HLAE is not installed."
 msgstr "HLAE is not installed."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "VirtualDub is not installed."
 msgstr "VirtualDub is not installed."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "FFmpeg is not installed."
 msgstr "FFmpeg is not installed."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "No sequences provided."
 msgstr "No sequences provided."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "One or more sequences are overlapping, at least 2 seconds are required between 2 sequences."
 msgstr "One or more sequences are overlapping, at least 2 seconds are required between 2 sequences."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Steam is not running."
 msgstr "Steam is not running."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "FFmpeg returned an error."
 msgstr "FFmpeg returned an error."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "VirtualDub returned an error."
 msgstr "VirtualDub returned an error."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "WAV file not found."
 msgstr "WAV file not found."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Raw files not found."
 msgstr "Raw files not found."
 
-#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "HLAE returned an error."
 msgstr "HLAE returned an error."
 
-#: src/ui/match/video/generating-dialog.tsx
-msgid "Generation done"
-msgstr "Generation done"
-
-#: src/ui/match/video/generating-dialog.tsx
-msgid "Output:"
-msgstr "Output:"
-
-#: src/ui/match/video/generating-dialog.tsx
-msgctxt "Button"
-msgid "Reveal raw files folder"
-msgstr "Reveal raw files folder"
-
-#: src/ui/match/video/generating-dialog.tsx
-msgctxt "Button"
-msgid "Reveal output folder"
-msgstr "Reveal output folder"
+#: src/ui/match/video/get-video-error-from-error-code.tsx
+msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
+msgstr "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
 
 #: src/ui/match/video/height-resolution-input.tsx
 msgctxt "Input label"
@@ -4991,6 +4981,11 @@ msgctxt "Input label"
 msgid "Focus camera on player"
 msgstr "Focus camera on player"
 
+#: src/ui/match/video/sequences/required-disk-space.tsx
+msgctxt "Disk usage in gigabyte"
+msgid "~{requiredDiskSpace}GB"
+msgstr "~{requiredDiskSpace}GB"
+
 #: src/ui/match/video/sequences/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"
 msgstr "End tick must be greater than start tick"
@@ -5012,11 +5007,6 @@ msgstr "{seconds} seconds"
 msgctxt "Input label"
 msgid "Show X-Ray"
 msgstr "Show X-Ray"
-
-#: src/ui/match/video/sequences/sequences-disk-space.tsx
-msgctxt "Disk usage in gigabyte"
-msgid "~{requiredDiskSpace}GB"
-msgstr "~{requiredDiskSpace}GB"
 
 #: src/ui/match/video/sequences/sequences-duration.tsx
 msgid "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
@@ -6549,10 +6539,20 @@ msgid "Minimized"
 msgstr "Minimized"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "No"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "Yes"
 msgstr "Yes"
 
@@ -6647,4 +6647,127 @@ msgstr "Forward in history"
 #: src/ui/title-bar/update-available-button.tsx
 msgid "Update ready!"
 msgstr "Update ready!"
+
+#: src/ui/videos/remove-all-videos-button.tsx
+msgctxt "Button"
+msgid "Remove all"
+msgstr "Remove all"
+
+#: src/ui/videos/remove-completed-videos-button.tsx
+msgctxt "Button"
+msgid "Remove completed"
+msgstr "Remove completed"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Waiting…"
+msgstr "Waiting…"
+
+#: src/ui/videos/video-entry.tsx
+msgid "In-game recording in progress…"
+msgstr "In-game recording in progress…"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Preparing files for conversion…"
+msgstr "Preparing files for conversion…"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Generating video for sequence {0} / {1}…"
+msgstr "Generating video for sequence {0} / {1}…"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Merging videos into a single file…"
+msgstr "Merging videos into a single file…"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Video generation done"
+msgstr "Video generation done"
+
+#: src/ui/videos/video-entry.tsx
+msgid "The folder doesn't exist yet"
+msgstr "The folder doesn't exist yet"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Map"
+msgstr "Map"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Video ID"
+msgstr "Video ID"
+
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Sequences"
+msgstr "Sequences"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Disk space"
+msgstr "Disk space"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Encoder software"
+msgstr "Encoder software"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Resolution"
+msgstr "Resolution"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Merge sequences into single file"
+msgstr "Merge sequences into single file"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Generate only RAW files"
+msgstr "Generate only RAW files"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Show death notices"
+msgstr "Show death notices"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Close game after recording"
+msgstr "Close game after recording"
+
+#: src/ui/videos/video-entry.tsx
+msgid "You will have to close the game manually."
+msgstr "You will have to close the game manually."
+
+#: src/ui/videos/video-entry.tsx
+msgid "Demo path"
+msgstr "Demo path"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Raw files path"
+msgstr "Raw files path"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Output path"
+msgstr "Output path"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Start tick"
+msgstr "Start tick"
+
+#: src/ui/videos/video-entry.tsx
+msgid "End tick"
+msgstr "End tick"
+
+#: src/ui/videos/video-entry.tsx
+msgid "X-Ray"
+msgstr "X-Ray"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Focused player"
+msgstr "Focused player"
+
+#: src/ui/videos/video-entry.tsx
+msgid "None"
+msgstr "None"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Output"
+msgstr "Output"
+
+#: src/ui/videos/videos.tsx
+msgid "No video generation in progress."
+msgstr "No video generation in progress."
 

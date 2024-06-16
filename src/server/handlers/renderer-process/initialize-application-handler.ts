@@ -14,6 +14,8 @@ import { startBackgroundTasks } from 'csdm/server/start-background-tasks';
 import { fetchIgnoredSteamAccounts } from 'csdm/node/database/steam-accounts/fetch-ignored-steam-accounts';
 import type { IgnoredSteamAccount } from 'csdm/common/types/ignored-steam-account';
 import { initializeSettings } from 'csdm/node/settings/initialize-settings';
+import { videoQueue } from 'csdm/server/video-queue';
+import { type Video } from 'csdm/common/types/video';
 
 export type InitializeApplicationSuccessPayload = {
   matchChecksums: string[];
@@ -24,6 +26,7 @@ export type InitializeApplicationSuccessPayload = {
   faceitAccounts: FaceitAccount[];
   downloads: Download[];
   ignoredSteamAccounts: IgnoredSteamAccount[];
+  videos: Video[];
 };
 
 export async function initializeApplicationHandler() {
@@ -45,6 +48,7 @@ export async function initializeApplicationHandler() {
       ignoredSteamAccounts,
       analyses: analysesListener.getAnalyses(),
       downloads: downloadDemoQueue.getDownloads(),
+      videos: videoQueue.getVideos(),
     };
 
     startBackgroundTasks();

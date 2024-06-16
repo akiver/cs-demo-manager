@@ -1,4 +1,5 @@
 import path from 'node:path';
+import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { getSequenceOutputFilePath } from 'csdm/node/video/sequences/get-sequence-output-file-path';
@@ -66,7 +67,12 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
   if (outputParameters !== '') {
     args.push(outputParameters);
   }
-  args.push('"' + getSequenceOutputFilePath(outputFolderPath, sequence, videoContainer) + '"');
+
+  // It's important to create the output folder before running FFmpeg otherwise it will fail.
+  await fs.ensureDir(outputFolderPath);
+
+  const outputPath = getSequenceOutputFilePath(outputFolderPath, sequence, videoContainer);
+  args.push('"' + outputPath + '"');
 
   return args;
 }

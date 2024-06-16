@@ -1,5 +1,4 @@
 import { Game } from 'csdm/common/types/counter-strike';
-import { isHlaeInstalled } from 'csdm/node/video/hlae/is-hlae-installed';
 import { generateVideoWithVirtualDub } from 'csdm/node/video/virtual-dub/generate-video-with-virtual-dub';
 import { generateVideoWithFFmpeg } from 'csdm/node/video/ffmpeg/generate-video-with-ffmpeg';
 import { concatenateVideosFromSequences } from 'csdm/node/video/ffmpeg/concatenate-videos-from-sequences';
@@ -7,26 +6,17 @@ import { createVdmFileForRecording } from 'csdm/node/video/create-vdm-file-for-r
 import { deleteSequenceRawFiles } from 'csdm/node/video/sequences/delete-sequence-raw-files';
 import type { HlaeOptions } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
 import { watchDemoWithHlae } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
-import { isVirtualDubInstalled } from 'csdm/node/video/virtual-dub/is-virtual-dub-installed';
-import { VirtualDubNotInstalled } from 'csdm/node/video/errors/virtual-dub-not-installed';
-import { isFfmpegInstalled } from 'csdm/node/video/ffmpeg/is-ffmpeg-installed';
-import { FfmpegNotInstalled } from 'csdm/node/video/errors/ffmpeg-not-installed';
-import { HlaeNotInstalled } from 'csdm/node/video/errors/hlae-not-installed';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { killCounterStrikeProcesses } from 'csdm/node/counter-strike/kill-counter-strike-processes';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
-import { deleteSequencesRawFiles } from 'csdm/node/video/sequences/delete-sequences-raw-files';
 import { killFfmpegProcess } from 'csdm/node/video/ffmpeg/kill-ffmpeg-process';
 import { killVirtualDubProcess } from 'csdm/node/video/virtual-dub/kill-virtual-dub-process';
 import { deleteVdmFile } from 'csdm/node/counter-strike/launcher/delete-vdm-file';
 import { deleteSequencesOutputFile } from 'csdm/node/video/sequences/delete-sequences-output-file';
 import { abortError, throwIfAborted } from 'csdm/node/errors/abort-error';
-import { NoSequencesFound } from 'csdm/node/video/errors/no-sequences-found';
-import { assertSequencesAreNotOverlapping } from 'csdm/node/video/sequences/assert-sequences-are-not-overlapping';
 import { killHlaeProcess } from 'csdm/node/video/hlae/kill-hlae-process';
 import { sleep } from 'csdm/common/sleep';
 import { sortSequencesByStartTick } from 'csdm/node/video/sequences/sort-sequences-by-start-tick';
-import { assertSteamIsRunning } from 'csdm/node/counter-strike/launcher/assert-steam-is-running';
 import { createJsonActionsFileForRecording } from 'csdm/node/video/create-json-actions-file-for-recording';
 import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-counter-strike';
 import { deleteJsonActionsFile } from 'csdm/node/counter-strike/json-actions-file/delete-json-actions-file';
@@ -34,6 +24,8 @@ import { moveSequencesRawFiles } from 'csdm/node/video/sequences/move-sequences-
 import type { Sequence } from 'csdm/common/types/sequence';
 import { VideoContainer } from 'csdm/common/types/video-container';
 import { fetchMatchPlayersSlots } from '../database/match/fetch-match-players-slots';
+import { assertVideoGenerationIsPossible } from './assert-video-generation-is-possible';
+import { deleteSequencesRawFiles } from './sequences/delete-sequences-raw-files';
 
 type FfmpegSettings = {
   audioBitrate: number;
@@ -45,7 +37,8 @@ type FfmpegSettings = {
   outputParameters: string;
 };
 
-type Options = {
+type Parameters = {
+  videoId: string;
   checksum: string;
   game: Game;
   tickrate: number;
@@ -66,11 +59,12 @@ type Options = {
   sequences: Sequence[];
   signal: AbortSignal;
   onGameStart: () => void;
-  onSequenceStart: (sequenceNumber: number, sequenceCount: number) => void;
+  onMoveFilesStart: () => void;
+  onSequenceStart: (sequenceNumber: number) => void;
   onConcatenateSequencesStart: () => void;
 };
 
-async function buildVideos({ signal, ...options }: Options) {
+async function buildVideos({ signal, ...options }: Parameters) {
   throwIfAborted(signal);
 
   const {
@@ -89,7 +83,7 @@ async function buildVideos({ signal, ...options }: Options) {
   const shouldConcatenate = concatenateSequences && sequences.length > 1;
 
   for (const sequence of sequences) {
-    onSequenceStart(sequence.number, sequences.length);
+    onSequenceStart(sequence.number);
 
     if (encoderSoftware === EncoderSoftware.FFmpeg) {
       await generateVideoWithFFmpeg(
@@ -144,29 +138,38 @@ async function buildVideos({ signal, ...options }: Options) {
       signal,
     );
     if (deleteRawFilesAfterEncoding) {
-      await deleteSequencesRawFiles(rawFilesFolderPath, sequences);
+      for (const sequence of sequences) {
+        await deleteSequenceRawFiles(rawFilesFolderPath, sequence);
+      }
     }
   }
 }
 
-export async function generateVideos(options: Options) {
-  const { signal } = options;
+export async function generateVideos(parameters: Parameters) {
+  logger.log(`Generating video with id ${parameters.videoId}`);
+
+  const { signal } = parameters;
   throwIfAborted(signal);
 
   const cleanupFiles = async (deleteOutputFile = true, deleteRawFiles = true) => {
+    logger.log(`Cleaning up files for video with id ${parameters.videoId}`);
     const promises: Promise<void>[] = [deleteVdmFile(demoPath), deleteJsonActionsFile(demoPath)];
     if (deleteRawFiles) {
-      promises.push(deleteSequencesRawFiles(rawFilesFolderPath, options.sequences));
+      promises.push(deleteSequencesRawFiles(rawFilesFolderPath, parameters.sequences));
     }
+
     if (deleteOutputFile) {
       const videoContainer =
-        options.encoderSoftware === EncoderSoftware.FFmpeg ? options.ffmpegSettings.videoContainer : VideoContainer.AVI;
-      promises.push(deleteSequencesOutputFile(outputFolderPath, options.sequences, videoContainer));
+        parameters.encoderSoftware === EncoderSoftware.FFmpeg
+          ? parameters.ffmpegSettings.videoContainer
+          : VideoContainer.AVI;
+      promises.push(deleteSequencesOutputFile(parameters.outputFolderPath, parameters.sequences, videoContainer));
     }
     await Promise.all(promises);
   };
 
   async function onAbort() {
+    logger.log(`Aborting video generation with id ${parameters.videoId}`);
     if (isWindows) {
       await Promise.all([killHlaeProcess(), killVirtualDubProcess()]);
     }
@@ -180,48 +183,26 @@ export async function generateVideos(options: Options) {
   signal.addEventListener('abort', onAbort, { once: true });
 
   const {
-    encoderSoftware,
     framerate,
     demoPath,
+    rawFilesFolderPath,
     generateOnlyRawFiles,
     showOnlyDeathNotices,
     width,
     height,
-    rawFilesFolderPath,
-    outputFolderPath,
     closeGameAfterRecording,
     tickrate,
     deathNoticesDuration,
     game,
-  } = options;
+  } = parameters;
 
-  if (options.sequences.length === 0) {
-    throw new NoSequencesFound();
-  }
-
-  const sequences = sortSequencesByStartTick(options.sequences);
-  assertSequencesAreNotOverlapping(sequences, tickrate);
-
-  if (isWindows) {
-    if (!(await isHlaeInstalled())) {
-      throw new HlaeNotInstalled();
-    }
-
-    if (!generateOnlyRawFiles && encoderSoftware === EncoderSoftware.VirtualDub && !(await isVirtualDubInstalled())) {
-      throw new VirtualDubNotInstalled();
-    }
-  }
-
-  if (!generateOnlyRawFiles && encoderSoftware === EncoderSoftware.FFmpeg && !(await isFfmpegInstalled())) {
-    throw new FfmpegNotInstalled();
-  }
-
-  await assertSteamIsRunning();
+  await assertVideoGenerationIsPossible(parameters);
 
   throwIfAborted(signal);
 
   await cleanupFiles();
 
+  const sequences = sortSequencesByStartTick(parameters.sequences);
   if (game === Game.CSGO) {
     await createVdmFileForRecording({
       rawFilesFolderPath,
@@ -234,16 +215,14 @@ export async function generateVideos(options: Options) {
       deathNoticesDuration,
     });
   } else {
-    const playerSlots = await fetchMatchPlayersSlots(options.checksum);
+    const playerSlots = await fetchMatchPlayersSlots(parameters.checksum);
     await createJsonActionsFileForRecording({
-      rawFilesFolderPath,
       framerate,
       demoPath,
       sequences,
       closeGameAfterRecording,
       showOnlyDeathNotices,
       tickrate,
-      deathNoticesDuration,
       playerSlots,
     });
   }
@@ -270,18 +249,24 @@ export async function generateVideos(options: Options) {
         width,
         height,
         signal,
-        onGameStart: options.onGameStart,
+        onGameStart: parameters.onGameStart,
       });
     }
 
+    throwIfAborted(signal);
+
+    parameters.onMoveFilesStart();
     await moveSequencesRawFiles(sequences, rawFilesFolderPath, game);
 
     if (generateOnlyRawFiles) {
+      logger.log(`Generating raw files with id ${parameters.videoId} ended`);
       return;
     }
 
-    await buildVideos(options);
-    await cleanupFiles(false, options.deleteRawFilesAfterEncoding);
+    await buildVideos(parameters);
+    await cleanupFiles(false, parameters.deleteRawFilesAfterEncoding);
+
+    logger.log(`Generating video with id ${parameters.videoId} ended`);
   } catch (error) {
     if (signal.aborted) {
       throw abortError;
