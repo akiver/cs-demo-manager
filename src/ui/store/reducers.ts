@@ -16,6 +16,7 @@ import { tagsReducer } from 'csdm/ui/tags/tags-reducer';
 import { searchReducer } from '../search/search-reducer';
 import { teamsReducer } from '../teams/teams-reducer';
 import { teamReducer } from '../team/team-reducer';
+import { videosReducer } from '../videos/videos-reducer';
 
 export const reducers = combineReducers({
   bootstrap: bootstrapReducer,
@@ -35,6 +36,7 @@ export const reducers = combineReducers({
   settings: settingsReducer,
   tags: tagsReducer,
   search: searchReducer,
+  videos: videosReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;

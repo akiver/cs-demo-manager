@@ -3,13 +3,11 @@ import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
 import { JSONActionsFileGenerator } from 'csdm/node/counter-strike/json-actions-file/json-actions-file-generator';
 
 type Options = {
-  rawFilesFolderPath: string;
   framerate: number;
   demoPath: string;
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
   showOnlyDeathNotices: boolean;
-  deathNoticesDuration: number;
   tickrate: number;
   playerSlots: Record<string, number>;
 };
@@ -46,7 +44,7 @@ export async function createJsonActionsFileForRecording({
   for (let i = 0; i < sequences.length; i++) {
     const sequence = sequences[i];
     const roundedTickrate = Math.round(tickrate);
-    const skipAheadTick = i === 0 ? 1 : sequences[i - 1].endTick + roundedTickrate;
+    const skipAheadTick = i === 0 ? 65 : sequences[i - 1].endTick + roundedTickrate;
     const setupSequenceTick = sequence.startTick - roundedTickrate > 0 ? sequence.startTick - roundedTickrate : 1;
 
     json

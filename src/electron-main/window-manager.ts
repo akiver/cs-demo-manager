@@ -184,8 +184,9 @@ class WindowManager {
       'http://www.virtualdub.org/',
       'https://www.faceit.com/',
       'https://support.apple.com/',
-      'https://www.advancedfx.org',
-      'https://docs.faceit.com',
+      'https://www.advancedfx.org/',
+      'https://docs.faceit.com/',
+      'https://discord.com/',
     ];
 
     for (const website of allowedWebsites) {

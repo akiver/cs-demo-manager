@@ -1,23 +1,15 @@
 import React from 'react';
 import { Plural } from '@lingui/macro';
-import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
-import { roundNumber } from 'csdm/common/math/round-number';
-import { useCurrentMatchSequences } from './use-current-match-sequences';
+import { getSequencesDuration } from './get-sequences-duration';
+import type { Sequence } from 'csdm/common/types/sequence';
 
-function useComputeSequencesDuration() {
-  const sequences = useCurrentMatchSequences();
-  const match = useCurrentMatch();
+type Props = {
+  sequences: Sequence[];
+  tickrate: number;
+};
 
-  let duration = 0;
-  for (const sequence of sequences) {
-    duration += (sequence.endTick - sequence.startTick) / match.tickrate;
-  }
-
-  return roundNumber(duration);
-}
-
-export function SequencesDuration() {
-  const duration = useComputeSequencesDuration();
+export function SequencesDuration({ sequences, tickrate }: Props) {
+  const duration = getSequencesDuration(sequences, tickrate);
 
   return (
     <span>

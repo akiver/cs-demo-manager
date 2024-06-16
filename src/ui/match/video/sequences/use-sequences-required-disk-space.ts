@@ -1,15 +1,11 @@
-import { roundNumber } from 'csdm/common/math/round-number';
-import { useComputeRequiredGigabyte } from './use-compute-require-gigabyte';
+import { useCurrentMatch } from '../../use-current-match';
 import { useCurrentMatchSequences } from './use-current-match-sequences';
+import { useGetSequencesRequiredDiskSpace } from './use-get-sequences-required-disk-space';
 
 export function useSequencesRequiredDiskSpace() {
   const sequences = useCurrentMatchSequences();
-  const computeRequiredGigabyte = useComputeRequiredGigabyte();
+  const match = useCurrentMatch();
+  const getRequiredDiskSpace = useGetSequencesRequiredDiskSpace();
 
-  let diskSpace = 0;
-  for (const sequence of sequences) {
-    diskSpace += computeRequiredGigabyte(sequence.startTick, sequence.endTick);
-  }
-
-  return roundNumber(diskSpace, 2);
+  return getRequiredDiskSpace(sequences, match.tickrate);
 }

@@ -7,5 +7,6 @@ export type Sequence = {
   showXRay: boolean;
   deathNotices: DeathNoticesPlayerOptions[];
   playerFocusSteamId?: string;
+  playerFocusName?: string;
   cfg?: string;
 };

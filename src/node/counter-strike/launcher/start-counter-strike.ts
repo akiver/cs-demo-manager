@@ -120,12 +120,10 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   options.onGameStart();
 
   const hasBeenKilled = await killCounterStrikeProcesses();
-
-  // When we kill the process on Unix it may take a bit of time before the process is actually gone.
+  // When we kill the process on Unix it may take a bit of time before the process actually releases files lock.
   // We wait a bit before starting the process again to avoid trying to start CS when it's still running. It would lead
   // to Source Engine error.
-  // We also have to wait on Windows for CS2 demos because the gameinfo.gi file may still be locked by the game.
-  const shouldWait = hasBeenKilled && (!isWindows || game !== Game.CSGO);
+  const shouldWait = hasBeenKilled && !isWindows;
   if (shouldWait) {
     await sleep(2000);
   }

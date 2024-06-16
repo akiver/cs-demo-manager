@@ -3,6 +3,7 @@ import { Plural } from '@lingui/macro';
 import { useCurrentMatchSequences } from './sequences/use-current-match-sequences';
 import { SequencesDuration } from './sequences/sequences-duration';
 import { SequencesDiskSpace } from './sequences/sequences-disk-space';
+import { useCurrentMatch } from '../use-current-match';
 
 function Separator() {
   return <span>|</span>;
@@ -10,6 +11,7 @@ function Separator() {
 
 export function SequencesSummary() {
   const sequences = useCurrentMatchSequences();
+  const match = useCurrentMatch();
 
   return (
     <div className="flex gap-x-4">
@@ -17,7 +19,7 @@ export function SequencesSummary() {
         <Plural value={sequences.length} one="# sequence" other="# sequences" />
       </p>
       <Separator />
-      <SequencesDuration />
+      <SequencesDuration sequences={sequences} tickrate={match.tickrate} />
       <Separator />
       <SequencesDiskSpace />
     </div>

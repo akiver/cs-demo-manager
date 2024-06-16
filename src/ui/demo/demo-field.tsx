@@ -10,12 +10,11 @@ type Props = {
 export function DemoField({ label, value, isCopyable }: Props) {
   const { copyToClipboard } = useClipboard();
 
-  let onClick: (() => void) | undefined;
-  if (isCopyable) {
-    onClick = () => {
+  const onClick = () => {
+    if (isCopyable) {
       copyToClipboard(String(value));
-    };
-  }
+    }
+  };
 
   return (
     <div className="flex flex-col">

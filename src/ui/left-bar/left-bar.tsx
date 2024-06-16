@@ -9,6 +9,7 @@ import { MatchesLink } from './matches-link';
 import { DemosLink } from './demos-link';
 import { SearchLink } from './search-link';
 import { TeamsLink } from './teams-link';
+import { VideoQueueLink } from './video-queue-link';
 
 export function LeftBar() {
   return (
@@ -25,6 +26,7 @@ export function LeftBar() {
       <BansLink />
       <SearchLink />
       <AnalysesLink />
+      <VideoQueueLink />
       <SettingsButton />
     </div>
   );

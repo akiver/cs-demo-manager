@@ -30,6 +30,7 @@ export const RoutePath = {
   TeamHeatmap: 'heatmap',
   TeamMatches: 'matches',
   TeamMaps: 'maps',
+  Videos: '/videos',
 } as const;
 export type RoutePath = (typeof RoutePath)[keyof typeof RoutePath];
 

@@ -48,7 +48,7 @@ import {
   connectDatabaseHandler,
   type ConnectDatabaseError,
 } from './renderer-process/database/connect-database-handler';
-import { generateVideosHandler, type GenerateVideosPayload } from './renderer-process/video/generate-videos-handler';
+import { addVideoToQueueHandler } from './renderer-process/video/add-video-to-queue-handler';
 import type { UpdateMatchDemoLocationPayload } from './renderer-process/match/update-match-demo-location-handler';
 import { updateMatchDemoLocationHandler } from './renderer-process/match/update-match-demo-location-handler';
 import { installHlaeHandler } from './renderer-process/video/install-hlae-handler';
@@ -56,7 +56,7 @@ import { updateHlaeHandler } from './renderer-process/video/update-hlae-handler'
 import { installVirtualDubHandler } from './renderer-process/video/install-virtual-dub-handler';
 import { installFfmpegHandler } from './renderer-process/video/install-ffmpeg-handler';
 import { updateFfmpegHandler } from './renderer-process/video/update-ffmpeg-handler';
-import { cancelVideosGenerationHandler } from './renderer-process/video/cancel-videos-generation-handler';
+import { removeVideosFromQueueHandler } from './renderer-process/video/remove-videos-from-queue-handler';
 import { fetchMatchGrenadesThrowHandler } from './renderer-process/match/fetch-match-grenades-throw-handler';
 import { getDatabaseSizeHandler } from './renderer-process/database/get-database-size-handler';
 import type { OptimizeDatabasePayload } from './renderer-process/database/optimize-database-handler';
@@ -187,6 +187,7 @@ import {
   updatePlayersTagsHandler,
   type UpdatePlayersTagsPayload,
 } from './renderer-process/tags/update-players-tags-handler';
+import type { AddVideoPayload } from 'csdm/common/types/video';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -239,7 +240,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.FetchBanStats]: Handler<void, BanStats>;
   [RendererClientMessageName.DisconnectDatabase]: Handler;
   [RendererClientMessageName.ConnectDatabase]: Handler<DatabaseSettings | undefined, ConnectDatabaseError | undefined>;
-  [RendererClientMessageName.GenerateVideos]: Handler<GenerateVideosPayload>;
+  [RendererClientMessageName.AddVideoToQueue]: Handler<AddVideoPayload>;
   [RendererClientMessageName.UpdateMatchDemoLocation]: Handler<UpdateMatchDemoLocationPayload>;
   [RendererClientMessageName.InstallHlae]: Handler<void, string>;
   [RendererClientMessageName.UpdateHlae]: Handler<void, string>;
@@ -250,7 +251,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdateFfmpeg]: Handler<void, string>;
   [RendererClientMessageName.EnableFfmpegCustomLocation]: Handler<string, FfmpegVersionChangedPayload>;
   [RendererClientMessageName.DisableFfmpegCustomLocation]: Handler<boolean, FfmpegVersionChangedPayload>;
-  [RendererClientMessageName.CancelVideosGeneration]: Handler;
+  [RendererClientMessageName.RemoveVideosFromQueue]: Handler<string[]>;
   [RendererClientMessageName.FetchMatchFlashbangMatrixRows]: Handler<string, FlashbangMatrixRow[]>;
   [RendererClientMessageName.FetchMatchDuelsMatrixRows]: Handler<string, DuelMatrixRow[]>;
   [RendererClientMessageName.FetchMatchGrenadesThrow]: Handler<string, GrenadeThrow[]>;
@@ -342,7 +343,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.FetchBanStats]: fetchBanStatsHandler,
   [RendererClientMessageName.DisconnectDatabase]: disconnectDatabaseConnectionHandler,
   [RendererClientMessageName.ConnectDatabase]: connectDatabaseHandler,
-  [RendererClientMessageName.GenerateVideos]: generateVideosHandler,
+  [RendererClientMessageName.AddVideoToQueue]: addVideoToQueueHandler,
   [RendererClientMessageName.UpdateMatchDemoLocation]: updateMatchDemoLocationHandler,
   [RendererClientMessageName.InstallHlae]: installHlaeHandler,
   [RendererClientMessageName.UpdateHlae]: updateHlaeHandler,
@@ -353,7 +354,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.UpdateFfmpeg]: updateFfmpegHandler,
   [RendererClientMessageName.EnableFfmpegCustomLocation]: enableFfmpegCustomLocationHandler,
   [RendererClientMessageName.DisableFfmpegCustomLocation]: disableFfmpegCustomLocationHandler,
-  [RendererClientMessageName.CancelVideosGeneration]: cancelVideosGenerationHandler,
+  [RendererClientMessageName.RemoveVideosFromQueue]: removeVideosFromQueueHandler,
   [RendererClientMessageName.FetchMatchFlashbangMatrixRows]: fetchMatchFlashbangMatrixRowsHandler,
   [RendererClientMessageName.FetchMatchDuelsMatrixRows]: fetchMatchDuelsMatrixRowsHandler,
   [RendererClientMessageName.FetchMatchGrenadesThrow]: fetchMatchGrenadesThrowHandler,

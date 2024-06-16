@@ -47,6 +47,7 @@ import { TeamOverview } from 'csdm/ui/team/overview/team-overview';
 import { TeamMatchesTable } from './team/matches/team-matches-table';
 import { TeamMaps } from './team/maps/team-maps';
 import { TeamHeatmap } from './team/heatmap/team-heatmap';
+import { Videos } from './videos/videos';
 
 export const router = createHashRouter(
   createRoutesFromElements(
@@ -107,6 +108,7 @@ export const router = createHashRouter(
         <Route path={RoutePath.DownloadsFaceit} element={<FaceitLastMatches />} />
         <Route path={RoutePath.DownloadsPending} element={<PendingDownloads />} />
       </Route>
+      <Route path={RoutePath.Videos} element={<Videos />} />
       <Route index={true} element={<InitialRouteRedirector />} />
     </Route>,
   ),
