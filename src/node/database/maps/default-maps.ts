@@ -199,6 +199,14 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_assembly',
+      game: Game.CS2,
+      position_x: 1628,
+      position_y: 4512,
+      scale: 2.84,
+      threshold_z: 0,
+    },
+    {
       name: 'de_aztec',
       game: Game.CS2,
       position_x: -3200,
@@ -255,6 +263,22 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_memento',
+      game: Game.CS2,
+      position_x: -2111,
+      position_y: 2534,
+      scale: 3.9720395,
+      threshold_z: 0,
+    },
+    {
+      name: 'de_mills',
+      game: Game.CS2,
+      position_x: -4810,
+      position_y: -320,
+      scale: 5.148437,
+      threshold_z: 0,
+    },
+    {
       name: 'de_mirage',
       game: Game.CS2,
       position_x: -3230,
@@ -277,6 +301,14 @@ export function getDefaultMaps(game?: Game) {
       position_y: 1781,
       scale: 5.2,
       threshold_z: 0,
+    },
+    {
+      name: 'de_thera',
+      game: Game.CS2,
+      position_x: -85,
+      position_y: 2261,
+      scale: 4.846961,
+      threshold_z: -4,
     },
     {
       name: 'de_train',

@@ -11,7 +11,7 @@
  * The only way to have accurate maps name is to update this file and publish a new CS:DM version when necessary.
  */
 export function getMapName(gameType: number) {
-  const CS_APOLLO = 1 << 0;
+  const DE_THERA = 1 << 0;
   const DE_DUST2 = 1 << 1;
   const DE_TRAIN = 1 << 2;
   const DE_ANCIENT = 1 << 3;
@@ -19,11 +19,12 @@ export function getMapName(gameType: number) {
   const DE_NUKE = 1 << 5;
   const DE_VERTIGO = 1 << 6;
   const DE_MIRAGE = 1 << 7;
-  const CS_OFFICE = 1 << 8;
-  const CS_ITALY = 1 << 9;
+  const DE_ASSEMBLY = 1 << 8;
+  const DE_MEMENTO = 1 << 9;
   const CS_ASSAULT = 1 << 10;
   const CS_MILITIA = 1 << 11;
   const DE_CACHE = 1 << 12;
+  const DE_MILLS = 1 << 13;
   const DE_BREACH = 1 << 14;
   const DE_ANUBIS = 1 << 15;
   const DE_TUSCAN = 1 << 16;
@@ -34,20 +35,16 @@ export function getMapName(gameType: number) {
 
   const value = (gameType >> 8) & 0xffffff;
   switch (value) {
-    case CS_APOLLO:
-      return 'cs_apollo';
     case CS_ASSAULT:
       return 'cs_assault';
-    case CS_ITALY:
-      return 'cs_italy';
     case CS_MILITIA:
       return 'cs_militia';
-    case CS_OFFICE:
-      return 'cs_office';
     case DE_ANUBIS:
       return 'de_anubis';
     case DE_ANCIENT:
       return 'de_ancient';
+    case DE_ASSEMBLY:
+      return 'de_assembly';
     case DE_BASALT:
       return 'de_basalt';
     case DE_BREACH:
@@ -62,12 +59,18 @@ export function getMapName(gameType: number) {
       return 'de_dust2';
     case DE_INFERNO:
       return 'de_inferno';
+    case DE_MEMENTO:
+      return 'de_memento';
+    case DE_MILLS:
+      return 'de_mills';
     case DE_MIRAGE:
       return 'de_mirage';
     case DE_NUKE:
       return 'de_nuke';
     case DE_OVERPASS:
       return 'de_overpass';
+    case DE_THERA:
+      return 'de_thera';
     case DE_TRAIN:
       return 'de_train';
     case DE_TUSCAN:
