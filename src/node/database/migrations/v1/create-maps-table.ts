@@ -1,5 +1,5 @@
+import { insertDefaultMaps } from 'csdm/node/database/maps/insert-default-maps';
 import type { Migration } from '../migration';
-import { getDefaultMaps } from 'csdm/node/database/maps/default-maps';
 
 const createMapsTable: Migration = {
   schemaVersion: 1,
@@ -19,11 +19,7 @@ const createMapsTable: Migration = {
       .addUniqueConstraint('maps_name_game_unique', ['name', 'game'])
       .execute();
 
-    await transaction
-      .insertInto('maps')
-      .values(getDefaultMaps())
-      .onConflict((oc) => oc.constraint('maps_name_game_unique').doNothing())
-      .execute();
+    await insertDefaultMaps(transaction);
   },
 };
 
