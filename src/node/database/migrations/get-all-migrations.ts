@@ -55,7 +55,6 @@ export async function getAllMigrations(): Promise<Migration[]> {
     import('./v2/create-round-tags-table'),
     import('./v3'),
     import('./v4'),
-    import('./v5'),
   ]);
 
   const migrations = modules.map((module) => module.default);

@@ -1,3 +1,4 @@
+import { insertDefaultMaps } from '../maps/insert-default-maps';
 import type { Migration } from './migration';
 
 const v4: Migration = {
@@ -10,6 +11,8 @@ const v4: Migration = {
       .addColumn('tag_id', 'int8', (col) => col.notNull())
       .addUniqueConstraint('steam_account_tags_steam_id_tag_id_unique', ['steam_id', 'tag_id'])
       .execute();
+
+    await insertDefaultMaps(transaction);
   },
 };
 
