@@ -129,7 +129,7 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
     }
   }
 
-  const hlaeParameters = ['-noGui', '-autoStart', '-afxDisableSteamStorage'];
+  const hlaeParameters = ['-noGui', '-autoStart', '-noConfig', '-afxDisableSteamStorage'];
   const { configFolderEnabled, configFolderPath, parameters: userHlaeParameters } = settings.video.hlae;
   if (configFolderEnabled && configFolderPath !== '') {
     hlaeParameters.push('-mmcfgEnabled true', `-mmcfg "${configFolderPath}"`);
