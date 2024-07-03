@@ -3,19 +3,21 @@ import { isWindows } from 'csdm/node/os/is-windows';
 import { areProcessesRunning } from 'csdm/node/os/are-processes-running';
 
 export async function isSteamRunning(): Promise<boolean> {
-  let processName: string;
+  let processNames: string[] = [];
   switch (true) {
     case isWindows:
-      processName = 'steam.exe';
+      // Steam China is available only on Windows ATTOW
+      // https://store.steamchina.com/about/
+      processNames = ['steam.exe', 'steamchina.exe'];
       break;
     case isMac:
-      processName = 'steam_osx';
+      processNames = ['steam_osx'];
       break;
     default:
-      processName = 'steam';
+      processNames = ['steam'];
   }
 
-  const processIsRunning = await areProcessesRunning([processName]);
+  const processIsRunning = await areProcessesRunning(processNames);
 
   return processIsRunning;
 }
