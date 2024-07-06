@@ -1,30 +1,41 @@
-import { exec } from 'node:child_process';
+import { exec, type ExecException } from 'node:child_process';
 import { PsqlTimeout } from './errors/psql-timeout';
 
 function removeDatabaseInformationFromMessage(message: string) {
-  const regex = /postgresql:\/\/(.*?):(.*?)@(.*):(\d+)\/(.*)/g;
+  const regex = /postgresql:\/\/(.*?):(.*?)@(.*):(\d+)\/?(.*)/g;
 
   return message.replace(regex, 'postgresql://*****:*****@*****:****/$5');
 }
 
 type Options = {
-  timeout: number;
+  timeoutMs: number;
 };
 
 export async function executePsql(command: string, options?: Options | undefined) {
   return new Promise<void>((resolve, reject) => {
-    exec(`psql ${command}`, { timeout: options?.timeout ?? 0 }, (error) => {
-      if (error !== null) {
-        error.message = removeDatabaseInformationFromMessage(error.message);
-        const isTimeout = error.code === null && error.signal === 'SIGTERM';
-        if (isTimeout) {
-          return reject(new PsqlTimeout());
+    exec(
+      `psql ${command}`,
+      {
+        // @ts-ignore No need to specify all custom NodeJS.ProcessEnv variables.
+        env: { ...process.env, PGCONNECT_TIMEOUT: '5' },
+        timeout: options?.timeoutMs ?? 0,
+      },
+      (error: ExecException | null) => {
+        if (error !== null) {
+          const isTimeout =
+            (error.code === null && error.signal === 'SIGTERM') ||
+            (error instanceof Error && error.message.includes('timeout'));
+
+          error.message = removeDatabaseInformationFromMessage(error.message);
+          if (isTimeout) {
+            return reject(new PsqlTimeout());
+          }
+
+          return reject(error);
         }
 
-        return reject(error);
-      }
-
-      resolve();
-    });
+        resolve();
+      },
+    );
   });
 }
