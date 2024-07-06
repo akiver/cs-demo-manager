@@ -264,7 +264,7 @@ try {
   process.exit(1);
 }
 
-process.on('SIGINT', function (signal) {
+process.on('SIGINT', () => {
   killElectronProcess();
-  process.exit(signal);
+  process.exit(0);
 });
