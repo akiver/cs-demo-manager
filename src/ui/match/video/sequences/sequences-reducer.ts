@@ -9,7 +9,7 @@ import {
   generatePlayerSequences,
   updateSequence,
 } from './sequences-actions';
-import { buildPlayerKillsSequences } from './build-player-kills-sequences';
+import { buildPlayerEventSequences } from './build-player-event-sequences';
 import { buildPlayerRoundsSequences } from './build-player-rounds-sequences';
 import { PlayerSequenceEvent } from './player-sequence-event';
 import { assertNever } from 'csdm/common/assert-never';
@@ -53,7 +53,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     })
     .addCase(generatePlayerKillsSequences, (state, action) => {
       const { match, steamId } = action.payload;
-      const sequences = buildPlayerKillsSequences(match, steamId);
+      const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, steamId);
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerSequences, (state, action) => {
@@ -63,8 +63,9 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
           state[match.demoFilePath] = buildPlayerRoundsSequences(match, steamId);
           break;
         }
-        case PlayerSequenceEvent.Kills: {
-          state[match.demoFilePath] = buildPlayerKillsSequences(match, steamId, weapons);
+        case PlayerSequenceEvent.Kills:
+        case PlayerSequenceEvent.Deaths: {
+          state[match.demoFilePath] = buildPlayerEventSequences(event, match, steamId, weapons);
           break;
         }
         default:

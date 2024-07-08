@@ -16,16 +16,20 @@ import type { Match } from 'csdm/common/types/match';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 
-function getVisibleWeapons(steamId: string | undefined, match: Match) {
-  const weapons = uniqueArray(
+function getVisibleWeapons(event: PlayerSequenceEvent, steamId: string | undefined, match: Match) {
+  if (!steamId) {
+    return [];
+  }
+
+  const key = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
+
+  return uniqueArray(
     match.kills
       .filter((kill) => {
-        return kill.killerSteamId === steamId;
+        return kill[key] === steamId;
       })
       .map((kill) => kill.weaponName),
   );
-
-  return uniqueArray(weapons);
 }
 
 function SelectPlayerDialog() {
@@ -38,10 +42,23 @@ function SelectPlayerDialog() {
       label: player.name,
     };
   });
-
+  const eventOptions: SelectOption<PlayerSequenceEvent>[] = [
+    {
+      value: PlayerSequenceEvent.Kills,
+      label: <Trans context="Select option">Kill</Trans>,
+    },
+    {
+      value: PlayerSequenceEvent.Deaths,
+      label: <Trans context="Select option">Death</Trans>,
+    },
+    {
+      value: PlayerSequenceEvent.Rounds,
+      label: <Trans context="Select option">Round</Trans>,
+    },
+  ];
   const [selectedSteamId, setSelectedSteamId] = useState(options.length > 0 ? options[0].value : undefined);
   const [selectedEvent, setSelectedEvent] = useState<PlayerSequenceEvent>(PlayerSequenceEvent.Kills);
-  const visibleWeapons = getVisibleWeapons(selectedSteamId, match);
+  const visibleWeapons = getVisibleWeapons(selectedEvent, selectedSteamId, match);
   const [selectedWeapons, setSelectedWeapons] = useState<WeaponName[]>(visibleWeapons);
 
   const onConfirm = () => {
@@ -59,7 +76,7 @@ function SelectPlayerDialog() {
   };
 
   const renderSelectedEventOptions = () => {
-    if (selectedEvent !== PlayerSequenceEvent.Kills) {
+    if (selectedEvent === PlayerSequenceEvent.Rounds) {
       return null;
     }
 
@@ -76,7 +93,7 @@ function SelectPlayerDialog() {
           />
         ) : (
           <p>
-            <Trans>This player has no kills.</Trans>
+            <Trans>No action found for this player</Trans>
           </p>
         )}
 
@@ -84,8 +101,8 @@ function SelectPlayerDialog() {
           <ExclamationTriangleIcon className="size-20 text-orange-700" />
           <p className="text-caption">
             <Trans>
-              If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence
-              will be generated.
+              If 2 actions occurred less than 10 seconds apart or 2 actions are less than 2 seconds apart, a single
+              sequence will be generated.
             </Trans>
           </p>
         </div>
@@ -113,7 +130,7 @@ function SelectPlayerDialog() {
                 value={selectedSteamId}
                 onChange={(steamId) => {
                   setSelectedSteamId(steamId);
-                  const selectedWeapons = getVisibleWeapons(steamId, match);
+                  const selectedWeapons = getVisibleWeapons(selectedEvent, steamId, match);
                   setSelectedWeapons(selectedWeapons);
                 }}
               />
@@ -126,19 +143,12 @@ function SelectPlayerDialog() {
             <div>
               <Select
                 id="event"
-                options={[
-                  {
-                    value: PlayerSequenceEvent.Kills,
-                    label: <Trans context="Select option">Kill</Trans>,
-                  },
-                  {
-                    value: PlayerSequenceEvent.Rounds,
-                    label: <Trans context="Select option">Round</Trans>,
-                  },
-                ]}
+                options={eventOptions}
                 value={selectedEvent}
                 onChange={(event) => {
                   setSelectedEvent(event);
+                  const selectedWeapons = getVisibleWeapons(event, selectedSteamId, match);
+                  setSelectedWeapons(selectedWeapons);
                 }}
               />
             </div>

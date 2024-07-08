@@ -4575,12 +4575,27 @@ msgid "Video container"
 msgstr "Video container"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
-msgid "This player has no kills."
-msgstr "This player has no kills."
+msgctxt "Select option"
+msgid "Kill"
+msgstr "Kill"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
-msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
-msgstr "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
+msgctxt "Select option"
+msgid "Death"
+msgstr "Death"
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Select option"
+msgid "Round"
+msgstr "Round"
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgid "No action found for this player"
+msgstr "No action found for this player"
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgid "If 2 actions occurred less than 10 seconds apart or 2 actions are less than 2 seconds apart, a single sequence will be generated."
+msgstr "If 2 actions occurred less than 10 seconds apart or 2 actions are less than 2 seconds apart, a single sequence will be generated."
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Dialog title"
@@ -4596,16 +4611,6 @@ msgstr "Player"
 msgctxt "Select label"
 msgid "Event"
 msgstr "Event"
-
-#: src/ui/match/video/generate-player-sequences-button.tsx
-msgctxt "Select option"
-msgid "Kill"
-msgstr "Kill"
-
-#: src/ui/match/video/generate-player-sequences-button.tsx
-msgctxt "Select option"
-msgid "Round"
-msgstr "Round"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Button"

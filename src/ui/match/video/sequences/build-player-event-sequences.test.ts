@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest';
 import type { Kill } from 'csdm/common/types/kill';
 import type { Match } from 'csdm/common/types/match';
 import type { Player } from 'csdm/common/types/player';
-import { buildPlayerKillsSequences } from './build-player-kills-sequences';
+import { buildPlayerEventSequences } from './build-player-event-sequences';
+import { PlayerSequenceEvent } from './player-sequence-event';
 
 const baseMatch: Partial<Match> = {
   demoFilePath: '/demo/path',
@@ -31,7 +32,7 @@ describe('generate player kills sequences', () => {
       kills: [kill],
     } as Match;
 
-    const sequences = buildPlayerKillsSequences(match, killerSteamId);
+    const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, killerSteamId);
 
     expect(sequences.length).toBe(1);
     const sequence = sequences[0];
@@ -68,7 +69,7 @@ describe('generate player kills sequences', () => {
       kills: [firstKillWithDedicatedSequence, firstKill, secondKill, thirdKill, lastKillWithDedicatedSequence],
     } as Match;
 
-    const sequences = buildPlayerKillsSequences(match, killerSteamId);
+    const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, killerSteamId);
 
     expect(sequences.length).toBe(3);
     const firstSequence = sequences[0];
@@ -100,7 +101,7 @@ describe('generate player kills sequences', () => {
       kills: [firstKill, secondKill],
     } as Match;
 
-    const sequences = buildPlayerKillsSequences(match, killerSteamId);
+    const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, killerSteamId);
 
     expect(sequences.length).toBe(1);
     const killSequence = sequences[0];
@@ -125,7 +126,7 @@ describe('generate player kills sequences', () => {
       kills: [kill1, kill2],
     } as Match;
 
-    const sequences = buildPlayerKillsSequences(match, killerSteamId);
+    const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, killerSteamId);
 
     expect(sequences.length).toBe(1);
     const sequence = sequences[0];
@@ -145,7 +146,7 @@ describe('generate player kills sequences', () => {
       kills: [firstKill],
     } as Match;
 
-    const sequences = buildPlayerKillsSequences(match, killerSteamId);
+    const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, killerSteamId);
 
     expect(sequences[0].startTick).toBe(1);
   });
@@ -162,7 +163,7 @@ describe('generate player kills sequences', () => {
       kills: [firstKill],
     } as Match;
 
-    const sequences = buildPlayerKillsSequences(match, killerSteamId);
+    const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, killerSteamId);
 
     expect(sequences[0].endTick).toBe(100);
   });
