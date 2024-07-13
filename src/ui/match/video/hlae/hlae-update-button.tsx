@@ -7,6 +7,7 @@ import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { UpdateButton } from 'csdm/ui/components/buttons/update-button';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { updateHlaeSuccess } from './hlae-actions';
+import { ButtonVariant } from 'csdm/ui/components/buttons/button';
 
 export function HlaeUpdateButton() {
   const client = useWebSocketClient();
@@ -42,5 +43,11 @@ export function HlaeUpdateButton() {
     }
   };
 
-  return <UpdateButton onClick={onClick} isDisabled={!isHlaeUpdateAvailable || isUpdating} />;
+  return (
+    <UpdateButton
+      onClick={onClick}
+      isDisabled={!isHlaeUpdateAvailable || isUpdating}
+      variant={isHlaeUpdateAvailable ? ButtonVariant.Primary : ButtonVariant.Default}
+    />
+  );
 }

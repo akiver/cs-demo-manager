@@ -8,6 +8,7 @@ import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { UpdateButton } from 'csdm/ui/components/buttons/update-button';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { updateFfmpegSuccess } from './ffmpeg-actions';
+import { ButtonVariant } from 'csdm/ui/components/buttons/button';
 
 export function FfmpegUpdateButton() {
   const client = useWebSocketClient();
@@ -45,5 +46,11 @@ export function FfmpegUpdateButton() {
     }
   };
 
-  return <UpdateButton onClick={onClick} isDisabled={isDisabled} />;
+  return (
+    <UpdateButton
+      onClick={onClick}
+      isDisabled={isDisabled}
+      variant={isFfmpegUpdateAvailable ? ButtonVariant.Primary : ButtonVariant.Default}
+    />
+  );
 }
