@@ -57,6 +57,7 @@ function buildStatsQuery({
       avg<number>('players.headshot_percentage').as('headshotPercentage'),
     ])
     .where('players.steam_id', '=', steamId)
+    .orderBy('matchCount', 'desc')
     .groupBy('mapName');
 
   if (startDate !== undefined && endDate !== undefined) {
