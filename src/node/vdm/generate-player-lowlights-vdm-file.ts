@@ -4,8 +4,8 @@ import { VDMGenerator } from './generator';
 
 function getSteamIdToFocusFromAction(isPlayerPerspective: boolean, action: Action) {
   return isPlayerPerspective
-    ? action.opponentSteamId ?? action.playerSteamId
-    : action.playerSteamId ?? action.opponentSteamId;
+    ? (action.opponentSteamId ?? action.playerSteamId)
+    : (action.playerSteamId ?? action.opponentSteamId);
 }
 
 type Parameters = {

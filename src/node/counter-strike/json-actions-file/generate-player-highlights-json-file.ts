@@ -3,7 +3,7 @@ import type { Action } from 'csdm/node/database/watch/get-match-playback';
 import { JSONActionsFileGenerator } from './json-actions-file-generator';
 
 function getSlotToFocusFromAction(isPlayerPerspective: boolean, action: Action) {
-  return isPlayerPerspective ? action.playerSlot ?? action.opponentSlot : action.opponentSlot ?? action.playerSlot;
+  return isPlayerPerspective ? (action.playerSlot ?? action.opponentSlot) : (action.opponentSlot ?? action.playerSlot);
 }
 
 type Parameters = {

@@ -6,7 +6,7 @@ import { Button, ButtonVariant } from './components/buttons/button';
 
 export function ErrorBoundary() {
   const error = useRouteError();
-  const errorData = error instanceof Error ? error.stack ?? error.message : JSON.stringify(error);
+  const errorData = error instanceof Error ? (error.stack ?? error.message) : JSON.stringify(error);
 
   const buildIssueUrl = () => {
     const info = window.csdm.getAppInformation();
