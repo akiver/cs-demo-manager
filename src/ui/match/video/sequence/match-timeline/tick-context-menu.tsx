@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans } from '@lingui/macro';
 import { ContextMenu } from 'csdm/ui/components/context-menu/context-menu';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
-import { useSequenceForm } from '../sequences/use-sequence-form';
+import { useSequenceForm } from '../use-sequence-form';
 
 type Props = {
   tick: number;

@@ -6,7 +6,7 @@ import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import type { SequenceFormContextState } from '../sequences/sequence-form-provider';
+import type { SequenceFormContextState } from '../sequence-form-provider';
 
 export type TickPosition = 'start' | 'end';
 export type TickOperation = 'minus' | 'plus';

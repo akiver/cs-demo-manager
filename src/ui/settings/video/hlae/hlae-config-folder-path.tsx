@@ -58,7 +58,6 @@ export function HlaeConfigFolderPath() {
   return (
     <div className="flex flex-col gap-y-4">
       <Checkbox
-        id="hlae-config-folder"
         label={<Trans>Enable config folder</Trans>}
         isChecked={configFolderEnabled}
         onChange={onCheckboxChange}

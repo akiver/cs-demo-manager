@@ -6,7 +6,7 @@ import { areSequencesOverlapping } from 'csdm/common/video/are-sequences-overlap
 import type { Player } from 'csdm/common/types/player';
 import { sortSequencesByStartTick } from 'csdm/node/video/sequences/sort-sequences-by-start-tick';
 import { useCurrentMatch } from '../../../use-current-match';
-import { EditSequenceDialog } from '../edit-sequence-dialog';
+import { EditSequenceDialog } from '../../sequence/edit-sequence-dialog';
 import { useCurrentMatchSequences } from '../use-current-match-sequences';
 import { SequenceItem } from './sequence-item';
 

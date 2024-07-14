@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
@@ -18,8 +19,7 @@ export function ConcatenateSequencesCheckbox() {
 
   return (
     <Checkbox
-      id="concatenate-sequences"
-      label="Concatenate sequences into 1 video"
+      label={<Trans context="Checkbox label">Concatenate sequences into 1 video</Trans>}
       onChange={onChange}
       isChecked={settings.concatenateSequences}
     />

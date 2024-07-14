@@ -1,14 +1,14 @@
 import ReactDOM from 'react-dom';
 import React, { useRef, useEffect } from 'react';
 import { Game } from 'csdm/common/types/counter-strike';
-import { MatchTimeline } from '../match-timeline/match-timeline';
-import { SequenceHaleDeathNotices } from './sequence-death-notices';
+import { MatchTimeline } from './match-timeline/match-timeline';
+import { SequenceDeathNotices } from './sequence-death-notices';
 import { StartTickInput } from './start-tick-input';
 import { EndTickInput } from './end-tick-input';
-import { FocusCameraPlayerSelect } from './focus-camera-player-select';
+import { SequenceFocusCameraPlayerSelect } from './sequence-focus-camera-player-select';
 import { SequenceDuration } from './sequence-duration';
 import { SaveSequenceButton } from './save-sequence-button';
-import { CfgInput } from './cfg-input';
+import { SequenceCfgInput } from './sequence-cfg-input';
 import { ContextMenuProvider } from 'csdm/ui/components/context-menu/context-menu-provider';
 import { FullScreenDialog } from 'csdm/ui/dialogs/full-screen-dialog';
 import type { SequenceForm } from './sequence-form';
@@ -67,7 +67,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <EndTickInput />
                   </div>
                   <SequenceXRayCheckbox />
-                  <FocusCameraPlayerSelect />
+                  <SequenceFocusCameraPlayerSelect />
                   <div>
                     <SequenceDuration />
                     <SequenceDiskSpace />
@@ -77,8 +77,8 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <CancelButton onClick={closeDialog} />
                   </div>
                 </div>
-                {window.csdm.isWindows && match.game === Game.CSGO && <SequenceHaleDeathNotices />}
-                <CfgInput />
+                {window.csdm.isWindows && match.game === Game.CSGO && <SequenceDeathNotices />}
+                <SequenceCfgInput />
               </div>
               <div className="mt-12">
                 <MatchTimeline />

@@ -79,7 +79,6 @@ export function AnalyzeConfirmationDialog({
       {demoAlreadyInDatabaseCount > 0 && (
         <div className="my-4">
           <Checkbox
-            id="re-analyze-demos"
             label={<Trans context="Checkbox label">Analyze demos already in database?</Trans>}
             isChecked={shouldReanalyzeDemos}
             onChange={(event) => {

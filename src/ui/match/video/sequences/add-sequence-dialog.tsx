@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import type { Sequence } from 'csdm/common/types/sequence';
-import { SequenceDialog } from './sequence-dialog';
+import { SequenceDialog } from '../sequence/sequence-dialog';
 import type { DeathNoticesPlayerOptions } from 'csdm/common/types/death-notice-player-options';
 import { useCurrentMatchSequences } from './use-current-match-sequences';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { addSequence } from './sequences-actions';
-import type { SequenceForm } from './sequence-form';
+import type { SequenceForm } from '../sequence/sequence-form';
 
 type Props = {
   isVisible: boolean;

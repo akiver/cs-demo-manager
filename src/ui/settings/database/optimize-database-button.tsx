@@ -62,7 +62,6 @@ function OptimizeDatabaseDialog() {
       confirmButtonVariant={ButtonVariant.Danger}
     >
       <Checkbox
-        id="delete-positions"
         label={<Trans>Delete positions</Trans>}
         isChecked={state.payload.clearPositions}
         isDisabled={state.isBusy}
@@ -83,7 +82,6 @@ function OptimizeDatabaseDialog() {
         </p>
       </div>
       <Checkbox
-        id="delete-orphan-demos"
         label={<Trans>Delete demos that are not on the filesystem anymore</Trans>}
         isChecked={state.payload.clearOrphanDemos}
         isDisabled={state.isBusy}
@@ -98,7 +96,6 @@ function OptimizeDatabaseDialog() {
         }}
       />
       <Checkbox
-        id="delete-demos"
         label={<Trans>Clear demos cache</Trans>}
         isChecked={state.payload.clearDemos}
         isDisabled={state.isBusy}

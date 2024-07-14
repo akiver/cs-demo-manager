@@ -3,7 +3,7 @@ import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { SequenceDialog } from './sequence-dialog';
-import { updateSequence } from './sequences-actions';
+import { updateSequence } from '../sequences/sequences-actions';
 import type { SequenceForm } from './sequence-form';
 
 type Props = {

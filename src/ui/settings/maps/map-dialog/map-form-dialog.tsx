@@ -52,7 +52,12 @@ export function MapFormDialog({ nameInput, error, onSubmit }: Props) {
   };
 
   return (
-    <Dialog onEnterPressed={validateAndSubmit}>
+    <Dialog
+      onEnterPressed={(event) => {
+        event.preventDefault();
+        validateAndSubmit();
+      }}
+    >
       <DialogHeader>
         <DialogTitle>
           <Trans context="Dialog title">Map</Trans>

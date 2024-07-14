@@ -318,44 +318,37 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
               <div className="flex gap-8 flex-wrap">
                 <Checkbox
                   label={_(translationPerSheetName[SheetName.General])}
-                  id="general"
                   name="sheets.general"
                   defaultChecked={true}
                 />
                 <Checkbox
                   label={_(translationPerSheetName[SheetName.Rounds])}
-                  id="rounds"
                   name="sheets.rounds"
                   defaultChecked={true}
                 />
                 <Checkbox
                   label={_(translationPerSheetName[SheetName.Players])}
-                  id="players"
                   name="sheets.players"
                   defaultChecked={true}
                 />
                 <Checkbox
                   label={_(translationPerSheetName[SheetName.Kills])}
-                  id="kills"
                   name="sheets.kills"
                   defaultChecked={true}
                 />
                 <Checkbox
                   label={_(translationPerSheetName[SheetName.Weapons])}
-                  id="weapons"
                   name="sheets.weapons"
                   defaultChecked={true}
                 />
                 <Checkbox
                   label={_(translationPerSheetName[SheetName.Clutches])}
-                  id="clutches"
                   name="sheets.clutches"
                   defaultChecked={true}
                 />
                 {(isSingleMatchSelected || outputType === OutputType.MultipleFiles) && (
                   <Checkbox
                     label={_(translationPerSheetName[SheetName.PlayersFlashbangMatrix])}
-                    id="players-flashbang-matrix"
                     name="sheets.playersFlashbangMatrix"
                     defaultChecked={true}
                   />

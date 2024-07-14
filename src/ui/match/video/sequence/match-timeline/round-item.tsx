@@ -6,7 +6,7 @@ import { Separator } from 'csdm/ui/components/context-menu/separator';
 import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu';
 import { scaleStyle } from 'csdm/ui/components/timeline/use-timeline';
 import type { Round } from 'csdm/common/types/round';
-import { useSequenceForm } from '../sequences/use-sequence-form';
+import { useSequenceForm } from '../use-sequence-form';
 
 type ContextMenuProps = {
   round: Round;

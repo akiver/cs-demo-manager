@@ -14,7 +14,6 @@ export function CloseGameAfterRecordingCheckbox() {
 
   return (
     <Checkbox
-      id="close-game-after-recording"
       label={<Trans context="Checkbox label">Close the game when recording is done</Trans>}
       onChange={onChange}
       isChecked={settings.closeGameAfterRecording}

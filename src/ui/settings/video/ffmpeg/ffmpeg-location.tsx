@@ -119,7 +119,6 @@ export function FfmpegLocation() {
   return (
     <div className="flex flex-col gap-y-4">
       <Checkbox
-        id="ffmpeg-location"
         label={<Trans>Enable custom location</Trans>}
         isChecked={customLocationEnabled}
         onChange={onCheckboxChange}

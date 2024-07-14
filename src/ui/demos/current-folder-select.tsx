@@ -46,7 +46,6 @@ export function CurrentFolderSelect() {
       </div>
       {folder && (
         <Checkbox
-          id="include-sub-folders"
           label={<Trans context="Checkbox label">Include subfolders</Trans>}
           isChecked={folder.includeSubFolders}
           isDisabled={showAllFolders || !canInteract}
@@ -57,7 +56,6 @@ export function CurrentFolderSelect() {
         />
       )}
       <Checkbox
-        id="select-all-folders"
         label={<Trans context="Checkbox label">See all folders</Trans>}
         isChecked={showAllFolders}
         isDisabled={!canInteract}

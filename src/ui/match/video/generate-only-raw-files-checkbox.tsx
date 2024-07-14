@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 
@@ -13,8 +14,7 @@ export function GenerateOnlyRawFilesCheckbox() {
 
   return (
     <Checkbox
-      id="generate-only-raw-files"
-      label="Generate only raw files"
+      label={<Trans context="Checkbox label">Generate only raw files</Trans>}
       onChange={onChange}
       isChecked={settings.generateOnlyRawFiles}
     />

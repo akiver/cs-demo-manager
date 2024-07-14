@@ -2539,7 +2539,8 @@ msgstr "Desconhecido"
 
 #: src/ui/dialogs/confirm-dialog.tsx
 #: src/ui/match/video/generate-player-sequences-button.tsx
-#: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
+#: src/ui/match/video/sequence/match-timeline/select-seconds-dialog.tsx
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgctxt "Button"
 msgid "Confirm"
 msgstr "Confirmar"
@@ -4502,8 +4503,18 @@ msgctxt "Checkbox label"
 msgid "Close the game when recording is done"
 msgstr ""
 
+#: src/ui/match/video/concatenate-sequences-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Concatenate sequences into 1 video"
+msgstr ""
+
 #: src/ui/match/video/death-notices-duration-input.tsx
 msgid "Death notices duration (seconds)"
+msgstr ""
+
+#: src/ui/match/video/delete-raw-files-after-encoding-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Delete raw files after encoding"
 msgstr ""
 
 #: src/ui/match/video/encoder-software-select.tsx
@@ -4578,6 +4589,16 @@ msgstr "Codec de vídeo"
 msgctxt "Input label"
 msgid "Video container"
 msgstr "Contêiner de vídeo"
+
+#: src/ui/match/video/focus-camera-player-select.tsx
+msgctxt "Checkbox label"
+msgid "Focus camera on player"
+msgstr ""
+
+#: src/ui/match/video/generate-only-raw-files-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Generate only raw files"
+msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
@@ -4728,239 +4749,271 @@ msgstr "HLAE foi atualizado"
 msgid "An error occurred while updating HLAE"
 msgstr "Ocorreu um erro ao atualizar o HLAE"
 
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused minus X seconds as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused plus X seconds as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused minus X seconds as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused plus X seconds as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on defuser"
-msgstr "Focar câmera no desarmador"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgid "Tick: {tick}"
-msgstr "Tique: {tick}"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgid "Bomb defused by {defuserName} on site {site}"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded minus X seconds as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded plus X seconds as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded minus X seconds as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded plus X seconds as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on planter"
-msgstr "Focar câmera no armador"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgid "Bomb exploded on site {site}"
-msgstr "Bomba explodiu no local {site}"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted minus X seconds as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted plus X seconds as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted minus X seconds as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted plus X seconds as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Tooltip"
-msgid "Tick: {tick}"
-msgstr "Tique: {tick}"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Tooltip"
-msgid "Bomb planted by {planterName} on site {site}"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill minus X seconds as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill plus X seconds as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill minus X seconds as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill plus X seconds as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on killer"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on victim"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Tooltip"
-msgid "<0>{killerName}</0> killed<1>{victimName}</1> with<2>{weaponName}</2>"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Timeline group label"
-msgid "Rounds"
-msgstr "Rodadas"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Timeline group label"
-msgid "Kills"
-msgstr "Abates"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Timeline group label"
-msgid "Bomb"
-msgstr "Bomba"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Tooltip"
-msgid "Start tick"
-msgstr "Tique inicial"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Tooltip"
-msgid "End tick"
-msgstr "Tique final"
-
-#: src/ui/match/video/match-timeline/round-item.tsx
-msgctxt "Context menu"
-msgid "Set round start tick as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/round-item.tsx
-msgctxt "Context menu"
-msgid "Set round start tick as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/round-item.tsx
-msgctxt "Context menu"
-msgid "Set round end tick as start tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/round-item.tsx
-msgctxt "Context menu"
-msgid "Set round end tick as end tick"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
-msgctxt "Dialog title"
-msgid "Enter the number of seconds"
-msgstr ""
-
-#: src/ui/match/video/match-timeline/tick-context-menu.tsx
-msgctxt "Context menu"
-msgid "Set tick {tick} as start tick"
-msgstr "Marcar {tick} como tique inicial"
-
-#: src/ui/match/video/match-timeline/tick-context-menu.tsx
-msgctxt "Context menu"
-msgid "Set tick {tick} as end tick"
-msgstr "Marcar {tick} como tique final"
-
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
 msgid "Reset settings"
 msgstr "Redefinir configurações"
+
+#: src/ui/match/video/sequence/end-tick-input.tsx
+msgctxt "Input label"
+msgid "End tick"
+msgstr "Tique final"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused minus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused plus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused minus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused plus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on defuser"
+msgstr "Focar câmera no desarmador"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgid "Tick: {tick}"
+msgstr "Tique: {tick}"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgid "Bomb defused by {defuserName} on site {site}"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded minus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded plus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded minus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded plus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on planter"
+msgstr "Focar câmera no armador"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgid "Bomb exploded on site {site}"
+msgstr "Bomba explodiu no local {site}"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted minus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted plus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted minus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted plus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Tooltip"
+msgid "Tick: {tick}"
+msgstr "Tique: {tick}"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Tooltip"
+msgid "Bomb planted by {planterName} on site {site}"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill minus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill plus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill minus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill plus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on killer"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on victim"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Tooltip"
+msgid "<0>{killerName}</0> killed<1>{victimName}</1> with<2>{weaponName}</2>"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Rounds"
+msgstr "Rodadas"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Kills"
+msgstr "Abates"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Bomb"
+msgstr "Bomba"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Tooltip"
+msgid "Start tick"
+msgstr "Tique inicial"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Tooltip"
+msgid "End tick"
+msgstr "Tique final"
+
+#: src/ui/match/video/sequence/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round start tick as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round start tick as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round end tick as start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round end tick as end tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/select-seconds-dialog.tsx
+msgctxt "Dialog title"
+msgid "Enter the number of seconds"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "Set tick {tick} as start tick"
+msgstr "Marcar {tick} como tique inicial"
+
+#: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "Set tick {tick} as end tick"
+msgstr "Marcar {tick} como tique final"
+
+#: src/ui/match/video/sequence/save-sequence-button.tsx
+msgid "End tick must be greater than start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-cfg-input.tsx
+msgctxt "Input label"
+msgid "CFG"
+msgstr "CFG"
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgid "Death notices"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-disk-space.tsx
+msgid "~{requiredDiskSpace}GB"
+msgstr "~{requiredDiskSpace}GB"
+
+#: src/ui/match/video/sequence/sequence-duration.tsx
+msgctxt "Duration"
+msgid "{seconds} seconds"
+msgstr "{seconds} segundos"
+
+#: src/ui/match/video/sequence/start-tick-input.tsx
+msgctxt "Input label"
+msgid "Start tick"
+msgstr "Tique inicial"
 
 #: src/ui/match/video/sequences-summary.tsx
 msgid "{0, plural, one {# sequence} other {# sequences}}"
@@ -4971,52 +5024,45 @@ msgctxt "Button"
 msgid "Add new sequence"
 msgstr "Adicionar nova sequência"
 
-#: src/ui/match/video/sequences/cfg-input.tsx
-msgctxt "Input label"
-msgid "CFG"
-msgstr "CFG"
-
 #: src/ui/match/video/sequences/delete-sequences-button.tsx
 msgctxt "Button"
 msgid "Delete sequences"
 msgstr "Excluir sequências"
 
-#: src/ui/match/video/sequences/end-tick-input.tsx
-msgctxt "Input label"
-msgid "End tick"
-msgstr "Tique final"
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
+msgid "No sequences to edit"
+msgstr ""
 
-#: src/ui/match/video/sequences/focus-camera-player-select.tsx
-msgctxt "Input label"
-msgid "Focus camera on player"
-msgstr "Focar câmera no jogador"
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
+msgctxt "Button"
+msgid "Edit sequences settings"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgctxt "Dialog title"
+msgid "Edit sequences settings"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "The following settings will be applied to all existing sequences."
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "Override camera focus"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "Override CFG"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "Override death notices"
+msgstr ""
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
 msgid "~{requiredDiskSpace}GB"
 msgstr "~{requiredDiskSpace}GB"
-
-#: src/ui/match/video/sequences/save-sequence-button.tsx
-msgid "End tick must be greater than start tick"
-msgstr ""
-
-#: src/ui/match/video/sequences/sequence-death-notices.tsx
-msgid "Death notices"
-msgstr ""
-
-#: src/ui/match/video/sequences/sequence-disk-space.tsx
-msgid "~{requiredDiskSpace}GB"
-msgstr "~{requiredDiskSpace}GB"
-
-#: src/ui/match/video/sequences/sequence-duration.tsx
-msgctxt "Duration"
-msgid "{seconds} seconds"
-msgstr "{seconds} segundos"
-
-#: src/ui/match/video/sequences/sequence-x-ray-checkbox.tsx
-msgctxt "Input label"
-msgid "Show X-Ray"
-msgstr "Mostrar Raio-X"
 
 #: src/ui/match/video/sequences/sequences-duration.tsx
 msgid "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
@@ -5026,11 +5072,6 @@ msgstr "{duration, plural, one {1 segundo} other {# segundos}}"
 msgctxt "Context menu"
 msgid "Edit"
 msgstr "Editar"
-
-#: src/ui/match/video/sequences/start-tick-input.tsx
-msgctxt "Input label"
-msgid "Start tick"
-msgstr "Tique inicial"
 
 #: src/ui/match/video/show-only-death-notices-checkbox.tsx
 msgctxt "Input label"
@@ -5085,6 +5126,11 @@ msgstr "Largura"
 msgctxt "Input placeholder"
 msgid "Width"
 msgstr "Largura"
+
+#: src/ui/match/video/x-ray-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Show X-Ray"
+msgstr ""
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx

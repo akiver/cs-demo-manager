@@ -11,7 +11,7 @@ import type { BombExploded } from 'csdm/common/types/bomb-exploded';
 import type { TickOperation, TickPosition } from './select-seconds-dialog';
 import { SelectSecondsDialog } from './select-seconds-dialog';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { useSequenceForm } from '../sequences/use-sequence-form';
+import { useSequenceForm } from '../use-sequence-form';
 
 type ContextMenuProps = {
   bombExploded: BombExploded;

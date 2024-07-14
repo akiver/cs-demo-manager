@@ -2539,7 +2539,8 @@ msgstr "未知"
 
 #: src/ui/dialogs/confirm-dialog.tsx
 #: src/ui/match/video/generate-player-sequences-button.tsx
-#: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
+#: src/ui/match/video/sequence/match-timeline/select-seconds-dialog.tsx
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgctxt "Button"
 msgid "Confirm"
 msgstr "确认"
@@ -4502,9 +4503,19 @@ msgctxt "Checkbox label"
 msgid "Close the game when recording is done"
 msgstr "录制完成后关闭游戏"
 
+#: src/ui/match/video/concatenate-sequences-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Concatenate sequences into 1 video"
+msgstr ""
+
 #: src/ui/match/video/death-notices-duration-input.tsx
 msgid "Death notices duration (seconds)"
 msgstr "死亡通知持续时间(秒)"
+
+#: src/ui/match/video/delete-raw-files-after-encoding-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Delete raw files after encoding"
+msgstr ""
 
 #: src/ui/match/video/encoder-software-select.tsx
 msgctxt "Select label of video encoder"
@@ -4577,6 +4588,16 @@ msgstr "视频编解码器"
 #: src/ui/match/video/ffmpeg/video-container-select.tsx
 msgctxt "Input label"
 msgid "Video container"
+msgstr ""
+
+#: src/ui/match/video/focus-camera-player-select.tsx
+msgctxt "Checkbox label"
+msgid "Focus camera on player"
+msgstr ""
+
+#: src/ui/match/video/generate-only-raw-files-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Generate only raw files"
 msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
@@ -4728,239 +4749,271 @@ msgstr "HLAE 已更新"
 msgid "An error occurred while updating HLAE"
 msgstr "在更新 HLAE 时发生了错误"
 
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused as start tick"
-msgstr "将拆除炸弹的时刻设置为起始时刻"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused minus X seconds as start tick"
-msgstr "将拆除炸弹的时刻减去 X 秒作为起始时刻"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused plus X seconds as start tick"
-msgstr "将拆除炸弹的时刻加上 X 秒作为起始时刻"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused as end tick"
-msgstr "将拆除炸弹的时刻设置为结束时刻"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused minus X seconds as end tick"
-msgstr "将拆除炸弹的时刻减去 X 秒作为结束时刻"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb defused plus X seconds as end tick"
-msgstr "将炸弹拆除的时刻加上 X 秒作为结束时刻"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on defuser"
-msgstr "将摄像机对焦在拆包的人身上"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgid "Tick: {tick}"
-msgstr "Tick: {tick}"
-
-#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
-msgid "Bomb defused by {defuserName} on site {site}"
-msgstr "炸弹在{site} 点被{defuserName} 拆除"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded as start tick"
-msgstr "将炸弹爆炸的时刻设置为起始时刻"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded minus X seconds as start tick"
-msgstr "将炸弹爆炸的时刻减去 X 秒作为起始时刻"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded plus X seconds as start tick"
-msgstr "将炸弹爆炸的时间加上 X 秒设置为起始时刻"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded as end tick"
-msgstr "将炸弹爆炸的时刻设置为结束时刻"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded minus X seconds as end tick"
-msgstr "将炸弹爆炸的时间减去 X 秒作为结束时刻"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb exploded plus X seconds as end tick"
-msgstr "将炸弹爆炸的时间加上 X 秒作为结束时刻"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on planter"
-msgstr "将摄像机对焦在下包的人身上"
-
-#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
-msgid "Bomb exploded on site {site}"
-msgstr "炸弹在{site} 点爆炸"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted as start tick"
-msgstr "将炸弹种植的时刻设置为起始时刻"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted minus X seconds as start tick"
-msgstr "将炸弹安放的时刻减去X秒作为开始刻"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted plus X seconds as start tick"
-msgstr "将炸弹安放的时刻加上 X 秒作为起始时刻"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted as end tick"
-msgstr "将炸弹安放的时刻设置为结束时刻"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted minus X seconds as end tick"
-msgstr "将炸弹安放的时刻减去X秒作为结束刻"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the bomb planted plus X seconds as end tick"
-msgstr "将炸弹安放的时刻加上 X 秒作为结束时刻"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Tooltip"
-msgid "Tick: {tick}"
-msgstr "Tick：{tick}"
-
-#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
-msgctxt "Tooltip"
-msgid "Bomb planted by {planterName} on site {site}"
-msgstr "{planterName} 在{site} 点安放炸弹"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill as start tick"
-msgstr "将击杀的时刻设置为起始时刻"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill minus X seconds as start tick"
-msgstr "将击杀的时刻减去 X 秒作为开始时刻"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill plus X seconds as start tick"
-msgstr "将击杀的时刻加上 X 秒作为开始时刻"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill as end tick"
-msgstr "将击杀的时刻设置为结束时刻"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill minus X seconds as end tick"
-msgstr "将击杀的时刻减去 X 秒作为结束时刻"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Set the tick of the kill plus X seconds as end tick"
-msgstr "将击杀的时刻加上 X 秒作为结束时刻"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on killer"
-msgstr "将摄像机对焦在凶手身上"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on victim"
-msgstr "将摄像机对焦在受害者身上"
-
-#: src/ui/match/video/match-timeline/kill-item.tsx
-msgctxt "Tooltip"
-msgid "<0>{killerName}</0> killed<1>{victimName}</1> with<2>{weaponName}</2>"
-msgstr "<0>{killerName}</0> 用<2>{weaponName}</2> 杀死了<1>{victimName}</1>"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Timeline group label"
-msgid "Rounds"
-msgstr "回合"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Timeline group label"
-msgid "Kills"
-msgstr "击杀数"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Timeline group label"
-msgid "Bomb"
-msgstr "炸弹"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Tooltip"
-msgid "Start tick"
-msgstr "开始时刻"
-
-#: src/ui/match/video/match-timeline/match-timeline.tsx
-msgctxt "Tooltip"
-msgid "End tick"
-msgstr "结束时刻"
-
-#: src/ui/match/video/match-timeline/round-item.tsx
-msgctxt "Context menu"
-msgid "Set round start tick as start tick"
-msgstr "将回合开始时刻设置为起始时刻"
-
-#: src/ui/match/video/match-timeline/round-item.tsx
-msgctxt "Context menu"
-msgid "Set round start tick as end tick"
-msgstr "将回合开始时刻设置为结束时刻"
-
-#: src/ui/match/video/match-timeline/round-item.tsx
-msgctxt "Context menu"
-msgid "Set round end tick as start tick"
-msgstr "将回合结束设为起始时刻"
-
-#: src/ui/match/video/match-timeline/round-item.tsx
-msgctxt "Context menu"
-msgid "Set round end tick as end tick"
-msgstr "将回合结束设置为结束时刻"
-
-#: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
-msgctxt "Dialog title"
-msgid "Enter the number of seconds"
-msgstr "输入秒数"
-
-#: src/ui/match/video/match-timeline/tick-context-menu.tsx
-msgctxt "Context menu"
-msgid "Set tick {tick} as start tick"
-msgstr "将时间点 {tick} 设置为起始时刻"
-
-#: src/ui/match/video/match-timeline/tick-context-menu.tsx
-msgctxt "Context menu"
-msgid "Set tick {tick} as end tick"
-msgstr "将时间点 {tick} 设置为结束时刻"
-
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
 msgid "Reset settings"
 msgstr "重置设置"
+
+#: src/ui/match/video/sequence/end-tick-input.tsx
+msgctxt "Input label"
+msgid "End tick"
+msgstr "结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused as start tick"
+msgstr "将拆除炸弹的时刻设置为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused minus X seconds as start tick"
+msgstr "将拆除炸弹的时刻减去 X 秒作为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused plus X seconds as start tick"
+msgstr "将拆除炸弹的时刻加上 X 秒作为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused as end tick"
+msgstr "将拆除炸弹的时刻设置为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused minus X seconds as end tick"
+msgstr "将拆除炸弹的时刻减去 X 秒作为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused plus X seconds as end tick"
+msgstr "将炸弹拆除的时刻加上 X 秒作为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on defuser"
+msgstr "将摄像机对焦在拆包的人身上"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgid "Tick: {tick}"
+msgstr "Tick: {tick}"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgid "Bomb defused by {defuserName} on site {site}"
+msgstr "炸弹在{site} 点被{defuserName} 拆除"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded as start tick"
+msgstr "将炸弹爆炸的时刻设置为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded minus X seconds as start tick"
+msgstr "将炸弹爆炸的时刻减去 X 秒作为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded plus X seconds as start tick"
+msgstr "将炸弹爆炸的时间加上 X 秒设置为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded as end tick"
+msgstr "将炸弹爆炸的时刻设置为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded minus X seconds as end tick"
+msgstr "将炸弹爆炸的时间减去 X 秒作为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded plus X seconds as end tick"
+msgstr "将炸弹爆炸的时间加上 X 秒作为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on planter"
+msgstr "将摄像机对焦在下包的人身上"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+msgid "Bomb exploded on site {site}"
+msgstr "炸弹在{site} 点爆炸"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted as start tick"
+msgstr "将炸弹种植的时刻设置为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted minus X seconds as start tick"
+msgstr "将炸弹安放的时刻减去X秒作为开始刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted plus X seconds as start tick"
+msgstr "将炸弹安放的时刻加上 X 秒作为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted as end tick"
+msgstr "将炸弹安放的时刻设置为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted minus X seconds as end tick"
+msgstr "将炸弹安放的时刻减去X秒作为结束刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted plus X seconds as end tick"
+msgstr "将炸弹安放的时刻加上 X 秒作为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Tooltip"
+msgid "Tick: {tick}"
+msgstr "Tick：{tick}"
+
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Tooltip"
+msgid "Bomb planted by {planterName} on site {site}"
+msgstr "{planterName} 在{site} 点安放炸弹"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill as start tick"
+msgstr "将击杀的时刻设置为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill minus X seconds as start tick"
+msgstr "将击杀的时刻减去 X 秒作为开始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill plus X seconds as start tick"
+msgstr "将击杀的时刻加上 X 秒作为开始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill as end tick"
+msgstr "将击杀的时刻设置为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill minus X seconds as end tick"
+msgstr "将击杀的时刻减去 X 秒作为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill plus X seconds as end tick"
+msgstr "将击杀的时刻加上 X 秒作为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on killer"
+msgstr "将摄像机对焦在凶手身上"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on victim"
+msgstr "将摄像机对焦在受害者身上"
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Tooltip"
+msgid "<0>{killerName}</0> killed<1>{victimName}</1> with<2>{weaponName}</2>"
+msgstr "<0>{killerName}</0> 用<2>{weaponName}</2> 杀死了<1>{victimName}</1>"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Rounds"
+msgstr "回合"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Kills"
+msgstr "击杀数"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Bomb"
+msgstr "炸弹"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Tooltip"
+msgid "Start tick"
+msgstr "开始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Tooltip"
+msgid "End tick"
+msgstr "结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round start tick as start tick"
+msgstr "将回合开始时刻设置为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round start tick as end tick"
+msgstr "将回合开始时刻设置为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round end tick as start tick"
+msgstr "将回合结束设为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round end tick as end tick"
+msgstr "将回合结束设置为结束时刻"
+
+#: src/ui/match/video/sequence/match-timeline/select-seconds-dialog.tsx
+msgctxt "Dialog title"
+msgid "Enter the number of seconds"
+msgstr "输入秒数"
+
+#: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "Set tick {tick} as start tick"
+msgstr "将时间点 {tick} 设置为起始时刻"
+
+#: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "Set tick {tick} as end tick"
+msgstr "将时间点 {tick} 设置为结束时刻"
+
+#: src/ui/match/video/sequence/save-sequence-button.tsx
+msgid "End tick must be greater than start tick"
+msgstr "结束时刻必须大于起始时刻"
+
+#: src/ui/match/video/sequence/sequence-cfg-input.tsx
+msgctxt "Input label"
+msgid "CFG"
+msgstr "配置"
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgid "Death notices"
+msgstr "死亡通知"
+
+#: src/ui/match/video/sequence/sequence-disk-space.tsx
+msgid "~{requiredDiskSpace}GB"
+msgstr "~{requiredDiskSpace}GB"
+
+#: src/ui/match/video/sequence/sequence-duration.tsx
+msgctxt "Duration"
+msgid "{seconds} seconds"
+msgstr "{seconds} 秒"
+
+#: src/ui/match/video/sequence/start-tick-input.tsx
+msgctxt "Input label"
+msgid "Start tick"
+msgstr "开始时刻"
 
 #: src/ui/match/video/sequences-summary.tsx
 msgid "{0, plural, one {# sequence} other {# sequences}}"
@@ -4971,52 +5024,45 @@ msgctxt "Button"
 msgid "Add new sequence"
 msgstr "增加新的镜头"
 
-#: src/ui/match/video/sequences/cfg-input.tsx
-msgctxt "Input label"
-msgid "CFG"
-msgstr "配置"
-
 #: src/ui/match/video/sequences/delete-sequences-button.tsx
 msgctxt "Button"
 msgid "Delete sequences"
 msgstr "删除镜头"
 
-#: src/ui/match/video/sequences/end-tick-input.tsx
-msgctxt "Input label"
-msgid "End tick"
-msgstr "结束时刻"
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
+msgid "No sequences to edit"
+msgstr ""
 
-#: src/ui/match/video/sequences/focus-camera-player-select.tsx
-msgctxt "Input label"
-msgid "Focus camera on player"
-msgstr "对焦摄像头在玩家身上"
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
+msgctxt "Button"
+msgid "Edit sequences settings"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgctxt "Dialog title"
+msgid "Edit sequences settings"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "The following settings will be applied to all existing sequences."
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "Override camera focus"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "Override CFG"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "Override death notices"
+msgstr ""
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
 msgid "~{requiredDiskSpace}GB"
 msgstr "~{requiredDiskSpace}GB"
-
-#: src/ui/match/video/sequences/save-sequence-button.tsx
-msgid "End tick must be greater than start tick"
-msgstr "结束时刻必须大于起始时刻"
-
-#: src/ui/match/video/sequences/sequence-death-notices.tsx
-msgid "Death notices"
-msgstr "死亡通知"
-
-#: src/ui/match/video/sequences/sequence-disk-space.tsx
-msgid "~{requiredDiskSpace}GB"
-msgstr "~{requiredDiskSpace}GB"
-
-#: src/ui/match/video/sequences/sequence-duration.tsx
-msgctxt "Duration"
-msgid "{seconds} seconds"
-msgstr "{seconds} 秒"
-
-#: src/ui/match/video/sequences/sequence-x-ray-checkbox.tsx
-msgctxt "Input label"
-msgid "Show X-Ray"
-msgstr "显示 X-Ray"
 
 #: src/ui/match/video/sequences/sequences-duration.tsx
 msgid "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
@@ -5026,11 +5072,6 @@ msgstr "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
 msgctxt "Context menu"
 msgid "Edit"
 msgstr "编辑"
-
-#: src/ui/match/video/sequences/start-tick-input.tsx
-msgctxt "Input label"
-msgid "Start tick"
-msgstr "开始时刻"
 
 #: src/ui/match/video/show-only-death-notices-checkbox.tsx
 msgctxt "Input label"
@@ -5085,6 +5126,11 @@ msgstr "高度"
 msgctxt "Input placeholder"
 msgid "Width"
 msgstr "高度"
+
+#: src/ui/match/video/x-ray-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Show X-Ray"
+msgstr ""
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx

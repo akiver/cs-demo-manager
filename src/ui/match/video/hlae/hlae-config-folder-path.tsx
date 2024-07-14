@@ -50,7 +50,6 @@ export function HlaeConfigFolderPath() {
   return (
     <div>
       <Checkbox
-        id="hlae-config-folder"
         label={<Trans context="Checkbox label">Enable config folder</Trans>}
         isChecked={configFolderEnabled}
         onChange={onEnableChange}

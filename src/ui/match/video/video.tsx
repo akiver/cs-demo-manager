@@ -22,6 +22,7 @@ import { ShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-checkbox
 import { RawFilesFolderPath } from './raw-files-folder-path';
 import { ResetSettingsButton } from './reset-settings-button';
 import { SequencesSummary } from './sequences-summary';
+import { EditSequencesSettingsButton } from './sequences/edit-sequences/edit-sequences-settings-button';
 
 export function MatchVideo() {
   return (
@@ -31,6 +32,7 @@ export function MatchVideo() {
           <AddVideoToQueueButton />
           <AddNewSequenceButton />
           <GeneratePlayerSequencesButton />
+          <EditSequencesSettingsButton />
           <ResetSettingsButton />
           <DeleteSequencesButton />
           <SequencesSummary />

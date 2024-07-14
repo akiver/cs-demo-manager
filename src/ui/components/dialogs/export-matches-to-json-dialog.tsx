@@ -120,7 +120,6 @@ export function ExportMatchesToJsonDialog({ checksums }: Props) {
                   </Button>
                   <Checkbox
                     label={<Trans context="Checkbox label">Minify</Trans>}
-                    id="minify"
                     name="minify"
                     defaultChecked={false}
                     isDisabled={isLoading}

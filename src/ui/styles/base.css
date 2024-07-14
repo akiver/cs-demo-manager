@@ -144,4 +144,11 @@
     border-radius: 6px;
     background-color: var(--blue-700);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
 }

@@ -11,6 +11,9 @@ export const updateSequence = createAction<{ demoFilePath: string; sequence: Seq
 export const deleteSequence = createAction<{ demoFilePath: string; sequence: Sequence }>(
   'match/video/sequences/delete',
 );
+export const replaceSequences = createAction<{ demoFilePath: string; sequences: Sequence[] }>(
+  'match/video/sequences/replace',
+);
 export const deleteSequences = createAction<{ demoFilePath: string }>('match/video/sequences/deleteAll');
 export const generatePlayerSequences = createAction<{
   steamId: string;

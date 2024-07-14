@@ -5,7 +5,7 @@ import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu
 import type { Group, Item } from 'csdm/ui/components/timeline/use-timeline';
 import { useTimeline } from 'csdm/ui/components/timeline/use-timeline';
 import type { Match } from 'csdm/common/types/match';
-import { useCurrentMatch } from '../../use-current-match';
+import { useCurrentMatch } from '../../../use-current-match';
 import { BombDefusedItem } from './bomb-defused-item';
 import { BombExplodedItem } from './bomb-exploded-item';
 import { BombPlantedItem } from './bomb-planted-item';
@@ -13,7 +13,7 @@ import { KillItem } from './kill-item';
 import { RoundItem } from './round-item';
 import { TickContextMenu } from './tick-context-menu';
 import { TimeMarker } from './time-marker';
-import { useSequenceForm } from '../sequences/use-sequence-form';
+import { useSequenceForm } from '../use-sequence-form';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 function useBuildRoundsGroup(match: Match, pixelsPerTick: number, ticksPerSecond: number): Group {

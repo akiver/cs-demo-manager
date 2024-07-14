@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 
@@ -17,8 +18,7 @@ export function DeleteRawFilesAfterEncodingCheckbox() {
 
   return (
     <Checkbox
-      id="delete-raw-files"
-      label="Delete raw files after encoding"
+      label={<Trans context="Checkbox label">Delete raw files after encoding</Trans>}
       onChange={onChange}
       isChecked={settings.deleteRawFilesAfterEncoding}
     />

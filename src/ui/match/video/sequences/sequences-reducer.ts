@@ -7,6 +7,7 @@ import {
   generatePlayerKillsSequences,
   generatePlayerRoundsSequences,
   generatePlayerSequences,
+  replaceSequences,
   updateSequence,
 } from './sequences-actions';
 import { buildPlayerEventSequences } from './build-player-event-sequences';
@@ -50,6 +51,9 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     })
     .addCase(deleteSequences, (state, action) => {
       state[action.payload.demoFilePath] = [];
+    })
+    .addCase(replaceSequences, (state, action) => {
+      state[action.payload.demoFilePath] = action.payload.sequences;
     })
     .addCase(generatePlayerKillsSequences, (state, action) => {
       const { match, steamId } = action.payload;

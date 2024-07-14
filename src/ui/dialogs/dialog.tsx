@@ -7,7 +7,7 @@ type BaseProps = {
   closeOnBackgroundClicked?: boolean;
   closeOnEscPressed?: boolean;
   onClose?: () => void;
-  onEnterPressed?: () => void;
+  onEnterPressed?: (event: React.KeyboardEvent) => void;
   children: ReactNode;
   blockNavigation?: boolean;
 };
@@ -40,8 +40,7 @@ export function Dialog({
         break;
       case 'Enter':
         if (typeof onEnterPressed === 'function') {
-          event.preventDefault();
-          onEnterPressed();
+          onEnterPressed(event);
         }
         break;
     }

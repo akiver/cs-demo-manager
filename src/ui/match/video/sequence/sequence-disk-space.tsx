@@ -1,9 +1,9 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
 import { roundNumber } from 'csdm/common/math/round-number';
-import { useComputeRequiredGigabyte } from './use-compute-require-gigabyte';
-import { useSequenceForm } from './use-sequence-form';
+import { useSequenceForm } from '../sequence/use-sequence-form';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
+import { useComputeRequiredGigabyte } from '../sequences/use-compute-require-gigabyte';
 
 function useComputeRequiredDiskSpace() {
   const { sequence } = useSequenceForm();

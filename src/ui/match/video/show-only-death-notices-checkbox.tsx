@@ -14,7 +14,6 @@ export function ShowOnlyDeathNoticesCheckbox() {
 
   return (
     <Checkbox
-      id="show-only-death-notices"
       label={<Trans context="Input label">Show only death notices</Trans>}
       onChange={onChange}
       isChecked={settings.showOnlyDeathNotices}

@@ -116,7 +116,6 @@ function ImportV2DataDialog() {
 
         <div>
           <Checkbox
-            id="comments"
             label={<Trans>Import comments</Trans>}
             isChecked={importComments}
             onChange={(event) => {
@@ -124,7 +123,6 @@ function ImportV2DataDialog() {
             }}
           />
           <Checkbox
-            id="statuses"
             label={<Trans>Import statuses</Trans>}
             isChecked={importStatuses}
             onChange={(event) => {

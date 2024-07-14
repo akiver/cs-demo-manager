@@ -114,7 +114,6 @@ export function HlaeLocation() {
   return (
     <div className="flex flex-col gap-y-4">
       <Checkbox
-        id="hlae-location"
         label={<Trans>Enable custom location</Trans>}
         isChecked={customLocationEnabled}
         onChange={onCheckboxChange}
