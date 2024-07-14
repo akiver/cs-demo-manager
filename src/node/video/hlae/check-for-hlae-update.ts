@@ -4,7 +4,8 @@ import { updateTimestamp } from 'csdm/node/database/timestamps/update-timestamp'
 import { fetchLastHlaeRelease } from './fetch-last-hlae-release';
 
 export async function checkForHlaeUpdate(currentVersion: string): Promise<boolean> {
-  const shouldCheck = await isTimestampExpired(TimestampName.HlaeUpdate);
+  const twoHoursInMilliseconds = 3600 * 2 * 1000;
+  const shouldCheck = await isTimestampExpired(TimestampName.HlaeUpdate, twoHoursInMilliseconds);
   if (!shouldCheck) {
     return false;
   }
