@@ -23,25 +23,67 @@ import { useArgument } from '../use-argument';
 import { ArgumentName } from 'csdm/common/argument/argument-name';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
+import { ButtonVariant } from 'csdm/ui/components/buttons/button';
+import { ResetDatabaseButton } from 'csdm/ui/settings/database/reset-database-button';
+
+function DatabaseSchemaVersionMismatch() {
+  return (
+    <div>
+      <p>
+        <Trans>
+          It looks like you installed an older version of CS Demo Manager and the current database schema is not
+          compatible with it.
+        </Trans>
+      </p>
+      <p>
+        <Trans>
+          You can either update CS Demo Manager to the latest version or reset the database to start from scratch.
+        </Trans>
+      </p>
+
+      <div className="mt-8">
+        <ResetDatabaseButton variant={ButtonVariant.Danger} />
+      </div>
+    </div>
+  );
+}
 
 function getHintFromError({ code, message }: ConnectDatabaseError) {
   switch (code) {
     case ErrorCode.PsqlNotFound:
       return (
-        <Trans>
-          It usually means that PostgreSQL is not installed on your system or the path to the <strong>psql</strong>{' '}
-          executable is not in your <strong>PATH</strong> environment variable.
-        </Trans>
+        <p>
+          <Trans>
+            It usually means that PostgreSQL is not installed on your system or the path to the <strong>psql</strong>{' '}
+            executable is not in your <strong>PATH</strong> environment variable.
+          </Trans>
+        </p>
       );
     case ErrorCode.PsqlTimeout:
-      return <Trans>It usually means that the PostgreSQL service is not running, make sure it's running.</Trans>;
+      return (
+        <p>
+          <Trans>It usually means that the PostgreSQL service is not running, make sure it's running.</Trans>
+        </p>
+      );
+    case ErrorCode.DatabaseSchemaVersionMismatch:
+      return <DatabaseSchemaVersionMismatch />;
   }
 
   if (message.includes('ECONNREFUSED')) {
-    return 'This error usually means that the database is not running or that the connection settings are incorrect.';
+    return (
+      <p>
+        <Trans>
+          This error usually means that the database is not running or that the connection settings are incorrect.
+        </Trans>
+      </p>
+    );
   }
 
-  return <Trans>Make sure PostgreSQL is running and your settings are correct.</Trans>;
+  return (
+    <p>
+      <Trans>Make sure PostgreSQL is running and your settings are correct.</Trans>
+    </p>
+  );
 }
 
 export function ConnectDatabase() {
@@ -141,7 +183,7 @@ export function ConnectDatabase() {
       <div className="flex flex-col mt-8 max-w-[600px] m-auto">
         <ErrorMessage message="The connection to the database failed with the following error:" />
         <p className="text-body-strong select-text my-8">{error.message}</p>
-        {hint && <p className="selectable">{hint}</p>}
+        {hint}
       </div>
     );
   };

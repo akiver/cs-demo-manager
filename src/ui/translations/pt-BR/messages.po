@@ -281,12 +281,24 @@ msgid "Connect"
 msgstr "Connectar"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "It looks like you installed an older version of CS Demo Manager and the current database schema is not compatible with it."
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that PostgreSQL is not installed on your system or the path to the <0>psql</0> executable is not in your <1>PATH</1> environment variable."
 msgstr "Geralmente significa que o PostgreSQL não está instalado no seu sistema ou o caminho para o executável <0>psql</0> não está na variável de ambiente <1>PATH</1>."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that the PostgreSQL service is not running, make sure it's running."
 msgstr "Geralmente isso significa que o serviço PostgreSQL não está rodando, certifique-se de que está em execução."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "This error usually means that the database is not running or that the connection settings are incorrect."
+msgstr ""
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "Make sure PostgreSQL is running and your settings are correct."

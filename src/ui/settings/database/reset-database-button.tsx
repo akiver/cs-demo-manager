@@ -50,7 +50,11 @@ function ResetDatabaseDialog() {
   );
 }
 
-export function ResetDatabaseButton() {
+type Props = {
+  variant?: ButtonVariant;
+};
+
+export function ResetDatabaseButton({ variant }: Props) {
   const { showDialog } = useDialog();
 
   const onClick = () => {
@@ -58,7 +62,7 @@ export function ResetDatabaseButton() {
   };
 
   return (
-    <Button onClick={onClick}>
+    <Button variant={variant} onClick={onClick}>
       <Trans context="Button">Reset database</Trans>
     </Button>
   );

@@ -6,6 +6,7 @@ import { resetDatabase } from '../reset-database';
 import { PostgresqlErrorCode } from '../postgresql-error-code';
 import type { Migration } from './migration';
 import { getAllMigrations } from './get-all-migrations';
+import { DatabaseSchemaVersionMismatch } from '../database-schema-version-mismatch-error';
 
 // This variable represents the current version of the database schema.
 // It's used to migrate database schema at app startup.
@@ -40,6 +41,10 @@ async function getCurrentSchemaVersion() {
 export async function migrateDatabase() {
   try {
     let currentSchemaVersion = await getCurrentSchemaVersion();
+    const isDowngrade = currentSchemaVersion > CURRENT_SCHEMA_VERSION;
+    if (isDowngrade) {
+      throw new DatabaseSchemaVersionMismatch(currentSchemaVersion, CURRENT_SCHEMA_VERSION);
+    }
 
     await db.transaction().execute(async (transaction) => {
       let shouldResetDatabase = false;
@@ -51,7 +56,6 @@ export async function migrateDatabase() {
         shouldResetDatabase = tables.length > 0;
       }
 
-      const isDowngrade = currentSchemaVersion > CURRENT_SCHEMA_VERSION;
       shouldResetDatabase = shouldResetDatabase || isDowngrade;
       if (shouldResetDatabase) {
         currentSchemaVersion = 0;

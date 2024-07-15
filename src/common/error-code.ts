@@ -31,6 +31,7 @@ export const ErrorCode = {
   DuplicateTeamName: 507,
   MapAlreadyExists: 600,
   PsqlNotFound: 700,
+  DatabaseSchemaVersionMismatch: 701,
   BoilerInvalidArgs: 800,
   BoilerCommunicationFailure: 801,
   BoilerAlreadyConnected: 802,
