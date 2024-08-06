@@ -1,11 +1,4 @@
-import fs from 'fs-extra';
-import { getDemoInfoFilePath } from 'csdm/node/demo/get-demo-info-file-path';
-import type { WatchableMatchInfo } from 'csgo-protobuf';
-import { CDataGCCStrike15_v2_MatchInfo } from 'csgo-protobuf';
-import { db } from 'csdm/node/database/database';
 import { deleteMatchesByChecksums } from './delete-matches-by-checksums';
-import { encodeMatch } from 'csgo-sharecode';
-import { unixTimestampToDate } from 'csdm/common/date/unix-timestamp-to-date';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import type { ShotTable } from '../shots/shot-table';
 import type { TeamTable } from '../teams/team-table';
@@ -785,6 +778,7 @@ async function insertMatchFromCsv({ outputFolderPath, demoName, databaseSettings
         'date',
         'source',
         'type',
+        'share_code',
         'map_name',
         'server_name',
         'client_name',
@@ -818,56 +812,6 @@ async function insertMatchFromCsv({ outputFolderPath, demoName, databaseSettings
   }
 }
 
-function getShareCodeFromMatchInfo(matchInfo: CDataGCCStrike15_v2_MatchInfo) {
-  const matchId = matchInfo.matchid as bigint;
-  const watchablematchinfo = matchInfo.watchablematchinfo as WatchableMatchInfo;
-  const tvPort = watchablematchinfo.tvPort as number;
-  const { roundstatsLegacy, roundstatsall } = matchInfo;
-  const lastRoundMessage = roundstatsLegacy ?? roundstatsall[roundstatsall.length - 1];
-
-  const lastRoundReservationId = lastRoundMessage.reservationid as bigint;
-  const shareCode = encodeMatch({
-    matchId: BigInt(matchId),
-    reservationId: BigInt(lastRoundReservationId),
-    tvPort,
-  });
-
-  return shareCode;
-}
-
-async function updateMatchFromDemoInfoFile(demoFilePath: string, checksum: string) {
-  const infoFilePath = getDemoInfoFilePath(demoFilePath);
-  const infoFileExists = await fs.pathExists(infoFilePath);
-  if (!infoFileExists) {
-    return;
-  }
-
-  const buffer: Buffer = await fs.readFile(infoFilePath);
-  const bytes = new Uint8Array(buffer);
-  const matchInfoMessage = CDataGCCStrike15_v2_MatchInfo.fromBinary(bytes);
-
-  const shareCode = getShareCodeFromMatchInfo(matchInfoMessage);
-  const date = unixTimestampToDate(matchInfoMessage.matchtime as number);
-  await db
-    .updateTable('matches')
-    .set({
-      share_code: shareCode,
-      date,
-    })
-    .where('checksum', '=', checksum)
-    .execute();
-}
-
-async function updateMatchName(checksum: string, demoName: string) {
-  await db
-    .updateTable('matches')
-    .set({
-      name: demoName,
-    })
-    .where('checksum', '=', checksum)
-    .execute();
-}
-
 export type InsertMatchParameters = {
   checksum: string;
   demoPath: string;
@@ -896,8 +840,6 @@ export async function insertMatch({ checksum, demoPath, outputFolderPath }: Inse
       outputFolderPath,
       demoName,
     });
-    await updateMatchFromDemoInfoFile(demoPath, checksum);
-    await updateMatchName(checksum, demoName);
 
     await Promise.all([
       insertTeamsFromCsv({
