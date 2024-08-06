@@ -3272,12 +3272,16 @@ msgid "*DEAD*"
 msgstr "*DEAD*"
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
-msgid "No chat messages found."
-msgstr "No chat messages found."
-
-#: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "Chat messages are available only if the <0>.info</0> file of the demo is next to its <1>.dem</1> file during analysis."
 msgstr "Chat messages are available only if the <0>.info</0> file of the demo is next to its <1>.dem</1> file during analysis."
+
+#: src/ui/match/chat-messages/empty-chat-messages.tsx
+msgid "Chat messages are available with Valve demos only after the {updateDate} CS2 update."
+msgstr "Chat messages are available with Valve demos only after the {updateDate} CS2 update."
+
+#: src/ui/match/chat-messages/empty-chat-messages.tsx
+msgid "No chat messages found."
+msgstr "No chat messages found."
 
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 msgctxt "OS save dialog title"

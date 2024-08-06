@@ -9,7 +9,6 @@ import { useCurrentMatch } from './use-current-match';
 import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
 import { useCurrentMatchSequences } from 'csdm/ui/match/video/sequences/use-current-match-sequences';
 import { TabLinkNumberBadge } from 'csdm/ui/components/tabs/tab-link-number-badge';
-import { Game } from 'csdm/common/types/counter-strike';
 
 function PreviousMatchLink() {
   const location = useLocation();
@@ -77,11 +76,9 @@ export function MatchTabs() {
           <TabLinkNumberBadge number={sequences.length} />
         </div>
       )}
-      {match.game === Game.CSGO && (
-        <TabLink url={RoutePath.MatchChat}>
-          <Trans context="Tab link">Chat</Trans>
-        </TabLink>
-      )}
+      <TabLink url={RoutePath.MatchChat}>
+        <Trans context="Tab link">Chat</Trans>
+      </TabLink>
       <NextMatchLink />
     </TabLinks>
   );
