@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-29 20:40\n"
+"PO-Revision-Date: 2024-08-07 00:11\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -282,11 +282,11 @@ msgstr "连接"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It looks like you installed an older version of CS Demo Manager and the current database schema is not compatible with it."
-msgstr ""
+msgstr "看起来您已经安装了旧版本的CS Demo Manager并且当前的数据库架构与它不一致"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
-msgstr ""
+msgstr "您可以更新CS Demo Manager到最新版本，或者重置数据库从零开始"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that PostgreSQL is not installed on your system or the path to the <0>psql</0> executable is not in your <1>PATH</1> environment variable."
@@ -298,7 +298,7 @@ msgstr "这通常意味着 PostgreSQL 服务未运行，请确保其正常运行
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "This error usually means that the database is not running or that the connection settings are incorrect."
-msgstr ""
+msgstr "这个错误通常意味着数据库未运行或者连接设置不正确"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "Make sure PostgreSQL is running and your settings are correct."
@@ -468,7 +468,7 @@ msgstr "重试"
 #: src/ui/components/buttons/reveal-button.tsx
 msgctxt "Button"
 msgid "Reveal"
-msgstr ""
+msgstr "显示"
 
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
@@ -566,7 +566,7 @@ msgstr "复制"
 #: src/ui/components/context-menu/items/copy-name-item.tsx
 msgctxt "Context menu"
 msgid "Copy name"
-msgstr ""
+msgstr "复制名称"
 
 #: src/ui/components/context-menu/items/copy-sharecode-item.tsx
 msgctxt "Copy context menu"
@@ -972,12 +972,12 @@ msgstr "武器"
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Clutches"
-msgstr ""
+msgstr "残局"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Players Flashbang matrix"
-msgstr ""
+msgstr "玩家闪光弹矩阵"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Exporting match {matchCount} of {totalMatchCount}…"
@@ -1201,7 +1201,7 @@ msgstr "武器"
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 msgctxt "Toast"
 msgid "Heatmap exported, click here to reveal the file"
-msgstr ""
+msgstr "热力图导出，点击此处显示文件"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
@@ -1252,23 +1252,23 @@ msgstr "事件"
 #: src/ui/components/heatmap/heatmap-select-map.tsx
 msgctxt "Input label"
 msgid "Map"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "Loading map…"
-msgstr ""
+msgstr "正在加载地图..."
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "An error occurred while loading the map."
-msgstr ""
+msgstr "加载地图时发生了一个错误."
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "Select a map."
-msgstr ""
+msgstr "选择一个地图."
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "No data points were found for the current filters."
-msgstr ""
+msgstr "现有过滤器中没有数据点被找到"
 
 #: src/ui/components/heatmap/input-blur.tsx
 msgctxt "Input label"
@@ -1431,28 +1431,28 @@ msgstr "查看回合"
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Matches"
-msgstr ""
+msgstr "比赛"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Total"
-msgstr ""
+msgstr "总共的"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 msgid "Win"
-msgstr ""
+msgstr "赢"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Lost"
-msgstr ""
+msgstr "输"
 
 #: src/ui/components/maps-stats.tsx
 msgid "Tie"
-msgstr ""
+msgstr "平局"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/rounds-panel.tsx
@@ -1463,32 +1463,32 @@ msgstr "回合"
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Sides"
-msgstr ""
+msgstr "阵营"
 
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Impact"
-msgstr ""
+msgstr "Impact(影响)"
 
 #: src/ui/components/maps-stats.tsx
 msgid "K/D"
-msgstr ""
+msgstr "K/D"
 
 #: src/ui/components/maps-stats.tsx
 msgid "ADR"
-msgstr ""
+msgstr "ADR"
 
 #: src/ui/components/maps-stats.tsx
 msgid "KAST"
-msgstr ""
+msgstr "KAST"
 
 #: src/ui/components/maps-stats.tsx
 msgid "HS%"
-msgstr ""
+msgstr "HS%"
 
 #: src/ui/components/maps-stats.tsx
 msgid "No maps stats found."
-msgstr ""
+msgstr "未找到地图统计信息."
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
@@ -1921,15 +1921,15 @@ msgstr "平均杀敌/一回合"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Won"
-msgstr ""
+msgstr "赢"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Avg kill"
-msgstr ""
+msgstr "平均击杀"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Save rate"
-msgstr ""
+msgstr "保枪率"
 
 #: src/ui/components/panels/clutches-panel.tsx
 #: src/ui/match/players/clutches-panel.tsx
@@ -1940,27 +1940,27 @@ msgstr "翻盘"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Overall"
-msgstr ""
+msgstr "全部的"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v2"
-msgstr ""
+msgstr "1v2"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v3"
-msgstr ""
+msgstr "1v3"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v4"
-msgstr ""
+msgstr "1v4"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v5"
-msgstr ""
+msgstr "1v5"
 
 #: src/ui/components/panels/headshot-panel.tsx
 msgctxt "Panel title"
@@ -2153,7 +2153,7 @@ msgstr "败北"
 
 #: src/ui/components/panels/win-rate.tsx
 msgid "Win rate"
-msgstr ""
+msgstr "胜率"
 
 #: src/ui/components/table/cells/bans-cell.tsx
 msgctxt "Tooltip"
@@ -2466,7 +2466,7 @@ msgstr "POV"
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
@@ -2933,7 +2933,7 @@ msgstr "未找到 Counter-Strike 可执行文件。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
-msgstr ""
+msgstr "确保Steam不是通过Flatpak安装的，因为它不被支持！"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
@@ -2941,7 +2941,7 @@ msgstr "请确保通过在 Steam 上选择 CS2 的 \"Betas\" 属性中的 \"csgo
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Read the <0>documentation</0> for more information."
-msgstr ""
+msgstr "阅读<0>文档</0>以了解更多信息."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "{game} is not supported on your operating system"
@@ -2949,7 +2949,7 @@ msgstr "您的操作系统不支持 {game}"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "HLAE executable not found"
-msgstr ""
+msgstr "未找到HLAE可执行文件"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
@@ -2957,11 +2957,11 @@ msgstr "没有发现击杀"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "This demo needs to be re-analyzed to make the camera focus work."
-msgstr ""
+msgstr "这个demo需要重新分析才能使相机聚焦正常工作"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Read this <0>documentation</0> for more information"
-msgstr ""
+msgstr "阅读此<0>文档</0> 以了解更多信息"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No rounds found"
@@ -3264,12 +3264,12 @@ msgstr "设置 ({shortcut})"
 #: src/ui/left-bar/teams-link.tsx
 msgctxt "Tooltip"
 msgid "Teams"
-msgstr ""
+msgstr "队伍i"
 
 #: src/ui/left-bar/video-queue-link.tsx
 msgctxt "Tooltip"
 msgid "Videos"
-msgstr ""
+msgstr "视频"
 
 #: src/ui/match/chat-messages/chat-message.tsx
 msgctxt "Chat message status"
@@ -3300,7 +3300,7 @@ msgstr "已导出聊天消息"
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
 msgid "Duels matrix"
-msgstr ""
+msgstr "对决表格"
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
@@ -3442,11 +3442,11 @@ msgstr "回合击杀"
 
 #: src/ui/match/duels/players-duels-matrix.tsx
 msgid "<0>{killerName}</0> killed <1>{victimName}</1> <2>{killCount}</2> times"
-msgstr ""
+msgstr "<0>{killerName}</0>杀死<1>{victimName}</1><2>{killCount}</2>次"
 
 #: src/ui/match/duels/players-duels-matrix.tsx
 msgid "No kills found between both teams."
-msgstr ""
+msgstr "双方队伍之间没有找到击杀."
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
@@ -3708,7 +3708,7 @@ msgstr "击杀"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "<0>{0}</0> flashed <1>{1}</1> around <2>{2}s</2>"
-msgstr ""
+msgstr "<0>{0}</0>致盲了<1>{1}</1>大约<2>{2}秒</2>"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "Players flashbang matrix"
@@ -3910,7 +3910,7 @@ msgstr "伤害"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Damages"
-msgstr ""
+msgstr "伤害"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3962,7 +3962,7 @@ msgstr "道具每回合平均伤害"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Utility Damage per Round"
-msgstr ""
+msgstr "道具平均每回合伤害"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3974,7 +3974,7 @@ msgstr "爆头"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Headshot percentage"
-msgstr ""
+msgstr "爆头率"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -4003,7 +4003,7 @@ msgstr "总辅助伤害量"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Utility Damage"
-msgstr ""
+msgstr "道具伤害"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first kill count"
@@ -4018,7 +4018,7 @@ msgstr "首杀"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Kills"
-msgstr ""
+msgstr "首杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first death count"
@@ -4033,7 +4033,7 @@ msgstr "首个死亡"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Deaths"
-msgstr ""
+msgstr "首死"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade kill count"
@@ -4048,7 +4048,7 @@ msgstr "补枪击杀(队友死亡后5秒内报仇)"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Trade Kills"
-msgstr ""
+msgstr "换人击杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade death count"
@@ -4063,7 +4063,7 @@ msgstr "交换死亡(一名玩家死亡后的5秒内有队友进行了复仇击�
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Trade Deaths"
-msgstr ""
+msgstr "换人死亡"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade kill count"
@@ -4078,7 +4078,7 @@ msgstr "首个人头交换(队友死亡后的5秒内实现了一次复仇击杀)
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Trade Kills"
-msgstr ""
+msgstr "首杀交换"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade death count"
@@ -4093,7 +4093,7 @@ msgstr "首个人头交换死亡(玩家死亡后，队友在5秒内进行了复�
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "First Trade Deaths"
-msgstr ""
+msgstr "首死交换"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header wallbang kill count"
@@ -4108,32 +4108,32 @@ msgstr "穿墙击杀"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Wallbang Kills"
-msgstr ""
+msgstr "穿墙击杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Collateral Kills"
-msgstr ""
+msgstr "附带击杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header no scope kill count"
 msgid "NS"
-msgstr ""
+msgstr "盲狙"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "No Scope Kill"
-msgstr ""
+msgstr "盲狙击杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "No Scope Kills"
-msgstr ""
+msgstr "盲狙击杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Score"
-msgstr ""
+msgstr "分数"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb planted count"
@@ -4148,7 +4148,7 @@ msgstr "炸弹安放数"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Bomb Planted"
-msgstr ""
+msgstr "炸弹安放数"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb defused count"
@@ -4163,7 +4163,7 @@ msgstr "炸弹拆除数"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Bomb Defused"
-msgstr ""
+msgstr "炸弹拆除数"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header hostage rescued count"
@@ -4178,7 +4178,7 @@ msgstr "拯救人质"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Hostage Rescued"
-msgstr ""
+msgstr "人质拯救"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
@@ -4507,12 +4507,12 @@ msgstr "您确定要继续吗？"
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgctxt "Button"
 msgid "Add to queue"
-msgstr ""
+msgstr "加入到队列"
 
 #: src/ui/match/video/add-video-to-queue-error-dialog.tsx
 msgctxt "Dialog title"
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #: src/ui/match/video/close-game-after-recording-checkbox.tsx
 msgctxt "Checkbox label"
@@ -4531,7 +4531,7 @@ msgstr "死亡通知持续时间(秒)"
 #: src/ui/match/video/delete-raw-files-after-encoding-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Delete raw files after encoding"
-msgstr ""
+msgstr "编码完成后删除源文件"
 
 #: src/ui/match/video/encoder-software-select.tsx
 msgctxt "Select label of video encoder"
@@ -5269,7 +5269,7 @@ msgstr "头部"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Neck"
-msgstr ""
+msgstr "颈部"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Chest"
@@ -5297,15 +5297,15 @@ msgstr "右腿"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "{updateCount, plural, one {The match has been updated} other {# matches have been updated}}"
-msgstr ""
+msgstr "{updateCount, plural,one {这个比赛已经更新}other {#比赛已经更新}}"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "The team names must be different."
-msgstr ""
+msgstr "队伍名称必须不同"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "The teams have not been found."
-msgstr ""
+msgstr "队伍未找到"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "Updating team names of match {updatedCount} out of {0}."
@@ -5314,17 +5314,17 @@ msgstr ""
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Dialog title"
 msgid "Update team names"
-msgstr ""
+msgstr "更新团队名称"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Input label"
 msgid "Team A"
-msgstr ""
+msgstr "Team A"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Input label"
 msgid "Team B"
-msgstr ""
+msgstr "Team B"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "You should rename team names only to merge stats into a single team!"
@@ -5469,12 +5469,12 @@ msgstr "匹配中"
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel label"
 msgid "Premier rank"
-msgstr ""
+msgstr "优先模式段位"
 
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel label"
 msgid "Competitive rank"
-msgstr ""
+msgstr "竞技模式段位"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel title"
@@ -5556,7 +5556,7 @@ msgstr "比赛"
 #: src/ui/player/rank/player-competitive-rank-history.tsx
 msgctxt "Chart title"
 msgid "Competitive matchmaking rank history"
-msgstr ""
+msgstr "竞技模式段位历史"
 
 #: src/ui/player/rank/player-competitive-rank-history.tsx
 #: src/ui/player/rank/player-premier-rank-history.tsx
@@ -5567,7 +5567,7 @@ msgstr "排名"
 #: src/ui/player/rank/player-premier-rank-history.tsx
 msgctxt "Chart title"
 msgid "Premier mode rank history"
-msgstr ""
+msgstr "优先模式段位历史"
 
 #: src/ui/player/rank/use-get-win-count-translation.ts
 msgid "Win count: {winCount}"
@@ -5718,7 +5718,7 @@ msgstr "附带击杀"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Knife/Tazer kills"
-msgstr ""
+msgstr "近战武器/电击枪击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -5728,7 +5728,7 @@ msgstr "空中飞人击杀"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Team kills"
-msgstr ""
+msgstr "队友击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -5755,7 +5755,7 @@ msgstr "未找到玩家"
 
 #: src/ui/search/results/collateral-kills-results.tsx
 msgid "Deaths {deathCount}"
-msgstr ""
+msgstr "死亡数{deathCount}"
 
 #: src/ui/search/results/ninja-defuse-results.tsx
 msgid "CT {ctAliveCount}"
@@ -5794,7 +5794,7 @@ msgstr "地图"
 #: src/ui/search/search.tsx
 msgctxt "Round tags filter label"
 msgid "Round tags"
-msgstr ""
+msgstr "回合标签"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"
@@ -5808,7 +5808,7 @@ msgstr "搜索"
 
 #: src/ui/settings/about/about.tsx
 msgid "Automatically download updates."
-msgstr ""
+msgstr "自动下载更新"
 
 #: src/ui/settings/about/about.tsx
 msgctxt "Settings title"
@@ -5983,11 +5983,11 @@ msgstr "断开连接"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You must select at least one data to import."
-msgstr ""
+msgstr "您必须选择至少一项数据进行导入。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You must select a CS:DM V2 backup file."
-msgstr ""
+msgstr "你必须选择一个CS:DM V2的备份文件。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You need at least one folder."
@@ -5995,15 +5995,15 @@ msgstr ""
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "The backup file is invalid."
-msgstr ""
+msgstr "备份文件无效。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "A required tag has not been found."
-msgstr ""
+msgstr "未找到所需的标签。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "Select the JSON backup file generated from the CS:DM V2."
-msgstr ""
+msgstr "选择从CS:DM V2生成的JSON备份文件。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
