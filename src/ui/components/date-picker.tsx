@@ -1,10 +1,10 @@
 import React, { type ReactNode } from 'react';
-import { enUS, fr, zhCN, ptBR, de } from 'date-fns/locale';
+import { enUS, fr, zhCN, ptBR, de } from 'react-day-picker/locale';
 import { DayPicker } from 'react-day-picker';
 import type { DateRange } from 'react-day-picker';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
-function getFnsLocale(locale: string) {
+function getLocaleObject(locale: string) {
   switch (locale) {
     case 'fr':
       return fr;
@@ -41,15 +41,15 @@ export function DatePicker({ isDisabled, startDate, endDate, onRangeChange, foot
       mode="range"
       footer={footer}
       showOutsideDays={true}
-      captionLayout="dropdown-buttons"
+      captionLayout="dropdown"
       selected={range}
       onSelect={onRangeChange}
-      fromYear={csgoReleaseDate.getFullYear()}
-      toYear={new Date().getFullYear()}
+      startMonth={new Date(csgoReleaseDate.getFullYear(), 0)}
+      endMonth={new Date(new Date().getFullYear(), 11)}
       hidden={{
         before: csgoReleaseDate,
       }}
-      locale={getFnsLocale(locale)}
+      locale={getLocaleObject(locale)}
     />
   );
 }

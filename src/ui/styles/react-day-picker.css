@@ -1,16 +1,38 @@
+/* https://github.com/gpbl/react-day-picker/blob/main/src/style.css */
 @import 'react-day-picker/dist/style.css';
 
-.rdp {
-  --rdp-cell-size: 36px;
-  --rdp-accent-color: var(--blue-700);
-  --rdp-background-color: var(--gray-300);
-  --rdp-outline: 1px solid var(--gray-900);
-  --rdp-outline-selected: 2px solid var(--gray-900);
-  margin: 0;
+.rdp-root {
+  --rdp-accent-color: var(--gray-800);
+  --rdp-accent-background-color: var(--blue-700);
+  --rdp-day-height: 36px;
+  --rdp-day-width: 36px;
+  --rdp-day_button-height: 36px;
+  --rdp-day_button-width: 36px;
+  --rdp-selected-border: 1px solid var(--gray-50);
+  --rdp-range_middle-color: var(--gray-900);
+  --rdp-range_start-date-background-color: var(--rdp-accent-background-color);
+  --rdp-range_end-date-background-color: var(--rdp-accent-background-color);
 }
 
-.rdp select {
+.rdp-day {
+  padding: 0;
+}
+
+.rdp-day:not(.rdp-selected):hover {
+  background-color: var(--gray-300);
+  border-radius: 100%;
+}
+
+.rdp-selected {
+  font-size: 1rem;
+}
+
+.rdp-dropdown {
   background-color: var(--gray-50);
   color: var(--gray-900);
   @apply p-4;
+}
+
+.rdp-dropdown:focus-visible ~ .rdp-caption_label {
+  outline: 1px solid var(--gray-800);
 }

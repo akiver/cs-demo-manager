@@ -104,7 +104,7 @@ function Footer({ startDate, endDate, selectedPreset, onPresetClick, showFilterI
 
   return (
     <div className="flex flex-col mt-8 gap-y-8">
-      <div className="flex flex-wrap gap-8">
+      <div className="flex flex-wrap gap-8 max-w-[270px]">
         {presets.map((preset) => {
           const onClick = () => {
             onPresetClick(preset);
@@ -142,9 +142,11 @@ type Props = {
 export function PeriodFilter({ isDisabled, startDate, endDate, onRangeChange, showFilterIndicator }: Props) {
   const { presets, allTime } = usePeriodPresets();
   let selectedPreset: Preset | undefined = allTime;
-  if (startDate && endDate) {
-    const diffDays = differenceInDays(new Date(startDate), new Date());
-    selectedPreset = presets.find((preset) => preset.daysAgo === diffDays);
+  if (startDate) {
+    const diffDays = Math.abs(differenceInDays(startDate, new Date()));
+    selectedPreset = presets.find((preset) => {
+      return preset.daysAgo !== undefined && Math.abs(preset.daysAgo - diffDays) === 0;
+    });
   }
 
   const onPresetClick = (preset: Preset) => {
