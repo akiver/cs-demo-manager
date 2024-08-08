@@ -8,7 +8,7 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-29 20:39\n"
+"PO-Revision-Date: 2024-08-07 00:11\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -468,7 +468,7 @@ msgstr "Réessayer"
 #: src/ui/components/buttons/reveal-button.tsx
 msgctxt "Button"
 msgid "Reveal"
-msgstr ""
+msgstr "Révéler"
 
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
@@ -566,7 +566,7 @@ msgstr "Copier"
 #: src/ui/components/context-menu/items/copy-name-item.tsx
 msgctxt "Context menu"
 msgid "Copy name"
-msgstr ""
+msgstr "Copier le nom"
 
 #: src/ui/components/context-menu/items/copy-sharecode-item.tsx
 msgctxt "Copy context menu"
@@ -1201,7 +1201,7 @@ msgstr "Armes"
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 msgctxt "Toast"
 msgid "Heatmap exported, click here to reveal the file"
-msgstr ""
+msgstr "Heatmap exportée, cliquez ici pour révéler le fichier"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
@@ -1252,23 +1252,23 @@ msgstr "Evénement"
 #: src/ui/components/heatmap/heatmap-select-map.tsx
 msgctxt "Input label"
 msgid "Map"
-msgstr ""
+msgstr "Map"
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "Loading map…"
-msgstr ""
+msgstr "Chargement de la map…"
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "An error occurred while loading the map."
-msgstr ""
+msgstr "Une erreur est survenue lors du chargement de la map."
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "Select a map."
-msgstr ""
+msgstr "Sélectionner une map."
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "No data points were found for the current filters."
-msgstr ""
+msgstr "Aucun point n'a été trouvé pour les filtres actuels."
 
 #: src/ui/components/heatmap/input-blur.tsx
 msgctxt "Input label"
@@ -1431,28 +1431,28 @@ msgstr "Voir le round"
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Matches"
-msgstr ""
+msgstr "Matchs"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 msgid "Win"
-msgstr ""
+msgstr "Victoire"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Lost"
-msgstr ""
+msgstr "Défaite"
 
 #: src/ui/components/maps-stats.tsx
 msgid "Tie"
-msgstr ""
+msgstr "Égalité"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/rounds-panel.tsx
@@ -1463,32 +1463,32 @@ msgstr "Rounds"
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Sides"
-msgstr ""
+msgstr "Sides"
 
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Impact"
-msgstr ""
+msgstr "Impact"
 
 #: src/ui/components/maps-stats.tsx
 msgid "K/D"
-msgstr ""
+msgstr "K/D"
 
 #: src/ui/components/maps-stats.tsx
 msgid "ADR"
-msgstr ""
+msgstr "ADR"
 
 #: src/ui/components/maps-stats.tsx
 msgid "KAST"
-msgstr ""
+msgstr "KAST"
 
 #: src/ui/components/maps-stats.tsx
 msgid "HS%"
-msgstr ""
+msgstr "HS%"
 
 #: src/ui/components/maps-stats.tsx
 msgid "No maps stats found."
-msgstr ""
+msgstr "Aucune statistique trouvée pour cette map."
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
@@ -1921,15 +1921,15 @@ msgstr "Moy. kills/round"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Won"
-msgstr ""
+msgstr "Gagné"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Avg kill"
-msgstr ""
+msgstr "Moy. kill"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Save rate"
-msgstr ""
+msgstr "Taux éco"
 
 #: src/ui/components/panels/clutches-panel.tsx
 #: src/ui/match/players/clutches-panel.tsx
@@ -1940,27 +1940,27 @@ msgstr "Clutchs"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Overall"
-msgstr ""
+msgstr "Global"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v2"
-msgstr ""
+msgstr "1v2"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v3"
-msgstr ""
+msgstr "1v3"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v4"
-msgstr ""
+msgstr "1v4"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v5"
-msgstr ""
+msgstr "1v5"
 
 #: src/ui/components/panels/headshot-panel.tsx
 msgctxt "Panel title"
@@ -2153,7 +2153,7 @@ msgstr "Défaites"
 
 #: src/ui/components/panels/win-rate.tsx
 msgid "Win rate"
-msgstr ""
+msgstr "Taux de victoire"
 
 #: src/ui/components/table/cells/bans-cell.tsx
 msgctxt "Tooltip"
@@ -2957,11 +2957,11 @@ msgstr "Aucun kill trouvé"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "This demo needs to be re-analyzed to make the camera focus work."
-msgstr ""
+msgstr "Cette démo doit être réanalyser pour que la caméra se place correctement sur les joueurs."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Read this <0>documentation</0> for more information"
-msgstr ""
+msgstr "Lisez la <0>documentation</0> pour plus d'informations"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No rounds found"
@@ -3264,12 +3264,12 @@ msgstr "Paramètres ({shortcut})"
 #: src/ui/left-bar/teams-link.tsx
 msgctxt "Tooltip"
 msgid "Teams"
-msgstr ""
+msgstr "Équipes"
 
 #: src/ui/left-bar/video-queue-link.tsx
 msgctxt "Tooltip"
 msgid "Videos"
-msgstr ""
+msgstr "Vidéos"
 
 #: src/ui/match/chat-messages/chat-message.tsx
 msgctxt "Chat message status"
@@ -3446,7 +3446,7 @@ msgstr "<0>{killerName}</0> a tué <1>{victimName}</1> <2>{killCount}</2> fois"
 
 #: src/ui/match/duels/players-duels-matrix.tsx
 msgid "No kills found between both teams."
-msgstr ""
+msgstr "Aucun kill trouvé entre les deux équipes."
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
@@ -4507,12 +4507,12 @@ msgstr "Voulez-vous vraiment continuer ?"
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgctxt "Button"
 msgid "Add to queue"
-msgstr ""
+msgstr "Ajouter à la file d'attente"
 
 #: src/ui/match/video/add-video-to-queue-error-dialog.tsx
 msgctxt "Dialog title"
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #: src/ui/match/video/close-game-after-recording-checkbox.tsx
 msgctxt "Checkbox label"
@@ -4522,7 +4522,7 @@ msgstr "Fermer le jeu lorsque l'enregistrement est terminé"
 #: src/ui/match/video/concatenate-sequences-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Concatenate sequences into 1 video"
-msgstr ""
+msgstr "Concaténer les séquences en 1 vidéo"
 
 #: src/ui/match/video/death-notices-duration-input.tsx
 msgid "Death notices duration (seconds)"
@@ -4531,7 +4531,7 @@ msgstr "Durée des notifications de mort (secondes)"
 #: src/ui/match/video/delete-raw-files-after-encoding-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Delete raw files after encoding"
-msgstr ""
+msgstr "Supprimer les fichiers bruts après l'encodage"
 
 #: src/ui/match/video/encoder-software-select.tsx
 msgctxt "Select label of video encoder"
@@ -4609,12 +4609,12 @@ msgstr "Conteneur vidéo"
 #: src/ui/match/video/focus-camera-player-select.tsx
 msgctxt "Checkbox label"
 msgid "Focus camera on player"
-msgstr ""
+msgstr "Focaliser la caméra sur le joueur"
 
 #: src/ui/match/video/generate-only-raw-files-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Generate only raw files"
-msgstr ""
+msgstr "Générer uniquement des fichiers bruts"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
@@ -4624,7 +4624,7 @@ msgstr "Kill"
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Death"
-msgstr ""
+msgstr "Mort"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
@@ -4633,11 +4633,11 @@ msgstr "Round"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "No action found for this player"
-msgstr ""
+msgstr "Aucune action trouvée pour ce joueur"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "If 2 actions occurred less than 10 seconds apart or 2 actions are less than 2 seconds apart, a single sequence will be generated."
-msgstr ""
+msgstr "Si 2 actions se sont produites à moins de 10 secondes d'intervalle ou si 2 actions sont à moins de 2 secondes d'intervalle, une seule séquence sera générée."
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Dialog title"
@@ -4713,7 +4713,7 @@ msgstr "HLAE a retourné une erreur."
 
 #: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
-msgstr ""
+msgstr "Assurez-vous que HLAE est à jour et compatible avec la dernière version de CS2 sur <0>GitHub</0> ou <1>Discord></1>."
 
 #: src/ui/match/video/height-resolution-input.tsx
 msgctxt "Input label"
@@ -5047,33 +5047,33 @@ msgstr "Supprimer les séquences"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgid "No sequences to edit"
-msgstr ""
+msgstr "Aucune séquence à modifier"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgctxt "Button"
 msgid "Edit sequences settings"
-msgstr ""
+msgstr "Modifier les paramètres de séquences"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgctxt "Dialog title"
 msgid "Edit sequences settings"
-msgstr ""
+msgstr "Modifier les paramètres de séquences"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "The following settings will be applied to all existing sequences."
-msgstr ""
+msgstr "Les paramètres suivants seront appliqués à toutes les séquences existantes."
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override camera focus"
-msgstr ""
+msgstr "Remplacer le focus de la caméra"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override CFG"
-msgstr ""
+msgstr "Remplacer CFG"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override death notices"
-msgstr ""
+msgstr "Remplacer les death notices"
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
@@ -5146,7 +5146,7 @@ msgstr "Largeur"
 #: src/ui/match/video/x-ray-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Show X-Ray"
-msgstr ""
+msgstr "Afficher les rayons X"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
@@ -5297,47 +5297,47 @@ msgstr "Jambe droite"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "{updateCount, plural, one {The match has been updated} other {# matches have been updated}}"
-msgstr ""
+msgstr "{updateCount, plural, one {Le match a été mis à jour} other {# matchs ont été mis à jour}}"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "The team names must be different."
-msgstr ""
+msgstr "Les noms d'équipe doivent être différents."
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "The teams have not been found."
-msgstr ""
+msgstr "Les équipes n'ont pas été trouvées."
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "Updating team names of match {updatedCount} out of {0}."
-msgstr ""
+msgstr "Mise à jour des noms d'équipe du match {updatedCount} sur {0}."
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Dialog title"
 msgid "Update team names"
-msgstr ""
+msgstr "Mettre à jour les noms d'équipe"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Input label"
 msgid "Team A"
-msgstr ""
+msgstr "Équipe A"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Input label"
 msgid "Team B"
-msgstr ""
+msgstr "Équipe B"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "You should rename team names only to merge stats into a single team!"
-msgstr ""
+msgstr "Vous devriez renommer les noms des équipes uniquement pour fusionner les statistiques en une seule équipe !"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "The only way to restore team names is by re-analyzing demos!"
-msgstr ""
+msgstr "La seule façon de restaurer les noms des équipes est de ré-analyser les démos !"
 
 #: src/ui/matches/table/match-context-menu.tsx
 msgctxt "Context menu"
 msgid "Update team names"
-msgstr ""
+msgstr "Mettre à jour les noms d'équipe"
 
 #: src/ui/matches/table/match-count.tsx
 msgid "{matchCount, plural, one {# match} other {# matches}}"
@@ -5718,7 +5718,7 @@ msgstr "Kills collatéraux"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Knife/Tazer kills"
-msgstr ""
+msgstr "Knife/Tazer kills"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -6287,7 +6287,7 @@ msgstr "La coordonnée Y est requise."
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Threshold Z is required."
-msgstr ""
+msgstr "Le seuil Z est requis."
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Scale is required."
@@ -6306,7 +6306,7 @@ msgstr "Échelle"
 #: src/ui/settings/maps/map-dialog/threshold-z-input.tsx
 msgctxt "Input label"
 msgid "Threshold Z"
-msgstr ""
+msgstr "Seuil Z"
 
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "Thumbnail image pixels must be smaller than {maxFileWidth}x{maxFileHeight}"
@@ -6387,12 +6387,12 @@ msgstr "Largeur"
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
-msgstr ""
+msgstr "Inclure les dommages supérieurs à 40HP qui n'ont pas entraîné la mort d'un joueur dans les meilleurs moments"
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgctxt "Settings title"
 msgid "Include damages (highlights)"
-msgstr ""
+msgstr "Inclure les dommages (meilleurs moments)"
 
 #: src/ui/settings/playback/highlights-watch-after-kill-delay.tsx
 msgctxt "Settings title"
@@ -6428,12 +6428,12 @@ msgstr "Paramètres de lancement"
 
 #: src/ui/settings/playback/lowlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's death in lowlights"
-msgstr ""
+msgstr "Inclure les dommages supérieurs à 40 HP qui n'ont pas entraîné la mort d'un joueur dans les pires moments"
 
 #: src/ui/settings/playback/lowlights-include-damages.tsx
 msgctxt "Settings title"
 msgid "Include damages (lowlights)"
-msgstr ""
+msgstr "Inclure les dommages (pires moments)"
 
 #: src/ui/settings/playback/lowlights-watch-after-kill-delay.tsx
 msgctxt "Settings title"
@@ -6455,20 +6455,20 @@ msgstr "Combien de secondes avant un kill démarrera la lecture en regardant les
 
 #: src/ui/settings/playback/player-voices.tsx
 msgid "Listen player voices during playback"
-msgstr ""
+msgstr "Écouter les voix du joueur pendant la lecture"
 
 #: src/ui/settings/playback/player-voices.tsx
 msgid "Doesn't work with Valve Matchmaking demos as voice data are not available!"
-msgstr ""
+msgstr "Ne fonctionne pas avec les démos Valve matchmaking car les données vocales ne sont pas disponibles !"
 
 #: src/ui/settings/playback/player-voices.tsx
 msgid "CS2 only!"
-msgstr ""
+msgstr "CS2 seulement !"
 
 #: src/ui/settings/playback/player-voices.tsx
 msgctxt "Settings title"
 msgid "Player voices"
-msgstr ""
+msgstr "Voix des joueurs"
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
@@ -6680,31 +6680,31 @@ msgstr "Exécutable HLAE invalide"
 
 #: src/ui/team/load-team-error.tsx
 msgid "This team is not in any analyzed demos."
-msgstr ""
+msgstr "Cette équipe n'est dans aucune démo analysée."
 
 #: src/ui/team/team-loader.tsx
 msgid "Loading team…"
-msgstr ""
+msgstr "Chargement de l'équipe…"
 
 #: src/ui/teams/no-teams.tsx
 msgid "No team found with current filters."
-msgstr ""
+msgstr "Aucune équipe trouvée avec les filtres actuels."
 
 #: src/ui/teams/no-teams.tsx
 msgid "No team found, you have to analyze demos to generate teams."
-msgstr ""
+msgstr "Aucune équipe trouvée, vous devez analyser des démos pour générer des équipes."
 
 #: src/ui/teams/table/selected-team-count.tsx
 msgid "{0, plural, one {# team selected} other {# teams selected}}"
-msgstr ""
+msgstr "{0, plural, one {# équipe sélectionnée} other {# équipes sélectionnées}}"
 
 #: src/ui/teams/table/team-count.tsx
 msgid "{0, plural, one {# team} other {# teams}}"
-msgstr ""
+msgstr "{0, plural, one {# équipe} other {# équipes}}"
 
 #: src/ui/teams/teams-table.tsx
 msgid "Loading teams…"
-msgstr ""
+msgstr "Chargement des équipes…"
 
 #: src/ui/title-bar/history/history-back-button.tsx
 msgctxt "Tooltip"
@@ -6723,16 +6723,16 @@ msgstr "Mise à jour prête !"
 #: src/ui/videos/remove-all-videos-button.tsx
 msgctxt "Button"
 msgid "Remove all"
-msgstr ""
+msgstr "Tout supprimer"
 
 #: src/ui/videos/remove-completed-videos-button.tsx
 msgctxt "Button"
 msgid "Remove completed"
-msgstr ""
+msgstr "Supprimer les terminées"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Waiting…"
-msgstr ""
+msgstr "En attente…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "In-game recording in progress…"
@@ -6740,68 +6740,68 @@ msgstr "Enregistrement en jeu en cours…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Preparing files for conversion…"
-msgstr ""
+msgstr "Préparation des fichiers pour la conversion…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Generating video for sequence {0} / {1}…"
-msgstr ""
+msgstr "Génération de la vidéo pour la séquence {0} / {1}…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Merging videos into a single file…"
-msgstr ""
+msgstr "Fusion des vidéos en un seul fichier…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Video generation done"
-msgstr ""
+msgstr "Génération de la vidéo terminée"
 
 #: src/ui/videos/video-entry.tsx
 msgid "The folder doesn't exist yet"
-msgstr ""
+msgstr "Le dossier n'existe pas encore"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Map"
-msgstr ""
+msgstr "Map"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Video ID"
-msgstr ""
+msgstr "ID de la vidéo"
 
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 msgid "Sequences"
-msgstr ""
+msgstr "Séquences"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Disk space"
-msgstr ""
+msgstr "Espace disque"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Encoder software"
-msgstr ""
+msgstr "Logiciel d'encodage"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Resolution"
-msgstr ""
+msgstr "Résolution"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Merge sequences into single file"
-msgstr ""
+msgstr "Fusionner les séquences en un seul fichier"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Generate only RAW files"
-msgstr ""
+msgstr "Générer uniquement des fichiers bruts"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Show death notices"
-msgstr ""
+msgstr "Afficher uniquement les death notices"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Close game after recording"
-msgstr ""
+msgstr "Fermer le jeu après l'enregistrement"
 
 #: src/ui/videos/video-entry.tsx
 msgid "You will have to close the game manually."
-msgstr ""
+msgstr "Vous devrez quitter le jeu manuellement."
 
 #: src/ui/videos/video-entry.tsx
 msgid "Demo path"
