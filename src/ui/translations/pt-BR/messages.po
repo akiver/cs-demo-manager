@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-29 20:39\n"
+"PO-Revision-Date: 2024-08-07 00:11\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -282,11 +282,11 @@ msgstr "Connectar"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It looks like you installed an older version of CS Demo Manager and the current database schema is not compatible with it."
-msgstr ""
+msgstr "Parece que você instalou uma versão mais antiga do CS Demo Manager e o esquema atual do banco de dados não é compatível com ele."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
-msgstr ""
+msgstr "Você pode atualizar o CS Demo Manager para a última versão ou redefinir o banco de dados para começar do zero."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that PostgreSQL is not installed on your system or the path to the <0>psql</0> executable is not in your <1>PATH</1> environment variable."
@@ -298,7 +298,7 @@ msgstr "Geralmente isso significa que o serviço PostgreSQL não está rodando, 
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "This error usually means that the database is not running or that the connection settings are incorrect."
-msgstr ""
+msgstr "Este erro geralmente significa que o banco de dados não está sendo executado ou que as configurações de conexão estão incorretas."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "Make sure PostgreSQL is running and your settings are correct."
@@ -468,7 +468,7 @@ msgstr "Tentar novamente"
 #: src/ui/components/buttons/reveal-button.tsx
 msgctxt "Button"
 msgid "Reveal"
-msgstr ""
+msgstr "Exibir"
 
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
@@ -566,7 +566,7 @@ msgstr "Copiar"
 #: src/ui/components/context-menu/items/copy-name-item.tsx
 msgctxt "Context menu"
 msgid "Copy name"
-msgstr ""
+msgstr "Copiar nome"
 
 #: src/ui/components/context-menu/items/copy-sharecode-item.tsx
 msgctxt "Copy context menu"
@@ -1201,7 +1201,7 @@ msgstr "Armas"
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 msgctxt "Toast"
 msgid "Heatmap exported, click here to reveal the file"
-msgstr ""
+msgstr "Mapa de calor exportado, clique aqui para mostrar o arquivo"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
@@ -1252,19 +1252,19 @@ msgstr "Evento"
 #: src/ui/components/heatmap/heatmap-select-map.tsx
 msgctxt "Input label"
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "Loading map…"
-msgstr ""
+msgstr "Carregando mapa…"
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "An error occurred while loading the map."
-msgstr ""
+msgstr "Ocorreu um erro ao carregar o mapa."
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "Select a map."
-msgstr ""
+msgstr "Selecione um mapa."
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "No data points were found for the current filters."
@@ -1431,28 +1431,28 @@ msgstr "Ver rodada"
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Matches"
-msgstr ""
+msgstr "Partidas"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 msgid "Win"
-msgstr ""
+msgstr "Vitória"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Lost"
-msgstr ""
+msgstr "Derrota"
 
 #: src/ui/components/maps-stats.tsx
 msgid "Tie"
-msgstr ""
+msgstr "Empate"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/rounds-panel.tsx
@@ -1463,20 +1463,20 @@ msgstr "Rodadas"
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Sides"
-msgstr ""
+msgstr "Facção"
 
 #: src/ui/components/maps-stats.tsx
 msgctxt "Panel title"
 msgid "Impact"
-msgstr ""
+msgstr "Impacto"
 
 #: src/ui/components/maps-stats.tsx
 msgid "K/D"
-msgstr ""
+msgstr "A/M"
 
 #: src/ui/components/maps-stats.tsx
 msgid "ADR"
-msgstr ""
+msgstr "DMR"
 
 #: src/ui/components/maps-stats.tsx
 msgid "KAST"
@@ -1944,23 +1944,23 @@ msgstr ""
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v2"
-msgstr ""
+msgstr "1v2"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v3"
-msgstr ""
+msgstr "1v3"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v4"
-msgstr ""
+msgstr "1v4"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "1v5"
-msgstr ""
+msgstr "1v5"
 
 #: src/ui/components/panels/headshot-panel.tsx
 msgctxt "Panel title"
@@ -2153,7 +2153,7 @@ msgstr "Derrotas"
 
 #: src/ui/components/panels/win-rate.tsx
 msgid "Win rate"
-msgstr ""
+msgstr "Taxa de vitórias"
 
 #: src/ui/components/table/cells/bans-cell.tsx
 msgctxt "Tooltip"
@@ -3264,12 +3264,12 @@ msgstr "Configurações ({shortcut})"
 #: src/ui/left-bar/teams-link.tsx
 msgctxt "Tooltip"
 msgid "Teams"
-msgstr ""
+msgstr "Equipes"
 
 #: src/ui/left-bar/video-queue-link.tsx
 msgctxt "Tooltip"
 msgid "Videos"
-msgstr ""
+msgstr "Vídeos"
 
 #: src/ui/match/chat-messages/chat-message.tsx
 msgctxt "Chat message status"
