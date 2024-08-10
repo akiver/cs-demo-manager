@@ -24,6 +24,9 @@ export const generatePlayerSequences = createAction<{
 export const generatePlayerKillsSequences = createAction<{ steamId: string; match: Match }>(
   'match/video/sequences/generatePlayerKills',
 );
+export const generatePlayerDeathsSequences = createAction<{ steamId: string; match: Match }>(
+  'match/video/sequences/generatePlayerDeaths',
+);
 export const generatePlayerRoundsSequences = createAction<{ steamId: string; match: Match }>(
   'match/video/sequences/generatePlayerRounds',
 );

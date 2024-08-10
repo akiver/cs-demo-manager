@@ -3830,6 +3830,11 @@ msgstr "Código de compartilhamento mira"
 msgid "Steam ID"
 msgstr "ID da Steam"
 
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-deaths-video-item.tsx
+msgctxt "Context menu"
+msgid "Deaths"
+msgstr ""
+
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
 msgid "Kills"

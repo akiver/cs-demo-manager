@@ -4,6 +4,7 @@ import {
   addSequence,
   deleteSequence,
   deleteSequences,
+  generatePlayerDeathsSequences,
   generatePlayerKillsSequences,
   generatePlayerRoundsSequences,
   generatePlayerSequences,
@@ -58,6 +59,11 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     .addCase(generatePlayerKillsSequences, (state, action) => {
       const { match, steamId } = action.payload;
       const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, steamId);
+      state[match.demoFilePath] = sequences;
+    })
+    .addCase(generatePlayerDeathsSequences, (state, action) => {
+      const { match, steamId } = action.payload;
+      const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Deaths, match, steamId);
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerSequences, (state, action) => {
