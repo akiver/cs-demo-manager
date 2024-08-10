@@ -19,6 +19,13 @@ import { useGetMapThumbnailSrc } from 'csdm/ui/maps/use-get-map-thumbnail-src';
 import { Card } from 'csdm/ui/components/card';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { useRemoveVideos } from './use-remove-videos';
+import { useWebSocketClient } from '../hooks/use-web-socket-client';
+import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { isErrorCode } from 'csdm/common/is-error-code';
+import { ErrorCode } from 'csdm/common/error-code';
+import { AddVideoToQueueErrorDialog } from '../match/video/add-video-to-queue-error-dialog';
+import { useDialog } from '../components/dialogs/use-dialog';
+import { RetryButton } from '../components/buttons/retry-button';
 
 function Grid({ children }: { children: ReactNode }) {
   return <div className="grid grid-cols-[auto_1fr] gap-y-4 gap-x-8 items-center">{children}</div>;
@@ -102,6 +109,8 @@ export function VideoEntry({ video }: Props) {
   const getRequiredDiskSpace = useGetSequencesRequiredDiskSpace();
   const getMapThumbnailSrc = useGetMapThumbnailSrc();
   const showToast = useShowToast();
+  const { showDialog } = useDialog();
+  const client = useWebSocketClient();
   const { isRemovingVideos, removeVideos } = useRemoveVideos();
 
   const tryRevealFolder = async (folderPath: string) => {
@@ -157,6 +166,19 @@ export function VideoEntry({ video }: Props) {
     }
   };
 
+  const onRetryClick = async () => {
+    try {
+      await client.send({
+        name: RendererClientMessageName.AddVideoToQueue,
+        payload: video,
+      });
+    } catch (error) {
+      const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
+      const message = getVideoErrorMessageFromErrorCode(video.game, errorCode);
+      showDialog(<AddVideoToQueueErrorDialog>{message}</AddVideoToQueueErrorDialog>);
+    }
+  };
+
   return (
     <Card>
       <div className="flex flex-col gap-y-8">
@@ -170,6 +192,7 @@ export function VideoEntry({ video }: Props) {
           >
             <Trans context="Button">Remove</Trans>
           </Button>
+          {video.status === VideoStatus.Error && <RetryButton onClick={onRetryClick} />}
           {renderCurrentStepMessage(video)}
         </div>
 

@@ -26,13 +26,15 @@ class VideoQueue {
   }
 
   public addVideo(partialVideo: AddVideoPayload) {
-    const id = randomUUID();
+    const id = partialVideo.id ?? randomUUID();
+    const date = partialVideo.date ?? new Date().toISOString();
     const video: Video = {
       ...partialVideo,
       id,
-      date: new Date().toISOString(),
+      date,
       status: VideoStatus.Pending,
       output: '',
+      errorCode: undefined,
       // Raw files and output files are stored in a folder named after the video id to avoid overwriting files
       rawFilesFolderPath: path.join(partialVideo.rawFilesFolderPath, id),
       outputFolderPath: path.join(partialVideo.outputFolderPath, id),

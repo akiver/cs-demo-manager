@@ -15,9 +15,14 @@ const initialState: VideosState = {
 export const videosReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(videoAddedToQueue, (state, action) => {
-      if (state.videos.some((a) => a.id === action.payload.id)) {
-        return;
+      if (action.payload.id) {
+        const videoIndex = state.videos.findIndex((video) => video.id === action.payload.id);
+        if (videoIndex > -1) {
+          state.videos[videoIndex] = action.payload;
+          return;
+        }
       }
+
       state.videos.push(action.payload);
     })
     .addCase(videoUpdated, (state, action) => {

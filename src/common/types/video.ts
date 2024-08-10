@@ -33,4 +33,7 @@ export type Video = {
   currentSequence?: number;
 };
 
-export type AddVideoPayload = Omit<Video, 'id' | 'date' | 'status' | 'output'>;
+export type AddVideoPayload = Omit<Video, 'id' | 'date' | 'status' | 'output'> & {
+  id?: string;
+  date?: string;
+};
