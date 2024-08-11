@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { useGetTimeElapsedBetweenFrames } from 'csdm/ui/match/use-time-elapsed-between-frames';
 import { Indicator } from 'csdm/ui/match/viewer-2d/playback-bar/indicator';
@@ -21,11 +22,18 @@ export function BombPlantedIndicator({ frame, leftX, planterName, site }: Props)
 
   return (
     <Tooltip
-      content={`${getTimeElapsedBetweenFrames({
-        startFrame: round.startFrame,
-        endFrame: frame,
-        frameRate: match.frameRate,
-      })} Bomb planted by "${planterName}" at bomb site ${site}`}
+      content={
+        <p className="w-max">
+          <Trans>
+            {getTimeElapsedBetweenFrames({
+              startFrame: round.startFrame,
+              endFrame: frame,
+              frameRate: match.frameRate,
+            })}{' '}
+            Bomb planted by {planterName} at bomb site {site}
+          </Trans>
+        </p>
+      }
       placement="top"
     >
       <div

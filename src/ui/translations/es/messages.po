@@ -5186,6 +5186,18 @@ msgstr ""
 msgid "Generate positions"
 msgstr ""
 
+#: src/ui/match/viewer-2d/playback-bar/bomb-exploded-indicator.tsx
+msgid "{0} Bomb planted by {planterName} exploded at site {site}"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/bomb-planted-indicator.tsx
+msgid "{0} Bomb planted by {planterName} at bomb site {site}"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
+msgid "{0} Freeze time ended"
+msgstr ""
+
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgctxt "Map radar level"
 msgid "Upper"

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { useGetTimeElapsedBetweenFrames } from 'csdm/ui/match/use-time-elapsed-between-frames';
 import { Indicator } from 'csdm/ui/match/viewer-2d/playback-bar/indicator';
@@ -16,11 +17,16 @@ export function FreezetimeEndIndicator({ leftX }: Props) {
 
   return (
     <Tooltip
-      content={`${getTimeElapsedBetweenFrames({
-        startFrame: round.startFrame,
-        endFrame: round.freezetimeEndFrame,
-        frameRate: match.frameRate,
-      })} Freeze time ended`}
+      content={
+        <Trans>
+          {getTimeElapsedBetweenFrames({
+            startFrame: round.startFrame,
+            endFrame: round.freezetimeEndFrame,
+            frameRate: match.frameRate,
+          })}{' '}
+          Freeze time ended
+        </Trans>
+      }
       placement="top"
     >
       <Indicator leftX={leftX} color="#12805c" />
