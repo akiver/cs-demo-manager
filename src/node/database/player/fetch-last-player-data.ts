@@ -18,9 +18,10 @@ export async function fetchLastPlayerData(filters: FetchPlayerFilters): Promise<
   const { steamId, startDate, endDate, games } = filters;
   let query = db
     .selectFrom('players')
-    .select(['players.name', 'wins_count as winsCount'])
     .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .where('steam_id', '=', steamId)
+    .leftJoin('steam_account_overrides', 'players.steam_id', 'steam_account_overrides.steam_id')
+    .select([db.fn.coalesce('steam_account_overrides.name', 'players.name').as('name'), 'wins_count as winsCount'])
+    .where('players.steam_id', '=', steamId)
     .orderBy('date', 'desc');
 
   if (games.length > 0) {
@@ -33,8 +34,9 @@ export async function fetchLastPlayerData(filters: FetchPlayerFilters): Promise<
 
   const accountPromise = db
     .selectFrom('steam_accounts')
-    .select(['name', 'avatar'])
-    .where('steam_id', '=', steamId)
+    .leftJoin('steam_account_overrides', 'steam_accounts.steam_id', 'steam_account_overrides.steam_id')
+    .select([db.fn.coalesce('steam_account_overrides.name', 'steam_accounts.name').as('name'), 'avatar'])
+    .where('steam_accounts.steam_id', '=', steamId)
     .executeTakeFirst();
   const lastPlayerEntryPromise = query.executeTakeFirstOrThrow();
 

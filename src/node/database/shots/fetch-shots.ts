@@ -10,7 +10,12 @@ type FetchShotsParameters = {
 };
 
 export async function fetchShots({ checksum, roundNumber, weaponNames }: FetchShotsParameters): Promise<Shot[]> {
-  let query = db.selectFrom('shots').selectAll().where('match_checksum', '=', checksum);
+  let query = db
+    .selectFrom('shots')
+    .selectAll()
+    .leftJoin('steam_account_overrides', 'shots.player_steam_id', 'steam_account_overrides.steam_id')
+    .select([db.fn.coalesce('steam_account_overrides.name', 'shots.player_name').as('player_name')])
+    .where('match_checksum', '=', checksum);
 
   if (roundNumber !== undefined) {
     query = query.where('round_number', '=', roundNumber);

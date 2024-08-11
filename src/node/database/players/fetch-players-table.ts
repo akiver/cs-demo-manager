@@ -125,8 +125,9 @@ async function fetchLastPlayersData(steamIds: string[]): Promise<LastPlayersData
     .selectFrom('players')
     .select(['players.steam_id as steamId', 'players.name as name', 'players.rank as rank'])
     .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'players.steam_id')
+    .leftJoin('steam_account_overrides', 'players.steam_id', 'steam_account_overrides.steam_id')
     .select([
-      'steam_accounts.name as lastKnownName',
+      db.fn.coalesce('steam_account_overrides.name', 'steam_accounts.name').as('lastKnownName'),
       'avatar',
       'last_ban_date as lastBanDate',
       'is_community_banned as isCommunityBanned',
@@ -142,7 +143,7 @@ async function fetchLastPlayersData(steamIds: string[]): Promise<LastPlayersData
       'players.steam_id',
       'players.name',
       'players.rank',
-      'steam_accounts.name',
+      'lastKnownName',
       'steam_accounts.avatar',
       'lastBanDate',
       'isCommunityBanned',

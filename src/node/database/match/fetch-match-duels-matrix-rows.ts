@@ -16,10 +16,12 @@ import type { DuelMatrixRow } from 'csdm/common/types/duel-matrix-row';
 export async function fetchMatchDuelsMatrixRows(checksum: string): Promise<DuelMatrixRow[]> {
   const result = await db
     .selectFrom('players as p1')
+    .leftJoin('steam_account_overrides as p1_overrides', 'p1.steam_id', 'p1_overrides.steam_id')
     .innerJoin('teams as t1', (eb) => {
       return eb.onRef('p1.match_checksum', '=', 't1.match_checksum').onRef('p1.team_name', '=', 't1.name');
     })
     .innerJoin('players as p2', 'p1.match_checksum', 'p2.match_checksum')
+    .leftJoin('steam_account_overrides as p2_overrides', 'p2.steam_id', 'p2_overrides.steam_id')
     .innerJoin('teams as t2', (eb) => {
       return eb.onRef('p2.match_checksum', '=', 't2.match_checksum').onRef('p2.team_name', '=', 't2.name');
     })
@@ -37,27 +39,31 @@ export async function fetchMatchDuelsMatrixRows(checksum: string): Promise<DuelM
     })
     .where('p2.match_checksum', '=', checksum)
     .whereRef('p1.team_name', '!=', 'p2.team_name')
-    .groupBy([
-      'p1.steam_id',
-      'p1.team_name',
-      'p1.name',
-      't1.current_side',
-      'p2.steam_id',
-      'p2.team_name',
-      'p2.name',
-      't2.current_side',
-    ])
-    .orderBy(['p1.team_name', 'p1.name', 'p1.steam_id', 'p2.team_name', 'p2.name', 'p2.steam_id'])
     .select([
       'p1.steam_id as killerSteamId',
-      'p1.name as killerName',
+      (eb) => {
+        return eb.fn.coalesce('p1_overrides.name', 'p1.name').as('killerName');
+      },
       't1.current_side as killerTeamSide',
       'p2.steam_id as victimSteamId',
-      'p2.name as victimName',
+      (eb) => {
+        return eb.fn.coalesce('p2_overrides.name', 'p2.name').as('victimName');
+      },
       't2.current_side as victimTeamSide',
       sql<number>`COUNT(DISTINCT k.id)`.as('killCount'),
       sql<number>`COUNT(DISTINCT k2.id)`.as('deathCount'),
     ])
+    .groupBy([
+      'p1.steam_id',
+      'p1.team_name',
+      'killerName',
+      't1.current_side',
+      'p2.steam_id',
+      'p2.team_name',
+      'victimName',
+      't2.current_side',
+    ])
+    .orderBy(['p1.team_name', 'killerName', 'p1.steam_id', 'p2.team_name', 'victimName', 'p2.steam_id'])
     .execute();
 
   return result;

@@ -6,6 +6,8 @@ export async function fetchBombExploded(checksum: string, roundNumber: number) {
   const row = await db
     .selectFrom('bombs_exploded')
     .selectAll()
+    .leftJoin('steam_account_overrides', 'bombs_exploded.planter_steam_id', 'steam_account_overrides.steam_id')
+    .select([db.fn.coalesce('steam_account_overrides.name', 'bombs_exploded.planter_name').as('planter_name')])
     .where('match_checksum', '=', checksum)
     .where('round_number', '=', roundNumber)
     .orderBy('frame', 'asc')

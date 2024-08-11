@@ -22,6 +22,8 @@ export async function fetchPlayers(checksum: string): Promise<Player[]> {
         'last_ban_date',
       ),
     )
+    .leftJoin('steam_account_overrides', 'players.steam_id', 'steam_account_overrides.steam_id')
+    .select([db.fn.coalesce('steam_account_overrides.name', 'players.name').as('name')])
     .leftJoin('kills', (join) => {
       return join.on(({ and, eb, ref }) => {
         return and([
@@ -47,6 +49,7 @@ export async function fetchPlayers(checksum: string): Promise<Player[]> {
       'steam_accounts.avatar',
       'last_ban_date',
       'ignored_steam_accounts.steam_id',
+      'steam_account_overrides.name',
     ])
     .execute();
 

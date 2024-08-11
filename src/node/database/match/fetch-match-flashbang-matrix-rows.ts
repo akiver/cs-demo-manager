@@ -27,10 +27,12 @@ import type { FlashbangMatrixRow } from 'csdm/common/types/flashbang-matrix-row'
 export async function fetchMatchFlashbangMatrixRows(checksum: string): Promise<FlashbangMatrixRow[]> {
   const result = await db
     .selectFrom('players as p1')
+    .leftJoin('steam_account_overrides as p1_overrides', 'p1.steam_id', 'p1_overrides.steam_id')
     .innerJoin('teams as t1', (eb) => {
       return eb.onRef('p1.match_checksum', '=', 't1.match_checksum').onRef('p1.team_name', '=', 't1.name');
     })
     .innerJoin('players as p2', 'p1.match_checksum', 'p2.match_checksum')
+    .leftJoin('steam_account_overrides as p2_overrides', 'p2.steam_id', 'p2_overrides.steam_id')
     .innerJoin('teams as t2', (eb) => {
       return eb.onRef('p2.match_checksum', '=', 't2.match_checksum').onRef('p2.team_name', '=', 't2.name');
     })
@@ -41,25 +43,29 @@ export async function fetchMatchFlashbangMatrixRows(checksum: string): Promise<F
         .on('pb.match_checksum', '=', checksum);
     })
     .where('p2.match_checksum', '=', checksum)
+    .select([
+      'p1.steam_id as flasherSteamId',
+      (eb) => {
+        return eb.fn.coalesce('p1_overrides.name', 'p1.name').as('flasherName');
+      },
+      't1.current_side as flasherTeamSide',
+      'p2.steam_id as flashedSteamId',
+      (eb) => {
+        return eb.fn.coalesce('p2_overrides.name', 'p2.name').as('flashedName');
+      },
+      't2.current_side as flashedTeamSide',
+      sql<number>`COALESCE(ROUND(AVG(pb.duration)::numeric, 2), 0)`.as('duration'),
+    ])
+    .orderBy(['p1.team_name', 'flasherName', 'p1.steam_id', 'p2.team_name', 'flashedName', 'p2.steam_id'])
     .groupBy([
       'p1.steam_id',
       'p1.team_name',
-      'p1.name',
+      'flasherName',
       't1.current_side',
       'p2.steam_id',
       'p2.team_name',
-      'p2.name',
+      'flashedName',
       't2.current_side',
-    ])
-    .orderBy(['p1.team_name', 'p1.name', 'p1.steam_id', 'p2.team_name', 'p2.name', 'p2.steam_id'])
-    .select([
-      'p1.steam_id as flasherSteamId',
-      'p1.name as flasherName',
-      't1.current_side as flasherTeamSide',
-      'p2.steam_id as flashedSteamId',
-      'p2.name as flashedName',
-      't2.current_side as flashedTeamSide',
-      sql<number>`COALESCE(ROUND(AVG(pb.duration)::numeric, 2), 0)`.as('duration'),
     ])
     .execute();
 
