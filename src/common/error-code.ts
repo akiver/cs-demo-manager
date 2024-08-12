@@ -80,6 +80,7 @@ export const ErrorCode = {
   SteamAccountAlreadyIgnored: 2000,
   SteamAccountNotFound: 2001,
   InvalidSteamCommunityUrl: 2002,
+  SteamAccountNameTooLong: 2003,
 
   TagNameAlreadyToken: 3000,
   TagNameTooShort: 3001,

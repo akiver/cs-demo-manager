@@ -8,7 +8,7 @@ import {
   fuzzySearchTextChanged,
   selectionChanged,
 } from './players-actions';
-import { playerCommentUpdated } from '../player/player-actions';
+import { playerCommentUpdated, steamAccountNameUpdated } from '../player/player-actions';
 import { playersTagsUpdated } from '../tags/tags-actions';
 
 export type PlayersState = {
@@ -56,6 +56,12 @@ export const playersReducer = createReducer(initialState, (builder) => {
       });
       for (const player of players) {
         player.tagIds = action.payload.tagIds;
+      }
+    })
+    .addCase(steamAccountNameUpdated, (state, action) => {
+      const player = state.entities.find((p) => p.steamId === action.payload.steamId);
+      if (player) {
+        player.name = action.payload.name;
       }
     });
 });

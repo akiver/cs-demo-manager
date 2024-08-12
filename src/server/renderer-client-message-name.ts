@@ -46,6 +46,7 @@ export const RendererClientMessageName = {
   ExportDemoPlayersVoice: 'export-demo-players-voice',
   UpdateMatchesType: 'update-matches-type',
   UpdateMatchesTeamNames: 'update-matches-team-names',
+  UpdateSteamAccountName: 'update-steam-account-name',
   ExportMatchesToXlsx: 'export-matches-to-xslx',
   ExportMatchesToJson: 'export-matches-to-json',
   AddMap: 'add-map',

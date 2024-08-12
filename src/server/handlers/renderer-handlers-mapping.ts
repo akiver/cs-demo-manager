@@ -188,6 +188,10 @@ import {
   type UpdatePlayersTagsPayload,
 } from './renderer-process/tags/update-players-tags-handler';
 import type { AddVideoPayload } from 'csdm/common/types/video';
+import {
+  updateSteamAccountNameHandler,
+  type UpdateSteamAccountNamePayload,
+} from './renderer-process/steam-accounts/update-steam-account-name-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -231,6 +235,7 @@ export interface RendererMessageHandlers {
     UpdateMatchesTeamNamesPayload,
     MatchesTeamNamesUpdatedPayload
   >;
+  [RendererClientMessageName.UpdateSteamAccountName]: Handler<UpdateSteamAccountNamePayload, string>;
   [RendererClientMessageName.ExportMatchesToXlsx]: Handler<ExportMatchesToXlsxPayload>;
   [RendererClientMessageName.ExportMatchesToJson]: Handler<ExportMatchesToJsonPayload>;
   [RendererClientMessageName.AddIgnoredSteamAccount]: Handler<string, IgnoredSteamAccount>;
@@ -334,6 +339,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.ExportDemoPlayersVoice]: exportDemoPlayersVoiceHandler,
   [RendererClientMessageName.UpdateMatchesType]: updateMatchesTypeHandler,
   [RendererClientMessageName.UpdateMatchesTeamNames]: updateMatchesTeamNamesHandler,
+  [RendererClientMessageName.UpdateSteamAccountName]: updateSteamAccountNameHandler,
   [RendererClientMessageName.ExportMatchesToXlsx]: exportMatchesToXlsxHandler,
   [RendererClientMessageName.ExportMatchesToJson]: exportMatchesToJsonHandler,
   [RendererClientMessageName.AddIgnoredSteamAccount]: addIgnoredSteamAccountHandler,

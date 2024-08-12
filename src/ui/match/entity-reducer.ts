@@ -7,6 +7,7 @@ import { demoRenamed } from 'csdm/ui/demos/demos-actions';
 import { addIgnoredSteamAccountSuccess, deleteIgnoredSteamAccountSuccess } from '../ban/ban-actions';
 import { insertMatchSuccess } from '../analyses/analyses-actions';
 import { matchesTypeUpdated } from '../matches/matches-actions';
+import { steamAccountNameUpdated } from '../player/player-actions';
 
 const initialState = null as Match | null;
 
@@ -78,6 +79,37 @@ export const entityReducer = createReducer(initialState, (builder) => {
     .addCase(insertMatchSuccess, (state, action) => {
       if (state?.checksum === action.payload.checksum) {
         return initialState;
+      }
+    })
+    .addCase(steamAccountNameUpdated, (state, action) => {
+      if (!state) {
+        return;
+      }
+
+      const { name } = action.payload;
+
+      for (const player of state.players) {
+        if (player.steamId === action.payload.steamId) {
+          player.name = name;
+        }
+      }
+
+      for (const kill of state.kills) {
+        if (kill.killerSteamId === action.payload.steamId) {
+          kill.killerName = name;
+        }
+        if (kill.assisterSteamId === action.payload.steamId) {
+          kill.assisterName = name;
+        }
+        if (kill.victimSteamId === action.payload.steamId) {
+          kill.victimName = name;
+        }
+      }
+
+      for (const chat of state.chatMessages) {
+        if (chat.senderSteamId === action.payload.steamId) {
+          chat.senderName = name;
+        }
       }
     });
 });

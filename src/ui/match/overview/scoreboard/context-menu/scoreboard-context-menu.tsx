@@ -13,16 +13,25 @@ import { Separator } from 'csdm/ui/components/context-menu/separator';
 import { isCounterStrikeStartable, isVideoGenerationAvailable } from 'csdm/ui/hooks/use-counter-strike';
 import { useNavigateToMatchPlayer } from 'csdm/ui/hooks/navigation/use-navigate-to-match-player';
 import { IgnoreSteamAccountBanItem } from 'csdm/ui/components/context-menu/items/ignore-steam-account-ban-item';
+import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { UpdatePlayerNameDialog } from 'csdm/ui/dialogs/update-player-name-dialog';
+import { UpdateNameItem } from 'csdm/ui/components/context-menu/items/update-name-item';
 
 type Props = {
   steamId: string;
+  name: string;
   demoPath: string;
 };
 
-export function ScoreboardContextMenu({ steamId, demoPath }: Props) {
+export function ScoreboardContextMenu({ steamId, name, demoPath }: Props) {
   const match = useCurrentMatch();
+  const { showDialog } = useDialog();
   const navigateToMatchPlayer = useNavigateToMatchPlayer();
   const canStartCs = isCounterStrikeStartable(match.game);
+
+  const onUpdateNameClick = () => {
+    showDialog(<UpdatePlayerNameDialog steamId={steamId} name={name} />);
+  };
 
   return (
     <ContextMenu>
@@ -42,6 +51,7 @@ export function ScoreboardContextMenu({ steamId, demoPath }: Props) {
       {isVideoGenerationAvailable(match.game) && <GeneratePlayerVideoItem steamId={steamId} />}
       <PinPlayerItem steamId={steamId} />
       <IgnoreSteamAccountBanItem steamId={steamId} />
+      <UpdateNameItem onClick={onUpdateNameClick} />
     </ContextMenu>
   );
 }

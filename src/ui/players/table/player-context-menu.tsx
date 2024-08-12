@@ -10,6 +10,8 @@ import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { PlayersTagsDialog } from '../players-tags-dialogs';
 import type { PlayerTable } from 'csdm/common/types/player-table';
 import { Separator } from 'csdm/ui/components/context-menu/separator';
+import { UpdateNameItem } from 'csdm/ui/components/context-menu/items/update-name-item';
+import { UpdatePlayerNameDialog } from 'csdm/ui/dialogs/update-player-name-dialog';
 
 type Props = {
   players: PlayerTable[];
@@ -22,24 +24,32 @@ export function PlayerContextMenu({ players, onCommentClick }: Props) {
   if (players.length === 0) {
     return null;
   }
+
   const playerSteamIds = players.map((player) => player.steamId);
   const selectedPlayerSteamId = playerSteamIds[playerSteamIds.length - 1];
+  const isMultipleSelection = playerSteamIds.length > 1;
 
   const onTagsClick = () => {
     const tagIds = players.flatMap((player) => player.tagIds);
     showDialog(<PlayersTagsDialog steamIds={playerSteamIds} defaultTagIds={tagIds} />);
   };
 
+  const onUpdateNameClick = () => {
+    const [player] = players;
+    showDialog(<UpdatePlayerNameDialog steamId={player.steamId} name={player.name} />);
+  };
+
   return (
     <ContextMenu>
       <NavigateToPlayerItem steamId={selectedPlayerSteamId} />
       <Separator />
-      <CommentItem onClick={onCommentClick} isDisabled={playerSteamIds.length !== 1} />
+      {!isMultipleSelection && <CommentItem onClick={onCommentClick} />}
       <TagsItem onClick={onTagsClick} />
       <Separator />
       <CopySteamIdItem steamIds={playerSteamIds} />
       <OpenSteamProfileItem steamIds={playerSteamIds} />
       <PinPlayerItem steamId={selectedPlayerSteamId} />
+      {!isMultipleSelection && <UpdateNameItem onClick={onUpdateNameClick} />}
     </ContextMenu>
   );
 }

@@ -22,6 +22,7 @@ export type Props = {
   children: ReactNode;
   variant?: ButtonVariant;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  form?: string;
 };
 
 export const Button = forwardRef(function Button(

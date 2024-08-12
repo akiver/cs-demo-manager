@@ -666,6 +666,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 #: src/ui/components/dialogs/rename-dialog.tsx
 #: src/ui/demos/table/demos-table.tsx
+#: src/ui/dialogs/update-player-name-dialog.tsx
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/download-demos-button.tsx
@@ -775,6 +776,11 @@ msgstr "This demo is not the same as the one of the match"
 msgctxt "Context menu"
 msgid "Update demo location"
 msgstr "Update demo location"
+
+#: src/ui/components/context-menu/items/update-name-item.tsx
+msgctxt "Context menu"
+msgid "Update name"
+msgstr "Update name"
 
 #: src/ui/components/context-menu/items/watch-item.tsx
 #: src/ui/components/context-menu/items/watch-player-item.tsx
@@ -1286,6 +1292,7 @@ msgid "Comment"
 msgstr "Comment"
 
 #: src/ui/components/inputs/database-name-input.tsx
+#: src/ui/dialogs/update-player-name-dialog.tsx
 #: src/ui/settings/maps/map-dialog/name-input.tsx
 msgctxt "Input label"
 msgid "Name"
@@ -2571,6 +2578,24 @@ msgstr "The demo located at <0>{demoFilePath}</0> doesn't exists."
 msgctxt "Button"
 msgid "Update demo location"
 msgstr "Update demo location"
+
+#: src/ui/dialogs/update-player-name-dialog.tsx
+#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
+msgid "The name is too long"
+msgstr "The name is too long"
+
+#: src/ui/dialogs/update-player-name-dialog.tsx
+msgctxt "Dialog title"
+msgid "Update player name"
+msgstr "Update player name"
+
+#: src/ui/dialogs/update-player-name-dialog.tsx
+msgid "It will override the name of the player identified by his Steam ID every place in the application."
+msgstr "It will override the name of the player identified by his Steam ID every place in the application."
+
+#: src/ui/dialogs/update-player-name-dialog.tsx
+msgid "Leave it empty to remove the override."
+msgstr "Leave it empty to remove the override."
 
 #: src/ui/downloads/dowload-required-tooltip.tsx
 msgctxt "Tooltip"
@@ -6561,10 +6586,6 @@ msgstr "About"
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "The name is already taken"
 msgstr "The name is already taken"
-
-#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
-msgid "The name is too long"
-msgstr "The name is too long"
 
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "The name is too short"

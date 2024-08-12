@@ -41,7 +41,10 @@ export function MatchOverviewProvider({ children }: Props) {
 
     const [player] = players;
 
-    showContextMenu(event, <ScoreboardContextMenu steamId={player.steamId} demoPath={match.demoFilePath} />);
+    showContextMenu(
+      event,
+      <ScoreboardContextMenu steamId={player.steamId} name={player.name} demoPath={match.demoFilePath} />,
+    );
   };
 
   const navigateToPlayer = (player: Player) => {
