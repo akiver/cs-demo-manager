@@ -4,7 +4,7 @@ import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-it
 import { useDialog } from '../../dialogs/use-dialog';
 import { useCounterStrike } from 'csdm/ui/hooks/use-counter-strike';
 import { useWatchSettings } from 'csdm/ui/settings/playback/use-watch-settings';
-import { SelectPovDialog } from '../../dialogs/select-pov-dialog';
+import { SelectActionsPovDialog } from '../../dialogs/select-actions-pov-dialog';
 import { WatchType } from 'csdm/common/types/watch-type';
 import { Perspective } from 'csdm/common/types/perspective';
 import { CounterStrikeRunningDialog } from '../../dialogs/counter-strike-running-dialog';
@@ -23,7 +23,7 @@ export function WatchPlayerHighlightsItem({ demoPath, steamId, game }: Props) {
 
   const startPlayerHighlights = () => {
     if (useCustomHighlights || game !== Game.CSGO) {
-      showDialog(<SelectPovDialog demoPath={demoPath} playerSteamId={steamId} type={WatchType.Highlights} />);
+      showDialog(<SelectActionsPovDialog demoPath={demoPath} playerSteamId={steamId} type={WatchType.Highlights} />);
     } else {
       watchPlayerHighlights({
         demoPath,

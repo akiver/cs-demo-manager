@@ -15,6 +15,7 @@ import { uniqueArray } from 'csdm/common/array/unique-array';
 import type { Match } from 'csdm/common/types/match';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
+import { Perspective } from 'csdm/common/types/perspective';
 
 function getVisibleWeapons(event: PlayerSequenceEvent, steamId: string | undefined, match: Match) {
   if (!steamId) {
@@ -60,6 +61,7 @@ function SelectPlayerDialog() {
   const [selectedEvent, setSelectedEvent] = useState<PlayerSequenceEvent>(PlayerSequenceEvent.Kills);
   const visibleWeapons = getVisibleWeapons(selectedEvent, selectedSteamId, match);
   const [selectedWeapons, setSelectedWeapons] = useState<WeaponName[]>(visibleWeapons);
+  const [perspective, setPerspective] = useState<Perspective>(Perspective.Player);
 
   const onConfirm = () => {
     if (selectedSteamId) {
@@ -69,6 +71,7 @@ function SelectPlayerDialog() {
           match,
           event: selectedEvent,
           weapons: selectedWeapons,
+          perspective,
         }),
       );
     }
@@ -82,6 +85,29 @@ function SelectPlayerDialog() {
 
     return (
       <>
+        <div className="flex flex-col gap-y-8">
+          <label htmlFor="pov">
+            <Trans context="Select label">POV</Trans>
+          </label>
+          <div>
+            <Select
+              id="pov"
+              options={[
+                {
+                  value: Perspective.Player,
+                  label: <Trans context="Select option">Player</Trans>,
+                },
+                {
+                  value: Perspective.Enemy,
+                  label: <Trans context="Select option">Enemy</Trans>,
+                },
+              ]}
+              value={perspective}
+              onChange={setPerspective}
+            />
+          </div>
+        </div>
+
         {visibleWeapons.length > 0 ? (
           <WeaponsFilter
             weapons={visibleWeapons}

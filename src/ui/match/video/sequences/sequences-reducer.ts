@@ -58,12 +58,22 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     })
     .addCase(generatePlayerKillsSequences, (state, action) => {
       const { match, steamId } = action.payload;
-      const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Kills, match, steamId);
+      const sequences = buildPlayerEventSequences(
+        PlayerSequenceEvent.Kills,
+        match,
+        steamId,
+        action.payload.perspective,
+      );
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerDeathsSequences, (state, action) => {
       const { match, steamId } = action.payload;
-      const sequences = buildPlayerEventSequences(PlayerSequenceEvent.Deaths, match, steamId);
+      const sequences = buildPlayerEventSequences(
+        PlayerSequenceEvent.Deaths,
+        match,
+        steamId,
+        action.payload.perspective,
+      );
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerSequences, (state, action) => {
@@ -75,7 +85,13 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
         }
         case PlayerSequenceEvent.Kills:
         case PlayerSequenceEvent.Deaths: {
-          state[match.demoFilePath] = buildPlayerEventSequences(event, match, steamId, weapons);
+          state[match.demoFilePath] = buildPlayerEventSequences(
+            event,
+            match,
+            steamId,
+            action.payload.perspective,
+            weapons,
+          );
           break;
         }
         default:

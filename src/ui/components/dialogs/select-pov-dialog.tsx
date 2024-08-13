@@ -1,48 +1,17 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { Button } from 'csdm/ui/components/buttons/button';
-import { Perspective } from 'csdm/common/types/perspective';
-import { useCounterStrike } from 'csdm/ui/hooks/use-counter-strike';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { WatchType } from 'csdm/common/types/watch-type';
 import { CancelButton } from '../buttons/cancel-button';
-import { Trans } from '@lingui/macro';
 
 type Props = {
-  type: WatchType;
-  playerSteamId: string;
-  demoPath: string;
+  onPlayerClick: () => void;
+  onEnemyClick: () => void;
 };
 
-export function SelectPovDialog({ playerSteamId, demoPath, type }: Props) {
-  const { watchPlayerHighlights, watchPlayerLowlights } = useCounterStrike();
+export function SelectPovDialog({ onPlayerClick, onEnemyClick }: Props) {
   const { hideDialog } = useDialog();
-
-  const startGame = (perspective: Perspective) => {
-    if (type === WatchType.Highlights) {
-      watchPlayerHighlights({
-        demoPath,
-        steamId: playerSteamId,
-        perspective,
-      });
-    } else {
-      watchPlayerLowlights({
-        demoPath,
-        steamId: playerSteamId,
-        perspective,
-      });
-    }
-
-    hideDialog();
-  };
-
-  const onEnemyPovClick = () => {
-    startGame(Perspective.Enemy);
-  };
-
-  const onPlayerPovClick = () => {
-    startGame(Perspective.Player);
-  };
 
   return (
     <Dialog>
@@ -57,10 +26,20 @@ export function SelectPovDialog({ playerSteamId, demoPath, type }: Props) {
         </p>
       </DialogContent>
       <DialogFooter>
-        <Button onClick={onPlayerPovClick}>
+        <Button
+          onClick={() => {
+            hideDialog();
+            onPlayerClick();
+          }}
+        >
           <Trans context="Watch from player point of view">Player</Trans>
         </Button>
-        <Button onClick={onEnemyPovClick}>
+        <Button
+          onClick={() => {
+            hideDialog();
+            onEnemyClick();
+          }}
+        >
           <Trans context="Watch from enemy point of view">Enemy</Trans>
         </Button>
         <CancelButton onClick={hideDialog} />

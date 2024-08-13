@@ -3,6 +3,7 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { PlayerSequenceEvent } from './player-sequence-event';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
+import type { Perspective } from 'csdm/common/types/perspective';
 
 export const addSequence = createAction<{ demoFilePath: string; sequence: Sequence }>('match/video/sequences/add');
 export const updateSequence = createAction<{ demoFilePath: string; sequence: Sequence }>(
@@ -20,11 +21,12 @@ export const generatePlayerSequences = createAction<{
   match: Match;
   event: PlayerSequenceEvent;
   weapons: WeaponName[];
+  perspective: Perspective;
 }>('match/video/sequences/generatePlayerSequences');
-export const generatePlayerKillsSequences = createAction<{ steamId: string; match: Match }>(
+export const generatePlayerKillsSequences = createAction<{ steamId: string; match: Match; perspective: Perspective }>(
   'match/video/sequences/generatePlayerKills',
 );
-export const generatePlayerDeathsSequences = createAction<{ steamId: string; match: Match }>(
+export const generatePlayerDeathsSequences = createAction<{ steamId: string; match: Match; perspective: Perspective }>(
   'match/video/sequences/generatePlayerDeaths',
 );
 export const generatePlayerRoundsSequences = createAction<{ steamId: string; match: Match }>(

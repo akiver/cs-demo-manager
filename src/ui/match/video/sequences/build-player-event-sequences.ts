@@ -4,6 +4,7 @@ import type { Match } from 'csdm/common/types/match';
 import type { Player } from 'csdm/common/types/player';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { PlayerSequenceEvent } from './player-sequence-event';
+import { Perspective } from 'csdm/common/types/perspective';
 
 function buildPlayersDeathNotices(players: Player[]) {
   const deathNotices: DeathNoticesPlayerOptions[] = players.map((player) => {
@@ -22,6 +23,7 @@ export function buildPlayerEventSequences(
   event: PlayerSequenceEvent,
   match: Match,
   steamId: string,
+  perspective: string,
   weapons?: WeaponName[],
 ) {
   if (event !== PlayerSequenceEvent.Kills && event !== PlayerSequenceEvent.Deaths) {
@@ -53,6 +55,12 @@ export function buildPlayerEventSequences(
   const maxTicksBetweenEvents = Math.round(match.tickrate * maxSecondsBetweenEvents);
 
   for (const [index, action] of playerEvents.entries()) {
+    let steamIdToFocus = steamId;
+    if (event === PlayerSequenceEvent.Kills && perspective === Perspective.Enemy && action.victimSteamId) {
+      steamIdToFocus = action.victimSteamId;
+    } else if (event === PlayerSequenceEvent.Deaths && perspective === Perspective.Enemy && action.killerSteamId) {
+      steamIdToFocus = action.killerSteamId;
+    }
     const sequenceStartTick = Math.max(1, action.tick - additionalTicksBeforeEvent);
     let sequenceEndTick = Math.min(match.tickCount, action.tick + additionalTicksAfterEvent);
 
@@ -78,7 +86,7 @@ export function buildPlayerEventSequences(
       startTick: sequenceStartTick,
       endTick: sequenceEndTick,
       deathNotices,
-      playerFocusSteamId: steamId,
+      playerFocusSteamId: steamIdToFocus,
       showXRay: false,
     });
   }
