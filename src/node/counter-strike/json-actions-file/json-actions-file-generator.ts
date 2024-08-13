@@ -93,11 +93,6 @@ export class JSONActionsFileGenerator {
       return this;
     }
 
-    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default but we don't want to see it so we
-    // call the demoui command to hide it.
-    // Note: the new convar demo_ui_mode has no effect.
-    this.addExecCommand(1, 'demoui');
-
     await fs.writeFile(this.filePath, JSON.stringify(this.actions, null, 2));
 
     return this;

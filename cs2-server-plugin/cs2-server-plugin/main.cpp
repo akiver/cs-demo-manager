@@ -74,6 +74,7 @@ const char* demoPath = NULL;
 bool isPlayingDemo = false;
 int currentTick = -1;
 bool isQuitting = false;
+bool initialized = false;
 std::vector<Action> actions = {};
 
 void LogToFile(const char* pMsg) {
@@ -225,6 +226,13 @@ void PlaybackLoop() {
         auto engine = GetEngine();
         if (engine == NULL) {
             continue;
+        }
+
+        if (!initialized) {
+            // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default.
+			// We have to set the demo_ui_mode convar to 0 before starting the playback prevent the UI from being displayed.
+            engine->ExecuteClientCmd(0, "demo_ui_mode 0", true);
+            initialized = true;
         }
 
         bool newIsPlayingDemo = engine->IsPlayingDemo();
