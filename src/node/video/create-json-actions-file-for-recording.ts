@@ -8,6 +8,7 @@ type Options = {
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
   showOnlyDeathNotices: boolean;
+  deathNoticesDuration: number;
   tickrate: number;
   playerSlots: Record<string, number>;
 };
@@ -20,6 +21,7 @@ export async function createJsonActionsFileForRecording({
   showOnlyDeathNotices,
   tickrate,
   playerSlots,
+  deathNoticesDuration,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath);
   const mandatoryCommands = [
@@ -38,11 +40,15 @@ export async function createJsonActionsFileForRecording({
     json.addExecCommand(1, 'cl_draw_only_deathnotices 1');
   }
 
-  // Pause the playback for a few seconds to avoid seeing the loading screen.
-  json.addPausePlayback(1);
+  json.addExecCommand(0, `mirv_deathmsg lifetime ${deathNoticesDuration}`);
 
   for (let i = 0; i < sequences.length; i++) {
     const sequence = sequences[i];
+    if (i === 0) {
+      // Pause the playback for a few seconds to avoid seeing the loading screen/tint effect.
+      json.addPausePlayback(sequence.startTick - 1);
+    }
+
     const roundedTickrate = Math.round(tickrate);
     const skipAheadTick = i === 0 ? 65 : sequences[i - 1].endTick + roundedTickrate;
     const setupSequenceTick = sequence.startTick - roundedTickrate > 0 ? sequence.startTick - roundedTickrate : 1;
@@ -53,6 +59,20 @@ export async function createJsonActionsFileForRecording({
 
     const showXrayCommand = `spec_show_xray ${sequence.showXRay ? 1 : 0}`;
     json.addExecCommand(setupSequenceTick, showXrayCommand);
+
+    for (const deathNotice of sequence.deathNotices) {
+      if (!deathNotice.showKill) {
+        json.addExecCommand(
+          setupSequenceTick,
+          `mirv_deathmsg filter add attackerMatch=x${deathNotice.steamId} block=1`,
+        );
+      } else if (deathNotice.highlightKill) {
+        json.addExecCommand(
+          setupSequenceTick,
+          `mirv_deathmsg filter add attackerMatch=x${deathNotice.steamId} attackerIsLocal=1`,
+        );
+      }
+    }
 
     json
       .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)

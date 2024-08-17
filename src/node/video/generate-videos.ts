@@ -222,6 +222,7 @@ export async function generateVideos(parameters: Parameters) {
       sequences,
       closeGameAfterRecording,
       showOnlyDeathNotices,
+      deathNoticesDuration,
       tickrate,
       playerSlots,
     });

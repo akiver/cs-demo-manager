@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React, { useRef, useEffect } from 'react';
-import { Game } from 'csdm/common/types/counter-strike';
 import { MatchTimeline } from './match-timeline/match-timeline';
 import { SequenceDeathNotices } from './sequence-death-notices';
 import { StartTickInput } from './start-tick-input';
@@ -15,7 +14,6 @@ import type { SequenceForm } from './sequence-form';
 import { SequenceFormProvider } from './sequence-form-provider';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { SequenceDiskSpace } from './sequence-disk-space';
-import { useCurrentMatch } from '../../use-current-match';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { SequenceXRayCheckbox } from './sequence-x-ray-checkbox';
 
@@ -29,7 +27,6 @@ type Props = {
 export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSequence }: Props) {
   const element = useRef<HTMLDivElement>(document.createElement('div'));
   const node = element.current;
-  const match = useCurrentMatch();
 
   useEffect(() => {
     document.body.appendChild(node);
@@ -77,7 +74,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <CancelButton onClick={closeDialog} />
                   </div>
                 </div>
-                {window.csdm.isWindows && match.game === Game.CSGO && <SequenceDeathNotices />}
+                {window.csdm.isWindows && <SequenceDeathNotices />}
                 <SequenceCfgInput />
               </div>
               <div className="mt-12">
