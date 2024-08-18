@@ -55,12 +55,26 @@ export async function createJsonActionsFileForRecording({
 
     json
       .addSkipAhead(skipAheadTick, setupSequenceTick)
+      .addExecCommand(setupSequenceTick, `mirv_deathmsg clear`)
       .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`);
 
     const showXrayCommand = `spec_show_xray ${sequence.showXRay ? 1 : 0}`;
     json.addExecCommand(setupSequenceTick, showXrayCommand);
 
     for (const deathNotice of sequence.deathNotices) {
+      json.addExecCommand(
+        setupSequenceTick,
+        `mirv_deathmsg filter add attackerMatch=x${deathNotice.steamId} "attackerName=${deathNotice.playerName}"`,
+      );
+      json.addExecCommand(
+        setupSequenceTick,
+        `mirv_deathmsg filter add assisterMatch=x${deathNotice.steamId} "assisterName=${deathNotice.playerName}"`,
+      );
+      json.addExecCommand(
+        setupSequenceTick,
+        `mirv_deathmsg filter add victimMatch=x${deathNotice.steamId} "victimName=${deathNotice.playerName}"`,
+      );
+
       if (!deathNotice.showKill) {
         json.addExecCommand(
           setupSequenceTick,
