@@ -4986,8 +4986,8 @@ msgstr "Focaliser la caméra sur la victime"
 
 #: src/ui/match/video/sequence/match-timeline/kill-item.tsx
 msgctxt "Tooltip"
-msgid "<0>{killerName}</0> killed<1>{victimName}</1> with<2>{weaponName}</2>"
-msgstr "<0>{killerName}</0> a tué<1>{victimName}</1> avec<2>{weaponName}</2>"
+msgid "<0>{killerName}</0> killed <1>{victimName}</1> with <2>{weaponName}</2>"
+msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"

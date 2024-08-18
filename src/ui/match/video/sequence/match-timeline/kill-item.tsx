@@ -109,9 +109,7 @@ function TooltipContent({ kill }: TooltipProps) {
   return (
     <p>
       <Trans context="Tooltip">
-        <span>{killerName}</span> killed
-        <span>{victimName}</span> with
-        <span>{weaponName}</span>
+        <span>{killerName}</span> killed <span>{victimName}</span> with <span>{weaponName}</span>
       </Trans>
     </p>
   );
