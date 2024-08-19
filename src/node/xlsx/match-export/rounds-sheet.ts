@@ -79,6 +79,14 @@ export class RoundsSheet extends SingleMatchExportSheet<Round> {
         name: 'start_money_team_b',
         cellFormatter: (row) => row.teamBStartMoney,
       },
+      {
+        name: 'team_a_equipment_value',
+        cellFormatter: row => row.teamAEquipmentValue
+      },
+      {
+        name: 'team_b_equipment_value',
+        cellFormatter: row => row.teamBEquipmentValue
+      },
     ];
   }
 
