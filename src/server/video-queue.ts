@@ -26,6 +26,7 @@ class VideoQueue {
   }
 
   public addVideo(partialVideo: AddVideoPayload) {
+    const isUpdate = partialVideo.id;
     const id = partialVideo.id ?? randomUUID();
     const date = partialVideo.date ?? new Date().toISOString();
     const video: Video = {
@@ -36,8 +37,8 @@ class VideoQueue {
       output: '',
       errorCode: undefined,
       // Raw files and output files are stored in a folder named after the video id to avoid overwriting files
-      rawFilesFolderPath: path.join(partialVideo.rawFilesFolderPath, id),
-      outputFolderPath: path.join(partialVideo.outputFolderPath, id),
+      rawFilesFolderPath: isUpdate ? partialVideo.rawFilesFolderPath : path.join(partialVideo.rawFilesFolderPath, id),
+      outputFolderPath: isUpdate ? partialVideo.outputFolderPath : path.join(partialVideo.outputFolderPath, id),
     };
     this.videos.push(video);
     this.abortControllers[id] = new AbortController();
