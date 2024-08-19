@@ -26,6 +26,7 @@ import { VideoContainer } from 'csdm/common/types/video-container';
 import { fetchMatchPlayersSlots } from '../database/match/fetch-match-players-slots';
 import { assertVideoGenerationIsPossible } from './assert-video-generation-is-possible';
 import { deleteSequencesRawFiles } from './sequences/delete-sequences-raw-files';
+import { uninstallCs2ServerPlugin } from '../counter-strike/launcher/cs2-server-plugin';
 
 type FfmpegSettings = {
   audioBitrate: number;
@@ -239,6 +240,7 @@ export async function generateVideos(parameters: Parameters) {
         height,
         fullscreen: false,
         signal,
+        uninstallPluginOnExit: false,
         gameParameters: null,
       };
       await watchDemoWithHlae(hlaeOptions);
@@ -250,6 +252,7 @@ export async function generateVideos(parameters: Parameters) {
         width,
         height,
         signal,
+        uninstallPluginOnExit: false,
         onGameStart: parameters.onGameStart,
       });
     }
@@ -275,5 +278,7 @@ export async function generateVideos(parameters: Parameters) {
 
     cleanupFiles();
     throw error;
+  } finally {
+    uninstallCs2ServerPlugin();
   }
 }

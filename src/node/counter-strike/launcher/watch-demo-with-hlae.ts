@@ -8,7 +8,7 @@ import { killCounterStrikeProcesses } from '../kill-counter-strike-processes';
 import { isCounterStrikeRunning } from 'csdm/node/counter-strike/is-counter-strike-running';
 import { abortError } from 'csdm/node/errors/abort-error';
 import { getCounterStrikeExecutablePath } from '../get-counter-strike-executable-path';
-import { installCs2ServerPlugin } from './cs2-server-plugin';
+import { installCs2ServerPlugin, uninstallCs2ServerPlugin } from './cs2-server-plugin';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
 import { getHlaeExecutablePathOrThrow } from 'csdm/node/video/hlae/hlae-location';
@@ -24,6 +24,7 @@ export type HlaeOptions = {
   hlaeParameters?: string;
   signal?: AbortSignal;
   onGameStart?: () => void;
+  uninstallPluginOnExit?: boolean;
 };
 
 async function isHlaeErrorWindowExists() {
@@ -161,4 +162,7 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
 
   options.onGameStart?.();
   await startHlae(command, signal);
+  if (options.uninstallPluginOnExit !== false) {
+    uninstallCs2ServerPlugin();
+  }
 }

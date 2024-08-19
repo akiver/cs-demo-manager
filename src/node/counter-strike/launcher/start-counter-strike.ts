@@ -26,6 +26,7 @@ type StartCounterStrikeOptions = {
   height?: number;
   fullscreen?: boolean;
   playDemoArgs?: string[];
+  uninstallPluginOnExit?: boolean;
   signal?: AbortSignal;
   onGameStart: () => void;
 };
@@ -153,7 +154,9 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
         deleteVdmFile(demoPath);
       } else {
         deleteJsonActionsFile(demoPath);
-        uninstallCs2ServerPlugin();
+        if (options.uninstallPluginOnExit !== false) {
+          uninstallCs2ServerPlugin();
+        }
       }
 
       if (signal?.aborted) {
