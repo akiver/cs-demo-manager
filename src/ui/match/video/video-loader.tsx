@@ -12,7 +12,6 @@ import { useCurrentMatch } from '../use-current-match';
 import type { InitializeVideoPayload } from 'csdm/server/handlers/renderer-process/video/initialize-video-handler';
 import { ErrorCode } from 'csdm/common/error-code';
 import { isErrorCode } from 'csdm/common/is-error-code';
-import { isVideoGenerationAvailable } from 'csdm/ui/hooks/use-counter-strike';
 
 export function VideoLoader() {
   const client = useWebSocketClient();
@@ -21,13 +20,8 @@ export function VideoLoader() {
   const dispatch = useDispatch();
   const [isReady, setIsReady] = useState(false);
   const demoExists = usePathExists(match.demoFilePath);
-  const isSupported = isVideoGenerationAvailable(match.game);
 
   useEffect(() => {
-    if (!isSupported) {
-      return;
-    }
-
     const initialize = async () => {
       try {
         const payload: InitializeVideoPayload = {
@@ -47,7 +41,7 @@ export function VideoLoader() {
     };
 
     initialize();
-  }, [dispatch, client, match, isSupported]);
+  }, [dispatch, client, match]);
 
   if (errorCode) {
     let message: ReactNode;
@@ -63,14 +57,6 @@ export function VideoLoader() {
     }
 
     return <Message message={message} />;
-  }
-
-  if (!isSupported) {
-    return (
-      <Message
-        message={<Trans>The video generator is currently available only on Windows for Counter-Strike 2 demos.</Trans>}
-      />
-    );
   }
 
   if (!isReady) {

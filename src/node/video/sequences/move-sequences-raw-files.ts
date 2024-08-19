@@ -16,17 +16,18 @@ import { WavFileNotFound } from 'csdm/node/video/errors/wav-file-not-found';
 // - CS2 because it's not yet possible with HLAE to set the destination folder and the startmovie command place the
 // files in a "movie" folder (we can't change it).
 export async function moveSequencesRawFiles(sequences: Sequence[], destinationFolderPath: string, game: Game) {
-  if (isWindows && game === Game.CSGO) {
+  const isCsgo = game === Game.CSGO;
+  if (isWindows && isCsgo) {
     return;
   }
 
   const csgoFolderPath = await getCsgoFolderPathOrThrow(game);
   let recordingFolderPath: string;
-  if (isWindows) {
+  if (isCsgo) {
+    recordingFolderPath = path.join(csgoFolderPath, 'csgo');
+  } else {
     // The "movie" folder is inside our plugin folder
     recordingFolderPath = path.join(csgoFolderPath, 'game', 'csgo', 'csdm', 'movie');
-  } else {
-    recordingFolderPath = path.join(csgoFolderPath, 'csgo');
   }
 
   const recordingFolderExists = await fs.pathExists(recordingFolderPath);
@@ -61,7 +62,7 @@ export async function moveSequencesRawFiles(sequences: Sequence[], destinationFo
     const rawFilesFolderPath = path.dirname(tgaFiles[0]);
     logger.log(`Sequence raw files folder: ${rawFilesFolderPath}`);
 
-    const wavFilePath = path.join(rawFilesFolderPath, isWindows ? `${sequenceName}.wav` : `${sequenceName}.WAV`);
+    const wavFilePath = path.join(rawFilesFolderPath, isCsgo ? `${sequenceName}.WAV` : `${sequenceName}.wav`);
     if (!(await fs.pathExists(wavFilePath))) {
       throw new WavFileNotFound();
     }

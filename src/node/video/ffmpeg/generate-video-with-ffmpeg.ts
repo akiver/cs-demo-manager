@@ -59,7 +59,7 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
   args.push(
     `-i "${rawFilesPathPattern}"`,
     `-i "${wavFilePath}"`,
-    `-vcodec ${videoCodec}`,
+    `-vcodec ${videoCodec} -pix_fmt yuv420p`,
     `-crf ${constantRateFactor}`,
     `-acodec ${audioCodec}`,
     `-b:a ${audioBitrate}K`,

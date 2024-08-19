@@ -115,21 +115,24 @@ export function EditSequenceSettingsDialog() {
               </div>
             </CollapseTransition>
           </div>
-          <div className="flex flex-col gap-y-4">
-            <Checkbox
-              label={<Trans>Override death notices</Trans>}
-              isChecked={state.overrideDeathNotices}
-              onChange={(event) => {
-                setState({ ...state, overrideDeathNotices: event.target.checked });
-              }}
-            />
 
-            <CollapseTransition isVisible={state.overrideDeathNotices}>
-              <div className="max-h-[300px] overflow-y-auto">
-                <DeathNotices />
-              </div>
-            </CollapseTransition>
-          </div>
+          {window.csdm.isWindows && (
+            <div className="flex flex-col gap-y-4">
+              <Checkbox
+                label={<Trans>Override death notices</Trans>}
+                isChecked={state.overrideDeathNotices}
+                onChange={(event) => {
+                  setState({ ...state, overrideDeathNotices: event.target.checked });
+                }}
+              />
+
+              <CollapseTransition isVisible={state.overrideDeathNotices}>
+                <div className="max-h-[300px] overflow-y-auto">
+                  <DeathNotices />
+                </div>
+              </CollapseTransition>
+            </div>
+          )}
         </div>
       </DialogContent>
       <DialogFooter>

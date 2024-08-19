@@ -5158,10 +5158,6 @@ msgid "An error occurred. (Code {errorCode})"
 msgstr ""
 
 #: src/ui/match/video/video-loader.tsx
-msgid "The video generator is currently available only on Windows for Counter-Strike 2 demos."
-msgstr ""
-
-#: src/ui/match/video/video-loader.tsx
 msgid "Loading video generator…"
 msgstr "Carregando gerador de vídeo…"
 

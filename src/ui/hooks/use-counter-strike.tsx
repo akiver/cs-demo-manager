@@ -144,7 +144,7 @@ export function isVideoGenerationAvailable(game: Game) {
     return true;
   }
 
-  return window.csdm.isWindows;
+  return !window.csdm.isMac;
 }
 
 export function useCounterStrike() {
