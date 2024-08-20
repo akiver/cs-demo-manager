@@ -81,11 +81,11 @@ export class RoundsSheet extends SingleMatchExportSheet<Round> {
       },
       {
         name: 'team_a_equipment_value',
-        cellFormatter: (row) => row.teamAEquipmentValue
+        cellFormatter: (row) => row.teamAEquipmentValue,
       },
       {
         name: 'team_b_equipment_value',
-        cellFormatter: (row) => row.teamBEquipmentValue
+        cellFormatter: (row) => row.teamBEquipmentValue,
       },
     ];
   }
