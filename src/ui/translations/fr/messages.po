@@ -8,7 +8,7 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-07 00:11\n"
+"PO-Revision-Date: 2024-08-20 00:11\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -282,11 +282,11 @@ msgstr "Se connecter"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It looks like you installed an older version of CS Demo Manager and the current database schema is not compatible with it."
-msgstr ""
+msgstr "Il semble que vous ayez installé une ancienne version de CS Demo Manager et que le schéma de la base de données de cette dernière n'est pas compatible avec le schéma actuel."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
-msgstr ""
+msgstr "Vous pouvez mettre à jour CS Demo Manager vers la dernière version ou réinitialiser la base de données pour démarrer à partir de zéro."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that PostgreSQL is not installed on your system or the path to the <0>psql</0> executable is not in your <1>PATH</1> environment variable."
@@ -298,7 +298,7 @@ msgstr "Cela signifie généralement que le service PostgreSQL ne fonctionne pas
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "This error usually means that the database is not running or that the connection settings are incorrect."
-msgstr ""
+msgstr "Cette erreur signifie généralement que la base de données n'est pas en cours d'exécution ou que les paramètres de connexion sont incorrects."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "Make sure PostgreSQL is running and your settings are correct."
@@ -785,7 +785,7 @@ msgstr "Mettre à jour l'emplacement de la démo"
 #: src/ui/components/context-menu/items/update-name-item.tsx
 msgctxt "Context menu"
 msgid "Update name"
-msgstr ""
+msgstr "Modifier le nom"
 
 #: src/ui/components/context-menu/items/watch-item.tsx
 #: src/ui/components/context-menu/items/watch-player-item.tsx
@@ -2592,15 +2592,15 @@ msgstr "Le nom est trop long"
 #: src/ui/dialogs/update-player-name-dialog.tsx
 msgctxt "Dialog title"
 msgid "Update player name"
-msgstr ""
+msgstr "Modifier le nom du joueur"
 
 #: src/ui/dialogs/update-player-name-dialog.tsx
 msgid "It will override the name of the player identified by his Steam ID every place in the application."
-msgstr ""
+msgstr "Cela remplacera le nom du joueur identifié par son ID Steam à chaque endroit de l'application."
 
 #: src/ui/dialogs/update-player-name-dialog.tsx
 msgid "Leave it empty to remove the override."
-msgstr ""
+msgstr "Laissez vide pour supprimer la substitution."
 
 #: src/ui/downloads/dowload-required-tooltip.tsx
 msgctxt "Tooltip"
@@ -3307,7 +3307,7 @@ msgstr "Le chat est disponible seulement si le fichier <0>.info</0> de la démo 
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "Chat messages are available with Valve demos only after the {updateDate} CS2 update."
-msgstr ""
+msgstr "Les messages de chat sont disponibles avec les démos de Valve seulement après la mise à jour CS2 du {updateDate}."
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "No chat messages found."
@@ -3858,7 +3858,7 @@ msgstr "Steam ID"
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-deaths-video-item.tsx
 msgctxt "Context menu"
 msgid "Deaths"
-msgstr ""
+msgstr "Morts"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
@@ -4664,17 +4664,17 @@ msgstr "Round"
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
 msgid "POV"
-msgstr ""
+msgstr "POV"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Player"
-msgstr ""
+msgstr "Joueur"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Enemy"
-msgstr ""
+msgstr "Ennemi"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "No action found for this player"
@@ -4987,7 +4987,7 @@ msgstr "Focaliser la caméra sur la victime"
 #: src/ui/match/video/sequence/match-timeline/kill-item.tsx
 msgctxt "Tooltip"
 msgid "<0>{killerName}</0> killed <1>{victimName}</1> with <2>{weaponName}</2>"
-msgstr ""
+msgstr "<0>{killerName}</0> a tué <1>{victimName}</1> avec <2>{weaponName}</2>"
 
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
@@ -5224,15 +5224,15 @@ msgstr "Générer les positions"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-exploded-indicator.tsx
 msgid "{0} Bomb planted by {planterName} exploded at site {site}"
-msgstr ""
+msgstr "{0} Bombe plantée par {planterName} a explosé sur le site {site}"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-planted-indicator.tsx
 msgid "{0} Bomb planted by {planterName} at bomb site {site}"
-msgstr ""
+msgstr "{0} Bombe plantée par {planterName} sur le site {site}"
 
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{0} Freeze time ended"
-msgstr ""
+msgstr "{0} Fin du freezetime"
 
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgctxt "Map radar level"
@@ -6854,41 +6854,41 @@ msgstr "Vous devrez quitter le jeu manuellement."
 
 #: src/ui/videos/video-entry.tsx
 msgid "Demo path"
-msgstr ""
+msgstr "Chemin de la démo"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Raw files path"
-msgstr ""
+msgstr "Chemin des fichiers bruts"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Output path"
-msgstr ""
+msgstr "Chemin de sortie"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Start tick"
-msgstr ""
+msgstr "Tick de début"
 
 #: src/ui/videos/video-entry.tsx
 msgid "End tick"
-msgstr ""
+msgstr "Tick de fin"
 
 #: src/ui/videos/video-entry.tsx
 msgid "X-Ray"
-msgstr ""
+msgstr "Rayon X"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Focused player"
-msgstr ""
+msgstr "Joueur ciblé"
 
 #: src/ui/videos/video-entry.tsx
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Output"
-msgstr ""
+msgstr "Sortie"
 
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
-msgstr ""
+msgstr "Aucune génération de vidéo en cours."
 
