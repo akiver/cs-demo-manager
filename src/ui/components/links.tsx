@@ -10,7 +10,7 @@ function isNavigationEvent(event: KeyboardEvent) {
     return false;
   }
 
-  if (event.target instanceof HTMLInputElement && event.target.value !== '') {
+  if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
     return false;
   }
 
