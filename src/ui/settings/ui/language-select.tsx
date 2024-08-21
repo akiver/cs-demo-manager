@@ -27,6 +27,10 @@ export function LanguageSelect() {
       value: 'zh-CN',
       label: '简体中文',
     },
+    {
+      value: 'de',
+      label: 'Deutsch',
+    },
   ];
 
   return (
