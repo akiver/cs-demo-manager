@@ -1,10 +1,12 @@
 import { encodeMatch } from 'csgo-sharecode';
-import type {
-  CDataGCCStrike15_v2_MatchInfo,
-  CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve,
-  CMsgGCCStrike15_v2_MatchmakingServerRoundStats,
-  TournamentTeam,
-  WatchableMatchInfo,
+import {
+  type CDataGCCStrike15_v2_MatchInfo,
+  type CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve,
+  type CMsgGCCStrike15_v2_MatchmakingServerRoundStats,
+  type TournamentTeam,
+  type WatchableMatchInfo,
+  CDataGCCStrike15_v2_MatchInfoSchema,
+  toBinary,
 } from 'csgo-protobuf';
 import { Game, TeamNumber } from 'csdm/common/types/counter-strike';
 import type { ValveMatch, ValvePlayer, ValvePlayerRound } from 'csdm/common/types/valve-match';
@@ -71,13 +73,7 @@ function getPlayerStartedTeamNumber(accountIds: number[], steamId3: number, swit
   return switchedTeams ? TeamNumber.CT : TeamNumber.T;
 }
 
-function getPlayerTeamNumberForRound(
-  player: ValvePlayer,
-  roundNumber: number,
-  // maxRounds is always present in CS2 messages but not necessarily in CS:GO messages.
-  // Fallback to the CS:GO 30 max rounds rule by default.
-  maxRounds = 30,
-) {
+function getPlayerTeamNumberForRound(player: ValvePlayer, roundNumber: number, maxRounds: number) {
   if (roundNumber <= maxRounds / 2) {
     return player.startMatchTeamNumber;
   }
@@ -103,6 +99,9 @@ export function getValveMatchFromMatchInfoProtobufMesssage(matchInfoMessage: CDa
   const players: ValvePlayer[] = [];
   let currentScoreTeamThatStartedCt = 0;
   let currentScoreTeamThatStartedT = 0;
+  // maxRounds is always present in CS2 messages but not necessarily in CS:GO messages.
+  // Fallback to the CS:GO 30 max rounds rule by default.
+  const maxRounds = lastRoundMessage.maxRounds > 0 ? lastRoundMessage.maxRounds : 30;
 
   if (roundstatsall.length > 0) {
     roundstatsall.map((roundMessage, roundIndex) => {
@@ -155,7 +154,7 @@ export function getValveMatchFromMatchInfoProtobufMesssage(matchInfoMessage: CDa
           headshotCount: enemyHeadshots[playerIndex] - player.headshotCount,
           mvpCount: mvps[playerIndex] - player.mvp,
           hasWon: hasPlayerWonRound(player),
-          teamNumber: getPlayerTeamNumberForRound(player, roundNumber, lastRoundMessage.maxRounds),
+          teamNumber: getPlayerTeamNumberForRound(player, roundNumber, maxRounds),
         };
         player.rounds.push(round);
 
@@ -240,7 +239,7 @@ export function getValveMatchFromMatchInfoProtobufMesssage(matchInfoMessage: CDa
     teamNameStartedT,
     teamNameStartedCT,
     downloadStatus: DownloadStatus.NotDownloaded,
-    protobufBytes: matchInfoMessage.toBinary(),
+    protobufBytes: toBinary(CDataGCCStrike15_v2_MatchInfoSchema, matchInfoMessage),
   };
 
   return match;

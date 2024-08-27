@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { fileURLToPath } from 'node:url';
 import fs from 'fs-extra';
-import { CDataGCCStrike15_v2_MatchInfo } from 'csgo-protobuf';
+import { CDataGCCStrike15_v2_MatchInfoSchema, fromBinary } from 'csgo-protobuf';
 import { getValveMatchFromMatchInfoProtobufMesssage } from './get-valve-match-from-match-info-protobuf-message';
 import type { ValveMatch } from 'csdm/common/types/valve-match';
 
@@ -9,7 +9,7 @@ async function readInfoFile(fileName: string) {
   const filePath = fileURLToPath(new URL(`fixtures/${fileName}`, import.meta.url));
   const buffer = await fs.readFile(filePath);
   const bytes = new Uint8Array(buffer);
-  const matchMessage: CDataGCCStrike15_v2_MatchInfo = CDataGCCStrike15_v2_MatchInfo.fromBinary(bytes);
+  const matchMessage = fromBinary(CDataGCCStrike15_v2_MatchInfoSchema, bytes);
 
   return matchMessage;
 }

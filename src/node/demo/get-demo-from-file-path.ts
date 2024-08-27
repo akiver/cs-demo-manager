@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'node:path';
-import { CDataGCCStrike15_v2_MatchInfo } from 'csgo-protobuf';
+import { CDataGCCStrike15_v2_MatchInfoSchema, fromBinary } from 'csgo-protobuf';
 import { getDemoChecksumFromFileStats } from './get-demo-checksum-from-file-stats';
 import type { Demo } from 'csdm/common/types/demo';
 import { DemoSource, DemoType, Game } from 'csdm/common/types/counter-strike';
@@ -118,7 +118,7 @@ async function updateDemoFromInfoFile(demo: Demo) {
 
     const buffer = await fs.readFile(infoFilePath);
     const bytes = new Uint8Array(buffer);
-    const matchMessage = CDataGCCStrike15_v2_MatchInfo.fromBinary(bytes);
+    const matchMessage = fromBinary(CDataGCCStrike15_v2_MatchInfoSchema, bytes);
     const match = getValveMatchFromMatchInfoProtobufMesssage(matchMessage);
     // Force the map's name to be the one from the file header because those in .info files may not be accurate
     // since maps values may change between CS operations and are hard coded.

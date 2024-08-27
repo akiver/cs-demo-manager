@@ -8700,7 +8700,7 @@ exports[`get Valve match from protobuf message > Matchmaking > should return cor
   "assistCount": 48,
   "date": "Tue, 09 Sep 2014 20:21:03 GMT",
   "deathCount": 195,
-  "demoUrl": undefined,
+  "demoUrl": "",
   "downloadStatus": "not-downloaded",
   "durationInSeconds": 2375,
   "game": "CSGO",

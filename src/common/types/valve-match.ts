@@ -50,7 +50,7 @@ export type ValveMatch = {
   assistCount: number;
   deathCount: number;
   players: ValvePlayer[];
-  demoUrl: string | undefined;
+  demoUrl: string;
   sharecode: string;
   downloadStatus: DownloadStatus;
   protobufBytes: Uint8Array; // Original protobuf message

@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import fs from 'fs-extra';
-import { CMsgGCCStrike15_v2_MatchList } from 'csgo-protobuf';
+import { type CMsgGCCStrike15_v2_MatchList, CMsgGCCStrike15_v2_MatchListSchema, fromBinary } from 'csgo-protobuf';
 import { NoMatchesFound } from './errors/no-matches-found';
 import { MatchesInfoFileNotFound } from './errors/matches-info-file-not-found';
 import { WriteFileError } from './errors/write-file-error';
@@ -85,7 +85,7 @@ export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCC
           if (infoFileExits) {
             const buffer = await fs.readFile(matchesInfoFilePath);
             const bytes = new Uint8Array(buffer);
-            const matchListMessage = CMsgGCCStrike15_v2_MatchList.fromBinary(bytes);
+            const matchListMessage = fromBinary(CMsgGCCStrike15_v2_MatchListSchema, bytes);
 
             return resolve(matchListMessage);
           }

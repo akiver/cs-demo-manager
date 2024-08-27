@@ -22,7 +22,7 @@ type BaseDownload = {
   game: Game;
   matchId: string;
   fileName: string;
-  demoUrl: string | undefined; // undefined if download link is expired
+  demoUrl: string;
 };
 
 export type ValveDownload = BaseDownload & {

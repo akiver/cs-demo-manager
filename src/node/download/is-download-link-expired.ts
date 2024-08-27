@@ -1,4 +1,4 @@
-export async function isDownloadLinkExpired(demoUrl: string | undefined) {
+export async function isDownloadLinkExpired(demoUrl: string) {
   if (!demoUrl) {
     return true;
   }

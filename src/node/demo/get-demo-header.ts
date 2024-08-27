@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { CDemoFileHeader } from 'csgo-protobuf';
+import { CDemoFileHeaderSchema, fromBinary } from 'csgo-protobuf';
 import { InvalidDemoHeader } from './errors/invalid-demo-header';
 
 class BitStream {
@@ -92,7 +92,7 @@ type DemoHeaderSource2 = {
   buildNumber: number;
   demoVersionGuid: string;
   demoVersionName: string;
-  game?: string; // Seems to be present only with POV demos, we could use it to detect them.
+  game: string; // Seems to be present only with POV demos, we could use it to detect them.
 };
 
 export type DemoHeader = DemoHeaderSource1 | DemoHeaderSource2;
@@ -145,7 +145,7 @@ function readSource2DemoHeader(buffer: Buffer) {
   stream.readVarInt32(); // tick
   const size = stream.readVarInt32();
   const bytes = stream.readBytes(size);
-  const msg = CDemoFileHeader.fromBinary(bytes);
+  const msg = fromBinary(CDemoFileHeaderSchema, bytes);
   if (
     !msg.networkProtocol ||
     !msg.serverName ||

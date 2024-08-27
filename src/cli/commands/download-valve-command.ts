@@ -6,7 +6,12 @@ import b2 from 'unbzip2-stream';
 import util from 'node:util';
 import { decodeMatchShareCode, InvalidShareCode } from 'csgo-sharecode';
 import { startBoiler } from 'csdm/node/boiler/start-boiler';
-import type { CDataGCCStrike15_v2_MatchInfo, WatchableMatchInfo } from 'csgo-protobuf';
+import {
+  type CDataGCCStrike15_v2_MatchInfo,
+  type WatchableMatchInfo,
+  CDataGCCStrike15_v2_MatchInfoSchema,
+  toBinary,
+} from 'csgo-protobuf';
 import { SteamCommunicationError } from 'csdm/node/boiler/errors/steam-communication-error';
 import { AlreadyConnected } from 'csdm/node/boiler/errors/already-connected';
 import { SteamRestartRequired } from 'csdm/node/boiler/errors/steam-restart-required';
@@ -168,7 +173,7 @@ export class DownloadValveCommand extends DownloadBaseCommand {
     this.demoPathBeingDownloaded = demoPath;
     const out = fs.createWriteStream(demoPath);
     await streamPipeline(response.body, b2(), out);
-    await fs.writeFile(`${demoPath}.info`, matchInfo.toBinary());
+    await fs.writeFile(`${demoPath}.info`, toBinary(CDataGCCStrike15_v2_MatchInfoSchema, matchInfo));
     this.demoPathBeingDownloaded = undefined;
   }
 
