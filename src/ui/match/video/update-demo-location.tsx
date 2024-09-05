@@ -1,9 +1,7 @@
 import React, { useState, type ReactNode } from 'react';
 import { Trans } from '@lingui/macro';
-import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { CenteredContent } from 'csdm/ui/components/content';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
-import { updateMatchDemoLocationSuccess } from '../match-actions';
 import { ErrorCode } from 'csdm/common/error-code';
 import { useUpdateDemoLocation } from 'csdm/ui/hooks/use-update-demo-location';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
@@ -16,7 +14,6 @@ type Props = {
 
 export function UpdateDemoLocation({ checksum, demoFilePath, onUpdated }: Props) {
   const [error, setError] = useState<ReactNode | undefined>(undefined);
-  const dispatch = useDispatch();
   const updateDemoLocation = useUpdateDemoLocation();
 
   const onClick = async () => {
@@ -26,12 +23,6 @@ export function UpdateDemoLocation({ checksum, demoFilePath, onUpdated }: Props)
         return;
       }
       setError(undefined);
-      dispatch(
-        updateMatchDemoLocationSuccess({
-          checksum,
-          demoFilePath: newDemoPath,
-        }),
-      );
       if (typeof onUpdated === 'function') {
         onUpdated(newDemoPath);
       }

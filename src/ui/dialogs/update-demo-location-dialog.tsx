@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { ErrorCode } from 'csdm/common/error-code';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from './dialog';
-import { updateMatchDemoLocationSuccess } from 'csdm/ui/match/match-actions';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { useDialog } from '../components/dialogs/use-dialog';
 import { useUpdateDemoLocation } from '../hooks/use-update-demo-location';
@@ -17,7 +15,6 @@ type Props = {
 
 export function UpdateDemoLocationDialog({ checksum, demoFilePath }: Props) {
   const [error, setError] = useState<string | undefined>(undefined);
-  const dispatch = useDispatch();
   const { hideDialog } = useDialog();
   const updateDemoLocation = useUpdateDemoLocation();
 
@@ -25,12 +22,6 @@ export function UpdateDemoLocationDialog({ checksum, demoFilePath }: Props) {
     try {
       await updateDemoLocation(checksum);
       setError(undefined);
-      dispatch(
-        updateMatchDemoLocationSuccess({
-          checksum,
-          demoFilePath,
-        }),
-      );
       hideDialog();
     } catch (error) {
       if (error === ErrorCode.ChecksumsMismatch) {
