@@ -1,14 +1,8 @@
-import { insertMatchPositions } from 'csdm/node/database/matches/insert-match-positions';
-import {
-  deleteCsvFilesInOutputFolder,
-  getDemoNameFromPath,
-  getOutputFolderPath,
-} from 'csdm/node/database/matches/match-insertion';
-import { getSettings } from 'csdm/node/settings/get-settings';
+import { deleteCsvFilesInOutputFolder, getOutputFolderPath } from 'csdm/node/database/matches/match-insertion';
 import { CorruptedDemoError } from 'csdm/node/demo-analyzer/corrupted-demo-error';
-import { deleteMatchPositions } from 'csdm/node/database/matches/delete-match-positions';
 import type { DemoSource } from 'csdm/common/types/counter-strike';
 import { analyzeDemo } from 'csdm/node/demo/analyze-demo';
+import { insertMatch } from './insert-match';
 
 type Parameters = {
   checksum: string;
@@ -20,15 +14,14 @@ type Parameters = {
 export async function generateMatchPositions({ checksum, demoPath, source, onInsertionStart }: Parameters) {
   const outputFolderPath = getOutputFolderPath();
 
-  const processPositionsInsertion = async () => {
+  const processMatchInsertion = async () => {
     onInsertionStart();
-    const settings = await getSettings();
-    const demoName = getDemoNameFromPath(demoPath);
-    await deleteMatchPositions(checksum);
-    await insertMatchPositions({
-      databaseSettings: settings.database,
+    // We insert the full match rather than just the positions because the unique grenade IDs change at each analysis.
+    // The grenade positions IDs and the grenade start,end... IDs events would be different if we only insert the positions.
+    await insertMatch({
+      checksum,
+      demoPath,
       outputFolderPath,
-      demoName,
     });
   };
 
@@ -40,15 +33,15 @@ export async function generateMatchPositions({ checksum, demoPath, source, onIns
       analyzePositions: true,
     });
 
-    await processPositionsInsertion();
+    await processMatchInsertion();
   } catch (error) {
     // If the demo is corrupted, we still want to try to insert positions in the database.
     if (error instanceof CorruptedDemoError) {
-      await processPositionsInsertion();
+      await processMatchInsertion();
     } else {
       throw error;
     }
   } finally {
-    deleteCsvFilesInOutputFolder(outputFolderPath);
+    await deleteCsvFilesInOutputFolder(outputFolderPath);
   }
 }
