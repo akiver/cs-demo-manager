@@ -67,14 +67,16 @@ export function Viewer2D() {
       drawChickens(context, interactiveCanvas);
 
       if (!isPlaying) {
+        lastFrame.current = new Date();
         return;
       }
 
       const now = new Date();
       const elapsed = now.getTime() - lastFrame.current.getTime();
-      if (elapsed >= 1000 / framerate / speed) {
-        setCurrentFrame(currentFrame + Math.max(1, Math.floor(speed)));
-        lastFrame.current = now;
+      const delay = 1000 / framerate / speed;
+      if (elapsed >= delay) {
+        setCurrentFrame(currentFrame + Math.max(1, Math.floor(elapsed / delay)));
+        lastFrame.current = new Date(now.getTime() - (elapsed % delay));
       }
 
       if (currentFrame >= round.endOfficiallyFrame) {
