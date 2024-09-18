@@ -10,7 +10,12 @@ function isNavigationEvent(event: KeyboardEvent) {
     return false;
   }
 
-  if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+  const { target } = event;
+  if (
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLDivElement && target.hasAttribute('contenteditable'))
+  ) {
     return false;
   }
 

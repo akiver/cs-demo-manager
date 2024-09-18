@@ -1288,8 +1288,8 @@ msgstr "Radius"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
-msgid "Comment"
-msgstr "Comment"
+msgid "Comment (Markdown supported)"
+msgstr "Comment (Markdown supported)"
 
 #: src/ui/components/inputs/database-name-input.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx

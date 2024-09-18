@@ -87,7 +87,7 @@ export function MatchInformation({ match }: Props) {
         </div>
         <Field name={<Trans>Checksum</Trans>} value={match.checksum} />
       </div>
-      <div className="w-full ml-16">
+      <div className="w-full ml-16 max-h-[126px]">
         <MatchCommentInput isResizable={false} />
       </div>
     </div>

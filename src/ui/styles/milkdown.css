@@ -1,0 +1,75 @@
+@import '@milkdown/kit/prose/view/style/prosemirror.css';
+
+/*
+* Show the possible placeholder when the editor is empty, the plugin inserts and updates it through `data-placeholder`.
+* https://github.com/HexMox/milkdown-plugin-placeholder
+*/
+.ProseMirror[data-placeholder]::before {
+  position: absolute;
+  content: attr(data-placeholder);
+  pointer-events: none;
+  color: theme(colors.gray.500);
+}
+
+.ProseMirror-selectednode {
+  outline: 2px solid theme(colors.blue.600);
+}
+
+.milkdown {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.milkdown .editor h1 {
+  font-size: 2rem;
+}
+
+.milkdown .editor h2 {
+  font-size: 1.75rem;
+}
+
+.milkdown .editor h3 {
+  font-size: 1.5rem;
+}
+
+.milkdown .editor h4 {
+  font-size: 1.25rem;
+}
+
+.milkdown .editor h5 {
+  font-size: 1rem;
+}
+
+.milkdown .editor h6 {
+  font-size: 0.875rem;
+}
+
+.milkdown .editor ul {
+  list-style-type: disc;
+  margin: auto;
+  padding-left: 16px;
+}
+
+.milkdown .editor hr {
+  border-width: 2px;
+  border-color: theme(colors.gray.800);
+  border-radius: 4px;
+}
+
+.milkdown .editor blockquote {
+  border-left: 4px solid theme(colors.gray.300);
+  padding-left: 8px;
+  margin: 0;
+}
+
+.milkdown .editor pre {
+  background-color: theme(colors.gray.200);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.milkdown .editor code:not(pre code) {
+  background-color: theme(colors.gray.200);
+  padding: 2px 4px;
+  border-radius: 4px;
+}

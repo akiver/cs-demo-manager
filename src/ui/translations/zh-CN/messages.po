@@ -1293,8 +1293,8 @@ msgstr "半径"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
-msgid "Comment"
-msgstr "评论"
+msgid "Comment (Markdown supported)"
+msgstr ""
 
 #: src/ui/components/inputs/database-name-input.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
