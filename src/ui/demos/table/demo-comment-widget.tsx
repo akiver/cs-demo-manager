@@ -17,7 +17,7 @@ export function DemoCommentWidget({ onClose, demos }: Props) {
 
   const [selectedDemo] = demos;
 
-  const onDestroy = (comment: string) => {
+  const onBlur = (comment: string) => {
     if (comment === selectedDemo.comment) {
       return;
     }
@@ -33,7 +33,7 @@ export function DemoCommentWidget({ onClose, demos }: Props) {
       key={`comment-${selectedDemo.checksum}`}
       comment={selectedDemo.comment}
       onClose={onClose}
-      onDestroy={onDestroy}
+      onBlur={onBlur}
     />
   );
 }

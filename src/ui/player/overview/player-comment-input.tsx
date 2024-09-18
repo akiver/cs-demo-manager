@@ -9,6 +9,7 @@ export function PlayerCommentInput() {
 
   return (
     <CommentInput
+      isResizable={true}
       currentComment={player.comment}
       updateComment={(comment) => {
         updateComment({

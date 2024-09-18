@@ -17,7 +17,7 @@ export function MatchCommentWidget({ onClose, matches }: Props) {
 
   const selectedMatch = matches[0];
 
-  const onDestroy = (comment: string) => {
+  const onBlur = (comment: string) => {
     if (comment === selectedMatch.comment) {
       return;
     }
@@ -33,7 +33,7 @@ export function MatchCommentWidget({ onClose, matches }: Props) {
       key={`comment-${selectedMatch.checksum}`}
       comment={selectedMatch.comment}
       onClose={onClose}
-      onDestroy={onDestroy}
+      onBlur={onBlur}
     />
   );
 }

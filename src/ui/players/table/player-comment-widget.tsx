@@ -17,7 +17,7 @@ export function PlayerCommentWidget({ onClose, players }: Props) {
 
   const selectedPlayer = players[0];
 
-  const onDestroy = (comment: string) => {
+  const onBlur = (comment: string) => {
     if (comment === selectedPlayer.comment) {
       return;
     }
@@ -33,7 +33,7 @@ export function PlayerCommentWidget({ onClose, players }: Props) {
       key={`comment-${selectedPlayer.steamId}`}
       comment={selectedPlayer.comment}
       onClose={onClose}
-      onDestroy={onDestroy}
+      onBlur={onBlur}
     />
   );
 }

@@ -1,18 +1,17 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
-import { TextArea } from 'csdm/ui/components/inputs/text-area';
+import { MarkdownEditor } from 'csdm/ui/components/inputs/markdown-editor';
 import { useUpdateComment } from 'csdm/ui/comment/use-update-comment';
 
 type Props = {
   checksum: string;
-  currentComment: string | undefined;
+  currentComment: string;
 };
 
 export function DemoCommentInput({ checksum, currentComment }: Props) {
   const updateComment = useUpdateComment();
 
-  const onBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
-    const comment = event.target.value;
+  const onBlur = (comment: string) => {
     if (comment === currentComment) {
       return;
     }
@@ -28,7 +27,9 @@ export function DemoCommentInput({ checksum, currentComment }: Props) {
       <label htmlFor="comment">
         <Trans>Comment:</Trans>
       </label>
-      <TextArea id="comment" defaultValue={currentComment} onBlur={onBlur} style={{ height: 120 }} />
+      <div className="max-h-[120px]">
+        <MarkdownEditor defaultValue={currentComment} onBlur={onBlur} />
+      </div>
     </div>
   );
 }

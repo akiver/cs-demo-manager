@@ -1293,7 +1293,7 @@ msgstr ""
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
-msgid "Comment"
+msgid "Comment (Markdown supported)"
 msgstr ""
 
 #: src/ui/components/inputs/database-name-input.tsx

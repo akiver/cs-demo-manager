@@ -7,7 +7,7 @@ type Props = {
   isResizable?: boolean;
 };
 
-export function MatchCommentInput({ isResizable = true }: Props) {
+export function MatchCommentInput({ isResizable = false }: Props) {
   const match = useCurrentMatch();
   const updateComment = useUpdateComment();
 
