@@ -19,7 +19,7 @@ export function getMapName(gameType: number) {
   const DE_NUKE = 1 << 5;
   const DE_VERTIGO = 1 << 6;
   const DE_MIRAGE = 1 << 7;
-  const DE_ASSEMBLY = 1 << 8;
+  const CS_OFFICE = 1 << 8;
   const DE_MEMENTO = 1 << 9;
   const CS_ASSAULT = 1 << 10;
   const CS_MILITIA = 1 << 11;
@@ -39,12 +39,12 @@ export function getMapName(gameType: number) {
       return 'cs_assault';
     case CS_MILITIA:
       return 'cs_militia';
+    case CS_OFFICE:
+      return 'cs_office';
     case DE_ANUBIS:
       return 'de_anubis';
     case DE_ANCIENT:
       return 'de_ancient';
-    case DE_ASSEMBLY:
-      return 'de_assembly';
     case DE_BASALT:
       return 'de_basalt';
     case DE_BREACH:
