@@ -46,7 +46,10 @@ export async function createJsonActionsFileForRecording({
     const sequence = sequences[i];
     if (i === 0) {
       // Pause the playback for a few seconds to avoid seeing the loading screen/tint effect.
-      json.addPausePlayback(sequence.startTick - 1);
+      // Do it a few ticks before the sequence's start tick because some ticks may be skipped between the time that the
+      // plugin pauses the playback and the time that the game actually pauses the playback (it would result in
+      // startmovie commands not being executed and so missing sequences).
+      json.addPausePlayback(sequence.startTick - 4);
     }
 
     const roundedTickrate = Math.round(tickrate);

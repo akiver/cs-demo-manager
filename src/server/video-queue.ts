@@ -5,7 +5,7 @@ import { RendererServerMessageName } from 'csdm/server/renderer-server-message-n
 import { getErrorCodeFromError } from './get-error-code-from-error';
 import { ErrorCode } from 'csdm/common/error-code';
 import { VideoStatus } from 'csdm/common/types/video-status';
-import { generateVideos } from 'csdm/node/video/generate-videos';
+import { generateVideo } from 'csdm/node/video/generate-video';
 import { AbortError } from 'csdm/node/errors/abort-error';
 import { CommandError } from 'csdm/node/video/errors/command-error';
 import type { AddVideoPayload, Video } from 'csdm/common/types/video';
@@ -105,7 +105,7 @@ class VideoQueue {
       const ctrl = new AbortController();
       this.abortControllers[video.id] = ctrl;
 
-      await generateVideos({
+      await generateVideo({
         ...video,
         videoId: video.id,
         signal: ctrl.signal,

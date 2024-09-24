@@ -146,7 +146,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
   }
 }
 
-export async function generateVideos(parameters: Parameters) {
+export async function generateVideo(parameters: Parameters) {
   logger.log(`Generating video with id ${parameters.videoId}`);
 
   const { signal } = parameters;
@@ -279,6 +279,6 @@ export async function generateVideos(parameters: Parameters) {
     cleanupFiles();
     throw error;
   } finally {
-    uninstallCs2ServerPlugin();
+    await uninstallCs2ServerPlugin();
   }
 }

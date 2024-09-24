@@ -163,6 +163,6 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
   options.onGameStart?.();
   await startHlae(command, signal);
   if (options.uninstallPluginOnExit !== false) {
-    uninstallCs2ServerPlugin();
+    await uninstallCs2ServerPlugin();
   }
 }
