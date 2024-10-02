@@ -113,6 +113,12 @@ export function getVideoErrorMessageFromErrorCode(game: Game, errorCode: ErrorCo
           <Trans>Raw files not found.</Trans>
         </p>
       );
+    case ErrorCode.GameError:
+      return (
+        <p>
+          <Trans>Counter-Strike crashed.</Trans>
+        </p>
+      );
     case ErrorCode.HlaeError:
       return (
         <div className="flex flex-col gap-x-4">

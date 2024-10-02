@@ -27,6 +27,7 @@ import { fetchMatchPlayersSlots } from '../database/match/fetch-match-players-sl
 import { assertVideoGenerationIsPossible } from './assert-video-generation-is-possible';
 import { deleteSequencesRawFiles } from './sequences/delete-sequences-raw-files';
 import { uninstallCs2ServerPlugin } from '../counter-strike/launcher/cs2-server-plugin';
+import { GameError } from '../counter-strike/launcher/errors/game-error';
 
 type FfmpegSettings = {
   audioBitrate: number;
@@ -242,6 +243,13 @@ export async function generateVideo(parameters: Parameters) {
         signal,
         uninstallPluginOnExit: false,
         gameParameters: null,
+        onGameSocketDisconnected: (durationInMs: number) => {
+          // TODO use a native plugin to detect if the CS process crashed
+          if (durationInMs <= 15_000) {
+            logger.log('Game process disconnected too quickly, considering it as a game crash');
+            throw new GameError();
+          }
+        },
       };
       await watchDemoWithHlae(hlaeOptions);
     } else {

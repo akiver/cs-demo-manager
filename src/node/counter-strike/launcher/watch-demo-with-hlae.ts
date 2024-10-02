@@ -12,6 +12,8 @@ import { installCs2ServerPlugin, uninstallCs2ServerPlugin } from './cs2-server-p
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
 import { getHlaeExecutablePathOrThrow } from 'csdm/node/video/hlae/hlae-location';
+import { server } from 'csdm/server/server';
+import { GameError } from './errors/game-error';
 
 export type HlaeOptions = {
   demoPath: string;
@@ -24,6 +26,7 @@ export type HlaeOptions = {
   hlaeParameters?: string;
   signal?: AbortSignal;
   onGameStart?: () => void;
+  onGameSocketDisconnected?: (durationInMs: number) => void;
   uninstallPluginOnExit?: boolean;
 };
 
@@ -55,7 +58,13 @@ async function waitForCounterStrikeExit() {
   });
 }
 
-async function startHlae(command: string, signal?: AbortSignal) {
+type StartHlaeOptions = {
+  command: string;
+  signal?: AbortSignal;
+  onGameSocketDisconnected?: (durationInMs: number) => void;
+};
+
+async function startHlae({ command, signal }: StartHlaeOptions) {
   logger.log('Starting HLAE with command', command);
 
   return new Promise<void>((resolve, reject) => {
@@ -83,10 +92,21 @@ async function startHlae(command: string, signal?: AbortSignal) {
         return reject(new HlaeError());
       }
 
+      const onGameSocketDisconnected = (durationInMs: number) => {
+        // TODO use a native plugin to detect if the CS process crashed
+        if (durationInMs <= 15_000) {
+          logger.log('Game process disconnected quickly, considering it as a game error');
+          return reject(new GameError());
+        }
+      };
+
       try {
+        server.addGameDisconnectionListener(onGameSocketDisconnected);
         await waitForCounterStrikeExit();
       } catch (error) {
         return reject(error);
+      } finally {
+        server.removeGameDisconnectionListener(onGameSocketDisconnected);
       }
 
       return resolve();
@@ -161,7 +181,11 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
   const command = `"${hlaeExecutablePath}" ${hlaeParameters.join(' ')}`;
 
   options.onGameStart?.();
-  await startHlae(command, signal);
+  await startHlae({
+    command,
+    signal,
+    onGameSocketDisconnected: options.onGameSocketDisconnected,
+  });
   if (options.uninstallPluginOnExit !== false) {
     await uninstallCs2ServerPlugin();
   }
