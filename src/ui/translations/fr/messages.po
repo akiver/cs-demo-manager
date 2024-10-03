@@ -1911,6 +1911,14 @@ msgctxt "Table header tooltip"
 msgid "Analyze date"
 msgstr "Date d'analyse"
 
+#: src/ui/components/messages/hlae-error.tsx
+msgid "HLAE returned an error."
+msgstr "HLAE a retourné une erreur."
+
+#: src/ui/components/messages/hlae-error.tsx
+msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
+msgstr "Assurez-vous que HLAE est à jour et compatible avec la dernière version de CS2 sur <0>GitHub</0> ou <1>Discord></1>."
+
 #: src/ui/components/panels/average-damages-per-round-panel.tsx
 msgctxt "Panel title"
 msgid "ADR"
@@ -4755,14 +4763,6 @@ msgstr "Fichiers bruts non trouvés."
 #: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Counter-Strike crashed."
 msgstr ""
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "HLAE returned an error."
-msgstr "HLAE a retourné une erreur."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
-msgstr "Assurez-vous que HLAE est à jour et compatible avec la dernière version de CS2 sur <0>GitHub</0> ou <1>Discord></1>."
 
 #: src/ui/match/video/height-resolution-input.tsx
 msgctxt "Input label"

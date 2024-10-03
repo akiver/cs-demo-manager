@@ -44,7 +44,7 @@ const config = {
     executableName: 'cs-demo-manager',
     extraFiles: [
       {
-        from: 'build/bin/csdm.cmd',
+        from: 'build-assets/bin/csdm.cmd',
         to: './csdm.cmd',
       },
     ],
@@ -88,7 +88,7 @@ const config = {
       // ./dist/mac-arm64/CS Demo Manager.app/Contents/MacOS/CS Demo Manager: code object is not signed at all
       // In subcomponent: ./dist/mac-arm64/CS Demo Manager.app/Contents/csdm
       {
-        from: 'build/bin/csdm_darwin.sh',
+        from: 'build-assets/bin/csdm_darwin.sh',
         to: './csdm',
       },
       {
@@ -105,10 +105,10 @@ const config = {
       { target: 'rpm', arch: ['x64'] },
       { target: 'AppImage', arch: ['x64'] },
     ],
-    icon: 'build/icon.icns',
+    icon: 'build-assets/icon.icns',
     extraFiles: [
       {
-        from: 'build/bin/csdm.sh',
+        from: 'build-assets/bin/csdm.sh',
         to: './csdm',
       },
     ],
@@ -122,6 +122,7 @@ const config = {
   },
   directories: {
     output: 'dist',
+    buildResources: 'build-assets',
   },
   files: [
     'package.json',

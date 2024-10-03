@@ -3,6 +3,7 @@ import { Trans } from '@lingui/macro';
 import { ErrorCode } from 'csdm/common/error-code';
 import { ExternalLink } from 'csdm/ui/components/external-link';
 import { Game } from 'csdm/common/types/counter-strike';
+import { HlaeError } from 'csdm/ui/components/messages/hlae-error';
 
 export function getVideoErrorMessageFromErrorCode(game: Game, errorCode: ErrorCode) {
   switch (errorCode) {
@@ -120,22 +121,7 @@ export function getVideoErrorMessageFromErrorCode(game: Game, errorCode: ErrorCo
         </p>
       );
     case ErrorCode.HlaeError:
-      return (
-        <div className="flex flex-col gap-x-4">
-          <span>
-            <Trans>HLAE returned an error.</Trans>
-          </span>
-          <span>
-            <Trans>
-              Make sure HLAE is up to date and compatible with the last CS2 version on{' '}
-              <ExternalLink href="https://github.com/advancedfx/advancedfx/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen">
-                GitHub
-              </ExternalLink>{' '}
-              or <ExternalLink href="https://discord.com/invite/NGp8qhN">Discord</ExternalLink>.
-            </Trans>
-          </span>
-        </div>
-      );
+      return <HlaeError />;
     default:
       return (
         <p>

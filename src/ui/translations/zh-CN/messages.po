@@ -1911,6 +1911,14 @@ msgctxt "Table header tooltip"
 msgid "Analyze date"
 msgstr "分析日期"
 
+#: src/ui/components/messages/hlae-error.tsx
+msgid "HLAE returned an error."
+msgstr "HLAE返回了一个错误"
+
+#: src/ui/components/messages/hlae-error.tsx
+msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
+msgstr ""
+
 #: src/ui/components/panels/average-damages-per-round-panel.tsx
 msgctxt "Panel title"
 msgid "ADR"
@@ -4754,14 +4762,6 @@ msgstr "未找到原始文件"
 
 #: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Counter-Strike crashed."
-msgstr ""
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "HLAE returned an error."
-msgstr "HLAE返回了一个错误"
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
 msgstr ""
 
 #: src/ui/match/video/height-resolution-input.tsx
