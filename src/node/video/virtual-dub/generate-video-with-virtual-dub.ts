@@ -31,13 +31,13 @@ function sanitizePath(path: string) {
 function generateVirtualDubScript(
   framerate: number,
   firstTgaFilePath: string,
-  wavFilePath: string,
+  wavFilePath: string | undefined,
   tgaFilesCount: number,
   videoFilePath: string,
 ) {
   return `
       VirtualDub.Open("${firstTgaFilePath}","",0);
-  VirtualDub.audio.SetSource("${wavFilePath}", "");
+  ${wavFilePath ? `VirtualDub.audio.SetSource("${wavFilePath}", "");` : ''}
   VirtualDub.audio.SetMode(0);
   VirtualDub.audio.SetInterleave(1, 500, 1, 0, 0);
   VirtualDub.audio.SetClipMode(1, 1);
@@ -79,10 +79,11 @@ async function writeVirtualDubScript({
     getSequenceOutputFilePath(outputFolderPath, sequence, VideoContainer.AVI),
   );
 
+  const wavFileExists = await fs.pathExists(wavFilePath);
   const script = generateVirtualDubScript(
     framerate,
     sanitizePath(tgaFiles[0]),
-    sanitizePath(wavFilePath),
+    wavFileExists ? sanitizePath(wavFilePath) : undefined,
     tgaFiles.length,
     outputFilePath,
   );

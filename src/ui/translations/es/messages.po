@@ -5165,6 +5165,10 @@ msgstr ""
 msgid "Loading video generator…"
 msgstr ""
 
+#: src/ui/match/video/video.tsx
+msgid "Due to a CS2 bug since the \"Armory\" update, the audio is not recorded!"
+msgstr ""
+
 #: src/ui/match/video/virtualdub/virtual-dub-install-button.tsx
 msgid "Installing VirtualDub…"
 msgstr ""

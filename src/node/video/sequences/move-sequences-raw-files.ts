@@ -7,7 +7,6 @@ import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
 import { getCsgoFolderPathOrThrow } from 'csdm/node/counter-strike/get-csgo-folder-path';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { RawFilesNotFoundError } from 'csdm/node/video/errors/raw-files-not-found';
-import { WavFileNotFound } from 'csdm/node/video/errors/wav-file-not-found';
 
 // Move the raw files of the sequences to the folder specified in the settings.
 // We move it only for:
@@ -62,19 +61,18 @@ export async function moveSequencesRawFiles(sequences: Sequence[], destinationFo
     const rawFilesFolderPath = path.dirname(tgaFiles[0]);
     logger.log(`Sequence raw files folder: ${rawFilesFolderPath}`);
 
-    const wavFilePath = path.join(rawFilesFolderPath, isCsgo ? `${sequenceName}.WAV` : `${sequenceName}.wav`);
-    if (!(await fs.pathExists(wavFilePath))) {
-      throw new WavFileNotFound();
-    }
-
     const destinationPath = path.join(destinationFolderPath, sequenceName);
     await fs.ensureDir(destinationPath);
+
+    const wavFilePath = path.join(rawFilesFolderPath, isCsgo ? `${sequenceName}.WAV` : `${sequenceName}.wav`);
+    if (await fs.pathExists(wavFilePath)) {
+      await fs.move(wavFilePath, path.join(destinationPath, `${sequenceName}.wav`));
+    }
 
     await Promise.all(
       tgaFiles.map((tgaFile) => {
         return fs.move(tgaFile, path.join(destinationPath, path.basename(tgaFile)));
       }),
     );
-    await fs.move(wavFilePath, path.join(destinationPath, `${sequenceName}.wav`));
   }
 }
