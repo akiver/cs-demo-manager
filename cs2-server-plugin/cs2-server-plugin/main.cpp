@@ -93,7 +93,7 @@ void Log(const char *msg, ...)
 	va_list args;
 	va_start(args, msg);
 	char buf[1024] = {};
-	V_vsnprintf(buf, sizeof(buf) - 1, msg, args);
+	vsnprintf(buf, sizeof(buf), msg, args);
 	ConColorMsg(Color(227, 0, 255, 255), "CSDM: %s\n", buf);
 	va_end(args);
 }

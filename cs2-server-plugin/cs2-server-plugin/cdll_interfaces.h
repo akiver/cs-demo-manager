@@ -88,11 +88,11 @@ public:
     virtual void _Unknown_040(void) = 0;
     virtual void _Unknown_041(void) = 0;
     virtual void _Unknown_042(void) = 0;
-
-    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue) = 0; //:043
-
+    virtual void _Unknown_043(void) = 0;
     virtual void _Unknown_044(void) = 0;
-    virtual void _Unknown_045(void) = 0;
+
+    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue) = 0; //:045
+
     virtual void _Unknown_046(void) = 0;
     virtual void _Unknown_047(void) = 0;
     virtual void _Unknown_048(void) = 0;
@@ -110,8 +110,10 @@ public:
     virtual void _Unknown_058(void) = 0;
     virtual void _Unknown_059(void) = 0;
     virtual void _Unknown_060(void) = 0;
+    virtual void _Unknown_061(void) = 0;
+    virtual void _Unknown_062(void) = 0;
 
-    virtual IDemoFile* GetDemoFile(void) = 0; //:061
+    virtual IDemoFile* GetDemoFile(void) = 0; //:063
 };
 
 enum ClientFrameStage_t

@@ -23,9 +23,7 @@ LIBS = -ldl -ltier0 -l:tier1.a
 
 SRC_FILES = main.cpp \
 			./deps/easywsclient/easywsclient.cpp \
-			./deps/hl2sdk/tier1/convar.cpp \
-			./deps/hl2sdk/tier1/characterset.cpp \
-			./deps/hl2sdk/tier1/strtools.cpp
+			./deps/hl2sdk/tier1/convar.cpp
 
 TARGET = libserver.so
 
