@@ -337,7 +337,7 @@ class WebSocketServer {
 // ! Sometimes you may have to use explicitly undici (NodeJS fetch) because of differences between DOM/NodeJS APIs.
 // ! In this case, you will not see requests from the DevTools.
 const originalFetch = globalThis.fetch;
-globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestInit) => {
   try {
     return await originalFetch(input, init);
   } catch (error) {
