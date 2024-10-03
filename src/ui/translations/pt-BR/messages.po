@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-07 00:11\n"
+"PO-Revision-Date: 2024-10-03 22:55\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -150,7 +150,7 @@ msgstr "Status"
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header"
@@ -785,7 +785,7 @@ msgstr "Atualizar localização de demo"
 #: src/ui/components/context-menu/items/update-name-item.tsx
 msgctxt "Context menu"
 msgid "Update name"
-msgstr ""
+msgstr "Atualizar nome"
 
 #: src/ui/components/context-menu/items/watch-item.tsx
 #: src/ui/components/context-menu/items/watch-player-item.tsx
