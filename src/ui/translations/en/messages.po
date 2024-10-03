@@ -4748,6 +4748,10 @@ msgid "Raw files not found."
 msgstr "Raw files not found."
 
 #: src/ui/match/video/get-video-error-from-error-code.tsx
+msgid "Counter-Strike crashed."
+msgstr "Counter-Strike crashed."
+
+#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "HLAE returned an error."
 msgstr "HLAE returned an error."
 
