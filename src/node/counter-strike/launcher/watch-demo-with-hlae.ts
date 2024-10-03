@@ -12,7 +12,8 @@ import { installCs2ServerPlugin, uninstallCs2ServerPlugin } from './cs2-server-p
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
 import { getHlaeExecutablePathOrThrow } from 'csdm/node/video/hlae/hlae-location';
-import { server } from 'csdm/server/server';
+import { getRunningProcessExitCode } from 'csdm/node/os/get-running-process-exit-code/get-running-process-exit-code';
+import { sleep } from 'csdm/common/sleep';
 import { GameError } from './errors/game-error';
 
 export type HlaeOptions = {
@@ -26,7 +27,6 @@ export type HlaeOptions = {
   hlaeParameters?: string;
   signal?: AbortSignal;
   onGameStart?: () => void;
-  onGameSocketDisconnected?: (durationInMs: number) => void;
   uninstallPluginOnExit?: boolean;
 };
 
@@ -38,30 +38,9 @@ async function isHlaeErrorWindowExists() {
   });
 }
 
-async function waitForCounterStrikeExit() {
-  const checkIntervalInMs = 2_000;
-
-  return new Promise<void>((resolve, reject) => {
-    const intervalId = setInterval(async () => {
-      const hlaeErrorDetected = await isHlaeErrorWindowExists();
-      if (hlaeErrorDetected) {
-        clearInterval(intervalId);
-        return reject(new HlaeError());
-      }
-
-      const isCsRunning = await isCounterStrikeRunning();
-      if (!isCsRunning) {
-        clearInterval(intervalId);
-        resolve();
-      }
-    }, checkIntervalInMs);
-  });
-}
-
 type StartHlaeOptions = {
   command: string;
   signal?: AbortSignal;
-  onGameSocketDisconnected?: (durationInMs: number) => void;
 };
 
 async function startHlae({ command, signal }: StartHlaeOptions) {
@@ -92,24 +71,29 @@ async function startHlae({ command, signal }: StartHlaeOptions) {
         return reject(new HlaeError());
       }
 
-      const onGameSocketDisconnected = (durationInMs: number) => {
-        // TODO use a native plugin to detect if the CS process crashed
-        if (durationInMs <= 15_000) {
-          logger.log('Game process disconnected quickly, considering it as a game error');
-          return reject(new GameError());
-        }
-      };
-
-      try {
-        server.addGameDisconnectionListener(onGameSocketDisconnected);
-        await waitForCounterStrikeExit();
-      } catch (error) {
-        return reject(error);
-      } finally {
-        server.removeGameDisconnectionListener(onGameSocketDisconnected);
+      await sleep(2_000);
+      const hlaeErrorDetected = await isHlaeErrorWindowExists();
+      if (hlaeErrorDetected) {
+        return reject(new HlaeError());
       }
 
-      return resolve();
+      const isCsRunning = await isCounterStrikeRunning();
+      if (!isCsRunning) {
+        return reject(new GameError());
+      }
+
+      try {
+        const exitCode = await getRunningProcessExitCode('cs2.exe');
+        if (exitCode === 0) {
+          return resolve();
+        }
+
+        return reject(new GameError());
+      } catch (error) {
+        logger.error('Failed to get CS2 exit code');
+        logger.error(error);
+        return reject(error);
+      }
     });
   });
 }
@@ -184,7 +168,6 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
   await startHlae({
     command,
     signal,
-    onGameSocketDisconnected: options.onGameSocketDisconnected,
   });
   if (options.uninstallPluginOnExit !== false) {
     await uninstallCs2ServerPlugin();

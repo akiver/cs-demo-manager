@@ -66,15 +66,12 @@ type GameListener<MessageName extends GameClientMessageName = GameClientMessageN
   payload: GameClientMessagePayload[MessageName],
 ) => void;
 
-type GameDisconnectionListener = (durationInMs: number) => void;
-
 class WebSocketServer {
   private server: WSServer;
   private rendererProcessSocket: WebSocket | null = null;
   private mainProcessSocket: WebSocket | null = null;
   private gameProcessSocket: WebSocket | null = null;
   private gameListeners = new Map<GameClientMessageName, GameListener[]>();
-  private gameSocketDisconnectionListeners: GameDisconnectionListener[] = [];
   private gameSocketConnectionTimestamp: number | null = null;
 
   constructor() {
@@ -295,17 +292,6 @@ class WebSocketServer {
     this.gameListeners.set(name, []);
   };
 
-  public addGameDisconnectionListener = (listener: GameDisconnectionListener) => {
-    this.gameSocketDisconnectionListeners.push(listener);
-  };
-
-  public removeGameDisconnectionListener = (listener: GameDisconnectionListener) => {
-    const index = this.gameSocketDisconnectionListeners.indexOf(listener);
-    if (index !== -1) {
-      this.gameSocketDisconnectionListeners.splice(index, 1);
-    }
-  };
-
   private onGameProcessSocketMessage = (data: RawData) => {
     try {
       const message: Omit<IdentifiableClientMessage<GameClientMessageName>, 'uuid'> = JSON.parse(data.toString());
@@ -328,15 +314,7 @@ class WebSocketServer {
     logger.log('WS:: game process socket disconnected', code, reason);
     this.gameProcessSocket = null;
 
-    if (this.gameSocketDisconnectionListeners.length > 0 && this.gameSocketConnectionTimestamp) {
-      const durationInMs = Date.now() - this.gameSocketConnectionTimestamp;
-      for (const listener of this.gameSocketDisconnectionListeners) {
-        listener(durationInMs);
-      }
-    }
-
     this.gameListeners.clear();
-    this.gameSocketDisconnectionListeners = [];
     this.gameSocketConnectionTimestamp = null;
   };
 

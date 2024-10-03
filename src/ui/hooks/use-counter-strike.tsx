@@ -16,6 +16,7 @@ import type { WatchPlayerAsSuspectPayload } from 'csdm/server/handlers/renderer-
 import type { WatchDemoErrorPayload } from 'csdm/server/handlers/renderer-process/counter-strike/counter-strike';
 import { ExternalLink } from '../components/external-link';
 import type { WatchPlayerRoundsPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-player-rounds-handler';
+import { HlaeError } from 'csdm/ui/components/messages/hlae-error';
 
 function getErrorMessageFromError(error: WatchDemoErrorPayload) {
   const { errorCode } = error;
@@ -115,6 +116,8 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
           </Trans>
         </p>
       );
+    case ErrorCode.HlaeError:
+      return <HlaeError />;
     case ErrorCode.AccessDenied:
       return (
         <div>

@@ -1906,6 +1906,14 @@ msgctxt "Table header tooltip"
 msgid "Analyze date"
 msgstr "Analyze date"
 
+#: src/ui/components/messages/hlae-error.tsx
+msgid "HLAE returned an error."
+msgstr "HLAE returned an error."
+
+#: src/ui/components/messages/hlae-error.tsx
+msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
+msgstr "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
+
 #: src/ui/components/panels/average-damages-per-round-panel.tsx
 msgctxt "Panel title"
 msgid "ADR"
@@ -4750,14 +4758,6 @@ msgstr "Raw files not found."
 #: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Counter-Strike crashed."
 msgstr "Counter-Strike crashed."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "HLAE returned an error."
-msgstr "HLAE returned an error."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
-msgstr "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
 
 #: src/ui/match/video/height-resolution-input.tsx
 msgctxt "Input label"
