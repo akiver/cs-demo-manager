@@ -1,5 +1,4 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
 import { AddNewSequenceButton } from 'csdm/ui/match/video/sequences/add-new-sequence-button';
 import { MatchCommentInput } from 'csdm/ui/match/match-comment-input';
 import { Content } from 'csdm/ui/components/content';
@@ -24,7 +23,6 @@ import { RawFilesFolderPath } from './raw-files-folder-path';
 import { ResetSettingsButton } from './reset-settings-button';
 import { SequencesSummary } from './sequences-summary';
 import { EditSequencesSettingsButton } from './sequences/edit-sequences/edit-sequences-settings-button';
-import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 
 export function MatchVideo() {
   return (
@@ -38,14 +36,6 @@ export function MatchVideo() {
           <ResetSettingsButton />
           <DeleteSequencesButton />
           <SequencesSummary />
-        </div>
-        <div className="mt-12">
-          <div className="flex items-center gap-x-8">
-            <ExclamationTriangleIcon className="size-16 text-red-700" />
-            <p>
-              <Trans>Due to a CS2 bug since the "Armory" update, the audio is not recorded!</Trans>
-            </p>
-          </div>
         </div>
         <div className="flex gap-x-12 mt-12">
           <div className="flex gap-x-12 border p-8 rounded">

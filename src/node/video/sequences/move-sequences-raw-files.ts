@@ -64,7 +64,15 @@ export async function moveSequencesRawFiles(sequences: Sequence[], destinationFo
     const destinationPath = path.join(destinationFolderPath, sequenceName);
     await fs.ensureDir(destinationPath);
 
-    const wavFilePath = path.join(rawFilesFolderPath, isCsgo ? `${sequenceName}.WAV` : `${sequenceName}.wav`);
+    let wavFileFolderPath = rawFilesFolderPath;
+    if (!isCsgo) {
+      // Since the "Armory" update the wav files are created inside csgo/movie instead of csgo/csdm/movie.
+      // Remove the last occurrence of "/csdm/" to get the correct path.
+      wavFileFolderPath = rawFilesFolderPath.replace(/csdm\/(?!.*csdm\/)/, '');
+    }
+    logger.log(`WAV file folder path: ${wavFileFolderPath}`);
+
+    const wavFilePath = path.join(wavFileFolderPath, isCsgo ? `${sequenceName}.WAV` : `${sequenceName}.wav`);
     if (await fs.pathExists(wavFilePath)) {
       await fs.move(wavFilePath, path.join(destinationPath, `${sequenceName}.wav`));
     }

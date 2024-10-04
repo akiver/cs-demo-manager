@@ -56,11 +56,16 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
   if (inputParameters !== '') {
     args.push(inputParameters);
   }
-  args.push(`-i "${rawFilesPathPattern}"`, `-vcodec ${videoCodec} -pix_fmt yuv420p`, `-crf ${constantRateFactor}`);
-
+  args.push(`-i "${rawFilesPathPattern}"`);
   const wavFileExists = await fs.pathExists(wavFilePath);
   if (wavFileExists) {
-    args.push(`-i "${wavFilePath}"`, `-acodec ${audioCodec}`, `-b:a ${audioBitrate}K`);
+    args.push(`-i "${wavFilePath}"`);
+  }
+
+  args.push(`-vcodec ${videoCodec} -pix_fmt yuv420p`, `-crf ${constantRateFactor}`);
+
+  if (wavFileExists) {
+    args.push(`-acodec ${audioCodec}`, `-b:a ${audioBitrate}K`);
   }
 
   if (outputParameters !== '') {
