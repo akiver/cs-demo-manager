@@ -3478,8 +3478,8 @@ msgstr "No kills found between both teams."
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
-msgid "{teamName} has +${money} more than {oppositeTeamName}"
-msgstr "{teamName} has +${money} more than {oppositeTeamName}"
+msgid "{teamName} has +{0} more than {oppositeTeamName}"
+msgstr "{teamName} has +{0} more than {oppositeTeamName}"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
@@ -3525,8 +3525,8 @@ msgstr "Type: {0}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip"
-msgid "Equipment value: ${money}"
-msgstr "Equipment value: ${money}"
+msgid "Equipment value: {0}"
+msgstr "Equipment value: {0}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgid "Breakdown"
@@ -3574,6 +3574,7 @@ msgstr "Winner"
 
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 #: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Equipment value"
 msgstr "Equipment value"
@@ -4356,11 +4357,13 @@ msgid "Accuracy"
 msgstr "Accuracy"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash"
 msgstr "Cash"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash spent"
 msgstr "Cash spent"
@@ -4391,6 +4394,15 @@ msgstr "{clutcherName} lost a 1v{opponentCount}"
 msgctxt "Panel title"
 msgid "Round end reason"
 msgstr "Round end reason"
+
+#: src/ui/match/rounds/round/players-economy-chart.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Economy"
+msgstr "Economy"
+
+#: src/ui/match/rounds/round/players-economy-chart.tsx
+msgid "Teams economy"
+msgstr "Teams economy"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
@@ -4487,10 +4499,6 @@ msgstr "Own damage"
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Own team damage"
 msgstr "Own team damage"
-
-#: src/ui/match/rounds/round/players-information.tsx
-msgid "Economy"
-msgstr "Economy"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Strategy"

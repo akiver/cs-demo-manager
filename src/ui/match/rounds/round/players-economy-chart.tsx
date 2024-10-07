@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
+import { Trans } from '@lingui/macro';
 import type { ChartOption } from 'csdm/ui/hooks/use-chart';
 import type { BarSeriesOption } from 'csdm/ui/hooks/use-chart';
 import { useChart } from 'csdm/ui/hooks/use-chart';
@@ -6,6 +7,9 @@ import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { useCurrentRound } from './use-current-round';
 import { Panel } from 'csdm/ui/components/panel';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
+import type { EconomyType } from 'csdm/common/types/counter-strike';
+import { useTranslateEconomyType } from 'csdm/ui/match/economy/team-economy-breakdown/use-translate-economy-type';
+import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
 
 function useEconomySeriesData() {
   const match = useCurrentMatch();
@@ -64,7 +68,6 @@ function useEconomySeriesData() {
 
 function useEconomyChartOption() {
   const colors = useChartColors();
-  const match = useCurrentMatch();
   const {
     playerNamesTeamA,
     playerNamesTeamB,
@@ -84,11 +87,8 @@ function useEconomyChartOption() {
 
   const commonOption: ChartOption = {
     color: ['#12805c', '#0d66d0', '#cb6f10'],
-    title: {
-      textStyle: {
-        color: colors.titleTextColor,
-        fontWeight: 500,
-      },
+    grid: {
+      top: 8,
     },
     tooltip: {
       trigger: 'axis',
@@ -162,11 +162,6 @@ function useEconomyChartOption() {
 
   const chartOptionTeamA: ChartOption = {
     ...commonOption,
-    title: {
-      ...commonOption.title,
-      text: match.teamA.name,
-      left: 0,
-    },
     xAxis: {
       ...commonOption.xAxis,
       inverse: true,
@@ -203,11 +198,6 @@ function useEconomyChartOption() {
 
   const chartOptionTeamB: ChartOption = {
     ...commonOption,
-    title: {
-      ...commonOption.title,
-      text: match.teamB.name,
-      right: 0,
-    },
     yAxis: {
       ...commonOption.yAxis,
       position: 'left',
@@ -244,13 +234,70 @@ function useEconomyChartOption() {
   };
 }
 
+type TeamEconomyOverviewRowProps = {
+  label: ReactNode;
+  value: number | string;
+};
+
+function TeamEconomyOverviewRow({ label, value }: TeamEconomyOverviewRowProps) {
+  const formatMoney = useFormatMoney();
+
+  return (
+    <div className="flex items-center gap-x-8">
+      <p>{label}</p>
+      <p className="text-body-strong">{typeof value === 'number' ? formatMoney(value) : value}</p>
+    </div>
+  );
+}
+
+type TeamEconomyOverviewProps = {
+  name: string;
+  equipmentValue: number;
+  startMoney: number;
+  moneySpent: number;
+  economyType: EconomyType;
+};
+
+function TeamEconomyOverview({ name, equipmentValue, startMoney, moneySpent, economyType }: TeamEconomyOverviewProps) {
+  const { translateEconomyType } = useTranslateEconomyType();
+
+  return (
+    <div>
+      <p className="text-subtitle">{name}</p>
+      <TeamEconomyOverviewRow label={<Trans>Cash</Trans>} value={startMoney} />
+      <TeamEconomyOverviewRow label={<Trans>Equipment value</Trans>} value={equipmentValue} />
+      <TeamEconomyOverviewRow label={<Trans>Cash spent</Trans>} value={moneySpent} />
+      <TeamEconomyOverviewRow label={<Trans>Economy</Trans>} value={translateEconomyType(economyType)} />
+    </div>
+  );
+}
+
 export function PlayersEconomyChart() {
+  const match = useCurrentMatch();
+  const round = useCurrentRound();
   const { chartOptionTeamA, chartOptionTeamB, chartHeightTeamA, chartHeightTeamB } = useEconomyChartOption();
   const { ref: chartRefTeamA } = useChart({ option: chartOptionTeamA });
   const { ref: chartRefTeamB } = useChart({ option: chartOptionTeamB });
 
   return (
-    <Panel header="Teams economy">
+    <Panel header={<Trans>Teams economy</Trans>}>
+      <div className="flex w-full justify-between">
+        <TeamEconomyOverview
+          name={match.teamA.name}
+          startMoney={round.teamAStartMoney}
+          moneySpent={round.teamAMoneySpent}
+          equipmentValue={round.teamAEquipmentValue}
+          economyType={round.teamAEconomyType}
+        />
+        <TeamEconomyOverview
+          name={match.teamB.name}
+          startMoney={round.teamBStartMoney}
+          moneySpent={round.teamBMoneySpent}
+          equipmentValue={round.teamBEquipmentValue}
+          economyType={round.teamBEconomyType}
+        />
+      </div>
+
       <div className="flex">
         <div
           className="w-1/2"

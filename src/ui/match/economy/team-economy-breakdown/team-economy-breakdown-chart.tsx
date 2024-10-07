@@ -21,6 +21,7 @@ import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { BombIcon } from 'csdm/ui/icons/weapons/bomb-icon';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
+import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
 
 type EconomyChartData = {
   value: number;
@@ -36,6 +37,7 @@ export function TeamsEconomyBreakdownChart() {
   const colors = useChartColors();
   const match = useCurrentMatch();
   const { translateEconomyType } = useTranslateEconomyType();
+  const formatMoney = useFormatMoney();
   const _ = useI18n();
   const teamAData: EconomyChartData[] = match.rounds.map((round) => {
     return {
@@ -100,7 +102,7 @@ export function TeamsEconomyBreakdownChart() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     formatter: (params: any) => {
       const data = params.data as EconomyChartData;
-      return `$${data.value}`;
+      return formatMoney(data.value);
     },
   };
 
@@ -141,7 +143,7 @@ export function TeamsEconomyBreakdownChart() {
       const equipmentValue = _(
         msg({
           context: 'Chart tooltip',
-          message: `Equipment value: $${money}`,
+          message: `Equipment value: ${formatMoney(money)}`,
         }),
       );
 

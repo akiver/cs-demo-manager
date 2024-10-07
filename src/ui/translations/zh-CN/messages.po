@@ -3483,8 +3483,8 @@ msgstr "双方队伍之间没有找到击杀."
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
-msgid "{teamName} has +${money} more than {oppositeTeamName}"
-msgstr "{teamName}比{oppositeTeamName}多了+${money}"
+msgid "{teamName} has +{0} more than {oppositeTeamName}"
+msgstr ""
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
@@ -3530,8 +3530,8 @@ msgstr "类型：{0}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip"
-msgid "Equipment value: ${money}"
-msgstr "装备价值：${money}"
+msgid "Equipment value: {0}"
+msgstr ""
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgid "Breakdown"
@@ -3579,6 +3579,7 @@ msgstr "获胜方"
 
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 #: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Equipment value"
 msgstr "装备价值"
@@ -4361,11 +4362,13 @@ msgid "Accuracy"
 msgstr "精准度"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash"
 msgstr "经济"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash spent"
 msgstr "花费经济"
@@ -4396,6 +4399,15 @@ msgstr "{clutcherName} 输掉了1v{opponentCount}"
 msgctxt "Panel title"
 msgid "Round end reason"
 msgstr "回合结束原因"
+
+#: src/ui/match/rounds/round/players-economy-chart.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Economy"
+msgstr "经济"
+
+#: src/ui/match/rounds/round/players-economy-chart.tsx
+msgid "Teams economy"
+msgstr ""
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
@@ -4492,10 +4504,6 @@ msgstr "自身伤害"
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Own team damage"
 msgstr "队友伤害"
-
-#: src/ui/match/rounds/round/players-information.tsx
-msgid "Economy"
-msgstr "经济"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Strategy"

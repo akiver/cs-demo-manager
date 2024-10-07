@@ -13,6 +13,7 @@ import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { CollapsePanel } from 'csdm/ui/components/collapse-panel/collapse-panel';
 import type { Match } from 'csdm/common/types/match';
 import { useTranslateEconomyType } from '../../economy/team-economy-breakdown/use-translate-economy-type';
+import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
 
 type AvatarsProps = {
   players: Player[];
@@ -84,6 +85,7 @@ type ContentProps = {
 function Content({ round, kills, roundStartFrame }: ContentProps) {
   const match = useCurrentMatch();
   const { translateEconomyType } = useTranslateEconomyType();
+  const formatMoney = useFormatMoney();
 
   return (
     <div className="flex gap-x-16 w-full">
@@ -104,18 +106,18 @@ function Content({ round, kills, roundStartFrame }: ContentProps) {
       <div>
         <Row
           title={<Trans>Cash</Trans>}
-          valueTeamA={`$${round.teamAStartMoney}`}
-          valueTeamB={`$${round.teamBStartMoney}`}
+          valueTeamA={formatMoney(round.teamAStartMoney)}
+          valueTeamB={formatMoney(round.teamBStartMoney)}
         />
         <Row
           title={<Trans>Cash spent</Trans>}
-          valueTeamA={`$${round.teamAMoneySpent}`}
-          valueTeamB={`$${round.teamBMoneySpent}`}
+          valueTeamA={formatMoney(round.teamAMoneySpent)}
+          valueTeamB={formatMoney(round.teamBMoneySpent)}
         />
         <Row
           title={<Trans>Equipment value</Trans>}
-          valueTeamA={`$${round.teamAEquipmentValue}`}
-          valueTeamB={`$${round.teamBEquipmentValue}`}
+          valueTeamA={formatMoney(round.teamAEquipmentValue)}
+          valueTeamB={formatMoney(round.teamBEquipmentValue)}
         />
         <Row
           title={<Trans>Economy type</Trans>}

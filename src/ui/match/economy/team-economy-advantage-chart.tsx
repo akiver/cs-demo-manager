@@ -6,11 +6,13 @@ import { Panel } from 'csdm/ui/components/panel';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { Trans, msg } from '@lingui/macro';
+import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
 
 export function TeamEconomyAdvantageChart() {
   const _ = useI18n();
   const match = useCurrentMatch();
   const colors = useChartColors();
+  const formatMoney = useFormatMoney();
   const roundsNumber = match.rounds.map((round) => {
     return round.number;
   });
@@ -76,7 +78,7 @@ export function TeamEconomyAdvantageChart() {
         const money = Math.abs(value);
         return _(
           msg({
-            message: `${teamName} has +$${money} more than ${oppositeTeamName}`,
+            message: `${teamName} has +${formatMoney(money)} more than ${oppositeTeamName}`,
             context: 'Chart tooltip',
           }),
         );

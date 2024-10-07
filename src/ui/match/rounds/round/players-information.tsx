@@ -13,6 +13,8 @@ import type { PlayerEconomy } from 'csdm/common/types/player-economy';
 import { roundNumber } from 'csdm/common/math/round-number';
 import type { Round } from 'csdm/common/types/round';
 import type { ChickenDeath } from 'csdm/common/types/chicken-death';
+import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
+import { useTranslateEconomyType } from 'csdm/ui/match/economy/team-economy-breakdown/use-translate-economy-type';
 
 function MainGrid({ children }: { children: ReactNode }) {
   return (
@@ -464,6 +466,9 @@ type EconomyProps = {
 };
 
 function Economy({ roundPlayerEconomies, playersTeamA, playersTeamB }: EconomyProps) {
+  const formatMoney = useFormatMoney();
+  const { translateEconomyType } = useTranslateEconomyType();
+
   const renderEconomyGrid = (players: Player[], gridArea: string) => {
     return (
       <Grid area={gridArea} playerCount={players.length}>
@@ -478,10 +483,10 @@ function Economy({ roundPlayerEconomies, playersTeamA, playersTeamB }: EconomyPr
 
           return (
             <GridRows key={player.steamId}>
-              <Cell value={`$${startMoney}`} />
-              <Cell value={`$${moneySpent}`} />
-              <Cell value={`$${equipmentValue}`} />
-              <Cell value={economyType} />
+              <Cell value={formatMoney(startMoney)} />
+              <Cell value={formatMoney(moneySpent)} />
+              <Cell value={formatMoney(equipmentValue)} />
+              <Cell value={translateEconomyType(economyType)} />
             </GridRows>
           );
         })}

@@ -16,7 +16,6 @@ export function RoundTopBar() {
         <p className="mr-auto">#{round.number}</p>
         <div className="flex items-center gap-x-4">
           <TeamText teamNumber={round.teamASide}>{match.teamA.name}</TeamText>
-          <p>${round.teamAStartMoney}</p>
           <TeamText teamNumber={round.teamASide} className="text-body-strong">
             {round.teamAScore}
           </TeamText>
@@ -26,7 +25,6 @@ export function RoundTopBar() {
           <TeamText teamNumber={round.teamBSide} className="text-body-strong">
             {round.teamBScore}
           </TeamText>
-          <p>${round.teamBStartMoney}</p>
           <TeamText teamNumber={round.teamBSide}>{match.teamB.name}</TeamText>
         </div>
         <div className="ml-auto">
