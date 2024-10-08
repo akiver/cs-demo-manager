@@ -3924,6 +3924,10 @@ msgctxt "Tooltip"
 msgid "Switch sides"
 msgstr "Trocar lados"
 
+#: src/ui/match/overview/scoreboard/scoreboard.tsx
+msgid "Loading…"
+msgstr ""
+
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"

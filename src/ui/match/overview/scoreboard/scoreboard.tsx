@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import type { Player } from 'csdm/common/types/player';
 import { TeamScore } from 'csdm/ui/components/match/team-score';
 import type { TableInstance } from 'csdm/ui/components/table/table-types';
@@ -21,7 +22,7 @@ export function Scoreboard({ table, teamName, score, scoreOppositeTeam }: Props)
           <Table<Player> table={table} />
         </div>
       ) : (
-        <Message message="Loading..." />
+        <Message message={<Trans>Loading…</Trans>} />
       )}
     </>
   );
