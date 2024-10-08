@@ -81,8 +81,7 @@ export async function updateSystemStartupBehavior(behavior: StartupBehavior) {
 
     const exePath = app.getPath('exe');
     // When the username contains spaces on Windows, openAtLogin doesn't work because the path is not surrounded by
-    // double quotes.
-    // TODO deps Remove this when https://github.com/electron/electron/issues/32657 is fixed
+    // double quotes. See https://github.com/electron/electron/issues/32657
     if (isWindows && exePath.includes(' ')) {
       await writeRegistryStringKey({
         path: 'Software\\Microsoft\\Windows\\CurrentVersion\\Run',
