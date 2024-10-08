@@ -2,6 +2,7 @@
 import path from 'node:path';
 import { format } from 'node:util';
 import fs from 'fs-extra';
+import type { FSWatcher } from 'chokidar';
 import { watch } from 'chokidar';
 import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 
@@ -19,7 +20,7 @@ class Logger implements ILogger {
   private logFolderPath: string;
   private logFilePath: string;
   private fileStream: fs.WriteStream | null = null;
-  private watcher: fs.FSWatcher | null = null;
+  private watcher: FSWatcher | null = null;
   private cache: any[] = [];
   private shouldLogToGlobalConsole = true;
 
