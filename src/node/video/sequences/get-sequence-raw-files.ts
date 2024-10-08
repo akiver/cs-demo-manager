@@ -66,10 +66,9 @@ export async function getSequenceRawFiles(sequence: Sequence, recordingFolderPat
     cwd: recordingFolderPath,
     absolute: true,
   });
-  // assertPathsNotEmpty(tgaFiles);
+  assertPathsNotEmpty(tgaFiles);
 
   const wavFilePath = path.join(sequenceRawFilesFolderPath, `${sequenceName}.wav`);
-  // await assertWavFileExists(wavFilePath);
 
   return { tgaFiles, wavFilePath };
 }
