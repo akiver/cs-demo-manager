@@ -1,6 +1,6 @@
 import path from 'node:path';
-import glob from 'fast-glob';
 import fs from 'fs-extra';
+import { glob } from 'csdm/node/filesystem/glob';
 import { Game } from 'csdm/common/types/counter-strike';
 import { isMac } from 'csdm/node/os/is-mac';
 import { isWindows } from 'csdm/node/os/is-windows';

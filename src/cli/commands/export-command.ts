@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
-import glob from 'fast-glob';
 import path from 'node:path';
 import os from 'node:os';
+import { glob } from 'csdm/node/filesystem/glob';
 import { type DemoSource, SupportedDemoSources } from 'csdm/common/types/counter-strike';
 import { Command } from './command';
 import { runDemoAnalyzer } from 'csdm/node/demo-analyzer/run-demo-analyzer';

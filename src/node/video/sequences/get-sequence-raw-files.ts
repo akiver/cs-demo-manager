@@ -1,6 +1,6 @@
 import path from 'node:path';
-import glob from 'fast-glob';
 import fs from 'fs-extra';
+import { glob } from 'csdm/node/filesystem/glob';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';

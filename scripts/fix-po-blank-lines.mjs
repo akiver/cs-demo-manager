@@ -5,7 +5,7 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import glob from 'fast-glob';
+import { glob } from 'tinyglobby';
 
 const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
 

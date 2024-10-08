@@ -1,7 +1,7 @@
 import path from 'node:path';
 import os from 'node:os';
-import glob from 'fast-glob';
 import fs from 'fs-extra';
+import { glob } from 'csdm/node/filesystem/glob';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import type { Database } from 'csdm/node/database/schema';
 import { executePsql } from 'csdm/node/database/psql/execute-psql';

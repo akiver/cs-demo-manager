@@ -1,4 +1,4 @@
-import glob from 'fast-glob';
+import { glob } from 'csdm/node/filesystem/glob';
 import type { Folder } from '../settings/settings';
 
 export async function findDemosInFolders(folders: Folder[]) {
