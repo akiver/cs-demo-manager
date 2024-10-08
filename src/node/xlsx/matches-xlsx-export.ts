@@ -33,41 +33,21 @@ export class MatchesXlsxExport {
   public async generate() {
     try {
       await this.workbook.initialize();
-      // TODO refactor Use a loop
-      if (this.options.sheets[SheetName.General]) {
-        this.options.onSheetGenerationStart?.(SheetName.General);
-        const sheet = new MatchesSheet(this.workbook, this.options.checksums);
-        await sheet.generate();
-      }
+      const sheetMappings = [
+        { name: SheetName.General, sheetClass: MatchesSheet },
+        { name: SheetName.Rounds, sheetClass: RoundsSheet },
+        { name: SheetName.Players, sheetClass: PlayersSheet },
+        { name: SheetName.Kills, sheetClass: KillsSheet },
+        { name: SheetName.Weapons, sheetClass: WeaponsSheet },
+        { name: SheetName.Clutches, sheetClass: ClutchesSheet },
+      ];
 
-      if (this.options.sheets[SheetName.Rounds]) {
-        this.options.onSheetGenerationStart?.(SheetName.Rounds);
-        const sheet = new RoundsSheet(this.workbook, this.options.checksums);
-        await sheet.generate();
-      }
-
-      if (this.options.sheets[SheetName.Players]) {
-        this.options.onSheetGenerationStart?.(SheetName.Players);
-        const sheet = new PlayersSheet(this.workbook, this.options.checksums);
-        await sheet.generate();
-      }
-
-      if (this.options.sheets[SheetName.Kills]) {
-        this.options.onSheetGenerationStart?.(SheetName.Kills);
-        const sheet = new KillsSheet(this.workbook, this.options.checksums);
-        await sheet.generate();
-      }
-
-      if (this.options.sheets[SheetName.Weapons]) {
-        this.options.onSheetGenerationStart?.(SheetName.Weapons);
-        const sheet = new WeaponsSheet(this.workbook, this.options.checksums);
-        await sheet.generate();
-      }
-
-      if (this.options.sheets[SheetName.Clutches]) {
-        this.options.onSheetGenerationStart?.(SheetName.Clutches);
-        const sheet = new ClutchesSheet(this.workbook, this.options.checksums);
-        await sheet.generate();
+      for (const { name, sheetClass } of sheetMappings) {
+        if (this.options.sheets[name]) {
+          this.options.onSheetGenerationStart?.(name);
+          const sheet = new sheetClass(this.workbook, this.options.checksums);
+          await sheet.generate();
+        }
       }
 
       await this.workbook.write(this.options.outputFilePath);
