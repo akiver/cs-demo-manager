@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContextMenu } from 'csdm/ui/components/context-menu/context-menu';
-import { NavigateToPlayerItem } from 'csdm/ui/components/context-menu/items/navigate-to-player-item';
 import { CopyNameItem } from 'csdm/ui/components/context-menu/items/copy-name-item';
+import { NavigateToTeamItem } from 'csdm/ui/components/context-menu/items/navigate-to-team-item';
 
 type Props = {
   teamNames: string[];
@@ -15,7 +15,7 @@ export function TeamContextMenu({ teamNames }: Props) {
 
   return (
     <ContextMenu>
-      <NavigateToPlayerItem steamId={selectedTeamName} />
+      <NavigateToTeamItem teamName={selectedTeamName} />
       <CopyNameItem names={teamNames} />
     </ContextMenu>
   );
