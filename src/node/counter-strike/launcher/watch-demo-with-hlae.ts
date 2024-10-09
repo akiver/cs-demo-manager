@@ -30,20 +30,29 @@ export type HlaeOptions = {
   uninstallPluginOnExit?: boolean;
 };
 
-async function isHlaeErrorWindowExists() {
+function getGameProcessName(game: Game) {
+  return game === Game.CSGO ? 'csgo.exe' : 'cs2.exe';
+}
+
+async function isHlaeErrorWindowExists(game: Game) {
   return new Promise<boolean>((resolve) => {
-    return exec('tasklist /fi "imagename eq cs2.exe" /v /nh', { windowsHide: true }, (err, stdout) => {
-      return resolve(stdout.includes('Error - AfxHookSource'));
-    });
+    return exec(
+      `tasklist /fi "imagename eq ${getGameProcessName(game)}" /v /nh`,
+      { windowsHide: true },
+      (err, stdout) => {
+        return resolve(stdout.includes('Error - AfxHookSource'));
+      },
+    );
   });
 }
 
 type StartHlaeOptions = {
   command: string;
   signal?: AbortSignal;
+  game: Game;
 };
 
-async function startHlae({ command, signal }: StartHlaeOptions) {
+async function startHlae({ command, signal, game }: StartHlaeOptions) {
   logger.log('Starting HLAE with command', command);
 
   return new Promise<void>((resolve, reject) => {
@@ -72,7 +81,7 @@ async function startHlae({ command, signal }: StartHlaeOptions) {
       }
 
       await sleep(2_000);
-      const hlaeErrorDetected = await isHlaeErrorWindowExists();
+      const hlaeErrorDetected = await isHlaeErrorWindowExists(game);
       if (hlaeErrorDetected) {
         return reject(new HlaeError());
       }
@@ -82,15 +91,17 @@ async function startHlae({ command, signal }: StartHlaeOptions) {
         return reject(new GameError());
       }
 
+      const processName = getGameProcessName(game);
+
       try {
-        const exitCode = await getRunningProcessExitCode('cs2.exe');
+        const exitCode = await getRunningProcessExitCode(processName);
         if (exitCode === 0) {
           return resolve();
         }
 
         return reject(new GameError());
       } catch (error) {
-        logger.error('Failed to get CS2 exit code');
+        logger.error(`Failed to get ${processName} exit code`);
         logger.error(error);
         return reject(error);
       }
@@ -168,8 +179,9 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
   await startHlae({
     command,
     signal,
+    game,
   });
-  if (options.uninstallPluginOnExit !== false) {
+  if (game !== Game.CSGO && options.uninstallPluginOnExit !== false) {
     await uninstallCs2ServerPlugin();
   }
 }
