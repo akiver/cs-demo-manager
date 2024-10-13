@@ -98,6 +98,23 @@ void Log(const char *msg, ...)
 	va_end(args);
 }
 
+void PluginError(const char* msg, ...)
+{
+    va_list args;
+    va_start(args, msg);
+    char buf[1024] = {};
+    vsnprintf(buf, sizeof(buf), msg, args);
+    va_end(args);
+
+    // Since the "Armory" update, calling Plat_FatalErrorFunc crashes the game on Windows.
+    #ifdef _WIN32
+        Plat_MessageBox("Error", buf);
+        Plat_ExitProcess(1);
+    #else
+        Plat_FatalErrorFunc("%s", buf);
+    #endif
+}
+
 inline bool FileExists(const std::string& name) {
     std::ifstream f(name.c_str());
 
@@ -393,15 +410,31 @@ void Shutdown()
     }
 }
 
+void AssertInsecureParameterIsPresent()
+{
+    bool found = false;
+	// Since the "Armory" update, calling CommandLine()->HasParm("-insecure") crashes the game when the parameter is not present.
+    auto parameters = CommandLine()->GetParms();
+	for (int i = 0; i < CommandLine()->ParmCount(); i++)
+	{
+		if (strcmp(parameters[i], "-insecure") == 0)
+		{
+			found = true;
+			break;
+		}
+	}
+
+	if (!found)
+	{
+		PluginError("CS:DM plugin loaded without the -insecure launch option.\n\nAborting.");
+	}
+}
+
 EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
 {
     if (serverCreateInterface == NULL)
     {
-        bool insecure = CommandLine()->HasParm("-insecure");
-        if (!insecure)
-        {
-            Plat_FatalErrorFunc("CS:DM plugin loaded without the -insecure launch option.\n\nAborting.");
-        }
+        AssertInsecureParameterIsPresent();
 
         const char* gameDirectory = Plat_GetGameDirectory();
         gameInfoPath = string(gameDirectory) + "/csgo/gameinfo.gi";
@@ -411,13 +444,13 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
         void* serverModule = LoadLib(libPath.c_str());
         if (serverModule == NULL)
         {
-            Plat_FatalErrorFunc("Could not load server lib %s : %s", libPath.c_str(), GetLastErrorString());
+            PluginError("Could not load server lib %s : %s", libPath.c_str(), GetLastErrorString());
         }
 
         serverCreateInterface = (CreateInterfaceFn)GetLibAddress(serverModule, "CreateInterface");
         if (serverCreateInterface == NULL)
         {
-            Plat_FatalErrorFunc("Could not find CreateInterface : %s", GetLastErrorString());
+            PluginError("Could not find CreateInterface : %s", GetLastErrorString());
         }
     }
 
@@ -430,7 +463,7 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
         DWORD oldProtect = 0;
         if (!VirtualProtect(vtable, sizeof(void**), PAGE_EXECUTE_READWRITE, &oldProtect))
         {
-            Plat_FatalErrorFunc("VirtualProtect PAGE_EXECUTE_READWRITE failed: %d", GetLastError());
+            PluginError("VirtualProtect PAGE_EXECUTE_READWRITE failed: %d", GetLastError());
         }
 
         serverConfigConnect = (AppSystemConnectFn)vtable[0];
@@ -441,13 +474,13 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
         DWORD ignore = 0;
         if (!VirtualProtect(vtable, sizeof(void**), oldProtect, &ignore))
         {
-            Plat_FatalErrorFunc("VirtualProtect restore failed: %d", GetLastError());
+            PluginError("VirtualProtect restore failed: %d", GetLastError());
         }
 #else
         void* pageStart = (void*)((uintptr_t)vtable & ~(PAGESIZE - 1));
         if (mprotect(pageStart, PAGESIZE, PROT_READ | PROT_WRITE | PROT_EXEC) != 0)
         {
-            Plat_FatalErrorFunc("mprotect failed: %s", strerror(errno));
+            PluginError("mprotect failed: %s", strerror(errno));
         }
 
         serverConfigConnect = (AppSystemConnectFn)vtable[0];
@@ -457,7 +490,7 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
 
         if (mprotect(pageStart, PAGESIZE, PROT_READ | PROT_EXEC) != 0)
         {
-            Plat_FatalErrorFunc("mprotect restore failed: %s", strerror(errno));
+            PluginError("mprotect restore failed: %s", strerror(errno));
         }
 #endif
     }
