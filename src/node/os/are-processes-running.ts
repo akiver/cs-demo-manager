@@ -1,11 +1,16 @@
 import { exec } from 'node:child_process';
 import { isWindows } from 'csdm/node/os/is-windows';
 
-export async function areProcessesRunning(processNames: string[]): Promise<boolean> {
+// TODO Remove log parameter once https://github.com/akiver/cs-demo-manager/issues/950 is resolved.
+export async function areProcessesRunning(processNames: string[], log = false): Promise<boolean> {
   if (isWindows) {
     return new Promise<boolean>((resolve) => {
       return exec('tasklist', { windowsHide: true }, (err, stdout) => {
         if (err) {
+          if (log) {
+            logger.log('tasklist error');
+            logger.log(err);
+          }
           return resolve(false);
         }
 
@@ -13,6 +18,11 @@ export async function areProcessesRunning(processNames: string[]): Promise<boole
           if (stdout.includes(name)) {
             return resolve(true);
           }
+        }
+
+        if (log) {
+          logger.log('tasklist process not found');
+          logger.log(stdout);
         }
 
         return resolve(false);
