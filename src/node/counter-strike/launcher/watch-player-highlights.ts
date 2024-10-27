@@ -1,11 +1,9 @@
 import { Game } from 'csdm/common/types/counter-strike';
-import { generatePlayerHighlightsVdmFile } from 'csdm/node/vdm/generate-player-highlights-vdm-file';
 import { startCounterStrike } from './start-counter-strike';
 import { detectDemoGame } from './detect-demo-game';
 import { getPlaybackMatch, type PlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
 import { NoKillsFound } from 'csdm/node/counter-strike/launcher/errors/no-kills-found';
 import { getSettings } from 'csdm/node/settings/get-settings';
-import { deleteVdmFile } from './delete-vdm-file';
 import { WatchType } from 'csdm/common/types/watch-type';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { generatePlayerHighlightsJsonFile } from '../json-actions-file/generate-player-highlights-json-file';
@@ -28,11 +26,7 @@ function assertPlayerHasActions(match: PlaybackMatch) {
 
 export async function watchPlayerHighlights({ demoPath, steamId, perspective, onGameStart }: Options) {
   const game = await detectDemoGame(demoPath);
-  if (game === Game.CSGO) {
-    await deleteVdmFile(demoPath);
-  } else {
-    await deleteJsonActionsFile(demoPath);
-  }
+  await deleteJsonActionsFile(demoPath);
 
   const playDemoArgs: string[] = [];
   const settings = await getSettings();
@@ -51,14 +45,16 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
       } else {
         assertPlayerHasActions(match);
 
-        await generatePlayerHighlightsVdmFile({
+        await generatePlayerHighlightsJsonFile({
           actions: match.actions,
           demoPath,
+          game,
           tickCount: match.tickCount,
           tickrate: match.tickrate,
           perspective,
           beforeDelaySeconds: highlights.beforeKillDelayInSeconds,
           nextDelaySeconds: highlights.afterKillDelayInSeconds,
+          playerVoicesEnabled,
         });
       }
     } else {
@@ -76,6 +72,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     await generatePlayerHighlightsJsonFile({
       actions: match.actions,
       demoPath,
+      game,
       tickCount: match.tickCount,
       tickrate: match.tickrate,
       perspective,

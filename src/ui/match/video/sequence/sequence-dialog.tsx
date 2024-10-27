@@ -16,6 +16,7 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import { SequenceDiskSpace } from './sequence-disk-space';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { SequenceXRayCheckbox } from './sequence-x-ray-checkbox';
+import { SequencePlayerVoicesCheckbox } from './sequence-player-voices-checkbox';
 
 type Props = {
   isVisible: boolean;
@@ -63,6 +64,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <StartTickInput />
                     <EndTickInput />
                   </div>
+                  <SequencePlayerVoicesCheckbox />
                   <SequenceXRayCheckbox />
                   <SequenceFocusCameraPlayerSelect />
                   <div>

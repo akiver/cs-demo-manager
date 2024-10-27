@@ -8,3 +8,13 @@
 [submodule "cs2-server-plugin/cs2-server-plugin/deps/json"]
 	path = cs2-server-plugin/cs2-server-plugin/deps/json
 	url = https://github.com/nlohmann/json
+[submodule "csgo-server-plugin/csgo-server-plugin/deps/hl2sdk"]
+	path = csgo-server-plugin/csgo-server-plugin/deps/hl2sdk
+	url = https://github.com/alliedmodders/hl2sdk.git
+	branch = csgo
+[submodule "csgo-server-plugin/csgo-server-plugin/deps/easywsclient"]
+	path = csgo-server-plugin/csgo-server-plugin/deps/easywsclient
+	url = https://github.com/dhbaird/easywsclient
+[submodule "csgo-server-plugin/csgo-server-plugin/deps/json"]
+	path = csgo-server-plugin/csgo-server-plugin/deps/json
+	url = https://github.com/nlohmann/json

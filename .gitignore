@@ -6,6 +6,9 @@ out
 .env
 *.dem
 *.vdm
+*.pdb
+*.exp
+*.lib
 linter/*.js
 static/*.exe
 static/csda

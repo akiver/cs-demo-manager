@@ -2,7 +2,7 @@ import { Game } from 'csdm/common/types/counter-strike';
 import { generateVideoWithVirtualDub } from 'csdm/node/video/virtual-dub/generate-video-with-virtual-dub';
 import { generateVideoWithFFmpeg } from 'csdm/node/video/ffmpeg/generate-video-with-ffmpeg';
 import { concatenateVideosFromSequences } from 'csdm/node/video/ffmpeg/concatenate-videos-from-sequences';
-import { createVdmFileForRecording } from 'csdm/node/video/create-vdm-file-for-recording';
+import { createCsgoJsonFileForRecording } from 'csdm/node/video/create-csgo-json-file-for-recording';
 import { deleteSequenceRawFiles } from 'csdm/node/video/sequences/delete-sequence-raw-files';
 import type { HlaeOptions } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
 import { watchDemoWithHlae } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
@@ -11,13 +11,12 @@ import { killCounterStrikeProcesses } from 'csdm/node/counter-strike/kill-counte
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { killFfmpegProcess } from 'csdm/node/video/ffmpeg/kill-ffmpeg-process';
 import { killVirtualDubProcess } from 'csdm/node/video/virtual-dub/kill-virtual-dub-process';
-import { deleteVdmFile } from 'csdm/node/counter-strike/launcher/delete-vdm-file';
 import { deleteSequencesOutputFile } from 'csdm/node/video/sequences/delete-sequences-output-file';
 import { abortError, throwIfAborted } from 'csdm/node/errors/abort-error';
 import { killHlaeProcess } from 'csdm/node/video/hlae/kill-hlae-process';
 import { sleep } from 'csdm/common/sleep';
 import { sortSequencesByStartTick } from 'csdm/node/video/sequences/sort-sequences-by-start-tick';
-import { createJsonActionsFileForRecording } from 'csdm/node/video/create-json-actions-file-for-recording';
+import { createCs2JsonActionsFileForRecording } from 'csdm/node/video/create-cs2-json-actions-file-for-recording';
 import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-counter-strike';
 import { deleteJsonActionsFile } from 'csdm/node/counter-strike/json-actions-file/delete-json-actions-file';
 import { moveSequencesRawFiles } from 'csdm/node/video/sequences/move-sequences-raw-files';
@@ -26,7 +25,7 @@ import { VideoContainer } from 'csdm/common/types/video-container';
 import { fetchMatchPlayersSlots } from '../database/match/fetch-match-players-slots';
 import { assertVideoGenerationIsPossible } from './assert-video-generation-is-possible';
 import { deleteSequencesRawFiles } from './sequences/delete-sequences-raw-files';
-import { uninstallCs2ServerPlugin } from '../counter-strike/launcher/cs2-server-plugin';
+import { uninstallCounterStrikeServerPlugin } from '../counter-strike/launcher/cs-server-plugin';
 
 type FfmpegSettings = {
   audioBitrate: number;
@@ -154,7 +153,7 @@ export async function generateVideo(parameters: Parameters) {
 
   const cleanupFiles = async (deleteOutputFile = true, deleteRawFiles = true) => {
     logger.log(`Cleaning up files for video with id ${parameters.videoId}`);
-    const promises: Promise<void>[] = [deleteVdmFile(demoPath), deleteJsonActionsFile(demoPath)];
+    const promises: Promise<void>[] = [deleteJsonActionsFile(demoPath)];
     if (deleteRawFiles) {
       promises.push(deleteSequencesRawFiles(rawFilesFolderPath, parameters.sequences));
     }
@@ -205,7 +204,7 @@ export async function generateVideo(parameters: Parameters) {
 
   const sequences = sortSequencesByStartTick(parameters.sequences);
   if (game === Game.CSGO) {
-    await createVdmFileForRecording({
+    await createCsgoJsonFileForRecording({
       rawFilesFolderPath,
       framerate,
       demoPath,
@@ -217,7 +216,7 @@ export async function generateVideo(parameters: Parameters) {
     });
   } else {
     const playerSlots = await fetchMatchPlayersSlots(parameters.checksum);
-    await createJsonActionsFileForRecording({
+    await createCs2JsonActionsFileForRecording({
       framerate,
       demoPath,
       sequences,
@@ -279,6 +278,6 @@ export async function generateVideo(parameters: Parameters) {
     cleanupFiles();
     throw error;
   } finally {
-    await uninstallCs2ServerPlugin();
+    await uninstallCounterStrikeServerPlugin(game);
   }
 }

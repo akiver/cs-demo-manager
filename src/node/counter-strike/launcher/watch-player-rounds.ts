@@ -1,11 +1,9 @@
 import { Game } from 'csdm/common/types/counter-strike';
 import { startCounterStrike } from './start-counter-strike';
 import { detectDemoGame } from './detect-demo-game';
-import { deleteVdmFile } from './delete-vdm-file';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
 import { db } from 'csdm/node/database/database';
-import { generatePlayerRoundsVdmFile } from 'csdm/node/vdm/generate-player-rounds-vdm-file';
 import { NoRoundsFound } from './errors/not-rounds-found';
 import { generatePlayerRoundsJsonFile } from '../json-actions-file/generate-player-rounds-json-file';
 import { getSettings } from 'csdm/node/settings/get-settings';
@@ -64,11 +62,7 @@ type Options = {
 
 export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Options) {
   const game = await detectDemoGame(demoPath);
-  if (game === Game.CSGO) {
-    await deleteVdmFile(demoPath);
-  } else {
-    await deleteJsonActionsFile(demoPath);
-  }
+  await deleteJsonActionsFile(demoPath);
 
   const checksum = await getDemoChecksumFromDemoPath(demoPath);
   const rounds = await fetchRounds(checksum, steamId);
@@ -79,31 +73,26 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
   const settings = await getSettings();
   const { round, playerVoicesEnabled } = settings.playback;
   const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds } = round;
+  let playerId: number | string = steamId;
   if (game !== Game.CSGO) {
     const slots = await fetchMatchPlayersSlots(checksum);
-    const playerSlot = slots[steamId];
-    if (!playerSlot) {
+    playerId = slots[steamId];
+    if (!playerId) {
       throw new NoRoundsFound();
     }
-    await generatePlayerRoundsJsonFile({
-      demoPath,
-      rounds,
-      playerSlot,
-      beforeDelaySeconds: beforeRoundDelayInSeconds,
-      afterDelaySeconds: afterRoundDelayInSeconds,
-      playerVoicesEnabled,
-    });
-  } else {
-    const tickrate = await fetchMatchTickrate(checksum);
-    await generatePlayerRoundsVdmFile({
-      tickrate,
-      demoPath,
-      rounds,
-      steamId,
-      beforeDelaySeconds: beforeRoundDelayInSeconds,
-      afterDelaySeconds: afterRoundDelayInSeconds,
-    });
   }
+
+  const tickrate = await fetchMatchTickrate(checksum);
+  await generatePlayerRoundsJsonFile({
+    tickrate,
+    demoPath,
+    game,
+    rounds,
+    playerId,
+    beforeDelaySeconds: beforeRoundDelayInSeconds,
+    afterDelaySeconds: afterRoundDelayInSeconds,
+    playerVoicesEnabled,
+  });
 
   if (settings.playback.useHlae) {
     await watchDemoWithHlae({

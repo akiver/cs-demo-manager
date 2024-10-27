@@ -88,6 +88,7 @@ export function buildPlayerEventSequences(
       deathNotices,
       playerFocusSteamId: steamIdToFocus,
       showXRay: false,
+      playerVoicesEnabled: false,
     });
   }
 

@@ -4821,6 +4821,11 @@ msgstr "HLAE has been updated"
 msgid "An error occurred while updating HLAE"
 msgstr "An error occurred while updating HLAE"
 
+#: src/ui/match/video/player-voices-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Player voices"
+msgstr "Player voices"
+
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
 msgid "Reset settings"
@@ -6526,10 +6531,6 @@ msgid "Doesn't work with Valve Matchmaking demos as voice data are not available
 msgstr "Doesn't work with Valve Matchmaking demos as voice data are not available!"
 
 #: src/ui/settings/playback/player-voices.tsx
-msgid "CS2 only!"
-msgstr "CS2 only!"
-
-#: src/ui/settings/playback/player-voices.tsx
 msgctxt "Settings title"
 msgid "Player voices"
 msgstr "Player voices"
@@ -6676,10 +6677,12 @@ msgstr "Minimized"
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "No"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -6886,6 +6889,10 @@ msgstr "End tick"
 #: src/ui/videos/video-entry.tsx
 msgid "X-Ray"
 msgstr "X-Ray"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Player voices"
+msgstr "Player voices"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Focused player"

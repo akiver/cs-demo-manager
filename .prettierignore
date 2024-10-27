@@ -2,6 +2,7 @@ node_modules
 package-lock.json
 .npmrc
 build
+build-assets
 out
 dist
 static
@@ -25,5 +26,8 @@ LICENSE
 *.ai
 *.bat
 *.woff2
+*.cpp
+*.gyp
 .node-version
 cs2-server-plugin
+csgo-server-plugin

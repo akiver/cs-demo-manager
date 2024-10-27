@@ -121,7 +121,6 @@
     "registry-js": "1.16.0",
     "source-map-support": "0.5.21",
     "tailwindcss": "3.4.13",
-    "telnet-client": "2.2.1",
     "tinyglobby": "^0.2.9",
     "typescript": "5.6.2",
     "typescript-eslint": "8.8.1",

@@ -1,16 +1,13 @@
 import { exec } from 'node:child_process';
 import { Game } from 'csdm/common/types/counter-strike';
-import { deleteVdmFile } from './delete-vdm-file';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { killCounterStrikeProcesses } from '../kill-counter-strike-processes';
-import { CSGO_TELNET_PORT, getCsgoTelnetConnection } from './get-csgo-telnet-connection';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { StartCounterStrikeError } from './errors/start-counter-strike-error';
 import { abortError, throwIfAborted } from 'csdm/node/errors/abort-error';
 import { sleep } from 'csdm/common/sleep';
 import { UnsupportedGame } from './errors/unsupported-game';
 import { getCounterStrikeExecutablePath } from '../get-counter-strike-executable-path';
-import { installCs2ServerPlugin, tryStartingDemoThroughWebSocket, uninstallCs2ServerPlugin } from './cs2-server-plugin';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { isMac } from 'csdm/node/os/is-mac';
 import { assertSteamIsRunning } from './assert-steam-is-running';
@@ -18,6 +15,8 @@ import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
 import { GameError } from './errors/game-error';
 import { AccessDeniedError } from './errors/access-denied-error';
+import { tryStartingDemoThroughWebSocket } from './try-starting-demo-through-web-socket';
+import { installCounterStrikeServerPlugin, uninstallCounterStrikeServerPlugin } from './cs-server-plugin';
 
 type StartCounterStrikeOptions = {
   demoPath: string;
@@ -42,37 +41,12 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
 
   assertDemoPathIsValid(demoPath, game);
 
-  const executablePath = await getCounterStrikeExecutablePath(game);
-
-  // Part where we try to start the game through Telnet (CSGO) or WebSocket (CS2) to avoid restarting the game.
-  // Trying to communicate with CSGO through Telnet is unstable on unix platforms, it may hang the CSGO process
-  // indefinitely and it happens quite frequently. That's why we try to do it only on Windows.
-  if (game === Game.CSGO && isWindows) {
-    const telnetConnection = await getCsgoTelnetConnection();
-    if (telnetConnection !== undefined) {
-      let command = `playdemo "${demoPath}"`;
-      if (Array.isArray(playDemoArgs)) {
-        command += ` ${playDemoArgs.join(' ')}`;
-      }
-      try {
-        logger.log('Sending playdemo command to CSGO', command);
-        const result = await telnetConnection.send(command);
-        logger.log('Command result', result);
-        await telnetConnection.destroy();
-
-        return;
-      } catch (error) {
-        logger.warn('Error while sending Telnet message');
-        logger.warn(error);
-      }
-    }
-  } else if (game !== Game.CSGO) {
-    const playbackStarted = await tryStartingDemoThroughWebSocket(demoPath);
-    if (playbackStarted) {
-      return;
-    }
+  const playbackStarted = await tryStartingDemoThroughWebSocket(demoPath);
+  if (playbackStarted) {
+    return;
   }
 
+  const executablePath = await getCounterStrikeExecutablePath(game);
   const settings = await getSettings();
   const {
     width: userWidth,
@@ -87,8 +61,6 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     // '-noassetbrowser',
     '-insecure',
     '-novid',
-    '-netconport',
-    CSGO_TELNET_PORT,
     '+playdemo',
     `"${demoPath}"`,
   ];
@@ -129,10 +101,8 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     await sleep(2000);
   }
 
-  if (game !== Game.CSGO) {
-    defineCfgFolderLocation();
-    await installCs2ServerPlugin();
-  }
+  await installCounterStrikeServerPlugin(game);
+  defineCfgFolderLocation();
 
   return new Promise<void>((resolve, reject) => {
     const startTime = Date.now();
@@ -150,13 +120,9 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     gameProcess.on('exit', (code) => {
       logger.log('Game process exited with code', code);
 
-      if (game === Game.CSGO) {
-        deleteVdmFile(demoPath);
-      } else {
-        deleteJsonActionsFile(demoPath);
-        if (options.uninstallPluginOnExit !== false) {
-          uninstallCs2ServerPlugin();
-        }
+      deleteJsonActionsFile(demoPath);
+      if (options.uninstallPluginOnExit !== false) {
+        uninstallCounterStrikeServerPlugin(game);
       }
 
       if (signal?.aborted) {

@@ -25,6 +25,7 @@ export function SequenceFormProvider({ children, initialSequence }: Props) {
     ...initialSequence,
     startTick: String(initialSequence.startTick),
     endTick: String(initialSequence.endTick),
+    playerVoicesEnabled: true,
   });
 
   return (

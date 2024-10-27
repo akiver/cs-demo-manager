@@ -8,5 +8,6 @@ export type Sequence = {
   deathNotices: DeathNoticesPlayerOptions[];
   playerFocusSteamId?: string;
   playerFocusName?: string;
+  playerVoicesEnabled: boolean;
   cfg?: string;
 };

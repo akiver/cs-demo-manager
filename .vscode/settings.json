@@ -5,7 +5,7 @@
   },
   "tailwindCSS.rootFontSize": 14,
   "search.exclude": {
-    "cs2-server-plugin": true
-  },
-  "eslint.experimental.useFlatConfig": true
+    "cs2-server-plugin/cs2-server-plugin/deps": true,
+    "csgo-server-plugin/csgo-server-plugin/deps": true
+  }
 }
