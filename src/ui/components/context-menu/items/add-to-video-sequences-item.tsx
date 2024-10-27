@@ -33,6 +33,7 @@ export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId
           deathNotices: [],
           playerFocusSteamId,
           showXRay: false,
+          playerVoicesEnabled: false,
         },
       }),
     );

@@ -23,6 +23,7 @@ export function buildPlayerRoundsSequences(match: Match, steamId: string) {
         deathNotices: [],
         playerFocusSteamId: steamId,
         showXRay: false,
+        playerVoicesEnabled: false,
       });
     }
   }

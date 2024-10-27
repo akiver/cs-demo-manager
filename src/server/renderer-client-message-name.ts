@@ -79,7 +79,6 @@ export const RendererClientMessageName = {
   UpdatePlayersTags: 'update-players-tags',
   UpdateRoundTags: 'update-round-tags',
   IsCsRunning: 'is-cs-running',
-  GetCsgoTelenetConnectionStatus: 'get-csgo-telnet-connection-status',
   ResetTablesState: 'reset-tables-state',
   FetchLastFaceitMatches: 'fetch-last-faceit-matches',
   AddFaceitAccount: 'add-faceit-account',

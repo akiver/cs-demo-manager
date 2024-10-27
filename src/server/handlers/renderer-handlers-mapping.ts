@@ -85,14 +85,12 @@ import { deleteTagHandler } from './renderer-process/tags/delete-tag-handler';
 import { insertTagHandler } from './renderer-process/tags/insert-tag-handler';
 import type { UpdateChecksumsTagsPayload } from './renderer-process/tags/update-checksums-tags-handler';
 import { updateChecksumsTagsHandler } from './renderer-process/tags/update-checksums-tags-handler';
-import { getCsgoTelnetConnectionStatusHandler } from './renderer-process/counter-strike/get-csgo-telnet-connection-status-handler';
 import { isCounterStrikeRunningHandler } from './renderer-process/counter-strike/is-counter-strike-running-handler';
 import type { MatchHeatmapFilter, TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import type { Demo } from 'csdm/common/types/demo';
 import type { Map } from 'csdm/common/types/map';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import type { Tag } from 'csdm/common/types/tag';
-import type { Status } from 'csdm/common/types/status';
 import type { Handler } from 'csdm/server/handler';
 import { resetMapsHandler } from './renderer-process/map/reset-maps-handler';
 import { resetTablesStateHandler } from './renderer-process/settings/reset-tables-state-handler';
@@ -284,7 +282,6 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdatePlayersTags]: Handler<UpdatePlayersTagsPayload>;
   [RendererClientMessageName.UpdateRoundTags]: Handler<UpdateRoundTagsPayload>;
   [RendererClientMessageName.IsCsRunning]: Handler<void, boolean>;
-  [RendererClientMessageName.GetCsgoTelenetConnectionStatus]: Handler<void, Status>;
   [RendererClientMessageName.ResetMaps]: Handler<Game, Map[]>;
   [RendererClientMessageName.ResetTablesState]: Handler;
   [RendererClientMessageName.FetchLastFaceitMatches]: Handler<string, FaceitMatch[]>;
@@ -379,7 +376,6 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.UpdatePlayersTags]: updatePlayersTagsHandler,
   [RendererClientMessageName.UpdateRoundTags]: updateRoundTagsHandler,
   [RendererClientMessageName.IsCsRunning]: isCounterStrikeRunningHandler,
-  [RendererClientMessageName.GetCsgoTelenetConnectionStatus]: getCsgoTelnetConnectionStatusHandler,
   [RendererClientMessageName.ResetMaps]: resetMapsHandler,
   [RendererClientMessageName.ResetTablesState]: resetTablesStateHandler,
   [RendererClientMessageName.FetchLastFaceitMatches]: fetchLastFaceitMatchesHandler,

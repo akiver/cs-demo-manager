@@ -1,0 +1,42 @@
+[
+  {
+    "cmd": "tv_listen_voice_indices -1",
+    "tick": 64
+  },
+  {
+    "cmd": "tv_listen_voice_indices_h -1",
+    "tick": 64
+  },
+  {
+    "cmd": "spec_player 4",
+    "tick": 1200
+  },
+  {
+    "cmd": "spec_mode 1",
+    "tick": 1200
+  },
+  {
+    "cmd": "spec_player 4",
+    "tick": 1700
+  },
+  {
+    "cmd": "spec_mode 1",
+    "tick": 1700
+  },
+  {
+    "cmd": "demo_gototick 4872",
+    "tick": 2256
+  },
+  {
+    "cmd": "spec_player 4",
+    "tick": 4872
+  },
+  {
+    "cmd": "spec_mode 1",
+    "tick": 4872
+  },
+  {
+    "cmd": "disconnect",
+    "tick": 5256
+  }
+]

@@ -22,6 +22,7 @@ export default [
       'knip.ts',
       'eslint-local-rules.js',
       'cs2-server-plugin',
+      'csgo-server-plugin',
       'linter',
       'scripts',
       'dist',

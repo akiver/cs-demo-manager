@@ -41,10 +41,12 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   let deathNotices = defaultDeathNotices;
   let playerFocusSteamId: string | undefined;
   let showXRay = false;
+  let playerVoicesEnabled = false;
   if (lastSequence !== undefined) {
     deathNotices = lastSequence.deathNotices;
     playerFocusSteamId = lastSequence.playerFocusSteamId;
     showXRay = lastSequence.showXRay;
+    playerVoicesEnabled = lastSequence.playerVoicesEnabled;
   }
 
   const sequence: Sequence = {
@@ -54,6 +56,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     deathNotices,
     playerFocusSteamId,
     showXRay,
+    playerVoicesEnabled,
   };
 
   return (

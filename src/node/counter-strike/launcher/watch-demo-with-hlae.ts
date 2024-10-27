@@ -8,13 +8,13 @@ import { killCounterStrikeProcesses } from '../kill-counter-strike-processes';
 import { isCounterStrikeRunning } from 'csdm/node/counter-strike/is-counter-strike-running';
 import { abortError } from 'csdm/node/errors/abort-error';
 import { getCounterStrikeExecutablePath } from '../get-counter-strike-executable-path';
-import { installCs2ServerPlugin, uninstallCs2ServerPlugin } from './cs2-server-plugin';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
 import { getHlaeExecutablePathOrThrow } from 'csdm/node/video/hlae/hlae-location';
 import { getRunningProcessExitCode } from 'csdm/node/os/get-running-process-exit-code/get-running-process-exit-code';
 import { sleep } from 'csdm/common/sleep';
 import { GameError } from './errors/game-error';
+import { installCounterStrikeServerPlugin, uninstallCounterStrikeServerPlugin } from './cs-server-plugin';
 
 export type HlaeOptions = {
   demoPath: string;
@@ -151,22 +151,23 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
     hlaeParameters.push('-mmcfgEnabled true', `-mmcfg "${configFolderPath}"`);
   }
 
-  if (game !== Game.CSGO) {
+  if (game === Game.CSGO) {
+    hlaeParameters.push(
+      '-csgoLauncher',
+      `-csgoExe "${csExecutablePath}"`,
+      `-customLaunchOptions "${gameParameters.join(' ')}"`,
+    );
+  } else {
     hlaeParameters.push(
       '-customLoader',
       `-hookDllPath "${path.join(path.dirname(hlaeExecutablePath), 'x64', 'AfxHookSource2.dll')}"`,
       `-programPath "${csExecutablePath}"`,
       `-cmdLine "${gameParameters.join(' ')}"`,
     );
-    defineCfgFolderLocation();
-    await installCs2ServerPlugin();
-  } else {
-    hlaeParameters.push(
-      '-csgoLauncher',
-      `-csgoExe "${csExecutablePath}"`,
-      `-customLaunchOptions "${gameParameters.join(' ')}"`,
-    );
   }
+
+  await installCounterStrikeServerPlugin(game);
+  defineCfgFolderLocation();
 
   const parameters = options.hlaeParameters ?? userHlaeParameters;
   if (typeof parameters === 'string' && parameters !== '') {
@@ -181,7 +182,7 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
     signal,
     game,
   });
-  if (game !== Game.CSGO && options.uninstallPluginOnExit !== false) {
-    await uninstallCs2ServerPlugin();
+  if (options.uninstallPluginOnExit !== false) {
+    await uninstallCounterStrikeServerPlugin(game);
   }
 }

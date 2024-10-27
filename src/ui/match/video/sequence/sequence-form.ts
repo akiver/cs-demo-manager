@@ -7,5 +7,6 @@ export type SequenceForm = {
   deathNotices: DeathNoticesPlayerOptions[];
   playerFocusSteamId?: string;
   showXRay: boolean;
+  playerVoicesEnabled: boolean;
   cfg?: string;
 };

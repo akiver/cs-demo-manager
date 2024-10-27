@@ -15,6 +15,7 @@ import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { CfgInput } from 'csdm/ui/match/video/cfg-input';
 import { DeathNotices } from './death-notices/death-notices';
 import { useDeathNotices } from './death-notices/use-death-notices';
+import { PlayerVoicesCheckbox } from '../../player-voices-checkbox';
 
 type State = {
   overridePlayerFocusSteamId: boolean;
@@ -29,6 +30,7 @@ export function EditSequenceSettingsDialog() {
   const sequences = useCurrentMatchSequences();
   const [playerFocusSteamId, setPlayerFocusSteamId] = useState<string | undefined>(undefined);
   const [showXRay, setShowXRay] = useState(false);
+  const [playerVoicesEnabled, setPlayerVoicesEnabled] = useState(false);
   const [cfg, setCfg] = useState<string | undefined>(undefined);
   const { deathNotices } = useDeathNotices();
 
@@ -43,6 +45,7 @@ export function EditSequenceSettingsDialog() {
       return {
         ...sequence,
         showXRay,
+        playerVoicesEnabled,
         playerFocusSteamId: state.overridePlayerFocusSteamId ? playerFocusSteamId : sequence.playerFocusSteamId,
         cfg: state.overrideCfg ? cfg : sequence.cfg,
         deathNotices: state.overrideDeathNotices ? deathNotices : sequence.deathNotices,
@@ -78,6 +81,7 @@ export function EditSequenceSettingsDialog() {
             <Trans>The following settings will be applied to all existing sequences.</Trans>
           </p>
           <XRayCheckbox defaultChecked={showXRay} onChange={setShowXRay} />
+          <PlayerVoicesCheckbox defaultChecked={playerVoicesEnabled} onChange={setPlayerVoicesEnabled} />
 
           <div className="flex flex-col gap-y-4">
             <Checkbox

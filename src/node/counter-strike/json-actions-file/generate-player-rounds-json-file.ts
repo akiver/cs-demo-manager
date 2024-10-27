@@ -1,31 +1,32 @@
+import type { Game } from 'csdm/common/types/counter-strike';
 import type { Round } from '../launcher/watch-player-rounds';
 import { JSONActionsFileGenerator } from './json-actions-file-generator';
 
 type Options = {
+  tickrate: number;
   demoPath: string;
+  game: Game;
   rounds: Round[];
-  playerSlot: number;
+  playerId: number | string;
   beforeDelaySeconds: number;
   afterDelaySeconds: number;
   playerVoicesEnabled: boolean;
 };
 
 export async function generatePlayerRoundsJsonFile({
+  tickrate,
   demoPath,
+  game,
   rounds,
-  playerSlot,
+  playerId,
   beforeDelaySeconds,
   afterDelaySeconds,
   playerVoicesEnabled,
 }: Options) {
-  const json = new JSONActionsFileGenerator(demoPath);
+  const json = new JSONActionsFileGenerator(demoPath, game, playerVoicesEnabled);
 
-  if (playerVoicesEnabled) {
-    json.addListenPlayerVoices();
-  }
-
-  const beforeRoundTicks = beforeDelaySeconds > 0 ? beforeDelaySeconds * 64 : 128;
-  const afterRoundTicks = afterDelaySeconds > 0 ? afterDelaySeconds * 64 : 128;
+  const beforeRoundTicks = beforeDelaySeconds > 0 ? beforeDelaySeconds * tickrate : 128;
+  const afterRoundTicks = afterDelaySeconds > 0 ? afterDelaySeconds * tickrate : tickrate;
   let currentTick = 0;
   for (let index = 0; index < rounds.length; index++) {
     const round = rounds[index];
@@ -33,7 +34,7 @@ export async function generatePlayerRoundsJsonFile({
     if (currentTick + afterRoundTicks < startTick) {
       json.addSkipAhead(currentTick, startTick);
     }
-    json.addSpecPlayer(currentTick, playerSlot);
+    json.addSpecPlayer(currentTick, playerId);
 
     if (round.deathTick !== null) {
       currentTick = round.deathTick + afterRoundTicks;

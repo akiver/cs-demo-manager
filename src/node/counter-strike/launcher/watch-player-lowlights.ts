@@ -1,12 +1,10 @@
 import { Game } from 'csdm/common/types/counter-strike';
-import { generatePlayerLowlightsVdmFile } from 'csdm/node/vdm/generate-player-lowlights-vdm-file';
 import { startCounterStrike } from './start-counter-strike';
 import { detectDemoGame } from './detect-demo-game';
 import { getPlaybackMatch, type PlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
 import { NoDeathsFound } from 'csdm/node/counter-strike/launcher/errors/no-deaths-found';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import type { WatchPlayerOptions } from 'csdm/common/types/watch-player-options';
-import { deleteVdmFile } from './delete-vdm-file';
 import { WatchType } from 'csdm/common/types/watch-type';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { generatePlayerLowlightsJsonFile } from '../json-actions-file/generate-player-lowlights-json-file';
@@ -21,11 +19,7 @@ function assertPlayerHasActions(match: PlaybackMatch) {
 
 export async function watchPlayerLowlights({ demoPath, steamId, perspective, onGameStart }: WatchPlayerOptions) {
   const game = await detectDemoGame(demoPath);
-  if (game === Game.CSGO) {
-    await deleteVdmFile(demoPath);
-  } else {
-    await deleteJsonActionsFile(demoPath);
-  }
+  await deleteJsonActionsFile(demoPath);
 
   const playDemoArgs: string[] = [];
   const settings = await getSettings();
@@ -44,14 +38,16 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
       } else {
         assertPlayerHasActions(match);
 
-        await generatePlayerLowlightsVdmFile({
+        await generatePlayerLowlightsJsonFile({
           actions: match.actions,
+          game,
           demoPath,
           tickCount: match.tickCount,
           tickrate: match.tickrate,
           perspective,
           beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,
           nextDelaySeconds: lowlights.afterKillDelayInSeconds,
+          playerVoicesEnabled,
         });
       }
     } else {
@@ -68,6 +64,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
 
     await generatePlayerLowlightsJsonFile({
       actions: match.actions,
+      game,
       demoPath,
       tickCount: match.tickCount,
       tickrate: match.tickrate,

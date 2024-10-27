@@ -2,7 +2,6 @@ import React from 'react';
 import { Trans, msg } from '@lingui/macro';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { Status } from 'csdm/common/types/status';
 import { useIsCsRunning } from './use-is-cs-running';
 import { ErrorCode } from 'csdm/common/error-code';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
@@ -156,31 +155,14 @@ export function useCounterStrike() {
   const showToast = useShowToast();
   const _ = useI18n();
 
-  const isTelnetConnectionWorking = async () => {
-    const telnetConnectionStatus = await client.send({
-      name: RendererClientMessageName.GetCsgoTelenetConnectionStatus,
-    });
-
-    return telnetConnectionStatus === Status.Success;
-  };
-
   const isKillCsRequired = async () => {
     const csRunning = await isCsRunning();
     if (csRunning) {
-      if (window.csdm.isMac) {
-        return true;
-      }
-
       const isCs2Connected = await client.send({
         name: RendererClientMessageName.IsCs2ConnectedToServer,
       });
 
-      if (isCs2Connected) {
-        return false;
-      }
-
-      const telnetConnectionWorking = await isTelnetConnectionWorking();
-      return !telnetConnectionWorking;
+      return !isCs2Connected;
     }
 
     return false;

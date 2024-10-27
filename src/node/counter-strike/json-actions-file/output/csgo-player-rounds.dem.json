@@ -1,0 +1,58 @@
+[
+  {
+    "cmd": "voice_enable 1",
+    "tick": 64
+  },
+  {
+    "cmd": "demo_gototick 872",
+    "tick": 64
+  },
+  {
+    "cmd": "spec_lock_to_accountid fakeKillerSteamId",
+    "tick": 64
+  },
+  {
+    "cmd": "spec_player_by_accountid fakeKillerSteamId",
+    "tick": 64
+  },
+  {
+    "cmd": "demo_gototick 10752",
+    "tick": 5864
+  },
+  {
+    "cmd": "spec_lock_to_accountid fakeKillerSteamId",
+    "tick": 5864
+  },
+  {
+    "cmd": "spec_player_by_accountid fakeKillerSteamId",
+    "tick": 5864
+  },
+  {
+    "cmd": "demo_gototick 16152",
+    "tick": 13184
+  },
+  {
+    "cmd": "spec_lock_to_accountid fakeKillerSteamId",
+    "tick": 13184
+  },
+  {
+    "cmd": "spec_player_by_accountid fakeKillerSteamId",
+    "tick": 13184
+  },
+  {
+    "cmd": "demo_gototick 21352",
+    "tick": 18984
+  },
+  {
+    "cmd": "spec_lock_to_accountid fakeKillerSteamId",
+    "tick": 18984
+  },
+  {
+    "cmd": "spec_player_by_accountid fakeKillerSteamId",
+    "tick": 18984
+  },
+  {
+    "cmd": "disconnect",
+    "tick": 25448
+  }
+]

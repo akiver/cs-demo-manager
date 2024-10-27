@@ -35,8 +35,8 @@ export async function getSequenceRawFiles(sequence: Sequence, recordingFolderPat
     const sequenceRawFilesFolderPath = path.join(recordingFolderPath, sequenceName);
     await assertFolderExists(sequenceRawFilesFolderPath);
 
-    const takeFolders = await glob(`${sequenceName}/take*`, {
-      cwd: recordingFolderPath,
+    const takeFolders = await glob(`take*`, {
+      cwd: sequenceRawFilesFolderPath,
       absolute: true,
       onlyDirectories: true,
       deep: 1,
