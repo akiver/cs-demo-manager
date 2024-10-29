@@ -1,0 +1,9 @@
+{
+  "name": "get-running-process-exit-code",
+  "scripts": {
+    "node-gyp": "node-gyp"
+  },
+  "devDependencies": {
+    "node-gyp": "10.2.0"
+  }
+}
