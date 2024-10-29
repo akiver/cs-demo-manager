@@ -1,11 +1,9 @@
-import { fixupPluginRules } from '@eslint/compat';
 import js from '@eslint/js';
 import ts from 'typescript-eslint';
 import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
 import reactHooks from 'eslint-plugin-react-hooks';
 import checkFile from 'eslint-plugin-check-file';
 import localRules from 'eslint-plugin-local-rules';
-import deprecation from 'eslint-plugin-deprecation';
 import lingui from 'eslint-plugin-lingui';
 import tailwind from 'eslint-plugin-tailwindcss';
 import prettier from 'eslint-plugin-prettier/recommended';
@@ -60,10 +58,9 @@ export default [
   {
     plugins: {
       'check-file': checkFile,
-      deprecation: fixupPluginRules(deprecation),
-      lingui: fixupPluginRules(lingui),
+      lingui,
       'local-rules': localRules,
-      'react-hooks': fixupPluginRules(reactHooks),
+      'react-hooks': reactHooks,
     },
 
     languageOptions: {
@@ -118,6 +115,7 @@ export default [
           format: ['camelCase', 'snake_case'],
         },
       ],
+      '@typescript-eslint/no-deprecated': 'error',
       '@typescript-eslint/no-inferrable-types': 0,
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -144,7 +142,6 @@ export default [
         },
       ],
       'check-file/no-index': 'error',
-      'deprecation/deprecation': 'error',
       eqeqeq: 'error',
       'lingui/no-unlocalized-strings': 'off',
       'lingui/t-call-in-function': 'error',

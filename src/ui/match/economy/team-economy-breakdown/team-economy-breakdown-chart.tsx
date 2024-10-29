@@ -128,6 +128,9 @@ export function TeamsEconomyBreakdownChart() {
         marker: string;
         name: string;
       };
+      const type = translateEconomyType(data.economyType);
+      const moneyValue = formatMoney(money);
+
       const round = _(
         msg({
           context: 'Chart tooltip',
@@ -137,13 +140,13 @@ export function TeamsEconomyBreakdownChart() {
       const economyType = _(
         msg({
           context: 'Chart tooltip economy type',
-          message: `Type: ${translateEconomyType(data.economyType)}`,
+          message: `Type: ${type}`,
         }),
       );
       const equipmentValue = _(
         msg({
           context: 'Chart tooltip',
-          message: `Equipment value: ${formatMoney(money)}`,
+          message: `Equipment value: ${moneyValue}`,
         }),
       );
 

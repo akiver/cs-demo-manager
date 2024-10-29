@@ -93,12 +93,13 @@ export function UpdateTeamNamesDialog({ matches }: Props) {
 
   const renderMessage = () => {
     if (isUpdating) {
+      const matchCount = matches.length;
       return (
         <div className="flex items-center gap-x-8">
           <Spinner size={24} />
           <p>
             <Trans>
-              Updating team names of match {updatedCount} out of {matches.length}.
+              Updating team names of match {updatedCount} out of {matchCount}.
             </Trans>
           </p>
         </div>

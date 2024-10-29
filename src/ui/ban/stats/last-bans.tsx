@@ -33,7 +33,7 @@ export function LastBans({ bannedAccounts }: Props) {
                 key={account.steamId}
                 className="flex gap-x-4 flex-none hover:bg-gray-100 p-8 rounded"
                 to={buildPlayerPath(account.steamId)}
-                unstable_viewTransition={true}
+                viewTransition={true}
               >
                 <Avatar avatarUrl={account.avatar} playerName={account.name} size={48} />
                 <div className="flex justify-center flex-col">

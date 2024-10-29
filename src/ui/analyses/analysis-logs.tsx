@@ -117,12 +117,12 @@ export function AnalysisLogs() {
         [ErrorCode.InsertRoundsError]: 'INSERT_ROUNDS_ERROR',
       } as Record<ErrorCode, string>;
 
+      const errorCode = errorCodeMapping[selectedAnalysis.errorCode] ?? 'UNKNOWN';
       message = (
         <div>
           <p>
             <Trans>
-              The analysis failed with the error code:{' '}
-              <strong className="selectable">{errorCodeMapping[selectedAnalysis.errorCode] ?? 'UNKNOWN'}</strong>
+              The analysis failed with the error code: <strong className="selectable">{errorCode}</strong>
             </Trans>
           </p>
           <p>

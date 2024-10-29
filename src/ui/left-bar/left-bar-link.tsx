@@ -21,7 +21,7 @@ export function LeftBarLink({ url, tooltip, icon, onClick }: Props) {
             isActive ? 'text-gray-900' : 'text-gray-500'
           }`;
         }}
-        unstable_viewTransition={true}
+        viewTransition={true}
       >
         <div className="flex justify-center w-32">{icon}</div>
       </NavLink>

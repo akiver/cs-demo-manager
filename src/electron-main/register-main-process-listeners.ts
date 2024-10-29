@@ -109,7 +109,7 @@ export function registerMainProcessListeners() {
   ipcMain.handle(IPCChannel.CanGoBack, () => {
     const mainWindow = windowManager.getMainWindow();
     if (mainWindow !== null && !mainWindow.isDestroyed()) {
-      return mainWindow.webContents.canGoBack();
+      return mainWindow.webContents.navigationHistory.canGoBack();
     }
 
     return false;
@@ -118,7 +118,7 @@ export function registerMainProcessListeners() {
   ipcMain.handle(IPCChannel.CanGoForward, () => {
     const mainWindow = windowManager.getMainWindow();
     if (mainWindow !== null && !mainWindow.isDestroyed()) {
-      return mainWindow.webContents.canGoForward();
+      return mainWindow.webContents.navigationHistory.canGoForward();
     }
 
     return false;

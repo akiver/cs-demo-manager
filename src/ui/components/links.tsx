@@ -47,7 +47,7 @@ const NavigationLink = React.forwardRef(function NavigationLink(
       to={to}
       state={state}
       aria-disabled={isDisabled}
-      unstable_viewTransition={true}
+      viewTransition={true}
     >
       {children}
     </Link>

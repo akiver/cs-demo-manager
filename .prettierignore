@@ -4,6 +4,7 @@ package-lock.json
 build
 build-assets
 out
+output
 dist
 static
 .DS_Store

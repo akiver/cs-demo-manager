@@ -19,18 +19,18 @@ export function BombPlantedIndicator({ frame, leftX, planterName, site }: Props)
   const getTimeElapsedBetweenFrames = useGetTimeElapsedBetweenFrames();
   const siteBlockWidth = 35;
   const center = siteBlockWidth / 2;
+  const time = getTimeElapsedBetweenFrames({
+    startFrame: round.startFrame,
+    endFrame: frame,
+    frameRate: match.frameRate,
+  });
 
   return (
     <Tooltip
       content={
         <p className="w-max">
           <Trans>
-            {getTimeElapsedBetweenFrames({
-              startFrame: round.startFrame,
-              endFrame: frame,
-              frameRate: match.frameRate,
-            })}{' '}
-            Bomb planted by {planterName} at bomb site {site}
+            {time} Bomb planted by {planterName} at bomb site {site}
           </Trans>
         </p>
       }

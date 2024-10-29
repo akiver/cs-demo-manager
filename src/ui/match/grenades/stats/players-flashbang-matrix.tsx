@@ -72,24 +72,26 @@ export function PlayersFlashbangMatrix() {
       return (
         <div className="flex flex-col w-fit" ref={chart}>
           {players.map((flasher) => {
+            const flasherName = flasher.name;
+
             return (
               <div key={flasher.steamId} className="flex">
                 <div className="flex items-center gap-x-8">
-                  <p className="w-[128px] truncate selectable" title={flasher.name}>
-                    {flasher.name}
+                  <p className="w-[128px] truncate selectable" title={flasherName}>
+                    {flasherName}
                   </p>
                   <TeamIndicator teamNumber={flasher.teamNumber} />
                 </div>
                 <div className="flex ml-8">
-                  {flasher.rows.map((row) => {
+                  {flasher.rows.map(({ flashedSteamId, flashedName, duration }) => {
                     return (
-                      <div key={row.flashedSteamId} className="flex flex-col w-[84px]">
+                      <div key={flashedSteamId} className="flex flex-col w-[84px]">
                         <Tooltip
                           content={
                             <Trans>
-                              <span className="text-body-strong">{flasher.name}</span> flashed{' '}
-                              <span className="text-body-strong">{row.flashedName}</span> around{' '}
-                              <span className="text-body-strong">{row.duration}s</span>
+                              <span className="text-body-strong">{flasherName}</span> flashed{' '}
+                              <span className="text-body-strong">{flashedName}</span> around{' '}
+                              <span className="text-body-strong">{duration}s</span>
                             </Trans>
                           }
                           delay={0}
@@ -101,11 +103,11 @@ export function PlayersFlashbangMatrix() {
                               backgroundColor: getColorAtPercentage(
                                 startColor,
                                 endColor,
-                                (row.duration / maxDuration) * 100,
+                                (duration / maxDuration) * 100,
                               ),
                             }}
                           >
-                            {row.duration}
+                            {duration}
                           </div>
                         </Tooltip>
                       </div>

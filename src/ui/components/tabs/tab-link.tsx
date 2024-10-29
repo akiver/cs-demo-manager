@@ -21,7 +21,7 @@ export function TabLink({ children, url, end = true }: Props) {
           isActive ? '' : 'opacity-60'
         }`;
       }}
-      unstable_viewTransition={true}
+      viewTransition={true}
     >
       {children}
     </NavLink>

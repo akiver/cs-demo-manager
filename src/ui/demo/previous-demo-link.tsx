@@ -14,6 +14,7 @@ export function PreviousDemoLink() {
   const currentDemoIndex = siblingDemoPaths.indexOf(currentDemoPath);
   const previousDemoPath = siblingDemoPaths[currentDemoIndex - 1];
   const to = previousDemoPath === undefined ? '' : buildDemoPath(previousDemoPath);
+  const key = window.csdm.isMac ? '⌘' : 'CTRL';
 
-  return <PreviousLink to={to} tooltip={<Trans>Previous demo ({window.csdm.isMac ? '⌘' : 'CTRL'}+←)</Trans>} />;
+  return <PreviousLink to={to} tooltip={<Trans>Previous demo ({key}+←)</Trans>} />;
 }

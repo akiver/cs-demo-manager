@@ -14,21 +14,14 @@ export function FreezetimeEndIndicator({ leftX }: Props) {
   const { round } = useViewerContext();
   const match = useCurrentMatch();
   const getTimeElapsedBetweenFrames = useGetTimeElapsedBetweenFrames();
+  const time = getTimeElapsedBetweenFrames({
+    startFrame: round.startFrame,
+    endFrame: round.freezetimeEndFrame,
+    frameRate: match.frameRate,
+  });
 
   return (
-    <Tooltip
-      content={
-        <Trans>
-          {getTimeElapsedBetweenFrames({
-            startFrame: round.startFrame,
-            endFrame: round.freezetimeEndFrame,
-            frameRate: match.frameRate,
-          })}{' '}
-          Freeze time ended
-        </Trans>
-      }
-      placement="top"
-    >
+    <Tooltip content={<Trans>{time} Freeze time ended</Trans>} placement="top">
       <Indicator leftX={leftX} color="#12805c" />
     </Tooltip>
   );

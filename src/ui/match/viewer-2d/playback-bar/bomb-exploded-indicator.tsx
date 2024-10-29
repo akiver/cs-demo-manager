@@ -17,18 +17,18 @@ export function BombExplodedIndicator({ frame, leftX, planterName, site }: Props
   const { round } = useViewerContext();
   const match = useCurrentMatch();
   const getTimeElapsedBetweenFrames = useGetTimeElapsedBetweenFrames();
+  const time = getTimeElapsedBetweenFrames({
+    startFrame: round.startFrame,
+    endFrame: frame,
+    frameRate: match.frameRate,
+  });
 
   return (
     <Tooltip
       content={
         <p className="w-max">
           <Trans>
-            {getTimeElapsedBetweenFrames({
-              startFrame: round.startFrame,
-              endFrame: frame,
-              frameRate: match.frameRate,
-            })}{' '}
-            Bomb planted by {planterName} exploded at site {site}
+            {time} Bomb planted by {planterName} exploded at site {site}
           </Trans>
         </p>
       }

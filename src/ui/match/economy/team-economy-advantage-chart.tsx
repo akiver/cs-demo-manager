@@ -75,10 +75,10 @@ export function TeamEconomyAdvantageChart() {
       formatter: (params) => {
         const { seriesName: teamName, value } = params as { seriesName: string; value: number };
         const oppositeTeamName = teamName === match.teamB.name ? match.teamA.name : match.teamB.name;
-        const money = Math.abs(value);
+        const money = formatMoney(Math.abs(value));
         return _(
           msg({
-            message: `${teamName} has +${formatMoney(money)} more than ${oppositeTeamName}`,
+            message: `${teamName} has +${money} more than ${oppositeTeamName}`,
             context: 'Chart tooltip',
           }),
         );

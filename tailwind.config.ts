@@ -10,7 +10,7 @@ const tooltipArrowStyle = {
 };
 
 const config: Config = {
-  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  content: ['./index.html', './src/ui/**/*.{ts,tsx}'],
   darkMode: 'class',
   theme: {
     colors: {

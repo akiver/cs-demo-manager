@@ -70,14 +70,17 @@ function getStatusMessage(video: Video) {
           <Trans>Preparing files for conversion…</Trans>
         </p>
       );
-    case VideoStatus.Converting:
+    case VideoStatus.Converting: {
+      const number = video.currentSequence;
+      const sequenceCount = video.sequences.length;
       return (
         <p>
           <Trans>
-            Generating video for sequence {video.currentSequence} / {video.sequences.length}…
+            Generating video for sequence {number} / {sequenceCount}…
           </Trans>
         </p>
       );
+    }
     case VideoStatus.Concatenating:
       return (
         <p>

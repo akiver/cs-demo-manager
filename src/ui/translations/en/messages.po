@@ -57,8 +57,8 @@ msgid "An error occurred while inserting the match into the database."
 msgstr "An error occurred while inserting the match into the database."
 
 #: src/ui/analyses/analysis-logs.tsx
-msgid "The analysis failed with the error code: <0>{0}</0>"
-msgstr "The analysis failed with the error code: <0>{0}</0>"
+msgid "The analysis failed with the error code: <0>{errorCode}</0>"
+msgstr "The analysis failed with the error code: <0>{errorCode}</0>"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read the error codes <0>documentation</0> to understand the code signification and what you can do."
@@ -2377,12 +2377,12 @@ msgid "Tags:"
 msgstr "Tags:"
 
 #: src/ui/demo/next-demo-link.tsx
-msgid "Next demo ({0}+→)"
-msgstr "Next demo ({0}+→)"
+msgid "Next demo ({key}+→)"
+msgstr "Next demo ({key}+→)"
 
 #: src/ui/demo/previous-demo-link.tsx
-msgid "Previous demo ({0}+←)"
-msgstr "Previous demo ({0}+←)"
+msgid "Previous demo ({key}+←)"
+msgstr "Previous demo ({key}+←)"
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
@@ -3478,8 +3478,8 @@ msgstr "No kills found between both teams."
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
-msgid "{teamName} has +{0} more than {oppositeTeamName}"
-msgstr "{teamName} has +{0} more than {oppositeTeamName}"
+msgid "{teamName} has +{money} more than {oppositeTeamName}"
+msgstr "{teamName} has +{money} more than {oppositeTeamName}"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
@@ -3520,13 +3520,13 @@ msgstr "Round: {roundNumber}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip economy type"
-msgid "Type: {0}"
-msgstr "Type: {0}"
+msgid "Type: {type}"
+msgstr "Type: {type}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip"
-msgid "Equipment value: {0}"
-msgstr "Equipment value: {0}"
+msgid "Equipment value: {moneyValue}"
+msgstr "Equipment value: {moneyValue}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgid "Breakdown"
@@ -3736,8 +3736,8 @@ msgid "Killed"
 msgstr "Killed"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
-msgid "<0>{0}</0> flashed <1>{1}</1> around <2>{2}s</2>"
-msgstr "<0>{0}</0> flashed <1>{1}</1> around <2>{2}s</2>"
+msgid "<0>{flasherName}</0> flashed <1>{flashedName}</1> around <2>{duration}s</2>"
+msgstr "<0>{flasherName}</0> flashed <1>{flashedName}</1> around <2>{duration}s</2>"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "Players flashbang matrix"
@@ -5239,16 +5239,16 @@ msgid "Generate positions"
 msgstr "Generate positions"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-exploded-indicator.tsx
-msgid "{0} Bomb planted by {planterName} exploded at site {site}"
-msgstr "{0} Bomb planted by {planterName} exploded at site {site}"
+msgid "{time} Bomb planted by {planterName} exploded at site {site}"
+msgstr "{time} Bomb planted by {planterName} exploded at site {site}"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-planted-indicator.tsx
-msgid "{0} Bomb planted by {planterName} at bomb site {site}"
-msgstr "{0} Bomb planted by {planterName} at bomb site {site}"
+msgid "{time} Bomb planted by {planterName} at bomb site {site}"
+msgstr "{time} Bomb planted by {planterName} at bomb site {site}"
 
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
-msgid "{0} Freeze time ended"
-msgstr "{0} Freeze time ended"
+msgid "{time} Freeze time ended"
+msgstr "{time} Freeze time ended"
 
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgctxt "Map radar level"
@@ -5377,8 +5377,8 @@ msgid "The teams have not been found."
 msgstr "The teams have not been found."
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
-msgid "Updating team names of match {updatedCount} out of {0}."
-msgstr "Updating team names of match {updatedCount} out of {0}."
+msgid "Updating team names of match {updatedCount} out of {matchCount}."
+msgstr "Updating team names of match {updatedCount} out of {matchCount}."
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Dialog title"
@@ -6806,8 +6806,8 @@ msgid "Preparing files for conversion…"
 msgstr "Preparing files for conversion…"
 
 #: src/ui/videos/video-entry.tsx
-msgid "Generating video for sequence {0} / {1}…"
-msgstr "Generating video for sequence {0} / {1}…"
+msgid "Generating video for sequence {number} / {sequenceCount}…"
+msgstr "Generating video for sequence {number} / {sequenceCount}…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Merging videos into a single file…"

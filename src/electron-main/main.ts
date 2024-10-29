@@ -45,10 +45,9 @@ if (isFirstAppInstance) {
     return args.find((arg) => arg.endsWith('.dem'));
   };
 
-  app.on('window-all-closed', (event: Event) => {
+  app.on('window-all-closed', () => {
     // The default behavior is to quit the app when all windows are closed.
-    // Prevent it in order to close all windows but keep the app alive and accessible through the Tray icon.
-    event.preventDefault();
+    // Only hide it from the dock to keep the app alive and accessible through the Tray icon.
     if (isMac) {
       app.dock.hide();
     }
@@ -113,7 +112,7 @@ if (isFirstAppInstance) {
     let isOpenedAtLogin = false;
     let shouldStartMinimized = false;
     if (isMac) {
-      // eslint-disable-next-line deprecation/deprecation
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
       const { wasOpenedAtLogin, wasOpenedAsHidden } = app.getLoginItemSettings();
       isOpenedAtLogin = wasOpenedAtLogin;
       shouldStartMinimized = isOpenedAtLogin && wasOpenedAsHidden;

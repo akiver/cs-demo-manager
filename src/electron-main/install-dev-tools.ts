@@ -1,4 +1,4 @@
-import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from '@tomjs/electron-devtools-installer';
 
 export async function installDevTools() {
   const extensions = [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS];
