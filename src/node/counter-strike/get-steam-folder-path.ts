@@ -37,5 +37,10 @@ export async function getSteamFolderPath() {
     return steamHomePath;
   }
 
+  const steamSnapPath = path.join(homedir(), 'snap', 'steam', 'common', '.local', 'share', 'Steam');
+  if (await fs.pathExists(steamSnapPath)) {
+    return steamSnapPath;
+  }
+
   return path.join(homedir(), '.local', 'share', 'steam');
 }
