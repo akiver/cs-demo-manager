@@ -19,7 +19,7 @@ export async function fetchTeamsTable(filter: TeamsTableFilter): Promise<TeamTab
       sum<number>('five_kill_count').as('fiveKillCount'),
       avg<number>('headshot_percentage').as('headshotPercentage'),
       avg<number>('kast').as('kast'),
-      avg<number>('kill_death_ratio').as('killDeathRatio'),
+      sql<number>`SUM(players.kill_count)::NUMERIC / NULLIF(SUM(players.death_count), 0)::NUMERIC`.as('killDeathRatio'),
       avg<number>('hltv_rating').as('hltvRating'),
       avg<number>('hltv_rating_2').as('hltvRating2'),
       avg<number>('average_damage_per_round').as('averageDamagePerRound'),

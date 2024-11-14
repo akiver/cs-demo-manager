@@ -51,7 +51,7 @@ function buildStatsQuery({
       ),
       sql<number>`COUNT(matches.checksum) FILTER (WHERE matches.winner_name IS NULL)`.as('tiedCount'),
       count<number>('matches.checksum').as('matchCount'),
-      avg<number>('players.kill_death_ratio').as('killDeathRatio'),
+      sql<number>`SUM(players.kill_count)::NUMERIC / NULLIF(SUM(players.death_count), 0)::NUMERIC`.as('killDeathRatio'),
       avg<number>('players.average_damage_per_round').as('averageDamagesPerRound'),
       avg<number>('players.kast').as('kast'),
       avg<number>('players.headshot_percentage').as('headshotPercentage'),
