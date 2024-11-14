@@ -6,6 +6,7 @@ import { ValveAvatarCell } from './avatar-cell';
 import type { ValvePlayer } from 'csdm/common/types/valve-match';
 import type { Column } from '../table/table-types';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
+import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-diff-sort-function';
 
 export function useValveScoreboardColumns() {
   const _ = useI18n();
@@ -121,6 +122,7 @@ export function useValveScoreboardColumns() {
         width: 50,
         maxWidth: 100,
         Cell: KillDeathDiffCell,
+        sortFunction: killDeathDiffSortFunction,
         textAlign: 'right',
       },
       {

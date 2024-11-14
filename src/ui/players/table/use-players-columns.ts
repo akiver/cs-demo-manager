@@ -13,6 +13,7 @@ import { BansCell } from './bans-cell';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { CommentCell } from 'csdm/ui/components/table/cells/comment-cell';
 import { TagsCell } from 'csdm/ui/components/table/cells/tags-cell';
+import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-diff-sort-function';
 
 export function usePlayersColumns() {
   const formatDate = useFormatDate();
@@ -260,6 +261,7 @@ export function usePlayersColumns() {
         maxWidth: 100,
         textAlign: 'right',
         Cell: KillDeathDiffCell,
+        sortFunction: killDeathDiffSortFunction,
       },
       {
         id: 'kill-death-ratio',

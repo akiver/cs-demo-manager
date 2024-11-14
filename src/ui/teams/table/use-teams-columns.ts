@@ -7,6 +7,7 @@ import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { msg } from '@lingui/macro';
 import type { TeamTable } from 'csdm/common/types/team-table';
+import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-diff-sort-function';
 
 export function useTeamsColumns() {
   const formatDate = useFormatDate();
@@ -145,6 +146,7 @@ export function useTeamsColumns() {
         maxWidth: 100,
         textAlign: 'right',
         Cell: KillDeathDiffCell,
+        sortFunction: killDeathDiffSortFunction,
       },
       {
         id: 'kill-death-ratio',

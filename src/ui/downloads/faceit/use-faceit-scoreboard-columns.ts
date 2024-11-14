@@ -7,6 +7,7 @@ import { FaceitAvatarCell } from './avatar-cell';
 import type { Column } from 'csdm/ui/components/table/table-types';
 import type { FaceitPlayer } from 'csdm/common/types/faceit-match';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
+import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-diff-sort-function';
 
 export function useFaceitScoreboardColumns() {
   const _ = useI18n();
@@ -122,6 +123,7 @@ export function useFaceitScoreboardColumns() {
         width: 50,
         maxWidth: 100,
         Cell: KillDeathDiffCell,
+        sortFunction: killDeathDiffSortFunction,
         textAlign: 'right',
       },
       {

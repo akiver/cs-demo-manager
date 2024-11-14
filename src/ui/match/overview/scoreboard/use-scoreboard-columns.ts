@@ -9,6 +9,7 @@ import type { Player } from 'csdm/common/types/player';
 import { ScoreboardAvatarCell } from './scoreboard-avatar-cell';
 import { BansCell } from './bans-cell';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
+import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-diff-sort-function';
 
 export function useScoreboardColumns(isDefuseMap: boolean) {
   const _ = useI18n();
@@ -189,6 +190,7 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
         maxWidth: 100,
         textAlign: 'right',
         Cell: KillDeathDiffCell,
+        sortFunction: killDeathDiffSortFunction,
       },
       {
         id: 'kill-death-ratio',
