@@ -215,6 +215,14 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_basalt',
+      game: Game.CS2,
+      position_x: -2345,
+      position_y: 2391,
+      scale: 4.37,
+      threshold_z: 0,
+    },
+    {
       name: 'de_cache',
       game: Game.CS2,
       position_x: -2000,
@@ -252,6 +260,14 @@ export function getDefaultMaps(game?: Game) {
       position_x: -2476,
       position_y: 3239,
       scale: 4.4,
+      threshold_z: 0,
+    },
+    {
+      name: 'de_edin',
+      game: Game.CS2,
+      position_x: -383,
+      position_y: 4420,
+      scale: 4.803717,
       threshold_z: 0,
     },
     {
@@ -303,6 +319,14 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_palais',
+      game: Game.CS2,
+      position_x: -1353,
+      position_y: 2044,
+      scale: 2.8003397,
+      threshold_z: 103,
+    },
+    {
       name: 'de_thera',
       game: Game.CS2,
       position_x: -85,
@@ -313,9 +337,9 @@ export function getDefaultMaps(game?: Game) {
     {
       name: 'de_train',
       game: Game.CS2,
-      position_x: -2477,
-      position_y: 2392,
-      scale: 4.7,
+      position_x: -2308,
+      position_y: 2078,
+      scale: 4.082077,
       threshold_z: 0,
     },
     {
@@ -325,6 +349,14 @@ export function getDefaultMaps(game?: Game) {
       position_y: 1762,
       scale: 4,
       threshold_z: 11700,
+    },
+    {
+      name: 'de_whistle',
+      game: Game.CS2,
+      position_x: -1825,
+      position_y: 1104,
+      scale: 2.8,
+      threshold_z: 0,
     },
   ];
 
