@@ -236,6 +236,9 @@ async function assertWebSocketServerIsAvailable() {
     });
 
     server.on('error', (error) => {
+      if (error.code === 'EACCES') {
+        console.error(`You don't have permission to run the WebSocket server on port ${port}.`);
+      }
       if (error.code === 'EADDRINUSE') {
         console.error(
           `A WebSocket server is already running on port ${port}. Please make sure to quit all running CS:DM application and retry.`,
