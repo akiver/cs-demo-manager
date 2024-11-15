@@ -1,10 +1,9 @@
-import { ipcMain, shell } from 'electron';
+import { ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import { Notification } from 'electron';
 import { i18n } from '@lingui/core';
 import { windowManager } from './window-manager';
 import { IPCChannel } from 'csdm/common/ipc-channel';
-import { isLinux } from 'csdm/node/os/is-linux';
 
 autoUpdater.logger = {
   error: logger.error,
@@ -20,30 +19,16 @@ export function initialize(autoDownloadUpdates: boolean) {
   let isDownloading = false;
   let shouldDownloadUpdatesAutomatically = autoDownloadUpdates;
 
-  const sendUpdateDownloadedMessage = () => {
-    const mainWindow = windowManager.getMainWindow();
-    if (mainWindow !== null && !mainWindow.isDestroyed()) {
-      mainWindow.webContents.send(IPCChannel.UpdateDownloaded);
-    }
-  };
-
   autoUpdater.on('update-available', (event) => {
     const isAlreadyDownloadedVersion = lastDownloadedVersion !== null && lastDownloadedVersion === event.version;
     if (isAlreadyDownloadedVersion) {
       return;
     }
 
-    // TODO deps Auto updates on Linux. electron-builder/electron-updater issue.
-    // It works on Debian distros but not on Fedora - untested with AppImage.
-    if (isLinux) {
-      lastDownloadedVersion = event.version;
-      sendUpdateDownloadedMessage();
-    } else {
-      if (shouldDownloadUpdatesAutomatically) {
-        isDownloading = true;
-        autoUpdater.downloadUpdate();
-        return;
-      }
+    if (shouldDownloadUpdatesAutomatically) {
+      isDownloading = true;
+      autoUpdater.downloadUpdate();
+      return;
     }
 
     const notification = new Notification({
@@ -57,28 +42,23 @@ export function initialize(autoDownloadUpdates: boolean) {
       }),
     });
     notification.on('click', () => {
-      if (isLinux) {
-        shell.openExternal('https://cs-demo-manager.com/download');
-      } else {
-        autoUpdater.downloadUpdate();
-      }
+      autoUpdater.downloadUpdate();
     });
     notification.show();
   });
 
   autoUpdater.on('update-downloaded', (event) => {
-    sendUpdateDownloadedMessage();
+    const mainWindow = windowManager.getMainWindow();
+    if (mainWindow !== null && !mainWindow.isDestroyed()) {
+      mainWindow.webContents.send(IPCChannel.UpdateDownloaded);
+    }
 
     lastDownloadedVersion = event.version;
     isDownloading = false;
   });
 
   ipcMain.handle(IPCChannel.InstallUpdate, () => {
-    if (isLinux) {
-      shell.openExternal('https://cs-demo-manager.com/download');
-    } else {
-      autoUpdater.quitAndInstall();
-    }
+    autoUpdater.quitAndInstall();
   });
 
   ipcMain.handle(IPCChannel.HasUpdateReadyToInstall, () => {
