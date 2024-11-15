@@ -62,6 +62,10 @@ jobs:
           P12_PASSWORD: ${{ secrets.APPLE_P12_PASSWORD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
 
+      - name: Install required tools
+        run: |
+          brew install python-setuptools
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
