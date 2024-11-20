@@ -18,6 +18,8 @@ import type { NinjaDefuseResult } from 'csdm/common/types/search/ninja-defuse-re
 import type { MultiKillResult } from 'csdm/common/types/search/multi-kill-result';
 import type { ClutchResult } from 'csdm/common/types/search/clutch-result';
 import { useMatchChecksums } from 'csdm/ui/cache/use-match-checksums';
+import { RoundsResult } from './results/rounds-result';
+import type { RoundResult } from 'csdm/common/types/search/round-result';
 
 export function SearchResults() {
   const { status, result, event } = useSearchState();
@@ -61,6 +63,8 @@ export function SearchResults() {
       return <KillsResults kills={result as KillResult[]} />;
     case SearchEvent.NinjaDefuse:
       return <NinjaDefuseResults bombsDefused={result as NinjaDefuseResult[]} />;
+    case SearchEvent.RoundStart:
+      return <RoundsResult rounds={result as RoundResult[]} />;
     default:
       return assertNever(event, 'Unknown search type');
   }

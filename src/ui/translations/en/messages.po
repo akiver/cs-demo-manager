@@ -5804,6 +5804,11 @@ msgctxt "Select option label"
 msgid "Ninja defuse"
 msgstr "Ninja defuse"
 
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Round start"
+msgstr "Round start"
+
 #: src/ui/search/filters/search-maps-input.tsx
 msgctxt "Input placeholder"
 msgid "Map's name"

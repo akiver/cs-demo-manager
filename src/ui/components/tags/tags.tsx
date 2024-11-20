@@ -7,7 +7,7 @@ import { Tag, TagsTooltip } from 'csdm/ui/components/tags/tag';
 
 type Props = {
   tagIds: string[];
-  onEditClick: () => void;
+  onEditClick?: () => void;
 };
 
 export function Tags({ onEditClick, tagIds }: Props) {
@@ -16,11 +16,13 @@ export function Tags({ onEditClick, tagIds }: Props) {
 
   return (
     <div className="flex gap-x-8 gap-y-4 items-center flex-wrap">
-      <Tooltip content={<Trans>Edit tags</Trans>}>
-        <Button onClick={onEditClick}>
-          <TagIcon height={14} />
-        </Button>
-      </Tooltip>
+      {onEditClick && (
+        <Tooltip content={<Trans>Edit tags</Trans>}>
+          <Button onClick={onEditClick}>
+            <TagIcon height={14} />
+          </Button>
+        </Tooltip>
+      )}
       {visibleTagIds.length === 0 ? (
         <p>
           <Trans>No tags</Trans>

@@ -11,6 +11,7 @@ import type { SearchFilter } from 'csdm/common/types/search/search-filter';
 import { handleError } from '../../handle-error';
 import { searchJumpKills } from 'csdm/node/database/search/search-jump-kills';
 import { searchTeamKills } from 'csdm/node/database/search/search-team-kills';
+import { searchRounds } from 'csdm/node/database/search/search-rounds';
 
 export type SearchPayload = SearchFilter & {
   event: SearchEvent;
@@ -76,6 +77,9 @@ export async function searchHandler(payload: SearchPayload) {
         break;
       case SearchEvent.TeamKills:
         result = await searchTeamKills(filter);
+        break;
+      case SearchEvent.RoundStart:
+        result = await searchRounds(filter);
         break;
       default:
         return assertNever(payload.event, `Unsupported search type ${payload.event}}`);

@@ -5809,6 +5809,11 @@ msgctxt "Select option label"
 msgid "Ninja defuse"
 msgstr "偷包（也可能是明抢"
 
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Round start"
+msgstr ""
+
 #: src/ui/search/filters/search-maps-input.tsx
 msgctxt "Input placeholder"
 msgid "Map's name"

@@ -111,6 +111,15 @@ function useSearchEventOptions(): SelectOption<SearchEvent>[] {
       ),
       value: SearchEvent.NinjaDefuse,
     },
+    {
+      label: _(
+        msg({
+          message: 'Round start',
+          context: 'Select option label',
+        }),
+      ),
+      value: SearchEvent.RoundStart,
+    },
   ];
 }
 
