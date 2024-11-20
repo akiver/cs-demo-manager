@@ -56,9 +56,9 @@ export async function generatePlayerHighlightsJsonFile({
   const isPlayerPerspective = perspective === Perspective.Player;
   const maxNextActionDelaySeconds = 15;
   const maxNextActionDelayTickCount = Math.max(Math.round(tickrate * maxNextActionDelaySeconds), tickNextDelayCount);
+  let isFirstAction = true;
 
   for (const [index, action] of actions.entries()) {
-    const isFirstAction = !json.hasActions();
     if (isFirstAction) {
       const idToFocus = getPlayerIdToFocusFromAction(isPlayerPerspective, action, game);
       if (!idToFocus) {
@@ -69,6 +69,7 @@ export async function generatePlayerHighlightsJsonFile({
       const toTick = Math.max(0, action.tick - tickBeforeDelayCount);
       json.addSkipAhead(0, toTick);
       json.addSpecPlayer(toTick, idToFocus);
+      isFirstAction = false;
     }
 
     const nextAction = index === actions.length - 1 ? undefined : actions[index + 1];

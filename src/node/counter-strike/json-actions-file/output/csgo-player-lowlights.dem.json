@@ -4,6 +4,18 @@
     "tick": 64
   },
   {
+    "cmd": "demo_gototick 872",
+    "tick": 64
+  },
+  {
+    "cmd": "spec_lock_to_accountid fakeOpponentSteamId",
+    "tick": 872
+  },
+  {
+    "cmd": "spec_player_by_accountid fakeOpponentSteamId",
+    "tick": 872
+  },
+  {
     "cmd": "spec_lock_to_accountid fakeOpponentSteamId",
     "tick": 1200
   },

@@ -25,10 +25,6 @@ export class JSONActionsFileGenerator {
     }
   }
 
-  public hasActions() {
-    return this.actions.length > 0;
-  }
-
   public addSkipAhead(startTick: number, toTick: number) {
     this.actions.push({
       cmd: `demo_gototick ${this.getValidTick(toTick)}`,

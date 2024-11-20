@@ -56,9 +56,9 @@ export async function generatePlayerLowlightsJsonFile({
   const maxNextActionDelayInSeconds = 15;
   const maxNextActionDelayTickCount = Math.max(Math.round(tickrate * maxNextActionDelayInSeconds), tickNextDelayCount);
   const isPlayerPerspective = perspective === Perspective.Player;
+  let isFirstAction = true;
 
   for (const [index, action] of actions.entries()) {
-    const isFirstAction = !json.hasActions();
     if (isFirstAction) {
       const playerIdToFocus = getPlayerIdToFocusFromAction(isPlayerPerspective, action, game);
       if (!playerIdToFocus) {
@@ -69,6 +69,7 @@ export async function generatePlayerLowlightsJsonFile({
       const toTick = Math.max(0, action.tick - tickBeforeDelayCount);
       json.addSkipAhead(0, toTick);
       json.addSpecPlayer(toTick, playerIdToFocus);
+      isFirstAction = false;
     }
 
     const nextAction = index === actions.length - 1 ? undefined : actions[index + 1];

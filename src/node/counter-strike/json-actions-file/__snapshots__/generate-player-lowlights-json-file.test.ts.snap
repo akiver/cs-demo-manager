@@ -11,6 +11,18 @@ exports[`Generate player's lowlights JSON file > CS2 1`] = `
     "tick": 64
   },
   {
+    "cmd": "demo_gototick 872",
+    "tick": 64
+  },
+  {
+    "cmd": "spec_player 4",
+    "tick": 872
+  },
+  {
+    "cmd": "spec_mode 1",
+    "tick": 872
+  },
+  {
     "cmd": "spec_player 4",
     "tick": 1200
   },
@@ -50,6 +62,18 @@ exports[`Generate player's lowlights JSON file > CSGO 1`] = `
   {
     "cmd": "voice_enable 1",
     "tick": 64
+  },
+  {
+    "cmd": "demo_gototick 872",
+    "tick": 64
+  },
+  {
+    "cmd": "spec_lock_to_accountid fakeOpponentSteamId",
+    "tick": 872
+  },
+  {
+    "cmd": "spec_player_by_accountid fakeOpponentSteamId",
+    "tick": 872
   },
   {
     "cmd": "spec_lock_to_accountid fakeOpponentSteamId",
