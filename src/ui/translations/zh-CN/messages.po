@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-07 00:11\n"
+"PO-Revision-Date: 2024-12-02 12:06\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -63,7 +63,7 @@ msgstr "在比赛结果输入数据库中时发生错误。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "The analysis failed with the error code: <0>{errorCode}</0>"
-msgstr ""
+msgstr "分析失败，错误代码：<0>{errorCode}</0>"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read the error codes <0>documentation</0> to understand the code signification and what you can do."
@@ -785,7 +785,7 @@ msgstr "更新录像文件位置"
 #: src/ui/components/context-menu/items/update-name-item.tsx
 msgctxt "Context menu"
 msgid "Update name"
-msgstr ""
+msgstr "修改名称"
 
 #: src/ui/components/context-menu/items/watch-item.tsx
 #: src/ui/components/context-menu/items/watch-player-item.tsx
@@ -1294,7 +1294,7 @@ msgstr "半径"
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
 msgid "Comment (Markdown supported)"
-msgstr ""
+msgstr "评论 (支持Markdown)"
 
 #: src/ui/components/inputs/database-name-input.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
@@ -1917,7 +1917,7 @@ msgstr "HLAE返回了一个错误"
 
 #: src/ui/components/messages/hlae-error.tsx
 msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
-msgstr ""
+msgstr "请确保HLA是最新版本，并且与最新的 CS2 版本兼容 <0>GitHub </0> 或<1>Discord</1>列。"
 
 #: src/ui/components/panels/average-damages-per-round-panel.tsx
 msgctxt "Panel title"
@@ -2383,11 +2383,11 @@ msgstr "标签:"
 
 #: src/ui/demo/next-demo-link.tsx
 msgid "Next demo ({key}+→)"
-msgstr ""
+msgstr "下一个demo({key}+→)"
 
 #: src/ui/demo/previous-demo-link.tsx
 msgid "Previous demo ({key}+←)"
-msgstr ""
+msgstr "上一个demo({key}+←)"
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
@@ -2605,15 +2605,15 @@ msgstr "此名称超出长度限制"
 #: src/ui/dialogs/update-player-name-dialog.tsx
 msgctxt "Dialog title"
 msgid "Update player name"
-msgstr ""
+msgstr "更新玩家名称"
 
 #: src/ui/dialogs/update-player-name-dialog.tsx
 msgid "It will override the name of the player identified by his Steam ID every place in the application."
-msgstr ""
+msgstr "这会覆盖所有应用中由他Steam ID指定的玩家名称"
 
 #: src/ui/dialogs/update-player-name-dialog.tsx
 msgid "Leave it empty to remove the override."
-msgstr ""
+msgstr "将其留空以移除覆盖。"
 
 #: src/ui/downloads/dowload-required-tooltip.tsx
 msgctxt "Tooltip"
@@ -3320,7 +3320,7 @@ msgstr "只有当演示的<0>.info</0> 文件在分析中处于其<1>.dem</1> �
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "Chat messages are available with Valve demos only after the {updateDate} CS2 update."
-msgstr ""
+msgstr "Valve demo的聊天信息只在CS2更新{updateDate} 后可用"
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "No chat messages found."
@@ -3489,7 +3489,7 @@ msgstr "双方队伍之间没有找到击杀."
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
 msgid "{teamName} has +{money} more than {oppositeTeamName}"
-msgstr ""
+msgstr "{teamName} 比{oppositeTeamName} 多了+{money}"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
@@ -3531,12 +3531,12 @@ msgstr "回合:{roundNumber}"
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip economy type"
 msgid "Type: {type}"
-msgstr ""
+msgstr "类型：{type}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Equipment value: {moneyValue}"
-msgstr ""
+msgstr "装备价值：{moneyValue}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgid "Breakdown"
@@ -3699,7 +3699,7 @@ msgstr "查找"
 #: src/ui/match/grenades/stats/grenade-select.tsx
 msgctxt "Grenade name"
 msgid "Fire"
-msgstr "燃烧弹"
+msgstr "开火"
 
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
@@ -3747,7 +3747,7 @@ msgstr "击杀"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "<0>{flasherName}</0> flashed <1>{flashedName}</1> around <2>{duration}s</2>"
-msgstr ""
+msgstr "<0>{flasherName}</0>致盲了<1>{flashedName}</1>大约<2>{duration}秒</2>"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "Players flashbang matrix"
@@ -3872,7 +3872,7 @@ msgstr "Steam ID"
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-deaths-video-item.tsx
 msgctxt "Context menu"
 msgid "Deaths"
-msgstr ""
+msgstr "死亡"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
@@ -3931,7 +3931,7 @@ msgstr "交换阵营"
 
 #: src/ui/match/overview/scoreboard/scoreboard.tsx
 msgid "Loading…"
-msgstr ""
+msgstr "正在加载……"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -4416,7 +4416,7 @@ msgstr "经济"
 
 #: src/ui/match/rounds/round/players-economy-chart.tsx
 msgid "Teams economy"
-msgstr ""
+msgstr "队伍经济"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
@@ -4669,7 +4669,7 @@ msgstr ""
 #: src/ui/match/video/generate-only-raw-files-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Generate only raw files"
-msgstr ""
+msgstr "仅生成原始文件"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
@@ -4689,17 +4689,17 @@ msgstr "回合"
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
 msgid "POV"
-msgstr ""
+msgstr "POV"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Player"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Enemy"
-msgstr ""
+msgstr "敌人"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "No action found for this player"
@@ -4717,7 +4717,7 @@ msgstr "创建玩家序列"
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
 msgid "Player"
-msgstr "玩家"
+msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
@@ -4834,7 +4834,7 @@ msgstr "在更新 HLAE 时发生了错误"
 #: src/ui/match/video/player-voices-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Player voices"
-msgstr ""
+msgstr "玩家语音"
 
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
@@ -6092,11 +6092,11 @@ msgstr "选择从CS:DM V2生成的JSON备份文件。"
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
 msgid "Select backup file"
-msgstr ""
+msgstr "选择备份文件"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "Import comments"
-msgstr ""
+msgstr "导入备注"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "Import statuses"
@@ -6121,17 +6121,17 @@ msgstr ""
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Dialog title"
 msgid "Import CS:DM V2"
-msgstr ""
+msgstr "导入 CS:DM V2"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
 msgid "Import"
-msgstr ""
+msgstr "导入..."
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
 msgid "Import V2 data"
-msgstr ""
+msgstr "导入 V2 数据"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Optimize database"
@@ -6371,7 +6371,7 @@ msgstr "需要Y坐标。"
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Threshold Z is required."
-msgstr ""
+msgstr "阈值Z是必需选择的。"
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Scale is required."
@@ -6390,7 +6390,7 @@ msgstr "缩放"
 #: src/ui/settings/maps/map-dialog/threshold-z-input.tsx
 msgctxt "Input label"
 msgid "Threshold Z"
-msgstr ""
+msgstr "阈值Z"
 
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "Thumbnail image pixels must be smaller than {maxFileWidth}x{maxFileHeight}"
@@ -6907,7 +6907,7 @@ msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"
-msgstr ""
+msgstr "玩家语音"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Focused player"
