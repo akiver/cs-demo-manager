@@ -71,6 +71,13 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.Gamersclub;
   }
 
+  // Default format: {TIME}_{MATCH_ID}_{MAP}_{TEAM1}_vs_{TEAM2}
+  // https://shobhit-pathak.github.io/MatchZy/gotv/#recording-demos
+  const matchZyDemoNameRegex = /^(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})_(\d+)_([a-zA-Z0-9_]+)_(.+?)_vs_(.+)$/;
+  if (serverName.includes('matchzy') || matchZyDemoNameRegex.exec(demoName) !== null) {
+    return DemoSource.MatchZy;
+  }
+
   if (serverName.includes('valve')) {
     return DemoSource.Valve;
   }

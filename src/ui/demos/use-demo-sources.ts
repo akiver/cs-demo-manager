@@ -78,6 +78,13 @@ export function useGetDemoSourceName() {
             message: 'Gamers Club',
           }),
         );
+      case DemoSource.MatchZy:
+        return _(
+          msg({
+            context: 'Demo source name',
+            message: 'MatchZy',
+          }),
+        );
       case DemoSource.PerfectWorld:
         return _(
           msg({
@@ -163,6 +170,10 @@ export function useDemoSources() {
     {
       value: DemoSource.Gamersclub,
       name: getDemoSourceName(DemoSource.Gamersclub),
+    },
+    {
+      value: DemoSource.MatchZy,
+      name: getDemoSourceName(DemoSource.MatchZy),
     },
     {
       value: DemoSource.PerfectWorld,

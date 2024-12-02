@@ -2540,6 +2540,11 @@ msgstr "Gamers Club"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "MatchZy"
+msgstr "MatchZy"
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "Perfect World"
 msgstr "Perfect World"
 

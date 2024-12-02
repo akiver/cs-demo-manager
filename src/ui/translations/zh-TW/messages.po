@@ -2545,6 +2545,11 @@ msgstr ""
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "MatchZy"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "Perfect World"
 msgstr ""
 
