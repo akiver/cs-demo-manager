@@ -1,10 +1,9 @@
-import { msg } from '@lingui/macro';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
+import { useLingui } from '@lingui/react/macro';
 
 export function useGetWinCountTranslation() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return (winCount: number) => {
-    return _(msg`Win count: ${winCount}`);
+    return t`Win count: ${winCount}`;
   };
 }

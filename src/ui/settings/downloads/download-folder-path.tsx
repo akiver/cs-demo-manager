@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { RevealFolderInExplorerButton } from 'csdm/ui/components/buttons/reveal-folder-in-explorer-button';
 import { useDownloadFolderPath } from './use-download-folder-path';
 import { useShowDownloadFolderDialog } from './use-show-download-folder-dialog';

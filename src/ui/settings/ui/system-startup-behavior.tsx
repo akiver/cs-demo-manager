@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
 import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';

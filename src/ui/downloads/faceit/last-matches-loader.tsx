@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';
 import { useFetchLastFaceitMatches } from './use-fetch-last-faceit-matches';

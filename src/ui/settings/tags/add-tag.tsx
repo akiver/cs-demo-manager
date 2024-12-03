@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import type { Tag } from 'csdm/common/types/tag';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';

@@ -1,50 +1,41 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export type Axis = 'day' | 'month' | 'year' | 'match';
 
 function useXAxisOptions() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const options: SelectOption<Axis>[] = [
     {
-      label: _(
-        msg({
-          context: 'Select option time period',
-          message: 'Day',
-        }),
-      ),
+      label: t({
+        context: 'Select option time period',
+        message: 'Day',
+      }),
       value: 'day',
     },
     {
-      label: _(
-        msg({
-          context: 'Select option time period',
-          message: 'Month',
-        }),
-      ),
+      label: t({
+        context: 'Select option time period',
+        message: 'Month',
+      }),
       value: 'month',
     },
     {
-      label: _(
-        msg({
-          context: 'Select option time period',
-          message: 'Year',
-        }),
-      ),
+      label: t({
+        context: 'Select option time period',
+        message: 'Year',
+      }),
       value: 'year',
     },
     {
-      label: _(
-        msg({
-          context: 'Select option time period',
-          message: 'Match',
-        }),
-      ),
+      label: t({
+        context: 'Select option time period',
+        message: 'Match',
+      }),
       value: 'match',
     },
   ];

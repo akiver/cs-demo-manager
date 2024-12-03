@@ -1,6 +1,5 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { OpeningDuelResult } from 'csdm/common/types/opening-duel-result';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
@@ -11,25 +10,21 @@ type Props = {
 };
 
 export function OpeningDuelResultSelect({ onChange, selectedResult }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
   const results: SelectOption<OpeningDuelResult>[] = [
     {
       value: OpeningDuelResult.Won,
-      label: _(
-        msg({
-          context: 'Opening duel result select option',
-          message: 'Won',
-        }),
-      ),
+      label: t({
+        context: 'Opening duel result select option',
+        message: 'Won',
+      }),
     },
     {
       value: OpeningDuelResult.Lost,
-      label: _(
-        msg({
-          context: 'Opening duel result select option',
-          message: 'Lost',
-        }),
-      ),
+      label: t({
+        context: 'Opening duel result select option',
+        message: 'Lost',
+      }),
     },
   ];
 

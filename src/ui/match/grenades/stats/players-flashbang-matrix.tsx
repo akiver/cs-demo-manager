@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';

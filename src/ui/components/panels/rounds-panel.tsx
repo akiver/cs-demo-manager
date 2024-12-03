@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Panel, PanelRow, PanelTitle, PanelValue } from 'csdm/ui/components/panel';
 
 type Props = {

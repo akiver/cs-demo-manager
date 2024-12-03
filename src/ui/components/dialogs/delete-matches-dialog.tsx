@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Trans, plural } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
+import { plural } from '@lingui/core/macro';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { Status } from 'csdm/common/types/status';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -40,7 +41,7 @@ export function DeleteMatchesDialog({ onDeleteSuccess, checksums }: Props) {
 
   return (
     <ConfirmDialog
-      title="Delete matches"
+      title={<Trans>Delete matches</Trans>}
       onConfirm={onConfirm}
       isBusy={status === Status.Loading}
       confirmButtonVariant={ButtonVariant.Danger}

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { useSequenceForm } from './use-sequence-form';
 
 export function StartTickInput() {
+  const { t } = useLingui();
   const { sequence, updateSequence } = useSequenceForm();
 
   const onBlur = (event: React.FocusEvent) => {
@@ -31,7 +32,10 @@ export function StartTickInput() {
       <InputNumber
         id="start-tick"
         min={1}
-        placeholder="Start tick"
+        placeholder={t({
+          context: 'Input placeholder',
+          message: 'Start tick',
+        })}
         value={sequence.startTick}
         onChange={onChange}
         onBlur={onBlur}

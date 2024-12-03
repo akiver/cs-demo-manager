@@ -1,9 +1,10 @@
 import React from 'react';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { RoundEndReason } from 'csdm/common/types/counter-strike';
 import { Panel } from 'csdm/ui/components/panel';
 import { useCurrentRound } from './use-current-round';
-import { Trans } from '@lingui/macro';
 
+/* eslint-disable lingui/no-unlocalized-strings */
 const roundEndReasonText: Record<number, string> = {
   [RoundEndReason.TargetBombed]: 'Target Successfully Bombed!',
   [RoundEndReason.TerroristsEscaped]: 'Terrorists escaped!',
@@ -23,10 +24,12 @@ const roundEndReasonText: Record<number, string> = {
   [RoundEndReason.TerroristsPlanted]: 'Terrorists Planted the bomb!',
   [RoundEndReason.CounterTerroristsReachedHostage]: 'Counter-Terrorists Reached the hostage!',
 };
+/* eslint-enable lingui/no-unlocalized-strings */
 
 export function EndReason() {
   const round = useCurrentRound();
-  const endReasonText = roundEndReasonText[round.endReason] || 'Unknown reason';
+  const { t } = useLingui();
+  const endReasonText = roundEndReasonText[round.endReason] || t`Unknown`;
 
   return (
     <Panel header={<Trans context="Panel title">Round end reason</Trans>} fitHeight={true}>

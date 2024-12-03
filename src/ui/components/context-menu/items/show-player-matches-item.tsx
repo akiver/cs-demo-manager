@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { buildPlayerMatchesPath } from 'csdm/ui/routes-paths';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 

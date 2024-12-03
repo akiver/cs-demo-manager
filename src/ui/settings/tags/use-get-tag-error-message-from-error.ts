@@ -1,22 +1,21 @@
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { ErrorCode } from 'csdm/common/error-code';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function useGetTagErrorMessageFromError() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return (error: unknown) => {
     switch (error) {
       case ErrorCode.TagNameAlreadyToken:
-        return _(msg`The name is already taken`);
+        return t`The name is already taken`;
       case ErrorCode.TagNameTooLong:
-        return _(msg`The name is too long`);
+        return t`The name is too long`;
       case ErrorCode.TagNameTooShort:
-        return _(msg`The name is too short`);
+        return t`The name is too short`;
       case ErrorCode.InvalidTagColor:
-        return _(msg`Invalid color`);
+        return t`Invalid color`;
       default:
-        return _(msg`An error occurred`);
+        return t`An error occurred`;
     }
   };
 }

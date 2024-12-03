@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { useSecondsToFormattedMinutes } from 'csdm/ui/hooks/use-seconds-to-formatted-minutes';
 import { CommentCell } from 'csdm/ui/components/table/cells/comment-cell';
 import { SourceCell } from 'csdm/ui/components/table/cells/source-cell';
@@ -10,7 +10,6 @@ import type { Column } from 'csdm/ui/components/table/table-types';
 import type { Demo } from 'csdm/common/types/demo';
 import { dateSortFunction } from 'csdm/ui/components/table/date-sort-function';
 import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { useGetDemoAnalysisStatus } from 'csdm/ui/analyses/use-get-demo-analysis-status';
 import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 
@@ -18,7 +17,7 @@ export function useDemosColumns() {
   const formatDate = useFormatDate();
   const secondsToFormattedMinutes = useSecondsToFormattedMinutes();
   const getDemoAnalysisStatus = useGetDemoAnalysisStatus();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const columns = useMemo(() => {
     return [
@@ -26,19 +25,15 @@ export function useDemosColumns() {
         id: 'comment',
         accessor: 'comment',
         headerText: '',
-        headerTooltip: _(
-          msg({
-            message: 'Comment',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerTooltip: t({
+          message: 'Comment',
+          context: 'Table header tooltip',
+        }),
         width: 20,
-        visibilityText: _(
-          msg({
-            context: 'Dropdown column visibility',
-            message: 'Comment',
-          }),
-        ),
+        visibilityText: t({
+          context: 'Dropdown column visibility',
+          message: 'Comment',
+        }),
         Cell: CommentCell,
         allowResize: false,
         allowSort: false,
@@ -48,18 +43,14 @@ export function useDemosColumns() {
         id: 'tags',
         accessor: 'tagIds',
         headerText: '',
-        headerTooltip: _(
-          msg({
-            message: 'Tags',
-            context: 'Table header tooltip',
-          }),
-        ),
-        visibilityText: _(
-          msg({
-            context: 'Dropdown column visibility',
-            message: 'Tags',
-          }),
-        ),
+        headerTooltip: t({
+          message: 'Tags',
+          context: 'Table header tooltip',
+        }),
+        visibilityText: t({
+          context: 'Dropdown column visibility',
+          message: 'Tags',
+        }),
         Cell: TagsCell,
         width: 20,
         allowResize: false,
@@ -70,18 +61,14 @@ export function useDemosColumns() {
         id: 'status',
         accessor: 'filePath',
         headerText: '',
-        headerTooltip: _(
-          msg({
-            message: 'Status',
-            context: 'Table header tooltip',
-          }),
-        ),
-        visibilityText: _(
-          msg({
-            context: 'Dropdown column visibility',
-            message: 'Status',
-          }),
-        ),
+        headerTooltip: t({
+          message: 'Status',
+          context: 'Table header tooltip',
+        }),
+        visibilityText: t({
+          context: 'Dropdown column visibility',
+          message: 'Status',
+        }),
         Cell: DemoStatusCell,
         width: 30,
         allowResize: false,
@@ -113,36 +100,28 @@ export function useDemosColumns() {
       {
         id: 'game',
         accessor: 'game',
-        headerText: _(
-          msg({
-            message: 'Game',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Game',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Game',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Game',
+          context: 'Table header tooltip',
+        }),
         width: 50,
         maxWidth: 100,
       },
       {
         id: 'source',
         accessor: 'source',
-        headerText: _(
-          msg({
-            message: 'Source',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Source',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Source',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Source',
+          context: 'Table header tooltip',
+        }),
         Cell: SourceCell,
         width: 75,
         allowResize: false,
@@ -151,54 +130,42 @@ export function useDemosColumns() {
       {
         id: 'type',
         accessor: 'type',
-        headerText: _(
-          msg({
-            message: 'Type',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Type',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Type',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Type',
+          context: 'Table header tooltip',
+        }),
         width: 60,
         maxWidth: 120,
       },
       {
         id: 'map',
         accessor: 'mapName',
-        headerText: _(
-          msg({
-            message: 'Map',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Map',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Map',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Map',
+          context: 'Table header tooltip',
+        }),
         width: 120,
         maxWidth: 200,
       },
       {
         id: 'name',
         accessor: 'name',
-        headerText: _(
-          msg({
-            message: 'Name',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Name',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Name',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Name',
+          context: 'Table header tooltip',
+        }),
         width: 400,
         maxWidth: 700,
         showTooltip: true,
@@ -206,18 +173,14 @@ export function useDemosColumns() {
       {
         id: 'path',
         accessor: 'filePath',
-        headerText: _(
-          msg({
-            message: 'Path',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Path',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Path',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Path',
+          context: 'Table header tooltip',
+        }),
         width: 200,
         maxWidth: 1200,
         showTooltip: true,
@@ -225,18 +188,14 @@ export function useDemosColumns() {
       {
         id: 'date',
         accessor: 'date',
-        headerText: _(
-          msg({
-            message: 'Date',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Date',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Date',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Date',
+          context: 'Table header tooltip',
+        }),
         width: 150,
         maxWidth: 200,
         sortFunction: dateSortFunction<Demo>,
@@ -247,18 +206,14 @@ export function useDemosColumns() {
       {
         id: 'duration',
         accessor: 'duration',
-        headerText: _(
-          msg({
-            message: 'Duration',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Duration',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Duration',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Duration',
+          context: 'Table header tooltip',
+        }),
         width: 90,
         maxWidth: 140,
         formatter: (seconds: number) => {
@@ -268,18 +223,14 @@ export function useDemosColumns() {
       {
         id: 'tickCount',
         accessor: 'tickCount',
-        headerText: _(
-          msg({
-            message: 'Ticks',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Ticks',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Ticks',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Ticks',
+          context: 'Table header tooltip',
+        }),
         width: 80,
         maxWidth: 120,
         textAlign: 'right',
@@ -288,18 +239,14 @@ export function useDemosColumns() {
       {
         id: 'tickrate',
         accessor: 'tickrate',
-        headerText: _(
-          msg({
-            message: 'Tickrate',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Tickrate',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Tickrate',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Tickrate',
+          context: 'Table header tooltip',
+        }),
         width: 50,
         maxWidth: 100,
         textAlign: 'right',
@@ -308,18 +255,14 @@ export function useDemosColumns() {
       {
         id: 'frameRate',
         accessor: 'frameRate',
-        headerText: _(
-          msg({
-            message: 'Frame rate',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Frame rate',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Frame rate',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Frame rate',
+          context: 'Table header tooltip',
+        }),
         width: 50,
         maxWidth: 100,
         textAlign: 'right',
@@ -328,40 +271,32 @@ export function useDemosColumns() {
       {
         id: 'server-name',
         accessor: 'serverName',
-        headerText: _(
-          msg({
-            message: 'Server name',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Server name',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Server name',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Server name',
+          context: 'Table header tooltip',
+        }),
         width: 250,
         maxWidth: 500,
       },
       {
         id: 'client-name',
         accessor: 'clientName',
-        headerText: _(
-          msg({
-            message: 'Client name',
-            context: 'Table header',
-          }),
-        ),
-        headerTooltip: _(
-          msg({
-            message: 'Client name',
-            context: 'Table header tooltip',
-          }),
-        ),
+        headerText: t({
+          message: 'Client name',
+          context: 'Table header',
+        }),
+        headerTooltip: t({
+          message: 'Client name',
+          context: 'Table header tooltip',
+        }),
         width: 200,
       },
     ] as const satisfies readonly Column<Demo>[];
-  }, [_, formatDate, secondsToFormattedMinutes, getDemoAnalysisStatus]);
+  }, [t, formatDate, secondsToFormattedMinutes, getDemoAnalysisStatus]);
 
   return columns;
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Plural, Trans } from '@lingui/macro';
+import { Plural, Trans } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { PortInput } from 'csdm/ui/components/inputs/port-input';
 import { DatabaseNameInput } from 'csdm/ui/components/inputs/database-name-input';
@@ -181,7 +181,7 @@ export function ConnectDatabase() {
     const hint = getHintFromError(error);
     return (
       <div className="flex flex-col mt-8 max-w-[600px] m-auto">
-        <ErrorMessage message="The connection to the database failed with the following error:" />
+        <ErrorMessage message={<Trans>The connection to the database failed with the following error:</Trans>} />
         <p className="text-body-strong select-text my-8">{error.message}</p>
         {hint}
       </div>

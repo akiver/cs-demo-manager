@@ -28,7 +28,7 @@ import { PeriodFilter } from 'csdm/ui/components/dropdown-filter/period-filter';
 import { formatDate, type DateRange } from 'csdm/common/date/date-range';
 import { SourcesFilter } from 'csdm/ui/components/dropdown-filter/sources-filter';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { TagsFilter } from '../components/dropdown-filter/tags-filter';
 import { isCtrlOrCmdEvent } from '../keyboard/keyboard';
 

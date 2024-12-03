@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useSearchState } from './use-search-state';
 import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { ChartOption } from 'csdm/ui/hooks/use-chart';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { getDateFirstDay } from 'csdm/common/date/get-date-first-day';
@@ -9,7 +9,6 @@ import { NoBanMessage } from './no-ban-message';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 import type { BannedSteamAccount } from 'csdm/common/types/banned-steam-account';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type BanPerMonth = {
   [timestamp: string]: number;
@@ -37,7 +36,7 @@ type Props = {
 export function BanPerDateChart({ bannedAccounts }: Props) {
   const colors = useChartColors();
   const { getTimeAxisLabel } = useGetTimeAxisLabel();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const banPerMonth: BanPerMonth = {};
   for (const account of bannedAccounts) {
@@ -59,12 +58,10 @@ export function BanPerDateChart({ bannedAccounts }: Props) {
   const option: ChartOption = {
     color: ['#6767ec'],
     xAxis: {
-      name: _(
-        msg({
-          context: 'Chart axis label',
-          message: 'Date',
-        }),
-      ),
+      name: t({
+        context: 'Chart axis label',
+        message: 'Date',
+      }),
       type: 'category',
       data: monthTimestamps,
       axisLabel: {
@@ -93,12 +90,10 @@ export function BanPerDateChart({ bannedAccounts }: Props) {
       },
     },
     yAxis: {
-      name: _(
-        msg({
-          context: 'Chart axis label',
-          message: 'Bans',
-        }),
-      ),
+      name: t({
+        context: 'Chart axis label',
+        message: 'Bans',
+      }),
       type: 'value',
       min: Math.max(0, minBanCount - 1),
       max: maxBanCount + 1,
@@ -131,12 +126,10 @@ export function BanPerDateChart({ bannedAccounts }: Props) {
       {
         data: bansCount,
         type: 'line',
-        name: _(
-          msg({
-            context: 'Chart tooltip',
-            message: 'Bans',
-          }),
-        ),
+        name: t({
+          context: 'Chart tooltip',
+          message: 'Bans',
+        }),
         symbolSize: [6, 6],
         markLine: {
           silent: true,

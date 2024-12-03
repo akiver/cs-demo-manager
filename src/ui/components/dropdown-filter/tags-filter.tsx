@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { useTags } from 'csdm/ui/tags/use-tags';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { FilterCategory } from 'csdm/ui/components/dropdown-filter/filter-category';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
 import { FilterSelection } from 'csdm/ui/components/dropdown-filter/filter-selection';

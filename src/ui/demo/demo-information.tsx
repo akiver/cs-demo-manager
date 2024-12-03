@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { DemoCommentInput } from './demo-comment-input';
 import { Source } from './demo-source';
 import type { Demo } from 'csdm/common/types/demo';

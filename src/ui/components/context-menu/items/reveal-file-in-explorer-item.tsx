@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from '@lingui/macro';
+import { Select } from '@lingui/react/macro';
 import { ContextMenuItem } from '../context-menu-item';
 
 type Props = {

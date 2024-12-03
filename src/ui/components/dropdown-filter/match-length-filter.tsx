@@ -1,9 +1,8 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { FilterCategory } from 'csdm/ui/components/dropdown-filter/filter-category';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
 import { FilterSelection } from './filter-selection';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Option = {
   maxRound: number;
@@ -17,34 +16,28 @@ type Props = {
 };
 
 export function MatchLengthFilter({ selectedMaxRounds, onChange, hasActiveFilter }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
   const options: Option[] = [
     {
       maxRound: 16,
-      name: _(
-        msg({
-          context: 'Match length',
-          message: 'MR 8',
-        }),
-      ),
+      name: t({
+        context: 'Match length',
+        message: 'MR 8',
+      }),
     },
     {
       maxRound: 24,
-      name: _(
-        msg({
-          context: 'Match length',
-          message: 'MR 12',
-        }),
-      ),
+      name: t({
+        context: 'Match length',
+        message: 'MR 12',
+      }),
     },
     {
       maxRound: 30,
-      name: _(
-        msg({
-          context: 'Match length',
-          message: 'MR 15',
-        }),
-      ),
+      name: t({
+        context: 'Match length',
+        message: 'MR 15',
+      }),
     },
   ];
 

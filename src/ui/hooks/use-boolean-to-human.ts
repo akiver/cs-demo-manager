@@ -1,9 +1,9 @@
-import { useI18n } from './use-i18n';
+import { useLingui } from '@lingui/react/macro';
 
 export function useBooleanHuman() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return (bool: boolean) => {
-    return bool ? _({ id: 'yes', message: 'Yes' }) : _({ id: 'no', message: 'No' });
+    return bool ? t({ id: 'yes', message: 'Yes' }) : t({ id: 'no', message: 'No' });
   };
 }

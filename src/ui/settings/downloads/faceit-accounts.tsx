@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import type { FaceitAccount } from 'csdm/common/types/faceit-account';
@@ -16,13 +16,12 @@ import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 function AddAccountDialog() {
   const [nickname, setNickname] = useState('');
   const { addFaceitAccount, errorMessage, isBusy } = useAddFaceitAcount();
   const { hideDialog } = useDialog();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const onConfirm = async () => {
     const accountAdded = await addFaceitAccount(nickname);
@@ -39,18 +38,14 @@ function AddAccountDialog() {
       isBusy={isBusy}
     >
       <TextInput
-        label={_(
-          msg({
-            context: 'Input label',
-            message: 'FACEIT nickname',
-          }),
-        )}
-        placeholder={_(
-          msg({
-            context: 'Input placeholder',
-            message: 'Nickname',
-          }),
-        )}
+        label={t({
+          context: 'Input label',
+          message: 'FACEIT nickname',
+        })}
+        placeholder={t({
+          context: 'Input placeholder',
+          message: 'Nickname',
+        })}
         value={nickname}
         onChange={(event) => {
           setNickname(event.target.value);

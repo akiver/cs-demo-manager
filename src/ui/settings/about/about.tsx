@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -31,6 +31,7 @@ export function About() {
     })();
   }, [client]);
 
+  /* eslint-disable lingui/no-unlocalized-strings */
   const data: string[] = [
     `Version: ${APP_VERSION}`,
     `OS: ${info.platform} ${info.arch} ${info.osVersion}`,
@@ -39,6 +40,7 @@ export function About() {
     'Last database migrations:',
     ...migrations.map((migration) => `v${migration.version} - ${migration.date}`),
   ];
+  /* eslint-enable lingui/no-unlocalized-strings */
 
   return (
     <SettingsView>

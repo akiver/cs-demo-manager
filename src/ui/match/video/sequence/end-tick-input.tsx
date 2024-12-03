@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
@@ -7,6 +7,7 @@ import { useSequenceForm } from './use-sequence-form';
 
 export function EndTickInput() {
   const match = useCurrentMatch();
+  const { t } = useLingui();
   const { sequence, updateSequence } = useSequenceForm();
 
   const onBlur = (event: React.FocusEvent) => {
@@ -35,7 +36,10 @@ export function EndTickInput() {
       <InputNumber
         id="end-tick"
         min={1}
-        placeholder="End tick"
+        placeholder={t({
+          context: 'Input placeholder',
+          message: 'End tick',
+        })}
         value={sequence.endTick}
         onChange={onChange}
         onBlur={onBlur}

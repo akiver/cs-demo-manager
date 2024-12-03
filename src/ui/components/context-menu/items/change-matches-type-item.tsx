@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { DemoType } from 'csdm/common/types/counter-strike';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';

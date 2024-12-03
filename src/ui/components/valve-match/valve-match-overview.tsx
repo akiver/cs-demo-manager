@@ -5,7 +5,7 @@ import type { ValveMatch, ValvePlayer } from 'csdm/common/types/valve-match';
 import { ValveMatchScoreboard } from 'csdm/ui/components/valve-match/valve-match-scoreboard';
 import { PerformanceTimeline } from './player-performance/performance-timeline';
 import { useIsDemoAnalysisInProgress } from 'csdm/ui/analyses/use-is-demo-analysis-in-progress';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Spinner } from '../spinner';
 
 type TeamScoreProps = {

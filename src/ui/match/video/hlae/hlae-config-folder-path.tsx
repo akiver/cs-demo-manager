@@ -1,13 +1,12 @@
 import React from 'react';
 import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { useHlaeSettings } from 'csdm/ui/settings/video/hlae/use-hlae-settings';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { FileOrDirectoryInput } from 'csdm/ui/components/inputs/file-or-directory-input';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function HlaeConfigFolderPath() {
-  const _ = useI18n();
+  const { t } = useLingui();
   const { hlaeSettings, updateHlaeSettings } = useHlaeSettings();
   const { configFolderPath, configFolderEnabled } = hlaeSettings;
 
@@ -57,8 +56,8 @@ export function HlaeConfigFolderPath() {
       <FileOrDirectoryInput
         type="folder"
         label={<Trans context="Input label">Config folder</Trans>}
-        placeholder={_('Config folder')}
-        dialogTitle={_('Select config folder')}
+        placeholder={t`Config folder`}
+        dialogTitle={t`Select config folder`}
         path={configFolderPath}
         isInputDisabled={!configFolderEnabled}
         isSelectButtonDisabled={!configFolderEnabled}

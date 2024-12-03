@@ -12,7 +12,7 @@ import { RoundsNavigationBar } from '../rounds-navigation-bar';
 import { PlayersEconomyChart } from './players-economy-chart';
 import { RoundTags } from './round-tags';
 import { Message } from 'csdm/ui/components/message';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 
 export function Round() {
   const match = useCurrentMatch();

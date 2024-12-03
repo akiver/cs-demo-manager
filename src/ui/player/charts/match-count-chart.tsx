@@ -1,5 +1,5 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { dateToUnixTimestamp } from 'csdm/common/date/date-to-unix-timestamp';
 import { getDateFirstDay } from 'csdm/common/date/get-date-first-day';
 import { getDateFirstMonth } from 'csdm/common/date/get-date-first-month';
@@ -10,7 +10,6 @@ import { usePlayerChartOptions } from './use-player-chart-options';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { usePlayer } from '../use-player';
 import { assertNever } from 'csdm/common/assert-never';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   axis: Axis;
@@ -61,7 +60,7 @@ function buildChartData({ chartsData, axis }: { chartsData: PlayerChartsData[]; 
 
 export function MatchCountChart({ axis }: Props) {
   const { chartsData } = usePlayer();
-  const _ = useI18n();
+  const { t } = useLingui();
   const data = buildChartData({ chartsData, axis });
 
   const firstValue = data.length > 0 ? data[0][1] : 0;
@@ -81,18 +80,14 @@ export function MatchCountChart({ axis }: Props) {
     data,
     minValue: Math.max(0, minValue - 0.5),
     maxValue: maxValue + 0.5,
-    title: _(
-      msg({
-        context: 'Chart title',
-        message: 'Number of matches played over time',
-      }),
-    ),
-    name: _(
-      msg({
-        context: 'Chart axis label match count',
-        message: 'Match',
-      }),
-    ),
+    title: t({
+      context: 'Chart title',
+      message: 'Number of matches played over time',
+    }),
+    name: t({
+      context: 'Chart axis label match count',
+      message: 'Match',
+    }),
     yLineParallelToXAxisValue: (maxValue + minValue) / 2,
   });
 

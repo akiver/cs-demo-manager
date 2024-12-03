@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { TeamNumber } from 'csdm/common/types/counter-strike';
 import { useGetMapThumbnailSrc } from 'csdm/ui/maps/use-get-map-thumbnail-src';
 import { CounterTerroristIcon } from 'csdm/ui/icons/counter-terrorist-icon';

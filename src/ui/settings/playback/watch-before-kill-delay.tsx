@@ -1,8 +1,7 @@
 import React, { type ReactNode } from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   title: ReactNode;
@@ -12,7 +11,7 @@ type Props = {
 };
 
 export function WatchBeforeKillDelay({ title, description, defaultValue, onChange }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
   const minSeconds = 0;
   const maxSeconds = 30;
 
@@ -28,12 +27,10 @@ export function WatchBeforeKillDelay({ title, description, defaultValue, onChang
       interactiveComponent={
         <InputNumber
           onBlur={onBlur}
-          placeholder={_(
-            msg({
-              context: 'Input placeholder',
-              message: 'Delay (seconds)',
-            }),
-          )}
+          placeholder={t({
+            context: 'Input placeholder',
+            message: 'Delay (seconds)',
+          })}
           defaultValue={String(defaultValue)}
           min={minSeconds}
           max={maxSeconds}

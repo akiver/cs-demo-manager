@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ErrorCode } from 'csdm/common/error-code';
 import type { IgnoredSteamAccount } from 'csdm/common/types/ignored-steam-account';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';

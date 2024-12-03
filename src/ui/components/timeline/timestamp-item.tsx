@@ -1,6 +1,6 @@
 import React from 'react';
 import { scaleStyle } from './use-timeline';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 
 type Props = {
   minutes: number;

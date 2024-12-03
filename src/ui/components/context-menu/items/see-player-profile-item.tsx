@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useNavigateToPlayer } from 'csdm/ui/hooks/use-navigate-to-player';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 

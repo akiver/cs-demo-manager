@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plural, Trans } from '@lingui/macro';
+import { Plural, Trans } from '@lingui/react/macro';
 import { Message } from 'csdm/ui/components/message';
 import { Status } from 'csdm/common/types/status';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -81,11 +81,11 @@ export function BanStats() {
   }, [client, ignoreBanBeforeFirstSeen]);
 
   if (status === Status.Loading) {
-    return <Message message="Loading ban stats..." />;
+    return <Message message={<Trans>Loading ban stats…</Trans>} />;
   }
 
   if (status === Status.Error) {
-    return <Message message="An error occurred while loading ban stats." />;
+    return <Message message={<Trans>An error occurred</Trans>} />;
   }
 
   const {

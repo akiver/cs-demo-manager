@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { GrenadeName, EconomyType } from 'csdm/common/types/counter-strike';
 import { useCurrentRound } from './use-current-round';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';

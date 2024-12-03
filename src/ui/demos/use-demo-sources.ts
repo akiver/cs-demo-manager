@@ -1,127 +1,94 @@
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { DemoSource } from 'csdm/common/types/counter-strike';
-import { useI18n } from '../hooks/use-i18n';
 import { assertSoftNever } from 'csdm/common/assert-soft-never';
 
 export function useGetDemoSourceName() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return (demoSource: DemoSource) => {
     switch (demoSource) {
       case DemoSource.Cevo:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'CEVO',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'CEVO',
+        });
       case DemoSource.Challengermode:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'Challengermode',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'Challengermode',
+        });
       case DemoSource.Ebot:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'eBot',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'eBot',
+        });
       case DemoSource.Esl:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'ESL',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'ESL',
+        });
       case DemoSource.Esea:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'ESEA',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'ESEA',
+        });
       case DemoSource.Esportal:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'Esportal',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'Esportal',
+        });
       case DemoSource.FaceIt:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'FACEIT',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'FACEIT',
+        });
       case DemoSource.Fastcup:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'FASTCUP',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'FASTCUP',
+        });
       case DemoSource.FiveEPlay:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: '5EPlay',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: '5EPlay',
+        });
       case DemoSource.Gamersclub:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'Gamers Club',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'Gamers Club',
+        });
       case DemoSource.MatchZy:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'MatchZy',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'MatchZy',
+        });
       case DemoSource.PerfectWorld:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'Perfect World',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'Perfect World',
+        });
       case DemoSource.Popflash:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'PopFlash',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'PopFlash',
+        });
       case DemoSource.Valve:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'Valve',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'Valve',
+        });
       case DemoSource.Unknown:
-        return _(
-          msg({
-            context: 'Demo source name',
-            message: 'Unknown',
-          }),
-        );
+        return t({
+          context: 'Demo source name',
+          message: 'Unknown',
+        });
       default:
         return assertSoftNever(
           demoSource,
-          _(
-            msg({
-              context: 'Demo source name',
-              message: 'Unknown',
-            }),
-          ),
+          t({
+            context: 'Demo source name',
+            message: 'Unknown',
+          }),
         );
     }
   };

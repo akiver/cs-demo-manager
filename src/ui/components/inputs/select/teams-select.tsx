@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { SelectOption } from '../select';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
 import { uniqueArray } from 'csdm/common/array/unique-array';

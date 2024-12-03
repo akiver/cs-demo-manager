@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
@@ -10,6 +10,7 @@ import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 
 function WatchAtTickDialog() {
+  const { t } = useLingui();
   const [tick, setTick] = useState<string>('');
   const [isCsRunningDialogVisible, setIsCsRunningDialogVisible] = useState(false);
   const { watchDemo, isKillCsRequired } = useCounterStrike();
@@ -65,7 +66,7 @@ function WatchAtTickDialog() {
               const value = event.target.value;
               setTick(value);
             }}
-            placeholder="Tick"
+            placeholder={t`Tick`}
           />
         </div>
       </DialogContent>

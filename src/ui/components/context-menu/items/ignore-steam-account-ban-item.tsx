@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { useIgnoredSteamAccounts } from 'csdm/ui/ban/use-ignored-steam-accounts';
 import { useIgnoreSteamAccount, useRemoveIgnoredSteamAccount } from 'csdm/ui/settings/bans/use-ignored-steam-account';

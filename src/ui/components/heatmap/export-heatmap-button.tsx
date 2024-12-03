@@ -1,11 +1,10 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { SaveDialogReturnValue, SaveDialogOptions } from 'electron';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { WriteBase64FilePayload } from 'csdm/server/handlers/renderer-process/filesystem/write-base64-file-handler';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { useShowToast } from '../toasts/use-show-toast';
 
 function buildImageBase64() {
@@ -30,13 +29,13 @@ function buildImageBase64() {
 
 export function ExportHeatmapButton() {
   const client = useWebSocketClient();
-  const _ = useI18n();
+  const { t } = useLingui();
   const showToast = useShowToast();
 
   const onClick = async () => {
     const options: SaveDialogOptions = {
       defaultPath: `heatmap-${Date.now()}.png`,
-      title: _({
+      title: t({
         id: 'os.dialogTitle.exportAsPNG',
         message: 'Export as PNG',
       }),

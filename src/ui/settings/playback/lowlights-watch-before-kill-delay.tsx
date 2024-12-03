@@ -2,7 +2,7 @@ import React from 'react';
 import { useWatchSettings } from './use-watch-settings';
 import { useUpdateSettings } from '../use-update-settings';
 import { WatchBeforeKillDelay } from './watch-before-kill-delay';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 
 export function LowlightsWatchBeforeKillDelay() {
   const { lowlights } = useWatchSettings();

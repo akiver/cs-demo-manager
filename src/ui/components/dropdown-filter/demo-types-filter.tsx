@@ -1,9 +1,8 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { FilterCategory } from 'csdm/ui/components/dropdown-filter/filter-category';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
 import { FilterSelection } from './filter-selection';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { DemoType } from 'csdm/common/types/counter-strike';
 
 type Option = {
@@ -18,25 +17,21 @@ type Props = {
 };
 
 export function DemoTypesFilter({ selectedTypes, onChange, hasActiveFilter }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
   const options: Option[] = [
     {
       type: DemoType.GOTV,
-      name: _(
-        msg({
-          context: 'Demo type',
-          message: 'GOTV',
-        }),
-      ),
+      name: t({
+        context: 'Demo type',
+        message: 'GOTV',
+      }),
     },
     {
       type: DemoType.POV,
-      name: _(
-        msg({
-          context: 'Demo type',
-          message: 'POV',
-        }),
-      ),
+      name: t({
+        context: 'Demo type',
+        message: 'POV',
+      }),
     },
   ];
 

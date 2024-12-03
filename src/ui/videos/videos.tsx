@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useVideos } from 'csdm/ui/videos/use-videos';
 import { Message } from 'csdm/ui/components/message';
 import { VideoEntry } from 'csdm/ui/videos/video-entry';

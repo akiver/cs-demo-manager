@@ -1,7 +1,6 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   hostname: string;
@@ -10,18 +9,16 @@ type Props = {
 };
 
 export function HostnameInput({ hostname, onChange, isDisabled = true }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return (
     <TextInput
       label={<Trans context="Button">Hostname</Trans>}
       value={hostname}
-      placeholder={_(
-        msg({
-          context: 'Input placeholder',
-          message: 'Hostname',
-        }),
-      )}
+      placeholder={t({
+        context: 'Input placeholder',
+        message: 'Hostname',
+      })}
       onChange={onChange}
       isDisabled={isDisabled}
     />

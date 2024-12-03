@@ -1,12 +1,11 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { useWebSocketClient } from '../../hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useShowToast } from '../../components/toasts/use-show-toast';
 import { SearchInput } from '../../components/inputs/search-input';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import type { PlayersFilter } from 'csdm/common/types/search/players-filter';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   isDisabled: boolean;
@@ -18,18 +17,16 @@ type Props = {
 export function SearchPlayersInput({ isDisabled, selectedPlayers, onPlayerSelected, onPlayerRemoved }: Props) {
   const client = useWebSocketClient();
   const showToast = useShowToast();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return (
     <SearchInput<PlayerResult>
       isDisabled={isDisabled}
-      placeholder={_(
-        msg({
-          context: 'Input placeholder',
-          message: 'Nickname or SteamID',
-        }),
-      )}
-      noResultMessage={_(msg`No players found`)}
+      placeholder={t({
+        context: 'Input placeholder',
+        message: 'Nickname or SteamID',
+      })}
+      noResultMessage={t`No players found`}
       getValueId={(player) => player.steamId}
       onValueRemoved={onPlayerRemoved}
       onValueSelected={onPlayerSelected}

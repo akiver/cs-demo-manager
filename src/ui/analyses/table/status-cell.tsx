@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Analysis } from 'csdm/common/types/analysis';
 import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 

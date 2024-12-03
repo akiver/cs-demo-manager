@@ -1,43 +1,34 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
 import { useUpdateSettings } from '../use-update-settings';
 import { Page } from 'csdm/node/settings/page';
 import { useUiSettings } from './use-ui-settings';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function InitialPageSelect() {
-  const _ = useI18n();
+  const { t } = useLingui();
   const { initialPage } = useUiSettings();
   const updateSettings = useUpdateSettings();
 
   const labelPerPage: Record<Page, string> = {
-    [Page.Matches]: _(
-      msg({
-        context: 'Select option initial page',
-        message: 'Matches',
-      }),
-    ),
-    [Page.Demos]: _(
-      msg({
-        context: 'Select option initial page',
-        message: 'Demos',
-      }),
-    ),
-    [Page.Players]: _(
-      msg({
-        context: 'Select option initial page',
-        message: 'Players',
-      }),
-    ),
-    [Page.Download]: _(
-      msg({
-        context: 'Select option initial page',
-        message: 'Download',
-      }),
-    ),
+    [Page.Matches]: t({
+      context: 'Select option initial page',
+      message: 'Matches',
+    }),
+    [Page.Demos]: t({
+      context: 'Select option initial page',
+      message: 'Demos',
+    }),
+    [Page.Players]: t({
+      context: 'Select option initial page',
+      message: 'Players',
+    }),
+    [Page.Download]: t({
+      context: 'Select option initial page',
+      message: 'Download',
+    }),
   };
 
   const options: SelectOption<Page>[] = Object.values(Page).map((page) => {

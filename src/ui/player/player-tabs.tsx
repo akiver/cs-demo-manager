@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { TabLinks } from 'csdm/ui/components/tabs/tab-links';
 import { TabLink } from 'csdm/ui/components/tabs/tab-link';
 import { RoutePath } from 'csdm/ui/routes-paths';

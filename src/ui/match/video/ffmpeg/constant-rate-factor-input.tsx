@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';

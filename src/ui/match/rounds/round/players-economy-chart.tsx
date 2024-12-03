@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { ChartOption } from 'csdm/ui/hooks/use-chart';
 import type { BarSeriesOption } from 'csdm/ui/hooks/use-chart';
 import { useChart } from 'csdm/ui/hooks/use-chart';
@@ -67,6 +67,7 @@ function useEconomySeriesData() {
 }
 
 function useEconomyChartOption() {
+  const { t } = useLingui();
   const colors = useChartColors();
   const {
     playerNamesTeamA,
@@ -142,17 +143,17 @@ function useEconomyChartOption() {
 
   const cashSeries: BarSeriesOption = {
     ...barSeries,
-    name: 'Cash',
+    name: t`Cash`,
   };
 
   const cashSpentSeries: BarSeriesOption = {
     ...barSeries,
-    name: 'Cash spent',
+    name: t`Cash spent`,
   };
 
   const equipmentValueSeries: BarSeriesOption = {
     ...barSeries,
-    name: 'Equipment value',
+    name: t`Equipment value`,
   };
 
   const labelTeamA = {

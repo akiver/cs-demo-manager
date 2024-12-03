@@ -1,9 +1,8 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { TeamNumber } from 'csdm/common/types/counter-strike';
 import type { SelectOption } from '../select';
 import { FilterValue } from '../../dropdown-filter/filter-value';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   selectedSides: TeamNumber[];
@@ -11,25 +10,21 @@ type Props = {
 };
 
 export function SideSelect({ onChange, selectedSides }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
   const sides: SelectOption<TeamNumber>[] = [
     {
       value: TeamNumber.CT,
-      label: _(
-        msg({
-          context: 'Select team option',
-          message: 'CT',
-        }),
-      ),
+      label: t({
+        context: 'Select team option',
+        message: 'CT',
+      }),
     },
     {
       value: TeamNumber.T,
-      label: _(
-        msg({
-          context: 'Select team option',
-          message: 'T',
-        }),
-      ),
+      label: t({
+        context: 'Select team option',
+        message: 'T',
+      }),
     },
   ];
 

@@ -1,5 +1,5 @@
 import React, { useState, type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';

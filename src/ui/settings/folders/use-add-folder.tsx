@@ -1,6 +1,6 @@
 import React from 'react';
 import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { folderAdded } from './folder-actions';
 import { useUpdateSettings } from '../use-update-settings';

@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
 
 type Props = {

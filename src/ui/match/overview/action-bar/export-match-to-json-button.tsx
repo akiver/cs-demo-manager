@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { Button } from 'csdm/ui/components/buttons/button';

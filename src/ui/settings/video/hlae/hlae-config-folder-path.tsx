@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron';

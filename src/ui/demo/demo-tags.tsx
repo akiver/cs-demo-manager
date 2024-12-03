@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Tags } from 'csdm/ui/components/tags/tags';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { ChecksumsTagsDialog } from 'csdm/ui/dialogs/checksums-tags-dialog';

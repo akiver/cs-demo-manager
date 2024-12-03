@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Demo } from 'csdm/common/types/demo';
 import type { CellProps } from 'csdm/ui/components/table/table-types';
 import { Spinner } from 'csdm/ui/components/spinner';

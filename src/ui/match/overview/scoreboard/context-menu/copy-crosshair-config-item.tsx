@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { decodeCrosshairShareCode, crosshairToConVars, InvalidCrosshairShareCode } from 'csgo-sharecode';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';

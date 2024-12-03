@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';

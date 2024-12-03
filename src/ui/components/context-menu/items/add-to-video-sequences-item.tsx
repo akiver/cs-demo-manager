@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { isVideoGenerationAvailable } from 'csdm/ui/hooks/use-counter-strike';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';

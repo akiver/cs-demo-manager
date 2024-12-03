@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { InstallButton } from 'csdm/ui/components/buttons/install-button';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useIsFfmpegInstalled } from './use-is-ffmpeg-installed';

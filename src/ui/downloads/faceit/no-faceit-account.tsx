@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { useAddFaceitAcount } from '../../settings/downloads/use-add-faceit-account';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 
 export function NoFaceitAccount() {
-  const _ = useI18n();
+  const { t } = useLingui();
   const [nickname, setNickname] = useState('');
   const { addFaceitAccount, errorMessage, isBusy } = useAddFaceitAcount();
 
@@ -25,7 +24,7 @@ export function NoFaceitAccount() {
       </p>
       <div className="w-[228px] mt-8">
         <TextInput
-          placeholder={_(msg({ message: 'FACEIT nickname', context: 'Input placeholder' }))}
+          placeholder={t({ message: 'FACEIT nickname', context: 'Input placeholder' })}
           onChange={(event) => {
             setNickname(event.target.value);
           }}

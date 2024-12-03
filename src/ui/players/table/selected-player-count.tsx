@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plural } from '@lingui/macro';
+import { Plural } from '@lingui/react/macro';
 import { usePlayersTable } from './use-players-table';
 
 export function SelectedPlayerCount() {

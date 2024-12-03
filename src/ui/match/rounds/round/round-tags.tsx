@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Panel } from 'csdm/ui/components/panel';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useCurrentRound } from './use-current-round';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ActionBar as CommonActionBar } from 'csdm/ui/components/action-bar';
 import { WatchDemoButton } from 'csdm/ui/downloads/watch-demo-button';
 import type { FaceitDownload } from 'csdm/common/download/download-types';

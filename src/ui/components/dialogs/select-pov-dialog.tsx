@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';

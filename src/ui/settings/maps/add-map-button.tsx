@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Game } from 'csdm/common/types/counter-strike';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { AddMapDialog } from 'csdm/ui/settings/maps/add-map-dialog';

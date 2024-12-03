@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { LeftBarLink } from './left-bar-link';
 import { RoutePath } from 'csdm/ui/routes-paths';
 import { PlayerIcon } from 'csdm/ui/icons/player-icon';

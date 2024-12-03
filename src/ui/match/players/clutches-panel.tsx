@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';
 import type { Clutch } from 'csdm/common/types/clutch';
 import { PlayDemoAtTickButton } from '../rounds/play-demo-at-tick-button';

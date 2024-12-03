@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
+import { msg } from '@lingui/core/macro';
 import type { MessageDescriptor } from '@lingui/core';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
@@ -21,7 +22,6 @@ import { RevealFileInExplorerButton } from 'csdm/ui/components/buttons/reveal-fi
 import { RevealFolderInExplorerButton } from 'csdm/ui/components/buttons/reveal-folder-in-explorer-button';
 import { SheetName } from 'csdm/node/xlsx/sheet-name';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 
 type Match = Pick<MatchTable, 'checksum' | 'name'>;
@@ -83,7 +83,7 @@ type ExportingContentProps = {
 };
 
 function ExportingDialog({ totalMatchCount }: ExportingContentProps) {
-  const _ = useI18n();
+  const { t } = useLingui();
   const client = useWebSocketClient();
   const { hideDialog } = useDialog();
   const [status, setStatus] = useState<Status>(Status.Loading);
@@ -158,7 +158,7 @@ function ExportingDialog({ totalMatchCount }: ExportingContentProps) {
       <Header />
       <DialogContent>
         <div className="flex flex-col gap-y-8">
-          <p>{_(message)}</p>
+          <p>{t(message)}</p>
           {status === Status.Error && <ErrorMessage message={<Trans>An error occurred.</Trans>} />}
         </div>
       </DialogContent>
@@ -176,7 +176,7 @@ type ExportDialogContentProps = {
 };
 
 function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProps) {
-  const _ = useI18n();
+  const { t } = useLingui();
   const client = useWebSocketClient();
   const { hideDialog } = useDialog();
   const [outputType, setOutputType] = useState<OutputType>(OutputType.SingleFile);
@@ -222,12 +222,10 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
     if (outputType === OutputType.SingleFile && !isSingleMatchSelected) {
       const name = `${matches.length}-matches.xlsx`;
       const options: SaveDialogOptions = {
-        buttonLabel: _(
-          msg({
-            context: 'Button label',
-            message: 'Export',
-          }),
-        ),
+        buttonLabel: t({
+          context: 'Button label',
+          message: 'Export',
+        }),
         defaultPath: name,
         filters: [{ name, extensions: ['xlsx'] }],
       };
@@ -244,12 +242,10 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
       };
     } else {
       const options: OpenDialogOptions = {
-        buttonLabel: _(
-          msg({
-            context: 'Button label',
-            message: 'Export',
-          }),
-        ),
+        buttonLabel: t({
+          context: 'Button label',
+          message: 'Export',
+        }),
         properties: ['openDirectory'],
       };
       const { canceled, filePaths } = await window.csdm.showOpenDialog(options);
@@ -317,38 +313,38 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
               </p>
               <div className="flex gap-8 flex-wrap">
                 <Checkbox
-                  label={_(translationPerSheetName[SheetName.General])}
+                  label={t(translationPerSheetName[SheetName.General])}
                   name="sheets.general"
                   defaultChecked={true}
                 />
                 <Checkbox
-                  label={_(translationPerSheetName[SheetName.Rounds])}
+                  label={t(translationPerSheetName[SheetName.Rounds])}
                   name="sheets.rounds"
                   defaultChecked={true}
                 />
                 <Checkbox
-                  label={_(translationPerSheetName[SheetName.Players])}
+                  label={t(translationPerSheetName[SheetName.Players])}
                   name="sheets.players"
                   defaultChecked={true}
                 />
                 <Checkbox
-                  label={_(translationPerSheetName[SheetName.Kills])}
+                  label={t(translationPerSheetName[SheetName.Kills])}
                   name="sheets.kills"
                   defaultChecked={true}
                 />
                 <Checkbox
-                  label={_(translationPerSheetName[SheetName.Weapons])}
+                  label={t(translationPerSheetName[SheetName.Weapons])}
                   name="sheets.weapons"
                   defaultChecked={true}
                 />
                 <Checkbox
-                  label={_(translationPerSheetName[SheetName.Clutches])}
+                  label={t(translationPerSheetName[SheetName.Clutches])}
                   name="sheets.clutches"
                   defaultChecked={true}
                 />
                 {(isSingleMatchSelected || outputType === OutputType.MultipleFiles) && (
                   <Checkbox
-                    label={_(translationPerSheetName[SheetName.PlayersFlashbangMatrix])}
+                    label={t(translationPerSheetName[SheetName.PlayersFlashbangMatrix])}
                     name="sheets.playersFlashbangMatrix"
                     defaultChecked={true}
                   />

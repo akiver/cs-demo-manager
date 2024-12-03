@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Game } from 'csdm/common/types/counter-strike';
 import { FilterCategory } from 'csdm/ui/components/dropdown-filter/filter-category';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';

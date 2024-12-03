@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import type { ChartOption } from 'csdm/ui/hooks/use-chart';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { CompetitiveRank } from 'csdm/common/types/counter-strike';
@@ -10,13 +10,12 @@ import { getPremierRankTier } from 'csdm/ui/shared/get-premier-rank-tier';
 import { PremierRank } from 'csdm/ui/components/premier-rank';
 import { useGetRankTierName } from 'csdm/ui/hooks/use-get-rank-tier-name';
 import { getCssVariableValue } from 'csdm/ui/shared/get-css-variable-value';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function PremierRankRepartitionChart() {
   const { enemyCountPerRank } = usePlayer();
   const colors = useChartColors();
   const getTierName = useGetRankTierName();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const enemyCountPerPremierTier = new Map<number, number>();
   const data = [];
@@ -66,7 +65,6 @@ export function PremierRankRepartitionChart() {
             <p>{getTierName(tier)}</p>
             <div className="flex gap-x-4">
               <p className="text-body-strong">{data.value}</p>
-              {/* eslint-disable-next-line local-rules/no-missing-translations */}
               <p>({percent}%)</p>
             </div>
           </div>,
@@ -79,12 +77,10 @@ export function PremierRankRepartitionChart() {
       },
     },
     title: {
-      text: _(
-        msg({
-          message: 'Players Premier rank repartition',
-          context: 'Chart title',
-        }),
-      ),
+      text: t({
+        message: 'Players Premier rank repartition',
+        context: 'Chart title',
+      }),
       left: 'center',
       textStyle: {
         color: colors.titleTextColor,

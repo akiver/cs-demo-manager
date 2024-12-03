@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { WatchButton } from 'csdm/ui/components/buttons/watch-button';
 import { KillFeedEntry } from 'csdm/ui/components/kill-feed-entry';
 import type { CollateralKillResult } from 'csdm/common/types/search/collateral-kill-result';

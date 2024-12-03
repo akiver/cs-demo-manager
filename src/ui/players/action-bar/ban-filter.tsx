@@ -1,50 +1,41 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { FilterCategory } from 'csdm/ui/components/dropdown-filter/filter-category';
 import { BanFilter } from 'csdm/common/types/ban-filter';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { FilterSelection } from 'csdm/ui/components/dropdown-filter/filter-selection';
 
 function useBanOptions() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return [
     {
       id: BanFilter.None,
-      label: _(
-        msg({
-          context: 'Select option Steam ban status',
-          message: 'None',
-        }),
-      ),
+      label: t({
+        context: 'Select option Steam ban status',
+        message: 'None',
+      }),
     },
     {
       id: BanFilter.VacBanned,
-      label: _(
-        msg({
-          context: 'Select option Steam ban status',
-          message: 'VAC banned',
-        }),
-      ),
+      label: t({
+        context: 'Select option Steam ban status',
+        message: 'VAC banned',
+      }),
     },
     {
       id: BanFilter.GameBanned,
-      label: _(
-        msg({
-          context: 'Select option Steam ban status',
-          message: 'Game banned',
-        }),
-      ),
+      label: t({
+        context: 'Select option Steam ban status',
+        message: 'Game banned',
+      }),
     },
     {
       id: BanFilter.CommunityBanned,
-      label: _(
-        msg({
-          context: 'Select option Steam ban status',
-          message: 'Community banned',
-        }),
-      ),
+      label: t({
+        context: 'Select option Steam ban status',
+        message: 'Community banned',
+      }),
     },
   ];
 }

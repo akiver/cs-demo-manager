@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plural } from '@lingui/macro';
+import { Plural } from '@lingui/react/macro';
 import { getSequencesDuration } from './get-sequences-duration';
 import type { Sequence } from 'csdm/common/types/sequence';
 

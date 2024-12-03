@@ -1,12 +1,11 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import type { Axis } from './x-axis';
 import { usePlayerChartOptions } from './use-player-chart-options';
 import { buildAveragePlayerChartData } from './build-average-player-chart-data';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { usePlayer } from '../use-player';
 import { roundNumber } from 'csdm/common/math/round-number';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   axis: Axis;
@@ -14,7 +13,7 @@ type Props = {
 
 export function HeadshotPercentageChart({ axis }: Props) {
   const { chartsData } = usePlayer();
-  const _ = useI18n();
+  const { t } = useLingui();
   const data: [string, number][] = buildAveragePlayerChartData({
     field: 'headshotPercentage',
     chartsData,
@@ -37,18 +36,14 @@ export function HeadshotPercentageChart({ axis }: Props) {
     data,
     minValue: Math.max(0, roundNumber(minValue - 1)),
     maxValue: roundNumber(maxValue + 1),
-    title: _(
-      msg({
-        context: 'Chart title',
-        message: 'Headshot percentage over time',
-      }),
-    ),
-    name: _(
-      msg({
-        context: 'Chart axis label',
-        message: 'HS%',
-      }),
-    ),
+    title: t({
+      context: 'Chart title',
+      message: 'Headshot percentage over time',
+    }),
+    name: t({
+      context: 'Chart axis label',
+      message: 'HS%',
+    }),
     yLineParallelToXAxisValue: (maxValue + minValue) / 2,
   });
 

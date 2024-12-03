@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useNavigateToDemo } from 'csdm/ui/hooks/use-navigate-to-demo';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import { ContextMenuItem } from '../context-menu-item';

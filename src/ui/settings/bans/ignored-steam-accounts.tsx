@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { DeleteButton } from 'csdm/ui/components/buttons/delete-button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';

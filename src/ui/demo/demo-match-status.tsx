@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SeeMatchButton } from './see-match-button';
 import { SupportedDemoSourcesPerGame } from 'csdm/ui/shared/supported-demo-sources';
 import { ChangeDemosSourceDialog } from 'csdm/ui/components/dialogs/change-demos-source-dialog';

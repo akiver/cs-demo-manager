@@ -1,5 +1,5 @@
 // Translation is not possible here as the locale provider is under the error boundary.
-/* eslint-disable local-rules/no-missing-translations */
+/* eslint-disable lingui/no-unlocalized-strings */
 import React from 'react';
 import { useRouteError } from 'react-router-dom';
 import { Button, ButtonVariant } from './components/buttons/button';

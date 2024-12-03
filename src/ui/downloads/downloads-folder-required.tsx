@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { CenteredContent } from 'csdm/ui/components/content';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useShowDownloadFolderDialog } from 'csdm/ui/settings/downloads/use-show-download-folder-dialog';

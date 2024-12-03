@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -12,7 +12,6 @@ import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { SpinnableButton } from 'csdm/ui/components/buttons/spinnable-button';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 function Header() {
   return (
@@ -34,7 +33,7 @@ export function ExportMatchesToJsonDialog({ checksums }: Props) {
   const client = useWebSocketClient();
   const showToast = useShowToast();
   const { hideDialog } = useDialog();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const isLoading = status === Status.Loading;
   const isOutputPathSelected = outputFolderPath !== '';
@@ -42,12 +41,10 @@ export function ExportMatchesToJsonDialog({ checksums }: Props) {
 
   const selectOutputFolder = useCallback(async () => {
     const { filePaths, canceled } = await window.csdm.showOpenDialog({
-      buttonLabel: _(
-        msg({
-          context: 'Button label',
-          message: 'Select',
-        }),
-      ),
+      buttonLabel: t({
+        context: 'Button label',
+        message: 'Select',
+      }),
       properties: ['openDirectory'],
     });
 
@@ -57,7 +54,7 @@ export function ExportMatchesToJsonDialog({ checksums }: Props) {
 
     const outputFolderPath = filePaths[0];
     setOutputFolderPath(outputFolderPath);
-  }, [_]);
+  }, [t]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     if (isExportPossible) {

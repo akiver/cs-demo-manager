@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { DownloadEntry } from 'csdm/ui/downloads/pending/download-entry';
 import { useDownloads } from './use-downloads';
 import { Message } from 'csdm/ui/components/message';

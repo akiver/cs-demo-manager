@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans, Plural } from '@lingui/macro';
+import { Trans, Plural } from '@lingui/react/macro';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import type { Demo } from 'csdm/common/types/demo';
 import { Checkbox } from '../inputs/checkbox';
@@ -34,7 +34,11 @@ export function AnalyzeConfirmationDialog({
   };
 
   return (
-    <ConfirmDialog title="Demo analysis" onConfirm={onConfirm} isConfirmButtonDisabled={isConfirmButtonDisabled}>
+    <ConfirmDialog
+      title={<Trans>Demo analysis</Trans>}
+      onConfirm={onConfirm}
+      isConfirmButtonDisabled={isConfirmButtonDisabled}
+    >
       <ul>
         {demosSourceNotSupportedCount > 0 && (
           <li>

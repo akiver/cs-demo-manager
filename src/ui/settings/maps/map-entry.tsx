@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Map } from 'csdm/common/types/map';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { DeleteMapDialog } from './delete-map-dialog';

@@ -1,14 +1,13 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { useUpdateSettings } from '../use-update-settings';
 import { useWatchSettings } from './use-watch-settings';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function LaunchParameters() {
   const { launchParameters } = useWatchSettings();
-  const _ = useI18n();
+  const { t } = useLingui();
   const updateSettings = useUpdateSettings();
 
   const onBlur = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,12 +27,10 @@ export function LaunchParameters() {
         <TextInput
           onBlur={onBlur}
           defaultValue={launchParameters}
-          placeholder={_(
-            msg({
-              context: 'Input placeholder',
-              message: 'Launch parameters',
-            }),
-          )}
+          placeholder={t({
+            context: 'Input placeholder',
+            message: 'Launch parameters',
+          })}
         />
       }
       description={<Trans>Additional launch parameters added to the game when it starts</Trans>}

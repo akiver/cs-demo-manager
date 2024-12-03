@@ -4,7 +4,7 @@ import { ExportMatchesAsXlsxDialog } from 'csdm/ui/components/dialogs/export-mat
 import type { MatchTable } from 'csdm/common/types/match-table';
 import { ExportMatchesToJsonItem } from 'csdm/ui/components/context-menu/items/export-matches-to-json-item';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ExportMatchesToXlsxItem } from './export-matches-to-xlsx-item';
 
 type Props = {

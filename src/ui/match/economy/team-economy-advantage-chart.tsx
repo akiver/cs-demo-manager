@@ -4,12 +4,11 @@ import { useChart } from 'csdm/ui/hooks/use-chart';
 import { useCurrentMatch } from '../use-current-match';
 import { Panel } from 'csdm/ui/components/panel';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
 
 export function TeamEconomyAdvantageChart() {
-  const _ = useI18n();
+  const { t } = useLingui();
   const match = useCurrentMatch();
   const colors = useChartColors();
   const formatMoney = useFormatMoney();
@@ -76,23 +75,19 @@ export function TeamEconomyAdvantageChart() {
         const { seriesName: teamName, value } = params as { seriesName: string; value: number };
         const oppositeTeamName = teamName === match.teamB.name ? match.teamA.name : match.teamB.name;
         const money = formatMoney(Math.abs(value));
-        return _(
-          msg({
-            message: `${teamName} has +${money} more than ${oppositeTeamName}`,
-            context: 'Chart tooltip',
-          }),
-        );
+        return t({
+          message: `${teamName} has +${money} more than ${oppositeTeamName}`,
+          context: 'Chart tooltip',
+        });
       },
     },
     xAxis: [
       {
         type: 'category',
-        name: _(
-          msg({
-            message: 'Round',
-            context: 'Chart axis label',
-          }),
-        ),
+        name: t({
+          message: 'Round',
+          context: 'Chart axis label',
+        }),
         axisLine: {
           onZero: false,
           lineStyle: {
@@ -102,12 +97,10 @@ export function TeamEconomyAdvantageChart() {
         axisPointer: {
           label: {
             formatter: ({ value: roundNumber }) => {
-              return _(
-                msg({
-                  message: `Round ${roundNumber}`,
-                  context: 'Chart tooltip',
-                }),
-              );
+              return t({
+                message: `Round ${roundNumber}`,
+                context: 'Chart tooltip',
+              });
             },
           },
         },
@@ -115,12 +108,10 @@ export function TeamEconomyAdvantageChart() {
       },
       {
         type: 'category',
-        name: _(
-          msg({
-            message: 'Winner',
-            context: 'Chart axis label',
-          }),
-        ),
+        name: t({
+          message: 'Winner',
+          context: 'Chart axis label',
+        }),
         axisLine: {
           onZero: false,
           lineStyle: {
@@ -130,12 +121,10 @@ export function TeamEconomyAdvantageChart() {
         axisPointer: {
           label: {
             formatter: ({ value: winnerName }) => {
-              return _(
-                msg({
-                  message: `Winner: ${winnerName}`,
-                  context: 'Chart tooltip',
-                }),
-              );
+              return t({
+                message: `Winner: ${winnerName}`,
+                context: 'Chart tooltip',
+              });
             },
           },
         },

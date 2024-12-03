@@ -13,7 +13,7 @@ import { SaveButton } from 'csdm/ui/components/buttons/save-button';
 import type { MapPayload } from 'csdm/server/handlers/renderer-process/map/map-payload';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useMapForm } from 'csdm/ui/settings/maps/map-dialog/use-map-form';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ExternalLink } from 'csdm/ui/components/external-link';
 import { ThresholdZInput } from './threshold-z-input';
 

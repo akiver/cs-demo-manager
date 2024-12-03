@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Spinner } from 'csdm/ui/components/spinner';
 import { Content, CenteredContent } from 'csdm/ui/components/content';

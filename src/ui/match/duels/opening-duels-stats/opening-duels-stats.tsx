@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import type { Kill } from 'csdm/common/types/kill';
 import { Tooltip } from 'csdm/ui/components/tooltip';

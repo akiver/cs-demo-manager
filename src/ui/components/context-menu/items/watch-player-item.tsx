@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
 import { WatchPlayerHighlightsItem } from './watch-player-highlights-item';
 import { WatchPlayerLowlightsItem } from './watch-player-lowlights-item';

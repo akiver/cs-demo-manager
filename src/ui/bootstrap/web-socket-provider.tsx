@@ -1,12 +1,11 @@
 import type { ReactNode } from 'react';
 import React, { createContext, useRef, useState } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { WebSocketClient } from '../web-socket-client';
 import { Loading } from './loading';
 import { LoadingError } from './loading-error';
 import { useRegisterWebSocketListeners } from './use-register-web-socket-listeners';
-import { useI18n } from '../hooks/use-i18n';
 
 export const WebSocketContext = createContext<WebSocketClient | null>(null);
 
@@ -18,7 +17,7 @@ export function WebSocketProvider({ children }: Props) {
   const clientRef = useRef<WebSocketClient | null>(null);
   const [status, setStatus] = useState<Status>(Status.Loading);
   const [error, setError] = useState('');
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const getClient = () => {
     if (clientRef.current === null) {
@@ -28,7 +27,7 @@ export function WebSocketProvider({ children }: Props) {
 
       const onConnectionError = (event: CloseEvent) => {
         const code = event.code;
-        setError(_(msg`The connection to the WebSocket server failed with code ${code}.`));
+        setError(t`The connection to the WebSocket server failed with code ${code}.`);
         setStatus(Status.Error);
       };
 

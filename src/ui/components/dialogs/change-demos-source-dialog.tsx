@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plural, Trans } from '@lingui/macro';
+import { Plural, Trans } from '@lingui/react/macro';
 import type { DemoSource } from 'csdm/common/types/counter-strike';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';

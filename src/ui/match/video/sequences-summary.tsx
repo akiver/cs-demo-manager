@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plural } from '@lingui/macro';
+import { Plural } from '@lingui/react/macro';
 import { useCurrentMatchSequences } from './sequences/use-current-match-sequences';
 import { SequencesDuration } from './sequences/sequences-duration';
 import { SequencesDiskSpace } from './sequences/sequences-disk-space';

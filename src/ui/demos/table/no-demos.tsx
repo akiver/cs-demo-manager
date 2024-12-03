@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { CenteredContent } from 'csdm/ui/components/content';
 import { useActiveDemosFilters } from '../use-active-demos-filters';
 import { useDemosState } from '../use-demos-state';

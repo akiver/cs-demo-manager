@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ContextMenu } from 'csdm/ui/components/context-menu/context-menu';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { Separator } from 'csdm/ui/components/context-menu/separator';

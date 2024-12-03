@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plural } from '@lingui/macro';
+import { Plural } from '@lingui/react/macro';
 import { TableStatusBarLegend } from 'csdm/ui/components/table/status-bar/table-status-bar-legend';
 import { TableStatusBarRectangle } from 'csdm/ui/components/table/status-bar/table-status-bar-rectangle';
 import { usePlayersTable } from './use-players-table';

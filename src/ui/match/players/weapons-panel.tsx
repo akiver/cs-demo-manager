@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';
 import type { Match } from 'csdm/common/types/match';

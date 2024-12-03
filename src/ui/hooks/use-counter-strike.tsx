@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useIsCsRunning } from './use-is-cs-running';
@@ -7,7 +7,6 @@ import { ErrorCode } from 'csdm/common/error-code';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import type { WatchDemoPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-demo-handler';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { WatchPlayerLowlightsPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-player-lowlights-handler';
 import type { WatchPlayerHighlightsPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-player-highlights-handler';
@@ -153,7 +152,7 @@ export function useCounterStrike() {
   const client = useWebSocketClient();
   const isCsRunning = useIsCsRunning();
   const showToast = useShowToast();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const isKillCsRequired = async () => {
     const csRunning = await isCsRunning();
@@ -174,7 +173,7 @@ export function useCounterStrike() {
 
       showToast({
         id: 'game-starting',
-        content: _(msg`Counter-Strike starting…`),
+        content: t`Counter-Strike starting…`,
       });
     };
 
