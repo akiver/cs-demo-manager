@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { useDownloadFolderPath } from 'csdm/ui/settings/downloads/use-download-folder-path';
 import { Tooltip } from 'csdm/ui/components/tooltip';

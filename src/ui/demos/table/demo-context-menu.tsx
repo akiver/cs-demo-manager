@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Demo } from 'csdm/common/types/demo';
 import { RevealFileInExplorerItem } from 'csdm/ui/components/context-menu/items/reveal-file-in-explorer-item';
 import { useIsDemoAnalysisInProgress } from 'csdm/ui/analyses/use-is-demo-analysis-in-progress';

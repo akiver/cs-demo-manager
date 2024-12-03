@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useLingui } from '@lingui/react/macro';
 import { useTable } from 'csdm/ui/components/table/use-table';
 import { Table } from 'csdm/ui/components/table/table';
 import type { Column } from 'csdm/ui/components/table/table-types';
@@ -13,6 +14,7 @@ function getRowId(row: DeathNoticesPlayerOptions) {
 }
 
 export function DeathNotices() {
+  const { t } = useLingui();
   const { deathNotices } = useDeathNotices();
 
   const columns = useMemo(() => {
@@ -20,8 +22,14 @@ export function DeathNotices() {
       {
         id: 'player-name',
         accessor: 'playerName',
-        headerText: 'Player',
-        headerTooltip: `Player's name`,
+        headerText: t({
+          context: 'Table header',
+          message: 'Player',
+        }),
+        headerTooltip: t({
+          context: 'Table header tooltip',
+          message: `Player's name`,
+        }),
         width: 350,
         Cell: PlayerNameInput,
         allowSort: false,
@@ -32,7 +40,10 @@ export function DeathNotices() {
         id: 'show-kills',
         accessor: 'showKill',
         headerText: 'S',
-        headerTooltip: 'Show kills',
+        headerTooltip: t({
+          context: 'Table header tooltip',
+          message: 'Show kills',
+        }),
         width: 40,
         Cell: ShowPlayerKillsCheckbox,
         allowSort: false,
@@ -43,7 +54,10 @@ export function DeathNotices() {
         id: 'highlight-kills',
         accessor: 'highlightKill',
         headerText: 'H',
-        headerTooltip: 'Highlight kills',
+        headerTooltip: t({
+          context: 'Table header tooltip',
+          message: 'Highlight kills',
+        }),
         width: 40,
         Cell: HighlightPlayerKillsCheckbox,
         allowSort: false,
@@ -51,7 +65,7 @@ export function DeathNotices() {
         allowMove: false,
       },
     ] as const satisfies readonly Column<DeathNoticesPlayerOptions>[];
-  }, []);
+  }, [t]);
 
   const table = useTable({
     columns,

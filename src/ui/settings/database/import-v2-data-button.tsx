@@ -1,5 +1,5 @@
 import React, { useState, type ReactNode } from 'react';
-import { Plural, Trans } from '@lingui/macro';
+import { Plural, Trans, useLingui } from '@lingui/react/macro';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
@@ -30,6 +30,7 @@ function PathList({ paths }: { paths: string[] }) {
 
 function ImportV2DataDialog() {
   const client = useWebSocketClient();
+  const { t } = useLingui();
   const [error, setError] = useState<ReactNode>(null);
   const [backupFilePath, setBackupFilePath] = useState<string>('');
   const [isBusy, setIsBusy] = useState(false);
@@ -42,7 +43,7 @@ function ImportV2DataDialog() {
   const onSelectBackupFileClick = async () => {
     const options: OpenDialogOptions = {
       properties: ['openFile'],
-      filters: [{ extensions: ['json'], name: 'JSON file' }],
+      filters: [{ extensions: ['json'], name: t`JSON file` }],
     };
     const { canceled, filePaths } = await window.csdm.showOpenDialog(options);
     if (canceled || filePaths.length === 0) {

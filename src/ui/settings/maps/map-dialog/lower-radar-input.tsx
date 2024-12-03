@@ -1,15 +1,14 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { ImageDragZone } from './image-drop-zone';
 import { DragIcon } from 'csdm/ui/icons/drag-icon';
 import { useMapFormField } from './use-map-form-field';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function LowerRadarInput() {
   const { value, setField } = useMapFormField('lowerRadarBase64');
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const updateLowerRadarFieldFromImageFilePath = async (imageFilePath: string) => {
     try {
@@ -17,12 +16,12 @@ export function LowerRadarInput() {
       const fileHeight = 1024;
       const png = await window.csdm.getPngInformation(imageFilePath);
       if (png.width !== fileWidth || png.height !== fileHeight) {
-        setField(value, _(msg`Radar image size must be ${fileWidth}x${fileHeight}.`));
+        setField(value, t`Radar image size must be ${fileWidth}x${fileHeight}.`);
         return;
       }
       setField(png.base64, undefined);
     } catch (error) {
-      setField(value, _(msg`Invalid PNG file.`));
+      setField(value, t`Invalid PNG file.`);
     }
   };
 
@@ -37,7 +36,7 @@ export function LowerRadarInput() {
   const selectRadarImageFile = async () => {
     const options: OpenDialogOptions = {
       properties: ['openFile'],
-      filters: [{ extensions: ['png'], name: 'PNG Files' }],
+      filters: [{ extensions: ['png'], name: t`PNG Files` }],
     };
     const { canceled, filePaths }: OpenDialogReturnValue = await window.csdm.showOpenDialog(options);
     if (canceled || filePaths.length === 0) {

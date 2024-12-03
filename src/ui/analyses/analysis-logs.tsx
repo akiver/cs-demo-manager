@@ -1,10 +1,9 @@
 import React, { type ReactNode } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { Analysis } from 'csdm/common/types/analysis';
 import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 import { useSelectedAnalysis } from './use-selected-analysis-demo-id';
 import { assertNever } from 'csdm/common/assert-never';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { isAnalysisErrorStatus } from './analysis-status';
 import { CopyButton } from 'csdm/ui/components/buttons/copy-button';
 import { ExternalLink } from 'csdm/ui/components/external-link';
@@ -13,41 +12,31 @@ import { isErrorCode } from 'csdm/common/is-error-code';
 import { ErrorCode } from 'csdm/common/error-code';
 
 function useGenerateLogs() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return (analysis: Analysis) => {
     const logs: string[] = [
-      _(
-        msg({
-          context: 'Analysis status',
-          message: 'Pending analysis…',
-        }),
-      ),
+      t({
+        context: 'Analysis status',
+        message: 'Pending analysis…',
+      }),
     ];
-    const analyzingMessage = _(
-      msg({
-        context: 'Analysis status',
-        message: 'Analyzing demo…',
-      }),
-    );
-    const analyzeErrorMessage = _(
-      msg({
-        context: 'Analysis status',
-        message: 'An error occurred while analyzing the demo.',
-      }),
-    );
-    const analyzeSuccessMessage = _(
-      msg({
-        context: 'Analysis status',
-        message: 'Analysis succeed.',
-      }),
-    );
-    const insertingMessage = _(
-      msg({
-        context: 'Analysis status',
-        message: 'Inserting match…',
-      }),
-    );
+    const analyzingMessage = t({
+      context: 'Analysis status',
+      message: 'Analyzing demo…',
+    });
+    const analyzeErrorMessage = t({
+      context: 'Analysis status',
+      message: 'An error occurred while analyzing the demo.',
+    });
+    const analyzeSuccessMessage = t({
+      context: 'Analysis status',
+      message: 'Analysis succeed.',
+    });
+    const insertingMessage = t({
+      context: 'Analysis status',
+      message: 'Inserting match…',
+    });
 
     switch (analysis.status) {
       case AnalysisStatus.Pending:
@@ -69,12 +58,11 @@ function useGenerateLogs() {
           analyzingMessage,
           analyzeSuccessMessage,
           insertingMessage,
-          _(
-            msg({
-              context: 'Analysis status',
-              message: 'Match inserted into the database.',
-            }),
-          ),
+
+          t({
+            context: 'Analysis status',
+            message: 'Match inserted into the database.',
+          }),
         );
         break;
       case AnalysisStatus.InsertError:
@@ -82,12 +70,11 @@ function useGenerateLogs() {
           analyzingMessage,
           analyzeSuccessMessage,
           insertingMessage,
-          _(
-            msg({
-              context: 'Analysis status',
-              message: 'An error occurred while inserting the match into the database.',
-            }),
-          ),
+
+          t({
+            context: 'Analysis status',
+            message: 'An error occurred while inserting the match into the database.',
+          }),
         );
         break;
       default:

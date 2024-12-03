@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Panel } from '../../../components/panel';
 import { useCurrentRound } from './use-current-round';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Switch } from 'csdm/ui/components/inputs/switch';
 import type { Folder } from 'csdm/node/settings/settings';
 import { useToggleFolderSubFoldersInclusion } from './use-toggle-folder-sub-folders-inclusion';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { useHeatmapContext } from './heatmap-context';
 

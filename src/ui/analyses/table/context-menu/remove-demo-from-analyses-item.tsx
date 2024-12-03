@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useSelectedAnalysis } from 'csdm/ui/analyses/use-selected-analysis-demo-id';

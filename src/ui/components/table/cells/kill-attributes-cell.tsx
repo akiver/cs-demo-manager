@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Kill } from 'csdm/common/types/kill';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { HeadshotIcon } from 'csdm/ui/icons/headshot-icon';

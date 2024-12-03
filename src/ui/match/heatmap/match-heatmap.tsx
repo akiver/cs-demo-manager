@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Heatmap } from 'csdm/ui/components/heatmap/heatmap';
 import { MatchHeatmapFilters } from 'csdm/ui/match/heatmap/match-heatmap-filters';
 import { Content } from 'csdm/ui/components/content';

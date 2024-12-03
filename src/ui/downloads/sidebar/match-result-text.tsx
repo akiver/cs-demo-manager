@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { MatchResult } from 'csdm/ui/downloads/match-result';
 import { assertNever } from 'csdm/common/assert-never';
 

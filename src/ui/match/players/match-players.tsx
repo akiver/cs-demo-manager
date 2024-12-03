@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Content } from 'csdm/ui/components/content';
 import { Message } from 'csdm/ui/components/message';
 import { useCurrentMatch } from '../use-current-match';
@@ -24,12 +25,13 @@ import { AverageDeathsPerRoundPanel } from 'csdm/ui/components/panels/average-de
 import { HltvRatingPanel } from 'csdm/ui/components/panels/hltv-rating-panel';
 
 export function MatchPlayers() {
+  const { t } = useLingui();
   const match = useCurrentMatch();
   const { steamId } = useParams<{ steamId: string }>();
   const player = match.players.find((player) => player.steamId === steamId);
 
   if (player === undefined) {
-    return <Message message="Player not found." />;
+    return <Message message={<Trans>Player not found.</Trans>} />;
   }
 
   const kills = match.kills.filter((kill) => kill.killerSteamId === steamId);
@@ -94,14 +96,14 @@ export function MatchPlayers() {
           </div>
           <div className="flex gap-8 flex-wrap">
             <KillsPanel
-              header="Kills"
+              header={t`Kills`}
               kills={kills}
               demoPath={match.demoFilePath}
               tickrate={match.tickrate}
               rounds={match.rounds}
             />
             <KillsPanel
-              header="Deaths"
+              header={t`Deaths`}
               kills={deaths}
               demoPath={match.demoFilePath}
               tickrate={match.tickrate}

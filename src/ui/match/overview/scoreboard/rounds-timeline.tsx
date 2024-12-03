@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { SyncIcon } from 'csdm/ui/icons/sync-icon';
 import type { Round } from 'csdm/common/types/round';

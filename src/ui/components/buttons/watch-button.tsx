@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { isCounterStrikeStartable, useCounterStrike } from 'csdm/ui/hooks/use-counter-strike';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { CounterStrikeRunningDialog } from '../dialogs/counter-strike-running-dialog';

@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useIsDemoAnalysisInProgress } from 'csdm/ui/analyses/use-is-demo-analysis-in-progress';
 import { useCurrentDemo } from './use-current-demo';

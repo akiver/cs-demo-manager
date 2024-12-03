@@ -1,6 +1,6 @@
 import type { FileFilter } from 'electron';
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RevealFileInExplorerButton } from 'csdm/ui/components/buttons/reveal-file-in-explorer-button';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';

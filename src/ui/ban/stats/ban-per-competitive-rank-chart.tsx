@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { CompetitiveRank } from 'csdm/common/types/counter-strike';
 import { NoBanMessage } from './no-ban-message';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';

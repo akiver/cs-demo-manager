@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import { ExternalLink } from 'csdm/ui/components/external-link';
 

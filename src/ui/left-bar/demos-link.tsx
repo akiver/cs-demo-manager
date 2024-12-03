@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { LeftBarLink } from 'csdm/ui/left-bar/left-bar-link';
 import { RoutePath } from 'csdm/ui/routes-paths';
 import { DemFileIcon } from 'csdm/ui/icons/dem-file-icon';

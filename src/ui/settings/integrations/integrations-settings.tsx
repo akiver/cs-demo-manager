@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { SteamAPIKey } from './steam-api-key';
 import { FaceitApiKey } from './faceit-api-key';

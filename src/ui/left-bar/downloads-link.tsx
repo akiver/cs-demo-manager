@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { DownloadIcon } from 'csdm/ui/icons/download-icon';
 import { LeftBarLink } from './left-bar-link';
 import { PendingDownloadsBadge } from './pending-downloads-badge';

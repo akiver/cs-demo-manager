@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { IncludeSubFoldersSwitch } from './include-sub-folders-switch';
 import { RemoveFolderButton } from './remove-folder-button';
 import { RevealFolderInExplorerButton } from 'csdm/ui/components/buttons/reveal-folder-in-explorer-button';

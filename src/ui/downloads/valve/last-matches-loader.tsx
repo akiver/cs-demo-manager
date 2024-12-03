@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';
 import { FetchMatchesConfirmation } from 'csdm/ui/downloads/valve/fetch-matches-confirmation';
@@ -14,7 +14,6 @@ import { useErrorCode } from './use-error-code';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useDownloadFolderPath } from 'csdm/ui/settings/downloads/use-download-folder-path';
 import { useGetBoilerErrorMessageFromErrorCode } from 'csdm/ui/downloads/use-get-boiler-error-message-from-error-code';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function LastMatchesLoader() {
   const client = useWebSocketClient();
@@ -23,7 +22,7 @@ export function LastMatchesLoader() {
   const errorCode = useErrorCode();
   const downloadFolderPath = useDownloadFolderPath();
   const getBoilerErrorMessageFromErrorCode = useGetBoilerErrorMessageFromErrorCode();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const fetchLastMatches = useCallback(() => {
     client.send({
@@ -44,7 +43,7 @@ export function LastMatchesLoader() {
   }
 
   if (status === Status.Error) {
-    let errorMessage = _(msg`An error occurred.`);
+    let errorMessage = t`An error occurred.`;
     if (errorCode !== undefined) {
       errorMessage = getBoilerErrorMessageFromErrorCode(errorMessage, errorCode);
     }

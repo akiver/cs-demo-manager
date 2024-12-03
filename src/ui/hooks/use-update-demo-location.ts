@@ -4,14 +4,16 @@ import { useWebSocketClient } from './use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { updateMatchDemoLocationSuccess } from 'csdm/ui/match/match-actions';
+import { useLingui } from '@lingui/react/macro';
 
 export function useUpdateDemoLocation() {
+  const { t } = useLingui();
   const client = useWebSocketClient();
   const dispatch = useDispatch();
 
   return async (checksum: string) => {
     const options: OpenDialogOptions = {
-      title: `Select demo's path`,
+      title: t`Select demo's path`,
       filters: [{ name: '*', extensions: ['dem'] }],
       properties: ['openFile'],
     };

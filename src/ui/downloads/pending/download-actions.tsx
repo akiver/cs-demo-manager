@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SeeDemoButton } from 'csdm/ui/downloads/see-demo-button';
 import { CheckCircleIcon } from 'csdm/ui/icons/check-circle-icon';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';

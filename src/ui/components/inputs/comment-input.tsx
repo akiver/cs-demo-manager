@@ -1,7 +1,6 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { MarkdownEditor } from './markdown-editor';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   isResizable?: boolean;
@@ -10,7 +9,7 @@ type Props = {
 };
 
 export function CommentInput({ isResizable, currentComment, updateComment }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const onBlur = (comment: string) => {
     if (comment === currentComment) {
@@ -25,12 +24,10 @@ export function CommentInput({ isResizable, currentComment, updateComment }: Pro
       defaultValue={currentComment}
       onBlur={onBlur}
       isResizable={isResizable}
-      placeholder={_(
-        msg({
-          context: 'Input placeholder',
-          message: 'Comment (Markdown supported)',
-        }),
-      )}
+      placeholder={t({
+        context: 'Input placeholder',
+        message: 'Comment (Markdown supported)',
+      })}
     />
   );
 }

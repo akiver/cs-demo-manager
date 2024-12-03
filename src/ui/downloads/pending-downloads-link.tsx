@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { RoutePath } from 'csdm/ui/routes-paths';
 import { TabLink } from 'csdm/ui/components/tabs/tab-link';
 import { usePendingDownloadCount } from './pending/use-pending-download-count';

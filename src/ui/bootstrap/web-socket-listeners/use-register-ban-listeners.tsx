@@ -1,5 +1,5 @@
 import React, { useEffect, type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { WebSocketClient } from 'csdm/ui/web-socket-client';
 import { ErrorCode } from 'csdm/common/error-code';
 import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';

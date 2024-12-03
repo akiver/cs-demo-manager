@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { Loading } from './loading';
 import { App } from './app';
@@ -12,6 +12,7 @@ import { LoadingError } from './loading-error';
 export function AppLoader() {
   const client = useWebSocketClient();
   const dispatch = useDispatch();
+  const { t } = useLingui();
   const [error, setError] = useState('');
   const [status, setStatus] = useState<Status>(Status.Loading);
 
@@ -29,7 +30,7 @@ export function AppLoader() {
         dispatch(initializeAppSuccess(payload));
         setStatus(Status.Success);
       } catch (error) {
-        let errorMessage = 'An error occurred while loading the application.';
+        let errorMessage = t`An error occurred while loading the application.`;
         if (typeof error === 'string') {
           errorMessage = error;
         }
@@ -39,7 +40,7 @@ export function AppLoader() {
     };
 
     initializeApplication();
-  }, [client, dispatch, status]);
+  }, [t, client, dispatch, status]);
 
   if (status === Status.Loading) {
     return <Loading />;

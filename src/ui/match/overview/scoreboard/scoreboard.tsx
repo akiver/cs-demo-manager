@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Player } from 'csdm/common/types/player';
 import { TeamScore } from 'csdm/ui/components/match/team-score';
 import type { TableInstance } from 'csdm/ui/components/table/table-types';

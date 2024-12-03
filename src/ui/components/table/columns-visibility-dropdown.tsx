@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ColumnVisibility } from 'csdm/ui/components/table/column-visibility';
 import { Dropdown } from 'csdm/ui/components/dropdown';
 import type { Data, TableInstance } from 'csdm/ui/components/table/table-types';

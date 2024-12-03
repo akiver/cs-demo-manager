@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { ChatMessage } from 'csdm/common/types/chat-message';
 import { TeamText } from 'csdm/ui/components/team-text';
 

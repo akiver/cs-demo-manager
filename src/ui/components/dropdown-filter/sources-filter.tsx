@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { DemoSource } from 'csdm/common/types/counter-strike';
 import { useDemoSources } from 'csdm/ui/demos/use-demo-sources';
 import { FilterCategory } from 'csdm/ui/components/dropdown-filter/filter-category';

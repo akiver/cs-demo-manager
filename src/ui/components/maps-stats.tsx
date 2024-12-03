@@ -8,7 +8,7 @@ import { useGetMapThumbnailSrc } from 'csdm/ui/maps/use-get-map-thumbnail-src';
 import { Panel, PanelStatRow } from 'csdm/ui/components/panel';
 import { CounterTerroristIcon } from 'csdm/ui/icons/counter-terrorist-icon';
 import { TerroristIcon } from 'csdm/ui/icons/terrorist-icon';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 
 type EntryProps = {
   mapStats: MapStats;

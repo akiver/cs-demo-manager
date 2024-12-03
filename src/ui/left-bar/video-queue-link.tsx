@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { RoutePath } from 'csdm/ui/routes-paths';
 import { LeftBarLink } from './left-bar-link';
 import { PendingVideosBadge } from './pending-videos-badge';

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { msg, select } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
+import { select } from '@lingui/core/macro';
 import type { TextInputHandlers } from 'csdm/ui/components/inputs/text-input';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { isCtrlOrCmdEvent } from 'csdm/ui/keyboard/keyboard';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   onChange: (text: string) => void;
@@ -13,7 +13,7 @@ type Props = {
 
 export function TextInputFilter({ value, onChange, isDisabled }: Props) {
   const ref = useRef<TextInputHandlers>(null);
-  const _ = useI18n();
+  const { t } = useLingui();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -41,15 +41,13 @@ export function TextInputFilter({ value, onChange, isDisabled }: Props) {
       <TextInput
         ref={ref}
         type="search"
-        placeholder={_(
-          msg({
-            context: 'Input placeholder',
-            message: select(window.csdm.platform, {
-              darwin: 'Filter… (⌘+F)',
-              other: 'Filter… (CTRL+F)',
-            }),
+        placeholder={t({
+          context: 'Input placeholder',
+          message: select(window.csdm.platform, {
+            darwin: 'Filter… (⌘+F)',
+            other: 'Filter… (CTRL+F)',
           }),
-        )}
+        })}
         onChange={handleChange}
         value={value}
         isDisabled={isDisabled}

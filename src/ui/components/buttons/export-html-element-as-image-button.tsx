@@ -1,8 +1,7 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   getElement: () => HTMLElement | null;
@@ -11,7 +10,7 @@ type Props = {
 
 export function ExportHtmlElementAsImageButton({ getElement, fileName }: Props) {
   const showToast = useShowToast();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const onClick = async () => {
     const element = getElement();
@@ -23,12 +22,10 @@ export function ExportHtmlElementAsImageButton({ getElement, fileName }: Props) 
       const filePath = await window.csdm.elementToImage({
         element,
         fileName,
-        title: _(
-          msg({
-            context: 'OS save dialog title',
-            message: 'Export as PNG',
-          }),
-        ),
+        title: t({
+          context: 'OS save dialog title',
+          message: 'Export as PNG',
+        }),
       });
       if (filePath) {
         window.csdm.browseToFile(filePath);
@@ -36,7 +33,7 @@ export function ExportHtmlElementAsImageButton({ getElement, fileName }: Props) 
     } catch (error) {
       logger.error(error);
       showToast({
-        content: _(msg`An error occurred`),
+        content: t`An error occurred`,
         type: 'error',
       });
     }

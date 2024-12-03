@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SettingsCategoryButton } from 'csdm/ui/settings/settings-category-button';
 import { CloseSettingsButton } from './close-settings-button';
 import { SettingsCategory } from './settings-category';

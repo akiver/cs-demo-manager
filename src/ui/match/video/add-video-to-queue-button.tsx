@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useCurrentMatchSequences } from './sequences/use-current-match-sequences';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';

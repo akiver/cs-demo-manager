@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 import { useSelectedAnalysis } from 'csdm/ui/analyses/use-selected-analysis-demo-id';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';

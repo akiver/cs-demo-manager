@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Trans } from '@lingui/react/macro';
 import { useNavigate, useParams } from 'react-router-dom';
 import { buildMatchRoundPath } from 'csdm/ui/routes-paths';
 import { Content } from 'csdm/ui/components/content';
@@ -29,7 +30,7 @@ export function Rounds() {
   });
 
   if (match.rounds.length === 0) {
-    return <Message message="No rounds found." />;
+    return <Message message={<Trans>No rounds found.</Trans>} />;
   }
 
   return (

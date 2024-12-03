@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { LastMatch as Match } from 'csdm/common/types/last-match';
 import { LastMatch } from './last-match';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';

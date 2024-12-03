@@ -1,31 +1,26 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
 import { ThemeName } from 'csdm/common/types/theme-name';
 import { useUpdateSettings } from '../use-update-settings';
 import { useThemeName } from './use-theme-name';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function ThemeSelect() {
-  const _ = useI18n();
+  const { t } = useLingui();
   const themeName = useThemeName();
   const updateSettings = useUpdateSettings();
 
   const labelPerTheme: Record<ThemeName, string> = {
-    [ThemeName.Light]: _(
-      msg({
-        context: 'Select option theme',
-        message: 'Light',
-      }),
-    ),
-    [ThemeName.Dark]: _(
-      msg({
-        context: 'Select option theme',
-        message: 'Dark',
-      }),
-    ),
+    [ThemeName.Light]: t({
+      context: 'Select option theme',
+      message: 'Light',
+    }),
+    [ThemeName.Dark]: t({
+      context: 'Select option theme',
+      message: 'Dark',
+    }),
   };
 
   const options: SelectOption<ThemeName>[] = Object.values(ThemeName).map((themeName) => {

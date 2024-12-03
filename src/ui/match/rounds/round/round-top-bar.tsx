@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentRound } from './use-current-round';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { formatMillisecondsToTimer } from 'csdm/ui/shared/format-milliseconds-to-timer';
 import { TeamText } from 'csdm/ui/components/team-text';

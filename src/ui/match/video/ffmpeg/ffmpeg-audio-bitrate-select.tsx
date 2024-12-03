@@ -3,7 +3,7 @@ import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 
 export function FfmpegAudioBitrateSelect() {
   const { settings, updateSettings } = useVideoSettings();

@@ -1,5 +1,5 @@
 import React, { useState, type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { Status } from 'csdm/common/types/status';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
@@ -62,7 +62,7 @@ export function RenameDialog({ checksum, currentName }: Props) {
 
   return (
     <ConfirmDialog
-      title="Rename"
+      title={<Trans>Rename</Trans>}
       onConfirm={submit}
       isBusy={isBusy}
       isConfirmButtonDisabled={isValidName}

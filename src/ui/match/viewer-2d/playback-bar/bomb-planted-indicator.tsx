@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { useGetTimeElapsedBetweenFrames } from 'csdm/ui/match/use-time-elapsed-between-frames';
 import { Indicator } from 'csdm/ui/match/viewer-2d/playback-bar/indicator';

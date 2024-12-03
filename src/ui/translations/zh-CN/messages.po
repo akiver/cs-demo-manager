@@ -222,6 +222,50 @@ msgid "Ban per Premier rank"
 msgstr "禁止每一个最高的段位"
 
 #: src/ui/ban/stats/ban-stats.tsx
+msgid "Loading ban stats…"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+#: src/ui/comment/use-update-comment.tsx
+#: src/ui/components/buttons/export-html-element-as-image-button.tsx
+#: src/ui/components/context-menu/items/change-matches-type-item.tsx
+#: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
+#: src/ui/components/dialogs/change-demos-source-dialog.tsx
+#: src/ui/components/dialogs/delete-matches-dialog.tsx
+#: src/ui/demo/demo-name-input.tsx
+#: src/ui/demos/table/update-demos-type-item.tsx
+#: src/ui/dialogs/checksums-tags-dialog.tsx
+#: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
+#: src/ui/downloads/pending/remove-download-button.tsx
+#: src/ui/downloads/pending/remove-downloads-button.tsx
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/chat-messages/export-chat-messages-button.tsx
+#: src/ui/match/duels/players-duels-matrix.tsx
+#: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
+#: src/ui/match/heatmap/match-heatmap.tsx
+#: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
+#: src/ui/player/use-update-player-comment.tsx
+#: src/ui/players/players-tags-dialogs.tsx
+#: src/ui/search/filters/search-maps-input.tsx
+#: src/ui/search/filters/search-players-input.tsx
+#: src/ui/settings/about/clear-logs-button.tsx
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
+#: src/ui/settings/downloads/faceit-accounts.tsx
+#: src/ui/settings/maps/add-map-dialog.tsx
+#: src/ui/settings/maps/edit-map-dialog.tsx
+#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
+#: src/ui/settings/ui/reset-tables-state.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+#: src/ui/team/heatmap/team-heatmap.tsx
+#: src/ui/videos/use-remove-videos.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "An error occurred"
+msgstr "出现错误"
+
+#: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Players"
 msgstr "玩家"
@@ -272,6 +316,7 @@ msgid "No VAC ban stats to show, you must analyze demos to generate stats."
 msgstr "没有被 VAC 封禁的统计数据，您必须分析录像才能生成统计数据。"
 
 #: src/ui/bootstrap/app-loader.tsx
+#: src/ui/bootstrap/app-loader.tsx
 msgid "An error occurred while loading the application."
 msgstr "加载应用程序时发生错误。"
 
@@ -305,6 +350,10 @@ msgid "Make sure PostgreSQL is running and your settings are correct."
 msgstr "请确认 PostgreSQL 正在运行并且您的设置是正确的。"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The connection to the database failed with the following error:"
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "CS Demo Manager requires a PostgreSQL database."
 msgstr "CS Demo Manager 需要 PostgreSQL 数据库。"
 
@@ -315,6 +364,10 @@ msgstr "{secondsBeforeNextTry, plural, one {重试于 # 秒后…} other {重试
 #: src/ui/bootstrap/connect-database/help-link.tsx
 msgid "Please read the <0>documentation</0> for help."
 msgstr "请阅读<0>文档</0>以获得帮助。"
+
+#: src/ui/bootstrap/settings-provider.tsx
+msgid "An error occurred while loading settings."
+msgstr ""
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "The Steam API returned a forbidden error"
@@ -335,45 +388,6 @@ msgstr "与 WebSocket 服务器的连接失败，代码为 {code}。"
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "An error occurred connecting to the WebSocket server."
 msgstr "连接到远程服务器时出错。"
-
-#: src/ui/comment/use-update-comment.tsx
-#: src/ui/components/buttons/export-html-element-as-image-button.tsx
-#: src/ui/components/context-menu/items/change-matches-type-item.tsx
-#: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
-#: src/ui/components/dialogs/change-demos-source-dialog.tsx
-#: src/ui/components/dialogs/delete-matches-dialog.tsx
-#: src/ui/demo/demo-name-input.tsx
-#: src/ui/demos/table/update-demos-type-item.tsx
-#: src/ui/dialogs/checksums-tags-dialog.tsx
-#: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
-#: src/ui/downloads/pending/remove-download-button.tsx
-#: src/ui/downloads/pending/remove-downloads-button.tsx
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/chat-messages/export-chat-messages-button.tsx
-#: src/ui/match/duels/players-duels-matrix.tsx
-#: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
-#: src/ui/match/heatmap/match-heatmap.tsx
-#: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
-#: src/ui/player/use-update-player-comment.tsx
-#: src/ui/players/players-tags-dialogs.tsx
-#: src/ui/search/filters/search-maps-input.tsx
-#: src/ui/search/filters/search-players-input.tsx
-#: src/ui/settings/about/clear-logs-button.tsx
-#: src/ui/settings/bans/use-ignored-steam-account.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-#: src/ui/settings/maps/add-map-dialog.tsx
-#: src/ui/settings/maps/edit-map-dialog.tsx
-#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
-#: src/ui/settings/ui/reset-tables-state.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-#: src/ui/team/heatmap/team-heatmap.tsx
-#: src/ui/videos/use-remove-videos.tsx
-#: src/ui/videos/video-entry.tsx
-msgid "An error occurred"
-msgstr "出现错误"
 
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
@@ -470,6 +484,7 @@ msgctxt "Button"
 msgid "Reveal"
 msgstr "显示"
 
+#. placeholder {0}: window.csdm.platform
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 #: src/ui/components/context-menu/items/reveal-file-in-explorer-item.tsx
@@ -588,6 +603,12 @@ msgstr "删除"
 msgctxt "Context menu"
 msgid "Details"
 msgstr "详细信息"
+
+#: src/ui/components/context-menu/items/details-item.tsx
+#: src/ui/components/context-menu/items/rename-item.tsx
+msgctxt "Keyboard shortcut"
+msgid "Enter"
+msgstr ""
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
 msgctxt "Context menu"
@@ -816,6 +837,10 @@ msgid "Rounds"
 msgstr "回合"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "Demo analysis"
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
 msgstr "{demosSourceNotSupportedCount, plural, one {不支持录像源} other {#不支持录像的来源}}"
 
@@ -836,6 +861,7 @@ msgctxt "Checkbox label"
 msgid "Analyze demos already in database?"
 msgstr "分析数据库中已有的录像？"
 
+#. placeholder {0}: demosToAnalyze.length
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{0, plural, one {# demo will be analyzed} other {# demos will be analyzed}}"
 msgstr "{0, plural, one {# 将进行对录像的分析} other {# 将进行对录像的分析}}"
@@ -868,27 +894,38 @@ msgstr "Counter-Strike 正在运行。"
 msgid "Do you want to close the game and continue?"
 msgstr "您想关闭游戏并继续吗"
 
+#. placeholder {0}: deletedDemos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo has been deleted.} other {# demos deleted.}}"
 msgstr "{0, plural, one {# 录像已被删除} other {# 已删除录像}}"
 
+#. placeholder {0}: notDeletedDemos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr "{0, plural, one {# 录像已被删除} other {# 已删除录像}}"
 
+#. placeholder {0}: checksums.length
+#. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 #: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
 msgstr "{0, plural, one {删除录像} other {删除录像}}"
 
+#. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
 msgstr "{0, plural, one {录像只会从您的系统文件中删除，而不是数据库。} other {这些录像只会从您的系统文件中删除，而不是数据库。}}"
 
+#. placeholder {0}: checksums.length
 #: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
 msgstr "{0, plural, one {录像只会从您的数据库中删除，而不是系统文件。} other {这些录像只会从您的数据库中删除，而不是系统文件。}}"
 
+#: src/ui/components/dialogs/delete-matches-dialog.tsx
+msgid "Delete matches"
+msgstr ""
+
+#. placeholder {0}: checksums.length
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "{0, plural, one {The match will be deleted only from the database not your filesystem.} other {These matches will be deleted only from the database not your filesystem.}}"
 msgstr "{0, plural, one {比赛只会从您的数据库中删除，而不是系统文件。} other {这些比赛只会从您的数据库中删除，而不是系统文件。}}"
@@ -1011,6 +1048,10 @@ msgstr "工作表"
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Invalid name."
 msgstr "无效名称。"
+
+#: src/ui/components/dialogs/rename-dialog.tsx
+msgid "Rename"
+msgstr ""
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Only the name visible from the application will change, it will not change the filename on your operating system."
@@ -1203,6 +1244,11 @@ msgstr "标签"
 msgctxt "Weapons filter label"
 msgid "Weapons"
 msgstr "武器"
+
+#. js-lingui-explicit-id
+#: src/ui/components/heatmap/export-heatmap-button.tsx
+msgid "os.dialogTitle.exportAsPNG"
+msgstr ""
 
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 msgctxt "Toast"
@@ -1401,11 +1447,47 @@ msgctxt "Filter teams name category"
 msgid "Teams"
 msgstr "团队"
 
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.pistol"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.smg"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.rifle"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.sniper"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.shotgun"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.machineGun"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.grenade"
+msgstr ""
+
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
 msgid "Weapon types"
 msgstr "武器类型"
 
+#. placeholder {0}: window.csdm.platform
 #: src/ui/components/inputs/text-input-filter.tsx
 msgctxt "Input placeholder"
 msgid "{0, select, darwin {Filter… (⌘+F)} other {Filter… (CTRL+F)}}"
@@ -2441,6 +2523,7 @@ msgstr "在数据库中"
 msgid "Not in database"
 msgstr "不在数据库中"
 
+#. placeholder {0}: table.getRowCount()
 #: src/ui/demos/table/demos-count.tsx
 msgid "{0, plural, one {# demo} other {# demos}}"
 msgstr "{0, plural, one {# 录像} other {# 录像}}"
@@ -2578,9 +2661,19 @@ msgid "Confirm"
 msgstr "确认"
 
 #: src/ui/dialogs/tags-dialog.tsx
+#: src/ui/match/rounds/overview/rounds-history.tsx
 #: src/ui/settings/settings-tabs.tsx
 msgid "Tags"
 msgstr "标签"
+
+#: src/ui/dialogs/update-demo-location-dialog.tsx
+#: src/ui/match/video/update-demo-location.tsx
+msgid "This demo checksum doesn't match the one associated with the match."
+msgstr "此demo校验与比赛信息不匹配"
+
+#: src/ui/dialogs/update-demo-location-dialog.tsx
+msgid "An error occurred while updating demo location."
+msgstr ""
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
 msgid "Demo location"
@@ -2950,6 +3043,16 @@ msgstr "获取最近的比赛信息中…"
 msgid "No matches found for the current Steam account."
 msgstr "未找到当前 Steam 账号匹配的数据."
 
+#. js-lingui-explicit-id
+#: src/ui/hooks/use-boolean-to-human.ts
+msgid "yes"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/hooks/use-boolean-to-human.ts
+msgid "no"
+msgstr ""
+
 #: src/ui/hooks/use-clipboard.tsx
 msgctxt "Toast"
 msgid "Copied to clipboard"
@@ -3249,6 +3352,10 @@ msgstr "观察者"
 msgctxt "Team side"
 msgid "Unassigned"
 msgstr "未分配"
+
+#: src/ui/hooks/use-update-demo-location.ts
+msgid "Select demo's path"
+msgstr ""
 
 #: src/ui/keyboard/keyboard-shortcut.ts
 msgctxt "Keyboard shortcut"
@@ -3585,6 +3692,7 @@ msgstr "获胜方"
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Equipment value"
 msgstr "装备价值"
@@ -3637,11 +3745,15 @@ msgid "No grenades found."
 msgstr "未发现手榴弹。"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
 msgctxt "Table header"
 msgid "Player"
 msgstr "玩家"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
 msgctxt "Table header tooltip"
 msgid "Player's name"
 msgstr "玩家名称"
@@ -3753,6 +3865,10 @@ msgstr "<0>{flasherName}</0>致盲了<1>{flashedName}</1>大约<2>{duration}秒<
 msgid "Players flashbang matrix"
 msgstr "玩家闪光弹数据矩阵"
 
+#: src/ui/match/grenades/stats/stats-label.tsx
+msgid "Thrown"
+msgstr ""
+
 #: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
 msgstr "获取比赛信息中…"
@@ -3845,6 +3961,10 @@ msgstr "观看特定时刻"
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgid "The playback will start at the specified tick."
 msgstr "回放将会从指定的时刻开始播放"
+
+#: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
+msgid "Tick"
+msgstr ""
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgctxt "Button"
@@ -4325,6 +4445,28 @@ msgctxt "Tooltip"
 msgid "Watch kill"
 msgstr "观看击杀"
 
+#: src/ui/match/players/match-players-loader.tsx
+msgid "No players found."
+msgstr ""
+
+#: src/ui/match/players/match-players.tsx
+#: src/ui/settings/downloads/use-add-faceit-account.tsx
+msgid "Player not found."
+msgstr "未找到该玩家"
+
+#: src/ui/match/players/match-players.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Kills"
+msgstr "击杀数"
+
+#: src/ui/match/players/match-players.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Deaths"
+msgstr "死亡数"
+
 #: src/ui/match/players/player-action-bar.tsx
 msgctxt "Tooltip"
 msgid "Banned player"
@@ -4372,11 +4514,13 @@ msgstr "精准度"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash"
 msgstr "经济"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash spent"
@@ -4392,6 +4536,14 @@ msgctxt "Tooltip"
 msgid "Watch round"
 msgstr "观看回合"
 
+#: src/ui/match/rounds/overview/rounds-history.tsx
+msgid "Round"
+msgstr ""
+
+#: src/ui/match/rounds/overview/rounds.tsx
+msgid "No rounds found."
+msgstr ""
+
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "No clutches in this round"
 msgstr "本回合没有关键残局"
@@ -4403,6 +4555,10 @@ msgstr "{clutcherName} 赢得了1vs {opponentCount}"
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "{clutcherName} lost a 1v{opponentCount}"
 msgstr "{clutcherName} 输掉了1v{opponentCount}"
+
+#: src/ui/match/rounds/round/end-reason.tsx
+msgid "Unknown"
+msgstr ""
 
 #: src/ui/match/rounds/round/end-reason.tsx
 msgctxt "Panel title"
@@ -4427,12 +4583,6 @@ msgid "Time alive"
 msgstr "存活时间"
 
 #: src/ui/match/rounds/round/players-information.tsx
-#: src/ui/match/rounds/round/players-information.tsx
-#: src/ui/match/weapons/weapons-accuracy.tsx
-msgid "Kills"
-msgstr "击杀数"
-
-#: src/ui/match/rounds/round/players-information.tsx
 msgid "Headshot kills"
 msgstr "爆头击杀"
 
@@ -4451,11 +4601,6 @@ msgstr "被致盲时的击杀"
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Chicken kills"
 msgstr "鸡的击杀数"
-
-#: src/ui/match/rounds/round/players-information.tsx
-#: src/ui/match/rounds/round/players-information.tsx
-msgid "Deaths"
-msgstr "死亡数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Trade deaths"
@@ -4569,6 +4714,15 @@ msgctxt "Dialog title"
 msgid "Error"
 msgstr "错误"
 
+#: src/ui/match/video/cfg-input.tsx
+msgctxt "Input placeholder"
+msgid ""
+"CFG executed at the beginning of the sequence.\n"
+"\n"
+"Example:\n"
+"cl_draw_only_deathnotices 0"
+msgstr ""
+
 #: src/ui/match/video/close-game-after-recording-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Close the game when recording is done"
@@ -4664,6 +4818,16 @@ msgstr ""
 #: src/ui/match/video/focus-camera-player-select.tsx
 msgctxt "Checkbox label"
 msgid "Focus camera on player"
+msgstr ""
+
+#: src/ui/match/video/framerate-input.tsx
+msgctxt "Input label"
+msgid "Framerate"
+msgstr ""
+
+#: src/ui/match/video/framerate-input.tsx
+msgctxt "Input placeholder"
+msgid "Framerate"
 msgstr ""
 
 #: src/ui/match/video/generate-only-raw-files-checkbox.tsx
@@ -4802,6 +4966,14 @@ msgctxt "Input label"
 msgid "Config folder"
 msgstr "配置文件夹"
 
+#: src/ui/match/video/hlae/hlae-config-folder-path.tsx
+msgid "Config folder"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-config-folder-path.tsx
+msgid "Select config folder"
+msgstr ""
+
 #: src/ui/match/video/hlae/hlae-install-button.tsx
 msgid "Installing HLAE…"
 msgstr "正在安装HLAE..."
@@ -4831,10 +5003,40 @@ msgstr "HLAE 已更新"
 msgid "An error occurred while updating HLAE"
 msgstr "在更新 HLAE 时发生了错误"
 
+#. Input placeholder
+#: src/ui/match/video/output-folder-path.tsx
+msgid "Output folder"
+msgstr ""
+
+#: src/ui/match/video/output-folder-path.tsx
+msgctxt "Input label"
+msgid "Output folder"
+msgstr ""
+
+#: src/ui/match/video/output-folder-path.tsx
+msgctxt "Dialog title"
+msgid "Select output folder"
+msgstr ""
+
 #: src/ui/match/video/player-voices-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Player voices"
 msgstr "玩家语音"
+
+#. Input placeholder
+#: src/ui/match/video/raw-files-folder-path.tsx
+msgid "Raw files folder"
+msgstr ""
+
+#: src/ui/match/video/raw-files-folder-path.tsx
+msgctxt "Input label"
+msgid "Raw files folder"
+msgstr ""
+
+#: src/ui/match/video/raw-files-folder-path.tsx
+msgctxt "Dialog title"
+msgid "Select raw files folder"
+msgstr ""
 
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
@@ -4845,6 +5047,11 @@ msgstr "重置设置"
 msgctxt "Input label"
 msgid "End tick"
 msgstr "结束时刻"
+
+#: src/ui/match/video/sequence/end-tick-input.tsx
+msgctxt "Input placeholder"
+msgid "End tick"
+msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
@@ -5085,6 +5292,27 @@ msgid "CFG"
 msgstr "配置"
 
 #: src/ui/match/video/sequence/sequence-death-notices.tsx
+#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Show kills"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Highlight kills kills"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgctxt "Table header"
+msgid "Actions"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Actions"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
 msgid "Death notices"
 msgstr "死亡通知"
 
@@ -5102,6 +5330,12 @@ msgctxt "Input label"
 msgid "Start tick"
 msgstr "开始时刻"
 
+#: src/ui/match/video/sequence/start-tick-input.tsx
+msgctxt "Input placeholder"
+msgid "Start tick"
+msgstr ""
+
+#. placeholder {0}: sequences.length
 #: src/ui/match/video/sequences-summary.tsx
 msgid "{0, plural, one {# sequence} other {# sequences}}"
 msgstr "{0, plural, one {# 录像} other {# 录像}}"
@@ -5115,6 +5349,11 @@ msgstr "增加新的镜头"
 msgctxt "Button"
 msgid "Delete sequences"
 msgstr "删除镜头"
+
+#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Highlight kills"
+msgstr ""
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgid "No sequences to edit"
@@ -5160,6 +5399,23 @@ msgctxt "Context menu"
 msgid "Edit"
 msgstr "编辑"
 
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgid "Sequence #{number}"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgid "Tick: {startTick} to {endTick}"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgid "Duration {durationInSeconds}s"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgid "Camera on {playerName}"
+msgstr ""
+
 #: src/ui/match/video/show-only-death-notices-checkbox.tsx
 msgctxt "Input label"
 msgid "Show only death notices"
@@ -5174,10 +5430,6 @@ msgstr "预览"
 msgctxt "Software installation status"
 msgid "Not installed"
 msgstr "未安装"
-
-#: src/ui/match/video/update-demo-location.tsx
-msgid "This demo checksum doesn't match the one associated with the match."
-msgstr "此demo校验与比赛信息不匹配"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
@@ -5343,6 +5595,26 @@ msgid "HS%"
 msgstr "爆头率%"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Rifles"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Pistols"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "SMGs"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Snipers"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Machine guns"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Head"
 msgstr "头部"
 
@@ -5438,6 +5710,7 @@ msgstr "未找到与筛选结果匹配的比赛。"
 msgid "No match found yet, you have to analyze demos to generate matches."
 msgstr "尚未找到比赛，您必须分析录像后才能生成匹配的比赛。"
 
+#. placeholder {0}: table.getSelectedRowCount()
 #: src/ui/matches/table/selected-match-count.tsx
 msgid "{0, plural, one {# match selected} other {# matches selected}}"
 msgstr "{0, plural, one {# 录像已选择} other {# 录像已选择}}"
@@ -5701,10 +5974,12 @@ msgstr "{gameBannedPlayerCount, plural, other {# 游戏封禁}}"
 msgid "{communityBannedPlayerCount, plural, one {# community ban} other {# community bans}}"
 msgstr "{communityBannedPlayerCount, plural, other {# 社区封禁}}"
 
+#. placeholder {0}: table.getRowCount()
 #: src/ui/players/table/player-count.tsx
 msgid "{0, plural, one {# player} other {# players}}"
 msgstr "{0, plural, other {# 玩家}}"
 
+#. placeholder {0}: table.getSelectedRowCount()
 #: src/ui/players/table/selected-player-count.tsx
 msgid "{0, plural, one {# player selected} other {# players selected}}"
 msgstr "{0, plural, other {# 玩家已选择}}"
@@ -6066,6 +6341,10 @@ msgid "Disconnect"
 msgstr "断开连接"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
+msgid "JSON file"
+msgstr ""
+
+#: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You must select at least one data to import."
 msgstr "您必须选择至少一项数据进行导入。"
 
@@ -6248,10 +6527,6 @@ msgid "In the meantime, you have to download demos from your browser."
 msgstr ""
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
-msgid "Player not found."
-msgstr "未找到该玩家"
-
-#: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The FACEIT API returned a 401 code, please check you API key."
 msgstr "FACEIT API 返回了一个401错误, 请检查您的 API 密钥。"
 
@@ -6319,6 +6594,10 @@ msgid "This map already exists."
 msgstr "此地图已经存在"
 
 #: src/ui/settings/maps/delete-map-dialog.tsx
+msgid "Delete map"
+msgstr ""
+
+#: src/ui/settings/maps/delete-map-dialog.tsx
 msgid "Do you want to delete this map?"
 msgstr "你想要删除这张地图吗？"
 
@@ -6342,6 +6621,11 @@ msgstr "小地图（雷达）尺寸必须为 {fileWidth}x{fileHeight}."
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "Invalid PNG file."
 msgstr "无效的 PNG 文件。"
+
+#: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
+#: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
+msgid "PNG Files"
+msgstr ""
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 msgctxt "Input label"
@@ -6376,6 +6660,10 @@ msgstr "阈值Z是必需选择的。"
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Scale is required."
 msgstr "缩放必须填写"
+
+#: src/ui/settings/maps/map-dialog/radar-input.tsx
+msgid "'PNG Files"
+msgstr ""
 
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgctxt "Input label"
@@ -6772,10 +7060,12 @@ msgstr ""
 msgid "No team found, you have to analyze demos to generate teams."
 msgstr ""
 
+#. placeholder {0}: table.getSelectedRowCount()
 #: src/ui/teams/table/selected-team-count.tsx
 msgid "{0, plural, one {# team selected} other {# teams selected}}"
 msgstr ""
 
+#. placeholder {0}: table.getRowCount()
 #: src/ui/teams/table/team-count.tsx
 msgid "{0, plural, one {# team} other {# teams}}"
 msgstr ""

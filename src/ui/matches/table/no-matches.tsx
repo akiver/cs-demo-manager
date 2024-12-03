@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { CenteredContent } from 'csdm/ui/components/content';
 import { useActiveMatchesFilters } from '../use-active-matches-filters';
 import { useFuzzySearchText } from '../use-fuzzy-search-text';

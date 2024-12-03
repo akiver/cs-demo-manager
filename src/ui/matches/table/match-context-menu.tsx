@@ -26,7 +26,7 @@ import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
 import { ExportPlayersVoiceItem } from 'csdm/ui/components/context-menu/items/export-players-voice-item';
 import { UpdateTeamNamesDialog } from '../dialogs/update-team-names-dialog';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 
 type Props = {
   matchChecksums: string[];

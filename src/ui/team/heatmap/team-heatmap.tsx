@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Heatmap } from 'csdm/ui/components/heatmap/heatmap';
 import { Content } from 'csdm/ui/components/content';
 import { useTeamProfileSettings } from 'csdm/ui/settings/use-team-profile-settings';

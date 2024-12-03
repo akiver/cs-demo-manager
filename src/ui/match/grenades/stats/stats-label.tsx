@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/react/macro';
 import { FlashbangLabels } from 'csdm/ui/match/grenades/stats/labels/flashbang-labels';
 import { FireLabels } from 'csdm/ui/match/grenades/stats/labels/fire-labels';
 import { HeGrenadeLabels } from 'csdm/ui/match/grenades/stats/labels/he-grenade-labels';
@@ -28,7 +29,7 @@ type Props = {
 export function StatsLabel({ grenade }: Props) {
   return (
     <div className="col-start-2 row-start-2 mx-8 mt-auto">
-      <StatLabel text="Thrown" />
+      <StatLabel text={<Trans>Thrown</Trans>} />
       {renderLabelsForGrenade(grenade)}
     </div>
   );

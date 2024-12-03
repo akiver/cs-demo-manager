@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useIsVirtualDubInstalled } from 'csdm/ui/match/video/virtualdub/use-is-virtual-dub-installed';
 import { InstallButton } from 'csdm/ui/components/buttons/install-button';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';

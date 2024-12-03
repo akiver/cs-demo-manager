@@ -1,5 +1,5 @@
 import React, { useEffect, useState, type ReactNode } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -14,7 +14,6 @@ import type {
   ExportDemoPlayersVoiceProgressPayload,
 } from 'csdm/server/handlers/renderer-process/demo/export-demo-players-voice-handler';
 import { ErrorCode } from 'csdm/common/error-code';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import { ExternalLink } from 'csdm/ui/components/external-link';
@@ -161,16 +160,14 @@ type Props = {
 export function ExportPlayersVoiceItem({ demoPaths }: Props) {
   const client = useWebSocketClient();
   const { showDialog } = useDialog();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const onClick = async () => {
     const { filePaths, canceled } = await window.csdm.showOpenDialog({
-      buttonLabel: _(
-        msg({
-          context: 'Button label',
-          message: 'Export',
-        }),
-      ),
+      buttonLabel: t({
+        context: 'Button label',
+        message: 'Export',
+      }),
       defaultPath: window.csdm.getPathDirectoryName(demoPaths[0]),
       properties: ['openDirectory'],
     });

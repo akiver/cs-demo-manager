@@ -1,12 +1,11 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { roundNumber } from 'csdm/common/math/round-number';
 import type { Axis } from './x-axis';
 import { usePlayerChartOptions } from './use-player-chart-options';
 import { buildAveragePlayerChartData } from './build-average-player-chart-data';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { usePlayer } from '../use-player';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   axis: Axis;
@@ -14,7 +13,7 @@ type Props = {
 
 export function KillDeathRatioChart({ axis }: Props) {
   const { chartsData } = usePlayer();
-  const _ = useI18n();
+  const { t } = useLingui();
   const data: [string, number][] = buildAveragePlayerChartData({
     field: 'killDeathRatio',
     chartsData,
@@ -37,18 +36,14 @@ export function KillDeathRatioChart({ axis }: Props) {
     data: data,
     minValue: Math.max(0, roundNumber(minValue - 0.1, 1)),
     maxValue: roundNumber(maxValue + 0.1, 1),
-    title: _(
-      msg({
-        context: 'Chart title',
-        message: 'Kill/death over time',
-      }),
-    ),
-    name: _(
-      msg({
-        context: 'Chart axis label kill death ratio',
-        message: 'K/D',
-      }),
-    ),
+    title: t({
+      context: 'Chart title',
+      message: 'Kill/death over time',
+    }),
+    name: t({
+      context: 'Chart axis label kill death ratio',
+      message: 'K/D',
+    }),
     yLineParallelToXAxisValue: (maxValue + minValue) / 2,
   });
 

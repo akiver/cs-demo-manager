@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { CheckIcon } from 'csdm/ui/icons/check-icon';
 import { MapIcon } from 'csdm/ui/icons/map-icon';
 import { useViewerContext } from '../use-viewer-context';

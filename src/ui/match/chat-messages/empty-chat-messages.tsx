@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { DemoSource, Game } from 'csdm/common/types/counter-strike';
 import { CenteredContent } from 'csdm/ui/components/content';
 import { useCurrentMatch } from '../use-current-match';

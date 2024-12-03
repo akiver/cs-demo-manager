@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { ErrorCode } from 'csdm/common/error-code';
 import { DownloadStatus } from 'csdm/common/types/download-status';

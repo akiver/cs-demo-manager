@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { Demo } from 'csdm/ui/demo/demo';
 import { Status } from 'csdm/common/types/status';

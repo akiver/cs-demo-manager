@@ -1,11 +1,10 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function WidthResolutionInput() {
-  const _ = useI18n();
+  const { t } = useLingui();
   const { settings, updateSettings } = useVideoSettings();
   const minimalWidth = 800;
 
@@ -29,12 +28,10 @@ export function WidthResolutionInput() {
       onBlur={onBlur}
       defaultValue={settings.width}
       min={minimalWidth}
-      placeholder={_(
-        msg({
-          context: 'Input placeholder',
-          message: 'Width',
-        }),
-      )}
+      placeholder={t({
+        context: 'Input placeholder',
+        message: 'Width',
+      })}
     />
   );
 }

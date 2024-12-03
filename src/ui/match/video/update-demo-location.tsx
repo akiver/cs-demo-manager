@@ -1,5 +1,5 @@
 import React, { useState, type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { CenteredContent } from 'csdm/ui/components/content';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { ErrorCode } from 'csdm/common/error-code';

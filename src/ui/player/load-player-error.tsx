@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Message } from '../components/message';
 import { useActivePlayerFilters } from './use-active-player-filters';
 import { ErrorCode } from 'csdm/common/error-code';

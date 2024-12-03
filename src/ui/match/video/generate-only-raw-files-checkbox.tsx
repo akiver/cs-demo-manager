@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 

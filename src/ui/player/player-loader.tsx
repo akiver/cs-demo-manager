@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';
 import { usePlayerState } from './use-player-state';

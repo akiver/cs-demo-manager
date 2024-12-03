@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Demo } from 'csdm/common/types/demo';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { useProcessDemosToAnalyze } from 'csdm/ui/hooks/use-process-demos-to-analyze';

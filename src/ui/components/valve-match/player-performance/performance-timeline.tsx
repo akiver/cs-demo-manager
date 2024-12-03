@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { PerformanceTimeLineBar } from 'csdm/ui/components/valve-match/player-performance/performance-timeline-bar';
 import type { ValvePlayer } from 'csdm/common/types/valve-match';
 import type { Game } from 'csdm/common/types/counter-strike';

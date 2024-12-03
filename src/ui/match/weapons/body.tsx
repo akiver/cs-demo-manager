@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import React, { useState, useLayoutEffect } from 'react';
 import type { ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useFloating, computePosition, offset } from '@floating-ui/react';
 import type { HumanBodyData } from './weapons-accuracy';
 

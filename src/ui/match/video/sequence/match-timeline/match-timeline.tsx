@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu';
 import type { Group, Item } from 'csdm/ui/components/timeline/use-timeline';
 import { useTimeline } from 'csdm/ui/components/timeline/use-timeline';
@@ -14,10 +14,9 @@ import { RoundItem } from './round-item';
 import { TickContextMenu } from './tick-context-menu';
 import { TimeMarker } from './time-marker';
 import { useSequenceForm } from '../use-sequence-form';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 function useBuildRoundsGroup(match: Match, pixelsPerTick: number, ticksPerSecond: number): Group {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const itemHeight = 40;
   const items: Item[] = match.rounds.map((round) => {
@@ -33,19 +32,17 @@ function useBuildRoundsGroup(match: Match, pixelsPerTick: number, ticksPerSecond
 
   return {
     id: 'rounds',
-    label: _(
-      msg({
-        message: 'Rounds',
-        context: 'Timeline group label',
-      }),
-    ),
+    label: t({
+      message: 'Rounds',
+      context: 'Timeline group label',
+    }),
     height: itemHeight,
     items,
   };
 }
 
 function useBuildKillsGroup(match: Match, pixelsPerTick: number): Group {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const items: Item[] = [];
   let currentY = 0;
@@ -80,19 +77,17 @@ function useBuildKillsGroup(match: Match, pixelsPerTick: number): Group {
 
   return {
     id: 'kills',
-    label: _(
-      msg({
-        message: 'Kills',
-        context: 'Timeline group label',
-      }),
-    ),
+    label: t({
+      message: 'Kills',
+      context: 'Timeline group label',
+    }),
     height: groupHeight,
     items: items,
   };
 }
 
 function useBuildBombGroup(match: Match, pixelsPerTick: number): Group {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const items: Item[] = [];
   const iconSize = 20;
@@ -124,12 +119,10 @@ function useBuildBombGroup(match: Match, pixelsPerTick: number): Group {
 
   return {
     id: 'bombs',
-    label: _(
-      msg({
-        message: 'Bomb',
-        context: 'Timeline group label',
-      }),
-    ),
+    label: t({
+      message: 'Bomb',
+      context: 'Timeline group label',
+    }),
     height: iconSize * 2,
     items: items,
   };
@@ -141,7 +134,7 @@ export function MatchTimeline() {
   const startTick = Number(sequence.startTick);
   const endTick = Number(sequence.endTick);
   const { showContextMenu } = useContextMenu();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const onContextMenu = (event: MouseEvent, tick: number) => {
     showContextMenu(event, <TickContextMenu tick={tick} />);
@@ -181,24 +174,20 @@ export function MatchTimeline() {
             <TimeMarker
               tick={startTick}
               pixelsPerTick={pixelsPerTick}
-              text={_(
-                msg({
-                  message: 'Start tick',
-                  context: 'Tooltip',
-                }),
-              )}
+              text={t({
+                message: 'Start tick',
+                context: 'Tooltip',
+              })}
             />
           )}
           {endTick > 0 && (
             <TimeMarker
               tick={endTick}
               pixelsPerTick={pixelsPerTick}
-              text={_(
-                msg({
-                  message: 'End tick',
-                  context: 'Tooltip',
-                }),
-              )}
+              text={t({
+                message: 'End tick',
+                context: 'Tooltip',
+              })}
             />
           )}
           {render(groups)}

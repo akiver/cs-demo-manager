@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { MAP_RADAR_SIZE } from 'csdm/ui/maps/maps-constants';
 import { useHeatmapContext } from './heatmap-context';
 import { HeatmapRenderer, type HeatmapPoint } from 'csdm/ui/shared/heatmap-renderer';

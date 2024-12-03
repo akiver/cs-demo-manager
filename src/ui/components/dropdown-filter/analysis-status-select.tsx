@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { AnalysisStatusFilter } from 'csdm/common/types/analysis-status-filter';
 import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 import { ActiveFilterIndicator } from './active-filter-indicator';

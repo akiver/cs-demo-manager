@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
@@ -10,6 +10,7 @@ export function LanguageSelect() {
   const locale = useLocale();
   const updateSettings = useUpdateSettings();
 
+  /* eslint-disable lingui/no-unlocalized-strings */
   const options: SelectOption[] = [
     {
       value: 'en',
@@ -32,6 +33,7 @@ export function LanguageSelect() {
       label: 'Deutsch',
     },
   ];
+  /* eslint-enable lingui/no-unlocalized-strings */
 
   return (
     <SettingsEntry

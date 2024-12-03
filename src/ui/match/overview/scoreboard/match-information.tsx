@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useSecondsToFormattedMinutes } from 'csdm/ui/hooks/use-seconds-to-formatted-minutes';
 import type { Match } from 'csdm/common/types/match';
 import { Tags } from 'csdm/ui/components/tags/tags';

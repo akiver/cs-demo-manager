@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { ContextMenuItem } from '../context-menu-item';
 
 type Props = {
@@ -7,12 +7,21 @@ type Props = {
 };
 
 export function RenameItem({ onClick }: Props) {
+  const { t } = useLingui();
+
   return (
     <ContextMenuItem onClick={onClick}>
       <p>
         <Trans context="Context menu">Rename</Trans>
       </p>
-      <p className="text-caption">{window.csdm.isMac ? 'Enter' : 'F2'}</p>
+      <p className="text-caption">
+        {window.csdm.isMac
+          ? t({
+              context: 'Keyboard shortcut',
+              message: 'Enter',
+            })
+          : 'F2'}
+      </p>
     </ContextMenuItem>
   );
 }

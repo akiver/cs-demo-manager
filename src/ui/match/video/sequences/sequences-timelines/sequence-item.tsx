@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { ContextMenu } from 'csdm/ui/components/context-menu/context-menu';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
@@ -45,12 +45,16 @@ type TooltipProps = {
 };
 
 function TooltipContent({ sequence, durationInSeconds, focusPlayer }: TooltipProps) {
+  const { t } = useLingui();
+  const { number, startTick, endTick } = sequence;
+  const playerName = focusPlayer?.name;
+
   return (
     <div>
-      <p>{`Sequence #${sequence.number}`}</p>
-      <p>{`Tick: ${sequence.startTick} to ${sequence.endTick}`}</p>
-      <p>{`Duration ${durationInSeconds}s`}</p>
-      {focusPlayer !== undefined && <p>{`Camera on ${focusPlayer.name}`}</p>}
+      <p>{t`Sequence #${number}`}</p>
+      <p>{t`Tick: ${startTick} to ${endTick}`}</p>
+      <p>{t`Duration ${durationInSeconds}s`}</p>
+      {playerName !== undefined && <p>{t`Camera on ${playerName}`}</p>}
     </div>
   );
 }
@@ -64,12 +68,14 @@ type Props = {
 };
 
 export function SequenceItem({ sequence, players, ticksPerSecond, isOverlapping, onEditClick }: Props) {
+  const { t } = useLingui();
   const { showContextMenu } = useContextMenu();
   const onContextMenu = (event: React.MouseEvent) => {
     showContextMenu(event.nativeEvent, <SequenceContextMenu sequence={sequence} onEditClick={onEditClick} />);
   };
   const durationInSeconds = Math.round((sequence.endTick - sequence.startTick) / ticksPerSecond);
   const focusPlayer = players.find((player) => player.steamId === sequence.playerFocusSteamId);
+  const playerName = focusPlayer?.name;
 
   return (
     <Tooltip
@@ -89,7 +95,7 @@ export function SequenceItem({ sequence, players, ticksPerSecond, isOverlapping,
           <p>{`#${sequence.number}`}</p>
           <p>{`${durationInSeconds}s`}</p>
           <p>{`${sequence.startTick}-${sequence.endTick}`}</p>
-          {focusPlayer !== undefined && <p>{`Camera on ${focusPlayer.name}`}</p>}
+          {playerName !== undefined && <p>{t`Camera on ${playerName}`}</p>}
         </div>
       </div>
     </Tooltip>

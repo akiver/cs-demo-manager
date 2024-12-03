@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { FileFilter, OpenDialogOptions, OpenDialogReturnValue } from 'electron';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { Button } from 'csdm/ui/components/buttons/button';

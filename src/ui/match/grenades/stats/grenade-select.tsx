@@ -1,9 +1,8 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { GrenadeOption } from 'csdm/ui/match/grenades/stats/grenade-option';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   onChange: (grenade: GrenadeOption) => void;
@@ -11,43 +10,35 @@ type Props = {
 };
 
 export function GrenadeSelect({ onChange, selectedGrenade }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const options: SelectOption<GrenadeOption>[] = [
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'Flashbang',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'Flashbang',
+      }),
       value: GrenadeOption.Flashbang,
     },
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'HE Grenade',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'HE Grenade',
+      }),
       value: GrenadeOption.HE,
     },
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'Fire',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'Fire',
+      }),
       value: GrenadeOption.Fire,
     },
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'Smoke',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'Smoke',
+      }),
       value: GrenadeOption.Smoke,
     },
   ];

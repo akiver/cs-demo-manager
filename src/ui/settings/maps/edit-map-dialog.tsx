@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import type { Map } from 'csdm/common/types/map';
@@ -9,10 +9,9 @@ import type { MapPayload } from 'csdm/server/handlers/renderer-process/map/map-p
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { MapFormDialog } from 'csdm/ui/settings/maps/map-dialog/map-form-dialog';
 import { NameInput } from 'csdm/ui/settings/maps/map-dialog/name-input';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function EditMapDialog() {
-  const _ = useI18n();
+  const { t } = useLingui();
   const client = useWebSocketClient();
   const dispatch = useDispatch();
   const { hideDialog } = useDialog();
@@ -27,7 +26,7 @@ export function EditMapDialog() {
       hideDialog();
       dispatch(updateMapSuccess({ map }));
     } catch (error) {
-      setError(_(msg`An error occurred`));
+      setError(t`An error occurred`);
     }
   };
 

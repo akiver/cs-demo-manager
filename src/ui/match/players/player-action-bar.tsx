@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Player } from 'csdm/common/types/player';
 import { ShieldIcon } from 'csdm/ui/icons/shield-icon';
 import { buildPlayerPath } from 'csdm/ui/routes-paths';

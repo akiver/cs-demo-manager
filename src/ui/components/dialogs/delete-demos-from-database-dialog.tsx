@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { plural } from '@lingui/macro';
+import { plural } from '@lingui/core/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { Status } from 'csdm/common/types/status';

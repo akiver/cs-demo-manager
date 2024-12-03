@@ -1,18 +1,17 @@
 import { ESLintUtils, ASTUtils, AST_NODE_TYPES } from '@typescript-eslint/utils';
 
 type Options = [];
-type MessagesIds = 'useLinguiMessage' | 'transComponentMessage';
+type MessagesIds = 'reactModuleMessage';
 
 /**
- * - Ensure we are using the internal useI18n hook instead of the useLingui hook from the @lingui/react module.
- * - Ensure that we use the macro version of the Trans component, not the one from the @lingui/react module.
- *   extracted. See https://lingui.dev/guides/message-extraction#non-macro-usages
+ * Ensure that we use the macro lingui modules instead of @lingui/react.
+ * See https://lingui.dev/guides/message-extraction#supported-patterns for why we should use the macro modules.
+ * Note: no need to detect the usage of @lingui/macro which is deprecated since v5 as it's detected by the "no-deprecated" linter rule.
  */
 export const rule = ESLintUtils.RuleCreator.withoutDocs<Options, MessagesIds>({
   meta: {
     messages: {
-      useLinguiMessage: `Using useLingui from the @lingui/react module is forbidden.\nPlease use the internal hook 'useI18n' instead (csdm/ui/hooks/use-i18n).`,
-      transComponentMessage: `Using the Trans component from the @lingui/react module is forbidden.\nPlease use the one from the '@lingui/macro' module instead.`,
+      reactModuleMessage: `Using the @lingui/react module is forbidden.\nPlease use '@lingui/react/macro' instead.`,
     },
     schema: [],
     type: 'problem',
@@ -31,20 +30,13 @@ export const rule = ESLintUtils.RuleCreator.withoutDocs<Options, MessagesIds>({
             continue;
           }
 
-          if (specifier.imported.name === 'useLingui') {
+          // Allow to import only I18nProvider as we have to wrap the application with it.
+          if (specifier.imported.name !== 'I18nProvider') {
             context.report({
               node,
-              messageId: 'useLinguiMessage',
+              messageId: 'reactModuleMessage',
               fix: (fixer) => {
-                return fixer.replaceText(node, `import { useI18n } from 'csdm/ui/hooks/use-i18n';`);
-              },
-            });
-          } else if (specifier.imported.name === 'Trans') {
-            context.report({
-              node,
-              messageId: 'transComponentMessage',
-              fix: (fixer) => {
-                return fixer.replaceText(node.source, `'@lingui/macro'`);
+                return fixer.replaceText(node.source, `'@lingui/react/macro'`);
               },
             });
           }

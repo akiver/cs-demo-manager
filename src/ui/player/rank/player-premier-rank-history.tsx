@@ -1,5 +1,5 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { renderToString } from 'react-dom/server';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 import type { ChartOption, ChartTextStyle } from 'csdm/ui/hooks/use-chart';
@@ -7,13 +7,12 @@ import { useChart } from 'csdm/ui/hooks/use-chart';
 import { type PremierRank } from 'csdm/common/types/counter-strike';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 import { usePlayer } from '../use-player';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { PremierRank as PremierRankLogo } from 'csdm/ui/components/premier-rank';
 import { useGetWinCountTranslation } from './use-get-win-count-translation';
 
 export function PlayerPremierRankHistory() {
   const { premierRankHistory } = usePlayer();
-  const _ = useI18n();
+  const { t } = useLingui();
   const colors = useChartColors();
   const locale = useLocale();
   const getWinCountTranslation = useGetWinCountTranslation();
@@ -63,12 +62,10 @@ export function PlayerPremierRankHistory() {
       },
     },
     title: {
-      text: _(
-        msg({
-          context: 'Chart title',
-          message: 'Premier mode rank history',
-        }),
-      ),
+      text: t({
+        context: 'Chart title',
+        message: 'Premier mode rank history',
+      }),
       left: 'center',
       textStyle: {
         color: colors.titleTextColor,
@@ -78,12 +75,10 @@ export function PlayerPremierRankHistory() {
     color: ['#5ba7fe'],
     xAxis: {
       type: 'time',
-      name: _(
-        msg({
-          context: 'Chart axis label',
-          message: 'Date',
-        }),
-      ),
+      name: t({
+        context: 'Chart axis label',
+        message: 'Date',
+      }),
       axisLine: {
         show: true,
         lineStyle: {
@@ -102,12 +97,10 @@ export function PlayerPremierRankHistory() {
     },
     yAxis: {
       type: 'value',
-      name: _(
-        msg({
-          context: 'Chart axis label',
-          message: 'Rank',
-        }),
-      ),
+      name: t({
+        context: 'Chart axis label',
+        message: 'Rank',
+      }),
       axisLabel: {
         rich: richConfig,
         formatter: (value: number) => {

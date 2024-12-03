@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { CommentDotsIcon } from 'csdm/ui/icons/comment-dots-icon';
 import { Tooltip } from '../../tooltip';
 import type { CellProps } from '../table-types';

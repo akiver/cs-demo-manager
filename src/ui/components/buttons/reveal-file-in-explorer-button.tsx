@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from '@lingui/macro';
+import { Select } from '@lingui/react/macro';
 import type { ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { Button } from 'csdm/ui/components/buttons/button';
 

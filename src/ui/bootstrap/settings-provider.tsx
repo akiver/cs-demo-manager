@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
+import { Trans } from '@lingui/react/macro';
 import { settingsUpdated } from 'csdm/ui/settings/settings-actions';
 import { Status } from 'csdm/common/types/status';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
@@ -39,7 +40,7 @@ export function SettingsProvider({ children }: Props): ReactElement {
   }
 
   if (status === Status.Error) {
-    return <LoadingError title="An error occurred while loading settings." error={error} />;
+    return <LoadingError title={<Trans>An error occurred while loading settings.</Trans>} error={error} />;
   }
 
   return children;

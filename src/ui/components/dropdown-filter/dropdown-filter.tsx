@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { ChevronDown } from 'csdm/ui/icons/chevron-down-icon';
 import { useOutsideClick } from 'csdm/ui/hooks/use-outside-click';

@@ -1,47 +1,35 @@
+import { useLingui } from '@lingui/react/macro';
 import type { ChartOption } from 'csdm/ui/hooks/use-chart';
-import { msg } from '@lingui/macro';
 import { useUnixTimestampToHumanizedDate } from 'csdm/ui/hooks/use-unix-timestamp-to-humanized-date';
 import type { Axis } from './x-axis';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 import { assertNever } from 'csdm/common/assert-never';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 function useGetTimeAxisTitle() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const getTimeAxisTitle = (axis: Axis) => {
     switch (axis) {
       case 'day':
-        return _(
-          msg({
-            context: 'Select option time period',
-            message: 'Day',
-          }),
-        );
-
+        return t({
+          context: 'Select option time period',
+          message: 'Day',
+        });
       case 'month':
-        return _(
-          msg({
-            context: 'Select option time period',
-            message: 'Month',
-          }),
-        );
-
+        return t({
+          context: 'Select option time period',
+          message: 'Month',
+        });
       case 'year':
-        return _(
-          msg({
-            context: 'Select option time period',
-            message: 'Year',
-          }),
-        );
-
+        return t({
+          context: 'Select option time period',
+          message: 'Year',
+        });
       case 'match':
-        return _(
-          msg({
-            context: 'Select option time period',
-            message: 'Match',
-          }),
-        );
+        return t({
+          context: 'Select option time period',
+          message: 'Match',
+        });
       default:
         assertNever(axis, `Unsupported axis: ${axis}`);
     }

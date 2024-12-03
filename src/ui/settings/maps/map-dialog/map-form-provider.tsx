@@ -1,8 +1,7 @@
 import React, { useState, createContext } from 'react';
 import type { ReactNode } from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { Game } from 'csdm/common/types/counter-strike';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export type MapFormValues = {
   name: string;
@@ -53,14 +52,14 @@ type Props = {
 };
 
 export function MapFormProvider({ children, id, game, initialValues }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
   const [fields, setFields] = useState<MapField>({
     name: {
       value: initialValues?.name ?? '',
       error: undefined,
       validate(this: Field) {
         if (this.value === '') {
-          return _(msg`Name is required.`);
+          return t`Name is required.`;
         }
       },
     },
@@ -69,7 +68,7 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
       error: undefined,
       validate() {
         if (this.value === '') {
-          return _(msg`Coordinate X is required.`);
+          return t`Coordinate X is required.`;
         }
       },
     },
@@ -78,7 +77,7 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
       error: undefined,
       validate() {
         if (this.value === '') {
-          return _(msg`Coordinate Y is required.`);
+          return t`Coordinate Y is required.`;
         }
       },
     },
@@ -87,7 +86,7 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
       error: undefined,
       validate() {
         if (this.value === '') {
-          return _(msg`Threshold Z is required.`);
+          return t`Threshold Z is required.`;
         }
       },
     },
@@ -96,7 +95,7 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
       error: undefined,
       validate() {
         if (this.value === '') {
-          return _(msg`Scale is required.`);
+          return t`Scale is required.`;
         }
       },
     },

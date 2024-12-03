@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
 
 export function DatabaseSize() {
   const client = useWebSocketClient();
-  const [size, setDatabaseSize] = useState('0 MB');
+  const [size, setDatabaseSize] = useState('');
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import { useShowToast } from '../../toasts/use-show-toast';

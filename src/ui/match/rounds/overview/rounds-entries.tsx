@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SyncIcon } from 'csdm/ui/icons/sync-icon';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { useCurrentMatch } from '../../use-current-match';

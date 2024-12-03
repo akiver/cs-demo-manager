@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useSettingsOverlay } from 'csdm/ui/settings/use-settings-overlay';
 import { LeftBarTooltip } from './left-bar-tooltip';
 import { CogsIcon } from 'csdm/ui/icons/cogs-icon';

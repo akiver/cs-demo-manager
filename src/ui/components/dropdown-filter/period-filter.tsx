@@ -1,12 +1,11 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { differenceInDays } from 'date-fns';
 import type { DateRange } from 'react-day-picker';
 import { subtractDateDays } from 'csdm/common/date/subtract-date-days';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
 import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { addDateDays } from 'csdm/common/date/add-date-days';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { DatePicker } from '../date-picker';
 import { ActiveFilterIndicator } from './active-filter-indicator';
 
@@ -25,16 +24,14 @@ type FooterProps = {
 };
 
 function usePeriodPresets() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const allTime: Preset = {
     name: 'all-time',
-    label: _(
-      msg({
-        context: 'Period filter preset',
-        message: 'All time',
-      }),
-    ),
+    label: t({
+      context: 'Period filter preset',
+      message: 'All time',
+    }),
     daysAgo: undefined,
   };
 
@@ -42,72 +39,58 @@ function usePeriodPresets() {
     allTime,
     {
       name: 'today',
-      label: _(
-        msg({
-          context: 'Period filter preset',
-          message: 'Today',
-        }),
-      ),
+      label: t({
+        context: 'Period filter preset',
+        message: 'Today',
+      }),
       daysAgo: 0,
     },
     {
       name: 'last-week',
-      label: _(
-        msg({
-          context: 'Period filter preset',
-          message: 'Last week',
-        }),
-      ),
+      label: t({
+        context: 'Period filter preset',
+        message: 'Last week',
+      }),
       daysAgo: 7,
     },
     {
       name: 'last-month',
-      label: _(
-        msg({
-          context: 'Period filter preset',
-          message: 'Last month',
-        }),
-      ),
+      label: t({
+        context: 'Period filter preset',
+        message: 'Last month',
+      }),
       daysAgo: 30,
     },
     {
       name: 'last-3-month',
-      label: _(
-        msg({
-          context: 'Period filter preset',
-          message: 'Last 3 month',
-        }),
-      ),
+      label: t({
+        context: 'Period filter preset',
+        message: 'Last 3 month',
+      }),
       daysAgo: 90,
     },
     {
       name: 'last-year',
-      label: _(
-        msg({
-          context: 'Period filter preset',
-          message: 'Last year',
-        }),
-      ),
+      label: t({
+        context: 'Period filter preset',
+        message: 'Last year',
+      }),
       daysAgo: 365,
     },
     {
       name: 'last-2-years',
-      label: _(
-        msg({
-          context: 'Period filter preset',
-          message: 'Last 2 years',
-        }),
-      ),
+      label: t({
+        context: 'Period filter preset',
+        message: 'Last 2 years',
+      }),
       daysAgo: 365 * 2,
     },
     {
       name: 'last-5-years',
-      label: _(
-        msg({
-          context: 'Period filter preset',
-          message: 'Last 5 years',
-        }),
-      ),
+      label: t({
+        context: 'Period filter preset',
+        message: 'Last 5 years',
+      }),
       daysAgo: 365 * 5,
     },
   ];

@@ -1,5 +1,5 @@
 import React, { useState, type ReactNode } from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
@@ -13,7 +13,6 @@ import { useGetBoilerErrorMessageFromErrorCode } from 'csdm/ui/downloads/use-get
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { useIsCsRunning } from 'csdm/ui/hooks/use-is-cs-running';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 
 type State = {
@@ -33,7 +32,7 @@ function DownloadDemoFromShareCodeDialog() {
   const client = useWebSocketClient();
   const isCsRunning = useIsCsRunning();
   const { hideDialog } = useDialog();
-  const _ = useI18n();
+  const { t } = useLingui();
   const getBoilerErrorMessageFromErrorCode = useGetBoilerErrorMessageFromErrorCode();
   const { shareCode, status, error, csIsRunning } = state;
   const isShareCodeEmpty = shareCode.length === 0;
@@ -77,7 +76,7 @@ function DownloadDemoFromShareCodeDialog() {
           errorMessage = <Trans>The download link has expired.</Trans>;
           break;
         default:
-          errorMessage = getBoilerErrorMessageFromErrorCode(_(msg`An error occurred.`), error as ErrorCode);
+          errorMessage = getBoilerErrorMessageFromErrorCode(t`An error occurred.`, error as ErrorCode);
       }
 
       setState({

@@ -1,16 +1,15 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { ChartOption } from 'csdm/ui/hooks/use-chart';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { useCurrentMatch } from '../use-current-match';
 import { Panel } from 'csdm/ui/components/panel';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function TeamEquipmentValuesChart() {
   const match = useCurrentMatch();
   const colors = useChartColors();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const roundsNumber = match.rounds.map((round) => {
     return round.number;
@@ -73,12 +72,10 @@ export function TeamEquipmentValuesChart() {
     xAxis: [
       {
         type: 'category',
-        name: _(
-          msg({
-            message: 'Round',
-            context: 'Chart axis label',
-          }),
-        ),
+        name: t({
+          message: 'Round',
+          context: 'Chart axis label',
+        }),
         axisLine: {
           lineStyle: {
             color: colors.axisColor,
@@ -87,12 +84,10 @@ export function TeamEquipmentValuesChart() {
         axisPointer: {
           label: {
             formatter: ({ value: roundNumber }) => {
-              return _(
-                msg({
-                  message: `Round ${roundNumber}`,
-                  context: 'Chart axis tooltip',
-                }),
-              );
+              return t({
+                message: `Round ${roundNumber}`,
+                context: 'Chart axis tooltip',
+              });
             },
           },
         },
@@ -100,12 +95,10 @@ export function TeamEquipmentValuesChart() {
       },
       {
         type: 'category',
-        name: _(
-          msg({
-            message: 'Winner',
-            context: 'Chart label',
-          }),
-        ),
+        name: t({
+          message: 'Winner',
+          context: 'Chart label',
+        }),
         axisLine: {
           onZero: false,
           lineStyle: {
@@ -115,12 +108,10 @@ export function TeamEquipmentValuesChart() {
         axisPointer: {
           label: {
             formatter: ({ value: winnerName }) => {
-              return _(
-                msg({
-                  message: `Winner: ${winnerName}`,
-                  context: 'Chart tooltip',
-                }),
-              );
+              return t({
+                message: `Winner: ${winnerName}`,
+                context: 'Chart tooltip',
+              });
             },
           },
         },

@@ -1,5 +1,5 @@
 import React, { useState, type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { HitGroup, WeaponType, type TeamNumber, type WeaponName } from 'csdm/common/types/counter-strike';
 import type { Damage } from 'csdm/common/types/damage';
 import { Body } from './body';
@@ -384,6 +384,7 @@ function WeaponsTable({ weapons, title }: WeaponTableProps) {
 
 export function WeaponsAccuracy() {
   const match = useCurrentMatch();
+  const { t } = useLingui();
   const [filters, setFilters] = useState<Filter>({
     roundsNumber: [],
     teamNames: [],
@@ -450,11 +451,11 @@ export function WeaponsAccuracy() {
 
       <div className="flex flex-wrap gap-16">
         <div className="flex flex-col flex-wrap gap-12">
-          {rifles.length > 0 && <WeaponsTable title="Rifles" weapons={rifles} />}
-          {pistols.length > 0 && <WeaponsTable title="Pistols" weapons={pistols} />}
-          {smgs.length > 0 && <WeaponsTable title="SMGs" weapons={smgs} />}
-          {snipers.length > 0 && <WeaponsTable title="Snipers" weapons={snipers} />}
-          {machineGuns.length > 0 && <WeaponsTable title="Machine guns" weapons={machineGuns} />}
+          {rifles.length > 0 && <WeaponsTable title={t`Rifles`} weapons={rifles} />}
+          {pistols.length > 0 && <WeaponsTable title={t`Pistols`} weapons={pistols} />}
+          {smgs.length > 0 && <WeaponsTable title={t`SMGs`} weapons={smgs} />}
+          {snipers.length > 0 && <WeaponsTable title={t`Snipers`} weapons={snipers} />}
+          {machineGuns.length > 0 && <WeaponsTable title={t`Machine guns`} weapons={machineGuns} />}
         </div>
 
         <div className="flex h-fit">

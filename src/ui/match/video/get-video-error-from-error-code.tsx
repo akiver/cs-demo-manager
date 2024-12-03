@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ErrorCode } from 'csdm/common/error-code';
 import { ExternalLink } from 'csdm/ui/components/external-link';
 import { Game } from 'csdm/common/types/counter-strike';

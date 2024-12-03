@@ -1,10 +1,9 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   event: HeatmapEvent;
@@ -12,57 +11,41 @@ type Props = {
 };
 
 export function HeatmapSelectEvent({ event, onChange }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const eventMessage: Record<HeatmapEvent, string> = {
-    [HeatmapEvent.Kills]: _(
-      msg({
-        context: 'Heatmap event',
-        message: 'Kills',
-      }),
-    ),
-    [HeatmapEvent.Deaths]: _(
-      msg({
-        context: 'Heatmap event',
-        message: 'Deaths',
-      }),
-    ),
-    [HeatmapEvent.Shots]: _(
-      msg({
-        context: 'Heatmap event',
-        message: 'Shots',
-      }),
-    ),
-    [HeatmapEvent.HeGrenade]: _(
-      msg({
-        context: 'Heatmap event',
-        message: 'HE',
-      }),
-    ),
-    [HeatmapEvent.Flashbang]: _(
-      msg({
-        context: 'Heatmap event',
-        message: 'Flashbang',
-      }),
-    ),
-    [HeatmapEvent.Smoke]: _(
-      msg({
-        context: 'Heatmap event',
-        message: 'Smoke',
-      }),
-    ),
-    [HeatmapEvent.Molotov]: _(
-      msg({
-        context: 'Heatmap event',
-        message: 'Molotov',
-      }),
-    ),
-    [HeatmapEvent.Decoy]: _(
-      msg({
-        context: 'Heatmap event',
-        message: 'Decoy',
-      }),
-    ),
+    [HeatmapEvent.Kills]: t({
+      context: 'Heatmap event',
+      message: 'Kills',
+    }),
+    [HeatmapEvent.Deaths]: t({
+      context: 'Heatmap event',
+      message: 'Deaths',
+    }),
+    [HeatmapEvent.Shots]: t({
+      context: 'Heatmap event',
+      message: 'Shots',
+    }),
+    [HeatmapEvent.HeGrenade]: t({
+      context: 'Heatmap event',
+      message: 'HE',
+    }),
+    [HeatmapEvent.Flashbang]: t({
+      context: 'Heatmap event',
+      message: 'Flashbang',
+    }),
+    [HeatmapEvent.Smoke]: t({
+      context: 'Heatmap event',
+      message: 'Smoke',
+    }),
+    [HeatmapEvent.Molotov]: t({
+      context: 'Heatmap event',
+      message: 'Molotov',
+    }),
+    [HeatmapEvent.Decoy]: t({
+      context: 'Heatmap event',
+      message: 'Decoy',
+    }),
   };
 
   const options: SelectOption<HeatmapEvent>[] = Object.values(HeatmapEvent).map((event) => {

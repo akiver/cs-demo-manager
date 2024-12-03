@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ExplosionIcon } from 'csdm/ui/icons/explosion-icon';
 import { ContextMenu } from 'csdm/ui/components/context-menu/context-menu';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';

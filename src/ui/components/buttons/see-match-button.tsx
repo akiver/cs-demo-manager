@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './button';
 import { useNavigateToMatch } from 'csdm/ui/hooks/use-navigate-to-match';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 
 type Props = {
   checksum: string;

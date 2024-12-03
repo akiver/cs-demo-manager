@@ -6,6 +6,7 @@ type Options = {
 };
 
 export function useGameOptions({ includeCs2LimitedTest }: Options = { includeCs2LimitedTest: true }) {
+  /* eslint-disable lingui/no-unlocalized-strings */
   const options: SelectOption<Game>[] = [
     {
       value: Game.CS2,
@@ -23,6 +24,7 @@ export function useGameOptions({ includeCs2LimitedTest }: Options = { includeCs2
       label: 'CS2 Limited Test',
     });
   }
+  /* eslint-enable lingui/no-unlocalized-strings */
 
   return options;
 }

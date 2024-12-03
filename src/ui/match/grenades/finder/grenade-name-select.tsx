@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { GrenadeName } from 'csdm/common/types/counter-strike';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
@@ -7,66 +7,53 @@ import { Select } from 'csdm/ui/components/inputs/select';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { grenadeNameChanged } from 'csdm/ui/match/grenades/finder/grenades-finder-actions';
 import { useSelectedGrenadeName } from 'csdm/ui/match/grenades/finder/use-selected-grenade-name';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function GrenadeNameSelect() {
   const dispatch = useDispatch();
   const selectedGrenadeName = useSelectedGrenadeName();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const options: SelectOption<GrenadeName>[] = [
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'Smoke',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'Smoke',
+      }),
       value: GrenadeName.Smoke,
     },
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'Flashbang',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'Flashbang',
+      }),
       value: GrenadeName.Flashbang,
     },
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'HE Grenade',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'HE Grenade',
+      }),
       value: GrenadeName.HE,
     },
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'Decoy',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'Decoy',
+      }),
       value: GrenadeName.Decoy,
     },
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'Molotov',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'Molotov',
+      }),
       value: GrenadeName.Molotov,
     },
     {
-      label: _(
-        msg({
-          context: 'Grenade name',
-          message: 'Incendiary',
-        }),
-      ),
+      label: t({
+        context: 'Grenade name',
+        message: 'Incendiary',
+      }),
       value: GrenadeName.Incendiary,
     },
   ];

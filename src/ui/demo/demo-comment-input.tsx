@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { MarkdownEditor } from 'csdm/ui/components/inputs/markdown-editor';
 import { useUpdateComment } from 'csdm/ui/comment/use-update-comment';
 

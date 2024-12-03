@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { roundNumber } from 'csdm/common/math/round-number';
 import { useSequenceForm } from '../sequence/use-sequence-form';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';

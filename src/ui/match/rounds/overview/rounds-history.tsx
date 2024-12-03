@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 import React from 'react';
+import { useLingui } from '@lingui/react/macro';
 import { RoundEndReasonIcon } from 'csdm/ui/icons/round-end-reason-icon';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { TagIndicator } from 'csdm/ui/components/tags/tag-indicator';
 import { useTags } from 'csdm/ui/tags/use-tags';
 
@@ -44,7 +44,7 @@ function TitleCell({ title }: { title: string }) {
 
 export function RoundsHistory() {
   const { teamA, teamB, rounds } = useCurrentMatch();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   return (
     <div
@@ -53,10 +53,10 @@ export function RoundsHistory() {
         gridTemplateColumns: `auto repeat(${rounds.length}, 40px)`,
       }}
     >
-      <TitleCell title={_('Round')} />
+      <TitleCell title={t`Round`} />
       <TitleCell title={teamA.name} />
       <TitleCell title={teamB.name} />
-      <TitleCell title={_('Tags')} />
+      <TitleCell title={t`Tags`} />
       {rounds.map((round) => {
         return (
           <React.Fragment key={`round-${round.number}`}>

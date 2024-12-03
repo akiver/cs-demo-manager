@@ -1,12 +1,11 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { roundNumber } from 'csdm/common/math/round-number';
 import type { Axis } from './x-axis';
 import { usePlayerChartOptions } from './use-player-chart-options';
 import { buildAveragePlayerChartData } from './build-average-player-chart-data';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { usePlayer } from '../use-player';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   axis: Axis;
@@ -14,7 +13,7 @@ type Props = {
 
 export function AverageDamagePerRoundChart({ axis }: Props) {
   const { chartsData } = usePlayer();
-  const _ = useI18n();
+  const { t } = useLingui();
   const data: [string, number][] = buildAveragePlayerChartData({
     field: 'averageDamagePerRound',
     chartsData,
@@ -37,18 +36,14 @@ export function AverageDamagePerRoundChart({ axis }: Props) {
     data: data,
     minValue: Math.max(0, roundNumber(minValue - 5)),
     maxValue: roundNumber(maxValue + 5),
-    title: _(
-      msg({
-        context: 'Chart title',
-        message: 'Damage Per Round over time',
-      }),
-    ),
-    name: _(
-      msg({
-        context: 'Chart axis label average damage per round',
-        message: 'ADR',
-      }),
-    ),
+    title: t({
+      context: 'Chart title',
+      message: 'Damage Per Round over time',
+    }),
+    name: t({
+      context: 'Chart axis label average damage per round',
+      message: 'ADR',
+    }),
     yLineParallelToXAxisValue: (maxValue + minValue) / 2,
   });
 

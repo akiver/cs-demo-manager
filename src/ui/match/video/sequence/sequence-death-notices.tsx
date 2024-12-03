@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { HighlightPlayerKillsCheckbox } from './highlight-player-kills-checkbox';
 import { PlayerNameInput } from './player-name-input';
 import { ShowPlayerKillsCheckbox } from './show-player-kills-checkbox';
@@ -16,13 +16,20 @@ function getRowId(row: DeathNoticesPlayerOptions) {
 
 export function SequenceDeathNotices() {
   const { sequence } = useSequenceForm();
+  const { t } = useLingui();
   const columns = useMemo(() => {
     return [
       {
         id: 'player-name',
         accessor: 'playerName',
-        headerText: 'Player',
-        headerTooltip: `Player's name`,
+        headerText: t({
+          context: 'Table header',
+          message: 'Player',
+        }),
+        headerTooltip: t({
+          context: 'Table header tooltip',
+          message: `Player's name`,
+        }),
         width: 350,
         Cell: PlayerNameInput,
         allowSort: false,
@@ -33,7 +40,10 @@ export function SequenceDeathNotices() {
         id: 'show-kills',
         accessor: 'showKill',
         headerText: 'S',
-        headerTooltip: 'Show kills',
+        headerTooltip: t({
+          context: 'Table header tooltip',
+          message: 'Show kills',
+        }),
         width: 40,
         Cell: ShowPlayerKillsCheckbox,
         allowSort: false,
@@ -44,7 +54,10 @@ export function SequenceDeathNotices() {
         id: 'highlight-kills',
         accessor: 'highlightKill',
         headerText: 'H',
-        headerTooltip: 'Highlight kills',
+        headerTooltip: t({
+          context: 'Table header tooltip',
+          message: 'Highlight kills kills',
+        }),
         width: 40,
         Cell: HighlightPlayerKillsCheckbox,
         allowSort: false,
@@ -54,8 +67,14 @@ export function SequenceDeathNotices() {
       {
         id: 'actions',
         accessor: 'steamId',
-        headerText: 'Actions',
-        headerTooltip: 'Actions',
+        headerText: t({
+          context: 'Table header',
+          message: 'Actions',
+        }),
+        headerTooltip: t({
+          context: 'Table header tooltip',
+          message: 'Actions',
+        }),
         width: 130,
         Cell: CopySteamIdButton,
         allowSort: false,
@@ -63,7 +82,7 @@ export function SequenceDeathNotices() {
         allowMove: false,
       },
     ] as const satisfies readonly Column<DeathNoticesPlayerOptions>[];
-  }, []);
+  }, [t]);
 
   const table = useTable({
     columns,

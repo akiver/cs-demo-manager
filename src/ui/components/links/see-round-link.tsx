@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Link } from './link';
 import { buildMatchRoundPath } from 'csdm/ui/routes-paths';
 

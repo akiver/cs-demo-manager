@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Content } from 'csdm/ui/components/content';
 import { UnsupportedMap } from 'csdm/ui/components/unsupported-map';
 import { Message } from 'csdm/ui/components/message';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Viewer2D } from './viewer-2d';
 import { UnsupportedMap } from '../../components/unsupported-map';

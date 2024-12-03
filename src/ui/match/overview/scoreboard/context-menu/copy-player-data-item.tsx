@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { CopySteamIdItem } from 'csdm/ui/components/context-menu/items/copy-steamid-item';
 import { CopyCrosshairShareCode } from './copy-crosshair-share-code-item';
 import { CopyCrosshairConfig } from './copy-crosshair-config-item';

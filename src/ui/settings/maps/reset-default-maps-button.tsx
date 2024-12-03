@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';

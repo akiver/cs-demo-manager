@@ -1,9 +1,8 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { WeaponType } from 'csdm/common/types/counter-strike';
 import { FilterSelection } from '../../dropdown-filter/filter-selection';
 import { FilterValue } from '../../dropdown-filter/filter-value';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   onChange: (weaponTypes: WeaponType[]) => void;
@@ -11,54 +10,54 @@ type Props = {
 };
 
 export function WeaponTypesFilter({ onChange, selectedWeaponTypes }: Props) {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const weaponTypes: Array<{ value: WeaponType; label: string }> = [
     {
       value: WeaponType.Pistol,
-      label: _({
+      label: t({
         id: 'weaponType.pistol',
         message: 'Pistol',
       }),
     },
     {
       value: WeaponType.SMG,
-      label: _({
+      label: t({
         id: 'weaponType.smg',
         message: 'SMG',
       }),
     },
     {
       value: WeaponType.Rifle,
-      label: _({
+      label: t({
         id: 'weaponType.rifle',
         message: 'Rifle',
       }),
     },
     {
       value: WeaponType.Sniper,
-      label: _({
+      label: t({
         id: 'weaponType.sniper',
         message: 'Sniper',
       }),
     },
     {
       value: WeaponType.Shotgun,
-      label: _({
+      label: t({
         id: 'weaponType.shotgun',
         message: 'Shotgun',
       }),
     },
     {
       value: WeaponType.MachineGun,
-      label: _({
+      label: t({
         id: 'weaponType.machineGun',
         message: 'Machine gun',
       }),
     },
     {
       value: WeaponType.Grenade,
-      label: _({
+      label: t({
         id: 'weaponType.grenade',
         message: 'Grenade',
       }),

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Game } from 'csdm/common/types/counter-strike';
 import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { Maps } from 'csdm/ui/settings/maps/maps';

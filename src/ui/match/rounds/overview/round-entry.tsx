@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { PlayDemoAtTickButton } from '../play-demo-at-tick-button';
 import { Avatar as AvatarImage } from 'csdm/ui/components/avatar';
 import { useCurrentMatch } from '../../use-current-match';

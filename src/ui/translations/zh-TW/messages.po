@@ -222,6 +222,50 @@ msgid "Ban per Premier rank"
 msgstr ""
 
 #: src/ui/ban/stats/ban-stats.tsx
+msgid "Loading ban stats…"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+#: src/ui/comment/use-update-comment.tsx
+#: src/ui/components/buttons/export-html-element-as-image-button.tsx
+#: src/ui/components/context-menu/items/change-matches-type-item.tsx
+#: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
+#: src/ui/components/dialogs/change-demos-source-dialog.tsx
+#: src/ui/components/dialogs/delete-matches-dialog.tsx
+#: src/ui/demo/demo-name-input.tsx
+#: src/ui/demos/table/update-demos-type-item.tsx
+#: src/ui/dialogs/checksums-tags-dialog.tsx
+#: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
+#: src/ui/downloads/pending/remove-download-button.tsx
+#: src/ui/downloads/pending/remove-downloads-button.tsx
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/chat-messages/export-chat-messages-button.tsx
+#: src/ui/match/duels/players-duels-matrix.tsx
+#: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
+#: src/ui/match/heatmap/match-heatmap.tsx
+#: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
+#: src/ui/player/use-update-player-comment.tsx
+#: src/ui/players/players-tags-dialogs.tsx
+#: src/ui/search/filters/search-maps-input.tsx
+#: src/ui/search/filters/search-players-input.tsx
+#: src/ui/settings/about/clear-logs-button.tsx
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
+#: src/ui/settings/downloads/faceit-accounts.tsx
+#: src/ui/settings/maps/add-map-dialog.tsx
+#: src/ui/settings/maps/edit-map-dialog.tsx
+#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
+#: src/ui/settings/ui/reset-tables-state.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+#: src/ui/team/heatmap/team-heatmap.tsx
+#: src/ui/videos/use-remove-videos.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "An error occurred"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Players"
 msgstr ""
@@ -272,6 +316,7 @@ msgid "No VAC ban stats to show, you must analyze demos to generate stats."
 msgstr ""
 
 #: src/ui/bootstrap/app-loader.tsx
+#: src/ui/bootstrap/app-loader.tsx
 msgid "An error occurred while loading the application."
 msgstr ""
 
@@ -305,6 +350,10 @@ msgid "Make sure PostgreSQL is running and your settings are correct."
 msgstr ""
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The connection to the database failed with the following error:"
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "CS Demo Manager requires a PostgreSQL database."
 msgstr ""
 
@@ -314,6 +363,10 @@ msgstr ""
 
 #: src/ui/bootstrap/connect-database/help-link.tsx
 msgid "Please read the <0>documentation</0> for help."
+msgstr ""
+
+#: src/ui/bootstrap/settings-provider.tsx
+msgid "An error occurred while loading settings."
 msgstr ""
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
@@ -334,45 +387,6 @@ msgstr ""
 
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "An error occurred connecting to the WebSocket server."
-msgstr ""
-
-#: src/ui/comment/use-update-comment.tsx
-#: src/ui/components/buttons/export-html-element-as-image-button.tsx
-#: src/ui/components/context-menu/items/change-matches-type-item.tsx
-#: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
-#: src/ui/components/dialogs/change-demos-source-dialog.tsx
-#: src/ui/components/dialogs/delete-matches-dialog.tsx
-#: src/ui/demo/demo-name-input.tsx
-#: src/ui/demos/table/update-demos-type-item.tsx
-#: src/ui/dialogs/checksums-tags-dialog.tsx
-#: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
-#: src/ui/downloads/pending/remove-download-button.tsx
-#: src/ui/downloads/pending/remove-downloads-button.tsx
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/chat-messages/export-chat-messages-button.tsx
-#: src/ui/match/duels/players-duels-matrix.tsx
-#: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
-#: src/ui/match/heatmap/match-heatmap.tsx
-#: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
-#: src/ui/player/use-update-player-comment.tsx
-#: src/ui/players/players-tags-dialogs.tsx
-#: src/ui/search/filters/search-maps-input.tsx
-#: src/ui/search/filters/search-players-input.tsx
-#: src/ui/settings/about/clear-logs-button.tsx
-#: src/ui/settings/bans/use-ignored-steam-account.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-#: src/ui/settings/maps/add-map-dialog.tsx
-#: src/ui/settings/maps/edit-map-dialog.tsx
-#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
-#: src/ui/settings/ui/reset-tables-state.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-#: src/ui/team/heatmap/team-heatmap.tsx
-#: src/ui/videos/use-remove-videos.tsx
-#: src/ui/videos/video-entry.tsx
-msgid "An error occurred"
 msgstr ""
 
 #: src/ui/components/buttons/analyze-button.tsx
@@ -470,6 +484,7 @@ msgctxt "Button"
 msgid "Reveal"
 msgstr ""
 
+#. placeholder {0}: window.csdm.platform
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 #: src/ui/components/context-menu/items/reveal-file-in-explorer-item.tsx
@@ -587,6 +602,12 @@ msgstr ""
 #: src/ui/components/context-menu/items/details-item.tsx
 msgctxt "Context menu"
 msgid "Details"
+msgstr ""
+
+#: src/ui/components/context-menu/items/details-item.tsx
+#: src/ui/components/context-menu/items/rename-item.tsx
+msgctxt "Keyboard shortcut"
+msgid "Enter"
 msgstr ""
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
@@ -816,6 +837,10 @@ msgid "Rounds"
 msgstr ""
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "Demo analysis"
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
 msgstr ""
 
@@ -836,6 +861,7 @@ msgctxt "Checkbox label"
 msgid "Analyze demos already in database?"
 msgstr ""
 
+#. placeholder {0}: demosToAnalyze.length
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{0, plural, one {# demo will be analyzed} other {# demos will be analyzed}}"
 msgstr ""
@@ -868,27 +894,38 @@ msgstr ""
 msgid "Do you want to close the game and continue?"
 msgstr ""
 
+#. placeholder {0}: deletedDemos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo has been deleted.} other {# demos deleted.}}"
 msgstr ""
 
+#. placeholder {0}: notDeletedDemos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr ""
 
+#. placeholder {0}: checksums.length
+#. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 #: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
 msgstr ""
 
+#. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
 msgstr ""
 
+#. placeholder {0}: checksums.length
 #: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
 msgstr ""
 
+#: src/ui/components/dialogs/delete-matches-dialog.tsx
+msgid "Delete matches"
+msgstr ""
+
+#. placeholder {0}: checksums.length
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "{0, plural, one {The match will be deleted only from the database not your filesystem.} other {These matches will be deleted only from the database not your filesystem.}}"
 msgstr ""
@@ -1010,6 +1047,10 @@ msgstr ""
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Invalid name."
+msgstr ""
+
+#: src/ui/components/dialogs/rename-dialog.tsx
+msgid "Rename"
 msgstr ""
 
 #: src/ui/components/dialogs/rename-dialog.tsx
@@ -1202,6 +1243,11 @@ msgstr ""
 #: src/ui/components/dropdown-filter/weapons-filter.tsx
 msgctxt "Weapons filter label"
 msgid "Weapons"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/heatmap/export-heatmap-button.tsx
+msgid "os.dialogTitle.exportAsPNG"
 msgstr ""
 
 #: src/ui/components/heatmap/export-heatmap-button.tsx
@@ -1401,11 +1447,47 @@ msgctxt "Filter teams name category"
 msgid "Teams"
 msgstr ""
 
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.pistol"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.smg"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.rifle"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.sniper"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.shotgun"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.machineGun"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.grenade"
+msgstr ""
+
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
 msgid "Weapon types"
 msgstr ""
 
+#. placeholder {0}: window.csdm.platform
 #: src/ui/components/inputs/text-input-filter.tsx
 msgctxt "Input placeholder"
 msgid "{0, select, darwin {Filter… (⌘+F)} other {Filter… (CTRL+F)}}"
@@ -2441,6 +2523,7 @@ msgstr ""
 msgid "Not in database"
 msgstr ""
 
+#. placeholder {0}: table.getRowCount()
 #: src/ui/demos/table/demos-count.tsx
 msgid "{0, plural, one {# demo} other {# demos}}"
 msgstr ""
@@ -2578,8 +2661,18 @@ msgid "Confirm"
 msgstr ""
 
 #: src/ui/dialogs/tags-dialog.tsx
+#: src/ui/match/rounds/overview/rounds-history.tsx
 #: src/ui/settings/settings-tabs.tsx
 msgid "Tags"
+msgstr ""
+
+#: src/ui/dialogs/update-demo-location-dialog.tsx
+#: src/ui/match/video/update-demo-location.tsx
+msgid "This demo checksum doesn't match the one associated with the match."
+msgstr ""
+
+#: src/ui/dialogs/update-demo-location-dialog.tsx
+msgid "An error occurred while updating demo location."
 msgstr ""
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
@@ -2950,6 +3043,16 @@ msgstr ""
 msgid "No matches found for the current Steam account."
 msgstr ""
 
+#. js-lingui-explicit-id
+#: src/ui/hooks/use-boolean-to-human.ts
+msgid "yes"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/ui/hooks/use-boolean-to-human.ts
+msgid "no"
+msgstr ""
+
 #: src/ui/hooks/use-clipboard.tsx
 msgctxt "Toast"
 msgid "Copied to clipboard"
@@ -3248,6 +3351,10 @@ msgstr ""
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "Unassigned"
+msgstr ""
+
+#: src/ui/hooks/use-update-demo-location.ts
+msgid "Select demo's path"
 msgstr ""
 
 #: src/ui/keyboard/keyboard-shortcut.ts
@@ -3585,6 +3692,7 @@ msgstr ""
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Equipment value"
 msgstr ""
@@ -3637,11 +3745,15 @@ msgid "No grenades found."
 msgstr ""
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
 msgctxt "Table header"
 msgid "Player"
 msgstr ""
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
 msgctxt "Table header tooltip"
 msgid "Player's name"
 msgstr ""
@@ -3753,6 +3865,10 @@ msgstr ""
 msgid "Players flashbang matrix"
 msgstr ""
 
+#: src/ui/match/grenades/stats/stats-label.tsx
+msgid "Thrown"
+msgstr ""
+
 #: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
 msgstr ""
@@ -3844,6 +3960,10 @@ msgstr ""
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgid "The playback will start at the specified tick."
+msgstr ""
+
+#: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
+msgid "Tick"
 msgstr ""
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
@@ -4325,6 +4445,28 @@ msgctxt "Tooltip"
 msgid "Watch kill"
 msgstr ""
 
+#: src/ui/match/players/match-players-loader.tsx
+msgid "No players found."
+msgstr ""
+
+#: src/ui/match/players/match-players.tsx
+#: src/ui/settings/downloads/use-add-faceit-account.tsx
+msgid "Player not found."
+msgstr ""
+
+#: src/ui/match/players/match-players.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Kills"
+msgstr ""
+
+#: src/ui/match/players/match-players.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Deaths"
+msgstr ""
+
 #: src/ui/match/players/player-action-bar.tsx
 msgctxt "Tooltip"
 msgid "Banned player"
@@ -4372,11 +4514,13 @@ msgstr ""
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash"
 msgstr ""
 
 #: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash spent"
@@ -4392,6 +4536,14 @@ msgctxt "Tooltip"
 msgid "Watch round"
 msgstr ""
 
+#: src/ui/match/rounds/overview/rounds-history.tsx
+msgid "Round"
+msgstr ""
+
+#: src/ui/match/rounds/overview/rounds.tsx
+msgid "No rounds found."
+msgstr ""
+
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "No clutches in this round"
 msgstr ""
@@ -4402,6 +4554,10 @@ msgstr ""
 
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "{clutcherName} lost a 1v{opponentCount}"
+msgstr ""
+
+#: src/ui/match/rounds/round/end-reason.tsx
+msgid "Unknown"
 msgstr ""
 
 #: src/ui/match/rounds/round/end-reason.tsx
@@ -4427,12 +4583,6 @@ msgid "Time alive"
 msgstr ""
 
 #: src/ui/match/rounds/round/players-information.tsx
-#: src/ui/match/rounds/round/players-information.tsx
-#: src/ui/match/weapons/weapons-accuracy.tsx
-msgid "Kills"
-msgstr ""
-
-#: src/ui/match/rounds/round/players-information.tsx
 msgid "Headshot kills"
 msgstr ""
 
@@ -4450,11 +4600,6 @@ msgstr ""
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Chicken kills"
-msgstr ""
-
-#: src/ui/match/rounds/round/players-information.tsx
-#: src/ui/match/rounds/round/players-information.tsx
-msgid "Deaths"
 msgstr ""
 
 #: src/ui/match/rounds/round/players-information.tsx
@@ -4569,6 +4714,15 @@ msgctxt "Dialog title"
 msgid "Error"
 msgstr ""
 
+#: src/ui/match/video/cfg-input.tsx
+msgctxt "Input placeholder"
+msgid ""
+"CFG executed at the beginning of the sequence.\n"
+"\n"
+"Example:\n"
+"cl_draw_only_deathnotices 0"
+msgstr ""
+
 #: src/ui/match/video/close-game-after-recording-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Close the game when recording is done"
@@ -4664,6 +4818,16 @@ msgstr ""
 #: src/ui/match/video/focus-camera-player-select.tsx
 msgctxt "Checkbox label"
 msgid "Focus camera on player"
+msgstr ""
+
+#: src/ui/match/video/framerate-input.tsx
+msgctxt "Input label"
+msgid "Framerate"
+msgstr ""
+
+#: src/ui/match/video/framerate-input.tsx
+msgctxt "Input placeholder"
+msgid "Framerate"
 msgstr ""
 
 #: src/ui/match/video/generate-only-raw-files-checkbox.tsx
@@ -4802,6 +4966,14 @@ msgctxt "Input label"
 msgid "Config folder"
 msgstr ""
 
+#: src/ui/match/video/hlae/hlae-config-folder-path.tsx
+msgid "Config folder"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-config-folder-path.tsx
+msgid "Select config folder"
+msgstr ""
+
 #: src/ui/match/video/hlae/hlae-install-button.tsx
 msgid "Installing HLAE…"
 msgstr ""
@@ -4831,9 +5003,39 @@ msgstr ""
 msgid "An error occurred while updating HLAE"
 msgstr ""
 
+#. Input placeholder
+#: src/ui/match/video/output-folder-path.tsx
+msgid "Output folder"
+msgstr ""
+
+#: src/ui/match/video/output-folder-path.tsx
+msgctxt "Input label"
+msgid "Output folder"
+msgstr ""
+
+#: src/ui/match/video/output-folder-path.tsx
+msgctxt "Dialog title"
+msgid "Select output folder"
+msgstr ""
+
 #: src/ui/match/video/player-voices-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Player voices"
+msgstr ""
+
+#. Input placeholder
+#: src/ui/match/video/raw-files-folder-path.tsx
+msgid "Raw files folder"
+msgstr ""
+
+#: src/ui/match/video/raw-files-folder-path.tsx
+msgctxt "Input label"
+msgid "Raw files folder"
+msgstr ""
+
+#: src/ui/match/video/raw-files-folder-path.tsx
+msgctxt "Dialog title"
+msgid "Select raw files folder"
 msgstr ""
 
 #: src/ui/match/video/reset-settings-button.tsx
@@ -4843,6 +5045,11 @@ msgstr ""
 
 #: src/ui/match/video/sequence/end-tick-input.tsx
 msgctxt "Input label"
+msgid "End tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/end-tick-input.tsx
+msgctxt "Input placeholder"
 msgid "End tick"
 msgstr ""
 
@@ -5085,6 +5292,27 @@ msgid "CFG"
 msgstr ""
 
 #: src/ui/match/video/sequence/sequence-death-notices.tsx
+#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Show kills"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Highlight kills kills"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgctxt "Table header"
+msgid "Actions"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Actions"
+msgstr ""
+
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
 msgid "Death notices"
 msgstr ""
 
@@ -5102,6 +5330,12 @@ msgctxt "Input label"
 msgid "Start tick"
 msgstr ""
 
+#: src/ui/match/video/sequence/start-tick-input.tsx
+msgctxt "Input placeholder"
+msgid "Start tick"
+msgstr ""
+
+#. placeholder {0}: sequences.length
 #: src/ui/match/video/sequences-summary.tsx
 msgid "{0, plural, one {# sequence} other {# sequences}}"
 msgstr ""
@@ -5114,6 +5348,11 @@ msgstr ""
 #: src/ui/match/video/sequences/delete-sequences-button.tsx
 msgctxt "Button"
 msgid "Delete sequences"
+msgstr ""
+
+#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Highlight kills"
 msgstr ""
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
@@ -5160,6 +5399,23 @@ msgctxt "Context menu"
 msgid "Edit"
 msgstr ""
 
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgid "Sequence #{number}"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgid "Tick: {startTick} to {endTick}"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgid "Duration {durationInSeconds}s"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgid "Camera on {playerName}"
+msgstr ""
+
 #: src/ui/match/video/show-only-death-notices-checkbox.tsx
 msgctxt "Input label"
 msgid "Show only death notices"
@@ -5173,10 +5429,6 @@ msgstr ""
 #: src/ui/match/video/software.tsx
 msgctxt "Software installation status"
 msgid "Not installed"
-msgstr ""
-
-#: src/ui/match/video/update-demo-location.tsx
-msgid "This demo checksum doesn't match the one associated with the match."
 msgstr ""
 
 #: src/ui/match/video/video-loader.tsx
@@ -5343,6 +5595,26 @@ msgid "HS%"
 msgstr ""
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Rifles"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Pistols"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "SMGs"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Snipers"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Machine guns"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Head"
 msgstr ""
 
@@ -5438,6 +5710,7 @@ msgstr ""
 msgid "No match found yet, you have to analyze demos to generate matches."
 msgstr ""
 
+#. placeholder {0}: table.getSelectedRowCount()
 #: src/ui/matches/table/selected-match-count.tsx
 msgid "{0, plural, one {# match selected} other {# matches selected}}"
 msgstr ""
@@ -5701,10 +5974,12 @@ msgstr ""
 msgid "{communityBannedPlayerCount, plural, one {# community ban} other {# community bans}}"
 msgstr ""
 
+#. placeholder {0}: table.getRowCount()
 #: src/ui/players/table/player-count.tsx
 msgid "{0, plural, one {# player} other {# players}}"
 msgstr ""
 
+#. placeholder {0}: table.getSelectedRowCount()
 #: src/ui/players/table/selected-player-count.tsx
 msgid "{0, plural, one {# player selected} other {# players selected}}"
 msgstr ""
@@ -6066,6 +6341,10 @@ msgid "Disconnect"
 msgstr ""
 
 #: src/ui/settings/database/import-v2-data-button.tsx
+msgid "JSON file"
+msgstr ""
+
+#: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You must select at least one data to import."
 msgstr ""
 
@@ -6248,10 +6527,6 @@ msgid "In the meantime, you have to download demos from your browser."
 msgstr ""
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
-msgid "Player not found."
-msgstr ""
-
-#: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The FACEIT API returned a 401 code, please check you API key."
 msgstr ""
 
@@ -6319,6 +6594,10 @@ msgid "This map already exists."
 msgstr ""
 
 #: src/ui/settings/maps/delete-map-dialog.tsx
+msgid "Delete map"
+msgstr ""
+
+#: src/ui/settings/maps/delete-map-dialog.tsx
 msgid "Do you want to delete this map?"
 msgstr ""
 
@@ -6341,6 +6620,11 @@ msgstr ""
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "Invalid PNG file."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
+#: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
+msgid "PNG Files"
 msgstr ""
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
@@ -6375,6 +6659,10 @@ msgstr ""
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Scale is required."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/radar-input.tsx
+msgid "'PNG Files"
 msgstr ""
 
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
@@ -6772,10 +7060,12 @@ msgstr ""
 msgid "No team found, you have to analyze demos to generate teams."
 msgstr ""
 
+#. placeholder {0}: table.getSelectedRowCount()
 #: src/ui/teams/table/selected-team-count.tsx
 msgid "{0, plural, one {# team selected} other {# teams selected}}"
 msgstr ""
 
+#. placeholder {0}: table.getRowCount()
 #: src/ui/teams/table/team-count.tsx
 msgid "{0, plural, one {# team} other {# teams}}"
 msgstr ""

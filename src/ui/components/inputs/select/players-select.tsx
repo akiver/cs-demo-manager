@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Player } from 'csdm/common/types/player';
 import { FilterSelection } from '../../dropdown-filter/filter-selection';
 import { FilterValue } from '../../dropdown-filter/filter-value';

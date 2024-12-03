@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
 import { GeneratePlayerKillsVideoItem } from './generate-player-kills-video-item';
 import { GeneratePlayerRoundsVideoItem } from './generate-player-rounds-video-item';

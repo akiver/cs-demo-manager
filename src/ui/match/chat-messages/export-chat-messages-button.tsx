@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { SaveDialogOptions, SaveDialogReturnValue } from 'electron';
 import { Button } from 'csdm/ui/components/buttons/button';
 import type { ChatMessage } from 'csdm/common/types/chat-message';
@@ -7,7 +7,6 @@ import { RendererClientMessageName } from 'csdm/server/renderer-client-message-n
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { ExportChatMessagesPayload } from 'csdm/server/handlers/renderer-process/match/export-match-chat-messages-handler';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 function formatChatMessage(chatMessage: ChatMessage) {
   const { senderIsAlive, senderName, message } = chatMessage;
@@ -24,17 +23,15 @@ type Props = {
 export function ExportChatMessagesButton({ checksum, chatMessages }: Props) {
   const client = useWebSocketClient();
   const showToast = useShowToast();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const onClick = async () => {
     const options: SaveDialogOptions = {
       defaultPath: `messages-${checksum}.txt`,
-      title: _(
-        msg({
-          context: 'OS save dialog title',
-          message: 'Export',
-        }),
-      ),
+      title: t({
+        context: 'OS save dialog title',
+        message: 'Export',
+      }),
       filters: [{ name: 'TXT', extensions: ['txt'] }],
     };
     const { canceled, filePath }: SaveDialogReturnValue = await window.csdm.showSaveDialog(options);

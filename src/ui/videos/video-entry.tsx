@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Video } from 'csdm/common/types/video';
 import { VideoStatus } from 'csdm/common/types/video-status';
 import { assertNever } from 'csdm/common/assert-never';

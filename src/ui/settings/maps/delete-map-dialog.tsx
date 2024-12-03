@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -36,7 +36,7 @@ export function DeleteMapDialog({ map }: Props) {
 
   return (
     <ConfirmDialog
-      title="Delete map"
+      title={<Trans>Delete map</Trans>}
       onConfirm={onConfirmClick}
       closeOnConfirm={false}
       isBusy={status === Status.Loading}

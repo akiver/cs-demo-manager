@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 
 type Props = {

@@ -1,5 +1,5 @@
 import React, { useState, type ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { ErrorCode } from 'csdm/common/error-code';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';

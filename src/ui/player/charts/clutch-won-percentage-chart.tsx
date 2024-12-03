@@ -1,11 +1,10 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import type { Axis } from './x-axis';
 import { usePlayerChartOptions } from './use-player-chart-options';
 import { buildAveragePlayerChartData } from './build-average-player-chart-data';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { usePlayer } from '../use-player';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
   axis: Axis;
@@ -13,7 +12,7 @@ type Props = {
 
 export function ClutchWonPercentageChart({ axis }: Props) {
   const { chartsData } = usePlayer();
-  const _ = useI18n();
+  const { t } = useLingui();
   const data: [string, number][] = buildAveragePlayerChartData({
     field: 'clutchWonPercentage',
     chartsData,
@@ -36,18 +35,14 @@ export function ClutchWonPercentageChart({ axis }: Props) {
     data,
     minValue: 0,
     maxValue: 100,
-    title: _(
-      msg({
-        context: 'Chart title',
-        message: 'Clutch won over time',
-      }),
-    ),
-    name: _(
-      msg({
-        context: 'Chart axis label',
-        message: 'Won %',
-      }),
-    ),
+    title: t({
+      context: 'Chart title',
+      message: 'Clutch won over time',
+    }),
+    name: t({
+      context: 'Chart axis label',
+      message: 'Won %',
+    }),
     yLineParallelToXAxisValue: (maxValue + minValue) / 2,
   });
 

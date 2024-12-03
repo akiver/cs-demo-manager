@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans, msg } from '@lingui/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { RoundEndReason, type EconomyType } from 'csdm/common/types/counter-strike';
 import { TeamEconomyCards } from './team-economy-cards';
 import { useTranslateEconomyType } from './use-translate-economy-type';
@@ -20,7 +20,6 @@ import { Panel } from 'csdm/ui/components/panel';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { BombIcon } from 'csdm/ui/icons/weapons/bomb-icon';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
 
 type EconomyChartData = {
@@ -38,7 +37,7 @@ export function TeamsEconomyBreakdownChart() {
   const match = useCurrentMatch();
   const { translateEconomyType } = useTranslateEconomyType();
   const formatMoney = useFormatMoney();
-  const _ = useI18n();
+  const { t } = useLingui();
   const teamAData: EconomyChartData[] = match.rounds.map((round) => {
     return {
       value: round.teamAEquipmentValue,
@@ -68,24 +67,20 @@ export function TeamsEconomyBreakdownChart() {
       color: colors.axisColor,
       formatter: (equipmentValue: number) => {
         const money = equipmentValue / 1000;
-        return _(
-          msg({
-            context: 'Chart axis label money value',
-            message: `${money}K`,
-          }),
-        );
+        return t({
+          context: 'Chart axis label money value',
+          message: `${money}K`,
+        });
       },
     },
   };
 
   const yAxis: YAXisComponentOption = {
     type: 'category',
-    name: _(
-      msg({
-        context: 'Chart axis label',
-        message: 'Round',
-      }),
-    ),
+    name: t({
+      context: 'Chart axis label',
+      message: 'Round',
+    }),
     nameTextStyle: {
       color: colors.axisColor,
     },
@@ -131,25 +126,20 @@ export function TeamsEconomyBreakdownChart() {
       const type = translateEconomyType(data.economyType);
       const moneyValue = formatMoney(money);
 
-      const round = _(
-        msg({
-          context: 'Chart tooltip',
-          message: `Round: ${roundNumber}`,
-        }),
-      );
-      const economyType = _(
-        msg({
-          context: 'Chart tooltip economy type',
-          message: `Type: ${type}`,
-        }),
-      );
-      const equipmentValue = _(
-        msg({
-          context: 'Chart tooltip',
-          message: `Equipment value: ${moneyValue}`,
-        }),
-      );
+      const round = t({
+        context: 'Chart tooltip',
+        message: `Round: ${roundNumber}`,
+      });
+      const economyType = t({
+        context: 'Chart tooltip economy type',
+        message: `Type: ${type}`,
+      });
+      const equipmentValue = t({
+        context: 'Chart tooltip',
+        message: `Equipment value: ${moneyValue}`,
+      });
 
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       return `${teamName}<br />${round}<br />${economyType} ${marker}<br />${equipmentValue}`;
     },
   };

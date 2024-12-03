@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ExportMatchesAsXlsxDialog } from 'csdm/ui/components/dialogs/export-matches-xlsx-dialog';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';

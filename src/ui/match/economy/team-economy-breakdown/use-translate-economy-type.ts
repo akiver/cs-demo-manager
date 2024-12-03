@@ -1,48 +1,37 @@
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import { EconomyType } from 'csdm/common/types/counter-strike';
 import { assertNever } from 'csdm/common/assert-never';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function useTranslateEconomyType() {
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const translateEconomyType = (type: EconomyType) => {
     switch (type) {
       case EconomyType.Pistol:
-        return _(
-          msg({
-            context: 'Economy type',
-            message: 'Pistol',
-          }),
-        );
+        return t({
+          context: 'Economy type',
+          message: 'Pistol',
+        });
       case EconomyType.Eco:
-        return _(
-          msg({
-            context: 'Economy type',
-            message: 'Eco',
-          }),
-        );
+        return t({
+          context: 'Economy type',
+          message: 'Eco',
+        });
       case EconomyType.Semi:
-        return _(
-          msg({
-            context: 'Economy type',
-            message: 'Semi buy',
-          }),
-        );
+        return t({
+          context: 'Economy type',
+          message: 'Semi buy',
+        });
       case EconomyType.ForceBuy:
-        return _(
-          msg({
-            context: 'Economy type',
-            message: 'Force buy',
-          }),
-        );
+        return t({
+          context: 'Economy type',
+          message: 'Force buy',
+        });
       case EconomyType.Full:
-        return _(
-          msg({
-            context: 'Economy type',
-            message: 'Full buy',
-          }),
-        );
+        return t({
+          context: 'Economy type',
+          message: 'Full buy',
+        });
       default:
         assertNever(type, `Unknown economy type: ${type}`);
     }

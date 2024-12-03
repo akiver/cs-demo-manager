@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { KillFeedEntry } from 'csdm/ui/components/kill-feed-entry';
 import type { Kill } from 'csdm/common/types/kill';
 import { PlayDemoAtTickButton } from 'csdm/ui/match/rounds/play-demo-at-tick-button';

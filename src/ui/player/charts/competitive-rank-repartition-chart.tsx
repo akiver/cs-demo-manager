@@ -1,19 +1,18 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
 import type { ChartOption } from 'csdm/ui/hooks/use-chart';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { CompetitiveRank } from 'csdm/common/types/counter-strike';
 import { usePlayer } from '../use-player';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 import { useGetRankName } from 'csdm/ui/hooks/use-get-rank-name';
-import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 export function CompetitiveRankRepartitionChart() {
   const { enemyCountPerRank } = usePlayer();
   const getRankName = useGetRankName();
   const colors = useChartColors();
-  const _ = useI18n();
+  const { t } = useLingui();
 
   const rankColors: Record<CompetitiveRank, string> = {
     [CompetitiveRank.Unknown]: '#c7c7c7',
@@ -78,7 +77,6 @@ export function CompetitiveRankRepartitionChart() {
             <p>{getRankName(rankNumber)}</p>
             <div className="flex gap-x-4">
               <p className="text-body-strong">{value}</p>
-              {/* eslint-disable-next-line local-rules/no-missing-translations */}
               <p>({percent}%)</p>
             </div>
           </div>,
@@ -91,12 +89,10 @@ export function CompetitiveRankRepartitionChart() {
       },
     },
     title: {
-      text: _(
-        msg({
-          message: 'Players competitive rank repartition',
-          context: 'Chart title',
-        }),
-      ),
+      text: t({
+        message: 'Players competitive rank repartition',
+        context: 'Chart title',
+      }),
       left: 'center',
       textStyle: {
         color: colors.titleTextColor,
