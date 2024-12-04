@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { BrowserWindow, app, nativeTheme, shell, type WebContents } from 'electron';
+import { BrowserWindow, app, shell } from 'electron';
 import windowStateKeeper from 'electron-window-state';
 import { IPCChannel } from 'csdm/common/ipc-channel';
 import { ArgumentName } from 'csdm/common/argument/argument-name';
@@ -87,7 +87,6 @@ class WindowManager {
       app.exit();
     });
 
-    this.fixDevToolsTheme(devWindow.webContents);
     devWindow.webContents.openDevTools();
     devWindow.loadFile('dev.html');
 
@@ -157,7 +156,6 @@ class WindowManager {
     });
 
     if (IS_DEV) {
-      this.fixDevToolsTheme(mainWindow.webContents);
       mainWindow.webContents.on('devtools-opened', () => {
         setImmediate(() => {
           mainWindow.focus();
@@ -198,20 +196,6 @@ class WindowManager {
     }
 
     return false;
-  }
-
-  // TODO electron Remove it when https://github.com/electron/electron/issues/43367 is fixed
-  private fixDevToolsTheme(webContents: WebContents) {
-    webContents.on('devtools-opened', () => {
-      if (!nativeTheme.shouldUseDarkColors) {
-        return;
-      }
-
-      nativeTheme.themeSource = 'light';
-      setTimeout(() => {
-        nativeTheme.themeSource = 'dark';
-      }, 100);
-    });
   }
 }
 

@@ -14,7 +14,7 @@ export class HeatmapRenderer {
   private alpha = 1;
   private minOpacity = 0.05;
   private circle: HTMLCanvasElement;
-  private gradient = new Uint8ClampedArray();
+  private gradient: Uint8ClampedArray<ArrayBufferLike> = new Uint8ClampedArray();
   private defaultGradient = {
     0.4: 'blue',
     0.6: 'cyan',
