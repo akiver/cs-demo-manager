@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import type { Player } from 'csdm/common/types/player';
 import { ShieldIcon } from 'csdm/ui/icons/shield-icon';

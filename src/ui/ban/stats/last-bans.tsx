@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import type { BannedSteamAccount } from 'csdm/common/types/banned-steam-account';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';

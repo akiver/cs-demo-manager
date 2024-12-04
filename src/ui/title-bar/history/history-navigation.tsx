@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { HistoryBackButton } from './history-back-button';
 import { HistoryForwardButton } from './history-forward-button';
 

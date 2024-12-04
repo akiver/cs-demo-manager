@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import { TabLinks } from 'csdm/ui/components/tabs/tab-links';
 import { TabLink } from 'csdm/ui/components/tabs/tab-link';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import { HistoryButton } from './history-button';
 import { LeftArrowIcon } from 'csdm/ui/icons/left-arrow-icon';

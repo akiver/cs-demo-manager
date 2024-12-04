@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import type { IpcRendererEvent } from 'electron';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';

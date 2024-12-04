@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Content } from 'csdm/ui/components/content';
 import { Message } from 'csdm/ui/components/message';

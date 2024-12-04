@@ -6,7 +6,7 @@ import { NavigationListener } from './navigation-listener';
 import { DropZone } from './drop-zone';
 import { ContextMenuProvider } from '../components/context-menu/context-menu-provider';
 import { useArgumentsContext } from './use-arguments-context';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router';
 
 export function App() {
   const { clearArguments } = useArgumentsContext();

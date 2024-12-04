@@ -2,7 +2,7 @@ globalThis.logger = window.csdm.logger;
 document.title = 'CS Demo Manager';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router';
 import { onWindowError } from 'csdm/common/on-window-error';
 import { router } from 'csdm/ui/router';
 import { ThemeName } from 'csdm/common/types/theme-name';

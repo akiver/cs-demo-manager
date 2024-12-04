@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router';
 import { buildMatchPlayerPath } from 'csdm/ui/routes-paths';
 import { useCurrentMatch } from '../use-current-match';
 import { Message } from 'csdm/ui/components/message';

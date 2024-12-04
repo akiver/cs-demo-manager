@@ -1,5 +1,5 @@
 import React, { useEffect, type ReactNode } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { LeftArrowIcon } from 'csdm/ui/icons/left-arrow-icon';
 import { RightArrowIcon } from '../icons/right-arrow-icon';
 import { Tooltip } from './tooltip';

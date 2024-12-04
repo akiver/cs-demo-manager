@@ -1,5 +1,5 @@
 import React from 'react';
-import { createHashRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import { createHashRouter, createRoutesFromElements, Route } from 'react-router';
 import { Root } from 'csdm/ui/bootstrap/root';
 import { Downloads } from 'csdm/ui/downloads/downloads';
 import { Matches } from 'csdm/ui/matches/matches';

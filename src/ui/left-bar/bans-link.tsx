@@ -4,7 +4,7 @@ import { LeftBarLink } from 'csdm/ui/left-bar/left-bar-link';
 import { RoutePath } from 'csdm/ui/routes-paths';
 import { ShieldIcon } from '../icons/shield-icon';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';
 import { LeftBarBadge } from './left-bar-badge';
 import { NumberBadge } from '../components/number-badge';

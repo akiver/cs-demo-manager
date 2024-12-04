@@ -1,5 +1,5 @@
-import type { NavigateOptions } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import type { NavigateOptions } from 'react-router';
+import { useNavigate } from 'react-router';
 import { buildDemoPath } from 'csdm/ui/routes-paths';
 
 export function useNavigateToDemo() {

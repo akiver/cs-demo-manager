@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import { useUiSettings } from '../settings/ui/use-ui-settings';
 import { useArgument } from './use-argument';
 import { ArgumentName } from 'csdm/common/argument/argument-name';

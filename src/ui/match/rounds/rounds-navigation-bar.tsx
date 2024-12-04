@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import { useCurrentMatch } from '../use-current-match';
 import { buildMatchRoundPath, buildMatchRoundsPath } from 'csdm/ui/routes-paths';

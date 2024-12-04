@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import { buildMatchRoundPath, buildMatchRoundsPath } from 'csdm/ui/routes-paths';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { RoundTopBar } from './round-top-bar';

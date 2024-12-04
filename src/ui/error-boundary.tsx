@@ -1,7 +1,7 @@
 // Translation is not possible here as the locale provider is under the error boundary.
 /* eslint-disable lingui/no-unlocalized-strings */
 import React from 'react';
-import { useRouteError } from 'react-router-dom';
+import { useRouteError } from 'react-router';
 import { Button, ButtonVariant } from './components/buttons/button';
 
 export function ErrorBoundary() {

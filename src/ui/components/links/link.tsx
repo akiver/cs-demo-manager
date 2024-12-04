@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ReactNode } from 'react';
-import { Link as RouterLink, type To } from 'react-router-dom';
+import { Link as RouterLink, type To } from 'react-router';
 
 type Props = {
   children: ReactNode;

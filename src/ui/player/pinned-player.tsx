@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import { usePinnedPlayerSteamId } from 'csdm/ui/settings/use-pinned-player-steamid';
 import { CenteredContent } from 'csdm/ui/components/content';

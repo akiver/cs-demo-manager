@@ -20,7 +20,7 @@ import type { GrenadePosition } from 'csdm/common/types/grenade-position';
 import type { BombPlanted } from 'csdm/common/types/bomb-planted';
 import type { BombDefused } from 'csdm/common/types/bomb-defused';
 import type { Shot } from 'csdm/common/types/shot';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import type { BombPlantStart } from 'csdm/common/types/bomb-plant-start';
 import type { BombDefuseStart } from 'csdm/common/types/bomb-defuse-start';
 import type { HostagePickUpStart } from 'csdm/common/types/hostage-pick-up-start';

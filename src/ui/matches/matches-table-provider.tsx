@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import { useTable } from '../components/table/use-table';
 import { MatchesTableContext } from './table/matches-table-context';

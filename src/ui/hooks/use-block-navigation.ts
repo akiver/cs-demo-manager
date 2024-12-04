@@ -1,4 +1,4 @@
-import { useBlocker } from 'react-router-dom';
+import { useBlocker } from 'react-router';
 
 export function useBlockNavigation(isNavigationBlocked: boolean) {
   const blocker = useBlocker(isNavigationBlocked);

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import React, { createContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import type { BombDefused } from 'csdm/common/types/bomb-defused';
 import type { BombPlanted } from 'csdm/common/types/bomb-planted';
 import type { BombExploded } from 'csdm/common/types/bomb-exploded';

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';

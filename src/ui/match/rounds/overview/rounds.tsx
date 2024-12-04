@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import { buildMatchRoundPath } from 'csdm/ui/routes-paths';
 import { Content } from 'csdm/ui/components/content';
 import { useCurrentMatch } from '../../use-current-match';

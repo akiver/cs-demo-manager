@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router';
 import { RoutePath } from 'csdm/ui/routes-paths';
 import { TabLink } from 'csdm/ui/components/tabs/tab-link';
 import { TabLinks } from 'csdm/ui/components/tabs/tab-links';

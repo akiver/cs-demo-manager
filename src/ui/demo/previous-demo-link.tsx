@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import { buildDemoPath } from 'csdm/ui/routes-paths';
 import { PreviousLink } from '../components/links';
