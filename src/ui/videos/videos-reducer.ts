@@ -1,15 +1,24 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { initializeAppSuccess } from 'csdm/ui/bootstrap/bootstrap-actions';
 import type { Video } from 'csdm/common/types/video';
-import { removeCompletedVideos, videoAddedToQueue, videosRemovedFromQueue, videoUpdated } from './videos-actions';
+import {
+  pauseQueue,
+  removeCompletedVideos,
+  resumeQueue,
+  videoAddedToQueue,
+  videosRemovedFromQueue,
+  videoUpdated,
+} from './videos-actions';
 import { VideoStatus } from 'csdm/common/types/video-status';
 
 export type VideosState = {
   readonly videos: Video[];
+  readonly isPaused: boolean;
 };
 
 const initialState: VideosState = {
   videos: [],
+  isPaused: true,
 };
 
 export const videosReducer = createReducer(initialState, (builder) => {
@@ -45,5 +54,11 @@ export const videosReducer = createReducer(initialState, (builder) => {
     })
     .addCase(initializeAppSuccess, (state, action) => {
       state.videos = action.payload.videos;
+    })
+    .addCase(resumeQueue, (state) => {
+      state.isPaused = false;
+    })
+    .addCase(pauseQueue, (state) => {
+      state.isPaused = true;
     });
 });

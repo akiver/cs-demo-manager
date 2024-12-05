@@ -190,6 +190,8 @@ import {
   updateSteamAccountNameHandler,
   type UpdateSteamAccountNamePayload,
 } from './renderer-process/steam-accounts/update-steam-account-name-handler';
+import { resumeVideoQueueHandler } from './renderer-process/video/resume-video-queue-handler';
+import { pauseVideoQueueHandler } from './renderer-process/video/pause-video-queue-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -244,6 +246,8 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.DisconnectDatabase]: Handler;
   [RendererClientMessageName.ConnectDatabase]: Handler<DatabaseSettings | undefined, ConnectDatabaseError | undefined>;
   [RendererClientMessageName.AddVideoToQueue]: Handler<AddVideoPayload>;
+  [RendererClientMessageName.ResumeVideoQueue]: Handler;
+  [RendererClientMessageName.PauseVideoQueue]: Handler;
   [RendererClientMessageName.UpdateMatchDemoLocation]: Handler<UpdateMatchDemoLocationPayload>;
   [RendererClientMessageName.InstallHlae]: Handler<void, string>;
   [RendererClientMessageName.UpdateHlae]: Handler<void, string>;
@@ -347,6 +351,8 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.DisconnectDatabase]: disconnectDatabaseConnectionHandler,
   [RendererClientMessageName.ConnectDatabase]: connectDatabaseHandler,
   [RendererClientMessageName.AddVideoToQueue]: addVideoToQueueHandler,
+  [RendererClientMessageName.ResumeVideoQueue]: resumeVideoQueueHandler,
+  [RendererClientMessageName.PauseVideoQueue]: pauseVideoQueueHandler,
   [RendererClientMessageName.UpdateMatchDemoLocation]: updateMatchDemoLocationHandler,
   [RendererClientMessageName.InstallHlae]: installHlaeHandler,
   [RendererClientMessageName.UpdateHlae]: updateHlaeHandler,

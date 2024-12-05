@@ -29,6 +29,8 @@ export const RendererServerMessageName = {
   VideoAddedToQueue: 'video-added-to-queue',
   VideosRemovedFromQueue: 'videos-removed-from-queue',
   VideoUpdated: 'video-updated',
+  VideoQueuePaused: 'video-queue-paused',
+  VideoQueueResumed: 'video-queue-resumed',
   AnalysisUpdated: 'analysis-status-changed',
   InsertingMatchPositions: 'inserting-match-positions',
   MatchInserted: 'match-inserted',
@@ -73,6 +75,8 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.VideoAddedToQueue]: Video;
   [RendererServerMessageName.VideosRemovedFromQueue]: string[];
   [RendererServerMessageName.VideoUpdated]: Video;
+  [RendererServerMessageName.VideoQueueResumed]: void;
+  [RendererServerMessageName.VideoQueuePaused]: void;
   [RendererServerMessageName.DemosRemovedFromAnalyses]: string[];
   [RendererServerMessageName.InsertingMatchPositions]: void;
   [RendererServerMessageName.AnalysisUpdated]: Analysis;

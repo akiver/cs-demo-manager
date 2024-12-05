@@ -14,6 +14,26 @@ class VideoQueue {
   private videos: Video[] = [];
   private currentVideo: Video | undefined;
   private abortControllers: { [videoId: string]: AbortController | null } = {};
+  private isPaused = true;
+
+  public resume() {
+    if (!this.isPaused) {
+      return;
+    }
+
+    this.isPaused = false;
+    this.loopUntilRecodingDone();
+    server.sendMessageToRendererProcess({
+      name: RendererServerMessageName.VideoQueueResumed,
+    });
+  }
+
+  public pause() {
+    this.isPaused = true;
+    server.sendMessageToRendererProcess({
+      name: RendererServerMessageName.VideoQueuePaused,
+    });
+  }
 
   public removeVideos(ids: string[]) {
     for (const id of ids) {
@@ -48,7 +68,9 @@ class VideoQueue {
       payload: video,
     });
 
-    this.loopUntilRecodingDone();
+    if (!this.isPaused) {
+      this.loopUntilRecodingDone();
+    }
   }
 
   private abortVideo(id: string) {
@@ -73,20 +95,6 @@ class VideoQueue {
     return this.videos;
   };
 
-  public hasVideosInProgress = () => {
-    return this.hasPendingVideos() || this.currentVideo;
-  };
-
-  public clear() {
-    this.videos = [];
-    this.abortControllers = {};
-    this.currentVideo = undefined;
-  }
-
-  private hasPendingVideos = () => {
-    return this.videos.length > 0;
-  };
-
   private async loopUntilRecodingDone() {
     if (this.currentVideo) {
       return;
@@ -95,6 +103,10 @@ class VideoQueue {
     this.currentVideo = this.videos.shift();
     while (this.currentVideo) {
       await this.processVideo(this.currentVideo);
+      if (this.isPaused) {
+        this.currentVideo = undefined;
+        break;
+      }
       this.currentVideo = this.videos.shift();
     }
   }

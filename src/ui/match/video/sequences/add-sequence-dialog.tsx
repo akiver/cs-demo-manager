@@ -49,10 +49,12 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     playerVoicesEnabled = lastSequence.playerVoicesEnabled;
   }
 
+  const tickrate = Math.round(match.tickrate);
+
   const sequence: Sequence = {
     number: sequenceNumber,
     startTick: 1,
-    endTick: Math.round(match.tickrate),
+    endTick: tickrate + tickrate * 10,
     deathNotices,
     playerFocusSteamId,
     showXRay,

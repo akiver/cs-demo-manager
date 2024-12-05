@@ -7097,6 +7097,16 @@ msgctxt "Button"
 msgid "Remove completed"
 msgstr "Remove completed"
 
+#: src/ui/videos/resume-or-pause-video-queue-button.tsx
+msgctxt "Button"
+msgid "Resume"
+msgstr "Resume"
+
+#: src/ui/videos/resume-or-pause-video-queue-button.tsx
+msgctxt "Button"
+msgid "Pause"
+msgstr "Pause"
+
 #: src/ui/videos/video-entry.tsx
 msgid "Waiting…"
 msgstr "Waiting…"

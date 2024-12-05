@@ -6,6 +6,7 @@ import { VideoEntry } from 'csdm/ui/videos/video-entry';
 import { Content } from 'csdm/ui/components/content';
 import { RemoveCompletedVideosButton } from './remove-completed-videos-button';
 import { RemoveAllVideosButton } from './remove-all-videos-button';
+import { ResumeOrPauseVideoQueueButton } from './resume-or-pause-video-queue-button';
 
 export function Videos() {
   const videos = useVideos();
@@ -17,6 +18,7 @@ export function Videos() {
   return (
     <Content>
       <div className="flex items-center gap-x-8">
+        <ResumeOrPauseVideoQueueButton />
         <RemoveCompletedVideosButton />
         <RemoveAllVideosButton />
       </div>

@@ -61,6 +61,8 @@ export const RendererClientMessageName = {
   DisconnectDatabase: 'disconnect-database',
   ConnectDatabase: 'connect-database',
   AddVideoToQueue: 'add-video-to-queue',
+  ResumeVideoQueue: 'resume-video-queue',
+  PauseVideoQueue: 'pause-video-queue',
   InstallHlae: 'install-hlae',
   UpdateHlae: 'update-hlae',
   EnableHlaeCustomLocation: 'enable-hlae-custom-location',
