@@ -54,7 +54,7 @@ function Wrapper({ x, y, refs, children, strategy, placement, getFloatingProps }
 }
 
 type Props = {
-  children: React.ReactElement;
+  children: React.ReactElement<Record<string, unknown>>;
   content: ReactNode;
   placement?: Placement;
   delay?: number;

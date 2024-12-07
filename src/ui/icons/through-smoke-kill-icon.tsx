@@ -1,12 +1,11 @@
 import React from 'react';
 import type { SVGAttributes } from 'react';
 
-type Props = SVGAttributes<SVGElement>;
+type Props = SVGAttributes<SVGElement> & {
+  ref?: React.Ref<SVGSVGElement>;
+};
 
-export const ThroughSmokeKillIcon = React.forwardRef(function ThroughSmokeKillIcon(
-  props: Props,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export function ThroughSmokeKillIcon({ ref, ...props }: Props) {
   return (
     <svg viewBox="0 0 32.074 32.074" enableBackground="new 0 0 32.074 32.074" ref={ref} {...props}>
       <path
@@ -64,4 +63,4 @@ export const ThroughSmokeKillIcon = React.forwardRef(function ThroughSmokeKillIc
       <rect x="15.895" y="9.838" fill="url(#gradientId)" width="2.143" height="2.143" />
     </svg>
   );
-});
+}

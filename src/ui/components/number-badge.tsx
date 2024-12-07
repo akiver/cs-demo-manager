@@ -1,39 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { motion } from 'motion/react';
 
 type Props = {
   number: number;
 };
 
 export function NumberBadge({ number }: Props) {
-  const [animate, setAnimate] = useState(false);
-
-  useEffect(() => {
-    let timeoutId = 0;
-
-    if (number !== 0) {
-      setAnimate(true);
-      timeoutId = window.setTimeout(() => {
-        setAnimate(false);
-      }, 300);
-    }
-
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [number]);
-
   if (number === 0) {
     return null;
   }
 
   return (
-    <div
+    <motion.div
       className="flex items-center justify-center h-20 min-w-20 bg-blue-700 text-white px-4 rounded-full text-center transition-[300ms]"
-      style={{
-        transform: `translateY(${animate ? '-30px' : 0})`,
-      }}
+      animate={{ translateY: [0, -60, 0], scale: [1, 4.5, 1], transition: { duration: 0.5 } }}
     >
       <p className="text-caption">{number}</p>
-    </div>
+    </motion.div>
   );
 }

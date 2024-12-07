@@ -1,9 +1,11 @@
 import React from 'react';
 import type { SVGAttributes } from 'react';
 
-type Props = SVGAttributes<SVGElement>;
+type Props = SVGAttributes<SVGElement> & {
+  ref?: React.Ref<SVGSVGElement>;
+};
 
-export const NoScopeIcon = React.forwardRef(function NoScopeIcon(props: Props, ref: React.Ref<SVGSVGElement>) {
+export function NoScopeIcon({ ref, ...props }: Props) {
   return (
     <svg viewBox="0 0 32.074 32.074" enableBackground="new 0 0 32.074 32.074" ref={ref} {...props}>
       <path
@@ -28,4 +30,4 @@ export const NoScopeIcon = React.forwardRef(function NoScopeIcon(props: Props, r
       />
     </svg>
   );
-});
+}

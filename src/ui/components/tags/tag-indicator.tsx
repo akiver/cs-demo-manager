@@ -3,11 +3,12 @@ import { Tooltip } from '../tooltip';
 import type { Tag } from 'csdm/common/types/tag';
 
 type CircleProps = {
+  ref?: React.Ref<HTMLDivElement>;
   color: string;
   top?: number;
 };
 
-const Circle = React.forwardRef(function Circle({ color, top }: CircleProps, ref: React.Ref<HTMLDivElement>) {
+function Circle({ ref, color, top }: CircleProps) {
   return (
     <div
       ref={ref}
@@ -19,7 +20,7 @@ const Circle = React.forwardRef(function Circle({ color, top }: CircleProps, ref
       }}
     />
   );
-});
+}
 
 type Props = {
   tag: Tag;

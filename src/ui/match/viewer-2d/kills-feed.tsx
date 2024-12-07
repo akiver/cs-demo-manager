@@ -1,5 +1,5 @@
 import React from 'react';
-import { animated, useTransition } from '@react-spring/web';
+import { AnimatePresence, motion } from 'motion/react';
 import type { Kill } from 'csdm/common/types/kill';
 import { useViewerContext } from './use-viewer-context';
 import { useCurrentMatch } from '../use-current-match';
@@ -26,35 +26,6 @@ function getVisibleKills(kills: Kill[], currentFrame: number, framerate: number)
     });
 }
 
-type KillEntryProps = {
-  kill: Kill;
-  visibleKills: Kill[];
-};
-
-function KillEntry({ kill, visibleKills }: KillEntryProps) {
-  const isVisible = visibleKills.includes(kill);
-  const transitions = useTransition(isVisible, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: {
-      duration: 200,
-    },
-  });
-
-  return transitions((styles, isVisible) => {
-    if (!isVisible) {
-      return null;
-    }
-
-    return (
-      <animated.div className="flex items-center rounded p-8 bg-black/30 mb-4" style={styles}>
-        <KillFeedEntry kill={kill} />
-      </animated.div>
-    );
-  });
-}
-
 export function KillsFeed() {
   const match = useCurrentMatch();
   const { kills, currentFrame } = useViewerContext();
@@ -62,9 +33,21 @@ export function KillsFeed() {
 
   return (
     <div className="absolute right-16 top-32 flex flex-col">
-      {kills.map((kill) => {
-        return <KillEntry key={`${kill.victimSteamId}-${kill.frame}`} kill={kill} visibleKills={visibleKills} />;
-      })}
+      <AnimatePresence>
+        {visibleKills.map((kill) => {
+          return (
+            <motion.div
+              key={`${kill.victimSteamId}-${kill.frame}`}
+              className="flex items-center rounded p-8 bg-black/30 mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.3 } }}
+              exit={{ opacity: 0 }}
+            >
+              <KillFeedEntry kill={kill} />
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
     </div>
   );
 }

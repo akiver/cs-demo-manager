@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import React, { createContext, useState } from 'react';
 import type { ReactNode } from 'react';
-import { useTransition, animated } from '@react-spring/web';
+import { motion } from 'motion/react';
 import { makeElementInert, makeElementNonInert } from 'csdm/ui/shared/inert';
 import { useFocusLastActiveElement } from 'csdm/ui/hooks/use-focus-last-active-element';
 
@@ -27,21 +27,6 @@ type Props = {
 export function DialogProvider({ children, inertElementId }: Props) {
   const [dialog, setDialog] = useState<ReactNode | undefined>(undefined);
   const { focusElement, updateElement } = useFocusLastActiveElement();
-  const transitions = useTransition(dialog, {
-    from: {
-      opacity: 0,
-    },
-    enter: {
-      opacity: 1,
-    },
-    leave: {
-      opacity: 0,
-    },
-    config: {
-      duration: 200,
-    },
-    exitBeforeEnter: true,
-  });
 
   return (
     <DialogContext.Provider
@@ -59,16 +44,18 @@ export function DialogProvider({ children, inertElementId }: Props) {
       }}
     >
       {children}
-      {transitions((style, dialog) => {
-        return dialog
-          ? ReactDOM.createPortal(
-              <animated.div className="absolute inset-0 z-[3] focus-within:outline-none" style={style}>
-                {dialog}
-              </animated.div>,
-              document.body,
-            )
-          : null;
-      })}
+      {dialog
+        ? ReactDOM.createPortal(
+            <motion.div
+              className="absolute inset-0 z-[3] focus-within:outline-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.3 } }}
+            >
+              {dialog}
+            </motion.div>,
+            document.body,
+          )
+        : null}
     </DialogContext.Provider>
   );
 }

@@ -42,6 +42,8 @@ function useBuildRoundsGroup(match: Match, pixelsPerTick: number, ticksPerSecond
 }
 
 function useBuildKillsGroup(match: Match, pixelsPerTick: number): Group {
+  // TODO remove comment when https://github.com/facebook/react/issues/31687 is fixed
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { t } = useLingui();
 
   const items: Item[] = [];

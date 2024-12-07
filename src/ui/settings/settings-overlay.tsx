@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import type { SpringValue } from '@react-spring/web';
-import { animated } from '@react-spring/web';
+import { motion } from 'motion/react';
 import { Settings } from './settings';
 import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
 import { SETTINGS_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 
 type Props = {
   onClose: () => void;
-  style: {
-    opacity: SpringValue<number>;
-  };
 };
 
-export function SettingsOverlay({ onClose, style }: Props) {
+export function SettingsOverlay({ onClose }: Props) {
   useBlockNavigation(true);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
@@ -24,14 +20,15 @@ export function SettingsOverlay({ onClose, style }: Props) {
   };
 
   return ReactDOM.createPortal(
-    <animated.div
+    <motion.div
       className="absolute inset-0 z-1 bg-overlay focus-within:outline-none"
-      style={style}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 0.3 } }}
       onKeyDown={onKeyDown}
       id={SETTINGS_ELEMENT_ID}
     >
       <Settings />
-    </animated.div>,
+    </motion.div>,
     document.body,
   );
 }

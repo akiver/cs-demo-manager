@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useImperativeHandle, forwardRef, useId } from 'react';
+import React, { useEffect, useRef, useImperativeHandle, useId } from 'react';
 
 export type TextInputHandlers = {
   focus: () => void;
@@ -8,6 +8,7 @@ export type TextInputHandlers = {
 };
 
 type Props = {
+  ref?: React.Ref<TextInputHandlers>;
   name?: string | undefined;
   label?: React.ReactNode | undefined;
   value?: string | ReadonlyArray<string> | number | undefined;
@@ -24,10 +25,16 @@ type Props = {
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
-export const TextInput = forwardRef(function TextInput(
-  { isDisabled, isReadOnly, autoFocus, onEnterKeyDown, label, onKeyDown, ...props }: Props,
-  ref: React.Ref<TextInputHandlers>,
-) {
+export function TextInput({
+  isDisabled,
+  isReadOnly,
+  autoFocus,
+  onEnterKeyDown,
+  label,
+  onKeyDown,
+  ref,
+  ...props
+}: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const id = useId();
 
@@ -90,4 +97,4 @@ export const TextInput = forwardRef(function TextInput(
       {input}
     </div>
   );
-});
+}

@@ -1,9 +1,11 @@
 import React from 'react';
 import type { SVGAttributes } from 'react';
 
-type Props = SVGAttributes<SVGElement>;
+type Props = SVGAttributes<SVGElement> & {
+  ref?: React.Ref<SVGSVGElement>;
+};
 
-export const HeadshotIcon = React.forwardRef(function HeadshotIcon(props: Props, ref: React.Ref<SVGSVGElement>) {
+export function HeadshotIcon({ ref, ...props }: Props) {
   return (
     <svg viewBox="0 0 32 32" ref={ref} {...props}>
       <g>
@@ -11,4 +13,4 @@ export const HeadshotIcon = React.forwardRef(function HeadshotIcon(props: Props,
       </g>
     </svg>
   );
-});
+}

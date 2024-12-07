@@ -1,5 +1,6 @@
 import React, { StrictMode } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
+import { MotionConfig } from 'motion/react';
 import { store } from 'csdm/ui/store/store';
 import { AppLoader } from 'csdm/ui/bootstrap/app-loader';
 import { LocaleProvider } from 'csdm/ui/bootstrap/locale-provider';
@@ -16,24 +17,26 @@ import { APP_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 function App() {
   return (
     <ReduxProvider store={store}>
-      <LocaleProvider>
-        <TitleBar />
-        <ArgumentsProvider>
-          <ToastsProvider>
-            <SettingsProvider>
-              <WebSocketProvider>
-                <DialogProvider inertElementId={APP_ELEMENT_ID}>
-                  <DatabaseLoader>
-                    <SettingsOverlayProvider>
-                      <AppLoader />
-                    </SettingsOverlayProvider>
-                  </DatabaseLoader>
-                </DialogProvider>
-              </WebSocketProvider>
-            </SettingsProvider>
-          </ToastsProvider>
-        </ArgumentsProvider>
-      </LocaleProvider>
+      <MotionConfig reducedMotion="user">
+        <LocaleProvider>
+          <TitleBar />
+          <ArgumentsProvider>
+            <ToastsProvider>
+              <SettingsProvider>
+                <WebSocketProvider>
+                  <DialogProvider inertElementId={APP_ELEMENT_ID}>
+                    <DatabaseLoader>
+                      <SettingsOverlayProvider>
+                        <AppLoader />
+                      </SettingsOverlayProvider>
+                    </DatabaseLoader>
+                  </DialogProvider>
+                </WebSocketProvider>
+              </SettingsProvider>
+            </ToastsProvider>
+          </ArgumentsProvider>
+        </LocaleProvider>
+      </MotionConfig>
     </ReduxProvider>
   );
 }

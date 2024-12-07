@@ -1,21 +1,22 @@
 import ReactDOM from 'react-dom';
 import React, { useState, useLayoutEffect } from 'react';
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode, Ref } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useFloating, computePosition, offset } from '@floating-ui/react';
 import type { HumanBodyData } from './weapons-accuracy';
 
 type Props = {
+  ref?: React.Ref<SVGPathElement>;
   width: number;
   data: HumanBodyData;
 };
 
-const Path = React.forwardRef(function Path(props: React.SVGProps<SVGPathElement>, ref: React.Ref<SVGPathElement>) {
+function Path({ ref, ...props }: React.SVGProps<SVGPathElement>) {
   return <path ref={ref} className="fill-gray-800 transition-opacity duration-500" {...props} />;
-});
+}
 
 type BodyTooltipProps = {
-  children: React.ReactElement;
+  children: ReactElement<{ ref: Ref<HTMLElement> }>;
   content: ReactNode;
 };
 

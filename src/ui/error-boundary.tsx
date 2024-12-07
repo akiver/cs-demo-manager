@@ -1,12 +1,18 @@
 // Translation is not possible here as the locale provider is under the error boundary.
 /* eslint-disable lingui/no-unlocalized-strings */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouteError } from 'react-router';
 import { Button, ButtonVariant } from './components/buttons/button';
+import { makeElementNonInert } from './shared/inert';
+import { APP_ELEMENT_ID } from './shared/element-ids';
 
 export function ErrorBoundary() {
   const error = useRouteError();
   const errorData = error instanceof Error ? (error.stack ?? error.message) : JSON.stringify(error);
+
+  useEffect(() => {
+    makeElementNonInert(APP_ELEMENT_ID);
+  }, []);
 
   const buildIssueUrl = () => {
     const info = window.csdm.getAppInformation();
@@ -31,7 +37,8 @@ export function ErrorBoundary() {
 
   return (
     <div className="flex flex-col items-center size-full">
-      <div className="flex flex-col mt-48 gap-y-12 w-full p-24">
+      <div className="h-48 w-full drag" />
+      <div className="flex flex-col gap-y-12 w-full p-24">
         <h1 className="text-title">A runtime error occurred</h1>
 
         <div>

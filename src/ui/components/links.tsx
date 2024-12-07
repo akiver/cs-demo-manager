@@ -28,14 +28,12 @@ function isNavigationEvent(event: KeyboardEvent) {
 
 type NavigationLinkProps = {
   children: React.ReactNode;
+  ref?: React.Ref<HTMLAnchorElement>;
   to: string;
   isDisabled: boolean;
 };
 
-const NavigationLink = React.forwardRef(function NavigationLink(
-  { children, to, isDisabled }: NavigationLinkProps,
-  ref: React.Ref<HTMLAnchorElement>,
-) {
+function NavigationLink({ children, ref, to, isDisabled }: NavigationLinkProps) {
   const { state } = useLocation();
 
   return (
@@ -52,7 +50,7 @@ const NavigationLink = React.forwardRef(function NavigationLink(
       {children}
     </Link>
   );
-});
+}
 
 type Direction = 'left' | 'right';
 function useKeyboardNavigation(to: string, direction: Direction) {

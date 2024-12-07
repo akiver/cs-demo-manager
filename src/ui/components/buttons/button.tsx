@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react';
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 export const ButtonVariant = {
   Default: 'default',
@@ -10,6 +10,7 @@ export const ButtonVariant = {
 export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant];
 
 export type Props = {
+  ref?: React.Ref<HTMLButtonElement>;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   isDisabled?: boolean;
   children: ReactNode;
@@ -18,10 +19,15 @@ export type Props = {
   form?: string;
 };
 
-export const Button = forwardRef(function Button(
-  { children, isDisabled, onClick, variant = ButtonVariant.Default, type = 'button', ...props }: Props,
-  ref: React.Ref<HTMLButtonElement>,
-) {
+export function Button({
+  children,
+  ref,
+  isDisabled,
+  onClick,
+  variant = ButtonVariant.Default,
+  type = 'button',
+  ...props
+}: Props) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (!onClick || event.detail > 1) {
       return;
@@ -49,4 +55,4 @@ export const Button = forwardRef(function Button(
       {children}
     </button>
   );
-});
+}

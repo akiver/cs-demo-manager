@@ -1,9 +1,11 @@
 import type { SVGAttributes } from 'react';
 import React from 'react';
 
-type Props = SVGAttributes<SVGElement>;
+type Props = SVGAttributes<SVGElement> & {
+  ref?: React.Ref<SVGSVGElement>;
+};
 
-export const PenetrateIcon = React.forwardRef(function PenetrateIcon(props: Props, ref: React.Ref<SVGSVGElement>) {
+export function PenetrateIcon({ ref, ...props }: Props) {
   return (
     <svg viewBox="0 0 32 32" ref={ref} {...props}>
       <g>
@@ -11,4 +13,4 @@ export const PenetrateIcon = React.forwardRef(function PenetrateIcon(props: Prop
       </g>
     </svg>
   );
-});
+}

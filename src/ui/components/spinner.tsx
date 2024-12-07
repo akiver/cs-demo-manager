@@ -1,10 +1,11 @@
 import React from 'react';
 
 type Props = {
+  ref?: React.Ref<HTMLDivElement>;
   size: number;
 };
 
-export const Spinner = React.forwardRef(function Spinner({ size }: Props, ref: React.Ref<HTMLDivElement>) {
+export function Spinner({ ref, size }: Props) {
   return (
     <div
       ref={ref}
@@ -15,4 +16,4 @@ export const Spinner = React.forwardRef(function Spinner({ size }: Props, ref: R
       }}
     />
   );
-});
+}

@@ -1,5 +1,4 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
-import { useTransition } from '@react-spring/web';
 import type { ReactNode } from 'react';
 import { SettingsOverlay } from './settings-overlay';
 import { SettingsCategory } from './settings-category';
@@ -42,20 +41,6 @@ export function SettingsOverlayProvider({ children }: Props) {
   const { focusElement, updateElement } = useFocusLastActiveElement();
   const [areSettingsVisible, setAreSettingsVisible] = useState(false);
   const [category, setCategory] = useState<SettingsCategory>(SettingsCategory.UI);
-  const transitions = useTransition(areSettingsVisible, {
-    from: {
-      opacity: 0,
-    },
-    enter: {
-      opacity: 1,
-    },
-    leave: {
-      opacity: 0,
-    },
-    config: {
-      duration: 200,
-    },
-  });
 
   const showCategory = (category: SettingsCategory) => {
     setCategory(category);
@@ -129,13 +114,11 @@ export function SettingsOverlayProvider({ children }: Props) {
       }}
     >
       {children}
-      {transitions((style, isVisible) => {
-        return isVisible ? (
-          <DialogProvider inertElementId={SETTINGS_ELEMENT_ID}>
-            <SettingsOverlay style={style} onClose={closeSettings} />
-          </DialogProvider>
-        ) : null;
-      })}
+      {areSettingsVisible ? (
+        <DialogProvider inertElementId={SETTINGS_ELEMENT_ID}>
+          <SettingsOverlay onClose={closeSettings} />
+        </DialogProvider>
+      ) : null}
     </SettingsOverlayContext.Provider>
   );
 }

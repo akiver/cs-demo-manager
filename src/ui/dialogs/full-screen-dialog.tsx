@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import type { SpringValue } from '@react-spring/web';
-import { useTransition, animated } from '@react-spring/web';
+import { motion } from 'motion/react';
 import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
 import { makeElementInert, makeElementNonInert } from 'csdm/ui/shared/inert';
 import { useFocusLastActiveElement } from 'csdm/ui/hooks/use-focus-last-active-element';
@@ -13,12 +12,9 @@ type Props = {
 
 type DialogProps = {
   children: React.ReactNode;
-  style: {
-    opacity: SpringValue<number>;
-  };
 };
 
-function Dialog({ children, style }: DialogProps) {
+function Dialog({ children }: DialogProps) {
   const container = useRef<HTMLDivElement>(null);
   const { updateElement, focusElement } = useFocusLastActiveElement();
 
@@ -37,37 +33,23 @@ function Dialog({ children, style }: DialogProps) {
   }, [container]);
 
   return (
-    <animated.div
+    <motion.div
       ref={container}
       className="absolute inset-0 size-full bg-overlay z-1 pt-[var(--title-bar-height)] focus-visible:outline-none"
-      style={style}
       tabIndex={-1}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 0.3 } }}
+      exit={{ opacity: 0 }}
       role="dialog"
       aria-modal="true"
     >
       {children}
-    </animated.div>
+    </motion.div>
   );
 }
 
 export function FullScreenDialog({ isVisible, children }: Props) {
-  const transitions = useTransition(isVisible, {
-    from: {
-      opacity: 0,
-    },
-    enter: {
-      opacity: 1,
-    },
-    leave: {
-      opacity: 0,
-    },
-    config: {
-      duration: 200,
-    },
-  });
   useBlockNavigation(isVisible);
 
-  return transitions((style, isVisible) => {
-    return isVisible ? <Dialog style={style}>{children}</Dialog> : null;
-  });
+  return isVisible ? <Dialog>{children}</Dialog> : null;
 }

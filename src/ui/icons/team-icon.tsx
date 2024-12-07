@@ -1,9 +1,11 @@
 import React from 'react';
 import type { SVGAttributes } from 'react';
 
-type Props = SVGAttributes<SVGElement>;
+type Props = SVGAttributes<SVGElement> & {
+  ref?: React.Ref<SVGSVGElement>;
+};
 
-export const TeamIcon = React.forwardRef(function TeamIcon(props: Props, ref: React.Ref<SVGSVGElement>) {
+export function TeamIcon({ ref, ...props }: Props) {
   return (
     <svg fill="none" viewBox="0 0 16 16" ref={ref} {...props}>
       <g fill="currentColor">
@@ -16,4 +18,4 @@ export const TeamIcon = React.forwardRef(function TeamIcon(props: Props, ref: Re
       </g>
     </svg>
   );
-});
+}

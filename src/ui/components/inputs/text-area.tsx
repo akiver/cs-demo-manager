@@ -1,13 +1,11 @@
 import React from 'react';
 
 type Props = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  ref?: React.Ref<HTMLTextAreaElement>;
   resizable?: boolean;
 };
 
-export const TextArea = React.forwardRef(function TextArea(
-  { resizable = true, ...props }: Props,
-  ref: React.Ref<HTMLTextAreaElement>,
-) {
+export function TextArea({ resizable = true, ref, ...props }: Props) {
   return (
     <textarea
       ref={ref}
@@ -16,10 +14,10 @@ export const TextArea = React.forwardRef(function TextArea(
       }`}
       style={{
         // @ts-expect-error CSS property supported by Chromium only ATM and not yet in TS defs.
-        // Can be removed once this line triggers an error when upgrading TS.
+        // TODO Can be removed once this line triggers an error when upgrading TS.
         fieldSizing: 'content',
       }}
       {...props}
     />
   );
-});
+}

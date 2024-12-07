@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { GrenadeName } from 'csdm/common/types/counter-strike';
 import { loadImageFromFilePath } from 'csdm/ui/shared/load-image-from-file-path';
 
-async function getCachedImage(imageRef: React.MutableRefObject<HTMLImageElement | null>, imageName: string) {
+async function getCachedImage(imageRef: React.RefObject<HTMLImageElement | null>, imageName: string) {
   if (imageRef.current !== null) {
     return imageRef.current;
   }

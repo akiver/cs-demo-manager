@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import type { ReactNode } from 'react';
-import { useTransition, animated } from '@react-spring/web';
+import { AnimatePresence, motion } from 'motion/react';
 import type { Toast, ShowToastOptions } from './toasts-context';
 import { ToastsContext } from './toasts-context';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
@@ -16,14 +16,6 @@ type Props = {
 export function ToastsProvider({ children }: Props) {
   const [toasts, setToasts] = useState<Toast[]>([]);
   const timeouts = useRef<Map<string, Timeout>>(new Map());
-  const transitions = useTransition(toasts, {
-    from: { opacity: 0, transform: 'translateX(100px)' },
-    enter: { opacity: 1, transform: 'translateX(0px)' },
-    leave: { opacity: 0, transform: 'translateX(100px)' },
-    config: {
-      duration: 300,
-    },
-  });
 
   const showToast = useCallback(
     (options: ShowToastOptions) => {
@@ -79,65 +71,72 @@ export function ToastsProvider({ children }: Props) {
     <ToastsContext.Provider value={showToast}>
       {children}
       <div className="absolute z-[3] right-24 top-48 flex flex-col gap-y-8 max-w-[448px]">
-        {transitions((style, toast) => {
-          const renderContent = () => {
-            let icon: ReactNode = null;
-            switch (toast.type) {
-              case 'success':
-                icon = <CheckCircleIcon className="size-24 mr-8 text-green-500 self-center" />;
-                break;
-              case 'error':
-                icon = <TimesCircleIcon className="size-24 mr-8 text-red-500 self-center" />;
-                break;
-              case 'warning':
-                icon = <ExclamationTriangleIcon className="size-24 mr-8 text-orange-500 self-center" />;
-                break;
-            }
+        <AnimatePresence>
+          {toasts.map((toast) => {
+            const renderContent = () => {
+              let icon: ReactNode = null;
+              switch (toast.type) {
+                case 'success':
+                  icon = <CheckCircleIcon className="size-24 mr-8 text-green-500 self-center" />;
+                  break;
+                case 'error':
+                  icon = <TimesCircleIcon className="size-24 mr-8 text-red-500 self-center" />;
+                  break;
+                case 'warning':
+                  icon = <ExclamationTriangleIcon className="size-24 mr-8 text-orange-500 self-center" />;
+                  break;
+              }
+
+              return (
+                <div className="flex items-center">
+                  {icon}
+                  <div className="flex-1 select-none">{toast.content}</div>
+                </div>
+              );
+            };
 
             return (
-              <div className="flex items-center">
-                {icon}
-                <div className="flex-1 select-none">{toast.content}</div>
-              </div>
+              <motion.div
+                key={toast.id}
+                className="flex p-16 bg-gray-75 text-gray-900 border-2 rounded-8 ml-auto min-w-[300px]"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 100 }}
+                transition={{ duration: 0.3 }}
+                role="alert"
+                onMouseEnter={() => {
+                  const timeout = timeouts.current.get(toast.id);
+                  if (!timeout) {
+                    return;
+                  }
+
+                  timeout.msRemaining -= Date.now() - timeout.startedAt;
+                  window.clearTimeout(timeout.id);
+                }}
+                onMouseLeave={() => {
+                  const timeout = timeouts.current.get(toast.id);
+                  if (!timeout) {
+                    return;
+                  }
+
+                  timeouts.current.set(toast.id, {
+                    id: window.setTimeout(() => {
+                      removeToast(toast.id);
+                    }, timeout.msRemaining),
+                    startedAt: Date.now(),
+                    msRemaining: timeout.msRemaining,
+                  });
+                }}
+                onClick={() => {
+                  toast.onClick?.();
+                  removeToast(toast.id);
+                }}
+              >
+                {renderContent()}
+              </motion.div>
             );
-          };
-
-          return (
-            <animated.div
-              className="flex p-16 bg-gray-75 text-gray-900 border-2 rounded-8 ml-auto min-w-[300px]"
-              style={style}
-              onMouseEnter={() => {
-                const timeout = timeouts.current.get(toast.id);
-                if (!timeout) {
-                  return;
-                }
-
-                timeout.msRemaining -= Date.now() - timeout.startedAt;
-                window.clearTimeout(timeout.id);
-              }}
-              onMouseLeave={() => {
-                const timeout = timeouts.current.get(toast.id);
-                if (!timeout) {
-                  return;
-                }
-
-                timeouts.current.set(toast.id, {
-                  id: window.setTimeout(() => {
-                    removeToast(toast.id);
-                  }, timeout.msRemaining),
-                  startedAt: Date.now(),
-                  msRemaining: timeout.msRemaining,
-                });
-              }}
-              onClick={() => {
-                toast.onClick?.();
-                removeToast(toast.id);
-              }}
-            >
-              {renderContent()}
-            </animated.div>
-          );
-        })}
+          })}
+        </AnimatePresence>
       </div>
     </ToastsContext.Provider>
   );

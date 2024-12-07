@@ -1,9 +1,11 @@
 import React from 'react';
 import type { SVGAttributes } from 'react';
 
-type Props = SVGAttributes<SVGElement>;
+type Props = SVGAttributes<SVGElement> & {
+  ref?: React.Ref<SVGSVGElement>;
+};
 
-export const JumpIcon = React.forwardRef(function JumpIcon(props: Props, ref: React.Ref<SVGSVGElement>) {
+export function JumpIcon({ ref, ...props }: Props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" ref={ref} {...props}>
       <g fill="none" stroke="currentColor" strokeWidth="4">
@@ -16,4 +18,4 @@ export const JumpIcon = React.forwardRef(function JumpIcon(props: Props, ref: Re
       </g>
     </svg>
   );
-});
+}

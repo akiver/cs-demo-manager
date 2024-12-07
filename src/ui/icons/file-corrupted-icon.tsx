@@ -1,12 +1,11 @@
 import type { SVGAttributes } from 'react';
 import React from 'react';
 
-type Props = SVGAttributes<SVGElement>;
+type Props = SVGAttributes<SVGElement> & {
+  ref?: React.Ref<SVGSVGElement>;
+};
 
-export const FileCorruptedIcon = React.forwardRef(function FileCorruptedIcon(
-  props: Props,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export function FileCorruptedIcon({ ref, ...props }: Props) {
   return (
     <svg fill="none" viewBox="0 0 24 24" ref={ref} {...props}>
       <path
@@ -17,4 +16,4 @@ export const FileCorruptedIcon = React.forwardRef(function FileCorruptedIcon(
       />
     </svg>
   );
-});
+}

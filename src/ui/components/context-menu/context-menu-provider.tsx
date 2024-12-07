@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import { useTransition, animated } from '@react-spring/web';
+import { motion } from 'motion/react';
 
 type ContextMenuContextState = {
   showContextMenu: (event: MouseEvent, contextMenu: ReactNode) => void;
@@ -29,20 +29,6 @@ export function ContextMenuProvider({ children }: Props) {
   const positionRef = useRef<Position>({ x: 0, y: 0 });
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [contextMenu, setContextMenu] = useState<ReactNode | undefined>(undefined);
-  const transitions = useTransition(contextMenu, {
-    from: {
-      opacity: 0,
-    },
-    enter: {
-      opacity: 1,
-    },
-    leave: {
-      opacity: 0,
-    },
-    config: {
-      duration: 200,
-    },
-  });
 
   const hideContextMenu = useCallback(() => {
     setContextMenu(undefined);
@@ -129,13 +115,17 @@ export function ContextMenuProvider({ children }: Props) {
       }}
     >
       {children}
-      {transitions((style, contextMenu) => {
-        return contextMenu ? (
-          <animated.div className="absolute z-1" ref={wrapperRef} onMouseDown={onWrapperMouseDown} style={style}>
-            {contextMenu}
-          </animated.div>
-        ) : null;
-      })}
+      {contextMenu ? (
+        <motion.div
+          className="absolute z-1"
+          ref={wrapperRef}
+          onMouseDown={onWrapperMouseDown}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.3 } }}
+        >
+          {contextMenu}
+        </motion.div>
+      ) : null}
     </ContextMenuContext.Provider>
   );
 }

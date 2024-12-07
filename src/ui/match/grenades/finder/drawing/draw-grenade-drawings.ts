@@ -20,7 +20,7 @@ export function drawGrenadeDrawings(
   drawings: GrenadeDrawing[],
   context: CanvasRenderingContext2D,
   interactiveCanvas: InteractiveCanvas,
-  hoveredIdRef: React.MutableRefObject<string | undefined>,
+  hoveredIdRef: React.RefObject<string | undefined>,
 ) {
   const { zoomedSize, getMouseX, getMouseY } = interactiveCanvas;
 
