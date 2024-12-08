@@ -12,7 +12,7 @@ export function TimeMarker({ tick, pixelsPerTick, text }: Props) {
 
   return (
     <div
-      className="absolute w-px h-full bg-blue-700 z-1"
+      className="absolute w-px h-full bg-gray-900 z-1 origin-left pointer-events-none"
       style={{
         ...scaleStyle,
         left: `${x}px`,

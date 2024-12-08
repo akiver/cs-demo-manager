@@ -3,7 +3,6 @@ import type { Group, Item } from 'csdm/ui/components/timeline/use-timeline';
 import { useTimeline } from 'csdm/ui/components/timeline/use-timeline';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { areSequencesOverlapping } from 'csdm/common/video/are-sequences-overlapping';
-import type { Player } from 'csdm/common/types/player';
 import { sortSequencesByStartTick } from 'csdm/node/video/sequences/sort-sequences-by-start-tick';
 import { useCurrentMatch } from '../../../use-current-match';
 import { EditSequenceDialog } from '../../sequence/edit-sequence-dialog';
@@ -12,7 +11,6 @@ import { SequenceItem } from './sequence-item';
 
 function buildSequencesGroup(
   sequences: Sequence[],
-  players: Player[],
   pixelsPerTick: number,
   ticksPerSecond: number,
   setSelectedSequenceOnTimeline: (sequence: Sequence | undefined) => void,
@@ -20,7 +18,7 @@ function buildSequencesGroup(
   const sortedSequences = sortSequencesByStartTick(sequences);
   const items: Item[] = [];
   let currentY = 0;
-  const itemHeight = 100;
+  const itemHeight = 120;
   let groupHeight = itemHeight;
   for (let index = 0; index < sortedSequences.length; index++) {
     const sequence = sortedSequences[index];
@@ -54,7 +52,6 @@ function buildSequencesGroup(
       element: (
         <SequenceItem
           sequence={sequence}
-          players={players}
           ticksPerSecond={ticksPerSecond}
           isOverlapping={isOverlapping}
           onEditClick={setSelectedSequenceOnTimeline}
@@ -79,13 +76,7 @@ export function SequencesTimeline() {
     tickCount: match.tickCount,
     ticksPerSecond: match.tickrate,
   });
-  const sequencesGroup = buildSequencesGroup(
-    sequences,
-    match.players,
-    pixelsPerTick,
-    ticksPerSecond,
-    setSelectedSequenceOnTimeline,
-  );
+  const sequencesGroup = buildSequencesGroup(sequences, pixelsPerTick, ticksPerSecond, setSelectedSequenceOnTimeline);
 
   const groups = [sequencesGroup, timestampGroup];
 

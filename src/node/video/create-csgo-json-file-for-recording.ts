@@ -78,6 +78,10 @@ export async function createCsgoJsonFileForRecording({
     const showXrayCommand = `spec_show_xray ${sequence.showXRay ? 1 : 0}`;
     json.addExecCommand(setupSequenceTick, showXrayCommand);
 
+    for (const camera of sequence.cameras) {
+      json.addSpecPlayer(camera.tick, camera.playerSteamId);
+    }
+
     if (isWindows) {
       const hlaeOutputFolderPath = getHlaeRawFilesFolderPath(rawFilesFolderPath, sequence);
       json
@@ -108,10 +112,6 @@ export async function createCsgoJsonFileForRecording({
       json
         .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
         .addExecCommand(sequence.endTick, 'endmovie');
-    }
-
-    if (sequence.playerFocusSteamId !== undefined) {
-      json.addSpecPlayer(setupSequenceTick, sequence.playerFocusSteamId);
     }
 
     if (typeof sequence.cfg === 'string') {

@@ -92,7 +92,7 @@ export function SequenceDeathNotices() {
   });
 
   return (
-    <div>
+    <div className="flex flex-col">
       <p>
         <Trans>Death notices</Trans>
       </p>

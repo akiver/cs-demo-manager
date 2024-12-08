@@ -16,6 +16,7 @@ import { CfgInput } from 'csdm/ui/match/video/cfg-input';
 import { DeathNotices } from './death-notices/death-notices';
 import { useDeathNotices } from './death-notices/use-death-notices';
 import { PlayerVoicesCheckbox } from '../../player-voices-checkbox';
+import type { Sequence } from 'csdm/common/types/sequence';
 
 type State = {
   overridePlayerFocusSteamId: boolean;
@@ -41,12 +42,16 @@ export function EditSequenceSettingsDialog() {
   });
 
   const onConfirm = () => {
-    const newSequences = sequences.map((sequence) => {
+    const newSequences = sequences.map<Sequence>((sequence) => {
+      const playerName = match.players.find((player) => player.steamId === playerFocusSteamId)?.name ?? '';
       return {
         ...sequence,
         showXRay,
         playerVoicesEnabled,
-        playerFocusSteamId: state.overridePlayerFocusSteamId ? playerFocusSteamId : sequence.playerFocusSteamId,
+        cameras:
+          state.overridePlayerFocusSteamId && playerFocusSteamId
+            ? [{ tick: sequence.startTick, playerSteamId: playerFocusSteamId, playerName }]
+            : sequence.cameras,
         cfg: state.overrideCfg ? cfg : sequence.cfg,
         deathNotices: state.overrideDeathNotices ? deathNotices : sequence.deathNotices,
       };

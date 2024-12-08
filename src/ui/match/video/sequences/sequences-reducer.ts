@@ -63,6 +63,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
         match,
         steamId,
         action.payload.perspective,
+        5,
       );
       state[match.demoFilePath] = sequences;
     })
@@ -73,6 +74,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
         match,
         steamId,
         action.payload.perspective,
+        5,
       );
       state[match.demoFilePath] = sequences;
     })
@@ -90,6 +92,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
             match,
             steamId,
             action.payload.perspective,
+            action.payload.startSecondsBeforeEvent,
             weapons,
           );
           break;

@@ -71,6 +71,13 @@ export async function createCs2JsonActionsFileForRecording({
     const showXrayCommand = `spec_show_xray ${sequence.showXRay ? 1 : 0}`;
     json.addExecCommand(setupSequenceTick, showXrayCommand);
 
+    for (const camera of sequence.cameras) {
+      const playerSlot = playerSlots[camera.playerSteamId];
+      if (playerSlot) {
+        json.addSpecPlayer(camera.tick, playerSlot);
+      }
+    }
+
     for (const deathNotice of sequence.deathNotices) {
       json.addExecCommand(
         setupSequenceTick,
@@ -101,13 +108,6 @@ export async function createCs2JsonActionsFileForRecording({
     json
       .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
       .addExecCommand(sequence.endTick, 'endmovie');
-
-    if (sequence.playerFocusSteamId) {
-      const playerSlot = playerSlots[sequence.playerFocusSteamId];
-      if (playerSlot) {
-        json.addSpecPlayer(setupSequenceTick, playerSlot);
-      }
-    }
 
     if (typeof sequence.cfg === 'string') {
       const commands = sequence.cfg.split('\n');

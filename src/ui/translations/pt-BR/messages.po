@@ -86,6 +86,7 @@ msgid "No demo analysis in progress."
 msgstr "Nenhuma análise de demo em progresso."
 
 #: src/ui/analyses/table/context-menu/remove-demo-from-analyses-item.tsx
+#: src/ui/match/video/sequence/match-timeline/camera-item.tsx
 msgctxt "Context menu"
 msgid "Remove"
 msgstr "Excluir"
@@ -464,6 +465,7 @@ msgid "Refresh"
 msgstr "Atualizar"
 
 #: src/ui/components/buttons/remove-button.tsx
+#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 #: src/ui/videos/video-entry.tsx
 msgctxt "Button"
 msgid "Remove"
@@ -3745,6 +3747,7 @@ msgid "No grenades found."
 msgstr "Nenhuma granada encontrada."
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 #: src/ui/match/video/sequence/sequence-death-notices.tsx
 #: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
 msgctxt "Table header"
@@ -3759,11 +3762,13 @@ msgid "Player's name"
 msgstr "Nome do jogador"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 msgctxt "Table header"
 msgid "Tick"
 msgstr "Tique"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 msgctxt "Table header tooltip"
 msgid "Tick"
 msgstr "Tique"
@@ -4866,6 +4871,16 @@ msgid "Enemy"
 msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Seconds to focus the camera on the killer before each kill"
+msgstr ""
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Seconds to focus the camera on the enemy before each kill"
+msgstr ""
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "No action found for this player"
 msgstr ""
 
@@ -5043,6 +5058,75 @@ msgctxt "Button"
 msgid "Reset settings"
 msgstr "Redefinir configurações"
 
+#: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
+msgctxt "Select option"
+msgid "Killer"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
+msgctxt "Select option"
+msgid "Victim"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
+msgctxt "Checkbox label"
+msgid "Focus the camera on the killer or victim a few seconds before each kill"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
+msgctxt "Input label"
+msgid "Seconds"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
+msgctxt "Dialog title"
+msgid "Generate cameras"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
+msgid "The sequence is from tick <0>{startTick}</0> to <1>{endTick}</1> (<2>{duration}s</2>)."
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
+msgid "Focus the camera on the following player when the sequence start"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
+msgctxt "Button"
+msgid "Generate"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/manage-cameras-buttons.tsx
+msgctxt "Button"
+msgid "Generate cameras"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/manage-cameras-buttons.tsx
+msgctxt "Button"
+msgid "Remove cameras"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+msgctxt "Table header tooltip"
+msgid "Player"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgctxt "Table header"
+msgid "Actions"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+#: src/ui/match/video/sequence/sequence-death-notices.tsx
+msgctxt "Table header tooltip"
+msgid "Actions"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+msgid "Cameras (<0>{cameraCount}</0>)"
+msgstr ""
+
 #: src/ui/match/video/sequence/end-tick-input.tsx
 msgctxt "Input label"
 msgid "End tick"
@@ -5052,6 +5136,11 @@ msgstr "Tique final"
 msgctxt "Input placeholder"
 msgid "End tick"
 msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on defuser"
+msgstr "Focar câmera no desarmador"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
@@ -5084,18 +5173,14 @@ msgid "Set the tick of the bomb defused plus X seconds as end tick"
 msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on defuser"
-msgstr "Focar câmera no desarmador"
-
-#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
-#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
-msgid "Tick: {tick}"
-msgstr "Tique: {tick}"
-
-#: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
-msgid "Bomb defused by {defuserName} on site {site}"
+msgid "Bomb defused by <0>{defuserName}</0> on site <1>{site}</1>"
 msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
+#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on planter"
+msgstr "Focar câmera no armador"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
 msgctxt "Context menu"
@@ -5128,14 +5213,8 @@ msgid "Set the tick of the bomb exploded plus X seconds as end tick"
 msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
-#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on planter"
-msgstr "Focar câmera no armador"
-
-#: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
-msgid "Bomb exploded on site {site}"
-msgstr "Bomba explodiu no local {site}"
+msgid "Bomb exploded on site <0>{site}</0>"
+msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
@@ -5169,12 +5248,35 @@ msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
 msgctxt "Tooltip"
-msgid "Tick: {tick}"
-msgstr "Tique: {tick}"
+msgid "Bomb planted by <0>{planterName}</0> on site <1>{site}</1>"
+msgstr ""
 
-#: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
-msgctxt "Tooltip"
-msgid "Bomb planted by {planterName} on site {site}"
+#: src/ui/match/video/sequence/match-timeline/camera-item.tsx
+msgid "Camera on <0>{playerName}</0>"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
+msgctxt "Context menu"
+msgid "At the start of the sequence"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
+msgid "{second, plural, one {# second before} other {# seconds before}}"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
+msgctxt "Context menu"
+msgid "X seconds before"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on killer"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on victim"
 msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/kill-item.tsx
@@ -5207,21 +5309,6 @@ msgctxt "Context menu"
 msgid "Set the tick of the kill plus X seconds as end tick"
 msgstr ""
 
-#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on killer"
-msgstr ""
-
-#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
-msgctxt "Context menu"
-msgid "Focus camera on victim"
-msgstr ""
-
-#: src/ui/match/video/sequence/match-timeline/kill-item.tsx
-msgctxt "Tooltip"
-msgid "<0>{killerName}</0> killed <1>{victimName}</1> with <2>{weaponName}</2>"
-msgstr ""
-
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
 msgid "Rounds"
@@ -5236,6 +5323,11 @@ msgstr "Abates"
 msgctxt "Timeline group label"
 msgid "Bomb"
 msgstr "Bomba"
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Cameras"
+msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Tooltip"
@@ -5274,13 +5366,27 @@ msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
-msgid "Set tick {tick} as start tick"
-msgstr "Marcar {tick} como tique inicial"
+msgid "Set tick {tick} as"
+msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
-msgid "Set tick {tick} as end tick"
-msgstr "Marcar {tick} como tique final"
+msgid "Start tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "End tick"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "Focus camera"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/tick.tsx
+msgid "Tick <0>{tick}</0>"
+msgstr ""
 
 #: src/ui/match/video/sequence/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"
@@ -5303,27 +5409,17 @@ msgid "Highlight kills kills"
 msgstr ""
 
 #: src/ui/match/video/sequence/sequence-death-notices.tsx
-msgctxt "Table header"
-msgid "Actions"
-msgstr ""
-
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
-msgctxt "Table header tooltip"
-msgid "Actions"
-msgstr ""
-
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
 msgid "Death notices"
 msgstr ""
 
 #: src/ui/match/video/sequence/sequence-disk-space.tsx
-msgid "~{requiredDiskSpace}GB"
-msgstr "~{requiredDiskSpace}GB"
+msgid "~<0>{requiredDiskSpace}</0>GB"
+msgstr ""
 
 #: src/ui/match/video/sequence/sequence-duration.tsx
 msgctxt "Duration"
-msgid "{seconds} seconds"
-msgstr "{seconds} segundos"
+msgid "<0>{seconds}</0> seconds"
+msgstr ""
 
 #: src/ui/match/video/sequence/start-tick-input.tsx
 msgctxt "Input label"
@@ -5400,20 +5496,19 @@ msgid "Edit"
 msgstr "Editar"
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
-msgid "Sequence #{number}"
+msgid "Sequence <0>#{number}</0>"
 msgstr ""
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
-msgid "Tick: {startTick} to {endTick}"
+msgid "Tick <0>{startTick}</0> to <1>{endTick}</1> (<2>{durationInSeconds}s</2>)"
 msgstr ""
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
-msgid "Duration {durationInSeconds}s"
+msgid "{cameraCount, plural, one {# camera focus point} other {# camera focus points}}"
 msgstr ""
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
-#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
-msgid "Camera on {playerName}"
+msgid "First camera focus point on <0>{focusPlayerName}</0>"
 msgstr ""
 
 #: src/ui/match/video/show-only-death-notices-checkbox.tsx
@@ -7108,6 +7203,10 @@ msgctxt "Button"
 msgid "Pause"
 msgstr ""
 
+#: src/ui/videos/resume-or-pause-video-queue-button.tsx
+msgid "The video queue is paused!"
+msgstr ""
+
 #: src/ui/videos/video-entry.tsx
 msgid "Waiting…"
 msgstr ""
@@ -7210,7 +7309,11 @@ msgid "Player voices"
 msgstr ""
 
 #: src/ui/videos/video-entry.tsx
-msgid "Focused player"
+msgid "Cameras"
+msgstr ""
+
+#: src/ui/videos/video-entry.tsx
+msgid "First camera on"
 msgstr ""
 
 #: src/ui/videos/video-entry.tsx

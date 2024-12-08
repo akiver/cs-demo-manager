@@ -12,28 +12,33 @@ import type { TickOperation, TickPosition } from './select-seconds-dialog';
 import { SelectSecondsDialog } from './select-seconds-dialog';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useSequenceForm } from '../use-sequence-form';
+import { Tick } from './tick';
+import { FocusCameraOnEventSubContextMenu } from './focus-camera-on-event-sub-context-menu';
 
 type ContextMenuProps = {
   bombDefused: BombDefused;
 };
 
 function BombDefusedContextMenu({ bombDefused }: ContextMenuProps) {
-  const { updateSequence } = useSequenceForm();
+  const { sequence, setStartTick, setEndTick, setCameraOnPlayerAtTick } = useSequenceForm();
   const { showDialog } = useDialog();
   const showSelectSecondsDialog = (position: TickPosition, operation: TickOperation) => {
     showDialog(
       <SelectSecondsDialog
         tick={bombDefused.tick}
-        tickPosition={position}
         operation={operation}
-        updateSequence={updateSequence}
+        onSubmit={(tick) => {
+          if (position === 'start') {
+            setStartTick(tick);
+          } else {
+            setEndTick(tick);
+          }
+        }}
       />,
     );
   };
   const onSetAsStartTickClick = () => {
-    updateSequence({
-      startTick: String(bombDefused.tick),
-    });
+    setStartTick(bombDefused.tick);
   };
   const onSetAsStartTickMinusSecondsClick = () => {
     showSelectSecondsDialog('start', 'minus');
@@ -42,9 +47,7 @@ function BombDefusedContextMenu({ bombDefused }: ContextMenuProps) {
     showSelectSecondsDialog('start', 'plus');
   };
   const onSetAsEndTickClick = () => {
-    updateSequence({
-      endTick: String(bombDefused.tick),
-    });
+    setEndTick(bombDefused.tick);
   };
   const onSetAsEndTickMinusSecondsClick = () => {
     showSelectSecondsDialog('end', 'minus');
@@ -52,14 +55,22 @@ function BombDefusedContextMenu({ bombDefused }: ContextMenuProps) {
   const onSetAsEndTickPlusSecondsClick = () => {
     showSelectSecondsDialog('end', 'plus');
   };
-  const onFocusCameraOnDefuserClick = () => {
-    updateSequence({
-      playerFocusSteamId: bombDefused.defuserSteamId,
-    });
-  };
+
   return (
     <>
       <ContextMenu>
+        <FocusCameraOnEventSubContextMenu
+          eventTick={bombDefused.tick}
+          startTick={Number(sequence.startTick)}
+          label={<Trans context="Context menu">Focus camera on defuser</Trans>}
+          onSubmit={(tick) => {
+            setCameraOnPlayerAtTick({
+              tick,
+              playerSteamId: bombDefused.defuserSteamId,
+            });
+          }}
+        />
+        <Separator />
         <ContextMenuItem onClick={onSetAsStartTickClick}>
           <Trans context="Context menu">Set the tick of the bomb defused as start tick</Trans>
         </ContextMenuItem>
@@ -79,10 +90,6 @@ function BombDefusedContextMenu({ bombDefused }: ContextMenuProps) {
         <ContextMenuItem onClick={onSetAsEndTickPlusSecondsClick}>
           <Trans context="Context menu">Set the tick of the bomb defused plus X seconds as end tick</Trans>
         </ContextMenuItem>
-        <Separator />
-        <ContextMenuItem onClick={onFocusCameraOnDefuserClick}>
-          <Trans context="Context menu">Focus camera on defuser</Trans>
-        </ContextMenuItem>
       </ContextMenu>
     </>
   );
@@ -96,12 +103,10 @@ function TooltipContent({ bombDefused }: TooltipProps) {
   const { tick, defuserName, site } = bombDefused;
   return (
     <div className="flex flex-col">
-      <p>
-        <Trans>Tick: {tick}</Trans>
-      </p>
+      <Tick tick={tick} />
       <p>
         <Trans>
-          Bomb defused by {defuserName} on site {site}
+          Bomb defused by <strong>{defuserName}</strong> on site <strong>{site}</strong>
         </Trans>
       </p>
     </div>
@@ -122,7 +127,7 @@ export function BombDefusedItem({ iconSize, bombDefused }: Props) {
 
   return (
     <Tooltip content={<TooltipContent bombDefused={bombDefused} />} placement="top" renderInPortal={true}>
-      <div className="origin-left" style={scaleStyle} onContextMenu={onContextMenu}>
+      <div style={scaleStyle} onContextMenu={onContextMenu}>
         <DefuserIcon width={iconSize} height={iconSize} className="text-ct" />
       </div>
     </Tooltip>

@@ -64,7 +64,7 @@ export function InputNumber({
     <input
       ref={inputRef}
       type="number"
-      className="appearance-none outline-none rounded duration-85 transition-all bg-gray-50 h-[30px] px-12 text-gray-800 border border-gray-300 focus:border-gray-900 placeholder:text-gray-500 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500 hover:enabled:focus:border-gray-900 hover:enabled:border-gray-600 w-[112px]"
+      className="appearance-none outline-none rounded duration-85 transition-all bg-gray-50 h-[30px] px-12 text-gray-800 border border-gray-300 focus:border-gray-900 placeholder:text-gray-500 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500 hover:enabled:focus:border-gray-900 hover:enabled:border-gray-600 w-full"
       min={allowNegativeNumber ? undefined : 0}
       onKeyDown={onKeyDown}
       disabled={isDisabled}

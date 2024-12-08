@@ -37,12 +37,7 @@ export function AddVideoToQueueButton() {
         tickrate: match.tickrate,
         demoPath: match.demoFilePath,
         mapName: match.mapName,
-        sequences: sequences.map((sequence) => {
-          return {
-            ...sequence,
-            playerFocusName: match.players.find((player) => player.steamId === sequence.playerFocusSteamId)?.name,
-          };
-        }),
+        sequences,
       };
       await client.send({
         name: RendererClientMessageName.AddVideoToQueue,

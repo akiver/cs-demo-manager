@@ -10,10 +10,11 @@ import { useCurrentMatchSequences } from 'csdm/ui/match/video/sequences/use-curr
 type Props = {
   startTick: number;
   endTick: number;
-  playerFocusSteamId?: string;
+  playerFocusSteamId: string;
+  playerFocusName: string;
 };
 
-export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId }: Props) {
+export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId, playerFocusName }: Props) {
   const match = useCurrentMatch();
   const dispatch = useDispatch();
   const sequences = useCurrentMatchSequences();
@@ -31,7 +32,13 @@ export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId
           endTick,
           number: sequences.length + 1,
           deathNotices: [],
-          playerFocusSteamId,
+          cameras: [
+            {
+              tick: startTick,
+              playerSteamId: playerFocusSteamId,
+              playerName: playerFocusName,
+            },
+          ],
           showXRay: false,
           playerVoicesEnabled: false,
         },

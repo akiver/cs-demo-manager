@@ -7,6 +7,7 @@ import { useCurrentMatchSequences } from './use-current-match-sequences';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { addSequence } from './sequences-actions';
 import type { SequenceForm } from '../sequence/sequence-form';
+import type { CameraFocus } from 'csdm/common/types/camera-focus';
 
 type Props = {
   isVisible: boolean;
@@ -39,12 +40,12 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   const sequenceNumber = sequences.length + 1;
   const lastSequence = sequences.length > 0 ? sequences[sequences.length - 1] : undefined;
   let deathNotices = defaultDeathNotices;
-  let playerFocusSteamId: string | undefined;
+  let cameras: CameraFocus[] = [];
   let showXRay = false;
   let playerVoicesEnabled = false;
   if (lastSequence !== undefined) {
     deathNotices = lastSequence.deathNotices;
-    playerFocusSteamId = lastSequence.playerFocusSteamId;
+    cameras = lastSequence.cameras;
     showXRay = lastSequence.showXRay;
     playerVoicesEnabled = lastSequence.playerVoicesEnabled;
   }
@@ -56,7 +57,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     startTick: 1,
     endTick: tickrate + tickrate * 10,
     deathNotices,
-    playerFocusSteamId,
+    cameras,
     showXRay,
     playerVoicesEnabled,
   };

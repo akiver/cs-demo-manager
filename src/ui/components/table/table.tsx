@@ -106,11 +106,12 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
             const rowId = table.getRowId(row);
             const isSelected = table.isRowSelected(rowId);
             const rowProps = table.getRowProps(rowId, row, rowIndex);
+            const isSelectionEnabled = table.isSelectionEnabled();
 
             return (
               <tr
                 className={`h-[var(--table-row-height)] outline-none ${
-                  isSelected ? '!bg-gray-300' : 'bg-gray-50 hover:!bg-gray-200'
+                  isSelected ? '!bg-gray-300' : isSelectionEnabled ? 'bg-gray-50 hover:!bg-gray-200' : ''
                 }`}
                 key={rowId}
                 role="row"

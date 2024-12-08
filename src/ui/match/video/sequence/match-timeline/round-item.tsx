@@ -13,40 +13,37 @@ type ContextMenuProps = {
 };
 
 function RoundContextMenu({ round }: ContextMenuProps) {
-  const { updateSequence } = useSequenceForm();
-  const onSetRoundStartTickAsStartClick = () => {
-    updateSequence({
-      startTick: String(round.startTick),
-    });
-  };
-  const onSetRoundStartTickAsEndClick = () => {
-    updateSequence({
-      endTick: String(round.startTick),
-    });
-  };
-  const onSetRoundEndTickAsStartClick = () => {
-    updateSequence({
-      startTick: String(round.endTick),
-    });
-  };
-  const onSetRoundEndTickAsEndClick = () => {
-    updateSequence({
-      endTick: String(round.endTick),
-    });
-  };
+  const { setStartTick, setEndTick } = useSequenceForm();
+
   return (
     <ContextMenu>
-      <ContextMenuItem onClick={onSetRoundStartTickAsStartClick}>
+      <ContextMenuItem
+        onClick={() => {
+          setStartTick(round.startTick);
+        }}
+      >
         <Trans context="Context menu">Set round start tick as start tick</Trans>
       </ContextMenuItem>
-      <ContextMenuItem onClick={onSetRoundStartTickAsEndClick}>
+      <ContextMenuItem
+        onClick={() => {
+          setEndTick(round.startTick);
+        }}
+      >
         <Trans context="Context menu">Set round start tick as end tick</Trans>
       </ContextMenuItem>
       <Separator />
-      <ContextMenuItem onClick={onSetRoundEndTickAsStartClick}>
+      <ContextMenuItem
+        onClick={() => {
+          setStartTick(round.endTick);
+        }}
+      >
         <Trans context="Context menu">Set round end tick as start tick</Trans>
       </ContextMenuItem>
-      <ContextMenuItem onClick={onSetRoundEndTickAsEndClick}>
+      <ContextMenuItem
+        onClick={() => {
+          setEndTick(round.endTick);
+        }}
+      >
         <Trans context="Context menu">Set round end tick as end tick</Trans>
       </ContextMenuItem>
     </ContextMenu>
@@ -66,13 +63,10 @@ export function RoundItem({ round, ticksPerSecond }: Props) {
   };
 
   return (
-    <div
-      className="flex justify-center flex-col h-full bg-gray-75 border-y border-gray-900 overflow-hidden"
-      onContextMenu={onContextMenu}
-    >
-      <div className="absolute w-px bg-gray-900 left-0 h-full" style={scaleStyle} />
-      <div className="absolute w-px bg-gray-900 right-0 h-full" style={scaleStyle} />
-      <div className="whitespace-nowrap text-caption origin-left pl-4" style={scaleStyle}>
+    <div className="bg-gray-75 border-y border-gray-900 h-full overflow-hidden" onContextMenu={onContextMenu}>
+      <div className="absolute w-px bg-gray-900 left-0 h-full origin-left" style={scaleStyle} />
+      <div className="absolute w-px bg-gray-900 right-0 h-full origin-right" style={scaleStyle} />
+      <div className="whitespace-nowrap text-caption pl-4 origin-left" style={scaleStyle}>
         <p>{`#${round.number} - ${Math.round((round.endTick - round.startTick) / ticksPerSecond)}s`}</p>
         <p>{`${round.startTick}-${round.endTick}`}</p>
       </div>

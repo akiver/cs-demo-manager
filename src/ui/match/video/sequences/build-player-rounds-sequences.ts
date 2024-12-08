@@ -21,7 +21,13 @@ export function buildPlayerRoundsSequences(match: Match, steamId: string) {
         startTick: round.freezetimeEndTick,
         endTick: endTick + match.tickrate * endSecondsAfterEndTick,
         deathNotices: [],
-        playerFocusSteamId: steamId,
+        cameras: [
+          {
+            tick: round.freezetimeEndTick,
+            playerSteamId: steamId,
+            playerName: match.players.find((player) => player.steamId === steamId)?.name ?? '',
+          },
+        ],
         showXRay: false,
         playerVoicesEnabled: false,
       });
