@@ -1,4 +1,5 @@
 import type { DeathNoticesPlayerOptions } from 'csdm/common/types/death-notice-player-options';
+import type { CameraFocus } from './camera-focus';
 
 export type Sequence = {
   number: number;
@@ -6,6 +7,7 @@ export type Sequence = {
   endTick: number;
   showXRay: boolean;
   deathNotices: DeathNoticesPlayerOptions[];
+  cameraFocus: CameraFocus;
   playerFocusSteamId?: string;
   playerFocusName?: string;
   playerVoicesEnabled: boolean;

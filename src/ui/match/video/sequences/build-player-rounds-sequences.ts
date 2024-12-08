@@ -21,6 +21,7 @@ export function buildPlayerRoundsSequences(match: Match, steamId: string) {
         startTick: round.freezetimeEndTick,
         endTick: endTick + match.tickrate * endSecondsAfterEndTick,
         deathNotices: [],
+        cameraFocus: {},
         playerFocusSteamId: steamId,
         showXRay: false,
         playerVoicesEnabled: false,

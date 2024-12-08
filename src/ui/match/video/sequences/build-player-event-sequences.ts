@@ -86,6 +86,7 @@ export function buildPlayerEventSequences(
       startTick: sequenceStartTick,
       endTick: sequenceEndTick,
       deathNotices,
+      cameraFocus: {},
       playerFocusSteamId: steamIdToFocus,
       showXRay: false,
       playerVoicesEnabled: false,

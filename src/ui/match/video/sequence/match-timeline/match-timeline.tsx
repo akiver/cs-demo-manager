@@ -14,6 +14,7 @@ import { RoundItem } from './round-item';
 import { TickContextMenu } from './tick-context-menu';
 import { TimeMarker } from './time-marker';
 import { useSequenceForm } from '../use-sequence-form';
+import { CameraMarker } from './camera-marker';
 
 function useBuildRoundsGroup(match: Match, pixelsPerTick: number, ticksPerSecond: number): Group {
   const { t } = useLingui();
@@ -172,6 +173,13 @@ export function MatchTimeline() {
 
       <div {...wrapperProps}>
         <div {...timelineProps}>
+          {Object.entries(sequence.cameraFocus).map(([tick, steamIds]) => {
+            if (steamIds.length === 0) {
+              return null;
+            }
+
+            return <CameraMarker key={tick} tick={Number(tick)} pixelsPerTick={pixelsPerTick} steamIds={steamIds} />;
+          })}
           {startTick > 0 && (
             <TimeMarker
               tick={startTick}
