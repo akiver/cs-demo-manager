@@ -29,17 +29,19 @@ export function StartTickInput() {
       <InputLabel htmlFor="start-tick">
         <Trans context="Input label">Start tick</Trans>
       </InputLabel>
-      <InputNumber
-        id="start-tick"
-        min={1}
-        placeholder={t({
-          context: 'Input placeholder',
-          message: 'Start tick',
-        })}
-        value={sequence.startTick}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
+      <div className="w-[112px]">
+        <InputNumber
+          id="start-tick"
+          min={1}
+          placeholder={t({
+            context: 'Input placeholder',
+            message: 'Start tick',
+          })}
+          value={sequence.startTick}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+      </div>
     </div>
   );
 }

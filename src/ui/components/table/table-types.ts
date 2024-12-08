@@ -65,6 +65,7 @@ export type TableInstance<DataType extends Data> = {
   getHideableColumns: () => Column<DataType>[];
   getColumnWidth: (columnId: string) => number | undefined;
   getColumnSortDirection: (columnId: string) => SortDirection | undefined;
+  isSelectionEnabled: () => boolean;
   isRowSelected: (rowId: string) => boolean;
   isColumnVisible: (columnId: string) => boolean;
   showColumn: (columnId: string) => void;
@@ -75,7 +76,7 @@ export type TableInstance<DataType extends Data> = {
   scrollToIndex: (index: number) => void;
   setFuzzySearchText: (text: string) => void;
   getWrapperProps: () => {
-    ref: React.MutableRefObject<HTMLDivElement | null>;
+    ref: React.RefObject<HTMLDivElement | null>;
     style: CSSProperties;
   };
   getTableProps: () => {
@@ -112,5 +113,6 @@ export type TableInstance<DataType extends Data> = {
     onMouseDown: (event: React.MouseEvent) => void;
     onDoubleClick: (event: React.MouseEvent) => void;
     onContextMenu: (event: React.MouseEvent) => void;
+    style?: CSSProperties | undefined;
   };
 };

@@ -24,6 +24,7 @@ export function buildPlayerEventSequences(
   match: Match,
   steamId: string,
   perspective: string,
+  startSecondsBeforeEvent: number,
   weapons?: WeaponName[],
 ) {
   if (event !== PlayerSequenceEvent.Kills && event !== PlayerSequenceEvent.Deaths) {
@@ -44,7 +45,6 @@ export function buildPlayerEventSequences(
 
   const minimumSecondsBetweenTwoEvents = 2;
   const maxSecondsBetweenEvents = 10;
-  const startSecondsBeforeEvent = 5;
   const endSecondsAfterEvent = 2;
 
   const deathNotices = buildPlayersDeathNotices(match.players);
@@ -86,7 +86,13 @@ export function buildPlayerEventSequences(
       startTick: sequenceStartTick,
       endTick: sequenceEndTick,
       deathNotices,
-      playerFocusSteamId: steamIdToFocus,
+      cameras: [
+        {
+          tick: sequenceStartTick,
+          playerSteamId: steamIdToFocus,
+          playerName: match.players.find((player) => player.steamId === steamId)?.name ?? '',
+        },
+      ],
       showXRay: false,
       playerVoicesEnabled: false,
     });

@@ -12,61 +12,79 @@ import type { TickOperation, TickPosition } from './select-seconds-dialog';
 import { scaleStyle } from 'csdm/ui/components/timeline/use-timeline';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useSequenceForm } from '../use-sequence-form';
+import { KillFeedEntry } from 'csdm/ui/components/kill-feed-entry';
+import { Tick } from './tick';
+import { FocusCameraOnEventSubContextMenu } from './focus-camera-on-event-sub-context-menu';
 
 type ContextMenuProps = {
   kill: Kill;
 };
 
 function KillContextMenu({ kill }: ContextMenuProps) {
-  const { updateSequence } = useSequenceForm();
-  const onSetAsStartTickClick = () => {
-    updateSequence({
-      startTick: String(kill.tick),
-    });
-  };
+  const { sequence, setCameraOnPlayerAtTick, setStartTick, setEndTick } = useSequenceForm();
   const { showDialog } = useDialog();
 
-  const showSelectSecondsDialog = (position: TickPosition, operation: TickOperation) => {
+  const onSetAsStartTickClick = () => {
+    setStartTick(kill.tick);
+  };
+
+  const showSelectSequenceBoundarySecondsDialog = (position: TickPosition, operation: TickOperation) => {
     showDialog(
       <SelectSecondsDialog
         tick={kill.tick}
-        tickPosition={position}
         operation={operation}
-        updateSequence={updateSequence}
+        onSubmit={(tick) => {
+          if (position === 'start') {
+            setStartTick(tick);
+          } else {
+            setEndTick(tick);
+          }
+        }}
       />,
     );
   };
   const onSetAsStartTickMinusSecondsClick = () => {
-    showSelectSecondsDialog('start', 'minus');
+    showSelectSequenceBoundarySecondsDialog('start', 'minus');
   };
   const onSetAsStartTickPlusSecondsClick = () => {
-    showSelectSecondsDialog('start', 'plus');
+    showSelectSequenceBoundarySecondsDialog('start', 'plus');
   };
   const onSetAsEndTickClick = () => {
-    updateSequence({
-      endTick: String(kill.tick),
-    });
+    setEndTick(kill.tick);
   };
   const onSetAsEndTickMinusSecondsClick = () => {
-    showSelectSecondsDialog('end', 'minus');
+    showSelectSequenceBoundarySecondsDialog('end', 'minus');
   };
   const onSetAsEndTickPlusSecondsClick = () => {
-    showSelectSecondsDialog('end', 'plus');
-  };
-  const onFocusCameraOnKillerClick = () => {
-    updateSequence({
-      playerFocusSteamId: kill.killerSteamId,
-    });
-  };
-  const onFocusCameraOnVictimClick = () => {
-    updateSequence({
-      playerFocusSteamId: kill.victimSteamId,
-    });
+    showSelectSequenceBoundarySecondsDialog('end', 'plus');
   };
 
   return (
     <>
       <ContextMenu>
+        <FocusCameraOnEventSubContextMenu
+          eventTick={kill.tick}
+          startTick={Number(sequence.startTick)}
+          label={<Trans context="Context menu">Focus camera on killer</Trans>}
+          onSubmit={(tick) => {
+            setCameraOnPlayerAtTick({
+              tick,
+              playerSteamId: kill.killerSteamId,
+            });
+          }}
+        />
+        <FocusCameraOnEventSubContextMenu
+          eventTick={kill.tick}
+          startTick={Number(sequence.startTick)}
+          label={<Trans context="Context menu">Focus camera on victim</Trans>}
+          onSubmit={(tick) => {
+            setCameraOnPlayerAtTick({
+              tick,
+              playerSteamId: kill.victimSteamId,
+            });
+          }}
+        />
+        <Separator />
         <ContextMenuItem onClick={onSetAsStartTickClick}>
           <Trans context="Context menu">Set the tick of the kill as start tick</Trans>
         </ContextMenuItem>
@@ -86,13 +104,6 @@ function KillContextMenu({ kill }: ContextMenuProps) {
         <ContextMenuItem onClick={onSetAsEndTickPlusSecondsClick}>
           <Trans context="Context menu">Set the tick of the kill plus X seconds as end tick</Trans>
         </ContextMenuItem>
-        <Separator />
-        <ContextMenuItem onClick={onFocusCameraOnKillerClick}>
-          <Trans context="Context menu">Focus camera on killer</Trans>
-        </ContextMenuItem>
-        <ContextMenuItem onClick={onFocusCameraOnVictimClick}>
-          <Trans context="Context menu">Focus camera on victim</Trans>
-        </ContextMenuItem>
       </ContextMenu>
     </>
   );
@@ -103,23 +114,20 @@ type TooltipProps = {
 };
 
 function TooltipContent({ kill }: TooltipProps) {
-  const killerName = kill.killerName;
-  const victimName = kill.victimName;
-  const weaponName = kill.weaponName;
   return (
-    <p>
-      <Trans context="Tooltip">
-        <span>{killerName}</span> killed <span>{victimName}</span> with <span>{weaponName}</span>
-      </Trans>
-    </p>
+    <div className="flex flex-col">
+      <Tick tick={kill.tick} />
+      <KillFeedEntry kill={kill} />
+    </div>
   );
 }
 
 type Props = {
   kill: Kill;
+  iconSize: number;
 };
 
-export function KillItem({ kill }: Props) {
+export function KillItem({ kill, iconSize }: Props) {
   const { showContextMenu } = useContextMenu();
   const onContextMenu = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -129,7 +137,7 @@ export function KillItem({ kill }: Props) {
   return (
     <Tooltip content={<TooltipContent kill={kill} />} placement="top" renderInPortal={true}>
       <div style={scaleStyle} onContextMenu={onContextMenu}>
-        <EliminationIcon className="fill-gray-900" width={20} height={20} />
+        <EliminationIcon className="fill-gray-900" width={iconSize} height={iconSize} />
       </div>
     </Tooltip>
   );

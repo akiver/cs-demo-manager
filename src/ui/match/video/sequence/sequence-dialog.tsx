@@ -4,7 +4,6 @@ import { MatchTimeline } from './match-timeline/match-timeline';
 import { SequenceDeathNotices } from './sequence-death-notices';
 import { StartTickInput } from './start-tick-input';
 import { EndTickInput } from './end-tick-input';
-import { SequenceFocusCameraPlayerSelect } from './sequence-focus-camera-player-select';
 import { SequenceDuration } from './sequence-duration';
 import { SaveSequenceButton } from './save-sequence-button';
 import { SequenceCfgInput } from './sequence-cfg-input';
@@ -17,6 +16,9 @@ import { SequenceDiskSpace } from './sequence-disk-space';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { SequenceXRayCheckbox } from './sequence-x-ray-checkbox';
 import { SequencePlayerVoicesCheckbox } from './sequence-player-voices-checkbox';
+import { SequenceCamerasTable } from './cameras/sequence-cameras-table';
+import { ManageCamerasButtons } from './cameras/manage-cameras-buttons';
+import { PlayersColors } from './players-colors';
 
 type Props = {
   isVisible: boolean;
@@ -58,30 +60,30 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
         <SequenceFormProvider initialSequence={initialSequence}>
           <ContextMenuProvider>
             <div className="flex flex-col h-full bg-gray-50 p-16 overflow-auto">
-              <div className="flex gap-x-12">
+              <div className="flex gap-x-12 max-h-[420px] mb-12">
                 <div className="flex flex-col gap-y-8">
-                  <div className="flex gap-x-8">
+                  <div className="flex flex-col gap-y-8">
                     <StartTickInput />
                     <EndTickInput />
                   </div>
+                  <ManageCamerasButtons />
                   <SequencePlayerVoicesCheckbox />
                   <SequenceXRayCheckbox />
-                  <SequenceFocusCameraPlayerSelect />
-                  <div>
+                  <div className="flex items-center gap-x-12">
                     <SequenceDuration />
                     <SequenceDiskSpace />
                   </div>
-                  <div className="flex gap-x-8">
+                  <div className="flex gap-x-8 mt-12">
                     <SaveSequenceButton onClick={onSaveClick} closeDialog={closeDialog} />
                     <CancelButton onClick={closeDialog} />
                   </div>
                 </div>
+                <SequenceCamerasTable />
                 {window.csdm.isWindows && <SequenceDeathNotices />}
                 <SequenceCfgInput />
               </div>
-              <div className="mt-12">
-                <MatchTimeline />
-              </div>
+              <PlayersColors />
+              <MatchTimeline />
             </div>
           </ContextMenuProvider>
         </SequenceFormProvider>

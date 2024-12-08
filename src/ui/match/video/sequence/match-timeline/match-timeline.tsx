@@ -14,6 +14,9 @@ import { RoundItem } from './round-item';
 import { TickContextMenu } from './tick-context-menu';
 import { TimeMarker } from './time-marker';
 import { useSequenceForm } from '../use-sequence-form';
+import { CameraMarker } from './camera-marker';
+import type { CameraFocus } from 'csdm/common/types/camera-focus';
+import { CameraItem } from './camera-item';
 
 function useBuildRoundsGroup(match: Match, pixelsPerTick: number, ticksPerSecond: number): Group {
   const { t } = useLingui();
@@ -73,7 +76,7 @@ function useBuildKillsGroup(match: Match, pixelsPerTick: number): Group {
       height: iconSize,
       x,
       y: currentY,
-      element: <KillItem kill={kill} />,
+      element: <KillItem kill={kill} iconSize={iconSize} />,
     });
   }
 
@@ -130,6 +133,53 @@ function useBuildBombGroup(match: Match, pixelsPerTick: number): Group {
   };
 }
 
+function useBuildCamerasGroup(match: Match, cameras: CameraFocus[], pixelsPerTick: number): Group {
+  // TODO remove comment when https://github.com/facebook/react/issues/31687 is fixed
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useLingui();
+
+  const items: Item[] = [];
+  let currentY = 0;
+  const iconSize = 12;
+  let groupHeight = iconSize;
+  for (let index = 0; index < cameras.length; index++) {
+    const camera = cameras[index];
+    const x = camera.tick * pixelsPerTick - iconSize / 2;
+    const previousCamera = cameras[index - 1];
+    if (previousCamera !== undefined) {
+      const previousCameraX = previousCamera.tick * pixelsPerTick - iconSize / 2;
+      if (x < previousCameraX + iconSize) {
+        currentY += iconSize;
+        if (currentY >= groupHeight) {
+          groupHeight = currentY + iconSize;
+        }
+      } else {
+        currentY = 0;
+      }
+    }
+
+    items.push({
+      startTick: camera.tick,
+      endTick: camera.tick + 1,
+      width: iconSize,
+      height: iconSize,
+      x,
+      y: currentY,
+      element: <CameraItem camera={camera} />,
+    });
+  }
+
+  return {
+    id: 'cameras',
+    label: t({
+      message: 'Cameras',
+      context: 'Timeline group label',
+    }),
+    height: groupHeight,
+    items: items,
+  };
+}
+
 export function MatchTimeline() {
   const match = useCurrentMatch();
   const { sequence } = useSequenceForm();
@@ -150,7 +200,22 @@ export function MatchTimeline() {
   const roundsGroup = useBuildRoundsGroup(match, pixelsPerTick, ticksPerSecond);
   const killsGroup = useBuildKillsGroup(match, pixelsPerTick);
   const bombGroup = useBuildBombGroup(match, pixelsPerTick);
-  const groups = [roundsGroup, killsGroup, bombGroup, timestampGroup];
+  const camerasGroup = useBuildCamerasGroup(match, sequence.cameras, pixelsPerTick);
+  const groups = [roundsGroup, killsGroup, bombGroup, camerasGroup, timestampGroup];
+
+  const cameraMarkers: { [tick: number]: number } = {}; // tick -> playerIndex
+  for (const camera of sequence.cameras) {
+    if (cameraMarkers[camera.tick] !== undefined) {
+      continue;
+    }
+
+    const playerIndex = match.players.findIndex((player) => player.steamId === camera.playerSteamId);
+    if (playerIndex === -1) {
+      continue;
+    }
+
+    cameraMarkers[camera.tick] = playerIndex;
+  }
 
   return (
     <div className="flex border border-gray-900">
@@ -161,7 +226,7 @@ export function MatchTimeline() {
               key={group.id}
               className="flex items-center"
               style={{
-                height: group.height,
+                height: group.height + 8, // add 4px vertical padding
               }}
             >
               {group.label && <p className="px-4 truncate">{group.label}</p>}
@@ -172,6 +237,11 @@ export function MatchTimeline() {
 
       <div {...wrapperProps}>
         <div {...timelineProps}>
+          {Object.entries(cameraMarkers).map(([tick, playerIndex]) => {
+            return (
+              <CameraMarker key={tick} tick={Number(tick)} pixelsPerTick={pixelsPerTick} playerIndex={playerIndex} />
+            );
+          })}
           {startTick > 0 && (
             <TimeMarker
               tick={startTick}

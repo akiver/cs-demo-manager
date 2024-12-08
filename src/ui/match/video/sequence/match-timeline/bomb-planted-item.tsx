@@ -12,29 +12,35 @@ import { SelectSecondsDialog } from './select-seconds-dialog';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { BombIcon } from 'csdm/ui/icons/weapons/bomb-icon';
 import { useSequenceForm } from '../use-sequence-form';
+import { Tick } from './tick';
+import { FocusCameraOnEventSubContextMenu } from './focus-camera-on-event-sub-context-menu';
 
 type ContextMenuProps = {
   bombPlanted: BombPlanted;
 };
 
 function BombPlantedContextMenu({ bombPlanted }: ContextMenuProps) {
-  const { updateSequence } = useSequenceForm();
+  const { sequence, setStartTick, setEndTick, setCameraOnPlayerAtTick } = useSequenceForm();
   const { showDialog } = useDialog();
+
   const showSelectSecondsDialog = (position: TickPosition, operation: TickOperation) => {
     showDialog(
       <SelectSecondsDialog
         tick={bombPlanted.tick}
-        tickPosition={position}
         operation={operation}
-        updateSequence={updateSequence}
+        onSubmit={(tick) => {
+          if (position === 'start') {
+            setStartTick(tick);
+          } else {
+            setEndTick(tick);
+          }
+        }}
       />,
     );
   };
 
   const onSetAsStartTickClick = () => {
-    updateSequence({
-      startTick: String(bombPlanted.tick),
-    });
+    setStartTick(bombPlanted.tick);
   };
   const onSetAsStartTickMinusSecondsClick = () => {
     showSelectSecondsDialog('start', 'minus');
@@ -43,9 +49,7 @@ function BombPlantedContextMenu({ bombPlanted }: ContextMenuProps) {
     showSelectSecondsDialog('start', 'plus');
   };
   const onSetAsEndTickClick = () => {
-    updateSequence({
-      endTick: String(bombPlanted.tick),
-    });
+    setEndTick(bombPlanted.tick);
   };
   const onSetAsEndTickMinusSecondsClick = () => {
     showSelectSecondsDialog('end', 'minus');
@@ -53,14 +57,22 @@ function BombPlantedContextMenu({ bombPlanted }: ContextMenuProps) {
   const onSetAsEndTickPlusSecondsClick = () => {
     showSelectSecondsDialog('end', 'plus');
   };
-  const onFocusCameraOnPlanterClick = () => {
-    updateSequence({
-      playerFocusSteamId: bombPlanted.planterSteamId,
-    });
-  };
+
   return (
     <>
       <ContextMenu>
+        <FocusCameraOnEventSubContextMenu
+          eventTick={bombPlanted.tick}
+          startTick={Number(sequence.startTick)}
+          label={<Trans context="Context menu">Focus camera on planter</Trans>}
+          onSubmit={(tick) => {
+            setCameraOnPlayerAtTick({
+              tick,
+              playerSteamId: bombPlanted.planterSteamId,
+            });
+          }}
+        />
+        <Separator />
         <ContextMenuItem onClick={onSetAsStartTickClick}>
           <Trans context="Context menu">Set the tick of the bomb planted as start tick</Trans>
         </ContextMenuItem>
@@ -80,10 +92,6 @@ function BombPlantedContextMenu({ bombPlanted }: ContextMenuProps) {
         <ContextMenuItem onClick={onSetAsEndTickPlusSecondsClick}>
           <Trans context="Context menu">Set the tick of the bomb planted plus X seconds as end tick</Trans>
         </ContextMenuItem>
-        <Separator />
-        <ContextMenuItem onClick={onFocusCameraOnPlanterClick}>
-          <Trans context="Context menu">Focus camera on planter</Trans>
-        </ContextMenuItem>
       </ContextMenu>
     </>
   );
@@ -97,12 +105,10 @@ function TooltipContent({ bombPlanted }: TooltipProps) {
   const { tick, planterName, site } = bombPlanted;
   return (
     <div className="flex flex-col">
-      <p>
-        <Trans context="Tooltip">Tick: {tick}</Trans>
-      </p>
+      <Tick tick={tick} />
       <p>
         <Trans context="Tooltip">
-          Bomb planted by {planterName} on site {site}
+          Bomb planted by <strong>{planterName}</strong> on site <strong>{site}</strong>
         </Trans>
       </p>
     </div>
@@ -123,7 +129,7 @@ export function BombPlantedItem({ iconSize, bombPlanted }: Props) {
 
   return (
     <Tooltip content={<TooltipContent bombPlanted={bombPlanted} />} placement="top" renderInPortal={true}>
-      <div className="origin-left" style={scaleStyle} onContextMenu={onContextMenu}>
+      <div style={scaleStyle} onContextMenu={onContextMenu}>
         <BombIcon size={iconSize} className="fill-red-700" />
       </div>
     </Tooltip>

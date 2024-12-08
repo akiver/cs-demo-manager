@@ -21,7 +21,9 @@ export function SequenceDiskSpace() {
 
   return (
     <span className={requiredDiskSpace >= minimumGigabyteWarning ? 'text-red-600' : undefined}>
-      <Trans>~{requiredDiskSpace}GB</Trans>
+      <Trans>
+        ~<strong>{requiredDiskSpace}</strong>GB
+      </Trans>
     </span>
   );
 }

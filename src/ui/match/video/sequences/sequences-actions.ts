@@ -22,6 +22,7 @@ export const generatePlayerSequences = createAction<{
   event: PlayerSequenceEvent;
   weapons: WeaponName[];
   perspective: Perspective;
+  startSecondsBeforeEvent: number;
 }>('match/video/sequences/generatePlayerSequences');
 export const generatePlayerKillsSequences = createAction<{ steamId: string; match: Match; perspective: Perspective }>(
   'match/video/sequences/generatePlayerKills',

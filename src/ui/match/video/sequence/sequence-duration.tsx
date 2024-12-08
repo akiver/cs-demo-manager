@@ -17,7 +17,9 @@ export function SequenceDuration() {
   return (
     <div className="flex gap-x-4">
       <span>
-        <Trans context="Duration">{seconds} seconds</Trans>
+        <Trans context="Duration">
+          <strong>{seconds}</strong> seconds
+        </Trans>
       </span>
     </div>
   );

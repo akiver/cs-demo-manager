@@ -263,6 +263,9 @@ export function useTable<DataType extends Data>({
     isColumnVisible: (columnId) => {
       return columnVisibilityRef.current[columnId] === undefined || columnVisibilityRef.current[columnId] === true;
     },
+    isSelectionEnabled: () => {
+      return rowSelection !== 'none';
+    },
     deselectAll: () => {
       updateSelection([]);
     },
@@ -524,6 +527,10 @@ export function useTable<DataType extends Data>({
           onContextMenu?.(event.nativeEvent, table);
         },
         onKeyDown: (event: React.KeyboardEvent<HTMLTableRowElement>) => {
+          if (rowSelection === 'none') {
+            return;
+          }
+
           switch (true) {
             case event.key === 'ArrowDown': {
               event.preventDefault();

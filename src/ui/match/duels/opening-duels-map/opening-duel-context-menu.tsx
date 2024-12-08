@@ -50,6 +50,7 @@ export function OpeningDuelContextMenu({ kill, onWatchClick }: Props) {
         startTick={kill.tick - Math.round(match.tickrate * 5)}
         endTick={kill.tick + Math.round(match.tickrate * 2)}
         playerFocusSteamId={kill.killerSteamId}
+        playerFocusName={kill.killerName}
       />
     </ContextMenu>
   );

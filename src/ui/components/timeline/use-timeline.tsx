@@ -79,7 +79,7 @@ export function useTimeline({ ticksPerSecond, tickCount, onContextMenu }: Timeli
 
       const delta = -event.deltaY;
       const newScale = Math.max(1, delta > 0 ? scale.current * 1.2 : scale.current / 1.2);
-      const maxScale = 4;
+      const maxScale = 20;
       if (newScale > maxScale) {
         return;
       }

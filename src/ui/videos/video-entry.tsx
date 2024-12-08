@@ -300,7 +300,7 @@ export function VideoEntry({ video }: Props) {
               <Trans>Sequences</Trans>
             </h2>
 
-            <div className="grid grid-cols-[60px_100px_100px_100px_100px_1fr] p-4 bg-gray-200 rounded-t gap-4">
+            <div className="grid grid-cols-[60px_100px_100px_100px_100px_100px_1fr] p-4 bg-gray-200 rounded-t gap-4">
               <SequenceListHeader>#</SequenceListHeader>
               <SequenceListHeader>
                 <Trans>Start tick</Trans>
@@ -315,23 +315,29 @@ export function VideoEntry({ video }: Props) {
                 <Trans>Player voices</Trans>
               </SequenceListHeader>
               <SequenceListHeader>
-                <Trans>Focused player</Trans>
+                <Trans>Cameras</Trans>
+              </SequenceListHeader>
+              <SequenceListHeader>
+                <Trans>First camera on</Trans>
               </SequenceListHeader>
             </div>
 
             <ul>
               {video.sequences.map((sequence) => {
+                const [firstCamera] = sequence.cameras;
+
                 return (
                   <li
                     key={sequence.number}
-                    className="grid grid-cols-[60px_100px_100px_100px_100px_1fr] gap-4 border p-4 last:rounded-b"
+                    className="grid grid-cols-[60px_100px_100px_100px_100px_100px_1fr] gap-4 border p-4 last:rounded-b"
                   >
                     <p>{sequence.number}</p>
                     <p>{sequence.startTick}</p>
                     <p>{sequence.endTick}</p>
                     <p>{sequence.showXRay ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.playerVoicesEnabled ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
-                    <p>{sequence.playerFocusName ? sequence.playerFocusName : <Trans>None</Trans>}</p>
+                    <p>{sequence.cameras.length}</p>
+                    <p>{firstCamera?.playerName ? firstCamera.playerName : <Trans>None</Trans>}</p>
                   </li>
                 );
               })}

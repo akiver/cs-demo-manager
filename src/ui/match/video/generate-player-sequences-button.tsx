@@ -16,6 +16,8 @@ import type { Match } from 'csdm/common/types/match';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { Perspective } from 'csdm/common/types/perspective';
+import { InputNumber } from 'csdm/ui/components/inputs/number-input';
+import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 
 function getVisibleWeapons(event: PlayerSequenceEvent, steamId: string | undefined, match: Match) {
   if (!steamId) {
@@ -62,6 +64,7 @@ function SelectPlayerDialog() {
   const visibleWeapons = getVisibleWeapons(selectedEvent, selectedSteamId, match);
   const [selectedWeapons, setSelectedWeapons] = useState<WeaponName[]>(visibleWeapons);
   const [perspective, setPerspective] = useState<Perspective>(Perspective.Player);
+  const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(2);
 
   const onConfirm = () => {
     if (selectedSteamId) {
@@ -72,6 +75,7 @@ function SelectPlayerDialog() {
           event: selectedEvent,
           weapons: selectedWeapons,
           perspective,
+          startSecondsBeforeEvent: startSecondsBeforeEvent,
         }),
       );
     }
@@ -104,6 +108,28 @@ function SelectPlayerDialog() {
               ]}
               value={perspective}
               onChange={setPerspective}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-y-8">
+          <InputLabel htmlFor="before-seconds-delay">
+            {perspective === Perspective.Player ? (
+              <Trans context="Input label">Seconds to focus the camera on the killer before each kill</Trans>
+            ) : (
+              <Trans context="Input label">Seconds to focus the camera on the enemy before each kill</Trans>
+            )}
+          </InputLabel>
+          <div className="w-[5rem]">
+            <InputNumber
+              id="before-seconds-delay"
+              min={1}
+              max={30}
+              placeholder={String(2)}
+              defaultValue={startSecondsBeforeEvent}
+              onChange={(event) => {
+                const input = event.target as HTMLInputElement;
+                setStartSecondsBeforeEvent(Number(input.value));
+              }}
             />
           </div>
         </div>

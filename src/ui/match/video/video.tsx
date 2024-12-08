@@ -28,7 +28,7 @@ export function MatchVideo() {
   return (
     <Content>
       <div className="flex flex-col">
-        <div className="flex items-center gap-x-8">
+        <div className="flex items-center flex-wrap gap-8">
           <AddVideoToQueueButton />
           <AddNewSequenceButton />
           <GeneratePlayerSequencesButton />
