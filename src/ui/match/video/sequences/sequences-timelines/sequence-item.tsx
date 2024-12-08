@@ -88,6 +88,7 @@ export function SequenceItem({ sequence, players, ticksPerSecond, isOverlapping,
           isOverlapping ? 'text-white bg-red-700' : 'text-gray-900 bg-gray-75'
         }`}
         onContextMenu={onContextMenu}
+        onDoubleClick={() => onEditClick(sequence)}
       >
         <div className="absolute w-px bg-gray-900 left-0 h-full" style={scaleStyle} />
         <div className="absolute w-px bg-gray-900 right-0 h-full" style={scaleStyle} />
