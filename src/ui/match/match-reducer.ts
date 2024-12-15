@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import { heatmapReducer } from 'csdm/ui/match/heatmap/heatmap-reducer';
 import { entityReducer } from 'csdm/ui/match/entity-reducer';
 import { videoReducer } from 'csdm/ui/match/video/video-reducer';

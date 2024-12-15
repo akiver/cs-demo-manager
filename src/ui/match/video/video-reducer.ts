@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import { hlaeReducer } from 'csdm/ui/match/video/hlae/hlae-reducer';
 import { virtualDubReducer } from 'csdm/ui/match/video/virtualdub/virtual-dub-reducer';
 import { sequencesReducer } from 'csdm/ui/match/video/sequences/sequences-reducer';

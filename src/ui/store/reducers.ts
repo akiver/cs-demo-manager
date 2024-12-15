@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import { demosReducer } from 'csdm/ui/demos/demos-reducer';
 import { analysesReducer } from 'csdm/ui/analyses/analyses-reducer';
 import { matchesReducer } from 'csdm/ui/matches/matches-reducer';
