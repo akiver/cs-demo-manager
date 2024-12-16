@@ -1,8 +1,6 @@
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { NoSequencesFound } from './errors/no-sequences-found';
-import { sortSequencesByStartTick } from './sequences/sort-sequences-by-start-tick';
-import { assertSequencesAreNotOverlapping } from './sequences/assert-sequences-are-not-overlapping';
 import { isWindows } from '../os/is-windows';
 import { isHlaeInstalled } from './hlae/is-hlae-installed';
 import { HlaeNotInstalled } from './errors/hlae-not-installed';
@@ -20,14 +18,11 @@ type Parameters = {
 };
 
 export async function assertVideoGenerationIsPossible(parameters: Parameters) {
-  const { encoderSoftware, generateOnlyRawFiles, tickrate } = parameters;
+  const { encoderSoftware, generateOnlyRawFiles } = parameters;
 
   if (parameters.sequences.length === 0) {
     throw new NoSequencesFound();
   }
-
-  const sequences = sortSequencesByStartTick(parameters.sequences);
-  assertSequencesAreNotOverlapping(sequences, tickrate);
 
   if (isWindows) {
     if (!(await isHlaeInstalled())) {

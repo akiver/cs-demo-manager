@@ -24,7 +24,8 @@ export async function createCs2JsonActionsFileForRecording({
   playerSlots,
   deathNoticesDuration,
 }: Options) {
-  const json = new JSONActionsFileGenerator(demoPath, Game.CS2, false);
+  const json = new JSONActionsFileGenerator(demoPath, Game.CS2);
+
   const mandatoryCommands = [
     'sv_cheats 1',
     'volume 1',
@@ -34,42 +35,48 @@ export async function createCs2JsonActionsFileForRecording({
     'cl_hud_telemetry_serverrecvmargin_graph_show 0',
     'r_show_build_info 0',
   ];
-  for (const command of mandatoryCommands) {
-    json.addExecCommand(1, command);
-  }
-  if (showOnlyDeathNotices) {
-    json.addExecCommand(1, 'cl_draw_only_deathnotices 1');
-  }
-
-  json.addExecCommand(0, `mirv_deathmsg lifetime ${deathNoticesDuration}`);
 
   for (let i = 0; i < sequences.length; i++) {
     const sequence = sequences[i];
-    if (i === 0) {
-      // Pause the playback for a few seconds to avoid seeing the loading screen/tint effect.
-      // Do it a few ticks before the sequence's start tick because some ticks may be skipped between the time that the
-      // plugin pauses the playback and the time that the game actually pauses the playback (it would result in
-      // startmovie commands not being executed and so missing sequences).
-      json.addPausePlayback(sequence.startTick - 4);
+
+    for (const command of mandatoryCommands) {
+      json.addExecCommand(1, command);
+    }
+
+    if (showOnlyDeathNotices) {
+      json.addExecCommand(1, 'cl_draw_only_deathnotices 1');
+    }
+
+    json.addExecCommand(1, `mirv_deathmsg lifetime ${deathNoticesDuration}`);
+
+    if (sequence.playerVoicesEnabled) {
+      json.enablePlayerVoices(1);
+    } else {
+      json.disablePlayerVoices(1);
     }
 
     const roundedTickrate = Math.round(tickrate);
-    const skipAheadTick = i === 0 ? 65 : sequences[i - 1].endTick + roundedTickrate;
     const setupSequenceTick = sequence.startTick - roundedTickrate > 0 ? sequence.startTick - roundedTickrate : 1;
 
     json
-      .addSkipAhead(skipAheadTick, setupSequenceTick)
       .addExecCommand(setupSequenceTick, `mirv_deathmsg clear`)
-      .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`);
+      .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`)
+      .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`);
 
-    if (sequence.playerVoicesEnabled) {
-      json.enablePlayerVoices(setupSequenceTick);
-    } else {
-      json.disablePlayerVoices(setupSequenceTick);
+    if (typeof sequence.cfg === 'string') {
+      const commands = sequence.cfg.split('\n');
+      for (const command of commands) {
+        json.addExecCommand(setupSequenceTick, command);
+      }
     }
 
-    const showXrayCommand = `spec_show_xray ${sequence.showXRay ? 1 : 0}`;
-    json.addExecCommand(setupSequenceTick, showXrayCommand);
+    // Pause the playback for a few seconds to avoid seeing the loading screen/tint effect.
+    // Do it a few ticks before the sequence's start tick because some ticks may be skipped between the time that the
+    // plugin pauses the playback and the time that the game actually pauses the playback (it would result in
+    // startmovie commands not being executed and so missing sequences).
+    json.addPausePlayback(sequence.startTick - 4);
+
+    json.addSkipAhead(1, setupSequenceTick);
 
     for (const camera of sequence.cameras) {
       const playerSlot = playerSlots[camera.playerSteamId];
@@ -109,16 +116,11 @@ export async function createCs2JsonActionsFileForRecording({
       .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
       .addExecCommand(sequence.endTick, 'endmovie');
 
-    if (typeof sequence.cfg === 'string') {
-      const commands = sequence.cfg.split('\n');
-      for (const command of commands) {
-        json.addExecCommand(setupSequenceTick, command);
-      }
+    if (closeGameAfterRecording && i === sequences.length - 1) {
+      json.addExecCommand(sequences[sequences.length - 1].endTick + 64, 'quit');
+    } else {
+      json.addGoToNextSequence(sequence.endTick + 64);
     }
-  }
-
-  if (closeGameAfterRecording) {
-    json.addExecCommand(sequences[sequences.length - 1].endTick + 1, 'quit');
   }
 
   await json.write();

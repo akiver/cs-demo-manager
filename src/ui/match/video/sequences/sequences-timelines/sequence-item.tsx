@@ -80,11 +80,10 @@ function TooltipContent({ sequence, durationInSeconds, cameraCount, focusPlayerN
 type Props = {
   sequence: Sequence;
   ticksPerSecond: number;
-  isOverlapping: boolean;
   onEditClick: (sequence: Sequence) => void;
 };
 
-export function SequenceItem({ sequence, ticksPerSecond, isOverlapping, onEditClick }: Props) {
+export function SequenceItem({ sequence, ticksPerSecond, onEditClick }: Props) {
   const { showContextMenu } = useContextMenu();
   const onContextMenu = (event: React.MouseEvent) => {
     showContextMenu(event.nativeEvent, <SequenceContextMenu sequence={sequence} onEditClick={onEditClick} />);
@@ -108,9 +107,7 @@ export function SequenceItem({ sequence, ticksPerSecond, isOverlapping, onEditCl
       renderInPortal={true}
     >
       <div
-        className={`flex justify-center flex-col size-full border-y border-gray-700 overflow-hidden ${
-          isOverlapping ? 'text-white bg-red-700' : 'text-gray-900 bg-gray-75'
-        }`}
+        className="flex justify-center flex-col size-full border-y border-gray-700 overflow-hidden text-gray-900 bg-gray-75"
         onContextMenu={onContextMenu}
         onDoubleClick={() => onEditClick(sequence)}
       >

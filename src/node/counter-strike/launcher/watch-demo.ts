@@ -15,10 +15,16 @@ async function generateJsonActionsFile(
   startTick?: number,
   steamId?: string,
 ) {
-  const generator = new JSONActionsFileGenerator(demoPath, game, playerVoicesEnabled);
+  const json = new JSONActionsFileGenerator(demoPath, game);
+
+  if (playerVoicesEnabled) {
+    json.enablePlayerVoices();
+  } else {
+    json.disablePlayerVoices();
+  }
 
   if (startTick) {
-    generator.addSkipAhead(0, startTick);
+    json.addSkipAhead(0, startTick);
   }
 
   if (steamId !== undefined) {
@@ -26,11 +32,11 @@ async function generateJsonActionsFile(
     const slots = await fetchMatchPlayersSlots(checksum);
     const slot = slots[steamId];
     if (slot) {
-      generator.addSpecPlayer(startTick ?? 0, slot);
+      json.addSpecPlayer(startTick ?? 0, slot);
     }
   }
 
-  await generator.write();
+  await json.write();
 }
 
 type Options = {

@@ -23,7 +23,13 @@ export async function generatePlayerRoundsJsonFile({
   afterDelaySeconds,
   playerVoicesEnabled,
 }: Options) {
-  const json = new JSONActionsFileGenerator(demoPath, game, playerVoicesEnabled);
+  const json = new JSONActionsFileGenerator(demoPath, game);
+
+  if (playerVoicesEnabled) {
+    json.enablePlayerVoices();
+  } else {
+    json.disablePlayerVoices();
+  }
 
   const beforeRoundTicks = beforeDelaySeconds > 0 ? beforeDelaySeconds * tickrate : 128;
   const afterRoundTicks = afterDelaySeconds > 0 ? afterDelaySeconds * tickrate : tickrate;

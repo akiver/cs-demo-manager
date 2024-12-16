@@ -4933,10 +4933,6 @@ msgid "No sequences provided."
 msgstr "没有提供序列"
 
 #: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "One or more sequences are overlapping, at least 2 seconds are required between 2 sequences."
-msgstr "一个或多个镜头重叠，两个镜头之间至少需要2秒"
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Steam is not running."
 msgstr "Steam不在运行"
 
