@@ -1,6 +1,7 @@
 #include <thread>
 #include <fstream>
 #include <mutex>
+#include <queue>
 #include <tier1.h>
 #include <easywsclient.hpp>
 #include <nlohmann/json.hpp>
@@ -14,6 +15,7 @@
 #include <sys/mman.h>
 #define CLIENT_LIB_PATH "/bin/linux64/client_client.so"
 #endif
+
 #include "utils.h"
 #include "plugin.h"
 #include "cdll_int.h"
@@ -29,6 +31,10 @@ using std::chrono::milliseconds;
 struct Action {
     int tick;
     string cmd;
+};
+
+struct Sequence {
+    std::vector<Action> actions;
 };
 
 #ifdef _WIN32
@@ -51,7 +57,7 @@ bool isPlayingDemo = false;
 int mainMenuFrameCount = 0;
 int currentTick = -1;
 bool isQuitting = false;
-std::vector<Action> actions = {};
+std::queue<Sequence> sequences;
 // Unlike CS2, executing client commands from a different thread than the main game thread may crash the game.
 // As the WebSocket connection runs in a separate thread, we defer the possible command execution when we receive a
 // WS message to the next frame of the main game thread.
@@ -84,30 +90,33 @@ void SendStatusOk() {
     ws->send(msg.dump());
 }
 
-void LoadJsonActionsFile(string demoPath) {
-    actions.clear();
+void LoadSequencesFile(string demoPath) {
+    sequences = {};
+
     string demoJsonPath = demoPath + ".json";
     if (FileExists(demoJsonPath)) {
         std::ifstream jsonFile(demoJsonPath);
-        json jsonActions = json::parse(jsonFile);
-        if (jsonActions.size() == 0) {
-            Log("No actions found in JSON file");
+        json jsonSequences = json::parse(jsonFile);
+        if (jsonSequences.size() == 0) {
+            Log("No sequences found in JSON file");
             return;
         }
 
-        for (auto jsonAction : jsonActions) {
-            struct Action action;
-            int tick = jsonAction["tick"];
-            action.tick = tick;
-            action.cmd = jsonAction["cmd"];
-            actions.push_back(action);
+        for (auto jsonSequence : jsonSequences) {
+            Sequence sequence;
+            for (auto jsonAction : jsonSequence["actions"]) {
+                Action action;
+                action.tick = jsonAction["tick"];
+                action.cmd = jsonAction["cmd"];
+                sequence.actions.push_back(action);
+            }
+            sequences.push(sequence);
         }
 
-        Log("JSON file actions loaded: %s", demoJsonPath.c_str());
-        Log("Actions: %s", jsonActions.dump().c_str());
+        Log("JSON sequences file loaded: %s", demoJsonPath.c_str());
     }
     else {
-        Log("JSON file actions not found at %s", demoJsonPath.c_str());
+        Log("JSON sequences file not found at %s", demoJsonPath.c_str());
     }
 }
 
@@ -123,7 +132,7 @@ void HandleWebSocketMessage(const string& message)
 
         string demoPath = msg["payload"];
 
-        LoadJsonActionsFile(demoPath);
+        LoadSequencesFile(demoPath);
 
         std::lock_guard<mutex> lock(pendingCmdMutex);
         pendingCmd = "playdemo \"" + demoPath + "\"";
@@ -174,12 +183,21 @@ void PlaybackFrame() {
 
     int newTick = engine->GetDemoPlaybackTick();
     if (newTick != currentTick) {
-        for (auto action : actions) {
+        Sequence currentSequence = sequences.front();
+        for (auto action : currentSequence.actions) {
             // Also check for minus 1 because some ticks may not be "seen" when fast-forwarding the playback during a few ticks.
             // Example with demo_gototick 1000: 1001 -> 1003 -> 1005 -> 1007 -> 1008 -> 1009 -> 1010...
             if (action.tick == newTick || action.tick == newTick - 1) {
-                Log("%d executing: %s", newTick, action.cmd.c_str());
-                engine->ExecuteClientCmd(action.cmd.c_str());
+                if (action.cmd == "go_to_next_sequence") {
+                    Log("Going to next sequence, remaining sequences: %d", sequences.size() - 1);
+                    sequences.pop();
+                    engine->ExecuteClientCmd("demo_gototick 0");
+                    currentTick = -1;
+                }
+                else {
+                    Log("%d executing: %s", newTick, action.cmd.c_str());
+                    engine->ExecuteClientCmd(action.cmd.c_str());
+                }
             }
         }
     }
@@ -342,7 +360,7 @@ bool CServerPlugin::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn g
         if (strcmp(param, "+playdemo") == 0 && i + 1 < paramCount) {
             demoPath = string(CommandLine()->GetParm(i + 1));
             std::replace(demoPath.begin(), demoPath.end(), '\\', '/');
-            LoadJsonActionsFile(demoPath);
+            LoadSequencesFile(demoPath);
             break;
         }
     }
@@ -385,7 +403,7 @@ CON_COMMAND(csdm_info, "Show info"){
     }
     Log("Tick: %d", currentTick);
     Log("Is playing demo: %d", isPlayingDemo);
-    Log("Action count: %d", actions.size());
+    Log("Sequences count: %d", sequences.size());
     Log("UI state: %d", gameUi->m_CSGOGameUIState);
 
     if (ws != NULL) {

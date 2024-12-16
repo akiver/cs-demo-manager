@@ -7,22 +7,23 @@ type Action = {
   cmd: string;
 };
 
+type Sequence = {
+  actions: Action[];
+};
+
 // Generates a JSON file that will be read by the game server plugin to execute commands at specific ticks.
 // It's like a VDM file.
 export class JSONActionsFileGenerator {
   private filePath: string;
-  private actions: Action[] = [];
+  private currentSequence: Sequence = {
+    actions: [],
+  };
+  private sequences: Sequence[] = [];
   private game: Game;
 
-  public constructor(demoPath: string, game: Game, playerVoicesEnabled: boolean) {
+  public constructor(demoPath: string, game: Game) {
     this.game = game;
     this.filePath = windowsToUnixPathSeparator(`${demoPath}.json`);
-
-    if (playerVoicesEnabled) {
-      this.enablePlayerVoices();
-    } else {
-      this.disablePlayerVoices();
-    }
   }
 
   public addSkipAhead(startTick: number, toTick: number) {
@@ -72,7 +73,7 @@ export class JSONActionsFileGenerator {
     return this;
   }
 
-  // "pause_playback" is a fake command that pause the demo's playback a few seconds from the VSP (CS2 only).
+  // Internal command that pauses the demo's playback a few seconds from the "CS2 server plugin" (CS2 only)
   public addPausePlayback(tick: number) {
     this.actions.push({
       cmd: 'pause_playback',
@@ -134,17 +135,38 @@ export class JSONActionsFileGenerator {
     return this;
   }
 
-  public async write() {
-    if (this.actions.length === 0) {
-      return this;
-    }
+  // Internal command that indicates the "game server plugin" to go to the next sequence in the queue.
+  public addGoToNextSequence(tick: number) {
+    this.actions.push({
+      tick: this.getValidTick(tick),
+      cmd: 'go_to_next_sequence',
+    });
 
-    await fs.writeFile(this.filePath, JSON.stringify(this.actions, null, 2));
+    this.sequences.push(this.currentSequence);
+    this.currentSequence = {
+      actions: [],
+    };
 
     return this;
   }
 
+  public async write() {
+    if (this.currentSequence.actions.length !== 0) {
+      this.sequences.push(this.currentSequence);
+    }
+
+    if (this.sequences.length === 0) {
+      return;
+    }
+
+    await fs.writeFile(this.filePath, JSON.stringify(this.sequences, null, 2));
+  }
+
   private getValidTick(tick: number): number {
     return Math.max(64, tick);
+  }
+
+  private get actions() {
+    return this.currentSequence.actions;
   }
 }

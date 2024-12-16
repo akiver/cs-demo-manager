@@ -65,7 +65,6 @@ export const ErrorCode = {
   HlaeError: 908,
   InvalidFfmpegExecutable: 909,
   InvalidHlaeExecutable: 910,
-  SequencesAreOverlapping: 911,
 
   SteamApiForbidden: 1000,
   SteamApiError: 1001,

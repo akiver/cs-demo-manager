@@ -42,41 +42,50 @@ export async function createCsgoJsonFileForRecording({
   deathNoticesDuration,
   tickrate,
 }: Options) {
-  const json = new JSONActionsFileGenerator(demoPath, Game.CSGO, false);
-  const mandatoryCommands = ['sv_cheats 1', 'volume 1'];
-  if (isWindows) {
-    mandatoryCommands.push('host_timescale 0', 'mirv_snd_timescale 1', 'mirv_gameoverlay enable 0');
-  }
-  for (const command of mandatoryCommands) {
-    json.addExecCommand(0, command);
-  }
-  if (showOnlyDeathNotices) {
-    json.addExecCommand(0, 'cl_draw_only_deathnotices 1');
-    json.addExecCommand(0, 'net_graph 0');
-  }
-
-  if (isWindows) {
-    json.addExecCommand(0, `mirv_deathmsg lifetime ${deathNoticesDuration}`);
-  }
+  const json = new JSONActionsFileGenerator(demoPath, Game.CSGO);
+  const mandatoryCommands = [
+    'sv_cheats 1',
+    'volume 1',
+    'net_graph 0',
+    'host_timescale 0',
+    'mirv_snd_timescale 1',
+    'mirv_gameoverlay enable 0',
+  ];
 
   for (let i = 0; i < sequences.length; i++) {
     const sequence = sequences[i];
+
+    for (const command of mandatoryCommands) {
+      json.addExecCommand(1, command);
+    }
+
+    if (showOnlyDeathNotices) {
+      json.addExecCommand(1, 'cl_draw_only_deathnotices 1');
+    }
+
+    json.addExecCommand(1, `mirv_deathmsg lifetime ${deathNoticesDuration}`);
+
+    if (sequence.playerVoicesEnabled) {
+      json.enablePlayerVoices(1);
+    } else {
+      json.disablePlayerVoices(1);
+    }
+
     const roundedTickrate = Math.round(tickrate);
-    const skipAheadTick = i === 0 ? roundedTickrate : sequences[i - 1].endTick + roundedTickrate;
     const setupSequenceTick = sequence.startTick - roundedTickrate > 0 ? sequence.startTick - roundedTickrate : 1;
 
     json
-      .addSkipAhead(skipAheadTick, setupSequenceTick)
-      .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`);
+      .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`)
+      .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`);
 
-    if (sequence.playerVoicesEnabled) {
-      json.enablePlayerVoices(setupSequenceTick);
-    } else {
-      json.disablePlayerVoices(setupSequenceTick);
+    if (typeof sequence.cfg === 'string') {
+      const commands = sequence.cfg.split('\n');
+      for (const command of commands) {
+        json.addExecCommand(setupSequenceTick, command);
+      }
     }
 
-    const showXrayCommand = `spec_show_xray ${sequence.showXRay ? 1 : 0}`;
-    json.addExecCommand(setupSequenceTick, showXrayCommand);
+    json.addSkipAhead(1, setupSequenceTick);
 
     for (const camera of sequence.cameras) {
       json.addSpecPlayer(camera.tick, camera.playerSteamId);
@@ -114,16 +123,11 @@ export async function createCsgoJsonFileForRecording({
         .addExecCommand(sequence.endTick, 'endmovie');
     }
 
-    if (typeof sequence.cfg === 'string') {
-      const commands = sequence.cfg.split('\n');
-      for (const command of commands) {
-        json.addExecCommand(setupSequenceTick, command);
-      }
+    if (closeGameAfterRecording && i === sequences.length - 1) {
+      json.addExecCommand(sequences[sequences.length - 1].endTick + 1, 'quit');
+    } else {
+      json.addGoToNextSequence(sequence.endTick + tickrate);
     }
-  }
-
-  if (closeGameAfterRecording) {
-    json.addExecCommand(sequences[sequences.length - 1].endTick + 1, 'quit');
   }
 
   await json.write();

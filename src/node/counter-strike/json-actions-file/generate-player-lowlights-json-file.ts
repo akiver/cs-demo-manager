@@ -42,7 +42,13 @@ export async function generatePlayerLowlightsJsonFile({
   nextDelaySeconds,
   playerVoicesEnabled,
 }: Parameters) {
-  const json = new JSONActionsFileGenerator(demoPath, game, playerVoicesEnabled);
+  const json = new JSONActionsFileGenerator(demoPath, game);
+
+  if (playerVoicesEnabled) {
+    json.enablePlayerVoices();
+  } else {
+    json.disablePlayerVoices();
+  }
 
   if (nextDelaySeconds < 1) {
     nextDelaySeconds = 1;

@@ -78,12 +78,6 @@ export function getVideoErrorMessageFromErrorCode(game: Game, errorCode: ErrorCo
           <Trans>No sequences provided.</Trans>
         </p>
       );
-    case ErrorCode.SequencesAreOverlapping:
-      return (
-        <p>
-          <Trans>One or more sequences are overlapping, at least 2 seconds are required between 2 sequences.</Trans>
-        </p>
-      );
     case ErrorCode.SteamNotRunning:
       return (
         <p>

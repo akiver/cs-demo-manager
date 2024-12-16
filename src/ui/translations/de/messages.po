@@ -4933,10 +4933,6 @@ msgid "No sequences provided."
 msgstr "Keine Sequenzen angegeben."
 
 #: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "One or more sequences are overlapping, at least 2 seconds are required between 2 sequences."
-msgstr "Eine oder mehrere Sequenzen überlappen, es sind mindestens 2 Sekunden zwischen 2 Sequenzen erforderlich."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Steam is not running."
 msgstr "Steam wird nicht ausgeführt."
 

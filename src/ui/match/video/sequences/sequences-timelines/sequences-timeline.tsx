@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { Group, Item } from 'csdm/ui/components/timeline/use-timeline';
 import { useTimeline } from 'csdm/ui/components/timeline/use-timeline';
 import type { Sequence } from 'csdm/common/types/sequence';
-import { areSequencesOverlapping } from 'csdm/common/video/are-sequences-overlapping';
 import { sortSequencesByStartTick } from 'csdm/node/video/sequences/sort-sequences-by-start-tick';
 import { useCurrentMatch } from '../../../use-current-match';
 import { EditSequenceDialog } from '../../sequence/edit-sequence-dialog';
@@ -39,9 +38,6 @@ function buildSequencesGroup(
       }
     }
 
-    const nextSequence = sortedSequences[index + 1];
-    const isOverlapping = areSequencesOverlapping(sequence, previousSequence, nextSequence, ticksPerSecond);
-
     items.push({
       startTick: sequence.startTick,
       endTick: sequence.endTick,
@@ -50,12 +46,7 @@ function buildSequencesGroup(
       y: currentY,
       height: itemHeight,
       element: (
-        <SequenceItem
-          sequence={sequence}
-          ticksPerSecond={ticksPerSecond}
-          isOverlapping={isOverlapping}
-          onEditClick={setSelectedSequenceOnTimeline}
-        />
+        <SequenceItem sequence={sequence} ticksPerSecond={ticksPerSecond} onEditClick={setSelectedSequenceOnTimeline} />
       ),
     });
   }

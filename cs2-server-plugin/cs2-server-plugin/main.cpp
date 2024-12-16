@@ -1,6 +1,6 @@
 #include <thread>
 #include <fstream>
-#include <deque>
+#include <queue>
 #include <nlohmann/json.hpp>
 #include <easywsclient.hpp>
 #include "icvar.h"
@@ -56,6 +56,10 @@ struct Action {
     string cmd;
 };
 
+struct Sequence {
+    std::vector<Action> actions;
+};
+
 typedef bool (*AppSystemConnectFn)(IAppSystem* appSystem, CreateInterfaceFn factory);
 typedef void (*AppSystemShutdownFn)();
 
@@ -75,7 +79,7 @@ bool isPlayingDemo = false;
 int currentTick = -1;
 bool isQuitting = false;
 bool initialized = false;
-std::vector<Action> actions = {};
+std::queue<Sequence> sequences;
 
 void LogToFile(const char* pMsg) {
     FILE* pFile = fopen("csdm.log", "a");
@@ -96,6 +100,7 @@ void Log(const char *msg, ...)
 	vsnprintf(buf, sizeof(buf), msg, args);
 	ConColorMsg(Color(227, 0, 255, 255), "CSDM: %s\n", buf);
 	va_end(args);
+    // LogToFile(buf);
 }
 
 void PluginError(const char* msg, ...)
@@ -205,30 +210,33 @@ void RestoreGameinfoFile() {
     }
 }
 
-void LoadJsonActionsFile(string demoPath) {
-    actions.clear();
+void LoadSequencesFile(string demoPath) {
+    sequences = {};
+
     string demoJsonPath = demoPath + ".json";
     if (FileExists(demoJsonPath)) {
         std::ifstream jsonFile(demoJsonPath);
-        json jsonActions = json::parse(jsonFile);
-        if (jsonActions.size() == 0) {
-            Log("No actions found in JSON file");
+        json jsonSequences = json::parse(jsonFile);
+        if (jsonSequences.size() == 0) {
+            Log("No sequences found in JSON file");
             return;
         }
 
-        for (auto jsonAction : jsonActions) {
-            struct Action action;
-            int tick = jsonAction["tick"];
-            action.tick = tick;
-            action.cmd = jsonAction["cmd"];
-            actions.push_back(action);
+        for (auto jsonSequence : jsonSequences) {
+            Sequence sequence;
+            for (auto jsonAction : jsonSequence["actions"]) {
+                Action action;
+                action.tick = jsonAction["tick"];
+                action.cmd = jsonAction["cmd"];
+                sequence.actions.push_back(action);
+            }
+            sequences.push(sequence);
         }
 
-        Log("JSON file actions loaded: %s", demoJsonPath.c_str());
-        Log("Actions: %s", jsonActions.dump().c_str());
+        Log("JSON sequences file loaded: %s", demoJsonPath.c_str());
     }
     else {
-        Log("JSON file actions not found at %s", demoJsonPath.c_str());
+        Log("JSON sequences file not found at %s", demoJsonPath.c_str());
     }
 }
 
@@ -280,17 +288,21 @@ void PlaybackLoop() {
         if (newTick != currentTick) {
             // Log("Tick: %d", newTick);
 
-            for (auto action : actions) {
+            Sequence currentSequence = sequences.front();
+            for (auto action : currentSequence.actions) {
                 if (action.tick == newTick) {
-                    if (action.cmd == "pause_playback")
-                    {
+                    if (action.cmd == "pause_playback") {
                         Log("Pausing demo playback");
                         engine->ExecuteClientCmd(0, "demo_pause", true);
                         std::this_thread::sleep_for(std::chrono::milliseconds(2000));
                         Log("Resuming demo playback");
                         engine->ExecuteClientCmd(0, "demo_resume", true);
-                    } else
-                    {
+                    } else if (action.cmd == "go_to_next_sequence") {
+                        Log("Going to next sequence, remaining sequences: %d", sequences.size() - 1);
+                        sequences.pop();
+                        engine->ExecuteClientCmd(0, "demo_gototick 0", true);
+                        currentTick = -1;
+                    } else {
                         Log("Executing: %s", action.cmd.c_str());
                         engine->ExecuteClientCmd(0, action.cmd.c_str(), true);
                     }
@@ -316,7 +328,7 @@ void HandleWebSocketMessage(const std::string& message)
 
         string demoPath = msg["payload"];
 
-        LoadJsonActionsFile(demoPath);
+        LoadSequencesFile(demoPath);
 
         string cmd = "playdemo \"" + demoPath + "\"";
         Log("Starting demo: %s", cmd.c_str());
@@ -501,7 +513,7 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
             const char* param = CommandLine()->GetParm(i);
             if (strcmp(param, "+playdemo") == 0 && i + 1 < paramCount) {
                 demoPath = CommandLine()->GetParm(i + 1);
-                LoadJsonActionsFile(string(demoPath));
+                LoadSequencesFile(string(demoPath));
                 break;
             }
         }
@@ -523,6 +535,6 @@ CON_COMMAND(csdm_info, "Prints CS:DM plugin info")
         Log("WebSocket not connected");
     }
 
-    Log("Action count: %d", actions.size());
+    Log("Sequence count: %d", sequences.size());
 }
 #endif
