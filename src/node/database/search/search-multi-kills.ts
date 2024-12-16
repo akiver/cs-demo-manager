@@ -30,7 +30,7 @@ export async function searchMultiKills({
         .onRef('k1.killer_steam_id', '=', 'k2.killer_steam_id');
     })
     .innerJoin('matches', 'k1.match_checksum', 'matches.checksum')
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'matches.tickrate'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -62,6 +62,7 @@ export async function searchMultiKills({
       'matches.demo_path',
       'matches.date',
       'matches.game',
+      'matches.tickrate',
     ])
     .having(sql<number>`COUNT(*)`, '=', killCount);
 
@@ -93,6 +94,7 @@ export async function searchMultiKills({
 
       multiKills.push({
         matchChecksum: kill.match_checksum,
+        matchTickrate: kill.tickrate,
         demoPath: kill.demo_path,
         game: kill.game,
         id: String(kill.id),

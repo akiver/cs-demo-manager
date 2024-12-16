@@ -4,6 +4,7 @@ import type { Kill } from '../kill';
 export type MultiKillResult = {
   id: string;
   matchChecksum: string;
+  matchTickrate: number;
   demoPath: string;
   game: Game;
   tick: number;

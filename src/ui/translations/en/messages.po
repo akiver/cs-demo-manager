@@ -6218,6 +6218,10 @@ msgstr "CT {ctAliveCount}"
 msgid "T {tAliveCount}"
 msgstr "T {tAliveCount}"
 
+#: src/ui/search/results/result-row.tsx
+msgid "{seconds}s"
+msgstr "{seconds}s"
+
 #: src/ui/search/search-results.tsx
 msgid "You have to analyze demos first to search for events."
 msgstr "You have to analyze demos first to search for events."

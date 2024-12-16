@@ -5,7 +5,16 @@ import { WatchButton } from 'csdm/ui/components/buttons/watch-button';
 import type { MultiKillResult } from 'csdm/common/types/search/multi-kill-result';
 import { VirtualListResults } from './virtual-list-results';
 import { DotSeparator } from './dot-separator';
-import { MapImage, MatchDate, PlayerName, RoundNumber, RowLeft, RowRight, TeamSideIcon } from './result-row';
+import {
+  ActionDuration,
+  MapImage,
+  MatchDate,
+  PlayerName,
+  RoundNumber,
+  RowLeft,
+  RowRight,
+  TeamSideIcon,
+} from './result-row';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
 
@@ -18,6 +27,8 @@ export function MultiKillsResults({ multiKills }: Props) {
     <VirtualListResults
       items={multiKills}
       renderItem={(multiKill) => {
+        const [firstKill] = multiKill.kills;
+        const lastKill = multiKill.kills[multiKill.kills.length - 1];
         return (
           <CollapsePanel
             key={multiKill.id}
@@ -33,11 +44,17 @@ export function MultiKillsResults({ multiKills }: Props) {
                   <RoundNumber roundNumber={multiKill.roundNumber} />
                   <DotSeparator />
                   <MatchDate date={multiKill.date} />
+                  <DotSeparator />
+                  <ActionDuration
+                    startTick={firstKill?.tick ?? 0}
+                    endTick={lastKill?.tick ?? 0}
+                    tickrate={multiKill.matchTickrate}
+                  />
                 </RowLeft>
                 <RowRight>
                   <WatchButton
                     demoPath={multiKill.demoPath}
-                    tick={multiKill.tick - 64 * 5}
+                    tick={multiKill.tick - multiKill.matchTickrate * 5}
                     focusSteamId={multiKill.killerSteamId}
                     game={multiKill.game}
                   />
