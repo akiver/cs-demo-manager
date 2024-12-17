@@ -19,12 +19,14 @@ function buildPlayersDeathNotices(players: Player[]) {
   return deathNotices;
 }
 
+// TODO quality This function has too much parameters.
 export function buildPlayerEventSequences(
   event: PlayerSequenceEvent,
   match: Match,
   steamId: string,
   perspective: string,
   startSecondsBeforeEvent: number,
+  showOnlyDeathNotices: boolean,
   weapons?: WeaponName[],
 ) {
   if (event !== PlayerSequenceEvent.Kills && event !== PlayerSequenceEvent.Deaths) {
@@ -85,6 +87,7 @@ export function buildPlayerEventSequences(
       number: sequences.length + 1,
       startTick: sequenceStartTick,
       endTick: sequenceEndTick,
+      showOnlyDeathNotices,
       deathNotices,
       cameras: [
         {

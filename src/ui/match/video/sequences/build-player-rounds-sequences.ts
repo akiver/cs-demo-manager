@@ -20,6 +20,7 @@ export function buildPlayerRoundsSequences(match: Match, steamId: string) {
         number: sequences.length + 1,
         startTick: round.freezetimeEndTick,
         endTick: endTick + match.tickrate * endSecondsAfterEndTick,
+        showOnlyDeathNotices: true,
         deathNotices: [],
         cameras: [
           {

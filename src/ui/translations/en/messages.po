@@ -5416,6 +5416,11 @@ msgctxt "Duration"
 msgid "<0>{seconds}</0> seconds"
 msgstr "<0>{seconds}</0> seconds"
 
+#: src/ui/match/video/sequence/show-only-death-notices-checkbox.tsx
+msgctxt "Input label"
+msgid "Show only death notices"
+msgstr "Show only death notices"
+
 #: src/ui/match/video/sequence/start-tick-input.tsx
 msgctxt "Input label"
 msgid "Start tick"
@@ -5505,11 +5510,6 @@ msgstr "{cameraCount, plural, one {# camera focus point} other {# camera focus p
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgid "First camera focus point on <0>{focusPlayerName}</0>"
 msgstr "First camera focus point on <0>{focusPlayerName}</0>"
-
-#: src/ui/match/video/show-only-death-notices-checkbox.tsx
-msgctxt "Input label"
-msgid "Show only death notices"
-msgstr "Show only death notices"
 
 #: src/ui/match/video/software-browse-button.tsx
 msgctxt "Button"
@@ -7074,12 +7074,10 @@ msgstr "Minimized"
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "No"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
-#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -7266,10 +7264,6 @@ msgstr "Merge sequences into single file"
 #: src/ui/videos/video-entry.tsx
 msgid "Generate only RAW files"
 msgstr "Generate only RAW files"
-
-#: src/ui/videos/video-entry.tsx
-msgid "Show death notices"
-msgstr "Show death notices"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Close game after recording"

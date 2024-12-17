@@ -6,6 +6,7 @@ import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { addSequence } from 'csdm/ui/match/video/sequences/sequences-actions';
 import { useCurrentMatchSequences } from 'csdm/ui/match/video/sequences/use-current-match-sequences';
+import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 
 type Props = {
   startTick: number;
@@ -15,6 +16,7 @@ type Props = {
 };
 
 export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId, playerFocusName }: Props) {
+  const { settings } = useVideoSettings();
   const match = useCurrentMatch();
   const dispatch = useDispatch();
   const sequences = useCurrentMatchSequences();
@@ -31,6 +33,7 @@ export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId
           startTick,
           endTick,
           number: sequences.length + 1,
+          showOnlyDeathNotices: settings.showOnlyDeathNotices,
           deathNotices: [],
           cameras: [
             {

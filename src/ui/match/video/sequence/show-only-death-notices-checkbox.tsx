@@ -1,13 +1,13 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
-import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { useSequenceForm } from './use-sequence-form';
 
 export function ShowOnlyDeathNoticesCheckbox() {
-  const { settings, updateSettings } = useVideoSettings();
+  const { sequence, updateSequence } = useSequenceForm();
 
-  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    await updateSettings({
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateSequence({
       showOnlyDeathNotices: event.target.checked,
     });
   };
@@ -16,7 +16,7 @@ export function ShowOnlyDeathNoticesCheckbox() {
     <Checkbox
       label={<Trans context="Input label">Show only death notices</Trans>}
       onChange={onChange}
-      isChecked={settings.showOnlyDeathNotices}
+      isChecked={sequence.showOnlyDeathNotices}
     />
   );
 }
