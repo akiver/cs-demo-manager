@@ -19,6 +19,7 @@ import { SequencePlayerVoicesCheckbox } from './sequence-player-voices-checkbox'
 import { SequenceCamerasTable } from './cameras/sequence-cameras-table';
 import { ManageCamerasButtons } from './cameras/manage-cameras-buttons';
 import { PlayersColors } from './players-colors';
+import { ShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-checkbox';
 
 type Props = {
   isVisible: boolean;
@@ -69,6 +70,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                   <ManageCamerasButtons />
                   <SequencePlayerVoicesCheckbox />
                   <SequenceXRayCheckbox />
+                  <ShowOnlyDeathNoticesCheckbox />
                   <div className="flex items-center gap-x-12">
                     <SequenceDuration />
                     <SequenceDiskSpace />

@@ -49,7 +49,6 @@ type Parameters = {
   generateOnlyRawFiles: boolean;
   deleteRawFilesAfterEncoding: boolean;
   closeGameAfterRecording: boolean;
-  showOnlyDeathNotices: boolean;
   concatenateSequences: boolean;
   ffmpegSettings: FfmpegSettings;
   rawFilesFolderPath: string;
@@ -187,7 +186,6 @@ export async function generateVideo(parameters: Parameters) {
     demoPath,
     rawFilesFolderPath,
     generateOnlyRawFiles,
-    showOnlyDeathNotices,
     width,
     height,
     closeGameAfterRecording,
@@ -210,7 +208,6 @@ export async function generateVideo(parameters: Parameters) {
       demoPath,
       sequences,
       closeGameAfterRecording,
-      showOnlyDeathNotices,
       tickrate,
       deathNoticesDuration,
     });
@@ -221,7 +218,6 @@ export async function generateVideo(parameters: Parameters) {
       demoPath,
       sequences,
       closeGameAfterRecording,
-      showOnlyDeathNotices,
       deathNoticesDuration,
       tickrate,
       playerSlots,

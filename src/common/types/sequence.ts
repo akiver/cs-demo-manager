@@ -6,6 +6,7 @@ export type Sequence = {
   startTick: number;
   endTick: number;
   showXRay: boolean;
+  showOnlyDeathNotices: boolean;
   deathNotices: DeathNoticesPlayerOptions[];
   cameras: CameraFocus[];
   playerVoicesEnabled: boolean;

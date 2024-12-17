@@ -20,7 +20,6 @@ export type Video = {
   generateOnlyRawFiles: boolean;
   deleteRawFilesAfterEncoding: boolean;
   closeGameAfterRecording: boolean;
-  showOnlyDeathNotices: boolean;
   concatenateSequences: boolean;
   ffmpegSettings: FfmpegSettings;
   rawFilesFolderPath: string;

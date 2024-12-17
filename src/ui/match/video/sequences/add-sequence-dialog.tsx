@@ -41,10 +41,12 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   let deathNotices = defaultDeathNotices;
   let showXRay = false;
   let playerVoicesEnabled = false;
+  let showOnlyDeathNotices = true;
   if (lastSequence !== undefined) {
     deathNotices = lastSequence.deathNotices;
     showXRay = lastSequence.showXRay;
     playerVoicesEnabled = lastSequence.playerVoicesEnabled;
+    showOnlyDeathNotices = lastSequence.showOnlyDeathNotices;
   }
 
   const tickrate = Math.round(match.tickrate);
@@ -53,6 +55,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     number: sequenceNumber,
     startTick: firstRound ? firstRound.freezetimeEndTick : tickrate,
     endTick: firstRound ? firstRound.endTick : tickrate + 10,
+    showOnlyDeathNotices,
     deathNotices,
     cameras: [],
     showXRay,

@@ -11,7 +11,6 @@ export function ResetSettingsButton() {
       closeGameAfterRecording,
       concatenateSequences,
       deleteRawFilesAfterEncoding,
-      showOnlyDeathNotices,
       deathNoticesDuration,
       encoderSoftware,
       ffmpegSettings,
@@ -24,7 +23,6 @@ export function ResetSettingsButton() {
       closeGameAfterRecording,
       concatenateSequences,
       deleteRawFilesAfterEncoding,
-      showOnlyDeathNotices,
       deathNoticesDuration,
       encoderSoftware,
       ffmpegSettings: {

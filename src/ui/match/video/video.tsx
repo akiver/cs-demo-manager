@@ -18,7 +18,6 @@ import { GenerateOnlyRawFilesCheckbox } from './generate-only-raw-files-checkbox
 import { DeleteRawFilesAfterEncodingCheckbox } from './delete-raw-files-after-encoding-checkbox';
 import { GeneratePlayerSequencesButton } from './generate-player-sequences-button';
 import { DeleteSequencesButton } from './sequences/delete-sequences-button';
-import { ShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-checkbox';
 import { RawFilesFolderPath } from './raw-files-folder-path';
 import { ResetSettingsButton } from './reset-settings-button';
 import { SequencesSummary } from './sequences-summary';
@@ -45,7 +44,6 @@ export function MatchVideo() {
               <CloseGameAfterRecordingCheckbox />
               <ConcatenateSequencesCheckbox />
               <DeleteRawFilesAfterEncodingCheckbox />
-              <ShowOnlyDeathNoticesCheckbox />
               <div className="flex mt-8 gap-x-8">
                 <WidthResolutionInput />
                 <HeightResolutionInput />

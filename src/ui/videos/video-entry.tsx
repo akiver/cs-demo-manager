@@ -234,9 +234,6 @@ export function VideoEntry({ video }: Props) {
             </Grid>
 
             <Grid>
-              <Field label={<Trans>Show death notices</Trans>}>
-                {video.showOnlyDeathNotices ? <Trans>Yes</Trans> : <Trans>No</Trans>}
-              </Field>
               <Field label={<Trans>Close game after recording</Trans>}>
                 {video.closeGameAfterRecording ? (
                   <Trans>Yes</Trans>
