@@ -16,7 +16,7 @@ export function CfgInput({ cfg, onBlur }: Props) {
       defaultValue={cfg}
       placeholder={t({
         context: 'Input placeholder',
-        message: `CFG executed at the beginning of the sequence.\n\nExample:\ncl_draw_only_deathnotices 0`,
+        message: `CFG executed at the beginning of the sequence.\n \nExample:\ncl_draw_only_deathnotices 0`,
       })}
       resizable={false}
       spellCheck={false}
