@@ -8,7 +8,8 @@ Companion application for your Counter-Strike demos.
 
 [Download](https://cs-demo-manager.com/download)  
 [User manual](https://cs-demo-manager.com/docs)  
-[Developer manual](https://cs-demo-manager.com/docs/development/architecture)
+[Developer manual](https://cs-demo-manager.com/docs/development/architecture)  
+[Contributing](https://cs-demo-manager.com/docs/contributing)
 
 ## License
 
