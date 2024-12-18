@@ -81,10 +81,15 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerSequences, (state, action) => {
-      const { match, steamId, event, weapons } = action.payload;
+      const { match, steamId, event, weapons, startSecondsBeforeEvent, endSecondsAfterEvent } = action.payload;
       switch (event) {
         case PlayerSequenceEvent.Rounds: {
-          state[match.demoFilePath] = buildPlayerRoundsSequences(match, steamId);
+          state[match.demoFilePath] = buildPlayerRoundsSequences(
+            match,
+            steamId,
+            startSecondsBeforeEvent,
+            endSecondsAfterEvent,
+          );
           break;
         }
         case PlayerSequenceEvent.Kills:
@@ -94,7 +99,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
             match,
             steamId,
             action.payload.perspective,
-            action.payload.startSecondsBeforeEvent,
+            startSecondsBeforeEvent,
             true,
             weapons,
           );
@@ -106,7 +111,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     })
     .addCase(generatePlayerRoundsSequences, (state, action) => {
       const { match, steamId } = action.payload;
-      const sequences = buildPlayerRoundsSequences(match, steamId);
+      const sequences = buildPlayerRoundsSequences(match, steamId, 0, 0);
       state[match.demoFilePath] = sequences;
     });
 });

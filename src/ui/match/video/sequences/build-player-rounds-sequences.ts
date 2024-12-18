@@ -1,9 +1,15 @@
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 
-export function buildPlayerRoundsSequences(match: Match, steamId: string) {
+export function buildPlayerRoundsSequences(
+  match: Match,
+  steamId: string,
+  startSecondsBeforeEvent: number,
+  endSecondsAfterEvent: number,
+) {
   const sequences: Sequence[] = [];
-  const endSecondsAfterEndTick = 2;
+  const startSecondsBeforeStartTick = startSecondsBeforeEvent;
+  const endSecondsAfterEndTick = endSecondsAfterEvent;
 
   for (const round of match.rounds) {
     const hasShot = match.shots.some((shot) => {
@@ -15,16 +21,17 @@ export function buildPlayerRoundsSequences(match: Match, steamId: string) {
 
     if (hasShot || playerDeath) {
       const endTick = playerDeath ? playerDeath.tick : round.endTick;
+      const startTick = round.freezetimeEndTick - match.tickrate * startSecondsBeforeStartTick;
 
       sequences.push({
         number: sequences.length + 1,
-        startTick: round.freezetimeEndTick,
+        startTick,
         endTick: endTick + match.tickrate * endSecondsAfterEndTick,
         showOnlyDeathNotices: true,
         deathNotices: [],
         cameras: [
           {
-            tick: round.freezetimeEndTick,
+            tick: startTick,
             playerSteamId: steamId,
             playerName: match.players.find((player) => player.steamId === steamId)?.name ?? '',
           },

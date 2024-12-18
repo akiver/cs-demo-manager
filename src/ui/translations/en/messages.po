@@ -4855,6 +4855,16 @@ msgid "Round"
 msgstr "Round"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Seconds to start before the round starts"
+msgstr "Seconds to start before the round starts"
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Seconds to stop after the round ends"
+msgstr "Seconds to stop after the round ends"
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
 msgid "POV"
 msgstr "POV"

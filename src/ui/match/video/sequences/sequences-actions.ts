@@ -16,6 +16,7 @@ export const replaceSequences = createAction<{ demoFilePath: string; sequences: 
   'match/video/sequences/replace',
 );
 export const deleteSequences = createAction<{ demoFilePath: string }>('match/video/sequences/deleteAll');
+// TODO quality Refactor it to reduce the number of params or split it into multiple actions
 export const generatePlayerSequences = createAction<{
   steamId: string;
   match: Match;
@@ -23,6 +24,7 @@ export const generatePlayerSequences = createAction<{
   weapons: WeaponName[];
   perspective: Perspective;
   startSecondsBeforeEvent: number;
+  endSecondsAfterEvent: number;
 }>('match/video/sequences/generatePlayerSequences');
 export const generatePlayerKillsSequences = createAction<{ steamId: string; match: Match; perspective: Perspective }>(
   'match/video/sequences/generatePlayerKills',
