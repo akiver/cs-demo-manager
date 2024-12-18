@@ -15,6 +15,7 @@ export function CfgInput({ cfg, onBlur }: Props) {
       id="cfg"
       defaultValue={cfg}
       placeholder={t({
+        id: 'video-cfg-placeholder',
         context: 'Input placeholder',
         message: `CFG executed at the beginning of the sequence.\n\nExample:\ncl_draw_only_deathnotices 0`,
       })}
