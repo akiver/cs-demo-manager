@@ -5424,11 +5424,6 @@ msgctxt "Duration"
 msgid "<0>{seconds}</0> seconds"
 msgstr ""
 
-#: src/ui/match/video/sequence/show-only-death-notices-checkbox.tsx
-msgctxt "Input label"
-msgid "Show only death notices"
-msgstr ""
-
 #: src/ui/match/video/sequence/start-tick-input.tsx
 msgctxt "Input label"
 msgid "Start tick"
@@ -5517,6 +5512,11 @@ msgstr ""
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgid "First camera focus point on <0>{focusPlayerName}</0>"
+msgstr ""
+
+#: src/ui/match/video/show-only-death-notices-checkbox.tsx
+msgctxt "Input label"
+msgid "Show only death notices"
 msgstr ""
 
 #: src/ui/match/video/software-browse-button.tsx

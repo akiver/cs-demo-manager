@@ -1,22 +1,15 @@
 import React from 'react';
-import { Trans } from '@lingui/react/macro';
-import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { useSequenceForm } from './use-sequence-form';
+import { ShowOnlyDeathNoticesCheckbox } from '../show-only-death-notices-checkbox';
 
-export function ShowOnlyDeathNoticesCheckbox() {
+export function SequenceShowOnlyDeathNoticesCheckbox() {
   const { sequence, updateSequence } = useSequenceForm();
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (isChecked: boolean) => {
     updateSequence({
-      showOnlyDeathNotices: event.target.checked,
+      showOnlyDeathNotices: isChecked,
     });
   };
 
-  return (
-    <Checkbox
-      label={<Trans context="Input label">Show only death notices</Trans>}
-      onChange={onChange}
-      isChecked={sequence.showOnlyDeathNotices}
-    />
-  );
+  return <ShowOnlyDeathNoticesCheckbox onChange={onChange} isChecked={sequence.showOnlyDeathNotices} />;
 }
