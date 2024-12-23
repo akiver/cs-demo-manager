@@ -19,16 +19,25 @@ function buildPlayersDeathNotices(players: Player[]) {
   return deathNotices;
 }
 
-// TODO quality This function has too much parameters.
-export function buildPlayerEventSequences(
-  event: PlayerSequenceEvent,
-  match: Match,
-  steamId: string,
-  perspective: string,
-  startSecondsBeforeEvent: number,
-  showOnlyDeathNotices: boolean,
-  weapons?: WeaponName[],
-) {
+type Options = {
+  event: PlayerSequenceEvent;
+  match: Match;
+  steamId: string;
+  perspective: string;
+  startSecondsBeforeEvent: number;
+  showOnlyDeathNotices: boolean;
+  weapons?: WeaponName[];
+};
+
+export function buildPlayerEventSequences({
+  event,
+  match,
+  steamId,
+  perspective,
+  startSecondsBeforeEvent,
+  showOnlyDeathNotices,
+  weapons,
+}: Options) {
   if (event !== PlayerSequenceEvent.Kills && event !== PlayerSequenceEvent.Deaths) {
     throw new Error(`Unsupported player event: ${event}`);
   }

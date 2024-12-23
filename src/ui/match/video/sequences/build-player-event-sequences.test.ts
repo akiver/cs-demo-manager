@@ -33,14 +33,14 @@ describe('generate player kills sequences', () => {
       kills: [kill],
     } as Match;
 
-    const sequences = buildPlayerEventSequences(
-      PlayerSequenceEvent.Kills,
+    const sequences = buildPlayerEventSequences({
+      event: PlayerSequenceEvent.Kills,
       match,
-      killerSteamId,
-      Perspective.Player,
-      5,
-      true,
-    );
+      steamId: killerSteamId,
+      perspective: Perspective.Player,
+      startSecondsBeforeEvent: 5,
+      showOnlyDeathNotices: true,
+    });
 
     expect(sequences.length).toBe(1);
     const sequence = sequences[0];
@@ -77,14 +77,14 @@ describe('generate player kills sequences', () => {
       kills: [firstKillWithDedicatedSequence, firstKill, secondKill, thirdKill, lastKillWithDedicatedSequence],
     } as Match;
 
-    const sequences = buildPlayerEventSequences(
-      PlayerSequenceEvent.Kills,
+    const sequences = buildPlayerEventSequences({
+      event: PlayerSequenceEvent.Kills,
       match,
-      killerSteamId,
-      Perspective.Player,
-      5,
-      true,
-    );
+      steamId: killerSteamId,
+      perspective: Perspective.Player,
+      startSecondsBeforeEvent: 5,
+      showOnlyDeathNotices: true,
+    });
 
     expect(sequences.length).toBe(3);
     const firstSequence = sequences[0];
@@ -116,14 +116,14 @@ describe('generate player kills sequences', () => {
       kills: [firstKill, secondKill],
     } as Match;
 
-    const sequences = buildPlayerEventSequences(
-      PlayerSequenceEvent.Kills,
+    const sequences = buildPlayerEventSequences({
+      event: PlayerSequenceEvent.Kills,
       match,
-      killerSteamId,
-      Perspective.Player,
-      5,
-      true,
-    );
+      steamId: killerSteamId,
+      perspective: Perspective.Player,
+      startSecondsBeforeEvent: 5,
+      showOnlyDeathNotices: true,
+    });
 
     expect(sequences.length).toBe(1);
     const killSequence = sequences[0];
@@ -148,14 +148,14 @@ describe('generate player kills sequences', () => {
       kills: [kill1, kill2],
     } as Match;
 
-    const sequences = buildPlayerEventSequences(
-      PlayerSequenceEvent.Kills,
+    const sequences = buildPlayerEventSequences({
+      event: PlayerSequenceEvent.Kills,
       match,
-      killerSteamId,
-      Perspective.Player,
-      5,
-      true,
-    );
+      steamId: killerSteamId,
+      perspective: Perspective.Player,
+      startSecondsBeforeEvent: 5,
+      showOnlyDeathNotices: true,
+    });
 
     expect(sequences.length).toBe(1);
     const sequence = sequences[0];
@@ -175,14 +175,14 @@ describe('generate player kills sequences', () => {
       kills: [firstKill],
     } as Match;
 
-    const sequences = buildPlayerEventSequences(
-      PlayerSequenceEvent.Kills,
+    const sequences = buildPlayerEventSequences({
+      event: PlayerSequenceEvent.Kills,
       match,
-      killerSteamId,
-      Perspective.Player,
-      5,
-      true,
-    );
+      steamId: killerSteamId,
+      perspective: Perspective.Player,
+      startSecondsBeforeEvent: 5,
+      showOnlyDeathNotices: true,
+    });
 
     expect(sequences[0].startTick).toBe(1);
   });
@@ -199,14 +199,14 @@ describe('generate player kills sequences', () => {
       kills: [firstKill],
     } as Match;
 
-    const sequences = buildPlayerEventSequences(
-      PlayerSequenceEvent.Kills,
+    const sequences = buildPlayerEventSequences({
+      event: PlayerSequenceEvent.Kills,
       match,
-      killerSteamId,
-      Perspective.Player,
-      5,
-      true,
-    );
+      steamId: killerSteamId,
+      perspective: Perspective.Player,
+      startSecondsBeforeEvent: 5,
+      showOnlyDeathNotices: true,
+    });
 
     expect(sequences[0].endTick).toBe(100);
   });

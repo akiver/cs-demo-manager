@@ -58,26 +58,26 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     })
     .addCase(generatePlayerKillsSequences, (state, action) => {
       const { match, steamId } = action.payload;
-      const sequences = buildPlayerEventSequences(
-        PlayerSequenceEvent.Kills,
+      const sequences = buildPlayerEventSequences({
+        event: PlayerSequenceEvent.Kills,
         match,
         steamId,
-        action.payload.perspective,
-        5,
-        true,
-      );
+        perspective: action.payload.perspective,
+        startSecondsBeforeEvent: 5,
+        showOnlyDeathNotices: true,
+      });
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerDeathsSequences, (state, action) => {
       const { match, steamId } = action.payload;
-      const sequences = buildPlayerEventSequences(
-        PlayerSequenceEvent.Deaths,
+      const sequences = buildPlayerEventSequences({
+        event: PlayerSequenceEvent.Deaths,
         match,
         steamId,
-        action.payload.perspective,
-        5,
-        true,
-      );
+        perspective: action.payload.perspective,
+        startSecondsBeforeEvent: 5,
+        showOnlyDeathNotices: true,
+      });
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerSequences, (state, action) => {
@@ -94,15 +94,15 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
         }
         case PlayerSequenceEvent.Kills:
         case PlayerSequenceEvent.Deaths: {
-          state[match.demoFilePath] = buildPlayerEventSequences(
+          state[match.demoFilePath] = buildPlayerEventSequences({
             event,
             match,
             steamId,
-            action.payload.perspective,
+            perspective: action.payload.perspective,
             startSecondsBeforeEvent,
-            true,
+            showOnlyDeathNotices: true,
             weapons,
-          );
+          });
           break;
         }
         default:
