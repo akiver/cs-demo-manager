@@ -76,6 +76,13 @@ function useSearchEventOptions(): SelectOption<SearchEvent>[] {
     },
     {
       label: t({
+        message: 'No scope kills',
+        context: 'Select option label',
+      }),
+      value: SearchEvent.NoScopeKills,
+    },
+    {
+      label: t({
         message: 'Team kills',
         context: 'Select option label',
       }),

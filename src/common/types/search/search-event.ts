@@ -10,6 +10,7 @@ export const SearchEvent = {
   NinjaDefuse: 'ninja-defuse',
   JumpKills: 'jump-kills',
   TeamKills: 'team-kills',
+  NoScopeKills: 'no-scope-kills',
   RoundStart: 'round-start',
 } as const;
 

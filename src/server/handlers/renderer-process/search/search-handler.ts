@@ -12,6 +12,7 @@ import { handleError } from '../../handle-error';
 import { searchJumpKills } from 'csdm/node/database/search/search-jump-kills';
 import { searchTeamKills } from 'csdm/node/database/search/search-team-kills';
 import { searchRounds } from 'csdm/node/database/search/search-rounds';
+import { searchNoScopeKills } from 'csdm/node/database/search/search-no-scope-kills';
 
 export type SearchPayload = SearchFilter & {
   event: SearchEvent;
@@ -74,6 +75,9 @@ export async function searchHandler(payload: SearchPayload) {
         break;
       case SearchEvent.JumpKills:
         result = await searchJumpKills(filter);
+        break;
+      case SearchEvent.NoScopeKills:
+        result = await searchNoScopeKills(filter);
         break;
       case SearchEvent.TeamKills:
         result = await searchTeamKills(filter);

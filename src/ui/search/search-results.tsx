@@ -60,6 +60,7 @@ export function SearchResults() {
     case SearchEvent.KnifeKills:
     case SearchEvent.JumpKills:
     case SearchEvent.TeamKills:
+    case SearchEvent.NoScopeKills:
       return <KillsResults kills={result as KillResult[]} />;
     case SearchEvent.NinjaDefuse:
       return <NinjaDefuseResults bombsDefused={result as NinjaDefuseResult[]} />;

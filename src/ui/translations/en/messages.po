@@ -6178,6 +6178,11 @@ msgstr "Jump kills"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
+msgid "No scope kills"
+msgstr "No scope kills"
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
 msgid "Team kills"
 msgstr "Team kills"
 
