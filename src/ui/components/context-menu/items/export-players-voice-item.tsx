@@ -109,7 +109,7 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
 
   return (
     <Dialog closeOnBackgroundClicked={!isExporting} closeOnEscPressed={!isExporting}>
-      <div className="min-w-[700px]">
+      <div className="w-[768px]">
         <DialogHeader>
           <DialogTitle>
             <Trans>Players voice export</Trans>
