@@ -4,7 +4,11 @@ import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { useCurrentMatch } from '../use-current-match';
-import { generatePlayerSequences } from './sequences/sequences-actions';
+import {
+  generatePlayerDeathsSequences,
+  generatePlayerKillsSequences,
+  generatePlayerRoundsSequences,
+} from './sequences/sequences-actions';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
@@ -18,6 +22,7 @@ import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { Perspective } from 'csdm/common/types/perspective';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
+import { assertNever } from 'csdm/common/assert-never';
 
 type SecondsInputProps = {
   label: ReactNode;
@@ -105,19 +110,43 @@ function SelectPlayerDialog() {
   const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(0);
 
   const onConfirm = () => {
-    if (selectedSteamId) {
-      dispatch(
-        generatePlayerSequences({
-          steamId: selectedSteamId,
-          match,
-          event: selectedEvent,
-          weapons: selectedWeapons,
-          perspective,
-          startSecondsBeforeEvent,
-          endSecondsAfterEvent,
-        }),
-      );
+    if (!selectedSteamId) {
+      return;
     }
+
+    switch (selectedEvent) {
+      case PlayerSequenceEvent.Deaths:
+        dispatch(
+          generatePlayerDeathsSequences({
+            match,
+            perspective,
+            steamId: selectedSteamId,
+            weapons: selectedWeapons,
+          }),
+        );
+        break;
+      case PlayerSequenceEvent.Kills:
+        dispatch(
+          generatePlayerKillsSequences({
+            match,
+            perspective,
+            steamId: selectedSteamId,
+            weapons: selectedWeapons,
+          }),
+        );
+        break;
+      case PlayerSequenceEvent.Rounds:
+        dispatch(
+          generatePlayerRoundsSequences({
+            match,
+            steamId: selectedSteamId,
+          }),
+        );
+        break;
+      default:
+        return assertNever(selectedEvent, `Unknown player sequence event: ${selectedEvent}`);
+    }
+
     hideDialog();
   };
 

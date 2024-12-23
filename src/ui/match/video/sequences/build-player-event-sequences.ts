@@ -20,31 +20,17 @@ function buildPlayersDeathNotices(players: Player[]) {
 }
 
 type Options = {
-  event: PlayerSequenceEvent;
+  event: typeof PlayerSequenceEvent.Kills | typeof PlayerSequenceEvent.Deaths;
   match: Match;
   steamId: string;
   perspective: string;
-  startSecondsBeforeEvent: number;
-  showOnlyDeathNotices: boolean;
-  weapons?: WeaponName[];
+  weapons: WeaponName[];
 };
 
-export function buildPlayerEventSequences({
-  event,
-  match,
-  steamId,
-  perspective,
-  startSecondsBeforeEvent,
-  showOnlyDeathNotices,
-  weapons,
-}: Options) {
-  if (event !== PlayerSequenceEvent.Kills && event !== PlayerSequenceEvent.Deaths) {
-    throw new Error(`Unsupported player event: ${event}`);
-  }
-
+export function buildPlayerEventSequences({ event, match, steamId, perspective, weapons }: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
   let playerEvents = match.kills.filter((kill) => kill[steamIdKey] === steamId);
-  if (weapons) {
+  if (weapons.length > 0) {
     playerEvents = playerEvents.filter((kill) => {
       return weapons.includes(kill.weaponName);
     });
@@ -56,6 +42,7 @@ export function buildPlayerEventSequences({
 
   const minimumSecondsBetweenTwoEvents = 2;
   const maxSecondsBetweenEvents = 10;
+  const startSecondsBeforeEvent = 5;
   const endSecondsAfterEvent = 2;
 
   const deathNotices = buildPlayersDeathNotices(match.players);
@@ -96,7 +83,7 @@ export function buildPlayerEventSequences({
       number: sequences.length + 1,
       startTick: sequenceStartTick,
       endTick: sequenceEndTick,
-      showOnlyDeathNotices,
+      showOnlyDeathNotices: true,
       deathNotices,
       cameras: [
         {

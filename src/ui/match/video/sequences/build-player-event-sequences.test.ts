@@ -38,8 +38,7 @@ describe('generate player kills sequences', () => {
       match,
       steamId: killerSteamId,
       perspective: Perspective.Player,
-      startSecondsBeforeEvent: 5,
-      showOnlyDeathNotices: true,
+      weapons: [],
     });
 
     expect(sequences.length).toBe(1);
@@ -82,8 +81,7 @@ describe('generate player kills sequences', () => {
       match,
       steamId: killerSteamId,
       perspective: Perspective.Player,
-      startSecondsBeforeEvent: 5,
-      showOnlyDeathNotices: true,
+      weapons: [],
     });
 
     expect(sequences.length).toBe(3);
@@ -121,8 +119,7 @@ describe('generate player kills sequences', () => {
       match,
       steamId: killerSteamId,
       perspective: Perspective.Player,
-      startSecondsBeforeEvent: 5,
-      showOnlyDeathNotices: true,
+      weapons: [],
     });
 
     expect(sequences.length).toBe(1);
@@ -153,8 +150,7 @@ describe('generate player kills sequences', () => {
       match,
       steamId: killerSteamId,
       perspective: Perspective.Player,
-      startSecondsBeforeEvent: 5,
-      showOnlyDeathNotices: true,
+      weapons: [],
     });
 
     expect(sequences.length).toBe(1);
@@ -180,8 +176,7 @@ describe('generate player kills sequences', () => {
       match,
       steamId: killerSteamId,
       perspective: Perspective.Player,
-      startSecondsBeforeEvent: 5,
-      showOnlyDeathNotices: true,
+      weapons: [],
     });
 
     expect(sequences[0].startTick).toBe(1);
@@ -204,8 +199,7 @@ describe('generate player kills sequences', () => {
       match,
       steamId: killerSteamId,
       perspective: Perspective.Player,
-      startSecondsBeforeEvent: 5,
-      showOnlyDeathNotices: true,
+      weapons: [],
     });
 
     expect(sequences[0].endTick).toBe(100);

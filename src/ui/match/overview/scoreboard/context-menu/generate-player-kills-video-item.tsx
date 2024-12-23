@@ -26,6 +26,7 @@ export function GeneratePlayerKillsVideoItem({ steamId }: Props) {
         match,
         steamId,
         perspective,
+        weapons: [],
       }),
     );
     setTimeout(() => {

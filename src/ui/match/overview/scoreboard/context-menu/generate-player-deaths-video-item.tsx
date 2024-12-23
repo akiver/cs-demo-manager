@@ -26,6 +26,7 @@ export function GeneratePlayerDeathsVideoItem({ steamId }: Props) {
         match,
         steamId,
         perspective,
+        weapons: [],
       }),
     );
     setTimeout(() => {
