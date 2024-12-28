@@ -1,5 +1,5 @@
 import type { FaceitMatch, FaceitPlayer, FaceitTeam } from 'csdm/common/types/faceit-match';
-import { getDownloadStatus } from 'csdm/node/faceit/get-download-status';
+import { getDownloadStatus } from 'csdm/node/download/get-download-status';
 import type { FaceitMatchPlayerRow } from './faceit-match-player-table';
 import type { FaceitMatchRow } from './faceit-match-table';
 import type { FaceitMatchTeamRow } from './faceit-match-team-table';

@@ -16,6 +16,8 @@ import type { IgnoredSteamAccount } from 'csdm/common/types/ignored-steam-accoun
 import { initializeSettings } from 'csdm/node/settings/initialize-settings';
 import { videoQueue } from 'csdm/server/video-queue';
 import { type Video } from 'csdm/common/types/video';
+import type { FiveEPlayAccount } from 'csdm/common/types/5eplay-account';
+import { fetch5EPlayAccounts } from 'csdm/node/database/5play-account/fetch-5eplay-accounts';
 
 export type InitializeApplicationSuccessPayload = {
   matchChecksums: string[];
@@ -24,6 +26,7 @@ export type InitializeApplicationSuccessPayload = {
   tags: Tag[];
   settings: Settings;
   faceitAccounts: FaceitAccount[];
+  fiveEPlayAccounts: FiveEPlayAccount[];
   downloads: Download[];
   ignoredSteamAccounts: IgnoredSteamAccount[];
   videos: Video[];
@@ -31,20 +34,23 @@ export type InitializeApplicationSuccessPayload = {
 
 export async function initializeApplicationHandler() {
   try {
-    const [settings, maps, tags, matchChecksums, faceitAccounts, ignoredSteamAccounts] = await Promise.all([
-      initializeSettings(),
-      fetchMaps(),
-      fetchTags(),
-      fetchMatchChecksums(),
-      fetchFaceitAccounts(),
-      fetchIgnoredSteamAccounts(),
-    ]);
+    const [settings, maps, tags, matchChecksums, faceitAccounts, fiveEPlayAccounts, ignoredSteamAccounts] =
+      await Promise.all([
+        initializeSettings(),
+        fetchMaps(),
+        fetchTags(),
+        fetchMatchChecksums(),
+        fetchFaceitAccounts(),
+        fetch5EPlayAccounts(),
+        fetchIgnoredSteamAccounts(),
+      ]);
     const payload: InitializeApplicationSuccessPayload = {
       maps,
       tags,
       matchChecksums,
       settings,
       faceitAccounts,
+      fiveEPlayAccounts,
       ignoredSteamAccounts,
       analyses: analysesListener.getAnalyses(),
       downloads: downloadDemoQueue.getDownloads(),

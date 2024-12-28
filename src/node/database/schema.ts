@@ -19,6 +19,7 @@ import type { FaceitAccountTable } from './faceit-account/faceit-account-row';
 import type { FaceitMatchPlayerTable } from './faceit-matches/faceit-match-player-table';
 import type { FaceitMatchTable } from './faceit-matches/faceit-match-table';
 import type { FaceitMatchTeamTable } from './faceit-matches/faceit-match-team-table';
+import type { FiveEPlayAccountTable } from './5play-account/5eplay-account-row';
 import type { FlashbangExplodeTable } from './flashbang-exploded/flashbang-explode-table';
 import type { GrenadeBounceTable } from './grenade-bounce/grenade-bounce-table';
 import type { GrenadePositionTable } from './grenade-position/grenade-position-table';
@@ -72,6 +73,7 @@ export type Database = {
   faceit_match_players: FaceitMatchPlayerTable;
   faceit_match_teams: FaceitMatchTeamTable;
   faceit_matches: FaceitMatchTable;
+  '5eplay_accounts': FiveEPlayAccountTable;
   flashbangs_explode: FlashbangExplodeTable;
   grenade_bounces: GrenadeBounceTable;
   grenade_positions: GrenadePositionTable;

@@ -129,7 +129,7 @@ export default [
       'check-file/filename-naming-convention': [
         'error',
         {
-          '**/*.{ts,tsx,mjs,md}': 'KEBAB_CASE',
+          '**/*.{ts,tsx,mjs,md}': '+([a-z0-9])*([a-z0-9])*(-+([a-z0-9]))', // KEBAB_CASE but allow numbers at the start
         },
         {
           ignoreMiddleExtensions: true,
@@ -138,7 +138,7 @@ export default [
       'check-file/folder-naming-convention': [
         'error',
         {
-          'src/**/': 'KEBAB_CASE',
+          'src/**/': '+([a-z0-9])*([a-z0-9])*(-+([a-z0-9]))', // KEBAB_CASE but allow numbers at the start
         },
       ],
       'check-file/no-index': 'error',

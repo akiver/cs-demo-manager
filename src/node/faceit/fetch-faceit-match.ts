@@ -6,7 +6,7 @@ import type { FaceitMatchStatsDTO } from 'csdm/node/faceit-web-api/fetch-match-s
 import { fetchMatch } from 'csdm/node/faceit-web-api/fetch-match';
 import type { FaceitFactionDTO } from 'csdm/node/faceit-web-api/fetch-match';
 import type { FaceitFactionV1DTO } from 'csdm/node/faceit-web-api/fetch-match';
-import { getDownloadStatus } from 'csdm/node/faceit/get-download-status';
+import { getDownloadStatus } from 'csdm/node/download/get-download-status';
 import { unixTimestampToDate } from 'csdm/common/date/unix-timestamp-to-date';
 import { Game } from 'csdm/common/types/counter-strike';
 

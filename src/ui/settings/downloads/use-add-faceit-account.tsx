@@ -33,16 +33,16 @@ export function useAddFaceitAcount() {
           errorMessage = <Trans>Player not found.</Trans>;
           break;
         case ErrorCode.FaceItApiError:
-          errorMessage = <Trans>The FACEIT API returned an error, please re-try later.</Trans>;
+          errorMessage = <Trans>The API returned an error, please re-try later.</Trans>;
           break;
         case ErrorCode.FaceItApiForbidden:
-          errorMessage = <Trans>The FACEIT API returned a forbidden error, please check your API key.</Trans>;
+          errorMessage = <Trans>The API returned a forbidden error, please check your API key.</Trans>;
           break;
         case ErrorCode.FaceItApiInvalidRequest:
-          errorMessage = <Trans>Invalid FACEIT API request.</Trans>;
+          errorMessage = <Trans>Invalid API request.</Trans>;
           break;
         case ErrorCode.FaceItApiUnauthorized:
-          errorMessage = <Trans>The FACEIT API returned a 401 code, please check you API key.</Trans>;
+          errorMessage = <Trans>The API returned a 401 code, please check you API key.</Trans>;
           break;
         default:
           errorMessage = <Trans>An error occurred.</Trans>;

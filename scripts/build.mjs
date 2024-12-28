@@ -51,7 +51,10 @@ async function buildWebSocketServerBundle() {
     platform: 'node',
     target: `node${node}`,
     mainFields: ['module', 'main'],
-    external: ['pg-native'],
+    external: [
+      'pg-native',
+      '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
+    ],
     define: {
       ...commonDefine,
       'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,

@@ -192,6 +192,12 @@ import {
 } from './renderer-process/steam-accounts/update-steam-account-name-handler';
 import { resumeVideoQueueHandler } from './renderer-process/video/resume-video-queue-handler';
 import { pauseVideoQueueHandler } from './renderer-process/video/pause-video-queue-handler';
+import type { FiveEPlayAccount } from 'csdm/common/types/5eplay-account';
+import { add5EPlayAccountHandler } from './renderer-process/5eplay/add-5eplay-account-handler';
+import { updateCurrent5EPlayAccountHandler } from './renderer-process/5eplay/update-current-5eplay-account-handler';
+import type { FiveEPlayMatch } from 'csdm/common/types/5eplay-match';
+import { fetchLast5EPlayMatchesHandler } from './renderer-process/5eplay/fetch-last-5eplay-matches-handler';
+import { delete5EPlayAccountHandler } from './renderer-process/5eplay/delete-5eplay-account-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -298,6 +304,10 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.FetchLastMigrations]: Handler<void, Migration[]>;
   [RendererClientMessageName.DeleteDemosFromDatabase]: Handler<string[]>;
   [RendererClientMessageName.ImportDataFromV2Backup]: Handler<ImportV2BackupOptions, ImportV2BackupResult>;
+  [RendererClientMessageName.FetchLast5EPlayMatches]: Handler<string, FiveEPlayMatch[]>;
+  [RendererClientMessageName.Add5EPlayAccount]: Handler<string, FiveEPlayAccount>;
+  [RendererClientMessageName.Delete5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
+  [RendererClientMessageName.UpdateCurrent5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
 }
 
 // Mapping between message names and server handlers sent from the Electron renderer process to the WebSocket server.
@@ -394,4 +404,8 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.FetchLastMigrations]: fetchMigrationsHandler,
   [RendererClientMessageName.DeleteDemosFromDatabase]: deleteDemosFromDatabaseHandler,
   [RendererClientMessageName.ImportDataFromV2Backup]: importDataFromV2BackupHandler,
+  [RendererClientMessageName.FetchLast5EPlayMatches]: fetchLast5EPlayMatchesHandler,
+  [RendererClientMessageName.Add5EPlayAccount]: add5EPlayAccountHandler,
+  [RendererClientMessageName.Delete5EPlayAccount]: delete5EPlayAccountHandler,
+  [RendererClientMessageName.UpdateCurrent5EPlayAccount]: updateCurrent5EPlayAccountHandler,
 };

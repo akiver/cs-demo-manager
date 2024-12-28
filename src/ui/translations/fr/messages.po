@@ -237,6 +237,7 @@ msgstr ""
 #: src/ui/demos/table/update-demos-type-item.tsx
 #: src/ui/dialogs/checksums-tags-dialog.tsx
 #: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
+#: src/ui/downloads/five-eplay/use-update-current-5eplay-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
 #: src/ui/hooks/use-counter-strike.tsx
@@ -251,6 +252,7 @@ msgstr ""
 #: src/ui/search/filters/search-players-input.tsx
 #: src/ui/settings/about/clear-logs-button.tsx
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
+#: src/ui/settings/downloads/5eplay-accounts.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
 #: src/ui/settings/maps/add-map-dialog.tsx
 #: src/ui/settings/maps/edit-map-dialog.tsx
@@ -699,6 +701,7 @@ msgstr "Vous devez installer <0>Rosetta</0>."
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/download-demos-button.tsx
 #: src/ui/downloads/faceit/last-matches-loader.tsx
+#: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
 #: src/ui/downloads/valve/last-matches-loader.tsx
 #: src/ui/match/grenades/finder/grenades-finder-loader.tsx
 #: src/ui/match/match-loader.tsx
@@ -715,6 +718,7 @@ msgstr "Vous devez installer <0>Rosetta</0>."
 #: src/ui/settings/database/database-size.tsx
 #: src/ui/settings/database/import-v2-data-button.tsx
 #: src/ui/settings/database/optimize-database-button.tsx
+#: src/ui/settings/downloads/use-add-5eplay-account.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 #: src/ui/settings/maps/delete-map-dialog.tsx
 #: src/ui/settings/maps/reset-default-maps-button.tsx
@@ -1700,6 +1704,7 @@ msgstr "Score équipe B"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1710,6 +1715,7 @@ msgstr "K"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1728,6 +1734,7 @@ msgstr "Kills"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1738,6 +1745,7 @@ msgstr "A"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1756,6 +1764,7 @@ msgstr "Assistances"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1766,6 +1775,7 @@ msgstr "D"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1783,6 +1793,7 @@ msgstr "Morts"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1792,6 +1803,7 @@ msgstr "5K"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1801,6 +1813,7 @@ msgstr "5-kill rounds"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1810,6 +1823,7 @@ msgstr "4K"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1819,6 +1833,7 @@ msgstr "4-kill rounds"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1828,6 +1843,7 @@ msgstr "3K"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1930,6 +1946,7 @@ msgstr "Tickrate"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/match/weapons/weapons-accuracy.tsx
 #: src/ui/players/table/use-players-columns.ts
@@ -1942,6 +1959,7 @@ msgstr "Nom"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2331,6 +2349,7 @@ msgstr "Regarder le round"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
@@ -2339,6 +2358,7 @@ msgstr "Avatar"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2348,6 +2368,7 @@ msgstr "K/D diff"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2811,31 +2832,36 @@ msgid "See on FACEIT"
 msgstr "Voir sur FACEIT"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
-msgid "Fetching last FACEIT matches…"
-msgstr "Récupération des derniers matchs FACEIT…"
+#: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
+#: src/ui/downloads/valve/last-matches-loader.tsx
+msgid "Fetching last matches…"
+msgstr "Récupération des derniers matchs…"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
-msgid "The FACEIT API returned a forbidden error, please check your API key."
-msgstr "L'API FACEIT a retourné une erreur 403, veuillez vérifier votre clé d'API."
+msgid "The API returned a forbidden error, please check your API key."
+msgstr ""
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
-msgid "The FACEIT API returned an unauthorized status code, please check your API key."
-msgstr "L'API FACEIT a retourné une erreur 401, veuillez vérifier votre clé d'API."
+msgid "The API returned an unauthorized status code, please check your API key."
+msgstr ""
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
+#: src/ui/settings/downloads/use-add-5eplay-account.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
-msgid "Invalid FACEIT API request."
-msgstr "Requête API FACEIT invalide."
+msgid "Invalid API request."
+msgstr ""
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
+#: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
-msgid "The FACEIT API returned an error, please re-try later."
-msgstr "L'API FACEIT a retourné une erreur, veuillez réessayer plus tard."
+msgid "The API returned an error, please re-try later."
+msgstr ""
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
-msgid "No matches found for the current FACEIT account."
-msgstr "Aucun match trouvé pour le compte FACEIT actuel."
+#: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
+msgid "No matches found for the current account."
+msgstr ""
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 msgid "To add a FACEIT account, enter your FACEIT nickname."
@@ -2852,6 +2878,7 @@ msgid "The nickname is case sensitive!"
 msgstr "Le pseudo est sensible à la casse!"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
+#: src/ui/downloads/five-eplay/no-5eplay-account.tsx
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 #: src/ui/settings/tags/add-tag.tsx
 msgctxt "Button"
@@ -2859,6 +2886,7 @@ msgid "Add"
 msgstr "Ajouter"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2867,6 +2895,7 @@ msgid "K/D"
 msgstr "K/D"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2875,6 +2904,7 @@ msgid "Kill-Death Ratio"
 msgstr "Ratio Kills/Deaths"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2883,6 +2913,7 @@ msgid "HS"
 msgstr "HS"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2891,6 +2922,7 @@ msgid "Headshot"
 msgstr "Headshot"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2899,12 +2931,128 @@ msgid "HS%"
 msgstr "HS%"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Headshot Percentage"
 msgstr "Pourcentage headshot"
+
+#: src/ui/downloads/five-eplay/5eplay-current-match.tsx
+msgctxt "Button"
+msgid "See on 5EPlay"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
+msgid "Invalid request."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scoreboard-context-menu.tsx
+msgctxt "Context menu"
+msgid "Open 5EPlay profile"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
+msgid "How can I find my 5EPlay ID?"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
+msgid "Log into your <0>5EPlay</0> account."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
+msgid "Go to your profile and copy the last segment of the URL."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
+msgid "For example, if the URL is <0>https://arena.5eplay.com/data/player/111111</0> then the ID is <1>111111</1>."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/no-5eplay-account.tsx
+msgid "To add a 5EPlay account, enter your 5EPlay ID."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/no-5eplay-account.tsx
+msgctxt "Input placeholder"
+msgid "5EPlay ID"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header kast"
+msgid "KAST"
+msgstr "KAST"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "Percentage of rounds in which the player either had a kill, assist, survived or was traded"
+msgstr "Pourcentage de rounds au cours desquels le joueur a soit fait 1 victime, 1 coopération, a survécu ou a été vengé"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header average damage per round"
+msgid "ADR"
+msgstr "ADR"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Table header tooltip"
+msgid "Average Damage per Round"
+msgstr "Dégâts moyens par round"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Average Damage per Round"
+msgstr "Dégâts moyens par round"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header first kill count"
+msgid "FK"
+msgstr "FK"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "First kills of a round"
+msgstr "Premier kill dans un round"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "First Kills"
+msgstr "Premiers kills"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header first death count"
+msgid "FD"
+msgstr "FD"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "First deaths of a round"
+msgstr "Mort en premier dans un round"
+
+#: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "First Deaths"
+msgstr "Premières morts"
 
 #: src/ui/downloads/pending-downloads-link.tsx
 msgctxt "Link"
@@ -3036,10 +3184,6 @@ msgstr "Counter-Strike se fermera s'il est en cours d'exécution et se lancera a
 #: src/ui/downloads/valve/fetch-matches-confirmation.tsx
 msgid "Continue"
 msgstr "Continuer"
-
-#: src/ui/downloads/valve/last-matches-loader.tsx
-msgid "Fetching last matches…"
-msgstr "Récupération des derniers matchs…"
 
 #: src/ui/downloads/valve/no-matches-found.tsx
 msgid "No matches found for the current Steam account."
@@ -4087,41 +4231,6 @@ msgstr "Dégâts"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header kast"
-msgid "KAST"
-msgstr "KAST"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "Percentage of rounds in which the player either had a kill, assist, survived or was traded"
-msgstr "Pourcentage de rounds au cours desquels le joueur a soit fait 1 victime, 1 coopération, a survécu ou a été vengé"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header average damage per round"
-msgid "ADR"
-msgstr "ADR"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Table header tooltip"
-msgid "Average Damage per Round"
-msgstr "Dégâts moyens par round"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-#: src/ui/teams/table/use-teams-columns.ts
-msgctxt "Dropdown column visibility"
-msgid "Average Damage per Round"
-msgstr "Dégâts moyens par round"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header utility damage per round"
 msgid "UDR"
 msgstr "UDR"
@@ -4177,36 +4286,6 @@ msgstr "Dégâts totaux infligés par utilitaire"
 msgctxt "Dropdown column visibility"
 msgid "Utility Damage"
 msgstr "Dégâts utilitaire"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-msgctxt "Table header first kill count"
-msgid "FK"
-msgstr "FK"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-msgctxt "Table header tooltip"
-msgid "First kills of a round"
-msgstr "Premier kill dans un round"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-msgctxt "Dropdown column visibility"
-msgid "First Kills"
-msgstr "Premiers kills"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-msgctxt "Table header first death count"
-msgid "FD"
-msgstr "FD"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-msgctxt "Table header tooltip"
-msgid "First deaths of a round"
-msgstr "Mort en premier dans un round"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-msgctxt "Dropdown column visibility"
-msgid "First Deaths"
-msgstr "Premières morts"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade kill count"
@@ -4455,6 +4534,7 @@ msgid "No players found."
 msgstr ""
 
 #: src/ui/match/players/match-players.tsx
+#: src/ui/settings/downloads/use-add-5eplay-account.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "Player not found."
 msgstr "Joueur introuvable."
@@ -6558,25 +6638,70 @@ msgctxt "Button"
 msgid "Reset database"
 msgstr "Réinitialiser la base de données"
 
-#: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
-msgid "Automatically download FACEIT demos in the background."
-msgstr "Télécharger automatiquement les démos FACEIT en arrière-plan."
+#: src/ui/settings/downloads/5eplay-accounts.tsx
+msgid "Add 5EPlay account"
+msgstr ""
 
+#: src/ui/settings/downloads/5eplay-accounts.tsx
+msgctxt "Input label"
+msgid "5EPlay ID"
+msgstr ""
+
+#: src/ui/settings/downloads/5eplay-accounts.tsx
+msgctxt "Input placeholder"
+msgid "ID"
+msgstr ""
+
+#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgid "No accounts"
+msgstr "Aucun compte"
+
+#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgid "Set as current account"
+msgstr "Définir comme compte actuel"
+
+#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgid "Accounts"
+msgstr "Comptes"
+
+#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgctxt "Button"
+msgid "Add account"
+msgstr "Ajouter un compte"
+
+#: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
+msgid "Automatically download 5EPLay demos in the background."
+msgstr ""
+
+#: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
 #: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
 #: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
 msgctxt "Settings title"
 msgid "Background download"
 msgstr "Téléchargement en arrière-plan"
 
-#: src/ui/settings/downloads/auto-download-faceit-demos.tsx
-msgid "Automatically download FACEIT demos at application startup."
-msgstr "Télécharger automatiquement les démos FACEIT au démarrage de l'application."
+#: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
+msgid "Automatically download 5EPlay demos at application startup."
+msgstr ""
 
+#: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
 #: src/ui/settings/downloads/auto-download-faceit-demos.tsx
 #: src/ui/settings/downloads/auto-download-valve-demos.tsx
 msgctxt "Settings title"
 msgid "Startup download"
 msgstr "Téléchargement au démarrage"
+
+#: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
+msgid "Automatically download FACEIT demos in the background."
+msgstr "Télécharger automatiquement les démos FACEIT en arrière-plan."
+
+#: src/ui/settings/downloads/auto-download-faceit-demos.tsx
+msgid "Automatically download FACEIT demos at application startup."
+msgstr "Télécharger automatiquement les démos FACEIT au démarrage de l'application."
 
 #: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
 msgid "Automatically download Valve matchmaking demos in the background."
@@ -6604,23 +6729,6 @@ msgctxt "Input placeholder"
 msgid "Nickname"
 msgstr "Pseudo"
 
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "No accounts"
-msgstr "Aucun compte"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "Set as current account"
-msgstr "Définir comme compte actuel"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "Accounts"
-msgstr "Comptes"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgctxt "Button"
-msgid "Add account"
-msgstr "Ajouter un compte"
-
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "FACEIT restricted demo downloads through a <0>private API</0> and recently gave us a server-side API key with the maximum rate limit."
 msgstr "FACEIT a restreint le téléchargement de démos via une <0>API privée</0> et nous ont récemment fourni une clé d'API serveur ayant les rate limit maximales."
@@ -6634,8 +6742,8 @@ msgid "In the meantime, you have to download demos from your browser."
 msgstr "En attendant, vous devez télécharger les démos à partir de votre navigateur."
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
-msgid "The FACEIT API returned a 401 code, please check you API key."
-msgstr "L'API FACEIT a retourné un code 401, veuillez vérifier votre clé d'API."
+msgid "The API returned a 401 code, please check you API key."
+msgstr ""
 
 #: src/ui/settings/folders/add-folder-button.tsx
 msgctxt "Button"

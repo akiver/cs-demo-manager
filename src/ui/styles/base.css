@@ -51,6 +51,7 @@
   svg,
   path,
   ul,
+  li,
   *[aria-hidden='true'] {
     user-select: none;
   }
