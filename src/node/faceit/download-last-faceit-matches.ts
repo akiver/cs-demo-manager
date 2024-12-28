@@ -16,9 +16,9 @@ export async function downloadLastFaceitMatches() {
     fetchDownloadHistories(),
   ]);
 
-  const downladedMatchIds = downloadHistories.map((history) => history.match_id);
+  const downloadedMatchIds = downloadHistories.map((history) => history.match_id);
   const matchesToDownload = matches.filter((match) => {
-    return match.downloadStatus === DownloadStatus.NotDownloaded && !downladedMatchIds.includes(match.id);
+    return match.downloadStatus === DownloadStatus.NotDownloaded && !downloadedMatchIds.includes(match.id);
   });
   const downloads = matchesToDownload.map((match) => {
     return {

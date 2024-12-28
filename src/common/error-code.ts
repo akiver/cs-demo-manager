@@ -76,6 +76,10 @@ export const ErrorCode = {
   FaceItApiUnauthorized: 1103,
   FaceItApiInvalidRequest: 1104,
 
+  FiveEPlayApiError: 1200,
+  FiveEPlayApiResourceNotFound: 1201,
+  FiveEPlayApiInvalidRequest: 1202,
+
   SteamAccountAlreadyIgnored: 2000,
   SteamAccountNotFound: 2001,
   InvalidSteamCommunityUrl: 2002,

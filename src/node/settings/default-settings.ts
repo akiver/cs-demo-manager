@@ -111,6 +111,8 @@ export const defaultSettings: Settings = {
     downloadValveDemosInBackground: true,
     downloadFaceitDemosAtStartup: true,
     downloadFaceitDemosInBackground: true,
+    download5EPlayDemosAtStartup: true,
+    download5EPlayDemosInBackground: true,
   },
   matches: {
     gameModes: [],

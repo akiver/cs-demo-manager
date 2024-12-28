@@ -6,7 +6,8 @@ export class FaceitApiError extends BaseError {
     super(ErrorCode.FaceItApiError);
     if (httpStatus !== undefined) {
       this.message = `FACEIT API error with HTTP status ${httpStatus}`;
+    } else {
+      this.message = 'FACEIT API error';
     }
-    this.message = 'FACEIT API error';
   }
 }

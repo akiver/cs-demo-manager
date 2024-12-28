@@ -100,6 +100,8 @@ type DownloadSettings = {
   downloadFaceitDemosAtStartup: boolean;
   downloadValveDemosInBackground: boolean;
   downloadFaceitDemosInBackground: boolean;
+  download5EPlayDemosAtStartup: boolean;
+  download5EPlayDemosInBackground: boolean;
 };
 
 export type MatchesSettings = MatchesTableFilter;

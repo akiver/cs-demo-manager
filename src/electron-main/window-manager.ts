@@ -187,6 +187,8 @@ class WindowManager {
       'https://www.advancedfx.org/',
       'https://docs.faceit.com/',
       'https://discord.com/',
+      'https://www.5eplay.com/',
+      'https://arena.5eplay.com/',
     ];
 
     for (const website of allowedWebsites) {

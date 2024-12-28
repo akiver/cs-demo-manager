@@ -33,32 +33,28 @@ export function LastMatchesLoader() {
   }
 
   if (status === Status.Loading) {
-    return <Message message={<Trans>Fetching last FACEIT matches…</Trans>} />;
+    return <Message message={<Trans>Fetching last matches…</Trans>} />;
   }
 
   if (status === Status.Error) {
     switch (errorCode) {
       case ErrorCode.FaceItApiForbidden:
-        return (
-          <Message message={<Trans>The FACEIT API returned a forbidden error, please check your API key.</Trans>} />
-        );
+        return <Message message={<Trans>The API returned a forbidden error, please check your API key.</Trans>} />;
       case ErrorCode.FaceItApiUnauthorized:
         return (
-          <Message
-            message={<Trans>The FACEIT API returned an unauthorized status code, please check your API key.</Trans>}
-          />
+          <Message message={<Trans>The API returned an unauthorized status code, please check your API key.</Trans>} />
         );
       case ErrorCode.FaceItApiInvalidRequest:
-        return <Message message={<Trans>Invalid FACEIT API request.</Trans>} />;
+        return <Message message={<Trans>Invalid API request.</Trans>} />;
       case ErrorCode.FaceItApiError:
-        return <Message message={<Trans>The FACEIT API returned an error, please re-try later.</Trans>} />;
+        return <Message message={<Trans>The API returned an error, please re-try later.</Trans>} />;
       default:
         return <Message message={<Trans>An error occurred.</Trans>} />;
     }
   }
 
   if (matches.length === 0) {
-    return <Message message={<Trans>No matches found for the current FACEIT account.</Trans>} />;
+    return <Message message={<Trans>No matches found for the current account.</Trans>} />;
   }
 
   return (

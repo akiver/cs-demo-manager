@@ -24,6 +24,7 @@ export const RoutePath = {
   Search: '/search',
   Downloads: '/downloads',
   DownloadsFaceit: 'faceit',
+  Downloads5EPlay: '5eplay',
   DownloadsPending: 'pending',
   Ban: '/ban',
   Teams: '/teams',

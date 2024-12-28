@@ -48,6 +48,7 @@ import { TeamMatchesTable } from './team/matches/team-matches-table';
 import { TeamMaps } from './team/maps/team-maps';
 import { TeamHeatmap } from './team/heatmap/team-heatmap';
 import { Videos } from './videos/videos';
+import { FiveEPlayLastMatches } from './downloads/five-eplay/5eplay-last-matches';
 
 export const router = createHashRouter(
   createRoutesFromElements(
@@ -106,6 +107,7 @@ export const router = createHashRouter(
       <Route path={RoutePath.Downloads} element={<Downloads />}>
         <Route index={true} element={<ValveLastMatchesLoader />} />
         <Route path={RoutePath.DownloadsFaceit} element={<FaceitLastMatches />} />
+        <Route path={RoutePath.Downloads5EPlay} element={<FiveEPlayLastMatches />} />
         <Route path={RoutePath.DownloadsPending} element={<PendingDownloads />} />
       </Route>
       <Route path={RoutePath.Videos} element={<Videos />} />
