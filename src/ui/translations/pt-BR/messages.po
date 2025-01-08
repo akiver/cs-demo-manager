@@ -3139,8 +3139,8 @@ msgstr "Argumentos inválidos fornecidos para o boiler."
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
-msgid "Error while contacting Steam, please retry later."
-msgstr "Erro ao contatar a Steam, por favor, tente novamente mais tarde."
+msgid "Error while contacting Steam, make sure your Steam account is not currently in-game on another device, otherwise please retry later."
+msgstr ""
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"

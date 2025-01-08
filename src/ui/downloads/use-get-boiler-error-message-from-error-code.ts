@@ -14,7 +14,8 @@ export function useGetBoilerErrorMessageFromErrorCode() {
       case ErrorCode.BoilerCommunicationFailure:
         return t({
           context: 'Boiler-writter error message',
-          message: 'Error while contacting Steam, please retry later.',
+          message:
+            'Error while contacting Steam, make sure your Steam account is not currently in-game on another device, otherwise please retry later.',
         });
       case ErrorCode.BoilerAlreadyConnected:
         return t({

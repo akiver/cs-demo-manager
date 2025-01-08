@@ -3139,7 +3139,7 @@ msgstr ""
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
-msgid "Error while contacting Steam, please retry later."
+msgid "Error while contacting Steam, make sure your Steam account is not currently in-game on another device, otherwise please retry later."
 msgstr ""
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts

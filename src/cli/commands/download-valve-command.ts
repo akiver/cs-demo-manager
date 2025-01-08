@@ -194,7 +194,8 @@ export class DownloadValveCommand extends DownloadBaseCommand {
           message = 'Matches info file not found.';
           break;
         case error instanceof SteamCommunicationError:
-          message = 'Error while contacting Steam, please retry later.';
+          message =
+            'Error while contacting Steam, make sure your Steam account is not currently in-game on another device, otherwise please retry later.';
           break;
         case error instanceof AlreadyConnected:
           message = 'You are already connected to the CS game coordinator, make sure to close CS and retry.';
