@@ -17,10 +17,11 @@ const files = await glob('**/*.po', {
 for (const file of files) {
   const content = await fs.readFile(file, 'utf-8');
   const lines = content.split('\n');
-  const lastLines = lines.slice(-2);
-  const blankLineCount = lastLines.filter((line) => line === '').length;
-  const blankLineToAddCount = 2 - blankLineCount;
-  if (blankLineToAddCount > 0) {
-    await fs.appendFile(file, '\n'.repeat(blankLineToAddCount));
+  while (lines[lines.length - 1] === '') {
+    lines.pop();
   }
+
+  lines.push('', '');
+
+  await fs.writeFile(file, lines.join('\n'));
 }
