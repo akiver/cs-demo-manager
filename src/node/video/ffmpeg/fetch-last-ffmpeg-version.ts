@@ -6,14 +6,19 @@ type EvermeetResponse = {
 };
 
 function findWindowsVersionFromGitHubRelease(release: GitHubReleaseResponse) {
+  let versionsFound: string[] = [];
   for (const asset of release.assets) {
     const matches = /ffmpeg-n.*-latest-win64-gpl-(\d+\.\d+(\.\d+)?)\.zip/g.exec(asset.name);
     if (matches !== null) {
-      return matches[1];
+      versionsFound = [...versionsFound, matches[1]];
     }
   }
 
-  throw new Error('FFMpeg version not found');
+  if (versionsFound.length === 0) {
+    throw new Error('FFMpeg version not found');
+  }
+
+  return versionsFound.sort().reverse()[0];
 }
 
 export async function fetchLastFfmpegVersion(): Promise<string> {
