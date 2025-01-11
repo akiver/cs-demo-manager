@@ -1,26 +1,26 @@
 import React from 'react';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import type { CellProps } from 'csdm/ui/components/table/table-types';
-import type { DeathNoticesPlayerOptions } from 'csdm/common/types/death-notice-player-options';
-import { useDeathNotices } from './use-death-notices';
+import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
+import { usePlayersOptions } from './use-players-options';
 
-type Props = CellProps<DeathNoticesPlayerOptions>;
+type Props = CellProps<SequencePlayerOptions>;
 
 export function ShowPlayerKillsCheckbox({ rowIndex }: Props) {
-  const { deathNotices, updateDeathNotices } = useDeathNotices();
-  const isChecked = deathNotices[rowIndex].showKill;
+  const { options, update } = usePlayersOptions();
+  const isChecked = options[rowIndex].showKill;
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
-    updateDeathNotices(
-      deathNotices.map((deathNotice, index) => {
+    update(
+      options.map((options, index) => {
         if (index === rowIndex) {
           return {
-            ...deathNotice,
+            ...options,
             showKill: isChecked,
           };
         }
-        return deathNotice;
+        return options;
       }),
     );
   };

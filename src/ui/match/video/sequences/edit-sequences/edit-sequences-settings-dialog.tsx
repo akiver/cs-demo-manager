@@ -13,15 +13,16 @@ import { FocusCameraPlayerSelect } from 'csdm/ui/match/video/focus-camera-player
 import { XRayCheckbox } from 'csdm/ui/match/video/x-ray-checkbox';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { CfgInput } from 'csdm/ui/match/video/cfg-input';
-import { DeathNotices } from './death-notices/death-notices';
-import { useDeathNotices } from './death-notices/use-death-notices';
-import { PlayerVoicesCheckbox } from '../../player-voices-checkbox';
+import { SequencePlayersOptions } from './player-options/sequence-players-options';
+import { usePlayersOptions } from './player-options/use-players-options';
+import { PlayerVoicesCheckbox } from 'csdm/ui/match/video/player-voices-checkbox';
 import type { Sequence } from 'csdm/common/types/sequence';
-import { ShowOnlyDeathNoticesCheckbox } from '../../show-only-death-notices-checkbox';
+import { ShowOnlyDeathNoticesCheckbox } from 'csdm/ui/match/video/show-only-death-notices-checkbox';
+import { useCanEditVideoPlayersOptions } from 'csdm/ui/match/video/use-can-edit-video-players-options';
 
 type State = {
   overridePlayerFocusSteamId: boolean;
-  overrideDeathNotices: boolean;
+  overridePlayerOptions: boolean;
   overrideCfg: boolean;
 };
 
@@ -33,13 +34,14 @@ export function EditSequenceSettingsDialog() {
   const [playerFocusSteamId, setPlayerFocusSteamId] = useState<string | undefined>(undefined);
   const [showOnlyDeathNotices, setShowOnlyDeathNotices] = useState(true);
   const [showXRay, setShowXRay] = useState(false);
-  const [playerVoicesEnabled, setPlayerVoicesEnabled] = useState(false);
+  const [playerVoicesEnabled, setPlayerVoicesEnabled] = useState(true);
   const [cfg, setCfg] = useState<string | undefined>(undefined);
-  const { deathNotices } = useDeathNotices();
+  const { options: playerOptions } = usePlayersOptions();
+  const canEditPlayersOptions = useCanEditVideoPlayersOptions();
 
   const [state, setState] = useState<State>({
     overridePlayerFocusSteamId: false,
-    overrideDeathNotices: false,
+    overridePlayerOptions: false,
     overrideCfg: false,
   });
 
@@ -56,7 +58,7 @@ export function EditSequenceSettingsDialog() {
             ? [{ tick: sequence.startTick, playerSteamId: playerFocusSteamId, playerName }]
             : sequence.cameras,
         cfg: state.overrideCfg ? cfg : sequence.cfg,
-        deathNotices: state.overrideDeathNotices ? deathNotices : sequence.deathNotices,
+        playersOptions: state.overridePlayerOptions ? playerOptions : sequence.playersOptions,
       };
     });
     dispatch(
@@ -129,19 +131,19 @@ export function EditSequenceSettingsDialog() {
             </CollapseTransition>
           </div>
 
-          {window.csdm.isWindows && (
+          {canEditPlayersOptions && (
             <div className="flex flex-col gap-y-4">
               <Checkbox
-                label={<Trans>Override death notices</Trans>}
-                isChecked={state.overrideDeathNotices}
+                label={<Trans>Override player options</Trans>}
+                isChecked={state.overridePlayerOptions}
                 onChange={(event) => {
-                  setState({ ...state, overrideDeathNotices: event.target.checked });
+                  setState({ ...state, overridePlayerOptions: event.target.checked });
                 }}
               />
 
-              <CollapseTransition isVisible={state.overrideDeathNotices}>
+              <CollapseTransition isVisible={state.overridePlayerOptions}>
                 <div className="max-h-[300px] overflow-y-auto">
-                  <DeathNotices />
+                  <SequencePlayersOptions />
                 </div>
               </CollapseTransition>
             </div>

@@ -3887,15 +3887,15 @@ msgstr "No grenades found."
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
-#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
+#: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header"
 msgid "Player"
 msgstr "Player"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
-#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
+#: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header tooltip"
 msgid "Player's name"
 msgstr "Player's name"
@@ -5194,13 +5194,13 @@ msgid "Player"
 msgstr "Player"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
+#: src/ui/match/video/sequence/sequence-players.tsx
 msgctxt "Table header"
 msgid "Actions"
 msgstr "Actions"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
+#: src/ui/match/video/sequence/sequence-players.tsx
 msgctxt "Table header tooltip"
 msgid "Actions"
 msgstr "Actions"
@@ -5479,21 +5479,6 @@ msgctxt "Input label"
 msgid "CFG"
 msgstr "CFG"
 
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
-#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
-msgctxt "Table header tooltip"
-msgid "Show kills"
-msgstr "Show kills"
-
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
-msgctxt "Table header tooltip"
-msgid "Highlight kills kills"
-msgstr "Highlight kills kills"
-
-#: src/ui/match/video/sequence/sequence-death-notices.tsx
-msgid "Death notices"
-msgstr "Death notices"
-
 #: src/ui/match/video/sequence/sequence-disk-space.tsx
 msgid "~<0>{requiredDiskSpace}</0>GB"
 msgstr "~<0>{requiredDiskSpace}</0>GB"
@@ -5502,6 +5487,45 @@ msgstr "~<0>{requiredDiskSpace}</0>GB"
 msgctxt "Duration"
 msgid "<0>{seconds}</0> seconds"
 msgstr "<0>{seconds}</0> seconds"
+
+#: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
+msgctxt "Table header show kills"
+msgid "K"
+msgstr "K"
+
+#: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
+msgctxt "Table header tooltip"
+msgid "Show kills"
+msgstr "Show kills"
+
+#: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
+msgctxt "Table header highlight kills"
+msgid "H"
+msgstr "H"
+
+#: src/ui/match/video/sequence/sequence-players.tsx
+msgctxt "Table header tooltip"
+msgid "Highlight kills kills"
+msgstr "Highlight kills kills"
+
+#: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
+msgctxt "Table header enable voices"
+msgid "V"
+msgstr "V"
+
+#: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
+msgctxt "Table header tooltip"
+msgid "Voice"
+msgstr "Voice"
+
+#: src/ui/match/video/sequence/sequence-players.tsx
+msgid "Players"
+msgstr "Players"
 
 #: src/ui/match/video/sequence/start-tick-input.tsx
 msgctxt "Input label"
@@ -5527,11 +5551,6 @@ msgstr "Add new sequence"
 msgctxt "Button"
 msgid "Delete sequences"
 msgstr "Delete sequences"
-
-#: src/ui/match/video/sequences/edit-sequences/death-notices/death-notices.tsx
-msgctxt "Table header tooltip"
-msgid "Highlight kills"
-msgstr "Highlight kills"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgid "No sequences to edit"
@@ -5560,8 +5579,13 @@ msgid "Override CFG"
 msgstr "Override CFG"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
-msgid "Override death notices"
-msgstr "Override death notices"
+msgid "Override player options"
+msgstr "Override player options"
+
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
+msgctxt "Table header tooltip"
+msgid "Highlight kills"
+msgstr "Highlight kills"
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in gigabyte"

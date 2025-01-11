@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { SequenceDialog } from '../sequence/sequence-dialog';
-import type { DeathNoticesPlayerOptions } from 'csdm/common/types/death-notice-player-options';
+import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
 import { useCurrentMatchSequences } from './use-current-match-sequences';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { addSequence } from './sequences-actions';
@@ -18,12 +18,13 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   const sequences = useCurrentMatchSequences();
   const dispatch = useDispatch();
 
-  const defaultDeathNotices: DeathNoticesPlayerOptions[] = match.players.map((player) => {
+  const defaultPlayersOptions: SequencePlayerOptions[] = match.players.map((player) => {
     return {
       steamId: player.steamId,
       playerName: player.name,
       showKill: true,
       highlightKill: false,
+      isVoiceEnabled: true,
     };
   });
 
@@ -38,12 +39,12 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
 
   const sequenceNumber = sequences.length + 1;
   const lastSequence = sequences.length > 0 ? sequences[sequences.length - 1] : undefined;
-  let deathNotices = defaultDeathNotices;
+  let playersOptions = defaultPlayersOptions;
   let showXRay = false;
   let playerVoicesEnabled = false;
   let showOnlyDeathNotices = true;
   if (lastSequence !== undefined) {
-    deathNotices = lastSequence.deathNotices;
+    playersOptions = lastSequence.playersOptions;
     showXRay = lastSequence.showXRay;
     playerVoicesEnabled = lastSequence.playerVoicesEnabled;
     showOnlyDeathNotices = lastSequence.showOnlyDeathNotices;
@@ -56,7 +57,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     startTick: firstRound ? firstRound.freezetimeEndTick : tickrate,
     endTick: firstRound ? firstRound.endTick : tickrate + 10,
     showOnlyDeathNotices,
-    deathNotices,
+    playersOptions,
     cameras: [],
     showXRay,
     playerVoicesEnabled,

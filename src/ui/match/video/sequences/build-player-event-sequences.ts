@@ -1,4 +1,4 @@
-import type { DeathNoticesPlayerOptions } from 'csdm/common/types/death-notice-player-options';
+import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { Player } from 'csdm/common/types/player';
@@ -6,17 +6,18 @@ import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { PlayerSequenceEvent } from './player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
 
-function buildPlayersDeathNotices(players: Player[]) {
-  const deathNotices: DeathNoticesPlayerOptions[] = players.map((player) => {
+function buildPlayersOptions(players: Player[]) {
+  const options: SequencePlayerOptions[] = players.map((player) => {
     return {
       highlightKill: false,
       playerName: player.name,
       showKill: true,
       steamId: player.steamId,
+      isVoiceEnabled: true,
     };
   });
 
-  return deathNotices;
+  return options;
 }
 
 type Options = {
@@ -45,7 +46,7 @@ export function buildPlayerEventSequences({ event, match, steamId, perspective, 
   const startSecondsBeforeEvent = 5;
   const endSecondsAfterEvent = 2;
 
-  const deathNotices = buildPlayersDeathNotices(match.players);
+  const playersOptions = buildPlayersOptions(match.players);
   const sequences: Sequence[] = [];
   const ticksRequiredBetweenTwoSequences = Math.round(match.tickrate * minimumSecondsBetweenTwoEvents);
   const additionalTicksBeforeEvent = Math.round(match.tickrate * startSecondsBeforeEvent);
@@ -84,7 +85,7 @@ export function buildPlayerEventSequences({ event, match, steamId, perspective, 
       startTick: sequenceStartTick,
       endTick: sequenceEndTick,
       showOnlyDeathNotices: true,
-      deathNotices,
+      playersOptions,
       cameras: [
         {
           tick: sequenceStartTick,

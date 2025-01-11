@@ -6,19 +6,18 @@ import { useSequenceForm } from './use-sequence-form';
 
 type Props = CellProps<SequencePlayerOptions>;
 
-export function HighlightPlayerKillsCheckbox({ rowIndex }: Props) {
+export function EnablePlayerVoicesCheckbox({ rowIndex }: Props) {
   const { sequence, updateSequence } = useSequenceForm();
-  const isChecked = sequence.playersOptions[rowIndex].highlightKill;
+  const isChecked = sequence.playersOptions[rowIndex].isVoiceEnabled;
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
-
     updateSequence({
       playersOptions: sequence.playersOptions.map((options, index) => {
         if (index === rowIndex) {
           return {
             ...options,
-            highlightKill: isChecked,
+            isVoiceEnabled: isChecked,
           };
         }
         return options;
