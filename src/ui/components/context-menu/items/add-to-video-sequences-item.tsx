@@ -34,7 +34,7 @@ export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId
           endTick,
           number: sequences.length + 1,
           showOnlyDeathNotices: settings.showOnlyDeathNotices,
-          deathNotices: [],
+          playersOptions: [],
           cameras: [
             {
               tick: startTick,

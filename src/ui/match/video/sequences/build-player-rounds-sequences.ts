@@ -28,7 +28,7 @@ export function buildPlayerRoundsSequences(
         startTick,
         endTick: endTick + match.tickrate * endSecondsAfterEndTick,
         showOnlyDeathNotices: true,
-        deathNotices: [],
+        playersOptions: [],
         cameras: [
           {
             tick: startTick,

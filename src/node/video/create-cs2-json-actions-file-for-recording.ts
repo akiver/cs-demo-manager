@@ -2,6 +2,7 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
 import { JSONActionsFileGenerator } from 'csdm/node/counter-strike/json-actions-file/json-actions-file-generator';
 import { Game } from 'csdm/common/types/counter-strike';
+import { generatePlayerVoicesValues } from '../counter-strike/launcher/generate-player-voices-values';
 
 type Options = {
   framerate: number;
@@ -80,30 +81,43 @@ export async function createCs2JsonActionsFileForRecording({
       }
     }
 
-    for (const deathNotice of sequence.deathNotices) {
+    for (const playerOptions of sequence.playersOptions) {
       json.addExecCommand(
         setupSequenceTick,
-        `mirv_deathmsg filter add attackerMatch=x${deathNotice.steamId} "attackerName=${deathNotice.playerName}"`,
+        `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} "attackerName=${playerOptions.playerName}"`,
       );
       json.addExecCommand(
         setupSequenceTick,
-        `mirv_deathmsg filter add assisterMatch=x${deathNotice.steamId} "assisterName=${deathNotice.playerName}"`,
+        `mirv_deathmsg filter add assisterMatch=x${playerOptions.steamId} "assisterName=${playerOptions.playerName}"`,
       );
       json.addExecCommand(
         setupSequenceTick,
-        `mirv_deathmsg filter add victimMatch=x${deathNotice.steamId} "victimName=${deathNotice.playerName}"`,
+        `mirv_deathmsg filter add victimMatch=x${playerOptions.steamId} "victimName=${playerOptions.playerName}"`,
       );
 
-      if (!deathNotice.showKill) {
+      if (!playerOptions.showKill) {
         json.addExecCommand(
           setupSequenceTick,
-          `mirv_deathmsg filter add attackerMatch=x${deathNotice.steamId} block=1`,
+          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} block=1`,
         );
-      } else if (deathNotice.highlightKill) {
+      } else if (playerOptions.highlightKill) {
         json.addExecCommand(
           setupSequenceTick,
-          `mirv_deathmsg filter add attackerMatch=x${deathNotice.steamId} attackerIsLocal=1`,
+          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=1`,
         );
+      }
+
+      if (playerOptions.isVoiceEnabled) {
+        const playersWithVoiceEnabled = sequence.playersOptions.filter((playerOptions) => playerOptions.isVoiceEnabled);
+        if (playersWithVoiceEnabled.length !== sequence.playersOptions.length) {
+          const userIds = playersWithVoiceEnabled.map((playerOptions) => {
+            // The player slot is the user id + 1 in demos.
+            return playerSlots[playerOptions.steamId] - 1;
+          });
+          const { valueLow, valueHigh } = generatePlayerVoicesValues(userIds);
+          json.addExecCommand(setupSequenceTick, `tv_listen_voice_indices ${valueLow}`);
+          json.addExecCommand(setupSequenceTick, `tv_listen_voice_indices_h ${valueHigh}`);
+        }
       }
     }
 

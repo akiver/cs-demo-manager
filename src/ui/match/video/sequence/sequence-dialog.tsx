@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import React, { useRef, useEffect } from 'react';
 import { MatchTimeline } from './match-timeline/match-timeline';
-import { SequenceDeathNotices } from './sequence-death-notices';
+import { SequencePlayers } from './sequence-players';
 import { StartTickInput } from './start-tick-input';
 import { EndTickInput } from './end-tick-input';
 import { SequenceDuration } from './sequence-duration';
@@ -20,6 +20,7 @@ import { SequenceCamerasTable } from './cameras/sequence-cameras-table';
 import { ManageCamerasButtons } from './cameras/manage-cameras-buttons';
 import { PlayersColors } from './players-colors';
 import { SequenceShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-checkbox';
+import { useCanEditVideoPlayersOptions } from 'csdm/ui/match/video/use-can-edit-video-players-options';
 
 type Props = {
   isVisible: boolean;
@@ -31,6 +32,7 @@ type Props = {
 export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSequence }: Props) {
   const element = useRef<HTMLDivElement>(document.createElement('div'));
   const node = element.current;
+  const canEditPlayersOptions = useCanEditVideoPlayersOptions();
 
   useEffect(() => {
     document.body.appendChild(node);
@@ -81,7 +83,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                   </div>
                 </div>
                 <SequenceCamerasTable />
-                {window.csdm.isWindows && <SequenceDeathNotices />}
+                {canEditPlayersOptions && <SequencePlayers />}
                 <SequenceCfgInput />
               </div>
               <PlayersColors />

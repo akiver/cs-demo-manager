@@ -5,7 +5,7 @@ import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { useCurrentMatchSequences } from 'csdm/ui/match/video/sequences/use-current-match-sequences';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
-import { DeathNoticesProvider } from './death-notices/death-notices-provider';
+import { SequencePlayersOptionsProvider } from './player-options/players-options-provider';
 import { EditSequenceSettingsDialog } from './edit-sequences-settings-dialog';
 
 export function EditSequencesSettingsButton() {
@@ -23,9 +23,9 @@ export function EditSequencesSettingsButton() {
       });
     } else {
       showDialog(
-        <DeathNoticesProvider match={match}>
+        <SequencePlayersOptionsProvider match={match}>
           <EditSequenceSettingsDialog />
-        </DeathNoticesProvider>,
+        </SequencePlayersOptionsProvider>,
       );
     }
   };

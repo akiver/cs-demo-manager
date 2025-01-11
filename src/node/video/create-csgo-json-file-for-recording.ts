@@ -4,7 +4,7 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
 import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix-path-separator';
 import { Game } from 'csdm/common/types/counter-strike';
-import type { DeathNoticesPlayerOptions } from 'csdm/common/types/death-notice-player-options';
+import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
 
 type Options = {
   rawFilesFolderPath: string;
@@ -27,8 +27,8 @@ function getHlaeRawFilesFolderPath(rawFilesFolderPath: string, sequence: Sequenc
  * mirv_exec doc: https://github.com/advancedfx/advancedfx/wiki/Source%3Amirv_exec
  * mirv_replace_name doc: https://github.com/advancedfx/advancedfx/wiki/Source%3Amirv_replace_name
  */
-function buildReplacePlayerNameCommand(deathNotice: DeathNoticesPlayerOptions) {
-  return `mirv_exec mirv_replace_name filter add x${deathNotice.steamId} "${deathNotice.playerName.replaceAll('"', '{QUOTE}')}"`;
+function buildReplacePlayerNameCommand(player: SequencePlayerOptions) {
+  return `mirv_exec mirv_replace_name filter add x${player.steamId} "${player.playerName.replaceAll('"', '{QUOTE}')}"`;
 }
 
 export async function createCsgoJsonFileForRecording({
@@ -95,20 +95,20 @@ export async function createCsgoJsonFileForRecording({
         .addExecCommand(sequence.startTick, 'mirv_streams record start')
         .addExecCommand(sequence.endTick, 'mirv_streams record end');
 
-      for (const deathNotice of sequence.deathNotices) {
-        const replacePlayerNameCommand = buildReplacePlayerNameCommand(deathNotice);
+      for (const playerOptions of sequence.playersOptions) {
+        const replacePlayerNameCommand = buildReplacePlayerNameCommand(playerOptions);
         json.addExecCommand(setupSequenceTick, replacePlayerNameCommand);
 
-        if (!deathNotice.showKill) {
+        if (!playerOptions.showKill) {
           json.addExecCommand(
             setupSequenceTick,
-            `mirv_deathmsg filter add attackerMatch=x${deathNotice.steamId} block=1`,
+            `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} block=1`,
           );
         }
-        if (deathNotice.highlightKill) {
+        if (playerOptions.highlightKill) {
           json.addExecCommand(
             setupSequenceTick,
-            `mirv_deathmsg filter add attackerMatch=x${deathNotice.steamId} attackerIsLocal=1`,
+            `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=1`,
           );
         }
       }
