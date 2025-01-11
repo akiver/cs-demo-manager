@@ -17,7 +17,7 @@ export async function isSteamRunning(): Promise<boolean> {
       processNames = ['steam'];
   }
 
-  const processIsRunning = await areProcessesRunning(processNames, true);
+  const processIsRunning = await areProcessesRunning(processNames);
 
   return processIsRunning;
 }
