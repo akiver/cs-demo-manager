@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-12-02 12:06\n"
+"PO-Revision-Date: 2025-01-12 00:14\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -224,7 +224,7 @@ msgstr "禁止每一个最高的段位"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "Loading ban stats…"
-msgstr ""
+msgstr "正在加载封禁数据…"
 
 #: src/ui/ban/stats/ban-stats.tsx
 #: src/ui/comment/use-update-comment.tsx
@@ -354,7 +354,7 @@ msgstr "请确认 PostgreSQL 正在运行并且您的设置是正确的。"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "The connection to the database failed with the following error:"
-msgstr ""
+msgstr "与数据库的连接失败，错误如下："
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "CS Demo Manager requires a PostgreSQL database."
@@ -370,7 +370,7 @@ msgstr "请阅读<0>文档</0>以获得帮助。"
 
 #: src/ui/bootstrap/settings-provider.tsx
 msgid "An error occurred while loading settings."
-msgstr ""
+msgstr "加载设置时发生了一个错误。"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "The Steam API returned a forbidden error"
@@ -844,7 +844,7 @@ msgstr "回合"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "Demo analysis"
-msgstr ""
+msgstr "分析Demo"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
@@ -929,7 +929,7 @@ msgstr "{0, plural, one {录像只会从您的数据库中删除，而不是系�
 
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "Delete matches"
-msgstr ""
+msgstr "删除比赛"
 
 #. placeholder {0}: checksums.length
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
@@ -1057,7 +1057,7 @@ msgstr "无效名称。"
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Rename"
-msgstr ""
+msgstr "重命名"
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Only the name visible from the application will change, it will not change the filename on your operating system."
@@ -1456,7 +1456,7 @@ msgstr "团队"
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.pistol"
-msgstr ""
+msgstr "武器类型.手枪"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
@@ -1481,12 +1481,12 @@ msgstr ""
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.machineGun"
-msgstr ""
+msgstr "武器类型.机枪"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.grenade"
-msgstr ""
+msgstr "武器类型.投掷物"
 
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
@@ -2697,7 +2697,7 @@ msgstr "此demo校验与比赛信息不匹配"
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
 msgid "An error occurred while updating demo location."
-msgstr ""
+msgstr "更新demo路径时发生错误"
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
 msgid "Demo location"
@@ -3502,7 +3502,7 @@ msgstr "未分配"
 
 #: src/ui/hooks/use-update-demo-location.ts
 msgid "Select demo's path"
-msgstr ""
+msgstr "选择Demo路径"
 
 #: src/ui/keyboard/keyboard-shortcut.ts
 msgctxt "Keyboard shortcut"
@@ -4017,7 +4017,7 @@ msgstr "玩家闪光弹数据矩阵"
 
 #: src/ui/match/grenades/stats/stats-label.tsx
 msgid "Thrown"
-msgstr ""
+msgstr "投掷"
 
 #: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
@@ -4114,7 +4114,7 @@ msgstr "回放将会从指定的时刻开始播放"
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgid "Tick"
-msgstr ""
+msgstr "Tick"
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgctxt "Button"
@@ -4532,7 +4532,7 @@ msgstr "观看击杀"
 
 #: src/ui/match/players/match-players-loader.tsx
 msgid "No players found."
-msgstr ""
+msgstr "未找到玩家."
 
 #: src/ui/match/players/match-players.tsx
 #: src/ui/settings/downloads/use-add-5eplay-account.tsx
@@ -4624,11 +4624,11 @@ msgstr "观看回合"
 
 #: src/ui/match/rounds/overview/rounds-history.tsx
 msgid "Round"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/match/rounds/overview/rounds.tsx
 msgid "No rounds found."
-msgstr ""
+msgstr "未找到回合."
 
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "No clutches in this round"
@@ -4644,7 +4644,7 @@ msgstr "{clutcherName} 输掉了1v{opponentCount}"
 
 #: src/ui/match/rounds/round/end-reason.tsx
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/ui/match/rounds/round/end-reason.tsx
 msgctxt "Panel title"
@@ -4901,12 +4901,12 @@ msgstr ""
 #: src/ui/match/video/focus-camera-player-select.tsx
 msgctxt "Checkbox label"
 msgid "Focus camera on player"
-msgstr ""
+msgstr "对焦摄像头在玩家身上"
 
 #: src/ui/match/video/framerate-input.tsx
 msgctxt "Input label"
 msgid "Framerate"
-msgstr ""
+msgstr "帧速率"
 
 #: src/ui/match/video/framerate-input.tsx
 msgctxt "Input placeholder"
@@ -4936,12 +4936,12 @@ msgstr "回合"
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Input label"
 msgid "Seconds to start before the round starts"
-msgstr ""
+msgstr "回合开始前多少秒开始"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Input label"
 msgid "Seconds to stop after the round ends"
-msgstr ""
+msgstr "回合结束后多少秒停止"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
@@ -4961,20 +4961,20 @@ msgstr "敌人"
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Input label"
 msgid "Seconds to focus the camera on the killer before each kill"
-msgstr ""
+msgstr "每次击杀之前提前多少秒转为击杀者视角"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Input label"
 msgid "Seconds to focus the camera on the enemy before each kill"
-msgstr ""
+msgstr "每次击杀之前提前多少秒转为受害者视角"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "No action found for this player"
-msgstr ""
+msgstr "没有找到该玩家对应的操作"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "If 2 actions occurred less than 10 seconds apart or 2 actions are less than 2 seconds apart, a single sequence will be generated."
-msgstr ""
+msgstr "如果两次击杀间隔少于10秒，或两个镜头之间间隔少于2秒，那么将生成一个单一镜头"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Dialog title"
@@ -5042,7 +5042,7 @@ msgstr "未找到原始文件"
 
 #: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Counter-Strike crashed."
-msgstr ""
+msgstr "该死！CS 崩溃了。"
 
 #: src/ui/match/video/height-resolution-input.tsx
 msgctxt "Input label"
@@ -5145,12 +5145,12 @@ msgstr "重置设置"
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Select option"
 msgid "Killer"
-msgstr ""
+msgstr "击杀者"
 
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Select option"
 msgid "Victim"
-msgstr ""
+msgstr "受害者"
 
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Checkbox label"
@@ -5173,7 +5173,7 @@ msgstr ""
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgid "Focus the camera on the following player when the sequence start"
-msgstr ""
+msgstr "序列开始时转为此玩家视角"
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgctxt "Button"
@@ -5342,7 +5342,7 @@ msgstr ""
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgctxt "Context menu"
 msgid "At the start of the sequence"
-msgstr ""
+msgstr "在序列开始时"
 
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgid "{second, plural, one {# second before} other {# seconds before}}"
@@ -5574,11 +5574,11 @@ msgstr ""
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override camera focus"
-msgstr ""
+msgstr "覆盖相机视角"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override CFG"
-msgstr ""
+msgstr "覆盖CFG"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override player options"
@@ -5668,7 +5668,7 @@ msgstr "高度"
 #: src/ui/match/video/x-ray-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Show X-Ray"
-msgstr ""
+msgstr "开启X光"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
@@ -5799,23 +5799,23 @@ msgstr "爆头率%"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Rifles"
-msgstr ""
+msgstr "步枪"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Pistols"
-msgstr ""
+msgstr "手枪"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "SMGs"
-msgstr ""
+msgstr "冲锋枪"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Snipers"
-msgstr ""
+msgstr "狙击手"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Machine guns"
-msgstr ""
+msgstr "机枪"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Head"
@@ -5886,12 +5886,12 @@ msgstr ""
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "The only way to restore team names is by re-analyzing demos!"
-msgstr ""
+msgstr "恢复团队名称的唯一办法是重新分析demo！"
 
 #: src/ui/matches/table/match-context-menu.tsx
 msgctxt "Context menu"
 msgid "Update team names"
-msgstr ""
+msgstr "更新团队名称"
 
 #: src/ui/matches/table/match-count.tsx
 msgid "{matchCount, plural, one {# match} other {# matches}}"
@@ -6326,7 +6326,7 @@ msgstr "空中飞人击杀"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "No scope kills"
-msgstr ""
+msgstr "盲狙击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -6341,7 +6341,7 @@ msgstr "偷包（也可能是明抢"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Round start"
-msgstr ""
+msgstr "回合开始"
 
 #: src/ui/search/filters/search-maps-input.tsx
 msgctxt "Input placeholder"
@@ -6502,11 +6502,11 @@ msgstr "重置设置"
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Bans that happened before the player was first seen in a match will be ignored."
-msgstr ""
+msgstr "忽略遇到该玩家之前的封禁事件"
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Ignore bans happened before first match"
-msgstr ""
+msgstr "忽略在第一场比赛之前的封禁事件"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
@@ -6607,7 +6607,7 @@ msgstr "你必须选择一个CS:DM V2的备份文件。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You need at least one folder."
-msgstr ""
+msgstr "您至少需要选择一个文件夹。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "The backup file is invalid."
@@ -6636,7 +6636,7 @@ msgstr ""
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "The comment and status of the demos inside the following folders will be updated:"
-msgstr ""
+msgstr "以下文件夹中的Demo评论和状态将被更新："
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "{demoToImportCount, plural, one {<0>#</0> demo to import found in the backup file.} other {<1>#</1> demos to import found in the backup file.}}"
@@ -6797,7 +6797,7 @@ msgstr "昵称"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "FACEIT restricted demo downloads through a <0>private API</0> and recently gave us a server-side API key with the maximum rate limit."
-msgstr ""
+msgstr "FACEIT通过<0>私有API</0>限制演示下载，但FACEIT为CSDM提供了一个最高费率限制的服务器端API密钥。"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "You <0>don't have to ask</0> FACEIT for an API key. It requires some work, but demo downloads will be back in a near future."
@@ -7117,7 +7117,7 @@ msgstr ""
 #: src/ui/settings/playback/player-voices.tsx
 msgctxt "Settings title"
 msgid "Player voices"
-msgstr ""
+msgstr "玩家语音"
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
@@ -7370,26 +7370,26 @@ msgstr "更新已准备就绪！"
 #: src/ui/videos/remove-all-videos-button.tsx
 msgctxt "Button"
 msgid "Remove all"
-msgstr ""
+msgstr "移除所有"
 
 #: src/ui/videos/remove-completed-videos-button.tsx
 msgctxt "Button"
 msgid "Remove completed"
-msgstr ""
+msgstr "移除已完成的任务"
 
 #: src/ui/videos/resume-or-pause-video-queue-button.tsx
 msgctxt "Button"
 msgid "Resume"
-msgstr ""
+msgstr "继续"
 
 #: src/ui/videos/resume-or-pause-video-queue-button.tsx
 msgctxt "Button"
 msgid "Pause"
-msgstr ""
+msgstr "暂停"
 
 #: src/ui/videos/resume-or-pause-video-queue-button.tsx
 msgid "The video queue is paused!"
-msgstr ""
+msgstr "视频队列已暂停！"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Waiting…"
@@ -7401,64 +7401,64 @@ msgstr "游戏内录制中…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Preparing files for conversion…"
-msgstr ""
+msgstr "准备转换文件…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Generating video for sequence {number} / {sequenceCount}…"
-msgstr ""
+msgstr "正在为镜头 {number} / {sequenceCount} 生成视频…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Merging videos into a single file…"
-msgstr ""
+msgstr "将视频片段合并为单个视频文件…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Video generation done"
-msgstr ""
+msgstr "视频生成已完成"
 
 #: src/ui/videos/video-entry.tsx
 msgid "The folder doesn't exist yet"
-msgstr ""
+msgstr "文件夹不存在"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Map"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Video ID"
-msgstr ""
+msgstr "视频 ID"
 
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 msgid "Sequences"
-msgstr ""
+msgstr "视频序列"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Disk space"
-msgstr ""
+msgstr "磁盘空间"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Encoder software"
-msgstr ""
+msgstr "编码器"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Resolution"
-msgstr ""
+msgstr "分辨率"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Merge sequences into single file"
-msgstr ""
+msgstr "将序列合并为单个视频文件…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Generate only RAW files"
-msgstr ""
+msgstr "仅生成原始视频文件"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Close game after recording"
-msgstr ""
+msgstr "录制后关闭游戏"
 
 #: src/ui/videos/video-entry.tsx
 msgid "You will have to close the game manually."
-msgstr ""
+msgstr "您必须手动关闭游戏。"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Demo path"
@@ -7474,15 +7474,15 @@ msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "Start tick"
-msgstr ""
+msgstr "开始Tick"
 
 #: src/ui/videos/video-entry.tsx
 msgid "End tick"
-msgstr ""
+msgstr "结束Tick"
 
 #: src/ui/videos/video-entry.tsx
 msgid "X-Ray"
-msgstr ""
+msgstr "X光"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"
