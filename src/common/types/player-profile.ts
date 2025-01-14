@@ -53,6 +53,10 @@ export type PlayerProfile = {
   twoKillCount: number;
   utilityDamage: number;
   wonMatchCount: number;
+  averageBlindTime: number;
+  averageEnemiesFlashed: number;
+  averageHeGrenadeDamage: number;
+  averageSmokesThrownPerMatch: number;
   clutches: Clutch[];
   enemyCountPerRank: Record<Rank, number>;
   competitiveRankHistory: CompetitiveRankHistory[];

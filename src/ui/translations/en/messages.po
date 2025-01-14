@@ -2203,6 +2203,7 @@ msgid "T"
 msgstr "T"
 
 #: src/ui/components/panels/utilities-panel.tsx
+#: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel title"
 msgid "Utilities"
 msgstr "Utilities"
@@ -6028,6 +6029,47 @@ msgstr "Premier rank"
 msgctxt "Panel label"
 msgid "Competitive rank"
 msgstr "Competitive rank"
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgid "On average, how long enemies stay blind whilst affected by a player's flashbang."
+msgstr "On average, how long enemies stay blind whilst affected by a player's flashbang."
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Avg blind time"
+msgstr "Avg blind time"
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Seconds"
+msgid "{averageBlindTime}s"
+msgstr "{averageBlindTime}s"
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgid "The average number of enemies blinded per flashbang thrown by the player. This includes only 5v5 matches, so the maximum possible value is 5."
+msgstr "The average number of enemies blinded per flashbang thrown by the player. This includes only 5v5 matches, so the maximum possible value is 5."
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Enemies flashed"
+msgstr "Enemies flashed"
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgid "On average, how much damage is dealt to enemies with HE grenades thrown by the player."
+msgstr "On average, how much damage is dealt to enemies with HE grenades thrown by the player."
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Avg HE damages"
+msgstr "Avg HE damages"
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgid "On average, how many smokes are thrown by the player in a single match. This includes only 5v5 matches."
+msgstr "On average, how many smokes are thrown by the player in a single match. This includes only 5v5 matches."
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Avg smokes thrown"
+msgstr "Avg smokes thrown"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel title"

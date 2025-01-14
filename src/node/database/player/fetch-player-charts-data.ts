@@ -1,21 +1,9 @@
 import { sql } from 'kysely';
-import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import type { PlayerChartsData } from 'csdm/common/types/charts/player-charts-data';
 import { db } from 'csdm/node/database/database';
-import type { FetchPlayerFilters } from './fetch-player-filters';
+import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
 
-export async function fetchPlayerChartsData({
-  steamId,
-  startDate,
-  endDate,
-  sources,
-  games,
-  ranking,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: FetchPlayerFilters): Promise<PlayerChartsData[]> {
+export async function fetchPlayerChartsData(filters: FetchPlayerFilters): Promise<PlayerChartsData[]> {
   let query = db
     .selectFrom('players')
     .select([
@@ -35,43 +23,11 @@ export async function fetchPlayerChartsData({
         'clutchWonPercentage',
       ),
     ])
-    .where('steam_id', '=', steamId)
+    .where('steam_id', '=', filters.steamId)
     .groupBy(['headshotPercentage', 'averageDamagePerRound', 'killDeathRatio', 'matches.date'])
     .orderBy('date', 'asc');
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (ranking !== RankingFilter.All) {
-    query = query.where('matches.is_ranked', '=', ranking === RankingFilter.Ranked);
-  }
-
-  if (sources.length > 0) {
-    query = query.where('source', 'in', sources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyPlayerFilters(query, filters);
 
   const data: PlayerChartsData[] = await query.execute();
 

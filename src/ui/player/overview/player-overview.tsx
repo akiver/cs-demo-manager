@@ -19,6 +19,7 @@ import { AverageDeathsPerRoundPanel } from 'csdm/ui/components/panels/average-de
 import { PlayerClutchesPanel } from 'csdm/ui/player/overview/player-clutches-panel';
 import { HltvRatingPanel } from 'csdm/ui/components/panels/hltv-rating-panel';
 import { PlayerCommentInput } from './player-comment-input';
+import { PlayerUtilitiesPanel } from './player-utilities-panel';
 
 export function PlayerOverview() {
   const {
@@ -39,6 +40,10 @@ export function PlayerOverview() {
     roundCount,
     roundCountAsCt,
     roundCountAsT,
+    averageBlindTime,
+    averageEnemiesFlashed,
+    averageHeGrenadeDamage,
+    averageSmokesThrownPerMatch,
   } = usePlayer();
 
   return (
@@ -70,6 +75,12 @@ export function PlayerOverview() {
             deathCount={deathCount}
           />
           <KillsPanel collateralKillCount={collateralKillCount} wallbangKillCount={wallbangKillCount} />
+          <PlayerUtilitiesPanel
+            averageBlindTime={averageBlindTime}
+            averageEnemiesFlashed={averageEnemiesFlashed}
+            averageHeGrenadeDamage={averageHeGrenadeDamage}
+            averageSmokesThrownPerMatch={averageSmokesThrownPerMatch}
+          />
           <RoundsPanel roundCount={roundCount} roundCountAsCt={roundCountAsCt} roundCountAsT={roundCountAsT} />
           <PlayerMultiKillsPanel />
           <PlayerObjectivesPanel />

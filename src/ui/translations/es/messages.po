@@ -2208,6 +2208,7 @@ msgid "T"
 msgstr ""
 
 #: src/ui/components/panels/utilities-panel.tsx
+#: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel title"
 msgid "Utilities"
 msgstr ""
@@ -6028,6 +6029,47 @@ msgstr ""
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel label"
 msgid "Competitive rank"
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgid "On average, how long enemies stay blind whilst affected by a player's flashbang."
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Avg blind time"
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Seconds"
+msgid "{averageBlindTime}s"
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgid "The average number of enemies blinded per flashbang thrown by the player. This includes only 5v5 matches, so the maximum possible value is 5."
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Enemies flashed"
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgid "On average, how much damage is dealt to enemies with HE grenades thrown by the player."
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Avg HE damages"
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgid "On average, how many smokes are thrown by the player in a single match. This includes only 5v5 matches."
+msgstr ""
+
+#: src/ui/player/overview/player-utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Avg smokes thrown"
 msgstr ""
 
 #: src/ui/player/overview/vac-panel.tsx

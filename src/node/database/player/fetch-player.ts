@@ -10,26 +10,15 @@ import { fetchPlayerRoundCount } from './fetch-player-rounds-count';
 import { fetchLastPlayerData } from './fetch-last-player-data';
 import type { PlayerProfile } from '../../../common/types/player-profile';
 import { fetchPlayerEnemyCountPerRank } from './fetch-player-enemy-count-per-rank';
-import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import { fetchMatchesTable } from '../matches/fetch-matches-table';
-import type { FetchPlayerFilters } from './fetch-player-filters';
+import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
 import { fetchPlayerCollateralKillCount } from './fetch-player-collateral-kill-count';
 import { fetchPlayerClutches } from './fetch-player-clutches';
 import { fetchPlayerPremierRankHistory } from './fetch-player-premier-rank-history';
 import { fetchPlayersTagIds } from '../tags/fetch-players-tag-ids';
+import { fetchPlayerUtilitiesStats } from './fetch-player-utilities-stats';
 
-function buildQuery({
-  steamId,
-  startDate,
-  endDate,
-  sources,
-  games,
-  gameModes,
-  ranking,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: FetchPlayerFilters) {
+function buildQuery(filters: FetchPlayerFilters) {
   const { count, avg, sum } = db.fn;
 
   let query = db
@@ -62,42 +51,10 @@ function buildQuery({
           .selectFrom('kills')
           .select(count<number>('kills.id').as('wallbangKillCount'))
           .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
-          .where('killer_steam_id', '=', steamId)
+          .where('killer_steam_id', '=', filters.steamId)
           .where('penetrated_objects', '>', 0);
 
-        if (startDate !== undefined && endDate !== undefined) {
-          wallbangsQuery = wallbangsQuery.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-        }
-
-        if (sources.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.source', 'in', sources);
-        }
-
-        if (games.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.game', 'in', games);
-        }
-
-        if (gameModes.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.game_mode_str', 'in', gameModes);
-        }
-
-        if (maxRounds.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.max_rounds', 'in', maxRounds);
-        }
-
-        if (demoTypes.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.type', 'in', demoTypes);
-        }
-
-        if (ranking !== RankingFilter.All) {
-          wallbangsQuery = wallbangsQuery.where('is_ranked', '=', ranking === RankingFilter.Ranked);
-        }
-
-        if (tagIds.length > 0) {
-          wallbangsQuery = wallbangsQuery
-            .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-            .where('checksum_tags.tag_id', 'in', tagIds);
-        }
+        wallbangsQuery = applyPlayerFilters(wallbangsQuery, filters);
 
         return wallbangsQuery.as('wallbangKillCount');
       },
@@ -112,7 +69,7 @@ function buildQuery({
       'has_private_profile as hasPrivateProfile',
       'is_community_banned as isCommunityBanned',
     ])
-    .where('players.steam_id', '=', steamId)
+    .where('players.steam_id', '=', filters.steamId)
     .groupBy([
       'players.steam_id',
       'vacBanCount',
@@ -123,39 +80,7 @@ function buildQuery({
       'isCommunityBanned',
     ]);
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (sources.length > 0) {
-    query = query.where('matches.source', 'in', sources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('matches.game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('matches.game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('matches.max_rounds', 'in', maxRounds);
-  }
-
-  if (ranking !== RankingFilter.All) {
-    query = query.where('is_ranked', '=', ranking === RankingFilter.Ranked);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyPlayerFilters(query, filters);
 
   return query;
 }
@@ -186,6 +111,7 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
     collateralKillCount,
     clutches,
     tagIds,
+    utilitiesStats,
   ] = await Promise.all([
     fetchLastPlayerData(filters),
     fetchPlayerMatchCountStats(filters),
@@ -200,6 +126,7 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
     fetchPlayerCollateralKillCount(filters),
     fetchPlayerClutches(filters),
     fetchPlayersTagIds([filters.steamId]),
+    fetchPlayerUtilitiesStats(filters),
   ]);
   player.name = lastPlayerData.name;
   player.avatar = lastPlayerData.avatar;
@@ -223,6 +150,10 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
   player.collateralKillCount = collateralKillCount;
   player.clutches = clutches;
   player.tagIds = tagIds;
+  player.averageBlindTime = utilitiesStats.averageBlindTime;
+  player.averageEnemiesFlashed = utilitiesStats.averageEnemiesFlashed;
+  player.averageHeGrenadeDamage = utilitiesStats.averageHeGrenadeDamage;
+  player.averageSmokesThrownPerMatch = utilitiesStats.averageSmokesThrownPerMatch;
 
   return player;
 }
