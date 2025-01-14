@@ -1,7 +1,6 @@
 import { sql } from 'kysely';
-import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import { db } from 'csdm/node/database/database';
-import type { FetchPlayerFilters } from './fetch-player-filters';
+import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
 import type { MapStats } from 'csdm/common/types/map-stats';
 
 type MapGlobalStats = {
@@ -27,18 +26,7 @@ type MapRoundStats = {
   roundWinCountAsT: number;
 };
 
-function buildStatsQuery({
-  steamId,
-  startDate,
-  endDate,
-  sources,
-  games,
-  ranking,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: FetchPlayerFilters) {
+function buildStatsQuery(filters: FetchPlayerFilters) {
   const { count, avg } = db.fn;
   let query = db
     .selectFrom('matches')
@@ -56,59 +44,16 @@ function buildStatsQuery({
       avg<number>('players.kast').as('kast'),
       avg<number>('players.headshot_percentage').as('headshotPercentage'),
     ])
-    .where('players.steam_id', '=', steamId)
+    .where('players.steam_id', '=', filters.steamId)
     .orderBy('matchCount', 'desc')
     .groupBy('mapName');
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (ranking !== RankingFilter.All) {
-    query = query.where('matches.is_ranked', '=', ranking === RankingFilter.Ranked);
-  }
-
-  if (sources.length > 0) {
-    query = query.where('matches.source', 'in', sources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('matches.game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyPlayerFilters(query, filters);
 
   return query;
 }
 
-function buildRoundsQuery({
-  steamId,
-  startDate,
-  endDate,
-  sources,
-  games,
-  ranking,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: FetchPlayerFilters) {
+function buildRoundsQuery(filters: FetchPlayerFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('rounds')
@@ -130,42 +75,10 @@ function buildRoundsQuery({
       sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_side = 3)`.as('roundCountAsCt'),
       count<number>('rounds.id').as('roundCount'),
     ])
-    .where('players.steam_id', '=', steamId)
+    .where('players.steam_id', '=', filters.steamId)
     .groupBy('mapName');
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (ranking !== RankingFilter.All) {
-    query = query.where('matches.is_ranked', '=', ranking === RankingFilter.Ranked);
-  }
-
-  if (sources.length > 0) {
-    query = query.where('source', 'in', sources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyPlayerFilters(query, filters);
 
   return query;
 }
