@@ -30,11 +30,11 @@ export function Ffmpeg() {
         <FfmpegBrowseButton />
       </Software>
       <div className="flex flex-col gap-y-8">
-        <div className="flex gap-x-8">
+        <div className="flex gap-8 flex-wrap">
           <AudioCodecInput />
           <FfmpegAudioBitrateSelect />
         </div>
-        <div className="flex gap-x-8">
+        <div className="flex gap-8 flex-wrap">
           <VideoContainerSelect />
           <VideoCodecInput />
           <ConstantRateFactorInput />

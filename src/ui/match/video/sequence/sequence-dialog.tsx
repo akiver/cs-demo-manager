@@ -21,6 +21,7 @@ import { ManageCamerasButtons } from './cameras/manage-cameras-buttons';
 import { PlayersColors } from './players-colors';
 import { SequenceShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-checkbox';
 import { useCanEditVideoPlayersOptions } from 'csdm/ui/match/video/use-can-edit-video-players-options';
+import { SequenceDeathNoticesDurationInput } from './sequence-death-notices-duration-input';
 
 type Props = {
   isVisible: boolean;
@@ -73,6 +74,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                   <SequencePlayerVoicesCheckbox />
                   <SequenceXRayCheckbox />
                   <SequenceShowOnlyDeathNoticesCheckbox />
+                  {window.csdm.isWindows && <SequenceDeathNoticesDurationInput />}
                   <div className="flex items-center gap-x-12">
                     <SequenceDuration />
                     <SequenceDiskSpace />

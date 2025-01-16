@@ -44,7 +44,7 @@ export function MatchVideo() {
               <CloseGameAfterRecordingCheckbox />
               <ConcatenateSequencesCheckbox />
               <DeleteRawFilesAfterEncodingCheckbox />
-              <div className="flex mt-8 gap-x-8">
+              <div className="flex flex-col mt-8 gap-8">
                 <WidthResolutionInput />
                 <HeightResolutionInput />
                 <FramerateInput />

@@ -12,7 +12,6 @@ type Options = {
   demoPath: string;
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
-  deathNoticesDuration: number;
   tickrate: number;
 };
 
@@ -37,7 +36,6 @@ export async function createCsgoJsonFileForRecording({
   demoPath,
   sequences,
   closeGameAfterRecording,
-  deathNoticesDuration,
   tickrate,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath, Game.CSGO);
@@ -58,7 +56,7 @@ export async function createCsgoJsonFileForRecording({
     }
 
     json.addExecCommand(1, `cl_draw_only_deathnotices ${sequence.showOnlyDeathNotices ? 1 : 0}`);
-    json.addExecCommand(1, `mirv_deathmsg lifetime ${deathNoticesDuration}`);
+    json.addExecCommand(1, `mirv_deathmsg lifetime ${sequence.deathNoticesDuration}`);
 
     if (sequence.playerVoicesEnabled) {
       json.enablePlayerVoices(1);

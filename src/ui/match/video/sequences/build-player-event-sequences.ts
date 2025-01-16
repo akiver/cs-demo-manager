@@ -5,6 +5,7 @@ import type { Player } from 'csdm/common/types/player';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { PlayerSequenceEvent } from './player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
+import type { VideoSettings } from 'csdm/node/settings/settings';
 
 function buildPlayersOptions(players: Player[]) {
   const options: SequencePlayerOptions[] = players.map((player) => {
@@ -26,9 +27,10 @@ type Options = {
   steamId: string;
   perspective: string;
   weapons: WeaponName[];
+  settings: VideoSettings;
 };
 
-export function buildPlayerEventSequences({ event, match, steamId, perspective, weapons }: Options) {
+export function buildPlayerEventSequences({ event, match, steamId, perspective, weapons, settings }: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
   let playerEvents = match.kills.filter((kill) => kill[steamIdKey] === steamId);
   if (weapons.length > 0) {
@@ -84,7 +86,8 @@ export function buildPlayerEventSequences({ event, match, steamId, perspective, 
       number: sequences.length + 1,
       startTick: sequenceStartTick,
       endTick: sequenceEndTick,
-      showOnlyDeathNotices: true,
+      showOnlyDeathNotices: settings.showOnlyDeathNotices,
+      deathNoticesDuration: settings.deathNoticesDuration,
       playersOptions,
       cameras: [
         {

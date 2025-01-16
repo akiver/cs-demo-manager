@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
@@ -6,6 +6,7 @@ import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { defaultSettings } from 'csdm/node/settings/default-settings';
 
 export function ConstantRateFactorInput() {
+  const id = useId();
   const { settings, updateSettings } = useVideoSettings();
   const minValue = 0;
   const maxValue = 51;
@@ -32,7 +33,7 @@ export function ConstantRateFactorInput() {
   return (
     <div className="flex flex-col gap-y-8">
       <InputLabel
-        htmlFor="crf"
+        htmlFor={id}
         helpTooltip={
           <Trans context="Tooltip">
             Impact the video quality, from 0 to 51 with 0 for the best quality resulting in a larger file
@@ -43,7 +44,7 @@ export function ConstantRateFactorInput() {
       </InputLabel>
       <InputNumber
         key={settings.ffmpegSettings.constantRateFactor}
-        id="crf"
+        id={id}
         min={minValue}
         max={maxValue}
         onBlur={onBlur}

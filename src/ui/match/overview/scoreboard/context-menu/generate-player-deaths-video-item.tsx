@@ -9,6 +9,7 @@ import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-it
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { Perspective } from 'csdm/common/types/perspective';
 import { SelectPovDialog } from 'csdm/ui/components/dialogs/select-pov-dialog';
+import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 
 type Props = {
   steamId: string;
@@ -17,6 +18,7 @@ type Props = {
 export function GeneratePlayerDeathsVideoItem({ steamId }: Props) {
   const dispatch = useDispatch();
   const match = useCurrentMatch();
+  const { settings } = useVideoSettings();
   const navigate = useNavigate();
   const { showDialog } = useDialog();
 
@@ -27,6 +29,7 @@ export function GeneratePlayerDeathsVideoItem({ steamId }: Props) {
         steamId,
         perspective,
         weapons: [],
+        settings,
       }),
     );
     setTimeout(() => {

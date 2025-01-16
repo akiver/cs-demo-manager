@@ -24,7 +24,6 @@ export type Video = {
   ffmpegSettings: FfmpegSettings;
   rawFilesFolderPath: string;
   outputFolderPath: string;
-  deathNoticesDuration: number;
   sequences: Sequence[];
   output: string;
   status: VideoStatus;
