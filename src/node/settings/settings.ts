@@ -134,7 +134,8 @@ export type VideoSettings = {
   ffmpegSettings: FfmpegSettings;
   rawFilesFolderPath: string;
   outputFolderPath: string;
-  // @platform win32 How long death notices will be displayed in seconds
+  // @platform win32 Requires HLAE
+  // How long death notices will be displayed in seconds by default. It can be overridden in the sequence settings.
   deathNoticesDuration: number;
   hlae: HlaeSettings;
 };

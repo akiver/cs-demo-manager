@@ -23,7 +23,6 @@ export function HeightResolutionInput() {
   return (
     <InputNumber
       key={settings.height}
-      id="height"
       label={<Trans context="Input label">Height</Trans>}
       min={minimalHeight}
       defaultValue={settings.height}

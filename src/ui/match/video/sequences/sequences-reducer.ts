@@ -55,30 +55,32 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       state[action.payload.demoFilePath] = action.payload.sequences;
     })
     .addCase(generatePlayerKillsSequences, (state, action) => {
-      const { match, steamId, weapons, perspective } = action.payload;
+      const { match, steamId, weapons, perspective, settings } = action.payload;
       const sequences = buildPlayerEventSequences({
         event: PlayerSequenceEvent.Kills,
         match,
         steamId,
         perspective,
         weapons,
+        settings,
       });
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerDeathsSequences, (state, action) => {
-      const { match, steamId, weapons, perspective } = action.payload;
+      const { match, steamId, weapons, perspective, settings } = action.payload;
       const sequences = buildPlayerEventSequences({
         event: PlayerSequenceEvent.Deaths,
         match,
         steamId,
         perspective,
         weapons,
+        settings,
       });
       state[match.demoFilePath] = sequences;
     })
     .addCase(generatePlayerRoundsSequences, (state, action) => {
-      const { match, steamId } = action.payload;
-      const sequences = buildPlayerRoundsSequences(match, steamId, 0, 0);
+      const { match, steamId, settings } = action.payload;
+      const sequences = buildPlayerRoundsSequences(match, steamId, 0, 0, settings);
       state[match.demoFilePath] = sequences;
     });
 });

@@ -5,7 +5,6 @@ import { HlaeBrowseButton } from 'csdm/ui/match/video/hlae/hlae-browse-button';
 import { Software } from 'csdm/ui/match/video/software';
 import { useInstalledHlaeVersion } from 'csdm/ui/match/video/hlae/use-installed-hlae-version';
 import { HlaeConfigFolderPath } from './hlae-config-folder-path';
-import { DeathNoticesDurationInput } from '../death-notices-duration-input';
 import { HlaeParameters } from './hlae-parameters';
 
 export function Hlae() {
@@ -23,7 +22,6 @@ export function Hlae() {
         <HlaeBrowseButton />
       </Software>
       <HlaeConfigFolderPath />
-      <DeathNoticesDurationInput />
       <HlaeParameters />
     </div>
   );

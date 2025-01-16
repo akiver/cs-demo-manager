@@ -5,6 +5,7 @@ import type { Player } from 'csdm/common/types/player';
 import { buildPlayerEventSequences } from './build-player-event-sequences';
 import { PlayerSequenceEvent } from './player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
+import { defaultSettings } from 'csdm/node/settings/default-settings';
 
 const baseMatch: Partial<Match> = {
   demoFilePath: '/demo/path',
@@ -39,6 +40,7 @@ describe('generate player kills sequences', () => {
       steamId: killerSteamId,
       perspective: Perspective.Player,
       weapons: [],
+      settings: defaultSettings.video,
     });
 
     expect(sequences.length).toBe(1);
@@ -82,6 +84,7 @@ describe('generate player kills sequences', () => {
       steamId: killerSteamId,
       perspective: Perspective.Player,
       weapons: [],
+      settings: defaultSettings.video,
     });
 
     expect(sequences.length).toBe(3);
@@ -120,6 +123,7 @@ describe('generate player kills sequences', () => {
       steamId: killerSteamId,
       perspective: Perspective.Player,
       weapons: [],
+      settings: defaultSettings.video,
     });
 
     expect(sequences.length).toBe(1);
@@ -151,6 +155,7 @@ describe('generate player kills sequences', () => {
       steamId: killerSteamId,
       perspective: Perspective.Player,
       weapons: [],
+      settings: defaultSettings.video,
     });
 
     expect(sequences.length).toBe(1);
@@ -177,6 +182,7 @@ describe('generate player kills sequences', () => {
       steamId: killerSteamId,
       perspective: Perspective.Player,
       weapons: [],
+      settings: defaultSettings.video,
     });
 
     expect(sequences[0].startTick).toBe(1);
@@ -200,6 +206,7 @@ describe('generate player kills sequences', () => {
       steamId: killerSteamId,
       perspective: Perspective.Player,
       weapons: [],
+      settings: defaultSettings.video,
     });
 
     expect(sequences[0].endTick).toBe(100);

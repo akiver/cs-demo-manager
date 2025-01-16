@@ -14,7 +14,6 @@ export function PortInput({ port, onChange, isDisabled = true }: Props) {
 
   return (
     <InputNumber
-      id="port-input"
       label={<Trans context="Input label">Port</Trans>}
       defaultValue={String(port)}
       onChange={onChange}

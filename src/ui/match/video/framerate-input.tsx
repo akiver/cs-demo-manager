@@ -23,7 +23,6 @@ export function FramerateInput() {
   return (
     <InputNumber
       key={settings.framerate}
-      id="framerate"
       label={<Trans context="Input label">Framerate</Trans>}
       min={1}
       defaultValue={settings.framerate}

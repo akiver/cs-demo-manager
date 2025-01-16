@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
@@ -21,6 +21,7 @@ export function KillFocusCameraPovSelect({
   onBeforeKillDelaySecondsChange,
 }: Props) {
   const { t } = useLingui();
+  const id = useId();
   const options: SelectOption<KillCameraPov>[] = [
     {
       value: 'killer',
@@ -71,12 +72,12 @@ export function KillFocusCameraPovSelect({
           />
 
           <div className="flex items-center gap-x-8">
-            <InputLabel htmlFor="before-seconds-delay">
+            <InputLabel htmlFor={id}>
               <Trans context="Input label">Seconds</Trans>
             </InputLabel>
             <div className="w-[5rem]">
               <InputNumber
-                id="before-seconds-delay"
+                id={id}
                 min={1}
                 max={30}
                 isDisabled={!hasPovSelected}

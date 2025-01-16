@@ -5572,6 +5572,10 @@ msgid "The following settings will be applied to all existing sequences."
 msgstr "The following settings will be applied to all existing sequences."
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
+msgid "Override death notices duration"
+msgstr "Override death notices duration"
+
+#: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override camera focus"
 msgstr "Override camera focus"
 

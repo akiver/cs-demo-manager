@@ -7,6 +7,7 @@ import { useCurrentMatchSequences } from './use-current-match-sequences';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { addSequence } from './sequences-actions';
 import type { SequenceForm } from '../sequence/sequence-form';
+import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 
 type Props = {
   isVisible: boolean;
@@ -17,6 +18,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   const match = useCurrentMatch();
   const sequences = useCurrentMatchSequences();
   const dispatch = useDispatch();
+  const settings = useVideoSettings();
 
   const defaultPlayersOptions: SequencePlayerOptions[] = match.players.map((player) => {
     return {
@@ -43,11 +45,13 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   let showXRay = false;
   let playerVoicesEnabled = false;
   let showOnlyDeathNotices = true;
+  let deathNoticesDuration = settings.settings.deathNoticesDuration;
   if (lastSequence !== undefined) {
     playersOptions = lastSequence.playersOptions;
     showXRay = lastSequence.showXRay;
     playerVoicesEnabled = lastSequence.playerVoicesEnabled;
     showOnlyDeathNotices = lastSequence.showOnlyDeathNotices;
+    deathNoticesDuration = lastSequence.deathNoticesDuration;
   }
 
   const tickrate = Math.round(match.tickrate);
@@ -57,6 +61,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     startTick: firstRound ? firstRound.freezetimeEndTick : tickrate,
     endTick: firstRound ? firstRound.endTick : tickrate + 10,
     showOnlyDeathNotices,
+    deathNoticesDuration,
     playersOptions,
     cameras: [],
     showXRay,

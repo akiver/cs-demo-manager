@@ -9,7 +9,6 @@ type Options = {
   demoPath: string;
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
-  deathNoticesDuration: number;
   tickrate: number;
   playerSlots: Record<string, number>;
 };
@@ -21,7 +20,6 @@ export async function createCs2JsonActionsFileForRecording({
   closeGameAfterRecording,
   tickrate,
   playerSlots,
-  deathNoticesDuration,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath, Game.CS2);
 
@@ -43,7 +41,7 @@ export async function createCs2JsonActionsFileForRecording({
     }
 
     json.addExecCommand(1, `cl_draw_only_deathnotices ${sequence.showOnlyDeathNotices ? 1 : 0}`);
-    json.addExecCommand(1, `mirv_deathmsg lifetime ${deathNoticesDuration}`);
+    json.addExecCommand(1, `mirv_deathmsg lifetime ${sequence.deathNoticesDuration}`);
 
     if (sequence.playerVoicesEnabled) {
       json.enablePlayerVoices(1);

@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
-import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
-import { defaultSettings } from 'csdm/node/settings/default-settings';
 
-export function DeathNoticesDurationInput() {
-  const { settings, updateSettings } = useVideoSettings();
-  const [duration, setDuration] = useState<string>(String(settings.deathNoticesDuration));
+type Props = {
+  value: number;
+  onBlur?: (value: number) => void;
+};
 
-  const onBlur = async () => {
-    let newDuration = Number(duration);
-    if (duration === '') {
-      newDuration = defaultSettings.video.deathNoticesDuration;
-      setDuration(String(newDuration));
-    }
+export function DeathNoticesDurationInput({ value, onBlur }: Props) {
+  const [duration, setDuration] = useState<string>(String(value));
 
-    await updateSettings({
-      deathNoticesDuration: newDuration,
-    });
+  const handleOnBlur = () => {
+    onBlur?.(parseInt(duration, 10));
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,12 +20,12 @@ export function DeathNoticesDurationInput() {
 
   return (
     <InputNumber
-      id="death-notices-duration"
+      name="death-notices-duration"
       label={<Trans>Death notices duration (seconds)</Trans>}
       min={0}
       onChange={onChange}
       value={duration}
-      onBlur={onBlur}
+      onBlur={handleOnBlur}
     />
   );
 }

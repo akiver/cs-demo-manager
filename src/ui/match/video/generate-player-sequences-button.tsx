@@ -23,6 +23,7 @@ import { Perspective } from 'csdm/common/types/perspective';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { assertNever } from 'csdm/common/assert-never';
+import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 
 type SecondsInputProps = {
   label: ReactNode;
@@ -80,6 +81,7 @@ function getVisibleWeapons(event: PlayerSequenceEvent, steamId: string | undefin
 function SelectPlayerDialog() {
   const dispatch = useDispatch();
   const match = useCurrentMatch();
+  const { settings } = useVideoSettings();
   const { hideDialog } = useDialog();
   const options: SelectOption[] = match.players.map((player) => {
     return {
@@ -122,6 +124,7 @@ function SelectPlayerDialog() {
             perspective,
             steamId: selectedSteamId,
             weapons: selectedWeapons,
+            settings,
           }),
         );
         break;
@@ -132,6 +135,7 @@ function SelectPlayerDialog() {
             perspective,
             steamId: selectedSteamId,
             weapons: selectedWeapons,
+            settings,
           }),
         );
         break;
@@ -140,6 +144,7 @@ function SelectPlayerDialog() {
           generatePlayerRoundsSequences({
             match,
             steamId: selectedSteamId,
+            settings,
           }),
         );
         break;

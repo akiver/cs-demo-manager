@@ -10,5 +10,7 @@ export type Sequence = {
   playersOptions: SequencePlayerOptions[];
   cameras: CameraFocus[];
   playerVoicesEnabled: boolean;
+  // @platform win32 Requires HLAE
+  deathNoticesDuration: number;
   cfg?: string;
 };

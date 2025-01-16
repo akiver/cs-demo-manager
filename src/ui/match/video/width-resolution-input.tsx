@@ -23,7 +23,6 @@ export function WidthResolutionInput() {
   return (
     <InputNumber
       key={settings.width}
-      id="width"
       label={<Trans context="Input label">Width</Trans>}
       onBlur={onBlur}
       defaultValue={settings.width}

@@ -10,5 +10,7 @@ export type SequenceForm = {
   showXRay: boolean;
   showOnlyDeathNotices: boolean;
   playerVoicesEnabled: boolean;
+  // @platform win32 Requires HLAE
+  deathNoticesDuration: number;
   cfg?: string;
 };

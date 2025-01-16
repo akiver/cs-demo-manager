@@ -53,7 +53,6 @@ type Parameters = {
   ffmpegSettings: FfmpegSettings;
   rawFilesFolderPath: string;
   outputFolderPath: string;
-  deathNoticesDuration: number;
   demoPath: string;
   sequences: Sequence[];
   signal: AbortSignal;
@@ -190,7 +189,6 @@ export async function generateVideo(parameters: Parameters) {
     height,
     closeGameAfterRecording,
     tickrate,
-    deathNoticesDuration,
     game,
   } = parameters;
 
@@ -209,7 +207,6 @@ export async function generateVideo(parameters: Parameters) {
       sequences,
       closeGameAfterRecording,
       tickrate,
-      deathNoticesDuration,
     });
   } else {
     const playerSlots = await fetchMatchPlayersSlots(parameters.checksum);
@@ -218,7 +215,6 @@ export async function generateVideo(parameters: Parameters) {
       demoPath,
       sequences,
       closeGameAfterRecording,
-      deathNoticesDuration,
       tickrate,
       playerSlots,
     });

@@ -3,12 +3,14 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { Perspective } from 'csdm/common/types/perspective';
 import type { WeaponName } from '@akiver/cs-demo-analyzer';
+import type { VideoSettings } from 'csdm/node/settings/settings';
 
 type GeneratePlayerEventPayload = {
   steamId: string;
   match: Match;
   perspective: Perspective;
   weapons: WeaponName[];
+  settings: VideoSettings;
 };
 
 export const addSequence = createAction<{ demoFilePath: string; sequence: Sequence }>('match/video/sequences/add');
@@ -28,6 +30,6 @@ export const generatePlayerKillsSequences = createAction<GeneratePlayerEventPayl
 export const generatePlayerDeathsSequences = createAction<GeneratePlayerEventPayload>(
   'match/video/sequences/generatePlayerDeaths',
 );
-export const generatePlayerRoundsSequences = createAction<{ steamId: string; match: Match }>(
+export const generatePlayerRoundsSequences = createAction<{ steamId: string; match: Match; settings: VideoSettings }>(
   'match/video/sequences/generatePlayerRounds',
 );
