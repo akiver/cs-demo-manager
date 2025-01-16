@@ -353,6 +353,32 @@ globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestIni
   }
 };
 
+if (IS_DEV) {
+  const originalSetTimeout = globalThis.setTimeout;
+  // @ts-ignore Undici uses Node Timeout since v6.20.0, we mimic it in dev mode as the server process runs in a
+  // BrowserWindow, not in a Node process.
+  globalThis.setTimeout = (callback: (...args: unknown[]) => void, ms: number, ...args: unknown[]): NodeJS.Timeout => {
+    const wrappedCallback = () => {
+      callback.apply(this, args);
+    };
+
+    const timeoutId = originalSetTimeout.call(window, wrappedCallback, ms ?? 0);
+    const timeout: NodeJS.Timeout = {
+      hasRef: () => true,
+      ref: () => timeout,
+      refresh: () => timeout,
+      unref: () => timeout,
+      [Symbol.toPrimitive]: () => Number(timeoutId),
+      [Symbol.dispose]: () => {
+        clearTimeout(timeoutId);
+        return timeoutId;
+      },
+    };
+
+    return timeout;
+  };
+}
+
 export const server = new WebSocketServer();
 
 process.on('message', function (message) {
