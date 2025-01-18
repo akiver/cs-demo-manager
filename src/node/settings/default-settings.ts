@@ -67,8 +67,10 @@ export const defaultSettings: Settings = {
     closeGameAfterRecording: true,
     concatenateSequences: false,
     deleteRawFilesAfterEncoding: true,
+    showXRay: true,
     showOnlyDeathNotices: true,
     deathNoticesDuration: 5,
+    playerVoicesEnabled: true,
     encoderSoftware: EncoderSoftware.FFmpeg,
     ffmpegSettings: {
       audioBitrate: 256,

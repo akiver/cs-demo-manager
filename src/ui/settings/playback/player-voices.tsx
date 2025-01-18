@@ -10,12 +10,10 @@ export function PlayerVoices() {
   const { playerVoicesEnabled } = useWatchSettings();
   const updateSettings = useUpdateSettings();
 
-  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = event.target.checked;
-
+  const onChange = async (isChecked: boolean) => {
     await updateSettings({
       playback: {
-        playerVoicesEnabled: checked,
+        playerVoicesEnabled: isChecked,
       },
     });
   };

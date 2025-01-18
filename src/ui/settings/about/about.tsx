@@ -52,11 +52,10 @@ export function About() {
             interactiveComponent={
               <Switch
                 isChecked={autoDownloadUpdates}
-                onChange={(event) => {
-                  const checked = event.target.checked;
-                  window.csdm.toggleAutoDownloadUpdates(checked);
+                onChange={(isChecked: boolean) => {
+                  window.csdm.toggleAutoDownloadUpdates(isChecked);
                   updateSettings({
-                    autoDownloadUpdates: checked,
+                    autoDownloadUpdates: isChecked,
                   });
                 }}
               />

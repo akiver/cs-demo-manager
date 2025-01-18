@@ -6,6 +6,8 @@ const v6: Migration = {
   run: (settings: Settings) => {
     settings.download.download5EPlayDemosAtStartup = true;
     settings.download.download5EPlayDemosInBackground = true;
+    settings.video.showXRay = true;
+    settings.video.playerVoicesEnabled = true;
 
     return Promise.resolve(settings);
   },

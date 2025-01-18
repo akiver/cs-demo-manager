@@ -9,11 +9,10 @@ export function AutoDownloadFaceitDemosBackground() {
   const { download } = useSettings();
   const updateSettings = useUpdateSettings();
 
-  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = event.target.checked;
+  const onChange = async (isChecked: boolean) => {
     await updateSettings({
       download: {
-        downloadFaceitDemosInBackground: checked,
+        downloadFaceitDemosInBackground: isChecked,
       },
     });
   };
