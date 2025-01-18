@@ -9,12 +9,11 @@ export function LowlightsIncludeDamages() {
   const { lowlights } = useWatchSettings();
   const updateSettings = useUpdateSettings();
 
-  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = event.target.checked;
+  const onChange = async (isChecked: boolean) => {
     await updateSettings({
       playback: {
         lowlights: {
-          includeDamages: checked,
+          includeDamages: isChecked,
         },
       },
     });

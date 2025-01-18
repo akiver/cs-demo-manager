@@ -130,7 +130,9 @@ export type VideoSettings = {
   deleteRawFilesAfterEncoding: boolean;
   closeGameAfterRecording: boolean;
   showOnlyDeathNotices: boolean;
+  showXRay: boolean;
   concatenateSequences: boolean;
+  playerVoicesEnabled: boolean;
   ffmpegSettings: FfmpegSettings;
   rawFilesFolderPath: string;
   outputFolderPath: string;

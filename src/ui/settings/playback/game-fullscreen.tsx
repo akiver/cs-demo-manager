@@ -9,12 +9,10 @@ export function GameFullscreen() {
   const { fullscreen } = useWatchSettings();
   const updateSettings = useUpdateSettings();
 
-  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = event.target.checked;
-
+  const onChange = async (isChecked: boolean) => {
     await updateSettings({
       playback: {
-        fullscreen: checked,
+        fullscreen: isChecked,
       },
     });
   };

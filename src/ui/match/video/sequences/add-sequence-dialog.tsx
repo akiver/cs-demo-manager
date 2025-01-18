@@ -42,9 +42,9 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   const sequenceNumber = sequences.length + 1;
   const lastSequence = sequences.length > 0 ? sequences[sequences.length - 1] : undefined;
   let playersOptions = defaultPlayersOptions;
-  let showXRay = false;
-  let playerVoicesEnabled = false;
-  let showOnlyDeathNotices = true;
+  let showXRay = settings.settings.showXRay;
+  let playerVoicesEnabled = settings.settings.playerVoicesEnabled;
+  let showOnlyDeathNotices = settings.settings.showOnlyDeathNotices;
   let deathNoticesDuration = settings.settings.deathNoticesDuration;
   if (lastSequence !== undefined) {
     playersOptions = lastSequence.playersOptions;

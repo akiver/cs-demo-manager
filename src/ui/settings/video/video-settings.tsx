@@ -3,6 +3,7 @@ import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { HlaeConfigFolderPath } from './hlae/hlae-config-folder-path';
 import { FfmpegLocation } from './ffmpeg/ffmpeg-location';
 import { HlaeLocation } from './hlae/hlae-location';
+import { DefaultVideoRecordingSettings } from './recording/default-video-recording-settings';
 
 export function VideoSettings() {
   return (
@@ -21,6 +22,7 @@ export function VideoSettings() {
           <p className="text-subtitle mb-8">FFmpeg</p>
           <FfmpegLocation />
         </div>
+        <DefaultVideoRecordingSettings />
       </div>
     </SettingsView>
   );

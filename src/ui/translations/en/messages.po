@@ -5049,7 +5049,7 @@ msgid "Height"
 msgstr "Height"
 
 #: src/ui/match/video/height-resolution-input.tsx
-#: src/ui/settings/playback/game-height.tsx
+#: src/ui/settings/shared/game-height-input.tsx
 msgctxt "Input placeholder"
 msgid "Height"
 msgstr "Height"
@@ -5663,7 +5663,7 @@ msgid "Width"
 msgstr "Width"
 
 #: src/ui/match/video/width-resolution-input.tsx
-#: src/ui/settings/playback/game-width.tsx
+#: src/ui/settings/shared/game-width-input.tsx
 msgctxt "Input placeholder"
 msgid "Width"
 msgstr "Width"
@@ -7023,24 +7023,6 @@ msgctxt "Settings title"
 msgid "Fullscreen"
 msgstr "Fullscreen"
 
-#: src/ui/settings/playback/game-height.tsx
-msgid "Set the game height resolution"
-msgstr "Set the game height resolution"
-
-#: src/ui/settings/playback/game-height.tsx
-msgctxt "Settings title"
-msgid "Height"
-msgstr "Height"
-
-#: src/ui/settings/playback/game-width.tsx
-msgid "Set the game width resolution"
-msgstr "Set the game width resolution"
-
-#: src/ui/settings/playback/game-width.tsx
-msgctxt "Settings title"
-msgid "Width"
-msgstr "Width"
-
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
 msgstr "Include health damages above 40HP that did not result into a player's kill in highlights"
@@ -7118,6 +7100,7 @@ msgid "Doesn't work with Valve Matchmaking demos as voice data are not available
 msgstr "Doesn't work with Valve Matchmaking demos as voice data are not available!"
 
 #: src/ui/settings/playback/player-voices.tsx
+#: src/ui/settings/video/recording/recording-player-voices.tsx
 msgctxt "Settings title"
 msgid "Player voices"
 msgstr "Player voices"
@@ -7197,6 +7180,24 @@ msgstr "Database"
 #: src/ui/settings/settings-tabs.tsx
 msgid "About"
 msgstr "About"
+
+#: src/ui/settings/shared/game-height-input.tsx
+msgid "Set the game height resolution."
+msgstr "Set the game height resolution."
+
+#: src/ui/settings/shared/game-height-input.tsx
+msgctxt "Settings title"
+msgid "Height"
+msgstr "Height"
+
+#: src/ui/settings/shared/game-width-input.tsx
+msgid "Set the game width resolution."
+msgstr "Set the game width resolution."
+
+#: src/ui/settings/shared/game-width-input.tsx
+msgctxt "Settings title"
+msgid "Width"
+msgstr "Width"
 
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "The name is already taken"
@@ -7325,6 +7326,50 @@ msgstr "Enable config folder"
 #: src/ui/settings/video/hlae/hlae-location.tsx
 msgid "Invalid HLAE executable"
 msgstr "Invalid HLAE executable"
+
+#: src/ui/settings/video/recording/default-video-recording-settings.tsx
+msgid "Default recording settings"
+msgstr "Default recording settings"
+
+#: src/ui/settings/video/recording/recording-death-notices-duration.tsx
+msgctxt "Input placeholder"
+msgid "Duration"
+msgstr "Duration"
+
+#: src/ui/settings/video/recording/recording-death-notices-duration.tsx
+msgid "How long death notices are displayed during recording in seconds."
+msgstr "How long death notices are displayed during recording in seconds."
+
+#: src/ui/settings/video/recording/recording-death-notices-duration.tsx
+msgctxt "Settings title"
+msgid "Death notices duration"
+msgstr "Death notices duration"
+
+#: src/ui/settings/video/recording/recording-player-voices.tsx
+msgid "Listen to player voices during recording."
+msgstr "Listen to player voices during recording."
+
+#: src/ui/settings/video/recording/recording-player-voices.tsx
+msgid "Player voices are not available in Valve Matchmaking demos!"
+msgstr "Player voices are not available in Valve Matchmaking demos!"
+
+#: src/ui/settings/video/recording/recording-show-only-death-notices.tsx
+msgid "Show only death notices during recording."
+msgstr "Show only death notices during recording."
+
+#: src/ui/settings/video/recording/recording-show-only-death-notices.tsx
+msgctxt "Settings title"
+msgid "Show only death notices"
+msgstr "Show only death notices"
+
+#: src/ui/settings/video/recording/recording-x-ray.tsx
+msgid "See players through walls during recording."
+msgstr "See players through walls during recording."
+
+#: src/ui/settings/video/recording/recording-x-ray.tsx
+msgctxt "Settings title"
+msgid "Show X-Ray"
+msgstr "Show X-Ray"
 
 #: src/ui/team/load-team-error.tsx
 msgid "This team is not in any analyzed demos."

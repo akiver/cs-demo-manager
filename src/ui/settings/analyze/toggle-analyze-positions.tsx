@@ -14,11 +14,10 @@ export function ToggleAnalyzePositions() {
       interactiveComponent={
         <Switch
           isChecked={analyzePositions}
-          onChange={async (event: React.ChangeEvent<HTMLInputElement>) => {
-            const checked = event.target.checked;
+          onChange={async (isChecked: boolean) => {
             await updateSettings({
               analyze: {
-                analyzePositions: checked,
+                analyzePositions: isChecked,
               },
             });
           }}

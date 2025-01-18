@@ -11,8 +11,8 @@ type Props = {
 export function IncludeSubFoldersSwitch({ folder }: Props) {
   const toggleFolderSubFoldersInclusion = useToggleFolderSubFoldersInclusion();
 
-  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    await toggleFolderSubFoldersInclusion(folder.path, event.target.checked);
+  const onChange = async (isChecked: boolean) => {
+    await toggleFolderSubFoldersInclusion(folder.path, isChecked);
   };
 
   const id = `include-sub-folders-${folder.path}`;

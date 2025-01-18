@@ -14,10 +14,10 @@ export function ToggleIgnoreBanBeforeFirstSeen() {
       interactiveComponent={
         <Switch
           isChecked={ignoreBanBeforeFirstSeen}
-          onChange={async (event) => {
+          onChange={async (isChecked: boolean) => {
             await updateSettings({
               ban: {
-                ignoreBanBeforeFirstSeen: event.target.checked,
+                ignoreBanBeforeFirstSeen: isChecked,
               },
             });
           }}
