@@ -2,13 +2,8 @@ import path from 'node:path';
 import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { getSettings } from 'csdm/node/settings/get-settings';
-import { getDefaultHlaeInstallationFolderPath } from '../hlae/hlae-location';
 
 export function getDefaultFfmpegInstallationPath() {
-  if (isWindows) {
-    return path.join(getDefaultHlaeInstallationFolderPath(), 'ffmpeg');
-  }
-
   return path.join(getAppFolderPath(), 'ffmpeg');
 }
 

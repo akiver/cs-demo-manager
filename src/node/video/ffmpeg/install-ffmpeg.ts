@@ -1,6 +1,5 @@
 import fs from 'fs-extra';
 import path from 'node:path';
-import { getDefaultHlaeInstallationFolderPath } from 'csdm/node/video/hlae/hlae-location';
 import { downloadAndExtractZipArchive } from 'csdm/node/filesystem/download-and-extract-zip-archive';
 import { fetchLastFfmpegVersion } from './fetch-last-ffmpeg-version';
 import { downloadAndExtractXzArchive } from 'csdm/node/filesystem/download-and-extract-xz-archive';
@@ -8,6 +7,7 @@ import { isWindows } from 'csdm/node/os/is-windows';
 import { isMac } from 'csdm/node/os/is-mac';
 import { isLinux } from 'csdm/node/os/is-linux';
 import { getDefaultFfmpegInstallationPath, getDefaultFfmpegExecutablePath } from './ffmpeg-location';
+import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 
 function getArchiveName(version: string) {
   switch (true) {
@@ -37,7 +37,7 @@ export async function installFfmpeg(): Promise<string> {
   const archiveUrl = getArchiveUrl(archiveName);
 
   const ffmpegFolderPath = getDefaultFfmpegInstallationPath();
-  const extractArchivePath = isWindows ? getDefaultHlaeInstallationFolderPath() : ffmpegFolderPath;
+  const extractArchivePath = isWindows ? getAppFolderPath() : ffmpegFolderPath;
 
   if (isLinux) {
     await downloadAndExtractXzArchive(archiveUrl, extractArchivePath);

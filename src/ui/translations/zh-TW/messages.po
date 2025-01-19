@@ -4911,10 +4911,6 @@ msgid "Input parameters"
 msgstr ""
 
 #: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
-msgid "You must install HLAE first"
-msgstr ""
-
-#: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
 msgid "Installing FFmpeg…"
 msgstr ""
 
