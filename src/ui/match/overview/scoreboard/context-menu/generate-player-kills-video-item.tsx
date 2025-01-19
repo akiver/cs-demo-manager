@@ -1,15 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
 import { Trans } from '@lingui/react/macro';
-import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { generatePlayerKillsSequences } from 'csdm/ui/match/video/sequences/sequences-actions';
-import { buildMatchVideoPath } from 'csdm/ui/routes-paths';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { SelectPovDialog } from 'csdm/ui/components/dialogs/select-pov-dialog';
-import { Perspective } from 'csdm/common/types/perspective';
-import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { GeneratePlayerEventsDialog } from './generate-player-events-dialog';
 
 type Props = {
   steamId: string;
@@ -17,34 +12,16 @@ type Props = {
 
 export function GeneratePlayerKillsVideoItem({ steamId }: Props) {
   const dispatch = useDispatch();
-  const match = useCurrentMatch();
-  const { settings } = useVideoSettings();
-  const navigate = useNavigate();
   const { showDialog } = useDialog();
-
-  const generateSequences = (perspective: Perspective) => {
-    dispatch(
-      generatePlayerKillsSequences({
-        match,
-        steamId,
-        perspective,
-        weapons: [],
-        settings,
-      }),
-    );
-    setTimeout(() => {
-      navigate(buildMatchVideoPath(match.checksum));
-    }, 300);
-  };
 
   const onClick = () => {
     showDialog(
-      <SelectPovDialog
-        onPlayerClick={() => {
-          generateSequences(Perspective.Player);
-        }}
-        onEnemyClick={() => {
-          generateSequences(Perspective.Enemy);
+      <GeneratePlayerEventsDialog
+        steamId={steamId}
+        secondsBeforeLabel={<Trans context="Input label">Seconds before each kill to start the sequence</Trans>}
+        secondsAfterLabel={<Trans context="Input label">Seconds after each kill to stop the sequence</Trans>}
+        generateSequences={(payload) => {
+          dispatch(generatePlayerKillsSequences(payload));
         }}
       />,
     );

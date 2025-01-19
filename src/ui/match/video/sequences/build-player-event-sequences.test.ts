@@ -41,6 +41,8 @@ describe('generate player kills sequences', () => {
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
+      startSecondsBeforeEvent: 5,
+      endSecondsAfterEvent: 2,
     });
 
     expect(sequences.length).toBe(1);
@@ -85,6 +87,8 @@ describe('generate player kills sequences', () => {
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
+      startSecondsBeforeEvent: 5,
+      endSecondsAfterEvent: 2,
     });
 
     expect(sequences.length).toBe(3);
@@ -124,6 +128,8 @@ describe('generate player kills sequences', () => {
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
+      startSecondsBeforeEvent: 5,
+      endSecondsAfterEvent: 2,
     });
 
     expect(sequences.length).toBe(1);
@@ -156,6 +162,8 @@ describe('generate player kills sequences', () => {
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
+      startSecondsBeforeEvent: 5,
+      endSecondsAfterEvent: 2,
     });
 
     expect(sequences.length).toBe(1);
@@ -183,6 +191,8 @@ describe('generate player kills sequences', () => {
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
+      startSecondsBeforeEvent: 5,
+      endSecondsAfterEvent: 2,
     });
 
     expect(sequences[0].startTick).toBe(1);
@@ -207,6 +217,8 @@ describe('generate player kills sequences', () => {
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
+      startSecondsBeforeEvent: 5,
+      endSecondsAfterEvent: 2,
     });
 
     expect(sequences[0].endTick).toBe(100);

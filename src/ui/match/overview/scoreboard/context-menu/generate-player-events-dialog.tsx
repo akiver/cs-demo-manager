@@ -1,42 +1,51 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import React, { useState, type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
-import { generatePlayerRoundsSequences } from 'csdm/ui/match/video/sequences/sequences-actions';
-import { buildMatchVideoPath } from 'csdm/ui/routes-paths';
-import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
-import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { useNavigate } from 'react-router';
+import { Perspective } from 'csdm/common/types/perspective';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
+import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
-import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
-import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
+import { PerspectiveSelect } from 'csdm/ui/components/inputs/select/perspective-select';
 import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
+import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
+import { buildMatchVideoPath } from 'csdm/ui/routes-paths';
+import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
+import type { GeneratePlayerEventPayload } from 'csdm/ui/match/video/sequences/sequences-actions';
 
-type GeneratePlayerRoundsDialogProps = {
+type Props = {
   steamId: string;
+  generateSequences: (payload: GeneratePlayerEventPayload) => void;
+  secondsBeforeLabel: ReactNode;
+  secondsAfterLabel: ReactNode;
 };
 
-function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps) {
+export function GeneratePlayerEventsDialog({
+  steamId,
+  generateSequences,
+  secondsBeforeLabel,
+  secondsAfterLabel,
+}: Props) {
   const { hideDialog } = useDialog();
-  const dispatch = useDispatch();
   const match = useCurrentMatch();
   const navigate = useNavigate();
   const { settings } = useVideoSettings();
-  const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(0);
+  const [perspective, setPerspective] = useState<Perspective>(Perspective.Player);
+  const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(2);
   const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(2);
 
   const submit = () => {
     hideDialog();
-    dispatch(
-      generatePlayerRoundsSequences({
-        match,
-        steamId,
-        settings,
-        startSecondsBeforeEvent,
-        endSecondsAfterEvent,
-      }),
-    );
+    generateSequences({
+      match,
+      steamId,
+      perspective,
+      weapons: [],
+      settings,
+      startSecondsBeforeEvent,
+      endSecondsAfterEvent,
+    });
+
     setTimeout(() => {
       navigate(buildMatchVideoPath(match.checksum));
     }, 300);
@@ -49,17 +58,17 @@ function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps
           <Trans context="Dialog title">Options</Trans>
         </DialogTitle>
       </DialogHeader>
+
       <DialogContent>
         <div className="flex flex-col gap-y-8">
+          <PerspectiveSelect perspective={perspective} onChange={setPerspective} />
           <SecondsInput
-            label={<Trans context="Input label">Seconds before the round starts to start the sequence</Trans>}
+            label={secondsBeforeLabel}
             defaultValue={startSecondsBeforeEvent}
             onChange={setStartSecondsBeforeEvent}
           />
           <SecondsInput
-            label={
-              <Trans context="Input label">Seconds after the round ends or the player dies to stop the sequence</Trans>
-            }
+            label={secondsAfterLabel}
             defaultValue={endSecondsAfterEvent}
             onChange={setEndSecondsAfterEvent}
           />
@@ -72,23 +81,5 @@ function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps
         <CancelButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>
-  );
-}
-
-type Props = {
-  steamId: string;
-};
-
-export function GeneratePlayerRoundsVideoItem({ steamId }: Props) {
-  const { showDialog } = useDialog();
-
-  const onClick = () => {
-    showDialog(<GeneratePlayerRoundsDialog steamId={steamId} />);
-  };
-
-  return (
-    <ContextMenuItem onClick={onClick}>
-      <Trans context="Context menu">Rounds</Trans>
-    </ContextMenuItem>
   );
 }

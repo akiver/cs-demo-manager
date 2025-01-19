@@ -28,9 +28,20 @@ type Options = {
   perspective: string;
   weapons: WeaponName[];
   settings: VideoSettings;
+  startSecondsBeforeEvent: number;
+  endSecondsAfterEvent: number;
 };
 
-export function buildPlayerEventSequences({ event, match, steamId, perspective, weapons, settings }: Options) {
+export function buildPlayerEventSequences({
+  event,
+  match,
+  steamId,
+  perspective,
+  weapons,
+  settings,
+  startSecondsBeforeEvent,
+  endSecondsAfterEvent,
+}: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
   let playerEvents = match.kills.filter((kill) => kill[steamIdKey] === steamId);
   if (weapons.length > 0) {
@@ -45,8 +56,6 @@ export function buildPlayerEventSequences({ event, match, steamId, perspective, 
 
   const minimumSecondsBetweenTwoEvents = 2;
   const maxSecondsBetweenEvents = 10;
-  const startSecondsBeforeEvent = 5;
-  const endSecondsAfterEvent = 2;
 
   const playersOptions = buildPlayersOptions(match.players);
   const sequences: Sequence[] = [];
@@ -88,16 +97,16 @@ export function buildPlayerEventSequences({ event, match, steamId, perspective, 
       endTick: sequenceEndTick,
       showOnlyDeathNotices: settings.showOnlyDeathNotices,
       deathNoticesDuration: settings.deathNoticesDuration,
+      showXRay: settings.showXRay,
+      playerVoicesEnabled: settings.playerVoicesEnabled,
       playersOptions,
       cameras: [
         {
           tick: sequenceStartTick,
           playerSteamId: steamIdToFocus,
-          playerName: match.players.find((player) => player.steamId === steamId)?.name ?? '',
+          playerName: match.players.find((player) => player.steamId === steamIdToFocus)?.name ?? '',
         },
       ],
-      showXRay: false,
-      playerVoicesEnabled: false,
     });
   }
 

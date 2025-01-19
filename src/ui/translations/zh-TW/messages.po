@@ -1410,6 +1410,19 @@ msgctxt "Opening duel result filter category"
 msgid "Opening duel result"
 msgstr ""
 
+#: src/ui/components/inputs/select/perspective-select.tsx
+msgid "Player"
+msgstr ""
+
+#: src/ui/components/inputs/select/perspective-select.tsx
+msgid "Enemy"
+msgstr ""
+
+#: src/ui/components/inputs/select/perspective-select.tsx
+msgctxt "Select label"
+msgid "Point of view"
+msgstr ""
+
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
 msgid "Players"
@@ -2677,6 +2690,8 @@ msgid "Unknown"
 msgstr ""
 
 #: src/ui/dialogs/confirm-dialog.tsx
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-events-dialog.tsx
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
 #: src/ui/match/video/generate-player-sequences-button.tsx
 #: src/ui/match/video/sequence/match-timeline/select-seconds-dialog.tsx
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
@@ -4140,13 +4155,53 @@ msgid "Steam ID"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-deaths-video-item.tsx
+msgctxt "Input label"
+msgid "Seconds before each death to start the sequence"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-deaths-video-item.tsx
+msgctxt "Input label"
+msgid "Seconds after each death to stop the sequence"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-deaths-video-item.tsx
 msgctxt "Context menu"
 msgid "Deaths"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-events-dialog.tsx
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
+msgctxt "Dialog title"
+msgid "Options"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Seconds before each kill to start the sequence"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Seconds after each kill to stop the sequence"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
 msgid "Kills"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Seconds before the round starts to start the sequence"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Seconds after the round ends or the player dies to stop the sequence"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
@@ -4934,16 +4989,6 @@ msgid "Round"
 msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
-msgctxt "Input label"
-msgid "Seconds to start before the round starts"
-msgstr ""
-
-#: src/ui/match/video/generate-player-sequences-button.tsx
-msgctxt "Input label"
-msgid "Seconds to stop after the round ends"
-msgstr ""
-
-#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
 msgid "POV"
 msgstr ""
@@ -4956,16 +5001,6 @@ msgstr ""
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Enemy"
-msgstr ""
-
-#: src/ui/match/video/generate-player-sequences-button.tsx
-msgctxt "Input label"
-msgid "Seconds to focus the camera on the killer before each kill"
-msgstr ""
-
-#: src/ui/match/video/generate-player-sequences-button.tsx
-msgctxt "Input label"
-msgid "Seconds to focus the camera on the enemy before each kill"
 msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx

@@ -1,4 +1,4 @@
-import React, { useId, useState, type ReactNode } from 'react';
+import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
@@ -20,47 +20,9 @@ import type { Match } from 'csdm/common/types/match';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { Perspective } from 'csdm/common/types/perspective';
-import { InputNumber } from 'csdm/ui/components/inputs/number-input';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { assertNever } from 'csdm/common/assert-never';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
-
-type SecondsInputProps = {
-  label: ReactNode;
-  defaultValue: number;
-  onChange: (value: number) => void;
-};
-
-function SecondsInput({ label, defaultValue, onChange }: SecondsInputProps) {
-  const id = useId();
-  const min = 0;
-  const max = 30;
-
-  return (
-    <div className="flex flex-col gap-y-8">
-      <InputLabel htmlFor={id}>{label}</InputLabel>
-      <div className="w-[5rem]">
-        <InputNumber
-          id={id}
-          min={min}
-          max={max}
-          placeholder={String(2)}
-          defaultValue={defaultValue}
-          onChange={(event) => {
-            if (!(event.target instanceof HTMLInputElement)) {
-              return;
-            }
-
-            const value = Number(event.target.value);
-            if (value >= min && value <= max) {
-              onChange(value);
-            }
-          }}
-        />
-      </div>
-    </div>
-  );
-}
+import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
 
 function getVisibleWeapons(event: PlayerSequenceEvent, steamId: string | undefined, match: Match) {
   if (!steamId) {
@@ -109,7 +71,7 @@ function SelectPlayerDialog() {
   const [selectedWeapons, setSelectedWeapons] = useState<WeaponName[]>(visibleWeapons);
   const [perspective, setPerspective] = useState<Perspective>(Perspective.Player);
   const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(2);
-  const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(0);
+  const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(2);
 
   const onConfirm = () => {
     if (!selectedSteamId) {
@@ -125,6 +87,8 @@ function SelectPlayerDialog() {
             steamId: selectedSteamId,
             weapons: selectedWeapons,
             settings,
+            startSecondsBeforeEvent,
+            endSecondsAfterEvent,
           }),
         );
         break;
@@ -136,6 +100,8 @@ function SelectPlayerDialog() {
             steamId: selectedSteamId,
             weapons: selectedWeapons,
             settings,
+            startSecondsBeforeEvent,
+            endSecondsAfterEvent,
           }),
         );
         break;
@@ -145,6 +111,8 @@ function SelectPlayerDialog() {
             match,
             steamId: selectedSteamId,
             settings,
+            startSecondsBeforeEvent,
+            endSecondsAfterEvent,
           }),
         );
         break;
@@ -161,13 +129,15 @@ function SelectPlayerDialog() {
         <>
           <SecondsInput
             key="round-start-delay"
-            label={<Trans context="Input label">Seconds to start before the round starts</Trans>}
-            defaultValue={endSecondsAfterEvent}
+            label={<Trans context="Input label">Seconds before the round starts to start the sequence</Trans>}
+            defaultValue={startSecondsBeforeEvent}
             onChange={setStartSecondsBeforeEvent}
           />
           <SecondsInput
             key="round-end-delay"
-            label={<Trans context="Input label">Seconds to stop after the round ends</Trans>}
+            label={
+              <Trans context="Input label">Seconds after the round ends or the player dies to stop the sequence</Trans>
+            }
             defaultValue={endSecondsAfterEvent}
             onChange={setEndSecondsAfterEvent}
           />
@@ -200,15 +170,14 @@ function SelectPlayerDialog() {
           </div>
         </div>
         <SecondsInput
-          label={
-            perspective === Perspective.Player ? (
-              <Trans context="Input label">Seconds to focus the camera on the killer before each kill</Trans>
-            ) : (
-              <Trans context="Input label">Seconds to focus the camera on the enemy before each kill</Trans>
-            )
-          }
+          label={<Trans context="Input label">Seconds before each kill to start the sequence</Trans>}
           defaultValue={startSecondsBeforeEvent}
           onChange={setStartSecondsBeforeEvent}
+        />
+        <SecondsInput
+          label={<Trans context="Input label">Seconds after each kill to stop the sequence</Trans>}
+          defaultValue={endSecondsAfterEvent}
+          onChange={setEndSecondsAfterEvent}
         />
 
         {visibleWeapons.length > 0 ? (
@@ -280,10 +249,10 @@ function SelectPlayerDialog() {
                   setSelectedWeapons(selectedWeapons);
                   if (event === PlayerSequenceEvent.Rounds) {
                     setStartSecondsBeforeEvent(0);
-                    setEndSecondsAfterEvent(0);
+                    setEndSecondsAfterEvent(2);
                   } else {
                     setStartSecondsBeforeEvent(2);
-                    setEndSecondsAfterEvent(0);
+                    setEndSecondsAfterEvent(2);
                   }
                 }}
               />

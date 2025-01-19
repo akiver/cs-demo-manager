@@ -10,8 +10,8 @@ export function buildPlayerRoundsSequences(
   settings: VideoSettings,
 ) {
   const sequences: Sequence[] = [];
-  const startSecondsBeforeStartTick = startSecondsBeforeEvent;
-  const endSecondsAfterEndTick = endSecondsAfterEvent;
+  const startSecondsBeforeEventTick = startSecondsBeforeEvent;
+  const endSecondsAfterEventTick = endSecondsAfterEvent;
 
   for (const round of match.rounds) {
     const hasShot = match.shots.some((shot) => {
@@ -23,14 +23,16 @@ export function buildPlayerRoundsSequences(
 
     if (hasShot || playerDeath) {
       const endTick = playerDeath ? playerDeath.tick : round.endTick;
-      const startTick = round.freezetimeEndTick - match.tickrate * startSecondsBeforeStartTick;
+      const startTick = round.freezetimeEndTick - match.tickrate * startSecondsBeforeEventTick;
 
       sequences.push({
         number: sequences.length + 1,
         startTick,
-        endTick: endTick + match.tickrate * endSecondsAfterEndTick,
+        endTick: endTick + match.tickrate * endSecondsAfterEventTick,
         showOnlyDeathNotices: settings.showOnlyDeathNotices,
         deathNoticesDuration: settings.deathNoticesDuration,
+        showXRay: settings.showXRay,
+        playerVoicesEnabled: settings.playerVoicesEnabled,
         playersOptions: [],
         cameras: [
           {
@@ -39,8 +41,6 @@ export function buildPlayerRoundsSequences(
             playerName: match.players.find((player) => player.steamId === steamId)?.name ?? '',
           },
         ],
-        showXRay: false,
-        playerVoicesEnabled: false,
       });
     }
   }
