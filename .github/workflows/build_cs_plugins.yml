@@ -1,0 +1,158 @@
+name: Build CS server binaries
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    name: Build macOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build CS:GO binary
+        run: |
+          /usr/bin/arch -x86_64 /bin/zsh --login <<'EOF'
+          cd csgo-server-plugin/csgo-server-plugin
+          make build
+          EOF
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: csgo-macos
+          path: static/csdm.dylib
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build CS:GO binary
+        run: |
+          cd csgo-server-plugin/csgo-server-plugin
+          make build
+
+      - name: Build CS2 binary
+        run: |
+          cd cs2-server-plugin/cs2-server-plugin
+          make build
+
+      # Rely on Linux ELF binaries to detect changes since they are by default more deterministic than Windows PE binaries.
+      # We have to check if the binaries have changed in this step rather than the next step because uploading/downloading
+      # artifacts alters the file's metadata and causes a diff.
+      - name: Check for changes
+        id: check-changes
+        run: |
+          git status
+          if git diff --quiet static/csdm_client.so static/libserver.so; then
+            echo "Changes detected!"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "No changes detected!"
+          fi
+
+      - name: Upload CS:GO binary
+        if: steps.check-changes.outputs.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: csgo-linux
+          path: static/csdm_client.so
+
+      - name: Upload CS2 binary
+        if: steps.check-changes.outputs.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs2-linux
+          path: static/libserver.so
+
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.3.1
+
+      - name: Build CS:GO binary
+        run: |
+          cd csgo-server-plugin
+          msbuild /p:Configuration=Release /p:Platform=x86 csgo-server-plugin.sln
+
+      - name: Build CS2 binary
+        run: |
+          cd cs2-server-plugin
+          msbuild /p:Configuration=Release /p:Platform=x64 cs2-server-plugin.sln
+
+      - name: Upload CS:GO binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: csgo-windows
+          path: static/csdm.dll
+
+      - name: Upload CS2 binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs2-windows
+          path: static/server.dll
+
+  create-pr:
+    name: Create Pull Request if required
+    runs-on: ubuntu-latest
+    needs: [build-macos, build-linux, build-windows]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      # If Linux artifacts have not been uploaded, it means there are no changes.
+      # In this case we don't need to create a PR.
+      - name: Check Linux artifacts
+        id: check-artifacts
+        run: |
+          if [ -f "artifacts/csgo-linux/csdm_client.so" ] || [ -f "artifacts/cs2-linux/libserver.so" ]; then
+            echo "linux_artifacts_exist=true" >> $GITHUB_OUTPUT
+          else
+            echo "linux_artifacts_exist=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Move files to static folder
+        if: steps.check-artifacts.outputs.linux_artifacts_exist == 'true'
+        run: |
+          mv artifacts/csgo-linux/csdm_client.so static/
+          mv artifacts/cs2-linux/libserver.so static/
+          mv artifacts/csgo-windows/csdm.dll static/
+          mv artifacts/cs2-windows/server.dll static/
+          mv artifacts/csgo-macos/csdm.dylib static/
+
+      - name: Create Pull Request
+        if: steps.check-artifacts.outputs.linux_artifacts_exist == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          commit-message: 'chore: update CS server binaries'
+          body: 'Automated changes by a GitHub action.'
+          title: 'chore: update CS server binaries'
+          branch: 'ci-update-cs-server-binaries'
+          delete-branch: true
+          sign-commits: true
+          add-paths: 'static/*'
