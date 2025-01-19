@@ -4,6 +4,6 @@
     "node-gyp": "node-gyp"
   },
   "devDependencies": {
-    "node-gyp": "10.2.0"
+    "node-gyp": "11.0.0"
   }
 }
