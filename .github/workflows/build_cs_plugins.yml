@@ -1,0 +1,85 @@
+name: Build CS Plugins
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    name: Build macOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build CS:GO plugin
+        run: |
+          /usr/bin/arch -x86_64 /bin/zsh --login <<'EOF'
+          cd csgo-server-plugin/csgo-server-plugin
+          make build
+          EOF
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: csgo-macos
+          path: static/csdm.dylib
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build CS:GO plugin
+        run: |
+          cd csgo-server-plugin/csgo-server-plugin
+          make
+
+      - name: Git status
+        run: |
+          git status
+          git diff
+          git log -1
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: csgo-linux
+          path: static/csdm_client.so
+
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.3.1
+
+      - name: Build CS:GO plugin
+        run: |
+          cd csgo-server-plugin
+          msbuild csgo-server-plugin.sln
+
+      - name: Git status
+        run: |
+          git status
+          git diff
+          git log -1
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: csgo-windows
+          path: static/csdm.dll
