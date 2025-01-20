@@ -100,7 +100,7 @@ void Log(const char *msg, ...)
 	vsnprintf(buf, sizeof(buf), msg, args);
 	ConColorMsg(Color(227, 0, 255, 255), "CSDM: %s\n", buf);
 	va_end(args);
-    // LogToFile(buf);
+    LogToFile(buf);
 }
 
 void PluginError(const char* msg, ...)
