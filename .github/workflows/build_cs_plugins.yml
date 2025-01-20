@@ -144,6 +144,11 @@ jobs:
           mv artifacts/cs2-windows/server.dll static/
           mv artifacts/csgo-macos/csdm.dylib static/
 
+          # Set correct permissions
+          chmod 755 static/csdm_client.so
+          chmod 755 static/libserver.so
+          chmod 755 static/csdm.dylib
+
       - name: Create Pull Request
         if: steps.check-artifacts.outputs.linux_artifacts_exist == 'true'
         uses: peter-evans/create-pull-request@v7
