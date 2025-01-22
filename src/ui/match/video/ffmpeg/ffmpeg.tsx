@@ -13,12 +13,13 @@ import { AudioCodecInput } from './audio-codec-input';
 import { FfmpegInputParametersInput } from './ffmpeg-input-parameters-input';
 import { FfmpegOutputParametersInput } from './ffmpeg-output-parameters-input';
 import { VideoContainerSelect } from './video-container-select';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
 
 export function Ffmpeg() {
   const installedFfmpegVersion = useInstalledFfmpegVersion();
   const { settings } = useVideoSettings();
 
-  if (settings.encoderSoftware !== EncoderSoftware.FFmpeg || settings.generateOnlyRawFiles) {
+  if (settings.encoderSoftware !== EncoderSoftware.FFmpeg || settings.recordingOutput === RecordingOutput.Images) {
     return null;
   }
 

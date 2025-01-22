@@ -1,22 +1,34 @@
-import { JSONActionsFileGenerator } from '../counter-strike/json-actions-file/json-actions-file-generator';
-import { isWindows } from 'csdm/node/os/is-windows';
+import { JSONActionsFileGenerator } from 'csdm/node/counter-strike/json-actions-file/json-actions-file-generator';
 import type { Sequence } from 'csdm/common/types/sequence';
-import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
+import { getSequenceName } from 'csdm/node/video/generation/get-sequence-name';
 import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix-path-separator';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
+import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
+import { EncoderSoftware } from 'csdm/common/types/encoder-software';
+import type { VideoContainer } from 'csdm/common/types/video-container';
 
 type Options = {
-  rawFilesFolderPath: string;
+  recordingSystem: RecordingSystem;
+  recordingOutput: RecordingOutput;
+  encoderSoftware: EncoderSoftware;
+  outputFolderPath: string;
   framerate: number;
   demoPath: string;
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
   tickrate: number;
+  ffmpegSettings: {
+    constantRateFactor: number;
+    videoContainer: VideoContainer;
+    videoCodec: string;
+    outputParameters: string;
+  };
 };
 
-function getHlaeRawFilesFolderPath(rawFilesFolderPath: string, sequence: Sequence) {
-  return `${windowsToUnixPathSeparator(rawFilesFolderPath)}/${getSequenceName(sequence)}`;
+function getHlaeOutputFolderPath(outputFolderPath: string, sequence: Sequence) {
+  return `${windowsToUnixPathSeparator(outputFolderPath)}/${getSequenceName(sequence)}`;
 }
 
 /**
@@ -31,12 +43,16 @@ function buildReplacePlayerNameCommand(player: SequencePlayerOptions) {
 }
 
 export async function createCsgoJsonFileForRecording({
-  rawFilesFolderPath,
+  recordingSystem,
+  recordingOutput,
+  encoderSoftware,
+  outputFolderPath,
   framerate,
   demoPath,
   sequences,
   closeGameAfterRecording,
   tickrate,
+  ffmpegSettings,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath, Game.CSGO);
   const mandatoryCommands = [
@@ -67,9 +83,33 @@ export async function createCsgoJsonFileForRecording({
     const roundedTickrate = Math.round(tickrate);
     const setupSequenceTick = sequence.startTick - roundedTickrate > 0 ? sequence.startTick - roundedTickrate : 1;
 
+    const hlaeOutputFolderPath = getHlaeOutputFolderPath(outputFolderPath, sequence);
+    const presetName =
+      recordingOutput === RecordingOutput.Video && encoderSoftware === EncoderSoftware.FFmpeg
+        ? `csdmPreset${sequence.number}`
+        : 'afxClassic';
+
     json
-      .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`)
-      .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`);
+      .addExecCommand(setupSequenceTick, `mirv_streams record startMovieWav 1`)
+      .addExecCommand(setupSequenceTick, `mirv_streams record name "${hlaeOutputFolderPath}"`)
+      .addExecCommand(setupSequenceTick, `mirv_replace_name filter clear`)
+      .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`)
+      .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`);
+
+    if (presetName !== 'afxClassic') {
+      let presetParameters = `-c:v ${ffmpegSettings.videoCodec}`;
+      if (ffmpegSettings.outputParameters === '') {
+        presetParameters += ` -crf ${ffmpegSettings.constantRateFactor}`;
+      } else {
+        presetParameters += ` ${ffmpegSettings.outputParameters}`;
+      }
+      json
+        .addExecCommand(
+          setupSequenceTick,
+          `mirv_streams settings add ffmpeg ${presetName} "${presetParameters} {QUOTE}${hlaeOutputFolderPath}\\\\video.${ffmpegSettings.videoContainer}{QUOTE}"`,
+        )
+        .addExecCommand(setupSequenceTick, `mirv_streams settings edit afxDefault settings ${presetName}`);
+    }
 
     if (typeof sequence.cfg === 'string') {
       const commands = sequence.cfg.split('\n');
@@ -84,32 +124,29 @@ export async function createCsgoJsonFileForRecording({
       json.addSpecPlayer(camera.tick, camera.playerSteamId);
     }
 
-    if (isWindows) {
-      const hlaeOutputFolderPath = getHlaeRawFilesFolderPath(rawFilesFolderPath, sequence);
+    for (const playerOptions of sequence.playersOptions) {
+      const replacePlayerNameCommand = buildReplacePlayerNameCommand(playerOptions);
+      json.addExecCommand(setupSequenceTick, replacePlayerNameCommand);
+
+      if (!playerOptions.showKill) {
+        json.addExecCommand(
+          setupSequenceTick,
+          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} block=1`,
+        );
+      }
+      if (playerOptions.highlightKill) {
+        json.addExecCommand(
+          setupSequenceTick,
+          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=1`,
+        );
+      }
+    }
+
+    if (recordingSystem === RecordingSystem.HLAE) {
       json
-        .addExecCommand(setupSequenceTick, `mirv_streams record name "${hlaeOutputFolderPath}"`)
-        .addExecCommand(setupSequenceTick, 'mirv_replace_name filter clear')
         .addExecCommand(sequence.startTick, 'mirv_streams add normal defaultNormal')
         .addExecCommand(sequence.startTick, 'mirv_streams record start')
         .addExecCommand(sequence.endTick, 'mirv_streams record end');
-
-      for (const playerOptions of sequence.playersOptions) {
-        const replacePlayerNameCommand = buildReplacePlayerNameCommand(playerOptions);
-        json.addExecCommand(setupSequenceTick, replacePlayerNameCommand);
-
-        if (!playerOptions.showKill) {
-          json.addExecCommand(
-            setupSequenceTick,
-            `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} block=1`,
-          );
-        }
-        if (playerOptions.highlightKill) {
-          json.addExecCommand(
-            setupSequenceTick,
-            `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=1`,
-          );
-        }
-      }
     } else {
       json
         .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)

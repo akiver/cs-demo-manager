@@ -5,11 +5,12 @@ import { Select } from 'csdm/ui/components/inputs/select';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
 
 export function EncoderSoftwareSelect() {
   const { settings, updateSettings } = useVideoSettings();
 
-  if (!window.csdm.isWindows || settings.generateOnlyRawFiles) {
+  if (!window.csdm.isWindows || settings.recordingOutput === RecordingOutput.Images) {
     return null;
   }
 

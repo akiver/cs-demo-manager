@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { Group, Item } from 'csdm/ui/components/timeline/use-timeline';
 import { useTimeline } from 'csdm/ui/components/timeline/use-timeline';
 import type { Sequence } from 'csdm/common/types/sequence';
-import { sortSequencesByStartTick } from 'csdm/node/video/sequences/sort-sequences-by-start-tick';
+import { sortSequencesByStartTick } from 'csdm/common/video/sort-sequences-by-start-tick';
 import { useCurrentMatch } from '../../../use-current-match';
 import { EditSequenceDialog } from '../../sequence/edit-sequence-dialog';
 import { useCurrentMatchSequences } from '../use-current-match-sequences';

@@ -3,6 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
 
 export function ConcatenateSequencesCheckbox() {
   const { settings, updateSettings } = useVideoSettings();
@@ -13,7 +14,7 @@ export function ConcatenateSequencesCheckbox() {
     });
   };
 
-  if (settings.encoderSoftware !== EncoderSoftware.FFmpeg || settings.generateOnlyRawFiles) {
+  if (settings.encoderSoftware !== EncoderSoftware.FFmpeg || settings.recordingOutput === RecordingOutput.Images) {
     return null;
   }
 

@@ -4,6 +4,8 @@ import type { EncoderSoftware } from './encoder-software';
 import type { Sequence } from './sequence';
 import type { VideoStatus } from './video-status';
 import type { ErrorCode } from '../error-code';
+import type { RecordingOutput } from './recording-output';
+import type { RecordingSystem } from './recording-system';
 
 export type Video = {
   id: string;
@@ -13,16 +15,15 @@ export type Video = {
   mapName: string;
   game: Game;
   tickrate: number;
+  recordingSystem: RecordingSystem;
+  recordingOutput: RecordingOutput;
   encoderSoftware: EncoderSoftware;
   framerate: number;
   width: number;
   height: number;
-  generateOnlyRawFiles: boolean;
-  deleteRawFilesAfterEncoding: boolean;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
   ffmpegSettings: FfmpegSettings;
-  rawFilesFolderPath: string;
   outputFolderPath: string;
   sequences: Sequence[];
   output: string;

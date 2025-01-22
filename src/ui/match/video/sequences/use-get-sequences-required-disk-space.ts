@@ -1,16 +1,15 @@
-import { roundNumber } from 'csdm/common/math/round-number';
-import { useComputeRequiredGigabyte } from './use-compute-require-gigabyte';
+import { useComputeRequiredBytes } from './use-compute-require-bytes';
 import type { Sequence } from 'csdm/common/types/sequence';
 
 export function useGetSequencesRequiredDiskSpace() {
-  const computeRequiredGigabyte = useComputeRequiredGigabyte();
+  const computeRequiredBytes = useComputeRequiredBytes();
 
   return (sequences: Sequence[], tickrate: number) => {
-    let diskSpace = 0;
+    let bytes = 0;
     for (const sequence of sequences) {
-      diskSpace += computeRequiredGigabyte(sequence.startTick, sequence.endTick, tickrate);
+      bytes += computeRequiredBytes(sequence.startTick, sequence.endTick, tickrate);
     }
 
-    return roundNumber(diskSpace, 2);
+    return bytes;
   };
 }

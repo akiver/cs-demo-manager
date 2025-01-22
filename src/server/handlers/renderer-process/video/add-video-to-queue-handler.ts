@@ -1,4 +1,4 @@
-import { assertVideoGenerationIsPossible } from 'csdm/node/video/assert-video-generation-is-possible';
+import { assertVideoGenerationIsPossible } from 'csdm/node/video/generation/assert-video-generation-is-possible';
 import { videoQueue } from 'csdm/server/video-queue';
 import type { AddVideoPayload } from 'csdm/common/types/video';
 import { handleError } from '../../handle-error';

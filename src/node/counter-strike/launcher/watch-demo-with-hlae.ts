@@ -1,5 +1,6 @@
 import { exec } from 'node:child_process';
 import path from 'node:path';
+import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { getSettings } from 'csdm/node/settings/get-settings';
@@ -15,8 +16,10 @@ import { getRunningProcessExitCode } from 'csdm/node/os/get-running-process-exit
 import { sleep } from 'csdm/common/sleep';
 import { GameError } from './errors/game-error';
 import { installCounterStrikeServerPlugin, uninstallCounterStrikeServerPlugin } from './cs-server-plugin';
+import { getFfmpegExecutablePath } from 'csdm/node/video/ffmpeg/ffmpeg-location';
+import { FfmpegNotInstalled } from 'csdm/node/video/errors/ffmpeg-not-installed';
 
-export type HlaeOptions = {
+type HlaeOptions = {
   demoPath: string;
   game: Game;
   fullscreen?: boolean;
@@ -28,7 +31,23 @@ export type HlaeOptions = {
   signal?: AbortSignal;
   onGameStart?: () => void;
   uninstallPluginOnExit?: boolean;
+  registerFfmpegLocation?: boolean; // Should we write the ffmpeg.ini file that indicates the location of the FFmpeg executable?
 };
+
+// Creates the ffmpeg.ini file that indicates the location of the FFmpeg executable.
+// The file must be inside the ffmpeg folder next to the HLAE executable. Example:
+// C:/Users/username/hlae/ffmpeg/ffmpeg.ini
+async function registerFfmpegLocation(hlaeExecutablePath: string) {
+  const ffmpegExecutablePath = await getFfmpegExecutablePath();
+  if (!(await fs.pathExists(ffmpegExecutablePath))) {
+    throw new FfmpegNotInstalled();
+  }
+
+  const ffmpegFolderPath = path.resolve(path.dirname(hlaeExecutablePath), 'ffmpeg');
+  await fs.ensureDir(ffmpegFolderPath);
+  const iniFilePath = path.resolve(ffmpegFolderPath, 'ffmpeg.ini');
+  await fs.writeFile(iniFilePath, `[Ffmpeg]\nPath=${ffmpegExecutablePath}`, 'utf-8');
+}
 
 function getGameProcessName(game: Game) {
   return game === Game.CSGO ? 'csgo.exe' : 'cs2.exe';
@@ -168,6 +187,9 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
 
   await installCounterStrikeServerPlugin(game);
   defineCfgFolderLocation();
+  if (options.registerFfmpegLocation) {
+    await registerFfmpegLocation(hlaeExecutablePath);
+  }
 
   const parameters = options.hlaeParameters ?? userHlaeParameters;
   if (typeof parameters === 'string' && parameters !== '') {

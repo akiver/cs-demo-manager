@@ -3299,10 +3299,6 @@ msgid "This demo needs to be re-analyzed to make the camera focus work."
 msgstr "Cette démo doit être réanalyser pour que la caméra se place correctement sur les joueurs."
 
 #: src/ui/hooks/use-counter-strike.tsx
-msgid "Read this <0>documentation</0> for more information"
-msgstr "Lisez la <0>documentation</0> pour plus d'informations"
-
-#: src/ui/hooks/use-counter-strike.tsx
 msgid "No rounds found"
 msgstr "Aucun round trouvé"
 
@@ -4870,12 +4866,12 @@ msgid "Disk space warning"
 msgstr "Avertissement d'espace disque"
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
-msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
-msgstr "Vous aurez besoin d'au moins <0>{requiredDiskSpace}GB</0> d'espace disque libre pour générer les vidéos."
+msgid "You will need at least <0>{requiredGigaBytes}GB</0> of free disk space to generate the videos."
+msgstr ""
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
-msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
-msgstr "Vous aurez besoin d'au moins <0>{requiredDiskSpace}GB</0> d'espace disque libre sur le disque où CS2 est installé pour générer les vidéos."
+msgid "You will need at least <0>{requiredGigaBytes}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
+msgstr ""
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgid "Are you sure you want to continue?"
@@ -4911,11 +4907,6 @@ msgstr "Concaténer les séquences en 1 vidéo"
 msgid "Death notices duration (seconds)"
 msgstr "Durée des notifications de mort (secondes)"
 
-#: src/ui/match/video/delete-raw-files-after-encoding-checkbox.tsx
-msgctxt "Checkbox label"
-msgid "Delete raw files after encoding"
-msgstr "Supprimer les fichiers bruts après l'encodage"
-
 #: src/ui/match/video/encoder-software-select.tsx
 msgctxt "Select label of video encoder"
 msgid "Encoder software"
@@ -4925,6 +4916,16 @@ msgstr "Logiciel d'encodage"
 msgctxt "Input label"
 msgid "Audio codec"
 msgstr "Codec audio"
+
+#: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
+msgctxt "Tooltip"
+msgid "This option is not available when using custom FFmpeg output parameters."
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
+msgctxt "Tooltip"
+msgid "You can still set the <0>-crf</0> parameter in your FFmpeg output parameters."
+msgstr ""
 
 #: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
 msgctxt "Tooltip"
@@ -4999,11 +5000,6 @@ msgstr ""
 msgctxt "Input placeholder"
 msgid "Framerate"
 msgstr ""
-
-#: src/ui/match/video/generate-only-raw-files-checkbox.tsx
-msgctxt "Checkbox label"
-msgid "Generate only raw files"
-msgstr "Générer uniquement des fichiers bruts"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
@@ -5189,19 +5185,27 @@ msgctxt "Checkbox label"
 msgid "Player voices"
 msgstr ""
 
-#. Input placeholder
-#: src/ui/match/video/raw-files-folder-path.tsx
-msgid "Raw files folder"
+#: src/ui/match/video/recording-output-select.tsx
+msgctxt "Select label"
+msgid "Output"
 msgstr ""
 
-#: src/ui/match/video/raw-files-folder-path.tsx
-msgctxt "Input label"
-msgid "Raw files folder"
+#: src/ui/match/video/recording-output.tsx
+#: src/ui/settings/settings-tabs.tsx
+msgid "Video"
+msgstr "Vidéo"
+
+#: src/ui/match/video/recording-output.tsx
+msgid "Images"
 msgstr ""
 
-#: src/ui/match/video/raw-files-folder-path.tsx
-msgctxt "Dialog title"
-msgid "Select raw files folder"
+#: src/ui/match/video/recording-output.tsx
+msgid "Images + video"
+msgstr ""
+
+#: src/ui/match/video/recording-system-select.tsx
+msgctxt "Select label"
+msgid "Recoding system"
 msgstr ""
 
 #: src/ui/match/video/reset-settings-button.tsx
@@ -5661,9 +5665,14 @@ msgid "Highlight kills"
 msgstr ""
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
+msgctxt "Disk usage in megabyte"
+msgid "~{roundedMb}MB"
+msgstr ""
+
+#: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
-msgid "~{requiredDiskSpace}GB"
-msgstr "~{requiredDiskSpace}GO"
+msgid "~{roundedGb}GB"
+msgstr ""
 
 #: src/ui/match/video/sequences/sequences-duration.tsx
 msgid "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
@@ -5704,6 +5713,11 @@ msgstr "Naviguer"
 msgctxt "Software installation status"
 msgid "Not installed"
 msgstr "Non installé"
+
+#: src/ui/match/video/video-documentation-link.tsx
+msgctxt "Link"
+msgid "Documentation"
+msgstr ""
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
@@ -7238,10 +7252,6 @@ msgid "Analyze"
 msgstr "Analyse"
 
 #: src/ui/settings/settings-tabs.tsx
-msgid "Video"
-msgstr "Vidéo"
-
-#: src/ui/settings/settings-tabs.tsx
 msgid "Ban"
 msgstr "Bans"
 
@@ -7349,12 +7359,10 @@ msgstr "Minimisé"
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "Non"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
-#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -7533,8 +7541,8 @@ msgid "In-game recording in progress…"
 msgstr "Enregistrement en jeu en cours…"
 
 #: src/ui/videos/video-entry.tsx
-msgid "Preparing files for conversion…"
-msgstr "Préparation des fichiers pour la conversion…"
+msgid "Moving final files…"
+msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "Generating video for sequence {number} / {sequenceCount}…"
@@ -7582,8 +7590,9 @@ msgid "Merge sequences into single file"
 msgstr "Fusionner les séquences en un seul fichier"
 
 #: src/ui/videos/video-entry.tsx
-msgid "Generate only RAW files"
-msgstr "Générer uniquement des fichiers bruts"
+#: src/ui/videos/video-entry.tsx
+msgid "Output"
+msgstr "Sortie"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Close game after recording"
@@ -7596,10 +7605,6 @@ msgstr "Vous devrez quitter le jeu manuellement."
 #: src/ui/videos/video-entry.tsx
 msgid "Demo path"
 msgstr "Chemin de la démo"
-
-#: src/ui/videos/video-entry.tsx
-msgid "Raw files path"
-msgstr "Chemin des fichiers bruts"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Output path"
@@ -7632,10 +7637,6 @@ msgstr ""
 #: src/ui/videos/video-entry.tsx
 msgid "None"
 msgstr "Aucun"
-
-#: src/ui/videos/video-entry.tsx
-msgid "Output"
-msgstr "Sortie"
 
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
