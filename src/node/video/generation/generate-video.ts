@@ -1,31 +1,32 @@
+import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
-import { generateVideoWithVirtualDub } from 'csdm/node/video/virtual-dub/generate-video-with-virtual-dub';
-import { generateVideoWithFFmpeg } from 'csdm/node/video/ffmpeg/generate-video-with-ffmpeg';
-import { concatenateVideosFromSequences } from 'csdm/node/video/ffmpeg/concatenate-videos-from-sequences';
-import { createCsgoJsonFileForRecording } from 'csdm/node/video/create-csgo-json-file-for-recording';
-import { deleteSequenceRawFiles } from 'csdm/node/video/sequences/delete-sequence-raw-files';
-import type { HlaeOptions } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
+import { generateVideoWithVirtualDub } from 'csdm/node/video/generation/generate-video-with-virtual-dub';
+import { generateVideoWithFFmpeg } from 'csdm/node/video/generation/generate-video-with-ffmpeg';
+import { concatenateVideosFromSequences } from 'csdm/node/video/generation/concatenate-videos-from-sequences';
+import { createCsgoJsonFileForRecording } from 'csdm/node/video/generation/create-csgo-json-file-for-recording';
 import { watchDemoWithHlae } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { killCounterStrikeProcesses } from 'csdm/node/counter-strike/kill-counter-strike-processes';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { killFfmpegProcess } from 'csdm/node/video/ffmpeg/kill-ffmpeg-process';
 import { killVirtualDubProcess } from 'csdm/node/video/virtual-dub/kill-virtual-dub-process';
-import { deleteSequencesOutputFile } from 'csdm/node/video/sequences/delete-sequences-output-file';
 import { abortError, throwIfAborted } from 'csdm/node/errors/abort-error';
 import { killHlaeProcess } from 'csdm/node/video/hlae/kill-hlae-process';
 import { sleep } from 'csdm/common/sleep';
-import { sortSequencesByStartTick } from 'csdm/node/video/sequences/sort-sequences-by-start-tick';
-import { createCs2JsonActionsFileForRecording } from 'csdm/node/video/create-cs2-json-actions-file-for-recording';
+import { sortSequencesByStartTick } from 'csdm/common/video/sort-sequences-by-start-tick';
+import { createCs2JsonActionsFileForRecording } from 'csdm/node/video/generation/create-cs2-json-actions-file-for-recording';
 import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-counter-strike';
 import { deleteJsonActionsFile } from 'csdm/node/counter-strike/json-actions-file/delete-json-actions-file';
-import { moveSequencesRawFiles } from 'csdm/node/video/sequences/move-sequences-raw-files';
+import { moveStartMovieFilesToOutputFolder } from 'csdm/node/video/generation/move-startmovie-files-to-output-folder';
 import type { Sequence } from 'csdm/common/types/sequence';
-import { VideoContainer } from 'csdm/common/types/video-container';
-import { fetchMatchPlayersSlots } from '../database/match/fetch-match-players-slots';
+import type { VideoContainer } from 'csdm/common/types/video-container';
+import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
 import { assertVideoGenerationIsPossible } from './assert-video-generation-is-possible';
-import { deleteSequencesRawFiles } from './sequences/delete-sequences-raw-files';
-import { uninstallCounterStrikeServerPlugin } from '../counter-strike/launcher/cs-server-plugin';
+import { deleteSequencesRawFiles } from './delete-sequences-raw-files';
+import { uninstallCounterStrikeServerPlugin } from 'csdm/node/counter-strike/launcher/cs-server-plugin';
+import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
+import { moveHlaeRawFilesToOutputFolder } from './move-hlae-files-to-output-folder';
 
 type FfmpegSettings = {
   audioBitrate: number;
@@ -42,16 +43,15 @@ type Parameters = {
   checksum: string;
   game: Game;
   tickrate: number;
+  recordingSystem: RecordingSystem;
+  recordingOutput: RecordingOutput;
   encoderSoftware: EncoderSoftware;
   framerate: number;
   width: number;
   height: number;
-  generateOnlyRawFiles: boolean;
-  deleteRawFilesAfterEncoding: boolean;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
   ffmpegSettings: FfmpegSettings;
-  rawFilesFolderPath: string;
   outputFolderPath: string;
   demoPath: string;
   sequences: Sequence[];
@@ -66,11 +66,11 @@ async function buildVideos({ signal, ...options }: Parameters) {
   throwIfAborted(signal);
 
   const {
+    recordingSystem,
+    recordingOutput,
     encoderSoftware,
     framerate,
-    deleteRawFilesAfterEncoding,
     sequences,
-    rawFilesFolderPath,
     outputFolderPath,
     concatenateSequences,
     ffmpegSettings,
@@ -78,14 +78,14 @@ async function buildVideos({ signal, ...options }: Parameters) {
     onSequenceStart,
     onConcatenateSequencesStart,
   } = options;
-  const shouldConcatenate = concatenateSequences && sequences.length > 1;
 
   for (const sequence of sequences) {
     onSequenceStart(sequence.number);
-
     if (encoderSoftware === EncoderSoftware.FFmpeg) {
       await generateVideoWithFFmpeg(
         {
+          recordingSystem,
+          recordingOutput,
           game,
           audioBitrate: ffmpegSettings.audioBitrate,
           constantRateFactor: ffmpegSettings.constantRateFactor,
@@ -95,7 +95,6 @@ async function buildVideos({ signal, ...options }: Parameters) {
           inputParameters: ffmpegSettings.inputParameters,
           outputParameters: ffmpegSettings.outputParameters,
           framerate,
-          rawFilesFolderPath,
           outputFolderPath,
           sequence,
         },
@@ -104,70 +103,69 @@ async function buildVideos({ signal, ...options }: Parameters) {
     } else {
       await generateVideoWithVirtualDub(
         {
+          recordingSystem,
           game,
           framerate,
-          rawFilesFolderPath,
           outputFolderPath,
           sequence,
         },
         signal,
       );
     }
-
-    if (!shouldConcatenate && deleteRawFilesAfterEncoding) {
-      await deleteSequenceRawFiles(rawFilesFolderPath, sequence);
-    }
   }
 
+  const shouldConcatenate = concatenateSequences && sequences.length > 1;
   if (shouldConcatenate) {
     onConcatenateSequencesStart();
     await concatenateVideosFromSequences(
       {
         outputFolderPath,
         sequences,
-        audioBitrate: ffmpegSettings.audioBitrate,
-        constantRateFactor: ffmpegSettings.constantRateFactor,
-        audioCodec: ffmpegSettings.audioCodec,
-        videoCodec: ffmpegSettings.videoCodec,
         videoContainer: ffmpegSettings.videoContainer,
-        inputParameters: ffmpegSettings.inputParameters,
-        outputParameters: ffmpegSettings.outputParameters,
       },
       signal,
     );
-    if (deleteRawFilesAfterEncoding) {
-      for (const sequence of sequences) {
-        await deleteSequenceRawFiles(rawFilesFolderPath, sequence);
-      }
-    }
   }
 }
 
 export async function generateVideo(parameters: Parameters) {
   logger.log(`Generating video with id ${parameters.videoId}`);
 
-  const { signal } = parameters;
+  const {
+    checksum,
+    videoId,
+    recordingSystem,
+    recordingOutput,
+    encoderSoftware,
+    framerate,
+    demoPath,
+    width,
+    height,
+    closeGameAfterRecording,
+    tickrate,
+    game,
+    ffmpegSettings,
+    outputFolderPath,
+    signal,
+    onMoveFilesStart,
+  } = parameters;
+
   throwIfAborted(signal);
 
-  const cleanupFiles = async (deleteOutputFile = true, deleteRawFiles = true) => {
-    logger.log(`Cleaning up files for video with id ${parameters.videoId}`);
-    const promises: Promise<void>[] = [deleteJsonActionsFile(demoPath)];
-    if (deleteRawFiles) {
-      promises.push(deleteSequencesRawFiles(rawFilesFolderPath, parameters.sequences));
+  const sequences = sortSequencesByStartTick(parameters.sequences);
+
+  const cleanupFiles = async (deleteOutputFile = true) => {
+    logger.log(`Cleaning up files for video with id ${videoId}`);
+    const promises: Promise<void>[] = [deleteJsonActionsFile(demoPath), deleteSequencesRawFiles(parameters)];
+    if (deleteOutputFile) {
+      promises.push(fs.remove(outputFolderPath));
     }
 
-    if (deleteOutputFile) {
-      const videoContainer =
-        parameters.encoderSoftware === EncoderSoftware.FFmpeg
-          ? parameters.ffmpegSettings.videoContainer
-          : VideoContainer.AVI;
-      promises.push(deleteSequencesOutputFile(parameters.outputFolderPath, parameters.sequences, videoContainer));
-    }
     await Promise.all(promises);
   };
 
   async function onAbort() {
-    logger.log(`Aborting video generation with id ${parameters.videoId}`);
+    logger.log(`Aborting video generation with id ${videoId}`);
     if (isWindows) {
       await Promise.all([killHlaeProcess(), killVirtualDubProcess()]);
     }
@@ -180,51 +178,48 @@ export async function generateVideo(parameters: Parameters) {
   }
   signal.addEventListener('abort', onAbort, { once: true });
 
-  const {
-    framerate,
-    demoPath,
-    rawFilesFolderPath,
-    generateOnlyRawFiles,
-    width,
-    height,
-    closeGameAfterRecording,
-    tickrate,
-    game,
-  } = parameters;
-
   await assertVideoGenerationIsPossible(parameters);
 
   throwIfAborted(signal);
 
   await cleanupFiles();
 
-  const sequences = sortSequencesByStartTick(parameters.sequences);
   if (game === Game.CSGO) {
     await createCsgoJsonFileForRecording({
-      rawFilesFolderPath,
+      recordingSystem,
+      recordingOutput,
+      encoderSoftware,
+      outputFolderPath,
       framerate,
       demoPath,
       sequences,
       closeGameAfterRecording,
       tickrate,
+      ffmpegSettings,
     });
   } else {
-    const players = await fetchMatchPlayersSlots(parameters.checksum);
+    const players = await fetchMatchPlayersSlots(checksum);
     await createCs2JsonActionsFileForRecording({
+      recordingSystem,
+      recordingOutput,
+      encoderSoftware,
+      outputFolderPath,
       framerate,
       demoPath,
       sequences,
       closeGameAfterRecording,
       tickrate,
       players,
+      ffmpegSettings,
     });
   }
 
   throwIfAborted(signal);
 
+  const shouldGenerateVideo = recordingOutput !== RecordingOutput.Images;
   try {
-    if (isWindows) {
-      const hlaeOptions: HlaeOptions = {
+    if (recordingSystem === RecordingSystem.HLAE) {
+      await watchDemoWithHlae({
         demoPath,
         game,
         width,
@@ -233,8 +228,8 @@ export async function generateVideo(parameters: Parameters) {
         signal,
         uninstallPluginOnExit: false,
         gameParameters: null,
-      };
-      await watchDemoWithHlae(hlaeOptions);
+        registerFfmpegLocation: shouldGenerateVideo,
+      });
     } else {
       await startCounterStrike({
         game,
@@ -250,18 +245,34 @@ export async function generateVideo(parameters: Parameters) {
 
     throwIfAborted(signal);
 
-    parameters.onMoveFilesStart();
-    await moveSequencesRawFiles(sequences, rawFilesFolderPath, game);
-
-    if (generateOnlyRawFiles) {
-      logger.log(`Generating raw files with id ${parameters.videoId} ended`);
-      return;
+    if (shouldGenerateVideo) {
+      await buildVideos(parameters);
+      if (recordingOutput === RecordingOutput.Video) {
+        await deleteSequencesRawFiles(parameters);
+      }
     }
 
-    await buildVideos(parameters);
-    await cleanupFiles(false, parameters.deleteRawFilesAfterEncoding);
+    const shouldKeepRawFiles = recordingOutput !== RecordingOutput.Video;
+    if (shouldKeepRawFiles) {
+      if (recordingSystem === RecordingSystem.CounterStrike) {
+        onMoveFilesStart();
+        await moveStartMovieFilesToOutputFolder({
+          sequences,
+          outputFolderPath,
+          game,
+        });
+      } else {
+        onMoveFilesStart();
+        await moveHlaeRawFilesToOutputFolder({
+          sequences,
+          outputFolderPath,
+          game,
+        });
+      }
+    }
 
-    logger.log(`Generating video with id ${parameters.videoId} ended`);
+    await cleanupFiles(false);
+    logger.log(`Generating video with id ${videoId} ended`);
   } catch (error) {
     if (signal.aborted) {
       throw abortError;

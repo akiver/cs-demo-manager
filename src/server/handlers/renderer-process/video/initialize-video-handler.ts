@@ -5,7 +5,6 @@ import { getInstalledHlaeVersion } from 'csdm/node/video/hlae/get-installed-hlae
 import { isWindows } from 'csdm/node/os/is-windows';
 import { isFfmpegUpdateAvailable } from 'csdm/node/video/ffmpeg/is-ffmpeg-update-available';
 import { getSettings } from 'csdm/node/settings/get-settings';
-import { getRawFilesFolderPath } from 'csdm/node/video/get-raw-files-folder-path';
 import { getOutputFolderPath } from 'csdm/node/video/get-output-folder-path';
 import { handleError } from '../../handle-error';
 
@@ -19,7 +18,6 @@ export type InitializeVideoSuccessPayload = {
   virtualDubVersion: string | undefined;
   ffmpegVersion: string | undefined;
   ffmpegUpdateAvailable: boolean;
-  rawFilesFolderPath: string;
   outputFolderPath: string;
 };
 
@@ -29,7 +27,6 @@ export async function initializeVideoHandler({ demoFilePath }: InitializeVideoPa
     const promises = [
       getInstalledFfmpegVersion(),
       isFfmpegUpdateAvailable(),
-      getRawFilesFolderPath(settings.video, demoFilePath),
       getOutputFolderPath(settings.video, demoFilePath),
     ];
     if (isWindows) {
@@ -39,7 +36,6 @@ export async function initializeVideoHandler({ demoFilePath }: InitializeVideoPa
     const [
       installedFfmpegVersion,
       ffmpegUpdateAvailable,
-      rawFilesFolderPath,
       outputFolderPath,
       installedHlaeVersion,
       hlaeUpdateAvailable,
@@ -47,7 +43,6 @@ export async function initializeVideoHandler({ demoFilePath }: InitializeVideoPa
     ] = (await Promise.all(promises)) as [
       string | undefined,
       boolean,
-      string,
       string,
       string | undefined,
       boolean,
@@ -60,7 +55,6 @@ export async function initializeVideoHandler({ demoFilePath }: InitializeVideoPa
       hlaeUpdateAvailable,
       ffmpegVersion: installedFfmpegVersion,
       ffmpegUpdateAvailable,
-      rawFilesFolderPath,
       outputFolderPath,
     };
 

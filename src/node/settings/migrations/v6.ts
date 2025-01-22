@@ -1,5 +1,8 @@
 import type { Settings } from '../settings';
 import type { Migration } from '../migration';
+import { isWindows } from 'csdm/node/os/is-windows';
+import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
 
 const v6: Migration = {
   schemaVersion: 6,
@@ -9,6 +12,8 @@ const v6: Migration = {
     settings.video.showXRay = true;
     settings.video.playerVoicesEnabled = true;
     settings.ui.redirectDemoToMatch = false;
+    settings.video.recordingSystem = isWindows ? RecordingSystem.HLAE : RecordingSystem.CounterStrike;
+    settings.video.recordingOutput = RecordingOutput.Video;
 
     return Promise.resolve(settings);
   },

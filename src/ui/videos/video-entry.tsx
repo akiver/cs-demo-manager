@@ -26,6 +26,7 @@ import { ErrorCode } from 'csdm/common/error-code';
 import { AddVideoToQueueErrorDialog } from '../match/video/add-video-to-queue-error-dialog';
 import { useDialog } from '../components/dialogs/use-dialog';
 import { RetryButton } from '../components/buttons/retry-button';
+import { RecordingOutput } from '../match/video/recording-output';
 
 function Grid({ children }: { children: ReactNode }) {
   return <div className="grid grid-cols-[auto_1fr] gap-y-4 gap-x-8 items-center">{children}</div>;
@@ -67,7 +68,7 @@ function getStatusMessage(video: Video) {
     case VideoStatus.MovingFiles:
       return (
         <p>
-          <Trans>Preparing files for conversion…</Trans>
+          <Trans>Moving final files…</Trans>
         </p>
       );
     case VideoStatus.Converting: {
@@ -131,10 +132,6 @@ export function VideoEntry({ video }: Props) {
 
   const onRevealOutputFolderClick = async () => {
     await tryRevealFolder(video.outputFolderPath);
-  };
-
-  const onRevealRawFilesFolderClick = async () => {
-    await tryRevealFolder(video.rawFilesFolderPath);
   };
 
   const renderCurrentStepMessage = (video: Video) => {
@@ -217,7 +214,7 @@ export function VideoEntry({ video }: Props) {
                 {<SequencesDuration sequences={video.sequences} tickrate={video.tickrate} />}
               </Field>
               <Field label={<Trans>Disk space</Trans>}>
-                <RequiredDiskSpace requiredDiskSpace={getRequiredDiskSpace(video.sequences, video.tickrate)} />
+                <RequiredDiskSpace bytes={getRequiredDiskSpace(video.sequences, video.tickrate)} />
               </Field>
             </Grid>
 
@@ -228,8 +225,8 @@ export function VideoEntry({ video }: Props) {
               <Field label={<Trans>Merge sequences into single file</Trans>}>
                 {video.concatenateSequences ? <Trans>Yes</Trans> : <Trans>No</Trans>}
               </Field>
-              <Field label={<Trans>Generate only RAW files</Trans>}>
-                {video.generateOnlyRawFiles ? <Trans>Yes</Trans> : <Trans>No</Trans>}
+              <Field label={<Trans>Output</Trans>}>
+                <RecordingOutput output={video.recordingOutput} />
               </Field>
             </Grid>
 
@@ -272,15 +269,6 @@ export function VideoEntry({ video }: Props) {
                   window.csdm.browseToFile(video.demoPath);
                 }}
               />
-            </div>
-
-            <p>
-              <Trans>Raw files path</Trans>
-            </p>
-
-            <div className="flex gap-x-8">
-              <TextInput value={video.rawFilesFolderPath} isReadOnly={true} />
-              <RevealButton onClick={onRevealRawFilesFolderClick} />
             </div>
 
             <p>

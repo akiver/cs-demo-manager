@@ -13,7 +13,6 @@ export const settingsReducer = createReducer(defaultSettings, (builder) => {
       return action.payload.settings;
     })
     .addCase(initializeVideoSuccess, (state, action) => {
-      state.video.rawFilesFolderPath = action.payload.rawFilesFolderPath;
       state.video.outputFolderPath = action.payload.outputFolderPath;
     });
 });

@@ -7,14 +7,15 @@ import { getVirtualDubFolderPath } from 'csdm/node/video/virtual-dub/get-virtual
 import { getVirtualDubExecutablePath } from 'csdm/node/video/virtual-dub/get-virtual-dub-executable-path';
 import { abortError } from 'csdm/node/errors/abort-error';
 import { VirtualDubError } from 'csdm/node/video/errors/virtual-dub-error';
-import { getSequenceOutputFilePath } from 'csdm/node/video/sequences/get-sequence-output-file-path';
-import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix-path-separator';
-import { getSequenceRawFiles } from 'csdm/node/video/sequences/get-sequence-raw-files';
+import { getSequenceOutputFilePath } from 'csdm/node/video/generation/get-sequence-output-file-path';
+import { getSequenceRawFiles } from 'csdm/node/video/generation/get-sequence-raw-files';
 import { VideoContainer } from 'csdm/common/types/video-container';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
+import type { RecordingSystem } from 'csdm/common/types/recording-system';
 
 type GenerateVideoWithVirtualDubSettings = {
+  recordingSystem: RecordingSystem;
   game: Game;
-  rawFilesFolderPath: string;
   outputFolderPath: string;
   framerate: number;
   sequence: Sequence;
@@ -67,18 +68,22 @@ function generateVirtualDubScript(
 }
 
 async function writeVirtualDubScript({
+  recordingSystem,
   sequence,
-  rawFilesFolderPath,
   outputFolderPath,
   game,
   framerate,
 }: GenerateVideoWithVirtualDubSettings) {
-  const { tgaFiles, wavFilePath } = await getSequenceRawFiles(sequence, rawFilesFolderPath, game);
+  const { tgaFiles, wavFilePath } = await getSequenceRawFiles({
+    recordingSystem,
+    sequence,
+    game,
+    outputFolderPath,
+    recordingOutput: RecordingOutput.ImagesAndVideo,
+    videoContainer: VideoContainer.AVI,
+  });
 
-  const outputFilePath = windowsToUnixPathSeparator(
-    getSequenceOutputFilePath(outputFolderPath, sequence, VideoContainer.AVI),
-  );
-
+  const outputFilePath = sanitizePath(getSequenceOutputFilePath(outputFolderPath, sequence, VideoContainer.AVI));
   const wavFileExists = await fs.pathExists(wavFilePath);
   const script = generateVirtualDubScript(
     framerate,
@@ -121,6 +126,7 @@ async function executeVirtualDub(signal: AbortSignal) {
 }
 
 export async function generateVideoWithVirtualDub(settings: GenerateVideoWithVirtualDubSettings, signal: AbortSignal) {
+  await fs.ensureDir(settings.outputFolderPath);
   await writeVirtualDubScript(settings);
   await executeVirtualDub(signal);
 }

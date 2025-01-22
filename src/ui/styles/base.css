@@ -52,6 +52,13 @@
     user-select: none;
   }
 
+  code {
+    background: var(--color-gray-300);
+    color: var(--color-gray-900);
+    padding: 0.2rem 0.4rem;
+    border-radius: var(--radius-4);
+  }
+
   /*
   * Scrollbar
   */

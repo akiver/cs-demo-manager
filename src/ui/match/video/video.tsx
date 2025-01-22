@@ -14,14 +14,14 @@ import { EncoderSoftwareSelect } from './encoder-software-select';
 import { Ffmpeg } from './ffmpeg/ffmpeg';
 import { FramerateInput } from './framerate-input';
 import { ConcatenateSequencesCheckbox } from './concatenate-sequences-checkbox';
-import { GenerateOnlyRawFilesCheckbox } from './generate-only-raw-files-checkbox';
-import { DeleteRawFilesAfterEncodingCheckbox } from './delete-raw-files-after-encoding-checkbox';
 import { GeneratePlayerSequencesButton } from './generate-player-sequences-button';
 import { DeleteSequencesButton } from './sequences/delete-sequences-button';
-import { RawFilesFolderPath } from './raw-files-folder-path';
 import { ResetSettingsButton } from './reset-settings-button';
 import { SequencesSummary } from './sequences-summary';
 import { EditSequencesSettingsButton } from './sequences/edit-sequences/edit-sequences-settings-button';
+import { RecordingSystemSelect } from './recording-system-select';
+import { RecordingOutputSelect } from './recording-output-select';
+import { VideoDocumentationLink } from './video-documentation-link';
 
 export function MatchVideo() {
   return (
@@ -35,24 +35,29 @@ export function MatchVideo() {
           <ResetSettingsButton />
           <DeleteSequencesButton />
           <SequencesSummary />
+          <VideoDocumentationLink />
         </div>
         <div className="flex gap-x-12 mt-12">
-          <div className="flex gap-x-12 border border-gray-400 p-8 rounded">
-            <div className="flex flex-col">
-              <EncoderSoftwareSelect />
-              <GenerateOnlyRawFilesCheckbox />
-              <CloseGameAfterRecordingCheckbox />
-              <ConcatenateSequencesCheckbox />
-              <DeleteRawFilesAfterEncodingCheckbox />
-              <div className="flex flex-col mt-8 gap-8">
+          <div className="flex flex-col border border-gray-400 p-8 rounded">
+            <div className="flex gap-x-12">
+              <div className="flex flex-col">
+                {window.csdm.isWindows && <RecordingSystemSelect />}
+                <RecordingOutputSelect />
+                <EncoderSoftwareSelect />
+              </div>
+              <div className="flex flex-col gap-y-8">
                 <WidthResolutionInput />
                 <HeightResolutionInput />
                 <FramerateInput />
               </div>
             </div>
+
             <div className="flex flex-col gap-y-8">
-              <RawFilesFolderPath />
               <OutputFolderPath />
+              <div>
+                <CloseGameAfterRecordingCheckbox />
+                <ConcatenateSequencesCheckbox />
+              </div>
             </div>
           </div>
           {window.csdm.isWindows && <Hlae />}
