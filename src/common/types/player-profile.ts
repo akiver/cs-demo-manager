@@ -1,12 +1,20 @@
 import type { CompetitiveRankHistory } from 'csdm/common/types/charts/competitive-rank-history';
 import type { PlayerChartsData } from 'csdm/common/types/charts/player-charts-data';
-import type { Rank, CompetitiveRank, PremierRank } from 'csdm/common/types/counter-strike';
+import type { Rank, CompetitiveRank, PremierRank, WeaponName } from 'csdm/common/types/counter-strike';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import type { EconomyBan } from 'csdm/node/steam-web-api/steam-constants';
 import type { Clutch } from './clutch';
 import type { PremierRankHistory } from './charts/premier-rank-history';
 import type { LastMatch } from './last-match';
 import type { MapStats } from './map-stats';
+
+export type PlayerOpeningDuelsStats = {
+  successPercentage: number;
+  tradePercentage: number;
+  bestWeapon: WeaponName;
+};
+
+export type PlayerOpeningDuelsStatsPerSide = Record<'ct' | 't' | 'all', PlayerOpeningDuelsStats>;
 
 export type PlayerProfile = {
   steamId: string;
@@ -57,6 +65,7 @@ export type PlayerProfile = {
   averageEnemiesFlashed: number;
   averageHeGrenadeDamage: number;
   averageSmokesThrownPerMatch: number;
+  openingDuelsStats: PlayerOpeningDuelsStats;
   clutches: Clutch[];
   enemyCountPerRank: Record<Rank, number>;
   competitiveRankHistory: CompetitiveRankHistory[];

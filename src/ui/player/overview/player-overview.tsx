@@ -20,6 +20,7 @@ import { PlayerClutchesPanel } from 'csdm/ui/player/overview/player-clutches-pan
 import { HltvRatingPanel } from 'csdm/ui/components/panels/hltv-rating-panel';
 import { PlayerCommentInput } from './player-comment-input';
 import { PlayerUtilitiesPanel } from './player-utilities-panel';
+import { PlayerOpeningDuelsStats } from './player-opening-duels-panel';
 
 export function PlayerOverview() {
   const {
@@ -81,6 +82,7 @@ export function PlayerOverview() {
             averageHeGrenadeDamage={averageHeGrenadeDamage}
             averageSmokesThrownPerMatch={averageSmokesThrownPerMatch}
           />
+          <PlayerOpeningDuelsStats />
           <RoundsPanel roundCount={roundCount} roundCountAsCt={roundCountAsCt} roundCountAsT={roundCountAsT} />
           <PlayerMultiKillsPanel />
           <PlayerObjectivesPanel />

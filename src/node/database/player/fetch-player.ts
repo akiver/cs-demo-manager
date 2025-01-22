@@ -17,6 +17,7 @@ import { fetchPlayerClutches } from './fetch-player-clutches';
 import { fetchPlayerPremierRankHistory } from './fetch-player-premier-rank-history';
 import { fetchPlayersTagIds } from '../tags/fetch-players-tag-ids';
 import { fetchPlayerUtilitiesStats } from './fetch-player-utilities-stats';
+import { fetchPlayerOpeningDuelsStats } from './fetch-player-opening-duels-stats';
 
 function buildQuery(filters: FetchPlayerFilters) {
   const { count, avg, sum } = db.fn;
@@ -112,6 +113,7 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
     clutches,
     tagIds,
     utilitiesStats,
+    openingDuelsStats,
   ] = await Promise.all([
     fetchLastPlayerData(filters),
     fetchPlayerMatchCountStats(filters),
@@ -127,6 +129,7 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
     fetchPlayerClutches(filters),
     fetchPlayersTagIds([filters.steamId]),
     fetchPlayerUtilitiesStats(filters),
+    fetchPlayerOpeningDuelsStats(filters),
   ]);
   player.name = lastPlayerData.name;
   player.avatar = lastPlayerData.avatar;
@@ -154,6 +157,7 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
   player.averageEnemiesFlashed = utilitiesStats.averageEnemiesFlashed;
   player.averageHeGrenadeDamage = utilitiesStats.averageHeGrenadeDamage;
   player.averageSmokesThrownPerMatch = utilitiesStats.averageSmokesThrownPerMatch;
+  player.openingDuelsStats = openingDuelsStats.all;
 
   return player;
 }
