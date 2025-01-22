@@ -6065,6 +6065,26 @@ msgctxt "Panel label"
 msgid "Competitive rank"
 msgstr "Competitive rank"
 
+#: src/ui/player/overview/player-opening-duels-panel.tsx
+msgctxt "Panel title"
+msgid "Opening duels"
+msgstr "Opening duels"
+
+#: src/ui/player/overview/player-opening-duels-panel.tsx
+msgctxt "Panel label"
+msgid "Success"
+msgstr "Success"
+
+#: src/ui/player/overview/player-opening-duels-panel.tsx
+msgctxt "Panel label"
+msgid "Traded"
+msgstr "Traded"
+
+#: src/ui/player/overview/player-opening-duels-panel.tsx
+msgctxt "Panel label"
+msgid "Best weapon"
+msgstr "Best weapon"
+
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "On average, how long enemies stay blind whilst affected by a player's flashbang."
 msgstr "On average, how long enemies stay blind whilst affected by a player's flashbang."
