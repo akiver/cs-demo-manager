@@ -157,6 +157,7 @@ export default [
             '^Valve$',
             '^FACEIT$',
             '^CS Demo Manager$',
+            '^Counter-Strike$',
             'rgba',
             '^setpos ',
             '^Ctrl+',

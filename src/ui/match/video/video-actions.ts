@@ -6,6 +6,5 @@ export const initializeVideoSuccess = createAction<{
   virtualDubVersion: string | undefined;
   ffmpegVersion: string | undefined;
   ffmpegUpdateAvailable: boolean;
-  rawFilesFolderPath: string;
   outputFolderPath: string;
 }>('match/video/initializationSuccess');

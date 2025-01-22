@@ -42,5 +42,5 @@ export function VirtualDubInstallButton() {
     }
   };
 
-  return <InstallButton isDisabled={isVirtualDubInstalled || isInstalling} onClick={onClick} />;
+  return <InstallButton isDisabled={isVirtualDubInstalled} isInstalling={isInstalling} onClick={onClick} />;
 }

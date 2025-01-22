@@ -8,6 +8,8 @@ import type { DemosTableFilter } from 'csdm/node/database/demos/demos-table-filt
 import type { PlayersTableFilter } from 'csdm/node/database/players/players-table-filter';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filter';
+import type { RecordingSystem } from 'csdm/common/types/recording-system';
+import type { RecordingOutput } from 'csdm/common/types/recording-output';
 
 export type Folder = {
   path: string;
@@ -85,6 +87,7 @@ export type PlayerProfileSettings = {
 
 export type FfmpegSettings = {
   audioBitrate: number;
+  // ! Has no effect when outputParameters is set
   constantRateFactor: number;
   customLocationEnabled: boolean;
   customExecutableLocation: string;
@@ -123,19 +126,18 @@ export type TeamProfileSettings = {
 };
 
 export type VideoSettings = {
+  recordingSystem: RecordingSystem;
+  recordingOutput: RecordingOutput;
   encoderSoftware: EncoderSoftware;
   framerate: number;
   width: number;
   height: number;
-  generateOnlyRawFiles: boolean;
-  deleteRawFilesAfterEncoding: boolean;
   closeGameAfterRecording: boolean;
   showOnlyDeathNotices: boolean;
   showXRay: boolean;
   concatenateSequences: boolean;
   playerVoicesEnabled: boolean;
   ffmpegSettings: FfmpegSettings;
-  rawFilesFolderPath: string;
   outputFolderPath: string;
   // @platform win32 Requires HLAE
   // How long death notices will be displayed in seconds by default. It can be overridden in the sequence settings.

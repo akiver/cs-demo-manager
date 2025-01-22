@@ -57,7 +57,6 @@ class VideoQueue {
       output: '',
       errorCode: undefined,
       // Raw files and output files are stored in a folder named after the video id to avoid overwriting files
-      rawFilesFolderPath: isUpdate ? partialVideo.rawFilesFolderPath : path.join(partialVideo.rawFilesFolderPath, id),
       outputFolderPath: isUpdate ? partialVideo.outputFolderPath : path.join(partialVideo.outputFolderPath, id),
     };
     this.videos.push(video);
