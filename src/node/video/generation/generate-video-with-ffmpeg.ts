@@ -2,16 +2,23 @@ import path from 'node:path';
 import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { Sequence } from 'csdm/common/types/sequence';
-import { getSequenceOutputFilePath } from 'csdm/node/video/sequences/get-sequence-output-file-path';
-import { isWindows } from 'csdm/node/os/is-windows';
-import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
-import { getSequenceRawFiles } from 'csdm/node/video/sequences/get-sequence-raw-files';
+import { getSequenceOutputFilePath } from 'csdm/node/video/generation/get-sequence-output-file-path';
+import { getSequenceName } from 'csdm/node/video/generation/get-sequence-name';
+import { getSequenceRawFiles } from 'csdm/node/video/generation/get-sequence-raw-files';
 import { executeFfmpeg } from 'csdm/node/video/ffmpeg/execute-ffmpeg';
 import type { VideoContainer } from 'csdm/common/types/video-container';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
+import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { RawFilesNotFoundError } from '../errors/raw-files-not-found';
+
+function buildMergeVideoAndAudioArgs(videoFilePath: string, wavFilePath: string, outputPath: string) {
+  return [`-i "${videoFilePath}"`, `-i "${wavFilePath}"`, '-c copy', '-map 0:v:0', '-map 1:a:0', `"${outputPath}"`];
+}
 
 type GenerateVideoWithFFmpegSettings = {
+  recordingSystem: RecordingSystem;
+  recordingOutput: RecordingOutput;
   game: Game;
-  rawFilesFolderPath: string;
   outputFolderPath: string;
   framerate: number;
   videoContainer: VideoContainer;
@@ -25,8 +32,9 @@ type GenerateVideoWithFFmpegSettings = {
 };
 
 async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
-  let rawFilesPathPattern: string;
   const {
+    recordingSystem,
+    recordingOutput,
     game,
     sequence,
     outputFolderPath,
@@ -37,12 +45,31 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
     videoCodec,
     audioCodec,
     inputParameters,
-    rawFilesFolderPath,
     outputParameters,
   } = settings;
-  const { tgaFiles, wavFilePath } = await getSequenceRawFiles(sequence, rawFilesFolderPath, game);
+  const { tgaFiles, wavFilePath, videoFilePath } = await getSequenceRawFiles({
+    recordingSystem,
+    sequence,
+    game,
+    recordingOutput,
+    videoContainer,
+    outputFolderPath,
+  });
+
+  // It's important to create the output folder before running FFmpeg otherwise it will fail.
+  await fs.ensureDir(outputFolderPath);
+
+  const outputPath = getSequenceOutputFilePath(outputFolderPath, sequence, videoContainer);
+  if (recordingSystem === RecordingSystem.HLAE && recordingOutput === RecordingOutput.Video) {
+    if (!videoFilePath) {
+      throw new RawFilesNotFoundError();
+    }
+    return buildMergeVideoAndAudioArgs(videoFilePath, wavFilePath, outputPath);
+  }
+
+  let rawFilesPathPattern: string;
   const sequenceRawFilesFolderPath = path.dirname(tgaFiles[0]);
-  if (isWindows && game === Game.CSGO) {
+  if (recordingSystem === RecordingSystem.HLAE) {
     rawFilesPathPattern = path.join(sequenceRawFilesFolderPath, '%05d.tga');
   } else {
     const sequenceName = getSequenceName(sequence);
@@ -65,7 +92,7 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
     args.push(`-i "${wavFilePath}"`);
   }
 
-  args.push(`-vcodec ${videoCodec} -pix_fmt yuv420p`, `-crf ${constantRateFactor}`);
+  args.push(`-vcodec ${videoCodec}`);
 
   if (wavFileExists) {
     args.push(`-acodec ${audioCodec}`, `-b:a ${audioBitrate}K`);
@@ -73,13 +100,11 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
 
   if (outputParameters !== '') {
     args.push(outputParameters);
+  } else {
+    args.push(`-pix_fmt yuv420p`, `-crf ${constantRateFactor}`);
   }
 
-  // It's important to create the output folder before running FFmpeg otherwise it will fail.
-  await fs.ensureDir(outputFolderPath);
-
-  const outputPath = getSequenceOutputFilePath(outputFolderPath, sequence, videoContainer);
-  args.push('"' + outputPath + '"');
+  args.push(`"${outputPath}"`);
 
   return args;
 }

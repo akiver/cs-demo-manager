@@ -17,6 +17,7 @@ import { ErrorCode } from 'csdm/common/error-code';
 import { AddVideoToQueueErrorDialog } from './add-video-to-queue-error-dialog';
 import { getVideoErrorMessageFromErrorCode } from './get-video-error-from-error-code';
 import { RoutePath } from 'csdm/ui/routes-paths';
+import { roundNumber } from 'csdm/common/math/round-number';
 
 export function AddVideoToQueueButton() {
   const match = useCurrentMatch();
@@ -24,7 +25,7 @@ export function AddVideoToQueueButton() {
   const { showDialog } = useDialog();
   const { settings } = useVideoSettings();
   const [isAddingVideoToQueue, setIsAddingVideoToQueue] = useState(false);
-  const requiredDiskSpace = useSequencesRequiredDiskSpace();
+  const requiredBytes = useSequencesRequiredDiskSpace();
   const client = useWebSocketClient();
   const navigate = useNavigate();
 
@@ -58,17 +59,18 @@ export function AddVideoToQueueButton() {
       setIsAddingVideoToQueue(false);
     };
 
-    if (requiredDiskSpace > 40) {
+    const requiredGigaBytes = roundNumber(requiredBytes / (1024 * 1024 * 1024), 2);
+    if (requiredGigaBytes > 40) {
       showDialog(
         <ConfirmDialog title={<Trans>Disk space warning</Trans>} onConfirm={tryAddingVideoToQueue}>
           <p>
             {match.game === Game.CSGO ? (
               <Trans>
-                You will need at least <strong>{requiredDiskSpace}GB</strong> of free disk space to generate the videos.
+                You will need at least <strong>{requiredGigaBytes}GB</strong> of free disk space to generate the videos.
               </Trans>
             ) : (
               <Trans>
-                You will need at least <strong>{requiredDiskSpace}GB</strong> of free disk space on the disk where CS2
+                You will need at least <strong>{requiredGigaBytes}GB</strong> of free disk space on the disk where CS2
                 is installed to generate the videos.
               </Trans>
             )}

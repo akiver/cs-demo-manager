@@ -5,7 +5,7 @@ import { RendererServerMessageName } from 'csdm/server/renderer-server-message-n
 import { getErrorCodeFromError } from './get-error-code-from-error';
 import { ErrorCode } from 'csdm/common/error-code';
 import { VideoStatus } from 'csdm/common/types/video-status';
-import { generateVideo } from 'csdm/node/video/generate-video';
+import { generateVideo } from 'csdm/node/video/generation/generate-video';
 import { AbortError } from 'csdm/node/errors/abort-error';
 import { CommandError } from 'csdm/node/video/errors/command-error';
 import type { AddVideoPayload, Video } from 'csdm/common/types/video';
@@ -57,7 +57,6 @@ class VideoQueue {
       output: '',
       errorCode: undefined,
       // Raw files and output files are stored in a folder named after the video id to avoid overwriting files
-      rawFilesFolderPath: isUpdate ? partialVideo.rawFilesFolderPath : path.join(partialVideo.rawFilesFolderPath, id),
       outputFolderPath: isUpdate ? partialVideo.outputFolderPath : path.join(partialVideo.outputFolderPath, id),
     };
     this.videos.push(video);

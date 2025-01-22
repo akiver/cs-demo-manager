@@ -1,26 +1,50 @@
 import type { Sequence } from 'csdm/common/types/sequence';
-import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
+import { getSequenceName } from 'csdm/node/video/generation/get-sequence-name';
 import { JSONActionsFileGenerator } from 'csdm/node/counter-strike/json-actions-file/json-actions-file-generator';
 import { Game } from 'csdm/common/types/counter-strike';
-import { generatePlayerVoicesValues } from '../counter-strike/launcher/generate-player-voices-values';
+import { generatePlayerVoicesValues } from 'csdm/node/counter-strike/launcher/generate-player-voices-values';
 import type { PlayerWatchInfo } from 'csdm/common/types/player-watch-info';
+import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix-path-separator';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
+import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { EncoderSoftware } from 'csdm/common/types/encoder-software';
+import type { VideoContainer } from 'csdm/common/types/video-container';
+
+function getHlaeOutputFolderPath(outputFolderPath: string, sequence: Sequence) {
+  return `${windowsToUnixPathSeparator(outputFolderPath)}/${getSequenceName(sequence)}`;
+}
 
 type Options = {
+  recordingSystem: RecordingSystem;
+  recordingOutput: RecordingOutput;
+  encoderSoftware: EncoderSoftware;
+  outputFolderPath: string;
   framerate: number;
   demoPath: string;
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
   tickrate: number;
   players: PlayerWatchInfo[];
+  ffmpegSettings: {
+    constantRateFactor: number;
+    videoContainer: VideoContainer;
+    videoCodec: string;
+    outputParameters: string;
+  };
 };
 
 export async function createCs2JsonActionsFileForRecording({
+  recordingSystem,
+  recordingOutput,
+  encoderSoftware,
+  outputFolderPath,
   framerate,
   demoPath,
   sequences,
   closeGameAfterRecording,
   tickrate,
   players,
+  ffmpegSettings,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath, Game.CS2);
 
@@ -32,6 +56,7 @@ export async function createCs2JsonActionsFileForRecording({
     'cl_hud_telemetry_ping_show 0',
     'cl_hud_telemetry_serverrecvmargin_graph_show 0',
     'r_show_build_info 0',
+    'mirv_streams record screen enabled 1',
   ];
 
   for (let i = 0; i < sequences.length; i++) {
@@ -53,10 +78,38 @@ export async function createCs2JsonActionsFileForRecording({
     const roundedTickrate = Math.round(tickrate);
     const setupSequenceTick = sequence.startTick - roundedTickrate > 0 ? sequence.startTick - roundedTickrate : 1;
 
+    const hlaeOutputFolderPath = getHlaeOutputFolderPath(outputFolderPath, sequence);
+    const presetName =
+      recordingOutput === RecordingOutput.Video && encoderSoftware === EncoderSoftware.FFmpeg
+        ? `csdmPreset${sequence.number}`
+        : 'afxClassic';
+
     json
+      .addExecCommand(setupSequenceTick, `mirv_streams record startMovieWav 1`)
+      .addExecCommand(setupSequenceTick, `mirv_streams record name "${hlaeOutputFolderPath}"`)
       .addExecCommand(setupSequenceTick, `mirv_deathmsg clear`)
-      .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`)
       .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`);
+
+    if (presetName !== 'afxClassic') {
+      let presetParameters = `-c:v ${ffmpegSettings.videoCodec}`;
+      if (ffmpegSettings.outputParameters === '') {
+        presetParameters += ` -crf ${ffmpegSettings.constantRateFactor}`;
+      } else {
+        presetParameters += ` ${ffmpegSettings.outputParameters}`;
+      }
+      json
+        .addExecCommand(
+          setupSequenceTick,
+          `mirv_streams settings add ffmpeg ${presetName} "${presetParameters} {QUOTE}${hlaeOutputFolderPath}\\\\video.${ffmpegSettings.videoContainer}{QUOTE}"`,
+        )
+        .addExecCommand(setupSequenceTick, `mirv_streams record screen settings ${presetName}`);
+    }
+
+    if (recordingSystem === RecordingSystem.HLAE) {
+      json.addExecCommand(setupSequenceTick, `mirv_streams record fps ${framerate}`);
+    } else {
+      json.addExecCommand(setupSequenceTick, `host_framerate ${framerate}`);
+    }
 
     if (typeof sequence.cfg === 'string') {
       const commands = sequence.cfg.split('\n');
@@ -123,9 +176,15 @@ export async function createCs2JsonActionsFileForRecording({
       }
     }
 
-    json
-      .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
-      .addExecCommand(sequence.endTick, 'endmovie');
+    if (recordingSystem === RecordingSystem.HLAE) {
+      json
+        .addExecCommand(sequence.startTick, `mirv_streams record start`)
+        .addExecCommand(sequence.endTick, 'mirv_streams record end');
+    } else {
+      json
+        .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
+        .addExecCommand(sequence.endTick, 'endmovie');
+    }
 
     if (closeGameAfterRecording && i === sequences.length - 1) {
       json.addExecCommand(sequences[sequences.length - 1].endTick + 64, 'quit');

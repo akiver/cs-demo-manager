@@ -6,6 +6,7 @@ import { useIsVirtualDubInstalled } from 'csdm/ui/match/video/virtualdub/use-is-
 import { VIRTUALDUB_VERSION } from 'csdm/node/video/virtual-dub/virtual-dub-version';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
 
 export function VirtualDub() {
   const virtualDubVersion = useIsVirtualDubInstalled() ? VIRTUALDUB_VERSION : undefined;
@@ -15,7 +16,7 @@ export function VirtualDub() {
     return null;
   }
 
-  if (settings.generateOnlyRawFiles) {
+  if (settings.recordingOutput === RecordingOutput.Images) {
     return null;
   }
 

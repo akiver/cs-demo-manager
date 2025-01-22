@@ -42,5 +42,5 @@ export function HlaeInstallButton() {
     }
   };
 
-  return <InstallButton isDisabled={isHlaeInstalled || isInstalling} onClick={onClick} />;
+  return <InstallButton isDisabled={isHlaeInstalled} isInstalling={isInstalling} onClick={onClick} />;
 }

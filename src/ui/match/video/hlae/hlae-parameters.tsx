@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { useHlaeSettings } from 'csdm/ui/settings/video/hlae/use-hlae-settings';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 
 export function HlaeParameters() {
-  const { settings, updateSettings } = useVideoSettings();
+  const { hlaeSettings, updateHlaeSettings } = useHlaeSettings();
   const [parameters, setParameters] = useState<string | undefined>(() => {
-    return settings.hlae.parameters;
+    return hlaeSettings.parameters;
   });
 
   const onBlur = () => {
-    updateSettings({
-      hlae: {
-        parameters,
-      },
+    updateHlaeSettings({
+      parameters,
     });
   };
 

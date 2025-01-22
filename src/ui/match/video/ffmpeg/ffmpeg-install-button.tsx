@@ -16,7 +16,7 @@ export function FfmpegInstallButton() {
   const isFfmpegInstalled = useIsFfmpegInstalled();
   const [isInstalling, setIsInstalling] = useState(false);
   const ffmpegSettings = useFfmpegSettings();
-  const isDisabled = isFfmpegInstalled || isInstalling || ffmpegSettings.customLocationEnabled;
+  const isDisabled = isFfmpegInstalled || ffmpegSettings.customLocationEnabled;
 
   const onClick = async () => {
     try {
@@ -45,5 +45,5 @@ export function FfmpegInstallButton() {
     }
   };
 
-  return <InstallButton isDisabled={isDisabled} onClick={onClick} />;
+  return <InstallButton isDisabled={isDisabled} isInstalling={isInstalling} onClick={onClick} />;
 }

@@ -3,7 +3,7 @@ import { useSequencesRequiredDiskSpace } from './use-sequences-required-disk-spa
 import { RequiredDiskSpace } from './required-disk-space';
 
 export function SequencesDiskSpace() {
-  const requiredDiskSpace = useSequencesRequiredDiskSpace();
+  const bytes = useSequencesRequiredDiskSpace();
 
-  return <RequiredDiskSpace requiredDiskSpace={requiredDiskSpace} />;
+  return <RequiredDiskSpace bytes={bytes} />;
 }

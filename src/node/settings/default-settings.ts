@@ -5,6 +5,8 @@ import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import { AnalysisStatusFilter } from 'csdm/common/types/analysis-status-filter';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { VideoContainer } from 'csdm/common/types/video-container';
+import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
 
 export const defaultSettings: Settings = {
   schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -65,9 +67,10 @@ export const defaultSettings: Settings = {
     playerVoicesEnabled: true,
   },
   video: {
+    recordingSystem: RecordingSystem.CounterStrike,
+    recordingOutput: RecordingOutput.Video,
     closeGameAfterRecording: true,
     concatenateSequences: false,
-    deleteRawFilesAfterEncoding: true,
     showXRay: true,
     showOnlyDeathNotices: true,
     deathNoticesDuration: 5,
@@ -85,10 +88,8 @@ export const defaultSettings: Settings = {
       outputParameters: '',
     },
     framerate: 30,
-    generateOnlyRawFiles: false,
     height: 720,
     width: 1280,
-    rawFilesFolderPath: '',
     outputFolderPath: '',
     hlae: {
       customLocationEnabled: false,

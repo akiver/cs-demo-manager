@@ -8,21 +8,22 @@ export function ResetSettingsButton() {
   const { updateSettings } = useVideoSettings();
   const onClick = () => {
     const {
+      recordingSystem,
+      recordingOutput,
       closeGameAfterRecording,
       concatenateSequences,
-      deleteRawFilesAfterEncoding,
       deathNoticesDuration,
       encoderSoftware,
       ffmpegSettings,
       framerate,
-      generateOnlyRawFiles,
       height,
       width,
     } = defaultSettings.video;
     updateSettings({
+      recordingSystem,
+      recordingOutput,
       closeGameAfterRecording,
       concatenateSequences,
-      deleteRawFilesAfterEncoding,
       deathNoticesDuration,
       encoderSoftware,
       ffmpegSettings: {
@@ -35,7 +36,6 @@ export function ResetSettingsButton() {
         videoContainer: ffmpegSettings.videoContainer,
       },
       framerate,
-      generateOnlyRawFiles,
       height,
       width,
     });
