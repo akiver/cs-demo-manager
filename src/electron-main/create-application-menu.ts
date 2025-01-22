@@ -346,12 +346,6 @@ export function createApplicationMenu() {
         },
       },
       {
-        label: 'Twitter',
-        click: () => {
-          shell.openExternal('https://twitter.com/CSGODemoManager');
-        },
-      },
-      {
         label: 'GitHub',
         click: () => {
           shell.openExternal('https://github.com/akiver/cs-demo-manager');

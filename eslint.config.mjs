@@ -173,7 +173,6 @@ export default [
             '^ArrowRight$',
             '^https://',
             '^Toggle Developer Tools$',
-            '^Twitter$',
             '^GitHub$',
             'Inter var$',
           ],
