@@ -209,14 +209,14 @@ export async function generateVideo(parameters: Parameters) {
       tickrate,
     });
   } else {
-    const playerSlots = await fetchMatchPlayersSlots(parameters.checksum);
+    const players = await fetchMatchPlayersSlots(parameters.checksum);
     await createCs2JsonActionsFileForRecording({
       framerate,
       demoPath,
       sequences,
       closeGameAfterRecording,
       tickrate,
-      playerSlots,
+      players,
     });
   }
 

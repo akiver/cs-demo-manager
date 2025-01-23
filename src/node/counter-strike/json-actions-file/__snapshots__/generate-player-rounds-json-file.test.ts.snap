@@ -13,6 +13,14 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
         "tick": 64
       },
       {
+        "cmd": "alias \\"voice_all\\" \\"tv_listen_voice_indices -1; tv_listen_voice_indices_h -1; echo Listening to all players\\"",
+        "tick": 64
+      },
+      {
+        "cmd": "echo \\"[CSDM] Type voice_all to listen to all players\\"",
+        "tick": 64
+      },
+      {
         "cmd": "demo_gototick 872",
         "tick": 64
       },
