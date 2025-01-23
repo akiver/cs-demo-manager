@@ -36,7 +36,7 @@
     "dev:cli": "node ./scripts/develop-cli.mjs",
     "electron": "electron ./out/main.js",
     "format": "prettier --write \"**\"",
-    "i18n:extract": "lingui extract --config ./lingui.config.ts --clean --overwrite && node ./scripts/fix-po-blank-lines.mjs && lingui extract --config ./src/electron-main/lingui.config.ts --clean --overwrite",
+    "i18n:extract": "lingui extract --config ./lingui.config.ts --clean --overwrite && lingui extract --config ./src/electron-main/lingui.config.ts --clean --overwrite",
     "lint": "eslint \"**\"",
     "package": "electron-builder --config electron-builder.config.js",
     "package:dir": "npm run package -- --dir",

@@ -7607,4 +7607,3 @@ msgstr "Sortie"
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
 msgstr "Aucune génération de vidéo en cours."
-

@@ -7606,4 +7606,3 @@ msgstr "Output"
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
 msgstr "No video generation in progress."
-
