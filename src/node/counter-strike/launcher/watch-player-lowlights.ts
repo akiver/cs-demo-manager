@@ -10,6 +10,7 @@ import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-
 import { generatePlayerLowlightsJsonFile } from '../json-actions-file/generate-player-lowlights-json-file';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 import { assertPlayersSlotsAreDefined } from './assert-players-slots-are-defined';
+import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
 
 function assertPlayerHasActions(match: PlaybackMatch) {
   if (match.actions.length === 0) {
@@ -48,6 +49,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
           beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,
           nextDelaySeconds: lowlights.afterKillDelayInSeconds,
           playerVoicesEnabled,
+          players: [],
         });
       }
     } else {
@@ -61,6 +63,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
 
     assertPlayerHasActions(match);
     assertPlayersSlotsAreDefined(match.actions);
+    const players = await fetchMatchPlayersSlots(match.checksum);
 
     await generatePlayerLowlightsJsonFile({
       actions: match.actions,
@@ -72,6 +75,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
       beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,
       nextDelaySeconds: lowlights.afterKillDelayInSeconds,
       playerVoicesEnabled,
+      players,
     });
   }
 

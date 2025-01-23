@@ -9,6 +9,7 @@ import { generatePlayerRoundsJsonFile } from '../json-actions-file/generate-play
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
+import type { PlayerWatchInfo } from 'csdm/common/types/player-watch-info';
 
 export type Round = {
   number: number;
@@ -73,13 +74,15 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
   const settings = await getSettings();
   const { round, playerVoicesEnabled } = settings.playback;
   const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds } = round;
+  let players: PlayerWatchInfo[] = [];
   let playerId: number | string = steamId;
   if (game !== Game.CSGO) {
-    const slots = await fetchMatchPlayersSlots(checksum);
-    playerId = slots[steamId];
-    if (!playerId) {
+    players = await fetchMatchPlayersSlots(checksum);
+    const player = players.find((player) => player.steamId === steamId);
+    if (!player) {
       throw new NoRoundsFound();
     }
+    playerId = player.slot;
   }
 
   const tickrate = await fetchMatchTickrate(checksum);
@@ -92,6 +95,7 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
     beforeDelaySeconds: beforeRoundDelayInSeconds,
     afterDelaySeconds: afterRoundDelayInSeconds,
     playerVoicesEnabled,
+    players,
   });
 
   if (settings.playback.useHlae) {

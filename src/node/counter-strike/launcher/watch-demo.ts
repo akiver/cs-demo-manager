@@ -6,7 +6,7 @@ import { getSettings } from 'csdm/node/settings/get-settings';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
 import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
-import type { Game } from 'csdm/common/types/counter-strike';
+import { Game } from 'csdm/common/types/counter-strike';
 
 async function generateJsonActionsFile(
   demoPath: string,
@@ -27,12 +27,17 @@ async function generateJsonActionsFile(
     json.addSkipAhead(0, startTick);
   }
 
-  if (steamId !== undefined) {
+  if (steamId || game !== Game.CSGO) {
     const checksum = await getDemoChecksumFromDemoPath(demoPath);
-    const slots = await fetchMatchPlayersSlots(checksum);
-    const slot = slots[steamId];
-    if (slot) {
-      json.addSpecPlayer(startTick ?? 0, slot);
+    const players = await fetchMatchPlayersSlots(checksum);
+    if (game !== Game.CSGO) {
+      json.generateVoiceAliases(players);
+    }
+    if (steamId) {
+      const player = players.find((player) => player.steamId === steamId);
+      if (player) {
+        json.addSpecPlayer(startTick ?? 0, player.slot);
+      }
     }
   }
 

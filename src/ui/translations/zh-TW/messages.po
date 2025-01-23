@@ -16,6 +16,7 @@ msgstr ""
 "X-Crowdin-Language: zh-TW\n"
 "X-Crowdin-File: /src/ui/translations/en/messages.po\n"
 "X-Crowdin-File-ID: 198\n"
+"PO-Revision-Date: \n"
 
 #: src/ui/analyses/action-bar/remove-all-analyses-button.tsx
 msgid "Remove all"

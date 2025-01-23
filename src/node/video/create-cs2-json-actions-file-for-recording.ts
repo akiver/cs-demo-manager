@@ -3,6 +3,7 @@ import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
 import { JSONActionsFileGenerator } from 'csdm/node/counter-strike/json-actions-file/json-actions-file-generator';
 import { Game } from 'csdm/common/types/counter-strike';
 import { generatePlayerVoicesValues } from '../counter-strike/launcher/generate-player-voices-values';
+import type { PlayerWatchInfo } from 'csdm/common/types/player-watch-info';
 
 type Options = {
   framerate: number;
@@ -10,7 +11,7 @@ type Options = {
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
   tickrate: number;
-  playerSlots: Record<string, number>;
+  players: PlayerWatchInfo[];
 };
 
 export async function createCs2JsonActionsFileForRecording({
@@ -19,7 +20,7 @@ export async function createCs2JsonActionsFileForRecording({
   sequences,
   closeGameAfterRecording,
   tickrate,
-  playerSlots,
+  players,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath, Game.CS2);
 
@@ -73,9 +74,9 @@ export async function createCs2JsonActionsFileForRecording({
     json.addSkipAhead(1, setupSequenceTick);
 
     for (const camera of sequence.cameras) {
-      const playerSlot = playerSlots[camera.playerSteamId];
-      if (playerSlot) {
-        json.addSpecPlayer(camera.tick, playerSlot);
+      const player = players.find((player) => player.steamId === camera.playerSteamId);
+      if (player) {
+        json.addSpecPlayer(camera.tick, player.slot);
       }
     }
 
@@ -108,10 +109,13 @@ export async function createCs2JsonActionsFileForRecording({
       if (playerOptions.isVoiceEnabled) {
         const playersWithVoiceEnabled = sequence.playersOptions.filter((playerOptions) => playerOptions.isVoiceEnabled);
         if (playersWithVoiceEnabled.length !== sequence.playersOptions.length) {
-          const userIds = playersWithVoiceEnabled.map((playerOptions) => {
-            // The player slot is the user id + 1 in demos.
-            return playerSlots[playerOptions.steamId] - 1;
-          });
+          const userIds: number[] = [];
+          for (const playerOptions of playersWithVoiceEnabled) {
+            const player = players.find((player) => player.steamId === playerOptions.steamId);
+            if (player) {
+              userIds.push(player.userId);
+            }
+          }
           const { valueLow, valueHigh } = generatePlayerVoicesValues(userIds);
           json.addExecCommand(setupSequenceTick, `tv_listen_voice_indices ${valueLow}`);
           json.addExecCommand(setupSequenceTick, `tv_listen_voice_indices_h ${valueHigh}`);

@@ -62,6 +62,7 @@ describe(`Generate player's lowlights JSON file`, () => {
       beforeDelaySeconds: 2,
       nextDelaySeconds: 4,
       playerVoicesEnabled: true,
+      players: [],
     });
 
     const content = await fs.readFile(`${demoPath}.json`, 'utf8');
@@ -123,6 +124,7 @@ describe(`Generate player's lowlights JSON file`, () => {
       beforeDelaySeconds: 2,
       nextDelaySeconds: 4,
       playerVoicesEnabled: true,
+      players: [],
     });
 
     const content = await fs.readFile(`${demoPath}.json`, 'utf8');
