@@ -111,6 +111,15 @@ export function About() {
             </li>
             <li>
               <Trans>
+                <ExternalLink href="https://github.com/GAMMACASE">@GAMMACASE</ExternalLink>,{' '}
+                <ExternalLink href="https://github.com/zer0k-z">@zer0.k</ExternalLink> and other AlliedModders
+                contributors to the{' '}
+                <ExternalLink href="https://github.com/alliedmodders/hl2sdk/tree/cs2">CS2 SDK</ExternalLink> internally
+                used by CS Demo Manager.
+              </Trans>
+            </li>
+            <li>
+              <Trans>
                 <ExternalLink href="https://github.com/LaihoE">@LaihoE</ExternalLink> for his reverse engineering work
                 on CS2 demo parsing. His parser is available on{' '}
                 <ExternalLink href="https://github.com/LaihoE/demoparser">GitHub</ExternalLink>.
