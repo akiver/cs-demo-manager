@@ -69,7 +69,7 @@ export function Dialog({
     >
       <div
         ref={container}
-        className="flex flex-col bg-gray-50 text-gray-800 rounded min-w-[524px] max-h-full focus-visible:outline-none shadow-[0_0_0_1px_theme(colors.gray.300)]"
+        className="flex flex-col bg-gray-50 text-gray-800 rounded min-w-[524px] max-h-[calc(100vh-140px)] overflow-y-auto focus-visible:outline-none shadow-[0_0_0_1px_theme(colors.gray.300)]"
         tabIndex={-1}
         onMouseDown={onMouseDown}
         onKeyDown={onKeyDown}

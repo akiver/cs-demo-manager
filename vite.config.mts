@@ -1,4 +1,5 @@
 import path from 'node:path';
+import fs from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -33,5 +34,12 @@ export default defineConfig({
       },
     }),
     lingui(),
+    {
+      name: 'write-changelog-file',
+      async closeBundle() {
+        // Write a dummy changelog file that will be used to determine if the changelog dialog should be shown.
+        await fs.writeFile('./static/changelog', '', 'utf-8');
+      },
+    },
   ],
 });

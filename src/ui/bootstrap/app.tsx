@@ -7,15 +7,26 @@ import { DropZone } from './drop-zone';
 import { ContextMenuProvider } from '../components/context-menu/context-menu-provider';
 import { useArgumentsContext } from './use-arguments-context';
 import { Outlet } from 'react-router';
+import { useDialog } from '../components/dialogs/use-dialog';
+import { ChangelogDialog } from '../changelog/changelog-dialog';
 
 export function App() {
   const { clearArguments } = useArgumentsContext();
+  const { showDialog } = useDialog();
 
   useEffect(() => {
     // The app has been renderer, we can now clear startup arguments so that they will be ignored when
     // reloading the window.
     clearArguments();
   }, [clearArguments]);
+
+  useEffect(() => {
+    (async () => {
+      if (await window.csdm.shouldShowChangelog()) {
+        showDialog(<ChangelogDialog />);
+      }
+    })();
+  }, [showDialog]);
 
   return (
     <NavigationListener>

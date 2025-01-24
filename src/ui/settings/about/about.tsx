@@ -13,6 +13,7 @@ import { SettingsEntry } from '../settings-entry';
 import { Switch } from 'csdm/ui/components/inputs/switch';
 import { useSettings } from '../use-settings';
 import { useUpdateSettings } from '../use-update-settings';
+import { Donate } from 'csdm/ui/components/donate';
 
 export function About() {
   const client = useWebSocketClient();
@@ -155,27 +156,7 @@ export function About() {
         </section>
 
         <section>
-          <h3 className="text-subtitle">
-            <Trans>Donate</Trans>
-          </h3>
-          <p>
-            <Trans>
-              CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since
-              then.
-            </Trans>
-          </p>
-          <p>
-            <Trans>
-              It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy
-              using.
-            </Trans>
-          </p>
-          <p>
-            <Trans>
-              Your <ExternalLink href="https://cs-demo-manager.com/download">donation</ExternalLink> is greatly
-              appreciated and motivates me to continue working on CS Demo Manager. Thank you!
-            </Trans>
-          </p>
+          <Donate />
         </section>
       </div>
     </SettingsView>

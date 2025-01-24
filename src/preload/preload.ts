@@ -257,6 +257,15 @@ const api: PreloadApi = {
   toggleAutoDownloadUpdates: (isEnabled: boolean) => {
     ipcRenderer.invoke(IPCChannel.ToggleAutoUpdate, isEnabled);
   },
+
+  shouldShowChangelog: async () => {
+    const changelogFilePath = path.join(getStaticFolderPath(), 'changelog');
+    const fileExists = await fs.pathExists(changelogFilePath);
+    // Delete the file to prevent the changelog dialog from showing next time the app is opened.
+    await fs.remove(changelogFilePath);
+
+    return fileExists;
+  },
 };
 
 contextBridge.exposeInMainWorld('csdm', api);

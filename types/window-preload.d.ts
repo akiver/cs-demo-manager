@@ -86,6 +86,7 @@ declare global {
     hasUpdateReadyToInstall: () => Promise<boolean>;
     installUpdate: () => void;
     toggleAutoDownloadUpdates: (isEnabled: boolean) => void;
+    shouldShowChangelog: () => Promise<boolean>;
   }
 
   interface Window {

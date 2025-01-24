@@ -392,6 +392,10 @@ msgstr "A conexão com o servidor de WebSocket falhou com o código {code}."
 msgid "An error occurred connecting to the WebSocket server."
 msgstr "Ocorreu um erro ao se conectar ao servidor WebSocket."
 
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Changelog version {APP_VERSION}"
+msgstr ""
+
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
 msgid "Analyze"
@@ -1080,6 +1084,22 @@ msgstr "Jogador"
 msgctxt "Watch from enemy point of view"
 msgid "Enemy"
 msgstr "Inimigo"
+
+#: src/ui/components/donate.tsx
+msgid "Donate"
+msgstr "Faça uma doação"
+
+#: src/ui/components/donate.tsx
+msgid "CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since then."
+msgstr ""
+
+#: src/ui/components/donate.tsx
+msgid "It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy using."
+msgstr ""
+
+#: src/ui/components/donate.tsx
+msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
+msgstr ""
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
@@ -6503,6 +6523,10 @@ msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager 
 msgstr ""
 
 #: src/ui/settings/about/about.tsx
+msgid "<0>@GAMMACASE</0>, <1>@zer0.k</1> and other AlliedModders contributors to the <2>CS2 SDK</2> internally used by CS Demo Manager."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
 msgid "<0>@LaihoE</0> for his reverse engineering work on CS2 demo parsing. His parser is available on <1>GitHub</1>."
 msgstr ""
 
@@ -6516,22 +6540,6 @@ msgstr ""
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@saul</0>, a Source Engine/CS wizard who created a <1>CSGO</1> and <2>CS2</2> demo parser and share his CS related knowledge through various <3>open-source</3> <4>projects</4>. You can support him on <5>GitHub</5>."
-msgstr ""
-
-#: src/ui/settings/about/about.tsx
-msgid "Donate"
-msgstr "Faça uma doação"
-
-#: src/ui/settings/about/about.tsx
-msgid "CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since then."
-msgstr ""
-
-#: src/ui/settings/about/about.tsx
-msgid "It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy using."
-msgstr ""
-
-#: src/ui/settings/about/about.tsx
-msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
 msgstr ""
 
 #: src/ui/settings/about/clear-logs-button.tsx

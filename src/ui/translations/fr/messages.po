@@ -392,6 +392,10 @@ msgstr "La connexion au serveur WebSocket a échoué avec le code {code}."
 msgid "An error occurred connecting to the WebSocket server."
 msgstr "Une erreur est survenue lors de la connexion au serveur WebSocket."
 
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Changelog version {APP_VERSION}"
+msgstr ""
+
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
 msgid "Analyze"
@@ -1080,6 +1084,22 @@ msgstr "Joueur"
 msgctxt "Watch from enemy point of view"
 msgid "Enemy"
 msgstr "Ennemi"
+
+#: src/ui/components/donate.tsx
+msgid "Donate"
+msgstr "Faire un don"
+
+#: src/ui/components/donate.tsx
+msgid "CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since then."
+msgstr "CS Demo Manager est un projet que j'ai commencé pendant mes études en 2014 et que j'ai maintenu autant que possible depuis."
+
+#: src/ui/components/donate.tsx
+msgid "It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy using."
+msgstr "Il n'est soutenu par aucune entité d'entreprise et est un logiciel libre et open-source que j'espère que vous appréciez d'utiliser."
+
+#: src/ui/components/donate.tsx
+msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
+msgstr "Votre <0>donation</0> est très appréciée et me motive à continuer à travailler sur CS Demo Manager. Merci!"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
@@ -6503,6 +6523,10 @@ msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager 
 msgstr "<0>@dtugend</0>, le développeur principal de <1>HLAE</1> utilisé par CS Demo Manager pour générer des vidéos. Sans HLAE, la communauté CS moviemaking ne serait pas la même. Vous pouvez soutenir l’équipe HLAE <2>ici</2>."
 
 #: src/ui/settings/about/about.tsx
+msgid "<0>@GAMMACASE</0>, <1>@zer0.k</1> and other AlliedModders contributors to the <2>CS2 SDK</2> internally used by CS Demo Manager."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
 msgid "<0>@LaihoE</0> for his reverse engineering work on CS2 demo parsing. His parser is available on <1>GitHub</1>."
 msgstr "<0>@LaihoE</0> pour son travail de rétro-ingénierie sur le format des démos CS2. Son parseur est disponible sur <1>GitHub</1>."
 
@@ -6517,22 +6541,6 @@ msgstr "<0>@markus-wa</0> pour la création et la maintenance de <1>demoinfocs-g
 #: src/ui/settings/about/about.tsx
 msgid "<0>@saul</0>, a Source Engine/CS wizard who created a <1>CSGO</1> and <2>CS2</2> demo parser and share his CS related knowledge through various <3>open-source</3> <4>projects</4>. You can support him on <5>GitHub</5>."
 msgstr "<0>@saul</0>, un connaisseur du Source Engine qui a créé un parseur de démo pour <1>CSGO</1> et <2>CS2</2> et qui partage ses connaissances à travers divers <3>projets</3><4>open-source</4>. Vous pouvez le soutenir sur <5>GitHub</5>."
-
-#: src/ui/settings/about/about.tsx
-msgid "Donate"
-msgstr "Faire un don"
-
-#: src/ui/settings/about/about.tsx
-msgid "CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since then."
-msgstr "CS Demo Manager est un projet que j'ai commencé pendant mes études en 2014 et que j'ai maintenu autant que possible depuis."
-
-#: src/ui/settings/about/about.tsx
-msgid "It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy using."
-msgstr "Il n'est soutenu par aucune entité d'entreprise et est un logiciel libre et open-source que j'espère que vous appréciez d'utiliser."
-
-#: src/ui/settings/about/about.tsx
-msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
-msgstr "Votre <0>donation</0> est très appréciée et me motive à continuer à travailler sur CS Demo Manager. Merci!"
 
 #: src/ui/settings/about/clear-logs-button.tsx
 msgid "Log file cleared"

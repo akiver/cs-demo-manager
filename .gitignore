@@ -14,5 +14,6 @@ static/*.exe
 static/csda
 static/boiler-writter
 static/csgove
+static/changelog
 build
 !build/Release/*.node

@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { makeElementInert, makeElementNonInert } from 'csdm/ui/shared/inert';
@@ -28,19 +28,26 @@ export function DialogProvider({ children, inertElementId }: Props) {
   const [dialog, setDialog] = useState<ReactNode | undefined>(undefined);
   const { focusElement, updateElement } = useFocusLastActiveElement();
 
+  const showDialog = useCallback(
+    (dialog: ReactNode) => {
+      setDialog(dialog);
+      updateElement();
+      makeElementInert(inertElementId);
+    },
+    [inertElementId, updateElement],
+  );
+
+  const hideDialog = useCallback(() => {
+    setDialog(undefined);
+    makeElementNonInert(inertElementId);
+    focusElement();
+  }, [focusElement, inertElementId]);
+
   return (
     <DialogContext.Provider
       value={{
-        showDialog: (dialog) => {
-          setDialog(dialog);
-          updateElement();
-          makeElementInert(inertElementId);
-        },
-        hideDialog: () => {
-          setDialog(undefined);
-          makeElementNonInert(inertElementId);
-          focusElement();
-        },
+        showDialog,
+        hideDialog,
       }}
     >
       {children}
