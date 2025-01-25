@@ -18,6 +18,7 @@ export async function getHlaeVersionFromExecutable(executablePath: string): Prom
   return new Promise((resolve, reject) => {
     const sanitizedExecutablePath = sanitizeExecutablePath(executablePath);
 
+    // TODO wmic is deprecated. https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmic
     exec(
       `wmic datafile where 'name="${sanitizedExecutablePath}"' get version`,
       { windowsHide: true },

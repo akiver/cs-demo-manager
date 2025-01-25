@@ -39,7 +39,6 @@ export function useMatchesColumns() {
         width: 20,
         allowResize: false,
         allowMove: false,
-        allowSort: false,
       },
       {
         id: 'tags',

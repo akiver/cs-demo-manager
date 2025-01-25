@@ -2316,11 +2316,6 @@ msgctxt "Tooltip"
 msgid "Community banned"
 msgstr "Community banned"
 
-#: src/ui/components/table/cells/comment-cell.tsx
-msgctxt "Tooltip"
-msgid "Comment"
-msgstr "Comment"
-
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Headshot"

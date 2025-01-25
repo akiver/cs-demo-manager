@@ -84,6 +84,10 @@ export function ChangelogDialog() {
                 account is in-game on another device.
               </li>
               <li>
+                <Category>UI</Category> Comment columns are now sortable, and the comment is displayed in a tooltip when
+                the icon is hovered over.
+              </li>
+              <li>
                 <Category>VIDEO</Category> Allow to set seconds before/after each kill/round to start/stop sequences
                 through a dialog.
               </li>

@@ -50,7 +50,7 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
                 }
 
                 return (
-                  <div className="px-4">
+                  <div className={column.allowResize ? 'px-4' : ''}>
                     {sortDirection === 'desc' ? <ArrowDownLongIcon height={16} /> : <ArrowUpLongIcon height={16} />}
                   </div>
                 );

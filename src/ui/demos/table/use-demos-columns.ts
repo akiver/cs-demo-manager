@@ -36,7 +36,6 @@ export function useDemosColumns() {
         }),
         Cell: CommentCell,
         allowResize: false,
-        allowSort: false,
         allowMove: false,
       },
       {
