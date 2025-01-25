@@ -6,7 +6,7 @@ function isValidExecutablePath(executablePath: string) {
 }
 
 function sanitizeExecutablePath(executablePath: string) {
-  // To use wmic, it's important to have double backslashes ("C:\\path" not "C:\path")
+  // To use PowerShell, it's important to have double backslashes ("C:\\path" not "C:\path")
   return executablePath.replaceAll('\\', '\\\\');
 }
 
@@ -18,9 +18,8 @@ export async function getHlaeVersionFromExecutable(executablePath: string): Prom
   return new Promise((resolve, reject) => {
     const sanitizedExecutablePath = sanitizeExecutablePath(executablePath);
 
-    // TODO wmic is deprecated. https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmic
     exec(
-      `wmic datafile where 'name="${sanitizedExecutablePath}"' get version`,
+      `powershell -Command "(Get-Item '${sanitizedExecutablePath}').VersionInfo.FileVersion"`,
       { windowsHide: true },
       (error, stdout) => {
         if (error) {
@@ -29,12 +28,20 @@ export async function getHlaeVersionFromExecutable(executablePath: string): Prom
           return reject(new InvalidHlaeExecutable());
         }
 
-        const lines = stdout.trim().split('\n');
-        if (lines.length !== 2 || !lines[0].startsWith('Version')) {
+        let version = stdout.trim();
+        if (!version) {
           return reject(new InvalidHlaeExecutable());
         }
 
-        return resolve(lines[1]);
+        // Ignore the build number which is always 0, 2.178.0.0 => 2.178.0
+        const [major, minor, patch] = version.split('.').slice(0, 3);
+        if (!major || !minor || !patch) {
+          return reject(new InvalidHlaeExecutable());
+        }
+
+        version = `${major}.${minor}.${patch}`;
+
+        return resolve(version);
       },
     );
   });
