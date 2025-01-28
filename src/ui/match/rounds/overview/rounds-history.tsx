@@ -48,7 +48,7 @@ export function RoundsHistory() {
 
   return (
     <div
-      className="grid grid-rows-[30px_repeat(3,_35px)] gap-px grid-flow-col max-w-fit overflow-x-auto border border-gray-300 bg-gray-300 flex-none mb-12"
+      className="grid grid-rows-[30px_repeat(3,35px)] gap-px grid-flow-col max-w-fit overflow-x-auto border border-gray-300 bg-gray-300 flex-none mb-12"
       style={{
         gridTemplateColumns: `auto repeat(${rounds.length}, 40px)`,
       }}

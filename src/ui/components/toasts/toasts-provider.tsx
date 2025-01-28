@@ -70,7 +70,7 @@ export function ToastsProvider({ children }: Props) {
   return (
     <ToastsContext.Provider value={showToast}>
       {children}
-      <div className="absolute z-[3] right-24 top-48 flex flex-col gap-y-8 max-w-[448px]">
+      <div className="absolute z-3 right-24 top-48 flex flex-col gap-y-8 max-w-[448px]">
         <AnimatePresence>
           {toasts.map((toast) => {
             const renderContent = () => {

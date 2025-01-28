@@ -60,7 +60,7 @@ export function SubContextMenu({ label, children }: Props) {
         <ChevronDown width={12} height={12} className="-rotate-90" />
       </div>
       <div ref={subMenuRef} className="absolute top-0 hidden">
-        <div className="bg-gray-100 p-8 rounded shadow-[0_0_4px_0_theme(colors.gray.500)]">{children}</div>
+        <div className="bg-gray-100 p-8 rounded shadow-[0_0_4px_0_var(--color-gray-500)]">{children}</div>
       </div>
     </div>
   );

@@ -114,7 +114,7 @@ export function Search() {
   return (
     <div className="flex flex-col flex-1 overflow-y-auto">
       <div className="flex gap-x-12 h-full">
-        <div className="flex flex-col flex-none pl-16 pr-8 py-16 w-[324px] gap-y-12 overflow-y-auto scrollbar-stable border-r">
+        <div className="flex flex-col flex-none pl-16 pr-8 py-16 w-[324px] gap-y-12 overflow-y-auto scrollbar-stable border-r border-gray-200">
           <div className="flex flex-col gap-y-8">
             <Trans context="Input label">Event</Trans>
             <SearchEventInput />

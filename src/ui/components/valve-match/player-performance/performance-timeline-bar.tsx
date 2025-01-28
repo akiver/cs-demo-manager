@@ -38,7 +38,7 @@ export function PerformanceTimeLineBar({ round, demoPath, game }: Props) {
 
   return (
     <div
-      className={`flex flex-col ${canOpenContextMenu ? 'from-gray-300 hover:bg-gradient-to-t' : ''}`}
+      className={`flex flex-col ${canOpenContextMenu ? 'from-gray-300 hover:bg-linear-to-t' : ''}`}
       onContextMenu={showRoundContextMenu}
       onClick={showRoundContextMenu}
     >
@@ -78,7 +78,7 @@ export function PerformanceTimeLineBar({ round, demoPath, game }: Props) {
         )}
       </div>
       <div
-        className={`pt-12 opacity-25 ${round.deathCount === 0 ? '' : 'bg-gradient-to-b from-red-600 via-transparent'}`}
+        className={`pt-12 opacity-25 ${round.deathCount === 0 ? '' : 'bg-linear-to-b from-red-600 via-transparent'}`}
       >
         <DeathElimination deathCount={round.deathCount} />
       </div>

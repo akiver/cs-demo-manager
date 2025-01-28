@@ -8,11 +8,11 @@
   position: absolute;
   content: attr(data-placeholder);
   pointer-events: none;
-  color: theme(colors.gray.500);
+  color: var(--color-gray-500);
 }
 
 .ProseMirror-selectednode {
-  outline: 2px solid theme(colors.blue.600);
+  outline: 2px solid var(--color-blue-600);
 }
 
 .milkdown {
@@ -52,24 +52,24 @@
 
 .milkdown .editor hr {
   border-width: 2px;
-  border-color: theme(colors.gray.800);
+  border-color: var(--color-gray-800);
   border-radius: 4px;
 }
 
 .milkdown .editor blockquote {
-  border-left: 4px solid theme(colors.gray.300);
+  border-left: 4px solid var(--color-gray-300);
   padding-left: 8px;
   margin: 0;
 }
 
 .milkdown .editor pre {
-  background-color: theme(colors.gray.200);
+  background-color: var(--color-gray-200);
   padding: 2px 4px;
   border-radius: 4px;
 }
 
 .milkdown .editor code:not(pre code) {
-  background-color: theme(colors.gray.200);
+  background-color: var(--color-gray-200);
   padding: 2px 4px;
   border-radius: 4px;
 }

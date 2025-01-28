@@ -1,1 +1,91 @@
-@tailwind utilities;
+@utility drag {
+  -webkit-app-region: drag;
+}
+
+@utility no-drag {
+  -webkit-app-region: no-drag;
+}
+
+@utility drag-element {
+  -webkit-user-drag: element;
+}
+
+@utility drag-none {
+  -webkit-user-drag: none;
+}
+
+@utility appearance-v-slider {
+  writing-mode: vertical-lr;
+  direction: rtl;
+}
+
+@utility scrollbar-stable {
+  scrollbar-gutter: stable;
+}
+
+@utility selectable {
+  user-select: text;
+  cursor: default;
+}
+
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility tooltip-right {
+  &::after {
+    content: '';
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    pointer-events: none;
+    margin-top: -5px;
+    border-color: transparent var(--gray-400) transparent transparent;
+    top: 50%;
+    right: 100%;
+  }
+}
+
+@utility tooltip-left {
+  &::after {
+    content: '';
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    pointer-events: none;
+    margin-top: -5px;
+    border-color: transparent transparent transparent var(--gray-400);
+    top: 50%;
+    left: 100%;
+  }
+}
+
+@utility tooltip-top {
+  &::after {
+    content: '';
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    pointer-events: none;
+    margin-left: -5px;
+    border-color: var(--gray-400) transparent transparent transparent;
+    top: 100%;
+    left: 50%;
+  }
+}
+
+@utility tooltip-bottom {
+  &::after {
+    content: '';
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    pointer-events: none;
+    margin-left: -5px;
+    border-color: transparent transparent var(--gray-400) transparent;
+    bottom: 100%;
+    left: 50%;
+  }
+}

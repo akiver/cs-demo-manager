@@ -1,7 +1,3 @@
-@import './variables.css';
-@import './fonts.css';
-
-@tailwind base;
 @layer base {
   html {
     font-size: 14px;

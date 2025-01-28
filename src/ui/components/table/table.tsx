@@ -23,7 +23,7 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
   return (
     <div className="overflow-auto h-full will-change-scroll" {...table.getWrapperProps()}>
       <table
-        className="outline-none border-spacing-0 w-fit table-fixed border-collapse"
+        className="outline-hidden border-spacing-0 w-fit table-fixed border-collapse"
         style={tableStyle}
         tabIndex={0}
         role="presentation"
@@ -64,7 +64,7 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
               return (
                 <th
                   key={column.id}
-                  className={`sticky top-0 bg-gray-50 p-0 z-1 h-32 outline-none
+                  className={`sticky top-0 bg-gray-50 p-0 z-1 h-32 outline-hidden
                   ${sortEnabled ? 'cursor-pointer' : 'cursor-default'}
                   ${dragEnabled ? 'drag-element' : 'drag-none'}`}
                   id={column.id}
@@ -110,8 +110,8 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
 
             return (
               <tr
-                className={`h-[var(--table-row-height)] outline-none ${
-                  isSelected ? '!bg-gray-300' : isSelectionEnabled ? 'bg-gray-50 hover:!bg-gray-200' : ''
+                className={`h-[var(--table-row-height)] outline-hidden ${
+                  isSelected ? 'bg-gray-300!' : isSelectionEnabled ? 'bg-gray-50 hover:bg-gray-200!' : ''
                 }`}
                 key={rowId}
                 role="row"

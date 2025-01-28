@@ -77,7 +77,7 @@ export function TextInput({
 
   const input = (
     <input
-      className="relative appearance-none outline-none rounded duration-85 transition-all bg-gray-50 w-full h-[30px] px-12 text-gray-800 border border-gray-400 focus:border-gray-900 placeholder:text-gray-600 disabled:cursor-default disabled:bg-gray-100 disabled:text-gray-700 enabled:focus:border-gray-900 hover:enabled:border-gray-900"
+      className="relative appearance-none outline-hidden rounded duration-85 transition-all bg-gray-50 w-full h-[30px] px-12 text-gray-800 border border-gray-400 focus:border-gray-900 placeholder:text-gray-600 disabled:cursor-default disabled:bg-gray-100 disabled:text-gray-700 enabled:focus:border-gray-900 hover:enabled:border-gray-900"
       ref={inputRef}
       disabled={isDisabled}
       onKeyDown={handleKeyDown}

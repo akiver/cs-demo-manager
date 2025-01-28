@@ -115,7 +115,10 @@ export function SearchInput<Value = unknown>({
 
     return (
       <div className="absolute z-10 w-full">
-        <div className="flex flex-col gap-y-4 bg-gray-50 border rounded max-h-[200px] overflow-auto" ref={resultsRef}>
+        <div
+          className="flex flex-col gap-y-4 bg-gray-50 border border-gray-400 rounded max-h-[200px] overflow-auto"
+          ref={resultsRef}
+        >
           {results.length > 0 ? (
             results.map((result, index) => {
               const hasFocus = focusedIndex === index;

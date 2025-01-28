@@ -42,8 +42,8 @@ export function DropdownFilter({ children, isDisabled, hasActiveFilter }: Props)
       </Button>
       <div ref={content}>
         {isOpened && (
-          <div className="absolute right-0 mt-8 z-[2]">
-            <div className="flex flex-col w-full bg-gray-75 rounded-8 shadow-[0_0_4px_0_theme(colors.gray.500)] max-h-[calc(100vh-var(--title-bar-height)-58px)] overflow-auto">
+          <div className="absolute right-0 mt-8 z-2">
+            <div className="flex flex-col w-full bg-gray-75 rounded-8 shadow-[0_0_4px_0_var(--color-gray-500)] max-h-[calc(100vh-var(--title-bar-height)-58px)] overflow-auto">
               {children}
             </div>
           </div>

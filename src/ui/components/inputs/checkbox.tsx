@@ -18,7 +18,7 @@ export function Checkbox({ label, isChecked, isDisabled, ...props }: Props) {
       <input
         id={id}
         type="checkbox"
-        className="outline-1 outline-gray-900 outline-offset-0"
+        className="focus-visible:outline outline-gray-800 outline-offset-0"
         checked={isChecked}
         disabled={isDisabled}
         {...props}

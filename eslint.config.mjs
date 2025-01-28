@@ -5,7 +5,6 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import checkFile from 'eslint-plugin-check-file';
 import localRules from 'eslint-plugin-local-rules';
 import lingui from 'eslint-plugin-lingui';
-import tailwind from 'eslint-plugin-tailwindcss';
 import prettier from 'eslint-plugin-prettier/recommended';
 
 export default [
@@ -52,7 +51,6 @@ export default [
   },
   js.configs.recommended,
   ...ts.configs.recommended,
-  ...tailwind.configs['flat/recommended'],
   reactRecommended,
   prettier,
   {
@@ -243,13 +241,6 @@ export default [
         },
       ],
       'react/prop-types': 0,
-      'tailwindcss/classnames-order': 'off',
-      'tailwindcss/no-custom-classname': [
-        'warn',
-        {
-          whitelist: ['max-w-fit', 'max-w-0'],
-        },
-      ],
     },
   },
   {

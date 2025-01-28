@@ -68,7 +68,7 @@ type RowProps = {
 
 function Row({ valueTeamA, valueTeamB, title }: RowProps) {
   return (
-    <div className="grid gap-8 grid-cols-[minmax(60px,_auto)_1fr_minmax(60px,_auto)] whitespace-nowrap">
+    <div className="grid gap-8 grid-cols-[minmax(60px,auto)_1fr_minmax(60px,auto)] whitespace-nowrap">
       <p className="text-left">{valueTeamA}</p>
       <p className="text-center">{title}</p>
       <p className="text-right">{valueTeamB}</p>

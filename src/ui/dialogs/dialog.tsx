@@ -69,7 +69,7 @@ export function Dialog({
     >
       <div
         ref={container}
-        className="flex flex-col bg-gray-50 text-gray-800 rounded min-w-[524px] max-h-[calc(100vh-140px)] overflow-y-auto focus-visible:outline-none shadow-[0_0_0_1px_theme(colors.gray.300)]"
+        className="flex flex-col bg-gray-50 text-gray-800 rounded min-w-[524px] max-h-[calc(100vh-140px)] overflow-y-auto focus-visible:outline-hidden shadow-[0_0_0_1px_var(--color-gray-300)]"
         tabIndex={-1}
         onMouseDown={onMouseDown}
         onKeyDown={onKeyDown}
@@ -103,7 +103,9 @@ type FooterProps = {
 };
 
 export function DialogFooter({ children }: FooterProps) {
-  return <footer className="flex items-center justify-end flex-1 gap-x-8 p-24 border-t">{children}</footer>;
+  return (
+    <footer className="flex items-center justify-end flex-1 gap-x-8 p-24 border-t border-gray-200">{children}</footer>
+  );
 }
 
 type TitleProps = {

@@ -9,7 +9,7 @@ export function TextArea({ resizable = true, ref, ...props }: Props) {
   return (
     <textarea
       ref={ref}
-      className={`appearance-none outline-none rounded duration-85 transition-all bg-gray-50 size-full p-8 text-gray-800 border border-gray-400 focus:border-gray-900 placeholder:text-gray-500 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500 hover:enabled:focus:border-gray-900 hover:enabled:border-gray-600 ${
+      className={`appearance-none outline-hidden rounded duration-85 transition-all bg-gray-50 size-full p-8 text-gray-800 border border-gray-400 focus:border-gray-900 placeholder:text-gray-500 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500 hover:enabled:focus:border-gray-900 hover:enabled:border-gray-600 ${
         resizable ? 'resize-y' : 'resize-none'
       }`}
       style={{

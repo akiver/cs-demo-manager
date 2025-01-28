@@ -33,8 +33,8 @@ export function Dropdown({ togglerContent, children, isDisabled = false }: Props
       </Button>
       <div ref={content}>
         {isOpened && (
-          <div className="absolute right-0 mt-8 z-[2]">
-            <div className="flex flex-col bg-gray-75 rounded-8 shadow-[0_0_4px_0_theme(colors.gray.500)] overflow-hidden">
+          <div className="absolute right-0 mt-8 z-2">
+            <div className="flex flex-col bg-gray-75 rounded-8 shadow-[0_0_4px_0_var(--color-gray-500)] overflow-hidden">
               {children}
             </div>
           </div>

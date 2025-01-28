@@ -17,7 +17,7 @@ export function SettingsCategoryButton({ children, category }: Props) {
 
   return (
     <button
-      className={`py-8 duration-85 transition-all text-body-strong text-gray-900 text-left hover:opacity-100 no-underline ${
+      className={`py-8 duration-85 transition-all text-body-strong text-gray-900 text-left hover:opacity-100 no-underline cursor-pointer ${
         isActive ? 'opacity-100' : 'opacity-50'
       }`}
       onClick={onClick}

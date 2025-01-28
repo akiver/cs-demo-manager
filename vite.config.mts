@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { lingui } from '@lingui/vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
 import { chrome } from './scripts/electron-vendors.mjs';
 import pkg from './package.json';
 
@@ -34,6 +35,7 @@ export default defineConfig({
       },
     }),
     lingui(),
+    tailwindcss(),
     {
       name: 'write-changelog-file',
       async closeBundle() {

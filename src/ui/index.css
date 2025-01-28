@@ -1,4 +1,6 @@
-@import './styles/base.css';
-@import './styles/components.css';
+@import 'tailwindcss';
+@import './styles/variables.css';
+@import './styles/fonts.css';
 @import './styles/utilities.css';
+@import './styles/base.css';
 @import './styles/third-parties.css';

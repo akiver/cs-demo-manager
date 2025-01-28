@@ -54,7 +54,7 @@ export function DialogProvider({ children, inertElementId }: Props) {
       {dialog
         ? ReactDOM.createPortal(
             <motion.div
-              className="absolute inset-0 z-[3] focus-within:outline-none"
+              className="absolute inset-0 z-3 focus-within:outline-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.3 } }}
             >
