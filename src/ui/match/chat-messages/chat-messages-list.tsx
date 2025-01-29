@@ -13,6 +13,10 @@ export function ChatMessagesList({ chatMessages }: Props) {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.target instanceof HTMLInputElement) {
+        return;
+      }
+
       if (isSelectAllKeyboardEvent(event)) {
         event.preventDefault();
         if (chatRef.current !== null) {

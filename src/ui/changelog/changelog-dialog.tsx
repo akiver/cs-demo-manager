@@ -66,6 +66,9 @@ export function ChangelogDialog() {
                 </Warning>
               </li>
               <li>
+                <Category>MATCH</Category> Added search input in chat tab to filter messages.
+              </li>
+              <li>
                 <Category>SEARCH</Category> Added no scope kills event.
               </li>
               <li>
