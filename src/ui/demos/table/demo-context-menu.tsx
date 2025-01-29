@@ -23,7 +23,6 @@ import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { DeleteDemosDialog } from 'csdm/ui/components/dialogs/delete-demos-dialog';
 import { DemoNotFoundDialog } from 'csdm/ui/components/dialogs/demo-not-found-dialog';
 import { RenameDemoDialog } from './rename-demo-dialog';
-import { ExportPlayersVoiceItem } from 'csdm/ui/components/context-menu/items/export-players-voice-item';
 import { ChangeDemosSourceDialog } from 'csdm/ui/components/dialogs/change-demos-source-dialog';
 import { UpdateDemosTypeItem } from './update-demos-type-item';
 import { CopyItem } from 'csdm/ui/components/context-menu/items/copy-item';
@@ -106,7 +105,6 @@ export function DemoContextMenu({ onCommentClick, demos, siblingDemoPaths }: Pro
       <NavigateToDemoItem demoPath={selectedDemo.filePath} siblingDemoPaths={siblingDemoPaths} />
       <NavigateToMatchItem demos={demos} />
       <AnalyzeItem demos={demos} />
-      <ExportPlayersVoiceItem demoPaths={filepaths} />
       <Separator />
       <CommentItem onClick={onCommentClick} isDisabled={demos.length !== 1} />
       <TagsItem onClick={onTagsClick} />

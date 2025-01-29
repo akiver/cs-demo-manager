@@ -752,8 +752,8 @@ msgstr "Exportieren"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Context menu"
-msgid "Export players voice"
-msgstr "Spielerstimmen exportieren"
+msgid "Players voice"
+msgstr ""
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"

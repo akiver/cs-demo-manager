@@ -23,7 +23,6 @@ import { CopyItem } from 'csdm/ui/components/context-menu/items/copy-item';
 import { ExportMatchesItem } from 'csdm/ui/components/context-menu/items/export-matches-item';
 import { WatchItem } from 'csdm/ui/components/context-menu/items/watch-item';
 import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
-import { ExportPlayersVoiceItem } from 'csdm/ui/components/context-menu/items/export-players-voice-item';
 import { UpdateTeamNamesDialog } from '../dialogs/update-team-names-dialog';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { Trans } from '@lingui/react/macro';
@@ -90,7 +89,6 @@ export function MatchContextMenu({ selectedMatches, matchChecksums, onCommentCli
       </ContextMenuItem>
       <Separator />
       <ExportMatchesItem matches={selectedMatches} />
-      <ExportPlayersVoiceItem demoPaths={filepaths} />
       <Separator />
       <CopyItem>
         <CopyShareCodeItem shareCodes={shareCodes} />

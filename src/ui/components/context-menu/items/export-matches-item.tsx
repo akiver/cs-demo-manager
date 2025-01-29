@@ -6,6 +6,7 @@ import { ExportMatchesToJsonItem } from 'csdm/ui/components/context-menu/items/e
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
 import { Trans } from '@lingui/react/macro';
 import { ExportMatchesToXlsxItem } from './export-matches-to-xlsx-item';
+import { ExportPlayersVoiceItem } from './export-players-voice-item';
 
 type Props = {
   matches: MatchTable[];
@@ -35,6 +36,7 @@ export function ExportMatchesItem({ matches }: Props) {
     <SubContextMenu label={<Trans context="Context menu">Export</Trans>}>
       <ExportMatchesToXlsxItem onClick={onExportToXlsxClick} />
       <ExportMatchesToJsonItem checksums={checksums} />
+      <ExportPlayersVoiceItem demoPaths={filepaths} />
     </SubContextMenu>
   );
 }

@@ -752,8 +752,8 @@ msgstr "导出"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Context menu"
-msgid "Export players voice"
-msgstr "导出玩家语音"
+msgid "Players voice"
+msgstr ""
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"

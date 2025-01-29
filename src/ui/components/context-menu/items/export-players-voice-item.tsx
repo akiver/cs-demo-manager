@@ -190,7 +190,7 @@ export function ExportPlayersVoiceItem({ demoPaths }: Props) {
 
   return (
     <ContextMenuItem onClick={onClick} isDisabled={demoPaths.length === 0}>
-      <Trans context="Context menu">Export players voice</Trans>
+      <Trans context="Context menu">Players voice</Trans>
     </ContextMenuItem>
   );
 }
