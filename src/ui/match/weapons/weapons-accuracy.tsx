@@ -363,7 +363,7 @@ function WeaponsTable({ weapons, title }: WeaponTableProps) {
         const WeaponIcon = WEAPONS_ICONS[weapon.name];
 
         return (
-          <div key={weapon.name} className="grid grid-cols-6 border py-4 last:rounded-b">
+          <div key={weapon.name} className="grid grid-cols-6 border border-gray-200 py-4 last:rounded-b">
             <Cell>
               <div className="flex items-center gap-x-4">
                 {WeaponIcon ? <WeaponIcon height={20} /> : <span>?</span>}

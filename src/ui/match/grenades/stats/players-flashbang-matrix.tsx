@@ -98,7 +98,7 @@ export function PlayersFlashbangMatrix() {
                           placement="top"
                         >
                           <div
-                            className="flex flex-col p-8 border text-body-strong text-center hover:scale-110 transition-transform duration-100 selectable"
+                            className="flex flex-col p-8 border border-gray-300 text-body-strong text-center hover:scale-110 transition-transform duration-100 selectable"
                             style={{
                               backgroundColor: getColorAtPercentage(
                                 startColor,

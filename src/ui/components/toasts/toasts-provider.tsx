@@ -98,7 +98,7 @@ export function ToastsProvider({ children }: Props) {
             return (
               <motion.div
                 key={toast.id}
-                className="flex p-16 bg-gray-75 text-gray-900 border-2 rounded-8 ml-auto min-w-[300px]"
+                className="flex p-16 bg-gray-75 text-gray-900 border-2 border-gray-300 rounded-8 ml-auto min-w-[300px]"
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 100 }}

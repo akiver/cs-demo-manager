@@ -20,7 +20,7 @@ export function VirtualDub() {
   }
 
   return (
-    <div className="border p-8 rounded">
+    <div className="border border-gray-400 p-8 rounded">
       <Software name="VirtualDub" websiteLink="http://www.virtualdub.org/" version={virtualDubVersion}>
         <VirtualDubInstallButton />
         <VirtualDubBrowseButton />

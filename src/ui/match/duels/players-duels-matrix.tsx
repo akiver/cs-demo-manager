@@ -156,7 +156,7 @@ export function PlayersDuelsMatrix() {
                       : 'transparent';
 
                     return (
-                      <div key={victimSteamId} className="flex flex-col h-full w-[104px] border">
+                      <div key={victimSteamId} className="flex flex-col h-full w-[104px] border border-gray-300">
                         {hasData ? (
                           <div className="relative flex size-full bg-[linear-gradient(45deg,var(--gray-75)_50%,var(--gray-200)_50%)]">
                             <div className="absolute left-12 bottom-8">

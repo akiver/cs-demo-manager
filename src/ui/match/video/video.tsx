@@ -37,7 +37,7 @@ export function MatchVideo() {
           <SequencesSummary />
         </div>
         <div className="flex gap-x-12 mt-12">
-          <div className="flex gap-x-12 border p-8 rounded">
+          <div className="flex gap-x-12 border border-gray-400 p-8 rounded">
             <div className="flex flex-col">
               <EncoderSoftwareSelect />
               <GenerateOnlyRawFilesCheckbox />

@@ -13,7 +13,7 @@ export function Tag(props: Props) {
   return (
     <div className="flex bg-gray-75 rounded border border-gray-300">
       <div
-        className="w-12 rounded-l border-r"
+        className="w-12 rounded-l border-r border-gray-300"
         style={{
           backgroundColor: tag.color,
         }}

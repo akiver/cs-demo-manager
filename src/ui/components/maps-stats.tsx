@@ -75,7 +75,7 @@ export function MapsStats({ mapsStats }: Props) {
 
   return (
     <Content>
-      <div className="flex flex-col divide-y">
+      <div className="flex flex-col divide-y divide-gray-300">
         {mapsStats.map((mapStats) => {
           return <MapEntry key={mapStats.mapName} mapStats={mapStats} />;
         })}

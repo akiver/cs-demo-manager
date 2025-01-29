@@ -326,7 +326,7 @@ export function VideoEntry({ video }: Props) {
                 return (
                   <li
                     key={sequence.number}
-                    className="grid grid-cols-[60px_100px_100px_100px_100px_100px_1fr] gap-4 border p-4 last:rounded-b"
+                    className="grid grid-cols-[60px_100px_100px_100px_100px_100px_1fr] gap-4 border border-gray-200 p-4 last:rounded-b"
                   >
                     <p>{sequence.number}</p>
                     <p>{sequence.startTick}</p>
