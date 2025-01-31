@@ -8,6 +8,7 @@ const v6: Migration = {
     settings.download.download5EPlayDemosInBackground = true;
     settings.video.showXRay = true;
     settings.video.playerVoicesEnabled = true;
+    settings.ui.redirectDemoToMatch = false;
 
     return Promise.resolve(settings);
   },

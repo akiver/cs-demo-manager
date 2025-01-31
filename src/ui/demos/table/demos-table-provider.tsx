@@ -23,6 +23,9 @@ import { useDemosState } from '../use-demos-state';
 import { useFetchDemos } from '../use-fetch-demos';
 import { useTableCommentWidgetVisibility } from 'csdm/ui/components/table/use-table-comment-widget-visibility';
 import { DemosTagsDialog } from './tags-dialog';
+import { useUiSettings } from 'csdm/ui/settings/ui/use-ui-settings';
+import { useIsDemoInDatabase } from 'csdm/ui/demo/use-is-demo-in-database';
+import { useNavigateToMatch } from 'csdm/ui/hooks/use-navigate-to-match';
 
 function getRowId(demo: Demo) {
   return demo.filePath;
@@ -37,10 +40,13 @@ type Props = {
 export function DemosTableProvider({ children }: Props) {
   const dispatch = useDispatch();
   const navigateToDemo = useNavigateToDemo();
+  const navigateToMatch = useNavigateToMatch();
   const demos = useDemos();
   const fuzzySearchText = useFuzzySearchText();
   const columns = useDemosColumns();
   const { showContextMenu } = useContextMenu();
+  const { redirectDemoToMatch } = useUiSettings();
+  const isDemoInDatabase = useIsDemoInDatabase();
   const selectedDemosPaths = useDemosState().selectedDemosPath;
   const status = useDemosStatus();
   const {
@@ -70,11 +76,15 @@ export function DemosTableProvider({ children }: Props) {
   };
 
   const handleNavigateToDemo = (demo: Demo, table: TableInstance<Demo>) => {
-    navigateToDemo(demo.filePath, {
-      state: {
-        siblingDemoPaths: table.getRowIds(),
-      },
-    });
+    if (redirectDemoToMatch && isDemoInDatabase(demo.checksum)) {
+      navigateToMatch(demo.checksum);
+    } else {
+      navigateToDemo(demo.filePath, {
+        state: {
+          siblingDemoPaths: table.getRowIds(),
+        },
+      });
+    }
   };
 
   const onKeyDown = (event: KeyboardEvent, table: TableInstance<Demo>) => {

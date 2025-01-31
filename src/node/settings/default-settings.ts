@@ -35,6 +35,7 @@ export const defaultSettings: Settings = {
     locale: 'en',
     theme: 'dark',
     initialPage: Page.Matches,
+    redirectDemoToMatch: false,
   },
   analyze: {
     analyzePositions: false,

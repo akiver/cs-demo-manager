@@ -33,6 +33,7 @@ type UISettings = {
   locale: string;
   theme: ThemeName;
   initialPage: Page;
+  redirectDemoToMatch: boolean;
 };
 
 type AnalyzeSettings = {

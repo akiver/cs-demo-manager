@@ -7324,6 +7324,15 @@ msgctxt "Settings title"
 msgid "Language"
 msgstr "Language"
 
+#: src/ui/settings/ui/redirect-demo-to-match.tsx
+msgid "Navigate to the demo's match page when going to a analyzed demo page."
+msgstr "Navigate to the demo's match page when going to a analyzed demo page."
+
+#: src/ui/settings/ui/redirect-demo-to-match.tsx
+msgctxt "Settings title"
+msgid "Redirect demo to match"
+msgstr "Redirect demo to match"
+
 #. Reset tables (columns order, visibility…)
 #: src/ui/settings/ui/reset-tables-state.tsx
 msgctxt "Button"

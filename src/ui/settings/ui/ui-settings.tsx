@@ -5,6 +5,7 @@ import { LanguageSelect } from 'csdm/ui/settings/ui/language-select';
 import { SystemStartupBehavior } from './system-startup-behavior';
 import { ResetTablesState } from './reset-tables-state';
 import { InitialPageSelect } from './initial-page-select';
+import { RedirectDemoToMatch } from './redirect-demo-to-match';
 
 export function UiSettings() {
   return (
@@ -13,6 +14,7 @@ export function UiSettings() {
       <LanguageSelect />
       <SystemStartupBehavior />
       <InitialPageSelect />
+      <RedirectDemoToMatch />
       <ResetTablesState />
     </SettingsView>
   );

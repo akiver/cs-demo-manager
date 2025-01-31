@@ -94,6 +94,10 @@ export function ChangelogDialog() {
                 the icon is hovered over.
               </li>
               <li>
+                <Category>DEMOS</Category> Added a UI option to redirect to the match page (instead of the demo page)
+                when opening an analyzed demo. It's disabled by default.
+              </li>
+              <li>
                 <Category>VIDEO</Category> Allow to set seconds before/after each kill/round to start/stop sequences
                 through a dialog.
               </li>
