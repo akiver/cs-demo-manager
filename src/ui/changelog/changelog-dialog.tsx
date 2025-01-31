@@ -132,6 +132,9 @@ export function ChangelogDialog() {
         </div>
       </DialogContent>
       <DialogFooter>
+        <ExternalLink href="https://cs-demo-manager.com">
+          <Trans>Visit website</Trans>
+        </ExternalLink>
         <CloseButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>

@@ -397,6 +397,10 @@ msgstr "Ocorreu um erro ao se conectar ao servidor WebSocket."
 msgid "Changelog version {APP_VERSION}"
 msgstr ""
 
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Visit website"
+msgstr ""
+
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
 msgid "Analyze"
