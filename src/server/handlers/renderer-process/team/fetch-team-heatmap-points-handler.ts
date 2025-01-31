@@ -1,11 +1,11 @@
 import type { TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import type { Point } from 'csdm/common/types/point';
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { assertNever } from 'csdm/common/assert-never';
 import { fetchTeamKillsPoints } from 'csdm/node/database/heatmap/fetch-team-kills-points';
 import { fetchTeamShotsPoints } from 'csdm/node/database/heatmap/fetch-team-shots-points';
 import { fetchTeamGrenadePoints } from 'csdm/node/database/heatmap/fetch-team-grenade-points';
+import { handleError } from '../../handle-error';
 
 export async function fetchTeamHeatmapPointsHandler(filter: TeamHeatmapFilter) {
   try {
@@ -31,9 +31,6 @@ export async function fetchTeamHeatmapPointsHandler(filter: TeamHeatmapFilter) {
 
     return points;
   } catch (error) {
-    logger.error('Error while fetching team heatmap points');
-    logger.error(error);
-    const errorCode = getErrorCodeFromError(error);
-    throw errorCode;
+    handleError(error, 'Error while fetching team heatmap points');
   }
 }

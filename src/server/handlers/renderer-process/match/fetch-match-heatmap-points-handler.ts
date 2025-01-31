@@ -4,8 +4,8 @@ import { fetchMatchKillsPoints } from 'csdm/node/database/heatmap/fetch-match-ki
 import { fetchMatchShotsPoints } from 'csdm/node/database/heatmap/fetch-match-shots-points';
 import type { Point } from 'csdm/common/types/point';
 import { fetchMatchGrenadePoints } from 'csdm/node/database/heatmap/fetch-match-grenade-points';
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { assertNever } from 'csdm/common/assert-never';
+import { handleError } from '../../handle-error';
 
 export async function fetchMatchHeatmapPointsHandler(filter: MatchHeatmapFilter) {
   try {
@@ -31,9 +31,6 @@ export async function fetchMatchHeatmapPointsHandler(filter: MatchHeatmapFilter)
 
     return points;
   } catch (error) {
-    logger.error('Error while fetching match heatmap points');
-    logger.error(error);
-    const errorCode = getErrorCodeFromError(error);
-    throw errorCode;
+    handleError(error, 'Error while fetching match heatmap points');
   }
 }

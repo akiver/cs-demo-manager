@@ -1,7 +1,6 @@
 import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import type { FetchPlayerFilters } from 'csdm/node/database/player/fetch-player-filters';
-import { ErrorCode } from 'csdm/common/error-code';
+import { handleError } from '../../handle-error';
 
 export async function fetchPlayerHandler(payload: FetchPlayerFilters) {
   try {
@@ -9,11 +8,6 @@ export async function fetchPlayerHandler(payload: FetchPlayerFilters) {
 
     return player;
   } catch (error) {
-    const errorCode = getErrorCodeFromError(error);
-    if (errorCode === ErrorCode.UnknownError) {
-      logger.error(`Error while fetching player with steamID ${payload.steamId}`);
-      logger.error(error);
-    }
-    throw errorCode;
+    handleError(error, `Error while fetching player with steamID ${payload.steamId}`);
   }
 }

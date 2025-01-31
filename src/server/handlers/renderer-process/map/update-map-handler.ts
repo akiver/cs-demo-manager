@@ -6,11 +6,11 @@ import { getMapRadarBase64 } from 'csdm/node/filesystem/maps/get-map-radar-base6
 import { updateMap } from 'csdm/node/database/maps/update-map';
 import { getMapLowerRadarBase64 } from 'csdm/node/filesystem/maps/get-map-lower-radar-base64';
 import { writeMapLowerRadarFileFromBase64 } from 'csdm/node/filesystem/maps/write-map-lower-radar-file-from-base64';
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import type { MapPayload } from './map-payload';
 import type { UpdatableMap } from 'csdm/node/database/maps/map-table';
 import { mapRowToMap } from 'csdm/node/database/maps/map-row-to-map';
 import { isPngBase64String } from 'csdm/node/filesystem/is-png-base64-string';
+import { handleError } from '../../handle-error';
 
 export async function updateMapHandler({
   id,
@@ -57,9 +57,6 @@ export async function updateMapHandler({
 
     return updatedMap;
   } catch (error) {
-    logger.error('Error while updating map');
-    logger.error(error);
-    const errorCode = getErrorCodeFromError(error);
-    throw errorCode;
+    handleError(error, 'Error while updating map');
   }
 }

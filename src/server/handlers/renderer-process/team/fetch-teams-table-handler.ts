@@ -1,6 +1,6 @@
 import { fetchTeamsTable } from 'csdm/node/database/teams/fetch-teams-table';
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filter';
+import { handleError } from '../../handle-error';
 
 export async function fetchTeamsTableHandler(filter: TeamsTableFilter) {
   try {
@@ -8,9 +8,6 @@ export async function fetchTeamsTableHandler(filter: TeamsTableFilter) {
 
     return teams;
   } catch (error) {
-    logger.error('Error while fetching teams table');
-    logger.error(error);
-    const errorCode = getErrorCodeFromError(error);
-    throw errorCode;
+    handleError(error, 'Error while fetching teams table');
   }
 }

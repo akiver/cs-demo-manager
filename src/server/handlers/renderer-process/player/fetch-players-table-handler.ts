@@ -1,6 +1,6 @@
 import { fetchPlayersTable } from 'csdm/node/database/players/fetch-players-table';
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import type { PlayersTableFilter } from 'csdm/node/database/players/players-table-filter';
+import { handleError } from '../../handle-error';
 
 export async function fetchPlayersHandler(filter: PlayersTableFilter) {
   try {
@@ -8,9 +8,6 @@ export async function fetchPlayersHandler(filter: PlayersTableFilter) {
 
     return players;
   } catch (error) {
-    logger.error('Error while fetching players table');
-    logger.error(error);
-    const errorCode = getErrorCodeFromError(error);
-    throw errorCode;
+    handleError(error, 'Error while fetching players table');
   }
 }

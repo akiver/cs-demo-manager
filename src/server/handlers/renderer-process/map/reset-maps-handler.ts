@@ -1,7 +1,7 @@
 import type { Game } from 'csdm/common/types/counter-strike';
 import { fetchMaps } from 'csdm/node/database/maps/fetch-maps';
 import { resetDefaultMaps } from 'csdm/node/database/maps/reset-default-maps';
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
+import { handleError } from '../../handle-error';
 
 export async function resetMapsHandler(game: Game) {
   try {
@@ -10,9 +10,6 @@ export async function resetMapsHandler(game: Game) {
 
     return maps;
   } catch (error) {
-    const errorCode = getErrorCodeFromError(error);
-    logger.error('Error while resetting maps');
-    logger.error(error);
-    throw errorCode;
+    handleError(error, 'Error while resetting maps');
   }
 }

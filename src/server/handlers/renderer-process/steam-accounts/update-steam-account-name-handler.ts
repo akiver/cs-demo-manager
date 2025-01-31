@@ -1,5 +1,5 @@
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { updateSteamAccountName } from 'csdm/node/database/steam-accounts/update-steam-account-name';
+import { handleError } from '../../handle-error';
 
 export type UpdateSteamAccountNamePayload = {
   steamId: string;
@@ -10,9 +10,6 @@ export async function updateSteamAccountNameHandler({ steamId, name }: UpdateSte
   try {
     return await updateSteamAccountName(steamId, name);
   } catch (error) {
-    logger.error('Error while updating steam account name');
-    logger.error(error);
-    const errorCode = getErrorCodeFromError(error);
-    throw errorCode;
+    handleError(error, 'Error while updating steam account name');
   }
 }

@@ -4,11 +4,11 @@ import { writeMapThumbnailFileFromBase64 } from 'csdm/node/filesystem/maps/write
 import { writeMapRadarFileFromBase64 } from 'csdm/node/filesystem/maps/write-map-radar-image-from-base64';
 import { insertMaps } from 'csdm/node/database/maps/insert-maps';
 import { writeMapLowerRadarFileFromBase64 } from 'csdm/node/filesystem/maps/write-map-lower-radar-file-from-base64';
-import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import type { MapPayload } from './map-payload';
 import type { InsertableMap } from 'csdm/node/database/maps/map-table';
 import { mapRowToMap } from 'csdm/node/database/maps/map-row-to-map';
 import { isPngBase64String } from 'csdm/node/filesystem/is-png-base64-string';
+import { handleError } from '../../handle-error';
 
 export async function addMapHandler({
   name,
@@ -46,9 +46,6 @@ export async function addMapHandler({
 
     return map;
   } catch (error) {
-    logger.error('Error while adding map');
-    logger.error(error);
-    const errorCode = getErrorCodeFromError(error);
-    throw errorCode;
+    handleError(error, 'Error while adding map');
   }
 }
