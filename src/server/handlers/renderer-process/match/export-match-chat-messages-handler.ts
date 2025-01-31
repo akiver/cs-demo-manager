@@ -1,15 +1,17 @@
-import fs from 'fs-extra';
+import type { ChatMessage } from 'csdm/common/types/chat-message';
 import { handleError } from '../../handle-error';
 
+import { exportMatchChatMessages } from 'csdm/node/chat-messages/export-match-chat-messages';
+
 export type ExportChatMessagesPayload = {
+  checksum: string;
   filePath: string;
-  messages: string[];
+  messages?: ChatMessage[];
 };
 
-export async function exportMatchChatMessagesHandler({ filePath, messages }: ExportChatMessagesPayload) {
+export async function exportMatchChatMessagesHandler({ checksum, filePath, messages }: ExportChatMessagesPayload) {
   try {
-    const text = messages.join('\n');
-    await fs.writeFile(filePath, text);
+    return await exportMatchChatMessages(checksum, filePath, messages);
   } catch (error) {
     handleError(error, 'Error while exporting chat messages');
   }

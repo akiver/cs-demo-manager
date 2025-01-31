@@ -18,6 +18,7 @@ export const RendererClientMessageName = {
   UpdateMatchDemoLocation: 'update-match-demo-location',
   InitializeVideo: 'initialize-video',
   ExportMatchChatMessages: 'export-match-chat-messages',
+  ExportMatchesChatMessages: 'export-matches-chat-messages',
   FetchDemosTable: 'fetch-demos-table',
   LoadDemoByPath: 'load-demo-by-path',
   NavigateToDemoOrMatch: 'navigate-to-demo-or-match',

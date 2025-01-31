@@ -69,6 +69,9 @@ export function ChangelogDialog() {
                 <Category>MATCH</Category> Added search input in chat tab to filter messages.
               </li>
               <li>
+                <Category>MATCHES</Category> Added context-menu item to export chat messages.
+              </li>
+              <li>
                 <Category>SEARCH</Category> Added no scope kills event.
               </li>
               <li>

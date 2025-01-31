@@ -230,6 +230,7 @@ msgstr ""
 #: src/ui/comment/use-update-comment.tsx
 #: src/ui/components/buttons/export-html-element-as-image-button.tsx
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
@@ -241,7 +242,7 @@ msgstr ""
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
 #: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/chat-messages/export-chat-messages-button.tsx
+#: src/ui/hooks/use-export-match-chat-messages.tsx
 #: src/ui/match/duels/players-duels-matrix.tsx
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 #: src/ui/match/heatmap/match-heatmap.tsx
@@ -618,6 +619,27 @@ msgctxt "Keyboard shortcut"
 msgid "Enter"
 msgstr "Eingabe"
 
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+msgctxt "Button label"
+msgid "Select"
+msgstr "Auswählen"
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+msgctxt "Toast"
+msgid "Chat messages exported, click here to reveal the folder"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+#: src/ui/hooks/use-export-match-chat-messages.tsx
+msgid "No chat messages to export"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+msgctxt "Context menu"
+msgid "Chat messages"
+msgstr ""
+
 #: src/ui/components/context-menu/items/export-matches-item.tsx
 msgctxt "Context menu"
 msgid "Export"
@@ -952,11 +974,6 @@ msgstr "Demo nicht gefunden."
 msgctxt "Dialog title"
 msgid "JSON export"
 msgstr "JSON-Export"
-
-#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-msgctxt "Button label"
-msgid "Select"
-msgstr "Auswählen"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Notification"
@@ -3319,6 +3336,15 @@ msgstr "Schließe bitte alle Anti-Cheat-Software und versuche es erneut."
 msgid "Counter-Strike starting…"
 msgstr "Counter-Strike startet…"
 
+#: src/ui/hooks/use-export-match-chat-messages.tsx
+msgctxt "OS save dialog title"
+msgid "Export"
+msgstr "Exportieren"
+
+#: src/ui/hooks/use-export-match-chat-messages.tsx
+msgid "Chat messages exported, click here to reveal the file"
+msgstr ""
+
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Premier"
@@ -3609,15 +3635,6 @@ msgstr "Chatnachrichten sind erst nach dem {updateDate} CS2 Update mit Valve Dem
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "No chat messages found."
 msgstr "Keine Chat-Nachrichten gefunden."
-
-#: src/ui/match/chat-messages/export-chat-messages-button.tsx
-msgctxt "OS save dialog title"
-msgid "Export"
-msgstr "Exportieren"
-
-#: src/ui/match/chat-messages/export-chat-messages-button.tsx
-msgid "Chat messages exported"
-msgstr "Chat-Nachrichten exportiert"
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"

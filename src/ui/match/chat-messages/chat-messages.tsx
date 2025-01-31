@@ -26,7 +26,7 @@ export function ChatMessages() {
   return (
     <>
       <ActionBar
-        left={<ExportChatMessagesButton checksum={checksum} chatMessages={visibleChatMessages} />}
+        left={<ExportChatMessagesButton checksum={checksum} messages={visibleChatMessages} />}
         right={<TextInputFilter value={fuzzySearchText} onChange={setFuzzySearchText} />}
       />
       <ChatMessagesList chatMessages={visibleChatMessages} />

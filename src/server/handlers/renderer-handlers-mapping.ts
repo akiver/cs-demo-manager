@@ -198,6 +198,10 @@ import { updateCurrent5EPlayAccountHandler } from './renderer-process/5eplay/upd
 import type { FiveEPlayMatch } from 'csdm/common/types/5eplay-match';
 import { fetchLast5EPlayMatchesHandler } from './renderer-process/5eplay/fetch-last-5eplay-matches-handler';
 import { delete5EPlayAccountHandler } from './renderer-process/5eplay/delete-5eplay-account-handler';
+import {
+  exportMatchesChatMessagesHandler,
+  type ExportMatchesChatMessagesPayload,
+} from './renderer-process/match/export-matches-chat-messages-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -282,7 +286,8 @@ export interface RendererMessageHandlers {
     WatchPlayerAsSuspectPayload,
     WatchDemoErrorPayload | undefined
   >;
-  [RendererClientMessageName.ExportMatchChatMessages]: Handler<ExportChatMessagesPayload>;
+  [RendererClientMessageName.ExportMatchChatMessages]: Handler<ExportChatMessagesPayload, boolean>;
+  [RendererClientMessageName.ExportMatchesChatMessages]: Handler<ExportMatchesChatMessagesPayload, boolean>;
   [RendererClientMessageName.WriteBase64File]: Handler<WriteBase64FilePayload>;
   [RendererClientMessageName.FetchPlayerStats]: Handler<FetchPlayerFilters, PlayerProfile>;
   [RendererClientMessageName.InsertTag]: Handler<Omit<Tag, 'id'>, Tag>;
@@ -383,6 +388,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.WatchPlayerLowlights]: watchPlayerLowlightsHandler,
   [RendererClientMessageName.WatchPlayerAsSuspect]: watchPlayerAsSuspectHandler,
   [RendererClientMessageName.ExportMatchChatMessages]: exportMatchChatMessagesHandler,
+  [RendererClientMessageName.ExportMatchesChatMessages]: exportMatchesChatMessagesHandler,
   [RendererClientMessageName.WriteBase64File]: writeBase64FileHandler,
   [RendererClientMessageName.FetchPlayerStats]: fetchPlayerHandler,
   [RendererClientMessageName.InsertTag]: insertTagHandler,
