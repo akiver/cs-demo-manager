@@ -123,6 +123,9 @@ export function ChangelogDialog() {
                 <Warning>Requires re-analyzing demos.</Warning>
               </li>
               <li>
+                <Category>ANALYZE</Category> Missing chat messages.
+              </li>
+              <li>
                 <Category>VIDEO</Category> New FFmpeg major/minor version not detected on Windows.
               </li>
             </ul>
