@@ -130,6 +130,9 @@ export function ChangelogDialog() {
                 <Category>ANALYZE</Category> Missing chat messages.
               </li>
               <li>
+                <Category>MATCH</Category> Possible wrong duels matrix values.
+              </li>
+              <li>
                 <Category>VIDEO</Category> New FFmpeg major/minor version not detected on Windows.
               </li>
             </ul>

@@ -35,7 +35,7 @@ export async function fetchMatchDuelsMatrixRows(checksum: string): Promise<DuelM
       return eb
         .onRef('p2.steam_id', '=', 'k2.killer_steam_id')
         .onRef('p1.steam_id', '=', 'k2.victim_steam_id')
-        .on('k.match_checksum', '=', checksum);
+        .on('k2.match_checksum', '=', checksum);
     })
     .where('p2.match_checksum', '=', checksum)
     .whereRef('p1.team_name', '!=', 'p2.team_name')
