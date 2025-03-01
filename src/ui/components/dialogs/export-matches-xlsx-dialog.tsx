@@ -111,7 +111,9 @@ function ExportingDialog({ totalMatchCount }: ExportingContentProps) {
 
     const onSheetProgress = (sheetName: SheetName) => {
       const translatedSheetName = translationPerSheetName[sheetName].message;
-      setMessage(msg`Generating sheet ${translatedSheetName}…`);
+      if (translatedSheetName) {
+        setMessage(msg`Generating sheet ${translatedSheetName}…`);
+      }
     };
 
     client.on(RendererServerMessageName.ExportMatchesToXlsxMatchProgress, onProgress);
