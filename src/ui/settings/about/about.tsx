@@ -14,6 +14,7 @@ import { Switch } from 'csdm/ui/components/inputs/switch';
 import { useSettings } from '../use-settings';
 import { useUpdateSettings } from '../use-update-settings';
 import { Donate } from 'csdm/ui/components/donate';
+import { SeeChangelogButton } from './see-changelog-button';
 
 export function About() {
   const client = useWebSocketClient();
@@ -48,7 +49,7 @@ export function About() {
       <div className="flex flex-col gap-y-20">
         <h2 className="text-title">CS Demo Manager</h2>
 
-        <section>
+        <section className="flex flex-col gap-y-8">
           <SettingsEntry
             interactiveComponent={
               <Switch
@@ -64,6 +65,9 @@ export function About() {
             description={<Trans>Automatically download updates.</Trans>}
             title={<Trans context="Settings title">Auto update</Trans>}
           />
+          <div>
+            <SeeChangelogButton />
+          </div>
         </section>
 
         <section className="flex flex-col">

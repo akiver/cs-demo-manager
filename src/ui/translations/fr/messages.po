@@ -2716,6 +2716,11 @@ msgstr "PopFlash"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "Renown"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "Valve"
 msgstr "Valve"
 
@@ -6592,6 +6597,11 @@ msgstr "Cela réinitialisera les paramètres de l'application à l'exception des
 #: src/ui/settings/about/reset-settings-button.tsx
 msgid "Reset settings"
 msgstr "Réinitialiser les paramètres"
+
+#: src/ui/settings/about/see-changelog-button.tsx
+msgctxt "Button"
+msgid "See Changelog"
+msgstr ""
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Bans that happened before the player was first seen in a match will be ignored."
