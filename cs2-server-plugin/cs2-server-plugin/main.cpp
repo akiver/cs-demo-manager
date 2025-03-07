@@ -131,40 +131,24 @@ inline bool FileExists(const std::string& name) {
     return f.good();
 }
 
-// Thank you Saul! https://github.com/saul/cvar-unhide-s2
 static void UnhideCommandsAndCvars()
 {
-    uint64 flagsToRemove = (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY | FCVAR_MISSING3);
+    uint64 flagsToRemove = (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY);
 
-    ConCommandHandle cmdHandle{};
-    auto invalidConcmd = g_pCVar->GetCommand(cmdHandle);
-    int cmdIdx = 0;
-    for (;;)
+    ConCommandData* data = g_pCVar->GetConCommandData(ConCommandRef());
+    for (ConCommandRef concmd = ConCommandRef((uint16)0); concmd.GetRawData() != data; concmd = ConCommandRef(concmd.GetAccessIndex() + 1))
     {
-        cmdHandle.Set(cmdIdx++);
-        auto concmd = g_pCVar->GetCommand(cmdHandle);
-        if (concmd == invalidConcmd)
-            break;
-
-        if (concmd->GetFlags() & flagsToRemove)
+        if (concmd.GetFlags() & flagsToRemove)
         {
-            concmd->RemoveFlags(flagsToRemove);
+            concmd.RemoveFlags(flagsToRemove);
         }
     }
 
-    ConVarHandle cvarHandle{};
-    auto invalidCvar = g_pCVar->GetConVar(cvarHandle);
-    int cvarIdx = 0;
-    for (;;)
+    for (ConVarRefAbstract ref(ConVarRef((uint16)0)); ref.IsValidRef(); ref = ConVarRefAbstract(ConVarRef(ref.GetAccessIndex() + 1)))
     {
-        cvarHandle.Set(cvarIdx++);
-        auto convar = g_pCVar->GetConVar(cvarHandle);
-        if (convar == invalidCvar)
-            break;
-
-        if (convar->flags & flagsToRemove)
+        if (ref.GetFlags() & flagsToRemove)
         {
-            convar->flags &= ~flagsToRemove;
+            ref.RemoveFlags(flagsToRemove);
         }
     }
 }
