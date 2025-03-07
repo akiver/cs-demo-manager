@@ -55,6 +55,7 @@ export function ChangelogDialog() {
                   Comment columns are now sortable, and the comment is displayed in a tooltip when the icon is hovered
                   over.
                 </Item>
+                <Item>Updated de_cache radar and thumbnail images.</Item>
               </Category>
               <Category title="ANALYZE">
                 <Item>
