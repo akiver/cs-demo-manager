@@ -22,6 +22,7 @@ function useDemoSourceImageSrc(source: DemoSource) {
     case DemoSource.Fastcup:
     case DemoSource.Gamersclub:
     case DemoSource.PerfectWorld:
+    case DemoSource.Renown:
       fileName = isDarkTheme ? `${source}-white.png` : `${source}-black.png`;
       break;
     case DemoSource.Challengermode:

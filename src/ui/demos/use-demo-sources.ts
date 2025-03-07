@@ -72,6 +72,11 @@ export function useGetDemoSourceName() {
           context: 'Demo source name',
           message: 'PopFlash',
         });
+      case DemoSource.Renown:
+        return t({
+          context: 'Demo source name',
+          message: 'Renown',
+        });
       case DemoSource.Valve:
         return t({
           context: 'Demo source name',
@@ -149,6 +154,10 @@ export function useDemoSources() {
     {
       value: DemoSource.Popflash,
       name: getDemoSourceName(DemoSource.Popflash),
+    },
+    {
+      value: DemoSource.Renown,
+      name: getDemoSourceName(DemoSource.Renown),
     },
     {
       value: DemoSource.Valve,

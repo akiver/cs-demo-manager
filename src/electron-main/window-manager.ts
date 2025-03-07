@@ -189,6 +189,7 @@ class WindowManager {
       'https://discord.com/',
       'https://www.5eplay.com/',
       'https://arena.5eplay.com/',
+      'https://renown.gg/',
     ];
 
     for (const website of allowedWebsites) {

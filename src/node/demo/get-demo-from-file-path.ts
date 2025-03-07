@@ -30,7 +30,8 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
   const faceitRegex = /\d+_team[\da-z-]+-team[\da-z-]+_de_[\da-z]+\\.dem/;
 
   const serverName = demoHeader.serverName.toLowerCase();
-  if (serverName.includes('faceit') || serverName.includes('blast') || faceitRegex.exec(demoName) !== null) {
+  const fileName = demoName.toLowerCase();
+  if (serverName.includes('faceit') || serverName.includes('blast') || faceitRegex.exec(fileName) !== null) {
     return DemoSource.FaceIt;
   }
 
@@ -47,15 +48,15 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
   }
 
   const ebotRegex = /(\d*)_(.*?)-(.*?)_(.*?)(.dem)/;
-  if (serverName.includes('ebot') || ebotRegex.exec(demoName) !== null) {
+  if (serverName.includes('ebot') || ebotRegex.exec(fileName) !== null) {
     return DemoSource.Ebot;
   }
 
-  if (serverName.includes('esea') || demoName.includes('esea')) {
+  if (serverName.includes('esea') || fileName.includes('esea')) {
     return DemoSource.Esea;
   }
 
-  if (serverName.includes('popflash') || demoName.includes('popflash')) {
+  if (serverName.includes('popflash') || fileName.includes('popflash')) {
     return DemoSource.Popflash;
   }
 
@@ -71,10 +72,14 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.Gamersclub;
   }
 
+  if (fileName.includes('renown') || serverName.includes('renown')) {
+    return DemoSource.Renown;
+  }
+
   // Default format: {TIME}_{MATCH_ID}_{MAP}_{TEAM1}_vs_{TEAM2}
   // https://shobhit-pathak.github.io/MatchZy/gotv/#recording-demos
   const matchZyDemoNameRegex = /^(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})_(\d+)_([a-zA-Z0-9_]+)_(.+?)_vs_(.+)$/;
-  if (serverName.includes('matchzy') || matchZyDemoNameRegex.exec(demoName) !== null) {
+  if (serverName.includes('matchzy') || matchZyDemoNameRegex.exec(fileName) !== null) {
     return DemoSource.MatchZy;
   }
 
@@ -87,7 +92,7 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
   }
 
   const fiveEPlayRegex = /^g\d+-(.*)[a-zA-Z0-9_]*$/;
-  if (fiveEPlayRegex.exec(demoName) !== null) {
+  if (fiveEPlayRegex.exec(fileName) !== null) {
     return DemoSource.FiveEPlay;
   }
 

@@ -56,6 +56,11 @@ export function ChangelogDialog() {
                   over.
                 </Item>
               </Category>
+              <Category title="ANALYZE">
+                <Item>
+                  Added support for <ExternalLink href="https://renown.gg/">Renown</ExternalLink> demos.
+                </Item>
+              </Category>
               <Category title="PLAYBACK">
                 <Item>
                   Added <strong>CS2</strong> aliases that you can type into the game's console or bind it to a keyboard
