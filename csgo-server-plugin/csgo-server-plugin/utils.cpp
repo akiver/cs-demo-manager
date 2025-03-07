@@ -29,6 +29,12 @@ void Log(const char* msg, ...)
     LogToFile(buf);
 }
 
+
+void DeleteLogFile()
+{
+    remove("csdm.log");
+}
+
 bool FileExists(const std::string& name) {
     std::ifstream f(name.c_str());
 

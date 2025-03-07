@@ -92,6 +92,11 @@ void LogToFile(const char* pMsg) {
     fclose(pFile);
 }
 
+void DeleteLogFile()
+{
+    remove("csdm.log");
+}
+
 void Log(const char *msg, ...)
 {
 	va_list args;
@@ -446,6 +451,7 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
 {
     if (serverCreateInterface == NULL)
     {
+        DeleteLogFile();
         AssertInsecureParameterIsPresent();
 
         const char* gameDirectory = Plat_GetGameDirectory();

@@ -8,6 +8,7 @@
 
 void LogToFile(const char* pMsg);
 void Log(const char* msg, ...);
+void DeleteLogFile();
 bool FileExists(const std::string& name);
 void* GetLibAddress(void* lib, const char* name);
 char* GetLastErrorString();

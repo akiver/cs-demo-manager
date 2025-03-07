@@ -272,6 +272,8 @@ void NewFrameStageNotify(void* thisptr, CClientFrameStage stage)
 // Called when the plugin is loaded ONLY if the -insecure launch parameter is set.
 bool CServerPlugin::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn gameServerFactory)
 {
+    DeleteLogFile();
+
     engine = (IVEngineClient14*)interfaceFactory("VEngineClient014", NULL);
     if (engine == NULL)
     {
