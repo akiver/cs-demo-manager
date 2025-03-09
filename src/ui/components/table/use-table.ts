@@ -10,6 +10,7 @@ import { getTableRowHeight } from './get-table-row-height';
 import { buildRows } from './build-rows';
 import type { Data, RowSelection, Column, TableInstance, SortedColumn } from './table-types';
 import { getCssVariableValue } from 'csdm/ui/shared/get-css-variable-value';
+import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 function buildColumnsWidthMapping<DataType extends Data>(columns: readonly Column<DataType>[]) {
   return Object.fromEntries(
@@ -58,6 +59,7 @@ export function useTable<DataType extends Data>({
   sortedColumn,
 }: Options<DataType>): TableInstance<DataType> {
   const client = useWebSocketClient();
+  const locale = useLocale();
   const render = useReducer(() => ({}), {})[1];
   const isReady = useRef(persistStateKey === undefined);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -78,6 +80,7 @@ export function useTable<DataType extends Data>({
     fuzzySearchColumnIds,
     columns,
     sortedColumn: sortedColumnRef.current,
+    locale,
   });
 
   const { getVirtualItems, getTotalSize, scrollToIndex } = useVirtualizer({

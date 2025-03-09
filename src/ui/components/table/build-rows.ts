@@ -5,6 +5,7 @@ function sortRows<DataType extends Data>(
   column: Column<DataType>,
   sortedColumn: SortedColumn<string>,
   rows: DataType[],
+  locale: string,
 ) {
   if (sortedColumn.direction === undefined) {
     return;
@@ -14,6 +15,12 @@ function sortRows<DataType extends Data>(
   function defaultSortFunction(rowA: DataType, rowB: DataType) {
     const valueA = typeof column.accessor === 'string' ? rowA[column.accessor] : column.accessor(rowA);
     const valueB = typeof column.accessor === 'string' ? rowB[column.accessor] : column.accessor(rowB);
+    if (typeof valueA === 'string' && typeof valueB === 'string') {
+      return isAscSort
+        ? valueA.localeCompare(valueB, locale, { sensitivity: 'base' })
+        : valueB.localeCompare(valueA, locale, { sensitivity: 'base' });
+    }
+
     if (valueA < valueB) {
       return isAscSort ? -1 : 1;
     }
@@ -34,6 +41,7 @@ type BuildRows<DataType extends Data> = {
   fuzzySearchColumnIds?: string[];
   columns: readonly Column<DataType>[];
   sortedColumn: SortedColumn<string> | undefined;
+  locale: string;
 };
 
 export function buildRows<DataType extends Data>({
@@ -42,13 +50,14 @@ export function buildRows<DataType extends Data>({
   fuzzySearchColumnIds,
   columns,
   sortedColumn,
+  locale,
 }: BuildRows<DataType>): DataType[] {
   const rows = [...data];
 
   if (sortedColumn) {
     const column = columns.find((column) => column.id === sortedColumn.id);
     if (column) {
-      sortRows<DataType>(column, sortedColumn, rows);
+      sortRows<DataType>(column, sortedColumn, rows, locale);
     }
   }
 
