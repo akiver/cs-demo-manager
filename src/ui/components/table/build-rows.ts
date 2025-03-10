@@ -11,14 +11,13 @@ function sortRows<DataType extends Data>(
     return;
   }
   const isAscSort = sortedColumn.direction === 'asc';
+  const { compare } = new Intl.Collator(locale, { sensitivity: 'base' });
 
   function defaultSortFunction(rowA: DataType, rowB: DataType) {
     const valueA = typeof column.accessor === 'string' ? rowA[column.accessor] : column.accessor(rowA);
     const valueB = typeof column.accessor === 'string' ? rowB[column.accessor] : column.accessor(rowB);
     if (typeof valueA === 'string' && typeof valueB === 'string') {
-      return isAscSort
-        ? valueA.localeCompare(valueB, locale, { sensitivity: 'base' })
-        : valueB.localeCompare(valueA, locale, { sensitivity: 'base' });
+      return isAscSort ? compare(valueA, valueB) : compare(valueB, valueA);
     }
 
     if (valueA < valueB) {
