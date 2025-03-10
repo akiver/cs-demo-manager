@@ -640,6 +640,7 @@ msgid "Chat messages"
 msgstr "Chat messages"
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
+#: src/ui/demos/table/export-demos-items.tsx
 msgctxt "Context menu"
 msgid "Export"
 msgstr "Export"

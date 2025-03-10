@@ -28,6 +28,7 @@ import { UpdateDemosTypeItem } from './update-demos-type-item';
 import { CopyItem } from 'csdm/ui/components/context-menu/items/copy-item';
 import { DeleteDemosFromDatabaseItem } from './delete-demos-from-database-item';
 import { DeleteDemosFromDatabaseDialog } from 'csdm/ui/components/dialogs/delete-demos-from-database-dialog';
+import { ExportDemosItem } from './export-demos-items';
 
 type NavigateToMatchItemProps = {
   demos: Demo[];
@@ -111,6 +112,8 @@ export function DemoContextMenu({ onCommentClick, demos, siblingDemoPaths }: Pro
       <RenameItem onClick={onRenameClick} />
       <ChangeSourceItem onClick={onChangeSourceClick} />
       <UpdateDemosTypeItem checksums={checksums} />
+      <Separator />
+      <ExportDemosItem filepaths={filepaths} />
       <Separator />
       <CopyItem>
         <CopyShareCodeItem shareCodes={demos.map((demo) => demo.shareCode)} />
