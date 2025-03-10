@@ -10,7 +10,8 @@ CXXFLAGS =  -std=c++17 \
 			-DPLATFORM_POSIX=1 \
 			-DX64BITS=1 \
 			-DPLATFORM_64BITS=1 \
-			-D_LINUX=1
+			-DLINUX=1 \
+			-Dstricmp=strcasecmp
 
 INCLUDE_DIRS =  -I./deps/json/include \
 				-I./deps/easywsclient \
