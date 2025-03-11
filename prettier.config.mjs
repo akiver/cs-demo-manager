@@ -1,5 +1,5 @@
-/** @type {import("prettier").Options} */
-module.exports = {
+/** @type {import("prettier").Config} */
+const config = {
   singleQuote: true,
   printWidth: 120,
   overrides: [
@@ -11,3 +11,5 @@ module.exports = {
     },
   ],
 };
+
+export default config;

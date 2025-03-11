@@ -1,11 +1,13 @@
-import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from '@tomjs/electron-devtools-installer';
+import { installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 export async function installDevTools() {
-  const extensions = [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS];
-
-  return Promise.all(
-    extensions.map((name) => installExtension(name, { loadExtensionOptions: { allowFileAccess: true } })),
-  ).catch((error) => {
-    logger.warn('Failed to install DevTools extension', error);
-  });
+  try {
+    // ! Need to do a CTRL/CMD+R to actually see the React DevTools.
+    // TODO deps Remove this note once the following issue is resolved.
+    // https://github.com/electron/electron/issues/41613
+    await installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS]);
+  } catch (error) {
+    logger.warn('Failed to install DevTools extension');
+    logger.error(error);
+  }
 }

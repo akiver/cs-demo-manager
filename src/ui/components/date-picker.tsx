@@ -2,6 +2,7 @@ import React, { type ReactNode } from 'react';
 import { enUS, fr, zhCN, ptBR, de } from 'react-day-picker/locale';
 import { DayPicker } from 'react-day-picker';
 import type { DateRange } from 'react-day-picker';
+import { useReducedMotion } from 'motion/react';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 function getLocaleObject(locale: string) {
@@ -29,6 +30,7 @@ type Props = {
 
 export function DatePicker({ isDisabled, startDate, endDate, onRangeChange, footer }: Props) {
   const locale = useLocale();
+  const shouldReduceMotion = useReducedMotion();
   const range: DateRange | undefined = {
     from: startDate ? new Date(startDate) : undefined,
     to: endDate ? new Date(endDate) : undefined,
@@ -41,6 +43,7 @@ export function DatePicker({ isDisabled, startDate, endDate, onRangeChange, foot
       mode="range"
       footer={footer}
       showOutsideDays={true}
+      animate={!shouldReduceMotion}
       captionLayout="dropdown"
       selected={range}
       onSelect={onRangeChange}
