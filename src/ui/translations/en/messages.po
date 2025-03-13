@@ -2672,6 +2672,11 @@ msgstr "ESEA"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "Esplay"
+msgstr "Esplay"
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "Esportal"
 msgstr "Esportal"
 

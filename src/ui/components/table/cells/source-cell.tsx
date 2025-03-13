@@ -31,6 +31,9 @@ function useDemoSourceImageSrc(source: DemoSource) {
     case DemoSource.Ebot:
       fileName = 'ebot.png';
       break;
+    case DemoSource.Esplay:
+      fileName = 'esplay.png';
+      break;
     case DemoSource.FiveEPlay:
       fileName = '5eplay.png';
       break;
