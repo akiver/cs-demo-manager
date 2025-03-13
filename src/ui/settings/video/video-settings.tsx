@@ -4,6 +4,7 @@ import { HlaeConfigFolderPath } from './hlae/hlae-config-folder-path';
 import { FfmpegLocation } from './ffmpeg/ffmpeg-location';
 import { HlaeLocation } from './hlae/hlae-location';
 import { DefaultVideoRecordingSettings } from './recording/default-video-recording-settings';
+import { HlaeParameters } from 'csdm/ui/match/video/hlae/hlae-parameters';
 
 export function VideoSettings() {
   return (
@@ -15,6 +16,7 @@ export function VideoSettings() {
             <div className="flex flex-col gap-y-8">
               <HlaeLocation />
               <HlaeConfigFolderPath />
+              <HlaeParameters />
             </div>
           </div>
         )}
