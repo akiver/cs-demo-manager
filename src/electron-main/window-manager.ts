@@ -190,6 +190,7 @@ class WindowManager {
       'https://www.5eplay.com/',
       'https://arena.5eplay.com/',
       'https://renown.gg/',
+      'https://esplay.com/',
     ];
 
     for (const website of allowedWebsites) {

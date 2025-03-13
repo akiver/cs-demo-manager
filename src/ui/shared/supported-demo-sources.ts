@@ -18,6 +18,7 @@ export const SupportedDemoSourcesPerGame: Record<Game, DemoSource[]> = {
     DemoSource.Challengermode,
     DemoSource.Ebot,
     DemoSource.Esl,
+    DemoSource.Esplay,
     DemoSource.Esportal,
     DemoSource.FaceIt,
     DemoSource.Fastcup,

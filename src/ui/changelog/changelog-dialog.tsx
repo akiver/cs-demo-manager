@@ -49,6 +49,11 @@ export function ChangelogDialog() {
             {/* eslint-disable lingui/no-unlocalized-strings */}
             <h2 className="text-subtitle mb-8">New features and improvements</h2>
             <ul>
+              <Category title="ANALYZE">
+                <Item>
+                  Added support for <ExternalLink href="https://esplay.com/">Esplay</ExternalLink> demos.
+                </Item>
+              </Category>
               <Category title="DEMOS">
                 <Item>Added back the context menu item to export players voices from the list.</Item>
               </Category>

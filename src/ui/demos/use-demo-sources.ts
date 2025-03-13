@@ -32,6 +32,11 @@ export function useGetDemoSourceName() {
           context: 'Demo source name',
           message: 'ESEA',
         });
+      case DemoSource.Esplay:
+        return t({
+          context: 'Demo source name',
+          message: 'Esplay',
+        });
       case DemoSource.Esportal:
         return t({
           context: 'Demo source name',
@@ -122,6 +127,10 @@ export function useDemoSources() {
     {
       value: DemoSource.Esea,
       name: getDemoSourceName(DemoSource.Esea),
+    },
+    {
+      value: DemoSource.Esplay,
+      name: getDemoSourceName(DemoSource.Esplay),
     },
     {
       value: DemoSource.Esportal,
