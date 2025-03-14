@@ -227,7 +227,6 @@ export async function generateVideo(parameters: Parameters) {
         fullscreen: false,
         signal,
         uninstallPluginOnExit: false,
-        gameParameters: null,
         registerFfmpegLocation: shouldGenerateVideo,
       });
     } else {

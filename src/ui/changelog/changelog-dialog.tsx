@@ -54,6 +54,16 @@ export function ChangelogDialog() {
                   Added support for <ExternalLink href="https://esplay.com/">Esplay</ExternalLink> demos.
                 </Item>
               </Category>
+              <Category title="VIDEO">
+                <Item>
+                  Counter-Strike launch parameters defined in the playback settings are now passed to the game when
+                  using HLAE through its `-customLaunchOptions` parameter.
+                </Item>
+                <Item>
+                  Added HLAE command-line parameters input in the app video settings. They are passed to HLAE when
+                  watching a demo.
+                </Item>
+              </Category>
               <Category title="DEMOS">
                 <Item>Added back the context menu item to export players voices from the list.</Item>
               </Category>

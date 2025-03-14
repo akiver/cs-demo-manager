@@ -26,7 +26,6 @@ type HlaeOptions = {
   width?: number;
   height?: number;
   playDemoArgs?: string[];
-  gameParameters?: string | null;
   hlaeParameters?: string;
   signal?: AbortSignal;
   onGameStart?: () => void;
@@ -157,11 +156,8 @@ export async function watchDemoWithHlae(options: HlaeOptions) {
   gameParameters.push('-height', String(height));
   const enableFullscreen = options.fullscreen ?? userFullscreen;
   gameParameters.push(enableFullscreen ? '-fullscreen' : '-sw');
-  if (options.gameParameters !== null) {
-    const parameters = options.gameParameters ?? userLaunchParameters;
-    if (typeof parameters === 'string' && parameters !== '') {
-      gameParameters.push(parameters);
-    }
+  if (typeof userLaunchParameters === 'string' && userLaunchParameters !== '') {
+    gameParameters.push(userLaunchParameters);
   }
 
   const hlaeParameters = ['-noGui', '-autoStart', '-noConfig', '-afxDisableSteamStorage'];
