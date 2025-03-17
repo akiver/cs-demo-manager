@@ -96,9 +96,7 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.FiveEPlay;
   }
 
-  // ID of 12 characters long, starts with "n" (probably the game id) and then 11 letters.
-  const esplayDemoNameRegex = /^n[a-zA-Z]{11}$/;
-  if (esplayDemoNameRegex.exec(fileName) !== null) {
+  if (serverName.includes('esplay')) {
     return DemoSource.Esplay;
   }
 
