@@ -395,7 +395,7 @@ msgstr "连接到远程服务器时出错。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Changelog version {APP_VERSION}"
-msgstr ""
+msgstr "更新日志 {APP_VERSION}"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Visit website"
@@ -6918,7 +6918,7 @@ msgstr ""
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The API returned a 401 code, please check you API key."
-msgstr ""
+msgstr "API返回了一个401码，请检查您 API 密钥。"
 
 #: src/ui/settings/folders/add-folder-button.tsx
 msgctxt "Button"
