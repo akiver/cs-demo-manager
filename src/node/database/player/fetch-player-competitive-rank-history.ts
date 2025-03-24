@@ -4,11 +4,10 @@ import type { CompetitiveRankHistory } from 'csdm/common/types/charts/competitiv
 import { db } from 'csdm/node/database/database';
 import type { FetchPlayerFilters } from './fetch-player-filters';
 
-export async function fetchPlayerCompetitiveRankHistory({
-  steamId,
-  startDate,
-  endDate,
-}: FetchPlayerFilters): Promise<CompetitiveRankHistory[]> {
+export async function fetchPlayerCompetitiveRankHistory(
+  steamId: string,
+  { startDate, endDate }: FetchPlayerFilters,
+): Promise<CompetitiveRankHistory[]> {
   let query = db
     .selectFrom('players')
     .select(['rank as rank', 'old_rank as oldRank', 'wins_count as winCount'])

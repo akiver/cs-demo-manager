@@ -9,7 +9,7 @@ type RoundCount = {
   roundCountAsT: number;
 };
 
-export async function fetchPlayerRoundCount(filters: FetchPlayerFilters): Promise<RoundCount> {
+export async function fetchPlayerRoundCount(steamId: string, filters: FetchPlayerFilters): Promise<RoundCount> {
   const { count } = db.fn;
   let query = db
     .selectFrom('rounds')
@@ -34,7 +34,7 @@ export async function fetchPlayerRoundCount(filters: FetchPlayerFilters): Promis
     ])
     .leftJoin('matches', 'matches.checksum', 'rounds.match_checksum')
     .leftJoin('players', 'players.match_checksum', 'rounds.match_checksum')
-    .where('players.steam_id', '=', filters.steamId);
+    .where('players.steam_id', '=', steamId);
 
   query = applyPlayerFilters(query, filters);
 

@@ -26,7 +26,7 @@ type MapRoundStats = {
   roundWinCountAsT: number;
 };
 
-function buildStatsQuery(filters: FetchPlayerFilters) {
+function buildStatsQuery(steamId: string, filters: FetchPlayerFilters) {
   const { count, avg } = db.fn;
   let query = db
     .selectFrom('matches')
@@ -44,7 +44,7 @@ function buildStatsQuery(filters: FetchPlayerFilters) {
       avg<number>('players.kast').as('kast'),
       avg<number>('players.headshot_percentage').as('headshotPercentage'),
     ])
-    .where('players.steam_id', '=', filters.steamId)
+    .where('players.steam_id', '=', steamId)
     .orderBy('matchCount', 'desc')
     .groupBy('mapName');
 
@@ -53,7 +53,7 @@ function buildStatsQuery(filters: FetchPlayerFilters) {
   return query;
 }
 
-function buildRoundsQuery(filters: FetchPlayerFilters) {
+function buildRoundsQuery(steamId: string, filters: FetchPlayerFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('rounds')
@@ -75,7 +75,7 @@ function buildRoundsQuery(filters: FetchPlayerFilters) {
       sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_side = 3)`.as('roundCountAsCt'),
       count<number>('rounds.id').as('roundCount'),
     ])
-    .where('players.steam_id', '=', filters.steamId)
+    .where('players.steam_id', '=', steamId)
     .groupBy('mapName');
 
   query = applyPlayerFilters(query, filters);
@@ -83,9 +83,9 @@ function buildRoundsQuery(filters: FetchPlayerFilters) {
   return query;
 }
 
-export async function fetchPlayerMapsStats(filters: FetchPlayerFilters): Promise<MapStats[]> {
-  const statsQuery = buildStatsQuery(filters);
-  const roundsQuery = buildRoundsQuery(filters);
+export async function fetchPlayerMapsStats(steamId: string, filters: FetchPlayerFilters): Promise<MapStats[]> {
+  const statsQuery = buildStatsQuery(steamId, filters);
+  const roundsQuery = buildRoundsQuery(steamId, filters);
 
   const [globalStats, roundsStats]: [MapGlobalStats[], MapRoundStats[]] = await Promise.all([
     statsQuery.execute(),

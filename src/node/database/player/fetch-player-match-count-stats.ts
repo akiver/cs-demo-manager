@@ -1,13 +1,13 @@
 import { db } from 'csdm/node/database/database';
 import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
 
-function buildQuery(filters: FetchPlayerFilters) {
+function buildQuery(steamId: string, filters: FetchPlayerFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('matches')
     .select(count<number>('matches.checksum').as('matchCount'))
     .leftJoin('players', 'players.match_checksum', 'matches.checksum')
-    .where('players.steam_id', '=', filters.steamId);
+    .where('players.steam_id', '=', steamId);
 
   query = applyPlayerFilters(query, filters);
 
@@ -20,14 +20,17 @@ type PlayerMatchCountStats = {
   lostMatchCount: number;
 };
 
-export async function fetchPlayerMatchCountStats(filters: FetchPlayerFilters): Promise<PlayerMatchCountStats> {
-  const wonMatchQuery = buildQuery(filters).whereRef('matches.winner_name', '=', 'players.team_name');
+export async function fetchPlayerMatchCountStats(
+  steamId: string,
+  filters: FetchPlayerFilters,
+): Promise<PlayerMatchCountStats> {
+  const wonMatchQuery = buildQuery(steamId, filters).whereRef('matches.winner_name', '=', 'players.team_name');
 
-  const lostMatchQuery = buildQuery(filters)
+  const lostMatchQuery = buildQuery(steamId, filters)
     .where('matches.winner_name', 'is not', null)
     .whereRef('matches.winner_name', '!=', 'players.team_name');
 
-  const tiedMatchQuery = buildQuery(filters).where('matches.winner_name', 'is', null);
+  const tiedMatchQuery = buildQuery(steamId, filters).where('matches.winner_name', 'is', null);
 
   const [wonMatchResult, lostMatchResult, tiedMatchResult] = await Promise.all([
     wonMatchQuery.executeTakeFirst(),

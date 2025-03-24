@@ -7,8 +7,6 @@ import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import type { OpenDialogOptions, SaveDialogOptions } from 'electron';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import type { MatchTable } from 'csdm/common/types/match-table';
-import type { ExportMatchesToXlsxPayload } from 'csdm/server/handlers/renderer-process/match/export-matches-to-xlsx-handler';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { RadioInput } from 'csdm/ui/components/inputs/radio-input';
 import { CloseButton } from 'csdm/ui/components/buttons/close-button';
@@ -16,13 +14,12 @@ import { RendererServerMessageName } from 'csdm/server/renderer-server-message-n
 import { Status } from 'csdm/common/types/status';
 import { RevealFileInExplorerButton } from 'csdm/ui/components/buttons/reveal-file-in-explorer-button';
 import { RevealFolderInExplorerButton } from 'csdm/ui/components/buttons/reveal-folder-in-explorer-button';
-import { SheetName } from 'csdm/node/xlsx/sheet-name';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
+import { XlsxOutputType, type XlsxOutput } from 'csdm/node/xlsx/xlsx-output';
+import { PlayerSheetName } from 'csdm/node/xlsx/player-sheet-name';
+import type { ExportPlayersToXlsxPayload } from 'csdm/server/handlers/renderer-process/player/export-players-to-xlsx-handler';
 import type { ExportToXlsxProgressPayload, ExportToXlsxSuccessPayload } from 'csdm/common/types/xlsx';
-import { type XlsxOutput, XlsxOutputType } from 'csdm/node/xlsx/xlsx-output';
-
-type Match = Pick<MatchTable, 'checksum' | 'name'>;
 
 function Header() {
   return (
@@ -34,34 +31,14 @@ function Header() {
   );
 }
 
-const translationPerSheetName: Record<SheetName, MessageDescriptor> = {
-  [SheetName.General]: msg({
+const translationPerSheetName: Record<PlayerSheetName, MessageDescriptor> = {
+  [PlayerSheetName.General]: msg({
     context: 'Excel sheet',
     message: 'General',
   }),
-  [SheetName.Players]: msg({
+  [PlayerSheetName.Maps]: msg({
     context: 'Excel sheet',
-    message: 'Players',
-  }),
-  [SheetName.Kills]: msg({
-    context: 'Excel sheet',
-    message: 'Rounds',
-  }),
-  [SheetName.Rounds]: msg({
-    context: 'Excel sheet',
-    message: 'Kills',
-  }),
-  [SheetName.Weapons]: msg({
-    context: 'Excel sheet',
-    message: 'Weapons',
-  }),
-  [SheetName.Clutches]: msg({
-    context: 'Excel sheet',
-    message: 'Clutches',
-  }),
-  [SheetName.PlayersFlashbangMatrix]: msg({
-    context: 'Excel sheet',
-    message: 'Players Flashbang matrix',
+    message: 'Maps',
   }),
 };
 
@@ -97,7 +74,7 @@ function ExportingDialog({ totalMatchCount }: ExportingContentProps) {
     };
 
     const onSheetProgress = (sheetName: string) => {
-      const translatedSheetName = translationPerSheetName[sheetName as SheetName].message;
+      const translatedSheetName = translationPerSheetName[sheetName as PlayerSheetName].message;
       if (translatedSheetName) {
         setMessage(msg`Generating sheet ${translatedSheetName}…`);
       }
@@ -160,18 +137,17 @@ function ExportingDialog({ totalMatchCount }: ExportingContentProps) {
 }
 
 type ExportDialogContentProps = {
-  matches: Match[];
+  steamIds: string[];
   onExportStart: () => void;
 };
 
-function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProps) {
+function ExportOptionsDialog({ steamIds, onExportStart }: ExportDialogContentProps) {
   const { t } = useLingui();
   const client = useWebSocketClient();
   const { hideDialog } = useDialog();
-  const [outputType, setOutputType] = useState<XlsxOutputType>(XlsxOutputType.SingleFile);
   const [atLeastOneSheetSelected, setAtLeastOneSheetSelected] = useState(true);
   const isExportButtonDisabled = !atLeastOneSheetSelected;
-  const isSingleMatchSelected = matches.length === 1;
+  const isSinglePlayerSelected = steamIds.length === 1;
 
   const isAtLeastOneSheetSelected = (formData: FormData) => {
     for (const fieldName of formData.keys()) {
@@ -195,21 +171,16 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
 
     const formData = new FormData(event.currentTarget);
     const outputType = formData.get('output-type') as XlsxOutputType;
-    let payload: ExportMatchesToXlsxPayload;
+    let payload: ExportPlayersToXlsxPayload;
     const buildSheetsPayload = (formData: FormData) => {
       return {
-        [SheetName.General]: formData.has('sheets.general'),
-        [SheetName.Players]: formData.has('sheets.players'),
-        [SheetName.Kills]: formData.has('sheets.kills'),
-        [SheetName.Rounds]: formData.has('sheets.rounds'),
-        [SheetName.Weapons]: formData.has('sheets.weapons'),
-        [SheetName.Clutches]: formData.has('sheets.clutches'),
-        [SheetName.PlayersFlashbangMatrix]: formData.has('sheets.playersFlashbangMatrix'),
+        [PlayerSheetName.General]: formData.has('sheets.general'),
+        [PlayerSheetName.Maps]: formData.has('sheets.maps'),
       };
     };
 
-    if (outputType === XlsxOutputType.SingleFile && !isSingleMatchSelected) {
-      const name = `${matches.length}-matches.xlsx`;
+    if (outputType === XlsxOutputType.SingleFile && !isSinglePlayerSelected) {
+      const name = `${steamIds.length}-players.xlsx`;
       const options: SaveDialogOptions = {
         buttonLabel: t({
           context: 'Button label',
@@ -224,10 +195,21 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
       }
 
       payload = {
-        exportEachMatchToSingleFile: false,
-        checksums: matches.map((match) => match.checksum),
+        exportEachPlayerToSingleFile: false,
+        steamIds,
         outputFilePath,
         sheets: buildSheetsPayload(formData),
+        filter: {
+          demoTypes: [],
+          startDate: undefined,
+          endDate: undefined,
+          gameModes: [],
+          games: [],
+          maxRounds: [],
+          ranking: 'all',
+          sources: [],
+          tagIds: [],
+        },
       };
     } else {
       const options: OpenDialogOptions = {
@@ -243,20 +225,26 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
       }
 
       payload = {
-        exportEachMatchToSingleFile: true,
-        matches: matches.map((match) => {
-          return {
-            checksum: match.checksum,
-            name: match.name,
-          };
-        }),
+        exportEachPlayerToSingleFile: true,
+        steamIds,
         outputFolderPath: filePaths[0],
         sheets: buildSheetsPayload(formData),
+        filter: {
+          demoTypes: [],
+          startDate: undefined,
+          endDate: undefined,
+          gameModes: [],
+          games: [],
+          maxRounds: [],
+          ranking: 'all',
+          sources: [],
+          tagIds: [],
+        },
       };
     }
 
     client.send({
-      name: RendererClientMessageName.ExportMatchesToXlsx,
+      name: RendererClientMessageName.ExportPlayersToXlsx,
       payload,
     });
     onExportStart();
@@ -264,7 +252,7 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
 
   const renderOutputOptions = () => {
     return (
-      <div className={isSingleMatchSelected ? 'hidden' : undefined}>
+      <div className={isSinglePlayerSelected ? 'hidden' : undefined}>
         <p className="text-body-strong">
           <Trans context="File destination">Output</Trans>
         </p>
@@ -275,14 +263,12 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
             value={XlsxOutputType.SingleFile}
             label={<Trans context="Radio label">Single file</Trans>}
             defaultChecked={true}
-            onChange={() => setOutputType(XlsxOutputType.SingleFile)}
           />
           <RadioInput
             id="multiple"
             name="output-type"
             value={XlsxOutputType.MultipleFiles}
             label={<Trans context="Radio label">Multiple files</Trans>}
-            onChange={() => setOutputType(XlsxOutputType.MultipleFiles)}
           />
         </div>
       </div>
@@ -302,42 +288,15 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
               </p>
               <div className="flex gap-8 flex-wrap">
                 <Checkbox
-                  label={t(translationPerSheetName[SheetName.General])}
+                  label={t(translationPerSheetName[PlayerSheetName.General])}
                   name="sheets.general"
                   defaultChecked={true}
                 />
                 <Checkbox
-                  label={t(translationPerSheetName[SheetName.Rounds])}
-                  name="sheets.rounds"
+                  label={t(translationPerSheetName[PlayerSheetName.Maps])}
+                  name="sheets.maps"
                   defaultChecked={true}
                 />
-                <Checkbox
-                  label={t(translationPerSheetName[SheetName.Players])}
-                  name="sheets.players"
-                  defaultChecked={true}
-                />
-                <Checkbox
-                  label={t(translationPerSheetName[SheetName.Kills])}
-                  name="sheets.kills"
-                  defaultChecked={true}
-                />
-                <Checkbox
-                  label={t(translationPerSheetName[SheetName.Weapons])}
-                  name="sheets.weapons"
-                  defaultChecked={true}
-                />
-                <Checkbox
-                  label={t(translationPerSheetName[SheetName.Clutches])}
-                  name="sheets.clutches"
-                  defaultChecked={true}
-                />
-                {(isSingleMatchSelected || outputType === XlsxOutputType.MultipleFiles) && (
-                  <Checkbox
-                    label={t(translationPerSheetName[SheetName.PlayersFlashbangMatrix])}
-                    name="sheets.playersFlashbangMatrix"
-                    defaultChecked={true}
-                  />
-                )}
               </div>
             </div>
           </div>
@@ -354,20 +313,20 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
 }
 
 type Props = {
-  matches: Match[];
+  steamIds: string[];
 };
 
-export function ExportMatchesAsXlsxDialog({ matches }: Props) {
+export function ExportPlayersToXlsxDialog({ steamIds }: Props) {
   const [isExporting, setIsExporting] = useState(false);
-  const key = matches.map((match) => match.checksum).join(',');
+  const key = steamIds.join(',');
 
   const onExportStart = () => {
     setIsExporting(true);
   };
 
   if (isExporting) {
-    return <ExportingDialog key={key} totalMatchCount={matches.length} />;
+    return <ExportingDialog key={key} totalMatchCount={steamIds.length} />;
   }
 
-  return <ExportOptionsDialog key={key} matches={matches} onExportStart={onExportStart} />;
+  return <ExportOptionsDialog key={key} steamIds={steamIds} onExportStart={onExportStart} />;
 }

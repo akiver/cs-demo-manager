@@ -3,7 +3,7 @@ import type { PlayerChartsData } from 'csdm/common/types/charts/player-charts-da
 import { db } from 'csdm/node/database/database';
 import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
 
-export async function fetchPlayerChartsData(filters: FetchPlayerFilters): Promise<PlayerChartsData[]> {
+export async function fetchPlayerChartsData(steamId: string, filters: FetchPlayerFilters): Promise<PlayerChartsData[]> {
   let query = db
     .selectFrom('players')
     .select([
@@ -23,7 +23,7 @@ export async function fetchPlayerChartsData(filters: FetchPlayerFilters): Promis
         'clutchWonPercentage',
       ),
     ])
-    .where('steam_id', '=', filters.steamId)
+    .where('steam_id', '=', steamId)
     .groupBy(['headshotPercentage', 'averageDamagePerRound', 'killDeathRatio', 'matches.date'])
     .orderBy('date', 'asc');
 

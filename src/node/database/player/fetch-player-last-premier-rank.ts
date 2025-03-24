@@ -4,11 +4,10 @@ import { CompetitiveRank, DemoSource, Game } from 'csdm/common/types/counter-str
 import { db } from 'csdm/node/database/database';
 import type { FetchPlayerFilters } from './fetch-player-filters';
 
-export async function fetchPlayerLastPremierRank({
-  steamId,
-  startDate,
-  endDate,
-}: FetchPlayerFilters): Promise<PremierRank> {
+export async function fetchPlayerLastPremierRank(
+  steamId: string,
+  { startDate, endDate }: FetchPlayerFilters,
+): Promise<PremierRank> {
   let query = db
     .selectFrom('players')
     .select(['rank'])
