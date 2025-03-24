@@ -5,7 +5,7 @@ import { Avatar as AvatarImage } from 'csdm/ui/components/avatar';
 import { useCurrentMatch } from '../../use-current-match';
 import type { Round } from 'csdm/common/types/round';
 import type { Kill } from 'csdm/common/types/kill';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { KillFeedEntry } from 'csdm/ui/components/kill-feed-entry';
 import { TeamText } from 'csdm/ui/components/team-text';
 import { RoundEndReasonIcon } from 'csdm/ui/icons/round-end-reason-icon';
@@ -16,7 +16,7 @@ import { useTranslateEconomyType } from '../../economy/team-economy-breakdown/us
 import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
 
 type AvatarsProps = {
-  players: Player[];
+  players: MatchPlayer[];
   kills: Kill[];
 };
 
@@ -131,8 +131,8 @@ function Content({ round, kills, roundStartFrame }: ContentProps) {
 
 type PanelHeaderProps = {
   round: Round;
-  playersTeamA: Player[];
-  playersTeamB: Player[];
+  playersTeamA: MatchPlayer[];
+  playersTeamB: MatchPlayer[];
   kills: Kill[];
   match: Match;
 };

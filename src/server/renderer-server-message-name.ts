@@ -7,15 +7,11 @@ import type { ErrorCode } from '../common/error-code';
 import type { ValveMatch } from '../common/types/valve-match';
 import type { SharedServerMessagePayload, SharedServerMessageName } from './shared-server-message-name';
 import type {
-  ExportMatchesToXlsxProgressPayload,
-  ExportMatchesToXlsxSuccessPayload,
-} from './handlers/renderer-process/match/export-matches-to-xlsx-handler';
-import type { SheetName } from 'csdm/node/xlsx/sheet-name';
-import type {
   ExportDemoPlayersVoiceErrorPayload,
   ExportDemoPlayersVoiceProgressPayload,
 } from './handlers/renderer-process/demo/export-demo-players-voice-handler';
 import type { Video } from 'csdm/common/types/video';
+import type { ExportToXlsxProgressPayload, ExportToXlsxSuccessPayload } from 'csdm/common/types/xlsx';
 
 // Message names sent from the WebSocket server to the renderer Electron process.
 export const RendererServerMessageName = {
@@ -45,10 +41,10 @@ export const RendererServerMessageName = {
   DownloadDemoError: 'download-error',
   DownloadDemoSuccess: 'download-demo-success',
   DownloadDemoInCurrentFolderLoaded: 'downloaded-demo-in-current-folder-loaded',
-  ExportMatchesToXlsxMatchProgress: 'export-matches-to-xslx-match-progress',
-  ExportMatchesToXlsxSheetProgress: 'export-matches-to-xslx-sheet-progress',
-  ExportMatchesToXlsxSuccess: 'export-matches-to-xslx-success',
-  ExportMatchesToXlsxError: 'export-matches-to-xslx-error',
+  ExportToXlsxProgress: 'export-to-xslx-progress',
+  ExportToXlsxSheetProgress: 'export-to-xslx-sheet-progress',
+  ExportToXlsxSuccess: 'export-to-xslx-success',
+  ExportToXlsxError: 'export-to-xslx-error',
   ExportDemoPlayersVoiceProgress: 'export-demo-players-voice-progress',
   ExportDemoPlayersVoiceDone: 'export-demo-players-voice-done',
   ExportDemoPlayersVoiceError: 'export-demo-players-voice-error',
@@ -92,10 +88,10 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.DownloadDemoCorrupted]: string;
   [RendererServerMessageName.DownloadDemoError]: string;
   [RendererServerMessageName.DownloadDemoInCurrentFolderLoaded]: Demo;
-  [RendererServerMessageName.ExportMatchesToXlsxMatchProgress]: ExportMatchesToXlsxProgressPayload;
-  [RendererServerMessageName.ExportMatchesToXlsxSheetProgress]: SheetName;
-  [RendererServerMessageName.ExportMatchesToXlsxSuccess]: ExportMatchesToXlsxSuccessPayload;
-  [RendererServerMessageName.ExportMatchesToXlsxError]: void;
+  [RendererServerMessageName.ExportToXlsxProgress]: ExportToXlsxProgressPayload;
+  [RendererServerMessageName.ExportToXlsxSheetProgress]: string;
+  [RendererServerMessageName.ExportToXlsxSuccess]: ExportToXlsxSuccessPayload;
+  [RendererServerMessageName.ExportToXlsxError]: void;
   [RendererServerMessageName.ExportDemoPlayersVoiceProgress]: ExportDemoPlayersVoiceProgressPayload;
   [RendererServerMessageName.ExportDemoPlayersVoiceDone]: void;
   [RendererServerMessageName.ExportDemoPlayersVoiceError]: ExportDemoPlayersVoiceErrorPayload;

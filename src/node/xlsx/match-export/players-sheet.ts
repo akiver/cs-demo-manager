@@ -1,14 +1,14 @@
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { playerColorToString } from 'csdm/node/demo-analyzer/player-color-to-string';
 import type { Column } from '../column';
 import { SingleMatchExportSheet } from './single-match-export-sheet';
 
-export class PlayersSheet extends SingleMatchExportSheet<Player> {
+export class PlayersSheet extends SingleMatchExportSheet<MatchPlayer> {
   protected getName() {
     return 'Players';
   }
 
-  protected getColumns(): Column<Player>[] {
+  protected getColumns(): Column<MatchPlayer>[] {
     return [
       {
         name: 'steam_id',
@@ -40,12 +40,10 @@ export class PlayersSheet extends SingleMatchExportSheet<Player> {
       },
       {
         name: 'score',
-
         cellFormatter: (row) => row.score,
       },
       {
         name: 'mvp',
-
         cellFormatter: (row) => row.mvpCount,
       },
       {

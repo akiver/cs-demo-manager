@@ -1,7 +1,7 @@
 import { sql, type ReferenceExpression } from 'kysely';
 import type { Database } from 'csdm/node/database/schema';
 import { db } from 'csdm/node/database/database';
-import type { FetchTeamFilters } from './fetch-team-filters';
+import type { TeamFilters } from './team-filters';
 import { fetchTeamMatchCountStats } from './fetch-team-match-count-stats';
 import type { TeamProfile } from 'csdm/common/types/team-profile';
 import { TeamNotFound } from './error/team-not-found';
@@ -17,13 +17,13 @@ function buildQuery({
   name,
   startDate,
   endDate,
-  sources,
+  demoSources,
   games,
   gameModes,
   tagIds,
   maxRounds,
   demoTypes,
-}: FetchTeamFilters) {
+}: TeamFilters) {
   const { count, avg, sum } = db.fn;
 
   let query = db
@@ -66,8 +66,8 @@ function buildQuery({
           wallbangsQuery = wallbangsQuery.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
         }
 
-        if (sources.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.source', 'in', sources);
+        if (demoSources.length > 0) {
+          wallbangsQuery = wallbangsQuery.where('matches.source', 'in', demoSources);
         }
 
         if (games.length > 0) {
@@ -108,8 +108,8 @@ function buildQuery({
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
-  if (sources.length > 0) {
-    query = query.where('matches.source', 'in', sources);
+  if (demoSources.length > 0) {
+    query = query.where('matches.source', 'in', demoSources);
   }
 
   if (games.length > 0) {
@@ -137,7 +137,7 @@ function buildQuery({
   return query;
 }
 
-export async function fetchTeam(filters: FetchTeamFilters): Promise<TeamProfile> {
+export async function fetchTeam(filters: TeamFilters): Promise<TeamProfile> {
   const query = buildQuery(filters);
   const row = await query.executeTakeFirst();
 
@@ -151,8 +151,8 @@ export async function fetchTeam(filters: FetchTeamFilters): Promise<TeamProfile>
     fetchTeamRoundCount(filters),
     fetchMatchesTable({
       ...filters,
-      teamName: filters.name,
       ranking: RankingFilter.All,
+      teamName: filters.name,
     }),
     fetchTeamCollateralKillCount(filters),
     fetchTeamClutches(filters),

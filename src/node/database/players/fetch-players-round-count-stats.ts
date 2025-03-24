@@ -1,15 +1,19 @@
 import { sql } from 'kysely';
 import { TeamNumber } from 'csdm/common/types/counter-strike';
-import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
 import { db } from '../database';
+import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filters';
 
-type RoundCount = {
+export type PlayerRoundCountStats = {
+  steamId: string;
   totalCount: number;
   roundCountAsCt: number;
   roundCountAsT: number;
 };
 
-export async function fetchPlayerRoundCount(filters: FetchPlayerFilters): Promise<RoundCount> {
+export async function fetchPlayersRoundCountStats(
+  steamIds: string[],
+  filters?: MatchFilters,
+): Promise<PlayerRoundCountStats[]> {
   const { count } = db.fn;
   let query = db
     .selectFrom('rounds')
@@ -33,20 +37,17 @@ export async function fetchPlayerRoundCount(filters: FetchPlayerFilters): Promis
           )`.as('roundCountAsT'),
     ])
     .leftJoin('matches', 'matches.checksum', 'rounds.match_checksum')
-    .leftJoin('players', 'players.match_checksum', 'rounds.match_checksum')
-    .where('players.steam_id', '=', filters.steamId);
+    .innerJoin('players', 'players.match_checksum', 'rounds.match_checksum')
+    .select(['players.steam_id as steamId'])
+    .where('players.steam_id', 'in', steamIds)
+    .orderBy('players.steam_id')
+    .groupBy('players.steam_id');
 
-  query = applyPlayerFilters(query, filters);
-
-  const row = await query.executeTakeFirst();
-
-  if (!row) {
-    return {
-      totalCount: 0,
-      roundCountAsCt: 0,
-      roundCountAsT: 0,
-    };
+  if (filters) {
+    query = applyMatchFilters(query, filters);
   }
 
-  return row;
+  const rows = await query.execute();
+
+  return rows;
 }

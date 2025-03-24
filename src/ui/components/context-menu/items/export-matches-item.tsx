@@ -5,7 +5,7 @@ import type { MatchTable } from 'csdm/common/types/match-table';
 import { ExportMatchesToJsonItem } from 'csdm/ui/components/context-menu/items/export-matches-to-json-item';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
 import { Trans } from '@lingui/react/macro';
-import { ExportMatchesToXlsxItem } from './export-matches-to-xlsx-item';
+import { ExportToXlsxItem } from './export-to-xlsx-item';
 import { ExportPlayersVoiceItem } from './export-players-voice-item';
 import { ExportChatMessagesItem } from './export-chat-messages-item';
 
@@ -35,7 +35,7 @@ export function ExportMatchesItem({ matches }: Props) {
 
   return (
     <SubContextMenu label={<Trans context="Context menu">Export</Trans>}>
-      <ExportMatchesToXlsxItem onClick={onExportToXlsxClick} />
+      <ExportToXlsxItem onClick={onExportToXlsxClick} />
       <ExportMatchesToJsonItem checksums={checksums} />
       <ExportPlayersVoiceItem demoPaths={filepaths} />
       <ExportChatMessagesItem checksums={checksums} />

@@ -1,18 +1,18 @@
 import { sql } from 'kysely';
 import { db } from 'csdm/node/database/database';
-import type { FetchTeamFilters } from './fetch-team-filters';
+import type { TeamFilters } from './team-filters';
 
 function buildQuery({
   name,
   startDate,
   endDate,
-  sources,
+  demoSources,
   games,
   gameModes,
   tagIds,
   maxRounds,
   demoTypes,
-}: FetchTeamFilters) {
+}: TeamFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('matches')
@@ -24,8 +24,8 @@ function buildQuery({
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
-  if (sources.length > 0) {
-    query = query.where('source', 'in', sources);
+  if (demoSources.length > 0) {
+    query = query.where('source', 'in', demoSources);
   }
 
   if (games.length > 0) {
@@ -59,7 +59,7 @@ type PlayerMatchCountStats = {
   lostMatchCount: number;
 };
 
-export async function fetchTeamMatchCountStats(filters: FetchTeamFilters): Promise<PlayerMatchCountStats> {
+export async function fetchTeamMatchCountStats(filters: TeamFilters): Promise<PlayerMatchCountStats> {
   const wonMatchQuery = buildQuery(filters).whereRef('matches.winner_name', '=', 'teams.name');
 
   const lostMatchQuery = buildQuery(filters)

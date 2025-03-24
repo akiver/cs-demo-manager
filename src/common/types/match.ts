@@ -2,7 +2,7 @@ import type { DemoSource, DemoType, Game, TeamNumber, GameMode } from 'csdm/comm
 import type { Team } from './team';
 import type { Round } from './round';
 import type { ChatMessage } from './chat-message';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from './match-player';
 import type { Damage } from './damage';
 import type { Shot } from './shot';
 import type { Kill } from './kill';
@@ -38,7 +38,7 @@ export type Match = {
   assistCount: number;
   collateralKillCount: number;
   shotCount: number;
-  players: Player[];
+  players: MatchPlayer[];
   rounds: Round[];
   kills: Kill[];
   blinds: PlayerBlind[];

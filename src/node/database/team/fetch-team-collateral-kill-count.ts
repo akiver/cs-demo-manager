@@ -1,9 +1,9 @@
 import { sql } from 'kysely';
 import { WeaponType } from 'csdm/common/types/counter-strike';
 import { db } from '../database';
-import type { FetchTeamFilters } from './fetch-team-filters';
+import type { TeamFilters } from './team-filters';
 
-export async function fetchTeamCollateralKillCount(filters: FetchTeamFilters) {
+export async function fetchTeamCollateralKillCount(filters: TeamFilters) {
   const { count } = db.fn;
   const subQuery = db.with('collateral_kills', (db) => {
     let query = db
@@ -19,8 +19,8 @@ export async function fetchTeamCollateralKillCount(filters: FetchTeamFilters) {
       query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);
     }
 
-    if (filters.sources.length > 0) {
-      query = query.where('matches.source', 'in', filters.sources);
+    if (filters.demoSources.length > 0) {
+      query = query.where('matches.source', 'in', filters.demoSources);
     }
 
     if (filters.games.length > 0) {

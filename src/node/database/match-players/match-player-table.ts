@@ -1,4 +1,4 @@
-import type { Generated, Selectable } from 'kysely';
+import type { Generated } from 'kysely';
 import type { PlayerColor, Rank, RankType } from 'csdm/common/types/counter-strike';
 import type { ColumnID } from 'csdm/common/types/column-id';
 
@@ -64,5 +64,3 @@ export type MatchPlayerTable = {
   color: PlayerColor;
   inspect_weapon_count: number;
 };
-
-export type MatchPlayerRow = Selectable<MatchPlayerTable>;

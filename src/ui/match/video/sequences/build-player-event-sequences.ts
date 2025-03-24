@@ -1,13 +1,13 @@
 import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { PlayerSequenceEvent } from './player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 
-function buildPlayersOptions(players: Player[]) {
+function buildPlayersOptions(players: MatchPlayer[]) {
   const options: SequencePlayerOptions[] = players.map((player) => {
     return {
       highlightKill: false,

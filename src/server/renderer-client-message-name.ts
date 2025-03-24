@@ -50,6 +50,7 @@ export const RendererClientMessageName = {
   UpdateSteamAccountName: 'update-steam-account-name',
   ExportMatchesToXlsx: 'export-matches-to-xslx',
   ExportMatchesToJson: 'export-matches-to-json',
+  ExportPlayersToXlsx: 'export-players-to-xslx',
   AddMap: 'add-map',
   UpdateMap: 'update-map',
   DeleteMap: 'delete-map',

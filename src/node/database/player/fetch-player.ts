@@ -1,25 +1,17 @@
 import { sql } from 'kysely';
 import { PlayerNotFound } from '../../errors/player-not-found';
-import { fetchPlayerMapsStats } from './fetch-player-maps-stats';
 import { fetchPlayerMatchCountStats } from './fetch-player-match-count-stats';
-import { fetchPlayerCompetitiveRankHistory } from './fetch-player-competitive-rank-history';
-import { fetchPlayerChartsData } from './fetch-player-charts-data';
 import { db } from 'csdm/node/database/database';
-import { fetchPlayerLastMatches } from './fetch-player-last-matches';
-import { fetchPlayerRoundCount } from './fetch-player-rounds-count';
+import { fetchPlayerRoundCountStats } from './fetch-player-round-count-stats';
 import { fetchLastPlayerData } from './fetch-last-player-data';
-import type { PlayerProfile } from '../../../common/types/player-profile';
-import { fetchPlayerEnemyCountPerRank } from './fetch-player-enemy-count-per-rank';
-import { fetchMatchesTable } from '../matches/fetch-matches-table';
-import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
+import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filters';
 import { fetchPlayerCollateralKillCount } from './fetch-player-collateral-kill-count';
-import { fetchPlayerClutches } from './fetch-player-clutches';
-import { fetchPlayerPremierRankHistory } from './fetch-player-premier-rank-history';
-import { fetchPlayersTagIds } from '../tags/fetch-players-tag-ids';
-import { fetchPlayerUtilitiesStats } from './fetch-player-utilities-stats';
+import { fetchPlayerUtilityStats } from './fetch-player-utility-stats';
 import { fetchPlayerOpeningDuelsStats } from './fetch-player-opening-duels-stats';
+import { EconomyBan } from 'csdm/node/steam-web-api/steam-constants';
+import type { Player } from 'csdm/common/types/player';
 
-function buildQuery(filters: FetchPlayerFilters) {
+async function fetchPlayerRow(steamId: string, filters?: MatchFilters) {
   const { count, avg, sum } = db.fn;
 
   let query = db
@@ -38,7 +30,18 @@ function buildQuery(filters: FetchPlayerFilters) {
       sum<number>('five_kill_count').as('fiveKillCount'),
       sum<number>('bomb_planted_count').as('bombPlantedCount'),
       sum<number>('bomb_defused_count').as('bombDefusedCount'),
+      sum<number>('mvp_count').as('mvpCount'),
+      sum<number>('first_kill_count').as('firstKillCount'),
+      sum<number>('first_death_count').as('firstDeathCount'),
+      sum<number>('first_trade_kill_count').as('firstTradeKillCount'),
+      sum<number>('first_trade_death_count').as('firstTradeDeathCount'),
+      sum<number>('trade_kill_count').as('tradeKillCount'),
+      sum<number>('trade_death_count').as('tradeDeathCount'),
+      sum<number>('damage_health').as('damageHealth'),
+      sum<number>('damage_armor').as('damageArmor'),
+      sum<number>('utility_damage').as('utilityDamage'),
       avg<number>('headshot_percentage').as('headshotPercentage'),
+      sql<number>`ROUND(AVG(utility_damage_per_round)::numeric, 1)`.as('averageUtilityDamagePerRound'),
       avg<number>('kast').as('kast'),
       sql<number>`SUM(players.kill_count)::NUMERIC / NULLIF(SUM(players.death_count), 0)::NUMERIC`.as('killDeathRatio'),
       avg<number>('hltv_rating').as('hltvRating'),
@@ -52,10 +55,12 @@ function buildQuery(filters: FetchPlayerFilters) {
           .selectFrom('kills')
           .select(count<number>('kills.id').as('wallbangKillCount'))
           .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
-          .where('killer_steam_id', '=', filters.steamId)
+          .where('killer_steam_id', '=', steamId)
           .where('penetrated_objects', '>', 0);
 
-        wallbangsQuery = applyPlayerFilters(wallbangsQuery, filters);
+        if (filters) {
+          wallbangsQuery = applyMatchFilters(wallbangsQuery, filters);
+        }
 
         return wallbangsQuery.as('wallbangKillCount');
       },
@@ -65,12 +70,12 @@ function buildQuery(filters: FetchPlayerFilters) {
     .select([
       'vac_ban_count as vacBanCount',
       'game_ban_count as gameBanCount',
-      `last_ban_date as lastBanDate`,
+      'last_ban_date as lastBanDate',
       'economy_ban as economyBan',
       'has_private_profile as hasPrivateProfile',
       'is_community_banned as isCommunityBanned',
     ])
-    .where('players.steam_id', '=', filters.steamId)
+    .where('players.steam_id', '=', steamId)
     .groupBy([
       'players.steam_id',
       'vacBanCount',
@@ -81,83 +86,55 @@ function buildQuery(filters: FetchPlayerFilters) {
       'isCommunityBanned',
     ]);
 
-  query = applyPlayerFilters(query, filters);
+  if (filters) {
+    query = applyMatchFilters(query, filters);
+  }
 
-  return query;
-}
+  const row = await query.executeTakeFirst();
 
-export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerProfile> {
-  const query = buildQuery(filters);
-  const playerRow = await query.executeTakeFirst();
-
-  if (!playerRow) {
+  if (!row) {
     throw new PlayerNotFound();
   }
 
-  const player = {
-    ...playerRow,
-  } as PlayerProfile;
+  return row;
+}
 
+export async function fetchPlayer(steamId: string, filters?: MatchFilters): Promise<Player> {
   const [
+    playerRow,
     lastPlayerData,
-    { wonMatchCount, lostMatchCount, tiedMatchCount },
-    rankHistory,
-    premierRankHistory,
-    chartsData,
+    matchCountStats,
     roundCount,
-    enemyCountPerRank,
-    lastMatches,
-    matches,
-    mapsStats,
     collateralKillCount,
-    clutches,
-    tagIds,
     utilitiesStats,
     openingDuelsStats,
   ] = await Promise.all([
-    fetchLastPlayerData(filters),
-    fetchPlayerMatchCountStats(filters),
-    fetchPlayerCompetitiveRankHistory(filters),
-    fetchPlayerPremierRankHistory(filters),
-    fetchPlayerChartsData(filters),
-    fetchPlayerRoundCount(filters),
-    fetchPlayerEnemyCountPerRank(filters),
-    fetchPlayerLastMatches(filters.steamId),
-    fetchMatchesTable(filters),
-    fetchPlayerMapsStats(filters),
-    fetchPlayerCollateralKillCount(filters),
-    fetchPlayerClutches(filters),
-    fetchPlayersTagIds([filters.steamId]),
-    fetchPlayerUtilitiesStats(filters),
-    fetchPlayerOpeningDuelsStats(filters),
+    fetchPlayerRow(steamId, filters),
+    fetchLastPlayerData(steamId, filters),
+    fetchPlayerMatchCountStats(steamId, filters),
+    fetchPlayerRoundCountStats(steamId, filters),
+    fetchPlayerCollateralKillCount(steamId, filters),
+    fetchPlayerUtilityStats(steamId, filters),
+    fetchPlayerOpeningDuelsStats(steamId, filters),
   ]);
-  player.name = lastPlayerData.name;
-  player.avatar = lastPlayerData.avatar;
-  player.comment = lastPlayerData.comment;
-  player.competitiveRank = lastPlayerData.competitiveRank;
-  player.premierRank = lastPlayerData.premierRank;
-  player.winsCount = lastPlayerData?.winsCount || 0;
-  player.wonMatchCount = wonMatchCount;
-  player.lostMatchCount = lostMatchCount;
-  player.tiedMatchCount = tiedMatchCount;
-  player.competitiveRankHistory = rankHistory;
-  player.premierRankHistory = premierRankHistory;
-  player.chartsData = chartsData;
-  player.roundCount = roundCount.totalCount;
-  player.roundCountAsCt = roundCount.roundCountAsCt;
-  player.roundCountAsT = roundCount.roundCountAsT;
-  player.enemyCountPerRank = enemyCountPerRank;
-  player.lastMatches = lastMatches;
-  player.matches = matches;
-  player.mapsStats = mapsStats;
-  player.collateralKillCount = collateralKillCount;
-  player.clutches = clutches;
-  player.tagIds = tagIds;
-  player.averageBlindTime = utilitiesStats.averageBlindTime;
-  player.averageEnemiesFlashed = utilitiesStats.averageEnemiesFlashed;
-  player.averageHeGrenadeDamage = utilitiesStats.averageHeGrenadeDamage;
-  player.averageSmokesThrownPerMatch = utilitiesStats.averageSmokesThrownPerMatch;
-  player.openingDuelsStats = openingDuelsStats.all;
+
+  const player: Player = {
+    ...playerRow,
+    ...lastPlayerData,
+    ...matchCountStats,
+    ...roundCount,
+    ...utilitiesStats,
+    roundCount: roundCount.totalCount,
+    collateralKillCount,
+    wallbangKillCount: playerRow.wallbangKillCount ?? 0,
+    vacBanCount: playerRow.vacBanCount ?? 0,
+    gameBanCount: playerRow.gameBanCount ?? 0,
+    economyBan: playerRow.economyBan ?? EconomyBan.None,
+    hasPrivateProfile: playerRow.hasPrivateProfile ?? false,
+    isCommunityBanned: playerRow.isCommunityBanned ?? false,
+    lastBanDate: playerRow.lastBanDate?.toISOString() ?? null,
+    openingDuelsStats: openingDuelsStats.all,
+  };
 
   return player;
 }

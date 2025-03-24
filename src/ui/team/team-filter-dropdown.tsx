@@ -34,7 +34,7 @@ export function TeamFilterDropdown() {
   };
   const onSourcesChange = (sources: DemoSource[]) => {
     fetchTeam({
-      sources,
+      demoSources: sources,
     });
   };
   const onGameModesChange = (modes: GameMode[]) => {

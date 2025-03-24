@@ -540,6 +540,11 @@ msgctxt "Button"
 msgid "Watch"
 msgstr "观看"
 
+#: src/ui/components/buttons/xlsx-export-button.tsx
+msgctxt "Button"
+msgid "XLSX export"
+msgstr "导出为XLSX"
+
 #: src/ui/components/context-menu/items/add-to-video-sequences-item.tsx
 msgctxt "Context menu"
 msgid "Add to video sequences"
@@ -646,6 +651,7 @@ msgstr ""
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
 #: src/ui/demos/table/export-demos-items.tsx
+#: src/ui/players/table/export-players-item.tsx
 msgctxt "Context menu"
 msgid "Export"
 msgstr "导出"
@@ -655,13 +661,8 @@ msgctxt "Context menu"
 msgid "JSON"
 msgstr "JSON"
 
-#: src/ui/components/context-menu/items/export-matches-to-xlsx-item.tsx
-msgctxt "Context menu"
-msgid "XLSX"
-msgstr "XLSX"
-
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgid "Export in progress…"
 msgstr "正在导出中…"
 
@@ -670,7 +671,7 @@ msgid "Exporting demo {demoNumber} of {totalDemoCount}..."
 msgstr "导出录像 {demoNumber} 到 {totalDemoCount}..."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgid "Export done."
 msgstr "导出完成。"
 
@@ -724,7 +725,7 @@ msgstr "您需要安装 <0>Rosetta</0>。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 #: src/ui/components/dialogs/rename-dialog.tsx
 #: src/ui/demos/table/demos-table.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
@@ -771,8 +772,8 @@ msgid "Warnings:"
 msgstr "警告："
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 msgctxt "Button label"
 msgid "Export"
 msgstr "导出"
@@ -781,6 +782,11 @@ msgstr "导出"
 msgctxt "Context menu"
 msgid "Players voice"
 msgstr ""
+
+#: src/ui/components/context-menu/items/export-to-xlsx-item.tsx
+msgctxt "Context menu"
+msgid "XLSX"
+msgstr "XLSX"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
@@ -991,7 +997,7 @@ msgid "Click here to reveal the output folder"
 msgstr "单击此处显示输出文件夹"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 msgctxt "File destination"
 msgid "Output"
 msgstr "输出"
@@ -1007,75 +1013,41 @@ msgid "Minify"
 msgstr "最小化"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 msgctxt "Button"
 msgid "Export"
 msgstr "导出"
 
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgctxt "Dialog title"
 msgid "Excel export"
 msgstr "Excel 导出"
 
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgctxt "Excel sheet"
-msgid "General"
-msgstr "常规"
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgctxt "Excel sheet"
-msgid "Players"
-msgstr "玩家"
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgctxt "Excel sheet"
-msgid "Rounds"
-msgstr "回合"
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgctxt "Excel sheet"
-msgid "Kills"
-msgstr "击杀次数"
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgctxt "Excel sheet"
-msgid "Weapons"
-msgstr "武器"
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgctxt "Excel sheet"
-msgid "Clutches"
-msgstr "残局"
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgctxt "Excel sheet"
-msgid "Players Flashbang matrix"
-msgstr "玩家闪光弹矩阵"
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgid "Exporting match {matchCount} of {totalMatchCount}…"
-msgstr "导出比赛 {matchCount} 到 {totalMatchCount}…"
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
-msgid "Generating sheet {translatedSheetName}…"
-msgstr "生成工作表 {translatedSheetName}..."
-
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 msgctxt "Radio label"
 msgid "Single file"
 msgstr "单个文件"
 
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 msgctxt "Radio label"
 msgid "Multiple files"
 msgstr "多个文件"
 
-#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 msgctxt "Excel sheets"
 msgid "Sheets"
 msgstr "工作表"
+
+#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+msgid "Exporting player {count} of {totalCount}…"
+msgstr ""
+
+#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+msgid "Generating sheet {translatedSheetName}…"
+msgstr "生成工作表 {translatedSheetName}..."
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Invalid name."
@@ -4150,11 +4122,6 @@ msgstr "视频"
 msgctxt "Tab link"
 msgid "Chat"
 msgstr "聊天"
-
-#: src/ui/match/overview/action-bar/export-match-as-xlsx-button.tsx
-msgctxt "Button"
-msgid "XLSX export"
-msgstr "导出为XLSX"
 
 #: src/ui/match/overview/action-bar/export-match-to-json-button.tsx
 msgctxt "Button"
@@ -7657,3 +7624,58 @@ msgstr ""
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
 msgstr ""
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "General"
+msgstr "常规"
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Maps"
+msgstr ""
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Clutch"
+msgstr ""
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Economy"
+msgstr ""
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Players"
+msgstr "玩家"
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Rounds"
+msgstr "回合"
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Kills"
+msgstr "击杀次数"
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Weapons"
+msgstr "武器"
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Clutches"
+msgstr "残局"
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Utility"
+msgstr ""
+
+#: src/ui/xlsx/xlsx-sheet-translations.ts
+msgctxt "Excel sheet"
+msgid "Players Flashbang matrix"
+msgstr "玩家闪光弹矩阵"

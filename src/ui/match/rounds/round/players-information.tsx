@@ -5,7 +5,7 @@ import { GrenadeName, EconomyType } from 'csdm/common/types/counter-strike';
 import { useCurrentRound } from './use-current-round';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Avatar } from 'csdm/ui/components/avatar';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import type { Shot } from 'csdm/common/types/shot';
 import type { Damage } from 'csdm/common/types/damage';
 import type { Kill } from 'csdm/common/types/kill';
@@ -113,7 +113,7 @@ function Title({ children }: TitleProps) {
 }
 
 type PlayerAvatarProps = {
-  player: Player;
+  player: MatchPlayer;
 };
 
 function PlayerAvatar({ player }: PlayerAvatarProps) {
@@ -139,14 +139,14 @@ function Cell({ value }: CellProps) {
 
 type GameplayProps = {
   roundKills: Kill[];
-  playersTeamA: Player[];
-  playersTeamB: Player[];
+  playersTeamA: MatchPlayer[];
+  playersTeamB: MatchPlayer[];
   round: Round;
 };
 
 function Gameplay({ round, roundKills, playersTeamA, playersTeamB }: GameplayProps) {
   const match = useCurrentMatch();
-  const renderGameplayGrid = (players: Player[], gridArea: string) => {
+  const renderGameplayGrid = (players: MatchPlayer[], gridArea: string) => {
     return (
       <Grid area={gridArea} playerCount={players.length}>
         {players.map((player) => {
@@ -187,12 +187,12 @@ function Gameplay({ round, roundKills, playersTeamA, playersTeamB }: GameplayPro
 type KillsProps = {
   roundKills: Kill[];
   roundChickenDeaths: ChickenDeath[];
-  playersTeamA: Player[];
-  playersTeamB: Player[];
+  playersTeamA: MatchPlayer[];
+  playersTeamB: MatchPlayer[];
 };
 
 function Kills({ roundKills, roundChickenDeaths, playersTeamA, playersTeamB }: KillsProps) {
-  const renderKillsGrid = (players: Player[], gridArea: string) => {
+  const renderKillsGrid = (players: MatchPlayer[], gridArea: string) => {
     return (
       <Grid area={gridArea} playerCount={players.length}>
         {players.map((player) => {
@@ -253,12 +253,12 @@ function Kills({ roundKills, roundChickenDeaths, playersTeamA, playersTeamB }: K
 
 type DeathsProps = {
   roundKills: Kill[];
-  playersTeamA: Player[];
-  playersTeamB: Player[];
+  playersTeamA: MatchPlayer[];
+  playersTeamB: MatchPlayer[];
 };
 
 function Deaths({ roundKills, playersTeamA, playersTeamB }: DeathsProps) {
-  const renderDeathsGrid = (players: Player[], gridArea: string) => {
+  const renderDeathsGrid = (players: MatchPlayer[], gridArea: string) => {
     return (
       <Grid area={gridArea} playerCount={players.length}>
         {players.map((player) => {
@@ -304,12 +304,12 @@ function Deaths({ roundKills, playersTeamA, playersTeamB }: DeathsProps) {
 
 type GrenadesProps = {
   roundShots: Shot[];
-  playersTeamA: Player[];
-  playersTeamB: Player[];
+  playersTeamA: MatchPlayer[];
+  playersTeamB: MatchPlayer[];
 };
 
 function Grenades({ roundShots, playersTeamA, playersTeamB }: GrenadesProps) {
-  const renderGrenadesGrid = (players: Player[], gridArea: string) => {
+  const renderGrenadesGrid = (players: MatchPlayer[], gridArea: string) => {
     return (
       <Grid area={gridArea} playerCount={players.length}>
         {players.map((player) => {
@@ -371,12 +371,12 @@ function Grenades({ roundShots, playersTeamA, playersTeamB }: GrenadesProps) {
 type DamagesProps = {
   roundDamages: Damage[];
   roundShots: Shot[];
-  playersTeamA: Player[];
-  playersTeamB: Player[];
+  playersTeamA: MatchPlayer[];
+  playersTeamB: MatchPlayer[];
 };
 
 function Damages({ roundShots, roundDamages, playersTeamA, playersTeamB }: DamagesProps) {
-  const renderDamagesGrid = (players: Player[], gridArea: string) => {
+  const renderDamagesGrid = (players: MatchPlayer[], gridArea: string) => {
     return (
       <Grid area={gridArea} playerCount={players.length}>
         {players.map((player) => {
@@ -461,15 +461,15 @@ function Damages({ roundShots, roundDamages, playersTeamA, playersTeamB }: Damag
 
 type EconomyProps = {
   roundPlayerEconomies: PlayerEconomy[];
-  playersTeamA: Player[];
-  playersTeamB: Player[];
+  playersTeamA: MatchPlayer[];
+  playersTeamB: MatchPlayer[];
 };
 
 function Economy({ roundPlayerEconomies, playersTeamA, playersTeamB }: EconomyProps) {
   const formatMoney = useFormatMoney();
   const { translateEconomyType } = useTranslateEconomyType();
 
-  const renderEconomyGrid = (players: Player[], gridArea: string) => {
+  const renderEconomyGrid = (players: MatchPlayer[], gridArea: string) => {
     return (
       <Grid area={gridArea} playerCount={players.length}>
         {players.map((player) => {

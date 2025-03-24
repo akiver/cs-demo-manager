@@ -178,7 +178,7 @@ export class PlayersSheet extends MultipleMatchExportSheet<PlayerRow> {
   }
 
   public async generate() {
-    const rows = await fetchPlayersRows(this.checksums);
+    const rows = await fetchPlayersRows({ checksums: this.checksums });
     for (const row of rows) {
       this.writeRow(row);
     }

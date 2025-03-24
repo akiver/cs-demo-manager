@@ -37,7 +37,7 @@ export function PlayerFilterDropdown() {
   };
   const onSourcesChange = (sources: DemoSource[]) => {
     fetchPlayer({
-      sources,
+      demoSources: sources,
     });
   };
   const onGameModesChange = (modes: GameMode[]) => {

@@ -12,6 +12,7 @@ import type { PlayerTable } from 'csdm/common/types/player-table';
 import { Separator } from 'csdm/ui/components/context-menu/separator';
 import { UpdateNameItem } from 'csdm/ui/components/context-menu/items/update-name-item';
 import { UpdatePlayerNameDialog } from 'csdm/ui/dialogs/update-player-name-dialog';
+import { ExportPlayersItem } from './export-players-item';
 
 type Props = {
   players: PlayerTable[];
@@ -50,6 +51,7 @@ export function PlayerContextMenu({ players, onCommentClick }: Props) {
       <OpenSteamProfileItem steamIds={playerSteamIds} />
       <PinPlayerItem steamId={selectedPlayerSteamId} />
       {!isMultipleSelection && <UpdateNameItem onClick={onUpdateNameClick} />}
+      <ExportPlayersItem steamIds={playerSteamIds} />
     </ContextMenu>
   );
 }

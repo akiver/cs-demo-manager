@@ -33,7 +33,7 @@ export function MatchesFilterDropdown() {
 
   const onSourcesChange = (sources: DemoSource[]) => {
     fetchMatches({
-      sources,
+      demoSources: sources,
     });
   };
   const onGamesChange = (games: Game[]) => {

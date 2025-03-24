@@ -2,11 +2,10 @@ import { sql } from 'kysely';
 import type { DemoSource, DemoType, Game, GameMode } from 'csdm/common/types/counter-strike';
 import { RankingFilter } from 'csdm/common/types/ranking-filter';
 
-export type FetchPlayerFilters = {
-  steamId: string;
+export type MatchFilters = {
   startDate: string | undefined;
   endDate: string | undefined;
-  sources: DemoSource[];
+  demoSources: DemoSource[];
   demoTypes: DemoType[];
   games: Game[];
   ranking: RankingFilter;
@@ -16,8 +15,8 @@ export type FetchPlayerFilters = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function applyPlayerFilters(query: any, filters: FetchPlayerFilters) {
-  if (filters.startDate !== undefined && filters.endDate !== undefined) {
+export function applyMatchFilters(query: any, filters: MatchFilters) {
+  if (filters.startDate && filters.endDate) {
     query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);
   }
 
@@ -25,8 +24,8 @@ export function applyPlayerFilters(query: any, filters: FetchPlayerFilters) {
     query = query.where('matches.is_ranked', '=', filters.ranking === RankingFilter.Ranked);
   }
 
-  if (filters.sources.length > 0) {
-    query = query.where('matches.source', 'in', filters.sources);
+  if (filters.demoSources.length > 0) {
+    query = query.where('matches.source', 'in', filters.demoSources);
   }
 
   if (filters.games.length > 0) {

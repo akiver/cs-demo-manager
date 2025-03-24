@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import type { Kill } from 'csdm/common/types/kill';
 import { Tooltip } from 'csdm/ui/components/tooltip';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { Avatar } from 'csdm/ui/components/avatar';
 import { Content } from 'csdm/ui/components/content';
 import { OpeningDuelResult } from 'csdm/common/types/opening-duel-result';
@@ -24,7 +24,7 @@ type PlayerStats = {
 
 type TeamChartProps = {
   teamName: string;
-  players: Player[];
+  players: MatchPlayer[];
   kills: Kill[];
   result: OpeningDuelResult | undefined;
   sides: TeamNumber[];

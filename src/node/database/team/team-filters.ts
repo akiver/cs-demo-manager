@@ -1,10 +1,10 @@
 import type { DemoSource, DemoType, Game, GameMode } from 'csdm/common/types/counter-strike';
 
-export type FetchTeamFilters = {
+export type TeamFilters = {
   name: string;
   startDate: string | undefined;
   endDate: string | undefined;
-  sources: DemoSource[];
+  demoSources: DemoSource[];
   demoTypes: DemoType[];
   games: Game[];
   gameModes: GameMode[];

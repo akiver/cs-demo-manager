@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import type { Kill } from 'csdm/common/types/kill';
 import type { Match } from 'csdm/common/types/match';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { buildPlayerEventSequences } from './build-player-event-sequences';
 import { PlayerSequenceEvent } from './player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
@@ -19,7 +19,7 @@ const killerSteamId = 'killer-steamId';
 const killer = {
   steamId: killerSteamId,
   name: 'Killer name',
-} as Player;
+} as MatchPlayer;
 
 describe('generate player kills sequences', () => {
   it('should generate 1 sequence if there is only 1 kill', () => {

@@ -7,6 +7,7 @@ import { Tags } from 'csdm/ui/components/tags/tags';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { PlayersTagsDialog } from 'csdm/ui/players/players-tags-dialogs';
 import type { PlayerProfile } from 'csdm/common/types/player-profile';
+import { ExportPlayerAsXlsxButton } from './export-player-as-xlsx-button';
 
 type LeftProps = {
   player: PlayerProfile;
@@ -29,5 +30,15 @@ function Left({ player }: LeftProps) {
 export function PlayerActionBar() {
   const player = useUnsafePlayer();
 
-  return <ActionBar left={player && <Left player={player} />} right={<PlayerFilterDropdown />} />;
+  return (
+    <ActionBar
+      left={player && <Left player={player} />}
+      right={
+        <>
+          <ExportPlayerAsXlsxButton />
+          <PlayerFilterDropdown />
+        </>
+      }
+    />
+  );
 }

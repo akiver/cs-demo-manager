@@ -2,13 +2,12 @@ import { sql } from 'kysely';
 import { CompetitiveRank } from 'csdm/common/types/counter-strike';
 import type { CompetitiveRankHistory } from 'csdm/common/types/charts/competitive-rank-history';
 import { db } from 'csdm/node/database/database';
-import type { FetchPlayerFilters } from './fetch-player-filters';
+import type { MatchFilters } from '../match/apply-match-filters';
 
-export async function fetchPlayerCompetitiveRankHistory({
-  steamId,
-  startDate,
-  endDate,
-}: FetchPlayerFilters): Promise<CompetitiveRankHistory[]> {
+export async function fetchPlayerCompetitiveRankHistory(
+  steamId: string,
+  { startDate, endDate }: MatchFilters,
+): Promise<CompetitiveRankHistory[]> {
   let query = db
     .selectFrom('players')
     .select(['rank as rank', 'old_rank as oldRank', 'wins_count as winCount'])
@@ -19,7 +18,7 @@ export async function fetchPlayerCompetitiveRankHistory({
     .where('rank', '<=', CompetitiveRank.GlobalElite)
     .orderBy('date', 'asc');
 
-  if (startDate !== undefined && endDate !== undefined) {
+  if (startDate && endDate) {
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 

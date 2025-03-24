@@ -1,11 +1,19 @@
 import { sql } from 'kysely';
 import { db } from 'csdm/node/database/database';
-import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
+import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filters';
 import { TeamNumber, WeaponName } from 'csdm/common/types/counter-strike';
-import type { PlayerOpeningDuelsStats, PlayerOpeningDuelsStatsPerSide } from 'csdm/common/types/player-profile';
+
+export type PlayerOpeningDuelsStats = {
+  successPercentage: number;
+  tradePercentage: number;
+  bestWeapon: WeaponName;
+};
+
+type PlayerOpeningDuelsStatsPerSide = Record<'ct' | 't' | 'all', PlayerOpeningDuelsStats>;
 
 export async function fetchPlayerOpeningDuelsStats(
-  filters: FetchPlayerFilters,
+  steamId: string,
+  filters?: MatchFilters,
 ): Promise<PlayerOpeningDuelsStatsPerSide> {
   const query = db
     .with('first_kill_per_round', (db) => {
@@ -17,7 +25,9 @@ export async function fetchPlayerOpeningDuelsStats(
         .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
         .groupBy(['match_checksum', 'round_number']);
 
-      subQuery = applyPlayerFilters(subQuery, filters);
+      if (filters) {
+        subQuery = applyMatchFilters(subQuery, filters);
+      }
 
       return subQuery;
     })
@@ -27,9 +37,9 @@ export async function fetchPlayerOpeningDuelsStats(
         .select([
           'kills.id',
           'kills.weapon_name',
-          sql<number>`CASE WHEN killer_steam_id = ${sql`${filters.steamId}`} THEN 1 ELSE 0 END`.as('is_success'),
+          sql<number>`CASE WHEN killer_steam_id = ${sql`${steamId}`} THEN 1 ELSE 0 END`.as('is_success'),
           sql<number>`CASE WHEN is_trade_death = true THEN 1 ELSE 0 END`.as('is_traded'),
-          sql<number>`CASE WHEN killer_steam_id = ${sql`${filters.steamId}`} THEN killer_side ELSE victim_side END`.as(
+          sql<number>`CASE WHEN killer_steam_id = ${sql`${steamId}`} THEN killer_side ELSE victim_side END`.as(
             'player_side',
           ),
         ])
@@ -40,10 +50,7 @@ export async function fetchPlayerOpeningDuelsStats(
             .onRef('kills.tick', '=', 'first_kill_per_round.first_tick');
         })
         .where(({ eb, or }) => {
-          return or([
-            eb('kills.killer_steam_id', '=', filters.steamId),
-            eb('kills.victim_steam_id', '=', filters.steamId),
-          ]);
+          return or([eb('kills.killer_steam_id', '=', steamId), eb('kills.victim_steam_id', '=', steamId)]);
         });
     })
     .with('weapon_stats', (db) => {

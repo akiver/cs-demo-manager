@@ -1,6 +1,6 @@
 import { sql } from 'kysely';
 import { db } from 'csdm/node/database/database';
-import type { FetchTeamFilters } from './fetch-team-filters';
+import type { TeamFilters } from './team-filters';
 import type { MapStats } from 'csdm/common/types/map-stats';
 
 type MatchStats = {
@@ -34,13 +34,13 @@ function buildMatchStatsQuery({
   name,
   startDate,
   endDate,
-  sources,
+  demoSources,
   games,
   gameModes,
   tagIds,
   maxRounds,
   demoTypes,
-}: FetchTeamFilters) {
+}: TeamFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('matches')
@@ -61,8 +61,8 @@ function buildMatchStatsQuery({
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
-  if (sources.length > 0) {
-    query = query.where('matches.source', 'in', sources);
+  if (demoSources.length > 0) {
+    query = query.where('matches.source', 'in', demoSources);
   }
 
   if (games.length > 0) {
@@ -94,13 +94,13 @@ function buildStatsQuery({
   name,
   startDate,
   endDate,
-  sources,
+  demoSources,
   games,
   gameModes,
   tagIds,
   maxRounds,
   demoTypes,
-}: FetchTeamFilters) {
+}: TeamFilters) {
   const { avg } = db.fn;
   let query = db
     .selectFrom('matches')
@@ -122,8 +122,8 @@ function buildStatsQuery({
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
-  if (sources.length > 0) {
-    query = query.where('matches.source', 'in', sources);
+  if (demoSources.length > 0) {
+    query = query.where('matches.source', 'in', demoSources);
   }
 
   if (games.length > 0) {
@@ -155,13 +155,13 @@ function buildRoundsQuery({
   name,
   startDate,
   endDate,
-  sources,
+  demoSources,
   games,
   gameModes,
   tagIds,
   maxRounds,
   demoTypes,
-}: FetchTeamFilters) {
+}: TeamFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('rounds')
@@ -190,8 +190,8 @@ function buildRoundsQuery({
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
-  if (sources.length > 0) {
-    query = query.where('source', 'in', sources);
+  if (demoSources.length > 0) {
+    query = query.where('source', 'in', demoSources);
   }
 
   if (games.length > 0) {
@@ -219,7 +219,7 @@ function buildRoundsQuery({
   return query;
 }
 
-export async function fetchTeamMapsStats(filters: FetchTeamFilters): Promise<MapStats[]> {
+export async function fetchTeamMapsStats(filters: TeamFilters): Promise<MapStats[]> {
   const statsQuery = buildStatsQuery(filters);
   const roundsQuery = buildRoundsQuery(filters);
   const matchStatsQuery = buildMatchStatsQuery(filters);
