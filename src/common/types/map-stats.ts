@@ -16,3 +16,7 @@ export type MapStats = {
   kast: number;
   headshotPercentage: number;
 };
+
+export type PlayerMapsStats = MapStats & {
+  steamId: string;
+};

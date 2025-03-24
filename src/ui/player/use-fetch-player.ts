@@ -6,6 +6,7 @@ import { usePlayerProfileSettings } from '../settings/use-player-profile-setting
 import { useDispatch } from '../store/use-dispatch';
 import { fetchPlayerError, fetchPlayerStart, fetchPlayerSuccess } from './player-actions';
 import { useCurrentPlayerSteamId } from './use-current-player-steam-id';
+import type { FetchPlayerPayload } from 'csdm/server/handlers/renderer-process/player/fetch-player-handler';
 
 export function useFetchPlayer() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export function useFetchPlayer() {
 
   return async (filters?: Partial<FetchPlayerFilters>) => {
     try {
-      const payload: FetchPlayerFilters = {
+      const payload: FetchPlayerPayload = {
         steamId,
         startDate,
         endDate,

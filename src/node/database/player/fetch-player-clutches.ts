@@ -3,12 +3,12 @@ import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filt
 import type { Clutch } from 'csdm/common/types/clutch';
 import { clutchRowToClutch } from '../clutches/clutch-row-to-clutch';
 
-export async function fetchPlayerClutches(filters: FetchPlayerFilters): Promise<Clutch[]> {
+export async function fetchPlayerClutches(steamId: string, filters: FetchPlayerFilters): Promise<Clutch[]> {
   let query = db
     .selectFrom('clutches')
     .selectAll()
     .leftJoin('matches', 'matches.checksum', 'clutches.match_checksum')
-    .where('clutches.clutcher_steam_id', '=', filters.steamId);
+    .where('clutches.clutcher_steam_id', '=', steamId);
 
   query = applyPlayerFilters(query, filters);
 

@@ -14,8 +14,8 @@ type LastPlayerData = {
   premierRank: PremierRank;
 };
 
-export async function fetchLastPlayerData(filters: FetchPlayerFilters): Promise<LastPlayerData> {
-  const { steamId, startDate, endDate, games } = filters;
+export async function fetchLastPlayerData(steamId: string, filters: FetchPlayerFilters): Promise<LastPlayerData> {
+  const { startDate, endDate, games } = filters;
   let query = db
     .selectFrom('players')
     .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
@@ -50,8 +50,8 @@ export async function fetchLastPlayerData(filters: FetchPlayerFilters): Promise<
     accountPromise,
     lastPlayerEntryPromise,
     commentPromise,
-    fetchPlayerLastPremierRank(filters),
-    fetchPlayerLastCompetitiveRank(filters),
+    fetchPlayerLastPremierRank(steamId, filters),
+    fetchPlayerLastCompetitiveRank(steamId, filters),
   ]);
 
   return {

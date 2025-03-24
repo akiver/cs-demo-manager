@@ -35,6 +35,7 @@ export type PlayerProfile = {
   fourKillCount: number;
   headshotCount: number;
   headshotPercentage: number;
+  averageUtilityDamagePerRound: number;
   hostageRescuedCount: number;
   kast: number;
   hltvRating: number;

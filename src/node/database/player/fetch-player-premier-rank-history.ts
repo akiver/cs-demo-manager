@@ -4,11 +4,10 @@ import { db } from 'csdm/node/database/database';
 import type { FetchPlayerFilters } from './fetch-player-filters';
 import type { PremierRankHistory } from 'csdm/common/types/charts/premier-rank-history';
 
-export async function fetchPlayerPremierRankHistory({
-  steamId,
-  startDate,
-  endDate,
-}: FetchPlayerFilters): Promise<PremierRankHistory[]> {
+export async function fetchPlayerPremierRankHistory(
+  steamId: string,
+  { startDate, endDate }: FetchPlayerFilters,
+): Promise<PremierRankHistory[]> {
   let query = db
     .selectFrom('players')
     .select(['rank as rank', 'wins_count as winCount'])

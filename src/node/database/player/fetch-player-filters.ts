@@ -3,7 +3,6 @@ import type { DemoSource, DemoType, Game, GameMode } from 'csdm/common/types/cou
 import { RankingFilter } from 'csdm/common/types/ranking-filter';
 
 export type FetchPlayerFilters = {
-  steamId: string;
   startDate: string | undefined;
   endDate: string | undefined;
   sources: DemoSource[];

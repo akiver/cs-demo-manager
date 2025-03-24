@@ -4,7 +4,7 @@ import { playerQueryResultToPlayer } from './player-query-result-to-player';
 import type { Player } from 'csdm/common/types/player';
 import type { PlayerQueryResult } from './player-query-result';
 import { fetchCollateralKillCountPerSteamId } from '../player/fetch-collateral-kill-count-per-steam-ids';
-import { fetchPlayersClutchStats } from '../clutches/fetch-players-clutch-stats';
+import { fetchPlayersClutchStats } from '../players/fetch-players-clutch-stats';
 import { fetchPlayersTagIds } from '../tags/fetch-players-tag-ids';
 
 export async function fetchPlayers(checksum: string): Promise<Player[]> {

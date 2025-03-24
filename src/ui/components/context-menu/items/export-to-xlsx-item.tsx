@@ -6,7 +6,7 @@ type Props = {
   onClick: () => void;
 };
 
-export function ExportMatchesToXlsxItem({ onClick }: Props) {
+export function ExportToXlsxItem({ onClick }: Props) {
   return (
     <ContextMenuItem onClick={onClick}>
       <Trans context="Context menu">XLSX</Trans>

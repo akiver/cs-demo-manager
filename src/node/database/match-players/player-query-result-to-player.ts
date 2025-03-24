@@ -1,5 +1,5 @@
 import type { Player } from 'csdm/common/types/player';
-import type { PlayerClutchStats } from '../clutches/fetch-players-clutch-stats';
+import type { PlayerClutchStats } from '../players/fetch-players-clutch-stats';
 import type { PlayerQueryResult } from './player-query-result';
 
 export function playerQueryResultToPlayer(

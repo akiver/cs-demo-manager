@@ -44,6 +44,7 @@ export async function fetchPlayersClutchStats(checksums: string[], steamIds: str
       sql<number>`COUNT(CASE WHEN opponent_count = 5 AND won = TRUE THEN 1 END)`.as('vsFiveWonCount'),
       sql<number>`COUNT(CASE WHEN opponent_count = 5 AND won = FALSE THEN 1 END)`.as('vsFiveLostCount'),
     ])
+    .orderBy('clutcher_steam_id')
     .groupBy(['clutches.clutcher_steam_id']);
 
   if (steamIds.length > 0) {

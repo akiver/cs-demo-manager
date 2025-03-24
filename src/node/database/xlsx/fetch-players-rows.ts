@@ -1,7 +1,7 @@
 import { sql } from 'kysely';
 import type { Rank } from 'csdm/common/types/counter-strike';
 import { db } from 'csdm/node/database/database';
-import { fetchPlayersClutchStats } from '../clutches/fetch-players-clutch-stats';
+import { fetchPlayersClutchStats } from '../players/fetch-players-clutch-stats';
 import { fetchLastPlayersLastData } from '../player/fetch-players-last-data';
 
 type PlayerQueryResult = {

@@ -1,11 +1,11 @@
 import { sql, type Expression, type SqlBool } from 'kysely';
-import type { Game, Rank } from 'csdm/common/types/counter-strike';
 import type { PlayerTable } from 'csdm/common/types/player-table';
 import { db } from 'csdm/node/database/database';
 import type { PlayersTableFilter } from './players-table-filter';
 import { BanFilter } from 'csdm/common/types/ban-filter';
 import { fetchPlayersTags } from 'csdm/node/database/tags/fetch-players-tags';
 import type { SteamAccountTagTable } from 'csdm/node/database/tags/steam-account-tag-table';
+import { fetchLastPlayersData, type LastPlayersData } from './fetch-last-players-data';
 
 type PlayersStatsResult = {
   steamId: string;
@@ -27,20 +27,6 @@ type PlayersStatsResult = {
   hltvRating: number;
   hltvRating2: number;
   comment: string | null;
-};
-
-type LastPlayersDataResult = {
-  steamId: string;
-  rank: Rank;
-  game: Game;
-  name: string;
-  lastKnownName: string | null;
-  avatar: string | null;
-  lastBanDate: Date | null;
-  lastMatchDate: Date;
-  vacBanCount: number | null;
-  gameBanCount: number | null;
-  isCommunityBanned: boolean | null;
 };
 
 async function fetchPlayersStats(filter: PlayersTableFilter): Promise<PlayersStatsResult[]> {
@@ -116,50 +102,9 @@ async function fetchPlayersStats(filter: PlayersTableFilter): Promise<PlayersSta
   return playersStats;
 }
 
-async function fetchLastPlayersData(steamIds: string[]): Promise<LastPlayersDataResult[]> {
-  if (steamIds.length === 0) {
-    return [];
-  }
-
-  const lastPlayersData = await db
-    .selectFrom('players')
-    .select(['players.steam_id as steamId', 'players.name as name', 'players.rank as rank'])
-    .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'players.steam_id')
-    .leftJoin('steam_account_overrides', 'players.steam_id', 'steam_account_overrides.steam_id')
-    .select([
-      db.fn.coalesce('steam_account_overrides.name', 'steam_accounts.name').as('lastKnownName'),
-      'avatar',
-      'last_ban_date as lastBanDate',
-      'is_community_banned as isCommunityBanned',
-      'vac_ban_count as vacBanCount',
-      'game_ban_count as gameBanCount',
-      'economy_ban as economyBan',
-    ])
-    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .select(['matches.date as lastMatchDate', 'matches.game as game'])
-    .where('players.steam_id', 'in', steamIds)
-    .groupBy([
-      'matches.checksum',
-      'players.steam_id',
-      'players.name',
-      'players.rank',
-      'lastKnownName',
-      'steam_accounts.avatar',
-      'lastBanDate',
-      'isCommunityBanned',
-      'vacBanCount',
-      'gameBanCount',
-      'economyBan',
-    ])
-    .orderBy('matches.date', 'desc')
-    .execute();
-
-  return lastPlayersData;
-}
-
 function buildPlayersTable(
   playersStats: PlayersStatsResult[],
-  lastPlayersData: LastPlayersDataResult[],
+  lastPlayersData: LastPlayersData[],
   tags: SteamAccountTagTable[],
 ): PlayerTable[] {
   const players: PlayerTable[] = [];

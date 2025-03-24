@@ -6,7 +6,7 @@ import { fetchPlayerCompetitiveRankHistory } from './fetch-player-competitive-ra
 import { fetchPlayerChartsData } from './fetch-player-charts-data';
 import { db } from 'csdm/node/database/database';
 import { fetchPlayerLastMatches } from './fetch-player-last-matches';
-import { fetchPlayerRoundCount } from './fetch-player-rounds-count';
+import { fetchPlayerRoundCountStats } from './fetch-player-round-count-stats';
 import { fetchLastPlayerData } from './fetch-last-player-data';
 import type { PlayerProfile } from '../../../common/types/player-profile';
 import { fetchPlayerEnemyCountPerRank } from './fetch-player-enemy-count-per-rank';
@@ -16,10 +16,10 @@ import { fetchPlayerCollateralKillCount } from './fetch-player-collateral-kill-c
 import { fetchPlayerClutches } from './fetch-player-clutches';
 import { fetchPlayerPremierRankHistory } from './fetch-player-premier-rank-history';
 import { fetchPlayersTagIds } from '../tags/fetch-players-tag-ids';
-import { fetchPlayerUtilitiesStats } from './fetch-player-utilities-stats';
+import { fetchPlayerUtilityStats } from './fetch-player-utility-stats';
 import { fetchPlayerOpeningDuelsStats } from './fetch-player-opening-duels-stats';
 
-function buildQuery(filters: FetchPlayerFilters) {
+function buildQuery(steamId: string, filters: FetchPlayerFilters) {
   const { count, avg, sum } = db.fn;
 
   let query = db
@@ -38,7 +38,10 @@ function buildQuery(filters: FetchPlayerFilters) {
       sum<number>('five_kill_count').as('fiveKillCount'),
       sum<number>('bomb_planted_count').as('bombPlantedCount'),
       sum<number>('bomb_defused_count').as('bombDefusedCount'),
+      sum<number>('mvp_count').as('mvpCount'),
+      sum<number>('utility_damage').as('utilityDamage'),
       avg<number>('headshot_percentage').as('headshotPercentage'),
+      sql<number>`ROUND(AVG(utility_damage_per_round)::numeric, 1)`.as('averageUtilityDamagePerRound'),
       avg<number>('kast').as('kast'),
       sql<number>`SUM(players.kill_count)::NUMERIC / NULLIF(SUM(players.death_count), 0)::NUMERIC`.as('killDeathRatio'),
       avg<number>('hltv_rating').as('hltvRating'),
@@ -52,7 +55,7 @@ function buildQuery(filters: FetchPlayerFilters) {
           .selectFrom('kills')
           .select(count<number>('kills.id').as('wallbangKillCount'))
           .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
-          .where('killer_steam_id', '=', filters.steamId)
+          .where('killer_steam_id', '=', steamId)
           .where('penetrated_objects', '>', 0);
 
         wallbangsQuery = applyPlayerFilters(wallbangsQuery, filters);
@@ -70,7 +73,7 @@ function buildQuery(filters: FetchPlayerFilters) {
       'has_private_profile as hasPrivateProfile',
       'is_community_banned as isCommunityBanned',
     ])
-    .where('players.steam_id', '=', filters.steamId)
+    .where('players.steam_id', '=', steamId)
     .groupBy([
       'players.steam_id',
       'vacBanCount',
@@ -86,8 +89,8 @@ function buildQuery(filters: FetchPlayerFilters) {
   return query;
 }
 
-export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerProfile> {
-  const query = buildQuery(filters);
+export async function fetchPlayer(steamId: string, filters: FetchPlayerFilters): Promise<PlayerProfile> {
+  const query = buildQuery(steamId, filters);
   const playerRow = await query.executeTakeFirst();
 
   if (!playerRow) {
@@ -115,21 +118,24 @@ export async function fetchPlayer(filters: FetchPlayerFilters): Promise<PlayerPr
     utilitiesStats,
     openingDuelsStats,
   ] = await Promise.all([
-    fetchLastPlayerData(filters),
-    fetchPlayerMatchCountStats(filters),
-    fetchPlayerCompetitiveRankHistory(filters),
-    fetchPlayerPremierRankHistory(filters),
-    fetchPlayerChartsData(filters),
-    fetchPlayerRoundCount(filters),
-    fetchPlayerEnemyCountPerRank(filters),
-    fetchPlayerLastMatches(filters.steamId),
-    fetchMatchesTable(filters),
-    fetchPlayerMapsStats(filters),
-    fetchPlayerCollateralKillCount(filters),
-    fetchPlayerClutches(filters),
-    fetchPlayersTagIds([filters.steamId]),
-    fetchPlayerUtilitiesStats(filters),
-    fetchPlayerOpeningDuelsStats(filters),
+    fetchLastPlayerData(steamId, filters),
+    fetchPlayerMatchCountStats(steamId, filters),
+    fetchPlayerCompetitiveRankHistory(steamId, filters),
+    fetchPlayerPremierRankHistory(steamId, filters),
+    fetchPlayerChartsData(steamId, filters),
+    fetchPlayerRoundCountStats(steamId, filters),
+    fetchPlayerEnemyCountPerRank(steamId, filters),
+    fetchPlayerLastMatches(steamId),
+    fetchMatchesTable({
+      ...filters,
+      steamId,
+    }),
+    fetchPlayerMapsStats(steamId, filters),
+    fetchPlayerCollateralKillCount(steamId, filters),
+    fetchPlayerClutches(steamId, filters),
+    fetchPlayersTagIds([steamId]),
+    fetchPlayerUtilityStats(steamId, filters),
+    fetchPlayerOpeningDuelsStats(steamId, filters),
   ]);
   player.name = lastPlayerData.name;
   player.avatar = lastPlayerData.avatar;
