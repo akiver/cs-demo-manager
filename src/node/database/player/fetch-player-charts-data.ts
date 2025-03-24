@@ -1,9 +1,9 @@
 import { sql } from 'kysely';
 import type { PlayerChartsData } from 'csdm/common/types/charts/player-charts-data';
 import { db } from 'csdm/node/database/database';
-import { applyPlayerFilters, type FetchPlayerFilters } from './fetch-player-filters';
+import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filters';
 
-export async function fetchPlayerChartsData(filters: FetchPlayerFilters): Promise<PlayerChartsData[]> {
+export async function fetchPlayerChartsData(steamId: string, filters: MatchFilters): Promise<PlayerChartsData[]> {
   let query = db
     .selectFrom('players')
     .select([
@@ -23,11 +23,11 @@ export async function fetchPlayerChartsData(filters: FetchPlayerFilters): Promis
         'clutchWonPercentage',
       ),
     ])
-    .where('steam_id', '=', filters.steamId)
+    .where('steam_id', '=', steamId)
     .groupBy(['headshotPercentage', 'averageDamagePerRound', 'killDeathRatio', 'matches.date'])
     .orderBy('date', 'asc');
 
-  query = applyPlayerFilters(query, filters);
+  query = applyMatchFilters(query, filters);
 
   const data: PlayerChartsData[] = await query.execute();
 

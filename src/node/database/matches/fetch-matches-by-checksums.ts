@@ -1,7 +1,7 @@
 import type { Match } from 'csdm/common/types/match';
 import { db } from 'csdm/node/database/database';
 import { matchRowToMatch } from './match-row-to-match';
-import { fetchPlayers } from '../match-players/fetch-players';
+import { fetchMatchPlayers } from '../match-players/fetch-match-players';
 import { fetchRounds } from '../rounds/fetch-rounds';
 import { fetchKills } from '../kills/fetch-kills';
 import { fetchClutches } from '../clutches/fetch-cluches';
@@ -49,7 +49,7 @@ export async function fetchMatchesByChecksums(checksums: string[]) {
       chatMessages,
       chickenDeaths,
     ] = await Promise.all([
-      fetchPlayers(checksum),
+      fetchMatchPlayers(checksum),
       fetchRounds(checksum),
       fetchKills(checksum),
       fetchClutches(checksum),

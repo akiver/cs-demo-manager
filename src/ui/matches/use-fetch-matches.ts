@@ -14,7 +14,7 @@ export function useFetchMatches() {
   return async (options?: Partial<FetchMatchesTablePayload>) => {
     try {
       const payload: FetchMatchesTablePayload = {
-        sources: options?.sources ?? sources,
+        demoSources: options?.demoSources ?? sources,
         games: options?.games ?? games,
         gameModes: options?.gameModes ?? gameModes,
         demoTypes: options?.demoTypes ?? demoTypes,

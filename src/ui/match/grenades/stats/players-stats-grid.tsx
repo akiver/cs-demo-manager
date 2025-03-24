@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar } from 'csdm/ui/components/avatar';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { FlashbangCells } from 'csdm/ui/match/grenades/stats/cells/flashbang-cells';
 import { FireCells } from 'csdm/ui/match/grenades/stats/cells/fire-cells';
 import { HeGrenadeCells } from 'csdm/ui/match/grenades/stats/cells/he-grenade-cells';
@@ -24,7 +24,7 @@ function renderCellsForGrenade(grenade: GrenadeOption, playerSteamId: string) {
 }
 
 type Props = {
-  players: Player[];
+  players: MatchPlayer[];
   teamName: string;
   grenade: GrenadeOption;
 };

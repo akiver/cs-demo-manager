@@ -1,11 +1,12 @@
 import type { ErrorCode } from 'csdm/common/error-code';
-import type { FetchPlayerFilters } from 'csdm/node/database/player/fetch-player-filters';
+import type { MatchFilters } from 'csdm/node/database/match/apply-match-filters';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
 import { usePlayerProfileSettings } from '../settings/use-player-profile-settings';
 import { useDispatch } from '../store/use-dispatch';
 import { fetchPlayerError, fetchPlayerStart, fetchPlayerSuccess } from './player-actions';
 import { useCurrentPlayerSteamId } from './use-current-player-steam-id';
+import type { FetchPlayerPayload } from 'csdm/server/handlers/renderer-process/player/fetch-player-handler';
 
 export function useFetchPlayer() {
   const dispatch = useDispatch();
@@ -14,13 +15,13 @@ export function useFetchPlayer() {
   const { updateSettings, demoSources, games, demoTypes, ranking, gameModes, tagIds, maxRounds, startDate, endDate } =
     usePlayerProfileSettings();
 
-  return async (filters?: Partial<FetchPlayerFilters>) => {
+  return async (filters?: Partial<MatchFilters>) => {
     try {
-      const payload: FetchPlayerFilters = {
+      const payload: FetchPlayerPayload = {
         steamId,
         startDate,
         endDate,
-        sources: demoSources,
+        demoSources,
         games,
         demoTypes,
         ranking,
@@ -31,7 +32,7 @@ export function useFetchPlayer() {
       };
       dispatch(fetchPlayerStart());
       await updateSettings({
-        demoSources: filters?.sources ?? demoSources,
+        demoSources: filters?.demoSources ?? demoSources,
         games: filters?.games ?? games,
         gameModes: filters?.gameModes ?? gameModes,
         demoTypes: filters?.demoTypes ?? demoTypes,

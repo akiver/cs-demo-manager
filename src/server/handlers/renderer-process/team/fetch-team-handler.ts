@@ -1,8 +1,8 @@
 import { fetchTeam } from 'csdm/node/database/team/fetch-team';
-import type { FetchTeamFilters } from 'csdm/node/database/team/fetch-team-filters';
+import type { TeamFilters } from 'csdm/node/database/team/team-filters';
 import { handleError } from '../../handle-error';
 
-export async function fetchTeamHandler(payload: FetchTeamFilters) {
+export async function fetchTeamHandler(payload: TeamFilters) {
   try {
     const team = await fetchTeam(payload);
 

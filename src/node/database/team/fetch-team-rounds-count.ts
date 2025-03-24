@@ -1,7 +1,7 @@
 import { sql } from 'kysely';
 import { TeamNumber } from 'csdm/common/types/counter-strike';
 import { db } from '../database';
-import type { FetchTeamFilters } from './fetch-team-filters';
+import type { TeamFilters } from './team-filters';
 
 type RoundCount = {
   totalCount: number;
@@ -13,13 +13,13 @@ export async function fetchTeamRoundCount({
   name,
   startDate,
   endDate,
-  sources,
+  demoSources,
   games,
   gameModes,
   tagIds,
   maxRounds,
   demoTypes,
-}: FetchTeamFilters): Promise<RoundCount> {
+}: TeamFilters): Promise<RoundCount> {
   const { count } = db.fn;
   let query = db
     .selectFrom('rounds')
@@ -52,8 +52,8 @@ export async function fetchTeamRoundCount({
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
-  if (sources.length > 0) {
-    query = query.where('source', 'in', sources);
+  if (demoSources.length > 0) {
+    query = query.where('source', 'in', demoSources);
   }
 
   if (games.length > 0) {

@@ -4,20 +4,20 @@ import { TableName } from 'csdm/node/settings/table/table-name';
 import { useCurrentMatch } from '../use-current-match';
 import { useScoreboardColumns } from './scoreboard/use-scoreboard-columns';
 import { useNavigateToMatchPlayer } from 'csdm/ui/hooks/navigation/use-navigate-to-match-player';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { ScoreboardContextMenu } from './scoreboard/context-menu/scoreboard-context-menu';
 import { MatchOverviewContext } from './match-overview-context';
 import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu';
 import type { TableInstance } from 'csdm/ui/components/table/table-types';
 import { useTable } from 'csdm/ui/components/table/use-table';
 
-function getRowId(player: Player) {
+function getRowId(player: MatchPlayer) {
   return player.steamId;
 }
 
 type ChildrenProps = {
-  tableTeamA: TableInstance<Player>;
-  tableTeamB: TableInstance<Player>;
+  tableTeamA: TableInstance<MatchPlayer>;
+  tableTeamB: TableInstance<MatchPlayer>;
 };
 
 type Props = {
@@ -33,7 +33,7 @@ export function MatchOverviewProvider({ children }: Props) {
   const columns = useScoreboardColumns(isDefuseMap);
   const navigateToMatchPlayer = useNavigateToMatchPlayer();
 
-  const onContextMenu = (event: MouseEvent, table: TableInstance<Player>) => {
+  const onContextMenu = (event: MouseEvent, table: TableInstance<MatchPlayer>) => {
     const players = table.getSelectedRows();
     if (players.length !== 1) {
       return;
@@ -47,7 +47,7 @@ export function MatchOverviewProvider({ children }: Props) {
     );
   };
 
-  const navigateToPlayer = (player: Player) => {
+  const navigateToPlayer = (player: MatchPlayer) => {
     navigateToMatchPlayer(match.checksum, player.steamId);
   };
 

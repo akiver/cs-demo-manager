@@ -2,19 +2,19 @@ import { sql } from 'kysely';
 import { db } from 'csdm/node/database/database';
 import type { Clutch } from 'csdm/common/types/clutch';
 import { clutchRowToClutch } from '../clutches/clutch-row-to-clutch';
-import type { FetchTeamFilters } from './fetch-team-filters';
+import type { TeamFilters } from './team-filters';
 
 export async function fetchTeamClutches({
   name,
   startDate,
   endDate,
-  sources,
+  demoSources,
   games,
   gameModes,
   tagIds,
   maxRounds,
   demoTypes,
-}: FetchTeamFilters): Promise<Clutch[]> {
+}: TeamFilters): Promise<Clutch[]> {
   let query = db
     .selectFrom('clutches')
     .selectAll()
@@ -26,8 +26,8 @@ export async function fetchTeamClutches({
     query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
-  if (sources.length > 0) {
-    query = query.where('source', 'in', sources);
+  if (demoSources.length > 0) {
+    query = query.where('source', 'in', demoSources);
   }
 
   if (games.length > 0) {

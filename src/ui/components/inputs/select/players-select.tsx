@@ -1,11 +1,10 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
-import type { Player } from 'csdm/common/types/player';
-import { FilterSelection } from '../../dropdown-filter/filter-selection';
-import { FilterValue } from '../../dropdown-filter/filter-value';
+import { FilterSelection } from 'csdm/ui/components/dropdown-filter/filter-selection';
+import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
 
 type Props = {
-  players: Player[];
+  players: { steamId: string; name: string }[];
   onChange: (steamIds: string[]) => void;
   selectedSteamIds: string[];
 };

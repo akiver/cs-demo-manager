@@ -2,7 +2,7 @@ import type { DemoSource, DemoType, Game, GameMode } from 'csdm/common/types/cou
 import type { Page } from 'csdm/node/settings/page';
 import type { ThemeName } from 'csdm/common/types/theme-name';
 import type { EncoderSoftware } from 'csdm/common/types/encoder-software';
-import type { MatchesTableFilter } from 'csdm/node/database/matches/matches-table-filter';
+import type { MatchFilters } from 'csdm/node/database/match/apply-match-filters';
 import type { RankingFilter } from 'csdm/common/types/ranking-filter';
 import type { DemosTableFilter } from 'csdm/node/database/demos/demos-table-filter';
 import type { PlayersTableFilter } from 'csdm/node/database/players/players-table-filter';
@@ -108,7 +108,7 @@ type DownloadSettings = {
   download5EPlayDemosInBackground: boolean;
 };
 
-export type MatchesSettings = MatchesTableFilter;
+export type MatchesSettings = MatchFilters;
 
 export type PlayersSettings = PlayersTableFilter;
 

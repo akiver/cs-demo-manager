@@ -78,7 +78,7 @@ import type { WriteBase64FilePayload } from './renderer-process/filesystem/write
 import { writeBase64FileHandler } from './renderer-process/filesystem/write-base64-file-handler';
 import type { UpdateDemosSourcePayload } from './renderer-process/demo/update-demos-source-handler';
 import { updateDemosSourceHandler } from './renderer-process/demo/update-demos-source-handler';
-import { fetchPlayerHandler } from './renderer-process/player/fetch-player-handler';
+import { fetchPlayerHandler, type FetchPlayerPayload } from './renderer-process/player/fetch-player-handler';
 import { resetDatabaseHandler } from './renderer-process/database/reset-database-handler';
 import { updateTagHandler } from './renderer-process/tags/update-tag-handler';
 import { deleteTagHandler } from './renderer-process/tags/delete-tag-handler';
@@ -112,7 +112,6 @@ import type { Point } from 'csdm/common/types/point';
 import type { IgnoredSteamAccount } from 'csdm/common/types/ignored-steam-account';
 import type { BanStats } from 'csdm/common/types/ban-stats';
 import type { PlayerProfile } from 'csdm/common/types/player-profile';
-import type { FetchPlayerFilters } from 'csdm/node/database/player/fetch-player-filters';
 import type { PlayerTable } from 'csdm/common/types/player-table';
 import type { UpdateDemosTypePayload } from './renderer-process/demo/update-demos-type-handler';
 import { updateDemosTypeHandler } from './renderer-process/demo/update-demos-type-handler';
@@ -172,7 +171,7 @@ import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filt
 import type { TeamTable } from 'csdm/common/types/team-table';
 import { fetchTeamsTableHandler } from './renderer-process/team/fetch-teams-table-handler';
 import { fetchTeamHandler } from './renderer-process/team/fetch-team-handler';
-import type { FetchTeamFilters } from 'csdm/node/database/team/fetch-team-filters';
+import type { TeamFilters } from 'csdm/node/database/team/team-filters';
 import type { TeamProfile } from 'csdm/common/types/team-profile';
 import { fetchTeamHeatmapPointsHandler } from './renderer-process/team/fetch-team-heatmap-points-handler';
 import {
@@ -202,6 +201,10 @@ import {
   exportMatchesChatMessagesHandler,
   type ExportMatchesChatMessagesPayload,
 } from './renderer-process/match/export-matches-chat-messages-handler';
+import {
+  exportPlayersToXlsxHandler,
+  type ExportPlayersToXlsxPayload,
+} from './renderer-process/player/export-players-to-xlsx-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -223,7 +226,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.NavigateToDemoOrMatch]: Handler<string>;
   [RendererClientMessageName.FetchPlayersTable]: Handler<PlayersTableFilter, PlayerTable[]>;
   [RendererClientMessageName.FetchTeamsTable]: Handler<TeamsTableFilter, TeamTable[]>;
-  [RendererClientMessageName.FetchTeam]: Handler<FetchTeamFilters, TeamProfile>;
+  [RendererClientMessageName.FetchTeam]: Handler<TeamFilters, TeamProfile>;
   [RendererClientMessageName.AddDemosToAnalyses]: Handler<Demo[]>;
   [RendererClientMessageName.RemoveDemosFromAnalyses]: Handler<string[]>;
   [RendererClientMessageName.GenerateMatchPositions]: Handler<GenerateMatchPositionsPayload>;
@@ -248,6 +251,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdateSteamAccountName]: Handler<UpdateSteamAccountNamePayload, string>;
   [RendererClientMessageName.ExportMatchesToXlsx]: Handler<ExportMatchesToXlsxPayload>;
   [RendererClientMessageName.ExportMatchesToJson]: Handler<ExportMatchesToJsonPayload>;
+  [RendererClientMessageName.ExportPlayersToXlsx]: Handler<ExportPlayersToXlsxPayload>;
   [RendererClientMessageName.AddIgnoredSteamAccount]: Handler<string, IgnoredSteamAccount>;
   [RendererClientMessageName.AddMap]: Handler<MapPayload, Map>;
   [RendererClientMessageName.UpdateMap]: Handler<MapPayload, Map>;
@@ -289,7 +293,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.ExportMatchChatMessages]: Handler<ExportChatMessagesPayload, boolean>;
   [RendererClientMessageName.ExportMatchesChatMessages]: Handler<ExportMatchesChatMessagesPayload, boolean>;
   [RendererClientMessageName.WriteBase64File]: Handler<WriteBase64FilePayload>;
-  [RendererClientMessageName.FetchPlayerStats]: Handler<FetchPlayerFilters, PlayerProfile>;
+  [RendererClientMessageName.FetchPlayerStats]: Handler<FetchPlayerPayload, PlayerProfile>;
   [RendererClientMessageName.InsertTag]: Handler<Omit<Tag, 'id'>, Tag>;
   [RendererClientMessageName.UpdateTag]: Handler<Tag>;
   [RendererClientMessageName.DeleteTag]: Handler<ColumnID>;
@@ -358,6 +362,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.UpdateSteamAccountName]: updateSteamAccountNameHandler,
   [RendererClientMessageName.ExportMatchesToXlsx]: exportMatchesToXlsxHandler,
   [RendererClientMessageName.ExportMatchesToJson]: exportMatchesToJsonHandler,
+  [RendererClientMessageName.ExportPlayersToXlsx]: exportPlayersToXlsxHandler,
   [RendererClientMessageName.AddIgnoredSteamAccount]: addIgnoredSteamAccountHandler,
   [RendererClientMessageName.AddMap]: addMapHandler,
   [RendererClientMessageName.UpdateMap]: updateMapHandler,

@@ -4,7 +4,7 @@ import { fetchCollateralKillCountPerMatch } from 'csdm/node/database/matches/fet
 import { fetchMatchTeamA } from 'csdm/node/database/matches/fetch-match-team-a';
 import { fetchMatchTeamB } from 'csdm/node/database/matches/fetch-match-team-b';
 import { matchRowToMatch } from 'csdm/node/database/matches/match-row-to-match';
-import { fetchPlayers } from 'csdm/node/database/match-players/fetch-players';
+import { fetchMatchPlayers } from 'csdm/node/database/match-players/fetch-match-players';
 import { fetchRounds } from 'csdm/node/database/rounds/fetch-rounds';
 import { fetchKills } from 'csdm/node/database/kills/fetch-kills';
 import { fetchClutches } from 'csdm/node/database/clutches/fetch-cluches';
@@ -51,7 +51,7 @@ export async function fetchMatchesForJsonExport(checksums: string[]): Promise<Ma
       chickenDeaths,
       grenadeDestroyed,
     ] = await Promise.all([
-      fetchPlayers(checksum),
+      fetchMatchPlayers(checksum),
       fetchRounds(checksum),
       fetchKills(checksum),
       fetchClutches(checksum),

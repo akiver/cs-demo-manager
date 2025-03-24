@@ -11,6 +11,7 @@ export async function getAllMigrations(): Promise<Migration[]> {
     import('./migrations/v4'),
     import('./migrations/v5'),
     import('./migrations/v6'),
+    import('./migrations/v7'),
   ]);
   const migrations: Migration[] = modules.map((module) => module.default);
 

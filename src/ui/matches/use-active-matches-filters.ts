@@ -5,7 +5,7 @@ import { defaultSettings } from 'csdm/node/settings/default-settings';
 export function useActiveMatchesFilters() {
   const { sources, games, gameModes, ranking, tagIds, startDate, endDate, maxRounds, demoTypes } = useMatchesSettings();
 
-  const hasActiveSourcesFilter = !areArraysValuesTheSame(defaultSettings.matches.sources, sources);
+  const hasActiveSourcesFilter = !areArraysValuesTheSame(defaultSettings.matches.demoSources, sources);
   const hasActiveGameModesFilter = !areArraysValuesTheSame(defaultSettings.matches.gameModes, gameModes);
   const hasActiveDemoTypesFilter = !areArraysValuesTheSame(defaultSettings.matches.demoTypes, demoTypes);
   const hasActiveGamesFilter = !areArraysValuesTheSame(defaultSettings.matches.games, games);

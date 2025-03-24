@@ -5,7 +5,7 @@ import { RankCell } from 'csdm/ui/components/table/cells/rank-cell';
 import type { Column } from 'csdm/ui/components/table/table-types';
 import { getTableRowHeight } from 'csdm/ui/components/table/get-table-row-height';
 import { roundNumber } from 'csdm/common/math/round-number';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { ScoreboardAvatarCell } from './scoreboard-avatar-cell';
 import { BansCell } from './bans-cell';
 import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-diff-sort-function';
@@ -13,8 +13,8 @@ import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-d
 export function useScoreboardColumns(isDefuseMap: boolean) {
   const { t } = useLingui();
 
-  const columns = useMemo((): Column<Player>[] => {
-    const columns: Column<Player>[] = [
+  const columns = useMemo((): Column<MatchPlayer>[] => {
+    const columns: Column<MatchPlayer>[] = [
       {
         id: 'avatar',
         accessor: 'avatar',
@@ -231,7 +231,7 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       },
       {
         id: 'udr',
-        accessor: 'utilityDamagePerRound',
+        accessor: 'averageUtilityDamagePerRound',
         headerText: t({
           context: 'Table header utility damage per round',
           message: 'UDR',

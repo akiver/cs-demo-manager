@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';
 import type { Match } from 'csdm/common/types/match';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import type { Kill } from 'csdm/common/types/kill';
 import { roundNumber } from 'csdm/common/math/round-number';
 
@@ -21,7 +21,7 @@ type WeaponStats = {
   headshotPercentage: number;
 };
 
-function buildWeaponsStats(match: Match, player: Player, kills: Kill[]): WeaponStats[] {
+function buildWeaponsStats(match: Match, player: MatchPlayer, kills: Kill[]): WeaponStats[] {
   const stats: WeaponStats[] = [];
 
   for (const kill of kills) {
@@ -63,7 +63,7 @@ function buildWeaponsStats(match: Match, player: Player, kills: Kill[]): WeaponS
 
 type Props = {
   match: Match;
-  player: Player;
+  player: MatchPlayer;
   kills: Kill[];
 };
 

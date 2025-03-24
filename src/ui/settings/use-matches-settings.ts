@@ -17,7 +17,7 @@ export function useMatchesSettings() {
         },
       );
     },
-    sources: settings.matches.sources,
+    sources: settings.matches.demoSources,
     games: settings.matches.games,
     gameModes: settings.matches.gameModes,
     tagIds: settings.matches.tagIds,

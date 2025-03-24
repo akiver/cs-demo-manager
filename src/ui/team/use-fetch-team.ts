@@ -1,5 +1,5 @@
 import type { ErrorCode } from 'csdm/common/error-code';
-import type { FetchTeamFilters } from 'csdm/node/database/team/fetch-team-filters';
+import type { TeamFilters } from 'csdm/node/database/team/team-filters';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
 import { useTeamProfileSettings } from '../settings/use-team-profile-settings';
@@ -14,13 +14,13 @@ export function useFetchTeam() {
   const { updateSettings, demoSources, games, demoTypes, gameModes, tagIds, maxRounds, startDate, endDate } =
     useTeamProfileSettings();
 
-  return async (filters?: Partial<FetchTeamFilters>) => {
+  return async (filters?: Partial<TeamFilters>) => {
     try {
-      const payload: FetchTeamFilters = {
+      const payload: TeamFilters = {
         name: teamName,
         startDate,
         endDate,
-        sources: demoSources,
+        demoSources,
         games,
         demoTypes,
         gameModes,
@@ -30,7 +30,7 @@ export function useFetchTeam() {
       };
       dispatch(fetchTeamStart());
       await updateSettings({
-        demoSources: filters?.sources ?? demoSources,
+        demoSources: filters?.demoSources ?? demoSources,
         games: filters?.games ?? games,
         gameModes: filters?.gameModes ?? gameModes,
         demoTypes: filters?.demoTypes ?? demoTypes,

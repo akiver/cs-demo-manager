@@ -70,8 +70,8 @@ export function MatchPlayers() {
               <KillDeathRatioPanel killDeathRatio={player.killDeathRatio} />
             </div>
             <div className="flex flex-col gap-y-8">
-              <AverageKillsPerRoundPanel averageKillsPerRound={player.averageKillPerRound} />
-              <AverageDeathsPerRoundPanel averageDeathsPerRound={player.averageDeathPerRound} />
+              <AverageKillsPerRoundPanel averageKillsPerRound={player.averageKillsPerRound} />
+              <AverageDeathsPerRoundPanel averageDeathsPerRound={player.averageDeathsPerRound} />
             </div>
             <HeadshotPanel
               headshotCount={player.headshotCount}

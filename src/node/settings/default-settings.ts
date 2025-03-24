@@ -121,7 +121,7 @@ export const defaultSettings: Settings = {
   matches: {
     gameModes: [],
     demoTypes: [],
-    sources: [],
+    demoSources: [],
     games: [],
     ranking: RankingFilter.All,
     tagIds: [],

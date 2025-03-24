@@ -1,10 +1,14 @@
-import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
-import type { FetchPlayerFilters } from 'csdm/node/database/player/fetch-player-filters';
+import { fetchPlayerProfile } from 'csdm/node/database/player/fetch-player-profile';
+import type { MatchFilters } from 'csdm/node/database/match/apply-match-filters';
 import { handleError } from '../../handle-error';
 
-export async function fetchPlayerHandler(payload: FetchPlayerFilters) {
+export type FetchPlayerPayload = MatchFilters & {
+  steamId: string;
+};
+
+export async function fetchPlayerHandler(payload: FetchPlayerPayload) {
   try {
-    const player = await fetchPlayer(payload);
+    const player = await fetchPlayerProfile(payload.steamId, payload);
 
     return player;
   } catch (error) {

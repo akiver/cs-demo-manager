@@ -2,19 +2,16 @@ import { sql } from 'kysely';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import { TeamLetter } from 'csdm/common/types/counter-strike';
 import { db } from 'csdm/node/database/database';
-import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import type { MatchTableRow } from 'csdm/node/database/matches/match-table-row';
 import { matchTableRowToMatchTable } from './match-table-row-to-match-table';
 import { fetchChecksumTags } from '../tags/fetch-checksum-tags';
 import { fetchCollateralKillCountPerMatch } from './fetch-collateral-kill-count-per-match';
-import type { MatchesTableFilter } from './matches-table-filter';
+import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filters';
 
-export async function fetchMatchesTable(
-  filter: MatchesTableFilter & { steamId?: string; teamName?: string },
-): Promise<MatchTable[]> {
+type MatchTableFilters = MatchFilters & { steamId?: string; teamName?: string };
+
+export async function fetchMatchesTable(filters: MatchTableFilters): Promise<MatchTable[]> {
   const { sum } = db.fn;
-  const { startDate, endDate, steamId, ranking, tagIds, sources, games, gameModes, maxRounds, demoTypes, teamName } =
-    filter;
   let query = db
     .selectFrom('matches')
     .selectAll('matches')
@@ -47,48 +44,17 @@ export async function fetchMatchesTable(
       'banned_player_count',
     ]);
 
-  if (steamId !== undefined) {
-    query = query.where('players.steam_id', '=', steamId);
+  query = applyMatchFilters(query, filters);
+
+  if (filters.steamId) {
+    query = query.where('players.steam_id', '=', filters.steamId);
   }
 
-  if (teamName !== undefined) {
+  if (filters.teamName) {
+    const { teamName } = filters;
     query = query.where((eb) => {
       return eb('teamA.name', '=', teamName).or('teamB.name', '=', teamName);
     });
-  }
-
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (ranking !== RankingFilter.All) {
-    query = query.where('matches.is_ranked', '=', ranking === RankingFilter.Ranked);
-  }
-
-  if (sources.length > 0) {
-    query = query.where('matches.source', 'in', sources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('matches.game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('matches.game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('matches.max_rounds', 'in', maxRounds);
-  }
-
-  if (Array.isArray(tagIds) && tagIds.length > 0) {
-    query = query
-      .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
   }
 
   const rows: MatchTableRow[] = await query.execute();

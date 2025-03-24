@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { Trans } from '@lingui/react/macro';
-import type { Player } from 'csdm/common/types/player';
+import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { ShieldIcon } from 'csdm/ui/icons/shield-icon';
 import { buildPlayerPath } from 'csdm/ui/routes-paths';
 import { ActionBar } from 'csdm/ui/components/action-bar';
@@ -17,7 +17,7 @@ import { PlayersTagsDialog } from 'csdm/ui/players/players-tags-dialogs';
 import { Tags } from 'csdm/ui/components/tags/tags';
 
 type Props = {
-  player: Player;
+  player: MatchPlayer;
 };
 
 export function PlayerActionBar({ player }: Props) {

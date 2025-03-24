@@ -1,8 +1,8 @@
 import { sql } from 'kysely';
 import type { Rank } from 'csdm/common/types/counter-strike';
 import { db } from 'csdm/node/database/database';
-import { fetchPlayersClutchStats } from '../clutches/fetch-players-clutch-stats';
-import { fetchLastPlayersLastData } from '../player/fetch-players-last-data';
+import { fetchPlayersClutchStats } from '../players/fetch-players-clutch-stats';
+import { fetchLastPlayersData } from '../players/fetch-last-players-data';
 
 type PlayerQueryResult = {
   steamId: string;
@@ -22,6 +22,13 @@ type PlayerQueryResult = {
   firstKillCount: number;
   firstDeathCount: number;
   averageDamagePerRound: number;
+  averageKillsPerRound: number;
+  averageDeathsPerRound: number;
+  oneKillCount: number;
+  twoKillCount: number;
+  threeKillCount: number;
+  fourKillCount: number;
+  fiveKillCount: number;
   vsOneCount: number;
   vsTwoCount: number;
   vsThreeCount: number;
@@ -40,8 +47,14 @@ type PlayerQueryResult = {
   bombPlantedCount: number;
   bombDefusedCount: number;
   hostageRescuedCount: number;
+  utilityDamage: number;
+  averageUtilityDamagePerRound: number;
   score: number;
   mvpCount: number;
+  gameBanCount: number;
+  isCommunityBanned: boolean;
+  vacBanCount: number;
+  lastBanDate: string | null;
 };
 
 export type PlayerRow = PlayerQueryResult & {
@@ -50,12 +63,16 @@ export type PlayerRow = PlayerQueryResult & {
   winsCount: number;
 };
 
-export async function fetchPlayersRows(checksums: string[]) {
+type Filters = {
+  checksums?: string[];
+  steamIds?: string[];
+};
+
+export async function fetchPlayersRows(filters: Filters): Promise<PlayerRow[]> {
   const { count, sum, avg } = db.fn;
-  const players = await db
+  let query = db
     .selectFrom('players')
     .select('steam_id as steamId')
-    .select('team_name as teamName')
     .select(count<number>('match_checksum').as('matchCount'))
     .select(sum<number>('players.kill_count').as('killCount'))
     .select(sum<number>('players.death_count').as('deathCount'))
@@ -65,6 +82,7 @@ export async function fetchPlayersRows(checksums: string[]) {
     .select(sum<number>('players.first_death_count').as('firstDeathCount'))
     .select(sum<number>('damage_health').as('damageHealth'))
     .select(sum<number>('damage_armor').as('damageArmor'))
+    .select(sum<number>('utility_damage').as('utilityDamage'))
     .select(sum<number>('one_kill_count').as('oneKillCount'))
     .select(sum<number>('two_kill_count').as('twoKillCount'))
     .select(sum<number>('three_kill_count').as('threeKillCount'))
@@ -80,31 +98,50 @@ export async function fetchPlayersRows(checksums: string[]) {
     .select(avg<number>('hltv_rating').as('hltvRating'))
     .select(avg<number>('hltv_rating_2').as('hltvRating2'))
     .select(avg<number>('average_damage_per_round').as('averageDamagePerRound'))
+    .select(avg<number>('average_kill_per_round').as('averageKillsPerRound'))
+    .select(avg<number>('average_death_per_round').as('averageDeathsPerRound'))
+    .select(sql<number>`ROUND(AVG(utility_damage_per_round)::numeric, 1)`.as('averageUtilityDamagePerRound'))
     .select(
       sql<number>`ROUND(SUM("players"."kill_count") / GREATEST(SUM("players"."death_count"), 1)::NUMERIC, 1)`.as(
         'killDeathRatio',
       ),
     )
     .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .where('matches.checksum', 'in', checksums)
-    .groupBy(['steam_id', 'team_name'])
-    .execute();
+    .groupBy(['steam_id']);
+
+  const checksums = filters.checksums ?? [];
+  if (checksums.length > 0) {
+    query = query.select('team_name as teamName').where('matches.checksum', 'in', checksums).groupBy('team_name');
+  }
+
+  const filterSteamIds = filters.steamIds ?? [];
+  if (filterSteamIds.length > 0) {
+    query = query.where('players.steam_id', 'in', filterSteamIds);
+  }
+
+  const players = await query.execute();
 
   const steamIds = players.map((player) => player.steamId);
   const [lastPlayersData, playersClutchStats] = await Promise.all([
-    fetchLastPlayersLastData(steamIds),
+    fetchLastPlayersData(steamIds),
     fetchPlayersClutchStats(checksums, steamIds),
   ]);
 
   const rows: PlayerRow[] = players.map((player) => {
-    const lastData = lastPlayersData.get(player.steamId);
+    const lastData = lastPlayersData.find((data) => data.steamId === player.steamId);
     const clutchStats = playersClutchStats.find((stats) => stats.clutcherSteamId === player.steamId);
+    if (!lastData) {
+      throw new Error(`Last player data not found for steamId: ${player.steamId}`);
+    }
 
     return {
       ...player,
-      name: lastData?.name ?? '',
-      rank: lastData?.rank ?? 0,
-      winsCount: lastData?.winsCount ?? 0,
+      ...lastData,
+      teamName: 'teamName' in player && typeof player.teamName === 'string' ? player.teamName : '',
+      gameBanCount: lastData.gameBanCount ?? 0,
+      isCommunityBanned: lastData.isCommunityBanned ?? false,
+      vacBanCount: lastData.vacBanCount ?? 0,
+      lastBanDate: lastData.lastBanDate?.toISOString() ?? null,
       vsOneCount: clutchStats?.vsOneCount ?? 0,
       vsOneWonCount: clutchStats?.vsOneWonCount ?? 0,
       vsOneLostCount: clutchStats?.vsOneLostCount ?? 0,

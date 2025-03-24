@@ -3,6 +3,7 @@ import { RendererServerMessageName } from 'csdm/server/renderer-server-message-n
 import { server } from 'csdm/server/server';
 import { MatchXlsxExport } from 'csdm/node/xlsx/match-xlsx-export';
 import type { SheetName } from 'csdm/node/xlsx/sheet-name';
+import type { ExportToXlsxSuccessPayload } from 'csdm/common/types/xlsx';
 
 type SheetsVisibility = {
   [SheetName.General]: boolean;
@@ -31,25 +32,15 @@ export type ExportMatchesToXlsxPayload =
       checksums: string[];
     };
 
-export type ExportMatchesToXlsxProgressPayload = {
-  matchCount: number;
-  totalMatchCount: number;
-};
-
-export type ExportMatchesToXlsxSuccessPayload = {
-  outputType: 'file' | 'folder';
-  outputPath: string;
-};
-
 export async function exportMatchesToXlsxHandler(payload: ExportMatchesToXlsxPayload) {
   try {
     if (payload.exportEachMatchToSingleFile) {
       for (const [index, match] of payload.matches.entries()) {
         server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.ExportMatchesToXlsxMatchProgress,
+          name: RendererServerMessageName.ExportToXlsxProgress,
           payload: {
-            matchCount: index + 1,
-            totalMatchCount: payload.matches.length,
+            count: index + 1,
+            totalCount: payload.matches.length,
           },
         });
 
@@ -68,7 +59,7 @@ export async function exportMatchesToXlsxHandler(payload: ExportMatchesToXlsxPay
         sheets: payload.sheets,
         onSheetGenerationStart(sheetName) {
           server.sendMessageToRendererProcess({
-            name: RendererServerMessageName.ExportMatchesToXlsxSheetProgress,
+            name: RendererServerMessageName.ExportToXlsxSheetProgress,
             payload: sheetName,
           });
         },
@@ -76,7 +67,7 @@ export async function exportMatchesToXlsxHandler(payload: ExportMatchesToXlsxPay
       await xlsxExport.generate();
     }
 
-    const successPayload: ExportMatchesToXlsxSuccessPayload = payload.exportEachMatchToSingleFile
+    const successPayload: ExportToXlsxSuccessPayload = payload.exportEachMatchToSingleFile
       ? {
           outputType: 'folder',
           outputPath: payload.outputFolderPath,
@@ -87,14 +78,14 @@ export async function exportMatchesToXlsxHandler(payload: ExportMatchesToXlsxPay
         };
 
     server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.ExportMatchesToXlsxSuccess,
+      name: RendererServerMessageName.ExportToXlsxSuccess,
       payload: successPayload,
     });
   } catch (error) {
     logger.error('Error while exporting matches to XLSX');
     logger.error(error);
     server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.ExportMatchesToXlsxError,
+      name: RendererServerMessageName.ExportToXlsxError,
     });
   }
 }

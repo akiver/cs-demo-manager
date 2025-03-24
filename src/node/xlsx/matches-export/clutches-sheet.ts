@@ -41,6 +41,10 @@ export class ClutchesSheet extends MultipleMatchExportSheet<ClutchRow> {
         name: 'kill_count',
         cellFormatter: (row) => row.killCount,
       },
+      {
+        name: 'has_won',
+        cellFormatter: (row) => row.hasWon,
+      },
     ];
   }
 
