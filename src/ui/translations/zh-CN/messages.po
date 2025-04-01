@@ -4019,7 +4019,7 @@ msgstr "查找"
 #: src/ui/match/grenades/stats/grenade-select.tsx
 msgctxt "Grenade name"
 msgid "Fire"
-msgstr "开火"
+msgstr "燃烧弹"
 
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
