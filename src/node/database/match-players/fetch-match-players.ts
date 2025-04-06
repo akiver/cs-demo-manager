@@ -66,7 +66,7 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
     .leftJoin('kills', (join) => {
       return join.on(({ and, eb, ref }) => {
         return and([
-          eb('kills.killer_steam_id', '=', 'players.steam_id'),
+          eb('kills.killer_steam_id', '=', ref('players.steam_id')),
           eb('kills.match_checksum', '=', ref('matches.checksum')),
         ]);
       });
