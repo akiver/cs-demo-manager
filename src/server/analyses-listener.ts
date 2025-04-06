@@ -38,7 +38,7 @@ class AnalysesListener {
 
     const analyses = demosNotInPendingAnalyses.map((demo) => {
       const analysis: Analysis = {
-        addedAt: new Date().toUTCString(),
+        addedAt: new Date().toISOString(),
         status: AnalysisStatus.Pending,
         demoChecksum: demo.checksum,
         demoPath: demo.filePath,

@@ -94,7 +94,7 @@ export async function searchCollateralKills({
         killerSteamId: row.killer_steam_id,
         roundNumber: row.round_number,
         tick: row.tick,
-        date: row.date.toUTCString(),
+        date: row.date.toISOString(),
         mapName: row.map_name,
         side: row.killer_side,
         kills: [killRowToKill(row)],

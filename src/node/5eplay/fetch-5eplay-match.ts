@@ -90,7 +90,7 @@ export async function fetch5EPlayMatch(
   return {
     id: matchId,
     downloadStatus: await getDownloadStatus(downloadFolderPath, matchId, match.demo_url),
-    date: unixTimestampToDate(match.start_time).toUTCString(),
+    date: unixTimestampToDate(match.start_time).toISOString(),
     demoUrl: match.demo_url,
     durationInSeconds: match.end_time - match.start_time,
     game: match.cs_type === 0 ? Game.CS2 : Game.CSGO,

@@ -76,7 +76,7 @@ export async function searchClutches({
     return {
       ...clutchRowToClutch(row),
       mapName: row.map_name,
-      date: row.date.toUTCString(),
+      date: row.date.toISOString(),
       demoPath: row.demo_path,
       game: row.game,
     };

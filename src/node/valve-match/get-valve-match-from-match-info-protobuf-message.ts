@@ -223,7 +223,7 @@ export function getValveMatchFromMatchInfoProtobufMesssage(matchInfoMessage: CDa
   const match: ValveMatch = {
     id: matchId.toString(),
     game,
-    date: date.toUTCString(),
+    date: date.toISOString(),
     durationInSeconds,
     result,
     scoreTeamStartedCT: currentScoreTeamThatStartedCt,

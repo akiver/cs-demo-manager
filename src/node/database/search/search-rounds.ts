@@ -83,7 +83,7 @@ export async function searchRounds({
     return {
       ...roundRowToRound(row, row.tagIds ?? []),
       mapName: row.map_name,
-      date: row.date.toUTCString(),
+      date: row.date.toISOString(),
       demoPath: row.demo_path,
       game: row.game,
     };

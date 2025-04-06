@@ -48,7 +48,7 @@ export async function faceitMatchRowToFaceitMatch(
     url: row.url,
     gameMode: row.game_mode,
     mapName: row.map_name,
-    date: row.date.toUTCString(),
+    date: row.date.toISOString(),
     durationInSeconds: row.duration_in_seconds,
     demoUrl: row.demo_url,
     winnerId: row.winner_id,

@@ -102,7 +102,7 @@ export async function searchMultiKills({
         killerSteamId: kill.killer_steam_id,
         roundNumber: kill.round_number,
         tick: kill.tick,
-        date: kill.date.toUTCString(),
+        date: kill.date.toISOString(),
         mapName: kill.map_name,
         side: kill.killer_side,
         kills: [killRowToKill(kill)],

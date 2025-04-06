@@ -23,7 +23,7 @@ export async function fetchIgnoredSteamAccounts(steamIds?: string[]): Promise<Ig
       steamId: row.steam_id,
       name: row.name,
       avatar: row.avatar,
-      lastBanDate: row.last_ban_date ? row.last_ban_date.toUTCString() : null,
+      lastBanDate: row.last_ban_date?.toISOString() ?? null,
     };
   });
 

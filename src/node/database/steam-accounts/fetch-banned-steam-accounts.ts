@@ -30,7 +30,7 @@ export async function fetchBannedSteamAccounts(ignoreBanBeforeFirstSeen: boolean
       steamId: row.steam_id,
       name: row.name,
       avatar: row.avatar,
-      lastBanDate: (row.last_ban_date as Date).toUTCString(),
+      lastBanDate: row.last_ban_date?.toISOString() ?? '',
       rank: row.rank ?? 0,
     };
   });

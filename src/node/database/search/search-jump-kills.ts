@@ -67,7 +67,7 @@ export async function searchJumpKills({
     return {
       ...killRowToKill(row),
       mapName: row.map_name,
-      date: row.date.toUTCString(),
+      date: row.date.toISOString(),
       demoPath: row.demo_path,
       game: row.game,
     };

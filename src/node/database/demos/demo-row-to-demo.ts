@@ -10,7 +10,7 @@ export function demoRowToDemo(row: DemoRow, filePath: string, tagIds: ColumnID[]
     name: row.name,
     source: row.source,
     type: row.type,
-    date: row.date.toUTCString(),
+    date: row.date.toISOString(),
     networkProtocol: row.network_protocol,
     buildNumber: row.build_number,
     serverName: row.server_name,

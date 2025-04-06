@@ -101,7 +101,7 @@ async function buildFaceitMatchFromFaceitDTOs(
 
   const match: FaceitMatch = {
     game: matchDTO.game === 'cs2' ? Game.CS2 : Game.CSGO,
-    date: unixTimestampToDate(matchDTO.started_at).toUTCString(),
+    date: unixTimestampToDate(matchDTO.started_at).toISOString(),
     id: matchDTO.match_id,
     mapName: matches?.groups?.mapName || firstRoundStats.round_stats.Map,
     demoUrl,

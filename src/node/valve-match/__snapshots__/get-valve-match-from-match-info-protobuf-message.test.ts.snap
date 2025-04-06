@@ -3,7 +3,7 @@
 exports[`get Valve match from protobuf message > CS2 Matchmaking > should return correct values for match730_003668313874395824202_1729175012_271 > match730_003668313874395824202_1729175012_271 1`] = `
 {
   "assistCount": 51,
-  "date": "Fri, 16 Feb 2024 19:31:02 GMT",
+  "date": "2024-02-16T19:31:02.000Z",
   "deathCount": 171,
   "demoUrl": "http://replay273.valve.net/730/003668148000611369297_1331187857.dem.bz2",
   "downloadStatus": "not-downloaded",
@@ -2468,7 +2468,7 @@ exports[`get Valve match from protobuf message > CS2 Matchmaking > should return
 exports[`get Valve match from protobuf message > CS2 Matchmaking > should return correct values for match730_003668537425296097309_2104686856_273 > match730_003668537425296097309_2104686856_273 1`] = `
 {
   "assistCount": 78,
-  "date": "Sun, 18 Feb 2024 21:39:12 GMT",
+  "date": "2024-02-18T21:39:12.000Z",
   "deathCount": 227,
   "demoUrl": "http://replay273.valve.net/730/003668537425296097309_2104686856.dem.bz2",
   "downloadStatus": "not-downloaded",
@@ -5633,7 +5633,7 @@ exports[`get Valve match from protobuf message > CS2 Matchmaking > should return
 exports[`get Valve match from protobuf message > Matchmaking > should return correct values > match730_003498492722937856210_1557600280_214 1`] = `
 {
   "assistCount": 45,
-  "date": "Mon, 16 Aug 2021 10:27:44 GMT",
+  "date": "2021-08-16T10:27:44.000Z",
   "deathCount": 218,
   "demoUrl": "http://replay214.valve.net/730/003498492722937856210_1557600280.dem.bz2",
   "downloadStatus": "not-downloaded",
@@ -8698,7 +8698,7 @@ exports[`get Valve match from protobuf message > Matchmaking > should return cor
 exports[`get Valve match from protobuf message > Matchmaking > should return correct values for a match with old protobuf definition > match730_003028590839392632871_1662707805_136 1`] = `
 {
   "assistCount": 48,
-  "date": "Tue, 09 Sep 2014 20:21:03 GMT",
+  "date": "2014-09-09T20:21:03.000Z",
   "deathCount": 195,
   "demoUrl": "",
   "downloadStatus": "not-downloaded",
@@ -8853,7 +8853,7 @@ exports[`get Valve match from protobuf message > Matchmaking > should return cor
 exports[`get Valve match from protobuf message > Valve tournaments > should return correct values for a match with overtime > match730_003189280594026561777_1796106830_900 1`] = `
 {
   "assistCount": 59,
-  "date": "Sun, 22 Jan 2017 20:44:34 GMT",
+  "date": "2017-01-22T20:44:34.000Z",
   "deathCount": 330,
   "demoUrl": "http://replay900.valve.net/730/003189280594026561777_1796106830.dem.bz2",
   "downloadStatus": "not-downloaded",
@@ -13618,7 +13618,7 @@ exports[`get Valve match from protobuf message > Valve tournaments > should retu
 exports[`get Valve match from protobuf message > Valve tournaments > should return correct values for a match without overtime > match730_003189870870709403769_1988138084_900 1`] = `
 {
   "assistCount": 18,
-  "date": "Thu, 26 Jan 2017 02:10:36 GMT",
+  "date": "2017-01-26T02:10:36.000Z",
   "deathCount": 126,
   "demoUrl": "http://replay900.valve.net/730/003189870870709403769_1988138084.dem.bz2",
   "downloadStatus": "not-downloaded",

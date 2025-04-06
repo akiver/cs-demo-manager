@@ -159,7 +159,7 @@ async function buildDemoFromFilePath(filePath: string): Promise<Demo> {
   const checksum = getDemoChecksumFromFileStats(header, stats);
   const name = path.parse(filePath).name;
   const dateTimestamp = +(stats.mtimeMs / 1000).toFixed(0);
-  const date = unixTimestampToDate(dateTimestamp).toUTCString();
+  const date = unixTimestampToDate(dateTimestamp).toISOString();
   const source = getDemoSource(header, name);
   const type = getDemoType(header);
 

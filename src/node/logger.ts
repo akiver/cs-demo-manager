@@ -133,7 +133,7 @@ class Logger implements ILogger {
   };
 
   private buildLogLine = (data: any[], level: Level) => {
-    const prefix = `${new Date().toUTCString()} | ${level.toUpperCase()} | ${process.env.PROCESS_NAME} |`;
+    const prefix = `${new Date().toISOString()} | ${level.toUpperCase()} | ${process.env.PROCESS_NAME} |`;
 
     return `${prefix} ${this.formatDataToWrite(...data)}\n`;
   };
