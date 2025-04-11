@@ -540,11 +540,6 @@ msgctxt "Button"
 msgid "Watch"
 msgstr ""
 
-#: src/ui/components/buttons/xlsx-export-button.tsx
-msgctxt "Button"
-msgid "XLSX export"
-msgstr ""
-
 #: src/ui/components/context-menu/items/add-to-video-sequences-item.tsx
 msgctxt "Context menu"
 msgid "Add to video sequences"
@@ -651,7 +646,6 @@ msgstr ""
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
 #: src/ui/demos/table/export-demos-items.tsx
-#: src/ui/players/table/export-players-item.tsx
 msgctxt "Context menu"
 msgid "Export"
 msgstr ""
@@ -661,8 +655,13 @@ msgctxt "Context menu"
 msgid "JSON"
 msgstr ""
 
+#: src/ui/components/context-menu/items/export-matches-to-xlsx-item.tsx
+msgctxt "Context menu"
+msgid "XLSX"
+msgstr ""
+
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Export in progress…"
 msgstr ""
 
@@ -671,7 +670,7 @@ msgid "Exporting demo {demoNumber} of {totalDemoCount}..."
 msgstr ""
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Export done."
 msgstr ""
 
@@ -725,7 +724,7 @@ msgstr ""
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 #: src/ui/components/dialogs/rename-dialog.tsx
 #: src/ui/demos/table/demos-table.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
@@ -772,8 +771,8 @@ msgid "Warnings:"
 msgstr ""
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Button label"
 msgid "Export"
 msgstr ""
@@ -781,11 +780,6 @@ msgstr ""
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Context menu"
 msgid "Players voice"
-msgstr ""
-
-#: src/ui/components/context-menu/items/export-to-xlsx-item.tsx
-msgctxt "Context menu"
-msgid "XLSX"
 msgstr ""
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
@@ -997,7 +991,7 @@ msgid "Click here to reveal the output folder"
 msgstr ""
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "File destination"
 msgid "Output"
 msgstr ""
@@ -1013,40 +1007,74 @@ msgid "Minify"
 msgstr ""
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 msgctxt "Button"
 msgid "Export"
 msgstr ""
 
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Dialog title"
 msgid "Excel export"
 msgstr ""
 
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "General"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Players"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Rounds"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Weapons"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Clutches"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Players Flashbang matrix"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgid "Exporting match {matchCount} of {totalMatchCount}…"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgid "Generating sheet {translatedSheetName}…"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Radio label"
 msgid "Single file"
 msgstr ""
 
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Radio label"
 msgid "Multiple files"
 msgstr ""
 
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheets"
 msgid "Sheets"
-msgstr ""
-
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
-msgid "Exporting player {count} of {totalCount}…"
-msgstr ""
-
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
-msgid "Generating sheet {translatedSheetName}…"
 msgstr ""
 
 #: src/ui/components/dialogs/rename-dialog.tsx
@@ -4121,6 +4149,11 @@ msgstr ""
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Chat"
+msgstr ""
+
+#: src/ui/match/overview/action-bar/export-match-as-xlsx-button.tsx
+msgctxt "Button"
+msgid "XLSX export"
 msgstr ""
 
 #: src/ui/match/overview/action-bar/export-match-to-json-button.tsx
@@ -7623,59 +7656,4 @@ msgstr ""
 
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "General"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Maps"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Clutch"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Economy"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Players"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Rounds"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Kills"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Weapons"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Clutches"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Utility"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Players Flashbang matrix"
 msgstr ""
