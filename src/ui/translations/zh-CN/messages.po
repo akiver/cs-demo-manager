@@ -395,11 +395,11 @@ msgstr "连接到远程服务器时出错。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Changelog version {APP_VERSION}"
-msgstr ""
+msgstr "更新日志 {APP_VERSION}"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Visit website"
-msgstr ""
+msgstr "访问我们的网站"
 
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
@@ -540,11 +540,6 @@ msgctxt "Button"
 msgid "Watch"
 msgstr "观看"
 
-#: src/ui/components/buttons/xlsx-export-button.tsx
-msgctxt "Button"
-msgid "XLSX export"
-msgstr "导出为XLSX"
-
 #: src/ui/components/context-menu/items/add-to-video-sequences-item.tsx
 msgctxt "Context menu"
 msgid "Add to video sequences"
@@ -584,7 +579,7 @@ msgstr "评论"
 #: src/ui/components/context-menu/items/copy-checksums-item.tsx
 msgctxt "Copy context menu"
 msgid "Checksum"
-msgstr "校验和"
+msgstr "校验码"
 
 #: src/ui/components/context-menu/items/copy-filepath-item.tsx
 msgctxt "Copy context menu"
@@ -626,7 +621,7 @@ msgstr "详细信息"
 #: src/ui/components/context-menu/items/rename-item.tsx
 msgctxt "Keyboard shortcut"
 msgid "Enter"
-msgstr ""
+msgstr "是"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
@@ -637,21 +632,20 @@ msgstr "选择"
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 msgctxt "Toast"
 msgid "Chat messages exported, click here to reveal the folder"
-msgstr ""
+msgstr "已导出聊天消息，点击此处显示文件"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 msgid "No chat messages to export"
-msgstr ""
+msgstr "没有可导出的聊天消息"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 msgctxt "Context menu"
 msgid "Chat messages"
-msgstr ""
+msgstr "聊天消息"
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
 #: src/ui/demos/table/export-demos-items.tsx
-#: src/ui/players/table/export-players-item.tsx
 msgctxt "Context menu"
 msgid "Export"
 msgstr "导出"
@@ -661,8 +655,13 @@ msgctxt "Context menu"
 msgid "JSON"
 msgstr "JSON"
 
+#: src/ui/components/context-menu/items/export-matches-to-xlsx-item.tsx
+msgctxt "Context menu"
+msgid "XLSX"
+msgstr "XLSX"
+
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Export in progress…"
 msgstr "正在导出中…"
 
@@ -671,7 +670,7 @@ msgid "Exporting demo {demoNumber} of {totalDemoCount}..."
 msgstr "导出录像 {demoNumber} 到 {totalDemoCount}..."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Export done."
 msgstr "导出完成。"
 
@@ -725,7 +724,7 @@ msgstr "您需要安装 <0>Rosetta</0>。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 #: src/ui/components/dialogs/rename-dialog.tsx
 #: src/ui/demos/table/demos-table.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
@@ -761,7 +760,7 @@ msgstr "出现错误。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Players voice export"
-msgstr "玩家语音导出"
+msgstr "导出玩家语音"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Valve Matchmaking demos do not contain voice audio data!"
@@ -772,8 +771,8 @@ msgid "Warnings:"
 msgstr "警告："
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Button label"
 msgid "Export"
 msgstr "导出"
@@ -781,12 +780,7 @@ msgstr "导出"
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Context menu"
 msgid "Players voice"
-msgstr ""
-
-#: src/ui/components/context-menu/items/export-to-xlsx-item.tsx
-msgctxt "Context menu"
-msgid "XLSX"
-msgstr "XLSX"
+msgstr "玩家语音"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
@@ -979,7 +973,7 @@ msgstr "{0, plural, one {比赛只会从您的数据库中删除，而不是系�
 #: src/ui/match/video/video-loader.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Demo not found."
-msgstr "未找到录像。"
+msgstr "未找到Demo录像。"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Dialog title"
@@ -997,7 +991,7 @@ msgid "Click here to reveal the output folder"
 msgstr "单击此处显示输出文件夹"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "File destination"
 msgid "Output"
 msgstr "输出"
@@ -1013,41 +1007,75 @@ msgid "Minify"
 msgstr "最小化"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 msgctxt "Button"
 msgid "Export"
 msgstr "导出"
 
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Dialog title"
 msgid "Excel export"
-msgstr "Excel 导出"
+msgstr "导出为Excel"
 
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "General"
+msgstr "常规"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Players"
+msgstr "玩家"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Rounds"
+msgstr "回合"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Kills"
+msgstr "击杀次数"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Weapons"
+msgstr "武器"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Clutches"
+msgstr "残局"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Players Flashbang matrix"
+msgstr "玩家闪光弹矩阵"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgid "Exporting match {matchCount} of {totalMatchCount}…"
+msgstr "导出比赛 {matchCount} 到 {totalMatchCount}…"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgid "Generating sheet {translatedSheetName}…"
+msgstr "生成工作表 {translatedSheetName}..."
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Radio label"
 msgid "Single file"
 msgstr "单个文件"
 
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Radio label"
 msgid "Multiple files"
 msgstr "多个文件"
 
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheets"
 msgid "Sheets"
 msgstr "工作表"
-
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
-msgid "Exporting player {count} of {totalCount}…"
-msgstr ""
-
-#: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
-msgid "Generating sheet {translatedSheetName}…"
-msgstr "生成工作表 {translatedSheetName}..."
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Invalid name."
@@ -1426,11 +1454,11 @@ msgstr "突破结果"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
 msgid "Player"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
 msgid "Enemy"
-msgstr ""
+msgstr "敌人"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
 msgctxt "Select label"
@@ -2080,7 +2108,7 @@ msgstr "保枪率"
 #: src/ui/match/rounds/round/clutches.tsx
 msgctxt "Panel title"
 msgid "Clutches"
-msgstr "翻盘"
+msgstr "残局"
 
 #: src/ui/components/panels/clutches-panel.tsx
 msgid "Overall"
@@ -2387,7 +2415,7 @@ msgstr "头像"
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "K/D diff"
-msgstr "K/D diff"
+msgstr "K/D差"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
@@ -2875,11 +2903,11 @@ msgstr "获取最近的比赛信息中…"
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The API returned a forbidden error, please check your API key."
-msgstr ""
+msgstr "FACEIT API 返回了一个错误(禁止访问), 请检查您的 API 密钥。"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 msgid "The API returned an unauthorized status code, please check your API key."
-msgstr ""
+msgstr "FACEIT API 返回了一个错误(未授权), 请检查您的 API 密钥。"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-5eplay-account.tsx
@@ -2977,41 +3005,41 @@ msgstr "爆头率"
 #: src/ui/downloads/five-eplay/5eplay-current-match.tsx
 msgctxt "Button"
 msgid "See on 5EPlay"
-msgstr ""
+msgstr "在 5EPlay 上查看"
 
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
 msgid "Invalid request."
-msgstr ""
+msgstr "无效请求。"
 
 #: src/ui/downloads/five-eplay/5eplay-scoreboard-context-menu.tsx
 msgctxt "Context menu"
 msgid "Open 5EPlay profile"
-msgstr ""
+msgstr "打开 5EPlay 配置文件"
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "How can I find my 5EPlay ID?"
-msgstr ""
+msgstr "如何找到我的5EPlay ID？"
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "Log into your <0>5EPlay</0> account."
-msgstr ""
+msgstr "登录您的 <0>5EPlay</0> 帐户。"
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "Go to your profile and copy the last segment of the URL."
-msgstr ""
+msgstr "访问您的个人资料页面并复制URL的最后一段。"
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "For example, if the URL is <0>https://arena.5eplay.com/data/player/111111</0> then the ID is <1>111111</1>."
-msgstr ""
+msgstr "例如，若网址是 <0>https://arena.5etplay.com/data/player/1111111</0>，则ID是<1>11111</1>。"
 
 #: src/ui/downloads/five-eplay/no-5eplay-account.tsx
 msgid "To add a 5EPlay account, enter your 5EPlay ID."
-msgstr ""
+msgstr "要添加 5EPlay 帐户，请输入您的 5EPlay ID。"
 
 #: src/ui/downloads/five-eplay/no-5eplay-account.tsx
 msgctxt "Input placeholder"
 msgid "5EPlay ID"
-msgstr ""
+msgstr "5EPlay ID"
 
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
@@ -3027,7 +3055,7 @@ msgstr "回合贡献率"
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Percentage of rounds in which the player either had a kill, assist, survived or was traded"
-msgstr "玩家在这一比赛中击杀、协助、存活或被交换的比赛回合百分比"
+msgstr "玩家在这一比赛中击杀、辅助、存活、补枪中的4项完成1项的百分率"
 
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
@@ -3175,7 +3203,7 @@ msgstr "无效的参数"
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Error while contacting Steam, make sure your Steam account is not currently in-game on another device, otherwise please retry later."
-msgstr ""
+msgstr "访问 Steam 时出错，请确保您的 Steam 帐户目前未在另一台设备上运行，否则请稍后重试。"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
@@ -3227,12 +3255,12 @@ msgstr "未找到当前 Steam 账号匹配的数据."
 #. js-lingui-explicit-id
 #: src/ui/hooks/use-boolean-to-human.ts
 msgid "yes"
-msgstr ""
+msgstr "是"
 
 #. js-lingui-explicit-id
 #: src/ui/hooks/use-boolean-to-human.ts
 msgid "no"
-msgstr ""
+msgstr "否"
 
 #: src/ui/hooks/use-clipboard.tsx
 msgctxt "Toast"
@@ -3326,7 +3354,7 @@ msgstr "导出"
 
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 msgid "Chat messages exported, click here to reveal the file"
-msgstr ""
+msgstr "已导出聊天消息，点击此处显示文件"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
@@ -3991,7 +4019,7 @@ msgstr "查找"
 #: src/ui/match/grenades/stats/grenade-select.tsx
 msgctxt "Grenade name"
 msgid "Fire"
-msgstr "开火"
+msgstr "燃烧弹"
 
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
@@ -4123,6 +4151,11 @@ msgctxt "Tab link"
 msgid "Chat"
 msgstr "聊天"
 
+#: src/ui/match/overview/action-bar/export-match-as-xlsx-button.tsx
+msgctxt "Button"
+msgid "XLSX export"
+msgstr "导出为XLSX"
+
 #: src/ui/match/overview/action-bar/export-match-to-json-button.tsx
 msgctxt "Button"
 msgid "JSON export"
@@ -4183,7 +4216,7 @@ msgstr "死亡"
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
 msgctxt "Dialog title"
 msgid "Options"
-msgstr ""
+msgstr "选项"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 #: src/ui/match/video/generate-player-sequences-button.tsx
@@ -4366,7 +4399,7 @@ msgstr "补枪击杀(队友死亡后5秒内报仇)"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Trade Kills"
-msgstr "换人击杀"
+msgstr "补枪击杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade death count"
@@ -4381,7 +4414,7 @@ msgstr "交换死亡(一名玩家死亡后的5秒内有队友进行了复仇击�
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Trade Deaths"
-msgstr "换人死亡"
+msgstr "补枪失败次数"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade kill count"
@@ -4581,7 +4614,7 @@ msgstr "存活"
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Tooltip"
 msgid "Watch clutch"
-msgstr "观看关键局"
+msgstr "观看残局"
 
 #: src/ui/match/players/kills-panel.tsx
 #: src/ui/match/rounds/overview/round-entry.tsx
@@ -4697,7 +4730,7 @@ msgstr "未找到回合."
 
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "No clutches in this round"
-msgstr "本回合没有关键残局"
+msgstr "本回合没有残局"
 
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "{clutcherName} won a 1v{opponentCount}"
@@ -4739,7 +4772,7 @@ msgstr "爆头击杀"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Trade kills"
-msgstr "换人击杀"
+msgstr "补枪击杀"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Airborne kills"
@@ -4755,7 +4788,7 @@ msgstr "鸡的击杀数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Trade deaths"
-msgstr "换人死亡数"
+msgstr "补枪失败次数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Blinded deaths"
@@ -4977,7 +5010,7 @@ msgstr "帧速率"
 #: src/ui/match/video/framerate-input.tsx
 msgctxt "Input placeholder"
 msgid "Framerate"
-msgstr ""
+msgstr "帧速率"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
@@ -5108,7 +5141,7 @@ msgstr "配置文件夹"
 
 #: src/ui/match/video/hlae/hlae-config-folder-path.tsx
 msgid "Config folder"
-msgstr ""
+msgstr "配置文件夹"
 
 #: src/ui/match/video/hlae/hlae-config-folder-path.tsx
 msgid "Select config folder"
@@ -5146,12 +5179,12 @@ msgstr "在更新 HLAE 时发生了错误"
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
 msgid "Output folder"
-msgstr ""
+msgstr "输出文件夹"
 
 #: src/ui/match/video/output-folder-path.tsx
 msgctxt "Input label"
 msgid "Output folder"
-msgstr ""
+msgstr "输出文件夹"
 
 #: src/ui/match/video/output-folder-path.tsx
 msgctxt "Dialog title"
@@ -5994,12 +6027,12 @@ msgstr "伤害/回合"
 #: src/ui/player/charts/clutch-won-percentage-chart.tsx
 msgctxt "Chart title"
 msgid "Clutch won over time"
-msgstr "加时赛中获得力克千钧胜利"
+msgstr "残局获胜"
 
 #: src/ui/player/charts/clutch-won-percentage-chart.tsx
 msgctxt "Chart axis label"
 msgid "Won %"
-msgstr "胜率%"
+msgstr "胜率"
 
 #: src/ui/player/charts/competitive-rank-repartition-chart.tsx
 msgctxt "Chart title"
@@ -6107,7 +6140,7 @@ msgstr ""
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel label"
 msgid "Traded"
-msgstr ""
+msgstr "补枪"
 
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel label"
@@ -6671,7 +6704,7 @@ msgstr "断开连接"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "JSON file"
-msgstr ""
+msgstr "JSON文件"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You must select at least one data to import."
@@ -6885,7 +6918,7 @@ msgstr ""
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The API returned a 401 code, please check you API key."
-msgstr ""
+msgstr "API返回了一个401码，请检查您 API 密钥。"
 
 #: src/ui/settings/folders/add-folder-button.tsx
 msgctxt "Button"
@@ -7624,58 +7657,3 @@ msgstr ""
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
 msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "General"
-msgstr "常规"
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Maps"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Clutch"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Economy"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Players"
-msgstr "玩家"
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Rounds"
-msgstr "回合"
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Kills"
-msgstr "击杀次数"
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Weapons"
-msgstr "武器"
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Clutches"
-msgstr "残局"
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Utility"
-msgstr ""
-
-#: src/ui/xlsx/xlsx-sheet-translations.ts
-msgctxt "Excel sheet"
-msgid "Players Flashbang matrix"
-msgstr "玩家闪光弹矩阵"
