@@ -1,13 +1,5 @@
-import type { DemoSource, DemoType, Game, GameMode } from 'csdm/common/types/counter-strike';
+import type { MatchFilters } from '../match/apply-match-filters';
 
-export type TeamFilters = {
+export type TeamFilters = MatchFilters & {
   name: string;
-  startDate: string | undefined;
-  endDate: string | undefined;
-  demoSources: DemoSource[];
-  demoTypes: DemoType[];
-  games: Game[];
-  gameModes: GameMode[];
-  tagIds: string[];
-  maxRounds: number[];
 };

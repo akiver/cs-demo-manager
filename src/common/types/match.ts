@@ -16,6 +16,7 @@ import type { ChickenDeath } from './chicken-death';
 import type { ChickenPosition } from './chicken-position';
 import type { BombExploded } from './bomb-exploded';
 import type { PlayerEconomy } from './player-economy';
+import type { TeamEconomyStats } from './team-economy-stats';
 
 export type Match = {
   checksum: string;
@@ -65,4 +66,5 @@ export type Match = {
   tagIds: string[];
   shareCode: string;
   hasVacLiveBan: boolean;
+  teamsEconomyStats: TeamEconomyStats[];
 };

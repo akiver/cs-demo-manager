@@ -3832,11 +3832,13 @@ msgid "{winnerTeamName} won the round {roundNumber}"
 msgstr "{winnerTeamName} venceu a rodada {roundNumber}"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
+#: src/ui/team/economy/teams-economy-types-chart.tsx
 msgctxt "Economy type"
 msgid "Pistol"
 msgstr "Pistola"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
+#: src/ui/team/economy/teams-economy-types-chart.tsx
 msgctxt "Economy type"
 msgid "Eco"
 msgstr "Eco"
@@ -4104,6 +4106,7 @@ msgid "Grenades"
 msgstr "Granadas"
 
 #: src/ui/match/match-tabs.tsx
+#: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Economy"
 msgstr "Economia"
@@ -7445,6 +7448,37 @@ msgstr ""
 #: src/ui/settings/video/recording/recording-x-ray.tsx
 msgctxt "Settings title"
 msgid "Show X-Ray"
+msgstr ""
+
+#: src/ui/team/economy/teams-economy-types-chart.tsx
+msgid "Won percentage"
+msgstr ""
+
+#: src/ui/team/economy/teams-economy-types-chart.tsx
+msgid "Total: {total}"
+msgstr ""
+
+#: src/ui/team/economy/teams-economy-types-chart.tsx
+msgid "Won: {won}"
+msgstr ""
+
+#: src/ui/team/economy/teams-economy-types-chart.tsx
+msgid "Lost: {lost}"
+msgstr ""
+
+#: src/ui/team/economy/teams-economy-types-chart.tsx
+msgctxt "Economy type"
+msgid "Semi"
+msgstr ""
+
+#: src/ui/team/economy/teams-economy-types-chart.tsx
+msgctxt "Economy type"
+msgid "Force-buy"
+msgstr ""
+
+#: src/ui/team/economy/teams-economy-types-chart.tsx
+msgctxt "Economy type"
+msgid "Full"
 msgstr ""
 
 #: src/ui/team/load-team-error.tsx

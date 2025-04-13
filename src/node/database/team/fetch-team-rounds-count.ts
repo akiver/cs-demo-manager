@@ -2,6 +2,7 @@ import { sql } from 'kysely';
 import { TeamNumber } from 'csdm/common/types/counter-strike';
 import { db } from '../database';
 import type { TeamFilters } from './team-filters';
+import { applyMatchFilters } from '../match/apply-match-filters';
 
 type RoundCount = {
   totalCount: number;
@@ -9,17 +10,7 @@ type RoundCount = {
   roundCountAsT: number;
 };
 
-export async function fetchTeamRoundCount({
-  name,
-  startDate,
-  endDate,
-  demoSources,
-  games,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: TeamFilters): Promise<RoundCount> {
+export async function fetchTeamRoundCount({ name, ...filters }: TeamFilters): Promise<RoundCount> {
   const { count } = db.fn;
   let query = db
     .selectFrom('rounds')
@@ -48,35 +39,7 @@ export async function fetchTeamRoundCount({
       return eb('teams.name', '=', name).or('teams.name', '=', name);
     });
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (demoSources.length > 0) {
-    query = query.where('source', 'in', demoSources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyMatchFilters(query, filters);
 
   const row = await query.executeTakeFirst();
 

@@ -7,7 +7,7 @@ import { GameModesFilter } from 'csdm/ui/components/dropdown-filter/game-modes-f
 import { RankingSelect } from 'csdm/ui/components/dropdown-filter/ranking-select';
 import { PeriodFilter } from 'csdm/ui/components/dropdown-filter/period-filter';
 import { FilterSeparator } from 'csdm/ui/components/dropdown-filter/filter-separator';
-import type { RankingFilter } from 'csdm/common/types/ranking-filter';
+import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import { useMatchesLoaded } from 'csdm/ui/matches/use-matches-loaded';
 import { useFetchMatches } from 'csdm/ui/matches/use-fetch-matches';
 import { formatDate, type DateRange } from 'csdm/common/date/date-range';
@@ -120,7 +120,7 @@ export function MatchesFilterDropdown() {
           </div>
           <FilterSeparator />
           <div className="p-8">
-            <RankingSelect selectedRanking={ranking} onChange={onRankingChange} />
+            <RankingSelect selectedRanking={ranking ?? RankingFilter.All} onChange={onRankingChange} />
           </div>
           <FilterSeparator />
           <div className="p-8">

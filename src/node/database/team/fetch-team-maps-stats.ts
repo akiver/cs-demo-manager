@@ -2,6 +2,7 @@ import { sql } from 'kysely';
 import { db } from 'csdm/node/database/database';
 import type { TeamFilters } from './team-filters';
 import type { MapStats } from 'csdm/common/types/map-stats';
+import { applyMatchFilters } from '../match/apply-match-filters';
 
 type MatchStats = {
   mapName: string;
@@ -30,17 +31,7 @@ type RoundStats = {
   roundWinCountAsT: number;
 };
 
-function buildMatchStatsQuery({
-  name,
-  startDate,
-  endDate,
-  demoSources,
-  games,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: TeamFilters) {
+function buildMatchStatsQuery({ name, ...filters }: TeamFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('matches')
@@ -57,50 +48,12 @@ function buildMatchStatsQuery({
     .where('teams.name', '=', name)
     .groupBy('mapName');
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (demoSources.length > 0) {
-    query = query.where('matches.source', 'in', demoSources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('matches.game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyMatchFilters(query, filters);
 
   return query;
 }
 
-function buildStatsQuery({
-  name,
-  startDate,
-  endDate,
-  demoSources,
-  games,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: TeamFilters) {
+function buildStatsQuery({ name, ...filters }: TeamFilters) {
   const { avg } = db.fn;
   let query = db
     .selectFrom('matches')
@@ -118,50 +71,12 @@ function buildStatsQuery({
     .where('teams.name', '=', name)
     .groupBy('mapName');
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (demoSources.length > 0) {
-    query = query.where('matches.source', 'in', demoSources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('matches.game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyMatchFilters(query, filters);
 
   return query;
 }
 
-function buildRoundsQuery({
-  name,
-  startDate,
-  endDate,
-  demoSources,
-  games,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: TeamFilters) {
+function buildRoundsQuery({ name, ...filters }: TeamFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('rounds')
@@ -186,35 +101,7 @@ function buildRoundsQuery({
     .where('teams.name', '=', name)
     .groupBy('mapName');
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (demoSources.length > 0) {
-    query = query.where('source', 'in', demoSources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyMatchFilters(query, filters);
 
   return query;
 }

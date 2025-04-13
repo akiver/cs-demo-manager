@@ -16,7 +16,6 @@ export async function executePsql(command: string, options?: Options | undefined
     exec(
       `psql ${command}`,
       {
-        // @ts-ignore No need to specify all custom NodeJS.ProcessEnv variables.
         env: { ...process.env, PGCONNECT_TIMEOUT: '10' },
         timeout: options?.timeoutMs ?? 0,
       },

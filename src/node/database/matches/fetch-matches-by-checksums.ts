@@ -17,6 +17,7 @@ import { fetchBombsDefused } from '../bomb-defused/fetch-bombs-defused';
 import { fetchBombsExploded } from '../bomb-exploded/fetch-bombs-exploded';
 import { fetchCollateralKillCountPerMatch } from './fetch-collateral-kill-count-per-match';
 import { fetchPlayersEconomies } from '../player-economies/fetch-player-economies';
+import { fetchMatchTeamsEconomyStats } from '../match/fetch-match-teams-economy-stats';
 
 export async function fetchMatchesByChecksums(checksums: string[]) {
   const rows = await db
@@ -48,6 +49,7 @@ export async function fetchMatchesByChecksums(checksums: string[]) {
       shots,
       chatMessages,
       chickenDeaths,
+      teamsEconomyStats,
     ] = await Promise.all([
       fetchMatchPlayers(checksum),
       fetchRounds(checksum),
@@ -64,6 +66,7 @@ export async function fetchMatchesByChecksums(checksums: string[]) {
       }),
       fetchChatMessages(checksum),
       fetchChickenDeaths(checksum),
+      fetchMatchTeamsEconomyStats(checksum),
     ]);
 
     match.players = players;
@@ -79,6 +82,7 @@ export async function fetchMatchesByChecksums(checksums: string[]) {
     match.shots = shots;
     match.chatMessages = chatMessages;
     match.chickenDeaths = chickenDeaths;
+    match.teamsEconomyStats = teamsEconomyStats;
     matches.push(match);
   }
 
