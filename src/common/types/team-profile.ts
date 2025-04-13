@@ -2,6 +2,7 @@ import type { MatchTable } from 'csdm/common/types/match-table';
 import type { Clutch } from './clutch';
 import type { LastMatch } from './last-match';
 import type { MapStats } from './map-stats';
+import type { TeamEconomyStats } from './team-economy-stats';
 
 export type TeamProfile = {
   name: string;
@@ -38,4 +39,5 @@ export type TeamProfile = {
   mapsStats: MapStats[];
   lastMatches: LastMatch[];
   matches: MatchTable[];
+  economyStats: TeamEconomyStats;
 };

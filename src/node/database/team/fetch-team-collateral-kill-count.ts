@@ -1,7 +1,7 @@
-import { sql } from 'kysely';
 import { WeaponType } from 'csdm/common/types/counter-strike';
 import { db } from '../database';
 import type { TeamFilters } from './team-filters';
+import { applyMatchFilters } from '../match/apply-match-filters';
 
 export async function fetchTeamCollateralKillCount(filters: TeamFilters) {
   const { count } = db.fn;
@@ -15,35 +15,7 @@ export async function fetchTeamCollateralKillCount(filters: TeamFilters) {
       .groupBy(['tick', 'killer_steam_id'])
       .having(count<number>('tick'), '>', 1);
 
-    if (filters.startDate !== undefined && filters.endDate !== undefined) {
-      query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);
-    }
-
-    if (filters.demoSources.length > 0) {
-      query = query.where('matches.source', 'in', filters.demoSources);
-    }
-
-    if (filters.games.length > 0) {
-      query = query.where('matches.game', 'in', filters.games);
-    }
-
-    if (filters.demoTypes.length > 0) {
-      query = query.where('matches.type', 'in', filters.demoTypes);
-    }
-
-    if (filters.gameModes.length > 0) {
-      query = query.where('matches.game_mode_str', 'in', filters.gameModes);
-    }
-
-    if (filters.maxRounds.length > 0) {
-      query = query.where('max_rounds', 'in', filters.maxRounds);
-    }
-
-    if (filters.tagIds.length > 0) {
-      query = query
-        .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-        .where('checksum_tags.tag_id', 'in', filters.tagIds);
-    }
+    query = applyMatchFilters(query, filters);
 
     return query;
   });

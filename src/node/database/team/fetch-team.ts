@@ -6,24 +6,15 @@ import { fetchTeamMatchCountStats } from './fetch-team-match-count-stats';
 import type { TeamProfile } from 'csdm/common/types/team-profile';
 import { TeamNotFound } from './error/team-not-found';
 import { fetchMatchesTable } from '../matches/fetch-matches-table';
-import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import { fetchTeamCollateralKillCount } from './fetch-team-collateral-kill-count';
 import { fetchTeamRoundCount } from './fetch-team-rounds-count';
 import { fetchTeamLastMatches } from './fetch-team-last-matches';
 import { fetchTeamClutches } from './fetch-team-clutches';
 import { fetchTeamMapsStats } from './fetch-team-maps-stats';
+import { fetchTeamEconomyStats } from './fetch-team-economy-stats';
+import { applyMatchFilters } from '../match/apply-match-filters';
 
-function buildQuery({
-  name,
-  startDate,
-  endDate,
-  demoSources,
-  games,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: TeamFilters) {
+function buildQuery({ name, ...filters }: TeamFilters) {
   const { count, avg, sum } = db.fn;
 
   let query = db
@@ -62,35 +53,7 @@ function buildQuery({
           .where('killer_team_name', '=', name)
           .where('penetrated_objects', '>', 0);
 
-        if (startDate !== undefined && endDate !== undefined) {
-          wallbangsQuery = wallbangsQuery.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-        }
-
-        if (demoSources.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.source', 'in', demoSources);
-        }
-
-        if (games.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.game', 'in', games);
-        }
-
-        if (gameModes.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.game_mode_str', 'in', gameModes);
-        }
-
-        if (maxRounds.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.max_rounds', 'in', maxRounds);
-        }
-
-        if (demoTypes.length > 0) {
-          wallbangsQuery = wallbangsQuery.where('matches.type', 'in', demoTypes);
-        }
-
-        if (tagIds.length > 0) {
-          wallbangsQuery = wallbangsQuery
-            .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-            .where('checksum_tags.tag_id', 'in', tagIds);
-        }
+        wallbangsQuery = applyMatchFilters(wallbangsQuery, filters);
 
         return wallbangsQuery.as('wallbangKillCount');
       },
@@ -104,35 +67,7 @@ function buildQuery({
     .where('teams.name', '=', name)
     .groupBy(['teams.name']);
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (demoSources.length > 0) {
-    query = query.where('matches.source', 'in', demoSources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('matches.game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('matches.game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('matches.max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyMatchFilters(query, filters);
 
   return query;
 }
@@ -145,19 +80,20 @@ export async function fetchTeam(filters: TeamFilters): Promise<TeamProfile> {
     throw new TeamNotFound();
   }
 
-  const [matchCountStats, lastMatches, roundCount, matches, collateralKillCount, clutches, maps] = await Promise.all([
-    fetchTeamMatchCountStats(filters),
-    fetchTeamLastMatches(filters.name),
-    fetchTeamRoundCount(filters),
-    fetchMatchesTable({
-      ...filters,
-      ranking: RankingFilter.All,
-      teamName: filters.name,
-    }),
-    fetchTeamCollateralKillCount(filters),
-    fetchTeamClutches(filters),
-    fetchTeamMapsStats(filters),
-  ]);
+  const [matchCountStats, lastMatches, roundCount, matches, collateralKillCount, clutches, maps, economyStats] =
+    await Promise.all([
+      fetchTeamMatchCountStats(filters),
+      fetchTeamLastMatches(filters.name),
+      fetchTeamRoundCount(filters),
+      fetchMatchesTable({
+        ...filters,
+        teamName: filters.name,
+      }),
+      fetchTeamCollateralKillCount(filters),
+      fetchTeamClutches(filters),
+      fetchTeamMapsStats(filters),
+      fetchTeamEconomyStats(filters),
+    ]);
   const team: TeamProfile = {
     ...row,
     ...matchCountStats,
@@ -169,6 +105,7 @@ export async function fetchTeam(filters: TeamFilters): Promise<TeamProfile> {
     roundCount: roundCount.totalCount,
     roundCountAsCt: roundCount.roundCountAsCt,
     roundCountAsT: roundCount.roundCountAsT,
+    economyStats,
   };
 
   return team;

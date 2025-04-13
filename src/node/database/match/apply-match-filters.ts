@@ -8,7 +8,7 @@ export type MatchFilters = {
   demoSources: DemoSource[];
   demoTypes: DemoType[];
   games: Game[];
-  ranking: RankingFilter;
+  ranking?: RankingFilter;
   gameModes: GameMode[];
   tagIds: string[];
   maxRounds: number[];
@@ -20,7 +20,7 @@ export function applyMatchFilters(query: any, filters: MatchFilters) {
     query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);
   }
 
-  if (filters.ranking !== RankingFilter.All) {
+  if (filters.ranking && filters.ranking !== RankingFilter.All) {
     query = query.where('matches.is_ranked', '=', filters.ranking === RankingFilter.Ranked);
   }
 

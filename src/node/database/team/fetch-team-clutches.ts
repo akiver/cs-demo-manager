@@ -1,20 +1,10 @@
-import { sql } from 'kysely';
 import { db } from 'csdm/node/database/database';
 import type { Clutch } from 'csdm/common/types/clutch';
 import { clutchRowToClutch } from '../clutches/clutch-row-to-clutch';
 import type { TeamFilters } from './team-filters';
+import { applyMatchFilters } from '../match/apply-match-filters';
 
-export async function fetchTeamClutches({
-  name,
-  startDate,
-  endDate,
-  demoSources,
-  games,
-  gameModes,
-  tagIds,
-  maxRounds,
-  demoTypes,
-}: TeamFilters): Promise<Clutch[]> {
+export async function fetchTeamClutches({ name, ...filters }: TeamFilters): Promise<Clutch[]> {
   let query = db
     .selectFrom('clutches')
     .selectAll()
@@ -22,35 +12,7 @@ export async function fetchTeamClutches({
     .leftJoin('teams', 'teams.match_checksum', 'clutches.match_checksum')
     .where('teams.name', '=', name);
 
-  if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
-  }
-
-  if (demoSources.length > 0) {
-    query = query.where('source', 'in', demoSources);
-  }
-
-  if (games.length > 0) {
-    query = query.where('game', 'in', games);
-  }
-
-  if (demoTypes.length > 0) {
-    query = query.where('type', 'in', demoTypes);
-  }
-
-  if (gameModes.length > 0) {
-    query = query.where('game_mode_str', 'in', gameModes);
-  }
-
-  if (maxRounds.length > 0) {
-    query = query.where('max_rounds', 'in', maxRounds);
-  }
-
-  if (tagIds.length > 0) {
-    query = query
-      .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
-      .where('checksum_tags.tag_id', 'in', tagIds);
-  }
+  query = applyMatchFilters(query, filters);
 
   const rows = await query.execute();
   const clutches = rows.map(clutchRowToClutch);

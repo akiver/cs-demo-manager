@@ -5,6 +5,7 @@ import { roundNumberPercentage } from 'csdm/common/math/round-number-percentage'
 import { getEconomyTypeColor } from './get-economy-type-color';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Panel } from 'csdm/ui/components/panel';
+import type { TeamEconomyStats } from 'csdm/common/types/team-economy-stats';
 
 type EconomyStatsProps = {
   economyType: EconomyType;
@@ -33,34 +34,19 @@ function EconomyStats({ percentage, economyType }: EconomyStatsProps) {
 }
 
 type TeamCardProps = {
-  teamName: string;
-  economyTypes: EconomyType[];
+  economyStats: TeamEconomyStats;
+  roundCount: number;
 };
 
-function TeamCard({ teamName, economyTypes }: TeamCardProps) {
-  const pistolCount = economyTypes.filter((type) => {
-    return type === EconomyType.Pistol;
-  }).length;
-  const pistolPercentage = roundNumberPercentage(pistolCount / economyTypes.length);
-  const ecoCount = economyTypes.filter((type) => {
-    return type === EconomyType.Eco;
-  }).length;
-  const ecoPercentage = roundNumberPercentage(ecoCount / economyTypes.length);
-  const semiBuyCount = economyTypes.filter((type) => {
-    return type === EconomyType.Semi;
-  }).length;
-  const forceBuyCount = economyTypes.filter((type) => {
-    return type === EconomyType.ForceBuy;
-  }).length;
-  const semiBuyPercentage = roundNumberPercentage(semiBuyCount / economyTypes.length);
-  const forceBuyPercentage = roundNumberPercentage(forceBuyCount / economyTypes.length);
-  const fullBuyCount = economyTypes.filter((type) => {
-    return type === EconomyType.Full;
-  }).length;
-  const fullBuyPercentage = roundNumberPercentage(fullBuyCount / economyTypes.length);
+function TeamCard({ economyStats, roundCount }: TeamCardProps) {
+  const pistolPercentage = roundNumberPercentage(economyStats.pistolCount / roundCount);
+  const ecoPercentage = roundNumberPercentage(economyStats.ecoCount / roundCount);
+  const semiBuyPercentage = roundNumberPercentage(economyStats.semiCount / roundCount);
+  const forceBuyPercentage = roundNumberPercentage(economyStats.forceBuyCount / roundCount);
+  const fullBuyPercentage = roundNumberPercentage(economyStats.fullCount / roundCount);
 
   return (
-    <Panel header={teamName}>
+    <Panel header={economyStats.teamName}>
       <div className="flex gap-12">
         <EconomyStats economyType={EconomyType.Pistol} percentage={pistolPercentage} />
         <EconomyStats economyType={EconomyType.Eco} percentage={ecoPercentage} />
@@ -74,13 +60,17 @@ function TeamCard({ teamName, economyTypes }: TeamCardProps) {
 
 export function TeamEconomyCards() {
   const match = useCurrentMatch();
-  const economyTypesTeamA = match.rounds.map((round) => round.teamAEconomyType);
-  const economyTypesTeamB = match.rounds.map((round) => round.teamBEconomyType);
+  const economyStatsTeamA = match.teamsEconomyStats.find((stats) => stats.teamName === match.teamA.name);
+  const economyStatsTeamB = match.teamsEconomyStats.find((stats) => stats.teamName === match.teamB.name);
+
+  if (!economyStatsTeamA || !economyStatsTeamB) {
+    return null;
+  }
 
   return (
     <div className="flex justify-around">
-      <TeamCard teamName={match.teamA.name} economyTypes={economyTypesTeamA} />
-      <TeamCard teamName={match.teamB.name} economyTypes={economyTypesTeamB} />
+      <TeamCard economyStats={economyStatsTeamA} roundCount={match.rounds.length} />
+      <TeamCard economyStats={economyStatsTeamB} roundCount={match.rounds.length} />
     </div>
   );
 }

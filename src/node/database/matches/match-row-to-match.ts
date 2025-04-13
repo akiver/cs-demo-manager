@@ -56,6 +56,7 @@ export async function matchRowToMatch(
     playerPositions: [],
     chickenPositions: [],
     chickenDeaths: [],
+    teamsEconomyStats: [],
     rounds: [],
     shots: [],
     comment: comment ?? '',
