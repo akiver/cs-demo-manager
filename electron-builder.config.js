@@ -71,11 +71,7 @@ const config = {
     ],
     category: 'public.app-category.developer-tools',
     appId: 'com.akiver.csdm',
-    notarize: shouldNotarize
-      ? {
-          teamId: process.env.APPLE_TEAM_ID,
-        }
-      : false,
+    notarize: shouldNotarize,
     extraResources: [
       // From https://developer.apple.com/forums/thread/128166
       // > IMPORTANT Scripts are not considered code.
