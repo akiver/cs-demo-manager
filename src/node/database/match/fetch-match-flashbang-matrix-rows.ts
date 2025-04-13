@@ -56,7 +56,13 @@ export async function fetchMatchFlashbangMatrixRows(checksum: string): Promise<F
       't2.current_side as flashedTeamSide',
       sql<number>`COALESCE(ROUND(AVG(pb.duration)::numeric, 2), 0)`.as('duration'),
     ])
-    .orderBy(['p1.team_name', 'flasherName', 'p1.steam_id', 'p2.team_name', 'flashedName', 'p2.steam_id'])
+    .orderBy('p1.team_name')
+    .orderBy('flasherName')
+    .orderBy('p1.steam_id')
+    .orderBy('p2.team_name')
+    .orderBy('flashedName')
+    .orderBy('p2.steam_id')
+
     .groupBy([
       'p1.steam_id',
       'p1.team_name',

@@ -6,7 +6,6 @@ import { ArgumentName } from 'csdm/common/argument/argument-name';
 import type { Argument } from 'csdm/common/types/argument';
 import { getArgumentValueFromArray } from 'csdm/electron-main/get-argument-value-from-array';
 import { listenForContextMenu } from 'csdm/electron-main/listen-for-context-menu';
-import { isMac } from 'csdm/node/os/is-mac';
 
 class WindowManager {
   private mainWindow: BrowserWindow | null = null;
@@ -138,7 +137,7 @@ class WindowManager {
     });
 
     mainWindow.on('show', () => {
-      if (isMac) {
+      if (app.dock) {
         app.dock.show();
       }
     });

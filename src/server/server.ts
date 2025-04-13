@@ -373,6 +373,12 @@ if (IS_DEV) {
         clearTimeout(timeoutId);
         return timeoutId;
       },
+      close: () => {
+        clearTimeout(timeoutId);
+        return timeout;
+      },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      _onTimeout() {},
     };
 
     return timeout;

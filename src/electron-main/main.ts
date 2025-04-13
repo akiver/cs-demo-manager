@@ -48,7 +48,7 @@ if (isFirstAppInstance) {
   app.on('window-all-closed', () => {
     // The default behavior is to quit the app when all windows are closed.
     // Only hide it from the dock to keep the app alive and accessible through the Tray icon.
-    if (isMac) {
+    if (app.dock) {
       app.dock.hide();
     }
   });
@@ -126,7 +126,7 @@ if (isFirstAppInstance) {
     }
 
     if (shouldStartMinimized) {
-      if (isMac) {
+      if (app.dock) {
         app.dock.hide(); // Will be restored when the main window is shown.
       }
       client.send({

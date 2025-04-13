@@ -63,7 +63,12 @@ export async function fetchMatchDuelsMatrixRows(checksum: string): Promise<DuelM
       'victimName',
       't2.current_side',
     ])
-    .orderBy(['p1.team_name', 'killerName', 'p1.steam_id', 'p2.team_name', 'victimName', 'p2.steam_id'])
+    .orderBy('p1.team_name')
+    .orderBy('killerName')
+    .orderBy('p1.steam_id')
+    .orderBy('p2.team_name')
+    .orderBy('victimName')
+    .orderBy('p2.steam_id')
     .execute();
 
   return result;
