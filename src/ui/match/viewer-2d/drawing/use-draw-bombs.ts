@@ -19,7 +19,7 @@ export function useDrawBombs() {
       const playerPositionsWithBomb = playerPositions.filter((position) => {
         return position.frame === currentFrame && position.hasBomb;
       });
-      // A player has a bomb, the bomb indicator will be drawn by the drawPlayers function
+      // A player has the bomb, the bomb indicator will be drawn by the drawPlayers function
       if (playerPositionsWithBomb.length > 0) {
         lastBombPosition.current = null;
         return;
