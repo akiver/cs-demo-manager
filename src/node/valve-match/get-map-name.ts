@@ -19,7 +19,7 @@ export function getMapName(gameType: number) {
   const wingmanMode: GameMode = 10;
 
   const mapping = {
-    [1 << 0]: 'de_thera',
+    [1 << 0]: 'de_grail',
     [1 << 1]: 'de_dust2',
     [1 << 2]: 'de_train',
     [1 << 3]: 'de_ancient',
@@ -31,15 +31,16 @@ export function getMapName(gameType: number) {
       [wingmanMode]: 'de_palais',
     },
     [1 << 8]: 'cs_office',
-    [1 << 9]: 'de_memento',
+    [1 << 9]: 'de_brewery',
     [1 << 10]: 'de_whistle',
-    [1 << 11]: 'cs_militia',
+    [1 << 11]: 'de_dogtown',
     [1 << 12]: 'de_cache',
-    [1 << 13]: 'de_mills',
+    [1 << 13]: 'de_jura',
     [1 << 14]: 'de_edin',
     [1 << 15]: 'de_anubis',
     [1 << 16]: 'de_tuscan',
     [1 << 18]: 'de_basalt',
+    [1 << 19]: 'cs_agency',
     [1 << 20]: 'de_overpass',
     [1 << 21]: 'de_cobblestone',
     [1 << 22]: 'de_canals',
