@@ -33,8 +33,18 @@ export function Viewer2D() {
   const { drawMapRadar } = useDrawMapRadar();
   const { drawDeaths } = useDrawDeaths();
   const { drawBombs } = useDrawBombs();
-  const { speed, isPlaying, setIsPlaying, currentFrame, setCurrentFrame, round, changeRound, map, framerate } =
-    useViewerContext();
+  const {
+    speed,
+    isPlaying,
+    setIsPlaying,
+    currentFrame,
+    setCurrentFrame,
+    round,
+    changeRound,
+    map,
+    framerate,
+    shouldDrawBombs,
+  } = useViewerContext();
   const interactiveCanvas = useInteractiveMapCanvas(canvasRef.current, map);
   const { canvasSize, setWrapper } = interactiveCanvas;
 
@@ -63,7 +73,9 @@ export function Viewer2D() {
       drawInfernos(context, interactiveCanvas);
       drawGrenades(context, interactiveCanvas);
       drawDeaths(context, interactiveCanvas);
-      drawBombs(context, interactiveCanvas);
+      if (shouldDrawBombs) {
+        drawBombs(context, interactiveCanvas);
+      }
       drawChickens(context, interactiveCanvas);
 
       if (!isPlaying) {

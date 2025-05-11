@@ -61,6 +61,7 @@ type ViewerContext = {
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
   radarLevel: RadarLevel;
+  shouldDrawBombs: boolean;
   setRadarLevel: (radarLevel: RadarLevel) => void;
   focusedPlayerId: string | undefined;
   updateFocusedPlayerId: (id: string) => void;
@@ -124,6 +125,7 @@ export function ViewerProvider({
   const remainingFrameCount = round.endOfficiallyFrame - currentFrame;
   const frameRate = match.frameRate > 0 ? match.frameRate : match.tickrate / 2;
   const timeRemaining = (remainingFrameCount / frameRate) * 1000;
+  const shouldDrawBombs = match.mapName.startsWith('de_');
   const navigate = useNavigate();
 
   return (
@@ -134,6 +136,7 @@ export function ViewerProvider({
         radarLevel,
         map,
         game: match.game,
+        shouldDrawBombs,
         playerPositions,
         heGrenadesExplode,
         smokesStart,
