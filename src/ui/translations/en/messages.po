@@ -6972,8 +6972,8 @@ msgstr "Coordinate Y"
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
-msgid "Radar image size must be {fileWidth}x{fileHeight}."
-msgstr "Radar image size must be {fileWidth}x{fileHeight}."
+msgid "The radar image must be a square."
+msgstr "The radar image must be a square."
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
