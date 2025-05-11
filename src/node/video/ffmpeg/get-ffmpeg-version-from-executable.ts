@@ -10,11 +10,14 @@ export async function getFfmpegVersionFromExecutable(executablePath: string): Pr
         return reject(new InvalidFfmpegExecutable());
       }
 
-      // Extract the "SemVer" version, see details https://ffmpeg.org/doxygen/3.3/group__version__utils.html
-      // Possible output examples:
+      // Extract the FFmpeg version from the output, it supports the following patterns:
       // "ffmpeg version n4.3.1-11-g2c887141b8-20211231 Copyright" => 4.3.1
       // "ffmpeg version 4.3.1 Copyright" => 4.3.1
-      const results = /ffmpeg version .*?(\d+\.\d+(\.\d+)?)(\S*)/.exec(stdout);
+      // "ffmpeg version 2025-05-05-git-f4e72eb5a3-full_build-www.gyan.dev"
+      const results =
+        /ffmpeg version (?:n)?([0-9]+\.[0-9]+\.[0-9]+|[0-9]{4}-[0-9]{2}-[0-9]{2}-git-[a-z0-9]+)(?:-[^-\s]+)?/.exec(
+          stdout,
+        );
       if (results !== null && results.length >= 2) {
         return resolve(results[1]);
       }
