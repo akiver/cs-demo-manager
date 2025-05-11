@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { MAP_RADAR_SIZE } from 'csdm/ui/maps/maps-constants';
 import { useHeatmapContext } from './heatmap-context';
 import { HeatmapRenderer, type HeatmapPoint } from 'csdm/ui/shared/heatmap-renderer';
 import { getScaledCoordinateX } from 'csdm/ui/maps/get-scaled-coordinate-x';
@@ -29,7 +28,7 @@ export function Heatmap() {
   const heatmapRendererRef = useRef<HeatmapRenderer | null>(null);
   const [status, setStatus] = useState<Status>(Status.Loading);
   const { alpha, blur, radius, points, mapName, radarLevel, game } = useHeatmapContext();
-  const [canvasSize, setCanvasSize] = useState(MAP_RADAR_SIZE);
+  const [canvasSize, setCanvasSize] = useState(1024);
   const [map, setMap] = useState<Map | undefined>(undefined);
   const [radarImage, setRadarImage] = useState<HTMLImageElement | null>(null);
   const getGetMapRadarFileSrc = useGetMapRadarSrc();
@@ -92,13 +91,13 @@ export function Heatmap() {
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
-    if (wrapper === null) {
+    if (wrapper === null || !map) {
       return;
     }
 
     const resizeObserver = new ResizeObserver((entries) => {
       if (entries.length > 0) {
-        const canvasSize = Math.min(entries[0].contentRect.height, MAP_RADAR_SIZE);
+        const canvasSize = Math.min(entries[0].contentRect.height, map.radarSize);
         setCanvasSize(canvasSize);
         draw();
       }
@@ -109,7 +108,7 @@ export function Heatmap() {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [draw]);
+  }, [draw, map]);
 
   const onHeatmapCanvasRef = (canvas: HTMLCanvasElement | null) => {
     if (!canvas) {

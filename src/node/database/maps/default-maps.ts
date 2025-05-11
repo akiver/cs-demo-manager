@@ -151,6 +151,14 @@ export function getDefaultMaps(game?: Game) {
 
   const cs2Maps: InsertableMap[] = [
     {
+      name: 'cs_agency',
+      game: Game.CS2,
+      position_x: -2597,
+      position_y: 2079,
+      scale: 4.1817436,
+      threshold_z: 0,
+    },
+    {
       name: 'cs_assault',
       game: Game.CS2,
       position_x: 4041,
@@ -223,6 +231,14 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_brewery',
+      game: Game.CS2,
+      position_x: -4122,
+      position_y: 4394,
+      scale: 2.1820312,
+      threshold_z: 0,
+    },
+    {
       name: 'de_cache',
       game: Game.CS2,
       position_x: -2000,
@@ -244,6 +260,14 @@ export function getDefaultMaps(game?: Game) {
       position_x: -3840,
       position_y: 3072,
       scale: 6,
+      threshold_z: 0,
+    },
+    {
+      name: 'de_dogtown',
+      game: Game.CS2,
+      position_x: -1741,
+      position_y: 3295,
+      scale: 2.0323243,
       threshold_z: 0,
     },
     {
@@ -271,11 +295,27 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_grail',
+      game: Game.CS2,
+      position_x: -4395,
+      position_y: 4203,
+      scale: 2.1756864,
+      threshold_z: 0,
+    },
+    {
       name: 'de_inferno',
       game: Game.CS2,
       position_x: -2087,
       position_y: 3870,
       scale: 4.9,
+      threshold_z: 0,
+    },
+    {
+      name: 'de_jura',
+      game: Game.CS2,
+      position_x: -2126,
+      position_y: 2389,
+      scale: 2.504188,
       threshold_z: 0,
     },
     {

@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { MAP_RADAR_SIZE } from 'csdm/ui/maps/maps-constants';
 import type { InteractiveCanvas } from 'csdm/ui/hooks/use-interactive-map-canvas';
 import { useViewerContext } from '../use-viewer-context';
 import { RadarLevel } from 'csdm/ui/maps/radar-level';
@@ -28,7 +27,10 @@ export function useDrawMapRadar() {
     loadRadarImages();
   }, [getMapRadarFileSrc, game, map.name, radarLevel]);
 
-  const drawMapRadar = (context: CanvasRenderingContext2D, { zoomedSize, zoomedX, zoomedY }: InteractiveCanvas) => {
+  const drawMapRadar = (
+    context: CanvasRenderingContext2D,
+    { zoomedX, zoomedY, getScaledRadarSize }: InteractiveCanvas,
+  ) => {
     if (context === null) {
       return;
     }
@@ -41,7 +43,9 @@ export function useDrawMapRadar() {
     }
 
     if (image !== null) {
-      context.drawImage(image, zoomedX(0), zoomedY(0), zoomedSize(MAP_RADAR_SIZE), zoomedSize(MAP_RADAR_SIZE));
+      const radarSize = getScaledRadarSize();
+
+      context.drawImage(image, zoomedX(0), zoomedY(0), radarSize, radarSize);
     }
   };
 

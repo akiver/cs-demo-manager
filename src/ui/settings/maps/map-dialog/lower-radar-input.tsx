@@ -12,11 +12,9 @@ export function LowerRadarInput() {
 
   const updateLowerRadarFieldFromImageFilePath = async (imageFilePath: string) => {
     try {
-      const fileWidth = 1024;
-      const fileHeight = 1024;
       const png = await window.csdm.getPngInformation(imageFilePath);
-      if (png.width !== fileWidth || png.height !== fileHeight) {
-        setField(value, t`Radar image size must be ${fileWidth}x${fileHeight}.`);
+      if (png.width !== png.height) {
+        setField(value, t`The radar image must be a square.`);
         return;
       }
       setField(png.base64, undefined);

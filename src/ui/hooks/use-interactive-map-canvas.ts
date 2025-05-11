@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getScaledCoordinateX } from 'csdm/ui/maps/get-scaled-coordinate-x';
 import { getScaledCoordinateY } from 'csdm/ui/maps/get-scaled-coordinate-y';
-import { MAP_RADAR_SIZE } from 'csdm/ui/maps/maps-constants';
 import type { Map } from 'csdm/common/types/map';
 
 function getScaleMultiplier(delta: number) {
@@ -12,6 +11,7 @@ function getScaleMultiplier(delta: number) {
 }
 
 export type InteractiveCanvas = {
+  getScaledRadarSize: () => number;
   setWrapper: (wrapper: HTMLDivElement) => void;
   zoomedSize: (size: number) => number;
   zoomedX: (x: number) => number;
@@ -54,14 +54,14 @@ export function useInteractiveMapCanvas(canvas: HTMLCanvasElement | null, map: M
 
     const height = wrapper.clientHeight * window.devicePixelRatio;
     const width = wrapper.clientWidth * window.devicePixelRatio;
-    scale.current = height / window.devicePixelRatio / MAP_RADAR_SIZE;
-    screenOriginPixelX.current = (width / window.devicePixelRatio - MAP_RADAR_SIZE * scale.current) / 2;
+    scale.current = height / window.devicePixelRatio / map.radarSize;
+    screenOriginPixelX.current = (width / window.devicePixelRatio - map.radarSize * scale.current) / 2;
 
     setCanvasSize({
       height,
       width,
     });
-  }, []);
+  }, [map.radarSize]);
 
   const setWrapper = useCallback(
     (wrapper: HTMLDivElement | null) => {
@@ -166,8 +166,14 @@ export function useInteractiveMapCanvas(canvas: HTMLCanvasElement | null, map: M
     };
   }, [pixelToWorldX, pixelToWorldY, canvas]);
 
+  const getScaledRadarSize = () => {
+    return Math.floor(map.radarSize * scale.current);
+  };
+
   const zoomedSize = (size: number) => {
-    return Math.floor(size * scale.current);
+    // The size of the radar may be 2048px instead of 1024px since the May 9, 2025 CS2 update.
+    // Use 1024px as the base size to properly scale the elements
+    return Math.floor(size * scale.current * (map.radarSize / 1024));
   };
 
   const zoomedX = (x: number) => {
@@ -179,16 +185,17 @@ export function useInteractiveMapCanvas(canvas: HTMLCanvasElement | null, map: M
   };
 
   const zoomedToRadarX = (x: number) => {
-    const scaledX = getScaledCoordinateX(map, MAP_RADAR_SIZE, x);
+    const scaledX = getScaledCoordinateX(map, map.radarSize, x);
     return zoomedX(scaledX);
   };
 
   const zoomedToRadarY = (y: number) => {
-    const scaledY = getScaledCoordinateY(map, MAP_RADAR_SIZE, y);
+    const scaledY = getScaledCoordinateY(map, map.radarSize, y);
     return zoomedY(scaledY);
   };
 
   return {
+    getScaledRadarSize,
     setWrapper,
     zoomedSize,
     zoomedX,
