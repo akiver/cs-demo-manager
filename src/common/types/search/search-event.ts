@@ -11,6 +11,7 @@ export const SearchEvent = {
   JumpKills: 'jump-kills',
   TeamKills: 'team-kills',
   NoScopeKills: 'no-scope-kills',
+  ThroughSmokeKills: 'through-smoke-kills',
   RoundStart: 'round-start',
 } as const;
 

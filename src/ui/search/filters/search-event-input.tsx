@@ -83,6 +83,13 @@ function useSearchEventOptions(): SelectOption<SearchEvent>[] {
     },
     {
       label: t({
+        message: 'Through smoke kills',
+        context: 'Select option label',
+      }),
+      value: SearchEvent.ThroughSmokeKills,
+    },
+    {
+      label: t({
         message: 'Team kills',
         context: 'Select option label',
       }),
