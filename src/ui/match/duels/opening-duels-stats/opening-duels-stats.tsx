@@ -13,6 +13,7 @@ import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { SideSelect } from 'csdm/ui/components/inputs/select/side-select';
 import { getCssVariableValue } from 'csdm/ui/shared/get-css-variable-value';
 import { OpeningDuelsRoundBreakdown } from './opening-duels-round-breakdown';
+import { Section } from 'csdm/ui/components/section';
 
 type PlayerStats = {
   steamId: string;
@@ -228,12 +229,9 @@ export function OpeningDuelsStats() {
           </div>
         </div>
 
-        <div className="flex flex-col">
-          <h3 className="text-body-strong mb-8">
-            <Trans>Round breakdown</Trans>
-          </h3>
+        <Section title={<Trans>Round breakdown</Trans>}>
           <OpeningDuelsRoundBreakdown openingKills={openingKills} />
-        </div>
+        </Section>
       </div>
     </Content>
   );

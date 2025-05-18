@@ -1552,7 +1552,7 @@ msgstr "Matches"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "Total"
 msgstr "Total"
 
@@ -1563,7 +1563,7 @@ msgstr "Win"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "Lost"
 msgstr "Lost"
 
@@ -2058,46 +2058,43 @@ msgctxt "Panel title"
 msgid "Average kills/round"
 msgstr "Average kills/round"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "Won"
 msgstr "Won"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "Avg kill"
 msgstr "Avg kill"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "Save rate"
 msgstr "Save rate"
 
-#: src/ui/components/panels/clutches-panel.tsx
-#: src/ui/match/players/clutches-panel.tsx
-#: src/ui/match/rounds/round/clutches.tsx
-msgctxt "Panel title"
+#: src/ui/components/panels/clutches.tsx
 msgid "Clutches"
 msgstr "Clutches"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "Overall"
 msgstr "Overall"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "1v1"
 msgstr "1v1"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "1v2"
 msgstr "1v2"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "1v3"
 msgstr "1v3"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "1v4"
 msgstr "1v4"
 
-#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/components/panels/clutches.tsx
 msgid "1v5"
 msgstr "1v5"
 
@@ -3219,6 +3216,33 @@ msgstr "Continue"
 msgid "No matches found for the current Steam account."
 msgstr "No matches found for the current Steam account."
 
+#: src/ui/hooks/chart/use-match-result-pie.tsx
+msgctxt "Match result"
+msgid "Won"
+msgstr "Won"
+
+#: src/ui/hooks/chart/use-match-result-pie.tsx
+msgctxt "Match result"
+msgid "Lost"
+msgstr "Lost"
+
+#: src/ui/hooks/chart/use-match-result-pie.tsx
+msgctxt "Match result"
+msgid "Tie"
+msgstr "Tie"
+
+#: src/ui/hooks/chart/use-team-side-pie.tsx
+#: src/ui/hooks/use-translate-team-number.ts
+msgctxt "Team side"
+msgid "CT"
+msgstr "CT"
+
+#: src/ui/hooks/chart/use-team-side-pie.tsx
+#: src/ui/hooks/use-translate-team-number.ts
+msgctxt "Team side"
+msgid "T"
+msgstr "T"
+
 #. js-lingui-explicit-id
 #: src/ui/hooks/use-boolean-to-human.ts
 msgid "yes"
@@ -3513,16 +3537,6 @@ msgstr "Banned"
 msgctxt "Steam economy ban status"
 msgid "Unknown"
 msgstr "Unknown"
-
-#: src/ui/hooks/use-translate-team-number.ts
-msgctxt "Team side"
-msgid "CT"
-msgstr "CT"
-
-#: src/ui/hooks/use-translate-team-number.ts
-msgctxt "Team side"
-msgid "T"
-msgstr "T"
 
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
@@ -4555,6 +4569,12 @@ msgstr "1v1"
 msgctxt "Table header tooltip"
 msgid "1 versus 1 won"
 msgstr "1 versus 1 won"
+
+#: src/ui/match/players/clutches-panel.tsx
+#: src/ui/match/rounds/round/clutches.tsx
+msgctxt "Panel title"
+msgid "Clutches"
+msgstr "Clutches"
 
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Panel label"
@@ -7489,9 +7509,109 @@ msgstr "Full"
 msgid "This team is not in any analyzed demos."
 msgstr "This team is not in any analyzed demos."
 
+#: src/ui/team/performance/bombs/team-bomb-plant-chart.tsx
+msgctxt "Chart tooltip"
+msgid "Bomb planted on {name}"
+msgstr "Bomb planted on {name}"
+
+#: src/ui/team/performance/bombs/team-bomb-plant-chart.tsx
+msgctxt "Chart title"
+msgid "Bomb plant repartition"
+msgstr "Bomb plant repartition"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Chart axis label"
+msgid "Won due to bomb explosion"
+msgstr "Won due to bomb explosion"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Chart axis label"
+msgid "Lost due to defusal"
+msgstr "Lost due to defusal"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Chart axis label"
+msgid "Won due to player deaths"
+msgstr "Won due to player deaths"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Chart title"
+msgid "Bomb plant round outcome"
+msgstr "Bomb plant round outcome"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Tooltip"
+msgid "Round outcome when the bomb was planted by the team"
+msgstr "Round outcome when the bomb was planted by the team"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Chart axis label"
+msgid "Won due to defusal"
+msgstr "Won due to defusal"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Chart axis label"
+msgid "Lost due to bomb explosion"
+msgstr "Lost due to bomb explosion"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Chart axis label"
+msgid "Lost due to player deaths"
+msgstr "Lost due to player deaths"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Chart title"
+msgid "Enemy bomb plant round outcome"
+msgstr "Enemy bomb plant round outcome"
+
+#: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
+msgctxt "Tooltip"
+msgid "Round outcome when the bomb was planted by the enemy team"
+msgstr "Round outcome when the bomb was planted by the enemy team"
+
+#: src/ui/team/performance/bombs/team-bombs-stats.tsx
+msgctxt "Panel title"
+msgid "Bombs"
+msgstr "Bombs"
+
+#: src/ui/team/performance/side/team-match-result-ct-chart.tsx
+msgctxt "Chart title"
+msgid "Match results starting as Counter-Terrorist"
+msgstr "Match results starting as Counter-Terrorist"
+
+#: src/ui/team/performance/side/team-match-result-terro-chart.tsx
+msgctxt "Chart title"
+msgid "Match results starting as Terrorist"
+msgstr "Match results starting as Terrorist"
+
+#: src/ui/team/performance/side/team-side-match-stats.tsx
+msgctxt "Chart tooltip"
+msgid "Matches started as CT"
+msgstr "Matches started as CT"
+
+#: src/ui/team/performance/side/team-side-match-stats.tsx
+msgctxt "Chart tooltip"
+msgid "Matches started as T"
+msgstr "Matches started as T"
+
+#: src/ui/team/performance/side/team-side-match-stats.tsx
+msgctxt "Chart title"
+msgid "Starting side distribution"
+msgstr "Starting side distribution"
+
+#: src/ui/team/performance/side/team-side-stats.tsx
+msgctxt "Panel title"
+msgid "Side"
+msgstr "Side"
+
 #: src/ui/team/team-loader.tsx
 msgid "Loading team…"
 msgstr "Loading team…"
+
+#: src/ui/team/team-tabs.tsx
+msgctxt "Tab link"
+msgid "Performance"
+msgstr "Performance"
 
 #: src/ui/teams/no-teams.tsx
 msgid "No team found with current filters."

@@ -50,6 +50,7 @@ import { TeamHeatmap } from './team/heatmap/team-heatmap';
 import { Videos } from './videos/videos';
 import { FiveEPlayLastMatches } from './downloads/five-eplay/5eplay-last-matches';
 import { TeamEconomy } from './team/economy/team-economy';
+import { TeamPerformance } from './team/performance/team-performance';
 
 export const router = createHashRouter(
   createRoutesFromElements(
@@ -101,6 +102,7 @@ export const router = createHashRouter(
         <Route path={RoutePath.TeamMaps} element={<TeamMaps />} />
         <Route path={RoutePath.TeamHeatmap} element={<TeamHeatmap />} />
         <Route path={RoutePath.TeamEconomy} element={<TeamEconomy />} />
+        <Route path={RoutePath.TeamPerformance} element={<TeamPerformance />} />
         <Route path={RoutePath.TeamMatches} element={<TeamMatchesTable />} />
       </Route>
       <Route path={RoutePath.Search} element={<Search />} />

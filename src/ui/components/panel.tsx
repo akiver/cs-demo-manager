@@ -50,12 +50,13 @@ type Props = {
   children?: ReactNode;
   fitHeight?: boolean;
   minWidth?: number;
+  overflowX?: boolean;
 };
 
-export function Panel({ header, children, fitHeight, minWidth }: Props) {
+export function Panel({ header, children, fitHeight, minWidth, overflowX = true }: Props) {
   return (
     <div
-      className={`flex flex-col min-w-[152px] border border-gray-300 bg-gray-75 rounded p-8 overflow-x-auto ${
+      className={`flex flex-col min-w-[152px] border border-gray-300 bg-gray-75 rounded p-8 ${overflowX ? 'overflow-x-auto' : ''} ${
         fitHeight ? 'h-fit' : 'h-auto'
       }`}
       style={{

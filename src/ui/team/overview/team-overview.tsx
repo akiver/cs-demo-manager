@@ -13,7 +13,7 @@ import { AverageKillsPerRoundPanel } from 'csdm/ui/components/panels/average-kil
 import { AverageDeathsPerRoundPanel } from 'csdm/ui/components/panels/average-deaths-per-round-panel';
 import { HltvRatingPanel } from 'csdm/ui/components/panels/hltv-rating-panel';
 import { TeamLastMatches } from './team-last-matches';
-import { TeamClutchesPanel } from './team-clutches-panel';
+import { TeamClutches } from './team-clutches';
 import { TeamMultiKillsPanel } from './team-multi-kills-panel';
 import { TeamObjectivesPanel } from './team-objectives-panel';
 
@@ -71,7 +71,7 @@ export function TeamOverview() {
           <TeamObjectivesPanel />
         </div>
         <div>
-          <TeamClutchesPanel />
+          <TeamClutches />
         </div>
         <div>
           <TeamLastMatches />

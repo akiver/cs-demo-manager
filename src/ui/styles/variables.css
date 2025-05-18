@@ -61,6 +61,9 @@
   --color-game-ban: #bd640d;
   --color-community-ban: #6d28d9;
 
+  --color-bombsite-a: #e34850;
+  --color-bombsite-b: #2680eb;
+
   --font-*: initial;
   --font-sans: Inter var, system-ui;
 

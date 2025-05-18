@@ -3,6 +3,8 @@ import type { Clutch } from './clutch';
 import type { LastMatch } from './last-match';
 import type { MapStats } from './map-stats';
 import type { TeamEconomyStats } from './team-economy-stats';
+import type { TeamMatchSideStats } from './team-match-side-stats';
+import type { TeamBombsStats } from './team-bombs-stats';
 
 export type TeamProfile = {
   name: string;
@@ -40,4 +42,6 @@ export type TeamProfile = {
   lastMatches: LastMatch[];
   matches: MatchTable[];
   economyStats: TeamEconomyStats;
+  sideStats: TeamMatchSideStats;
+  bombsStats: TeamBombsStats;
 };

@@ -13,6 +13,8 @@ import { fetchTeamClutches } from './fetch-team-clutches';
 import { fetchTeamMapsStats } from './fetch-team-maps-stats';
 import { fetchTeamEconomyStats } from './fetch-team-economy-stats';
 import { applyMatchFilters } from '../match/apply-match-filters';
+import { fetchTeamMatchSideStats } from './fetch-team-match-side-stats';
+import { fetchTeamBombsStats } from './fetch-team-bombs-stats';
 
 function buildQuery({ name, ...filters }: TeamFilters) {
   const { count, avg, sum } = db.fn;
@@ -80,20 +82,32 @@ export async function fetchTeam(filters: TeamFilters): Promise<TeamProfile> {
     throw new TeamNotFound();
   }
 
-  const [matchCountStats, lastMatches, roundCount, matches, collateralKillCount, clutches, maps, economyStats] =
-    await Promise.all([
-      fetchTeamMatchCountStats(filters),
-      fetchTeamLastMatches(filters.name),
-      fetchTeamRoundCount(filters),
-      fetchMatchesTable({
-        ...filters,
-        teamName: filters.name,
-      }),
-      fetchTeamCollateralKillCount(filters),
-      fetchTeamClutches(filters),
-      fetchTeamMapsStats(filters),
-      fetchTeamEconomyStats(filters),
-    ]);
+  const [
+    matchCountStats,
+    lastMatches,
+    roundCount,
+    matches,
+    collateralKillCount,
+    clutches,
+    maps,
+    economyStats,
+    sideStats,
+    bombsStats,
+  ] = await Promise.all([
+    fetchTeamMatchCountStats(filters),
+    fetchTeamLastMatches(filters.name),
+    fetchTeamRoundCount(filters),
+    fetchMatchesTable({
+      ...filters,
+      teamName: filters.name,
+    }),
+    fetchTeamCollateralKillCount(filters),
+    fetchTeamClutches(filters),
+    fetchTeamMapsStats(filters),
+    fetchTeamEconomyStats(filters),
+    fetchTeamMatchSideStats(filters),
+    fetchTeamBombsStats(filters),
+  ]);
   const team: TeamProfile = {
     ...row,
     ...matchCountStats,
@@ -106,6 +120,8 @@ export async function fetchTeam(filters: TeamFilters): Promise<TeamProfile> {
     roundCountAsCt: roundCount.roundCountAsCt,
     roundCountAsT: roundCount.roundCountAsT,
     economyStats,
+    sideStats,
+    bombsStats,
   };
 
   return team;

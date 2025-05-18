@@ -1,6 +1,7 @@
 import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { Panel, PanelStatRow } from 'csdm/ui/components/panel';
+import { PanelStatRow } from 'csdm/ui/components/panel';
+import { Section } from 'csdm/ui/components/section';
 import { roundNumber } from 'csdm/common/math/round-number';
 import { WinRate } from 'csdm/ui/components/panels/win-rate';
 import type { Clutch } from 'csdm/common/types/clutch';
@@ -11,7 +12,7 @@ type ClutchProps = {
   allClutches: Clutch[];
 };
 
-function ClutchBlock({ allClutches, title, opponentCount }: ClutchProps) {
+function ClutchPanel({ allClutches, title, opponentCount }: ClutchProps) {
   const clutches =
     opponentCount > 0 ? allClutches.filter((clutch) => clutch.opponentCount === opponentCount) : allClutches;
   const wonCount = clutches.filter((clutch) => clutch.won).length;
@@ -24,7 +25,7 @@ function ClutchBlock({ allClutches, title, opponentCount }: ClutchProps) {
   const averageKill = roundNumber(killCount / clutches.length, 1);
 
   return (
-    <div className="flex flex-col w-[192px] border border-gray-300 p-8 rounded">
+    <div className="flex flex-col w-[192px] border border-gray-300 bg-gray-100 p-8 rounded">
       <p className="text-body-strong">{title}</p>
       <div className="flex flex-col mt-12">
         <PanelStatRow title={<Trans>Total</Trans>} value={clutches.length} />
@@ -44,17 +45,17 @@ type Props = {
   clutches: Clutch[];
 };
 
-export function ClutchesPanel({ clutches }: Props) {
+export function Clutches({ clutches }: Props) {
   return (
-    <Panel header={<Trans context="Panel title">Clutches</Trans>}>
+    <Section title={<Trans>Clutches</Trans>}>
       <div className="flex flex-wrap gap-12">
-        <ClutchBlock opponentCount={0} title={<Trans>Overall</Trans>} allClutches={clutches} />
-        <ClutchBlock opponentCount={1} title={<Trans>1v1</Trans>} allClutches={clutches} />
-        <ClutchBlock opponentCount={2} title={<Trans>1v2</Trans>} allClutches={clutches} />
-        <ClutchBlock opponentCount={3} title={<Trans>1v3</Trans>} allClutches={clutches} />
-        <ClutchBlock opponentCount={4} title={<Trans>1v4</Trans>} allClutches={clutches} />
-        <ClutchBlock opponentCount={5} title={<Trans>1v5</Trans>} allClutches={clutches} />
+        <ClutchPanel opponentCount={0} title={<Trans>Overall</Trans>} allClutches={clutches} />
+        <ClutchPanel opponentCount={1} title={<Trans>1v1</Trans>} allClutches={clutches} />
+        <ClutchPanel opponentCount={2} title={<Trans>1v2</Trans>} allClutches={clutches} />
+        <ClutchPanel opponentCount={3} title={<Trans>1v3</Trans>} allClutches={clutches} />
+        <ClutchPanel opponentCount={4} title={<Trans>1v4</Trans>} allClutches={clutches} />
+        <ClutchPanel opponentCount={5} title={<Trans>1v5</Trans>} allClutches={clutches} />
       </div>
-    </Panel>
+    </Section>
   );
 }
