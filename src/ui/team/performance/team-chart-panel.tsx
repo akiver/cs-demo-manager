@@ -9,12 +9,12 @@ type TeamChartPanelHeaderProps = {
 
 export function TeamChartPanelHeader({ title, tooltip }: TeamChartPanelHeaderProps) {
   return (
-    <div className="flex items-center gap-x-12">
-      <h3 className="text-body-strong mb-8">{title}</h3>
+    <div className="flex items-center gap-x-12 mb-8">
+      <h3 className="text-body-strong">{title}</h3>
       {tooltip && (
         <Tooltip content={<p>{tooltip}</p>}>
-          <div className="flex items-center justify-center rounded-full bg-gray-400 p-4 size-16">
-            <QuestionIcon className="size-8" />
+          <div className="flex items-center justify-center rounded-full bg-gray-400 p-4 size-20">
+            <QuestionIcon className="size-12" />
           </div>
         </Tooltip>
       )}
@@ -27,7 +27,7 @@ type TeamChartProps = {
 };
 
 export function TeamChart({ ref }: TeamChartProps) {
-  return <div className="min-h-[280px] min-w-[360px]" ref={ref} />;
+  return <div className="min-h-[280px] min-w-[400px]" ref={ref} />;
 }
 
 type Props = {

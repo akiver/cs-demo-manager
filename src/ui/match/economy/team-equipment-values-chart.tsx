@@ -3,7 +3,7 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import type { ChartOption } from 'csdm/ui/hooks/use-chart';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { useCurrentMatch } from '../use-current-match';
-import { Panel } from 'csdm/ui/components/panel';
+import { Panel, PanelTitle } from 'csdm/ui/components/panel';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 
 export function TeamEquipmentValuesChart() {
@@ -154,7 +154,13 @@ export function TeamEquipmentValuesChart() {
   });
 
   return (
-    <Panel header={<Trans>Equipment value</Trans>}>
+    <Panel
+      header={
+        <PanelTitle>
+          <Trans>Equipment value</Trans>
+        </PanelTitle>
+      }
+    >
       <div className="min-h-[400px]" ref={ref} />
     </Panel>
   );

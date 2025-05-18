@@ -76,7 +76,7 @@ function TeamChart({ teamName, players, kills, result, sides }: TeamChartProps) 
     <div className="flex flex-col border border-gray-300 bg-gray-75 rounded p-8">
       <div className="flex flex-col">
         <div className="flex justify-between">
-          <p>{teamName}</p>
+          <p className="text-body-strong">{teamName}</p>
           <p className="text-subtitle">{openDuelTeamCount}</p>
         </div>
 

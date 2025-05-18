@@ -16,7 +16,7 @@ import { useChart } from 'csdm/ui/hooks/use-chart';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { EliminationIcon } from 'csdm/ui/icons/elimination-icon';
 import { DefuserIcon } from 'csdm/ui/icons/weapons/defuser-icon';
-import { Panel } from 'csdm/ui/components/panel';
+import { Panel, PanelTitle } from 'csdm/ui/components/panel';
 import { useChartColors } from 'csdm/ui/hooks/use-charts-colors';
 import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { BombIcon } from 'csdm/ui/icons/weapons/bomb-icon';
@@ -199,7 +199,13 @@ export function TeamsEconomyBreakdownChart() {
   const style = { height: match.rounds.length * 35, minWidth: 700 };
 
   return (
-    <Panel header={<Trans>Breakdown</Trans>}>
+    <Panel
+      header={
+        <PanelTitle>
+          <Trans>Breakdown</Trans>
+        </PanelTitle>
+      }
+    >
       <TeamEconomyCards />
       <div className="flex justify-center">
         <div ref={chartRefTeamA} style={style} />

@@ -1553,6 +1553,7 @@ msgstr "Matches"
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total"
 msgstr "Total"
 
@@ -1564,6 +1565,7 @@ msgstr "Win"
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Lost"
 msgstr "Lost"
 
@@ -2059,6 +2061,7 @@ msgid "Average kills/round"
 msgstr "Average kills/round"
 
 #: src/ui/components/panels/clutches.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won"
 msgstr "Won"
 
@@ -3841,13 +3844,13 @@ msgid "{winnerTeamName} won the round {roundNumber}"
 msgstr "{winnerTeamName} won the round {roundNumber}"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Pistol"
 msgstr "Pistol"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Eco"
 msgstr "Eco"
@@ -4115,7 +4118,6 @@ msgid "Grenades"
 msgstr "Grenades"
 
 #: src/ui/match/match-tabs.tsx
-#: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Economy"
 msgstr "Economy"
@@ -7474,36 +7476,40 @@ msgctxt "Settings title"
 msgid "Show X-Ray"
 msgstr "Show X-Ray"
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"
 msgstr "Won percentage"
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total: {total}"
 msgstr "Total: {total}"
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won: {won}"
 msgstr "Won: {won}"
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Lost: {lost}"
 msgstr "Lost: {lost}"
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Semi"
 msgstr "Semi"
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Force-buy"
 msgstr "Force-buy"
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Full"
 msgstr "Full"
+
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
+msgid "Round outcomes by economy type"
+msgstr "Round outcomes by economy type"
 
 #: src/ui/team/load-team-error.tsx
 msgid "This team is not in any analyzed demos."

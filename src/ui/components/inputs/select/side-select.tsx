@@ -7,9 +7,10 @@ import { FilterValue } from '../../dropdown-filter/filter-value';
 type Props = {
   selectedSides: TeamNumber[];
   onChange: (side: TeamNumber | undefined) => void;
+  direction?: 'vertical' | 'horizontal';
 };
 
-export function SideSelect({ onChange, selectedSides }: Props) {
+export function SideSelect({ onChange, selectedSides, direction = 'vertical' }: Props) {
   const { t } = useLingui();
   const sides: SelectOption<TeamNumber>[] = [
     {
@@ -29,7 +30,7 @@ export function SideSelect({ onChange, selectedSides }: Props) {
   ];
 
   return (
-    <div className="flex flex-col gap-y-8">
+    <div className={`flex gap-8 ${direction === 'vertical' ? 'flex-col' : 'flex-row'}`}>
       <p>
         <Trans context="Filter side category">Side</Trans>
       </p>

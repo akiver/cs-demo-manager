@@ -1558,6 +1558,7 @@ msgstr "Partidas"
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total"
 msgstr "Total"
 
@@ -1569,6 +1570,7 @@ msgstr "Vitória"
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Lost"
 msgstr "Derrota"
 
@@ -2064,6 +2066,7 @@ msgid "Average kills/round"
 msgstr "Média de abates/rodada"
 
 #: src/ui/components/panels/clutches.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won"
 msgstr ""
 
@@ -3846,13 +3849,13 @@ msgid "{winnerTeamName} won the round {roundNumber}"
 msgstr "{winnerTeamName} venceu a rodada {roundNumber}"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Pistol"
 msgstr "Pistola"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Eco"
 msgstr "Eco"
@@ -4120,7 +4123,6 @@ msgid "Grenades"
 msgstr "Granadas"
 
 #: src/ui/match/match-tabs.tsx
-#: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Economy"
 msgstr "Economia"
@@ -7475,35 +7477,39 @@ msgctxt "Settings title"
 msgid "Show X-Ray"
 msgstr ""
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"
 msgstr ""
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total: {total}"
 msgstr ""
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won: {won}"
 msgstr ""
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Lost: {lost}"
 msgstr ""
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Semi"
 msgstr ""
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Force-buy"
 msgstr ""
 
-#: src/ui/team/economy/teams-economy-types-chart.tsx
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Full"
+msgstr ""
+
+#: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
+msgid "Round outcomes by economy type"
 msgstr ""
 
 #: src/ui/team/load-team-error.tsx
