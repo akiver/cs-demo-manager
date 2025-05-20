@@ -35,6 +35,7 @@ declare global {
     ADDITIONAL_ARGUMENTS: string[];
     getStartupArguments: () => Promise<Argument[]>;
     getTheme: () => Promise<ThemeName>;
+    getWebFilePath: (file: File) => string;
     getSystemStartupBehavior: () => Promise<StartupBehavior>;
     updateSystemStartupBehavior: (behavior: StartupBehavior) => Promise<void>;
     clearStartupArguments: () => void;

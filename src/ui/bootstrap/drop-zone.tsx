@@ -16,8 +16,9 @@ export function DropZone({ children }: Props) {
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     for (const file of event.dataTransfer.files) {
-      if (file.path.endsWith('.dem')) {
-        navigateToDemo(file.path);
+      const path = window.csdm.getWebFilePath(file);
+      if (path.endsWith('.dem')) {
+        navigateToDemo(path);
         break;
       }
     }

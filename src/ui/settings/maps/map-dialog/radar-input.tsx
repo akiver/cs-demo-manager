@@ -26,9 +26,9 @@ export function RadarInput() {
 
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const files: FileList = event.dataTransfer.files;
+    const { files } = event.dataTransfer;
     if (files.length > 0) {
-      updateRadarFieldFromImageFilePath(files[0].path);
+      updateRadarFieldFromImageFilePath(window.csdm.getWebFilePath(files[0]));
     }
   };
 

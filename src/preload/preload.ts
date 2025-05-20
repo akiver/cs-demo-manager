@@ -8,7 +8,7 @@ import type {
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from 'electron';
-import { ipcRenderer, contextBridge } from 'electron';
+import { ipcRenderer, contextBridge, webUtils } from 'electron';
 import fs from 'fs-extra';
 import { getRankImageSrc } from 'csdm/node/filesystem/get-rank-image-src';
 import { getPremierRankImageSrc } from 'csdm/node/filesystem/get-premier-rank-image-src';
@@ -265,6 +265,10 @@ const api: PreloadApi = {
     await fs.remove(changelogFilePath);
 
     return fileExists;
+  },
+
+  getWebFilePath: (file: File) => {
+    return webUtils.getPathForFile(file);
   },
 };
 

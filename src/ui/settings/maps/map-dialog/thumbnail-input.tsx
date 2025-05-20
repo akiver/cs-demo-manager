@@ -28,9 +28,9 @@ export function ThumbnailInput() {
 
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const files: FileList = event.dataTransfer.files;
+    const { files } = event.dataTransfer;
     if (files.length > 0) {
-      updateFieldFromImageFilePath(files[0].path);
+      updateFieldFromImageFilePath(window.csdm.getWebFilePath(files[0]));
     }
   };
 
