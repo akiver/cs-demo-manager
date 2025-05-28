@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Dialog, DialogContent, DialogFooter, DialogHeader } from 'csdm/ui/dialogs/dialog';
-import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 
 export type TickPosition = 'start' | 'end';
 export type TickOperation = 'minus' | 'plus';
@@ -49,9 +49,7 @@ export function SelectSecondsDialog({ onSubmit, tick, operation }: DialogProps) 
         />
       </DialogContent>
       <DialogFooter>
-        <Button onClick={submit} variant={ButtonVariant.Primary}>
-          <Trans context="Button">Confirm</Trans>
-        </Button>
+        <ConfirmButton onClick={submit} />
         <CancelButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>

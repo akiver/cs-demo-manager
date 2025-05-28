@@ -8,10 +8,10 @@ import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { PerspectiveSelect } from 'csdm/ui/components/inputs/select/perspective-select';
 import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
-import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { buildMatchVideoPath } from 'csdm/ui/routes-paths';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import type { GeneratePlayerEventPayload } from 'csdm/ui/match/video/sequences/sequences-actions';
+import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 
 type Props = {
   steamId: string;
@@ -75,9 +75,7 @@ export function GeneratePlayerEventsDialog({
         </div>
       </DialogContent>
       <DialogFooter>
-        <Button variant={ButtonVariant.Primary} onClick={submit}>
-          <Trans context="Button">Confirm</Trans>
-        </Button>
+        <ConfirmButton onClick={submit} />
         <CancelButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>

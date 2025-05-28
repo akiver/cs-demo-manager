@@ -1,6 +1,5 @@
 import React, { useState, type FormEvent } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { replaceSequences } from 'csdm/ui/match/video/sequences/sequences-actions';
@@ -21,6 +20,7 @@ import { ShowOnlyDeathNoticesCheckbox } from 'csdm/ui/match/video/show-only-deat
 import { useCanEditVideoPlayersOptions } from 'csdm/ui/match/video/use-can-edit-video-players-options';
 import { DeathNoticesDurationInput } from '../../death-notices-duration-input';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 
 type State = {
   overridePlayerFocusSteamId: boolean;
@@ -176,9 +176,7 @@ export function EditSequenceSettingsDialog() {
           </div>
         </DialogContent>
         <DialogFooter>
-          <Button type="submit" variant={ButtonVariant.Primary}>
-            <Trans context="Button">Confirm</Trans>
-          </Button>
+          <ConfirmButton type="submit" />
           <CancelButton onClick={hideDialog} />
         </DialogFooter>
       </form>

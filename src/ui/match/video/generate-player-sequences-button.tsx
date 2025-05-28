@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
+import { Button } from 'csdm/ui/components/buttons/button';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { useCurrentMatch } from '../use-current-match';
@@ -23,6 +23,7 @@ import { Perspective } from 'csdm/common/types/perspective';
 import { assertNever } from 'csdm/common/assert-never';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
+import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 
 function getVisibleWeapons(event: PlayerSequenceEvent, steamId: string | undefined, match: Match) {
   if (!steamId) {
@@ -262,9 +263,7 @@ function SelectPlayerDialog() {
         </div>
       </DialogContent>
       <DialogFooter>
-        <Button onClick={onConfirm} variant={ButtonVariant.Primary}>
-          <Trans context="Button">Confirm</Trans>
-        </Button>
+        <ConfirmButton onClick={onConfirm} />
         <CancelButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>

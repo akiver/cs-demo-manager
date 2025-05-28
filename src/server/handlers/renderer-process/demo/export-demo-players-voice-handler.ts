@@ -3,6 +3,7 @@ import { CounterStrikeExecutableNotFound } from 'csdm/node/counter-strike/launch
 import { CsgoVoiceExtractorUnknownError } from 'csdm/node/csgo-voice-extractor/errors/csgo-voice-extractor-unknown-error';
 import { InvalidArgs } from 'csdm/node/csgo-voice-extractor/errors/invalid-args';
 import { LoadCsgoLibError } from 'csdm/node/csgo-voice-extractor/errors/load-csgo-lib-error';
+import type { ExportVoiceMode } from 'csdm/node/csgo-voice-extractor/export-voice-mode';
 import { startCsgoVoiceExtractor } from 'csdm/node/csgo-voice-extractor/start-csgo-voice-extractor';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
@@ -21,6 +22,7 @@ export type ExportDemoPlayersVoiceErrorPayload = {
 export type ExportDemoPlayersVoicePayload = {
   demoPaths: string[];
   outputPath: string;
+  mode: ExportVoiceMode;
 };
 
 export async function exportDemoPlayersVoiceHandler(payload: ExportDemoPlayersVoicePayload) {
@@ -34,7 +36,7 @@ export async function exportDemoPlayersVoiceHandler(payload: ExportDemoPlayersVo
         },
       });
 
-      await startCsgoVoiceExtractor(demoPath, payload.outputPath);
+      await startCsgoVoiceExtractor(demoPath, payload.outputPath, payload.mode);
     } catch (error) {
       logger.error(error);
       const errorCode = getErrorCodeFromError(error);

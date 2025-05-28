@@ -17,6 +17,11 @@ import { ErrorCode } from 'csdm/common/error-code';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import { ExternalLink } from 'csdm/ui/components/external-link';
+import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
+import { ExportVoiceMode } from 'csdm/node/csgo-voice-extractor/export-voice-mode';
+import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
+import { InputLabel } from 'csdm/ui/components/inputs/input-label';
+import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 
 type DialogProps = {
   outputFolderPath: string;
@@ -153,6 +158,59 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
   );
 }
 
+type SelectExportModeDialogProps = {
+  onSelect: (mode: ExportVoiceMode) => void;
+};
+
+function SelectExportModeDialog({ onSelect }: SelectExportModeDialogProps) {
+  const { hideDialog } = useDialog();
+  const [mode, setMode] = useState<ExportVoiceMode>(ExportVoiceMode.SingleFull);
+  const options: SelectOption<ExportVoiceMode>[] = [
+    {
+      label: <Trans context="Voice mode export label">One file per player (no silence, only voice)</Trans>,
+      value: ExportVoiceMode.SplitCompact,
+    },
+    {
+      label: <Trans context="Voice mode export label">One file per player (with silence, demo length)</Trans>,
+      value: ExportVoiceMode.SplitFull,
+    },
+    {
+      label: <Trans context="Voice mode export label">Single file (all players, with silence, demo length)</Trans>,
+      value: ExportVoiceMode.SingleFull,
+    },
+  ];
+
+  return (
+    <Dialog>
+      <div className="w-[768px]">
+        <DialogHeader>
+          <DialogTitle>
+            <Trans>Players voice export</Trans>
+          </DialogTitle>
+        </DialogHeader>
+        <DialogContent>
+          <div className="flex flex-col gap-y-8">
+            <InputLabel>
+              <Trans>Choose how you want the voice audio to be exported</Trans>
+            </InputLabel>
+            <div>
+              <Select options={options} value={mode} onChange={setMode} />
+            </div>
+          </div>
+        </DialogContent>
+        <DialogFooter>
+          <ConfirmButton
+            onClick={() => {
+              onSelect(mode);
+            }}
+          />
+          <CancelButton onClick={hideDialog} />
+        </DialogFooter>
+      </div>
+    </Dialog>
+  );
+}
+
 type Props = {
   demoPaths: string[];
 };
@@ -162,30 +220,37 @@ export function ExportPlayersVoiceItem({ demoPaths }: Props) {
   const { showDialog } = useDialog();
   const { t } = useLingui();
 
-  const onClick = async () => {
-    const { filePaths, canceled } = await window.csdm.showOpenDialog({
-      buttonLabel: t({
-        context: 'Button label',
-        message: 'Export',
-      }),
-      defaultPath: window.csdm.getPathDirectoryName(demoPaths[0]),
-      properties: ['openDirectory'],
-    });
+  const onClick = () => {
+    showDialog(
+      <SelectExportModeDialog
+        onSelect={async (mode) => {
+          const { filePaths, canceled } = await window.csdm.showOpenDialog({
+            buttonLabel: t({
+              context: 'Button label',
+              message: 'Export',
+            }),
+            defaultPath: window.csdm.getPathDirectoryName(demoPaths[0]),
+            properties: ['openDirectory'],
+          });
 
-    if (canceled || filePaths.length === 0) {
-      return;
-    }
+          if (canceled || filePaths.length === 0) {
+            return;
+          }
 
-    const outputPath = filePaths[0];
-    showDialog(<ExportPlayersVoiceDialog outputFolderPath={outputPath} />);
+          const outputPath = filePaths[0];
+          showDialog(<ExportPlayersVoiceDialog outputFolderPath={outputPath} />);
 
-    client.send({
-      name: RendererClientMessageName.ExportDemoPlayersVoice,
-      payload: {
-        demoPaths,
-        outputPath,
-      },
-    });
+          client.send({
+            name: RendererClientMessageName.ExportDemoPlayersVoice,
+            payload: {
+              demoPaths,
+              outputPath,
+              mode,
+            },
+          });
+        }}
+      />,
+    );
   };
 
   return (

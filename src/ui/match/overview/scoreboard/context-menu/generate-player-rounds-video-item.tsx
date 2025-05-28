@@ -9,9 +9,9 @@ import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-it
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
-import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
+import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 
 type GeneratePlayerRoundsDialogProps = {
   steamId: string;
@@ -66,9 +66,7 @@ function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps
         </div>
       </DialogContent>
       <DialogFooter>
-        <Button variant={ButtonVariant.Primary} onClick={submit}>
-          <Trans context="Button">Confirm</Trans>
-        </Button>
+        <ConfirmButton onClick={submit} />
         <CancelButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>
