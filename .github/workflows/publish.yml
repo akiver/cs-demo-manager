@@ -147,7 +147,7 @@ jobs:
         run: |
           npm install
           npm run build
-          npm run package -- --win --publish always
+          npm run package -- --win --publish=always
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
