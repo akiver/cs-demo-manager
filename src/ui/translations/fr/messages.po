@@ -63,7 +63,7 @@ msgstr "Une erreur est survenue lors de l'insertion du match dans la base de don
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "The analysis failed with the error code: <0>{errorCode}</0>"
-msgstr ""
+msgstr "L'analyse a échoué avec le code d'erreur : <0>{errorCode}</0>"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read the error codes <0>documentation</0> to understand the code signification and what you can do."
@@ -224,7 +224,7 @@ msgstr "Bans par rang Premier"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "Loading ban stats…"
-msgstr ""
+msgstr "Chargement des statistiques de ban…"
 
 #: src/ui/ban/stats/ban-stats.tsx
 #: src/ui/comment/use-update-comment.tsx
@@ -355,7 +355,7 @@ msgstr "Assurez-vous que PostgreSQL est bien démarré et que les paramètres de
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "The connection to the database failed with the following error:"
-msgstr ""
+msgstr "La connexion à la base de données a échoué avec l'erreur suivante :"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "CS Demo Manager requires a PostgreSQL database."
@@ -371,7 +371,7 @@ msgstr "Merci de lire la <0>documentation</0> pour obtenir de l'aide."
 
 #: src/ui/bootstrap/settings-provider.tsx
 msgid "An error occurred while loading settings."
-msgstr ""
+msgstr "Une erreur est survenue lors du chargement des paramètres."
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "The Steam API returned a forbidden error"
@@ -395,11 +395,11 @@ msgstr "Une erreur est survenue lors de la connexion au serveur WebSocket."
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Changelog version {APP_VERSION}"
-msgstr ""
+msgstr "Changelog de la version {APP_VERSION}"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Visit website"
-msgstr ""
+msgstr "Visiter le site Web"
 
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
@@ -632,7 +632,7 @@ msgstr "Détails"
 #: src/ui/components/context-menu/items/rename-item.tsx
 msgctxt "Keyboard shortcut"
 msgid "Enter"
-msgstr ""
+msgstr "Entrer"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
@@ -643,17 +643,17 @@ msgstr "Sélectionner"
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 msgctxt "Toast"
 msgid "Chat messages exported, click here to reveal the folder"
-msgstr ""
+msgstr "Messages exportés, cliquez ici pour révéler le dossier"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 msgid "No chat messages to export"
-msgstr ""
+msgstr "Aucun message à exporter"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 msgctxt "Context menu"
 msgid "Chat messages"
-msgstr ""
+msgstr "Messages du chat"
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
 #: src/ui/demos/table/export-demos-items.tsx
@@ -807,7 +807,7 @@ msgstr "Exporter"
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Context menu"
 msgid "Players voice"
-msgstr ""
+msgstr "Voix des joueurs"
 
 #: src/ui/components/context-menu/items/export-to-xlsx-item.tsx
 msgctxt "Context menu"
@@ -907,7 +907,7 @@ msgstr "Rounds"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "Demo analysis"
-msgstr ""
+msgstr "Analyse de démo"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
@@ -992,7 +992,7 @@ msgstr "{0, plural, one {La démo sera supprimée de la base de données, pas de
 
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "Delete matches"
-msgstr ""
+msgstr "Supprimer les matchs"
 
 #. placeholder {0}: checksums.length
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
@@ -1069,7 +1069,7 @@ msgstr "Feuilles"
 
 #: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgid "Exporting player {count} of {totalCount}…"
-msgstr ""
+msgstr "Export du joueur {count} sur {totalCount}…"
 
 #: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgid "Generating sheet {translatedSheetName}…"
@@ -1081,7 +1081,7 @@ msgstr "Nom invalide."
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Rename"
-msgstr ""
+msgstr "Renommer"
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Only the name visible from the application will change, it will not change the filename on your operating system."
@@ -1386,7 +1386,7 @@ msgstr "Rayon"
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
 msgid "Comment (Markdown supported)"
-msgstr ""
+msgstr "Commentaire (Markdown accepté)"
 
 #: src/ui/components/inputs/database-name-input.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
@@ -1452,16 +1452,16 @@ msgstr "Résultat du duel d'ouverture"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
 msgid "Player"
-msgstr ""
+msgstr "Joueur"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
 msgid "Enemy"
-msgstr ""
+msgstr "Ennemi"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
 msgctxt "Select label"
 msgid "Point of view"
-msgstr ""
+msgstr "Point de vue"
 
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
@@ -2106,7 +2106,7 @@ msgstr "Taux éco"
 
 #: src/ui/components/panels/clutches.tsx
 msgid "Clutches"
-msgstr ""
+msgstr "Clutchs"
 
 #: src/ui/components/panels/clutches.tsx
 msgid "Overall"
@@ -2537,11 +2537,11 @@ msgstr "Tags :"
 
 #: src/ui/demo/next-demo-link.tsx
 msgid "Next demo ({key}+→)"
-msgstr ""
+msgstr "Démo suivante ({key}+→)"
 
 #: src/ui/demo/previous-demo-link.tsx
 msgid "Previous demo ({key}+←)"
-msgstr ""
+msgstr "Démo précédente ({key}+←)"
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
@@ -2676,7 +2676,7 @@ msgstr "ESEA"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Esplay"
-msgstr ""
+msgstr "Esplay"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2706,7 +2706,7 @@ msgstr "Gamers Club"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "MatchZy"
-msgstr ""
+msgstr "MatchZy"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2721,7 +2721,7 @@ msgstr "PopFlash"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Renown"
-msgstr ""
+msgstr "Renown"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2747,7 +2747,7 @@ msgstr "Le checksum de cette démo ne correspond pas à celui du match associé.
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
 msgid "An error occurred while updating demo location."
-msgstr ""
+msgstr "Une erreur est survenue lors de la mise à jour de l'emplacement de la démo."
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
 msgid "Demo location"
@@ -2901,7 +2901,7 @@ msgstr ""
 #: src/ui/settings/downloads/use-add-5eplay-account.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "Invalid API request."
-msgstr ""
+msgstr "Requête API invalide."
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
@@ -2912,7 +2912,7 @@ msgstr ""
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
 msgid "No matches found for the current account."
-msgstr ""
+msgstr "Aucun match trouvé pour le compte actuel."
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 msgid "To add a FACEIT account, enter your FACEIT nickname."
@@ -2993,41 +2993,41 @@ msgstr "Pourcentage headshot"
 #: src/ui/downloads/five-eplay/5eplay-current-match.tsx
 msgctxt "Button"
 msgid "See on 5EPlay"
-msgstr ""
+msgstr "Voir sur 5EPlay"
 
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
 msgid "Invalid request."
-msgstr ""
+msgstr "Requête non valide."
 
 #: src/ui/downloads/five-eplay/5eplay-scoreboard-context-menu.tsx
 msgctxt "Context menu"
 msgid "Open 5EPlay profile"
-msgstr ""
+msgstr "Ouvrir le profil 5EPlay"
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "How can I find my 5EPlay ID?"
-msgstr ""
+msgstr "Comment puis-je trouver mon ID 5EPlay?"
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "Log into your <0>5EPlay</0> account."
-msgstr ""
+msgstr "Connectez-vous à votre compte <0>5EPlay</0>."
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "Go to your profile and copy the last segment of the URL."
-msgstr ""
+msgstr "Allez sur la page de votre profil et copiez le dernier segment de l'URL."
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "For example, if the URL is <0>https://arena.5eplay.com/data/player/111111</0> then the ID is <1>111111</1>."
-msgstr ""
+msgstr "Par exemple, si l’URL est <0>https://arena.5eplay.com/data/player/111111</0> alors l’ID est <1>111111</1>."
 
 #: src/ui/downloads/five-eplay/no-5eplay-account.tsx
 msgid "To add a 5EPlay account, enter your 5EPlay ID."
-msgstr ""
+msgstr "Pour ajouter un compte 5EPlay, entrez votre identifiant 5EPlay."
 
 #: src/ui/downloads/five-eplay/no-5eplay-account.tsx
 msgctxt "Input placeholder"
 msgid "5EPlay ID"
-msgstr ""
+msgstr "Identifiant 5EPlay"
 
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
@@ -3191,7 +3191,7 @@ msgstr "Arguments non valides fournis à boiler."
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Error while contacting Steam, make sure your Steam account is not currently in-game on another device, otherwise please retry later."
-msgstr ""
+msgstr "Erreur lors de la communication avec Steam, assurez-vous que votre compte Steam n'est pas actuellement en jeu sur un autre appareil, sinon veuillez réessayer plus tard."
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
@@ -3243,17 +3243,17 @@ msgstr "Aucun match trouvé pour le compte Steam actuel."
 #: src/ui/hooks/chart/use-match-result-pie.tsx
 msgctxt "Match result"
 msgid "Won"
-msgstr ""
+msgstr "Gagné"
 
 #: src/ui/hooks/chart/use-match-result-pie.tsx
 msgctxt "Match result"
 msgid "Lost"
-msgstr ""
+msgstr "Perdu"
 
 #: src/ui/hooks/chart/use-match-result-pie.tsx
 msgctxt "Match result"
 msgid "Tie"
-msgstr ""
+msgstr "Égalité"
 
 #: src/ui/hooks/chart/use-team-side-pie.tsx
 #: src/ui/hooks/use-translate-team-number.ts
@@ -3270,12 +3270,12 @@ msgstr "T"
 #. js-lingui-explicit-id
 #: src/ui/hooks/use-boolean-to-human.ts
 msgid "yes"
-msgstr ""
+msgstr "oui"
 
 #. js-lingui-explicit-id
 #: src/ui/hooks/use-boolean-to-human.ts
 msgid "no"
-msgstr ""
+msgstr "non"
 
 #: src/ui/hooks/use-clipboard.tsx
 msgctxt "Toast"
@@ -4082,7 +4082,7 @@ msgstr "Matrice flashbang des joueurs"
 
 #: src/ui/match/grenades/stats/stats-label.tsx
 msgid "Thrown"
-msgstr ""
+msgstr "Jeté"
 
 #: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
@@ -4174,7 +4174,7 @@ msgstr "La lecture commencera au tick spécifié."
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgid "Tick"
-msgstr ""
+msgstr "Tick"
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgctxt "Button"
@@ -4218,7 +4218,7 @@ msgstr "Morts"
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
 msgctxt "Dialog title"
 msgid "Options"
-msgstr ""
+msgstr "Options"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 #: src/ui/match/video/generate-player-sequences-button.tsx
@@ -4301,7 +4301,7 @@ msgstr "Changement de side"
 
 #: src/ui/match/overview/scoreboard/scoreboard.tsx
 msgid "Loading…"
-msgstr ""
+msgstr "Chargement…"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -4638,7 +4638,7 @@ msgstr "Regarder le kill"
 
 #: src/ui/match/players/match-players-loader.tsx
 msgid "No players found."
-msgstr ""
+msgstr "Aucun joueur trouvé."
 
 #: src/ui/match/players/match-players.tsx
 #: src/ui/settings/downloads/use-add-5eplay-account.tsx
@@ -4730,11 +4730,11 @@ msgstr "Regarder le round"
 
 #: src/ui/match/rounds/overview/rounds-history.tsx
 msgid "Round"
-msgstr ""
+msgstr "Round"
 
 #: src/ui/match/rounds/overview/rounds.tsx
 msgid "No rounds found."
-msgstr ""
+msgstr "Aucun round trouvé."
 
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "No clutches in this round"
@@ -4750,7 +4750,7 @@ msgstr "{clutcherName} a perdu un 1v{opponentCount}"
 
 #: src/ui/match/rounds/round/end-reason.tsx
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnue"
 
 #: src/ui/match/rounds/round/end-reason.tsx
 msgctxt "Panel title"
@@ -4764,7 +4764,7 @@ msgstr "Économie"
 
 #: src/ui/match/rounds/round/players-economy-chart.tsx
 msgid "Teams economy"
-msgstr ""
+msgstr "Économie des équipes"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
@@ -4886,11 +4886,11 @@ msgstr "Avertissement d'espace disque"
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgid "You will need at least <0>{requiredGigaBytes}GB</0> of free disk space to generate the videos."
-msgstr ""
+msgstr "Vous aurez besoin d'au moins <0>{requiredGigaBytes}Go</0> d'espace disque libre pour générer les vidéos."
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgid "You will need at least <0>{requiredGigaBytes}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
-msgstr ""
+msgstr "Vous aurez besoin d'au moins <0>{requiredGigaBytes}Go</0> d'espace disque libre sur le disque où CS2 est installé pour générer les vidéos."
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgid "Are you sure you want to continue?"
@@ -4939,12 +4939,12 @@ msgstr "Codec audio"
 #: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
 msgctxt "Tooltip"
 msgid "This option is not available when using custom FFmpeg output parameters."
-msgstr ""
+msgstr "Cette option n'est pas disponible lorsque vous utilisez des paramètres de sortie FFmpeg personnalisés."
 
 #: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
 msgctxt "Tooltip"
 msgid "You can still set the <0>-crf</0> parameter in your FFmpeg output parameters."
-msgstr ""
+msgstr "Vous pouvez toujours définir le paramètre <0>-crf</0> dans vos paramètres de sortie FFmpeg."
 
 #: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
 msgctxt "Tooltip"
@@ -5013,12 +5013,12 @@ msgstr "Focaliser la caméra sur le joueur"
 #: src/ui/match/video/framerate-input.tsx
 msgctxt "Input label"
 msgid "Framerate"
-msgstr ""
+msgstr "Framerate"
 
 #: src/ui/match/video/framerate-input.tsx
 msgctxt "Input placeholder"
 msgid "Framerate"
-msgstr ""
+msgstr "Framerate"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
@@ -5124,7 +5124,7 @@ msgstr "Fichiers bruts non trouvés."
 
 #: src/ui/match/video/get-video-error-from-error-code.tsx
 msgid "Counter-Strike crashed."
-msgstr ""
+msgstr "Counter-Strike a planté."
 
 #: src/ui/match/video/height-resolution-input.tsx
 msgctxt "Input label"
@@ -5187,27 +5187,27 @@ msgstr "Une erreur est survenue lors de la mise à jour de HLAE"
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
 msgid "Output folder"
-msgstr ""
+msgstr "Dossier de sortie"
 
 #: src/ui/match/video/output-folder-path.tsx
 msgctxt "Input label"
 msgid "Output folder"
-msgstr ""
+msgstr "Dossier de sortie"
 
 #: src/ui/match/video/output-folder-path.tsx
 msgctxt "Dialog title"
 msgid "Select output folder"
-msgstr ""
+msgstr "Sélectionner le dossier de sortie"
 
 #: src/ui/match/video/player-voices-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Player voices"
-msgstr ""
+msgstr "Voix des joueurs"
 
 #: src/ui/match/video/recording-output-select.tsx
 msgctxt "Select label"
 msgid "Output"
-msgstr ""
+msgstr "Sortie"
 
 #: src/ui/match/video/recording-output.tsx
 #: src/ui/settings/settings-tabs.tsx
@@ -5216,16 +5216,16 @@ msgstr "Vidéo"
 
 #: src/ui/match/video/recording-output.tsx
 msgid "Images"
-msgstr ""
+msgstr "Images"
 
 #: src/ui/match/video/recording-output.tsx
 msgid "Images + video"
-msgstr ""
+msgstr "Images + vidéo"
 
 #: src/ui/match/video/recording-system-select.tsx
 msgctxt "Select label"
 msgid "Recoding system"
-msgstr ""
+msgstr "Système d'enregistrement"
 
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
@@ -5235,71 +5235,71 @@ msgstr "Réinitialiser les paramètres"
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Select option"
 msgid "Killer"
-msgstr ""
+msgstr "Tueur"
 
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Select option"
 msgid "Victim"
-msgstr ""
+msgstr "Victime"
 
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Checkbox label"
 msgid "Focus the camera on the killer or victim a few seconds before each kill"
-msgstr ""
+msgstr "Concentrez la caméra sur le tueur ou la victime quelques secondes avant chaque kill"
 
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Input label"
 msgid "Seconds"
-msgstr ""
+msgstr "Secondes"
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgctxt "Dialog title"
 msgid "Generate cameras"
-msgstr ""
+msgstr "Générer des caméras"
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgid "The sequence is from tick <0>{startTick}</0> to <1>{endTick}</1> (<2>{duration}s</2>)."
-msgstr ""
+msgstr "La séquence est du tick <0>{startTick}</0> au tick <1>{endTick}</1> (<2>{duration}s</2>)."
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgid "Focus the camera on the following player when the sequence start"
-msgstr ""
+msgstr "Concentrez la caméra sur le joueur suivant lorsque la séquence démarre"
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgctxt "Button"
 msgid "Generate"
-msgstr ""
+msgstr "Générer"
 
 #: src/ui/match/video/sequence/cameras/manage-cameras-buttons.tsx
 msgctxt "Button"
 msgid "Generate cameras"
-msgstr ""
+msgstr "Générer des caméras"
 
 #: src/ui/match/video/sequence/cameras/manage-cameras-buttons.tsx
 msgctxt "Button"
 msgid "Remove cameras"
-msgstr ""
+msgstr "Supprimer les caméras"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 msgctxt "Table header tooltip"
 msgid "Player"
-msgstr ""
+msgstr "Joueur"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 #: src/ui/match/video/sequence/sequence-players.tsx
 msgctxt "Table header"
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 #: src/ui/match/video/sequence/sequence-players.tsx
 msgctxt "Table header tooltip"
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 msgid "Cameras (<0>{cameraCount}</0>)"
-msgstr ""
+msgstr "Caméras (<0>{cameraCount}</0>)"
 
 #: src/ui/match/video/sequence/end-tick-input.tsx
 msgctxt "Input label"
@@ -5309,7 +5309,7 @@ msgstr "Tick de fin"
 #: src/ui/match/video/sequence/end-tick-input.tsx
 msgctxt "Input placeholder"
 msgid "End tick"
-msgstr ""
+msgstr "Tick de fin"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
@@ -5348,7 +5348,7 @@ msgstr "Définir le tick de la bombe désamorcée plus X secondes en tick de fin
 
 #: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
 msgid "Bomb defused by <0>{defuserName}</0> on site <1>{site}</1>"
-msgstr ""
+msgstr "Bombe désamorcée par <0>{defuserName}</0> sur le site <1>{site}</1>"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
 #: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
@@ -5388,7 +5388,7 @@ msgstr "Définir le tick de la bombe explosée plus X secondes en tick de fin"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
 msgid "Bomb exploded on site <0>{site}</0>"
-msgstr ""
+msgstr "Bombe explosée sur le site <0>{site}</0>"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
@@ -5423,25 +5423,25 @@ msgstr "Définir le tick de la bombe plantée plus X secondes comme tick de fin"
 #: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
 msgctxt "Tooltip"
 msgid "Bomb planted by <0>{planterName}</0> on site <1>{site}</1>"
-msgstr ""
+msgstr "Bombe plantée par <0>{planterName}</0> sur le site <1>{site}</1>"
 
 #: src/ui/match/video/sequence/match-timeline/camera-item.tsx
 msgid "Camera on <0>{playerName}</0>"
-msgstr ""
+msgstr "Caméra sur <0>{playerName}</0>"
 
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgctxt "Context menu"
 msgid "At the start of the sequence"
-msgstr ""
+msgstr "Au début de la séquence"
 
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgid "{second, plural, one {# second before} other {# seconds before}}"
-msgstr ""
+msgstr "{second, plural, one {# seconde avant} other {# secondes avant}}"
 
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgctxt "Context menu"
 msgid "X seconds before"
-msgstr ""
+msgstr "X secondes avant"
 
 #: src/ui/match/video/sequence/match-timeline/kill-item.tsx
 msgctxt "Context menu"
@@ -5501,7 +5501,7 @@ msgstr "Bombe"
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
 msgid "Cameras"
-msgstr ""
+msgstr "Caméras"
 
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Tooltip"
@@ -5541,17 +5541,17 @@ msgstr "Entrez le nombre de secondes"
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "Set tick {tick} as"
-msgstr ""
+msgstr "Définir le tick {tick} comme"
 
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "Start tick"
-msgstr ""
+msgstr "Tick de début"
 
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "End tick"
-msgstr ""
+msgstr "Tick de fin"
 
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
@@ -5560,7 +5560,7 @@ msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/tick.tsx
 msgid "Tick <0>{tick}</0>"
-msgstr ""
+msgstr "Tick <0>{tick}</0>"
 
 #: src/ui/match/video/sequence/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"
@@ -5573,24 +5573,24 @@ msgstr "CFG"
 
 #: src/ui/match/video/sequence/sequence-disk-space.tsx
 msgid "~<0>{requiredDiskSpace}</0>GB"
-msgstr ""
+msgstr "~<0>{requiredDiskSpace}</0>Go"
 
 #: src/ui/match/video/sequence/sequence-duration.tsx
 msgctxt "Duration"
 msgid "<0>{seconds}</0> seconds"
-msgstr ""
+msgstr "<0>{seconds}</0> secondes"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header show kills"
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header tooltip"
 msgid "Show kills"
-msgstr ""
+msgstr "Afficher les kills"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
@@ -5607,17 +5607,17 @@ msgstr ""
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header enable voices"
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header tooltip"
 msgid "Voice"
-msgstr ""
+msgstr "Voix"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 msgid "Players"
-msgstr ""
+msgstr "Joueurs"
 
 #: src/ui/match/video/sequence/start-tick-input.tsx
 msgctxt "Input label"
@@ -5627,7 +5627,7 @@ msgstr "Tick de début"
 #: src/ui/match/video/sequence/start-tick-input.tsx
 msgctxt "Input placeholder"
 msgid "Start tick"
-msgstr ""
+msgstr "Tick de début"
 
 #. placeholder {0}: sequences.length
 #: src/ui/match/video/sequences-summary.tsx
@@ -5686,12 +5686,12 @@ msgstr ""
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in megabyte"
 msgid "~{roundedMb}MB"
-msgstr ""
+msgstr "~{roundedMb}Mo"
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
 msgid "~{roundedGb}GB"
-msgstr ""
+msgstr "~{roundedGb}GO"
 
 #: src/ui/match/video/sequences/sequences-duration.tsx
 msgid "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
@@ -5704,11 +5704,11 @@ msgstr "Modifier"
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgid "Sequence <0>#{number}</0>"
-msgstr ""
+msgstr "Séquence <0>#{number}</0>"
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgid "Tick <0>{startTick}</0> to <1>{endTick}</1> (<2>{durationInSeconds}s</2>)"
-msgstr ""
+msgstr "Tick <0>{startTick}</0> au tick <1>{endTick}</1> (<2>{durationInSeconds}s</2>)"
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgid "{cameraCount, plural, one {# camera focus point} other {# camera focus points}}"
@@ -5736,7 +5736,7 @@ msgstr "Non installé"
 #: src/ui/match/video/video-documentation-link.tsx
 msgctxt "Link"
 msgid "Documentation"
-msgstr ""
+msgstr "Documentation"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
@@ -5817,7 +5817,7 @@ msgstr ""
 
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"
-msgstr ""
+msgstr "{time} Fin du freezetime"
 
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgctxt "Map radar level"
@@ -5907,7 +5907,7 @@ msgstr ""
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Pistols"
-msgstr ""
+msgstr "Pistolets"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "SMGs"
@@ -5915,7 +5915,7 @@ msgstr ""
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Snipers"
-msgstr ""
+msgstr "Snipers"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Machine guns"
@@ -6138,22 +6138,22 @@ msgstr "Rang compétitif"
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel title"
 msgid "Opening duels"
-msgstr ""
+msgstr "Duels d'ouverture"
 
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel label"
 msgid "Success"
-msgstr ""
+msgstr "Succès"
 
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel label"
 msgid "Traded"
-msgstr ""
+msgstr "Échangé"
 
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel label"
 msgid "Best weapon"
-msgstr ""
+msgstr "Meilleure arme"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "On average, how long enemies stay blind whilst affected by a player's flashbang."
@@ -6162,21 +6162,21 @@ msgstr ""
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Avg blind time"
-msgstr ""
+msgstr "Temps moyen flashé"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Seconds"
 msgid "{averageBlindTime}s"
-msgstr ""
+msgstr "{averageBlindTime}s"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "The average number of enemies blinded per flashbang thrown by the player. This includes only 5v5 matches, so the maximum possible value is 5."
-msgstr ""
+msgstr "Le nombre moyen d'ennemis aveuglés par flashbang lancé par le joueur. Cela inclut seulement les matchs 5v5, donc la valeur maximale possible est de 5."
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Enemies flashed"
-msgstr ""
+msgstr "Ennemis flashés"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "On average, how much damage is dealt to enemies with HE grenades thrown by the player."
@@ -6470,7 +6470,7 @@ msgstr "Ninja defuse"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Round start"
-msgstr ""
+msgstr "Début du round"
 
 #: src/ui/search/filters/search-maps-input.tsx
 msgctxt "Input placeholder"
@@ -6504,7 +6504,7 @@ msgstr "T {tAliveCount}"
 
 #: src/ui/search/results/result-row.tsx
 msgid "{seconds}s"
-msgstr ""
+msgstr "{seconds}s"
 
 #: src/ui/search/search-results.tsx
 msgid "You have to analyze demos first to search for events."
@@ -6620,7 +6620,7 @@ msgstr "Réinitialiser les paramètres"
 #: src/ui/settings/about/see-changelog-button.tsx
 msgctxt "Button"
 msgid "See Changelog"
-msgstr ""
+msgstr "Voir le changelog"
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Bans that happened before the player was first seen in a match will be ignored."
@@ -6717,7 +6717,7 @@ msgstr "Se déconnecter"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "JSON file"
-msgstr ""
+msgstr "Fichier JSON"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You must select at least one data to import."
@@ -6828,17 +6828,17 @@ msgstr "Réinitialiser la base de données"
 
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 msgid "Add 5EPlay account"
-msgstr ""
+msgstr "Ajouter un compte 5EPlay"
 
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 msgctxt "Input label"
 msgid "5EPlay ID"
-msgstr ""
+msgstr "Identifiant 5EPlay"
 
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 msgctxt "Input placeholder"
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
@@ -6863,7 +6863,7 @@ msgstr "Ajouter un compte"
 
 #: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
 msgid "Automatically download 5EPLay demos in the background."
-msgstr ""
+msgstr "Télécharger automatiquement les démos 5EPlay en arrière-plan."
 
 #: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
 #: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
@@ -6874,7 +6874,7 @@ msgstr "Téléchargement en arrière-plan"
 
 #: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
 msgid "Automatically download 5EPlay demos at application startup."
-msgstr ""
+msgstr "Télécharger automatiquement les démos 5EPlay au démarrage de l'application."
 
 #: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
 #: src/ui/settings/downloads/auto-download-faceit-demos.tsx
@@ -6931,7 +6931,7 @@ msgstr "En attendant, vous devez télécharger les démos à partir de votre nav
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The API returned a 401 code, please check you API key."
-msgstr ""
+msgstr "L'API a retourné un code 401, veuillez vérifier votre clé d'API."
 
 #: src/ui/settings/folders/add-folder-button.tsx
 msgctxt "Button"
@@ -6998,7 +6998,7 @@ msgstr "Cette map existe déjà."
 
 #: src/ui/settings/maps/delete-map-dialog.tsx
 msgid "Delete map"
-msgstr ""
+msgstr "Supprimer la map"
 
 #: src/ui/settings/maps/delete-map-dialog.tsx
 msgid "Do you want to delete this map?"
@@ -7017,7 +7017,7 @@ msgstr "Coordonnée Y"
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgid "The radar image must be a square."
-msgstr ""
+msgstr "L'image du radar doit être un carré."
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
@@ -7028,7 +7028,7 @@ msgstr "Fichier PNG invalide."
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "PNG Files"
-msgstr ""
+msgstr "Fichiers PNG"
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 msgctxt "Input label"
@@ -7298,7 +7298,7 @@ msgstr "À propos de"
 
 #: src/ui/settings/shared/game-height-input.tsx
 msgid "Set the game height resolution."
-msgstr ""
+msgstr "Définir la résolution en hauteur du jeu."
 
 #: src/ui/settings/shared/game-height-input.tsx
 msgctxt "Settings title"
@@ -7307,7 +7307,7 @@ msgstr "Hauteur"
 
 #: src/ui/settings/shared/game-width-input.tsx
 msgid "Set the game width resolution."
-msgstr ""
+msgstr "Définir la résolution en largeur du jeu."
 
 #: src/ui/settings/shared/game-width-input.tsx
 msgctxt "Settings title"
@@ -7371,7 +7371,7 @@ msgstr ""
 #: src/ui/settings/ui/redirect-demo-to-match.tsx
 msgctxt "Settings title"
 msgid "Redirect demo to match"
-msgstr ""
+msgstr "Rediriger démo vers match"
 
 #. Reset tables (columns order, visibility…)
 #: src/ui/settings/ui/reset-tables-state.tsx
@@ -7451,12 +7451,12 @@ msgstr "Exécutable HLAE invalide"
 
 #: src/ui/settings/video/recording/default-video-recording-settings.tsx
 msgid "Default recording settings"
-msgstr ""
+msgstr "Paramètres d'enregistrement par défaut"
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"
 msgid "Duration"
-msgstr ""
+msgstr "Durée"
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgid "How long death notices are displayed during recording in seconds."
@@ -7469,11 +7469,11 @@ msgstr ""
 
 #: src/ui/settings/video/recording/recording-player-voices.tsx
 msgid "Listen to player voices during recording."
-msgstr ""
+msgstr "Entendre la voix du joueur pendant l'enregistrement."
 
 #: src/ui/settings/video/recording/recording-player-voices.tsx
 msgid "Player voices are not available in Valve Matchmaking demos!"
-msgstr ""
+msgstr "Les démos du Matchmaking Valve ne contiennent pas les voix des joueurs !"
 
 #: src/ui/settings/video/recording/recording-show-only-death-notices.tsx
 msgid "Show only death notices during recording."
@@ -7495,7 +7495,7 @@ msgstr ""
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"
-msgstr ""
+msgstr "Pourcentage gagné"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total: {total}"
@@ -7512,7 +7512,7 @@ msgstr ""
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Semi"
-msgstr ""
+msgstr "Semi"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
@@ -7522,7 +7522,7 @@ msgstr ""
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Full"
-msgstr ""
+msgstr "Full"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Round outcomes by economy type"
@@ -7535,7 +7535,7 @@ msgstr "Cette équipe n'est dans aucune démo analysée."
 #: src/ui/team/performance/bombs/team-bomb-plant-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Bomb planted on {name}"
-msgstr ""
+msgstr "Bombe plantée en {name}"
 
 #: src/ui/team/performance/bombs/team-bomb-plant-chart.tsx
 msgctxt "Chart title"
@@ -7595,7 +7595,7 @@ msgstr ""
 #: src/ui/team/performance/bombs/team-bombs-stats.tsx
 msgctxt "Panel title"
 msgid "Bombs"
-msgstr ""
+msgstr "Bombes"
 
 #: src/ui/team/performance/side/team-match-result-ct-chart.tsx
 msgctxt "Chart title"
@@ -7610,12 +7610,12 @@ msgstr ""
 #: src/ui/team/performance/side/team-side-match-stats.tsx
 msgctxt "Chart tooltip"
 msgid "Matches started as CT"
-msgstr ""
+msgstr "Matchs commencés en CT"
 
 #: src/ui/team/performance/side/team-side-match-stats.tsx
 msgctxt "Chart tooltip"
 msgid "Matches started as T"
-msgstr ""
+msgstr "Matchs commencés en T"
 
 #: src/ui/team/performance/side/team-side-match-stats.tsx
 msgctxt "Chart title"
@@ -7625,7 +7625,7 @@ msgstr ""
 #: src/ui/team/performance/side/team-side-stats.tsx
 msgctxt "Panel title"
 msgid "Side"
-msgstr ""
+msgstr "Side"
 
 #: src/ui/team/team-loader.tsx
 msgid "Loading team…"
@@ -7634,7 +7634,7 @@ msgstr "Chargement de l'équipe…"
 #: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Performance"
-msgstr ""
+msgstr "Performance"
 
 #: src/ui/teams/no-teams.tsx
 msgid "No team found with current filters."
@@ -7685,16 +7685,16 @@ msgstr "Supprimer les terminées"
 #: src/ui/videos/resume-or-pause-video-queue-button.tsx
 msgctxt "Button"
 msgid "Resume"
-msgstr ""
+msgstr "Reprendre"
 
 #: src/ui/videos/resume-or-pause-video-queue-button.tsx
 msgctxt "Button"
 msgid "Pause"
-msgstr ""
+msgstr "Suspendre"
 
 #: src/ui/videos/resume-or-pause-video-queue-button.tsx
 msgid "The video queue is paused!"
-msgstr ""
+msgstr "La génération des vidéos est en pause !"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Waiting…"
@@ -7706,11 +7706,11 @@ msgstr "Enregistrement en jeu en cours…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Moving final files…"
-msgstr ""
+msgstr "Déplacement des fichiers finaux…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Generating video for sequence {number} / {sequenceCount}…"
-msgstr ""
+msgstr "Génération de la vidéo pour la séquence {number} / {sequenceCount}…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Merging videos into a single file…"
@@ -7788,11 +7788,11 @@ msgstr "Rayon X"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"
-msgstr ""
+msgstr "Voix des joueurs"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Cameras"
-msgstr ""
+msgstr "Caméras"
 
 #: src/ui/videos/video-entry.tsx
 msgid "First camera on"
