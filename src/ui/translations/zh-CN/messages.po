@@ -59,7 +59,7 @@ msgstr "将比赛结果输入数据库中。"
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "An error occurred while inserting the match into the database."
-msgstr "在比赛结果输入数据库中时发生错误。"
+msgstr "将比赛插入数据库时出错。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "The analysis failed with the error code: <0>{errorCode}</0>"
@@ -190,7 +190,7 @@ msgstr "添加日期"
 #: src/ui/ban/stats/ban-per-competitive-rank-chart.tsx
 msgctxt "Chart title"
 msgid "Ban per competitive rank"
-msgstr "禁止每一个竞技等级"
+msgstr "每个竞争等级的封禁数"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 #: src/ui/player/rank/player-competitive-rank-history.tsx
@@ -1069,7 +1069,7 @@ msgstr "工作表"
 
 #: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgid "Exporting player {count} of {totalCount}…"
-msgstr ""
+msgstr "导出玩家… ({count} / {totalCount})"
 
 #: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgid "Generating sheet {translatedSheetName}…"
@@ -1229,12 +1229,12 @@ msgstr "今天"
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last week"
-msgstr "过去一周内"
+msgstr "最近一周"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last month"
-msgstr "上个月"
+msgstr "最近一个月"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
@@ -1244,17 +1244,17 @@ msgstr "最近三个月"
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last year"
-msgstr "过去一年内"
+msgstr "最近一年"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last 2 years"
-msgstr "最近两年内"
+msgstr "最近两年"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last 5 years"
-msgstr "过去五年内"
+msgstr "最近五年"
 
 #: src/ui/components/dropdown-filter/ranking-select.tsx
 msgctxt "Option label for ranking filter"
@@ -1294,7 +1294,7 @@ msgstr "武器"
 #. js-lingui-explicit-id
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 msgid "os.dialogTitle.exportAsPNG"
-msgstr ""
+msgstr "保存为PNG"
 
 #: src/ui/components/heatmap/export-heatmap-button.tsx
 msgctxt "Toast"
@@ -1334,7 +1334,7 @@ msgstr "烟雾弹"
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
 msgid "Molotov"
-msgstr "燃烧弹"
+msgstr "燃烧瓶"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
@@ -1448,7 +1448,7 @@ msgstr "失败"
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result filter category"
 msgid "Opening duel result"
-msgstr "突破结果"
+msgstr "首杀对枪结果"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
 msgid "Player"
@@ -1461,7 +1461,7 @@ msgstr "敌人"
 #: src/ui/components/inputs/select/perspective-select.tsx
 msgctxt "Select label"
 msgid "Point of view"
-msgstr ""
+msgstr "视角"
 
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
@@ -1499,47 +1499,47 @@ msgstr "T"
 #: src/ui/components/inputs/select/side-select.tsx
 msgctxt "Filter side category"
 msgid "Side"
-msgstr "侧面"
+msgstr "阵营"
 
 #: src/ui/components/inputs/select/teams-select.tsx
 msgctxt "Filter teams name category"
 msgid "Teams"
-msgstr "团队"
+msgstr "队伍"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.pistol"
-msgstr "武器类型.手枪"
+msgstr "手枪"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.smg"
-msgstr ""
+msgstr "冲锋枪"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.rifle"
-msgstr ""
+msgstr "步枪"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.sniper"
-msgstr ""
+msgstr "狙击枪"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.shotgun"
-msgstr ""
+msgstr "霰弹枪"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.machineGun"
-msgstr "武器类型.机枪"
+msgstr "机枪"
 
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.grenade"
-msgstr "武器类型.投掷物"
+msgstr "投掷物"
 
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
@@ -2106,7 +2106,7 @@ msgstr "保枪率"
 
 #: src/ui/components/panels/clutches.tsx
 msgid "Clutches"
-msgstr ""
+msgstr "残局"
 
 #: src/ui/components/panels/clutches.tsx
 msgid "Overall"
@@ -2142,7 +2142,7 @@ msgstr "HS %"
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel label"
 msgid "Kills"
-msgstr "击杀数"
+msgstr "击杀"
 
 #: src/ui/components/panels/headshot-panel.tsx
 msgctxt "Panel label"
@@ -2264,7 +2264,7 @@ msgstr "T"
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel title"
 msgid "Utilities"
-msgstr "工具"
+msgstr "投掷物"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
@@ -2284,7 +2284,7 @@ msgstr "烟雾弹"
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Molotovs"
-msgstr "燃烧弹"
+msgstr "燃烧瓶"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
@@ -2439,7 +2439,7 @@ msgstr "MVP"
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Most Valuable Player"
-msgstr "Most Valuable Player"
+msgstr "MVP"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
@@ -2676,7 +2676,7 @@ msgstr "ESEA"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Esplay"
-msgstr ""
+msgstr "Esplay"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2706,7 +2706,7 @@ msgstr "Gamers Club"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "MatchZy"
-msgstr ""
+msgstr "MatchZy"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2721,7 +2721,7 @@ msgstr "PopFlash"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Renown"
-msgstr ""
+msgstr "Renown"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2901,18 +2901,18 @@ msgstr "FACEIT API 返回了一个错误(未授权), 请检查您的 API 密钥�
 #: src/ui/settings/downloads/use-add-5eplay-account.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "Invalid API request."
-msgstr ""
+msgstr "无效的API请求。"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The API returned an error, please re-try later."
-msgstr ""
+msgstr "API请求出错，请稍后重试。"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
 msgid "No matches found for the current account."
-msgstr ""
+msgstr "当前帐户没有比赛。"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 msgid "To add a FACEIT account, enter your FACEIT nickname."
@@ -3243,17 +3243,17 @@ msgstr "未找到当前 Steam 账号匹配的数据."
 #: src/ui/hooks/chart/use-match-result-pie.tsx
 msgctxt "Match result"
 msgid "Won"
-msgstr ""
+msgstr "获胜"
 
 #: src/ui/hooks/chart/use-match-result-pie.tsx
 msgctxt "Match result"
 msgid "Lost"
-msgstr ""
+msgstr "失败"
 
 #: src/ui/hooks/chart/use-match-result-pie.tsx
 msgctxt "Match result"
 msgid "Tie"
-msgstr ""
+msgstr "平局"
 
 #: src/ui/hooks/chart/use-team-side-pie.tsx
 #: src/ui/hooks/use-translate-team-number.ts
@@ -3655,17 +3655,17 @@ msgstr "未找到聊天消息"
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
 msgid "Duels matrix"
-msgstr "对决表格"
+msgstr "对位表格"
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
 msgid "Opening duels stats"
-msgstr "突破统计"
+msgstr "首杀统计"
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link "
 msgid "Opening duels map"
-msgstr "突破地图"
+msgstr "首杀地图"
 
 #: src/ui/match/duels/opening-duels-map/opening-duel-context-menu.tsx
 msgctxt "Context menu"
@@ -3769,7 +3769,7 @@ msgstr "{openDuelWonPercentage}%"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Opening duels won"
-msgstr "突破成功"
+msgstr "拿下首杀"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "{openDuelLostPercentage}%"
@@ -3777,19 +3777,19 @@ msgstr "{openDuelLostPercentage}%"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Opening duels lost"
-msgstr "突破失败"
+msgstr "送出首杀"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels lost: {lostCount}"
-msgstr "突破失败: {lostCount}"
+msgstr "送出首杀: {lostCount}"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels won: {wonCount}"
-msgstr "突破成功: {wonCount}"
+msgstr "拿下首杀: {wonCount}"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels: <0>{openingDuelCount}</0>"
-msgstr "突破击杀: <0>{openingDuelCount}</0>"
+msgstr "首杀对枪: <0>{openingDuelCount}</0>"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Round breakdown"
@@ -3940,7 +3940,7 @@ msgstr "诱饵弹"
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 msgctxt "Grenade name"
 msgid "Molotov"
-msgstr "燃烧弹"
+msgstr "燃烧瓶"
 
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 msgctxt "Grenade name"
@@ -4041,7 +4041,7 @@ msgstr "每投掷伤害"
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
 msgid "Enemies damaged per throw"
-msgstr "每次投掷对敌人造成的伤害"
+msgstr "每次投掷伤害敌方人数"
 
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 msgid "Average damage per round"
@@ -4082,7 +4082,7 @@ msgstr "玩家闪光弹数据矩阵"
 
 #: src/ui/match/grenades/stats/stats-label.tsx
 msgid "Thrown"
-msgstr "投掷"
+msgstr "投掷次数"
 
 #: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
@@ -4131,12 +4131,12 @@ msgstr "武器"
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Duels"
-msgstr "一对一"
+msgstr "对位数据"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Grenades"
-msgstr "手雷"
+msgstr "投掷物"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
@@ -4886,11 +4886,11 @@ msgstr "磁盘空间警告"
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgid "You will need at least <0>{requiredGigaBytes}GB</0> of free disk space to generate the videos."
-msgstr ""
+msgstr "您至少需要<0>{requiredGigaBytes}GB</0>的可用磁盘空间来生成视频。"
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgid "You will need at least <0>{requiredGigaBytes}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
-msgstr ""
+msgstr "在安装 CS2 的磁盘，您至少需要<0>{requiredGigaBytes}GB</0>的可用磁盘空间来生成视频。"
 
 #: src/ui/match/video/add-video-to-queue-button.tsx
 msgid "Are you sure you want to continue?"
@@ -4920,7 +4920,7 @@ msgstr "录制完成后关闭游戏"
 #: src/ui/match/video/concatenate-sequences-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Concatenate sequences into 1 video"
-msgstr ""
+msgstr "整合到 1 个视频"
 
 #: src/ui/match/video/death-notices-duration-input.tsx
 msgid "Death notices duration (seconds)"
@@ -4939,7 +4939,7 @@ msgstr "音频编解码器"
 #: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
 msgctxt "Tooltip"
 msgid "This option is not available when using custom FFmpeg output parameters."
-msgstr ""
+msgstr "当使用自定义 FFmpeg 输出参数时，此选项不可用。"
 
 #: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
 msgctxt "Tooltip"
@@ -5003,7 +5003,7 @@ msgstr "视频编解码器"
 #: src/ui/match/video/ffmpeg/video-container-select.tsx
 msgctxt "Input label"
 msgid "Video container"
-msgstr ""
+msgstr "视频格式"
 
 #: src/ui/match/video/focus-camera-player-select.tsx
 msgctxt "Checkbox label"
@@ -5028,7 +5028,7 @@ msgstr "击杀"
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Death"
-msgstr ""
+msgstr "死亡"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
@@ -5153,7 +5153,7 @@ msgstr "配置文件夹"
 
 #: src/ui/match/video/hlae/hlae-config-folder-path.tsx
 msgid "Select config folder"
-msgstr ""
+msgstr "选择配置文件夹"
 
 #: src/ui/match/video/hlae/hlae-install-button.tsx
 msgid "Installing HLAE…"
@@ -5197,7 +5197,7 @@ msgstr "输出文件夹"
 #: src/ui/match/video/output-folder-path.tsx
 msgctxt "Dialog title"
 msgid "Select output folder"
-msgstr ""
+msgstr "选择输出目录"
 
 #: src/ui/match/video/player-voices-checkbox.tsx
 msgctxt "Checkbox label"
@@ -5207,7 +5207,7 @@ msgstr "玩家语音"
 #: src/ui/match/video/recording-output-select.tsx
 msgctxt "Select label"
 msgid "Output"
-msgstr ""
+msgstr "输出"
 
 #: src/ui/match/video/recording-output.tsx
 #: src/ui/settings/settings-tabs.tsx
@@ -5216,16 +5216,16 @@ msgstr "视频"
 
 #: src/ui/match/video/recording-output.tsx
 msgid "Images"
-msgstr ""
+msgstr "图片"
 
 #: src/ui/match/video/recording-output.tsx
 msgid "Images + video"
-msgstr ""
+msgstr "图片 + 视频"
 
 #: src/ui/match/video/recording-system-select.tsx
 msgctxt "Select label"
 msgid "Recoding system"
-msgstr ""
+msgstr "录制系统"
 
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
@@ -5245,17 +5245,17 @@ msgstr "受害者"
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Checkbox label"
 msgid "Focus the camera on the killer or victim a few seconds before each kill"
-msgstr ""
+msgstr "在每次击杀之前几秒钟将相机焦点放在杀死者或受害者上"
 
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Input label"
 msgid "Seconds"
-msgstr ""
+msgstr "秒"
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgctxt "Dialog title"
 msgid "Generate cameras"
-msgstr ""
+msgstr "生成相机"
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgid "The sequence is from tick <0>{startTick}</0> to <1>{endTick}</1> (<2>{duration}s</2>)."
@@ -5268,22 +5268,22 @@ msgstr "序列开始时转为此玩家视角"
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
 msgctxt "Button"
 msgid "Generate"
-msgstr ""
+msgstr "生成"
 
 #: src/ui/match/video/sequence/cameras/manage-cameras-buttons.tsx
 msgctxt "Button"
 msgid "Generate cameras"
-msgstr ""
+msgstr "生成相机"
 
 #: src/ui/match/video/sequence/cameras/manage-cameras-buttons.tsx
 msgctxt "Button"
 msgid "Remove cameras"
-msgstr ""
+msgstr "移除相机"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 msgctxt "Table header tooltip"
 msgid "Player"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 #: src/ui/match/video/sequence/sequence-players.tsx
@@ -5295,11 +5295,11 @@ msgstr ""
 #: src/ui/match/video/sequence/sequence-players.tsx
 msgctxt "Table header tooltip"
 msgid "Actions"
-msgstr ""
+msgstr "行为"
 
 #: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
 msgid "Cameras (<0>{cameraCount}</0>)"
-msgstr ""
+msgstr "相机总数: (<0>{cameraCount}</0>)"
 
 #: src/ui/match/video/sequence/end-tick-input.tsx
 msgctxt "Input label"
@@ -5309,7 +5309,7 @@ msgstr "结束时刻"
 #: src/ui/match/video/sequence/end-tick-input.tsx
 msgctxt "Input placeholder"
 msgid "End tick"
-msgstr ""
+msgstr "结束Tick"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
@@ -5348,7 +5348,7 @@ msgstr "将炸弹拆除的时刻加上 X 秒作为结束时刻"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-defused-item.tsx
 msgid "Bomb defused by <0>{defuserName}</0> on site <1>{site}</1>"
-msgstr ""
+msgstr "炸弹在<1>{site}</1>点被<0>{defuserName}</0>拆除"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
 #: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
@@ -5388,7 +5388,7 @@ msgstr "将炸弹爆炸的时间加上 X 秒作为结束时刻"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-exploded-item.tsx
 msgid "Bomb exploded on site <0>{site}</0>"
-msgstr ""
+msgstr "炸弹在<0>{site}</0>点爆炸"
 
 #: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
@@ -5423,11 +5423,11 @@ msgstr "将炸弹安放的时刻加上 X 秒作为结束时刻"
 #: src/ui/match/video/sequence/match-timeline/bomb-planted-item.tsx
 msgctxt "Tooltip"
 msgid "Bomb planted by <0>{planterName}</0> on site <1>{site}</1>"
-msgstr ""
+msgstr "<0>{planterName}</0>在<1>{site}</1>点安放炸弹"
 
 #: src/ui/match/video/sequence/match-timeline/camera-item.tsx
 msgid "Camera on <0>{playerName}</0>"
-msgstr ""
+msgstr "<0>{playerName}</0> 玩家摄像头"
 
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgctxt "Context menu"
@@ -5441,7 +5441,7 @@ msgstr ""
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgctxt "Context menu"
 msgid "X seconds before"
-msgstr ""
+msgstr "X秒前"
 
 #: src/ui/match/video/sequence/match-timeline/kill-item.tsx
 msgctxt "Context menu"
@@ -5501,7 +5501,7 @@ msgstr "炸弹"
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
 msgid "Cameras"
-msgstr ""
+msgstr "相机"
 
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Tooltip"
@@ -5546,12 +5546,12 @@ msgstr ""
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "Start tick"
-msgstr ""
+msgstr "开始Tick"
 
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "End tick"
-msgstr ""
+msgstr "结束Tick"
 
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
@@ -5590,7 +5590,7 @@ msgstr ""
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header tooltip"
 msgid "Show kills"
-msgstr ""
+msgstr "显示击杀数"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
@@ -5681,17 +5681,17 @@ msgstr ""
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header tooltip"
 msgid "Highlight kills"
-msgstr ""
+msgstr "高光击杀"
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in megabyte"
 msgid "~{roundedMb}MB"
-msgstr ""
+msgstr "~{roundedMb}MB"
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
 msgid "~{roundedGb}GB"
-msgstr ""
+msgstr "~{roundedGb}GB"
 
 #: src/ui/match/video/sequences/sequences-duration.tsx
 msgid "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
@@ -5726,7 +5726,7 @@ msgstr "只显示死亡通知"
 #: src/ui/match/video/software-browse-button.tsx
 msgctxt "Button"
 msgid "Browse"
-msgstr "预览"
+msgstr "浏览文件"
 
 #: src/ui/match/video/software.tsx
 msgctxt "Software installation status"
@@ -5736,7 +5736,7 @@ msgstr "未安装"
 #: src/ui/match/video/video-documentation-link.tsx
 msgctxt "Link"
 msgid "Documentation"
-msgstr ""
+msgstr "帮助文档"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
@@ -5809,11 +5809,11 @@ msgstr "生成位置"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-exploded-indicator.tsx
 msgid "{time} Bomb planted by {planterName} exploded at site {site}"
-msgstr ""
+msgstr "{time} {planterName} 在{site} 点安放的炸弹爆炸"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-planted-indicator.tsx
 msgid "{time} Bomb planted by {planterName} at bomb site {site}"
-msgstr ""
+msgstr "{time} {planterName} 在{site} 点安放炸弹"
 
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"
@@ -5972,7 +5972,7 @@ msgstr ""
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Dialog title"
 msgid "Update team names"
-msgstr "更新团队名称"
+msgstr "更改队伍名称"
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Input label"
@@ -5990,12 +5990,12 @@ msgstr ""
 
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgid "The only way to restore team names is by re-analyzing demos!"
-msgstr "恢复团队名称的唯一办法是重新分析demo！"
+msgstr "恢复队伍名称的唯一办法是重新分析demo！"
 
 #: src/ui/matches/table/match-context-menu.tsx
 msgctxt "Context menu"
 msgid "Update team names"
-msgstr "更新团队名称"
+msgstr "更新队伍名称"
 
 #: src/ui/matches/table/match-count.tsx
 msgid "{matchCount, plural, one {# match} other {# matches}}"
@@ -6123,7 +6123,7 @@ msgstr "这位玩家不在任何分析过的Demo中。"
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel title"
 msgid "Matchmaking"
-msgstr "匹配中"
+msgstr "匹配比赛"
 
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel label"
@@ -6138,12 +6138,12 @@ msgstr "竞技模式段位"
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel title"
 msgid "Opening duels"
-msgstr ""
+msgstr "首杀对枪"
 
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel label"
 msgid "Success"
-msgstr ""
+msgstr "成功"
 
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel label"
@@ -6153,48 +6153,48 @@ msgstr "补枪"
 #: src/ui/player/overview/player-opening-duels-panel.tsx
 msgctxt "Panel label"
 msgid "Best weapon"
-msgstr ""
+msgstr "最佳武器"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "On average, how long enemies stay blind whilst affected by a player's flashbang."
-msgstr ""
+msgstr "受玩家闪光弹影响的敌人平均保持多长时间的致盲时间。"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Avg blind time"
-msgstr ""
+msgstr "平均致盲"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Seconds"
 msgid "{averageBlindTime}s"
-msgstr ""
+msgstr "{averageBlindTime}秒"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "The average number of enemies blinded per flashbang thrown by the player. This includes only 5v5 matches, so the maximum possible value is 5."
-msgstr ""
+msgstr "玩家平均每颗闪光弹致盲的敌人数。这里只包括 5v5 竞技比赛，因此可能的最大值是 5 。"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Enemies flashed"
-msgstr ""
+msgstr "敌人被闪白"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "On average, how much damage is dealt to enemies with HE grenades thrown by the player."
-msgstr ""
+msgstr "平均每颗手雷对敌人造成的伤害。"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Avg HE damages"
-msgstr ""
+msgstr "手雷均伤"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "On average, how many smokes are thrown by the player in a single match. This includes only 5v5 matches."
-msgstr ""
+msgstr "玩家平均每场比赛中投掷多少次烟雾弹，这里只包括 5v5 竞技比赛。"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Avg smokes thrown"
-msgstr ""
+msgstr "平均丢烟数"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel title"
@@ -6455,7 +6455,7 @@ msgstr "盲狙击杀"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Through smoke kills"
-msgstr ""
+msgstr "穿烟击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -6504,7 +6504,7 @@ msgstr "T {tAliveCount}"
 
 #: src/ui/search/results/result-row.tsx
 msgid "{seconds}s"
-msgstr ""
+msgstr "{seconds}秒"
 
 #: src/ui/search/search-results.tsx
 msgid "You have to analyze demos first to search for events."
@@ -6574,7 +6574,7 @@ msgstr "<0>@DandrewsDev</0>因他在 CS2Demo上的<1>语音数据提取</1>。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the HLAE team <2>here</2>."
-msgstr "<0>@dtugend</0>, CS Demo Manager用于生成视频的<1>HLAE</1>的主要开发者。 没有HLAE，CS视频制作社区将截然不同。您可以支持HLAE团队<2>这里</2>。"
+msgstr "<0>@dtugend</0>, CS Demo Manager用于生成视频的<1>HLAE</1>的主要开发者。 没有HLAE，CS视频制作社区将截然不同。您可以<2>在此处</2>支持HLAE团队。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@GAMMACASE</0>, <1>@zer0.k</1> and other AlliedModders contributors to the <2>CS2 SDK</2> internally used by CS Demo Manager."
@@ -6620,7 +6620,7 @@ msgstr "重置设置"
 #: src/ui/settings/about/see-changelog-button.tsx
 msgctxt "Button"
 msgid "See Changelog"
-msgstr ""
+msgstr "查看更新说明"
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Bans that happened before the player was first seen in a match will be ignored."
@@ -6828,17 +6828,17 @@ msgstr "重置数据库"
 
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 msgid "Add 5EPlay account"
-msgstr ""
+msgstr "添加5EPlay帐号"
 
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 msgctxt "Input label"
 msgid "5EPlay ID"
-msgstr ""
+msgstr "5EPlay ID"
 
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 msgctxt "Input placeholder"
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
@@ -6863,7 +6863,7 @@ msgstr "增加一个账号"
 
 #: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
 msgid "Automatically download 5EPLay demos in the background."
-msgstr ""
+msgstr "在后台自动下载5E的demo。"
 
 #: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
 #: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
@@ -6874,7 +6874,7 @@ msgstr "后台下载"
 
 #: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
 msgid "Automatically download 5EPlay demos at application startup."
-msgstr ""
+msgstr "在本程序启动时自动下载5E的demo。"
 
 #: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
 #: src/ui/settings/downloads/auto-download-faceit-demos.tsx
@@ -6998,7 +6998,7 @@ msgstr "此地图已经存在"
 
 #: src/ui/settings/maps/delete-map-dialog.tsx
 msgid "Delete map"
-msgstr ""
+msgstr "删除地图"
 
 #: src/ui/settings/maps/delete-map-dialog.tsx
 msgid "Do you want to delete this map?"
@@ -7017,7 +7017,7 @@ msgstr "Y 坐标"
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgid "The radar image must be a square."
-msgstr ""
+msgstr "雷达图像必须是正方形。"
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
@@ -7028,12 +7028,12 @@ msgstr "无效的 PNG 文件。"
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "PNG Files"
-msgstr ""
+msgstr "PNG文件"
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 msgctxt "Input label"
 msgid "Lower radar"
-msgstr ""
+msgstr "底层雷达图"
 
 #: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
 msgctxt "Dialog title"
@@ -7066,12 +7066,12 @@ msgstr "缩放必须填写"
 
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgid "'PNG Files"
-msgstr ""
+msgstr "PNG文件"
 
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgctxt "Input label"
 msgid "Radar"
-msgstr "雷达"
+msgstr "雷达图"
 
 #: src/ui/settings/maps/map-dialog/scale-input.tsx
 msgctxt "Input label"
@@ -7231,7 +7231,7 @@ msgstr ""
 #: src/ui/settings/playback/use-hlae.tsx
 msgctxt "Settings title"
 msgid "Use HLAE"
-msgstr ""
+msgstr "使用HLAE"
 
 #: src/ui/settings/playback/watch-before-kill-delay.tsx
 msgctxt "Input placeholder"
@@ -7298,7 +7298,7 @@ msgstr "关于"
 
 #: src/ui/settings/shared/game-height-input.tsx
 msgid "Set the game height resolution."
-msgstr ""
+msgstr "设置游戏分辨率高度。"
 
 #: src/ui/settings/shared/game-height-input.tsx
 msgctxt "Settings title"
@@ -7307,7 +7307,7 @@ msgstr "高度"
 
 #: src/ui/settings/shared/game-width-input.tsx
 msgid "Set the game width resolution."
-msgstr ""
+msgstr "设置游戏分辨率宽度。"
 
 #: src/ui/settings/shared/game-width-input.tsx
 msgctxt "Settings title"
@@ -7451,7 +7451,7 @@ msgstr "无效的 HLAE 可执行文件"
 
 #: src/ui/settings/video/recording/default-video-recording-settings.tsx
 msgid "Default recording settings"
-msgstr ""
+msgstr "默认录制设置"
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"
@@ -7486,16 +7486,16 @@ msgstr ""
 
 #: src/ui/settings/video/recording/recording-x-ray.tsx
 msgid "See players through walls during recording."
-msgstr ""
+msgstr "录制过程中透过墙壁显示玩家。"
 
 #: src/ui/settings/video/recording/recording-x-ray.tsx
 msgctxt "Settings title"
 msgid "Show X-Ray"
-msgstr ""
+msgstr "开启 X 光"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"
-msgstr ""
+msgstr "胜率"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total: {total}"
@@ -7503,11 +7503,11 @@ msgstr ""
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won: {won}"
-msgstr ""
+msgstr "获胜：{won}"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Lost: {lost}"
-msgstr ""
+msgstr "失败：{lost}"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
@@ -7517,12 +7517,12 @@ msgstr ""
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Force-buy"
-msgstr ""
+msgstr "强起"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Full"
-msgstr ""
+msgstr "全起"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Round outcomes by economy type"
@@ -7535,7 +7535,7 @@ msgstr ""
 #: src/ui/team/performance/bombs/team-bomb-plant-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Bomb planted on {name}"
-msgstr ""
+msgstr "已在{name}安放炸弹"
 
 #: src/ui/team/performance/bombs/team-bomb-plant-chart.tsx
 msgctxt "Chart title"
@@ -7545,17 +7545,17 @@ msgstr ""
 #: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
 msgctxt "Chart axis label"
 msgid "Won due to bomb explosion"
-msgstr ""
+msgstr "因炸弹爆炸获胜"
 
 #: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
 msgctxt "Chart axis label"
 msgid "Lost due to defusal"
-msgstr ""
+msgstr "因拆弹失败"
 
 #: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
 msgctxt "Chart axis label"
 msgid "Won due to player deaths"
-msgstr ""
+msgstr "因玩家死亡胜利"
 
 #: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
 msgctxt "Chart title"
@@ -7570,17 +7570,17 @@ msgstr ""
 #: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
 msgctxt "Chart axis label"
 msgid "Won due to defusal"
-msgstr ""
+msgstr "因拆弹胜利"
 
 #: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
 msgctxt "Chart axis label"
 msgid "Lost due to bomb explosion"
-msgstr ""
+msgstr "因炸弹爆炸失败"
 
 #: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
 msgctxt "Chart axis label"
 msgid "Lost due to player deaths"
-msgstr ""
+msgstr "因玩家死亡失败"
 
 #: src/ui/team/performance/bombs/team-bomb-round-outcome-chart.tsx
 msgctxt "Chart title"
@@ -7595,37 +7595,37 @@ msgstr ""
 #: src/ui/team/performance/bombs/team-bombs-stats.tsx
 msgctxt "Panel title"
 msgid "Bombs"
-msgstr ""
+msgstr "炸弹"
 
 #: src/ui/team/performance/side/team-match-result-ct-chart.tsx
 msgctxt "Chart title"
 msgid "Match results starting as Counter-Terrorist"
-msgstr ""
+msgstr "CT开局的比赛结果"
 
 #: src/ui/team/performance/side/team-match-result-terro-chart.tsx
 msgctxt "Chart title"
 msgid "Match results starting as Terrorist"
-msgstr ""
+msgstr "T开局的比赛结果"
 
 #: src/ui/team/performance/side/team-side-match-stats.tsx
 msgctxt "Chart tooltip"
 msgid "Matches started as CT"
-msgstr ""
+msgstr "CT开局的比赛"
 
 #: src/ui/team/performance/side/team-side-match-stats.tsx
 msgctxt "Chart tooltip"
 msgid "Matches started as T"
-msgstr ""
+msgstr "T开局的比赛"
 
 #: src/ui/team/performance/side/team-side-match-stats.tsx
 msgctxt "Chart title"
 msgid "Starting side distribution"
-msgstr ""
+msgstr "开始选边"
 
 #: src/ui/team/performance/side/team-side-stats.tsx
 msgctxt "Panel title"
 msgid "Side"
-msgstr ""
+msgstr "阵营"
 
 #: src/ui/team/team-loader.tsx
 msgid "Loading team…"
@@ -7634,7 +7634,7 @@ msgstr ""
 #: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Performance"
-msgstr ""
+msgstr "表现"
 
 #: src/ui/teams/no-teams.tsx
 msgid "No team found with current filters."
@@ -7656,7 +7656,7 @@ msgstr ""
 
 #: src/ui/teams/teams-table.tsx
 msgid "Loading teams…"
-msgstr ""
+msgstr "加载队伍中…"
 
 #: src/ui/title-bar/history/history-back-button.tsx
 msgctxt "Tooltip"
@@ -7698,7 +7698,7 @@ msgstr "视频队列已暂停！"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Waiting…"
-msgstr ""
+msgstr "请等待..."
 
 #: src/ui/videos/video-entry.tsx
 msgid "In-game recording in progress…"
@@ -7706,7 +7706,7 @@ msgstr "游戏内录制中…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Moving final files…"
-msgstr ""
+msgstr "移动最后的文件…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Generating video for sequence {number} / {sequenceCount}…"
@@ -7756,7 +7756,7 @@ msgstr "将序列合并为单个视频文件…"
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 msgid "Output"
-msgstr ""
+msgstr "输出"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Close game after recording"
@@ -7768,11 +7768,11 @@ msgstr "您必须手动关闭游戏。"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Demo path"
-msgstr ""
+msgstr "demo路径"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Output path"
-msgstr ""
+msgstr "输出路径"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Start tick"
@@ -7792,7 +7792,7 @@ msgstr "玩家语音"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Cameras"
-msgstr ""
+msgstr "相机"
 
 #: src/ui/videos/video-entry.tsx
 msgid "First camera on"
@@ -7804,7 +7804,7 @@ msgstr ""
 
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
-msgstr ""
+msgstr "没有待生成的视频。"
 
 #: src/ui/xlsx/xlsx-sheet-translations.ts
 msgctxt "Excel sheet"
@@ -7814,17 +7814,17 @@ msgstr "常规"
 #: src/ui/xlsx/xlsx-sheet-translations.ts
 msgctxt "Excel sheet"
 msgid "Maps"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/xlsx/xlsx-sheet-translations.ts
 msgctxt "Excel sheet"
 msgid "Clutch"
-msgstr ""
+msgstr "残局"
 
 #: src/ui/xlsx/xlsx-sheet-translations.ts
 msgctxt "Excel sheet"
 msgid "Economy"
-msgstr ""
+msgstr "经济"
 
 #: src/ui/xlsx/xlsx-sheet-translations.ts
 msgctxt "Excel sheet"
@@ -7854,7 +7854,7 @@ msgstr "残局"
 #: src/ui/xlsx/xlsx-sheet-translations.ts
 msgctxt "Excel sheet"
 msgid "Utility"
-msgstr ""
+msgstr "投掷物"
 
 #: src/ui/xlsx/xlsx-sheet-translations.ts
 msgctxt "Excel sheet"
