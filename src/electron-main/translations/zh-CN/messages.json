@@ -45,7 +45,7 @@
   "dialog.quitApp.confirmation": "录像正在分析中, 您是否想要退出此程序?",
   "yes": "是",
   "no": "否",
-  "notification.bannedPlayers.title": "{playerCount} 个新的被封禁的家！",
+  "notification.bannedPlayers.title": "{playerCount} 个新的被封禁玩家！",
   "notification.bannedPlayers.body": "点击以查看玩家",
   "notification.downloadingFaceitDemo.title": "正在下载 FACEIT 录像中",
   "notification.downloadingFaceitDemo.message": "正在下载新的 FACEIT 录像中，点击此处查看",
