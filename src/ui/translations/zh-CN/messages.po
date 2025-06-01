@@ -296,24 +296,24 @@ msgstr "被封禁账户的平均值"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "{averageBannedAccountAgeInYears, plural, one {# year} other {# years}}"
-msgstr "{averageBannedAccountAgeInYears, plural, one {# 年} other {# 年}}"
+msgstr "{averageBannedAccountAgeInYears, plural, other {# 年}}"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Median banned account age"
-msgstr "被封禁账户的中位值"
+msgstr "被封禁账户注册时间的中位值"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "{medianBannedAccountAgeInYears, plural, one {# year} other {# years}}"
-msgstr "{medianBannedAccountAgeInYears, plural, one {# 年} other {# 年}}"
+msgstr "{medianBannedAccountAgeInYears, plural, other {# 年}}"
 
 #: src/ui/ban/stats/last-bans.tsx
 msgid "Last bans"
-msgstr "最后一次的封禁"
+msgstr "上次封禁"
 
 #: src/ui/ban/stats/no-ban-message.tsx
 msgid "No bans yet"
-msgstr "尚未封禁"
+msgstr "尚无封禁"
 
 #: src/ui/ban/stats/no-stats.tsx
 msgid "No VAC ban stats to show, you must analyze demos to generate stats."
@@ -363,7 +363,7 @@ msgstr "CS Demo Manager 需要 PostgreSQL 数据库。"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "{secondsBeforeNextTry, plural, one {Retrying in # second…} other {Retrying in # seconds…}}"
-msgstr "{secondsBeforeNextTry, plural, one {重试于 # 秒后…} other {重试于 # 秒后…}}"
+msgstr "{secondsBeforeNextTry, plural, other {# 秒后重试…}}"
 
 #: src/ui/bootstrap/connect-database/help-link.tsx
 msgid "Please read the <0>documentation</0> for help."
@@ -449,7 +449,7 @@ msgstr "复制共享代码"
 
 #: src/ui/components/buttons/copy-steamid-button.tsx
 msgid "Copy SteamID"
-msgstr "复制 Steam ID"
+msgstr "复制 SteamID"
 
 #: src/ui/components/buttons/delete-button.tsx
 msgctxt "Button"
@@ -508,7 +508,7 @@ msgstr "显示"
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 #: src/ui/components/context-menu/items/reveal-file-in-explorer-item.tsx
 msgid "{0, select, darwin {Reveal in Finder} win32 {Reveal in Explorer} other {Reveal in files explorer}}"
-msgstr "{0, select, darwin {在Finder中显示} win32 {在资源管理器中显示} other {在文件管理器中显示}}"
+msgstr "{0, select, darwin {在访达中显示} win32 {在资源管理器中显示} other {在文件管理器中显示}}"
 
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 msgid "Folder not found"
@@ -781,12 +781,12 @@ msgstr "警告："
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Voice mode export label"
 msgid "One file per player (no silence, only voice)"
-msgstr ""
+msgstr "每个玩家一个文件(没有静音，只有语音)"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Voice mode export label"
 msgid "One file per player (with silence, demo length)"
-msgstr ""
+msgstr "每个玩家一个文件(静音，演示长度)"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Voice mode export label"
@@ -911,7 +911,7 @@ msgstr "分析Demo"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
-msgstr "{demosSourceNotSupportedCount, plural, one {不支持录像源} other {#不支持录像的来源}}"
+msgstr "{demosSourceNotSupportedCount, plural, other {# 个不支持的录像来源}}"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "Please see this <0>documentation</0> for details."
@@ -3550,7 +3550,7 @@ msgstr "无"
 #: src/ui/hooks/use-translate-economy-ban.ts
 msgctxt "Steam economy ban status"
 msgid "Probation"
-msgstr "冷却时间Probation"
+msgstr "交易观察期"
 
 #: src/ui/hooks/use-translate-economy-ban.ts
 msgctxt "Steam economy ban status"
@@ -5436,7 +5436,7 @@ msgstr "在序列开始时"
 
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgid "{second, plural, one {# second before} other {# seconds before}}"
-msgstr ""
+msgstr "{second, plural, other {# 秒前}}"
 
 #: src/ui/match/video/sequence/match-timeline/focus-camera-on-event-sub-context-menu.tsx
 msgctxt "Context menu"
@@ -5541,7 +5541,7 @@ msgstr "输入秒数"
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "Set tick {tick} as"
-msgstr ""
+msgstr "设置为 {tick} tick"
 
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
@@ -5560,7 +5560,7 @@ msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/tick.tsx
 msgid "Tick <0>{tick}</0>"
-msgstr ""
+msgstr "Tick <0>{tick}</0>"
 
 #: src/ui/match/video/sequence/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"
@@ -5578,7 +5578,7 @@ msgstr ""
 #: src/ui/match/video/sequence/sequence-duration.tsx
 msgctxt "Duration"
 msgid "<0>{seconds}</0> seconds"
-msgstr ""
+msgstr "<0>{seconds}</0> 秒"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
@@ -5601,7 +5601,7 @@ msgstr ""
 #: src/ui/match/video/sequence/sequence-players.tsx
 msgctxt "Table header tooltip"
 msgid "Highlight kills kills"
-msgstr ""
+msgstr "高光击杀数"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
@@ -5613,11 +5613,11 @@ msgstr ""
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header tooltip"
 msgid "Voice"
-msgstr ""
+msgstr "语音"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/match/video/sequence/start-tick-input.tsx
 msgctxt "Input label"
@@ -5627,7 +5627,7 @@ msgstr "开始时刻"
 #: src/ui/match/video/sequence/start-tick-input.tsx
 msgctxt "Input placeholder"
 msgid "Start tick"
-msgstr ""
+msgstr "开始Tick"
 
 #. placeholder {0}: sequences.length
 #: src/ui/match/video/sequences-summary.tsx
@@ -5646,25 +5646,25 @@ msgstr "删除镜头"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgid "No sequences to edit"
-msgstr ""
+msgstr "没有要编辑的序列"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgctxt "Button"
 msgid "Edit sequences settings"
-msgstr ""
+msgstr "编辑序列设置"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgctxt "Dialog title"
 msgid "Edit sequences settings"
-msgstr ""
+msgstr "编辑序列设置"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "The following settings will be applied to all existing sequences."
-msgstr ""
+msgstr "以下设置将应用于现有的所有序列。"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override death notices duration"
-msgstr ""
+msgstr "覆盖死亡通知持续时间"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override camera focus"
@@ -5704,7 +5704,7 @@ msgstr "编辑"
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgid "Sequence <0>#{number}</0>"
-msgstr ""
+msgstr "<0>#{number}</0>条序列"
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgid "Tick <0>{startTick}</0> to <1>{endTick}</1> (<2>{durationInSeconds}s</2>)"
@@ -5817,7 +5817,7 @@ msgstr "{time} {planterName} 在{site} 点安放炸弹"
 
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"
-msgstr ""
+msgstr "{time}静止时间结束"
 
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgctxt "Map radar level"
@@ -6885,7 +6885,7 @@ msgstr "启动下载"
 
 #: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
 msgid "Automatically download FACEIT demos in the background."
-msgstr "在后台自动下载FACEIT演示。"
+msgstr "在后台自动下载FACEIT的Demo。"
 
 #: src/ui/settings/downloads/auto-download-faceit-demos.tsx
 msgid "Automatically download FACEIT demos at application startup."
@@ -6923,7 +6923,7 @@ msgstr "FACEIT通过<0>私有API</0>限制演示下载，但FACEIT为CSDM提供�
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "You <0>don't have to ask</0> FACEIT for an API key. It requires some work, but demo downloads will be back in a near future."
-msgstr ""
+msgstr "你<0>无需询问</0> FACEIT来获取一个 API 密钥。它需要一些工作，但演示下载将在不久的将来恢复。"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "In the meantime, you have to download demos from your browser."
@@ -7144,12 +7144,12 @@ msgstr "全屏"
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
-msgstr ""
+msgstr "包含造成超过 40HP 的伤害，但未造成击杀的镜头"
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgctxt "Settings title"
 msgid "Include damages (highlights)"
-msgstr ""
+msgstr "包含高伤害 (高光时刻)"
 
 #: src/ui/settings/playback/highlights-watch-after-kill-delay.tsx
 msgctxt "Settings title"
@@ -7185,17 +7185,17 @@ msgstr "启动参数"
 
 #: src/ui/settings/playback/lowlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's death in lowlights"
-msgstr ""
+msgstr "包含受到超过 40HP 的伤害，但未造成死亡的镜头"
 
 #: src/ui/settings/playback/lowlights-include-damages.tsx
 msgctxt "Settings title"
 msgid "Include damages (lowlights)"
-msgstr ""
+msgstr "包含高伤害 (低谷时刻)"
 
 #: src/ui/settings/playback/lowlights-watch-after-kill-delay.tsx
 msgctxt "Settings title"
 msgid "After kill delay (lowlights)"
-msgstr ""
+msgstr "击杀后延迟 (低谷时刻)"
 
 #: src/ui/settings/playback/lowlights-watch-after-kill-delay.tsx
 msgid "How many seconds to wait before skipping to the next kill when watching lowlights"
@@ -7204,19 +7204,19 @@ msgstr "观看低谷时，跳转到下一个击杀前需要等待几秒钟"
 #: src/ui/settings/playback/lowlights-watch-before-kill-delay.tsx
 msgctxt "Settings title"
 msgid "Before kill delay (lowlights)"
-msgstr ""
+msgstr "击杀前延迟 (低谷时刻)"
 
 #: src/ui/settings/playback/lowlights-watch-before-kill-delay.tsx
 msgid "How many seconds to start before a kill when watching lowlights"
-msgstr ""
+msgstr "观看低谷时，在击杀镜头前多少秒开始播放"
 
 #: src/ui/settings/playback/player-voices.tsx
 msgid "Listen player voices during playback"
-msgstr ""
+msgstr "观看Demo时聆听赛中玩家的语音"
 
 #: src/ui/settings/playback/player-voices.tsx
 msgid "Doesn't work with Valve Matchmaking demos as voice data are not available!"
-msgstr ""
+msgstr "对缺少玩家语音数据的 Valve 官方匹配服务器的 Demo 无效！"
 
 #: src/ui/settings/playback/player-voices.tsx
 #: src/ui/settings/video/recording/recording-player-voices.tsx
@@ -7226,7 +7226,7 @@ msgstr "玩家语音"
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
-msgstr ""
+msgstr "使用 HLAE 启动CS，请在 <0>视频</0>设置中配置HLAE"
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgctxt "Settings title"
@@ -7254,7 +7254,7 @@ msgstr ""
 
 #: src/ui/settings/playback/watch-round-before-delay.tsx
 msgid "How many seconds to start before the end of the round's freeze time."
-msgstr ""
+msgstr "在回合冻结时间结束之前开始多少秒钟。"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
@@ -7366,18 +7366,18 @@ msgstr "语言"
 
 #: src/ui/settings/ui/redirect-demo-to-match.tsx
 msgid "Navigate to the demo's match page when going to a analyzed demo page."
-msgstr ""
+msgstr "已分析的Demo将默认展示比赛页面。"
 
 #: src/ui/settings/ui/redirect-demo-to-match.tsx
 msgctxt "Settings title"
 msgid "Redirect demo to match"
-msgstr ""
+msgstr "默认展示比赛页面"
 
 #. Reset tables (columns order, visibility…)
 #: src/ui/settings/ui/reset-tables-state.tsx
 msgctxt "Button"
 msgid "Reset tables"
-msgstr "Reset tables"
+msgstr "重置表格"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "Minimized"
@@ -7460,7 +7460,7 @@ msgstr ""
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgid "How long death notices are displayed during recording in seconds."
-msgstr ""
+msgstr "死亡通知以秒为单位在录制时显示多长。"
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Settings title"
@@ -7469,15 +7469,15 @@ msgstr ""
 
 #: src/ui/settings/video/recording/recording-player-voices.tsx
 msgid "Listen to player voices during recording."
-msgstr ""
+msgstr "录制时聆听玩家语音。"
 
 #: src/ui/settings/video/recording/recording-player-voices.tsx
 msgid "Player voices are not available in Valve Matchmaking demos!"
-msgstr ""
+msgstr "注意 Valve 官方匹配服务器的Demo中没有玩家语音！"
 
 #: src/ui/settings/video/recording/recording-show-only-death-notices.tsx
 msgid "Show only death notices during recording."
-msgstr ""
+msgstr "在录制期间只显示死亡通知。"
 
 #: src/ui/settings/video/recording/recording-show-only-death-notices.tsx
 msgctxt "Settings title"
@@ -7499,7 +7499,7 @@ msgstr "胜率"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total: {total}"
-msgstr ""
+msgstr "总计：{total}"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won: {won}"
@@ -7512,7 +7512,7 @@ msgstr "失败：{lost}"
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
 msgid "Semi"
-msgstr ""
+msgstr "半起"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgctxt "Economy type"
@@ -7526,7 +7526,7 @@ msgstr "全起"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Round outcomes by economy type"
-msgstr ""
+msgstr "按经济类型分列的回合收入"
 
 #: src/ui/team/load-team-error.tsx
 msgid "This team is not in any analyzed demos."
@@ -7629,7 +7629,7 @@ msgstr "阵营"
 
 #: src/ui/team/team-loader.tsx
 msgid "Loading team…"
-msgstr ""
+msgstr "加载队伍中…"
 
 #: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
@@ -7638,21 +7638,21 @@ msgstr "表现"
 
 #: src/ui/teams/no-teams.tsx
 msgid "No team found with current filters."
-msgstr ""
+msgstr "当前筛选条件下未找到队伍。"
 
 #: src/ui/teams/no-teams.tsx
 msgid "No team found, you have to analyze demos to generate teams."
-msgstr ""
+msgstr "未找到队伍，您必须先分析Demo来生成队伍。"
 
 #. placeholder {0}: table.getSelectedRowCount()
 #: src/ui/teams/table/selected-team-count.tsx
 msgid "{0, plural, one {# team selected} other {# teams selected}}"
-msgstr ""
+msgstr "{0, plural, other {# 支队伍已选择}}"
 
 #. placeholder {0}: table.getRowCount()
 #: src/ui/teams/table/team-count.tsx
 msgid "{0, plural, one {# team} other {# teams}}"
-msgstr ""
+msgstr "{0, plural, other {# 队伍}}"
 
 #: src/ui/teams/teams-table.tsx
 msgid "Loading teams…"
@@ -7800,7 +7800,7 @@ msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: src/ui/videos/videos.tsx
 msgid "No video generation in progress."
