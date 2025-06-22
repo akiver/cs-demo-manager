@@ -1,4 +1,3 @@
-import fs from 'fs-extra';
 import {
   getDefaultCs2Folders,
   getDefaultCsgoFolders,
@@ -10,36 +9,6 @@ import { writeSettings } from '../settings/write-settings';
 export async function initializeSettings() {
   const settings = await getSettings();
   let needToWriteSettings = false;
-
-  async function removeInexistentFoldersFromSettings() {
-    const folderPathsToRemove: string[] = [];
-    for (const folder of settings.folders) {
-      const folderExists = await fs.pathExists(folder.path);
-      if (!folderExists) {
-        folderPathsToRemove.push(folder.path);
-      }
-    }
-
-    if (folderPathsToRemove.length > 0) {
-      settings.folders = settings.folders.filter((folder) => {
-        return !folderPathsToRemove.includes(folder.path);
-      });
-      needToWriteSettings = true;
-    }
-  }
-
-  async function removeInexistentDownloadFolderFromSettings() {
-    const downloadFolderPath = settings.download.folderPath;
-    if (typeof downloadFolderPath !== 'string') {
-      return;
-    }
-
-    const downloadFolderExists = await fs.pathExists(downloadFolderPath);
-    if (!downloadFolderExists) {
-      settings.download.folderPath = undefined;
-      needToWriteSettings = true;
-    }
-  }
 
   function updateSettingsFromCounterStrikeFolders(defaultFolders: string[]) {
     if (defaultFolders.length < 2) {
@@ -64,9 +33,6 @@ export async function initializeSettings() {
       needToWriteSettings = true;
     }
   }
-
-  await removeInexistentFoldersFromSettings();
-  await removeInexistentDownloadFolderFromSettings();
 
   if (settings.folders.length === 0 || settings.download.folderPath === undefined) {
     const [cs2DefaultFolders, csgoFolders] = await Promise.all([getDefaultCs2Folders(), getDefaultCsgoFolders()]);
