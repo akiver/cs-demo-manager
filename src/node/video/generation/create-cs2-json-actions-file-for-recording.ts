@@ -134,18 +134,10 @@ export async function createCs2JsonActionsFileForRecording({
     }
 
     for (const playerOptions of sequence.playersOptions) {
-      json.addExecCommand(
-        setupSequenceTick,
-        `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} "attackerName=${playerOptions.playerName}"`,
-      );
-      json.addExecCommand(
-        setupSequenceTick,
-        `mirv_deathmsg filter add assisterMatch=x${playerOptions.steamId} "assisterName=${playerOptions.playerName}"`,
-      );
-      json.addExecCommand(
-        setupSequenceTick,
-        `mirv_deathmsg filter add victimMatch=x${playerOptions.steamId} "victimName=${playerOptions.playerName}"`,
-      );
+      // Unlike CS:GO, support for double quotes in player's name is not supported in CS2.
+      // The reason is that the "mirv_exec" command used as a workaround in CS:GO is not available for CS2.
+      const replacePlayerNameCommand = `mirv_replace_name byXuid add x${playerOptions.steamId} "${playerOptions.playerName}"`;
+      json.addExecCommand(setupSequenceTick, replacePlayerNameCommand);
 
       if (!playerOptions.showKill) {
         json.addExecCommand(
