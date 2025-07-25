@@ -1,0 +1,3 @@
+.waveform ::part(scroll):focus {
+  outline: 1px solid var(--gray-800);
+}

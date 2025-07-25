@@ -21,7 +21,7 @@ import { SequencesSummary } from './sequences-summary';
 import { EditSequencesSettingsButton } from './sequences/edit-sequences/edit-sequences-settings-button';
 import { RecordingSystemSelect } from './recording-system-select';
 import { RecordingOutputSelect } from './recording-output-select';
-import { VideoDocumentationLink } from './video-documentation-link';
+import { DocumentationLink } from 'csdm/ui/components/links/documentation-link';
 
 export function MatchVideo() {
   return (
@@ -35,7 +35,9 @@ export function MatchVideo() {
           <ResetSettingsButton />
           <DeleteSequencesButton />
           <SequencesSummary />
-          <VideoDocumentationLink />
+          <div className="ml-auto">
+            <DocumentationLink url="https://cs-demo-manager.com/docs/guides/video" />
+          </div>
         </div>
         <div className="flex gap-x-12 mt-12">
           <div className="flex flex-col border border-gray-400 p-8 rounded">

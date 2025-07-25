@@ -3,6 +3,7 @@ import { useViewerContext } from '../use-viewer-context';
 import { PlaybackBarButton } from './playback-bar-button';
 import { VerticalSlider } from './vertical-slider';
 import { isCtrlOrCmdEvent } from 'csdm/ui/keyboard/keyboard';
+import { Popover, PopoverContent, PopoverTrigger } from 'csdm/ui/components/popover/popover';
 
 export function SpeedButton() {
   const [isSliderVisible, setIsSliderVisible] = useState(false);
@@ -32,15 +33,17 @@ export function SpeedButton() {
   }, [setSpeed, speed]);
 
   return (
-    <PlaybackBarButton
-      onMouseEnter={() => {
-        setIsSliderVisible(true);
-      }}
-      onMouseLeave={() => {
-        setIsSliderVisible(false);
-      }}
-    >
-      {isSliderVisible && (
+    <Popover open={isSliderVisible} onOpenChange={setIsSliderVisible} openOnHover={true}>
+      <PopoverTrigger asChild={true}>
+        <PlaybackBarButton
+          onClick={() => {
+            setIsSliderVisible(!isSliderVisible);
+          }}
+        >
+          <p>{`${speed}x`}</p>
+        </PlaybackBarButton>
+      </PopoverTrigger>
+      <PopoverContent>
         <VerticalSlider
           min={min}
           max={max}
@@ -50,14 +53,7 @@ export function SpeedButton() {
             setSpeed(+event.target.value);
           }}
         />
-      )}
-      <div
-        onClick={() => {
-          setIsSliderVisible(!isSliderVisible);
-        }}
-      >
-        <p>{`${speed}x`}</p>
-      </div>
-    </PlaybackBarButton>
+      </PopoverContent>
+    </Popover>
   );
 }
