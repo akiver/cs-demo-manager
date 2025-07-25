@@ -6,8 +6,7 @@ import { BombExplodedIndicator } from './bomb-exploded-indicator';
 import { BombPlantedIndicator } from './bomb-planted-indicator';
 
 export function Timeline() {
-  const { setIsPlaying, setCurrentFrame, currentFrame, round, kills, isPlaying, bombExploded, bombPlanted } =
-    useViewerContext();
+  const { play, currentFrame, round, kills, bombExploded, bombPlanted } = useViewerContext();
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   const getTimelineWidth = () => {
@@ -42,11 +41,8 @@ export function Timeline() {
     const xCoordinate = event.clientX - rectangle.left;
     const playbackPercent = (xCoordinate * 100) / getTimelineWidth();
     const { startFrame, endOfficiallyFrame } = round;
-    setCurrentFrame(Math.floor((playbackPercent * (endOfficiallyFrame - startFrame)) / 100 + startFrame));
-
-    if (!isPlaying) {
-      setIsPlaying(true);
-    }
+    const newFrame = Math.floor((playbackPercent * (endOfficiallyFrame - startFrame)) / 100 + startFrame);
+    play(newFrame);
   };
 
   const elapsedTimeWidth = getPlayBarElapsedWidth();

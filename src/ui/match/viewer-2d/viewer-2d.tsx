@@ -36,7 +36,8 @@ export function Viewer2D() {
   const {
     speed,
     isPlaying,
-    setIsPlaying,
+    playPause,
+    pause,
     currentFrame,
     setCurrentFrame,
     round,
@@ -95,7 +96,7 @@ export function Viewer2D() {
         if (round.number < match.rounds.length) {
           changeRound(round.number + 1);
         } else {
-          setIsPlaying(false);
+          pause();
         }
       }
     };
@@ -112,7 +113,7 @@ export function Viewer2D() {
       switch (event.key) {
         case ' ':
           event.preventDefault();
-          setIsPlaying(!isPlaying);
+          playPause();
           break;
         default:
       }
@@ -123,7 +124,7 @@ export function Viewer2D() {
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [isPlaying, setIsPlaying]);
+  }, [playPause]);
 
   return (
     <FullscreenProvider>

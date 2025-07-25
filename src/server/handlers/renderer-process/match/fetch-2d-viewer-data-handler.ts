@@ -37,10 +37,12 @@ import type { FlashbangExplode } from 'csdm/common/types/flashbang-explode';
 import { fetchFlashbangsExplode } from 'csdm/node/database/flashbang-exploded/fetch-flashbangs-explode';
 import { fetchKills } from 'csdm/node/database/kills/fetch-kills';
 import { handleError } from '../../handle-error';
+import { getDemoAudioFilePath } from 'csdm/node/demo/get-demo-audio-file-path';
 
 export type Fetch2dViewerDataPayload = {
   checksum: string;
   roundNumber: number;
+  demoFilePath: string;
 };
 
 export type Fetch2dViewerDataSuccessPayload = {
@@ -63,9 +65,10 @@ export type Fetch2dViewerDataSuccessPayload = {
   flashbangsExplode: FlashbangExplode[];
   decoysStart: DecoyStart[];
   smokesStart: SmokeStart[];
+  audioFilePath: string | null;
 };
 
-export async function fetch2DViewerDataHandler({ checksum, roundNumber }: Fetch2dViewerDataPayload) {
+export async function fetch2DViewerDataHandler({ checksum, roundNumber, demoFilePath }: Fetch2dViewerDataPayload) {
   try {
     const [
       playerPositions,
@@ -87,6 +90,7 @@ export async function fetch2DViewerDataHandler({ checksum, roundNumber }: Fetch2
       decoysStart,
       smokesStart,
       flashbangsExplode,
+      audioFilePath,
     ] = await Promise.all([
       fetchPlayersPositions(checksum, roundNumber),
       fetchRound(checksum, roundNumber),
@@ -110,6 +114,7 @@ export async function fetch2DViewerDataHandler({ checksum, roundNumber }: Fetch2
       fetchDecoysStart(checksum, roundNumber),
       fetchSmokesStart(checksum, roundNumber),
       fetchFlashbangsExplode(checksum, roundNumber),
+      getDemoAudioFilePath(demoFilePath),
     ]);
 
     const payload: Fetch2dViewerDataSuccessPayload = {
@@ -132,6 +137,7 @@ export async function fetch2DViewerDataHandler({ checksum, roundNumber }: Fetch2
       bombExploded,
       bombPlanted,
       bombDefused,
+      audioFilePath,
     };
 
     return payload;

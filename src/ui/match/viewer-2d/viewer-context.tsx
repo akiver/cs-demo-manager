@@ -26,8 +26,15 @@ import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
 import type { FlashbangExplode } from 'csdm/common/types/flashbang-explode';
 import type { Game } from 'csdm/common/types/counter-strike';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { focusedPlayerChanged, speedChanged } from './viewer-actions';
+import {
+  audioOffsetChanged,
+  focusedPlayerChanged,
+  resetAudioOffset,
+  speedChanged,
+  volumeChanged,
+} from './viewer-actions';
 import { useViewer2DState } from './use-viewer-state';
+import { deleteDemoAudioOffset, persistDemoAudioOffset } from './audio/audio-offset';
 
 type ViewerContext = {
   framerate: number;
@@ -36,9 +43,18 @@ type ViewerContext = {
   currentFrame: number;
   setCurrentFrame: (frame: number) => void;
   timeRemaining: number;
+  play: (frame?: number) => void;
+  pause: () => void;
+  playPause: () => Promise<void>;
   isPlaying: boolean;
-  setIsPlaying: (isPlaying: boolean) => void;
   changeRound: (roundNumber: number) => void;
+  volume: number;
+  updateVolume: (volume: number) => void;
+  updateAudioOffset: (seconds: number) => void;
+  resetAudioOffset: () => void;
+  loadAudioFile: (audioFilePath: string) => Promise<void>;
+  unloadAudioFile: () => void;
+  audioBytes: Uint8Array;
   map: Map;
   game: Game;
   kills: Kill[];
@@ -91,6 +107,10 @@ type Props = {
   bombExploded: BombExploded | null;
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
+  audio: HTMLAudioElement | null;
+  audioBytes: Uint8Array;
+  loadAudioFile: (audioFilePath: string) => Promise<void>;
+  unloadAudioFile: () => void;
 };
 
 export function ViewerProvider({
@@ -115,6 +135,10 @@ export function ViewerProvider({
   heGrenadesExplode,
   smokesStart,
   flashbangsExplode,
+  audio,
+  audioBytes,
+  loadAudioFile,
+  unloadAudioFile,
 }: Props) {
   const dispatch = useDispatch();
   const match = useCurrentMatch();
@@ -123,18 +147,87 @@ export function ViewerProvider({
   const [isPlaying, setIsPlaying] = useState(false);
   const [radarLevel, setRadarLevel] = useState<RadarLevel>(RadarLevel.Upper);
   const remainingFrameCount = round.endOfficiallyFrame - currentFrame;
-  const frameRate = match.frameRate > 0 ? match.frameRate : match.tickrate / 2;
-  const timeRemaining = (remainingFrameCount / frameRate) * 1000;
+  const framerate = match.frameRate > 0 ? match.frameRate : match.tickrate / 2;
+  const timeRemaining = (remainingFrameCount / framerate) * 1000;
   const shouldDrawBombs = match.mapName.startsWith('de_');
   const navigate = useNavigate();
+  const { audioOffsetSeconds, volume } = viewerState;
+
+  const clampAudioTime = (seconds: number): number => {
+    if (!audio || isNaN(audio.duration)) {
+      return 0;
+    }
+
+    return Math.max(0, Math.min(seconds, audio.duration));
+  };
+
+  const play = async (frame?: number) => {
+    setIsPlaying(true);
+    if (frame) {
+      setCurrentFrame(frame);
+    }
+    if (audio) {
+      const firstRound = match.rounds[0];
+      audio.currentTime = clampAudioTime(
+        ((frame ?? currentFrame) - firstRound.startFrame) / framerate + audioOffsetSeconds,
+      );
+      try {
+        await audio.play();
+      } catch (error) {
+        // noop
+      }
+    }
+  };
+
+  const pause = () => {
+    setIsPlaying(false);
+    audio?.pause();
+  };
 
   return (
     <ViewerContext.Provider
       value={{
-        framerate: frameRate,
-        setRadarLevel,
-        radarLevel,
+        framerate,
         map,
+        currentFrame,
+        setCurrentFrame,
+        timeRemaining,
+        isPlaying,
+        radarLevel,
+        volume,
+        audioBytes,
+        setRadarLevel,
+        play,
+        pause,
+        playPause: async () => {
+          if (isPlaying) {
+            pause();
+          } else {
+            await play();
+          }
+        },
+        updateVolume: (volume) => {
+          if (!audio) {
+            return;
+          }
+          audio.volume = volume;
+          dispatch(volumeChanged({ volume }));
+        },
+        updateAudioOffset: (seconds: number) => {
+          if (!audio) {
+            return;
+          }
+
+          audio.currentTime = clampAudioTime(currentFrame / framerate + seconds);
+          dispatch(audioOffsetChanged({ seconds }));
+          persistDemoAudioOffset(match.checksum, seconds);
+        },
+        resetAudioOffset: () => {
+          dispatch(resetAudioOffset());
+          deleteDemoAudioOffset(match.checksum);
+        },
+        loadAudioFile,
+        unloadAudioFile,
         game: match.game,
         shouldDrawBombs,
         playerPositions,
@@ -153,20 +246,19 @@ export function ViewerProvider({
         bombExploded,
         bombPlanted,
         bombDefused,
-        currentFrame,
-        setCurrentFrame,
-        timeRemaining,
-        isPlaying,
-        setIsPlaying,
         kills,
         shots,
         round,
         changeRound: (roundNumber: number) => {
+          audio?.pause();
           navigate(buildMatch2dViewerRoundPath(match.checksum, roundNumber));
         },
         speed: viewerState.speed,
         setSpeed: (speed: number) => {
           dispatch(speedChanged({ speed }));
+          if (audio) {
+            audio.playbackRate = speed;
+          }
         },
         focusedPlayerId: viewerState.focusedPlayerId,
         updateFocusedPlayerId: (id: string) => {

@@ -21,6 +21,8 @@ import type { ElementToImageOptions } from 'csdm/preload/element-to-image';
 import type { ThemeName } from 'csdm/common/types/theme-name';
 import type { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import type { AppInformation } from 'csdm/node/get-app-information';
+import type { getDemoAudioData } from 'csdm/preload/get-demo-audio-data';
+import type { getDemoAudioFilePath } from 'csdm/node/demo/get-demo-audio-file-path';
 
 declare global {
   interface PreloadApi {
@@ -55,7 +57,6 @@ declare global {
     getRankImageSrc: (rankNumber: Rank) => string;
     getPremierRankImageSrc: (rank: PremierRank) => string;
     pathExists: typeof fs.pathExists;
-    getAudio: (audioFileName: AudioFileName) => Audio;
     getPathDirectoryName: (path: string) => string;
     showMainWindow: () => void;
     onOpenDemoFile: (callback: (event: IpcRendererEvent, demoPath: string) => void) => () => void;
@@ -88,6 +89,8 @@ declare global {
     installUpdate: () => void;
     toggleAutoDownloadUpdates: (isEnabled: boolean) => void;
     shouldShowChangelog: () => Promise<boolean>;
+    getDemoAudioFilePath: typeof getDemoAudioFilePath;
+    getDemoAudioData: typeof getDemoAudioData;
   }
 
   interface Window {

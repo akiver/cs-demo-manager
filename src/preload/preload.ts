@@ -35,6 +35,8 @@ import { elementToImage } from 'csdm/preload/element-to-image';
 import type { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import { getAppInformation } from 'csdm/node/get-app-information';
 import { resetSettings } from 'csdm/node/settings/reset-settings';
+import { getDemoAudioData } from 'csdm/preload/get-demo-audio-data';
+import { getDemoAudioFilePath } from 'csdm/node/demo/get-demo-audio-file-path';
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {
@@ -90,10 +92,6 @@ const api: PreloadApi = {
   pathExists: fs.pathExists,
   getPathDirectoryName: path.dirname,
   elementToImage,
-
-  getAudio: (audioFileName: string) => {
-    return new Audio(`file://${path.join(getStaticFolderPath(), 'sounds', audioFileName)}`);
-  },
 
   showMainWindow: () => {
     ipcRenderer.invoke(IPCChannel.ShowWindow);
@@ -270,6 +268,9 @@ const api: PreloadApi = {
   getWebFilePath: (file: File) => {
     return webUtils.getPathForFile(file);
   },
+
+  getDemoAudioFilePath,
+  getDemoAudioData,
 };
 
 contextBridge.exposeInMainWorld('csdm', api);

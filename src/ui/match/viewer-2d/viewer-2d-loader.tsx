@@ -1,4 +1,4 @@
-import React, { useState, useEffect, type ReactNode } from 'react';
+import React, { useState, useEffect, type ReactNode, useCallback } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Viewer2D } from './viewer-2d';
@@ -32,6 +32,9 @@ import type { DecoyStart } from 'csdm/common/types/decoy-start';
 import type { FlashbangExplode } from 'csdm/common/types/flashbang-explode';
 import { ErrorCode } from 'csdm/common/error-code';
 import { NoPositionsFound } from './no-positions-found';
+import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
+import { useDispatch } from 'csdm/ui/store/use-dispatch';
+import { audioLoaded, resetAudioOffset } from './viewer-actions';
 
 type State = {
   error: ReactNode | undefined;
@@ -55,6 +58,8 @@ type State = {
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
   status: Status;
+  audio: HTMLAudioElement | null; // the audio element used during playback
+  audioBytes: Uint8Array; // the audio bytes used for the audio waveform
 };
 
 const defaultState: State = {
@@ -78,7 +83,9 @@ const defaultState: State = {
   bombPlanted: null,
   bombDefused: null,
   round: undefined,
-  status: Status.Idle,
+  status: Status.Loading,
+  audio: null,
+  audioBytes: new Uint8Array(),
 };
 
 export function Viewer2DLoader() {
@@ -88,13 +95,43 @@ export function Viewer2DLoader() {
   const match = useCurrentMatch();
   const map = useCurrentMatchMap();
   const [state, setState] = useState<State>(defaultState);
+  const showToast = useShowToast();
+  const dispatch = useDispatch();
+
+  const loadAudioFile = useCallback(
+    async (audioFilePath: string) => {
+      if (state.audio) {
+        return;
+      }
+
+      const data = await window.csdm.getDemoAudioData(match.checksum, audioFilePath);
+      if (data) {
+        dispatch(audioLoaded(data));
+        setState((state) => {
+          return {
+            ...state,
+            audio: data.audio,
+            audioBytes: data.audioBytes,
+          };
+        });
+      }
+    },
+    [match.checksum, state.audio, dispatch],
+  );
+
+  const unloadAudioFile = () => {
+    dispatch(resetAudioOffset());
+    setState((state) => {
+      return {
+        ...state,
+        audio: null,
+        audioBytes: new Uint8Array(),
+      };
+    });
+  };
 
   useEffect(() => {
-    setState(defaultState);
-  }, [roundNumber]);
-
-  useEffect(() => {
-    if (state.status !== Status.Idle) {
+    if (state.status !== Status.Loading && (!state.round || state.round.number === roundNumber)) {
       return;
     }
 
@@ -102,39 +139,76 @@ export function Viewer2DLoader() {
       try {
         const payload: Fetch2dViewerDataPayload = {
           checksum: match.checksum,
+          demoFilePath: match.demoFilePath,
           roundNumber,
         };
-        setState({
-          ...state,
-          status: Status.Loading,
+        setState((state) => {
+          return {
+            ...state,
+            status: Status.Loading,
+          };
         });
         const result = await client.send({
           name: RendererClientMessageName.Fetch2DViewerData,
           payload,
         });
 
-        setState({
-          ...state,
-          ...result,
-          status: Status.Success,
+        if (result.audioFilePath) {
+          try {
+            await loadAudioFile(result.audioFilePath);
+          } catch (error) {
+            logger.error('Error fetching demo audio data');
+            logger.error(error);
+            showToast({
+              type: 'error',
+              content: (
+                <div>
+                  <p>
+                    <Trans>An error occurred while loading the audio file found for this match.</Trans>
+                  </p>
+                  <p>
+                    <Trans>Make sure the file is a valid audio file.</Trans>
+                  </p>
+                </div>
+              ),
+            });
+          }
+        }
+
+        setState((state) => {
+          return {
+            ...state,
+            ...result,
+            status: Status.Success,
+          };
         });
       } catch (error) {
         let errorMessage = <Trans>An error occurred while loading round number {roundNumber}.</Trans>;
         if (error === ErrorCode.RoundNotFound) {
           errorMessage = <Trans>Round number {roundNumber} not found.</Trans>;
         }
-        setState({
+        setState((state) => ({
           ...state,
           status: Status.Error,
           error: errorMessage,
-        });
+        }));
       }
     };
 
     fetchData();
-  }, [client, state, match, roundNumber]);
+  }, [
+    showToast,
+    client,
+    dispatch,
+    state.status,
+    state.round,
+    roundNumber,
+    match.checksum,
+    match.demoFilePath,
+    loadAudioFile,
+  ]);
 
-  if (state.status === Status.Idle || state.status === Status.Loading) {
+  if (state.status === Status.Loading) {
     return <Message message={<Trans>Loading round number {roundNumber}…</Trans>} />;
   }
 
@@ -156,7 +230,7 @@ export function Viewer2DLoader() {
         onPositionsAvailable={() => {
           setState({
             ...state,
-            status: Status.Idle,
+            status: Status.Loading,
           });
         }}
       />
@@ -185,6 +259,10 @@ export function Viewer2DLoader() {
       bombDefused={state.bombDefused}
       bombsDefuseStart={state.bombsDefuseStart}
       bombsPlantStart={state.bombsPlantStart}
+      audio={state.audio}
+      audioBytes={state.audioBytes}
+      loadAudioFile={loadAudioFile}
+      unloadAudioFile={unloadAudioFile}
     >
       <Viewer2D />
     </ViewerProvider>

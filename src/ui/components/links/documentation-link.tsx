@@ -3,7 +3,11 @@ import { Trans } from '@lingui/react/macro';
 import { QuestionIcon } from 'csdm/ui/icons/question-icon';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 
-export function VideoDocumentationLink() {
+type Props = {
+  url: string;
+};
+
+export function DocumentationLink({ url }: Props) {
   return (
     <Tooltip
       placement="left"
@@ -13,7 +17,7 @@ export function VideoDocumentationLink() {
         </p>
       }
     >
-      <a href="https://cs-demo-manager.com/docs/guides/video" target="_blank" rel="noreferrer" className="ml-auto">
+      <a href={url} target="_blank" rel="noreferrer">
         <QuestionIcon className="size-16" />
       </a>
     </Tooltip>
