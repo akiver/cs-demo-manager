@@ -689,6 +689,7 @@ msgid "No voice data found for demo: {demoPath}"
 msgstr "No voice data found for demo: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Failed to parse demo: {demoPath}"
 msgstr "Failed to parse demo: {demoPath}"
 
@@ -705,6 +706,7 @@ msgid "Invalid arguments for demo: {demoPath}"
 msgstr "Invalid arguments for demo: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Failed to load the Counter-Strike audio library."
 msgstr "Failed to load the Counter-Strike audio library."
 
@@ -713,10 +715,12 @@ msgid "Failed to open the demo file."
 msgstr "Failed to open the demo file."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Some required library files are missing."
 msgstr "Some required library files are missing."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "This demo format is not supported."
 msgstr "This demo format is not supported."
 
@@ -742,6 +746,9 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/match/video/get-video-error-from-error-code.tsx
 #: src/ui/match/video/update-demo-location.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 #: src/ui/matches/table/matches-table.tsx
 #: src/ui/player/load-player-error.tsx
@@ -766,6 +773,7 @@ msgid "Players voice export"
 msgstr "Players voice export"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Valve Matchmaking demos do not contain voice audio data!"
 msgstr "Valve Matchmaking demos do not contain voice audio data!"
 
@@ -1565,6 +1573,11 @@ msgstr "No matches."
 msgctxt "Panel title"
 msgid "Last matches"
 msgstr "Last matches"
+
+#: src/ui/components/links/documentation-link.tsx
+msgctxt "Link"
+msgid "Documentation"
+msgstr "Documentation"
 
 #: src/ui/components/links/see-round-link.tsx
 msgctxt "Link"
@@ -5740,11 +5753,6 @@ msgctxt "Software installation status"
 msgid "Not installed"
 msgstr "Not installed"
 
-#: src/ui/match/video/video-documentation-link.tsx
-msgctxt "Link"
-msgid "Documentation"
-msgstr "Documentation"
-
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
 msgstr "An error occurred. (Code {errorCode})"
@@ -5814,6 +5822,98 @@ msgstr "Positions haven't been generated yet."
 msgid "Generate positions"
 msgstr "Generate positions"
 
+#: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
+msgid "{elapsedTime}/{totalDuration}"
+msgstr "{elapsedTime}/{totalDuration}"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
+msgid "Offset: {offsetSeconds}s"
+msgstr "Offset: {offsetSeconds}s"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
+msgid "Set as current position"
+msgstr "Set as current position"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
+msgid "Reset position"
+msgstr "Reset position"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
+msgid "Unload file"
+msgstr "Unload file"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Could not find the demo file: {demoPath}"
+msgstr "Could not find the demo file: {demoPath}"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "There was a problem decoding the demo: {demoPath}"
+msgstr "There was a problem decoding the demo: {demoPath}"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "No voice data was found in: {demoPath}"
+msgstr "No voice data was found in: {demoPath}"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Unsupported audio format in: {demoPath}"
+msgstr "Unsupported audio format in: {demoPath}"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Unable to create audio file for: {demoPath}"
+msgstr "Unable to create audio file for: {demoPath}"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Invalid arguments provided for: {demoPath}"
+msgstr "Invalid arguments provided for: {demoPath}"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Could not open the demo file."
+msgstr "Could not open the demo file."
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Rosetta is required. Please install it from <0>Apple</0>."
+msgstr "Rosetta is required. Please install it from <0>Apple</0>."
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Audio playback"
+msgstr "Audio playback"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "No audio file was found for this demo."
+msgstr "No audio file was found for this demo."
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "You can either:"
+msgstr "You can either:"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Generate a <0>.wav</0> file containing the players' voice audio next to the demo file."
+msgstr "Generate a <0>.wav</0> file containing the players' voice audio next to the demo file."
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Select an existing audio file from your computer to use for playback."
+msgstr "Select an existing audio file from your computer to use for playback."
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "See the <0>documentation</0> for more information."
+msgstr "See the <0>documentation</0> for more information."
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "The following issues were found:"
+msgstr "The following issues were found:"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Generate audio file"
+msgstr "Generate audio file"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Audio Files"
+msgstr "Audio Files"
+
+#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+msgid "Choose audio file…"
+msgstr "Choose audio file…"
+
 #: src/ui/match/viewer-2d/playback-bar/bomb-exploded-indicator.tsx
 msgid "{time} Bomb planted by {planterName} exploded at site {site}"
 msgstr "{time} Bomb planted by {planterName} exploded at site {site}"
@@ -5835,6 +5935,14 @@ msgstr "Upper"
 msgctxt "Map radar level"
 msgid "Lower"
 msgstr "Lower"
+
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+msgid "An error occurred while loading the audio file found for this match."
+msgstr "An error occurred while loading the audio file found for this match."
+
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+msgid "Make sure the file is a valid audio file."
+msgstr "Make sure the file is a valid audio file."
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading round number {roundNumber}."
