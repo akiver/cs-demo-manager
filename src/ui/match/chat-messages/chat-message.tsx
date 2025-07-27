@@ -8,11 +8,11 @@ type Props = {
 };
 
 export function ChatMessageRow({ chatMessage }: Props) {
-  const { senderName, frame, senderSteamId, senderSide, senderIsAlive, message } = chatMessage;
+  const { senderName, senderSide, senderIsAlive, message } = chatMessage;
   const playerStatus = senderIsAlive ? '' : <Trans context="Chat message status">*DEAD*</Trans>;
 
   return (
-    <div key={`${frame}-${senderName}-${senderSteamId}`}>
+    <div>
       <TeamText teamNumber={senderSide} className="select-text">
         {playerStatus} {senderName}
       </TeamText>

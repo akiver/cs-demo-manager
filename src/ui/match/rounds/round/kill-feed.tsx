@@ -17,14 +17,14 @@ export function KillFeed() {
     <Panel header={<Trans context="Panel title">Kills</Trans>} fitHeight={true}>
       <div className="flex flex-col gap-y-4">
         {kills.map((kill) => {
-          const { tick, victimName, killerSteamId } = kill;
+          const { tick, killerSteamId } = kill;
           return (
             <KillFeedEntry
-              key={`kill-${tick}-${victimName}`}
+              key={kill.id}
               kill={kill}
               timeElapsedOption={{
-                frameRate: match.frameRate,
-                roundStartFrame: currentRound.startFrame,
+                tickrate: match.tickrate,
+                roundFreezetimeEndTick: currentRound.freezetimeEndTick,
               }}
               right={
                 <PlayDemoAtTickButton

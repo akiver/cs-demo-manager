@@ -6,7 +6,7 @@ import { BombExplodedIndicator } from './bomb-exploded-indicator';
 import { BombPlantedIndicator } from './bomb-planted-indicator';
 
 export function Timeline() {
-  const { play, currentFrame, round, kills, bombExploded, bombPlanted } = useViewerContext();
+  const { play, currentTick, round, kills, bombExploded, bombPlanted } = useViewerContext();
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   const getTimelineWidth = () => {
@@ -18,17 +18,17 @@ export function Timeline() {
     return wrapper.clientWidth;
   };
 
-  const frameToPlaybackBarX = (frame: number) => {
-    const { startFrame, endOfficiallyFrame } = round;
-    const elapsedPercent = (frame - startFrame) / (endOfficiallyFrame - startFrame);
+  const tickToPlaybackBarX = (tick: number) => {
+    const { startTick, endOfficiallyTick } = round;
+    const elapsedPercent = (tick - startTick) / (endOfficiallyTick - startTick);
     const x = getTimelineWidth() * elapsedPercent;
 
     return x;
   };
 
   const getPlayBarElapsedWidth = () => {
-    const { startFrame, endOfficiallyFrame } = round;
-    const elapsedPercent = (currentFrame - startFrame) / (endOfficiallyFrame - startFrame);
+    const { startTick, endOfficiallyTick } = round;
+    const elapsedPercent = (currentTick - startTick) / (endOfficiallyTick - startTick);
     const width = getTimelineWidth() * elapsedPercent;
     return width;
   };
@@ -40,9 +40,9 @@ export function Timeline() {
     const rectangle = wrapperRef.current.getBoundingClientRect();
     const xCoordinate = event.clientX - rectangle.left;
     const playbackPercent = (xCoordinate * 100) / getTimelineWidth();
-    const { startFrame, endOfficiallyFrame } = round;
-    const newFrame = Math.floor((playbackPercent * (endOfficiallyFrame - startFrame)) / 100 + startFrame);
-    play(newFrame);
+    const { startTick, endOfficiallyTick } = round;
+    const newTick = Math.floor((playbackPercent * (endOfficiallyTick - startTick)) / 100 + startTick);
+    play(newTick);
   };
 
   const elapsedTimeWidth = getPlayBarElapsedWidth();
@@ -55,33 +55,27 @@ export function Timeline() {
           width: `${elapsedTimeWidth}px`,
         }}
       />
-      <FreezetimeEndIndicator leftX={frameToPlaybackBarX(round.freezetimeEndFrame)} />
+      <FreezetimeEndIndicator leftX={tickToPlaybackBarX(round.freezetimeEndTick)} />
       {kills.map((kill) => {
-        const leftX = frameToPlaybackBarX(kill.frame);
-        return (
-          <KillIndicator
-            key={`playback-kill-${kill.victimSide}-${kill.frame}-${kill.victimSteamId}`}
-            leftX={leftX}
-            kill={kill}
-          />
-        );
+        const leftX = tickToPlaybackBarX(kill.tick);
+        return <KillIndicator key={kill.id} leftX={leftX} kill={kill} />;
       })}
       {bombExploded !== null && (
         <BombExplodedIndicator
-          key={`playback-bomb-exploded-${bombExploded.frame}-${bombExploded.site}`}
-          leftX={frameToPlaybackBarX(bombExploded.frame)}
+          key={`playback-bomb-exploded-${bombExploded.id}`}
+          leftX={tickToPlaybackBarX(bombExploded.tick)}
           planterName={bombExploded.planterName}
           site={bombExploded.site}
-          frame={bombExploded.frame}
+          tick={bombExploded.tick}
         />
       )}
       {bombPlanted !== null && (
         <BombPlantedIndicator
-          key={`playback-bomb-planted-${bombPlanted.frame}-${bombPlanted.site}`}
-          leftX={frameToPlaybackBarX(bombPlanted.frame)}
+          key={`playback-bomb-planted-${bombPlanted.id}`}
+          leftX={tickToPlaybackBarX(bombPlanted.tick)}
           planterName={bombPlanted.planterName}
           site={bombPlanted.site}
-          frame={bombPlanted.frame}
+          tick={bombPlanted.tick}
         />
       )}
     </div>

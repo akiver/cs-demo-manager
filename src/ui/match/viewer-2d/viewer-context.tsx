@@ -37,13 +37,13 @@ import { useViewer2DState } from './use-viewer-state';
 import { deleteDemoAudioOffset, persistDemoAudioOffset } from './audio/audio-offset';
 
 type ViewerContext = {
-  framerate: number;
+  tickrate: number;
   speed: number;
   setSpeed: (speed: number) => void;
-  currentFrame: number;
-  setCurrentFrame: (frame: number) => void;
+  currentTick: number;
+  setCurrentTick: (tick: number) => void;
   timeRemaining: number;
-  play: (frame?: number) => void;
+  play: (tick?: number) => void;
   pause: () => void;
   playPause: () => Promise<void>;
   isPlaying: boolean;
@@ -143,12 +143,12 @@ export function ViewerProvider({
   const dispatch = useDispatch();
   const match = useCurrentMatch();
   const viewerState = useViewer2DState();
-  const [currentFrame, setCurrentFrame] = useState(round.freezetimeEndFrame);
+  const [currentTick, setCurrentTick] = useState(round.freezetimeEndTick);
   const [isPlaying, setIsPlaying] = useState(false);
   const [radarLevel, setRadarLevel] = useState<RadarLevel>(RadarLevel.Upper);
-  const remainingFrameCount = round.endOfficiallyFrame - currentFrame;
-  const framerate = match.frameRate > 0 ? match.frameRate : match.tickrate / 2;
-  const timeRemaining = (remainingFrameCount / framerate) * 1000;
+  const remainingTickCount = round.endOfficiallyTick - currentTick;
+  const tickrate = match.tickrate > 0 ? match.tickrate : 64;
+  const timeRemaining = (remainingTickCount / tickrate) * 1000;
   const shouldDrawBombs = match.mapName.startsWith('de_');
   const navigate = useNavigate();
   const { audioOffsetSeconds, volume } = viewerState;
@@ -161,16 +161,13 @@ export function ViewerProvider({
     return Math.max(0, Math.min(seconds, audio.duration));
   };
 
-  const play = async (frame?: number) => {
+  const play = async (tick?: number) => {
     setIsPlaying(true);
-    if (frame) {
-      setCurrentFrame(frame);
+    if (tick) {
+      setCurrentTick(tick);
     }
     if (audio) {
-      const firstRound = match.rounds[0];
-      audio.currentTime = clampAudioTime(
-        ((frame ?? currentFrame) - firstRound.startFrame) / framerate + audioOffsetSeconds,
-      );
+      audio.currentTime = clampAudioTime((tick ?? currentTick) / tickrate + audioOffsetSeconds);
       try {
         await audio.play();
       } catch (error) {
@@ -187,10 +184,10 @@ export function ViewerProvider({
   return (
     <ViewerContext.Provider
       value={{
-        framerate,
+        tickrate,
         map,
-        currentFrame,
-        setCurrentFrame,
+        currentTick,
+        setCurrentTick,
         timeRemaining,
         isPlaying,
         radarLevel,
@@ -218,7 +215,7 @@ export function ViewerProvider({
             return;
           }
 
-          audio.currentTime = clampAudioTime(currentFrame / framerate + seconds);
+          audio.currentTime = clampAudioTime(currentTick / tickrate + seconds);
           dispatch(audioOffsetChanged({ seconds }));
           persistDemoAudioOffset(match.checksum, seconds);
         },

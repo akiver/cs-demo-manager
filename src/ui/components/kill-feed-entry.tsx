@@ -9,7 +9,7 @@ import { ExplosionIcon } from 'csdm/ui/icons/explosion-icon';
 import { WorldIcon } from 'csdm/ui/icons/weapons/world-icon';
 import { RevengeIcon } from 'csdm/ui/icons/revenge-icon';
 import { TeamText } from 'csdm/ui/components/team-text';
-import { useGetTimeElapsedBetweenFrames } from 'csdm/ui/match/use-time-elapsed-between-frames';
+import { getTimeElapsedBetweenTicks } from 'csdm/ui/match/get-time-elapsed-between-ticks';
 import { PenetrateIcon } from 'csdm/ui/icons/penetrate-icon';
 import { BlindIcon } from 'csdm/ui/icons/blind-icon';
 import { NoScopeIcon } from 'csdm/ui/icons/noscope-icon';
@@ -102,8 +102,8 @@ function renderVictimName(kill: Kill) {
 }
 
 type TimeElapsedOption = {
-  roundStartFrame: number;
-  frameRate: number;
+  roundFreezetimeEndTick: number;
+  tickrate: number;
 };
 
 type Props = {
@@ -113,16 +113,14 @@ type Props = {
 };
 
 export function KillFeedEntry({ kill, timeElapsedOption, right }: Props) {
-  const getTimeElapsedBetweenFrames = useGetTimeElapsedBetweenFrames();
-
   return (
     <div className="flex items-center gap-8">
       {timeElapsedOption && (
         <p className="w-48">
-          {getTimeElapsedBetweenFrames({
-            frameRate: timeElapsedOption.frameRate,
-            startFrame: timeElapsedOption.roundStartFrame,
-            endFrame: kill.frame,
+          {getTimeElapsedBetweenTicks({
+            tickrate: timeElapsedOption.tickrate,
+            startTick: timeElapsedOption.roundFreezetimeEndTick,
+            endTick: kill.tick,
           })}
         </p>
       )}

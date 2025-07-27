@@ -10,7 +10,7 @@ type AnimatedShot = Shot & {
 };
 
 export function useDrawShots() {
-  const { shots, currentFrame } = useViewerContext();
+  const { shots, currentTick } = useViewerContext();
   const pendingAnimatedShotsRef = useRef<AnimatedShot[]>([]);
 
   const drawShots = (
@@ -39,10 +39,10 @@ export function useDrawShots() {
       shot.time += 0.1;
     }
 
-    const frameShots = shots.filter((shot) => {
-      return shot.frame === currentFrame;
+    const tickShots = shots.filter((shot) => {
+      return shot.tick === currentTick;
     });
-    for (const shot of frameShots) {
+    for (const shot of tickShots) {
       pendingAnimatedShots.push({
         ...shot,
         time: 0.1,

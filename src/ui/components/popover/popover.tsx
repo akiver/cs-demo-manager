@@ -102,7 +102,7 @@ type ContextType =
 
 const PopoverContext = createContext<ContextType>(null);
 
-export function usePopoverContext() {
+function usePopoverContext() {
   const context = useContext(PopoverContext);
 
   if (context === null) {

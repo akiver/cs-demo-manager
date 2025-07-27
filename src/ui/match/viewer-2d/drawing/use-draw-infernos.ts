@@ -2,14 +2,14 @@ import type { InteractiveCanvas } from '../../../hooks/use-interactive-map-canva
 import { useViewerContext } from '../use-viewer-context';
 
 export function useDrawInfernos() {
-  const { infernoPositions, currentFrame } = useViewerContext();
+  const { infernoPositions, currentTick } = useViewerContext();
 
   const drawInfernos = (
     context: CanvasRenderingContext2D,
     { zoomedSize, zoomedToRadarX, zoomedToRadarY }: InteractiveCanvas,
   ) => {
     const positions = infernoPositions.filter((position) => {
-      return position.frame === currentFrame;
+      return position.tick === currentTick;
     });
 
     context.lineWidth = zoomedSize(1);

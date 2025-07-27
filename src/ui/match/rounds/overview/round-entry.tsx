@@ -79,10 +79,10 @@ function Row({ valueTeamA, valueTeamB, title }: RowProps) {
 type ContentProps = {
   kills: Kill[];
   round: Round;
-  roundStartFrame: number;
+  roundFreezetimeEndTick: number;
 };
 
-function Content({ round, kills, roundStartFrame }: ContentProps) {
+function Content({ round, kills, roundFreezetimeEndTick }: ContentProps) {
   const match = useCurrentMatch();
   const { translateEconomyType } = useTranslateEconomyType();
   const formatMoney = useFormatMoney();
@@ -96,8 +96,8 @@ function Content({ round, kills, roundStartFrame }: ContentProps) {
               key={kill.id}
               kill={kill}
               timeElapsedOption={{
-                roundStartFrame,
-                frameRate: match.frameRate,
+                roundFreezetimeEndTick: roundFreezetimeEndTick,
+                tickrate: match.tickrate,
               }}
             />
           );
@@ -204,7 +204,7 @@ export function RoundEntry({ round }: Props) {
           />
         }
       >
-        <Content round={round} kills={kills} roundStartFrame={round.startFrame} />
+        <Content round={round} kills={kills} roundFreezetimeEndTick={round.freezetimeEndTick} />
       </CollapsePanel>
     </div>
   );

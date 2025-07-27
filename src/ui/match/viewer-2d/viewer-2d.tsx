@@ -22,7 +22,7 @@ export function Viewer2D() {
   const match = useCurrentMatch();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
-  const lastFrame = useRef(new Date());
+  const lastRenderTime = useRef(performance.now());
   const animationIdRef = useRef(0);
   const { drawPlayers } = useDrawPlayers();
   const { drawHostages } = useDrawHostages();
@@ -38,12 +38,12 @@ export function Viewer2D() {
     isPlaying,
     playPause,
     pause,
-    currentFrame,
-    setCurrentFrame,
+    currentTick,
+    tickrate,
+    setCurrentTick,
     round,
     changeRound,
     map,
-    framerate,
     shouldDrawBombs,
   } = useViewerContext();
   const interactiveCanvas = useInteractiveMapCanvas(canvasRef.current, map);
@@ -80,19 +80,19 @@ export function Viewer2D() {
       drawChickens(context, interactiveCanvas);
 
       if (!isPlaying) {
-        lastFrame.current = new Date();
+        lastRenderTime.current = performance.now();
         return;
       }
 
-      const now = new Date();
-      const elapsed = now.getTime() - lastFrame.current.getTime();
-      const delay = 1000 / framerate / speed;
-      if (elapsed >= delay) {
-        setCurrentFrame(currentFrame + Math.max(1, Math.floor(elapsed / delay)));
-        lastFrame.current = new Date(now.getTime() - (elapsed % delay));
+      const now = performance.now();
+      const elapsed = now - lastRenderTime.current;
+      const ticksToAdvance = Math.floor((elapsed / 1000) * tickrate * speed);
+      if (ticksToAdvance > 0) {
+        setCurrentTick(currentTick + ticksToAdvance);
+        lastRenderTime.current = performance.now() - (elapsed % (1000 / (tickrate * speed)));
       }
 
-      if (currentFrame >= round.endOfficiallyFrame) {
+      if (currentTick >= round.endOfficiallyTick) {
         if (round.number < match.rounds.length) {
           changeRound(round.number + 1);
         } else {

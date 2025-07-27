@@ -105,8 +105,8 @@ function AudioPopover() {
     unloadAudioFile,
     volume,
     updateVolume,
-    currentFrame,
-    framerate,
+    currentTick,
+    tickrate,
   } = useViewerContext();
   const { audioOffsetSeconds } = useViewer2DState();
   const { currentTime, isPlaying, ws } = useWavSurfer(containerRef, audioBytes);
@@ -114,9 +114,9 @@ function AudioPopover() {
 
   useEffect(() => {
     // keep in sync the WaveSurfer instance with the playback state
-    const time = currentFrame / framerate + audioOffsetSeconds;
+    const time = currentTick / tickrate + audioOffsetSeconds;
     ws?.setTime(time);
-  }, [ws, currentFrame, framerate, audioOffsetSeconds]);
+  }, [ws, currentTick, tickrate, audioOffsetSeconds]);
 
   useEffect(() => {
     ws?.setVolume(volume);
@@ -188,7 +188,7 @@ function AudioPopover() {
                 <Button
                   variant={ButtonVariant.Primary}
                   onClick={() => {
-                    updateAudioOffset(ws.getCurrentTime() - currentFrame / framerate);
+                    updateAudioOffset(ws.getCurrentTime() - currentTick / tickrate);
                   }}
                 >
                   <Trans>Set as current position</Trans>

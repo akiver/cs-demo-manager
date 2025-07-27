@@ -4,7 +4,7 @@ import { loadAudio } from 'csdm/ui/match/viewer-2d/audio/load-audio';
 import { getDemoAudioOffset } from 'csdm/ui/match/viewer-2d/audio/audio-offset';
 import { supportedAudioExtensions } from 'csdm/common/types/audio-extensions';
 
-export type DemoAudioData = {
+type DemoAudioData = {
   audioFilePath: string;
   audio: HTMLAudioElement;
   audioBytes: Buffer;

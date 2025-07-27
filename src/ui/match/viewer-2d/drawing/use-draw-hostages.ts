@@ -3,13 +3,13 @@ import { useViewerContext } from '../use-viewer-context';
 import type { InteractiveCanvas } from '../../../hooks/use-interactive-map-canvas';
 
 export function useDrawHostages() {
-  const { hostagePositions, currentFrame } = useViewerContext();
+  const { hostagePositions, currentTick } = useViewerContext();
 
   const drawHostages = (
     context: CanvasRenderingContext2D,
     { zoomedSize, zoomedToRadarX, zoomedToRadarY }: InteractiveCanvas,
   ) => {
-    const positions = hostagePositions.filter((position) => position.frame === currentFrame);
+    const positions = hostagePositions.filter((position) => position.tick === currentTick);
 
     for (const position of positions) {
       const x = zoomedToRadarX(position.x);

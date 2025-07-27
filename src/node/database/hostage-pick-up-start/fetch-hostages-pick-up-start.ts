@@ -7,7 +7,7 @@ export async function fetchHostagesPickUpStart(checksum: string, roundNumber: nu
     .selectAll()
     .where('match_checksum', '=', checksum)
     .where('round_number', '=', roundNumber)
-    .orderBy('frame', 'asc')
+    .orderBy('tick')
     .execute();
 
   const hostagesPickUpStart = rows.map(hostagePickUpStartRowToHostagePickUpStart);

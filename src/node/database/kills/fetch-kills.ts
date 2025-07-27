@@ -19,7 +19,7 @@ export async function fetchKills(checksum: string, roundNumber?: number) {
       return eb.fn.coalesce('assister.name', 'kills.assister_name').as('assister_name');
     })
     .where('match_checksum', '=', checksum)
-    .orderBy('frame', 'asc');
+    .orderBy('tick');
 
   if (typeof roundNumber === 'number') {
     query = query.where('round_number', '=', roundNumber);

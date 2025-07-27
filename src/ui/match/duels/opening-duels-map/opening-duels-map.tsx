@@ -206,8 +206,8 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
       <KillFeedEntry
         kill={hoveringKill}
         timeElapsedOption={{
-          frameRate: match.frameRate,
-          roundStartFrame: round?.startFrame ?? 0,
+          tickrate: match.tickrate,
+          roundFreezetimeEndTick: round?.freezetimeEndTick ?? 0,
         }}
       />
     );
