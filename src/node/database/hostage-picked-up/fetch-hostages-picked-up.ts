@@ -7,7 +7,7 @@ export async function fetchHostagesPickedUp(checksum: string, roundNumber: numbe
     .selectAll()
     .where('match_checksum', '=', checksum)
     .where('round_number', '=', roundNumber)
-    .orderBy('frame', 'asc')
+    .orderBy('tick')
     .execute();
 
   const hostagesPickedUp = rows.map(hostagePickedUpRowToHostagePickedUp);

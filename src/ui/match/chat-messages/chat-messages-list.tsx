@@ -41,7 +41,7 @@ export function ChatMessagesList({ chatMessages }: Props) {
     <Content>
       <div className="select-text" ref={chatRef}>
         {chatMessages.map((chat) => {
-          return <ChatMessageRow key={`${chat.frame}-${chat.senderName}-${chat.senderSteamId}`} chatMessage={chat} />;
+          return <ChatMessageRow key={chat.id} chatMessage={chat} />;
         })}
       </div>
     </Content>

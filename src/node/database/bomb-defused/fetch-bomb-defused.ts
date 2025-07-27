@@ -10,7 +10,7 @@ export async function fetchBombDefused(checksum: string, roundNumber: number) {
     .select([db.fn.coalesce('steam_account_overrides.name', 'bombs_defused.defuser_name').as('defuser_name')])
     .where('match_checksum', '=', checksum)
     .where('round_number', '=', roundNumber)
-    .orderBy('frame', 'asc')
+    .orderBy('tick')
     .executeTakeFirst();
 
   let bombDefused: BombDefused | null = null;

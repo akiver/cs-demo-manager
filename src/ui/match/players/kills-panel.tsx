@@ -37,8 +37,8 @@ export function KillsPanel({ header, kills, demoPath, tickrate, rounds }: Props)
               <KillFeedEntry
                 kill={kill}
                 timeElapsedOption={{
-                  frameRate: match.frameRate,
-                  roundStartFrame: round?.startFrame ?? 1,
+                  tickrate: match.tickrate,
+                  roundFreezetimeEndTick: round?.freezetimeEndTick ?? 1,
                 }}
                 right={
                   <PlayDemoAtTickButton

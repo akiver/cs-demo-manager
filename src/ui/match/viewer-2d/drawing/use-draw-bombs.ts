@@ -6,7 +6,7 @@ import { useBombImage } from './use-bomb-image';
 import type { PlayerPosition } from 'csdm/common/types/player-position';
 
 export function useDrawBombs() {
-  const { currentFrame, bombPlanted, bombDefused, bombExploded, playerPositions } = useViewerContext();
+  const { currentTick, bombPlanted, bombDefused, bombExploded, playerPositions } = useViewerContext();
   const bombImage = useBombImage();
   const explosionImage = useBombExplosionImage();
   const lastBombPosition = useRef<PlayerPosition | null>(null);
@@ -15,9 +15,9 @@ export function useDrawBombs() {
     context: CanvasRenderingContext2D,
     { zoomedToRadarX, zoomedToRadarY, zoomedSize }: InteractiveCanvas,
   ) => {
-    if (bombPlanted === null || bombPlanted.frame > currentFrame) {
+    if (bombPlanted === null || bombPlanted.tick > currentTick) {
       const playerPositionsWithBomb = playerPositions.filter((position) => {
-        return position.frame === currentFrame && position.hasBomb;
+        return position.tick === currentTick && position.hasBomb;
       });
       // A player has the bomb, the bomb indicator will be drawn by the drawPlayers function
       if (playerPositionsWithBomb.length > 0) {
@@ -38,14 +38,14 @@ export function useDrawBombs() {
         );
       };
 
-      if (lastBombPosition.current && lastBombPosition.current.frame <= currentFrame) {
+      if (lastBombPosition.current && lastBombPosition.current.tick <= currentTick) {
         drawBomb(lastBombPosition.current.x, lastBombPosition.current.y);
         return;
       }
 
-      for (let i = currentFrame - 1; i >= 0; i--) {
+      for (let i = currentTick - 1; i >= 0; i--) {
         const lastPlayerPositionWithBomb = playerPositions.find((position) => {
-          return position.frame === i && position.hasBomb;
+          return position.tick === i && position.hasBomb;
         });
         if (lastPlayerPositionWithBomb) {
           drawBomb(lastPlayerPositionWithBomb.x, lastPlayerPositionWithBomb.y);
@@ -57,8 +57,8 @@ export function useDrawBombs() {
       return;
     }
 
-    const isDefusedBomb = bombDefused !== null && bombDefused.frame <= currentFrame;
-    const isExplodedBomb = bombExploded !== null && bombExploded.frame <= currentFrame;
+    const isDefusedBomb = bombDefused !== null && bombDefused.tick <= currentTick;
+    const isExplodedBomb = bombExploded !== null && bombExploded.tick <= currentTick;
     const x = zoomedToRadarX(bombPlanted.x);
     const y = zoomedToRadarY(bombPlanted.y);
     const bombImageSize = zoomedSize(isExplodedBomb ? 60 : 22);

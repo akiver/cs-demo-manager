@@ -23,8 +23,8 @@ export function KillIndicator({ kill, leftX }: Props) {
         <KillFeedEntry
           kill={kill}
           timeElapsedOption={{
-            frameRate: match.frameRate,
-            roundStartFrame: round.startFrame,
+            tickrate: match.tickrate,
+            roundFreezetimeEndTick: round.freezetimeEndTick,
           }}
         />
       }

@@ -3,14 +3,14 @@ import type { InteractiveCanvas } from '../../../hooks/use-interactive-map-canva
 import { useChickenImage } from './use-chicken-image';
 
 export function useDrawChickens() {
-  const { chickenPositions, currentFrame } = useViewerContext();
+  const { chickenPositions, currentTick } = useViewerContext();
   const chickenImage = useChickenImage();
 
   const drawChickens = (
     context: CanvasRenderingContext2D,
     { zoomedSize, zoomedToRadarX, zoomedToRadarY }: InteractiveCanvas,
   ) => {
-    const positions = chickenPositions.filter((position) => position.frame === currentFrame);
+    const positions = chickenPositions.filter((position) => position.tick === currentTick);
     const imageSize = zoomedSize(20);
 
     for (const position of positions) {

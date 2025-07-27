@@ -65,7 +65,7 @@ export function MultiKillsResults({ multiKills }: Props) {
             }
           >
             {multiKill.kills.map((kill) => {
-              return <KillFeedEntry key={`${kill.victimSteamId}-${kill.frame}`} kill={kill} />;
+              return <KillFeedEntry key={kill.id} kill={kill} />;
             })}
           </CollapsePanel>
         );

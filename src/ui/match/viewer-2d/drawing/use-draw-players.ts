@@ -10,11 +10,11 @@ import { buildPlayerId } from '../build-player-id';
 export function useDrawPlayers() {
   const {
     playerPositions,
-    currentFrame,
+    currentTick,
     focusedPlayerId,
     bombsDefuseStart,
     bombsPlantStart,
-    framerate,
+    tickrate,
     hostagesPickUpStart,
     hostagesPickedUp,
   } = useViewerContext();
@@ -24,7 +24,7 @@ export function useDrawPlayers() {
     context: CanvasRenderingContext2D,
     { zoomedToRadarX, zoomedToRadarY, zoomedSize }: InteractiveCanvas,
   ) => {
-    const positions = playerPositions.filter((position) => position.frame === currentFrame);
+    const positions = playerPositions.filter((position) => position.tick === currentTick);
     const playersAlivePositions = positions.filter((position) => position.isAlive);
 
     for (const position of playersAlivePositions) {
@@ -113,11 +113,11 @@ export function useDrawPlayers() {
       }
 
       if (position.isDefusing) {
-        const bombDefuseStart = bombsDefuseStart.find((event) => event.frame < currentFrame);
+        const bombDefuseStart = bombsDefuseStart.find((event) => event.tick < currentTick);
         if (bombDefuseStart) {
           const defuseSecondsRequired = position.hasDefuseKit ? 5 : 10;
-          const startDefusingFrame = currentFrame - bombDefuseStart.frame;
-          const percentage = startDefusingFrame / (defuseSecondsRequired * framerate);
+          const startDefusingTick = currentTick - bombDefuseStart.tick;
+          const percentage = startDefusingTick / (defuseSecondsRequired * tickrate);
           const startAngle = -Math.PI / 2;
           const endAngle = startAngle + Math.PI * 2 * percentage;
           context.beginPath();
@@ -133,20 +133,20 @@ export function useDrawPlayers() {
         const untieHostageDuration = 4;
         let pickUpSecondsRequired = position.hasDefuseKit ? untieHostageWithKitDuration : untieHostageDuration;
         const hostagePickUpStart = hostagesPickUpStart.find((event) => {
-          return event.frame < currentFrame && event.frame > currentFrame - pickUpSecondsRequired * framerate;
+          return event.tick < currentTick && event.tick > currentTick - pickUpSecondsRequired * tickrate;
         });
         if (hostagePickUpStart) {
           if (!position.hasDefuseKit) {
             const isHostageAlreadyUntied = hostagesPickedUp.some((event) => {
-              return event.frame < currentFrame && event.hostageEntityId === hostagePickUpStart.hostageEntityId;
+              return event.tick < currentTick && event.hostageEntityId === hostagePickUpStart.hostageEntityId;
             });
             // If an hostage has already been untied in the round even if a player doesn't have a kit it will take 1s to untie him.
             if (isHostageAlreadyUntied) {
               pickUpSecondsRequired = untieHostageWithKitDuration;
             }
           }
-          const startPickingUpFrame = currentFrame - hostagePickUpStart.frame;
-          const percentage = startPickingUpFrame / (pickUpSecondsRequired * framerate);
+          const startPickingUpTick = currentTick - hostagePickUpStart.tick;
+          const percentage = startPickingUpTick / (pickUpSecondsRequired * tickrate);
           const startAngle = -Math.PI / 2;
           const endAngle = startAngle + Math.PI * 2 * percentage;
           context.beginPath();
@@ -158,11 +158,11 @@ export function useDrawPlayers() {
       }
 
       if (position.isPlanting) {
-        const bombPlantStart = bombsPlantStart.find((event) => event.frame < currentFrame);
+        const bombPlantStart = bombsPlantStart.find((event) => event.tick < currentTick);
         if (bombPlantStart) {
-          const startPlantingFrame = currentFrame - bombPlantStart.frame;
+          const startPlantingTick = currentTick - bombPlantStart.tick;
           const bombPlantDuration = 3.2;
-          const percentage = startPlantingFrame / (bombPlantDuration * framerate);
+          const percentage = startPlantingTick / (bombPlantDuration * tickrate);
           const startAngle = -Math.PI / 2;
           const endAngle = startAngle + Math.PI * 2 * percentage;
           context.beginPath();
