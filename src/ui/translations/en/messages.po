@@ -5183,6 +5183,14 @@ msgstr "HLAE has been updated"
 msgid "An error occurred while updating HLAE"
 msgstr "An error occurred while updating HLAE"
 
+#: src/ui/match/video/hlae/hlae.tsx
+msgid "This HLAE version doesn't support the last CS2 update, the game will crash!"
+msgstr "This HLAE version doesn't support the last CS2 update, the game will crash!"
+
+#: src/ui/match/video/hlae/hlae.tsx
+msgid "If there is a new version available, please update it. Otherwise, use the \"Counter-Strike\" recording system in the meantime."
+msgstr "If there is a new version available, please update it. Otherwise, use the \"Counter-Strike\" recording system in the meantime."
+
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
 msgid "Output folder"
