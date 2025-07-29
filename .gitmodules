@@ -4,7 +4,8 @@
 [submodule "cs2-server-plugin/cs2-server-plugin/deps/hl2sdk"]
 	path = cs2-server-plugin/cs2-server-plugin/deps/hl2sdk
 	url = https://github.com/alliedmodders/hl2sdk
-	branch = cs2
+	# TODO deps Replace with the cs2 branch when it supports the July 29th update, the deadlock branch supports recent Source 2 updates
+	branch = deadlock
 [submodule "cs2-server-plugin/cs2-server-plugin/deps/json"]
 	path = cs2-server-plugin/cs2-server-plugin/deps/json
 	url = https://github.com/nlohmann/json
