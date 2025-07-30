@@ -8,8 +8,7 @@ import { useInstalledHlaeVersion } from 'csdm/ui/match/video/hlae/use-installed-
 import { HlaeConfigFolderPath } from './hlae-config-folder-path';
 import { HlaeParameters } from './hlae-parameters';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
-import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
-import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { useIsHlaeEnabled } from './use-is-hlae-enabled';
 
 function isUnsupportedVersion(version: string | undefined): boolean {
   if (!version) {
@@ -29,9 +28,9 @@ function isUnsupportedVersion(version: string | undefined): boolean {
 
 export function Hlae() {
   const version = useInstalledHlaeVersion();
-  const { settings } = useVideoSettings();
+  const isHlaeEnabled = useIsHlaeEnabled();
 
-  if (settings.recordingSystem !== RecordingSystem.HLAE) {
+  if (!isHlaeEnabled) {
     return null;
   }
 
