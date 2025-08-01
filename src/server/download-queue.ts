@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import { pipeline } from 'node:stream';
-import { request } from 'undici';
+import { Client, interceptors } from 'undici';
 import b2 from 'unbzip2-stream';
 import unzipper from 'unzipper';
 import zlib from 'node:zlib';
@@ -162,10 +162,12 @@ class DownloadDemoQueue {
     const demoPath = this.buildDemoPath(downloadFolderPath, currentDownload.fileName);
     const infoPath = this.buildDemoInfoFilePath(demoPath);
     try {
-      const response = await request(currentDownload.demoUrl, {
+      const url = new URL(currentDownload.demoUrl);
+      const client = new Client(url.origin).compose(interceptors.redirect({ maxRedirections: 1 }));
+      const response = await client.request({
+        path: url.pathname,
         signal: controller.signal,
         method: 'GET',
-        maxRedirections: 1,
       });
       if (response.statusCode === 404) {
         server.sendMessageToRendererProcess({

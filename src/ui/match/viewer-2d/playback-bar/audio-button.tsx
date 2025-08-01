@@ -15,7 +15,7 @@ import { useThemeName } from 'csdm/ui/settings/ui/use-theme-name';
 import { ThemeName } from 'csdm/common/types/theme-name';
 import { VerticalSlider } from './vertical-slider';
 
-function useWavSurfer(container: RefObject<HTMLDivElement | null>, audioBytes: Uint8Array) {
+function useWavSurfer(container: RefObject<HTMLDivElement | null>, audioBytes: Uint8Array<ArrayBuffer>) {
   const [ws, setWs] = useState<WaveSurfer | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);

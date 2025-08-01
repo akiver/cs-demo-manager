@@ -59,7 +59,7 @@ type State = {
   bombDefused: BombDefused | null;
   status: Status;
   audio: HTMLAudioElement | null; // the audio element used during playback
-  audioBytes: Uint8Array; // the audio bytes used for the audio waveform
+  audioBytes: Uint8Array<ArrayBuffer>; // the audio bytes used for the audio waveform
 };
 
 const defaultState: State = {

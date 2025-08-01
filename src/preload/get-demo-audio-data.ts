@@ -7,7 +7,7 @@ import { supportedAudioExtensions } from 'csdm/common/types/audio-extensions';
 type DemoAudioData = {
   audioFilePath: string;
   audio: HTMLAudioElement;
-  audioBytes: Buffer;
+  audioBytes: Uint8Array<ArrayBuffer>;
   offsetSeconds: number;
 };
 

@@ -54,7 +54,7 @@ type ViewerContext = {
   resetAudioOffset: () => void;
   loadAudioFile: (audioFilePath: string) => Promise<void>;
   unloadAudioFile: () => void;
-  audioBytes: Uint8Array;
+  audioBytes: Uint8Array<ArrayBuffer>;
   map: Map;
   game: Game;
   kills: Kill[];
@@ -108,7 +108,7 @@ type Props = {
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
   audio: HTMLAudioElement | null;
-  audioBytes: Uint8Array;
+  audioBytes: Uint8Array<ArrayBuffer>;
   loadAudioFile: (audioFilePath: string) => Promise<void>;
   unloadAudioFile: () => void;
 };
