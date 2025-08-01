@@ -11,7 +11,7 @@ import { RendererServerMessageName } from 'csdm/server/renderer-server-message-n
 import { server } from 'csdm/server/server';
 import { loadDemoByPath } from 'csdm/node/demo/load-demo-by-path';
 import { getSettings } from 'csdm/node/settings/get-settings';
-import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
+import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
 import type { Download, DownloadDemoProgressPayload } from 'csdm/common/download/download-types';
 import { DownloadSource } from 'csdm/common/download/download-types';
 import { MatchAlreadyInDownloadQueue } from 'csdm/node/download/errors/match-already-in-download-queue';
@@ -21,6 +21,7 @@ import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expir
 import { WriteDemoInfoFileError } from 'csdm/node/download/errors/write-info-file-error';
 import { insertDownloadHistory } from 'csdm/node/database/download-history/insert-download-history';
 import { InvalidDemoHeader } from 'csdm/node/demo/errors/invalid-demo-header';
+import { insertDemos } from 'csdm/node/database/demos/insert-demos';
 const streamPipeline = util.promisify(pipeline);
 
 class DownloadDemoQueue {
@@ -228,13 +229,20 @@ class DownloadDemoQueue {
         }
       }
 
-      const demoChecksum = await getDemoChecksumFromDemoPath(demoPath);
+      const demo = await getDemoFromFilePath(demoPath);
+      // for non-Valve demos, we update the demo's date with the one coming from the third-party API and insert it into
+      // the database so that the date will be more accurate.
+      // for Valve demos, the date is retrieved from the proto .info file.
+      if (currentDownload.source !== DownloadSource.Valve) {
+        demo.date = currentDownload.match.date;
+        await insertDemos([demo]);
+      }
       await insertDownloadHistory(currentDownload.matchId);
 
       server.sendMessageToRendererProcess({
         name: RendererServerMessageName.DownloadDemoSuccess,
         payload: {
-          demoChecksum,
+          demoChecksum: demo.checksum,
           download: currentDownload,
         },
       });
