@@ -13,11 +13,11 @@ export function Weapons({ weapons, currentWeapon, playerName }: Props) {
     <div className="flex flex-wrap opacity-50 gap-x-4">
       {weapons
         .filter((weaponName) => weaponName !== currentWeapon)
-        .map((weaponName) => {
+        .map((weaponName, index) => {
           const WeaponIcon = WEAPONS_ICONS[weaponName];
           if (WeaponIcon !== undefined) {
             return (
-              <div className="relative" key={`weapon-${playerName}-${weaponName}`}>
+              <div className="relative" key={`weapon-${playerName}-${weaponName}-${index}`}>
                 <WeaponIcon className="fill-gray-800 stroke-gray-800 h-20" />
               </div>
             );
