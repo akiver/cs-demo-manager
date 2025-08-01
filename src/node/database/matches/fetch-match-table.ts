@@ -6,6 +6,7 @@ import { fetchChecksumTagIds } from '../tags/fetch-checksum-tag-ids';
 import { MatchNotFound } from './errors/match-not-found';
 import { fetchCollateralKillCountPerMatch } from './fetch-collateral-kill-count-per-match';
 import { matchTableRowToMatchTable } from './match-table-row-to-match-table';
+import { fetchPlayersPerMatch } from './fetch-players-per-match';
 
 export async function fetchMatchTable(checksum: string): Promise<MatchTable> {
   const { sum } = db.fn;
@@ -48,8 +49,9 @@ export async function fetchMatchTable(checksum: string): Promise<MatchTable> {
   }
 
   const tagIds = await fetchChecksumTagIds(row.checksum);
+  const playersPerMatch = await fetchPlayersPerMatch([row.checksum]);
   const collateralKillCountPerMatch = await fetchCollateralKillCountPerMatch([row.checksum]);
-  const match: MatchTable = matchTableRowToMatchTable(row, tagIds, collateralKillCountPerMatch);
+  const match: MatchTable = matchTableRowToMatchTable(row, tagIds, collateralKillCountPerMatch, playersPerMatch);
 
   return match;
 }

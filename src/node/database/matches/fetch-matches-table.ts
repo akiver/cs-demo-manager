@@ -7,6 +7,7 @@ import { matchTableRowToMatchTable } from './match-table-row-to-match-table';
 import { fetchChecksumTags } from '../tags/fetch-checksum-tags';
 import { fetchCollateralKillCountPerMatch } from './fetch-collateral-kill-count-per-match';
 import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filters';
+import { fetchPlayersPerMatch } from './fetch-players-per-match';
 
 type MatchTableFilters = MatchFilters & { steamId?: string; teamName?: string };
 
@@ -60,6 +61,7 @@ export async function fetchMatchesTable(filters: MatchTableFilters): Promise<Mat
   const rows: MatchTableRow[] = await query.execute();
   const collateralKillCountPerMatch = await fetchCollateralKillCountPerMatch();
   const checksumTags = await fetchChecksumTags();
+  const playersPerMatch = await fetchPlayersPerMatch(rows.map((row) => row.checksum));
   const matches: MatchTable[] = [];
   for (const row of rows) {
     const tagIds: string[] = checksumTags
@@ -67,7 +69,7 @@ export async function fetchMatchesTable(filters: MatchTableFilters): Promise<Mat
         return checksumTag.checksum === row.checksum;
       })
       .map((checksumTag) => String(checksumTag.tag_id));
-    const match = matchTableRowToMatchTable(row, tagIds, collateralKillCountPerMatch);
+    const match = matchTableRowToMatchTable(row, tagIds, collateralKillCountPerMatch, playersPerMatch);
     matches.push(match);
   }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { FilterSelection } from 'csdm/ui/components/dropdown-filter/filter-selection';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
@@ -7,25 +7,31 @@ type Props = {
   players: { steamId: string; name: string }[];
   onChange: (steamIds: string[]) => void;
   selectedSteamIds: string[];
+  filter?: ReactNode;
 };
 
-export function PlayersSelect({ players, onChange, selectedSteamIds }: Props) {
+export function PlayersSelect({
+  players,
+  onChange,
+  selectedSteamIds,
+  filter = (
+    <FilterSelection
+      onSelectAllClick={() => {
+        onChange(players.map((round) => round.steamId));
+      }}
+      onDeselectAllClick={() => {
+        onChange([]);
+      }}
+    />
+  ),
+}: Props) {
   return (
     <div className="flex flex-col gap-y-8">
       <div className="flex items-baseline">
         <p>
           <Trans context="Players filter category">Players</Trans>
         </p>
-        <div className="ml-16 mt-px">
-          <FilterSelection
-            onSelectAllClick={() => {
-              onChange(players.map((round) => round.steamId));
-            }}
-            onDeselectAllClick={() => {
-              onChange([]);
-            }}
-          />
-        </div>
+        <div className="ml-16 mt-px">{filter}</div>
       </div>
       <div className="flex flex-wrap gap-4">
         {players.map((player) => {

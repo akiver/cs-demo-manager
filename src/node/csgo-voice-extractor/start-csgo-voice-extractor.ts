@@ -19,19 +19,25 @@ import { UnsupportedDemoFormat } from './errors/unsupported-demo-format';
 import { OpenDemoError } from './errors/open-demo-error';
 import type { ExportVoiceMode } from './export-voice-mode';
 
-export async function startCsgoVoiceExtractor(demoPath: string, outputFolderPath: string, mode: ExportVoiceMode) {
+type Options = {
+  demoPath: string;
+  outputFolderPath: string;
+  mode: ExportVoiceMode;
+  steamIds: string[];
+};
+
+export async function startCsgoVoiceExtractor({ demoPath, outputFolderPath, mode, steamIds }: Options) {
   await fs.mkdirp(outputFolderPath);
 
   return new Promise<void>((resolve, reject) => {
     const librariesFolderPath = path.join(getStaticFolderPath(), 'csgove');
     const executablePath = path.join(librariesFolderPath, isWindows ? 'csgove.exe' : 'csgove');
-    const args = [
-      `"${executablePath}"`,
-      '-exit-on-first-error',
-      `-mode=${mode}`,
-      `-output="${outputFolderPath}"`,
-      `"${demoPath}"`,
-    ];
+    const args = [`"${executablePath}"`, '-exit-on-first-error', `-mode=${mode}`, `-output="${outputFolderPath}"`];
+    if (steamIds.length > 0) {
+      args.push(`-steam-ids="${steamIds.join(',')}"`);
+    }
+    args.push(`"${demoPath}"`);
+
     const command = args.join(' ');
     const libraryPathVarName = isMac ? 'DYLD_LIBRARY_PATH' : 'LD_LIBRARY_PATH';
 

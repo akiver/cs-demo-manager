@@ -197,6 +197,7 @@ function AudioSelectorDialog({ loadAudioFile }: Props) {
                   demoPaths: [demoFilePath],
                   outputPath: window.csdm.getPathDirectoryName(demoFilePath),
                   mode: ExportVoiceMode.SingleFull,
+                  steamIds: [],
                 },
               });
               setIsExporting(true);

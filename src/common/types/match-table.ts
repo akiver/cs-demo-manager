@@ -1,5 +1,10 @@
 import type { Match } from 'csdm/common/types/match';
 
+export type MatchTablePlayer = {
+  steamId: string;
+  name: string;
+};
+
 export type MatchTable = Pick<
   Match,
   | 'checksum'
@@ -36,4 +41,5 @@ export type MatchTable = Pick<
   fourKillCount: number;
   threeKillCount: number;
   hltvRating2: number;
+  players: MatchTablePlayer[];
 };

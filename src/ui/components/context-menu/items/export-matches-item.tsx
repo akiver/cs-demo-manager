@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { ExportMatchesAsXlsxDialog } from 'csdm/ui/components/dialogs/export-matches-xlsx-dialog';
-import type { MatchTable } from 'csdm/common/types/match-table';
+import type { MatchTable, MatchTablePlayer } from 'csdm/common/types/match-table';
 import { ExportMatchesToJsonItem } from 'csdm/ui/components/context-menu/items/export-matches-to-json-item';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
 import { Trans } from '@lingui/react/macro';
@@ -23,10 +23,16 @@ export function ExportMatchesItem({ matches }: Props) {
   const checksums: string[] = [];
   const shareCodes: string[] = [];
   const filepaths: string[] = [];
+  const players: MatchTablePlayer[] = [];
   for (const match of matches) {
     checksums.push(match.checksum);
     shareCodes.push(match.shareCode);
     filepaths.push(match.demoFilePath);
+    for (const player of match.players) {
+      if (!players.some(({ steamId }) => steamId === player.steamId)) {
+        players.push(player);
+      }
+    }
   }
 
   const onExportToXlsxClick = () => {
@@ -37,7 +43,7 @@ export function ExportMatchesItem({ matches }: Props) {
     <SubContextMenu label={<Trans context="Context menu">Export</Trans>}>
       <ExportToXlsxItem onClick={onExportToXlsxClick} />
       <ExportMatchesToJsonItem checksums={checksums} />
-      <ExportPlayersVoiceItem demoPaths={filepaths} />
+      <ExportPlayersVoiceItem demoPaths={filepaths} players={players} />
       <ExportChatMessagesItem checksums={checksums} />
     </SubContextMenu>
   );

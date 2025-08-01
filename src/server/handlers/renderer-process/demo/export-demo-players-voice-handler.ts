@@ -23,6 +23,7 @@ export type ExportDemoPlayersVoicePayload = {
   demoPaths: string[];
   outputPath: string;
   mode: ExportVoiceMode;
+  steamIds: string[];
 };
 
 export async function exportDemoPlayersVoiceHandler(payload: ExportDemoPlayersVoicePayload) {
@@ -36,7 +37,12 @@ export async function exportDemoPlayersVoiceHandler(payload: ExportDemoPlayersVo
         },
       });
 
-      await startCsgoVoiceExtractor(demoPath, payload.outputPath, payload.mode);
+      await startCsgoVoiceExtractor({
+        demoPath,
+        outputFolderPath: payload.outputPath,
+        mode: payload.mode,
+        steamIds: payload.steamIds,
+      });
     } catch (error) {
       logger.error(error);
       const errorCode = getErrorCodeFromError(error);

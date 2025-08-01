@@ -22,6 +22,8 @@ import { ExportVoiceMode } from 'csdm/node/csgo-voice-extractor/export-voice-mod
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
+import { PlayersSelect } from '../../inputs/select/players-select';
+import type { MatchTablePlayer } from 'csdm/common/types/match-table';
 
 type DialogProps = {
   outputFolderPath: string;
@@ -159,12 +161,14 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
 }
 
 type SelectExportModeDialogProps = {
-  onSelect: (mode: ExportVoiceMode) => void;
+  onSelect: (mode: ExportVoiceMode, steamIds: string[]) => void;
+  players?: MatchTablePlayer[];
 };
 
-function SelectExportModeDialog({ onSelect }: SelectExportModeDialogProps) {
+function SelectExportModeDialog({ onSelect, players }: SelectExportModeDialogProps) {
   const { hideDialog } = useDialog();
   const [mode, setMode] = useState<ExportVoiceMode>(ExportVoiceMode.SingleFull);
+  const [steamIds, setSteamIds] = useState<string[]>([]);
   const options: SelectOption<ExportVoiceMode>[] = [
     {
       label: <Trans context="Voice mode export label">One file per player (no silence, only voice)</Trans>,
@@ -195,13 +199,18 @@ function SelectExportModeDialog({ onSelect }: SelectExportModeDialogProps) {
             </InputLabel>
             <div>
               <Select options={options} value={mode} onChange={setMode} />
+              {players && players.length > 0 && (
+                <div className="mt-12 max-h-[220px] overflow-auto">
+                  <PlayersSelect players={players} selectedSteamIds={steamIds} onChange={setSteamIds} filter={null} />
+                </div>
+              )}
             </div>
           </div>
         </DialogContent>
         <DialogFooter>
           <ConfirmButton
             onClick={() => {
-              onSelect(mode);
+              onSelect(mode, steamIds);
             }}
           />
           <CancelButton onClick={hideDialog} />
@@ -213,9 +222,10 @@ function SelectExportModeDialog({ onSelect }: SelectExportModeDialogProps) {
 
 type Props = {
   demoPaths: string[];
+  players?: MatchTablePlayer[];
 };
 
-export function ExportPlayersVoiceItem({ demoPaths }: Props) {
+export function ExportPlayersVoiceItem({ demoPaths, players }: Props) {
   const client = useWebSocketClient();
   const { showDialog } = useDialog();
   const { t } = useLingui();
@@ -223,7 +233,8 @@ export function ExportPlayersVoiceItem({ demoPaths }: Props) {
   const onClick = () => {
     showDialog(
       <SelectExportModeDialog
-        onSelect={async (mode) => {
+        players={players}
+        onSelect={async (mode, steamIds) => {
           const { filePaths, canceled } = await window.csdm.showOpenDialog({
             buttonLabel: t({
               context: 'Button label',
@@ -246,6 +257,7 @@ export function ExportPlayersVoiceItem({ demoPaths }: Props) {
               demoPaths,
               outputPath,
               mode,
+              steamIds,
             },
           });
         }}
