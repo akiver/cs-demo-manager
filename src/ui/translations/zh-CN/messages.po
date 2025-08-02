@@ -1549,6 +1549,11 @@ msgstr "机枪"
 msgid "weaponType.grenade"
 msgstr "投掷物"
 
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.melee"
+msgstr ""
+
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
 msgid "Weapon types"
@@ -6036,6 +6041,10 @@ msgstr "狙击手"
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Machine guns"
 msgstr "机枪"
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Melee"
+msgstr ""
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Head"

@@ -37,6 +37,9 @@ function buildHitGroupData(damages: Damage[], totalDamageCount: number): HitGrou
 
 function getFilteredDamages(filters: Filter, damages: Damage[], weaponName?: WeaponName) {
   let filteredDamages: Damage[] = damages.filter((damage) => {
+    if (damage.weaponType === WeaponType.Melee) {
+      return true;
+    }
     return damage.hitgroup !== HitGroup.Generic && damage.hitgroup !== HitGroup.Gear;
   });
 
@@ -178,8 +181,9 @@ function buildWeaponsStats(filters: Filter, match: Match) {
   const smgs = allStats.filter((weapon) => weapon.type === WeaponType.SMG);
   const snipers = allStats.filter((weapon) => weapon.type === WeaponType.Sniper);
   const machineGuns = allStats.filter((weapon) => weapon.type === WeaponType.MachineGun);
+  const melee = allStats.filter((weapon) => weapon.type === WeaponType.Melee);
 
-  return { rifles, pistols, smgs, snipers, machineGuns };
+  return { rifles, pistols, smgs, snipers, machineGuns, melee };
 }
 
 export type HumanBodyData = {
@@ -393,7 +397,7 @@ export function WeaponsAccuracy() {
     weaponTypes: [],
   });
   const bodyData = getBodyDataFromFilters(filters, match.damages);
-  const { rifles, pistols, smgs, snipers, machineGuns } = buildWeaponsStats(filters, match);
+  const { rifles, pistols, smgs, snipers, machineGuns, melee } = buildWeaponsStats(filters, match);
 
   return (
     <div className="flex flex-col gap-y-12">
@@ -456,6 +460,7 @@ export function WeaponsAccuracy() {
           {smgs.length > 0 && <WeaponsTable title={t`SMGs`} weapons={smgs} />}
           {snipers.length > 0 && <WeaponsTable title={t`Snipers`} weapons={snipers} />}
           {machineGuns.length > 0 && <WeaponsTable title={t`Machine guns`} weapons={machineGuns} />}
+          {melee.length > 0 && <WeaponsTable title={t`Melee`} weapons={melee} />}
         </div>
 
         <div className="flex h-fit">

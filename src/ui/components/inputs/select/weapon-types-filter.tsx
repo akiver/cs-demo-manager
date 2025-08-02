@@ -62,6 +62,13 @@ export function WeaponTypesFilter({ onChange, selectedWeaponTypes }: Props) {
         message: 'Grenade',
       }),
     },
+    {
+      value: WeaponType.Melee,
+      label: t({
+        id: 'weaponType.melee',
+        message: 'Melee',
+      }),
+    },
   ];
 
   return (

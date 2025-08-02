@@ -1544,6 +1544,11 @@ msgstr "Machine gun"
 msgid "weaponType.grenade"
 msgstr "Grenade"
 
+#. js-lingui-explicit-id
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgid "weaponType.melee"
+msgstr "Melee"
+
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
 msgid "Weapon types"
@@ -6035,6 +6040,10 @@ msgstr "Snipers"
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Machine guns"
 msgstr "Machine guns"
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Melee"
+msgstr "Melee"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Head"
