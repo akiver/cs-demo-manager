@@ -24,7 +24,7 @@ function buildPlayersOptions(players: MatchPlayer[]) {
 type Options = {
   event: typeof PlayerSequenceEvent.Kills | typeof PlayerSequenceEvent.Deaths;
   match: Match;
-  steamId: string;
+  steamIds: string[];
   perspective: string;
   weapons: WeaponName[];
   settings: VideoSettings;
@@ -32,10 +32,10 @@ type Options = {
   endSecondsAfterEvent: number;
 };
 
-export function buildPlayerEventSequences({
+export function buildPlayersEventSequences({
   event,
   match,
-  steamId,
+  steamIds,
   perspective,
   weapons,
   settings,
@@ -43,7 +43,7 @@ export function buildPlayerEventSequences({
   endSecondsAfterEvent,
 }: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
-  let playerEvents = match.kills.filter((kill) => kill[steamIdKey] === steamId);
+  let playerEvents = match.kills.filter((kill) => steamIds.includes(kill[steamIdKey]));
   if (weapons.length > 0) {
     playerEvents = playerEvents.filter((kill) => {
       return weapons.includes(kill.weaponName);
@@ -65,7 +65,7 @@ export function buildPlayerEventSequences({
   const maxTicksBetweenEvents = Math.round(match.tickrate * maxSecondsBetweenEvents);
 
   for (const [index, action] of playerEvents.entries()) {
-    let steamIdToFocus = steamId;
+    let steamIdToFocus = action[steamIdKey];
     if (event === PlayerSequenceEvent.Kills && perspective === Perspective.Enemy && action.victimSteamId) {
       steamIdToFocus = action.victimSteamId;
     } else if (event === PlayerSequenceEvent.Deaths && perspective === Perspective.Enemy && action.killerSteamId) {

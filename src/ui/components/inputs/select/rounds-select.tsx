@@ -13,7 +13,7 @@ type Props = {
 export function RoundsSelect({ rounds, onChange, selectedRoundNumbers }: Props) {
   return (
     <div className="flex flex-col gap-y-8">
-      <div className="flex items-baseline">
+      <div className="flex items-baseline justify-between">
         <p>
           <Trans context="Filter rounds category">Rounds</Trans>
         </p>

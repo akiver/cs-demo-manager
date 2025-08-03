@@ -10,12 +10,12 @@ import { PerspectiveSelect } from 'csdm/ui/components/inputs/select/perspective-
 import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
 import { buildMatchVideoPath } from 'csdm/ui/routes-paths';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
-import type { GeneratePlayerEventPayload } from 'csdm/ui/match/video/sequences/sequences-actions';
+import type { GeneratePlayersEventPayload } from 'csdm/ui/match/video/sequences/sequences-actions';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 
 type Props = {
   steamId: string;
-  generateSequences: (payload: GeneratePlayerEventPayload) => void;
+  generateSequences: (payload: GeneratePlayersEventPayload) => void;
   secondsBeforeLabel: ReactNode;
   secondsAfterLabel: ReactNode;
 };
@@ -38,7 +38,7 @@ export function GeneratePlayerEventsDialog({
     hideDialog();
     generateSequences({
       match,
-      steamId,
+      steamIds: [steamId],
       perspective,
       weapons: [],
       settings,

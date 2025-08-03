@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import type { Kill } from 'csdm/common/types/kill';
 import type { Match } from 'csdm/common/types/match';
 import type { MatchPlayer } from 'csdm/common/types/match-player';
-import { buildPlayerEventSequences } from './build-player-event-sequences';
+import { buildPlayersEventSequences } from './build-players-event-sequences';
 import { PlayerSequenceEvent } from './player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
 import { defaultSettings } from 'csdm/node/settings/default-settings';
@@ -34,10 +34,10 @@ describe('generate player kills sequences', () => {
       kills: [kill],
     } as Match;
 
-    const sequences = buildPlayerEventSequences({
+    const sequences = buildPlayersEventSequences({
       event: PlayerSequenceEvent.Kills,
       match,
-      steamId: killerSteamId,
+      steamIds: [killerSteamId],
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
@@ -80,10 +80,10 @@ describe('generate player kills sequences', () => {
       kills: [firstKillWithDedicatedSequence, firstKill, secondKill, thirdKill, lastKillWithDedicatedSequence],
     } as Match;
 
-    const sequences = buildPlayerEventSequences({
+    const sequences = buildPlayersEventSequences({
       event: PlayerSequenceEvent.Kills,
       match,
-      steamId: killerSteamId,
+      steamIds: [killerSteamId],
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
@@ -121,10 +121,10 @@ describe('generate player kills sequences', () => {
       kills: [firstKill, secondKill],
     } as Match;
 
-    const sequences = buildPlayerEventSequences({
+    const sequences = buildPlayersEventSequences({
       event: PlayerSequenceEvent.Kills,
       match,
-      steamId: killerSteamId,
+      steamIds: [killerSteamId],
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
@@ -155,10 +155,10 @@ describe('generate player kills sequences', () => {
       kills: [kill1, kill2],
     } as Match;
 
-    const sequences = buildPlayerEventSequences({
+    const sequences = buildPlayersEventSequences({
       event: PlayerSequenceEvent.Kills,
       match,
-      steamId: killerSteamId,
+      steamIds: [killerSteamId],
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
@@ -184,10 +184,10 @@ describe('generate player kills sequences', () => {
       kills: [firstKill],
     } as Match;
 
-    const sequences = buildPlayerEventSequences({
+    const sequences = buildPlayersEventSequences({
       event: PlayerSequenceEvent.Kills,
       match,
-      steamId: killerSteamId,
+      steamIds: [killerSteamId],
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,
@@ -210,10 +210,10 @@ describe('generate player kills sequences', () => {
       kills: [firstKill],
     } as Match;
 
-    const sequences = buildPlayerEventSequences({
+    const sequences = buildPlayersEventSequences({
       event: PlayerSequenceEvent.Kills,
       match,
-      steamId: killerSteamId,
+      steamIds: [killerSteamId],
       perspective: Perspective.Player,
       weapons: [],
       settings: defaultSettings.video,

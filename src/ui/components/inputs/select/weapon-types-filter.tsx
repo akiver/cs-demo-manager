@@ -73,7 +73,7 @@ export function WeaponTypesFilter({ onChange, selectedWeaponTypes }: Props) {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <div className="flex items-baseline">
+      <div className="flex items-baseline justify-between">
         <p>
           <Trans context="Filter weapon types category">Weapon types</Trans>
         </p>

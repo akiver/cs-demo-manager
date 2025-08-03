@@ -5,9 +5,9 @@ import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { useCurrentMatch } from '../use-current-match';
 import {
-  generatePlayerDeathsSequences,
-  generatePlayerKillsSequences,
-  generatePlayerRoundsSequences,
+  generatePlayersDeathsSequences,
+  generatePlayersKillsSequences,
+  generatePlayersRoundsSequences,
 } from './sequences/sequences-actions';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
@@ -24,9 +24,10 @@ import { assertNever } from 'csdm/common/assert-never';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
+import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
 
-function getVisibleWeapons(event: PlayerSequenceEvent, steamId: string | undefined, match: Match) {
-  if (!steamId) {
+function getVisibleWeapons(event: PlayerSequenceEvent, steamIds: string[], match: Match) {
+  if (steamIds.length === 0) {
     return [];
   }
 
@@ -35,7 +36,7 @@ function getVisibleWeapons(event: PlayerSequenceEvent, steamId: string | undefin
   return uniqueArray(
     match.kills
       .filter((kill) => {
-        return kill[key] === steamId;
+        return steamIds.includes(kill[key]);
       })
       .map((kill) => kill.weaponName),
   );
@@ -66,26 +67,26 @@ function SelectPlayerDialog() {
       label: <Trans context="Select option">Round</Trans>,
     },
   ];
-  const [selectedSteamId, setSelectedSteamId] = useState(options.length > 0 ? options[0].value : undefined);
+  const [selectedSteamIds, setSelectedSteamIds] = useState(options.length > 0 ? [options[0].value] : []);
   const [selectedEvent, setSelectedEvent] = useState<PlayerSequenceEvent>(PlayerSequenceEvent.Kills);
-  const visibleWeapons = getVisibleWeapons(selectedEvent, selectedSteamId, match);
+  const visibleWeapons = getVisibleWeapons(selectedEvent, selectedSteamIds, match);
   const [selectedWeapons, setSelectedWeapons] = useState<WeaponName[]>(visibleWeapons);
   const [perspective, setPerspective] = useState<Perspective>(Perspective.Player);
   const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(2);
   const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(2);
 
   const onConfirm = () => {
-    if (!selectedSteamId) {
+    if (!selectedSteamIds) {
       return;
     }
 
     switch (selectedEvent) {
       case PlayerSequenceEvent.Deaths:
         dispatch(
-          generatePlayerDeathsSequences({
+          generatePlayersDeathsSequences({
             match,
             perspective,
-            steamId: selectedSteamId,
+            steamIds: selectedSteamIds,
             weapons: selectedWeapons,
             settings,
             startSecondsBeforeEvent,
@@ -95,10 +96,10 @@ function SelectPlayerDialog() {
         break;
       case PlayerSequenceEvent.Kills:
         dispatch(
-          generatePlayerKillsSequences({
+          generatePlayersKillsSequences({
             match,
             perspective,
-            steamId: selectedSteamId,
+            steamIds: selectedSteamIds,
             weapons: selectedWeapons,
             settings,
             startSecondsBeforeEvent,
@@ -108,9 +109,9 @@ function SelectPlayerDialog() {
         break;
       case PlayerSequenceEvent.Rounds:
         dispatch(
-          generatePlayerRoundsSequences({
+          generatePlayersRoundsSequences({
             match,
-            steamId: selectedSteamId,
+            steamIds: selectedSteamIds,
             settings,
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
@@ -218,23 +219,16 @@ function SelectPlayerDialog() {
       </DialogHeader>
       <DialogContent>
         <div className="flex flex-col gap-y-12 w-[512px]">
-          <div className="flex flex-col gap-y-8">
-            <label htmlFor="player">
-              <Trans context="Select label">Player</Trans>
-            </label>
-            <div>
-              <Select
-                id="player"
-                options={options}
-                value={selectedSteamId}
-                onChange={(steamId) => {
-                  setSelectedSteamId(steamId);
-                  const selectedWeapons = getVisibleWeapons(selectedEvent, steamId, match);
-                  setSelectedWeapons(selectedWeapons);
-                }}
-              />
-            </div>
-          </div>
+          <PlayersSelect
+            players={match.players}
+            selectedSteamIds={selectedSteamIds}
+            onChange={(steamIds: string[]) => {
+              setSelectedSteamIds(steamIds);
+              const selectedWeapons = getVisibleWeapons(selectedEvent, steamIds, match);
+              setSelectedWeapons(selectedWeapons);
+            }}
+          />
+
           <div className="flex flex-col gap-y-8">
             <label htmlFor="event">
               <Trans context="Select label">Event</Trans>
@@ -246,7 +240,7 @@ function SelectPlayerDialog() {
                 value={selectedEvent}
                 onChange={(event) => {
                   setSelectedEvent(event);
-                  const selectedWeapons = getVisibleWeapons(event, selectedSteamId, match);
+                  const selectedWeapons = getVisibleWeapons(event, selectedSteamIds, match);
                   setSelectedWeapons(selectedWeapons);
                   if (event === PlayerSequenceEvent.Rounds) {
                     setStartSecondsBeforeEvent(0);

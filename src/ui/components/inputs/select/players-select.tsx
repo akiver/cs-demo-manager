@@ -27,7 +27,7 @@ export function PlayersSelect({
 }: Props) {
   return (
     <div className="flex flex-col gap-y-8">
-      <div className="flex items-baseline">
+      <div className="flex items-baseline justify-between">
         <p>
           <Trans context="Players filter category">Players</Trans>
         </p>

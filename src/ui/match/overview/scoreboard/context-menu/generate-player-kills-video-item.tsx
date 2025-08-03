@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
-import { generatePlayerKillsSequences } from 'csdm/ui/match/video/sequences/sequences-actions';
+import { generatePlayersKillsSequences } from 'csdm/ui/match/video/sequences/sequences-actions';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
@@ -21,7 +21,7 @@ export function GeneratePlayerKillsVideoItem({ steamId }: Props) {
         secondsBeforeLabel={<Trans context="Input label">Seconds before each kill to start the sequence</Trans>}
         secondsAfterLabel={<Trans context="Input label">Seconds after each kill to stop the sequence</Trans>}
         generateSequences={(payload) => {
-          dispatch(generatePlayerKillsSequences(payload));
+          dispatch(generatePlayersKillsSequences(payload));
         }}
       />,
     );

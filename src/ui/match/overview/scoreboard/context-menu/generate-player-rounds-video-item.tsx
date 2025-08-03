@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
-import { generatePlayerRoundsSequences } from 'csdm/ui/match/video/sequences/sequences-actions';
+import { generatePlayersRoundsSequences } from 'csdm/ui/match/video/sequences/sequences-actions';
 import { buildMatchVideoPath } from 'csdm/ui/routes-paths';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
@@ -29,9 +29,9 @@ function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps
   const submit = () => {
     hideDialog();
     dispatch(
-      generatePlayerRoundsSequences({
+      generatePlayersRoundsSequences({
         match,
-        steamId,
+        steamIds: [steamId],
         settings,
         startSecondsBeforeEvent,
         endSecondsAfterEvent,
