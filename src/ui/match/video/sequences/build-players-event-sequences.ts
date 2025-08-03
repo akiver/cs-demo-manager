@@ -25,6 +25,7 @@ type Options = {
   event: typeof PlayerSequenceEvent.Kills | typeof PlayerSequenceEvent.Deaths;
   match: Match;
   steamIds: string[];
+  rounds: number[];
   perspective: string;
   weapons: WeaponName[];
   settings: VideoSettings;
@@ -36,6 +37,7 @@ export function buildPlayersEventSequences({
   event,
   match,
   steamIds,
+  rounds,
   perspective,
   weapons,
   settings,
@@ -43,7 +45,12 @@ export function buildPlayersEventSequences({
   endSecondsAfterEvent,
 }: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
-  let playerEvents = match.kills.filter((kill) => steamIds.includes(kill[steamIdKey]));
+  let playerEvents = match.kills.filter((kill) => {
+    if (rounds.length > 0 && !rounds.includes(kill.roundNumber)) {
+      return false;
+    }
+    return steamIds.includes(kill[steamIdKey]);
+  });
   if (weapons.length > 0) {
     playerEvents = playerEvents.filter((kill) => {
       return weapons.includes(kill.weaponName);

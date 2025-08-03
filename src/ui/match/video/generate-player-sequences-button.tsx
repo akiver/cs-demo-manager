@@ -25,6 +25,7 @@ import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
+import { RoundsSelect } from 'csdm/ui/components/inputs/select/rounds-select';
 
 function getVisibleWeapons(event: PlayerSequenceEvent, steamIds: string[], match: Match) {
   if (steamIds.length === 0) {
@@ -69,6 +70,7 @@ function SelectPlayerDialog() {
   ];
   const [selectedSteamIds, setSelectedSteamIds] = useState(options.length > 0 ? [options[0].value] : []);
   const [selectedEvent, setSelectedEvent] = useState<PlayerSequenceEvent>(PlayerSequenceEvent.Kills);
+  const [selectedRounds, setSelectedRounds] = useState<number[]>([]);
   const visibleWeapons = getVisibleWeapons(selectedEvent, selectedSteamIds, match);
   const [selectedWeapons, setSelectedWeapons] = useState<WeaponName[]>(visibleWeapons);
   const [perspective, setPerspective] = useState<Perspective>(Perspective.Player);
@@ -87,6 +89,7 @@ function SelectPlayerDialog() {
             match,
             perspective,
             steamIds: selectedSteamIds,
+            rounds: selectedRounds,
             weapons: selectedWeapons,
             settings,
             startSecondsBeforeEvent,
@@ -100,6 +103,7 @@ function SelectPlayerDialog() {
             match,
             perspective,
             steamIds: selectedSteamIds,
+            rounds: selectedRounds,
             weapons: selectedWeapons,
             settings,
             startSecondsBeforeEvent,
@@ -112,6 +116,7 @@ function SelectPlayerDialog() {
           generatePlayersRoundsSequences({
             match,
             steamIds: selectedSteamIds,
+            rounds: selectedRounds,
             settings,
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
@@ -253,6 +258,7 @@ function SelectPlayerDialog() {
               />
             </div>
           </div>
+          <RoundsSelect rounds={match.rounds} selectedRoundNumbers={selectedRounds} onChange={setSelectedRounds} />
           {renderSelectedEventOptions()}
         </div>
       </DialogContent>

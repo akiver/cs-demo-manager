@@ -5,6 +5,7 @@ import type { VideoSettings } from 'csdm/node/settings/settings';
 export function buildPlayersRoundsSequences(
   match: Match,
   steamIds: string[],
+  rounds: number[],
   startSecondsBeforeEvent: number,
   endSecondsAfterEvent: number,
   settings: VideoSettings,
@@ -15,6 +16,9 @@ export function buildPlayersRoundsSequences(
 
   for (const steamId of steamIds) {
     for (const round of match.rounds) {
+      if (rounds.length > 0 && !rounds.includes(round.number)) {
+        continue;
+      }
       const hasShot = match.shots.some((shot) => {
         return shot.roundNumber === round.number && shot.playerSteamId === steamId;
       });

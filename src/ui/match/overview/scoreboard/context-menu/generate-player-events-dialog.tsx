@@ -40,6 +40,7 @@ export function GeneratePlayerEventsDialog({
       match,
       steamIds: [steamId],
       perspective,
+      rounds: [],
       weapons: [],
       settings,
       startSecondsBeforeEvent,

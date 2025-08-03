@@ -8,6 +8,7 @@ import type { VideoSettings } from 'csdm/node/settings/settings';
 export type GeneratePlayersEventPayload = {
   steamIds: string[];
   match: Match;
+  rounds: number[];
   perspective: Perspective;
   weapons: WeaponName[];
   settings: VideoSettings;
@@ -38,4 +39,5 @@ export const generatePlayersRoundsSequences = createAction<{
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   settings: VideoSettings;
+  rounds: number[];
 }>('match/video/sequences/generatePlayersRounds');
