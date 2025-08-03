@@ -32,6 +32,7 @@ function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps
       generatePlayersRoundsSequences({
         match,
         steamIds: [steamId],
+        rounds: [],
         settings,
         startSecondsBeforeEvent,
         endSecondsAfterEvent,

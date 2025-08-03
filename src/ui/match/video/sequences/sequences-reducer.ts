@@ -66,6 +66,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       const sequences = buildPlayersRoundsSequences(
         match,
         steamIds,
+        action.payload.rounds,
         startSecondsBeforeEvent,
         endSecondsAfterEvent,
         settings,
