@@ -48,29 +48,56 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       state[action.payload.demoFilePath] = action.payload.sequences;
     })
     .addCase(generatePlayersKillsSequences, (state, action) => {
+      const {
+        match: { demoFilePath },
+        preserveExistingSequences,
+      } = action.payload;
+      const existingSequences = state[demoFilePath] ?? [];
       const sequences = buildPlayersEventSequences({
         event: PlayerSequenceEvent.Kills,
         ...action.payload,
+        firstSequenceNumber: preserveExistingSequences ? existingSequences.length + 1 : 1,
       });
-      state[action.payload.match.demoFilePath] = sequences;
+      if (preserveExistingSequences) {
+        state[demoFilePath] = [...existingSequences, ...sequences];
+      } else {
+        state[demoFilePath] = sequences;
+      }
     })
     .addCase(generatePlayersDeathsSequences, (state, action) => {
+      const {
+        match: { demoFilePath },
+        preserveExistingSequences,
+      } = action.payload;
+      const existingSequences = state[demoFilePath] ?? [];
       const sequences = buildPlayersEventSequences({
         event: PlayerSequenceEvent.Deaths,
         ...action.payload,
+        firstSequenceNumber: preserveExistingSequences ? existingSequences.length + 1 : 1,
       });
-      state[action.payload.match.demoFilePath] = sequences;
+      if (preserveExistingSequences) {
+        state[demoFilePath] = [...existingSequences, ...sequences];
+      } else {
+        state[demoFilePath] = sequences;
+      }
     })
     .addCase(generatePlayersRoundsSequences, (state, action) => {
-      const { match, steamIds, settings, startSecondsBeforeEvent, endSecondsAfterEvent } = action.payload;
-      const sequences = buildPlayersRoundsSequences(
+      const { match, steamIds, settings, startSecondsBeforeEvent, endSecondsAfterEvent, preserveExistingSequences } =
+        action.payload;
+      const existingSequences = state[match.demoFilePath] ?? [];
+      const sequences = buildPlayersRoundsSequences({
         match,
         steamIds,
-        action.payload.rounds,
+        rounds: action.payload.rounds,
         startSecondsBeforeEvent,
         endSecondsAfterEvent,
         settings,
-      );
-      state[match.demoFilePath] = sequences;
+        firstSequenceNumber: preserveExistingSequences ? existingSequences.length + 1 : 1,
+      });
+      if (preserveExistingSequences) {
+        state[match.demoFilePath] = [...existingSequences, ...sequences];
+      } else {
+        state[match.demoFilePath] = sequences;
+      }
     });
 });

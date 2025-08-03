@@ -5073,6 +5073,11 @@ msgid "No action found for this player"
 msgstr "Aucune action trouvée pour ce joueur"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Checkbox label"
+msgid "Preserve existing sequences"
+msgstr ""
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "If 2 actions occurred less than 10 seconds apart or 2 actions are less than 2 seconds apart, a single sequence will be generated."
 msgstr "Si 2 actions se sont produites à moins de 10 secondes d'intervalle ou si 2 actions sont à moins de 2 secondes d'intervalle, une seule séquence sera générée."
 
@@ -5080,11 +5085,6 @@ msgstr "Si 2 actions se sont produites à moins de 10 secondes d'intervalle ou s
 msgctxt "Dialog title"
 msgid "Generate player's sequences"
 msgstr "Générer les séquences du joueur"
-
-#: src/ui/match/video/generate-player-sequences-button.tsx
-msgctxt "Select label"
-msgid "Player"
-msgstr "Joueur"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"

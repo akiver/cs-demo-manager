@@ -44,6 +44,7 @@ describe('generate player kills sequences', () => {
       settings: defaultSettings.video,
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
+      firstSequenceNumber: 1,
     });
 
     expect(sequences.length).toBe(1);
@@ -91,6 +92,7 @@ describe('generate player kills sequences', () => {
       settings: defaultSettings.video,
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
+      firstSequenceNumber: 1,
     });
 
     expect(sequences.length).toBe(3);
@@ -133,6 +135,7 @@ describe('generate player kills sequences', () => {
       settings: defaultSettings.video,
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
+      firstSequenceNumber: 1,
     });
 
     expect(sequences.length).toBe(1);
@@ -168,6 +171,7 @@ describe('generate player kills sequences', () => {
       settings: defaultSettings.video,
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
+      firstSequenceNumber: 1,
     });
 
     expect(sequences.length).toBe(1);
@@ -198,6 +202,7 @@ describe('generate player kills sequences', () => {
       settings: defaultSettings.video,
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
+      firstSequenceNumber: 1,
     });
 
     expect(sequences[0].startTick).toBe(1);
@@ -225,6 +230,7 @@ describe('generate player kills sequences', () => {
       settings: defaultSettings.video,
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
+      firstSequenceNumber: 1,
     });
 
     expect(sequences[0].endTick).toBe(100);

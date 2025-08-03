@@ -14,6 +14,7 @@ export type GeneratePlayersEventPayload = {
   settings: VideoSettings;
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
+  preserveExistingSequences: boolean;
 };
 
 export const addSequence = createAction<{ demoFilePath: string; sequence: Sequence }>('match/video/sequences/add');
@@ -40,4 +41,5 @@ export const generatePlayersRoundsSequences = createAction<{
   endSecondsAfterEvent: number;
   settings: VideoSettings;
   rounds: number[];
+  preserveExistingSequences: boolean;
 }>('match/video/sequences/generatePlayersRounds');

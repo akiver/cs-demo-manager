@@ -26,6 +26,7 @@ import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
 import { RoundsSelect } from 'csdm/ui/components/inputs/select/rounds-select';
+import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 
 function getVisibleWeapons(event: PlayerSequenceEvent, steamIds: string[], match: Match) {
   if (steamIds.length === 0) {
@@ -76,6 +77,7 @@ function SelectPlayerDialog() {
   const [perspective, setPerspective] = useState<Perspective>(Perspective.Player);
   const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(2);
   const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(2);
+  const [preserveExistingSequences, setPreserveExistingSequences] = useState(false);
 
   const onConfirm = () => {
     if (!selectedSteamIds) {
@@ -94,6 +96,7 @@ function SelectPlayerDialog() {
             settings,
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
+            preserveExistingSequences,
           }),
         );
         break;
@@ -108,6 +111,7 @@ function SelectPlayerDialog() {
             settings,
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
+            preserveExistingSequences,
           }),
         );
         break;
@@ -120,6 +124,7 @@ function SelectPlayerDialog() {
             settings,
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
+            preserveExistingSequences,
           }),
         );
         break;
@@ -201,6 +206,14 @@ function SelectPlayerDialog() {
             <Trans>No action found for this player</Trans>
           </p>
         )}
+
+        <Checkbox
+          label={<Trans context="Checkbox label">Preserve existing sequences</Trans>}
+          isChecked={preserveExistingSequences}
+          onChange={(event) => {
+            setPreserveExistingSequences(event.target.checked);
+          }}
+        />
 
         <div className="flex items-center gap-x-8">
           <ExclamationTriangleIcon className="size-20 text-orange-700" />

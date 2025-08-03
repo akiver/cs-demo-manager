@@ -36,6 +36,7 @@ function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps
         settings,
         startSecondsBeforeEvent,
         endSecondsAfterEvent,
+        preserveExistingSequences: false,
       }),
     );
     setTimeout(() => {

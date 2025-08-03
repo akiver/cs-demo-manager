@@ -5073,6 +5073,11 @@ msgid "No action found for this player"
 msgstr "没有找到该玩家对应的操作"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Checkbox label"
+msgid "Preserve existing sequences"
+msgstr ""
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "If 2 actions occurred less than 10 seconds apart or 2 actions are less than 2 seconds apart, a single sequence will be generated."
 msgstr "如果两次击杀间隔少于10秒，或两个镜头之间间隔少于2秒，那么将生成一个单一镜头"
 
@@ -5080,11 +5085,6 @@ msgstr "如果两次击杀间隔少于10秒，或两个镜头之间间隔少于2
 msgctxt "Dialog title"
 msgid "Generate player's sequences"
 msgstr "创建玩家序列"
-
-#: src/ui/match/video/generate-player-sequences-button.tsx
-msgctxt "Select label"
-msgid "Player"
-msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
