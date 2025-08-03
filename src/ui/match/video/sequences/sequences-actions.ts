@@ -5,8 +5,8 @@ import type { Perspective } from 'csdm/common/types/perspective';
 import type { WeaponName } from '@akiver/cs-demo-analyzer';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 
-export type GeneratePlayerEventPayload = {
-  steamId: string;
+export type GeneratePlayersEventPayload = {
+  steamIds: string[];
   match: Match;
   perspective: Perspective;
   weapons: WeaponName[];
@@ -26,16 +26,16 @@ export const replaceSequences = createAction<{ demoFilePath: string; sequences: 
   'match/video/sequences/replace',
 );
 export const deleteSequences = createAction<{ demoFilePath: string }>('match/video/sequences/deleteAll');
-export const generatePlayerKillsSequences = createAction<GeneratePlayerEventPayload>(
-  'match/video/sequences/generatePlayerKills',
+export const generatePlayersKillsSequences = createAction<GeneratePlayersEventPayload>(
+  'match/video/sequences/generatePlayersKills',
 );
-export const generatePlayerDeathsSequences = createAction<GeneratePlayerEventPayload>(
-  'match/video/sequences/generatePlayerDeaths',
+export const generatePlayersDeathsSequences = createAction<GeneratePlayersEventPayload>(
+  'match/video/sequences/generatePlayersDeaths',
 );
-export const generatePlayerRoundsSequences = createAction<{
-  steamId: string;
+export const generatePlayersRoundsSequences = createAction<{
+  steamIds: string[];
   match: Match;
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   settings: VideoSettings;
-}>('match/video/sequences/generatePlayerRounds');
+}>('match/video/sequences/generatePlayersRounds');

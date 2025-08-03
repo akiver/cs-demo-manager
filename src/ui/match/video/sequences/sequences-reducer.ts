@@ -4,14 +4,14 @@ import {
   addSequence,
   deleteSequence,
   deleteSequences,
-  generatePlayerDeathsSequences,
-  generatePlayerKillsSequences,
-  generatePlayerRoundsSequences,
+  generatePlayersDeathsSequences,
+  generatePlayersKillsSequences,
+  generatePlayersRoundsSequences,
   replaceSequences,
   updateSequence,
 } from './sequences-actions';
-import { buildPlayerEventSequences } from './build-player-event-sequences';
-import { buildPlayerRoundsSequences } from './build-player-rounds-sequences';
+import { buildPlayersEventSequences } from './build-players-event-sequences';
+import { buildPlayersRoundsSequences } from './build-players-rounds-sequences';
 import { PlayerSequenceEvent } from './player-sequence-event';
 
 export type SequencesByDemoFilePath = { [demoFilePath: string]: Sequence[] | undefined };
@@ -47,25 +47,25 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     .addCase(replaceSequences, (state, action) => {
       state[action.payload.demoFilePath] = action.payload.sequences;
     })
-    .addCase(generatePlayerKillsSequences, (state, action) => {
-      const sequences = buildPlayerEventSequences({
+    .addCase(generatePlayersKillsSequences, (state, action) => {
+      const sequences = buildPlayersEventSequences({
         event: PlayerSequenceEvent.Kills,
         ...action.payload,
       });
       state[action.payload.match.demoFilePath] = sequences;
     })
-    .addCase(generatePlayerDeathsSequences, (state, action) => {
-      const sequences = buildPlayerEventSequences({
+    .addCase(generatePlayersDeathsSequences, (state, action) => {
+      const sequences = buildPlayersEventSequences({
         event: PlayerSequenceEvent.Deaths,
         ...action.payload,
       });
       state[action.payload.match.demoFilePath] = sequences;
     })
-    .addCase(generatePlayerRoundsSequences, (state, action) => {
-      const { match, steamId, settings, startSecondsBeforeEvent, endSecondsAfterEvent } = action.payload;
-      const sequences = buildPlayerRoundsSequences(
+    .addCase(generatePlayersRoundsSequences, (state, action) => {
+      const { match, steamIds, settings, startSecondsBeforeEvent, endSecondsAfterEvent } = action.payload;
+      const sequences = buildPlayersRoundsSequences(
         match,
-        steamId,
+        steamIds,
         startSecondsBeforeEvent,
         endSecondsAfterEvent,
         settings,
