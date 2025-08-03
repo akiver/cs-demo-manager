@@ -45,6 +45,7 @@ export function GeneratePlayerEventsDialog({
       settings,
       startSecondsBeforeEvent,
       endSecondsAfterEvent,
+      preserveExistingSequences: false,
     });
 
     setTimeout(() => {

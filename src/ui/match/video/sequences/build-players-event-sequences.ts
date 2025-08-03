@@ -31,6 +31,7 @@ type Options = {
   settings: VideoSettings;
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
+  firstSequenceNumber: number;
 };
 
 export function buildPlayersEventSequences({
@@ -43,6 +44,7 @@ export function buildPlayersEventSequences({
   settings,
   startSecondsBeforeEvent,
   endSecondsAfterEvent,
+  firstSequenceNumber,
 }: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
   let playerEvents = match.kills.filter((kill) => {
@@ -99,7 +101,7 @@ export function buildPlayersEventSequences({
     }
 
     sequences.push({
-      number: sequences.length + 1,
+      number: firstSequenceNumber + sequences.length,
       startTick: sequenceStartTick,
       endTick: sequenceEndTick,
       showOnlyDeathNotices: settings.showOnlyDeathNotices,

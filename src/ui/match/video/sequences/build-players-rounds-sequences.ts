@@ -2,14 +2,25 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 
-export function buildPlayersRoundsSequences(
-  match: Match,
-  steamIds: string[],
-  rounds: number[],
-  startSecondsBeforeEvent: number,
-  endSecondsAfterEvent: number,
-  settings: VideoSettings,
-) {
+type Options = {
+  match: Match;
+  steamIds: string[];
+  rounds: number[];
+  startSecondsBeforeEvent: number;
+  endSecondsAfterEvent: number;
+  settings: VideoSettings;
+  firstSequenceNumber: number;
+};
+
+export function buildPlayersRoundsSequences({
+  match,
+  steamIds,
+  rounds,
+  startSecondsBeforeEvent,
+  endSecondsAfterEvent,
+  settings,
+  firstSequenceNumber,
+}: Options) {
   const sequences: Sequence[] = [];
   const startSecondsBeforeEventTick = startSecondsBeforeEvent;
   const endSecondsAfterEventTick = endSecondsAfterEvent;
@@ -31,7 +42,7 @@ export function buildPlayersRoundsSequences(
         const startTick = round.freezetimeEndTick - match.tickrate * startSecondsBeforeEventTick;
 
         sequences.push({
-          number: sequences.length + 1,
+          number: firstSequenceNumber + sequences.length,
           startTick,
           endTick: endTick + match.tickrate * endSecondsAfterEventTick,
           showOnlyDeathNotices: settings.showOnlyDeathNotices,
