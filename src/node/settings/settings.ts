@@ -71,6 +71,7 @@ type PlaybackSettings = {
   launchParameters: string;
   useHlae: boolean;
   playerVoicesEnabled: boolean;
+  cs2PluginVersion?: string;
 };
 
 export type PlayerProfileSettings = {

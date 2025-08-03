@@ -5901,6 +5901,7 @@ msgid "Select an existing audio file from your computer to use for playback."
 msgstr ""
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
+#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "See the <0>documentation</0> for more information."
 msgstr ""
 
@@ -7239,6 +7240,43 @@ msgstr "Réinitialiser les maps par défaut"
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
 msgstr "CS2 ne possède pas encore la fonctionnalité lowlights/highlights. L'algorithme personnalisé sera toujours utilisé pour les démos CS2."
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "Latest"
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the Limited Test up to the 'Armory' update ({armoryUpdateDate})."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "Your CS2 build must be from before this update to use this version!"
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the 'Armory' update ({armoryUpdateDate}) up to the 'Animation' update released on {animationUpdateDate}."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You must also select the CS2 beta branch <0>\"1.40.8.8\"</0> in your Steam library to use this version."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "The version of the internal CS2 plugin used to communicate with the game during playback."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "If you plan to use HLAE, you must install a version of HLAE that is compatible with the selected CS2 beta branch!"
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgctxt "Settings title"
+msgid "CS2 plugin"
+msgstr ""
 
 #: src/ui/settings/playback/custom-highlights.tsx
 msgid "Use a custom highlights algorithm to generate players highlights"

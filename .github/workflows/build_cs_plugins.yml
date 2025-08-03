@@ -54,7 +54,7 @@ jobs:
         id: check-changes
         run: |
           git status
-          if git diff --quiet static/csdm_client.so static/libserver.so; then
+          if git diff --quiet static/csdm_client.so static/cs2/libserver.so; then
             echo "Changes detected!"
             echo "changed=false" >> $GITHUB_OUTPUT
           else
@@ -74,7 +74,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cs2-linux
-          path: static/libserver.so
+          path: static/cs2/libserver.so
 
   build-windows:
     name: Build Windows
@@ -109,7 +109,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cs2-windows
-          path: static/server.dll
+          path: static/cs2/server.dll
 
   create-pr:
     name: Create Pull Request if required
@@ -139,14 +139,14 @@ jobs:
         if: steps.check-artifacts.outputs.linux_artifacts_exist == 'true'
         run: |
           mv artifacts/csgo-linux/csdm_client.so static/
-          mv artifacts/cs2-linux/libserver.so static/
+          mv artifacts/cs2-linux/libserver.so static/cs2/
           mv artifacts/csgo-windows/csdm.dll static/
-          mv artifacts/cs2-windows/server.dll static/
+          mv artifacts/cs2-windows/server.dll static/cs2/
           mv artifacts/csgo-macos/csdm.dylib static/
 
           # Set correct permissions
           chmod 755 static/csdm_client.so
-          chmod 755 static/libserver.so
+          chmod 755 static/cs2/libserver.so
           chmod 755 static/csdm.dylib
 
       - name: Create Pull Request

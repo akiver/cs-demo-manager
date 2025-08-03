@@ -35,4 +35,4 @@ TARGET = libserver.so
 build:
 	@"$(MAKE)" .clean
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(INCLUDE_DIRS) $(LIB_DIRS) $(LIBS) $(SRC_FILES)
-	mv $(TARGET) ../../static/$(TARGET)
+	mv $(TARGET) ../../static/cs2/$(TARGET)

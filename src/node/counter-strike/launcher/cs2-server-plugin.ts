@@ -4,6 +4,8 @@ import { getStaticFolderPath } from 'csdm/node/filesystem/get-static-folder-path
 import { getCsgoFolderPathOrThrow } from '../get-csgo-folder-path';
 import { Game } from 'csdm/common/types/counter-strike';
 import { isWindows } from 'csdm/node/os/is-windows';
+import { getSettings } from 'csdm/node/settings/get-settings';
+import { CS2PluginVersion } from 'csdm/common/types/cs2-plugin-version';
 
 function getGameInfoFilePathFromGamePath(executablePath: string) {
   return path.join(executablePath, 'game', 'csgo', 'gameinfo.gi');
@@ -22,6 +24,16 @@ async function deleteLogFile(csgoFolderPath: string) {
   await fs.remove(logFilePath);
 }
 
+async function getBinaryName() {
+  const settings = await getSettings();
+  const version = settings.playback.cs2PluginVersion ?? CS2PluginVersion.latest;
+  if (version !== CS2PluginVersion.latest) {
+    return isWindows ? `server_${version}.dll` : `libserver_${version}.so`;
+  }
+
+  return isWindows ? 'server.dll' : 'libserver.so';
+}
+
 export async function installCs2ServerPlugin() {
   try {
     logger.log('Installing CS2 server plugin');
@@ -31,8 +43,8 @@ export async function installCs2ServerPlugin() {
     const binFolderPath = isWindows ? path.join(pluginFolder, 'bin') : path.join(pluginFolder, 'bin', 'linuxsteamrt64');
     await deleteLogFile(csgoFolderPath);
     await fs.mkdirp(binFolderPath);
-    const binaryName = isWindows ? 'server.dll' : 'libserver.so';
-    await fs.copyFile(path.join(getStaticFolderPath(), binaryName), path.join(binFolderPath, binaryName));
+    const binaryName = await getBinaryName();
+    await fs.copyFile(path.join(getStaticFolderPath(), 'cs2', binaryName), path.join(binFolderPath, binaryName));
 
     const gameInfoFilePath = getGameInfoFilePathFromGamePath(csgoFolderPath);
     const content = await fs.readFile(gameInfoFilePath, 'utf8');

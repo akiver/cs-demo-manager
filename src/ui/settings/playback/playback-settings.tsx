@@ -16,6 +16,7 @@ import { UseHlae } from './use-hlae';
 import { PlayerVoices } from './player-voices';
 import { HighlightsIncludeDamages } from './highlights-include-damages';
 import { LowlightsIncludeDamages } from './lowlights-include-damages';
+import { Cs2PluginSelect } from './cs2-plugin-select';
 
 export function PlaybackSettings() {
   return (
@@ -36,6 +37,7 @@ export function PlaybackSettings() {
       <WatchRoundBeforeDelay />
       <WatchRoundAfterDelay />
       {window.csdm.isWindows && <UseHlae />}
+      {!window.csdm.isMac && <Cs2PluginSelect />}
     </SettingsView>
   );
 }
