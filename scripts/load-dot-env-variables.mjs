@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const steamApiKey = process.env.STEAM_API_KEYS;
 if (!steamApiKey || steamApiKey === 'KEY_1,KEY_2') {
