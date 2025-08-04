@@ -981,8 +981,8 @@ msgstr "{0, plural,one {A demo foi excluída.} other {# demos excluídas.}}"
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr "{0, plural,one {A demo não foi deletada.} other {# demos não foram deletadas.}}"
 
-#. placeholder {0}: checksums.length
 #. placeholder {0}: demos.length
+#. placeholder {0}: checksums.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 #: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
