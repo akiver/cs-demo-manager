@@ -23,7 +23,7 @@ export function RecordingSystemSelect() {
   return (
     <div className="flex flex-col gap-y-8 w-[152px] mb-8">
       <InputLabel>
-        <Trans context="Select label">Recoding system</Trans>
+        <Trans context="Select label">Recording system</Trans>
       </InputLabel>
       <Select
         options={options}

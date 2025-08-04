@@ -976,8 +976,8 @@ msgstr "{0, plural, one {The demo has been deleted.} other {# demos deleted.}}"
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 
-#. placeholder {0}: demos.length
 #. placeholder {0}: checksums.length
+#. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 #: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
@@ -5241,8 +5241,8 @@ msgstr "Images + video"
 
 #: src/ui/match/video/recording-system-select.tsx
 msgctxt "Select label"
-msgid "Recoding system"
-msgstr "Recoding system"
+msgid "Recording system"
+msgstr "Recording system"
 
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
