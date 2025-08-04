@@ -31,6 +31,7 @@ using std::chrono::milliseconds;
 struct Action {
     int tick;
     string cmd;
+    bool executed;
 };
 
 struct Sequence {
@@ -108,6 +109,7 @@ void LoadSequencesFile(string demoPath) {
                 Action action;
                 action.tick = jsonAction["tick"];
                 action.cmd = jsonAction["cmd"];
+                action.executed = false;
                 sequence.actions.push_back(action);
             }
             sequences.push(sequence);
@@ -177,17 +179,18 @@ void PlaybackFrame() {
     }
 
     isPlayingDemo = newIsPlayingDemo;
-    if (!isPlayingDemo) {
+    if (!isPlayingDemo || gameUi->m_CSGOGameUIState != CSGO_GAME_UI_STATE_INGAME) {
         return;
     }
 
     int newTick = engine->GetDemoPlaybackTick();
     if (newTick != currentTick) {
-        Sequence currentSequence = sequences.front();
-        for (auto action : currentSequence.actions) {
+        Sequence& currentSequence = sequences.front();
+        for (auto& action : currentSequence.actions) {
             // Also check for minus 1 because some ticks may not be "seen" when fast-forwarding the playback during a few ticks.
             // Example with demo_gototick 1000: 1001 -> 1003 -> 1005 -> 1007 -> 1008 -> 1009 -> 1010...
-            if (action.tick == newTick || action.tick == newTick - 1) {
+            if (!action.executed && (action.tick == newTick || action.tick == newTick - 1)) {
+                action.executed = true;
                 if (action.cmd == "go_to_next_sequence") {
                     Log("Going to next sequence, remaining sequences: %d", sequences.size() - 1);
                     sequences.pop();

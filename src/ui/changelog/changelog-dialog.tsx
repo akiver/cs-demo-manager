@@ -111,6 +111,7 @@ export function ChangelogDialog() {
                   Last player not visible in the table from the section "Override player options" of the "Edit sequences
                   settings" dialog.
                 </Item>
+                <Item>Possible single frame in the video when using HLAE with 128 tickrate CS:GO demos.</Item>
               </Category>
             </ul>
           </div>
