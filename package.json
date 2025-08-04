@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@akiver/boiler-writter": "1.6.0",
-    "@akiver/cs-demo-analyzer": "1.7.2",
+    "@akiver/cs-demo-analyzer": "1.7.3",
     "@akiver/csgo-voice-extractor": "3.1.0",
     "@crowdin/cli": "4.9.1",
     "@eslint/js": "9.32.0",
