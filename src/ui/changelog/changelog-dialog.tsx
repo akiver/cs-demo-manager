@@ -49,90 +49,68 @@ export function ChangelogDialog() {
             {/* eslint-disable lingui/no-unlocalized-strings */}
             <h2 className="text-subtitle mb-8">New features and improvements</h2>
             <ul>
-              <Category title="MAPS">
-                <Item>Support for the new maps added in the May 9, 2025 CS2 update.</Item>
-              </Category>
-              <Category title="DEMOS/MATCHES">
+              <Category title="2D VIEWER">
                 <Item>
-                  Added an export mode selection dialog when exporting players' voices. You can now choose between:
-                  <ul className="list-disc list-inside ml-16">
-                    <li>One file per player (no silence, only voice)</li>
-                    <li>One file per player (with silence, demo length)</li>
-                    <li>
-                      Single file (all players voices are mixed together in one audio file, with silence, demo length)
-                    </li>
-                  </ul>
+                  You can now play an audio file in the 2D viewer during playback. See the{' '}
+                  <ExternalLink href="https://cs-demo-manager.com/docs/guides/2d-viewer">documentation</ExternalLink>{' '}
+                  for usage instructions.
                 </Item>
               </Category>
-              <Category title="TEAM">
-                <Item>
-                  Added a <strong>Performance</strong> tab in the team page that shows side, bomb, and round outcomes
-                  stats.
-                </Item>
-              </Category>
-              <Category title="ANALYZE">
-                <Item>
-                  Added support for <ExternalLink href="https://esplay.com">Esplay</ExternalLink> demos.
-                </Item>
-              </Category>
-              <Category title="SEARCH">
-                <Item>
-                  Added a <strong>Through smoke kills</strong> event to find kills made through smoke.
-                </Item>
-              </Category>
-              <Category title="PLAYERS">
-                <Item>
-                  Added a context menu item and a button to export players to XLSX from the list/player's page.
-                </Item>
-              </Category>
-              <Category title="PLAYBACK">
-                <Item>
-                  Counter-Strike launch parameters defined in the playback settings are now passed to the game when
-                  using HLAE through its <code>-customLaunchOptions</code> parameter.
-                </Item>
-                <Item>
-                  Added HLAE command-line parameters input in the app video settings. It's passed to HLAE when watching
-                  a demo.
-                </Item>
-              </Category>
-              <Category title="DEMOS">
-                <Item>Added back the context menu item to export players voices from the list.</Item>
-              </Category>
-              <Category title="VIDEO">
-                <Item>It's now possible to add multiple sequences with the same start/end ticks.</Item>
+              <Category title="MATCHES">
+                <Item>A filter to export voices of only specific players is available in the export context-menu.</Item>
               </Category>
               <Category title="MATCH">
+                <Item>Added melee weapons (knife, taser) stats in the weapons tab.</Item>
+              </Category>
+              <Category title="SETTINGS">
                 <Item>
-                  Added a <strong>Round outcomes by economy type</strong> chart in the <strong>Economy</strong> tab.
+                  Added a playback option to use older internal{' '}
+                  <ExternalLink href="https://cs-demo-manager.com/docs/guides/playback#cs2-plugin-compatibility">
+                    CS2 'plugin'
+                  </ExternalLink>
+                  . This allows to watch old demos not supported by the last CS2 build in combination of using an older
+                  CS2 Steam beta branch.
+                </Item>
+                <Item>Non-existent demos folders are now preserved on app startup.</Item>
+              </Category>
+              <Category title="DOWNLOAD">
+                <Item>
+                  The date of the match when downloading non-Valve demos is now more accurate. We retrieve it from the
+                  third-party service.
                 </Item>
               </Category>
-              <Category title="2D VIEWER">
-                <Item>The bomb is now drawn when it's dropped.</Item>
+              <Category title="VIDEO">
+                <Item>
+                  Added a player filter in the 'Generate players' sequence' dialog to generate sequences for multiple
+                  players.
+                </Item>
+                <Item>
+                  Added a round filter in the 'Generate players' sequence' dialog to generate sequences only for
+                  specific rounds.
+                </Item>
+                <Item>Added an option to preserve existing sequences in the "generate players' sequence" dialog.</Item>
+                <Item>Options requiring HLAE are hidden if the recording system is not HLAE.</Item>
+                <Item>
+                  The app now uses the HLAE command <code>mirv_replace_name</code> (added in version 2.184.0) to replace
+                  player names.
+                </Item>
               </Category>
             </ul>
           </div>
           <div>
             <h2 className="text-subtitle mb-8">Fixes</h2>
             <ul>
-              <Category title="DOWNLOAD">
-                <Item>
-                  Crash when loading last MM matches and a game was played on <i>cs_agency</i>.
-                </Item>
+              <Category title="GENERAL">
+                <Item>Support for the 28th July 2025 CS2 update.</Item>
               </Category>
-              <Category title="UI">
-                <Item>Column sorting now takes case into account.</Item>
-              </Category>
-              <Category title="MATCH">
-                <Item>Wallbang/no scope kills always 0 in scoreboard</Item>
-              </Category>
-              <Category title="PLAYERS">
-                <Item>Error when loading more than 65536 players</Item>
+              <Category title="2D VIEWER">
+                <Item>Flashbang icons in the players overview now match the number of flashbangs a player has.</Item>
               </Category>
               <Category title="VIDEO">
-                <Item>Properly detect FFmpeg executables that use a git based version.</Item>
-              </Category>
-              <Category title="ANALYZE">
-                <Item>Fixed possible errors.</Item>
+                <Item>
+                  Last player not visible in the table from the section "Override player options" of the "Edit sequences
+                  settings" dialog.
+                </Item>
               </Category>
             </ul>
           </div>
