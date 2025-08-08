@@ -2,21 +2,17 @@ import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
-import { useUpdateSettings } from '../use-update-settings';
-import { useWatchSettings } from './use-watch-settings';
+import { usePlaybackSettings } from './use-playback-settings';
 
 export function LaunchParameters() {
-  const { launchParameters } = useWatchSettings();
+  const { launchParameters, updateSettings } = usePlaybackSettings();
   const { t } = useLingui();
-  const updateSettings = useUpdateSettings();
 
   const onBlur = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const newLaunchParameters: string = event.target.value;
     if (newLaunchParameters !== launchParameters) {
       await updateSettings({
-        playback: {
-          launchParameters: event.target.value,
-        },
+        launchParameters: event.target.value,
       });
     }
   };

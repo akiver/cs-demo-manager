@@ -3,16 +3,15 @@ import { Trans } from '@lingui/react/macro';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
-import { useUpdateSettings } from '../use-update-settings';
-import { useWatchSettings } from './use-watch-settings';
 import { CS2PluginVersion as PluginVersion } from 'csdm/common/types/cs2-plugin-version';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { ExternalLink } from 'csdm/ui/components/external-link';
+import { usePlaybackSettings } from './use-playback-settings';
 
 export function Cs2PluginSelect() {
-  const { cs2PluginVersion } = useWatchSettings();
-  const updateSettings = useUpdateSettings();
+  const { cs2PluginVersion } = usePlaybackSettings();
+  const { updateSettings } = usePlaybackSettings();
   const formatDate = useFormatDate();
   const version = cs2PluginVersion ?? PluginVersion.latest;
 
@@ -82,9 +81,7 @@ export function Cs2PluginSelect() {
             value={cs2PluginVersion ?? PluginVersion.latest}
             onChange={async (version) => {
               await updateSettings({
-                playback: {
-                  cs2PluginVersion: version,
-                },
+                cs2PluginVersion: version,
               });
             }}
           />

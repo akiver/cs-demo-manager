@@ -56,7 +56,7 @@ type PlaybackTypeSettings = {
   includeDamages: boolean; // When enabled, sequences where the player didn't necessarily had a kill but only a large amount of damage will be included.
 };
 
-type PlaybackSettings = {
+export type PlaybackSettings = {
   height: number;
   width: number;
   fullscreen: boolean;
@@ -72,6 +72,10 @@ type PlaybackSettings = {
   useHlae: boolean;
   playerVoicesEnabled: boolean;
   cs2PluginVersion?: string;
+  customCs2LocationEnabled?: boolean;
+  cs2ExecutablePath?: string;
+  customCsgoLocationEnabled?: boolean;
+  csgoExecutablePath?: string;
 };
 
 export type PlayerProfileSettings = {

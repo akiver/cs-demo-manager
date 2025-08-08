@@ -1,19 +1,15 @@
 import React from 'react';
-import { useWatchSettings } from './use-watch-settings';
-import { useUpdateSettings } from '../use-update-settings';
 import { WatchBeforeKillDelay } from './watch-before-kill-delay';
 import { Trans } from '@lingui/react/macro';
+import { usePlaybackSettings } from './use-playback-settings';
 
 export function LowlightsWatchBeforeKillDelay() {
-  const { lowlights } = useWatchSettings();
-  const updateSettings = useUpdateSettings();
+  const { lowlights, updateSettings } = usePlaybackSettings();
 
   const onChange = async (seconds: number) => {
     await updateSettings({
-      playback: {
-        lowlights: {
-          beforeKillDelayInSeconds: seconds,
-        },
+      lowlights: {
+        beforeKillDelayInSeconds: seconds,
       },
     });
   };

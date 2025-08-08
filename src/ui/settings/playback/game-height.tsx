@@ -1,11 +1,9 @@
 import React from 'react';
-import { useUpdateSettings } from 'csdm/ui/settings/use-update-settings';
-import { useWatchSettings } from 'csdm/ui/settings/playback/use-watch-settings';
 import { GameHeightInput } from 'csdm/ui/settings/shared/game-height-input';
+import { usePlaybackSettings } from './use-playback-settings';
 
 export function GameHeight() {
-  const { height } = useWatchSettings();
-  const updateSettings = useUpdateSettings();
+  const { height, updateSettings } = usePlaybackSettings();
 
   const onBlur = async (height: number | undefined) => {
     if (!height) {
@@ -13,9 +11,7 @@ export function GameHeight() {
     }
 
     await updateSettings({
-      playback: {
-        height,
-      },
+      height,
     });
   };
 

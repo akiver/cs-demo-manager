@@ -24,7 +24,7 @@ async function deleteLogFile(csgoFolderPath: string) {
   await fs.remove(logFilePath);
 }
 
-async function getBinaryName() {
+async function getBundledBinaryName() {
   const settings = await getSettings();
   const version = settings.playback.cs2PluginVersion ?? CS2PluginVersion.latest;
   if (version !== CS2PluginVersion.latest) {
@@ -43,8 +43,9 @@ export async function installCs2ServerPlugin() {
     const binFolderPath = isWindows ? path.join(pluginFolder, 'bin') : path.join(pluginFolder, 'bin', 'linuxsteamrt64');
     await deleteLogFile(csgoFolderPath);
     await fs.mkdirp(binFolderPath);
-    const binaryName = await getBinaryName();
-    await fs.copyFile(path.join(getStaticFolderPath(), 'cs2', binaryName), path.join(binFolderPath, binaryName));
+    const bundledBinaryName = await getBundledBinaryName();
+    const binaryName = isWindows ? 'server.dll' : 'libserver.so';
+    await fs.copyFile(path.join(getStaticFolderPath(), 'cs2', bundledBinaryName), path.join(binFolderPath, binaryName));
 
     const gameInfoFilePath = getGameInfoFilePathFromGamePath(csgoFolderPath);
     const content = await fs.readFile(gameInfoFilePath, 'utf8');

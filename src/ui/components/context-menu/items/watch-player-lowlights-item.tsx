@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { useDialog } from '../../dialogs/use-dialog';
 import { useCounterStrike } from 'csdm/ui/hooks/use-counter-strike';
-import { useWatchSettings } from 'csdm/ui/settings/playback/use-watch-settings';
+import { usePlaybackSettings } from 'csdm/ui/settings/playback/use-playback-settings';
 import { SelectActionsPovDialog } from '../../dialogs/select-actions-pov-dialog';
 import { WatchType } from 'csdm/common/types/watch-type';
 import { Perspective } from 'csdm/common/types/perspective';
@@ -19,7 +19,7 @@ type Props = {
 export function WatchPlayerLowlightsItem({ demoPath, steamId, game }: Props) {
   const { showDialog } = useDialog();
   const { isKillCsRequired, watchPlayerLowlights } = useCounterStrike();
-  const { useCustomLowlights } = useWatchSettings();
+  const { useCustomLowlights } = usePlaybackSettings();
 
   const startPlayerLowlights = () => {
     if (useCustomLowlights || game !== Game.CSGO) {

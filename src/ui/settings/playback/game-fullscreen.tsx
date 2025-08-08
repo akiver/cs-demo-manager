@@ -2,18 +2,14 @@ import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Switch } from 'csdm/ui/components/inputs/switch';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
-import { useWatchSettings } from './use-watch-settings';
-import { useUpdateSettings } from '../use-update-settings';
+import { usePlaybackSettings } from './use-playback-settings';
 
 export function GameFullscreen() {
-  const { fullscreen } = useWatchSettings();
-  const updateSettings = useUpdateSettings();
+  const { fullscreen, updateSettings } = usePlaybackSettings();
 
   const onChange = async (isChecked: boolean) => {
     await updateSettings({
-      playback: {
-        fullscreen: isChecked,
-      },
+      fullscreen: isChecked,
     });
   };
 

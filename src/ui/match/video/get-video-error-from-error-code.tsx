@@ -54,6 +54,12 @@ export function getVideoErrorMessageFromErrorCode(game: Game, errorCode: ErrorCo
           <Trans>Counter-Strike executable not found.</Trans>
         </p>
       );
+    case ErrorCode.CustomCounterStrikeExecutableNotFound:
+      return (
+        <p>
+          <Trans>Counter-Strike executable not found, check your app playback settings.</Trans>
+        </p>
+      );
     case ErrorCode.HlaeNotInstalled:
       return (
         <p>

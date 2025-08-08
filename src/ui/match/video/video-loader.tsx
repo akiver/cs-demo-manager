@@ -52,6 +52,9 @@ export function VideoLoader() {
       case ErrorCode.CounterStrikeExecutableNotFound:
         message = <Trans>Counter-Strike executable not found.</Trans>;
         break;
+      case ErrorCode.CustomCounterStrikeExecutableNotFound:
+        message = <Trans>Counter-Strike executable not found, check your app playback settings.</Trans>;
+        break;
       default:
         message = <Trans>An error occurred. (Code {errorCode})</Trans>;
     }

@@ -503,6 +503,12 @@ msgctxt "Button"
 msgid "Reveal"
 msgstr ""
 
+#: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "File not found"
+msgstr ""
+
 #. placeholder {0}: window.csdm.platform
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
@@ -3324,6 +3330,12 @@ msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Read the <0>documentation</0> for more information."
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
+#: src/ui/match/video/video-loader.tsx
+msgid "Counter-Strike executable not found, check your app playback settings."
 msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx
@@ -7229,8 +7241,26 @@ msgctxt "Button"
 msgid "Reset default maps"
 msgstr ""
 
+#: src/ui/settings/playback/cs-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "Enable custom location"
+msgstr ""
+
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-location.tsx
+msgid "Path to the <0>cs2.exe</0> file located in the <1>game\\bin\\win64</1> folder of your CS2 installation."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-location.tsx
+msgid "Path to the <0>cs2.sh</0> script located in the <1>game</1> folder of your CS2 installation."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-location.tsx
+msgid "CS2 location"
 msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
@@ -7268,6 +7298,18 @@ msgstr ""
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgctxt "Settings title"
 msgid "CS2 plugin"
+msgstr ""
+
+#: src/ui/settings/playback/csgo-location.tsx
+msgid "Path to the <0>csgo.exe</0> file located in the root folder of your CS:GO installation."
+msgstr ""
+
+#: src/ui/settings/playback/csgo-location.tsx
+msgid "Path to the <0>csgo.sh</0> script located in the root folder of your CS:GO installation."
+msgstr ""
+
+#: src/ui/settings/playback/csgo-location.tsx
+msgid "CS:GO location"
 msgstr ""
 
 #: src/ui/settings/playback/custom-highlights.tsx
@@ -7583,17 +7625,7 @@ msgid "Theme"
 msgstr ""
 
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-msgid "File not found"
-msgstr ""
-
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
 msgid "Invalid FFmpeg executable"
-msgstr ""
-
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-msgid "Enable custom location"
 msgstr ""
 
 #: src/ui/settings/video/hlae/hlae-config-folder-path.tsx
