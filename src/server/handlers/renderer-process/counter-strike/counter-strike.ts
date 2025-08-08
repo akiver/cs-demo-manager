@@ -5,6 +5,7 @@ import type { Game } from 'csdm/common/types/counter-strike';
 import { CounterStrikeExecutableNotFound } from 'csdm/node/counter-strike/launcher/errors/counter-strike-executable-not-found';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { UnsupportedGame } from 'csdm/node/counter-strike/launcher/errors/unsupported-game';
+import { CustomCounterStrikeExecutableNotFound } from 'csdm/node/counter-strike/launcher/errors/custom-counter-strike-executable-not-found';
 
 export type WatchDemoErrorPayload = {
   demoPath: string;
@@ -25,7 +26,11 @@ export function buildWatchDemoErrorPayload(error: unknown, demoPath: string, mes
     logger.error(error);
   }
   let game: Game | undefined;
-  if (error instanceof CounterStrikeExecutableNotFound || error instanceof UnsupportedGame) {
+  if (
+    error instanceof CounterStrikeExecutableNotFound ||
+    error instanceof CustomCounterStrikeExecutableNotFound ||
+    error instanceof UnsupportedGame
+  ) {
     game = error.game;
   }
   const payload: WatchDemoErrorPayload = {

@@ -51,6 +51,12 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
           </p>
         </div>
       );
+    case ErrorCode.CustomCounterStrikeExecutableNotFound:
+      return (
+        <p>
+          <Trans>Counter-Strike executable not found, check your app playback settings.</Trans>
+        </p>
+      );
     case ErrorCode.UnsupportedGame: {
       const game = error.game;
       return <Trans>{game} is not supported on your operating system</Trans>;

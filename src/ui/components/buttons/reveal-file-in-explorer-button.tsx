@@ -1,7 +1,8 @@
 import React from 'react';
-import { Select } from '@lingui/react/macro';
+import { Select, Trans } from '@lingui/react/macro';
 import type { ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { Button } from 'csdm/ui/components/buttons/button';
+import { useShowToast } from '../toasts/use-show-toast';
 
 type Props = {
   path: string;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export function RevealFileInExplorerButton({ path, isDisabled, onFileRevealed, onFileNotFound, variant }: Props) {
+  const showToast = useShowToast();
   const onClick = async () => {
     const fileExists = await window.csdm.pathExists(path);
     if (fileExists) {
@@ -20,6 +22,11 @@ export function RevealFileInExplorerButton({ path, isDisabled, onFileRevealed, o
     } else {
       if (typeof onFileNotFound === 'function') {
         onFileNotFound();
+      } else {
+        showToast({
+          content: <Trans>File not found</Trans>,
+          type: 'error',
+        });
       }
     }
   };

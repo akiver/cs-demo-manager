@@ -58,6 +58,7 @@ declare global {
     getPremierRankImageSrc: (rank: PremierRank) => string;
     pathExists: typeof fs.pathExists;
     getPathDirectoryName: (path: string) => string;
+    getPathBasename: (path: string) => string;
     showMainWindow: () => void;
     onOpenDemoFile: (callback: (event: IpcRendererEvent, demoPath: string) => void) => () => void;
     onOpenSettings: (callback: () => void) => () => void;

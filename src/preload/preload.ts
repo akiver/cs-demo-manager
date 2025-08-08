@@ -91,6 +91,7 @@ const api: PreloadApi = {
   getPremierRankImageSrc,
   pathExists: fs.pathExists,
   getPathDirectoryName: path.dirname,
+  getPathBasename: path.basename,
   elementToImage,
 
   showMainWindow: () => {

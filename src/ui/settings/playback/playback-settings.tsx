@@ -17,6 +17,8 @@ import { PlayerVoices } from './player-voices';
 import { HighlightsIncludeDamages } from './highlights-include-damages';
 import { LowlightsIncludeDamages } from './lowlights-include-damages';
 import { Cs2PluginSelect } from './cs2-plugin-select';
+import { Cs2Location } from './cs2-location';
+import { CsgoLocation } from './csgo-location';
 
 export function PlaybackSettings() {
   return (
@@ -37,7 +39,13 @@ export function PlaybackSettings() {
       <WatchRoundBeforeDelay />
       <WatchRoundAfterDelay />
       {window.csdm.isWindows && <UseHlae />}
-      {!window.csdm.isMac && <Cs2PluginSelect />}
+      {!window.csdm.isMac && (
+        <>
+          <Cs2PluginSelect />
+          <Cs2Location />
+          <CsgoLocation />
+        </>
+      )}
     </SettingsView>
   );
 }

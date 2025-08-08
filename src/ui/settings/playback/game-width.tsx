@@ -1,11 +1,9 @@
 import React from 'react';
-import { useUpdateSettings } from 'csdm/ui/settings/use-update-settings';
-import { useWatchSettings } from 'csdm/ui/settings/playback/use-watch-settings';
 import { GameWidthInput } from 'csdm/ui/settings/shared/game-width-input';
+import { usePlaybackSettings } from './use-playback-settings';
 
 export function GameWidth() {
-  const { width } = useWatchSettings();
-  const updateSettings = useUpdateSettings();
+  const { width, updateSettings } = usePlaybackSettings();
 
   const onBlur = async (width: number | undefined) => {
     if (!width) {
@@ -13,9 +11,7 @@ export function GameWidth() {
     }
 
     await updateSettings({
-      playback: {
-        width,
-      },
+      width,
     });
   };
 

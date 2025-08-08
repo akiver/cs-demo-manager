@@ -2,21 +2,17 @@ import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Switch } from 'csdm/ui/components/inputs/switch';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
-import { useWatchSettings } from 'csdm/ui/settings/playback/use-watch-settings';
-import { useUpdateSettings } from 'csdm/ui/settings/use-update-settings';
 import { useSettingsOverlay } from 'csdm/ui/settings//use-settings-overlay';
 import { SettingsCategory } from 'csdm/ui/settings//settings-category';
+import { usePlaybackSettings } from './use-playback-settings';
 
 export function UseHlae() {
-  const { useHlae } = useWatchSettings();
-  const updateSettings = useUpdateSettings();
+  const { useHlae, updateSettings } = usePlaybackSettings();
   const { showCategory } = useSettingsOverlay();
 
   const onChange = async (isChecked: boolean) => {
     await updateSettings({
-      playback: {
-        useHlae: isChecked,
-      },
+      useHlae: isChecked,
     });
   };
 

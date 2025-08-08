@@ -1,19 +1,15 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
-import { useWatchSettings } from './use-watch-settings';
-import { useUpdateSettings } from '../use-update-settings';
 import { WatchBeforeKillDelay } from './watch-before-kill-delay';
+import { usePlaybackSettings } from './use-playback-settings';
 
 export function WatchRoundAfterDelay() {
-  const { round } = useWatchSettings();
-  const updateSettings = useUpdateSettings();
+  const { round, updateSettings } = usePlaybackSettings();
 
   const onChange = async (seconds: number) => {
     await updateSettings({
-      playback: {
-        round: {
-          afterRoundDelayInSeconds: seconds,
-        },
+      round: {
+        afterRoundDelayInSeconds: seconds,
       },
     });
   };
