@@ -6,5 +6,5 @@ export function useCurrentMatchMap(): Map | undefined {
   const match = useCurrentMatch();
   const maps = useMaps();
 
-  return maps.find((map) => map.name === match.mapName);
+  return maps.find((map) => map.name === match.mapName && map.game === match.game);
 }
