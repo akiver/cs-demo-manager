@@ -3665,6 +3665,10 @@ msgctxt "Chat message status"
 msgid "*DEAD*"
 msgstr "*DEAD*"
 
+#: src/ui/match/chat-messages/chat-messages.tsx
+msgid "All teams"
+msgstr "All teams"
+
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "Chat messages are available only if the <0>.info</0> file of the demo is next to its <1>.dem</1> file during analysis."
 msgstr "Chat messages are available only if the <0>.info</0> file of the demo is next to its <1>.dem</1> file during analysis."
