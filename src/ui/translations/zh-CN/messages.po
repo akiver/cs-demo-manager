@@ -39,7 +39,7 @@ msgstr "录像分析中…"
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "An error occurred while analyzing the demo."
-msgstr "分析录像时发生错误。"
+msgstr "分析 demo 时发生错误。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
@@ -1484,11 +1484,11 @@ msgstr "玩家"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
 msgid "Upper"
-msgstr "高级"
+msgstr "上层"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
 msgid "Lower"
-msgstr "较低"
+msgstr "下层"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
@@ -4084,15 +4084,15 @@ msgstr "持续时间"
 
 #: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
 msgid "Players flashed"
-msgstr "被白的玩家"
+msgstr "闪白的玩家数"
 
 #: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
 msgid "Player flashed per throw"
-msgstr "每次投掷导致被闪的玩家数"
+msgstr "每个闪光闪白的玩家数"
 
 #: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
 msgid "Average player flashed per round"
-msgstr "每回合平均被闪的玩家数"
+msgstr "每个回合闪白的玩家数"
 
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
 msgid "Damages per round"
@@ -5087,7 +5087,7 @@ msgstr "没有找到该玩家对应的操作"
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Checkbox label"
 msgid "Preserve existing sequences"
-msgstr ""
+msgstr "保留现有的序列"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "If 2 actions occurred less than 10 seconds apart or 2 actions are less than 2 seconds apart, a single sequence will be generated."
@@ -5834,11 +5834,11 @@ msgstr "生成位置"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
 msgid "{elapsedTime}/{totalDuration}"
-msgstr ""
+msgstr "{elapsedTime}/{totalDuration}"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
 msgid "Offset: {offsetSeconds}s"
-msgstr ""
+msgstr "偏移: {offsetSeconds}秒"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
 msgid "Set as current position"
@@ -5907,7 +5907,7 @@ msgstr ""
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "See the <0>documentation</0> for more information."
-msgstr ""
+msgstr "详情请查阅<0>文档</0>。"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "The following issues were found:"
@@ -6306,7 +6306,7 @@ msgstr "玩家平均每颗闪光弹致盲的敌人数。这里只包括 5v5 竞�
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Enemies flashed"
-msgstr "敌人被闪白"
+msgstr "闪白敌人数量"
 
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgid "On average, how much damage is dealt to enemies with HE grenades thrown by the player."
@@ -6762,7 +6762,7 @@ msgstr "忽略在第一场比赛之前的封禁事件"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
-msgstr "分析时分析玩家/手榴弹位置，仅2D查看器需要位置。 启用后，它会增加输入数据库和磁盘空间使用的匹配时间。"
+msgstr "分析玩家/手榴弹位置。只有 2D 查看器需要分析位置。 启用此选项会增加插入数据库的时间以及占用更多磁盘空间。"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions"
@@ -7289,16 +7289,16 @@ msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "The version of the internal CS2 plugin used to communicate with the game during playback."
-msgstr ""
+msgstr "用于与游戏建立通信的内部 CS2 插件版本。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If you plan to use HLAE, you must install a version of HLAE that is compatible with the selected CS2 beta branch!"
-msgstr ""
+msgstr "如果你想要使用HLAE，你必须安装一个与 CS2 测试版兼容的HLAE 版本！"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgctxt "Settings title"
 msgid "CS2 plugin"
-msgstr ""
+msgstr "CS2 插件"
 
 #: src/ui/settings/playback/csgo-location.tsx
 msgid "Path to the <0>csgo.exe</0> file located in the root folder of your CS:GO installation."
