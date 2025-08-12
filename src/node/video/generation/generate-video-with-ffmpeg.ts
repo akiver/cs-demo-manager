@@ -1,5 +1,6 @@
 import path from 'node:path';
 import fs from 'fs-extra';
+import { tmpdir } from 'node:os';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { getSequenceOutputFilePath } from 'csdm/node/video/generation/get-sequence-output-file-path';
@@ -11,8 +12,51 @@ import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RawFilesNotFoundError } from '../errors/raw-files-not-found';
 
-function buildMergeVideoAndAudioArgs(videoFilePath: string, wavFilePath: string, outputPath: string) {
-  return [`-i "${videoFilePath}"`, `-i "${wavFilePath}"`, '-c copy', '-map 0:v:0', '-map 1:a:0', `"${outputPath}"`];
+function buildMergeVideoAndAudioArgs(videoFilePath: string, audioFilePath: string, outputPath: string) {
+  return [`-i "${videoFilePath}"`, `-i "${audioFilePath}"`, '-c copy', '-map 0:v:0', '-map 1:a:0', `"${outputPath}"`];
+}
+
+async function convertGameAudioFile(
+  wavFilePath: string,
+  audioCodec: string,
+  audioBitrate: number,
+  signal: AbortSignal,
+) {
+  const codecs = [
+    { name: 'mp3', ext: '.mp3' },
+    { name: 'aac', ext: '.m4a' },
+    { name: 'alac', ext: '.m4a' },
+    { name: 'opus', ext: '.opus' },
+    { name: 'flac', ext: '.flac' },
+    { name: 'vorbis', ext: '.ogg' },
+    { name: 'ac3', ext: '.ac3' },
+  ];
+  let extension = '.wav';
+  for (const codec of codecs) {
+    if (audioCodec.includes(codec.name)) {
+      extension = codec.ext;
+      break;
+    }
+  }
+
+  const tmpFilePath = path.join(tmpdir(), `csdm-audio${extension}`);
+  const args = [
+    '-y', // override the file if it exists
+    '-i',
+    `"${wavFilePath}"`,
+    '-acodec',
+    audioCodec,
+    '-b:a',
+    `${audioBitrate}K`,
+    `"${tmpFilePath}"`,
+  ];
+
+  await executeFfmpeg(args, signal);
+
+  const audioFilePath = wavFilePath.replace(/\.wav$/, extension);
+  await fs.move(tmpFilePath, audioFilePath, { overwrite: true });
+
+  return audioFilePath;
 }
 
 type GenerateVideoWithFFmpegSettings = {
@@ -31,30 +75,24 @@ type GenerateVideoWithFFmpegSettings = {
   outputParameters: string;
 };
 
-async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
+export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegSettings, signal: AbortSignal) {
+  const { tgaFiles, wavFilePath, videoFilePath } = await getSequenceRawFiles(settings);
+
   const {
-    recordingSystem,
-    recordingOutput,
-    game,
-    sequence,
-    outputFolderPath,
     framerate,
-    audioBitrate,
-    constantRateFactor,
-    videoContainer,
+    inputParameters,
     videoCodec,
     audioCodec,
-    inputParameters,
+    audioBitrate,
+    constantRateFactor,
     outputParameters,
-  } = settings;
-  const { tgaFiles, wavFilePath, videoFilePath } = await getSequenceRawFiles({
     recordingSystem,
-    sequence,
     game,
-    recordingOutput,
-    videoContainer,
+    sequence,
     outputFolderPath,
-  });
+    videoContainer,
+    recordingOutput,
+  } = settings;
 
   // It's important to create the output folder before running FFmpeg otherwise it will fail.
   await fs.ensureDir(outputFolderPath);
@@ -64,7 +102,9 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
     if (!videoFilePath) {
       throw new RawFilesNotFoundError();
     }
-    return buildMergeVideoAndAudioArgs(videoFilePath, wavFilePath, outputPath);
+    // The game generates PCM audio, we need to convert it to the desired format
+    const audioFilePath = await convertGameAudioFile(wavFilePath, audioCodec, audioBitrate, signal);
+    return buildMergeVideoAndAudioArgs(videoFilePath, audioFilePath, outputPath);
   }
 
   let rawFilesPathPattern: string;
@@ -79,6 +119,7 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
     );
   }
 
+  const wavFileExists = await fs.pathExists(wavFilePath);
   const args: string[] = [
     '-y', // override the file if it exists
     `-framerate ${framerate}`,
@@ -87,7 +128,6 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
     args.push(inputParameters);
   }
   args.push(`-i "${rawFilesPathPattern}"`);
-  const wavFileExists = await fs.pathExists(wavFilePath);
   if (wavFileExists) {
     args.push(`-i "${wavFilePath}"`);
   }
@@ -106,10 +146,5 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
 
   args.push(`"${outputPath}"`);
 
-  return args;
-}
-
-export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegSettings, signal: AbortSignal) {
-  const args = await getFFmpegArgs(settings);
   await executeFfmpeg(args, signal);
 }
