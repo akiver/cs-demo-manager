@@ -26,6 +26,7 @@ export async function searchHandler(payload: SearchPayload) {
       steamIds: payload.steamIds,
       victimSteamIds: payload.victimSteamIds,
       mapNames: payload.mapNames,
+      weaponNames: payload.weaponNames,
       startDate: payload.startDate,
       endDate: payload.endDate,
       demoSources: payload.demoSources,

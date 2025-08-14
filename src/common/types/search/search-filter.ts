@@ -1,4 +1,4 @@
-import type { DemoSource } from 'csdm/common/types/counter-strike';
+import type { DemoSource, WeaponName } from 'csdm/common/types/counter-strike';
 
 export type SearchFilter = {
   steamIds: string[];
@@ -7,6 +7,7 @@ export type SearchFilter = {
   startDate: string | undefined;
   endDate: string | undefined;
   demoSources: DemoSource[];
+  weaponNames: WeaponName[];
   roundTagIds: string[];
   matchTagIds: string[];
 };

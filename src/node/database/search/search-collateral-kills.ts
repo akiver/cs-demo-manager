@@ -10,6 +10,7 @@ type Filter = SearchFilter;
 export async function searchCollateralKills({
   steamIds,
   victimSteamIds,
+  weaponNames,
   mapNames,
   startDate,
   endDate,
@@ -75,6 +76,10 @@ export async function searchCollateralKills({
           .where('victim_filter.victim_steam_id', 'in', victimSteamIds),
       );
     });
+  }
+
+  if (weaponNames.length > 0) {
+    query = query.where('k1.weapon_name', 'in', weaponNames);
   }
 
   if (mapNames.length > 0) {

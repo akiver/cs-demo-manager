@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import type { DemoSource } from 'csdm/common/types/counter-strike';
+import { WeaponName, type DemoSource } from 'csdm/common/types/counter-strike';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import {
   periodChanged,
@@ -15,6 +15,7 @@ import {
   matchTagIdsChanged,
   victimSelected,
   victimRemoved,
+  weaponNamesChanged,
 } from './search-actions';
 import { useSearchState } from './use-search-state';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
@@ -33,14 +34,72 @@ import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import { Trans } from '@lingui/react/macro';
 import { TagsFilter } from '../components/dropdown-filter/tags-filter';
 import { isCtrlOrCmdEvent } from '../keyboard/keyboard';
+import { WeaponsFilter } from '../components/dropdown-filter/weapons-filter';
+import { SearchEvent } from 'csdm/common/types/search/search-event';
 
 export function Search() {
   const dispatch = useDispatch();
   const client = useWebSocketClient();
-  const { status, event, players, victims, mapNames, startDate, endDate, demoSources, roundTagIds, matchTagIds } =
-    useSearchState();
+  const {
+    status,
+    event,
+    players,
+    victims,
+    mapNames,
+    startDate,
+    endDate,
+    demoSources,
+    roundTagIds,
+    matchTagIds,
+    weaponNames,
+  } = useSearchState();
   const isLoading = status === Status.Loading;
-  const canFilterOnVictims = event.toLowerCase().includes('kill');
+  const isEventWithKills = event.toLowerCase().includes('kill');
+  const canFilterOnVictims = isEventWithKills;
+  const canFilterOnWeapons = isEventWithKills && event !== SearchEvent.KnifeKills;
+  const weapons = [
+    WeaponName.Knife,
+    WeaponName.Zeus,
+    WeaponName.AK47,
+    WeaponName.AUG,
+    WeaponName.AWP,
+    WeaponName.CZ75,
+    WeaponName.Deagle,
+    WeaponName.DualBerettas,
+    WeaponName.Famas,
+    WeaponName.FiveSeven,
+    WeaponName.G3SG1,
+    WeaponName.GalilAR,
+    WeaponName.Glock,
+    WeaponName.M249,
+    WeaponName.M4A1,
+    WeaponName.M4A4,
+    WeaponName.MAG7,
+    WeaponName.MP5,
+    WeaponName.MP7,
+    WeaponName.Mac10,
+    WeaponName.Negev,
+    WeaponName.Nova,
+    WeaponName.P2000,
+    WeaponName.P250,
+    WeaponName.P90,
+    WeaponName.PPBizon,
+    WeaponName.Revolver,
+    WeaponName.SG553,
+    WeaponName.SawedOff,
+    WeaponName.Scar20,
+    WeaponName.Scout,
+    WeaponName.Tec9,
+    WeaponName.UMP45,
+    WeaponName.USP,
+    WeaponName.XM1014,
+    WeaponName.Decoy,
+    WeaponName.Flashbang,
+    WeaponName.HEGrenade,
+    WeaponName.Incendiary,
+    WeaponName.Molotov,
+    WeaponName.Smoke,
+  ];
 
   const onPlayerSelected = (player: PlayerResult) => {
     dispatch(playerSelected({ player }));
@@ -78,6 +137,10 @@ export function Search() {
     dispatch(matchTagIdsChanged({ tagIds }));
   };
 
+  const onWeaponNamesChanged = (weaponNames: WeaponName[]) => {
+    dispatch(weaponNamesChanged({ weaponNames }));
+  };
+
   const search = async () => {
     try {
       dispatch(searchStart());
@@ -89,6 +152,7 @@ export function Search() {
           event,
           steamIds,
           mapNames,
+          weaponNames,
           startDate,
           endDate,
           demoSources,
@@ -151,6 +215,14 @@ export function Search() {
                 onPlayerRemoved={onVictimRemoved}
               />
             </div>
+          )}
+          {canFilterOnWeapons && (
+            <WeaponsFilter
+              weapons={weapons}
+              selectedWeapons={weaponNames}
+              hasActiveFilter={weaponNames.length > 0}
+              onChange={onWeaponNamesChanged}
+            />
           )}
           <div className="flex flex-col gap-y-8">
             <Trans context="Input label">Maps</Trans>
