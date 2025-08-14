@@ -24,6 +24,7 @@ export async function searchHandler(payload: SearchPayload) {
     let result: SearchResult = [];
     const filter: SearchFilter = {
       steamIds: payload.steamIds,
+      victimSteamIds: payload.victimSteamIds,
       mapNames: payload.mapNames,
       startDate: payload.startDate,
       endDate: payload.endDate,

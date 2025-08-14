@@ -15,6 +15,8 @@ import {
   demoSourcesChanged,
   roundTagIdsChanged,
   matchTagIdsChanged,
+  victimSelected,
+  victimRemoved,
 } from './search-actions';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import type { SearchResult } from 'csdm/common/types/search/search-result';
@@ -24,6 +26,7 @@ type FinderState = {
   readonly event: SearchEvent;
   readonly result: SearchResult;
   readonly players: PlayerResult[];
+  readonly victims: PlayerResult[];
   readonly mapNames: string[];
   readonly startDate: string | undefined;
   readonly endDate: string | undefined;
@@ -37,6 +40,7 @@ const initialState: FinderState = {
   event: SearchEvent.FiveKill,
   result: [],
   players: [],
+  victims: [],
   mapNames: [],
   startDate: undefined,
   endDate: undefined,
@@ -59,6 +63,14 @@ export const searchReducer = createReducer(initialState, (builder) => {
     })
     .addCase(playerRemoved, (state, action) => {
       state.players = state.players.filter((player) => player.steamId !== action.payload.steamId);
+    })
+    .addCase(victimSelected, (state, action) => {
+      if (!state.victims.some((victim) => victim.steamId === action.payload.victim.steamId)) {
+        state.victims.push(action.payload.victim);
+      }
+    })
+    .addCase(victimRemoved, (state, action) => {
+      state.victims = state.victims.filter((victim) => victim.steamId !== action.payload.steamId);
     })
     .addCase(mapSelected, (state, action) => {
       if (!state.mapNames.includes(action.payload.mapName)) {

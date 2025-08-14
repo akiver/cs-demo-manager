@@ -8,6 +8,7 @@ type Filter = SearchFilter;
 
 export async function searchTeamKills({
   steamIds,
+  victimSteamIds,
   mapNames,
   startDate,
   endDate,
@@ -52,6 +53,10 @@ export async function searchTeamKills({
 
   if (steamIds.length > 0) {
     query = query.where('kills.killer_steam_id', 'in', steamIds);
+  }
+
+  if (victimSteamIds.length > 0) {
+    query = query.where('kills.victim_steam_id', 'in', victimSteamIds);
   }
 
   if (mapNames.length > 0) {

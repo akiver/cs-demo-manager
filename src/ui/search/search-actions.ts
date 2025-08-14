@@ -8,6 +8,8 @@ import type { SearchResult } from 'csdm/common/types/search/search-result';
 export const searchEventChanged = createAction<{ event: SearchEvent }>('search/searchEventChanged');
 export const playerSelected = createAction<{ player: PlayerResult }>('search/playerSelected');
 export const playerRemoved = createAction<{ steamId: string }>('search/playerRemoved');
+export const victimSelected = createAction<{ victim: PlayerResult }>('search/victimSelected');
+export const victimRemoved = createAction<{ steamId: string }>('search/victimRemoved');
 export const mapSelected = createAction<{ mapName: string }>('search/mapSelected');
 export const mapRemoved = createAction<{ mapName: string }>('search/mapRemoved');
 export const demoSourcesChanged = createAction<{ demoSources: DemoSource[] }>('search/sourcesChanged');

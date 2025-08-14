@@ -6663,6 +6663,11 @@ msgstr "Jogadores"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"
+msgid "Victims"
+msgstr ""
+
+#: src/ui/search/search.tsx
+msgctxt "Input label"
 msgid "Maps"
 msgstr "Mapas"
 

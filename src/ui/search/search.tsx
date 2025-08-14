@@ -13,6 +13,8 @@ import {
   demoSourcesChanged,
   roundTagIdsChanged,
   matchTagIdsChanged,
+  victimSelected,
+  victimRemoved,
 } from './search-actions';
 import { useSearchState } from './use-search-state';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
@@ -35,9 +37,10 @@ import { isCtrlOrCmdEvent } from '../keyboard/keyboard';
 export function Search() {
   const dispatch = useDispatch();
   const client = useWebSocketClient();
-  const { status, event, players, mapNames, startDate, endDate, demoSources, roundTagIds, matchTagIds } =
+  const { status, event, players, victims, mapNames, startDate, endDate, demoSources, roundTagIds, matchTagIds } =
     useSearchState();
   const isLoading = status === Status.Loading;
+  const canFilterOnVictims = event.toLowerCase().includes('kill');
 
   const onPlayerSelected = (player: PlayerResult) => {
     dispatch(playerSelected({ player }));
@@ -45,6 +48,14 @@ export function Search() {
 
   const onPlayerRemoved = (player: PlayerResult) => {
     dispatch(playerRemoved({ steamId: player.steamId }));
+  };
+
+  const onVictimSelected = (victim: PlayerResult) => {
+    dispatch(victimSelected({ victim }));
+  };
+
+  const onVictimRemoved = (victim: PlayerResult) => {
+    dispatch(victimRemoved({ steamId: victim.steamId }));
   };
 
   const onMapSelected = (mapName: string) => {
@@ -71,6 +82,7 @@ export function Search() {
     try {
       dispatch(searchStart());
       const steamIds = players.map((player) => player.steamId);
+      const victimSteamIds = victims.map((victim) => victim.steamId);
       const result = await client.send({
         name: RendererClientMessageName.SearchEvent,
         payload: {
@@ -82,6 +94,7 @@ export function Search() {
           demoSources,
           roundTagIds,
           matchTagIds,
+          victimSteamIds,
         },
       });
 
@@ -128,6 +141,17 @@ export function Search() {
               onPlayerRemoved={onPlayerRemoved}
             />
           </div>
+          {canFilterOnVictims && (
+            <div className="flex flex-col gap-y-8">
+              <Trans context="Input label">Victims</Trans>
+              <SearchPlayersInput
+                isDisabled={isLoading}
+                selectedPlayers={victims}
+                onPlayerSelected={onVictimSelected}
+                onPlayerRemoved={onVictimRemoved}
+              />
+            </div>
+          )}
           <div className="flex flex-col gap-y-8">
             <Trans context="Input label">Maps</Trans>
             <SearchMapsInput
