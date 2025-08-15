@@ -208,6 +208,17 @@ export function Viewer2DLoader() {
     loadAudioFile,
   ]);
 
+  useEffect(() => {
+    return () => {
+      if (state.audio) {
+        state.audio.pause();
+        // eslint-disable-next-line react-hooks/react-compiler
+        state.audio.currentTime = 0;
+        state.audio.src = '';
+      }
+    };
+  }, [state.audio]);
+
   if (state.status === Status.Loading) {
     return <Message message={<Trans>Loading round number {roundNumber}…</Trans>} />;
   }
