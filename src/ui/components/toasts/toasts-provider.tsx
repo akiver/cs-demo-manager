@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import type { Toast, ShowToastOptions } from './toasts-context';
@@ -17,46 +17,43 @@ export function ToastsProvider({ children }: Props) {
   const [toasts, setToasts] = useState<Toast[]>([]);
   const timeouts = useRef<Map<string, Timeout>>(new Map());
 
-  const showToast = useCallback(
-    (options: ShowToastOptions) => {
-      const toastId = options.id ?? window.crypto.randomUUID();
-      const timeoutId = timeouts.current.get(toastId)?.id;
-      window.clearTimeout(timeoutId);
+  const showToast = (options: ShowToastOptions) => {
+    const toastId = options.id ?? window.crypto.randomUUID();
+    const timeoutId = timeouts.current.get(toastId)?.id;
+    window.clearTimeout(timeoutId);
 
-      const durationInMs = 5000;
-      timeouts.current.set(toastId, {
-        id: window.setTimeout(() => {
-          removeToast(toastId);
-        }, durationInMs),
-        startedAt: Date.now(),
-        msRemaining: durationInMs,
+    const durationInMs = 5000;
+    timeouts.current.set(toastId, {
+      id: window.setTimeout(() => {
+        removeToast(toastId);
+      }, durationInMs),
+      startedAt: Date.now(),
+      msRemaining: durationInMs,
+    });
+
+    const isToastAlreadyExists = timeoutId !== undefined || toasts.some((toast) => toast.id === toastId);
+    if (isToastAlreadyExists) {
+      setToasts((toasts) => {
+        return toasts.map((toast) => {
+          if (toast.id === toastId) {
+            return { ...options, id: toastId };
+          }
+
+          return toast;
+        });
       });
-
-      const isToastAlreadyExists = timeoutId !== undefined || toasts.some((toast) => toast.id === toastId);
-      if (isToastAlreadyExists) {
-        setToasts((toasts) => {
-          return toasts.map((toast) => {
-            if (toast.id === toastId) {
-              return { ...options, id: toastId };
-            }
-
-            return toast;
-          });
-        });
-      } else {
-        setToasts((toasts) => {
-          return [
-            ...toasts,
-            {
-              ...options,
-              id: toastId,
-            },
-          ];
-        });
-      }
-    },
-    [toasts],
-  );
+    } else {
+      setToasts((toasts) => {
+        return [
+          ...toasts,
+          {
+            ...options,
+            id: toastId,
+          },
+        ];
+      });
+    }
+  };
 
   const removeToast = (toastId: string) => {
     window.clearTimeout(timeouts.current.get(toastId)?.id);

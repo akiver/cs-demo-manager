@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { KillIndicator } from './kill-indicator';
 import { FreezetimeEndIndicator } from './freezetime-end-indicator';
 import { useViewerContext } from '../use-viewer-context';
@@ -8,20 +8,33 @@ import { BombPlantedIndicator } from './bomb-planted-indicator';
 export function Timeline() {
   const { play, currentTick, round, kills, bombExploded, bombPlanted } = useViewerContext();
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const [timelineWidth, setTimelineWidth] = useState(0);
 
-  const getTimelineWidth = () => {
+  useEffect(() => {
     const wrapper = wrapperRef.current;
-    if (wrapper === null) {
-      return 0;
+    if (!wrapper) {
+      return;
     }
 
-    return wrapper.clientWidth;
-  };
+    setTimelineWidth(wrapper.clientWidth);
+
+    const observer = new ResizeObserver(() => {
+      if (wrapperRef.current) {
+        setTimelineWidth(wrapperRef.current.clientWidth);
+      }
+    });
+
+    observer.observe(wrapper);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const tickToPlaybackBarX = (tick: number) => {
     const { startTick, endOfficiallyTick } = round;
     const elapsedPercent = (tick - startTick) / (endOfficiallyTick - startTick);
-    const x = getTimelineWidth() * elapsedPercent;
+    const x = timelineWidth * elapsedPercent;
 
     return x;
   };
@@ -29,7 +42,7 @@ export function Timeline() {
   const getPlayBarElapsedWidth = () => {
     const { startTick, endOfficiallyTick } = round;
     const elapsedPercent = (currentTick - startTick) / (endOfficiallyTick - startTick);
-    const width = getTimelineWidth() * elapsedPercent;
+    const width = timelineWidth * elapsedPercent;
     return width;
   };
 
@@ -39,7 +52,7 @@ export function Timeline() {
     }
     const rectangle = wrapperRef.current.getBoundingClientRect();
     const xCoordinate = event.clientX - rectangle.left;
-    const playbackPercent = (xCoordinate * 100) / getTimelineWidth();
+    const playbackPercent = (xCoordinate * 100) / timelineWidth;
     const { startTick, endOfficiallyTick } = round;
     const newTick = Math.floor((playbackPercent * (endOfficiallyTick - startTick)) / 100 + startTick);
     play(newTick);

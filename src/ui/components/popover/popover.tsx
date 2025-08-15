@@ -1,7 +1,6 @@
 import React, {
   createContext,
   useContext,
-  useMemo,
   useState,
   type HTMLProps,
   type ReactElement,
@@ -77,20 +76,17 @@ function usePopover({
   });
   const interactions = useInteractions([click, dismiss, role, hover]);
 
-  return useMemo(
-    () => ({
-      open,
-      setOpen,
-      ...interactions,
-      ...data,
-      modal,
-      labelId,
-      descriptionId,
-      setLabelId,
-      setDescriptionId,
-    }),
-    [open, setOpen, interactions, data, modal, labelId, descriptionId],
-  );
+  return {
+    open,
+    setOpen,
+    ...interactions,
+    ...data,
+    modal,
+    labelId,
+    descriptionId,
+    setLabelId,
+    setDescriptionId,
+  };
 }
 
 type ContextType =

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { HighlightPlayerKillsCheckbox } from './highlight-player-kills-checkbox';
 import { PlayerNameInput } from './player-name-input';
@@ -22,107 +22,103 @@ export function SequencePlayers() {
   const match = useCurrentMatch();
   const { t } = useLingui();
 
-  const columns = useMemo(() => {
-    const columns: Column<SequencePlayerOptions>[] = [
+  const columns: Column<SequencePlayerOptions>[] = [
+    {
+      id: 'player-name',
+      accessor: 'playerName',
+      headerText: t({
+        context: 'Table header',
+        message: 'Player',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: `Player's name`,
+      }),
+      width: 350,
+      Cell: PlayerNameInput,
+      allowSort: false,
+      allowResize: false,
+      allowMove: false,
+    },
+  ];
+
+  // Death notices edition is available only on Windows
+  if (window.csdm.isWindows) {
+    columns.push(
       {
-        id: 'player-name',
-        accessor: 'playerName',
+        id: 'show-kills',
+        accessor: 'showKill',
         headerText: t({
-          context: 'Table header',
-          message: 'Player',
+          context: 'Table header show kills',
+          message: 'K',
         }),
         headerTooltip: t({
           context: 'Table header tooltip',
-          message: `Player's name`,
+          message: 'Show kills',
         }),
-        width: 350,
-        Cell: PlayerNameInput,
+        width: 40,
+        Cell: ShowPlayerKillsCheckbox,
         allowSort: false,
         allowResize: false,
         allowMove: false,
       },
-    ];
-
-    // Death notices edition is available only on Windows
-    if (window.csdm.isWindows) {
-      columns.push(
-        {
-          id: 'show-kills',
-          accessor: 'showKill',
-          headerText: t({
-            context: 'Table header show kills',
-            message: 'K',
-          }),
-          headerTooltip: t({
-            context: 'Table header tooltip',
-            message: 'Show kills',
-          }),
-          width: 40,
-          Cell: ShowPlayerKillsCheckbox,
-          allowSort: false,
-          allowResize: false,
-          allowMove: false,
-        },
-        {
-          id: 'highlight-kills',
-          accessor: 'highlightKill',
-          headerText: t({
-            context: 'Table header highlight kills',
-            message: 'H',
-          }),
-          headerTooltip: t({
-            context: 'Table header tooltip',
-            message: 'Highlight kills kills',
-          }),
-          width: 40,
-          Cell: HighlightPlayerKillsCheckbox,
-          allowSort: false,
-          allowResize: false,
-          allowMove: false,
-        },
-      );
-    }
-
-    if (match.game !== Game.CSGO) {
-      columns.push({
-        id: 'voice',
-        accessor: 'isVoiceEnabled',
+      {
+        id: 'highlight-kills',
+        accessor: 'highlightKill',
         headerText: t({
-          context: 'Table header enable voices',
-          message: 'V',
+          context: 'Table header highlight kills',
+          message: 'H',
         }),
         headerTooltip: t({
           context: 'Table header tooltip',
-          message: 'Voice',
+          message: 'Highlight kills kills',
         }),
         width: 40,
-        Cell: EnablePlayerVoicesCheckbox,
+        Cell: HighlightPlayerKillsCheckbox,
         allowSort: false,
         allowResize: false,
         allowMove: false,
-      });
-    }
+      },
+    );
+  }
 
+  if (match.game !== Game.CSGO) {
     columns.push({
-      id: 'actions',
-      accessor: 'steamId',
+      id: 'voice',
+      accessor: 'isVoiceEnabled',
       headerText: t({
-        context: 'Table header',
-        message: 'Actions',
+        context: 'Table header enable voices',
+        message: 'V',
       }),
       headerTooltip: t({
         context: 'Table header tooltip',
-        message: 'Actions',
+        message: 'Voice',
       }),
-      width: 130,
-      Cell: CopySteamIdButton,
+      width: 40,
+      Cell: EnablePlayerVoicesCheckbox,
       allowSort: false,
       allowResize: false,
       allowMove: false,
     });
+  }
 
-    return columns satisfies readonly Column<SequencePlayerOptions>[];
-  }, [t, match.game]);
+  columns.push({
+    id: 'actions',
+    accessor: 'steamId',
+    headerText: t({
+      context: 'Table header',
+      message: 'Actions',
+    }),
+    headerTooltip: t({
+      context: 'Table header tooltip',
+      message: 'Actions',
+    }),
+    width: 130,
+    Cell: CopySteamIdButton,
+    allowSort: false,
+    allowResize: false,
+    allowMove: false,
+  });
 
   const table = useTable({
     columns,

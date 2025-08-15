@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { useViewerContext } from './use-viewer-context';
 import { formatMillisecondsToTimer } from 'csdm/ui/shared/format-milliseconds-to-timer';
 
-export const Timer = memo(() => {
+export function Timer() {
   const { timeRemaining, bombPlanted, currentTick, tickrate, round } = useViewerContext();
   const remainingTimer = formatMillisecondsToTimer(timeRemaining);
   const isBombPlanted = bombPlanted !== null && bombPlanted.tick <= currentTick;
@@ -16,6 +16,4 @@ export const Timer = memo(() => {
       <p className="text-body-strong">{elapsedTimer}</p>
     </div>
   );
-});
-
-Timer.displayName = 'Timer';
+}

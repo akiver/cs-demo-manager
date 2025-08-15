@@ -12,5 +12,5 @@ export function onWindowError(event: ErrorEvent) {
     return;
   }
 
-  logger.error(error);
+  logger.error(error ?? event.message);
 }

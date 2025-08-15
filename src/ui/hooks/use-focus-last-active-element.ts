@@ -1,13 +1,13 @@
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 
 export function useFocusLastActiveElement() {
   const lastActiveElement = useRef<Element | null>(null);
 
-  const updateElement = useCallback(() => {
+  const updateElement = () => {
     lastActiveElement.current = document.activeElement;
-  }, []);
+  };
 
-  const focusElement = useCallback(() => {
+  const focusElement = () => {
     const elementToFocus = lastActiveElement.current;
     if (elementToFocus instanceof HTMLElement) {
       window.requestIdleCallback(() => {
@@ -15,7 +15,7 @@ export function useFocusLastActiveElement() {
         lastActiveElement.current = null;
       });
     }
-  }, []);
+  };
 
   return {
     updateElement,

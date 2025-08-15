@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 import { unixTimestampToDate } from 'csdm/common/date/unix-timestamp-to-date';
 
@@ -13,10 +12,7 @@ const DEFAULT_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
 export function useUnixTimestampToHumanizedDate() {
   const locale = useLocale();
 
-  return useCallback(
-    (unixTimestamp: number, options: Intl.DateTimeFormatOptions = DEFAULT_FORMAT_OPTIONS) => {
-      return new Intl.DateTimeFormat(locale, options).format(unixTimestampToDate(unixTimestamp));
-    },
-    [locale],
-  );
+  return (unixTimestamp: number, options: Intl.DateTimeFormatOptions = DEFAULT_FORMAT_OPTIONS) => {
+    return new Intl.DateTimeFormat(locale, options).format(unixTimestampToDate(unixTimestamp));
+  };
 }

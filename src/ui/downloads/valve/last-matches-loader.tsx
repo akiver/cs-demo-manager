@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';
@@ -24,11 +24,11 @@ export function LastMatchesLoader() {
   const getBoilerErrorMessageFromErrorCode = useGetBoilerErrorMessageFromErrorCode();
   const { t } = useLingui();
 
-  const fetchLastMatches = useCallback(() => {
+  const fetchLastMatches = () => {
     client.send({
       name: RendererClientMessageName.FetchLastValveMatches,
     });
-  }, [client]);
+  };
 
   if (downloadFolderPath === undefined) {
     return <DownloadsFolderRequired />;

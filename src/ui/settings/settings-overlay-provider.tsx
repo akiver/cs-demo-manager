@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { SettingsOverlay } from './settings-overlay';
 import { SettingsCategory } from './settings-category';
@@ -46,23 +46,26 @@ export function SettingsOverlayProvider({ children }: Props) {
     setCategory(category);
   };
 
-  const openSettings = useCallback(
-    (category?: SettingsCategory) => {
-      if (category) {
-        showCategory(category);
-      }
-      updateElement();
-      makeElementInert(APP_ELEMENT_ID);
-      setAreSettingsVisible(true);
-    },
-    [updateElement],
-  );
+  // https://github.com/reactwg/react-compiler/discussions/18
+  // eslint-disable-next-line react-hooks/react-compiler
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const openSettings = (category?: SettingsCategory) => {
+    if (category) {
+      showCategory(category);
+    }
+    updateElement();
+    makeElementInert(APP_ELEMENT_ID);
+    setAreSettingsVisible(true);
+  };
 
-  const closeSettings = useCallback(() => {
+  // https://github.com/reactwg/react-compiler/discussions/18
+  // eslint-disable-next-line react-hooks/react-compiler
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const closeSettings = () => {
     makeElementNonInert(APP_ELEMENT_ID);
     focusElement();
     setAreSettingsVisible(false);
-  }, [focusElement]);
+  };
 
   useEffect(() => {
     const onOpenSettings = () => {

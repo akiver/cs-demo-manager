@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
 import { useDialog } from '../components/dialogs/use-dialog';
@@ -24,10 +24,10 @@ export function Dialog({
   useBlockNavigation(blockNavigation);
   const { hideDialog } = useDialog();
 
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     onClose?.();
     hideDialog();
-  }, [onClose, hideDialog]);
+  };
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     event.stopPropagation();

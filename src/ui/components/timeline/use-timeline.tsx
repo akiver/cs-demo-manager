@@ -119,6 +119,7 @@ export function useTimeline({ ticksPerSecond, tickCount, onContextMenu }: Timeli
     panStartX.current = event.clientX;
     // Note: On Windows it will not properly work if the dev tools are opened.
     // https://stackoverflow.com/a/16274104
+    // eslint-disable-next-line react-hooks/react-compiler
     document.body.style.cursor = 'move';
   };
 

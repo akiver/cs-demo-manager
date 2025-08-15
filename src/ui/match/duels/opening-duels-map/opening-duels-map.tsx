@@ -242,6 +242,7 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
         <div className="absolute top-0 size-full overflow-hidden">
           <canvas
             ref={(ref) => {
+              // eslint-disable-next-line react-hooks/react-compiler
               canvasRef.current = ref;
               refs.setReference(ref);
             }}

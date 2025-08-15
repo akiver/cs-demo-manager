@@ -1,4 +1,4 @@
-import { useCallback, useReducer, useEffect, useRef } from 'react';
+import { useReducer, useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import type { ColumnState } from 'csdm/node/settings/table/column-state';
@@ -85,9 +85,9 @@ export function useTable<DataType extends Data>({
 
   const { getVirtualItems, getTotalSize, scrollToIndex } = useVirtualizer({
     count: rows.length,
-    getScrollElement: useCallback(() => {
+    getScrollElement: () => {
       return wrapperRef.current;
-    }, []),
+    },
     scrollToFn(offset, { behavior }, { scrollElement, options }) {
       if (scrollElement === null || offset <= 0) {
         return;

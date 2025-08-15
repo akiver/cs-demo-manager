@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { createContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 
@@ -30,15 +30,15 @@ export function ContextMenuProvider({ children }: Props) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [contextMenu, setContextMenu] = useState<ReactNode | undefined>(undefined);
 
-  const hideContextMenu = useCallback(() => {
+  const hideContextMenu = () => {
     setContextMenu(undefined);
-  }, []);
+  };
 
-  const showContextMenu = useCallback((event: MouseEvent, contextMenu: ReactNode) => {
+  const showContextMenu = (event: MouseEvent, contextMenu: ReactNode) => {
     event.preventDefault();
     positionRef.current = { x: event.clientX, y: event.clientY };
     setContextMenu(contextMenu);
-  }, []);
+  };
 
   const onWrapperMouseDown = (event: React.MouseEvent) => {
     event.stopPropagation();

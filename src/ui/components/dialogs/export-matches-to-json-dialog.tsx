@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { Button } from 'csdm/ui/components/buttons/button';
@@ -39,7 +39,7 @@ export function ExportMatchesToJsonDialog({ checksums }: Props) {
   const isOutputPathSelected = outputFolderPath !== '';
   const isExportPossible = isLoading || !isOutputPathSelected;
 
-  const selectOutputFolder = useCallback(async () => {
+  const selectOutputFolder = async () => {
     const { filePaths, canceled } = await window.csdm.showOpenDialog({
       buttonLabel: t({
         context: 'Button label',
@@ -54,7 +54,7 @@ export function ExportMatchesToJsonDialog({ checksums }: Props) {
 
     const outputFolderPath = filePaths[0];
     setOutputFolderPath(outputFolderPath);
-  }, [t]);
+  };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     if (isExportPossible) {

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useCallback } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { ArgumentName } from 'csdm/common/argument/argument-name';
 import { Status } from 'csdm/common/types/status';
@@ -37,10 +37,10 @@ export function ArgumentsProvider({ children }: Props) {
     getStartupArguments();
   }, []);
 
-  const clearArguments = useCallback(() => {
+  const clearArguments = () => {
     window.csdm.clearStartupArguments();
     setArgs([]);
-  }, []);
+  };
 
   if (status === Status.Loading) {
     return <Loading />;

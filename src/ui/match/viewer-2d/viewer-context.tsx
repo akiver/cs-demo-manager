@@ -167,6 +167,7 @@ export function ViewerProvider({
       setCurrentTick(tick);
     }
     if (audio) {
+      // eslint-disable-next-line react-hooks/react-compiler
       audio.currentTime = clampAudioTime((tick ?? currentTick) / tickrate + audioOffsetSeconds);
       try {
         await audio.play();
