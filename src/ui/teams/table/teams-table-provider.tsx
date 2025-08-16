@@ -56,6 +56,7 @@ export function TeamsTableProvider({ children }: Props) {
     data: teams,
     getRowId,
     persistStateKey: TableName.Teams,
+    persistScrollKey: TableName.Teams,
     rowSelection: 'multiple',
     fuzzySearchColumnIds,
     fuzzySearchText,

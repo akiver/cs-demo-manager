@@ -12,6 +12,7 @@ import { useAnalysesColumns } from './use-analyses-columns';
 import { useTable } from 'csdm/ui/components/table/use-table';
 import { Table } from 'csdm/ui/components/table/table';
 import type { TableInstance } from 'csdm/ui/components/table/table-types';
+import { TableName } from 'csdm/node/settings/table/table-name';
 
 function getRowId(analysis: Analysis) {
   return analysis.demoPath;
@@ -35,14 +36,15 @@ export function AnalysesTable() {
     }
   };
 
-  const selectedChecksums = selectedAnalysis === undefined ? [] : [selectedAnalysis.demoChecksum];
+  const selectedPaths = selectedAnalysis === undefined ? [] : [selectedAnalysis.demoPath];
 
   const table = useTable({
     columns,
     data: analyses,
     getRowId,
-    selectedRowIds: selectedChecksums,
+    selectedRowIds: selectedPaths,
     rowSelection: 'single',
+    persistScrollKey: TableName.Analyses,
     onContextMenu,
     onSelectionChanged,
   });

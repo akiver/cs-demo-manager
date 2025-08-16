@@ -9,7 +9,6 @@ import { isCtrlOrCmdEvent, isSelectAllKeyboardEvent } from 'csdm/ui/keyboard/key
 import { getTableRowHeight } from './get-table-row-height';
 import { buildRows } from './build-rows';
 import type { Data, RowSelection, Column, TableInstance, SortedColumn } from './table-types';
-import { getCssVariableValue } from 'csdm/ui/shared/get-css-variable-value';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 function buildColumnsWidthMapping<DataType extends Data>(columns: readonly Column<DataType>[]) {
@@ -26,6 +25,7 @@ type Options<DataType extends Data> = {
   getRowId: (data: DataType) => string;
   rowSelection: RowSelection;
   persistStateKey?: TableName;
+  persistScrollKey?: TableName;
   width?: number;
   fuzzySearchText?: string;
   fuzzySearchColumnIds?: string[];
@@ -53,6 +53,7 @@ export function useTable<DataType extends Data>({
   onSelectWithKeyboard,
   onContextMenu,
   persistStateKey,
+  persistScrollKey,
   getRowStyle,
   width,
   selectedRowIds,
@@ -83,26 +84,12 @@ export function useTable<DataType extends Data>({
     locale,
   });
 
-  const { getVirtualItems, getTotalSize, scrollToIndex } = useVirtualizer({
+  const { getVirtualItems, getTotalSize, scrollToIndex, scrollToOffset, scrollOffset } = useVirtualizer({
     count: rows.length,
+    overscan: 10,
+    useAnimationFrameWithResizeObserver: true,
     getScrollElement: () => {
       return wrapperRef.current;
-    },
-    scrollToFn(offset, { behavior }, { scrollElement, options }) {
-      if (scrollElement === null || offset <= 0) {
-        return;
-      }
-
-      let toOffset = offset;
-      if (offset > scrollElement.scrollTop) {
-        const rowHeight = Number.parseFloat(getCssVariableValue('--table-row-height'));
-        toOffset = offset + scrollElement.getBoundingClientRect().height - rowHeight;
-      }
-
-      scrollElement.scrollTo({
-        [options.horizontal ? 'left' : 'top']: toOffset,
-        behavior: behavior === 'smooth' ? 'smooth' : undefined,
-      });
     },
     estimateSize: getTableRowHeight,
   });
@@ -112,18 +99,19 @@ export function useTable<DataType extends Data>({
       return;
     }
 
-    if (selectedRowIds === undefined || selectedRowIds.length === 0) {
+    if (!persistScrollKey) {
       isFirstRender.current = false;
       return;
     }
 
-    const [rowIdToScroll] = selectedRowIds;
-    const rowToScrollIndex = rows.findIndex((row) => {
-      return getRowId(row) === rowIdToScroll;
-    });
-    if (rowToScrollIndex > -1) {
+    const savedScrollOffset = window.sessionStorage.getItem(persistScrollKey);
+    if (savedScrollOffset) {
+      const scrollOffset = parseInt(savedScrollOffset, 10);
+      if (isNaN(scrollOffset)) {
+        return;
+      }
       window.requestAnimationFrame(() => {
-        scrollToIndex(rowToScrollIndex);
+        scrollToOffset(scrollOffset);
       });
     }
 
@@ -163,6 +151,14 @@ export function useTable<DataType extends Data>({
 
     loadPersistedState();
   }, [persistStateKey, client, render]);
+
+  useEffect(() => {
+    if (!persistScrollKey || scrollOffset === null) {
+      return;
+    }
+
+    window.sessionStorage.setItem(persistScrollKey, String(scrollOffset));
+  }, [persistScrollKey, scrollOffset]);
 
   useEffect(() => {
     const onResetTables = () => {
@@ -587,7 +583,6 @@ export function useTable<DataType extends Data>({
               if (previousRowElement) {
                 previousRowElement.focus();
               }
-              scrollToIndex(previousRowIndex);
 
               const newRowIndex = previousRowIndex;
               const currentRowIndex = rowIndex;

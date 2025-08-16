@@ -71,6 +71,7 @@ export function PlayersTableProvider({ children }: Props) {
     data: players,
     getRowId,
     persistStateKey: TableName.Players,
+    persistScrollKey: TableName.Players,
     rowSelection: 'multiple',
     fuzzySearchColumnIds,
     fuzzySearchText,

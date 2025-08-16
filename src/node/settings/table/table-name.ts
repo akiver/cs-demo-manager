@@ -1,6 +1,7 @@
 export const TableName = {
-  Matches: 'matches',
+  Analyses: 'analyses',
   Demos: 'demos',
+  Matches: 'matches',
   MatchScoreboard: 'match-scoreboard',
   Players: 'players',
   Teams: 'teams',

@@ -109,6 +109,7 @@ export function MatchesTableProvider({ children }: Props) {
     onContextMenu,
     onKeyDown,
     persistStateKey: TableName.Matches,
+    persistScrollKey: TableName.Matches,
     selectedRowIds: selectedChecksums,
     onSelectionChanged,
     sortedColumn: {

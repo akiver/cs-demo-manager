@@ -117,6 +117,7 @@ export function DemosTableProvider({ children }: Props) {
     data: demos,
     getRowId,
     persistStateKey: TableName.Demos,
+    persistScrollKey: TableName.Demos,
     rowSelection: 'multiple',
     fuzzySearchText,
     fuzzySearchColumnIds,
