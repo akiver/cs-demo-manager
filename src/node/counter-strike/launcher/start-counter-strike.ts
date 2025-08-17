@@ -58,11 +58,15 @@ async function buildLinuxCommand(scriptPath: string, args: string, game: Game) {
     followSymbolicLinks: false,
   });
   if (!runSteamScriptPath) {
+    logger.error(
+      `Cannot find the Steam Linux Runtime script "${steamScriptName}" in the Steam folder at ${steamFolderPath}`,
+    );
     throw new CounterStrikeExecutableNotFound(game);
   }
 
   const scriptExists = await fs.pathExists(scriptPath);
   if (!scriptExists) {
+    logger.error(`Cannot find the Counter-Strike script "${scriptPath}"`);
     throw new CounterStrikeExecutableNotFound(game);
   }
 
