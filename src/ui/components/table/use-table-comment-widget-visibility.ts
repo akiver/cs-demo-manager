@@ -21,9 +21,33 @@ export function useTableCommentWidgetVisibility() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        hideWidget();
+      if (!isWidgetVisible) {
+        return;
+      }
+
+      switch (event.key) {
+        case 'Escape':
+          event.preventDefault();
+          hideWidget();
+          break;
+        case 'ArrowDown':
+        case 'ArrowUp': {
+          // temporarily hide the widget when navigating with arrow keys because the markdown editor can be heavy to
+          // render, and so slowing down the navigation.
+          const isWidgetTarget = event.target instanceof HTMLDivElement && event.target.contentEditable === 'true';
+          if (isWidgetTarget) {
+            break;
+          }
+          setIsWidgetVisible(false);
+          document.addEventListener(
+            'keyup',
+            () => {
+              setIsWidgetVisible(true);
+            },
+            { once: true },
+          );
+          break;
+        }
       }
     };
 
@@ -32,7 +56,7 @@ export function useTableCommentWidgetVisibility() {
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, []);
+  }, [isWidgetVisible]);
 
   return { isWidgetVisible, showWidget, hideWidget, onKeyDown };
 }
