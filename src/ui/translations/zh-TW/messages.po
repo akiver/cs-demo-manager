@@ -7281,15 +7281,19 @@ msgid "You selected a version compatible with CS2 from the Limited Test up to th
 msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
-msgid "Your CS2 build must be from before this update to use this version!"
-msgstr ""
-
-#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the 'Armory' update ({armoryUpdateDate}) up to the 'Animation' update released on {animationUpdateDate}."
 msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
-msgid "You must also select the CS2 beta branch <0>\"1.40.8.8\"</0> in your Steam library to use this version."
+msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.8.8\"</0> in your Steam library to use this version."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the 'Animation' update ({animationUpdateDate}) up to the {update14095} update."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.9.4\"</0> in your Steam library to use this version."
 msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
