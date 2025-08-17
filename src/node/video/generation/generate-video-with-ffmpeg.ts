@@ -12,10 +12,6 @@ import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RawFilesNotFoundError } from '../errors/raw-files-not-found';
 
-function buildMergeVideoAndAudioArgs(videoFilePath: string, audioFilePath: string, outputPath: string) {
-  return [`-i "${videoFilePath}"`, `-i "${audioFilePath}"`, '-c copy', '-map 0:v:0', '-map 1:a:0', `"${outputPath}"`];
-}
-
 async function convertGameAudioFile(
   wavFilePath: string,
   audioCodec: string,
@@ -104,7 +100,23 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
     }
     // The game generates PCM audio, we need to convert it to the desired format
     const audioFilePath = await convertGameAudioFile(wavFilePath, audioCodec, audioBitrate, signal);
-    return buildMergeVideoAndAudioArgs(videoFilePath, audioFilePath, outputPath);
+    const args = [
+      '-y', // override the file if it exists
+    ];
+
+    if (inputParameters !== '') {
+      args.push(inputParameters);
+    }
+
+    args.push(
+      ...[`-i "${videoFilePath}"`, `-i "${audioFilePath}"`, '-c copy', '-map 0:v:0', '-map 1:a:0', `"${outputPath}"`],
+    );
+
+    if (outputParameters !== '') {
+      args.push(outputParameters);
+    }
+
+    return await executeFfmpeg(args, signal);
   }
 
   let rawFilesPathPattern: string;
