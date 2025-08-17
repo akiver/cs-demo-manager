@@ -29,6 +29,10 @@ export function InitialPageSelect() {
       context: 'Select option initial page',
       message: 'Download',
     }),
+    [Page.Teams]: t({
+      context: 'Select option initial page',
+      message: 'Teams',
+    }),
   };
 
   const options: SelectOption<Page>[] = Object.values(Page).map((page) => {

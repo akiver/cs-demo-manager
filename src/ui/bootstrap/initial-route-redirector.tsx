@@ -27,14 +27,26 @@ export function InitialRouteRedirector() {
     let to: string = RoutePath.Matches;
     if (startPathArgument && startPathArgument !== StartPath.Settings) {
       switch (startPathArgument) {
+        case StartPath.Bans:
+          to = RoutePath.Ban;
+          break;
+        case StartPath.Demos:
+          to = RoutePath.Demos;
+          break;
         case StartPath.Downloads:
           to = buildPendingDownloadPath();
+          break;
+        case StartPath.Matches:
+          to = RoutePath.Matches;
           break;
         case StartPath.Players:
           to = RoutePath.Players;
           break;
-        case StartPath.Bans:
-          to = RoutePath.Ban;
+        case StartPath.Search:
+          to = RoutePath.Search;
+          break;
+        case StartPath.Teams:
+          to = RoutePath.Teams;
           break;
       }
     } else {
@@ -47,6 +59,9 @@ export function InitialRouteRedirector() {
           break;
         case Page.Players:
           to = RoutePath.Players;
+          break;
+        case Page.Teams:
+          to = RoutePath.Teams;
           break;
       }
     }

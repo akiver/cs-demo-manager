@@ -7553,6 +7553,11 @@ msgid "Download"
 msgstr "下载"
 
 #: src/ui/settings/ui/initial-page-select.tsx
+msgctxt "Select option initial page"
+msgid "Teams"
+msgstr ""
+
+#: src/ui/settings/ui/initial-page-select.tsx
 msgid "Initial page displayed on app startup"
 msgstr "应用程序启动时显示的初始页面"
 
