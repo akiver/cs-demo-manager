@@ -1610,7 +1610,7 @@ msgstr "比赛"
 #: src/ui/components/panels/clutches.tsx
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total"
-msgstr "总共的"
+msgstr "总计"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
@@ -2383,7 +2383,7 @@ msgstr "致盲"
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Jump kill"
-msgstr "爆笑跳杀"
+msgstr "跳跃击杀"
 
 #: src/ui/components/table/columns-visibility-dropdown.tsx
 msgctxt "Dropdown"
@@ -3336,7 +3336,7 @@ msgstr "阅读<0>文档</0>以了解更多信息."
 #: src/ui/match/video/get-video-error-from-error-code.tsx
 #: src/ui/match/video/video-loader.tsx
 msgid "Counter-Strike executable not found, check your app playback settings."
-msgstr ""
+msgstr "找不到 Counter-Strike 可执行程序，请检查你的播放设置页中的选项。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "{game} is not supported on your operating system"
@@ -3672,7 +3672,7 @@ msgstr "*死亡*"
 
 #: src/ui/match/chat-messages/chat-messages.tsx
 msgid "All teams"
-msgstr ""
+msgstr "所有队伍"
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "Chat messages are available only if the <0>.info</0> file of the demo is next to its <1>.dem</1> file during analysis."
@@ -5846,67 +5846,67 @@ msgstr "偏移: {offsetSeconds}秒"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
 msgid "Set as current position"
-msgstr ""
+msgstr "设置为当前位置"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
 msgid "Reset position"
-msgstr ""
+msgstr "重置位置"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-button.tsx
 msgid "Unload file"
-msgstr ""
+msgstr "卸载文件"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Could not find the demo file: {demoPath}"
-msgstr ""
+msgstr "未能找到 demo 文件: {demoPath}"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "There was a problem decoding the demo: {demoPath}"
-msgstr ""
+msgstr "解码该 demo 时遇到问题: {demoPath}"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "No voice data was found in: {demoPath}"
-msgstr ""
+msgstr "未找到此 demo 的语音数据: {demoPath}"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Unsupported audio format in: {demoPath}"
-msgstr ""
+msgstr "不支持的音频格式: {demoPath}"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Unable to create audio file for: {demoPath}"
-msgstr ""
+msgstr "无法创建音频文件: {demoPath}"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Invalid arguments provided for: {demoPath}"
-msgstr ""
+msgstr "提供的参数无效: {demoPath}"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Could not open the demo file."
-msgstr ""
+msgstr "无法打开 demo 文件。"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Rosetta is required. Please install it from <0>Apple</0>."
-msgstr ""
+msgstr "需要安装 Rosetta。请从 <0>Apple</0> 安装。"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Audio playback"
-msgstr ""
+msgstr "音频播放"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "No audio file was found for this demo."
-msgstr ""
+msgstr "没有找到该 demo 所对应的音频文件。"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "You can either:"
-msgstr ""
+msgstr "你可以："
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Generate a <0>.wav</0> file containing the players' voice audio next to the demo file."
-msgstr ""
+msgstr "在 demo 文件旁边生成包含玩家语音的 <0>.wav</0> 文件。"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Select an existing audio file from your computer to use for playback."
-msgstr ""
+msgstr "从计算机中选择一个现有的音频文件用于播放。"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 #: src/ui/settings/playback/cs2-plugin-select.tsx
@@ -5915,19 +5915,19 @@ msgstr "详情请查阅<0>文档</0>。"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "The following issues were found:"
-msgstr ""
+msgstr "遇到了下列问题："
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Generate audio file"
-msgstr ""
+msgstr "生成音频文件"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Audio Files"
-msgstr ""
+msgstr "音频文件"
 
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Choose audio file…"
-msgstr ""
+msgstr "选择音频文件…"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-exploded-indicator.tsx
 msgid "{time} Bomb planted by {planterName} exploded at site {site}"
@@ -5953,11 +5953,11 @@ msgstr "更低"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading the audio file found for this match."
-msgstr ""
+msgstr "加载这场比赛的音频文件时出错。"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "Make sure the file is a valid audio file."
-msgstr ""
+msgstr "请确保该文件是有效的音频文件。"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading round number {roundNumber}."
@@ -6053,7 +6053,7 @@ msgstr "机枪"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Melee"
-msgstr ""
+msgstr "近战"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Head"
@@ -7116,7 +7116,7 @@ msgstr "Steam API 密钥"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "Custom Steam API key used to retrieve information from Steam"
-msgstr "自定义Steam API密钥用于从Steam 获取信息"
+msgstr "用于从 Steam 获取信息的自定义 Steam API 密钥"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "FACEIT API key"
@@ -7124,7 +7124,7 @@ msgstr "FACEIT API密钥"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "Custom FACEIT API key used to retrieve information from FACEIT"
-msgstr "自定义FACEIT API密钥用于从FACEIT 获取信息"
+msgstr "用于从 FACEIT 获取信息的自定义 FACEIT API 密钥"
 
 #: src/ui/settings/maps/add-map-button.tsx
 msgctxt "Button"
@@ -7262,27 +7262,27 @@ msgstr "CS2 还没有内置的高光/低光算法。因此 CS2 的 demo 将始�
 
 #: src/ui/settings/playback/cs2-location.tsx
 msgid "Path to the <0>cs2.exe</0> file located in the <1>game\\bin\\win64</1> folder of your CS2 installation."
-msgstr ""
+msgstr "位于您的 CS2 安装目录下 <1>game\\bin\\win64</1> 中的 <0>cs2.exe</0> 文件路径。"
 
 #: src/ui/settings/playback/cs2-location.tsx
 msgid "Path to the <0>cs2.sh</0> script located in the <1>game</1> folder of your CS2 installation."
-msgstr ""
+msgstr "位于您的 CS2 安装目录下 <1>game</1> 中的 <0>cs2.sh</0> 文件路径。"
 
 #: src/ui/settings/playback/cs2-location.tsx
 msgid "CS2 location"
-msgstr ""
+msgstr "CS2 安装位置"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Latest"
-msgstr ""
+msgstr "最新"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the Limited Test up to the 'Armory' update ({armoryUpdateDate})."
-msgstr ""
+msgstr "你选择了兼容 CS2「武库通行证」更新({armoryUpdateDate})之前版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the 'Armory' update ({armoryUpdateDate}) up to the 'Animation' update released on {animationUpdateDate}."
-msgstr ""
+msgstr "你选择了兼容 CS2「武库通行证」更新({armoryUpdateDate})之后，「动画系统」更新{animationUpdateDate}之前版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.8.8\"</0> in your Steam library to use this version."
@@ -7298,7 +7298,7 @@ msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
-msgstr ""
+msgstr "只有当你想要观看与最新的 CS2 更新不兼容的旧 demo 时才更改这个选项！"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "The version of the internal CS2 plugin used to communicate with the game during playback."
@@ -7315,15 +7315,15 @@ msgstr "CS2 插件"
 
 #: src/ui/settings/playback/csgo-location.tsx
 msgid "Path to the <0>csgo.exe</0> file located in the root folder of your CS:GO installation."
-msgstr ""
+msgstr "位于您的 CS:GO 安装目录下的 <0>csgo.exe</0> 文件路径。"
 
 #: src/ui/settings/playback/csgo-location.tsx
 msgid "Path to the <0>csgo.sh</0> script located in the root folder of your CS:GO installation."
-msgstr ""
+msgstr "位于您的 CS:GO 安装目录下的 <0>csgo.sh</0> 文件路径。"
 
 #: src/ui/settings/playback/csgo-location.tsx
 msgid "CS:GO location"
-msgstr ""
+msgstr "CS:GO 安装位置"
 
 #: src/ui/settings/playback/custom-highlights.tsx
 msgid "Use a custom highlights algorithm to generate players highlights"
@@ -7436,12 +7436,12 @@ msgstr "玩家语音"
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
-msgstr "使用 HLAE 启动CS，请在 <0>视频</0>设置中配置HLAE"
+msgstr "使用 HLAE 启动 CS，请在<0>视频</0>设置中配置 HLAE"
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgctxt "Settings title"
 msgid "Use HLAE"
-msgstr "使用HLAE"
+msgstr "使用 HLAE"
 
 #: src/ui/settings/playback/watch-before-kill-delay.tsx
 msgctxt "Input placeholder"
