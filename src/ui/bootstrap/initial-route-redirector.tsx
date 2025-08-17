@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Navigate } from 'react-router';
+import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router';
 import { useUiSettings } from '../settings/ui/use-ui-settings';
 import { useArgument } from './use-argument';
 import { ArgumentName } from 'csdm/common/argument/argument-name';
@@ -12,41 +12,48 @@ export function InitialRouteRedirector() {
   const { initialPage: defaultPage } = useUiSettings();
   const { openSettings } = useSettingsOverlay();
   const startPathArgument = useArgument(ArgumentName.StartPath);
-  let to: RoutePath | string = RoutePath.Matches;
+  const navigate = useNavigate();
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
-    if (startPathArgument !== StartPath.Settings) {
+    if (hasRedirected.current) {
       return;
     }
 
-    openSettings();
-  }, [startPathArgument, openSettings]);
-
-  if (startPathArgument && startPathArgument !== StartPath.Settings) {
-    switch (startPathArgument) {
-      case StartPath.Downloads:
-        to = buildPendingDownloadPath();
-        break;
-      case StartPath.Players:
-        to = RoutePath.Players;
-        break;
-      case StartPath.Bans:
-        to = RoutePath.Ban;
-        break;
+    if (startPathArgument === StartPath.Settings) {
+      openSettings();
     }
-  } else {
-    switch (defaultPage) {
-      case Page.Demos:
-        to = RoutePath.Demos;
-        break;
-      case Page.Download:
-        to = RoutePath.Downloads;
-        break;
-      case Page.Players:
-        to = RoutePath.Players;
-        break;
-    }
-  }
 
-  return <Navigate to={to} replace={true} />;
+    let to: string = RoutePath.Matches;
+    if (startPathArgument && startPathArgument !== StartPath.Settings) {
+      switch (startPathArgument) {
+        case StartPath.Downloads:
+          to = buildPendingDownloadPath();
+          break;
+        case StartPath.Players:
+          to = RoutePath.Players;
+          break;
+        case StartPath.Bans:
+          to = RoutePath.Ban;
+          break;
+      }
+    } else {
+      switch (defaultPage) {
+        case Page.Demos:
+          to = RoutePath.Demos;
+          break;
+        case Page.Download:
+          to = RoutePath.Downloads;
+          break;
+        case Page.Players:
+          to = RoutePath.Players;
+          break;
+      }
+    }
+
+    navigate(to, { replace: true });
+    hasRedirected.current = true;
+  }, [defaultPage, navigate, openSettings, startPathArgument]);
+
+  return null;
 }
