@@ -394,6 +394,10 @@ msgid "An error occurred connecting to the WebSocket server."
 msgstr "连接到远程服务器时出错。"
 
 #: src/ui/changelog/changelog-dialog.tsx
+msgid "Failed to load changelog."
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
 msgid "Changelog version {APP_VERSION}"
 msgstr "更新日志 {APP_VERSION}"
 

@@ -174,6 +174,7 @@ export default [
             '^Toggle Developer Tools$',
             '^GitHub$',
             'Inter var$',
+            'CS:DM',
           ],
           ignoreNames: [
             // Ignore matching className (case-insensitive)

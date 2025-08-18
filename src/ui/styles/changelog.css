@@ -1,0 +1,75 @@
+.changelog {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.changelog h3 {
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.changelog h3:not(:first-child) {
+  margin-top: 0.5rem;
+}
+
+.changelog h4 {
+  font-weight: bold;
+}
+
+.changelog ul {
+  list-style-type: disc;
+  margin: auto;
+  padding-left: 16px;
+}
+
+.changelog code {
+  background-color: var(--color-gray-200);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.changelog a {
+  color: var(--color-blue-500);
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.changelog .directive {
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.changelog .directive a {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+.changelog .directive.warning {
+  background-color: rgb(77, 56, 0);
+  color: var(--color-white);
+}
+
+.changelog .directive.warning a {
+  text-decoration-color: rgb(230, 167, 0);
+}
+
+.changelog .directive.info {
+  background-color: rgb(25, 60, 71);
+  color: var(--color-white);
+}
+
+.changelog .directive.info a {
+  text-decoration-color: rgb(76, 179, 212);
+}
+
+.changelog .directive.danger {
+  background-color: rgb(75, 17, 19);
+  color: var(--color-white);
+}
+
+.changelog .directive.danger a {
+  text-decoration-color: rgb(225, 50, 56);
+}
