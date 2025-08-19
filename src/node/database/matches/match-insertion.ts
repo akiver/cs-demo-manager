@@ -5,6 +5,7 @@ import { glob } from 'csdm/node/filesystem/glob';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import type { Database } from 'csdm/node/database/schema';
 import { executePsql } from 'csdm/node/database/psql/execute-psql';
+import { formatHostnameForUri } from 'csdm/node/database/format-hostname-for-uri';
 
 export type InsertOptions = {
   databaseSettings: DatabaseSettings;
@@ -41,7 +42,7 @@ export async function insertFromCsv<Table>({
   const columnNames = columns.join(',');
   const command = `-c "\\copy ${tableName}(${columnNames}) FROM '${csvFilePath}' ENCODING 'UTF8' CSV DELIMITER ','" "postgresql://${username}:${encodeURIComponent(
     password,
-  )}@${hostname}:${port}/${database}"`;
+  )}@${formatHostnameForUri(hostname)}:${port}/${database}"`;
   await executePsql(command);
 }
 
