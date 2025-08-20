@@ -16,8 +16,8 @@ export type InteractiveCanvas = {
   zoomedSize: (size: number) => number;
   zoomedX: (x: number) => number;
   zoomedY: (y: number) => number;
-  zoomedToRadarX: (x: number) => number;
-  zoomedToRadarY: (y: number) => number;
+  zoomedToRadarX: (x: number, z: number) => number;
+  zoomedToRadarY: (y: number, z: number) => number;
   getMouseX: () => number;
   getMouseY: () => number;
   canvasSize: { width: number; height: number };
@@ -29,7 +29,12 @@ export type InteractiveCanvas = {
  * The canvas element must be wrapped by a div and its ref prop must call the setWrapper provided by this hook.
  * See the 2D viewer code for usage details.
  */
-export function useInteractiveMapCanvas(canvas: HTMLCanvasElement | null, map: Map): InteractiveCanvas {
+export function useInteractiveMapCanvas(
+  canvas: HTMLCanvasElement | null,
+  map: Map,
+  lowerRadarOffsetX = 0,
+  lowerRadarOffsetY = 0,
+): InteractiveCanvas {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const worldOriginX = useRef(0);
   const worldOriginY = useRef(0);
@@ -184,14 +189,32 @@ export function useInteractiveMapCanvas(canvas: HTMLCanvasElement | null, map: M
     return Math.floor((y - worldOriginY.current) * scale.current + screenOriginPixelY.current);
   };
 
-  const zoomedToRadarX = (x: number) => {
-    const scaledX = getScaledCoordinateX(map, map.radarSize, x);
-    return zoomedX(scaledX);
+  const zoomedToRadarX = (x: number, z: number) => {
+    let scaledX = zoomedX(getScaledCoordinateX(map, map.radarSize, x));
+    const isOnLowerLevel = z < map.thresholdZ;
+    if (map.lowerRadarFilePath && isOnLowerLevel) {
+      const radarSize = getScaledRadarSize();
+      const radarX = zoomedX(0);
+      const relativeX = (scaledX - radarX) / radarSize;
+      const scaledOffsetX = zoomedSize(lowerRadarOffsetX);
+      scaledX = radarX + scaledOffsetX + relativeX * radarSize;
+    }
+
+    return scaledX;
   };
 
-  const zoomedToRadarY = (y: number) => {
-    const scaledY = getScaledCoordinateY(map, map.radarSize, y);
-    return zoomedY(scaledY);
+  const zoomedToRadarY = (y: number, z: number) => {
+    let scaledY = zoomedY(getScaledCoordinateY(map, map.radarSize, y));
+    const isOnLowerLevel = z < map.thresholdZ;
+    if (map.lowerRadarFilePath && isOnLowerLevel) {
+      const radarSize = getScaledRadarSize();
+      const radarY = zoomedY(0);
+      const relativeY = (scaledY - radarY) / radarSize;
+      const scaledOffsetY = zoomedSize(lowerRadarOffsetY);
+      scaledY = radarY + scaledOffsetY + radarSize + relativeY * radarSize;
+    }
+
+    return scaledY;
   };
 
   return {

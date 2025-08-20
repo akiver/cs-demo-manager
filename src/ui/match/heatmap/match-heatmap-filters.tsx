@@ -3,7 +3,7 @@ import { ExportHeatmapButton } from 'csdm/ui/components/heatmap/export-heatmap-b
 import { HeatmapInputRadius } from 'csdm/ui/components/heatmap/input-radius';
 import { HeatmapInputBlur } from 'csdm/ui/components/heatmap/input-blur';
 import { HeatmapSideSelect } from 'csdm/ui/components/heatmap/heatmap-side-select';
-import { HeatmapInputOpacity } from 'csdm/ui/components/heatmap/input-opacity';
+import { HeatmapInputOpacity } from 'csdm/ui/components/heatmap/heatmap-input-opacity';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { blurChanged, opacityChanged, radiusChanged } from './match-heatmap-actions';
 import { HeatmapSelectEvent } from 'csdm/ui/components/heatmap/heatmap-select-event';

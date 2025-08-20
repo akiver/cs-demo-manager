@@ -14,8 +14,8 @@ export function useDrawChickens() {
     const imageSize = zoomedSize(20);
 
     for (const position of positions) {
-      const x = zoomedToRadarX(position.x) - imageSize / 2;
-      const y = zoomedToRadarY(position.y) - imageSize / 2;
+      const x = zoomedToRadarX(position.x, position.z) - imageSize / 2;
+      const y = zoomedToRadarY(position.y, position.z) - imageSize / 2;
       context.drawImage(chickenImage, x, y, imageSize, imageSize);
     }
   };

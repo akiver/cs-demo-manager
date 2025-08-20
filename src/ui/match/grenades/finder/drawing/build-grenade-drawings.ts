@@ -17,11 +17,11 @@ export function useBuildGrenadeDrawings() {
 
       for (const [index, position] of grenadeThrow.positions.entries()) {
         const nextPosition = index < grenadeThrow.positions.length ? grenadeThrow.positions[index + 1] : undefined;
-        const startX = zoomedToRadarX(position.x);
-        const startY = zoomedToRadarY(position.y);
+        const startX = zoomedToRadarX(position.x, position.z);
+        const startY = zoomedToRadarY(position.y, position.z);
         if (nextPosition) {
-          const endX = zoomedToRadarX(nextPosition.x);
-          const endY = zoomedToRadarY(nextPosition.y);
+          const endX = zoomedToRadarX(nextPosition.x, nextPosition.z);
+          const endY = zoomedToRadarY(nextPosition.y, nextPosition.z);
           currentPath.moveTo(startX, startY);
           currentPath.lineTo(endX, endY);
         } else {

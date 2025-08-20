@@ -1391,11 +1391,6 @@ msgctxt "Input label"
 msgid "Blur"
 msgstr ""
 
-#: src/ui/components/heatmap/input-opacity.tsx
-msgctxt "Input label"
-msgid "Opacity"
-msgstr ""
-
 #: src/ui/components/heatmap/input-radius.tsx
 msgctxt "Input label"
 msgid "Radius"
@@ -1431,6 +1426,11 @@ msgstr ""
 #: src/ui/components/inputs/hostname-input.tsx
 msgctxt "Input placeholder"
 msgid "Hostname"
+msgstr ""
+
+#: src/ui/components/inputs/opacity-input.tsx
+msgctxt "Input label"
+msgid "Opacity"
 msgstr ""
 
 #: src/ui/components/inputs/password-input.tsx
@@ -1495,7 +1495,6 @@ msgid "Lower"
 msgstr ""
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgid "Radar level"
 msgstr ""
 
@@ -5945,14 +5944,18 @@ msgstr ""
 msgid "{time} Freeze time ended"
 msgstr ""
 
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
-msgctxt "Map radar level"
-msgid "Upper"
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgid "Lower radar configuration"
 msgstr ""
 
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
-msgctxt "Map radar level"
-msgid "Lower"
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgctxt "Input label"
+msgid "X"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgctxt "Input label"
+msgid "Y"
 msgstr ""
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx

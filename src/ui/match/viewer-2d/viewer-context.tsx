@@ -14,7 +14,6 @@ import type { Round } from 'csdm/common/types/round';
 import type { Shot } from 'csdm/common/types/shot';
 import { useCurrentMatch } from '../use-current-match';
 import { buildMatch2dViewerRoundPath } from 'csdm/ui/routes-paths';
-import { RadarLevel } from 'csdm/ui/maps/radar-level';
 import type { BombPlantStart } from 'csdm/common/types/bomb-plant-start';
 import type { BombDefuseStart } from 'csdm/common/types/bomb-defuse-start';
 import type { HostagePickUpStart } from 'csdm/common/types/hostage-pick-up-start';
@@ -76,11 +75,15 @@ type ViewerContext = {
   bombExploded: BombExploded | null;
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
-  radarLevel: RadarLevel;
   shouldDrawBombs: boolean;
-  setRadarLevel: (radarLevel: RadarLevel) => void;
   focusedPlayerId: string | undefined;
   updateFocusedPlayerId: (id: string) => void;
+  lowerRadarOffsetX: number;
+  setLowerRadarOffsetX: (offsetX: number) => void;
+  lowerRadarOffsetY: number;
+  setLowerRadarOffsetY: (offsetY: number) => void;
+  lowerRadarOpacity: number;
+  setLowerRadarOpacity: (opacity: number) => void;
 };
 
 export const ViewerContext = createContext<ViewerContext | undefined>(undefined);
@@ -145,7 +148,18 @@ export function ViewerProvider({
   const viewerState = useViewer2DState();
   const [currentTick, setCurrentTick] = useState(round.freezetimeEndTick);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [radarLevel, setRadarLevel] = useState<RadarLevel>(RadarLevel.Upper);
+  const [lowerRadarOffsetX, setLowerRadarOffsetX] = useState(() => {
+    const value = window.localStorage.getItem(`${match.game}_${match.mapName}_lower_radar_offset_x`);
+    return value ? Number.parseInt(value) : 0;
+  });
+  const [lowerRadarOffsetY, setLowerRadarOffsetY] = useState(() => {
+    const value = window.localStorage.getItem(`${match.game}_${match.mapName}_lower_radar_offset_y`);
+    return value ? Number.parseInt(value) : 0;
+  });
+  const [lowerRadarOpacity, setLowerRadarOpacity] = useState(() => {
+    const value = window.localStorage.getItem(`${match.game}_${match.mapName}_lower_radar_opacity`);
+    return value ? Number.parseFloat(value) : 1;
+  });
   const remainingTickCount = round.endOfficiallyTick - currentTick;
   const tickrate = match.tickrate > 0 ? match.tickrate : 64;
   const timeRemaining = (remainingTickCount / tickrate) * 1000;
@@ -191,10 +205,8 @@ export function ViewerProvider({
         setCurrentTick,
         timeRemaining,
         isPlaying,
-        radarLevel,
         volume,
         audioBytes,
-        setRadarLevel,
         play,
         pause,
         playPause: async () => {
@@ -262,6 +274,21 @@ export function ViewerProvider({
         updateFocusedPlayerId: (id: string) => {
           const newId = id === viewerState.focusedPlayerId ? undefined : id;
           dispatch(focusedPlayerChanged({ focusedPlayerId: newId }));
+        },
+        lowerRadarOffsetX,
+        setLowerRadarOffsetX: (offsetX: number) => {
+          window.localStorage.setItem(`${match.game}_${match.mapName}_lower_radar_offset_x`, String(offsetX));
+          setLowerRadarOffsetX(offsetX);
+        },
+        lowerRadarOffsetY,
+        setLowerRadarOffsetY: (offsetY: number) => {
+          window.localStorage.setItem(`${match.game}_${match.mapName}_lower_radar_offset_y`, String(offsetY));
+          setLowerRadarOffsetY(offsetY);
+        },
+        lowerRadarOpacity,
+        setLowerRadarOpacity: (opacity: number) => {
+          window.localStorage.setItem(`${match.game}_${match.mapName}_lower_radar_opacity`, String(opacity));
+          setLowerRadarOpacity(opacity);
         },
       }}
     >

@@ -12,8 +12,8 @@ export function useDrawHostages() {
     const positions = hostagePositions.filter((position) => position.tick === currentTick);
 
     for (const position of positions) {
-      const x = zoomedToRadarX(position.x);
-      const y = zoomedToRadarY(position.y);
+      const x = zoomedToRadarX(position.x, position.z);
+      const y = zoomedToRadarY(position.y, position.z);
       const radius = position.state === HostageState.BeingCarried ? zoomedSize(4) : zoomedSize(8);
 
       context.beginPath();

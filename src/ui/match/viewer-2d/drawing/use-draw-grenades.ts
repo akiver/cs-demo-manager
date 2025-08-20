@@ -18,8 +18,8 @@ export function useDrawGrenades() {
     const grenadeCircleSize = zoomedSize(4);
 
     const drawSmokeEffect = (smokeStarted: SmokeStart, smokeExpiredPosition: GrenadePosition | undefined) => {
-      const x = zoomedToRadarX(smokeStarted.x);
-      const y = zoomedToRadarY(smokeStarted.y);
+      const x = zoomedToRadarX(smokeStarted.x, smokeStarted.z);
+      const y = zoomedToRadarY(smokeStarted.y, smokeStarted.z);
       context.beginPath();
       context.fillStyle = `${getGrenadeColor(GrenadeName.Smoke)}7f`;
       context.lineWidth = zoomedSize(2);
@@ -45,8 +45,8 @@ export function useDrawGrenades() {
     };
 
     const drawDecoyEffect = (position: GrenadePosition) => {
-      const x = zoomedToRadarX(position.x);
-      const y = zoomedToRadarY(position.y);
+      const x = zoomedToRadarX(position.x, position.z);
+      const y = zoomedToRadarY(position.y, position.z);
 
       context.beginPath();
       context.fillStyle = getGrenadeColor(position.grenadeName);
@@ -64,8 +64,8 @@ export function useDrawGrenades() {
         return;
       }
 
-      const x = zoomedToRadarX(heGrenadeExplode.x);
-      const y = zoomedToRadarY(heGrenadeExplode.y);
+      const x = zoomedToRadarX(heGrenadeExplode.x, heGrenadeExplode.z);
+      const y = zoomedToRadarY(heGrenadeExplode.y, heGrenadeExplode.z);
       context.beginPath();
       context.fillStyle = getGrenadeColor(GrenadeName.HE);
       const scale = 1 - secondsElapsed / effectDurationSeconds;
@@ -132,18 +132,21 @@ export function useDrawGrenades() {
       for (let i = 0; i < previousPositions.length - 1; i++) {
         context.beginPath();
         const currentPosition = previousPositions[i];
-        context.moveTo(zoomedToRadarX(currentPosition.x), zoomedToRadarY(currentPosition.y));
+        context.moveTo(
+          zoomedToRadarX(currentPosition.x, currentPosition.z),
+          zoomedToRadarY(currentPosition.y, currentPosition.z),
+        );
 
         const nextPosition = previousPositions[i + 1];
-        context.lineTo(zoomedToRadarX(nextPosition.x), zoomedToRadarY(nextPosition.y));
+        context.lineTo(zoomedToRadarX(nextPosition.x, nextPosition.z), zoomedToRadarY(nextPosition.y, nextPosition.z));
         context.closePath();
         context.stroke();
       }
 
       // Draw grenade circle
       context.beginPath();
-      const x = zoomedToRadarX(position.x);
-      const y = zoomedToRadarY(position.y);
+      const x = zoomedToRadarX(position.x, position.z);
+      const y = zoomedToRadarY(position.y, position.z);
       context.arc(x, y, grenadeCircleSize, 0, 2 * Math.PI);
       context.closePath();
       context.fill();
@@ -158,8 +161,8 @@ export function useDrawGrenades() {
         continue;
       }
 
-      const x = zoomedToRadarX(flashbangExplode.x);
-      const y = zoomedToRadarY(flashbangExplode.y);
+      const x = zoomedToRadarX(flashbangExplode.x, flashbangExplode.z);
+      const y = zoomedToRadarY(flashbangExplode.y, flashbangExplode.z);
       context.beginPath();
       context.fillStyle = getGrenadeColor(GrenadeName.Flashbang);
       const scale = 1 - secondsElapsedSinceExplosion;

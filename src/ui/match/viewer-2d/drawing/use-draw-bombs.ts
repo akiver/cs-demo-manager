@@ -25,9 +25,9 @@ export function useDrawBombs() {
         return;
       }
 
-      const drawBomb = (x: number, y: number) => {
-        const zoomedX = zoomedToRadarX(x);
-        const zoomedY = zoomedToRadarY(y);
+      const drawBomb = ({ x, y, z }: PlayerPosition) => {
+        const zoomedX = zoomedToRadarX(x, z);
+        const zoomedY = zoomedToRadarY(y, z);
         const bombImageSize = zoomedSize(14);
         context.drawImage(
           bombImage,
@@ -39,7 +39,7 @@ export function useDrawBombs() {
       };
 
       if (lastBombPosition.current && lastBombPosition.current.tick <= currentTick) {
-        drawBomb(lastBombPosition.current.x, lastBombPosition.current.y);
+        drawBomb(lastBombPosition.current);
         return;
       }
 
@@ -48,7 +48,7 @@ export function useDrawBombs() {
           return position.tick === i && position.hasBomb;
         });
         if (lastPlayerPositionWithBomb) {
-          drawBomb(lastPlayerPositionWithBomb.x, lastPlayerPositionWithBomb.y);
+          drawBomb(lastPlayerPositionWithBomb);
           lastBombPosition.current = lastPlayerPositionWithBomb;
           return;
         }
@@ -59,8 +59,8 @@ export function useDrawBombs() {
 
     const isDefusedBomb = bombDefused !== null && bombDefused.tick <= currentTick;
     const isExplodedBomb = bombExploded !== null && bombExploded.tick <= currentTick;
-    const x = zoomedToRadarX(bombPlanted.x);
-    const y = zoomedToRadarY(bombPlanted.y);
+    const x = zoomedToRadarX(bombPlanted.x, bombPlanted.z);
+    const y = zoomedToRadarY(bombPlanted.y, bombPlanted.z);
     const bombImageSize = zoomedSize(isExplodedBomb ? 60 : 22);
     context.save();
     context.globalAlpha = isDefusedBomb ? 0.5 : 1;

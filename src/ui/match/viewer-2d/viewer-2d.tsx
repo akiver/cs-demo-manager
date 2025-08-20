@@ -45,8 +45,10 @@ export function Viewer2D() {
     changeRound,
     map,
     shouldDrawBombs,
+    lowerRadarOffsetX,
+    lowerRadarOffsetY,
   } = useViewerContext();
-  const interactiveCanvas = useInteractiveMapCanvas(canvasRef.current, map);
+  const interactiveCanvas = useInteractiveMapCanvas(canvasRef.current, map, lowerRadarOffsetX, lowerRadarOffsetY);
   const { canvasSize, setWrapper } = interactiveCanvas;
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { ExportHeatmapButton } from 'csdm/ui/components/heatmap/export-heatmap-button';
 import { HeatmapInputRadius } from 'csdm/ui/components/heatmap/input-radius';
 import { HeatmapInputBlur } from 'csdm/ui/components/heatmap/input-blur';
-import { HeatmapInputOpacity } from 'csdm/ui/components/heatmap/input-opacity';
+import { HeatmapInputOpacity } from 'csdm/ui/components/heatmap/heatmap-input-opacity';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { blurChanged, opacityChanged, radiusChanged } from 'csdm/ui/team/heatmap/team-heatmap-actions';
 import { RadarLevelSelect } from 'csdm/ui/components/inputs/select/radar-level-select';

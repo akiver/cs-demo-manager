@@ -20,8 +20,8 @@ export function useDrawShots() {
     const pendingAnimatedShots = pendingAnimatedShotsRef.current;
 
     for (const shot of pendingAnimatedShots) {
-      const x = zoomedToRadarX(shot.x);
-      const y = zoomedToRadarY(shot.y);
+      const x = zoomedToRadarX(shot.x, shot.z);
+      const y = zoomedToRadarY(shot.y, shot.z);
       const playerAngle = -degreesToRadians(shot.playerYaw);
       const playerRadius = zoomedSize(8);
       const startX = x + playerRadius * Math.cos(playerAngle);

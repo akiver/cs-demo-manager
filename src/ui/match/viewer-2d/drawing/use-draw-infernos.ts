@@ -17,16 +17,16 @@ export function useDrawInfernos() {
     context.strokeStyle = '#da7b11';
 
     for (const position of positions) {
-      const { convexHell2D } = position;
+      const { convexHell2D, z } = position;
       // Ensure we have valid tuples [x,y, x,y, x,y ...]
       if (convexHell2D.length < 2 || convexHell2D.length % 2 !== 0) {
         continue;
       }
 
       context.beginPath();
-      context.moveTo(zoomedToRadarX(convexHell2D[0]), zoomedToRadarY(convexHell2D[1]));
+      context.moveTo(zoomedToRadarX(convexHell2D[0], z), zoomedToRadarY(convexHell2D[1], z));
       for (let index = 2; index < convexHell2D.length - 1; index += 2) {
-        context.lineTo(zoomedToRadarX(convexHell2D[index]), zoomedToRadarY(convexHell2D[index + 1]));
+        context.lineTo(zoomedToRadarX(convexHell2D[index], z), zoomedToRadarY(convexHell2D[index + 1], z));
       }
       context.closePath();
       context.fill();

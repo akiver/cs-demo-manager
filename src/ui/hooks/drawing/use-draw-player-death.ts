@@ -2,17 +2,21 @@ import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import type { InteractiveCanvas } from 'csdm/ui/hooks/use-interactive-map-canvas';
 import type { TeamNumber } from 'csdm/common/types/counter-strike';
 
+type Params = {
+  context: CanvasRenderingContext2D;
+  interactiveCanvas: InteractiveCanvas;
+  x: number;
+  y: number;
+  z: number;
+  side: TeamNumber;
+  color?: string;
+};
+
 export function useDrawPlayerDeath() {
-  return (
-    context: CanvasRenderingContext2D,
-    { zoomedToRadarX, zoomedToRadarY, zoomedSize }: InteractiveCanvas,
-    x: number,
-    y: number,
-    side: TeamNumber,
-    color?: string,
-  ) => {
-    const scaledX = zoomedToRadarX(x);
-    const scaledY = zoomedToRadarY(y);
+  return ({ context, interactiveCanvas, x, y, z, side, color }: Params) => {
+    const { zoomedSize, zoomedToRadarX, zoomedToRadarY } = interactiveCanvas;
+    const scaledX = zoomedToRadarX(x, z);
+    const scaledY = zoomedToRadarY(y, z);
 
     const crossSize = zoomedSize(10);
     const crossCenter = crossSize / 2;

@@ -5,7 +5,7 @@ import { SpeedButton } from './speed-button';
 import { FullscreenButton } from './fullscreen-button';
 import { NextRoundButton } from './next-round-button';
 import { PreviousRoundButton } from './previous-round-button';
-import { RadarLevelButton } from './radar-level-button';
+import { LowerRadarButton } from './lower-radar-button';
 import { AudioButton } from './audio-button';
 import { AudioSelectorButton } from './audio-selector-button';
 import { useViewerContext } from '../use-viewer-context';
@@ -22,7 +22,7 @@ export function PlaybackBar() {
       <SpeedButton />
       {audioBytes.length > 0 ? <AudioButton /> : <AudioSelectorButton loadAudioFile={loadAudioFile} />}
       <Timeline />
-      <RadarLevelButton />
+      <LowerRadarButton />
       <FullscreenButton />
       <div className="flex items-center px-8">
         <DocumentationLink url="https://cs-demo-manager.com/docs/guides/2d-viewer" />

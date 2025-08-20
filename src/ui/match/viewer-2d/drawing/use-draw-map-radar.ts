@@ -6,7 +6,7 @@ import { loadImageFromFilePath } from 'csdm/ui/shared/load-image-from-file-path'
 import { useGetMapRadarSrc } from 'csdm/ui/maps/use-get-map-radar-src';
 
 export function useDrawMapRadar() {
-  const { map, game, radarLevel } = useViewerContext();
+  const { map, game, lowerRadarOffsetX, lowerRadarOffsetY, lowerRadarOpacity } = useViewerContext();
   const radarImage = useRef<HTMLImageElement | null>(null);
   const lowerRadarImage = useRef<HTMLImageElement | null>(null);
   const getMapRadarFileSrc = useGetMapRadarSrc();
@@ -25,27 +25,37 @@ export function useDrawMapRadar() {
     };
 
     loadRadarImages();
-  }, [getMapRadarFileSrc, game, map.name, radarLevel]);
+  }, [getMapRadarFileSrc, game, map.name]);
 
   const drawMapRadar = (
     context: CanvasRenderingContext2D,
-    { zoomedX, zoomedY, getScaledRadarSize }: InteractiveCanvas,
+    { zoomedX, zoomedY, getScaledRadarSize, zoomedSize }: InteractiveCanvas,
   ) => {
     if (context === null) {
       return;
     }
 
-    let image: HTMLImageElement | null = null;
-    if (radarLevel === RadarLevel.Upper && radarImage.current !== null) {
-      image = radarImage.current;
-    } else if (radarLevel === RadarLevel.Lower && lowerRadarImage.current !== null) {
-      image = lowerRadarImage.current;
+    const radarSize = getScaledRadarSize();
+    const x = zoomedX(0);
+    const y = zoomedY(0);
+
+    if (lowerRadarImage.current !== null) {
+      context.save();
+      context.globalAlpha = lowerRadarOpacity;
+      const scaledOffsetX = zoomedSize(lowerRadarOffsetX);
+      const scaledOffsetY = zoomedSize(lowerRadarOffsetY);
+      context.drawImage(
+        lowerRadarImage.current,
+        x + scaledOffsetX,
+        y + radarSize + scaledOffsetY,
+        radarSize,
+        radarSize,
+      );
+      context.restore();
     }
 
-    if (image !== null) {
-      const radarSize = getScaledRadarSize();
-
-      context.drawImage(image, zoomedX(0), zoomedY(0), radarSize, radarSize);
+    if (radarImage.current !== null) {
+      context.drawImage(radarImage.current, x, y, radarSize, radarSize);
     }
   };
 

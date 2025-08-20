@@ -1391,11 +1391,6 @@ msgctxt "Input label"
 msgid "Blur"
 msgstr "Flou"
 
-#: src/ui/components/heatmap/input-opacity.tsx
-msgctxt "Input label"
-msgid "Opacity"
-msgstr "Transparence"
-
 #: src/ui/components/heatmap/input-radius.tsx
 msgctxt "Input label"
 msgid "Radius"
@@ -1432,6 +1427,11 @@ msgstr "Nom d'hôte"
 msgctxt "Input placeholder"
 msgid "Hostname"
 msgstr "Nom d'hôte"
+
+#: src/ui/components/inputs/opacity-input.tsx
+msgctxt "Input label"
+msgid "Opacity"
+msgstr "Transparence"
 
 #: src/ui/components/inputs/password-input.tsx
 msgctxt "Input label"
@@ -1495,7 +1495,6 @@ msgid "Lower"
 msgstr "Inférieur"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgid "Radar level"
 msgstr "Niveau du radar"
 
@@ -5945,15 +5944,19 @@ msgstr ""
 msgid "{time} Freeze time ended"
 msgstr "{time} Fin du freezetime"
 
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
-msgctxt "Map radar level"
-msgid "Upper"
-msgstr "Supérieur"
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgid "Lower radar configuration"
+msgstr ""
 
-#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
-msgctxt "Map radar level"
-msgid "Lower"
-msgstr "Inférieur"
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgctxt "Input label"
+msgid "X"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
+msgctxt "Input label"
+msgid "Y"
+msgstr ""
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading the audio file found for this match."

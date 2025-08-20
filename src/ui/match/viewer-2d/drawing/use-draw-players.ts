@@ -28,9 +28,8 @@ export function useDrawPlayers() {
     const playersAlivePositions = positions.filter((position) => position.isAlive);
 
     for (const position of playersAlivePositions) {
-      const x = zoomedToRadarX(position.x);
-      const y = zoomedToRadarY(position.y);
-
+      const x = zoomedToRadarX(position.x, position.z);
+      const y = zoomedToRadarY(position.y, position.z);
       const isFocusedPlayer = focusedPlayerId === buildPlayerId(position.playerSteamId, position.playerName);
       const playerRadius = zoomedSize(8);
       context.beginPath();
