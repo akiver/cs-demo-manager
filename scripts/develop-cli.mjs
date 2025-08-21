@@ -23,7 +23,10 @@ const context = await esbuild.context({
     'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
     'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
   },
-  external: ['pg-native'],
+  external: [
+    'pg-native',
+    '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
+  ],
   plugins: [nativeNodeModulesPlugin],
 });
 
