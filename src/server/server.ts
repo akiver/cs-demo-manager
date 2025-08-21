@@ -353,7 +353,7 @@ globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestIni
   }
 };
 
-if (IS_DEV) {
+if (typeof window !== 'undefined') {
   const originalSetTimeout = globalThis.setTimeout;
   // @ts-ignore Undici uses Node Timeout since v6.20.0, we mimic it in dev mode as the server process runs in a
   // BrowserWindow, not in a Node process.
