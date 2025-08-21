@@ -26,7 +26,7 @@ export class VideoCommand extends Command {
   }
 
   public async run() {
-    await this.parseArgs();
+    this.parseArgs();
     await migrateSettings();
     await this.initDatabaseConnection();
 
@@ -93,7 +93,7 @@ export class VideoCommand extends Command {
     }
   }
 
-  protected async parseArgs() {
+  protected parseArgs() {
     super.parseArgs(this.args);
     if (this.args.length < 3) {
       console.log('Missing arguments');
@@ -114,4 +114,3 @@ export class VideoCommand extends Command {
     }
   }
 }
-
