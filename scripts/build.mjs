@@ -121,7 +121,7 @@ async function buildCliBundle() {
       'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
       'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
     },
-    external: ['pg-native'],
+    external: ['pg-native', '@aws-sdk/client-s3'],
     plugins: [nativeNodeModulesPlugin],
   });
 }
