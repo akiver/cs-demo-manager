@@ -144,6 +144,7 @@
   },
   "overrides": {
     "esbuild": "0.25.9",
-    "node-gyp": "11.3.0"
+    "node-gyp": "11.3.0",
+    "fdir": "6.4.3"
   }
 }

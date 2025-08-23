@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - electron
+  - electron-winstaller
+  - esbuild
+  - oxc-resolver
+  - registry-js
