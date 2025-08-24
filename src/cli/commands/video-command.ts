@@ -78,6 +78,7 @@ export class VideoCommand extends Command {
 
   public async run() {
     try {
+      await this.initDatabaseConnection();
       this.parseArgs();
       await migrateSettings();
 
