@@ -1,4 +1,3 @@
-import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
 import { generateVideoWithVirtualDub } from 'csdm/node/video/generation/generate-video-with-virtual-dub';
 import { generateVideoWithFFmpeg } from 'csdm/node/video/generation/generate-video-with-ffmpeg';
@@ -154,14 +153,9 @@ export async function generateVideo(parameters: Parameters) {
 
   const sequences = sortSequencesByStartTick(parameters.sequences);
 
-  const cleanupFiles = async (deleteOutputFile = true) => {
+  const cleanupFiles = async () => {
     logger.log(`Cleaning up files for video with id ${videoId}`);
-    const promises: Promise<void>[] = [deleteJsonActionsFile(demoPath), deleteSequencesRawFiles(parameters)];
-    if (deleteOutputFile) {
-      promises.push(fs.remove(outputFolderPath));
-    }
-
-    await Promise.all(promises);
+    await Promise.all([deleteJsonActionsFile(demoPath), deleteSequencesRawFiles(parameters)]);
   };
 
   async function onAbort() {
@@ -270,7 +264,7 @@ export async function generateVideo(parameters: Parameters) {
       }
     }
 
-    await cleanupFiles(false);
+    await cleanupFiles();
     logger.log(`Generating video with id ${videoId} ended`);
   } catch (error) {
     if (signal.aborted) {
