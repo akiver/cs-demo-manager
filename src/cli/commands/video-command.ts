@@ -12,15 +12,15 @@ import type { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RecordingSystem as RecordingSystemEnum } from 'csdm/common/types/recording-system';
 import type { RecordingOutput } from 'csdm/common/types/recording-output';
 import { RecordingOutput as RecordingOutputEnum } from 'csdm/common/types/recording-output';
-import type { VideoContainer } from 'csdm/common/types/video-container';
+import { VideoContainer } from 'csdm/common/types/video-container';
 import { parseArgs } from 'node:util';
 import { InvalidArgument } from 'csdm/node/errors/invalid-argument';
 
 export class VideoCommand extends Command {
   public static Name = 'video';
-  private demoPath: string;
-  private startTick: number;
-  private endTick: number;
+  private demoPath: string = '';
+  private startTick: number = 0;
+  private endTick: number = 0;
   private framerate: number | undefined;
   private width: number | undefined;
   private height: number | undefined;
@@ -80,12 +80,11 @@ export class VideoCommand extends Command {
     try {
       this.parseArgs();
       await migrateSettings();
-      await this.initDatabaseConnection();
 
       const settings = await getSettings();
       const demo = await getDemoFromFilePath(this.demoPath);
       let outputFolderPath = await getOutputFolderPath(settings.video, this.demoPath);
-      outputFolderPath = `${outputFolderPath}/${demo.name}`
+      outputFolderPath = `${outputFolderPath}/${demo.name}`;
 
       const sequence: Sequence = {
         number: 1,
@@ -281,7 +280,11 @@ export class VideoCommand extends Command {
       this.ffmpegAudioCodec = String(values['ffmpeg-audio-codec']);
     }
     if (values['ffmpeg-video-container'] !== undefined) {
-      this.ffmpegVideoContainer = String(values['ffmpeg-video-container']);
+      const videoContainer = values['ffmpeg-video-container'] as VideoContainer;
+      if (!Object.values(VideoContainer).includes(videoContainer)) {
+        throw new InvalidArgument('Invalid video container');
+      }
+      this.ffmpegVideoContainer = videoContainer;
     }
     if (values['ffmpeg-input-parameters'] !== undefined) {
       this.ffmpegInputParameters = String(values['ffmpeg-input-parameters']);
