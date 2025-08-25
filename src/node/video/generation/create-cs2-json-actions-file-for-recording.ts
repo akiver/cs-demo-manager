@@ -124,7 +124,9 @@ export async function createCs2JsonActionsFileForRecording({
     // startmovie commands not being executed and so missing sequences).
     json.addPausePlayback(sequence.startTick - 4);
 
-    json.addSkipAhead(1, setupSequenceTick);
+    // Skip ahead 1 tick before the setup tick to make sure the setup commands are executed.
+    // It may not if we do both the skip ahead and the setup cmds at the same tick.
+    json.addSkipAhead(1, Math.max(1, setupSequenceTick - 1));
 
     for (const camera of sequence.cameras) {
       const player = players.find((player) => player.steamId === camera.playerSteamId);
