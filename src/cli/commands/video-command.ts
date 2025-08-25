@@ -1,10 +1,11 @@
 import { randomUUID } from 'node:crypto';
 import { parseArgs } from 'node:util';
+import path from 'node:path';
+import fs from 'fs-extra';
 import { Command } from './command';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
-import { getOutputFolderPath } from 'csdm/node/video/get-output-folder-path';
 import { generateVideo } from 'csdm/node/video/generation/generate-video';
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { EncoderSoftware } from 'csdm/common/types/encoder-software';
@@ -19,6 +20,7 @@ import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 
 export class VideoCommand extends Command {
   public static Name = 'video';
+  private readonly outputFlag = 'output';
   private readonly framerateFlag = 'framerate';
   private readonly widthFlag = 'width';
   private readonly heightFlag = 'height';
@@ -39,6 +41,7 @@ export class VideoCommand extends Command {
   private readonly playerVoicesFlag = 'player-voices';
   private readonly deathNoticesDurationFlag = 'death-notices-duration';
   private readonly cfgFlag = 'cfg';
+  private outputFolderPath: string | undefined;
   private demoPath: string = '';
   private startTick: number = 0;
   private endTick: number = 0;
@@ -99,15 +102,13 @@ export class VideoCommand extends Command {
 
   public async run() {
     try {
-      this.parseArgs();
+      await this.parseArgs();
       await this.initDatabaseConnection();
       await migrateSettings();
 
       const settings = await getSettings();
       const demo = await getDemoFromFilePath(this.demoPath);
-      let outputFolderPath = await getOutputFolderPath(settings.video, this.demoPath);
-      outputFolderPath = `${outputFolderPath}/${demo.name}`;
-
+      const outputFolderPath = this.outputFolderPath ?? path.dirname(this.demoPath);
       const sequence: Sequence = {
         number: 1,
         startTick: this.startTick,
@@ -179,10 +180,11 @@ export class VideoCommand extends Command {
     }
   }
 
-  protected parseArgs() {
+  protected async parseArgs() {
     super.parseArgs(this.args);
     const { values, positionals } = parseArgs({
       options: {
+        [this.outputFlag]: { type: 'string', short: 'o' },
         [this.framerateFlag]: { type: 'string' },
         [this.widthFlag]: { type: 'string' },
         [this.heightFlag]: { type: 'string' },
@@ -239,6 +241,21 @@ export class VideoCommand extends Command {
     }
     this.endTick = endTick;
 
+    const outputFolderPath = values[this.outputFlag];
+    if (outputFolderPath) {
+      try {
+        const stats = await fs.stat(outputFolderPath);
+        if (!stats.isDirectory()) {
+          throw new InvalidArgument('Output folder is not a directory');
+        }
+        this.outputFolderPath = outputFolderPath;
+      } catch (error) {
+        if (error instanceof InvalidArgument) {
+          throw error;
+        }
+        throw new InvalidArgument('Output folder does not exist');
+      }
+    }
     if (values[this.framerateFlag]) {
       const framerate = Number(values[this.framerateFlag]);
       if (Number.isNaN(framerate)) {
