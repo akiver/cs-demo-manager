@@ -17,16 +17,12 @@ exports[`Generate player's highlights JSON file > CS2 1`] = `
         "tick": 64
       },
       {
-        "cmd": "spec_player 4",
-        "tick": 872
-      },
-      {
         "cmd": "spec_mode 1",
         "tick": 872
       },
       {
         "cmd": "spec_player 4",
-        "tick": 1200
+        "tick": 872
       },
       {
         "cmd": "spec_mode 1",
@@ -34,10 +30,14 @@ exports[`Generate player's highlights JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_player 4",
+        "tick": 1200
+      },
+      {
+        "cmd": "spec_mode 1",
         "tick": 1700
       },
       {
-        "cmd": "spec_mode 1",
+        "cmd": "spec_player 4",
         "tick": 1700
       },
       {
@@ -45,11 +45,11 @@ exports[`Generate player's highlights JSON file > CS2 1`] = `
         "tick": 2256
       },
       {
-        "cmd": "spec_player 4",
+        "cmd": "spec_mode 1",
         "tick": 4872
       },
       {
-        "cmd": "spec_mode 1",
+        "cmd": "spec_player 4",
         "tick": 4872
       },
       {

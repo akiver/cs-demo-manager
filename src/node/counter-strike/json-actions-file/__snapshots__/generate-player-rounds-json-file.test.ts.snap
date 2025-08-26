@@ -25,11 +25,11 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
         "tick": 64
       },
       {
-        "cmd": "spec_player 4",
+        "cmd": "spec_mode 1",
         "tick": 64
       },
       {
-        "cmd": "spec_mode 1",
+        "cmd": "spec_player 4",
         "tick": 64
       },
       {
@@ -37,11 +37,11 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
         "tick": 5864
       },
       {
-        "cmd": "spec_player 4",
+        "cmd": "spec_mode 1",
         "tick": 5864
       },
       {
-        "cmd": "spec_mode 1",
+        "cmd": "spec_player 4",
         "tick": 5864
       },
       {
@@ -49,11 +49,11 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
         "tick": 13184
       },
       {
-        "cmd": "spec_player 4",
+        "cmd": "spec_mode 1",
         "tick": 13184
       },
       {
-        "cmd": "spec_mode 1",
+        "cmd": "spec_player 4",
         "tick": 13184
       },
       {
@@ -61,11 +61,11 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
         "tick": 18984
       },
       {
-        "cmd": "spec_player 4",
+        "cmd": "spec_mode 1",
         "tick": 18984
       },
       {
-        "cmd": "spec_mode 1",
+        "cmd": "spec_player 4",
         "tick": 18984
       },
       {

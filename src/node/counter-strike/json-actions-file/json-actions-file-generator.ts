@@ -51,14 +51,15 @@ export class JSONActionsFileGenerator {
         tick: actionTick,
       });
     } else {
-      this.actions.push({
-        cmd: `spec_player ${playerId}`,
-        tick: actionTick,
-      });
       // The camera may be stuck in free mode with some demos (probably related to a server configuration)
       // Force the first person camera mode so the camera will properly focus on the player.
+      // ! It's important to set spec_mode before spec_player otherwise the spec_player command may not work.
       this.actions.push({
         cmd: 'spec_mode 1',
+        tick: actionTick,
+      });
+      this.actions.push({
+        cmd: `spec_player ${playerId}`,
         tick: actionTick,
       });
     }
