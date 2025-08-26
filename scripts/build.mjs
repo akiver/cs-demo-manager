@@ -60,6 +60,10 @@ async function buildWebSocketServerBundle() {
       'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
       'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
     },
+    alias: {
+      // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
+      fdir: './node_modules/fdir/dist/index.cjs',
+    },
     plugins: [nativeNodeModulesPlugin],
   });
 }
@@ -122,6 +126,10 @@ async function buildCliBundle() {
       'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
     },
     external: ['pg-native', '@aws-sdk/client-s3'],
+    alias: {
+      // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
+      fdir: './node_modules/fdir/dist/index.cjs',
+    },
     plugins: [nativeNodeModulesPlugin],
   });
 }

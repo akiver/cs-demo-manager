@@ -27,6 +27,10 @@ const context = await esbuild.context({
     'pg-native',
     '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
   ],
+  alias: {
+    // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
+    fdir: './node_modules/fdir/dist/index.cjs',
+  },
   plugins: [nativeNodeModulesPlugin],
 });
 
