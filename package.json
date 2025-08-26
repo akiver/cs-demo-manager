@@ -37,7 +37,7 @@
     "electron": "electron ./out/main.js",
     "format": "prettier --write \"**\"",
     "i18n:extract": "lingui extract --config ./lingui.config.ts --clean --overwrite && lingui extract --config ./src/electron-main/lingui.config.ts --clean --overwrite",
-    "lint": "eslint \"**\"",
+    "lint": "eslint \"**\" --concurrency auto",
     "package": "electron-builder --config electron-builder.config.js",
     "package:dir": "npm run package -- --dir",
     "postinstall": "electron-builder install-app-deps && node ./scripts/postinstall.mjs && node ./scripts/build-linter-rules.mjs",
