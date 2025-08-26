@@ -72,7 +72,6 @@ class WebSocketServer {
   private mainProcessSocket: WebSocket | null = null;
   private gameProcessSocket: WebSocket | null = null;
   private gameListeners = new Map<GameClientMessageName, GameListener[]>();
-  private gameSocketConnectionTimestamp: number | null = null;
 
   constructor() {
     this.server = new WSServer({
@@ -153,7 +152,6 @@ class WebSocketServer {
       this.gameProcessSocket.on('close', this.onGameProcessSocketDisconnect);
       this.gameProcessSocket.on('error', this.onGameProcessSocketError);
       this.gameProcessSocket.on('message', this.onGameProcessSocketMessage);
-      this.gameSocketConnectionTimestamp = Date.now();
     }
   };
 
@@ -315,7 +313,6 @@ class WebSocketServer {
     this.gameProcessSocket = null;
 
     this.gameListeners.clear();
-    this.gameSocketConnectionTimestamp = null;
   };
 
   private onGameProcessSocketError(error: unknown) {
@@ -323,6 +320,11 @@ class WebSocketServer {
   }
 
   private onError = (error: Error) => {
+    // Ignore port already in use errors in CLI, it means the GUI is running and so the WS server too.
+    if (process.env.PROCESS_NAME === 'cli' && 'code' in error && error.code === 'EADDRINUSE') {
+      return;
+    }
+
     logger.error('WS:: an error occurred');
     logger.error(error);
   };
