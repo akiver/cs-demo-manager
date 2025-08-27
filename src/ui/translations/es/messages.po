@@ -2563,11 +2563,11 @@ msgid "Tags:"
 msgstr ""
 
 #: src/ui/demo/next-demo-link.tsx
-msgid "Next demo ({key}+→)"
+msgid "Next demo ({modifierKey}+→)"
 msgstr ""
 
 #: src/ui/demo/previous-demo-link.tsx
-msgid "Previous demo ({key}+←)"
+msgid "Previous demo ({modifierKey}+←)"
 msgstr ""
 
 #: src/ui/demo/see-match-button.tsx
@@ -3607,11 +3607,6 @@ msgstr ""
 
 #: src/ui/hooks/use-update-demo-location.ts
 msgid "Select demo's path"
-msgstr ""
-
-#: src/ui/keyboard/keyboard-shortcut.ts
-msgctxt "Keyboard shortcut"
-msgid "C"
 msgstr ""
 
 #: src/ui/left-bar/analyses-link.tsx
@@ -5938,6 +5933,46 @@ msgstr ""
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-planted-indicator.tsx
 msgid "{time} Bomb planted by {planterName} at bomb site {site}"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Tool"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Pen"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Eraser"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Size"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Color"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Undo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Redo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Clear"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Stop drawing"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Start drawing"
 msgstr ""
 
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx

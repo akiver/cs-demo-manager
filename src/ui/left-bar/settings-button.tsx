@@ -3,6 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { useSettingsOverlay } from 'csdm/ui/settings/use-settings-overlay';
 import { LeftBarTooltip } from './left-bar-tooltip';
 import { CogsIcon } from 'csdm/ui/icons/cogs-icon';
+import { modifierKey } from '../keyboard/keyboard-shortcut';
 
 export function SettingsButton() {
   const { openSettings } = useSettingsOverlay();
@@ -11,7 +12,7 @@ export function SettingsButton() {
     openSettings();
   };
 
-  const shortcut = window.csdm.isMac ? '⌘+,' : 'CTRL+,';
+  const shortcut = `${modifierKey}+,`;
 
   return (
     <LeftBarTooltip content={<Trans>Settings ({shortcut})</Trans>}>

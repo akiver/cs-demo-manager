@@ -67,10 +67,10 @@ export function LowerRadarButton() {
   }
 
   return (
-    <Popover openOnHover={true}>
+    <Popover openOnHover={true} closeDelay={300}>
       <PopoverTrigger asChild={true}>
         <PlaybackBarButton>
-          <MapIcon />
+          <MapIcon className="w-20" />
         </PlaybackBarButton>
       </PopoverTrigger>
 

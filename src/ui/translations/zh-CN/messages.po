@@ -2563,12 +2563,12 @@ msgid "Tags:"
 msgstr "标签:"
 
 #: src/ui/demo/next-demo-link.tsx
-msgid "Next demo ({key}+→)"
-msgstr "下一个 demo({key}+→)"
+msgid "Next demo ({modifierKey}+→)"
+msgstr ""
 
 #: src/ui/demo/previous-demo-link.tsx
-msgid "Previous demo ({key}+←)"
-msgstr "上一个 demo({key}+←)"
+msgid "Previous demo ({modifierKey}+←)"
+msgstr ""
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
@@ -3608,11 +3608,6 @@ msgstr "未分配"
 #: src/ui/hooks/use-update-demo-location.ts
 msgid "Select demo's path"
 msgstr "选择 Demo 文件路径"
-
-#: src/ui/keyboard/keyboard-shortcut.ts
-msgctxt "Keyboard shortcut"
-msgid "C"
-msgstr "C"
 
 #: src/ui/left-bar/analyses-link.tsx
 msgctxt "Tooltip"
@@ -5939,6 +5934,46 @@ msgstr "{time} {planterName} 在{site} 点安放的炸弹爆炸"
 #: src/ui/match/viewer-2d/playback-bar/bomb-planted-indicator.tsx
 msgid "{time} Bomb planted by {planterName} at bomb site {site}"
 msgstr "{time} {planterName} 在{site} 点安放炸弹"
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Tool"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Pen"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Eraser"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Size"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Color"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Undo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Redo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Clear"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Stop drawing"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Start drawing"
+msgstr ""
 
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"

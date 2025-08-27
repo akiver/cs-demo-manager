@@ -28,7 +28,7 @@ export function FullscreenButton() {
 
   return (
     <PlaybackBarButton onClick={toggleFullscreen}>
-      {isFullscreenEnabled ? <MinimizeIcon height={24} /> : <MaximizeIcon height={24} />}
+      {isFullscreenEnabled ? <MinimizeIcon className="h-20" /> : <MaximizeIcon className="h-20" />}
     </PlaybackBarButton>
   );
 }

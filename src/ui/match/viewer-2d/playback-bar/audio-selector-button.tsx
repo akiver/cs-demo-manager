@@ -247,7 +247,7 @@ export function AudioSelectorButton({ loadAudioFile }: Props) {
         showDialog(<AudioSelectorDialog loadAudioFile={loadAudioFile} />);
       }}
     >
-      <SoundCross className="size-32" />
+      <SoundCross className="w-20" />
     </PlaybackBarButton>
   );
 }

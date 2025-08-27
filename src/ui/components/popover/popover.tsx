@@ -32,11 +32,15 @@ type PopoverOptions = {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   openOnHover?: boolean;
+  openDelay?: number;
+  closeDelay?: number;
 };
 
 function usePopover({
   initialOpen = false,
   openOnHover = false,
+  openDelay = 0,
+  closeDelay = 0,
   placement = 'top',
   modal,
   open: controlledOpen,
@@ -73,6 +77,7 @@ function usePopover({
   const hover = useHover(context, {
     handleClose: safePolygon(),
     enabled: openOnHover,
+    delay: { open: openDelay, close: closeDelay },
   });
   const interactions = useInteractions([click, dismiss, role, hover]);
 

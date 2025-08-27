@@ -34,8 +34,15 @@ import {
 } from './viewer-actions';
 import { useViewer2DState } from './use-viewer-state';
 import { deleteDemoAudioOffset, persistDemoAudioOffset } from './audio/audio-offset';
+import type { DrawingTool } from './drawing/use-drawable-canvas';
+
+type ViewerMode = 'drawing' | 'playback';
 
 type ViewerContext = {
+  mode: ViewerMode;
+  setMode: (mode: ViewerMode) => void;
+  toggleMode: () => void;
+  isDrawingMode: boolean;
   tickrate: number;
   speed: number;
   setSpeed: (speed: number) => void;
@@ -84,6 +91,12 @@ type ViewerContext = {
   setLowerRadarOffsetY: (offsetY: number) => void;
   lowerRadarOpacity: number;
   setLowerRadarOpacity: (opacity: number) => void;
+  drawingTool: DrawingTool;
+  setDrawingTool: (tool: DrawingTool) => void;
+  drawingSize: number;
+  setDrawingSize: (width: number) => void;
+  drawingColor: string;
+  setDrawingColor: (color: string) => void;
 };
 
 export const ViewerContext = createContext<ViewerContext | undefined>(undefined);
@@ -146,6 +159,10 @@ export function ViewerProvider({
   const dispatch = useDispatch();
   const match = useCurrentMatch();
   const viewerState = useViewer2DState();
+  const [mode, setMode] = useState<ViewerMode>('playback');
+  const [drawingTool, setDrawingTool] = useState<DrawingTool>('pen');
+  const [drawingSize, setDrawingSize] = useState(2);
+  const [drawingColor, setDrawingColor] = useState('#ff0000');
   const [currentTick, setCurrentTick] = useState(round.freezetimeEndTick);
   const [isPlaying, setIsPlaying] = useState(false);
   const [lowerRadarOffsetX, setLowerRadarOffsetX] = useState(() => {
@@ -199,6 +216,13 @@ export function ViewerProvider({
   return (
     <ViewerContext.Provider
       value={{
+        mode,
+        setMode,
+        isDrawingMode: mode === 'drawing',
+        toggleMode: () =>
+          setMode((mode) => {
+            return mode === 'drawing' ? 'playback' : 'drawing';
+          }),
         tickrate,
         map,
         currentTick,
@@ -259,6 +283,12 @@ export function ViewerProvider({
         kills,
         shots,
         round,
+        drawingTool,
+        setDrawingTool,
+        drawingColor,
+        setDrawingColor,
+        drawingSize,
+        setDrawingSize,
         changeRound: (roundNumber: number) => {
           audio?.pause();
           navigate(buildMatch2dViewerRoundPath(match.checksum, roundNumber));

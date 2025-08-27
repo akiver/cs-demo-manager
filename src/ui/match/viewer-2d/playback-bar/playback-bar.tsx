@@ -10,8 +10,14 @@ import { AudioButton } from './audio-button';
 import { AudioSelectorButton } from './audio-selector-button';
 import { useViewerContext } from '../use-viewer-context';
 import { DocumentationLink } from 'csdm/ui/components/links/documentation-link';
+import { DrawingButton } from './drawing-button';
+import type { DrawableCanvas } from '../drawing/use-drawable-canvas';
 
-export function PlaybackBar() {
+type Props = {
+  drawing: DrawableCanvas;
+};
+
+export function PlaybackBar({ drawing }: Props) {
   const { loadAudioFile, audioBytes } = useViewerContext();
 
   return (
@@ -22,6 +28,7 @@ export function PlaybackBar() {
       <SpeedButton />
       {audioBytes.length > 0 ? <AudioButton /> : <AudioSelectorButton loadAudioFile={loadAudioFile} />}
       <Timeline />
+      <DrawingButton drawing={drawing} />
       <LowerRadarButton />
       <FullscreenButton />
       <div className="flex items-center px-8">

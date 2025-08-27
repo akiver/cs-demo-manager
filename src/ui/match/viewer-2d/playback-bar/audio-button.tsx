@@ -241,7 +241,7 @@ export function AudioButton() {
             setIsPopoverVisible(!isPopoverVisible);
           }}
         >
-          <SoundIcon className="size-32" />
+          <SoundIcon className="size-20" />
         </PlaybackBarButton>
       </PopoverTrigger>
 
