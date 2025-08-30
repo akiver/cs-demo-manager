@@ -6,14 +6,14 @@ import type { PlayerTable } from 'csdm/common/types/player-table';
 export async function fetchPlayerByName(name: string): Promise<PlayerTable> {
   const players = await fetchPlayersTable({
     name,
-    sources: [],
-    origins: [],
     tagIds: [],
     bans: [],
+    startDate: undefined,
+    endDate: undefined,
   });
 
   if (players.length === 0) {
-    throw new PlayerNotFound(`Player with name ${name} not found`);
+    throw new PlayerNotFound();
   }
 
   if (players.length > 1) {
