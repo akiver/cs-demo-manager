@@ -17,6 +17,8 @@ import { isValidRecordingOutput } from 'csdm/common/types/recording-output';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import { isValidVideoContainer } from 'csdm/common/types/video-container';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
+import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
+import { fetchPlayerByName } from 'csdm/node/database/player/fetch-player-by-name';
 
 export class VideoCommand extends Command {
   public static Name = 'video';
@@ -46,6 +48,8 @@ export class VideoCommand extends Command {
   private readonly noPlayerVoicesFlag = 'no-player-voices';
   private readonly deathNoticesDurationFlag = 'death-notices-duration';
   private readonly cfgFlag = 'cfg';
+  private readonly focusPlayerFlag = 'focus-player';
+  private readonly focusPlayerNameFlag = 'focus-player-name';
   private outputFolderPath: string | undefined;
   private demoPath: string = '';
   private startTick: number = 0;
@@ -70,6 +74,8 @@ export class VideoCommand extends Command {
   private playerVoices: boolean | undefined;
   private deathNoticesDuration: number | undefined;
   private cfg: string | undefined;
+  private focusPlayerSteamId: string | undefined;
+  private focusPlayerName: string | undefined;
 
   public getDescription() {
     return 'Generate a video from a demo.';
@@ -108,6 +114,8 @@ export class VideoCommand extends Command {
     console.log(`  --${this.noPlayerVoicesFlag}`);
     console.log(`  --${this.deathNoticesDurationFlag} <number>`);
     console.log(`  --${this.cfgFlag} <string>`);
+    console.log(`  --${this.focusPlayerFlag} <steamId>`);
+    console.log(`  --${this.focusPlayerNameFlag} <name>`);
   }
 
   public async run() {
@@ -131,6 +139,22 @@ export class VideoCommand extends Command {
         deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
         cfg: this.cfg,
       };
+
+      if (this.focusPlayerSteamId) {
+        const player = await fetchPlayer(this.focusPlayerSteamId);
+        sequence.cameras.push({
+          tick: this.startTick,
+          playerSteamId: this.focusPlayerSteamId,
+          playerName: player.name,
+        });
+      } else if (this.focusPlayerName) {
+        const player = await fetchPlayerByName(this.focusPlayerName);
+        sequence.cameras.push({
+          tick: this.startTick,
+          playerSteamId: player.steamId,
+          playerName: player.name,
+        });
+      }
 
       const videoId = randomUUID();
       const controller = new AbortController();
@@ -220,6 +244,8 @@ export class VideoCommand extends Command {
         [this.noPlayerVoicesFlag]: { type: 'boolean' },
         [this.deathNoticesDurationFlag]: { type: 'string' },
         [this.cfgFlag]: { type: 'string' },
+        [this.focusPlayerFlag]: { type: 'string' },
+        [this.focusPlayerNameFlag]: { type: 'string' },
       },
       allowPositionals: true,
       args: this.args,
@@ -413,6 +439,15 @@ export class VideoCommand extends Command {
     }
     if (values[this.cfgFlag]) {
       this.cfg = values[this.cfgFlag];
+    }
+    if (values[this.focusPlayerFlag] && values[this.focusPlayerNameFlag]) {
+      throw new InvalidArgument('You cannot use both focus-player and focus-player-name at the same time.');
+    }
+    if (values[this.focusPlayerFlag]) {
+      this.focusPlayerSteamId = values[this.focusPlayerFlag] as string;
+    }
+    if (values[this.focusPlayerNameFlag]) {
+      this.focusPlayerName = values[this.focusPlayerNameFlag] as string;
     }
   }
 }
