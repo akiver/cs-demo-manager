@@ -3,7 +3,7 @@ import { getInstalledFfmpegVersion } from 'csdm/node/video/ffmpeg/get-installed-
 
 export async function isFfmpegUpdateAvailable(): Promise<boolean> {
   const installedVersion = await getInstalledFfmpegVersion();
-  if (installedVersion === undefined) {
+  if (installedVersion === undefined || installedVersion === '?') {
     return false;
   }
 

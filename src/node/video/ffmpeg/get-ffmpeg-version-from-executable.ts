@@ -1,7 +1,9 @@
 import { exec } from 'node:child_process';
 import { InvalidFfmpegExecutable } from 'csdm/node/video/errors/invalid-ffmpeg-executable';
 
-export async function getFfmpegVersionFromExecutable(executablePath: string): Promise<string | undefined> {
+export type FfmpegVersion = (string & {}) | '?';
+
+export async function getFfmpegVersionFromExecutable(executablePath: string): Promise<FfmpegVersion> {
   return new Promise((resolve, reject) => {
     exec(`"${executablePath}" -version`, { windowsHide: true }, (error, stdout) => {
       if (error !== null) {
@@ -24,7 +26,7 @@ export async function getFfmpegVersionFromExecutable(executablePath: string): Pr
 
       logger.warn(`Can't find FFmpeg version from stdout:`);
       logger.log(stdout);
-      return reject(new InvalidFfmpegExecutable());
+      return resolve('?');
     });
   });
 }

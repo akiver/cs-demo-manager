@@ -1,9 +1,9 @@
 import fs from 'fs-extra';
 import { InvalidFfmpegExecutable } from 'csdm/node/video/errors/invalid-ffmpeg-executable';
 import { getFfmpegExecutablePath } from './ffmpeg-location';
-import { getFfmpegVersionFromExecutable } from './get-ffmpeg-version-from-executable';
+import { getFfmpegVersionFromExecutable, type FfmpegVersion } from './get-ffmpeg-version-from-executable';
 
-export async function getInstalledFfmpegVersion(): Promise<string | undefined> {
+export async function getInstalledFfmpegVersion(): Promise<FfmpegVersion | undefined> {
   const ffmpegExecutablePath = await getFfmpegExecutablePath();
   const ffmpegExecutableExists = await fs.pathExists(ffmpegExecutablePath);
   if (!ffmpegExecutableExists) {
