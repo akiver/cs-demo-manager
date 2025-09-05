@@ -6810,6 +6810,15 @@ msgstr "Bans that happened before the player was first seen in a match will be i
 msgid "Ignore bans happened before first match"
 msgstr "Ignore bans happened before first match"
 
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgid "Maximum number of concurrent analyses."
+msgstr "Maximum number of concurrent analyses."
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgctxt "Settings title"
+msgid "Maximum number of analyses that can run at the same time."
+msgstr "Maximum number of analyses that can run at the same time."
+
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
 msgstr "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."

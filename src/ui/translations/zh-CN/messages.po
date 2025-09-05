@@ -6811,6 +6811,15 @@ msgstr "忽略遇到该玩家之前的封禁事件"
 msgid "Ignore bans happened before first match"
 msgstr "忽略在第一场比赛之前的封禁事件"
 
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgid "Maximum number of concurrent analyses."
+msgstr ""
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgctxt "Settings title"
+msgid "Maximum number of analyses that can run at the same time."
+msgstr ""
+
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
 msgstr "分析玩家/手榴弹位置。只有 2D 查看器需要分析位置。 启用此选项会增加插入数据库的时间以及占用更多磁盘空间。"
