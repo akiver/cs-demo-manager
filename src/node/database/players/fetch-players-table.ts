@@ -143,7 +143,11 @@ export async function fetchPlayersTable(filter: PlayersTableFilter): Promise<Pla
   const playersStats = await fetchPlayersStats(filter);
   const steamIds = playersStats.map((player) => player.steamId);
   const [lastPlayersData, tags] = await Promise.all([fetchLastPlayersData(steamIds), fetchPlayersTags()]);
-  const players = buildPlayersTable(playersStats, lastPlayersData, tags);
+  let players = buildPlayersTable(playersStats, lastPlayersData, tags);
+
+  if (filter.name) {
+    players = players.filter((player) => player.name === filter.name);
+  }
 
   return players;
 }
