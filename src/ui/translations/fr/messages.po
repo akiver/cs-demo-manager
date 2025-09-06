@@ -6812,11 +6812,11 @@ msgid "Ignore bans happened before first match"
 msgstr "Ignorer les bans qui ont eu lieu avant le premier match"
 
 #: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
-msgid "Maximum number of concurrent analyses."
+msgctxt "Settings title"
+msgid "Maximum number of concurrent analyses"
 msgstr ""
 
 #: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
-msgctxt "Settings title"
 msgid "Maximum number of analyses that can run at the same time."
 msgstr ""
 

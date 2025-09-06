@@ -31,8 +31,8 @@ export function MaxConcurrentAnalysesSelect() {
           }}
         />
       }
-      description={<Trans>Maximum number of concurrent analyses.</Trans>}
-      title={<Trans context="Settings title">Maximum number of analyses that can run at the same time.</Trans>}
+      title={<Trans context="Settings title">Maximum number of concurrent analyses</Trans>}
+      description={<Trans>Maximum number of analyses that can run at the same time.</Trans>}
     />
   );
 }
