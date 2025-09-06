@@ -1,11 +1,9 @@
-import { downloadHlae } from 'csdm/node/video/hlae/download-hlae';
-import { getDefaultHlaeInstallationFolderPath } from 'csdm/node/video/hlae/hlae-location';
 import { handleError } from '../../handle-error';
+import { installHlae } from 'csdm/node/video/hlae/install-hlae';
 
 export async function installHlaeHandler() {
   try {
-    const installationFolderPath = getDefaultHlaeInstallationFolderPath();
-    const version = await downloadHlae(installationFolderPath);
+    const version = await installHlae();
 
     return version;
   } catch (error) {
