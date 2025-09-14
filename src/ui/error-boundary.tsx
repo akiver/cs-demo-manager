@@ -36,9 +36,9 @@ export function ErrorBoundary() {
   };
 
   return (
-    <div className="flex flex-col items-center size-full">
+    <div className="flex size-full flex-col items-center">
       <div className="h-48 w-full drag" />
-      <div className="flex flex-col gap-y-12 w-full p-24">
+      <div className="flex w-full flex-col gap-y-12 p-24">
         <h1 className="text-title">A runtime error occurred</h1>
 
         <div>
@@ -47,7 +47,7 @@ export function ErrorBoundary() {
           <p>This will help us to fix the issue.</p>
         </div>
 
-        <div className="flex flex-col gap-y-16 w-full">
+        <div className="flex w-full flex-col gap-y-16">
           <div className="flex items-center gap-x-8">
             <Button
               variant={ButtonVariant.Primary}
@@ -92,8 +92,8 @@ export function ErrorBoundary() {
           </div>
           <div>
             <h2 className="text-subtitle">Error</h2>
-            <div className="overflow-auto bg-gray-100 max-h-[600px] rounded-8">
-              <pre className="select-text p-8">{errorData}</pre>
+            <div className="max-h-[600px] overflow-auto rounded-8 bg-gray-100">
+              <pre className="p-8 select-text">{errorData}</pre>
             </div>
           </div>
         </div>

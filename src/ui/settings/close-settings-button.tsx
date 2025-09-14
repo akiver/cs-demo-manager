@@ -9,7 +9,7 @@ export function CloseSettingsButton() {
     <button
       role="button"
       aria-pressed="false"
-      className="flex flex-col items-center mb-16 cursor-pointer duration-85 transition-all hover:text-gray-900"
+      className="mb-16 flex cursor-pointer flex-col items-center transition-all duration-85 hover:text-gray-900"
       onClick={closeSettings}
     >
       <TimesCircleIcon height={40} />

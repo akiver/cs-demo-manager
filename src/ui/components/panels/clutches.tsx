@@ -25,9 +25,9 @@ function ClutchPanel({ allClutches, title, opponentCount }: ClutchProps) {
   const averageKill = roundNumber(killCount / clutches.length, 1);
 
   return (
-    <div className="flex flex-col w-[192px] border border-gray-300 bg-gray-100 p-8 rounded">
+    <div className="flex w-[192px] flex-col rounded border border-gray-300 bg-gray-100 p-8">
       <p className="text-body-strong">{title}</p>
-      <div className="flex flex-col mt-12">
+      <div className="mt-12 flex flex-col">
         <PanelStatRow title={<Trans>Total</Trans>} value={clutches.length} />
         <PanelStatRow title={<Trans>Won</Trans>} value={wonCount} />
         <PanelStatRow title={<Trans>Lost</Trans>} value={lostCount} />

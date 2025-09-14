@@ -42,7 +42,7 @@ export function PlayersFilterDropdown() {
         <div className="flex flex-col p-8">
           <PeriodFilter startDate={startDate} endDate={endDate} onRangeChange={onPeriodChange} />
         </div>
-        <div className="border-l border-l-gray-300 w-[300px]">
+        <div className="w-[300px] border-l border-l-gray-300">
           <div className="p-8">
             <BansFilter selectedBans={bans} onChange={onBansChange} hasActiveFilter={hasActiveBanFilters} />
           </div>

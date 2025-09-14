@@ -31,7 +31,7 @@ export function CurrentMatch() {
   };
 
   return (
-    <div className="flex flex-col flex-1 overflow-auto">
+    <div className="flex flex-1 flex-col overflow-auto">
       <ActionBar
         left={
           <>
@@ -44,7 +44,7 @@ export function CurrentMatch() {
           </>
         }
       />
-      <div className="flex flex-col flex-1 overflow-auto p-16">
+      <div className="flex flex-1 flex-col overflow-auto p-16">
         <ValveMatchOverview
           match={match}
           demoPath={demoPath}

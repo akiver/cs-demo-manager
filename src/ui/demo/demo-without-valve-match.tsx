@@ -39,7 +39,7 @@ export function DemoWithoutValveMatch() {
       <Content>
         <div className="flex">
           <DemoInformation demo={demo} />
-          <div className="w-full ml-4">
+          <div className="ml-4 w-full">
             <DemoMatchStatus demo={demo} />
           </div>
         </div>

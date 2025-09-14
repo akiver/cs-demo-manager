@@ -66,14 +66,14 @@ export function MatchDate({ date }: { date: string }) {
 
 export function Row({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center flex-1 justify-between gap-x-8 px-16 py-8 bg-gray-75 border border-gray-300 rounded overflow-x-auto scrollbar-stable">
+    <div className="flex flex-1 items-center justify-between gap-x-8 overflow-x-auto rounded border border-gray-300 bg-gray-75 px-16 py-8 scrollbar-stable">
       {children}
     </div>
   );
 }
 
 export function RowLeft({ children }: { children: ReactNode }) {
-  return <div className="flex items-center gap-x-8 flex-none">{children}</div>;
+  return <div className="flex flex-none items-center gap-x-8">{children}</div>;
 }
 
 export function RowRight({ children }: { children: ReactNode }) {

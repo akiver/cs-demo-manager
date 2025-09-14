@@ -30,13 +30,13 @@ export function KillsFeed() {
   const visibleKills = getVisibleKills(kills, currentTick, tickrate);
 
   return (
-    <div className="absolute right-16 top-32 flex flex-col">
+    <div className="absolute top-32 right-16 flex flex-col">
       <AnimatePresence>
         {visibleKills.map((kill) => {
           return (
             <motion.div
               key={kill.id}
-              className="flex items-center rounded p-8 bg-black/30 mb-4"
+              className="mb-4 flex items-center rounded bg-black/30 p-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.3 } }}
               exit={{ opacity: 0 }}

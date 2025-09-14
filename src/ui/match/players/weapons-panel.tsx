@@ -8,7 +8,7 @@ import type { Kill } from 'csdm/common/types/kill';
 import { roundNumber } from 'csdm/common/math/round-number';
 
 function Value({ children }: { children: ReactNode }) {
-  return <span className="text-right selectable">{children}</span>;
+  return <span className="selectable text-right">{children}</span>;
 }
 
 type WeaponStats = {

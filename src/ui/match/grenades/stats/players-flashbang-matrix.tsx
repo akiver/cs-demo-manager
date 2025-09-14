@@ -70,22 +70,22 @@ export function PlayersFlashbangMatrix() {
   const renderPanelContent = () => {
     if (status === Status.Success) {
       return (
-        <div className="flex flex-col w-fit" ref={chart}>
+        <div className="flex w-fit flex-col" ref={chart}>
           {players.map((flasher) => {
             const flasherName = flasher.name;
 
             return (
               <div key={flasher.steamId} className="flex">
                 <div className="flex items-center gap-x-8">
-                  <p className="w-[128px] truncate selectable" title={flasherName}>
+                  <p className="w-[128px] selectable truncate" title={flasherName}>
                     {flasherName}
                   </p>
                   <TeamIndicator teamNumber={flasher.teamNumber} />
                 </div>
-                <div className="flex ml-8">
+                <div className="ml-8 flex">
                   {flasher.rows.map(({ flashedSteamId, flashedName, duration }) => {
                     return (
-                      <div key={flashedSteamId} className="flex flex-col w-[84px]">
+                      <div key={flashedSteamId} className="flex w-[84px] flex-col">
                         <Tooltip
                           content={
                             <Trans>
@@ -98,7 +98,7 @@ export function PlayersFlashbangMatrix() {
                           placement="top"
                         >
                           <div
-                            className="flex flex-col p-8 border border-gray-300 text-body-strong text-center hover:scale-110 transition-transform duration-100 selectable"
+                            className="flex selectable flex-col border border-gray-300 p-8 text-center text-body-strong transition-transform duration-100 hover:scale-110"
                             style={{
                               backgroundColor: getColorAtPercentage(
                                 startColor,
@@ -117,13 +117,13 @@ export function PlayersFlashbangMatrix() {
               </div>
             );
           })}
-          <div className="flex mt-8">
+          <div className="mt-8 flex">
             <div className="flex w-[152px]" />
             {players.map((player) => {
               return (
-                <div key={player.steamId} className="flex flex-col gap-y-4 w-[84px]">
+                <div key={player.steamId} className="flex w-[84px] flex-col gap-y-4">
                   <TeamIndicator teamNumber={player.teamNumber} />
-                  <p className="overflow-hidden break-words selectable" title={player.name}>
+                  <p className="selectable overflow-hidden break-words" title={player.name}>
                     {player.name}
                   </p>
                 </div>

@@ -24,7 +24,7 @@ export function CollateralKillsResults({ kills }: Props) {
           <CollapsePanel
             key={kill.id}
             header={
-              <div className="flex items-center flex-1 gap-x-8 justify-between overflow-x-auto">
+              <div className="flex flex-1 items-center justify-between gap-x-8 overflow-x-auto">
                 <RowLeft>
                   <MapImage mapName={kill.mapName} />
                   <TeamSideIcon side={kill.side} />

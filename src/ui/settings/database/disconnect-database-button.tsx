@@ -48,7 +48,7 @@ function DisconnectDatabaseDialog() {
         {error && (
           <div className="flex flex-col gap-8">
             <ErrorMessage message={<Trans>Database disconnection failed with the following error:</Trans>} />
-            <p className="select-text text-body-strong">{error}</p>
+            <p className="text-body-strong select-text">{error}</p>
           </div>
         )}
       </div>

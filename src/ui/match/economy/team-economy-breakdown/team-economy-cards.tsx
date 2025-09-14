@@ -20,13 +20,13 @@ function EconomyStats({ percentage, economyType }: EconomyStatsProps) {
   return (
     <div className="flex items-center">
       <div
-        className="size-24 mr-4 rounded"
+        className="mr-4 size-24 rounded"
         style={{
           backgroundColor: color,
         }}
       />
       <div>
-        <p className="text-title selectable">{percentage}%</p>
+        <p className="selectable text-title">{percentage}%</p>
         <p className="selectable">{economyTypeText}</p>
       </div>
     </div>

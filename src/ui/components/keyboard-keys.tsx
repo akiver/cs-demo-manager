@@ -6,7 +6,7 @@ type Props = {
 
 export function KeyboardKey({ children }: Props) {
   return (
-    <div className="flex items-center justify-center bg-gray-50 border border-gray-400 text-caption font-bold rounded-4 py-4 px-8">
+    <div className="flex items-center justify-center rounded-4 border border-gray-400 bg-gray-50 px-8 py-4 text-caption font-bold">
       <p>{children}</p>
     </div>
   );

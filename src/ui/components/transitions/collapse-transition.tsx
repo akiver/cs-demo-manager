@@ -22,7 +22,7 @@ export function CollapseTransition({ children, isVisible }: Props) {
     <div
       ref={contentRef}
       className={clsx(
-        'transition-[max-height,opacity] duration-200 ease-out overflow-hidden max-h-0',
+        'max-h-0 overflow-hidden transition-[max-height,opacity] duration-200 ease-out',
         isVisible ? 'opacity-100' : 'opacity-0',
       )}
       style={{ maxHeight }}

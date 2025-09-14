@@ -46,7 +46,7 @@ export function PerformanceTimeLineBar({ round, demoPath, game }: Props) {
       onClick={showRoundContextMenu}
     >
       <div
-        className="flex flex-col flex-1 relative pb-12"
+        className="relative flex flex-1 flex-col pb-12"
         style={{
           color,
           background: round.hasWon

@@ -12,7 +12,7 @@ export function RoundTopBar() {
 
   return (
     <div className="relative">
-      <div className="flex items-center w-full px-12 py-8 border-b border-b-gray-300">
+      <div className="flex w-full items-center border-b border-b-gray-300 px-12 py-8">
         <p className="mr-auto">#{round.number}</p>
         <div className="flex items-center gap-x-4">
           <TeamText teamNumber={round.teamASide}>{match.teamA.name}</TeamText>

@@ -10,7 +10,7 @@ type Props = {
 
 export function VerticalSlider({ value, onChange, min, max, step }: Props) {
   return (
-    <div className="flex items-center justify-center py-8 bg-gray-100 w-40 h-[120px]">
+    <div className="flex h-[120px] w-40 items-center justify-center bg-gray-100 py-8">
       <input
         type="range"
         value={value}
@@ -18,7 +18,7 @@ export function VerticalSlider({ value, onChange, min, max, step }: Props) {
         min={min}
         max={max}
         step={step}
-        className="w-12 h-full appearance-v-slider focus-visible:outline-none"
+        className="h-full w-12 appearance-v-slider focus-visible:outline-none"
       />
     </div>
   );

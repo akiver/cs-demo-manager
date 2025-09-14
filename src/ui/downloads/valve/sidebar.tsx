@@ -41,7 +41,7 @@ export function Sidebar() {
   const dispatch = useDispatch();
 
   return (
-    <div className="border-r border-r-gray-300 overflow-auto min-w-fit">
+    <div className="min-w-fit overflow-auto border-r border-r-gray-300">
       {matches.map((match) => {
         const playerLoggedOnSteam = match.players.find((player) => player.steamId === currentSteamId);
         const result = getMatchResultForPlayerFromMatchResult(match.result, playerLoggedOnSteam);

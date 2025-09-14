@@ -15,7 +15,7 @@ export function ImageDragZone({ children, onDrop, onClick }: Props) {
 
   return (
     <div
-      className="flex items-center justify-center size-[200px] border border-gray-300 cursor-pointer"
+      className="flex size-[200px] cursor-pointer items-center justify-center border border-gray-300"
       onClick={onClick}
       onDrop={onDrop}
       onDragOver={onDragOver}

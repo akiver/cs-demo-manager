@@ -6,5 +6,5 @@ type Props = {
 };
 
 export function CellText({ children }: Props) {
-  return <p className="text-body-strong selectable">{children}</p>;
+  return <p className="selectable text-body-strong">{children}</p>;
 }

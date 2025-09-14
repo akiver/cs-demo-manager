@@ -34,7 +34,7 @@ export function UpdateAvailableButton() {
     <div className="no-drag">
       <Tooltip content={<Trans>Update ready!</Trans>} placement="bottom" delay={0}>
         <button
-          className="flex no-underline text-green-400 hover:text-green-700 duration-85 transition-all outline-hidden border border-transparent"
+          className="flex border border-transparent text-green-400 no-underline outline-hidden transition-all duration-85 hover:text-green-700"
           onClick={onClick}
         >
           <UpdateIcon className="w-20" />

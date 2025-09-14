@@ -25,7 +25,7 @@ export function DemoMatchStatus({ demo }: Props) {
         <p>
           <Trans>The source of this demo is not supported.</Trans>
         </p>
-        <div className="flex justify-center mt-8">
+        <div className="mt-8 flex justify-center">
           <Button
             onClick={() => {
               showDialog(<ChangeDemosSourceDialog checksums={[demo.checksum]} initialSource={demo.source} />);
@@ -53,7 +53,7 @@ export function DemoMatchStatus({ demo }: Props) {
           <p>
             <Trans>This demo has been analyzed.</Trans>
           </p>
-          <div className="flex justify-center mt-8">
+          <div className="mt-8 flex justify-center">
             <SeeMatchButton />
           </div>
         </div>
@@ -65,12 +65,12 @@ export function DemoMatchStatus({ demo }: Props) {
         <p>
           <Trans>This demo has not been analyzed yet.</Trans>
         </p>
-        <div className="flex justify-center mt-8">
+        <div className="mt-8 flex justify-center">
           <AnalyzeButton demos={[demo]} />
         </div>
       </div>
     );
   };
 
-  return <div className="flex flex-col h-full items-center justify-center">{renderDemoMatchStatus()}</div>;
+  return <div className="flex h-full flex-col items-center justify-center">{renderDemoMatchStatus()}</div>;
 }

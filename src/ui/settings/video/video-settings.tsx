@@ -12,7 +12,7 @@ export function VideoSettings() {
       <div className="flex flex-col gap-y-12">
         {window.csdm.isWindows && (
           <div>
-            <p className="text-subtitle mb-8">HLAE</p>
+            <p className="mb-8 text-subtitle">HLAE</p>
             <div className="flex flex-col gap-y-8">
               <HlaeLocation />
               <HlaeConfigFolderPath />
@@ -21,7 +21,7 @@ export function VideoSettings() {
           </div>
         )}
         <div>
-          <p className="text-subtitle mb-8">FFmpeg</p>
+          <p className="mb-8 text-subtitle">FFmpeg</p>
           <FfmpegLocation />
         </div>
         <DefaultVideoRecordingSettings />

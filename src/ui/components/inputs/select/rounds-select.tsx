@@ -17,7 +17,7 @@ export function RoundsSelect({ rounds, onChange, selectedRoundNumbers }: Props) 
         <p>
           <Trans context="Filter rounds category">Rounds</Trans>
         </p>
-        <div className="ml-16 mt-px">
+        <div className="mt-px ml-16">
           <FilterSelection
             onSelectAllClick={() => {
               onChange(rounds.map((round) => round.number));

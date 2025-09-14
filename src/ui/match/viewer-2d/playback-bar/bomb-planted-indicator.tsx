@@ -34,13 +34,13 @@ export function BombPlantedIndicator({ tick, leftX, planterName, site }: Props) 
       placement="top"
     >
       <div
-        className="absolute flex items-center h-full"
+        className="absolute flex h-full items-center"
         style={{
           left: leftX - center,
         }}
       >
         <div
-          className="flex items-center justify-center h-24 rounded bg-[#c9252d] z-1"
+          className="z-1 flex h-24 items-center justify-center rounded bg-[#c9252d]"
           style={{
             width: siteBlockWidth,
           }}

@@ -13,13 +13,13 @@ type Props = {
 export function PerformanceTimeline({ player, demoPath, game }: Props) {
   const playerName = player.name;
   return (
-    <div className="flex flex-col items-center justify-center mt-12">
+    <div className="mt-12 flex flex-col items-center justify-center">
       <p>
         <Trans>
           <span className="text-body-strong">{playerName}</span> Round performance
         </Trans>
       </p>
-      <div className="flex flex-1 items-center justify-center mt-8">
+      <div className="mt-8 flex flex-1 items-center justify-center">
         {player.rounds.map((round) => {
           return <PerformanceTimeLineBar key={`round-${round.number}`} round={round} demoPath={demoPath} game={game} />;
         })}

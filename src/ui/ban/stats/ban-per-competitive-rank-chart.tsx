@@ -33,18 +33,18 @@ export function BanPerCompetitiveRankChart({ bannedAccounts }: Props) {
     const maxBannedCount = Math.max(...banCountPerRank.values());
 
     return (
-      <div className="flex gap-x-4 w-max mx-auto">
+      <div className="mx-auto flex w-max gap-x-4">
         {Object.values(CompetitiveRank).map((rankNumber) => {
           const bannedCount = banCountPerRank.get(rankNumber) ?? 0;
           const rankName = getRankName(rankNumber);
 
           return (
             <div key={rankNumber} className="flex">
-              <div className="flex flex-col items-center h-[324px] justify-end">
+              <div className="flex h-[324px] flex-col items-center justify-end">
                 {bannedCount > 0 && (
                   <Tooltip content={`${rankName}: ${bannedCount}`} placement="top">
                     <div
-                      className="w-40 bg-blue-700 flex justify-center animate-grow-height"
+                      className="flex w-40 animate-grow-height justify-center bg-blue-700"
                       style={{
                         height: `${(bannedCount / maxBannedCount) * 100}%`,
                       }}
@@ -54,7 +54,7 @@ export function BanPerCompetitiveRankChart({ bannedAccounts }: Props) {
                   </Tooltip>
                 )}
                 <img
-                  className="w-[64px] mt-4"
+                  className="mt-4 w-[64px]"
                   src={window.csdm.getRankImageSrc(rankNumber)}
                   alt={rankName}
                   title={rankName}

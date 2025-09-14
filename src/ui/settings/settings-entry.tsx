@@ -9,7 +9,7 @@ type Props = {
 
 export function SettingsEntry({ title, interactiveComponent, description }: Props) {
   return (
-    <div className="flex justify-between items-center py-8 border-b border-b-gray-300">
+    <div className="flex items-center justify-between border-b border-b-gray-300 py-8">
       <div className="pr-16">
         <p className="text-body-strong">{title}</p>
         <div className="mt-4">{description}</div>

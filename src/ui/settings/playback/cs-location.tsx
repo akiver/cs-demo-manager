@@ -84,9 +84,9 @@ export function CsLocation({
   };
 
   return (
-    <div className="flex flex-col py-8 border-b border-b-gray-300">
+    <div className="flex flex-col border-b border-b-gray-300 py-8">
       <p className="text-body-strong">{title}</p>
-      <div className="flex flex-col mt-4 gap-y-4">
+      <div className="mt-4 flex flex-col gap-y-4">
         <Checkbox
           label={<Trans>Enable custom location</Trans>}
           isChecked={customLocationEnabled}

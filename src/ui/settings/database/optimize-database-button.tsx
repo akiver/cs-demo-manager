@@ -75,7 +75,7 @@ function OptimizeDatabaseDialog() {
           });
         }}
       />
-      <div className="flex items-center gap-x-4 mb-8">
+      <div className="mb-8 flex items-center gap-x-4">
         <ExclamationTriangleIcon className="size-12 text-orange-700" />
         <p className="text-caption">
           <Trans>It will delete all data required for the 2D viewer!</Trans>

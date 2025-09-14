@@ -14,7 +14,7 @@ export function SequenceCfgInput() {
   };
 
   return (
-    <div className="flex flex-col gap-y-8 w-[300px]">
+    <div className="flex w-[300px] flex-col gap-y-8">
       <InputLabel htmlFor="cfg">
         <Trans context="Input label">CFG</Trans>
       </InputLabel>

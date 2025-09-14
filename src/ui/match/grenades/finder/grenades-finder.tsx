@@ -108,14 +108,14 @@ export function GrenadesFinder({ map, grenadesThrow }: Props) {
 
   return (
     <div className="flex h-full">
-      <div className="flex flex-col flex-1 mr-12 max-w-[488px] gap-y-12">
+      <div className="mr-12 flex max-w-[488px] flex-1 flex-col gap-y-12">
         <GrenadeNameSelect />
         <FinderRoundsSelect />
         <FinderPlayerSelect />
         <FinderSideSelect />
         <Table<GrenadeThrow> table={table} />
       </div>
-      <div className="flex flex-1 relative bg-gray-50" ref={setWrapper}>
+      <div className="relative flex flex-1 bg-gray-50" ref={setWrapper}>
         <div className="absolute top-0 size-full overflow-hidden">
           <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} />
         </div>

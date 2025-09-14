@@ -35,7 +35,7 @@ function Dialog({ children }: DialogProps) {
   return (
     <motion.div
       ref={container}
-      className="absolute inset-0 size-full bg-overlay z-1 pt-[var(--title-bar-height)] focus-visible:outline-hidden"
+      className="absolute inset-0 z-1 size-full bg-overlay pt-[var(--title-bar-height)] focus-visible:outline-hidden"
       tabIndex={-1}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.3 } }}

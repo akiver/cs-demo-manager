@@ -148,7 +148,6 @@ export default [
       eqeqeq: 'error',
       ...eslintPluginBetterTailwindcss.configs['recommended-warn'].rules,
       ...eslintPluginBetterTailwindcss.configs['recommended-error'].rules,
-      'better-tailwindcss/enforce-consistent-class-order': 'off',
       'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
       'better-tailwindcss/no-unregistered-classes': ['error', { ignore: ['dark', 'changelog', 'waveform'] }],
       'lingui/no-unlocalized-strings': [

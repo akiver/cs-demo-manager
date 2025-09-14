@@ -21,7 +21,7 @@ export function DemoField({ label, value, isCopyable }: Props) {
     <div className="flex flex-col">
       <p>{label}</p>
       <p
-        className={clsx('break-all text-body-strong', isCopyable ? 'select-text cursor-pointer' : 'selectable')}
+        className={clsx('text-body-strong break-all', isCopyable ? 'cursor-pointer select-text' : 'selectable')}
         onClick={onClick}
       >
         {value}

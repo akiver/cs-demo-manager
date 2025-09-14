@@ -1,5 +1,5 @@
 import React from 'react';
 
 export function Separator() {
-  return <div className="h-px bg-gray-500 my-4" />;
+  return <div className="my-4 h-px bg-gray-500" />;
 }

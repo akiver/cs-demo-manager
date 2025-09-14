@@ -41,7 +41,7 @@ export function Button({
     <button
       ref={ref}
       className={clsx(
-        'px-12 leading-none whitespace-nowrap rounded border flex items-center duration-85 transition-all relative cursor-default h-[30px] aria-disabled:bg-gray-300 aria-disabled:text-gray-600 aria-disabled:border-transparent',
+        'relative flex h-[30px] cursor-default items-center rounded border px-12 leading-none whitespace-nowrap transition-all duration-85 aria-disabled:border-transparent aria-disabled:bg-gray-300 aria-disabled:text-gray-600',
         {
           [ButtonVariant.Default]:
             'bg-gray-50 border-gray-400 text-gray-800 active:bg-gray-200 hover:text-gray-900 hover:border-gray-900 focus:border-gray-800 focus-visible:outline-hidden',

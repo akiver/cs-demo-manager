@@ -17,7 +17,7 @@ type Props = {
 
 export function DemoInformation({ demo }: Props) {
   return (
-    <div className="flex flex-col mr-12 gap-y-8 min-w-[354px] max-w-[354px]">
+    <div className="mr-12 flex max-w-[354px] min-w-[354px] flex-col gap-y-8">
       <DemoMap mapName={demo.mapName} game={demo.game} />
       <DemoDate date={demo.date} />
       <DemoDuration duration={demo.duration} />

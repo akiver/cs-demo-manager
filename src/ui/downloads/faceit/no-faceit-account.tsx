@@ -18,11 +18,11 @@ export function NoFaceitAccount() {
   const isDisabled = isBusy || nickname === '';
 
   return (
-    <div className="flex flex-col mt-48 mx-auto max-w-[600px]">
+    <div className="mx-auto mt-48 flex max-w-[600px] flex-col">
       <p className="text-body-strong">
         <Trans>To add a FACEIT account, enter your FACEIT nickname.</Trans>
       </p>
-      <div className="w-[228px] mt-8">
+      <div className="mt-8 w-[228px]">
         <TextInput
           placeholder={t({ message: 'FACEIT nickname', context: 'Input placeholder' })}
           onChange={(event) => {
@@ -34,7 +34,7 @@ export function NoFaceitAccount() {
           onEnterKeyDown={submit}
         />
       </div>
-      <div className="flex items-center gap-x-8 mt-4">
+      <div className="mt-4 flex items-center gap-x-8">
         <ExclamationTriangleIcon className="size-12 text-orange-700" />
         <p className="text-caption">
           <Trans>The nickname is case sensitive!</Trans>

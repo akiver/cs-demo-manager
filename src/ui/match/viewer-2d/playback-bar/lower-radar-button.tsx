@@ -23,7 +23,7 @@ function LowerRadarPopover({ radarSize }: Props) {
   } = useViewerContext();
 
   return (
-    <div className="flex flex-col gap-y-8 p-8 bg-gray-100 rounded-8">
+    <div className="flex flex-col gap-y-8 rounded-8 bg-gray-100 p-8">
       <p className="text-body-strong">
         <Trans>Lower radar configuration</Trans>
       </p>

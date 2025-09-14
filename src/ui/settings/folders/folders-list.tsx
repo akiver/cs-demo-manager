@@ -6,7 +6,7 @@ export function FoldersList() {
   const folders = useFolders();
 
   return (
-    <div className="flex flex-col gap-y-12 mt-8">
+    <div className="mt-8 flex flex-col gap-y-12">
       {folders.map((folder) => {
         return <FolderRow key={folder.path} folder={folder} />;
       })}

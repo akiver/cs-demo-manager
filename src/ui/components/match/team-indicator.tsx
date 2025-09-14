@@ -11,7 +11,7 @@ export function TeamIndicator({ teamNumber }: Props) {
 
   return (
     <div
-      className="flex self-center size-8 rounded-full"
+      className="flex size-8 self-center rounded-full"
       style={{
         backgroundColor: color,
       }}

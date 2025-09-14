@@ -31,12 +31,12 @@ export function LastBans({ bannedAccounts }: Props) {
             return (
               <Link
                 key={account.steamId}
-                className="flex gap-x-4 flex-none hover:bg-gray-100 p-8 rounded"
+                className="flex flex-none gap-x-4 rounded p-8 hover:bg-gray-100"
                 to={buildPlayerPath(account.steamId)}
                 viewTransition={true}
               >
                 <Avatar avatarUrl={account.avatar} playerName={account.name} size={48} />
-                <div className="flex justify-center flex-col">
+                <div className="flex flex-col justify-center">
                   <p className="text-body-strong">{account.name}</p>
                   <p>
                     {formatDate(account.lastBanDate, {

@@ -43,7 +43,7 @@ export function PlayerRow({
 
   return (
     <div
-      className="flex items-center relative p-4 cursor-pointer gap-x-8"
+      className="relative flex cursor-pointer items-center gap-x-8 p-4"
       style={{
         boxShadow: isFocused ? '0 0 0 1px red inset' : undefined,
       }}
@@ -57,7 +57,7 @@ export function PlayerRow({
         isAlive={isAlive}
         hasBomb={hasBomb}
       />
-      <div className="flex flex-col justify-center w-[112px]">
+      <div className="flex w-[112px] flex-col justify-center">
         <p className="truncate" title={name}>
           {name}
         </p>

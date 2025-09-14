@@ -22,7 +22,7 @@ export function Videos() {
         <RemoveCompletedVideosButton />
         <RemoveAllVideosButton />
       </div>
-      <div className="flex flex-col gap-y-12 mt-12">
+      <div className="mt-12 flex flex-col gap-y-12">
         {videos.map((video) => {
           return <VideoEntry key={video.id} video={video} />;
         })}

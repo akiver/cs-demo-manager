@@ -10,7 +10,7 @@ import { RecordingShowOnlyDeathNotices } from './recording-show-only-death-notic
 export function DefaultVideoRecordingSettings() {
   return (
     <div>
-      <h2 className="text-subtitle mb-8">
+      <h2 className="mb-8 text-subtitle">
         <Trans>Default recording settings</Trans>
       </h2>
       <div className="flex flex-col gap-y-8">

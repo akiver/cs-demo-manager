@@ -13,8 +13,8 @@ export function CurrentWeapon({ weaponName }: Props) {
   }
 
   return (
-    <div className="flex ml-auto">
-      <WeaponIcon className="fill-gray-800 stroke-gray-800 h-24" />
+    <div className="ml-auto flex">
+      <WeaponIcon className="h-24 fill-gray-800 stroke-gray-800" />
     </div>
   );
 }

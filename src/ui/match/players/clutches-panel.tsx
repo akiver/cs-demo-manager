@@ -7,7 +7,7 @@ import { useBooleanHuman } from 'csdm/ui/hooks/use-boolean-to-human';
 import type { Game } from 'csdm/common/types/counter-strike';
 
 function Value({ children }: { children: ReactNode }) {
-  return <span className="text-right selectable">{children}</span>;
+  return <span className="selectable text-right">{children}</span>;
 }
 
 type Props = {

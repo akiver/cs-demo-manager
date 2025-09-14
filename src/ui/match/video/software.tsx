@@ -18,7 +18,7 @@ export function Software({ name, version, websiteLink, children }: Props) {
         </a>
         <p>{version ?? <Trans context="Software installation status">Not installed</Trans>}</p>
       </div>
-      <div className="flex mt-8 gap-x-8">{children}</div>
+      <div className="mt-8 flex gap-x-8">{children}</div>
     </div>
   );
 }

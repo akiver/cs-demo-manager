@@ -54,7 +54,7 @@ export function PlayerCompetitiveRankHistory() {
               <span>{'->'}</span>
               <img src={window.csdm.getRankImageSrc(rank)} className="h-32" />
             </div>
-            <div className="flex flex-col mt-8">
+            <div className="mt-8 flex flex-col">
               <p>{getWinCountTranslation(winCount)}</p>
               <p>{date}</p>
             </div>

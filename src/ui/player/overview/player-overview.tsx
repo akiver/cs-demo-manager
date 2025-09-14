@@ -50,7 +50,7 @@ export function PlayerOverview() {
   return (
     <Content>
       <div className="flex flex-col gap-y-12">
-        <div className="flex gap-8 flex-wrap">
+        <div className="flex flex-wrap gap-8">
           <MatchmakingPanel />
           <PlayerWinRatePanel />
           <div className="flex flex-col gap-y-8">
@@ -94,7 +94,7 @@ export function PlayerOverview() {
         <div>
           <PlayerLastMatches />
         </div>
-        <div className="min-h-[128px] max-w-[512px] h-max">
+        <div className="h-max min-h-[128px] max-w-[512px]">
           <PlayerCommentInput />
         </div>
       </div>

@@ -17,7 +17,7 @@ export function Hlae() {
   }
 
   return (
-    <div className="flex flex-col gap-12 border border-gray-400 p-8 rounded">
+    <div className="flex flex-col gap-12 rounded border border-gray-400 p-8">
       <Software
         name="HLAE"
         websiteLink="https://github.com/advancedfx/advancedfx/wiki/Half-Life-Advanced-Effects"

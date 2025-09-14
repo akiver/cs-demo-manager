@@ -155,7 +155,7 @@ export function AnalysisLogs() {
   };
 
   return (
-    <div className="h-[420px] p-16 w-full border-t border-t-gray-300 mt-auto overflow-y-auto">
+    <div className="mt-auto h-[420px] w-full overflow-y-auto border-t border-t-gray-300 p-16">
       <div className="flex flex-col justify-end">
         {logs.map((log, index) => {
           return <p key={`${log}${index}`}>{log}</p>;
@@ -163,15 +163,15 @@ export function AnalysisLogs() {
         {isAnalysisErrorStatus(selectedAnalysis.status) && renderError()}
       </div>
       {selectedAnalysis.output && (
-        <div className="flex flex-col gap-y-4 w-full mt-12">
+        <div className="mt-12 flex w-full flex-col gap-y-4">
           <div className="flex items-center gap-x-8">
             <p className="text-body-strong">
               <Trans>Logs:</Trans>
             </p>
             <CopyButton data={selectedAnalysis.output} />
           </div>
-          <div className="overflow-auto bg-gray-100 max-h-[600px] rounded-8">
-            <pre className="select-text p-8">{selectedAnalysis.output}</pre>
+          <div className="max-h-[600px] overflow-auto rounded-8 bg-gray-100">
+            <pre className="p-8 select-text">{selectedAnalysis.output}</pre>
           </div>
         </div>
       )}

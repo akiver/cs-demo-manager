@@ -8,7 +8,7 @@ type Props = {
 
 export function TimestampItem({ minutes }: Props) {
   return (
-    <div className="flex items-center origin-left" style={scaleStyle}>
+    <div className="flex origin-left items-center" style={scaleStyle}>
       <span className="ml-4">
         <Trans context="Minutes timestamp in timelines">{minutes} min</Trans>
       </span>

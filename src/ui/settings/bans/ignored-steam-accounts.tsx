@@ -37,9 +37,9 @@ export function IgnoredSteamAccounts() {
           };
 
           return (
-            <div className="flex py-4 border-gray-300 border-t last:border-b w-fit" key={account.steamId}>
+            <div className="flex w-fit border-t border-gray-300 py-4 last:border-b" key={account.steamId}>
               <a
-                className="flex items-center w-[384px] gap-x-8 mr-8"
+                className="mr-8 flex w-[384px] items-center gap-x-8"
                 href={buildPlayerSteamProfileUrl(account.steamId)}
                 target="_blank"
                 rel="noreferrer"

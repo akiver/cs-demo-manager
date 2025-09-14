@@ -24,18 +24,18 @@ export function Ffmpeg() {
   }
 
   return (
-    <div className="flex flex-col border border-gray-400 p-8 rounded gap-y-8">
+    <div className="flex flex-col gap-y-8 rounded border border-gray-400 p-8">
       <Software name="FFmpeg" websiteLink="https://ffmpeg.org/documentation.html" version={installedFfmpegVersion}>
         <FfmpegInstallButton />
         <FfmpegUpdateButton />
         <FfmpegBrowseButton />
       </Software>
       <div className="flex flex-col gap-y-8">
-        <div className="flex gap-8 flex-wrap">
+        <div className="flex flex-wrap gap-8">
           <AudioCodecInput />
           <FfmpegAudioBitrateSelect />
         </div>
-        <div className="flex gap-8 flex-wrap">
+        <div className="flex flex-wrap gap-8">
           <VideoContainerSelect />
           <VideoCodecInput />
           <ConstantRateFactorInput />

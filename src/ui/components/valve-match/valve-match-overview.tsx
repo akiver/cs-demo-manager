@@ -17,7 +17,7 @@ type TeamScoreProps = {
 function TeamScore({ teamName, teamScore, side }: TeamScoreProps) {
   return (
     <div className="flex items-center">
-      <TeamText className="text-title mr-4" teamNumber={side}>
+      <TeamText className="mr-4 text-title" teamNumber={side}>
         {teamScore}
       </TeamText>
       <TeamText className="text-body-strong" teamNumber={side}>
@@ -40,8 +40,8 @@ export function ValveMatchOverview({ match, demoPath, selectedPlayer, onPlayerSe
   const isDemoAnalysisInProgress = useIsDemoAnalysisInProgress();
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex flex-col m-auto">
+    <div className="flex w-full flex-col">
+      <div className="m-auto flex flex-col">
         {match.demoChecksum && isDemoAnalysisInProgress(match.demoChecksum) && (
           <div className="flex items-center gap-x-8 self-center">
             <Spinner size={24} />
@@ -59,7 +59,7 @@ export function ValveMatchOverview({ match, demoPath, selectedPlayer, onPlayerSe
             game={match.game}
           />
         </div>
-        <div className="flex flex-col mt-12">
+        <div className="mt-12 flex flex-col">
           <TeamScore teamScore={match.scoreTeamStartedT} teamName={match.teamNameStartedT} side={TeamNumber.T} />
           <ValveMatchScoreboard
             players={terrorists}

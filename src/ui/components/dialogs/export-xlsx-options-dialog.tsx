@@ -90,7 +90,7 @@ export function ExportXlsxOptionsDialog({ ids, onOutputSelected, renderCheckboxe
               <p className="text-body-strong">
                 <Trans context="File destination">Output</Trans>
               </p>
-              <div className="flex gap-8 mt-4 flex-wrap">
+              <div className="mt-4 flex flex-wrap gap-8">
                 <RadioInput
                   id="single"
                   name="output-type"
@@ -108,11 +108,11 @@ export function ExportXlsxOptionsDialog({ ids, onOutputSelected, renderCheckboxe
                 />
               </div>
             </div>
-            <div className="max-w-[448px] mt-8">
+            <div className="mt-8 max-w-[448px]">
               <p className="text-body-strong">
                 <Trans context="Excel sheets">Sheets</Trans>
               </p>
-              <div className="flex gap-8 mt-4 flex-wrap">
+              <div className="mt-4 flex flex-wrap gap-8">
                 {renderCheckboxes(isSingleSelection || outputType === XlsxOutputType.MultipleFiles)}
               </div>
             </div>

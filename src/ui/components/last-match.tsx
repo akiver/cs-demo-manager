@@ -20,7 +20,7 @@ export function LastMatch({ match }: Props) {
   const hasPlayerWon = match.winnerName === match.focusTeamName;
 
   return (
-    <div className="flex items-center min-w-fit cursor-pointer gap-x-4" onClick={onClick}>
+    <div className="flex min-w-fit cursor-pointer items-center gap-x-4" onClick={onClick}>
       <img className="w-[128px]" src={getMapThumbnailSrc(match.mapName, match.game)} />
       <div className="flex flex-col">
         <p>

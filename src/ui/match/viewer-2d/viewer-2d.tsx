@@ -207,7 +207,7 @@ export function Viewer2D() {
 
   return (
     <FullscreenProvider>
-      <div className="flex flex-1 justify-between relative overflow-y-auto bg-gray-50" ref={setWrapper}>
+      <div className="relative flex flex-1 justify-between overflow-y-auto bg-gray-50" ref={setWrapper}>
         <div
           className={clsx(
             'absolute inset-0 size-full overflow-hidden',
@@ -225,7 +225,7 @@ export function Viewer2D() {
           />
         </div>
         <Timer />
-        <div className="absolute left-8 top-8 flex flex-col w-[352px] gap-y-8 overflow-auto">
+        <div className="absolute top-8 left-8 flex w-[352px] flex-col gap-y-8 overflow-auto">
           <TeamPanel teamNumber={round.teamASide} teamName={match.teamA.name} teamScore={round.teamAScore} />
           <TeamPanel teamNumber={round.teamBSide} teamName={match.teamB.name} teamScore={round.teamBScore} />
         </div>

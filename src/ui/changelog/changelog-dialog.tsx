@@ -94,7 +94,7 @@ export function ChangelogDialog() {
   const renderChangelog = () => {
     if (status === Status.Loading) {
       return (
-        <div className="flex items-center justify-center self-center h-[120px]">
+        <div className="flex h-[120px] items-center justify-center self-center">
           <Spinner size={48} />
         </div>
       );
@@ -119,7 +119,7 @@ export function ChangelogDialog() {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <div className="flex flex-col gap-y-16 max-w-[700px] **:select-text">
+        <div className="flex max-w-[700px] flex-col gap-y-16 **:select-text">
           {renderChangelog()}
           <Donate />
         </div>

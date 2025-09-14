@@ -12,7 +12,7 @@ export function TeamScore({ teamName, teamScore, scoreOppositeTeam }: Props) {
   return (
     <div className="flex items-center">
       <p className={clsx('text-title', getTeamScoreClassName(teamScore, scoreOppositeTeam))}>{teamScore}</p>
-      <p className="text-body-strong ml-4">{teamName}</p>
+      <p className="ml-4 text-body-strong">{teamName}</p>
     </div>
   );
 }

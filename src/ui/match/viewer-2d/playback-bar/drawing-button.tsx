@@ -29,7 +29,7 @@ function ToolButton({
       <button
         onClick={onClick}
         className={clsx(
-          'flex items-center justify-center text-gray-900 cursor-pointer p-4 rounded-4 transition-colors duration-200',
+          'flex cursor-pointer items-center justify-center rounded-4 p-4 text-gray-900 transition-colors duration-200',
           isSelected ? 'bg-gray-400' : 'bg-gray-75',
         )}
       >
@@ -44,7 +44,7 @@ function ColorButton({ color, selected, onClick }: { color: string; selected: bo
     <button
       className={clsx(
         'size-32 cursor-pointer border-2 border-white outline-3',
-        selected ? `outline-blue-700 scale-110 transition-all duration-200 rounded-8` : `rounded-4 outline-transparent`,
+        selected ? `scale-110 rounded-8 outline-blue-700 transition-all duration-200` : `rounded-4 outline-transparent`,
       )}
       style={{ backgroundColor: color }}
       onClick={onClick}
@@ -70,14 +70,14 @@ function DrawingPopover({ drawing }: Props) {
   const colors = ['#ffffff', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ffa500', '#800080'];
 
   return (
-    <div className="flex flex-col gap-y-16 bg-gray-100 w-[24rem] p-16 rounded-8">
+    <div className="flex w-[24rem] flex-col gap-y-16 rounded-8 bg-gray-100 p-16">
       <div className="flex gap-x-16">
         <div className="flex flex-col gap-y-16">
           <div className="flex flex-col gap-y-8">
             <p>
               <Trans>Tool</Trans>
             </p>
-            <div className="flex gap-x-8 items-center">
+            <div className="flex items-center gap-x-8">
               <ToolButton
                 onClick={() => setDrawingTool('pen')}
                 isSelected={drawingTool === 'pen'}
@@ -95,8 +95,8 @@ function DrawingPopover({ drawing }: Props) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-8 w-[11rem]">
-            <div className="flex gap-x-8 items-end">
+          <div className="flex w-[11rem] flex-col gap-y-8">
+            <div className="flex items-end gap-x-8">
               <RangeInput label={<Trans>Size</Trans>} min={1} max={10} onChange={setDrawingSize} value={drawingSize} />
               <p className="text-body-strong">{drawingSize}</p>
             </div>
@@ -122,7 +122,7 @@ function DrawingPopover({ drawing }: Props) {
         </div>
       </div>
 
-      <div className="flex items-center gap-8 flex-wrap">
+      <div className="flex flex-wrap items-center gap-8">
         <Tooltip
           content={
             <KeyboardKeys>

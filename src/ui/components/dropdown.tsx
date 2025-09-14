@@ -27,14 +27,14 @@ export function Dropdown({ togglerContent, children, isDisabled = false }: Props
     <div className="relative">
       <Button isDisabled={isDisabled} onClick={onClick}>
         {togglerContent}
-        <div className="flex items-center ml-8">
+        <div className="ml-8 flex items-center">
           <ChevronDown width={14} />
         </div>
       </Button>
       <div ref={content}>
         {isOpened && (
-          <div className="absolute right-0 mt-8 z-2">
-            <div className="flex flex-col bg-gray-75 rounded-8 shadow-[0_0_4px_0_var(--color-gray-500)] overflow-hidden">
+          <div className="absolute right-0 z-2 mt-8">
+            <div className="flex flex-col overflow-hidden rounded-8 bg-gray-75 shadow-[0_0_4px_0_var(--color-gray-500)]">
               {children}
             </div>
           </div>

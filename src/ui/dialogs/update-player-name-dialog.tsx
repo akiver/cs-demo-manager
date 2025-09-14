@@ -91,7 +91,7 @@ export function UpdatePlayerNameDialog({ steamId, name }: Props) {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <form id="player-form" ref={formRef} onSubmit={onSubmit} className="flex flex-col gap-y-8 max-w-[524px]">
+        <form id="player-form" ref={formRef} onSubmit={onSubmit} className="flex max-w-[524px] flex-col gap-y-8">
           <TextInput
             name="name"
             defaultValue={name}
@@ -99,7 +99,7 @@ export function UpdatePlayerNameDialog({ steamId, name }: Props) {
             label={<Trans context="Input label">Name</Trans>}
           />
 
-          <div className="flex items-center gap-x-8 mt-8">
+          <div className="mt-8 flex items-center gap-x-8">
             <ExclamationTriangleIcon className="size-24 text-orange-700" />
             <p>
               <Trans>

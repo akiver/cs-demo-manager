@@ -12,7 +12,7 @@ export function PendingDownloadsList() {
   }
 
   return (
-    <div className="flex flex-col gap-y-8 p-16 overflow-y-auto">
+    <div className="flex flex-col gap-y-8 overflow-y-auto p-16">
       {downloads.map((download) => (
         <DownloadEntry key={download.matchId} download={download} />
       ))}

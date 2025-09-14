@@ -94,7 +94,7 @@ export function EditSequenceSettingsDialog() {
       </DialogHeader>
       <form onSubmit={onConfirm}>
         <DialogContent>
-          <div className="flex flex-col gap-y-8 max-h-[500px] overflow-hidden">
+          <div className="flex max-h-[500px] flex-col gap-y-8 overflow-hidden">
             <p>
               <Trans>The following settings will be applied to all existing sequences.</Trans>
             </p>
@@ -145,7 +145,7 @@ export function EditSequenceSettingsDialog() {
               />
 
               <CollapseTransition isVisible={state.overrideCfg}>
-                <div className="w-full h-[180px]">
+                <div className="h-[180px] w-full">
                   <CfgInput
                     cfg={cfg}
                     onBlur={(event) => {

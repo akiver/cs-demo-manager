@@ -12,7 +12,7 @@ export function HistoryButton({ children, onClick, isDisabled, tooltip }: Props)
   return (
     <Tooltip content={tooltip}>
       <button
-        className="flex items-center justify-center size-28 rounded hover:bg-gray-300 text-gray-900 aria-disabled:cursor-default aria-disabled:opacity-40 aria-disabled:hover:bg-transparent"
+        className="flex size-28 items-center justify-center rounded text-gray-900 hover:bg-gray-300 aria-disabled:cursor-default aria-disabled:opacity-40 aria-disabled:hover:bg-transparent"
         onClick={isDisabled ? undefined : onClick}
         aria-disabled={isDisabled}
       >

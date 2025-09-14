@@ -63,7 +63,7 @@ export function FaceitApiKey() {
   };
 
   return (
-    <div className="flex items-center gap-x-8 max-w-[524px]">
+    <div className="flex max-w-[524px] items-center gap-x-8">
       <TextInput
         value={apiKey}
         onChange={onChange}

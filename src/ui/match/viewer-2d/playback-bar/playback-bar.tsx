@@ -21,7 +21,7 @@ export function PlaybackBar({ drawing }: Props) {
   const { loadAudioFile, audioBytes } = useViewerContext();
 
   return (
-    <div className="flex relative h-40 cursor-pointer">
+    <div className="relative flex h-40 cursor-pointer">
       <PlayPauseButton />
       <PreviousRoundButton />
       <NextRoundButton />

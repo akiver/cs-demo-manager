@@ -61,7 +61,7 @@ export function Timeline() {
   const elapsedTimeWidth = getPlayBarElapsedWidth();
 
   return (
-    <div className="flex relative bg-gray-50 border-x border-x-gray-300 w-full" ref={wrapperRef} onClick={onClick}>
+    <div className="relative flex w-full border-x border-x-gray-300 bg-gray-50" ref={wrapperRef} onClick={onClick}>
       <div
         className="bg-gray-300"
         style={{

@@ -20,7 +20,7 @@ export function MatchmakingPanel() {
         <p>
           <Trans context="Panel label">Premier rank</Trans>
         </p>
-        <div className="flex h-full w-[64px] mb-4">
+        <div className="mb-4 flex h-full w-[64px]">
           <PremierRank rank={premierRank} />
         </div>
       </PanelRow>
@@ -28,7 +28,7 @@ export function MatchmakingPanel() {
         <p>
           <Trans context="Panel label">Competitive rank</Trans>
         </p>
-        <div className="flex h-full w-[64px] mb-4">
+        <div className="mb-4 flex h-full w-[64px]">
           <img src={window.csdm.getRankImageSrc(competitiveRank)} />
         </div>
       </PanelRow>

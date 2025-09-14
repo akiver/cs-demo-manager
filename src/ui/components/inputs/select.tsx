@@ -23,7 +23,7 @@ export function Select<ValueType extends string | number = string>({
   return (
     <select
       id={id}
-      className="h-[30px] bg-gray-50 border border-gray-400 rounded disabled:bg-gray-400 enabled:hover:border-gray-900 focus:border-gray-900 outline-hidden pl-12 appearance-none"
+      className="h-[30px] appearance-none rounded border border-gray-400 bg-gray-50 pl-12 outline-hidden focus:border-gray-900 enabled:hover:border-gray-900 disabled:bg-gray-400"
       disabled={isDisabled}
       value={value}
       onChange={(event) => {

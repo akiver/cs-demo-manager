@@ -67,20 +67,20 @@ export function ToastsProvider({ children }: Props) {
   return (
     <ToastsContext.Provider value={showToast}>
       {children}
-      <div className="absolute z-3 right-24 top-48 flex flex-col gap-y-8 max-w-[448px]">
+      <div className="absolute top-48 right-24 z-3 flex max-w-[448px] flex-col gap-y-8">
         <AnimatePresence>
           {toasts.map((toast) => {
             const renderContent = () => {
               let icon: ReactNode = null;
               switch (toast.type) {
                 case 'success':
-                  icon = <CheckCircleIcon className="size-24 mr-8 text-green-500 self-center" />;
+                  icon = <CheckCircleIcon className="mr-8 size-24 self-center text-green-500" />;
                   break;
                 case 'error':
-                  icon = <TimesCircleIcon className="size-24 mr-8 text-red-500 self-center" />;
+                  icon = <TimesCircleIcon className="mr-8 size-24 self-center text-red-500" />;
                   break;
                 case 'warning':
-                  icon = <ExclamationTriangleIcon className="size-24 mr-8 text-orange-500 self-center" />;
+                  icon = <ExclamationTriangleIcon className="mr-8 size-24 self-center text-orange-500" />;
                   break;
               }
 
@@ -95,7 +95,7 @@ export function ToastsProvider({ children }: Props) {
             return (
               <motion.div
                 key={toast.id}
-                className="flex p-16 bg-gray-75 text-gray-900 border-2 border-gray-300 rounded-8 ml-auto min-w-[300px]"
+                className="ml-auto flex min-w-[300px] rounded-8 border-2 border-gray-300 bg-gray-75 p-16 text-gray-900"
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 100 }}

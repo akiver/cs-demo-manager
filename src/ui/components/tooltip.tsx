@@ -42,7 +42,7 @@ function Wrapper({ x, y, refs, children, strategy, placement, getFloatingProps }
     <div
       ref={refs.setFloating}
       className={clsx(
-        'bg-gray-75 border border-gray-400 p-8 rounded select-none transition-opacity duration-300 z-10',
+        'z-10 rounded border border-gray-400 bg-gray-75 p-8 transition-opacity duration-300 select-none',
         arrowClassName,
       )}
       style={{

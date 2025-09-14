@@ -21,9 +21,9 @@ export function CurrentFolderSelect() {
   const canInteract = demosLoaded && folders.length > 0;
 
   return (
-    <div className="flex items-center p-8 gap-12">
+    <div className="flex items-center gap-12 p-8">
       <FolderIcon height={24} />
-      <div className="flex flex-col w-full">
+      <div className="flex w-full flex-col">
         <Select
           isDisabled={!demosLoaded || showAllFolders || folders.length === 0}
           onChange={async (selectedFolderPath) => {

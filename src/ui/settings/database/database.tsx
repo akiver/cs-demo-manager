@@ -11,7 +11,7 @@ export function Database() {
   const { hostname, port, username, password, database } = useDatabaseSettings();
 
   return (
-    <div className="flex flex-col gap-y-8 max-w-[264px]">
+    <div className="flex max-w-[264px] flex-col gap-y-8">
       <HostnameInput hostname={hostname} />
       <DatabaseNameInput databaseName={database} />
       <UsernameInput username={username} />

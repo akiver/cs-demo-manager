@@ -22,7 +22,7 @@ function Link({ children, to, end }: LinkProps) {
       end={end}
       viewTransition={true}
     >
-      <div className="min-w-40 flex justify-center items-center px-8">{children}</div>
+      <div className="flex min-w-40 items-center justify-center px-8">{children}</div>
     </NavLink>
   );
 }
@@ -46,7 +46,7 @@ export function RoundsNavigationBar() {
   }
 
   return (
-    <div className="flex mt-auto h-[50px] border-t border-t-gray-300">
+    <div className="mt-auto flex h-[50px] border-t border-t-gray-300">
       <Link to={buildMatchRoundsPath(checksum)} end={true}>
         <p>
           <Trans>Overview</Trans>

@@ -82,7 +82,7 @@ export function MatchesFilterDropdown() {
         <div className="flex flex-col p-8">
           <PeriodFilter startDate={startDate} endDate={endDate} onRangeChange={onPeriodChange} />
         </div>
-        <div className="border-l border-l-gray-300 w-[424px]">
+        <div className="w-[424px] border-l border-l-gray-300">
           <div className="p-8">
             <SourcesFilter
               selectedSources={sources}

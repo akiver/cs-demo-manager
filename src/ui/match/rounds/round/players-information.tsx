@@ -70,7 +70,7 @@ function GridRows({ children }: { children: ReactNode }) {
 function Middle({ children, area }: { area: string; children: ReactNode }) {
   return (
     <div
-      className="flex flex-col items-center justify-center mx-8 h-full"
+      className="mx-8 flex h-full flex-col items-center justify-center"
       style={{
         gridArea: area,
       }}
@@ -82,7 +82,7 @@ function Middle({ children, area }: { area: string; children: ReactNode }) {
 
 function StickyHeader({ children, style }: { children?: ReactNode; style?: React.CSSProperties }) {
   return (
-    <div className="grid sticky -top-16 py-4 bg-gray-75" style={style}>
+    <div className="sticky -top-16 grid bg-gray-75 py-4" style={style}>
       {children}
     </div>
   );
@@ -106,7 +106,7 @@ type TitleProps = {
 
 function Title({ children }: TitleProps) {
   return (
-    <div className="flex items-center justify-center w-full h-[50px]">
+    <div className="flex h-[50px] w-full items-center justify-center">
       <p>{children}</p>
     </div>
   );
@@ -120,7 +120,7 @@ function PlayerAvatar({ player }: PlayerAvatarProps) {
   return (
     <div className="flex flex-col items-center">
       <Avatar avatarUrl={player.avatar} size={40} />
-      <p className="truncate max-w-[100px] selectable">{player.name}</p>
+      <p className="max-w-[100px] selectable truncate">{player.name}</p>
     </div>
   );
 }
@@ -131,7 +131,7 @@ type CellProps = {
 
 function Cell({ value }: CellProps) {
   return (
-    <div className="flex items-center justify-center bg-gray-100 border-b border-b-gray-300 last:border-b-0">
+    <div className="flex items-center justify-center border-b border-b-gray-300 bg-gray-100 last:border-b-0">
       <p className="selectable">{value}</p>
     </div>
   );
@@ -543,7 +543,7 @@ export function PlayersInformation() {
   });
 
   return (
-    <div className="bg-gray-75 border border-gray-200">
+    <div className="border border-gray-200 bg-gray-75">
       <div className="p-8">
         <p className="text-body-strong">
           <Trans>Players stats</Trans>

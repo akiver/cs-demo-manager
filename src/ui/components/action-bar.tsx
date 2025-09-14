@@ -8,9 +8,9 @@ type Props = {
 
 export function ActionBar({ left, right }: Props) {
   return (
-    <div className="flex items-center p-8 border-b border-b-gray-300 flex-wrap">
-      <div className="flex items-center flex-1 gap-8 flex-wrap">{left}</div>
-      <div className="flex items-center gap-8 flex-wrap">{right}</div>
+    <div className="flex flex-wrap items-center border-b border-b-gray-300 p-8">
+      <div className="flex flex-1 flex-wrap items-center gap-8">{left}</div>
+      <div className="flex flex-wrap items-center gap-8">{right}</div>
     </div>
   );
 }

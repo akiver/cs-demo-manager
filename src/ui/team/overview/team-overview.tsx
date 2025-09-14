@@ -41,7 +41,7 @@ export function TeamOverview() {
   return (
     <Content>
       <div className="flex flex-col gap-y-12">
-        <div className="flex gap-8 flex-wrap">
+        <div className="flex flex-wrap gap-8">
           <TeamWinRatePanel />
           <div className="flex flex-col gap-y-8">
             <HltvRatingPanel hltvRating={hltvRating} />

@@ -6,7 +6,7 @@ type Props = {
 
 export function StatLabel({ text }: Props) {
   return (
-    <div className="flex items-center justify-center h-48 bg-gray-75 whitespace-nowrap">
+    <div className="flex h-48 items-center justify-center bg-gray-75 whitespace-nowrap">
       <p>{text}</p>
     </div>
   );

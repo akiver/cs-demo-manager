@@ -9,7 +9,7 @@ type ButtonProps = {
 
 function Button({ children, onClick }: ButtonProps) {
   return (
-    <button className="text-caption cursor-auto hover:text-gray-900" onClick={onClick}>
+    <button className="cursor-auto text-caption hover:text-gray-900" onClick={onClick}>
       {children}
     </button>
   );

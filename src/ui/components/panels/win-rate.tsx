@@ -16,7 +16,7 @@ export function WinRate({ title, value, barClassName }: Props) {
         <p>{title ?? <Trans>Win rate</Trans>}</p>
         <PanelValue>{`${value}%`}</PanelValue>
       </div>
-      <div className="h-4 rounded-full w-full bg-gray-200">
+      <div className="h-4 w-full rounded-full bg-gray-200">
         <div
           className={clsx('h-4 rounded-full', barClassName ?? 'bg-gray-800')}
           style={{

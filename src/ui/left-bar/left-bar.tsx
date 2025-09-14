@@ -13,9 +13,9 @@ import { VideoQueueLink } from './video-queue-link';
 
 export function LeftBar() {
   return (
-    <div className="flex flex-col items-center overflow-y-auto h-full w-[60px] bg-gray-50 border-r border-r-gray-300 no-scrollbar">
+    <div className="flex no-scrollbar h-full w-[60px] flex-col items-center overflow-y-auto border-r border-r-gray-300 bg-gray-50">
       <PinnedPlayerLink />
-      <div className="flex w-full my-8 px-12">
+      <div className="my-8 flex w-full px-12">
         <div className="h-px w-full bg-gray-600" />
       </div>
       <MatchesLink />

@@ -16,10 +16,10 @@ import { CloseButton } from 'csdm/ui/components/buttons/close-button';
 
 function PathList({ paths }: { paths: string[] }) {
   return (
-    <ul className="border border-gray-300 rounded-4 max-h-[200px] overflow-auto">
+    <ul className="max-h-[200px] overflow-auto rounded-4 border border-gray-300">
       {paths.map((path) => {
         return (
-          <li key={path} className="px-8 py-4 selectable font-bold whitespace-nowrap">
+          <li key={path} className="selectable px-8 py-4 font-bold whitespace-nowrap">
             {path}
           </li>
         );
@@ -109,8 +109,8 @@ function ImportV2DataDialog() {
             </Button>
           </div>
           {backupFilePath !== '' && (
-            <div className="border border-gray-300 rounded-4">
-              <p className="px-8 py-4 selectable font-bold">{backupFilePath}</p>
+            <div className="rounded-4 border border-gray-300">
+              <p className="selectable px-8 py-4 font-bold">{backupFilePath}</p>
             </div>
           )}
         </div>
@@ -218,7 +218,7 @@ function ImportV2DataDialog() {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <div className="flex flex-col gap-y-8 w-[620px]">{result ? renderResult(result) : renderForm()}</div>
+        <div className="flex w-[620px] flex-col gap-y-8">{result ? renderResult(result) : renderForm()}</div>
       </DialogContent>
       <DialogFooter>
         {result === null && (

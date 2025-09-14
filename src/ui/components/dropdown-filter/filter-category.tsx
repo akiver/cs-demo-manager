@@ -14,7 +14,7 @@ export function FilterCategory({ name, children, right }: Props) {
         <p>{name}</p>
         {right}
       </div>
-      <div className="flex flex-wrap gap-x-8 gap-y-4 max-h-[150px] overflow-auto py-4">{children}</div>
+      <div className="flex max-h-[150px] flex-wrap gap-x-8 gap-y-4 overflow-auto py-4">{children}</div>
     </div>
   );
 }

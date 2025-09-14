@@ -25,7 +25,7 @@ export function Avatar({ avatarUrl, playerName, playerColor, size }: Props) {
   return (
     <img
       className={clsx(
-        'border size-[100px]',
+        'size-[100px] border',
         playerColor ? getPlayerColorBorderClassName(playerColor) : 'border-gray-300',
       )}
       style={{

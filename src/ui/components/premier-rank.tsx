@@ -14,7 +14,7 @@ export function PremierRank({ rank }: Props) {
 
   return (
     <div
-      className="flex relative size-full"
+      className="relative flex size-full"
       style={{
         color: `var(--cs-rating-tier-${tier})`,
       }}
@@ -54,8 +54,8 @@ export function PremierRank({ rank }: Props) {
         </defs>
       </svg>
 
-      <div className="absolute flex left-0 top-0 h-full items-center ml-[14px]">
-        <p className="brightness-[1.7] text-[14px] font-semibold -skew-x-12 [text-shadow:_1px_1px_black]">
+      <div className="absolute top-0 left-0 ml-[14px] flex h-full items-center">
+        <p className="-skew-x-12 text-[14px] font-semibold brightness-[1.7] [text-shadow:_1px_1px_black]">
           {major === '0' ? '---' : major}
           {minor !== undefined && <small className="text-[10px]">{`,${minor}`}</small>}
         </p>

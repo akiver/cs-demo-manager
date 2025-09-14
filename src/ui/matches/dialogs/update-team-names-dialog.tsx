@@ -134,7 +134,7 @@ export function UpdateTeamNamesDialog({ matches }: Props) {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <div className="flex flex-col gap-y-8 max-w-[524px]">
+        <div className="flex max-w-[524px] flex-col gap-y-8">
           <TextInput
             value={teamNameA}
             onChange={(event) => {
@@ -152,7 +152,7 @@ export function UpdateTeamNamesDialog({ matches }: Props) {
             label={<Trans context="Input label">Team B</Trans>}
           />
 
-          <div className="flex items-center gap-x-8 mt-8">
+          <div className="mt-8 flex items-center gap-x-8">
             <ExclamationTriangleIcon className="size-24 text-red-700" />
             <div>
               <p>

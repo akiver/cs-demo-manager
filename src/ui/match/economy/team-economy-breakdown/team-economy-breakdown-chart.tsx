@@ -209,7 +209,7 @@ export function TeamsEconomyBreakdownChart() {
       <TeamEconomyCards />
       <div className="flex justify-center">
         <div ref={chartRefTeamA} style={style} />
-        <div className="flex flex-col justify-around my-[38px]">
+        <div className="my-[38px] flex flex-col justify-around">
           {match.rounds.map((round) => {
             let Icon = EliminationIcon;
             switch (round.endReason) {

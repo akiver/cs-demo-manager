@@ -41,8 +41,8 @@ function NavigationLink({ children, ref, to, isDisabled }: NavigationLinkProps) 
     <Link
       ref={ref}
       className={clsx(
-        'flex items-center h-full',
-        isDisabled ? 'text-gray-600 cursor-default pointer-events-none' : 'text-gray-900 cursor-pointer',
+        'flex h-full items-center',
+        isDisabled ? 'pointer-events-none cursor-default text-gray-600' : 'cursor-pointer text-gray-900',
       )}
       to={to}
       state={state}

@@ -50,10 +50,10 @@ export function PlayerPremierRankHistory() {
 
         return renderToString(
           <div className="flex flex-col gap-y-4">
-            <div className="self-center w-[64px]">
+            <div className="w-[64px] self-center">
               <PremierRankLogo rank={rank} />
             </div>
-            <div className="flex flex-col mt-8">
+            <div className="mt-8 flex flex-col">
               <p>{getWinCountTranslation(winCount)}</p>
               <p>{date}</p>
             </div>

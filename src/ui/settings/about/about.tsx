@@ -79,7 +79,7 @@ export function About() {
               {line}
             </p>
           ))}
-          <div className="flex items-center mt-4 gap-x-8">
+          <div className="mt-4 flex items-center gap-x-8">
             <CopyButton data={data.join('\n')} />
             <RevealLogFileButton />
             <ClearLogsButton />

@@ -18,7 +18,7 @@ export function RoundButton({ round }: Props) {
   return (
     <button
       className={clsx(
-        'flex flex-col items-center border border-gray-300 justify-center w-48 min-w-48 text-gray-900 duration-85 transition-all cursor-pointer',
+        'flex w-48 min-w-48 cursor-pointer flex-col items-center justify-center border border-gray-300 text-gray-900 transition-all duration-85',
         isCurrent ? 'bg-gray-300 hover:bg-gray-300' : 'bg-gray-50 hover:bg-gray-100',
       )}
       onClick={onClick}

@@ -35,7 +35,7 @@ function Cell({ children }: { children: ReactNode }) {
 function TitleCell({ title }: { title: string }) {
   return (
     <Cell>
-      <p className="truncate px-8 max-w-[248px] mr-auto" title={title}>
+      <p className="mr-auto max-w-[248px] truncate px-8" title={title}>
         {title}
       </p>
     </Cell>
@@ -48,7 +48,7 @@ export function RoundsHistory() {
 
   return (
     <div
-      className="grid grid-rows-[30px_repeat(3,35px)] gap-px grid-flow-col max-w-fit overflow-x-auto border border-gray-300 bg-gray-300 flex-none mb-12"
+      className="mb-12 grid max-w-fit flex-none grid-flow-col grid-rows-[30px_repeat(3,35px)] gap-px overflow-x-auto border border-gray-300 bg-gray-300"
       style={{
         gridTemplateColumns: `auto repeat(${rounds.length}, 40px)`,
       }}

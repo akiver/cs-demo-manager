@@ -11,7 +11,7 @@ export function TextArea({ resizable = true, ref, ...props }: Props) {
     <textarea
       ref={ref}
       className={clsx(
-        'appearance-none outline-hidden rounded duration-85 transition-all bg-gray-50 size-full p-8 text-gray-800 border border-gray-400 focus:border-gray-900 placeholder:text-gray-500 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500 hover:enabled:focus:border-gray-900 hover:enabled:border-gray-600',
+        'size-full appearance-none rounded border border-gray-400 bg-gray-50 p-8 text-gray-800 outline-hidden transition-all duration-85 placeholder:text-gray-500 focus:border-gray-900 hover:enabled:border-gray-600 hover:enabled:focus:border-gray-900 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500',
         resizable ? 'resize-y' : 'resize-none',
       )}
       style={{

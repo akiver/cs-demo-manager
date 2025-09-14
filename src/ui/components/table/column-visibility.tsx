@@ -26,10 +26,10 @@ export function ColumnVisibility<DataType extends Data>({ table, columnId, label
   return (
     <button
       className={clsx(
-        'flex items-center justify-center px-8 py-4 border rounded hover:text-gray-900 select-none text-caption cursor-default',
+        'flex cursor-default items-center justify-center rounded border px-8 py-4 text-caption select-none hover:text-gray-900',
         isVisible
-          ? 'bg-gray-50 hover:bg-gray-100 text-gray-900 border-gray-400'
-          : 'bg-gray-200 text-gray-600 border-transparent',
+          ? 'border-gray-400 bg-gray-50 text-gray-900 hover:bg-gray-100'
+          : 'border-transparent bg-gray-200 text-gray-600',
       )}
       onClick={onClick}
     >

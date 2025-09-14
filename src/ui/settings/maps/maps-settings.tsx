@@ -15,7 +15,7 @@ export function MapsSettings() {
 
   return (
     <SettingsView>
-      <div className="flex gap-x-8 items-center mb-12">
+      <div className="mb-12 flex items-center gap-x-8">
         <InputLabel>
           <Trans context="Select label">Game</Trans>
         </InputLabel>
@@ -26,7 +26,7 @@ export function MapsSettings() {
           }}
         />
       </div>
-      <div className="flex gap-x-8 mb-12">
+      <div className="mb-12 flex gap-x-8">
         <AddMapButton game={game} />
         <ResetDefaultMapsButton game={game} />
       </div>

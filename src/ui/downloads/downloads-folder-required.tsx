@@ -9,7 +9,7 @@ export function DownloadsFolderRequired() {
 
   return (
     <CenteredContent>
-      <p className="text-subtitle mb-12">
+      <p className="mb-12 text-subtitle">
         <Trans>A downloads folder is required.</Trans>
       </p>
       <Button onClick={showDownloadFolderDialog} variant={ButtonVariant.Primary}>

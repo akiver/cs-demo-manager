@@ -103,8 +103,8 @@ function Footer({ startDate, endDate, selectedPreset, onPresetClick, showFilterI
   const formatDate = useFormatDate();
 
   return (
-    <div className="flex flex-col mt-8 gap-y-8">
-      <div className="flex flex-wrap gap-8 max-w-[270px]">
+    <div className="mt-8 flex flex-col gap-y-8">
+      <div className="flex max-w-[270px] flex-wrap gap-8">
         {presets.map((preset) => {
           const onClick = () => {
             onPresetClick(preset);

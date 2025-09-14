@@ -9,7 +9,7 @@ type CircleProps = {
 };
 
 function Circle({ className }: CircleProps) {
-  return <div className={clsx('size-12 rounded-full mr-4', className)} />;
+  return <div className={clsx('mr-4 size-12 rounded-full', className)} />;
 }
 
 type Props = {
