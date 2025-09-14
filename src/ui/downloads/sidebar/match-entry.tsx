@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import type { Game, TeamNumber } from 'csdm/common/types/counter-strike';
 import { MatchScore } from 'csdm/ui/downloads/sidebar/match-score';
 import { MatchDate } from 'csdm/ui/downloads/sidebar/match-date';
@@ -50,9 +51,11 @@ export function MatchEntry({
 
   return (
     <div
-      className={`flex items-center border-b border-b-gray-300 cursor-pointer p-8 border-l-2 ${
-        isSelected ? 'bg-gray-100' : 'bg-gray-50 hover:bg-gray-75'
-      } ${borderLeftClasses[result]}`}
+      className={clsx(
+        'flex items-center border-b border-b-gray-300 cursor-pointer p-8 border-l-2',
+        isSelected ? 'bg-gray-100' : 'bg-gray-50 hover:bg-gray-75',
+        borderLeftClasses[result],
+      )}
       onClick={selectMatch}
     >
       <div className="flex flex-col items-center">

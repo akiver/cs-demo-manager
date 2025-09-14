@@ -1,11 +1,14 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "tailwindCSS.rootFontSize": 14,
   "search.exclude": {
     "cs2-server-plugin/cs2-server-plugin/deps": true,
     "csgo-server-plugin/csgo-server-plugin/deps": true
-  }
+  },
+  "tailwindCSS.rootFontSize": 14,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

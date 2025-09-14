@@ -1,4 +1,5 @@
 import React, { type ReactNode } from 'react';
+import clsx from 'clsx';
 import { Trans } from '@lingui/react/macro';
 import { PanelValue } from 'csdm/ui/components/panel';
 
@@ -17,7 +18,7 @@ export function WinRate({ title, value, barClassName }: Props) {
       </div>
       <div className="h-4 rounded-full w-full bg-gray-200">
         <div
-          className={`h-4 rounded-full ${barClassName ?? 'bg-gray-800'}`}
+          className={clsx('h-4 rounded-full', barClassName ?? 'bg-gray-800')}
           style={{
             width: `${value}%`,
           }}

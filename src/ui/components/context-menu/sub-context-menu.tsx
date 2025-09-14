@@ -51,7 +51,7 @@ export function SubContextMenu({ label, children }: Props) {
 
   return (
     <div
-      className={`relative flex items-center h-32 leading-none px-16 min-w-[224px] hover:bg-gray-300`}
+      className="relative flex items-center h-32 leading-none px-16 min-w-[224px] hover:bg-gray-300"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

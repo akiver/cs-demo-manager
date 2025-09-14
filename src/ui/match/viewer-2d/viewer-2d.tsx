@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
+import clsx from 'clsx';
 import { PlaybackBar } from 'csdm/ui/match/viewer-2d/playback-bar/playback-bar';
 import { TeamPanel } from 'csdm/ui/match/viewer-2d/teams-panel/team-panel';
 import { Timer } from './timer';
@@ -208,14 +209,19 @@ export function Viewer2D() {
     <FullscreenProvider>
       <div className="flex flex-1 justify-between relative overflow-y-auto bg-gray-50" ref={setWrapper}>
         <div
-          className={`absolute inset-0 size-full overflow-hidden ${isDrawingMode ? (drawingTool === 'eraser' ? 'cursor-pointer' : 'cursor-crosshair') : ''} ${isHoldingSpace.current ? 'cursor-grabbing' : ''}`}
+          className={clsx(
+            'absolute inset-0 size-full overflow-hidden',
+            isDrawingMode && (drawingTool === 'eraser' ? 'cursor-pointer' : 'cursor-crosshair'),
+          )}
         >
           <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} className="absolute inset-0" />
           <canvas
             ref={drawingCanvasRef}
             width={canvasSize.width}
             height={canvasSize.height}
-            className={`absolute inset-0 ${!isDrawingMode ? 'pointer-events-none' : ''}`}
+            className={clsx('absolute inset-0', {
+              'pointer-events-none': !isDrawingMode,
+            })}
           />
         </div>
         <Timer />

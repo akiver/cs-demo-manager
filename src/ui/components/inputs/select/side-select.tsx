@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { TeamNumber } from 'csdm/common/types/counter-strike';
 import type { SelectOption } from '../select';
@@ -30,7 +31,7 @@ export function SideSelect({ onChange, selectedSides, direction = 'vertical' }: 
   ];
 
   return (
-    <div className={`flex gap-8 ${direction === 'vertical' ? 'flex-col' : 'flex-row'}`}>
+    <div className={clsx('flex gap-8', direction === 'vertical' ? 'flex-col' : 'flex-row')}>
       <p>
         <Trans context="Filter side category">Side</Trans>
       </p>

@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { useViewerContext } from './use-viewer-context';
 import { formatMillisecondsToTimer } from 'csdm/ui/shared/format-milliseconds-to-timer';
 
@@ -11,7 +12,13 @@ export function Timer() {
 
   return (
     <div className="absolute top-16 left-1/2 -translate-x-1/2 py-4 px-8 bg-gray-200 rounded flex gap-4">
-      <p className={`text-body-strong ${isBombPlanted ? 'text-red-700' : ''}`}>{remainingTimer}</p>
+      <p
+        className={clsx('text-body-strong', {
+          'text-red-700': isBombPlanted,
+        })}
+      >
+        {remainingTimer}
+      </p>
       <p>/</p>
       <p className="text-body-strong">{elapsedTimer}</p>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState, type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
+import clsx from 'clsx';
 import { TeamNumber } from 'csdm/common/types/counter-strike';
 import { SideSelect } from 'csdm/ui/components/inputs/select/side-select';
 import type { TeamEconomyStats } from 'csdm/common/types/team-economy-stats';
@@ -10,7 +11,7 @@ import { Section } from 'csdm/ui/components/section';
 function LegendItem({ className, label }: { className: string; label: ReactNode }) {
   return (
     <div className="flex items-center gap-x-4">
-      <div className={`w-32 h-16 ${className}`} />
+      <div className={clsx('w-32 h-16', className)} />
       <p className="text-body-strong">{label}</p>
     </div>
   );
@@ -30,10 +31,17 @@ function Bar({ max, value, colorClassName, tooltip }: BarProps) {
   return (
     <Tooltip content={tooltip} delay={0} placement="top">
       <div
-        className={`w-32 flex items-center justify-center animate-grow-height transition-all duration-300 ${className}`}
+        className={clsx(
+          'w-32 flex items-center justify-center animate-grow-height transition-all duration-300',
+          className,
+        )}
         style={{ height }}
       >
-        <span className={`text-white ${value.toString().length > 3 ? '-rotate-90' : ''}`}>
+        <span
+          className={clsx('text-white', {
+            '-rotate-90': value.toString().length > 3,
+          })}
+        >
           {max === 0 ? '-' : value}{' '}
         </span>
       </div>

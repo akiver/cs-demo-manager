@@ -1,4 +1,5 @@
 import React, { type ReactNode } from 'react';
+import clsx from 'clsx';
 import { Trans } from '@lingui/react/macro';
 import { useSecondsToFormattedMinutes } from 'csdm/ui/hooks/use-seconds-to-formatted-minutes';
 import type { Match } from 'csdm/common/types/match';
@@ -21,13 +22,13 @@ type TeamScoresProps = {
 function TeamScores({ teamNameA, teamNameB, scoreTeamA, scoreTeamB }: TeamScoresProps) {
   return (
     <div className="flex items-center">
-      <p className={`text-subtitle selectable ${getTeamScoreClassName(scoreTeamA, scoreTeamB)}`}>{scoreTeamA}</p>
+      <p className={clsx('text-subtitle selectable', getTeamScoreClassName(scoreTeamA, scoreTeamB))}>{scoreTeamA}</p>
       <p className="text-gray-900 ml-4 selectable">{teamNameA}</p>
       <p className="mx-4">
         <Trans context="Versus">vs</Trans>
       </p>
       <p className="text-gray-900 mr-4 selectable">{teamNameB}</p>
-      <p className={`text-subtitle selectable ${getTeamScoreClassName(scoreTeamB, scoreTeamA)}`}>{scoreTeamB}</p>
+      <p className={clsx('text-subtitle selectable', getTeamScoreClassName(scoreTeamB, scoreTeamA))}>{scoreTeamB}</p>
     </div>
   );
 }

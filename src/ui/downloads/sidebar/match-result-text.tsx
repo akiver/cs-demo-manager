@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
+import clsx from 'clsx';
 import { MatchResult } from 'csdm/ui/downloads/match-result';
 import { assertNever } from 'csdm/common/assert-never';
 
@@ -32,5 +33,5 @@ export function MatchResultText({ result }: Props) {
       assertNever(result, 'Unknown match result');
   }
 
-  return <p className={`text-caption ${className}`}>{text}</p>;
+  return <p className={clsx(`text-caption ${className}`)}>{text}</p>;
 }

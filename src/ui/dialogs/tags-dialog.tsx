@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
+import clsx from 'clsx';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { useTags } from 'csdm/ui/tags/use-tags';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
@@ -42,11 +43,12 @@ export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
             return (
               <div
                 key={tag.id}
-                className={`flex rounded border border-gray-300 hover:text-gray-900 cursor-default ${
+                className={clsx(
+                  'flex rounded border border-gray-300 hover:text-gray-900 cursor-default',
                   isSelected
                     ? 'bg-gray-50 hover:bg-gray-100 text-gray-900 border-gray-400'
-                    : 'bg-gray-200 text-gray-600 border-transparent'
-                }`}
+                    : 'bg-gray-200 text-gray-600 border-transparent',
+                )}
                 onClick={() => {
                   const newSelectedTagIds = isSelected
                     ? selectedTags.filter((id) => id !== tag.id)

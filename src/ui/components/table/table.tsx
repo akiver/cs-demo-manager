@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import React from 'react';
+import clsx from 'clsx';
 import type { Data, TableInstance } from './table-types';
 import { ArrowDownLongIcon } from 'csdm/ui/icons/arrow-down-long-icon';
 import { ArrowUpLongIcon } from 'csdm/ui/icons/arrow-up-long-icon';
@@ -64,9 +65,11 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
               return (
                 <th
                   key={column.id}
-                  className={`sticky top-0 bg-gray-50 p-0 z-1 h-32 outline-hidden
-                  ${sortEnabled ? 'cursor-pointer' : 'cursor-default'}
-                  ${dragEnabled ? 'drag-element' : 'drag-none'}`}
+                  className={clsx(
+                    'sticky top-0 bg-gray-50 p-0 z-1 h-32 outline-hidden',
+                    sortEnabled ? 'cursor-pointer' : 'cursor-default',
+                    dragEnabled ? 'drag-element' : 'drag-none',
+                  )}
                   id={column.id}
                   style={style}
                   title={column.headerTooltip}
@@ -75,14 +78,16 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
                   {...columnProps}
                 >
                   <div
-                    className={`${
-                      hasDragOver ? 'border-l-2 border-l-blue-700' : 'border-l-transparent'
-                    } flex items-center justify-between h-full px-8 border-gray-300 border-y border-r last:border-r-0`}
+                    className={clsx(
+                      'flex items-center justify-between h-full px-8 border-gray-300 border-y border-r last:border-r-0',
+                      hasDragOver ? 'border-l-2 border-l-blue-700' : 'border-l-transparent',
+                    )}
                   >
                     <span
-                      className={`flex-1 text-body-strong truncate ${
-                        column.textAlign === 'right' ? 'text-right' : 'text-left'
-                      }`}
+                      className={clsx(
+                        'flex-1 text-body-strong truncate',
+                        column.textAlign === 'right' ? 'text-right' : 'text-left',
+                      )}
                     >
                       {column.headerText}
                     </span>
@@ -110,9 +115,10 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
 
             return (
               <tr
-                className={`h-[var(--table-row-height)] outline-hidden ${
-                  isSelected ? 'bg-gray-300!' : isSelectionEnabled ? 'bg-gray-50 hover:bg-gray-200!' : ''
-                }`}
+                className={clsx(
+                  'h-[var(--table-row-height)] outline-hidden',
+                  isSelected ? 'bg-gray-300!' : isSelectionEnabled && 'bg-gray-50 hover:bg-gray-200!',
+                )}
                 key={rowId}
                 role="row"
                 tabIndex={index}
@@ -131,9 +137,11 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
                   return (
                     <td
                       key={column.id}
-                      className={`border-b border-r last:border-r-0 border-gray-300 max-w-0 overflow-hidden truncate selectable ${
-                        column.textAlign === 'right' ? 'text-right' : 'text-left'
-                      } ${column.noPadding ? 'p-0' : 'px-4'}`}
+                      className={clsx(
+                        'border-b border-r last:border-r-0 border-gray-300 max-w-0 overflow-hidden truncate selectable',
+                        column.textAlign === 'right' ? 'text-right' : 'text-left',
+                        column.noPadding ? 'p-0' : 'px-4',
+                      )}
                       title={column.showTooltip ? String(formattedValue) : undefined}
                     >
                       {Cell ? <Cell data={row} rowIndex={index} noPadding={column.noPadding} /> : formattedValue}

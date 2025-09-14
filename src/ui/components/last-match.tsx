@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import type { LastMatch as Match } from 'csdm/common/types/last-match';
 import { useNavigateToMatch } from 'csdm/ui/hooks/use-navigate-to-match';
 import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
@@ -31,9 +32,10 @@ export function LastMatch({ match }: Props) {
         </p>
         <p>{match.mapName}</p>
         <div
-          className={`flex justify-center ${
-            isTieGame ? 'text-blue-400' : hasPlayerWon ? 'text-green-400' : 'text-red-400'
-          }`}
+          className={clsx(
+            'flex justify-center',
+            isTieGame ? 'text-blue-400' : hasPlayerWon ? 'text-green-400' : 'text-red-400',
+          )}
         >
           <p>{match.scoreTeamA}</p>
           <p>:</p>

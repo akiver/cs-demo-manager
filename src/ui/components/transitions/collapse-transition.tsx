@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, type ReactNode } from 'react';
+import clsx from 'clsx';
 
 type Props = {
   children: ReactNode;
@@ -20,7 +21,10 @@ export function CollapseTransition({ children, isVisible }: Props) {
   return (
     <div
       ref={contentRef}
-      className={`transition-[max-height,opacity] duration-200 ease-out overflow-hidden max-h-0 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      className={clsx(
+        'transition-[max-height,opacity] duration-200 ease-out overflow-hidden max-h-0',
+        isVisible ? 'opacity-100' : 'opacity-0',
+      )}
       style={{ maxHeight }}
     >
       {children}

@@ -1,5 +1,6 @@
 import React, { useState, type ReactNode } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
+import clsx from 'clsx';
 import { HitGroup, WeaponType, type TeamNumber, type WeaponName } from 'csdm/common/types/counter-strike';
 import type { Damage } from 'csdm/common/types/damage';
 import { Body } from './body';
@@ -256,7 +257,7 @@ function HeaderCell({ children, onClick, sortDirection }: HeaderCellProps) {
   return (
     <div className="flex items-center justify-between px-8" onClick={onClick}>
       <span>{children}</span>
-      <div className={`pr-4 ${sortDirection !== undefined ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={clsx('pr-4', sortDirection ? 'opacity-100' : 'opacity-0')}>
         {sortDirection === 'desc' ? <ArrowDownLongIcon height={16} /> : <ArrowUpLongIcon height={16} />}
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Avatar } from 'csdm/ui/components/avatar';
 import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { FlashbangCells } from 'csdm/ui/match/grenades/stats/cells/flashbang-cells';
@@ -51,7 +52,11 @@ export function PlayersStatsGrid({ players, teamName, grenade }: Props) {
                   </p>
                 </div>
               </Tooltip>
-              <div className={`${isLastPlayer ? '' : 'border-r border-r-gray-300'}`}>
+              <div
+                className={clsx({
+                  'border-r border-r-gray-300': !isLastPlayer,
+                })}
+              >
                 {renderCellsForGrenade(grenade, player.steamId)}
               </div>
             </div>

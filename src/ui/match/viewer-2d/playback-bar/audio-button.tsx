@@ -129,7 +129,7 @@ function AudioPopover() {
 
   return (
     <div className="flex justify-between items-center bg-gray-100 w-[37.5rem] p-16 cursor-default rounded-8">
-      <div className="flex flex-col gap-y-5 w-full">
+      <div className="flex flex-col w-full">
         <div ref={containerRef} className="waveform" />
         {ws ? (
           <div className="flex flex-col gap-y-8">

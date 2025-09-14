@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import clsx from 'clsx';
 import { TextInput, type TextInputHandlers } from './text-input';
 
 type Props<Value> = {
@@ -124,7 +125,7 @@ export function SearchInput<Value = unknown>({
               const hasFocus = focusedIndex === index;
               return (
                 <div
-                  className={`px-8 py-4 hover:bg-gray-100 ${hasFocus ? 'bg-gray-75' : ''}`}
+                  className={clsx('px-8 py-4 hover:bg-gray-100', hasFocus && 'bg-gray-75')}
                   key={getValueId(result)}
                   onMouseDown={(event) => {
                     event.stopPropagation();

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import React, { cloneElement, useState } from 'react';
 import type { Middleware, Strategy } from '@floating-ui/react';
+import clsx from 'clsx';
 import {
   offset,
   shift,
@@ -40,7 +41,10 @@ function Wrapper({ x, y, refs, children, strategy, placement, getFloatingProps }
   return (
     <div
       ref={refs.setFloating}
-      className={`bg-gray-75 border border-gray-400 p-8 rounded select-none transition-opacity duration-300 z-10 ${arrowClassName}`}
+      className={clsx(
+        'bg-gray-75 border border-gray-400 p-8 rounded select-none transition-opacity duration-300 z-10',
+        arrowClassName,
+      )}
       style={{
         position: strategy,
         top: y,

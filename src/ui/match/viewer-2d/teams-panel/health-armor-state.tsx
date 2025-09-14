@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { ArmorIndicator } from './armor-indicator';
 import { BombIndicator } from './bomb-indicator';
@@ -7,7 +8,7 @@ import { EliminationIcon } from 'csdm/ui/icons/elimination-icon';
 
 function Circle({ className, children, ...props }: React.SVGProps<SVGCircleElement>) {
   return (
-    <circle className={`transition-stroke-dashoffset duration-850 ease-in-out ${className}`} {...props}>
+    <circle className={clsx('transition-stroke-dashoffset duration-850 ease-in-out', className)} {...props}>
       {children}
     </circle>
   );

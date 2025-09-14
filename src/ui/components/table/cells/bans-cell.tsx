@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Trans } from '@lingui/react/macro';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 
@@ -8,7 +9,7 @@ type CircleProps = {
 };
 
 function Circle({ ref, className }: CircleProps) {
-  return <div ref={ref} className={`size-8 rounded-full ${className}`} />;
+  return <div ref={ref} className={clsx('size-8 rounded-full', className)} />;
 }
 
 type Props = {

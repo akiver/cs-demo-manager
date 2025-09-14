@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
+import clsx from 'clsx';
 import { Popover, PopoverContent, PopoverTrigger } from 'csdm/ui/components/popover/popover';
 import { useViewerContext } from '../use-viewer-context';
 import { PlaybackBarButton } from './playback-bar-button';
@@ -27,7 +28,10 @@ function ToolButton({
     <Tooltip content={tooltip} placement="top">
       <button
         onClick={onClick}
-        className={`flex items-center justify-center text-gray-900 cursor-pointer p-4 rounded-4 transition-colors duration-200 ${isSelected ? 'bg-gray-400' : 'bg-gray-75'}`}
+        className={clsx(
+          'flex items-center justify-center text-gray-900 cursor-pointer p-4 rounded-4 transition-colors duration-200',
+          isSelected ? 'bg-gray-400' : 'bg-gray-75',
+        )}
       >
         {children}
       </button>
@@ -38,7 +42,10 @@ function ToolButton({
 function ColorButton({ color, selected, onClick }: { color: string; selected: boolean; onClick: () => void }) {
   return (
     <button
-      className={`size-32  cursor-pointer border-2 border-white outline-3 ${selected ? 'outline-blue-700 scale-110 transition-all duration-200 rounded-8' : 'rounded-4 outline-transparent'}`}
+      className={clsx(
+        'size-32 cursor-pointer border-2 border-white outline-3',
+        selected ? `outline-blue-700 scale-110 transition-all duration-200 rounded-8` : `rounded-4 outline-transparent`,
+      )}
       style={{ backgroundColor: color }}
       onClick={onClick}
     />
@@ -176,7 +183,7 @@ export function DrawingButton({ drawing }: Props) {
     <Popover openOnHover={true} closeDelay={300}>
       <PopoverTrigger asChild={true}>
         <PlaybackBarButton onClick={toggleMode}>
-          <PencilIcon className={`size-20 ${mode === 'drawing' ? 'text-red-700' : ''}`} />
+          <PencilIcon className={clsx('size-20', mode === 'drawing' && 'text-red-700')} />
         </PlaybackBarButton>
       </PopoverTrigger>
 

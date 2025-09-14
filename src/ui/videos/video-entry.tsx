@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
+import clsx from 'clsx';
 import type { Video } from 'csdm/common/types/video';
 import { VideoStatus } from 'csdm/common/types/video-status';
 import { assertNever } from 'csdm/common/assert-never';
@@ -42,7 +43,7 @@ function Field({ label, children, isSelectable = false }: FieldProps) {
   return (
     <>
       <p>{label}</p>
-      <div className={`break-all text-body-strong ${isSelectable ? 'selectable' : 'select-none'}`}>{children}</div>
+      <div className={clsx('break-all text-body-strong', isSelectable ? 'selectable' : 'select-none')}>{children}</div>
     </>
   );
 }
