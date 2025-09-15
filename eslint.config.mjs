@@ -146,6 +146,7 @@ export default [
       ],
       'check-file/no-index': 'error',
       eqeqeq: 'error',
+      'preserve-caught-error': ['error', { requireCatchParameter: true }],
       ...eslintPluginBetterTailwindcss.configs['recommended-warn'].rules,
       ...eslintPluginBetterTailwindcss.configs['recommended-error'].rules,
       'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
