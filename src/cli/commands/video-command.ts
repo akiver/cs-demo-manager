@@ -149,7 +149,8 @@ export class VideoCommand extends Command {
           playerSteamId: this.focusPlayerSteamId,
           playerName: player.name,
         });
-        
+      }
+
       const recordingSystem = this.recordingSystem ?? settings.video.recordingSystem;
       if (recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
         console.log('Installing HLAE...');
@@ -167,7 +168,6 @@ export class VideoCommand extends Command {
       if (shouldGenerateVideo && encoderSoftware === EncoderSoftware.FFmpeg && !(await isFfmpegInstalled())) {
         console.log('Installing FFmpeg...');
         await installFfmpeg();
-
       }
 
       const videoId = randomUUID();
