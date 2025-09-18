@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { SHOW_COMMENT_SHORTCUT } from 'csdm/ui/keyboard/keyboard-shortcut';
+import { showCommentKey } from 'csdm/ui/keyboard/keyboard-shortcut';
 import { isCtrlOrCmdEvent } from 'csdm/ui/keyboard/keyboard';
 
 export function useTableCommentWidgetVisibility() {
@@ -14,7 +14,7 @@ export function useTableCommentWidgetVisibility() {
   };
 
   const onKeyDown = (event: KeyboardEvent) => {
-    if (!isCtrlOrCmdEvent(event) && event.key.toUpperCase() === SHOW_COMMENT_SHORTCUT.key) {
+    if (!isCtrlOrCmdEvent(event) && event.key.toUpperCase() === showCommentKey) {
       setIsWidgetVisible((isVisible) => !isVisible);
     }
   };

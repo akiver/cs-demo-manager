@@ -11,7 +11,7 @@ export function Indicator({ ref, color, leftX }: Props) {
   return (
     <div
       ref={ref}
-      className="absolute w-[2px] h-full"
+      className="absolute h-full w-[2px]"
       style={{
         backgroundColor: color,
         left: `${leftX}px`,

@@ -10,7 +10,7 @@ type Props = {
 export function NoMatchesFound({ onRetryClick }: Props) {
   return (
     <CenteredContent>
-      <p className="text-subtitle mb-12">
+      <p className="mb-12 text-subtitle">
         <Trans>No matches found for the current Steam account.</Trans>
       </p>
       <RetryButton onClick={onRetryClick} />

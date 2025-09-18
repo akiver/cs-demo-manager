@@ -23,7 +23,7 @@ export function DemoCommentInput({ checksum, currentComment }: Props) {
   };
 
   return (
-    <div className="flex flex-col gap-y-8 h-fit">
+    <div className="flex h-fit flex-col gap-y-8">
       <label htmlFor="comment">
         <Trans>Comment:</Trans>
       </label>

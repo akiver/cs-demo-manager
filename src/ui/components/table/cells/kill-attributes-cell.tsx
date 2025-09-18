@@ -14,7 +14,7 @@ type Props = {
 export function KillAttributesCell({ data: kill }: Props) {
   const iconSize = 24;
   return (
-    <div className="flex px-4 gap-x-4">
+    <div className="flex gap-x-4 px-4">
       {kill.isHeadshot && (
         <Tooltip content={<Trans context="Tooltip kill">Headshot</Trans>}>
           <HeadshotIcon height={iconSize} />

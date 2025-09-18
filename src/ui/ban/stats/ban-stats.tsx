@@ -105,7 +105,7 @@ export function BanStats() {
   return (
     <Content>
       <div className="flex flex-col gap-y-12">
-        <div className="flex gap-12 flex-wrap">
+        <div className="flex flex-wrap gap-12">
           <Panel
             header={
               <>

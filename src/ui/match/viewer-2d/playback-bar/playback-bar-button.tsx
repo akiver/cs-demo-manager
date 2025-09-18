@@ -12,11 +12,11 @@ export function PlaybackBarButton({ children, ref, onClick, isDisabled }: Props)
   return (
     <button
       ref={ref}
-      className="flex items-center justify-center flex-none w-40 p-12 bg-gray-50 text-gray-900 border-r border-r-gray-300 last:border-r-0 duration-85 transition-all cursor-pointer disabled:opacity-50 hover:enabled:bg-gray-100"
+      className="flex min-w-40 cursor-pointer items-center justify-center border-r border-r-gray-300 bg-gray-50 p-8 text-gray-900 transition-all duration-85 last:border-r-0 hover:enabled:bg-gray-100 disabled:opacity-50"
       onClick={onClick}
       disabled={isDisabled}
     >
-      {children}
+      <div>{children}</div>
     </button>
   );
 }

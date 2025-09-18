@@ -31,7 +31,7 @@ export function PreviousRoundButton() {
 
   return (
     <PlaybackBarButton onClick={onClick} isDisabled={isDisabled}>
-      <StepBackwardIcon />
+      <StepBackwardIcon className="h-20" />
     </PlaybackBarButton>
   );
 }

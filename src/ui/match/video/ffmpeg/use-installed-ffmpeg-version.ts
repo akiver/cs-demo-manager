@@ -1,6 +1,6 @@
 import { useFfmpegState } from './use-ffmpeg-state';
 
-export function useInstalledFfmpegVersion(): string | undefined {
+export function useInstalledFfmpegVersion() {
   const ffmpegState = useFfmpegState();
 
   return ffmpegState.version;

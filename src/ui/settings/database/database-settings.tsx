@@ -10,7 +10,7 @@ export function DatabaseSettings() {
   return (
     <SettingsView>
       <DatabaseSize />
-      <div className="flex gap-8 mt-8 mb-12">
+      <div className="mt-8 mb-12 flex gap-8">
         <OptimizeDatabaseButton />
         <ResetDatabaseButton />
         <ImportV2DataButton />

@@ -10,7 +10,7 @@ type Props = {
 export function FetchMatchesInfoError({ error, onRetryClick }: Props) {
   return (
     <CenteredContent>
-      <p className="text-subtitle mb-8">{error}</p>
+      <p className="mb-8 text-subtitle">{error}</p>
       <RetryButton onClick={onRetryClick} />
     </CenteredContent>
   );

@@ -62,7 +62,7 @@ export function CurrentMatch() {
   const match = useCurrentMatch();
 
   return (
-    <div className="flex flex-col flex-1 overflow-auto">
+    <div className="flex flex-1 flex-col overflow-auto">
       <ActionBar />
       <Match match={match} />
     </div>

@@ -40,7 +40,7 @@ function Avatars({ players, kills }: AvatarsProps) {
             }}
           >
             <AvatarImage avatarUrl={player.avatar} playerName={player.name} size={44} playerColor={player.color} />
-            <div className="flex gap-x-px mt-px">
+            <div className="mt-px flex gap-x-px">
               {playerKills.map((kill) => {
                 return (
                   <div
@@ -68,7 +68,7 @@ type RowProps = {
 
 function Row({ valueTeamA, valueTeamB, title }: RowProps) {
   return (
-    <div className="grid gap-8 grid-cols-[minmax(60px,auto)_1fr_minmax(60px,auto)] whitespace-nowrap">
+    <div className="grid grid-cols-[minmax(60px,auto)_1fr_minmax(60px,auto)] gap-8 whitespace-nowrap">
       <p className="text-left">{valueTeamA}</p>
       <p className="text-center">{title}</p>
       <p className="text-right">{valueTeamB}</p>
@@ -88,7 +88,7 @@ function Content({ round, kills, roundFreezetimeEndTick }: ContentProps) {
   const formatMoney = useFormatMoney();
 
   return (
-    <div className="flex gap-x-16 w-full">
+    <div className="flex w-full gap-x-16">
       <div>
         {kills.map((kill) => {
           return (
@@ -148,9 +148,9 @@ function PanelHeader({ round, playersTeamA, playersTeamB, kills, match }: PanelH
       <p className="text-body-strong">
         <Trans>Round {roundNumber}</Trans>
       </p>
-      <div className="flex items-center justify-center flex-1">
+      <div className="flex flex-1 items-center justify-center">
         <Avatars players={playersTeamA} kills={kills} />
-        <TeamText teamNumber={round.teamASide} className="text-title mx-8">
+        <TeamText teamNumber={round.teamASide} className="mx-8 text-title">
           {round.teamAScore}
         </TeamText>
         <div className="flex flex-col items-center">
@@ -166,7 +166,7 @@ function PanelHeader({ round, playersTeamA, playersTeamB, kills, match }: PanelH
             </p>
           )}
         </div>
-        <TeamText teamNumber={round.teamBSide} className="text-title mx-8">
+        <TeamText teamNumber={round.teamBSide} className="mx-8 text-title">
           {round.teamBScore}
         </TeamText>
         <Avatars players={playersTeamB} kills={kills} />

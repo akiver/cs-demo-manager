@@ -1,5 +1,5 @@
 import React from 'react';
 
 export function ActiveFilterIndicator() {
-  return <div className="size-8 rounded-full bg-orange-700 z-1" />;
+  return <div className="z-1 size-8 rounded-full bg-orange-700" />;
 }

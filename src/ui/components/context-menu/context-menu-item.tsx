@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import React from 'react';
+import clsx from 'clsx';
 import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu';
 
 type Props = {
@@ -18,12 +19,13 @@ export function ContextMenuItem({ onClick, children, isDisabled }: Props) {
 
   return (
     <div
-      className={`flex items-center leading-none h-32 px-16 min-w-[224px] hover:bg-gray-200 select-none rounded ${
-        isDisabled ? 'opacity-50 pointer-events-none' : 'opacity-100 pointer-events-auto hover:text-gray-900'
-      }`}
+      className={clsx(
+        'flex h-32 min-w-[224px] items-center rounded px-16 leading-none select-none hover:bg-gray-200',
+        isDisabled ? 'pointer-events-none opacity-50' : 'pointer-events-auto opacity-100 hover:text-gray-900',
+      )}
       onClick={handleClick}
     >
-      <div className="flex justify-between items-center flex-1">{children}</div>
+      <div className="flex flex-1 items-center justify-between">{children}</div>
     </div>
   );
 }

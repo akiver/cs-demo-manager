@@ -63,10 +63,10 @@ export function RoundItem({ round, ticksPerSecond }: Props) {
   };
 
   return (
-    <div className="bg-gray-75 border-y border-gray-900 h-full overflow-hidden" onContextMenu={onContextMenu}>
-      <div className="absolute w-px bg-gray-900 left-0 h-full origin-left" style={scaleStyle} />
-      <div className="absolute w-px bg-gray-900 right-0 h-full origin-right" style={scaleStyle} />
-      <div className="whitespace-nowrap text-caption pl-4 origin-left" style={scaleStyle}>
+    <div className="h-full overflow-hidden border-y border-gray-900 bg-gray-75" onContextMenu={onContextMenu}>
+      <div className="absolute left-0 h-full w-px origin-left bg-gray-900" style={scaleStyle} />
+      <div className="absolute right-0 h-full w-px origin-right bg-gray-900" style={scaleStyle} />
+      <div className="origin-left pl-4 text-caption whitespace-nowrap" style={scaleStyle}>
         <p>{`#${round.number} - ${Math.round((round.endTick - round.startTick) / ticksPerSecond)}s`}</p>
         <p>{`${round.startTick}-${round.endTick}`}</p>
       </div>

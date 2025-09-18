@@ -81,9 +81,9 @@ export function ChangeDemosSourceDialog({ checksums, initialSource }: Props) {
       isBusy={status === Status.Loading}
       isConfirmButtonDisabled={initialSource !== undefined && initialSource === source}
     >
-      <div className="flex flex-col gap-y-8 max-w-[600px]">
+      <div className="flex max-w-[600px] flex-col gap-y-8">
         <div className="flex items-center gap-x-4">
-          <ExclamationTriangleIcon className="size-16 text-red-700 shrink-0" />
+          <ExclamationTriangleIcon className="size-16 shrink-0 text-red-700" />
           <p>
             <Trans>
               Change it only if the source is unknown or incorrect in the app! (for instance Valve instead of FACEIT)
@@ -92,13 +92,13 @@ export function ChangeDemosSourceDialog({ checksums, initialSource }: Props) {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <ExclamationTriangleIcon className="size-16 text-orange-700 shrink-0" />
+          <ExclamationTriangleIcon className="size-16 shrink-0 text-orange-700" />
           <p className="text-caption">
             <Trans>Changing a demo's source require to re-analyze it to update its match data!</Trans>
           </p>
         </div>
 
-        <div className="mt-4 mx-auto">
+        <div className="mx-auto mt-4">
           <Select
             options={options}
             value={source}

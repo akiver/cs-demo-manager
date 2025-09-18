@@ -13,7 +13,7 @@ export function PlayerSteamLink({ player }: Props) {
       href={buildPlayerSteamProfileUrl(player.steamId)}
       target="_blank"
       rel="noreferrer"
-      className="flex items-center gap-x-4 w-max"
+      className="flex w-max items-center gap-x-4"
     >
       <Avatar avatarUrl={player.avatar} size={30} />
       <p className="text-body-strong">{player.name}</p>

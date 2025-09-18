@@ -18,11 +18,11 @@ export function MapEntry({ map }: Props) {
   const { showDialog } = useDialog();
 
   return (
-    <div className="w-[256px] border border-gray-300 rounded">
+    <div className="w-[256px] rounded border border-gray-300">
       <img src={getMapThumbnailSrc(map.name, map.game)} alt={map.name} />
       <div className="p-8">
         <p>{map.name}</p>
-        <div className="flex gap-8 mt-8">
+        <div className="mt-8 flex gap-8">
           <Button
             onClick={async () => {
               const [radarBase64, lowerRadarBase64, thumbnailBase64] = await Promise.all([

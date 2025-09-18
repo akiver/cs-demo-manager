@@ -43,7 +43,7 @@ export function FiveEPlayScoreboard({ teamName, teamScore, players, scoreOpposit
   });
 
   return (
-    <div className="flex flex-col m-auto">
+    <div className="m-auto flex flex-col">
       <TeamScore teamName={teamName} teamScore={teamScore} scoreOppositeTeam={scoreOppositeTeam} />
       <Table<FiveEPlayPlayer> table={table} />
     </div>

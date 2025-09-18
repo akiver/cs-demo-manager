@@ -68,7 +68,7 @@ export function DownloadActions({ matchId, demoFileName }: Props) {
   }
 
   return (
-    <div className="flex flex-col flex-1 items-end justify-between h-full">
+    <div className="flex h-full flex-1 flex-col items-end justify-between">
       <div className="flex items-center gap-8">
         {statusIcon}
         <RemoveDownloadButton matchId={matchId} />

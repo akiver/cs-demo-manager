@@ -12,14 +12,14 @@ export function TimeMarker({ tick, pixelsPerTick, text }: Props) {
 
   return (
     <div
-      className="absolute w-px h-full bg-gray-900 z-1 origin-left pointer-events-none"
+      className="pointer-events-none absolute z-1 h-full w-px origin-left bg-gray-900"
       style={{
         ...scaleStyle,
         left: `${x}px`,
       }}
     >
       <p
-        className="absolute pl-4 bottom-0 w-[100px] h-24 flex items-center flex-wrap bg-blue-700 rounded-r text-ellipsis text-white"
+        className="absolute bottom-0 flex h-24 w-[100px] flex-wrap items-center rounded-r bg-blue-700 pl-4 text-ellipsis text-white"
         title={text}
       >
         {text}

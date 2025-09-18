@@ -9,6 +9,7 @@ import { useCurrentMatch } from './use-current-match';
 import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
 import { useCurrentMatchSequences } from 'csdm/ui/match/video/sequences/use-current-match-sequences';
 import { TabLinkNumberBadge } from 'csdm/ui/components/tabs/tab-link-number-badge';
+import { modifierKey } from '../keyboard/keyboard-shortcut';
 
 function PreviousMatchLink() {
   const location = useLocation();
@@ -17,7 +18,7 @@ function PreviousMatchLink() {
   const currentMatchIndex = siblingChecksums?.findIndex((checksum) => checksum === currentChecksum);
   const previousMatchChecksum = siblingChecksums[currentMatchIndex - 1];
   const to = previousMatchChecksum === undefined ? '' : buildMatchPath(previousMatchChecksum);
-  const shortcut = window.csdm.isMac ? '⌘+←' : 'CTRL+←';
+  const shortcut = `${modifierKey}+←`;
 
   return <PreviousLink to={to} tooltip={<Trans>Previous match ({shortcut})</Trans>} />;
 }
@@ -29,7 +30,7 @@ function NextMatchLink() {
   const currentMatchIndex = siblingChecksums?.findIndex((checksum) => checksum === currentChecksum);
   const nextMatchChecksum = siblingChecksums[currentMatchIndex + 1];
   const to = nextMatchChecksum === undefined ? '' : buildMatchPath(nextMatchChecksum);
-  const shortcut = window.csdm.isMac ? '⌘+→' : 'CTRL+→';
+  const shortcut = `${modifierKey}+→`;
 
   return <NextLink to={to} tooltip={<Trans>Next match ({shortcut})</Trans>} />;
 }

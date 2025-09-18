@@ -33,7 +33,7 @@ export function FullscreenProvider({ children }: Props) {
   }, []);
 
   return (
-    <div className="flex flex-col flex-1" ref={wrapper}>
+    <div className="flex flex-1 flex-col" ref={wrapper}>
       <FullscreenContext.Provider
         value={{
           toggleFullscreen: async () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ReactNode } from 'react';
+import clsx from 'clsx';
 
 type Props = {
   children: ReactNode;
@@ -10,9 +11,10 @@ type Props = {
 export function Control({ children, onClick, variant }: Props) {
   return (
     <div
-      className={`flex items-center justify-center w-48 h-full ${
-        variant === 'danger' ? 'hover:bg-[#c42b1c]' : 'hover:bg-gray-300'
-      }`}
+      className={clsx(
+        'flex h-full w-48 items-center justify-center',
+        variant === 'danger' ? 'hover:bg-[#c42b1c]' : 'hover:bg-gray-300',
+      )}
       onClick={onClick}
     >
       {children}

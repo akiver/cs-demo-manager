@@ -31,7 +31,7 @@ export function PlayersSelect({
         <p>
           <Trans context="Players filter category">Players</Trans>
         </p>
-        <div className="ml-16 mt-px">{filter}</div>
+        <div className="mt-px ml-16">{filter}</div>
       </div>
       <div className="flex flex-wrap gap-4">
         {players.map((player) => {

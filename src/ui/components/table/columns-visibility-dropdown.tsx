@@ -19,7 +19,7 @@ export function ColumnsVisibilityDropdown<DataType extends Data>({ isDisabled, t
 
   return (
     <Dropdown togglerContent={<Trans context="Dropdown">Columns</Trans>} isDisabled={isDisabled}>
-      <div className="flex flex-wrap w-[424px] p-8 gap-8">
+      <div className="flex w-[424px] flex-wrap gap-8 p-8">
         {sortedColumns.map((column) => {
           return (
             <ColumnVisibility

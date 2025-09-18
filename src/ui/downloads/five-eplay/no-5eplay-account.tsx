@@ -18,11 +18,11 @@ export function No5EPlayAccount() {
   const isDisabled = isBusy || domainId === '';
 
   return (
-    <div className="flex flex-col mt-48 mx-auto">
+    <div className="mx-auto mt-48 flex flex-col">
       <p className="text-body-strong">
         <Trans>To add a 5EPlay account, enter your 5EPlay ID.</Trans>
       </p>
-      <div className="w-[228px] mt-8">
+      <div className="mt-8 w-[228px]">
         <TextInput
           placeholder={t({ message: '5EPlay ID', context: 'Input placeholder' })}
           onChange={(event) => {

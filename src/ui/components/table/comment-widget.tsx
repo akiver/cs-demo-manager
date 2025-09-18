@@ -37,8 +37,8 @@ export function TableCommentWidget({ onClose, comment, onBlur }: Props) {
   };
 
   return (
-    <div className="absolute right-16 top-[84px] z-1 bg-gray-75 border border-gray-300 p-16 flex flex-col gap-y-8 rounded-8 shadow-[0_0_4px_0_var(--color-gray-500)]">
-      <div className="w-[500px] h-[300px]">
+    <div className="absolute top-[84px] right-16 z-1 flex flex-col gap-y-8 rounded-8 border border-gray-300 bg-gray-75 p-16 shadow-[0_0_4px_0_var(--color-gray-500)]">
+      <div className="h-[300px] w-[500px]">
         <MarkdownEditor defaultValue={comment} onReady={onReady} onDestroy={onDestroy} onBlur={onBlur} />
       </div>
       <div>

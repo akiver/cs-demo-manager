@@ -33,7 +33,7 @@ export function NextRoundButton() {
 
   return (
     <PlaybackBarButton onClick={onClick} isDisabled={isDisabled}>
-      <StepForwardIcon />
+      <StepForwardIcon className="h-20" />
     </PlaybackBarButton>
   );
 }

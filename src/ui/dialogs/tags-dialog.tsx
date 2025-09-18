@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
+import clsx from 'clsx';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { useTags } from 'csdm/ui/tags/use-tags';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
@@ -33,7 +34,7 @@ export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <div className="max-w-[524px] max-h-[300px] overflow-auto flex flex-wrap gap-8">
+        <div className="flex max-h-[300px] max-w-[524px] flex-wrap gap-8 overflow-auto">
           {tags.map((tag) => {
             const isSelected = selectedTags.some((tagId) => {
               return tagId === tag.id;
@@ -42,11 +43,12 @@ export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
             return (
               <div
                 key={tag.id}
-                className={`flex rounded border border-gray-300 hover:text-gray-900 cursor-default ${
+                className={clsx(
+                  'flex cursor-default rounded border border-gray-300 hover:text-gray-900',
                   isSelected
-                    ? 'bg-gray-50 hover:bg-gray-100 text-gray-900 border-gray-400'
-                    : 'bg-gray-200 text-gray-600 border-transparent'
-                }`}
+                    ? 'border-gray-400 bg-gray-50 text-gray-900 hover:bg-gray-100'
+                    : 'border-transparent bg-gray-200 text-gray-600',
+                )}
                 onClick={() => {
                   const newSelectedTagIds = isSelected
                     ? selectedTags.filter((id) => id !== tag.id)

@@ -7,6 +7,6 @@ export async function loadAudio(audioFilePath: string) {
     audio.addEventListener('loadedmetadata', () => {
       resolve(audio);
     });
-    audio.src = `file://${audioFilePath}`;
+    audio.src = `file://${audioFilePath.replaceAll('#', '%23')}`;
   });
 }

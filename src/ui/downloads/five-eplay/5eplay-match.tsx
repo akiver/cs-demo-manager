@@ -8,8 +8,8 @@ type Props = {
 
 export function FiveEPlayMatch({ match }: Props) {
   return (
-    <div className="flex flex-col flex-1 p-16 overflow-auto">
-      <div className="flex flex-col my-8 gap-y-8">
+    <div className="flex flex-1 flex-col overflow-auto p-16">
+      <div className="my-8 flex flex-col gap-y-8">
         {match.teams.map((team, index) => {
           const oppositeTeam = index === 0 && match.teams.length > 1 ? match.teams[1] : match.teams[0];
           const players = match.players.filter((player) => {

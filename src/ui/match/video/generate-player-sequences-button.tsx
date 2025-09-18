@@ -236,7 +236,7 @@ function SelectPlayerDialog() {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <div className="flex flex-col gap-y-12 w-[512px]">
+        <div className="flex w-[512px] flex-col gap-y-12">
           <PlayersSelect
             players={match.players}
             selectedSteamIds={selectedSteamIds}

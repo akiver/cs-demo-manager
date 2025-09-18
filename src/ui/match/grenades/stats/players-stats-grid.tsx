@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Avatar } from 'csdm/ui/components/avatar';
 import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { FlashbangCells } from 'csdm/ui/match/grenades/stats/cells/flashbang-cells';
@@ -34,7 +35,7 @@ export function PlayersStatsGrid({ players, teamName, grenade }: Props) {
     <>
       <p className="text-body-strong">{teamName}</p>
       <div
-        className="grid row-start-2 mt-8"
+        className="row-start-2 mt-8 grid"
         style={{
           gridTemplateColumns: `repeat(${players.length}, 72px)`,
         }}
@@ -46,12 +47,16 @@ export function PlayersStatsGrid({ players, teamName, grenade }: Props) {
               <Tooltip content={player.name} placement="top">
                 <div className="mb-8">
                   <Avatar avatarUrl={player.avatar} size={60} playerColor={player.color} />
-                  <p className="truncate selectable" title={player.name}>
+                  <p className="selectable truncate" title={player.name}>
                     {player.name}
                   </p>
                 </div>
               </Tooltip>
-              <div className={`${isLastPlayer ? '' : 'border-r border-r-gray-300'}`}>
+              <div
+                className={clsx({
+                  'border-r border-r-gray-300': !isLastPlayer,
+                })}
+              >
                 {renderCellsForGrenade(grenade, player.steamId)}
               </div>
             </div>

@@ -50,7 +50,7 @@ function Cell({ killCount, backgroundColor, killerName, victimName }: CellProps)
       renderInPortal={true}
     >
       <div
-        className="flex items-center justify-center rounded-full size-40 selectable hover:scale-110 transition-transform duration-100"
+        className="flex size-40 selectable items-center justify-center rounded-full transition-transform duration-100 hover:scale-110"
         style={{ backgroundColor }}
       >
         <span className="text-subtitle text-white">{killCount}</span>
@@ -120,14 +120,14 @@ export function PlayersDuelsMatrix() {
       }
 
       return (
-        <div className="flex flex-col w-fit" ref={chart}>
-          <div className="flex mb-8">
+        <div className="flex w-fit flex-col" ref={chart}>
+          <div className="mb-8 flex">
             <div className="flex w-[172px]" />
 
             {playersTeamT.map((player) => {
               return (
-                <div key={player.steamId} className="flex flex-col gap-y-4 w-[104px]">
-                  <p className="overflow-hidden truncate selectable" title={player.name}>
+                <div key={player.steamId} className="flex w-[104px] flex-col gap-y-4">
+                  <p className="selectable truncate overflow-hidden" title={player.name}>
                     {player.name}
                   </p>
                   <TeamIndicator teamNumber={player.teamNumber} />
@@ -139,12 +139,12 @@ export function PlayersDuelsMatrix() {
             return (
               <div key={player.steamId} className="flex">
                 <div className="flex items-center gap-x-8">
-                  <p className="w-[148px] truncate selectable" title={player.name}>
+                  <p className="w-[148px] selectable truncate" title={player.name}>
                     {player.name}
                   </p>
                   <TeamIndicator teamNumber={player.teamNumber} />
                 </div>
-                <div className="flex h-[84px] ml-8">
+                <div className="ml-8 flex h-[84px]">
                   {player.rows.map(({ victimSteamId, victimName, killCount, deathCount }) => {
                     const hasData = killCount > 0 || deathCount > 0;
                     const winRatePercent = (killCount / (killCount + deathCount)) * 100;
@@ -156,10 +156,10 @@ export function PlayersDuelsMatrix() {
                       : 'transparent';
 
                     return (
-                      <div key={victimSteamId} className="flex flex-col h-full w-[104px] border border-gray-300">
+                      <div key={victimSteamId} className="flex h-full w-[104px] flex-col border border-gray-300">
                         {hasData ? (
                           <div className="relative flex size-full bg-[linear-gradient(45deg,var(--gray-75)_50%,var(--gray-200)_50%)]">
-                            <div className="absolute left-12 bottom-8">
+                            <div className="absolute bottom-8 left-12">
                               <Cell
                                 killCount={killCount}
                                 backgroundColor={killerColor}
@@ -167,7 +167,7 @@ export function PlayersDuelsMatrix() {
                                 victimName={victimName}
                               />
                             </div>
-                            <div className="absolute right-12 top-8">
+                            <div className="absolute top-8 right-12">
                               <Cell
                                 killCount={deathCount}
                                 backgroundColor={victimColor}
@@ -177,7 +177,7 @@ export function PlayersDuelsMatrix() {
                             </div>
                           </div>
                         ) : (
-                          <span className="flex items-center justify-center text-subtitle h-full">-</span>
+                          <span className="flex h-full items-center justify-center text-subtitle">-</span>
                         )}
                       </div>
                     );

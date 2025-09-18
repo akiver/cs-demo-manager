@@ -95,5 +95,5 @@ export function MatchCountChart({ axis }: Props) {
     option: chartOptions,
   });
 
-  return <div className="w-full h-[352px]" ref={ref} />;
+  return <div className="h-[352px] w-full" ref={ref} />;
 }

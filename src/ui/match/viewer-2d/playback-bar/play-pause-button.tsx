@@ -7,5 +7,9 @@ import { PlayIcon } from 'csdm/ui/icons/play-icon';
 export function PlayPauseButton() {
   const { isPlaying, playPause } = useViewerContext();
 
-  return <PlaybackBarButton onClick={playPause}>{isPlaying ? <PauseIcon /> : <PlayIcon />}</PlaybackBarButton>;
+  return (
+    <PlaybackBarButton onClick={playPause}>
+      {isPlaying ? <PauseIcon className="size-20" /> : <PlayIcon className="h-20" />}
+    </PlaybackBarButton>
+  );
 }

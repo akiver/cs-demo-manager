@@ -23,7 +23,7 @@ export function LeftBarLink({ url, tooltip, icon, onClick }: Props) {
         }}
         viewTransition={true}
       >
-        <div className="flex justify-center w-32">{icon}</div>
+        <div className="flex w-32 justify-center">{icon}</div>
       </NavLink>
     </LeftBarTooltip>
   );

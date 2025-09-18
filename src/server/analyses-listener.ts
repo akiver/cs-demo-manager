@@ -11,10 +11,11 @@ import { analyzeDemo } from 'csdm/node/demo/analyze-demo';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { getErrorCodeFromError } from './get-error-code-from-error';
 import type { ErrorCode } from 'csdm/common/error-code';
+import { MAX_CONCURRENT_ANALYSES } from 'csdm/common/analyses';
 
 class AnalysesListener {
   private analyses: Analysis[] = [];
-  private currentAnalysis: Analysis | undefined;
+  private currentAnalyses: Analysis[] = [];
   private outputFolderPath: string; // Folder path where CSV files will be write on the host
 
   public constructor() {
@@ -60,19 +61,16 @@ class AnalysesListener {
   }
 
   public getAnalyses = () => {
-    if (this.currentAnalysis !== undefined) {
-      return [...this.analyses, this.currentAnalysis];
-    }
-    return this.analyses;
+    return [...this.analyses, ...this.currentAnalyses];
   };
 
   public hasAnalysesInProgress = () => {
-    return this.hasPendingAnalyses() || this.currentAnalysis !== undefined;
+    return this.hasPendingAnalyses() || this.currentAnalyses.length > 0;
   };
 
   public clear() {
     this.analyses = [];
-    this.currentAnalysis = undefined;
+    this.currentAnalyses = [];
   }
 
   private hasPendingAnalyses = () => {
@@ -80,27 +78,49 @@ class AnalysesListener {
   };
 
   private async loopUntilAnalysesDone() {
-    if (this.currentAnalysis) {
-      return;
+    const promises: Promise<void>[] = [];
+
+    const settings = await getSettings();
+    const maxConcurrentAnalyses = Math.min(
+      MAX_CONCURRENT_ANALYSES,
+      settings.analyze.maxConcurrentAnalyses ?? MAX_CONCURRENT_ANALYSES / 2,
+    );
+    while (this.analyses.length > 0 && this.currentAnalyses.length < maxConcurrentAnalyses) {
+      const analysis = this.analyses.shift();
+      if (analysis) {
+        this.currentAnalyses.push(analysis);
+        const analysisPromise = this.processAnalysis(analysis, settings.analyze.analyzePositions)
+          .catch((error) => {
+            logger.error('Unhandled error during analysis');
+            logger.error(error);
+          })
+          .finally(() => {
+            this.currentAnalyses = this.currentAnalyses.filter(
+              ({ demoChecksum }) => demoChecksum !== analysis.demoChecksum,
+            );
+          });
+
+        promises.push(analysisPromise);
+      }
     }
 
-    this.currentAnalysis = this.analyses.shift();
-    while (this.currentAnalysis) {
-      await this.processAnalysis(this.currentAnalysis);
-      this.currentAnalysis = this.analyses.shift();
+    if (promises.length > 0) {
+      await Promise.race(promises);
+      if (this.analyses.length > 0) {
+        await this.loopUntilAnalysesDone();
+      }
     }
   }
 
-  private readonly processAnalysis = async (analysis: Analysis) => {
+  private readonly processAnalysis = async (analysis: Analysis, analyzePositions: boolean) => {
     const { demoChecksum: checksum, demoPath, source } = analysis;
     try {
-      this.updateCurrentAnalysisStatus(AnalysisStatus.Analyzing);
-      const settings = await getSettings();
+      this.updateAnalysisStatus(analysis, AnalysisStatus.Analyzing);
       await analyzeDemo({
         demoPath,
-        outputFolderPath: this.outputFolderPath,
+        outputFolderPath: this.getAnalysisOutputFolderPath(analysis),
         source,
-        analyzePositions: settings.analyze.analyzePositions,
+        analyzePositions,
         onStdout: (data) => {
           logger.log(data);
           analysis.output += data;
@@ -118,35 +138,35 @@ class AnalysesListener {
           });
         },
       });
-      this.updateCurrentAnalysisStatus(AnalysisStatus.AnalyzeSuccess);
+      this.updateAnalysisStatus(analysis, AnalysisStatus.AnalyzeSuccess);
 
-      await this.insertMatch(checksum, demoPath);
+      await this.insertMatch(analysis, checksum, demoPath);
     } catch (error) {
       logger.error('Error while analyzing demo');
       if (error) {
         logger.error(error);
       }
       const isCorruptedDemo = error instanceof CorruptedDemoError;
-      if (!isCorruptedDemo && this.currentAnalysis && error instanceof Error) {
-        this.currentAnalysis.output += error.message;
+      if (!isCorruptedDemo && error instanceof Error) {
+        analysis.output += error.message;
       }
-      this.updateCurrentAnalysisStatus(AnalysisStatus.AnalyzeError);
+      this.updateAnalysisStatus(analysis, AnalysisStatus.AnalyzeError);
       // If the demo is corrupted, we still want to try to insert it in the database.
       if (isCorruptedDemo) {
-        await this.insertMatch(checksum, demoPath);
+        await this.insertMatch(analysis, checksum, demoPath);
       }
     }
   };
 
-  private async insertMatch(checksum: string, demoPath: string) {
+  private async insertMatch(analysis: Analysis, checksum: string, demoPath: string) {
     try {
-      this.updateCurrentAnalysisStatus(AnalysisStatus.Inserting);
+      this.updateAnalysisStatus(analysis, AnalysisStatus.Inserting);
       const match = await processMatchInsertion({
         checksum,
         demoPath,
-        outputFolderPath: this.outputFolderPath,
+        outputFolderPath: this.getAnalysisOutputFolderPath(analysis),
       });
-      this.updateCurrentAnalysisStatus(AnalysisStatus.InsertSuccess);
+      this.updateAnalysisStatus(analysis, AnalysisStatus.InsertSuccess);
       server.sendMessageToRendererProcess({
         name: RendererServerMessageName.MatchInserted,
         payload: match,
@@ -154,36 +174,36 @@ class AnalysesListener {
     } catch (error) {
       logger.error('Error while inserting match');
       logger.error(error);
-      if (this.currentAnalysis) {
-        let errorOutput: string;
-        if (error instanceof Error) {
-          errorOutput = error.message;
-          if (error.stack) {
-            errorOutput += `\n${error.stack}`;
-          }
-          if (error.cause) {
-            errorOutput += `\n${error.cause}`;
-          }
-        } else {
-          errorOutput = String(error);
+      let errorOutput: string;
+      if (error instanceof Error) {
+        errorOutput = error.message;
+        if (error.stack) {
+          errorOutput += `\n${error.stack}`;
         }
-        this.currentAnalysis.output += errorOutput;
+        if (error.cause) {
+          errorOutput += `\n${error.cause}`;
+        }
+      } else {
+        errorOutput = String(error);
       }
+      analysis.output += errorOutput;
 
-      this.updateCurrentAnalysisStatus(AnalysisStatus.InsertError, getErrorCodeFromError(error));
+      this.updateAnalysisStatus(analysis, AnalysisStatus.InsertError, getErrorCodeFromError(error));
     }
   }
 
-  private updateCurrentAnalysisStatus = (status: AnalysisStatus, errorCode?: ErrorCode) => {
-    if (this.currentAnalysis !== undefined) {
-      this.currentAnalysis.status = status;
-      this.currentAnalysis.errorCode = errorCode;
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.AnalysisUpdated,
-        payload: this.currentAnalysis,
-      });
-    }
+  private updateAnalysisStatus = (analysis: Analysis, status: AnalysisStatus, errorCode?: ErrorCode) => {
+    analysis.status = status;
+    analysis.errorCode = errorCode;
+    server.sendMessageToRendererProcess({
+      name: RendererServerMessageName.AnalysisUpdated,
+      payload: analysis,
+    });
   };
+
+  private getAnalysisOutputFolderPath(analysis: Analysis) {
+    return path.join(this.outputFolderPath, analysis.demoChecksum);
+  }
 }
 
 export const analysesListener = new AnalysesListener();

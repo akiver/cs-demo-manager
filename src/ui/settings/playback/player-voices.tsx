@@ -20,7 +20,7 @@ export function PlayerVoices() {
       description={
         <div>
           <Trans>Listen player voices during playback</Trans>
-          <div className="flex items-center gap-x-4 mt-4">
+          <div className="mt-4 flex items-center gap-x-4">
             <ExclamationTriangleIcon className="size-12 shrink-0 text-orange-700" />
             <p className="text-caption">
               <Trans>Doesn't work with Valve Matchmaking demos as voice data are not available!</Trans>

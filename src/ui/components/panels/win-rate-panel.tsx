@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Trans } from '@lingui/react/macro';
 import { roundNumberPercentage } from 'csdm/common/math/round-number-percentage';
 import { Panel, PanelRow, PanelTitle, PanelValue, PanelValueVariant } from 'csdm/ui/components/panel';
@@ -8,7 +9,7 @@ type CircleProps = {
 };
 
 function Circle({ className }: CircleProps) {
-  return <div className={`size-12 rounded-full mr-4 ${className}`} />;
+  return <div className={clsx('mr-4 size-12 rounded-full', className)} />;
 }
 
 type Props = {

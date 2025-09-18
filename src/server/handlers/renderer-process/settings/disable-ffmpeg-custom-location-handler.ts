@@ -11,7 +11,7 @@ import type { FfmpegVersionChangedPayload } from './ffmpeg-version-changed-paylo
 export async function disableFfmpegCustomLocationHandler(clearCustomLocation?: boolean) {
   const payload: FfmpegVersionChangedPayload = {
     errorCode: undefined,
-    version: undefined,
+    version: '?',
     isUpdateAvailable: false,
   };
 
@@ -38,7 +38,7 @@ export async function disableFfmpegCustomLocationHandler(clearCustomLocation?: b
 
     const version = await getFfmpegVersionFromExecutable(defaultFfmpegExecutablePath);
     let isUpdateAvailable = false;
-    if (version !== undefined) {
+    if (version !== '?') {
       isUpdateAvailable = await checkForFfmpegUpdate(version);
     }
 

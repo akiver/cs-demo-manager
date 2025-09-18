@@ -135,13 +135,13 @@ function AudioSelectorDialog({ loadAudioFile }: Props) {
               <p className="mt-8">
                 <Trans>You can either:</Trans>
               </p>
-              <ul className="list-disc list-inside ml-16">
+              <ul className="ml-16 list-inside list-disc">
                 <li>
                   <Trans>
                     Generate a <code>.wav</code> file containing the players' voice audio next to the demo file.
                   </Trans>
                   {source === DemoSource.Valve && (
-                    <div className="flex items-center gap-x-4 ml-16">
+                    <div className="ml-16 flex items-center gap-x-4">
                       <ExclamationTriangleIcon className="size-16 text-red-700" />
                       <p>
                         <Trans>Valve Matchmaking demos do not contain voice audio data!</Trans>
@@ -166,17 +166,17 @@ function AudioSelectorDialog({ loadAudioFile }: Props) {
             </div>
           </div>
           {warnings.length > 0 && (
-            <div className="flex flex-col mt-16">
-              <div className="flex items-center gap-x-8 mb-8">
+            <div className="mt-16 flex flex-col">
+              <div className="mb-8 flex items-center gap-x-8">
                 <ExclamationTriangleIcon className="size-16 text-orange-700" />
                 <p>
                   <Trans>The following issues were found:</Trans>
                 </p>
               </div>
-              <ul className="flex flex-col gap-y-8 p-8 rounded max-w-[824px] max-h-[224px] overflow-auto bg-gray-100">
+              <ul className="flex max-h-[224px] max-w-[824px] flex-col gap-y-8 overflow-auto rounded bg-gray-100 p-8">
                 {warnings.map((warning, index) => {
                   return (
-                    <li key={`${warning}${index}`} className="select-text break-all selectable">
+                    <li key={`${warning}${index}`} className="selectable break-all select-text">
                       {warning}
                     </li>
                   );
@@ -247,7 +247,7 @@ export function AudioSelectorButton({ loadAudioFile }: Props) {
         showDialog(<AudioSelectorDialog loadAudioFile={loadAudioFile} />);
       }}
     >
-      <SoundCross className="size-32" />
+      <SoundCross className="w-20" />
     </PlaybackBarButton>
   );
 }

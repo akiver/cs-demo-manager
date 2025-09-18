@@ -1,4 +1,5 @@
 import React, { type ReactNode } from 'react';
+import clsx from 'clsx';
 import { Trans } from '@lingui/react/macro';
 import { useSecondsToFormattedMinutes } from 'csdm/ui/hooks/use-seconds-to-formatted-minutes';
 import type { Match } from 'csdm/common/types/match';
@@ -21,13 +22,13 @@ type TeamScoresProps = {
 function TeamScores({ teamNameA, teamNameB, scoreTeamA, scoreTeamB }: TeamScoresProps) {
   return (
     <div className="flex items-center">
-      <p className={`text-subtitle selectable ${getTeamScoreClassName(scoreTeamA, scoreTeamB)}`}>{scoreTeamA}</p>
-      <p className="text-gray-900 ml-4 selectable">{teamNameA}</p>
+      <p className={clsx('selectable text-subtitle', getTeamScoreClassName(scoreTeamA, scoreTeamB))}>{scoreTeamA}</p>
+      <p className="ml-4 selectable text-gray-900">{teamNameA}</p>
       <p className="mx-4">
         <Trans context="Versus">vs</Trans>
       </p>
-      <p className="text-gray-900 mr-4 selectable">{teamNameB}</p>
-      <p className={`text-subtitle selectable ${getTeamScoreClassName(scoreTeamB, scoreTeamA)}`}>{scoreTeamB}</p>
+      <p className="mr-4 selectable text-gray-900">{teamNameB}</p>
+      <p className={clsx('selectable text-subtitle', getTeamScoreClassName(scoreTeamB, scoreTeamA))}>{scoreTeamB}</p>
     </div>
   );
 }
@@ -41,7 +42,7 @@ function Field({ name, value }: FieldProps) {
   return (
     <div className="flex items-center">
       <p className="shrink-0">{name}</p>
-      <p className="text-gray-900 ml-8 selectable break-all">{value}</p>
+      <p className="ml-8 selectable break-all text-gray-900">{value}</p>
     </div>
   );
 }
@@ -63,9 +64,9 @@ export function MatchInformation({ match }: Props) {
 
   return (
     <div className="flex">
-      <img src={getMapThumbnailSrc(match.mapName, match.game)} alt={match.mapName} className="h-[124px] mr-8" />
-      <div className="flex flex-col shrink-0">
-        <p className="text-gray-900 selectable">{match.mapName}</p>
+      <img src={getMapThumbnailSrc(match.mapName, match.game)} alt={match.mapName} className="mr-8 h-[124px]" />
+      <div className="flex shrink-0 flex-col">
+        <p className="selectable text-gray-900">{match.mapName}</p>
         <TeamScores
           teamNameA={match.teamA.name}
           teamNameB={match.teamB.name}
@@ -76,7 +77,7 @@ export function MatchInformation({ match }: Props) {
         <p className="selectable">{secondsToFormattedMinutes(match.duration)}</p>
         <Tags tagIds={match.tagIds} onEditClick={onEditTagsClick} />
       </div>
-      <div className="flex flex-col w-full ml-16">
+      <div className="ml-16 flex w-full flex-col">
         <Field name={<Trans>Source</Trans>} value={getDemoSourceName(match.source)} />
         <Field name={<Trans>Name</Trans>} value={match.name} />
         <Field name={<Trans>Client name</Trans>} value={match.clientName} />
@@ -87,7 +88,7 @@ export function MatchInformation({ match }: Props) {
         </div>
         <Field name={<Trans>Checksum</Trans>} value={match.checksum} />
       </div>
-      <div className="w-full ml-16 max-h-[126px]">
+      <div className="ml-16 max-h-[126px] w-full">
         <MatchCommentInput isResizable={false} />
       </div>
     </div>

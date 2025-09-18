@@ -23,7 +23,7 @@ export function RecordingPlayerVoices() {
           <p>
             <Trans>Listen to player voices during recording.</Trans>
           </p>
-          <div className="flex items-center gap-x-4 mt-4">
+          <div className="mt-4 flex items-center gap-x-4">
             <ExclamationTriangleIcon className="size-12 shrink-0 text-orange-700" />
             <p className="text-caption">
               <Trans>Player voices are not available in Valve Matchmaking demos!</Trans>

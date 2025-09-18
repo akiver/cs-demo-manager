@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import React from 'react';
+import clsx from 'clsx';
 
 type TitleProps = {
   children: ReactNode;
@@ -27,7 +28,7 @@ type PanelValueProps = {
 
 export function PanelValue({ children, variant = PanelValueVariant.Default }: PanelValueProps) {
   return (
-    <p className={`text-gray-900 selectable ${variant === PanelValueVariant.Big ? 'text-title' : ''}`}>{children}</p>
+    <p className={clsx('selectable text-gray-900', variant === PanelValueVariant.Big && 'text-title')}>{children}</p>
   );
 }
 
@@ -56,15 +57,17 @@ type Props = {
 export function Panel({ header, children, fitHeight, minWidth, overflowX = true }: Props) {
   return (
     <div
-      className={`flex flex-col min-w-[152px] border border-gray-300 bg-gray-75 rounded p-8 ${overflowX ? 'overflow-x-auto' : ''} ${
-        fitHeight ? 'h-fit' : 'h-auto'
-      }`}
+      className={clsx(
+        'flex min-w-[152px] flex-col rounded border border-gray-300 bg-gray-75 p-8',
+        fitHeight ? 'h-fit' : 'h-auto',
+        overflowX && 'overflow-x-auto',
+      )}
       style={{
         minWidth,
       }}
     >
       {typeof header === 'string' ? <PanelTitle>{header}</PanelTitle> : header}
-      {children && <div className="flex flex-col h-full justify-end mt-12">{children}</div>}
+      {children && <div className="mt-12 flex h-full flex-col justify-end">{children}</div>}
     </div>
   );
 }

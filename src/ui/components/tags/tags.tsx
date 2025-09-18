@@ -15,7 +15,7 @@ export function Tags({ onEditClick, tagIds }: Props) {
   const hiddenTagIds = tagIds.slice(3);
 
   return (
-    <div className="flex gap-x-8 gap-y-4 items-center flex-wrap">
+    <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
       {onEditClick && (
         <Tooltip content={<Trans>Edit tags</Trans>}>
           <Button onClick={onEditClick}>
@@ -34,7 +34,7 @@ export function Tags({ onEditClick, tagIds }: Props) {
       )}
       {hiddenTagIds.length > 0 && (
         <Tooltip content={<TagsTooltip tagIds={hiddenTagIds} />}>
-          <div className="flex items-center justify-center bg-gray-75 rounded px-8 py-4 border border-transparent">
+          <div className="flex items-center justify-center rounded border border-transparent bg-gray-75 px-8 py-4">
             <p className="text-caption">+{hiddenTagIds.length}</p>
           </div>
         </Tooltip>

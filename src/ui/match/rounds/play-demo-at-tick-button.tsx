@@ -50,7 +50,7 @@ export function PlayDemoAtTickButton({ tick, focusSteamId, demoPath, game, toolt
 
   return (
     <Tooltip content={tooltip} placement="left">
-      <div className="hover:text-gray-900 transition duration-300" onClick={onClick}>
+      <div className="transition duration-300 hover:text-gray-900" onClick={onClick}>
         <PlayCircleIcon height={size} />
       </div>
     </Tooltip>

@@ -13,7 +13,7 @@ export function Switch({ id, isChecked, onChange }: Props) {
       id={id}
       onChange={(event) => onChange(event.target.checked)}
       checked={isChecked}
-      className="relative w-40 h-20 bg-gray-300 checked:bg-blue-700 rounded-full cursor-pointer appearance-none before:inline-block before:size-12 before:bg-gray-100 checked:before:bg-gray-50 before:translate-x-4 checked:before:translate-x-24 before:rounded-full before:duration-300"
+      className="relative h-20 w-40 cursor-pointer appearance-none rounded-full bg-gray-300 before:inline-block before:size-12 before:translate-x-4 before:rounded-full before:bg-gray-100 before:duration-300 checked:bg-blue-700 checked:before:translate-x-24 checked:before:bg-gray-50"
     />
   );
 }

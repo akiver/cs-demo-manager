@@ -43,7 +43,7 @@ export function Scoreboard({ teamName, teamScore, players, scoreOppositeTeam }: 
   });
 
   return (
-    <div className="flex flex-col m-auto">
+    <div className="m-auto flex flex-col">
       <TeamScore teamName={teamName} teamScore={teamScore} scoreOppositeTeam={scoreOppositeTeam} />
       <Table<FaceitPlayer> table={table} />
     </div>

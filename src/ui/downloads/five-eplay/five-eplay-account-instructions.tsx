@@ -8,7 +8,7 @@ export function FiveEPlayAccountInstructions() {
       <h2 className="text-title">
         <Trans>How can I find my 5EPlay ID?</Trans>
       </h2>
-      <ol className="list-decimal list-inside">
+      <ol className="list-inside list-decimal">
         <li>
           <Trans>
             Log into your <ExternalLink href="https://www.5eplay.com/">5EPlay</ExternalLink> account.

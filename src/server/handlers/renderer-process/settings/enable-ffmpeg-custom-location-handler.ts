@@ -5,6 +5,7 @@ import { FileNotFound } from 'csdm/node/filesystem/errors/file-not-found';
 import type { FfmpegSettings } from 'csdm/node/settings/settings';
 import type { FfmpegVersionChangedPayload } from './ffmpeg-version-changed-payload';
 import { handleError } from '../../handle-error';
+import { InvalidFfmpegExecutable } from 'csdm/node/video/errors/invalid-ffmpeg-executable';
 
 export async function enableFfmpegCustomLocationHandler(customExecutablePath: string) {
   try {
@@ -14,6 +15,9 @@ export async function enableFfmpegCustomLocationHandler(customExecutablePath: st
     }
 
     const version = await getFfmpegVersionFromExecutable(customExecutablePath);
+    if (version === '?') {
+      throw new InvalidFfmpegExecutable();
+    }
 
     const ffmpegSettings: Partial<FfmpegSettings> = {
       customLocationEnabled: true,

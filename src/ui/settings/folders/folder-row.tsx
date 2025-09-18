@@ -13,9 +13,9 @@ type Props = {
 
 export function FolderRow({ folder }: Props) {
   return (
-    <div className="flex flex-col border border-gray-300 p-8 rounded">
-      <p className="font-semibold selectable">{folder.path}</p>
-      <div className="flex items-center justify-between mt-4">
+    <div className="flex flex-col rounded border border-gray-300 p-8">
+      <p className="selectable font-semibold">{folder.path}</p>
+      <div className="mt-4 flex items-center justify-between">
         <IncludeSubFoldersSwitch folder={folder} />
         <div className="flex gap-x-8">
           <RevealFolderInExplorerButton path={folder.path} />
@@ -23,7 +23,7 @@ export function FolderRow({ folder }: Props) {
         </div>
       </div>
       {pathContainsInvalidCsgoChars(folder.path) && (
-        <div className="flex items-center gap-x-4 mt-4">
+        <div className="mt-4 flex items-center gap-x-4">
           <ExclamationTriangleIcon className="size-12 text-orange-700" />
           <p className="text-caption">
             <Trans>

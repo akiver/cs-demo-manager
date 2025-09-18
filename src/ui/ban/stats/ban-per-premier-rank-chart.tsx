@@ -32,13 +32,13 @@ export function BanPerPremierRankChart({ bannedAccounts }: Props) {
     const maxBannedCount = Math.max(...banCountPerTier.values());
 
     return (
-      <div className="flex gap-x-4 w-max mx-auto">
+      <div className="mx-auto flex w-max gap-x-4">
         {[0, 1, 2, 3, 4, 5, 6].map((tier) => {
           const bannedCount = banCountPerTier.get(tier) ?? 0;
 
           return (
             <div key={tier} className="flex">
-              <div className="flex flex-col items-center h-[324px] justify-end">
+              <div className="flex h-[324px] flex-col items-center justify-end">
                 {bannedCount > 0 && (
                   <Tooltip
                     content={
@@ -49,7 +49,7 @@ export function BanPerPremierRankChart({ bannedAccounts }: Props) {
                     placement="top"
                   >
                     <div
-                      className="w-40 bg-blue-700 flex justify-center animate-grow-height"
+                      className="flex w-40 animate-grow-height justify-center bg-blue-700"
                       style={{
                         height: `${(bannedCount / maxBannedCount) * 100}%`,
                       }}
@@ -58,7 +58,7 @@ export function BanPerPremierRankChart({ bannedAccounts }: Props) {
                     </div>
                   </Tooltip>
                 )}
-                <div className="w-[64px] mt-4">
+                <div className="mt-4 w-[64px]">
                   <PremierRankLogo rank={tier * 1000 * 5} />
                 </div>
               </div>

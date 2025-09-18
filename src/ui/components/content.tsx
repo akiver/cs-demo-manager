@@ -6,9 +6,9 @@ type Props = {
 };
 
 export function Content({ children }: Props) {
-  return <div className="flex flex-col flex-1 p-16 overflow-y-auto">{children}</div>;
+  return <div className="flex flex-1 flex-col overflow-y-auto p-16">{children}</div>;
 }
 
 export function CenteredContent({ children }: Props) {
-  return <div className="flex flex-col flex-1 p-16 overflow-y-auto items-center justify-center">{children}</div>;
+  return <div className="flex flex-1 flex-col items-center justify-center overflow-y-auto p-16">{children}</div>;
 }

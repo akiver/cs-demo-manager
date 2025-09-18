@@ -8,16 +8,22 @@ import { getSettings } from 'csdm/node/settings/get-settings';
 import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
 import { generateVideo } from 'csdm/node/video/generation/generate-video';
 import type { Sequence } from 'csdm/common/types/sequence';
-import type { EncoderSoftware } from 'csdm/common/types/encoder-software';
+import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { isValidEncoderSoftware } from 'csdm/common/types/encoder-software';
-import type { RecordingSystem } from 'csdm/common/types/recording-system';
+import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { isValidRecordingSystem } from 'csdm/common/types/recording-system';
-import type { RecordingOutput } from 'csdm/common/types/recording-output';
+import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { isValidRecordingOutput } from 'csdm/common/types/recording-output';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import { isValidVideoContainer } from 'csdm/common/types/video-container';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
+import { isHlaeInstalled } from 'csdm/node/video/hlae/is-hlae-installed';
+import { installHlae } from 'csdm/node/video/hlae/install-hlae';
+import { isVirtualDubInstalled } from 'csdm/node/video/virtual-dub/is-virtual-dub-installed';
+import { downloadAndExtractVirtualDub } from 'csdm/node/video/virtual-dub/download-and-extract-virtual-dub';
+import { isFfmpegInstalled } from 'csdm/node/video/ffmpeg/is-ffmpeg-installed';
+import { installFfmpeg } from 'csdm/node/video/ffmpeg/install-ffmpeg';
 
 export class VideoCommand extends Command {
   public static Name = 'video';
@@ -75,7 +81,7 @@ export class VideoCommand extends Command {
   private focusPlayerSteamId: string | undefined;
 
   public getDescription() {
-    return 'Generate a video from a demo.';
+    return 'Generate videos from demos.';
   }
 
   public printHelp() {
@@ -143,6 +149,25 @@ export class VideoCommand extends Command {
           playerSteamId: this.focusPlayerSteamId,
           playerName: player.name,
         });
+        
+      const recordingSystem = this.recordingSystem ?? settings.video.recordingSystem;
+      if (recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
+        console.log('Installing HLAE...');
+        await installHlae();
+      }
+
+      const recordingOutput = this.recordingOutput ?? settings.video.recordingOutput;
+      const shouldGenerateVideo = recordingOutput !== RecordingOutput.Images;
+      const encoderSoftware = this.encoderSoftware ?? settings.video.encoderSoftware;
+      if (shouldGenerateVideo && encoderSoftware === EncoderSoftware.VirtualDub && !(await isVirtualDubInstalled())) {
+        console.log('Installing VirtualDub...');
+        await downloadAndExtractVirtualDub();
+      }
+
+      if (shouldGenerateVideo && encoderSoftware === EncoderSoftware.FFmpeg && !(await isFfmpegInstalled())) {
+        console.log('Installing FFmpeg...');
+        await installFfmpeg();
+
       }
 
       const videoId = randomUUID();
@@ -153,9 +178,9 @@ export class VideoCommand extends Command {
         checksum: demo.checksum,
         game: demo.game,
         tickrate: demo.tickrate,
-        recordingSystem: this.recordingSystem ?? settings.video.recordingSystem,
-        recordingOutput: this.recordingOutput ?? settings.video.recordingOutput,
-        encoderSoftware: this.encoderSoftware ?? settings.video.encoderSoftware,
+        recordingSystem,
+        recordingOutput,
+        encoderSoftware,
         framerate: this.framerate ?? settings.video.framerate,
         width: this.width ?? settings.video.width,
         height: this.height ?? settings.video.height,

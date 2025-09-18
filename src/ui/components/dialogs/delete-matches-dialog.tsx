@@ -47,7 +47,7 @@ export function DeleteMatchesDialog({ onDeleteSuccess, checksums }: Props) {
       confirmButtonVariant={ButtonVariant.Danger}
       closeOnConfirm={false}
     >
-      <div className="flex flex-col gap-y-8 max-w-[500px]">
+      <div className="flex max-w-[500px] flex-col gap-y-8">
         <ErrorMessage
           message={plural(checksums.length, {
             one: 'The match will be deleted only from the database not your filesystem.',

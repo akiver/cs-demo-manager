@@ -1,5 +1,6 @@
 import React, { useState, type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
+import clsx from 'clsx';
 import { TeamNumber } from 'csdm/common/types/counter-strike';
 import { SideSelect } from 'csdm/ui/components/inputs/select/side-select';
 import type { TeamEconomyStats } from 'csdm/common/types/team-economy-stats';
@@ -10,7 +11,7 @@ import { Section } from 'csdm/ui/components/section';
 function LegendItem({ className, label }: { className: string; label: ReactNode }) {
   return (
     <div className="flex items-center gap-x-4">
-      <div className={`w-32 h-16 ${className}`} />
+      <div className={clsx('h-16 w-32', className)} />
       <p className="text-body-strong">{label}</p>
     </div>
   );
@@ -30,10 +31,17 @@ function Bar({ max, value, colorClassName, tooltip }: BarProps) {
   return (
     <Tooltip content={tooltip} delay={0} placement="top">
       <div
-        className={`w-32 flex items-center justify-center animate-grow-height transition-all duration-300 ${className}`}
+        className={clsx(
+          'flex w-32 animate-grow-height items-center justify-center transition-all duration-300',
+          className,
+        )}
         style={{ height }}
       >
-        <span className={`text-white ${value.toString().length > 3 ? '-rotate-90' : ''}`}>
+        <span
+          className={clsx('text-white', {
+            '-rotate-90': value.toString().length > 3,
+          })}
+        >
           {max === 0 ? '-' : value}{' '}
         </span>
       </div>
@@ -52,11 +60,11 @@ function Bars({ total, won, lost, label }: BarsProps) {
   const wonPercentage = total === 0 ? 0 : roundNumberPercentage(won / total);
 
   return (
-    <div className="flex flex-col gap-y-4 mt-8 border border-gray-300 bg-gray-100 rounded-4 p-4">
+    <div className="mt-8 flex flex-col gap-y-4 rounded-4 border border-gray-300 bg-gray-100 p-4">
       <Tooltip content={<Trans>Won percentage</Trans>} delay={0}>
-        <p className="text-subtitle text-center">{total === 0 ? '-' : `${wonPercentage}%`}</p>
+        <p className="text-center text-subtitle">{total === 0 ? '-' : `${wonPercentage}%`}</p>
       </Tooltip>
-      <div className="flex items-end h-[200px] mt-auto">
+      <div className="mt-auto flex h-[200px] items-end">
         <Bar colorClassName="bg-blue-700" max={total} value={total} tooltip={<Trans>Total: {total}</Trans>} />
         <Bar colorClassName="bg-green-700" tooltip={<Trans>Won: {won}</Trans>} max={total} value={won} />
         <Bar colorClassName="bg-red-700" tooltip={<Trans>Lost: {lost}</Trans>} max={total} value={lost} />
@@ -85,7 +93,7 @@ function TeamChart({ teamName, economyStats, sides, showTeamName = true }: TeamC
   const types = ['pistol', 'eco', 'semi', 'forceBuy', 'full'] as const;
 
   return (
-    <div className="flex flex-col h-auto">
+    <div className="flex h-auto flex-col">
       <div className="flex gap-x-16">
         {showTeamName && <p className="text-body-strong">{teamName}</p>}
         <div className="flex gap-x-8">
@@ -143,7 +151,7 @@ export function TeamsRoundOutcomesByEconomyTypeChart({ economyStats, showTeamNam
           direction="horizontal"
         />
       </div>
-      <div className="flex items-center gap-16 flex-wrap">
+      <div className="flex flex-wrap items-center gap-16">
         {economyStats.map((stats) => {
           return (
             <TeamChart

@@ -20,6 +20,8 @@ export type InteractiveCanvas = {
   zoomedToRadarY: (y: number, z: number) => number;
   getMouseX: () => number;
   getMouseY: () => number;
+  pixelToWorldX: (x: number) => number;
+  pixelToWorldY: (y: number) => number;
   canvasSize: { width: number; height: number };
 };
 
@@ -146,11 +148,13 @@ export function useInteractiveMapCanvas(
 
       if (event.type === 'mousedown') {
         isDragging.current = true;
+        mouseWorldX.current = pixelToWorldX(mousePixelX.current);
+        mouseWorldY.current = pixelToWorldY(mousePixelY.current);
       } else if (event.type === 'mouseup' || event.type === 'mouseout') {
         isDragging.current = false;
       }
 
-      if (isDragging.current) {
+      if (isDragging.current && event.type !== 'mousedown') {
         worldOriginX.current -= mouseWorldX.current - lastMouseWorldX;
         worldOriginY.current -= mouseWorldY.current - lastMouseWorldY;
         mouseWorldX.current = pixelToWorldX(mousePixelX.current);
@@ -227,6 +231,8 @@ export function useInteractiveMapCanvas(
     zoomedToRadarY,
     getMouseX: () => mousePixelX.current,
     getMouseY: () => mousePixelY.current,
+    pixelToWorldX,
+    pixelToWorldY,
     canvasSize,
   };
 }

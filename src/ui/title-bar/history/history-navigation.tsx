@@ -64,7 +64,7 @@ export function HistoryNavigation() {
   };
 
   return (
-    <div className="flex items-center gap-x-4 no-drag h-full" onDoubleClick={onDoubleClick}>
+    <div className="flex h-full items-center gap-x-4 no-drag" onDoubleClick={onDoubleClick}>
       <HistoryBackButton />
       <HistoryForwardButton />
     </div>

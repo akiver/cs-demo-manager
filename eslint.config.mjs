@@ -6,6 +6,7 @@ import checkFile from 'eslint-plugin-check-file';
 import localRules from 'eslint-plugin-local-rules';
 import lingui from 'eslint-plugin-lingui';
 import prettier from 'eslint-plugin-prettier/recommended';
+import eslintPluginBetterTailwindcss from 'eslint-plugin-better-tailwindcss';
 
 export default [
   {
@@ -57,6 +58,7 @@ export default [
     plugins: {
       'check-file': checkFile,
       lingui,
+      'better-tailwindcss': eslintPluginBetterTailwindcss,
       'local-rules': localRules,
       'react-hooks': reactHooks,
     },
@@ -71,6 +73,9 @@ export default [
     settings: {
       react: {
         version: 'detect',
+      },
+      'better-tailwindcss': {
+        entryPoint: 'src/ui/index.css',
       },
     },
 
@@ -141,6 +146,11 @@ export default [
       ],
       'check-file/no-index': 'error',
       eqeqeq: 'error',
+      'preserve-caught-error': ['error', { requireCatchParameter: true }],
+      ...eslintPluginBetterTailwindcss.configs['recommended-warn'].rules,
+      ...eslintPluginBetterTailwindcss.configs['recommended-error'].rules,
+      'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
+      'better-tailwindcss/no-unregistered-classes': ['error', { ignore: ['dark', 'changelog', 'waveform'] }],
       'lingui/no-unlocalized-strings': [
         'error',
         {

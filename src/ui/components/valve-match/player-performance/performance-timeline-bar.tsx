@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import type { ValvePlayerRound } from 'csdm/common/types/valve-match';
 import { EliminationIcon } from 'csdm/ui/icons/elimination-icon';
 import { StarIcon } from 'csdm/ui/icons/star-icon';
@@ -38,12 +39,14 @@ export function PerformanceTimeLineBar({ round, demoPath, game }: Props) {
 
   return (
     <div
-      className={`flex flex-col ${canOpenContextMenu ? 'from-gray-300 hover:bg-linear-to-t' : ''}`}
+      className={clsx('flex flex-col', {
+        'from-gray-300 hover:bg-linear-to-t': canOpenContextMenu,
+      })}
       onContextMenu={showRoundContextMenu}
       onClick={showRoundContextMenu}
     >
       <div
-        className="flex flex-col flex-1 relative pb-12"
+        className="relative flex flex-1 flex-col pb-12"
         style={{
           color,
           background: round.hasWon
@@ -78,7 +81,9 @@ export function PerformanceTimeLineBar({ round, demoPath, game }: Props) {
         )}
       </div>
       <div
-        className={`pt-12 opacity-25 ${round.deathCount === 0 ? '' : 'bg-linear-to-b from-red-600 via-transparent'}`}
+        className={clsx(`pt-12 opacity-25`, {
+          'bg-linear-to-b from-red-600 via-transparent': round.deathCount > 0,
+        })}
       >
         <DeathElimination deathCount={round.deathCount} />
       </div>

@@ -68,7 +68,7 @@ function GeneratingDialog({ onPositionsAvailable }: Props) {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <div className="flex flex-col gap-y-12 max-w-2xl">
+        <div className="flex max-w-2xl flex-col gap-y-12">
           <p>
             <Trans>It will analyze the demo and generate positions required for the 2D viewer.</Trans>
           </p>
@@ -109,7 +109,7 @@ export function NoPositionsFound({ onPositionsAvailable }: Props) {
 
   return (
     <CenteredContent>
-      <p className="text-subtitle mb-12">
+      <p className="mb-12 text-subtitle">
         <Trans>Positions haven't been generated yet.</Trans>
       </p>
       <Button onClick={onClick} variant={ButtonVariant.Primary}>

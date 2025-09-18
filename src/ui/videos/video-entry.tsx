@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
+import clsx from 'clsx';
 import type { Video } from 'csdm/common/types/video';
 import { VideoStatus } from 'csdm/common/types/video-status';
 import { assertNever } from 'csdm/common/assert-never';
@@ -29,7 +30,7 @@ import { RetryButton } from '../components/buttons/retry-button';
 import { RecordingOutput } from '../match/video/recording-output';
 
 function Grid({ children }: { children: ReactNode }) {
-  return <div className="grid grid-cols-[auto_1fr] gap-y-4 gap-x-8 items-center">{children}</div>;
+  return <div className="grid grid-cols-[auto_1fr] items-center gap-x-8 gap-y-4">{children}</div>;
 }
 
 type FieldProps = {
@@ -42,7 +43,7 @@ function Field({ label, children, isSelectable = false }: FieldProps) {
   return (
     <>
       <p>{label}</p>
-      <div className={`break-all text-body-strong ${isSelectable ? 'selectable' : 'select-none'}`}>{children}</div>
+      <div className={clsx('text-body-strong break-all', isSelectable ? 'selectable' : 'select-none')}>{children}</div>
     </>
   );
 }
@@ -200,7 +201,7 @@ export function VideoEntry({ video }: Props) {
           <img
             src={getMapThumbnailSrc(video.mapName, video.game)}
             alt={video.mapName}
-            className="h-[92px] rounded-4 mr-8 self-center"
+            className="mr-8 h-[92px] self-center rounded-4"
           />
 
           <div className="flex flex-wrap items-start gap-x-16">
@@ -281,11 +282,11 @@ export function VideoEntry({ video }: Props) {
           </Grid>
 
           <div className="flex flex-col">
-            <h2 className="text-body-strong mb-4">
+            <h2 className="mb-4 text-body-strong">
               <Trans>Sequences</Trans>
             </h2>
 
-            <div className="grid grid-cols-[60px_100px_100px_100px_100px_100px_1fr] p-4 bg-gray-200 rounded-t gap-4">
+            <div className="grid grid-cols-[60px_100px_100px_100px_100px_100px_1fr] gap-4 rounded-t bg-gray-200 p-4">
               <SequenceListHeader>#</SequenceListHeader>
               <SequenceListHeader>
                 <Trans>Start tick</Trans>
@@ -330,12 +331,12 @@ export function VideoEntry({ video }: Props) {
           </div>
 
           {video.output && (
-            <div className="flex flex-col gap-y-4 w-full">
+            <div className="flex w-full flex-col gap-y-4">
               <h2 className="text-body-strong">
                 <Trans>Output</Trans>
               </h2>
-              <div className="overflow-auto bg-gray-75 max-h-[600px]">
-                <pre className="select-text p-8">{video.output}</pre>
+              <div className="max-h-[600px] overflow-auto bg-gray-75">
+                <pre className="p-8 select-text">{video.output}</pre>
               </div>
             </div>
           )}

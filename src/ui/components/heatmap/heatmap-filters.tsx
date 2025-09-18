@@ -5,5 +5,5 @@ type Props = {
 };
 
 export function HeatmapFilters({ children }: Props) {
-  return <div className="flex flex-col w-[400px] gap-y-12 mr-16">{children}</div>;
+  return <div className="mr-16 flex w-[400px] flex-col gap-y-12">{children}</div>;
 }

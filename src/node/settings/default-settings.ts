@@ -40,6 +40,7 @@ export const defaultSettings: Settings = {
     redirectDemoToMatch: false,
   },
   analyze: {
+    maxConcurrentAnalyses: 4,
     analyzePositions: false,
   },
   playback: {

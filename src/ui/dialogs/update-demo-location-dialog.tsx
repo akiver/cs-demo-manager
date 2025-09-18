@@ -41,7 +41,7 @@ export function UpdateDemoLocationDialog({ checksum, demoFilePath }: Props) {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <div className="flex flex-col gap-y-8 max-w-[700px] break-all">
+        <div className="flex max-w-[700px] flex-col gap-y-8 break-all">
           <p>
             <Trans>
               The demo located at <code className="selectable">{demoFilePath}</code> doesn't exists.

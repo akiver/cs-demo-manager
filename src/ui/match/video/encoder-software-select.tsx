@@ -26,7 +26,7 @@ export function EncoderSoftwareSelect() {
   ];
 
   return (
-    <div className="flex flex-col gap-y-8 w-[152px] mb-8">
+    <div className="mb-8 flex w-[152px] flex-col gap-y-8">
       <InputLabel>
         <Trans context="Select label of video encoder">Encoder software</Trans>
       </InputLabel>

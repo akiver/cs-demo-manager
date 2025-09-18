@@ -15,7 +15,7 @@ export function DownloadFolderPath() {
       <p className="text-body-strong">
         <Trans>Download folder</Trans>
       </p>
-      <div className="flex gap-x-8 mt-8">
+      <div className="mt-8 flex gap-x-8">
         <TextInput value={downloadFolderPath} isReadOnly={true} />
         {downloadFolderPath !== undefined && <RevealFolderInExplorerButton path={downloadFolderPath} />}
         <ChangeButton onClick={showDownloadFolderDialog} />

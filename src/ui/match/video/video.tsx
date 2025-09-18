@@ -27,7 +27,7 @@ export function MatchVideo() {
   return (
     <Content>
       <div className="flex flex-col">
-        <div className="flex items-center flex-wrap gap-8">
+        <div className="flex flex-wrap items-center gap-8">
           <AddVideoToQueueButton />
           <AddNewSequenceButton />
           <GeneratePlayerSequencesButton />
@@ -39,8 +39,8 @@ export function MatchVideo() {
             <DocumentationLink url="https://cs-demo-manager.com/docs/guides/video" />
           </div>
         </div>
-        <div className="flex gap-x-12 mt-12">
-          <div className="flex flex-col border border-gray-400 p-8 rounded">
+        <div className="mt-12 flex gap-x-12">
+          <div className="flex flex-col rounded border border-gray-400 p-8">
             <div className="flex gap-x-12">
               <div className="flex flex-col">
                 {window.csdm.isWindows && <RecordingSystemSelect />}

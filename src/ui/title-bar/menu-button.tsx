@@ -4,7 +4,7 @@ import { BarsIcon } from 'csdm/ui/icons/bars-icon';
 export function MenuButton() {
   return (
     <button
-      className="flex items-center justify-center w-48 cursor-default h-full no-drag hover:bg-gray-300 outline-hidden"
+      className="flex h-full w-48 cursor-default items-center justify-center outline-hidden no-drag hover:bg-gray-300"
       onClick={() => {
         window.csdm.showTitleBarMenu();
       }}

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import clsx from 'clsx';
 import { TextInput, type TextInputHandlers } from './text-input';
 
 type Props<Value> = {
@@ -116,7 +117,7 @@ export function SearchInput<Value = unknown>({
     return (
       <div className="absolute z-10 w-full">
         <div
-          className="flex flex-col gap-y-4 bg-gray-50 border border-gray-400 rounded max-h-[200px] overflow-auto"
+          className="flex max-h-[200px] flex-col gap-y-4 overflow-auto rounded border border-gray-400 bg-gray-50"
           ref={resultsRef}
         >
           {results.length > 0 ? (
@@ -124,7 +125,7 @@ export function SearchInput<Value = unknown>({
               const hasFocus = focusedIndex === index;
               return (
                 <div
-                  className={`px-8 py-4 hover:bg-gray-100 ${hasFocus ? 'bg-gray-75' : ''}`}
+                  className={clsx('px-8 py-4 hover:bg-gray-100', hasFocus && 'bg-gray-75')}
                   key={getValueId(result)}
                   onMouseDown={(event) => {
                     event.stopPropagation();
@@ -149,17 +150,17 @@ export function SearchInput<Value = unknown>({
     }
 
     return (
-      <div className="flex flex-wrap max-h-[134px] overflow-y-auto mt-8 gap-x-8 gap-y-4">
+      <div className="mt-8 flex max-h-[134px] flex-wrap gap-x-8 gap-y-4 overflow-y-auto">
         {selectedValues.map((value) => {
           return (
             <div
               key={getValueId(value)}
-              className="flex items-center justify-center px-8 py-4 border rounded text-gray-700 gap-x-8"
+              className="flex items-center justify-center gap-x-8 rounded border px-8 py-4 text-gray-700"
             >
               {renderValue(value)}
               <button
                 disabled={isDisabled}
-                className="text-gray-800 hover:disabled:text-gray-800 hover:text-gray-900"
+                className="text-gray-800 hover:text-gray-900 hover:disabled:text-gray-800"
                 onClick={() => {
                   onValueRemoved(value);
                 }}

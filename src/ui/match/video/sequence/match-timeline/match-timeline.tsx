@@ -215,7 +215,7 @@ export function MatchTimeline() {
 
   return (
     <div className="flex border border-gray-900">
-      <div className="border-r border-r-gray-900 max-w-[200px]">
+      <div className="max-w-[200px] border-r border-r-gray-900">
         {groups.map((group) => {
           return (
             <div
@@ -225,7 +225,7 @@ export function MatchTimeline() {
                 height: group.height + 8, // add 4px vertical padding
               }}
             >
-              {group.label && <p className="px-4 truncate">{group.label}</p>}
+              {group.label && <p className="truncate px-4">{group.label}</p>}
             </div>
           );
         })}

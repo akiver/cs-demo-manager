@@ -123,7 +123,7 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
           </DialogTitle>
         </DialogHeader>
         <DialogContent>
-          <div className="flex items-center gap-x-4 mb-16">
+          <div className="mb-16 flex items-center gap-x-4">
             <ExclamationTriangleIcon className="size-16 text-red-700" />
             <p>
               <Trans>Valve Matchmaking demos do not contain voice audio data!</Trans>
@@ -131,16 +131,16 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
           </div>
           {warnings.length > 0 && (
             <div className="flex flex-col">
-              <div className="flex items-center gap-x-8 mb-8">
+              <div className="mb-8 flex items-center gap-x-8">
                 <ExclamationTriangleIcon className="size-16 text-orange-700" />
                 <p>
                   <Trans>Warnings:</Trans>
                 </p>
               </div>
-              <ul className="flex flex-col gap-y-8 p-8 rounded max-w-[824px] max-h-[224px] overflow-auto bg-gray-100">
+              <ul className="flex max-h-[224px] max-w-[824px] flex-col gap-y-8 overflow-auto rounded bg-gray-100 p-8">
                 {warnings.map((warning, index) => {
                   return (
-                    <li key={`${warning}${index}`} className="select-text break-all selectable">
+                    <li key={`${warning}${index}`} className="selectable break-all select-text">
                       {warning}
                     </li>
                   );

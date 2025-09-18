@@ -2563,12 +2563,12 @@ msgid "Tags:"
 msgstr "Tags:"
 
 #: src/ui/demo/next-demo-link.tsx
-msgid "Next demo ({key}+→)"
-msgstr "Nächste Demo ({key}+→)"
+msgid "Next demo ({modifierKey}+→)"
+msgstr ""
 
 #: src/ui/demo/previous-demo-link.tsx
-msgid "Previous demo ({key}+←)"
-msgstr "Vorherige Demo ({key}+←)"
+msgid "Previous demo ({modifierKey}+←)"
+msgstr ""
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
@@ -3608,11 +3608,6 @@ msgstr "Nicht zugewiesen"
 #: src/ui/hooks/use-update-demo-location.ts
 msgid "Select demo's path"
 msgstr "Demo-Pfad auswählen"
-
-#: src/ui/keyboard/keyboard-shortcut.ts
-msgctxt "Keyboard shortcut"
-msgid "C"
-msgstr "C"
 
 #: src/ui/left-bar/analyses-link.tsx
 msgctxt "Tooltip"
@@ -5940,6 +5935,46 @@ msgstr ""
 msgid "{time} Bomb planted by {planterName} at bomb site {site}"
 msgstr ""
 
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Tool"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Pen"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Eraser"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Size"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Color"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Undo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Redo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Clear"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Stop drawing"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Start drawing"
+msgstr ""
+
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"
 msgstr ""
@@ -6774,6 +6809,15 @@ msgstr ""
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Ignore bans happened before first match"
+msgstr ""
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgctxt "Settings title"
+msgid "Maximum number of concurrent analyses"
+msgstr ""
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgid "Maximum number of analyses that can run at the same time."
 msgstr ""
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx

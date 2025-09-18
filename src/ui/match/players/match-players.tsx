@@ -57,7 +57,7 @@ export function MatchPlayers() {
       <PlayerActionBar player={player} />
       <Content>
         <div className="flex flex-col gap-y-12">
-          <div className="flex gap-8 flex-wrap">
+          <div className="flex flex-wrap gap-8">
             <div className="flex flex-col gap-y-8">
               <HltvRatingPanel hltvRating={player.hltvRating} />
               <HltvRating2Panel hltvRating2={player.hltvRating2} />
@@ -94,7 +94,7 @@ export function MatchPlayers() {
               hostageRescuedCount={player.hostageRescuedCount}
             />
           </div>
-          <div className="flex gap-8 flex-wrap">
+          <div className="flex flex-wrap gap-8">
             <KillsPanel
               header={t`Kills`}
               kills={kills}

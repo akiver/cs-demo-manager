@@ -68,7 +68,7 @@ export function RenameDialog({ checksum, currentName }: Props) {
       isConfirmButtonDisabled={isValidName}
       closeOnConfirm={false}
     >
-      <div className="flex flex-col gap-y-8 max-w-[448px]">
+      <div className="flex max-w-[448px] flex-col gap-y-8">
         <p>
           <Trans>
             Only the name visible from the application will change, it will not change the filename on your operating

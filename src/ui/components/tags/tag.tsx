@@ -11,7 +11,7 @@ export function Tag(props: Props) {
   }
 
   return (
-    <div className="flex bg-gray-75 rounded border border-gray-300">
+    <div className="flex rounded border border-gray-300 bg-gray-75">
       <div
         className="w-12 rounded-l border-r border-gray-300"
         style={{
@@ -29,7 +29,7 @@ type TooltipProps = {
 
 export function TagsTooltip({ tagIds }: TooltipProps) {
   return (
-    <div className="flex gap-8 flex-wrap">
+    <div className="flex flex-wrap gap-8">
       {tagIds.map((tagId) => {
         return <Tag key={tagId} id={tagId} />;
       })}

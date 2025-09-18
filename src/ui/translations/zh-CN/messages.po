@@ -395,7 +395,7 @@ msgstr "连接到远程服务器时出错。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Failed to load changelog."
-msgstr ""
+msgstr "加载更新日志失败。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Changelog version {APP_VERSION}"
@@ -642,7 +642,7 @@ msgstr "详细信息"
 #: src/ui/components/context-menu/items/rename-item.tsx
 msgctxt "Keyboard shortcut"
 msgid "Enter"
-msgstr "是"
+msgstr "Enter"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
@@ -1137,7 +1137,7 @@ msgstr "它没有任何公司实体的支持，是一个自由和开放源码软
 
 #: src/ui/components/donate.tsx
 msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
-msgstr "非常感谢您的 <0> 捐赠 </0 > ，这将鼓励我继续改进 CS Demo Manager。谢谢！"
+msgstr "非常感谢您的 <0> 捐赠 </0> ，这将鼓励我继续改进 CS Demo Manager。谢谢！"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
@@ -1399,7 +1399,7 @@ msgstr "半径"
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
 msgid "Comment (Markdown supported)"
-msgstr "评论 (支持Markdown)"
+msgstr "评论 (支持 Markdown 格式)"
 
 #: src/ui/components/inputs/database-name-input.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
@@ -1496,7 +1496,7 @@ msgstr "下层"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
 msgid "Radar level"
-msgstr "雷达级别"
+msgstr "雷达楼层"
 
 #: src/ui/components/inputs/select/rounds-select.tsx
 msgctxt "Filter rounds category"
@@ -1561,7 +1561,7 @@ msgstr "投掷物"
 #. js-lingui-explicit-id
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgid "weaponType.melee"
-msgstr ""
+msgstr "近战"
 
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
@@ -2101,7 +2101,7 @@ msgstr "HLAE返回了一个错误"
 
 #: src/ui/components/messages/hlae-error.tsx
 msgid "Make sure HLAE is up to date and compatible with the last CS2 version on <0>GitHub</0> or <1>Discord</1>."
-msgstr "请确保HLA是最新版本，并且与最新的 CS2 版本兼容 <0>GitHub </0> 或<1>Discord</1>列。"
+msgstr "请查看 <0>GitHub</0> 或 <1>Discord</1>，确保 HLAE 是最新版本，并且与最新的 CS2 版本兼容。"
 
 #: src/ui/components/panels/average-damages-per-round-panel.tsx
 msgctxt "Panel title"
@@ -2563,12 +2563,12 @@ msgid "Tags:"
 msgstr "标签:"
 
 #: src/ui/demo/next-demo-link.tsx
-msgid "Next demo ({key}+→)"
-msgstr "下一个 demo({key}+→)"
+msgid "Next demo ({modifierKey}+→)"
+msgstr ""
 
 #: src/ui/demo/previous-demo-link.tsx
-msgid "Previous demo ({key}+←)"
-msgstr "上一个 demo({key}+←)"
+msgid "Previous demo ({modifierKey}+←)"
+msgstr ""
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
@@ -3609,11 +3609,6 @@ msgstr "未分配"
 msgid "Select demo's path"
 msgstr "选择 Demo 文件路径"
 
-#: src/ui/keyboard/keyboard-shortcut.ts
-msgctxt "Keyboard shortcut"
-msgid "C"
-msgstr "C"
-
 #: src/ui/left-bar/analyses-link.tsx
 msgctxt "Tooltip"
 msgid "Analyses"
@@ -3661,7 +3656,7 @@ msgstr "设置 ({shortcut})"
 #: src/ui/left-bar/teams-link.tsx
 msgctxt "Tooltip"
 msgid "Teams"
-msgstr "队伍i"
+msgstr "队伍"
 
 #: src/ui/left-bar/video-queue-link.tsx
 msgctxt "Tooltip"
@@ -5940,6 +5935,46 @@ msgstr "{time} {planterName} 在{site} 点安放的炸弹爆炸"
 msgid "{time} Bomb planted by {planterName} at bomb site {site}"
 msgstr "{time} {planterName} 在{site} 点安放炸弹"
 
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Tool"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Pen"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Eraser"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Size"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Color"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Undo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Redo"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Clear"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Stop drawing"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
+msgid "Start drawing"
+msgstr ""
+
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"
 msgstr "{time}静止时间结束"
@@ -6671,7 +6706,7 @@ msgstr "玩家"
 #: src/ui/search/search.tsx
 msgctxt "Input label"
 msgid "Victims"
-msgstr ""
+msgstr "受害者"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"
@@ -6775,6 +6810,15 @@ msgstr "忽略遇到该玩家之前的封禁事件"
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Ignore bans happened before first match"
 msgstr "忽略在第一场比赛之前的封禁事件"
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgctxt "Settings title"
+msgid "Maximum number of concurrent analyses"
+msgstr ""
+
+#: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
+msgid "Maximum number of analyses that can run at the same time."
+msgstr ""
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
@@ -7293,15 +7337,15 @@ msgstr "你选择了兼容 CS2「武库通行证」更新({armoryUpdateDate})之
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.8.8\"</0> in your Steam library to use this version."
-msgstr ""
+msgstr "除非使用自定义版本，否则你需要在你的Steam库中选择 CS2 测试版分支 <0>\"1.40.8.8\"</0> 使用。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the 'Animation' update ({animationUpdateDate}) up to the {update14095} update."
-msgstr ""
+msgstr "你选择了兼容 CS2「动画系统」更新({animationUpdateDate})到{update14095}更新之间版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.9.4\"</0> in your Steam library to use this version."
-msgstr ""
+msgstr "除非使用自定义版本，否则你需要在你的Steam库中选择 CS2 测试版分支 <0>\"1.40.9.4\"</0> 使用。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
@@ -7566,7 +7610,7 @@ msgstr "下载"
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Teams"
-msgstr ""
+msgstr "队伍"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgid "Initial page displayed on app startup"

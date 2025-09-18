@@ -73,14 +73,14 @@ function TeamChart({ teamName, players, kills, result, sides }: TeamChartProps) 
   const openDuelLostPercentage = roundNumberPercentage(openDuelTeamLostCount / openDuelTeamCount);
 
   return (
-    <div className="flex flex-col border border-gray-300 bg-gray-75 rounded p-8">
+    <div className="flex flex-col rounded border border-gray-300 bg-gray-75 p-8">
       <div className="flex flex-col">
         <div className="flex justify-between">
           <p className="text-body-strong">{teamName}</p>
           <p className="text-subtitle">{openDuelTeamCount}</p>
         </div>
 
-        <div className="flex w-full gap-x-4 my-4">
+        <div className="my-4 flex w-full gap-x-4">
           <div
             className="h-4 rounded-full bg-blue-700 transition-all duration-300"
             style={{
@@ -106,7 +106,7 @@ function TeamChart({ teamName, players, kills, result, sides }: TeamChartProps) 
           </div>
 
           <div className="flex flex-col">
-            <p className="text-subtitle text-red-700 text-right">
+            <p className="text-right text-subtitle text-red-700">
               <Trans>{openDuelLostPercentage}%</Trans>
             </p>
             <p>
@@ -116,17 +116,17 @@ function TeamChart({ teamName, players, kills, result, sides }: TeamChartProps) 
         </div>
       </div>
 
-      <div className="flex justify-center gap-x-12 mt-8">
+      <div className="mt-8 flex justify-center gap-x-12">
         {playersStats.map(({ steamId, avatar, name, wonCount, lostCount }) => {
           const openingDuelCount = wonCount + lostCount;
           return (
             <div key={steamId} className="flex">
               <div className="flex flex-col items-center">
-                <div className="flex flex-col items-center h-[284px] gap-y-4 justify-end">
+                <div className="flex h-[284px] flex-col items-center justify-end gap-y-4">
                   {lostCount > 0 && (
                     <Tooltip content={<Trans>Open duels lost: {lostCount}</Trans>} placement="top">
                       <div
-                        className="w-40 bg-red-700 flex justify-center animate-grow-height transition-all duration-300"
+                        className="flex w-40 animate-grow-height justify-center bg-red-700 transition-all duration-300"
                         style={{
                           height: `calc(${lostCount}/var(--max-opening-duel-count) * 100%)`,
                         }}
@@ -138,7 +138,7 @@ function TeamChart({ teamName, players, kills, result, sides }: TeamChartProps) 
                   {wonCount > 0 && (
                     <Tooltip content={<Trans>Open duels won: {wonCount}</Trans>} placement="top">
                       <div
-                        className="w-40 bg-blue-700 flex justify-center animate-grow-height transition-all duration-300"
+                        className="flex w-40 animate-grow-height justify-center bg-blue-700 transition-all duration-300"
                         style={{
                           height: `calc(${wonCount}/var(--max-opening-duel-count) * 100%)`,
                         }}
@@ -157,12 +157,12 @@ function TeamChart({ teamName, players, kills, result, sides }: TeamChartProps) 
                     }
                     placement="top"
                   >
-                    <div className="text-body-strong my-4 p-4 border border-gray-400 w-40 text-center">
+                    <div className="my-4 w-40 border border-gray-400 p-4 text-center text-body-strong">
                       <p>{openingDuelCount}</p>
                     </div>
                   </Tooltip>
                   <Avatar avatarUrl={avatar} playerName={name} size={48} />
-                  <p className="w-[72px] text-center truncate" title={name}>
+                  <p className="w-[72px] truncate text-center" title={name}>
                     {name}
                   </p>
                 </div>
@@ -211,7 +211,7 @@ export function OpeningDuelsStats() {
               }}
             />
           </div>
-          <div className="flex items-center gap-x-16 mt-12">
+          <div className="mt-12 flex items-center gap-x-16">
             <TeamChart
               teamName={teamNameA}
               players={playersTeamA}

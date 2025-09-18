@@ -77,7 +77,7 @@ export function WeaponTypesFilter({ onChange, selectedWeaponTypes }: Props) {
         <p>
           <Trans context="Filter weapon types category">Weapon types</Trans>
         </p>
-        <div className="ml-16 mt-px">
+        <div className="mt-px ml-16">
           <FilterSelection
             onSelectAllClick={() => {
               onChange(weaponTypes.map((weaponType) => weaponType.value));

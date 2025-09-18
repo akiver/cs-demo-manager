@@ -30,7 +30,7 @@ export function PlayerActionBar({ player }: Props) {
   return (
     <ActionBar
       left={
-        <div className="flex items-center gap-x-8 w-max">
+        <div className="flex w-max items-center gap-x-8">
           <a
             href={buildPlayerSteamProfileUrl(player.steamId)}
             target="_blank"

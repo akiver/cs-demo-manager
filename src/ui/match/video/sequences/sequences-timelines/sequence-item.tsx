@@ -107,13 +107,13 @@ export function SequenceItem({ sequence, ticksPerSecond, onEditClick }: Props) {
       renderInPortal={true}
     >
       <div
-        className="flex justify-center flex-col size-full border-y border-gray-700 overflow-hidden text-gray-900 bg-gray-75"
+        className="flex size-full flex-col justify-center overflow-hidden border-y border-gray-700 bg-gray-75 text-gray-900"
         onContextMenu={onContextMenu}
         onDoubleClick={() => onEditClick(sequence)}
       >
-        <div className="absolute w-px bg-gray-900 left-0 origin-left h-full" style={scaleStyle} />
-        <div className="absolute w-px bg-gray-900 right-0 origin-right h-full" style={scaleStyle} />
-        <div className="whitespace-nowrap pl-4 origin-left" style={scaleStyle}>
+        <div className="absolute left-0 h-full w-px origin-left bg-gray-900" style={scaleStyle} />
+        <div className="absolute right-0 h-full w-px origin-right bg-gray-900" style={scaleStyle} />
+        <div className="origin-left pl-4 whitespace-nowrap" style={scaleStyle}>
           <p>{`#${sequence.number}`}</p>
           <p>{`${durationInSeconds}s`}</p>
           <p>{`${sequence.startTick}-${sequence.endTick}`}</p>

@@ -39,6 +39,7 @@ type UISettings = {
 };
 
 type AnalyzeSettings = {
+  maxConcurrentAnalyses?: number;
   analyzePositions: boolean;
 };
 

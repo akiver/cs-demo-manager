@@ -59,7 +59,7 @@ export function PremierRankRepartitionChart() {
 
         return renderToString(
           <div className="flex flex-col gap-y-4">
-            <div className="self-center w-[64px]">
+            <div className="w-[64px] self-center">
               <PremierRank rank={tier * 1000 * 5} />
             </div>
             <p>{getTierName(tier)}</p>

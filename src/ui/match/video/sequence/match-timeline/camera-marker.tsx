@@ -13,7 +13,7 @@ export function CameraMarker({ tick, pixelsPerTick, playerIndex }: Props) {
 
   return (
     <div
-      className="absolute w-px h-full z-1 origin-left pointer-events-none"
+      className="pointer-events-none absolute z-1 h-full w-px origin-left"
       style={{
         ...scaleStyle,
         left: `${x}px`,

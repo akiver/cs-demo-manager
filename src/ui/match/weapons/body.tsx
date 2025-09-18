@@ -81,7 +81,7 @@ function BodyTooltip({ children, content }: BodyTooltipProps) {
       {ReactDOM.createPortal(
         <div
           ref={refs.setFloating}
-          className="bg-gray-100 border border-gray-400 p-8 rounded-8 transition-opacity duration-300 z-10 pointer-events-none"
+          className="pointer-events-none z-10 rounded-8 border border-gray-400 bg-gray-100 p-8 transition-opacity duration-300"
           style={{
             position: strategy,
             opacity: isVisible ? 1 : 0,

@@ -1,5 +1,6 @@
 import React, { useEffect, type ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
+import clsx from 'clsx';
 import { LeftArrowIcon } from 'csdm/ui/icons/left-arrow-icon';
 import { RightArrowIcon } from '../icons/right-arrow-icon';
 import { Tooltip } from './tooltip';
@@ -39,9 +40,10 @@ function NavigationLink({ children, ref, to, isDisabled }: NavigationLinkProps) 
   return (
     <Link
       ref={ref}
-      className={`flex items-center h-full ${
-        isDisabled ? 'text-gray-600 cursor-default pointer-events-none' : 'text-gray-900 cursor-pointer'
-      }`}
+      className={clsx(
+        'flex h-full items-center',
+        isDisabled ? 'pointer-events-none cursor-default text-gray-600' : 'cursor-pointer text-gray-900',
+      )}
       to={to}
       state={state}
       aria-disabled={isDisabled}

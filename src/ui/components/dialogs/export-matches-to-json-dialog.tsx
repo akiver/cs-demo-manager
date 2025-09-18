@@ -102,7 +102,7 @@ export function ExportMatchesToJsonDialog({ checksums }: Props) {
         <DialogContent>
           <div className="flex flex-col gap-y-8">
             <div>
-              <p className="text-body-strong mb-8">
+              <p className="mb-8 text-body-strong">
                 <Trans context="File destination">Output</Trans>
               </p>
               <div className="flex flex-col items-start gap-y-12">

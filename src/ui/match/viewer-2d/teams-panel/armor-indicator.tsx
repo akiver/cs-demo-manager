@@ -3,7 +3,7 @@ import { ArmorIcon } from 'csdm/ui/icons/armor-icon';
 import { ArmorWithHelmetIcon } from 'csdm/ui/icons/armor-with-helmet-icon';
 
 function Wrapper({ children }: { children: React.ReactNode }) {
-  return <div className="absolute left-4 bottom-4">{children}</div>;
+  return <div className="absolute bottom-4 left-4">{children}</div>;
 }
 
 type Props = {

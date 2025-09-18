@@ -10,7 +10,7 @@ type Props = {
 export function FetchMatchesConfirmation({ onContinueClick }: Props) {
   return (
     <CenteredContent>
-      <p className="text-subtitle mb-12">
+      <p className="mb-12 text-subtitle">
         <Trans>It will close Counter-Strike if it's running and start automatically for a few seconds.</Trans>
       </p>
       <Button onClick={onContinueClick} variant={ButtonVariant.Primary}>

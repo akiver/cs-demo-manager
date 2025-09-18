@@ -87,7 +87,7 @@ function renderWeaponIcon(kill: Kill) {
 function renderWeapon(kill: Kill) {
   return (
     <div className="flex gap-8">
-      {kill.isKillerAirborne && <AirborneKillIcon height={18} className="-mr-8 -mt-4" />}
+      {kill.isKillerAirborne && <AirborneKillIcon height={18} className="-mt-4 -mr-8" />}
       {renderWeaponIcon(kill)}
       {kill.isNoScope && <NoScopeIcon height={20} />}
       {kill.isThroughSmoke && <ThroughSmokeKillIcon height={20} />}

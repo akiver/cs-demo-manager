@@ -18,10 +18,10 @@ function MapEntry({ mapStats }: EntryProps) {
   const getMapThumbnailSrc = useGetMapThumbnailSrc();
 
   return (
-    <div className="flex gap-x-12 first:pt-0 py-12">
+    <div className="flex gap-x-12 py-12 first:pt-0">
       <div className="flex flex-col self-center">
         <img className="max-w-[200px] rounded-4" src={getMapThumbnailSrc(mapStats.mapName)} alt={mapStats.mapName} />
-        <p className="text-center selectable">{mapStats.mapName}</p>
+        <p className="selectable text-center">{mapStats.mapName}</p>
       </div>
       <Panel header={<Trans context="Panel title">Matches</Trans>} minWidth={200}>
         <PanelStatRow title={<Trans>Total</Trans>} value={mapStats.matchCount} />

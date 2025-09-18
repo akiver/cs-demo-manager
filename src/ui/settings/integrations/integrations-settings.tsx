@@ -18,7 +18,7 @@ export function IntegrationsSettings() {
         </div>
         <SteamAPIKey />
       </div>
-      <div className="flex flex-col gap-y-8 mt-12">
+      <div className="mt-12 flex flex-col gap-y-8">
         <div>
           <p className="text-body-strong">
             <Trans>FACEIT API key</Trans>

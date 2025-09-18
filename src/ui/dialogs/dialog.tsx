@@ -64,12 +64,12 @@ export function Dialog({
 
   return (
     <div
-      className="absolute inset-0 flex justify-center items-center bg-black/75 pt-[var(--title-bar-height)]"
+      className="absolute inset-0 flex items-center justify-center bg-black/75 pt-[var(--title-bar-height)]"
       onMouseDown={onBackgroundLayerClick}
     >
       <div
         ref={container}
-        className="flex flex-col bg-gray-50 text-gray-800 rounded min-w-[524px] max-h-[calc(100vh-140px)] overflow-y-auto focus-visible:outline-hidden shadow-[0_0_0_1px_var(--color-gray-300)]"
+        className="flex max-h-[calc(100vh-140px)] min-w-[524px] flex-col overflow-y-auto rounded bg-gray-50 text-gray-800 shadow-[0_0_0_1px_var(--color-gray-300)] focus-visible:outline-hidden"
         tabIndex={-1}
         onMouseDown={onMouseDown}
         onKeyDown={onKeyDown}
@@ -87,7 +87,7 @@ type ContentProps = {
 };
 
 export function DialogContent({ children }: ContentProps) {
-  return <div className="flex flex-col px-24 pb-24 pt-12">{children}</div>;
+  return <div className="flex flex-col px-24 pt-12 pb-24">{children}</div>;
 }
 
 type HeaderProps = {
@@ -104,7 +104,7 @@ type FooterProps = {
 
 export function DialogFooter({ children }: FooterProps) {
   return (
-    <footer className="flex items-center justify-end flex-1 gap-x-8 p-24 border-t border-gray-200">{children}</footer>
+    <footer className="flex flex-1 items-center justify-end gap-x-8 border-t border-gray-200 p-24">{children}</footer>
   );
 }
 

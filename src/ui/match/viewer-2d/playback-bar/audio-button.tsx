@@ -128,8 +128,8 @@ function AudioPopover() {
   const offsetSeconds = Math.round(audioOffsetSeconds);
 
   return (
-    <div className="flex justify-between items-center bg-gray-100 w-[37.5rem] p-16 cursor-default rounded-8">
-      <div className="flex flex-col gap-y-5 w-full">
+    <div className="flex w-[37.5rem] cursor-default items-center justify-between rounded-8 bg-gray-100 p-16">
+      <div className="flex w-full flex-col">
         <div ref={containerRef} className="waveform" />
         {ws ? (
           <div className="flex flex-col gap-y-8">
@@ -144,10 +144,10 @@ function AudioPopover() {
                 ws.setTime(Number(event.target.value));
               }}
             />
-            <div className="w-full flex items-center gap-x-8 justify-between flex-wrap">
+            <div className="flex w-full flex-wrap items-center justify-between gap-x-8">
               <div className="flex items-center gap-x-8">
                 <button
-                  className="size-16 cursor-pointer shrink-0"
+                  className="size-16 shrink-0 cursor-pointer"
                   onClick={() => {
                     ws.playPause();
                   }}
@@ -211,7 +211,7 @@ function AudioPopover() {
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-center size-full absolute inset-0">
+          <div className="absolute inset-0 flex size-full items-center justify-center">
             <Spinner size={40} />
           </div>
         )}
@@ -241,7 +241,7 @@ export function AudioButton() {
             setIsPopoverVisible(!isPopoverVisible);
           }}
         >
-          <SoundIcon className="size-32" />
+          <SoundIcon className="size-20" />
         </PlaybackBarButton>
       </PopoverTrigger>
 

@@ -54,7 +54,7 @@ function AddAccountDialog() {
         onEnterKeyDown={onConfirm}
         autoFocus={true}
       />
-      <div className="flex items-center gap-x-4 mt-4">
+      <div className="mt-4 flex items-center gap-x-4">
         <ExclamationTriangleIcon className="size-12 text-orange-700" />
         <p className="text-caption">
           <Trans>The nickname is case sensitive!</Trans>
@@ -106,9 +106,9 @@ export function FaceitAccounts() {
       const avatarSrc = account.avatarUrl === '' ? window.csdm.getDefaultPlayerAvatar() : account.avatarUrl;
 
       return (
-        <div className="flex p-8 border-gray-300 border-t first:border-t-0 w-fit" key={account.id}>
+        <div className="flex w-fit border-t border-gray-300 p-8 first:border-t-0" key={account.id}>
           <a
-            className="flex items-center w-[224px] gap-x-4 mr-8"
+            className="mr-8 flex w-[224px] items-center gap-x-4"
             href={`https://www.faceit.com/en/players/${account.nickname}`}
             target="_blank"
             rel="noreferrer"
@@ -140,7 +140,7 @@ export function FaceitAccounts() {
 
   return (
     <div>
-      <div className="flex items-center gap-x-16 my-12">
+      <div className="my-12 flex items-center gap-x-16">
         <p className="text-body-strong">
           <Trans>Accounts</Trans>
         </p>

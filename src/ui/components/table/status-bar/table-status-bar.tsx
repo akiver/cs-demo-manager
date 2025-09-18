@@ -7,7 +7,7 @@ type Props = {
 
 export function TableStatusBar({ children }: Props) {
   return (
-    <div className="mt-auto p-8 bg-gray-50 w-full border-t border-t-gray-300">
+    <div className="mt-auto w-full border-t border-t-gray-300 bg-gray-50 p-8">
       <div className="flex items-center justify-end">{children}</div>
     </div>
   );

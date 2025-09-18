@@ -6,5 +6,5 @@ type Props = {
 };
 
 export function AppContent({ children }: Props) {
-  return <div className="flex flex-col flex-1 w-full bg-gray-50 overflow-hidden">{children}</div>;
+  return <div className="flex w-full flex-1 flex-col overflow-hidden bg-gray-50">{children}</div>;
 }

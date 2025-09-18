@@ -180,9 +180,9 @@ export function ConnectDatabase() {
 
     const hint = getHintFromError(error);
     return (
-      <div className="flex flex-col mt-8 max-w-[600px] m-auto">
+      <div className="m-auto mt-8 flex max-w-[600px] flex-col">
         <ErrorMessage message={<Trans>The connection to the database failed with the following error:</Trans>} />
-        <p className="text-body-strong select-text my-8">{error.message}</p>
+        <p className="my-8 text-body-strong select-text">{error.message}</p>
         {hint}
       </div>
     );
@@ -191,15 +191,15 @@ export function ConnectDatabase() {
   return (
     <AppWrapper>
       <AppContent>
-        <div className="flex flex-col m-auto">
-          <div className="flex flex-col w-[400px] m-auto">
+        <div className="m-auto flex flex-col">
+          <div className="m-auto flex w-[400px] flex-col">
             <div>
               <p>
                 <Trans>CS Demo Manager requires a PostgreSQL database.</Trans>
               </p>
               <HelpLink />
             </div>
-            <div className="flex flex-col mt-12 gap-12">
+            <div className="mt-12 flex flex-col gap-12">
               <div className="flex gap-x-8">
                 <div className="w-full">
                   <HostnameInput

@@ -10,7 +10,7 @@ export function FfmpegAudioBitrateSelect() {
   const options: SelectOption<number>[] = [128, 256, 320].map((bitrate) => {
     return {
       value: bitrate,
-      label: bitrate.toString(),
+      label: bitrate,
     };
   });
 
@@ -25,7 +25,7 @@ export function FfmpegAudioBitrateSelect() {
         onChange={async (audioBitrate) => {
           await updateSettings({
             ffmpegSettings: {
-              audioBitrate,
+              audioBitrate: Number(audioBitrate),
             },
           });
         }}

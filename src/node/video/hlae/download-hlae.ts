@@ -13,7 +13,7 @@ export async function downloadHlae(installationFolderPath: string): Promise<stri
     }
   } catch (error) {
     logger.error(error);
-    throw new Error('An error occurred while contacting GitHub');
+    throw new Error('An error occurred while contacting GitHub', { cause: error });
   }
 
   try {
@@ -24,6 +24,6 @@ export async function downloadHlae(installationFolderPath: string): Promise<stri
     return version;
   } catch (error) {
     logger.error(error);
-    throw new Error('An error occurred while downloading zip archive');
+    throw new Error('An error occurred while downloading zip archive', { cause: error });
   }
 }

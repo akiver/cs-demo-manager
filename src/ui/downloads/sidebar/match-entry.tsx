@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import type { Game, TeamNumber } from 'csdm/common/types/counter-strike';
 import { MatchScore } from 'csdm/ui/downloads/sidebar/match-score';
 import { MatchDate } from 'csdm/ui/downloads/sidebar/match-date';
@@ -50,17 +51,19 @@ export function MatchEntry({
 
   return (
     <div
-      className={`flex items-center border-b border-b-gray-300 cursor-pointer p-8 border-l-2 ${
-        isSelected ? 'bg-gray-100' : 'bg-gray-50 hover:bg-gray-75'
-      } ${borderLeftClasses[result]}`}
+      className={clsx(
+        'flex cursor-pointer items-center border-b border-l-2 border-b-gray-300 p-8',
+        isSelected ? 'bg-gray-100' : 'bg-gray-50 hover:bg-gray-75',
+        borderLeftClasses[result],
+      )}
       onClick={selectMatch}
     >
       <div className="flex flex-col items-center">
-        <img className="w-[128px] h-[64px]" src={getMapThumbnailSrc(mapName, game)} alt={mapName} />
+        <img className="h-[64px] w-[128px]" src={getMapThumbnailSrc(mapName, game)} alt={mapName} />
         <p>{mapName}</p>
       </div>
       <div className="flex flex-col items-center pl-8">
-        <div className="flex items-center justify-around w-full">
+        <div className="flex w-full items-center justify-around">
           <MatchScore teamNumber={sideOnTheLeft} score={scoreOnTheLeft} />
           <p className="text-body-strong">-</p>
           <MatchScore teamNumber={sideOnTheRight} score={scoreOnTheRight} />

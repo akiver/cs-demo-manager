@@ -14,7 +14,7 @@ type LineProps = {
 function Line({ sideTeamA, winnerSide }: LineProps) {
   return (
     <div
-      className="flex grow mx-4 h-[2px]"
+      className="mx-4 flex h-[2px] grow"
       style={{
         alignSelf: sideTeamA === winnerSide ? 'flex-start' : 'flex-end',
         backgroundColor: getTeamColor(winnerSide),
@@ -29,7 +29,7 @@ type Props = {
 
 export function RoundsTimeline({ rounds }: Props) {
   return (
-    <div className="flex my-8">
+    <div className="my-8 flex">
       {rounds.map((round, index) => {
         let isNextRoundSideSwitch = false;
         if (index < rounds.length - 1) {

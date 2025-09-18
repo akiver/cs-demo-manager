@@ -24,10 +24,10 @@ export function TitleBar() {
   return (
     <div
       onDoubleClick={onDoubleClick}
-      className="flex items-center text-gray-900 bg-gray-50 border-b border-b-gray-300 h-[var(--title-bar-height)] overflow-hidden drag"
+      className="flex h-[var(--title-bar-height)] items-center overflow-hidden border-b border-b-gray-300 bg-gray-50 text-gray-900 drag"
     >
       {!window.csdm.isMac && <MenuButton />}
-      <div className="flex items-center gap-x-16 mx-auto">
+      <div className="mx-auto flex items-center gap-x-16">
         {databaseStatus === DatabaseStatus.Connected && <HistoryNavigation />}
         <p>{`CS Demo Manager ${APP_VERSION}`}</p>
         <UpdateAvailableButton />
