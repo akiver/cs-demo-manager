@@ -17,6 +17,7 @@ import { isValidRecordingOutput } from 'csdm/common/types/recording-output';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import { isValidVideoContainer } from 'csdm/common/types/video-container';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
+import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
 import { isHlaeInstalled } from 'csdm/node/video/hlae/is-hlae-installed';
 import { installHlae } from 'csdm/node/video/hlae/install-hlae';
 import { isVirtualDubInstalled } from 'csdm/node/video/virtual-dub/is-virtual-dub-installed';
@@ -52,6 +53,7 @@ export class VideoCommand extends Command {
   private readonly noPlayerVoicesFlag = 'no-player-voices';
   private readonly deathNoticesDurationFlag = 'death-notices-duration';
   private readonly cfgFlag = 'cfg';
+  private readonly focusPlayerFlag = 'focus-player';
   private outputFolderPath: string | undefined;
   private demoPath: string = '';
   private startTick: number = 0;
@@ -76,6 +78,7 @@ export class VideoCommand extends Command {
   private playerVoices: boolean | undefined;
   private deathNoticesDuration: number | undefined;
   private cfg: string | undefined;
+  private focusPlayerSteamId: string | undefined;
 
   public getDescription() {
     return 'Generate videos from demos.';
@@ -114,6 +117,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.noPlayerVoicesFlag}`);
     console.log(`  --${this.deathNoticesDurationFlag} <number>`);
     console.log(`  --${this.cfgFlag} <string>`);
+    console.log(`  --${this.focusPlayerFlag} <steamId>`);
   }
 
   public async run() {
@@ -137,6 +141,15 @@ export class VideoCommand extends Command {
         deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
         cfg: this.cfg,
       };
+
+      if (this.focusPlayerSteamId) {
+        const player = await fetchPlayer(this.focusPlayerSteamId);
+        sequence.cameras.push({
+          tick: this.startTick,
+          playerSteamId: this.focusPlayerSteamId,
+          playerName: player.name,
+        });
+      }
 
       const recordingSystem = this.recordingSystem ?? settings.video.recordingSystem;
       if (recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
@@ -245,6 +258,7 @@ export class VideoCommand extends Command {
         [this.noPlayerVoicesFlag]: { type: 'boolean' },
         [this.deathNoticesDurationFlag]: { type: 'string' },
         [this.cfgFlag]: { type: 'string' },
+        [this.focusPlayerFlag]: { type: 'string' },
       },
       allowPositionals: true,
       args: this.args,
@@ -438,6 +452,9 @@ export class VideoCommand extends Command {
     }
     if (values[this.cfgFlag]) {
       this.cfg = values[this.cfgFlag];
+    }
+    if (values[this.focusPlayerFlag]) {
+      this.focusPlayerSteamId = values[this.focusPlayerFlag] as string;
     }
   }
 }
