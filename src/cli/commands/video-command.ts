@@ -23,6 +23,7 @@ import { isVirtualDubInstalled } from 'csdm/node/video/virtual-dub/is-virtual-du
 import { downloadAndExtractVirtualDub } from 'csdm/node/video/virtual-dub/download-and-extract-virtual-dub';
 import { isFfmpegInstalled } from 'csdm/node/video/ffmpeg/is-ffmpeg-installed';
 import { installFfmpeg } from 'csdm/node/video/ffmpeg/install-ffmpeg';
+import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
 
 export class VideoCommand extends Command {
   public static Name = 'video';
@@ -142,13 +143,13 @@ export class VideoCommand extends Command {
       };
 
       if (this.focusPlayerSteamId) {
-          const player = await fetchPlayer(this.focusPlayerSteamId);
-          sequence.cameras.push({
-            tick: this.startTick,
-            playerSteamId: this.focusPlayerSteamId,
-            playerName: player.name,
-          });
-    }
+        const player = await fetchPlayer(this.focusPlayerSteamId);
+        sequence.cameras.push({
+          tick: this.startTick,
+          playerSteamId: this.focusPlayerSteamId,
+          playerName: player.name,
+        });
+      }
 
       const recordingSystem = this.recordingSystem ?? settings.video.recordingSystem;
       if (recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
