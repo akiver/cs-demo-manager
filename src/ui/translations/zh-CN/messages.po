@@ -2564,11 +2564,11 @@ msgstr "标签:"
 
 #: src/ui/demo/next-demo-link.tsx
 msgid "Next demo ({modifierKey}+→)"
-msgstr ""
+msgstr "下一个 demo({modifierKey}+→)"
 
 #: src/ui/demo/previous-demo-link.tsx
 msgid "Previous demo ({modifierKey}+←)"
-msgstr ""
+msgstr "上一个 demo({modifierKey}+←)"
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
@@ -5937,43 +5937,43 @@ msgstr "{time} {planterName} 在{site} 点安放炸弹"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Tool"
-msgstr ""
+msgstr "工具"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Pen"
-msgstr ""
+msgstr "画笔"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Eraser"
-msgstr ""
+msgstr "橡皮"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Size"
-msgstr ""
+msgstr "笔尖大小"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Color"
-msgstr ""
+msgstr "颜色"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Undo"
-msgstr ""
+msgstr "撤销"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Redo"
-msgstr ""
+msgstr "重做"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Stop drawing"
-msgstr ""
+msgstr "结束画图"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Start drawing"
-msgstr ""
+msgstr "开始画图"
 
 #: src/ui/match/viewer-2d/playback-bar/freezetime-end-indicator.tsx
 msgid "{time} Freeze time ended"
@@ -5981,17 +5981,17 @@ msgstr "{time}静止时间结束"
 
 #: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
 msgid "Lower radar configuration"
-msgstr ""
+msgstr "下层雷达配置"
 
 #: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
 msgctxt "Input label"
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #: src/ui/match/viewer-2d/playback-bar/lower-radar-button.tsx
 msgctxt "Input label"
 msgid "Y"
-msgstr ""
+msgstr "Y"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading the audio file found for this match."
@@ -6814,11 +6814,11 @@ msgstr "忽略在第一场比赛之前的封禁事件"
 #: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
 msgctxt "Settings title"
 msgid "Maximum number of concurrent analyses"
-msgstr ""
+msgstr "最大并发分析的数量"
 
 #: src/ui/settings/analyze/max-concurrent-analyses-select.tsx
 msgid "Maximum number of analyses that can run at the same time."
-msgstr ""
+msgstr "可同时进行分析的最大数量。"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
