@@ -5,6 +5,7 @@ export const CS2PluginVersion = {
   '14030': '14030', // Support from the beta to the 3rd October 2024 update ("Armory").
   '14088': '14088', // Support between the "Armory" update and the 28th July 2025 update ("Animation").
   '14094': '14094', // Support between the 28th July 2025 update ("Animation") and the 14th August 2025 update.
+  '14103': '14103', // Support between the 14th August 2025 update and the 17th September 2025 update.
   latest: 'latest',
 } as const;
 

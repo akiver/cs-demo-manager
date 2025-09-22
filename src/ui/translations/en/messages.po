@@ -520,6 +520,7 @@ msgid "Folder not found"
 msgstr "Folder not found"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
+#: src/ui/components/buttons/reveal-plugin-log-file-button.tsx
 msgid "Reveal log file"
 msgstr "Reveal log file"
 
@@ -7345,6 +7346,14 @@ msgstr "You selected a version compatible with CS2 from the 'Animation' update (
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.9.4\"</0> in your Steam library to use this version."
 msgstr "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.9.4\"</0> in your Steam library to use this version."
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update."
+msgstr "You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update."
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.0.3\"</0> in your Steam library to use this version."
+msgstr "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.0.3\"</0> in your Steam library to use this version."
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"

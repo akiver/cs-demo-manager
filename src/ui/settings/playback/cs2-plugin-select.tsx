@@ -23,6 +23,7 @@ export function Cs2PluginSelect() {
   const armoryUpdateDate = formatDate('2024-10-03', dateOptions);
   const animationUpdateDate = formatDate('2025-07-28', dateOptions);
   const update14095 = formatDate('2025-08-14', dateOptions);
+  const update14104 = formatDate('2025-09-17', dateOptions);
 
   const options: SelectOption<PluginVersion>[] = Object.values(PluginVersion).map((version) => ({
     value: version,
@@ -69,6 +70,22 @@ export function Cs2PluginSelect() {
             <p>
               <Trans>
                 If not using a custom build, you must select the CS2 beta branch <strong>"1.40.9.4"</strong> in your
+                Steam library to use this version.
+              </Trans>
+            </p>
+          </div>
+        );
+      case PluginVersion[14103]:
+        return (
+          <div>
+            <p>
+              <Trans>
+                You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update.
+              </Trans>
+            </p>
+            <p>
+              <Trans>
+                If not using a custom build, you must select the CS2 beta branch <strong>"1.41.0.3"</strong> in your
                 Steam library to use this version.
               </Trans>
             </p>
