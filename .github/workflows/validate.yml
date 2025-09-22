@@ -78,6 +78,7 @@ jobs:
         id: git-diff
         run: |
           npm run i18n:extract
+          git diff --ignore-blank-lines src/ui/translations src/electron-main/translations
           echo "MODIFIED=$(if [ -n "$(git diff --ignore-blank-lines src/ui/translations src/electron-main/translations)" ]; then echo "true"; else echo "false"; fi)" >> "$GITHUB_OUTPUT"
 
       - name: Fail if all translations have not been extracted
