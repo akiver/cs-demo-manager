@@ -525,7 +525,6 @@ msgid "Folder not found"
 msgstr "未找到文件夹"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
-#: src/ui/components/buttons/reveal-plugin-log-file-button.tsx
 msgid "Reveal log file"
 msgstr "显示日志文件"
 

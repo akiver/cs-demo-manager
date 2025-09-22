@@ -520,7 +520,6 @@ msgid "Folder not found"
 msgstr "Folder not found"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
-#: src/ui/components/buttons/reveal-plugin-log-file-button.tsx
 msgid "Reveal log file"
 msgstr "Reveal log file"
 
