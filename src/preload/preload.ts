@@ -10,6 +10,7 @@ import type {
 } from 'electron';
 import { ipcRenderer, contextBridge, webUtils } from 'electron';
 import fs from 'fs-extra';
+import type { PreloadResult } from './preload-result';
 import { getRankImageSrc } from 'csdm/node/filesystem/get-rank-image-src';
 import { getPremierRankImageSrc } from 'csdm/node/filesystem/get-premier-rank-image-src';
 import { isMac } from 'csdm/node/os/is-mac';
@@ -37,6 +38,8 @@ import { getAppInformation } from 'csdm/node/get-app-information';
 import { resetSettings } from 'csdm/node/settings/reset-settings';
 import { getDemoAudioData } from 'csdm/preload/get-demo-audio-data';
 import { getDemoAudioFilePath } from 'csdm/node/demo/get-demo-audio-file-path';
+import { getCounterStrikeLogFilePath } from 'csdm/node/counter-strike/get-counter-strike-log-file-path';
+import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {
@@ -272,6 +275,14 @@ const api: PreloadApi = {
 
   getDemoAudioFilePath,
   getDemoAudioData,
+  getCounterStrikeLogFilePath: async (game): Promise<PreloadResult<string>> => {
+    try {
+      const logFilePath = await getCounterStrikeLogFilePath(game);
+      return { success: logFilePath };
+    } catch (error) {
+      return { error: { code: getErrorCodeFromError(error) } };
+    }
+  },
 };
 
 contextBridge.exposeInMainWorld('csdm', api);

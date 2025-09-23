@@ -247,6 +247,7 @@ msgstr "Loading ban stats…"
 #: src/ui/search/filters/search-maps-input.tsx
 #: src/ui/search/filters/search-players-input.tsx
 #: src/ui/settings/about/clear-logs-button.tsx
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
@@ -518,6 +519,11 @@ msgstr "{0, select, darwin {Reveal in Finder} win32 {Reveal in Explorer} other {
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 msgid "Folder not found"
 msgstr "Folder not found"
+
+#: src/ui/components/buttons/reveal-log-file-button.tsx
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
+msgid "The log file does not exist"
+msgstr "The log file does not exist"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
 msgid "Reveal log file"
@@ -6741,6 +6747,10 @@ msgid "Information"
 msgstr "Information"
 
 #: src/ui/settings/about/about.tsx
+msgid "Logs"
+msgstr "Logs"
+
+#: src/ui/settings/about/about.tsx
 msgid "Credits"
 msgstr "Credits"
 
@@ -6796,6 +6806,10 @@ msgstr "It will reset settings excepted database information!"
 #: src/ui/settings/about/reset-settings-button.tsx
 msgid "Reset settings"
 msgstr "Reset settings"
+
+#: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
+msgid "Reveal {gameName} log file"
+msgstr "Reveal {gameName} log file"
 
 #: src/ui/settings/about/see-changelog-button.tsx
 msgctxt "Button"

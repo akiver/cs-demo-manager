@@ -7,6 +7,7 @@ import type {
 } from 'electron';
 import type fs from 'fs-extra';
 import type { ILogger } from 'csdm/node/logger';
+import type { PreloadResult } from 'csdm/preload/preload-result';
 import type { Settings } from 'csdm/node/settings/settings';
 import type { UpdateSettingsOptions } from 'csdm/node/settings/update-settings';
 import type { getMapRadarBase64 } from 'csdm/node/filesystem/maps/get-map-radar-base64';
@@ -92,6 +93,7 @@ declare global {
     shouldShowChangelog: () => Promise<boolean>;
     getDemoAudioFilePath: typeof getDemoAudioFilePath;
     getDemoAudioData: typeof getDemoAudioData;
+    getCounterStrikeLogFilePath: (game: Game) => Promise<PreloadResult<string>>;
   }
 
   interface Window {

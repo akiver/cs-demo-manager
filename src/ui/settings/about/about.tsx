@@ -15,6 +15,8 @@ import { useSettings } from '../use-settings';
 import { useUpdateSettings } from '../use-update-settings';
 import { Donate } from 'csdm/ui/components/donate';
 import { SeeChangelogButton } from './see-changelog-button';
+import { RevealCounterStrikeLogFileButton } from './reveal-counter-strike-log-file-button';
+import { Game } from 'csdm/common/types/counter-strike';
 
 export function About() {
   const client = useWebSocketClient();
@@ -81,9 +83,19 @@ export function About() {
           ))}
           <div className="mt-4 flex items-center gap-x-8">
             <CopyButton data={data.join('\n')} />
+            <ResetSettingsButton />
+          </div>
+        </section>
+
+        <section className="flex flex-col">
+          <h2 className="text-subtitle">
+            <Trans>Logs</Trans>
+          </h2>
+          <div className="mt-4 flex items-center gap-x-8">
             <RevealLogFileButton />
             <ClearLogsButton />
-            <ResetSettingsButton />
+            <RevealCounterStrikeLogFileButton game={Game.CS2} />
+            <RevealCounterStrikeLogFileButton game={Game.CSGO} />
           </div>
         </section>
 
