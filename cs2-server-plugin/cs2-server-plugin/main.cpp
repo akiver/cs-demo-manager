@@ -1,6 +1,7 @@
 #include <thread>
 #include <fstream>
 #include <queue>
+#include <sstream>
 #include <nlohmann/json.hpp>
 #include <easywsclient.hpp>
 #include "icvar.h"
@@ -204,13 +205,22 @@ void LoadSequencesFile(string demoPath) {
 
     string demoJsonPath = demoPath + ".json";
     if (FileExists(demoJsonPath)) {
+        Log("Loading JSON file %s",  demoJsonPath.c_str());
         std::ifstream jsonFile(demoJsonPath);
         json jsonSequences = json::parse(jsonFile);
+
+        std::istringstream stream(jsonSequences.dump(2));
+        string line;
+        while (std::getline(stream, line)) {
+            Log("%s", line.c_str());
+        }
+
         if (jsonSequences.size() == 0) {
             Log("No sequences found in JSON file");
             return;
         }
 
+        Log("Loading %d sequences", jsonSequences.size());
         for (auto jsonSequence : jsonSequences) {
             Sequence sequence;
             for (auto jsonAction : jsonSequence["actions"]) {
@@ -220,9 +230,10 @@ void LoadSequencesFile(string demoPath) {
                 sequence.actions.push_back(action);
             }
             sequences.push(sequence);
+            Log("Sequence with %d actions loaded", sequence.actions.size());
         }
 
-        Log("JSON sequences file loaded: %s", demoJsonPath.c_str());
+        Log("%d sequences loaded", sequences.size());
     }
     else {
         Log("JSON sequences file not found at %s", demoJsonPath.c_str());
@@ -251,7 +262,7 @@ void PlaybackLoop() {
 
         bool newIsPlayingDemo = engine->IsPlayingDemo();
         if (newIsPlayingDemo && !isPlayingDemo) {
-            Log("Demo playback started %d", currentTick);
+            Log("[%d] Demo playback started, sequences %d", currentTick, sequences.size());
             currentTick = -1;
 
             // Required to make the spec_lock_to_accountid command working since the 25/04/2024 update - it looks like the command has been hidden.
@@ -259,7 +270,7 @@ void PlaybackLoop() {
             UnhideCommandsAndCvars();
         }
         else if (!newIsPlayingDemo && isPlayingDemo) {
-            Log("Demo playback stopped %d", currentTick);
+            Log("[%d] Demo playback stopped, sequences %d", currentTick, sequences.size());
             currentTick = -1;
         }
 
@@ -281,18 +292,18 @@ void PlaybackLoop() {
             for (auto action : currentSequence.actions) {
                 if (action.tick == newTick) {
                     if (action.cmd == "pause_playback") {
-                        Log("Pausing demo playback");
+                        Log("[%d] Pausing demo playback", newTick);
                         engine->ExecuteClientCmd(0, "demo_pause", true);
                         std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-                        Log("Resuming demo playback");
+                        Log("[%d] Resuming demo playback", newTick);
                         engine->ExecuteClientCmd(0, "demo_resume", true);
                     } else if (action.cmd == "go_to_next_sequence") {
-                        Log("Going to next sequence, remaining sequences: %d", sequences.size() - 1);
+                        Log("[%d] Going to next sequence, remaining sequences: %d", newTick, sequences.size() - 1);
                         sequences.pop();
                         engine->ExecuteClientCmd(0, "demo_gototick 0", true);
                         currentTick = -1;
                     } else {
-                        Log("Executing: %s", action.cmd.c_str());
+                        Log("[%d] Executing: %s", newTick, action.cmd.c_str());
                         engine->ExecuteClientCmd(0, action.cmd.c_str(), true);
                     }
                 }
@@ -305,7 +316,7 @@ void PlaybackLoop() {
 
 void HandleWebSocketMessage(const std::string& message)
 {
-    Log("Message received: %s", message.c_str());
+    Log("[%d] Message received: %s", currentTick, message.c_str());
 
     json msg = json::parse(message.c_str());
     if (!msg.contains("name")) {
