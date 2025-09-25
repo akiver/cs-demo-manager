@@ -141,6 +141,7 @@ export type VideoSettings = {
   closeGameAfterRecording: boolean;
   showOnlyDeathNotices: boolean;
   showXRay: boolean;
+  showAssists: boolean;
   concatenateSequences: boolean;
   playerVoicesEnabled: boolean;
   ffmpegSettings: FfmpegSettings;

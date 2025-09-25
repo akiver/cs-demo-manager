@@ -73,6 +73,7 @@ export const defaultSettings: Settings = {
     closeGameAfterRecording: true,
     concatenateSequences: false,
     showXRay: true,
+    showAssists: true,
     showOnlyDeathNotices: true,
     deathNoticesDuration: 5,
     playerVoicesEnabled: true,

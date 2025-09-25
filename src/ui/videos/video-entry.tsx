@@ -286,7 +286,7 @@ export function VideoEntry({ video }: Props) {
               <Trans>Sequences</Trans>
             </h2>
 
-            <div className="grid grid-cols-[60px_100px_100px_100px_100px_100px_1fr] gap-4 rounded-t bg-gray-200 p-4">
+            <div className="grid grid-cols-[60px_100px_100px_100px_100px_100px_100px_1fr] gap-4 rounded-t bg-gray-200 p-4">
               <SequenceListHeader>#</SequenceListHeader>
               <SequenceListHeader>
                 <Trans>Start tick</Trans>
@@ -296,6 +296,9 @@ export function VideoEntry({ video }: Props) {
               </SequenceListHeader>
               <SequenceListHeader>
                 <Trans>X-Ray</Trans>
+              </SequenceListHeader>
+              <SequenceListHeader>
+                <Trans>Assists</Trans>
               </SequenceListHeader>
               <SequenceListHeader>
                 <Trans>Player voices</Trans>
@@ -315,12 +318,13 @@ export function VideoEntry({ video }: Props) {
                 return (
                   <li
                     key={sequence.number}
-                    className="grid grid-cols-[60px_100px_100px_100px_100px_100px_1fr] gap-4 border border-gray-200 p-4 last:rounded-b"
+                    className="grid grid-cols-[60px_100px_100px_100px_100px_100px_100px_1fr] gap-4 border border-gray-200 p-4 last:rounded-b"
                   >
                     <p>{sequence.number}</p>
                     <p>{sequence.startTick}</p>
                     <p>{sequence.endTick}</p>
                     <p>{sequence.showXRay ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
+                    <p>{sequence.showAssists ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.playerVoicesEnabled ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.cameras.length}</p>
                     <p>{firstCamera?.playerName ? firstCamera.playerName : <Trans>None</Trans>}</p>

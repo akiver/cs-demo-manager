@@ -47,6 +47,8 @@ export class VideoCommand extends Command {
   private readonly ffmpegOutputParametersFlag = 'ffmpeg-output-parameters';
   private readonly showXRayFlag = 'show-x-ray';
   private readonly noShowXRayFlag = 'no-show-x-ray';
+  private readonly showAssistsFlag = 'show-assists';
+  private readonly noShowAssistsFlag = 'no-show-assists';
   private readonly showOnlyDeathNoticesFlag = 'show-only-death-notices';
   private readonly noShowOnlyDeathNoticesFlag = 'no-show-only-death-notices';
   private readonly playerVoicesFlag = 'player-voices';
@@ -74,6 +76,7 @@ export class VideoCommand extends Command {
   private ffmpegInputParameters: string | undefined;
   private ffmpegOutputParameters: string | undefined;
   private showXRay: boolean | undefined;
+  private showAssists: boolean | undefined;
   private showOnlyDeathNotices: boolean | undefined;
   private playerVoices: boolean | undefined;
   private deathNoticesDuration: number | undefined;
@@ -111,6 +114,8 @@ export class VideoCommand extends Command {
     console.log(`  --${this.ffmpegOutputParametersFlag} <string>`);
     console.log(`  --${this.showXRayFlag}`);
     console.log(`  --${this.noShowXRayFlag}`);
+    console.log(`  --${this.showAssistsFlag}`);
+    console.log(`  --${this.noShowAssistsFlag}`);
     console.log(`  --${this.showOnlyDeathNoticesFlag}`);
     console.log(`  --${this.noShowOnlyDeathNoticesFlag}`);
     console.log(`  --${this.playerVoicesFlag}`);
@@ -134,6 +139,7 @@ export class VideoCommand extends Command {
         startTick: this.startTick,
         endTick: this.endTick,
         showXRay: this.showXRay ?? settings.video.showXRay,
+        showAssists: this.showAssists ?? settings.video.showAssists,
         showOnlyDeathNotices: this.showOnlyDeathNotices ?? settings.video.showOnlyDeathNotices,
         playersOptions: [],
         cameras: [],
@@ -252,6 +258,8 @@ export class VideoCommand extends Command {
         [this.ffmpegOutputParametersFlag]: { type: 'string' },
         [this.showXRayFlag]: { type: 'boolean' },
         [this.noShowXRayFlag]: { type: 'boolean' },
+        [this.showAssistsFlag]: { type: 'boolean' },
+        [this.noShowAssistsFlag]: { type: 'boolean' },
         [this.showOnlyDeathNoticesFlag]: { type: 'boolean' },
         [this.noShowOnlyDeathNoticesFlag]: { type: 'boolean' },
         [this.playerVoicesFlag]: { type: 'boolean' },
@@ -423,6 +431,14 @@ export class VideoCommand extends Command {
     const noShowXRay = values[this.noShowXRayFlag];
     if (noShowXRay !== undefined) {
       this.showXRay = false;
+    }
+    const showAssists = values[this.showAssistsFlag];
+    if (showAssists !== undefined) {
+      this.showAssists = true;
+    }
+    const noShowAssists = values[this.noShowAssistsFlag];
+    if (noShowAssists !== undefined) {
+      this.showAssists = false;
     }
     const showOnlyDeathNotices = values[this.showOnlyDeathNoticesFlag];
     if (showOnlyDeathNotices !== undefined) {

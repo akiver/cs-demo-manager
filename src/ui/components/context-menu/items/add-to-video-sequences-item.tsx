@@ -44,6 +44,7 @@ export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId
             },
           ],
           showXRay: false,
+          showAssists: true,
           playerVoicesEnabled: false,
         },
       }),

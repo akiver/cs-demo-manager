@@ -43,12 +43,14 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   const lastSequence = sequences.length > 0 ? sequences[sequences.length - 1] : undefined;
   let playersOptions = defaultPlayersOptions;
   let showXRay = settings.settings.showXRay;
+  let showAssists = settings.settings.showAssists;
   let playerVoicesEnabled = settings.settings.playerVoicesEnabled;
   let showOnlyDeathNotices = settings.settings.showOnlyDeathNotices;
   let deathNoticesDuration = settings.settings.deathNoticesDuration;
   if (lastSequence !== undefined) {
     playersOptions = lastSequence.playersOptions;
     showXRay = lastSequence.showXRay;
+    showAssists = lastSequence.showAssists;
     playerVoicesEnabled = lastSequence.playerVoicesEnabled;
     showOnlyDeathNotices = lastSequence.showOnlyDeathNotices;
     deathNoticesDuration = lastSequence.deathNoticesDuration;
@@ -65,6 +67,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     playersOptions,
     cameras: [],
     showXRay,
+    showAssists,
     playerVoicesEnabled,
   };
 

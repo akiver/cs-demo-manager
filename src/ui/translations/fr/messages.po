@@ -4944,6 +4944,11 @@ msgctxt "Dialog title"
 msgid "Error"
 msgstr "Erreur"
 
+#: src/ui/match/video/assists-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Show assists"
+msgstr ""
+
 #. js-lingui-explicit-id
 #: src/ui/match/video/cfg-input.tsx
 msgctxt "Input placeholder"
@@ -7676,10 +7681,12 @@ msgstr "Minimisé"
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "Non"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -7730,6 +7737,15 @@ msgstr "Exécutable HLAE invalide"
 #: src/ui/settings/video/recording/default-video-recording-settings.tsx
 msgid "Default recording settings"
 msgstr "Paramètres d'enregistrement par défaut"
+
+#: src/ui/settings/video/recording/recording-assists.tsx
+msgid "Show assists in kill feed."
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-assists.tsx
+msgctxt "Settings title"
+msgid "Show Assists"
+msgstr ""
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"
@@ -8063,6 +8079,10 @@ msgstr "Tick de fin"
 #: src/ui/videos/video-entry.tsx
 msgid "X-Ray"
 msgstr "Rayon X"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Assists"
+msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"

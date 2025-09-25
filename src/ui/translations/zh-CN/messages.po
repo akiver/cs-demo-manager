@@ -4944,6 +4944,11 @@ msgctxt "Dialog title"
 msgid "Error"
 msgstr "错误"
 
+#: src/ui/match/video/assists-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Show assists"
+msgstr ""
+
 #. js-lingui-explicit-id
 #: src/ui/match/video/cfg-input.tsx
 msgctxt "Input placeholder"
@@ -7676,10 +7681,12 @@ msgstr "最小化"
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "否"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -7730,6 +7737,15 @@ msgstr "无效的 HLAE 可执行文件"
 #: src/ui/settings/video/recording/default-video-recording-settings.tsx
 msgid "Default recording settings"
 msgstr "默认录制设置"
+
+#: src/ui/settings/video/recording/recording-assists.tsx
+msgid "Show assists in kill feed."
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-assists.tsx
+msgctxt "Settings title"
+msgid "Show Assists"
+msgstr ""
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"
@@ -8063,6 +8079,10 @@ msgstr "结束Tick"
 #: src/ui/videos/video-entry.tsx
 msgid "X-Ray"
 msgstr "X光"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Assists"
+msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"

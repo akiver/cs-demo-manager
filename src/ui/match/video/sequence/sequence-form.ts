@@ -8,6 +8,7 @@ export type SequenceForm = {
   playersOptions: SequencePlayerOptions[];
   cameras: CameraFocus[];
   showXRay: boolean;
+  showAssists: boolean;
   showOnlyDeathNotices: boolean;
   playerVoicesEnabled: boolean;
   // @platform win32 Requires HLAE

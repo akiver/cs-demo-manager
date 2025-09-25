@@ -6,6 +6,7 @@ import { RecordingXRay } from './recording-x-ray';
 import { RecordingPlayerVoices } from './recording-player-voices';
 import { RecordingDeathNoticesDuration } from './recording-death-notices-duration';
 import { RecordingShowOnlyDeathNotices } from './recording-show-only-death-notices';
+import { RecordingAssists } from './recording-assists';
 
 export function DefaultVideoRecordingSettings() {
   return (
@@ -17,6 +18,7 @@ export function DefaultVideoRecordingSettings() {
         <RecordingGameWidth />
         <RecordingGameHeight />
         <RecordingXRay />
+        <RecordingAssists />
         <RecordingPlayerVoices />
         <RecordingShowOnlyDeathNotices />
         {window.csdm.isWindows && <RecordingDeathNoticesDuration />}

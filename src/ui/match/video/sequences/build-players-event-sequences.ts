@@ -107,6 +107,7 @@ export function buildPlayersEventSequences({
       showOnlyDeathNotices: settings.showOnlyDeathNotices,
       deathNoticesDuration: settings.deathNoticesDuration,
       showXRay: settings.showXRay,
+      showAssists: settings.showAssists,
       playerVoicesEnabled: settings.playerVoicesEnabled,
       playersOptions,
       cameras: [
