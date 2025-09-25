@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, type ReactNode } from 'react';
+import React, { useRef, type ReactNode } from 'react';
 import clsx from 'clsx';
 
 type Props = {
@@ -8,15 +8,7 @@ type Props = {
 
 export function CollapseTransition({ children, isVisible }: Props) {
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const [maxHeight, setMaxHeight] = useState(0);
-
-  useEffect(() => {
-    if (isVisible && contentRef.current) {
-      setMaxHeight(contentRef.current.scrollHeight);
-    } else {
-      setMaxHeight(0);
-    }
-  }, [isVisible]);
+  const maxHeight = isVisible ? contentRef.current?.scrollHeight : 0;
 
   return (
     <div
