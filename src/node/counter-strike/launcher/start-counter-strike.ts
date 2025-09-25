@@ -22,6 +22,7 @@ import { getSteamFolderPath } from '../get-steam-folder-path';
 import { glob } from 'csdm/node/filesystem/glob';
 import { CounterStrikeExecutableNotFound } from './errors/counter-strike-executable-not-found';
 import { isLinux } from 'csdm/node/os/is-linux';
+import type { Settings } from 'csdm/node/settings/settings';
 
 type StartCounterStrikeOptions = {
   demoPath: string;
@@ -43,7 +44,7 @@ function buildUnixCommand(scriptPath: string, args: string, game: Game) {
   return `${scriptPath} ${args}`;
 }
 
-async function buildLinuxCommand(scriptPath: string, args: string, game: Game) {
+async function buildLinuxCommand(scriptPath: string, args: string, game: Game, followSymbolicLinks: boolean) {
   const steamFolderPath = await getSteamFolderPath();
   /**
    * On Linux CS must be launched through a Steam Linux Runtime script.
@@ -55,7 +56,7 @@ async function buildLinuxCommand(scriptPath: string, args: string, game: Game) {
   const [runSteamScriptPath] = await glob(`**/${steamScriptName}`, {
     cwd: steamFolderPath,
     absolute: true,
-    followSymbolicLinks: false,
+    followSymbolicLinks,
   });
   if (!runSteamScriptPath) {
     logger.error(
@@ -82,13 +83,13 @@ function buildWindowsCommand(executablePath: string, args: string) {
   return `"${executablePath}" ${args}`;
 }
 
-async function buildCommand(executablePath: string, args: string, game: Game) {
+async function buildCommand(executablePath: string, args: string, game: Game, settings: Settings) {
   if (isWindows) {
     return buildWindowsCommand(executablePath, args);
   }
 
   if (isLinux) {
-    return buildLinuxCommand(executablePath, args, game);
+    return buildLinuxCommand(executablePath, args, game, settings.playback.followSymbolicLinks);
   }
 
   return buildUnixCommand(executablePath, args, game);
@@ -143,7 +144,7 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   launchParameters.push(enableFullscreen ? '-fullscreen' : '-sw');
 
   const args = launchParameters.join(' ');
-  const command = await buildCommand(executablePath, args, game);
+  const command = await buildCommand(executablePath, args, game, settings);
 
   throwIfAborted(signal);
   logger.log('Starting game with command', command);

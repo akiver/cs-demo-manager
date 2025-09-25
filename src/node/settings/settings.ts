@@ -77,6 +77,8 @@ export type PlaybackSettings = {
   cs2ExecutablePath?: string;
   customCsgoLocationEnabled?: boolean;
   csgoExecutablePath?: string;
+  // @platform Linux Follow symlinks when looking for the Steam runtime script used to launch the game.
+  followSymbolicLinks: boolean;
 };
 
 export type PlayerProfileSettings = {

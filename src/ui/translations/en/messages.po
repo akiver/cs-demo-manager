@@ -7420,6 +7420,15 @@ msgctxt "Settings title"
 msgid "Lowlights"
 msgstr "Lowlights"
 
+#: src/ui/settings/playback/follow-symbolic-links.tsx
+msgid "Follow symbolic links when looking for the Steam runtime script used to launch Counter-Strike."
+msgstr "Follow symbolic links when looking for the Steam runtime script used to launch Counter-Strike."
+
+#: src/ui/settings/playback/follow-symbolic-links.tsx
+msgctxt "Settings title"
+msgid "Follow symbolic Links"
+msgstr "Follow symbolic Links"
+
 #: src/ui/settings/playback/game-fullscreen.tsx
 msgid "Start the game in fullscreen mode"
 msgstr "Start the game in fullscreen mode"

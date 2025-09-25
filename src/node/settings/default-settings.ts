@@ -66,6 +66,7 @@ export const defaultSettings: Settings = {
     launchParameters: '',
     useHlae: false,
     playerVoicesEnabled: true,
+    followSymbolicLinks: false,
   },
   video: {
     recordingSystem: RecordingSystem.CounterStrike,

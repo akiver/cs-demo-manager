@@ -19,10 +19,12 @@ import { LowlightsIncludeDamages } from './lowlights-include-damages';
 import { Cs2PluginSelect } from './cs2-plugin-select';
 import { Cs2Location } from './cs2-location';
 import { CsgoLocation } from './csgo-location';
+import { FollowSymbolicLinks } from './follow-symbolic-links';
 
 export function PlaybackSettings() {
   return (
     <SettingsView>
+      {window.csdm.isLinux && <FollowSymbolicLinks />}
       <GameWidth />
       <GameHeight />
       <GameFullscreen />

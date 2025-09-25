@@ -5,6 +5,7 @@ const v9: Migration = {
   schemaVersion: 9,
   run: (settings: Settings) => {
     settings.video.showAssists = true;
+    settings.playback.followSymbolicLinks = false;
 
     return Promise.resolve(settings);
   },
