@@ -22,7 +22,7 @@ import { getSteamFolderPath } from '../get-steam-folder-path';
 import { glob } from 'csdm/node/filesystem/glob';
 import { CounterStrikeExecutableNotFound } from './errors/counter-strike-executable-not-found';
 import { isLinux } from 'csdm/node/os/is-linux';
-import type { Settings } from 'csdm/node/settings/settings';
+import type { PlaybackSettings, Settings } from 'csdm/node/settings/settings';
 
 type StartCounterStrikeOptions = {
   demoPath: string;
@@ -44,7 +44,7 @@ function buildUnixCommand(scriptPath: string, args: string, game: Game) {
   return `${scriptPath} ${args}`;
 }
 
-async function buildLinuxCommand(scriptPath: string, args: string, game: Game, followSymbolicLinks: boolean) {
+async function buildLinuxCommand(scriptPath: string, args: string, game: Game, settings: PlaybackSettings) {
   const steamFolderPath = await getSteamFolderPath();
   /**
    * On Linux CS must be launched through a Steam Linux Runtime script.
@@ -53,11 +53,31 @@ async function buildLinuxCommand(scriptPath: string, args: string, game: Game, f
    * that depend on the OS arch.
    */
   const steamScriptName = game === Game.CS2 ? 'SteamLinuxRuntime_sniper/_v2-entry-point' : 'steam-runtime/run.sh';
-  const [runSteamScriptPath] = await glob(`**/${steamScriptName}`, {
-    cwd: steamFolderPath,
-    absolute: true,
-    followSymbolicLinks,
-  });
+  let runSteamScriptPath: string | undefined;
+  if (settings.cs2SteamRuntimeScriptPath) {
+    runSteamScriptPath = settings.cs2SteamRuntimeScriptPath;
+    const scriptExists = await fs.pathExists(runSteamScriptPath);
+    if (!scriptExists) {
+      logger.error(`The provided Steam Linux Runtime script "${runSteamScriptPath}" doesn't exist.`);
+      throw new CounterStrikeExecutableNotFound(game);
+    }
+    logger.log(`Using custom Steam Linux Runtime script at "${runSteamScriptPath}"`);
+  } else {
+    const result = await glob(`**/${steamScriptName}`, {
+      cwd: steamFolderPath,
+      absolute: true,
+      followSymbolicLinks: settings.followSymbolicLinks,
+    });
+    if (result.length === 0) {
+      logger.error(
+        `Cannot find the Steam Linux Runtime script "${steamScriptName}" in the Steam folder at ${steamFolderPath}`,
+      );
+      throw new CounterStrikeExecutableNotFound(game);
+    }
+
+    runSteamScriptPath = result[0];
+  }
+
   if (!runSteamScriptPath) {
     logger.error(
       `Cannot find the Steam Linux Runtime script "${steamScriptName}" in the Steam folder at ${steamFolderPath}`,
@@ -89,7 +109,7 @@ async function buildCommand(executablePath: string, args: string, game: Game, se
   }
 
   if (isLinux) {
-    return buildLinuxCommand(executablePath, args, game, settings.playback.followSymbolicLinks);
+    return buildLinuxCommand(executablePath, args, game, settings.playback);
   }
 
   return buildUnixCommand(executablePath, args, game);

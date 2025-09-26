@@ -67,6 +67,8 @@ export const defaultSettings: Settings = {
     useHlae: false,
     playerVoicesEnabled: true,
     followSymbolicLinks: false,
+    customCs2SteamRuntimeScriptLocationEnabled: false,
+    cs2SteamRuntimeScriptPath: '',
   },
   video: {
     recordingSystem: RecordingSystem.CounterStrike,

@@ -7320,12 +7320,6 @@ msgctxt "Button"
 msgid "Reset default maps"
 msgstr "Réinitialiser les maps par défaut"
 
-#: src/ui/settings/playback/cs-location.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-msgid "Enable custom location"
-msgstr "Activer l'emplacement personnalisé"
-
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
 msgstr "CS2 ne possède pas encore la fonctionnalité lowlights/highlights. L'algorithme personnalisé sera toujours utilisé pour les démos CS2."
@@ -7420,6 +7414,12 @@ msgstr "Utilisez un algorithme personnalisé pour générer les pires moments de
 msgctxt "Settings title"
 msgid "Lowlights"
 msgstr "Pires moments"
+
+#: src/ui/settings/playback/executable-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "Enable custom location"
+msgstr "Activer l'emplacement personnalisé"
 
 #: src/ui/settings/playback/follow-symbolic-links.tsx
 msgid "Follow symbolic links when looking for the Steam runtime script used to launch Counter-Strike."
@@ -7520,6 +7520,22 @@ msgstr "Ne fonctionne pas avec les démos Valve matchmaking car les données voc
 msgctxt "Settings title"
 msgid "Player voices"
 msgstr "Voix des joueurs"
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Steam runtime script location"
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Path to the Steam runtime script used to start CS2. "
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "As of September 2025, this script is named <0>_v2-entry-point</0> and uses the Steam runtime 3 \"Sniper\"."
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
+msgstr ""
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"

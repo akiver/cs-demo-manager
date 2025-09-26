@@ -7319,12 +7319,6 @@ msgctxt "Button"
 msgid "Reset default maps"
 msgstr "Reset default maps"
 
-#: src/ui/settings/playback/cs-location.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-msgid "Enable custom location"
-msgstr "Enable custom location"
-
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
 msgstr "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
@@ -7419,6 +7413,12 @@ msgstr "Use a custom lowlights algorithm to generate players lowlights"
 msgctxt "Settings title"
 msgid "Lowlights"
 msgstr "Lowlights"
+
+#: src/ui/settings/playback/executable-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "Enable custom location"
+msgstr "Enable custom location"
 
 #: src/ui/settings/playback/follow-symbolic-links.tsx
 msgid "Follow symbolic links when looking for the Steam runtime script used to launch Counter-Strike."
@@ -7519,6 +7519,22 @@ msgstr "Doesn't work with Valve Matchmaking demos as voice data are not availabl
 msgctxt "Settings title"
 msgid "Player voices"
 msgstr "Player voices"
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Steam runtime script location"
+msgstr "Steam runtime script location"
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Path to the Steam runtime script used to start CS2. "
+msgstr "Path to the Steam runtime script used to start CS2. "
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "As of September 2025, this script is named <0>_v2-entry-point</0> and uses the Steam runtime 3 \"Sniper\"."
+msgstr "As of September 2025, this script is named <0>_v2-entry-point</0> and uses the Steam runtime 3 \"Sniper\"."
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
+msgstr "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"

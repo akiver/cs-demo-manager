@@ -6,9 +6,11 @@ import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { ResetButton } from 'csdm/ui/components/buttons/reset-button';
 import { ChangeButton } from 'csdm/ui/components/buttons/change-button';
 
-async function showSelectExecutableDialog(executableName: string) {
+async function showSelectExecutableDialog(executableName?: string) {
   const { filePaths, canceled } = await window.csdm.showOpenDialog({
-    filters: [{ extensions: window.csdm.isWindows ? ['exe'] : ['sh'], name: executableName }],
+    filters: executableName
+      ? [{ extensions: window.csdm.isWindows ? ['exe'] : ['sh'], name: executableName }]
+      : undefined,
 
     properties: ['openFile'],
   });
@@ -18,7 +20,7 @@ async function showSelectExecutableDialog(executableName: string) {
 
   const executablePath = filePaths[0];
   const filename = window.csdm.getPathBasename(executablePath);
-  if (filename !== executableName) {
+  if (executableName && filename !== executableName) {
     return;
   }
 
@@ -30,11 +32,11 @@ type Props = {
   description: ReactNode;
   customLocationEnabled: boolean;
   executablePath: string;
-  expectedExecutableName: string;
+  expectedExecutableName?: string;
   updateSettings: (values: { isEnabled?: boolean; executablePath?: string }) => Promise<void>;
 };
 
-export function CsLocation({
+export function ExecutableLocation({
   title,
   description,
   customLocationEnabled,
@@ -92,7 +94,7 @@ export function CsLocation({
           isChecked={customLocationEnabled}
           onChange={onCheckboxChange}
         />
-        <p>{description}</p>
+        {description}
         <div className="flex items-center gap-x-8">
           <TextInput value={executablePath} isReadOnly={true} />
           <RevealFileInExplorerButton path={executablePath} isDisabled={!executablePath} />

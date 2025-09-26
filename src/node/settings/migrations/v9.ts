@@ -6,6 +6,8 @@ const v9: Migration = {
   run: (settings: Settings) => {
     settings.video.showAssists = true;
     settings.playback.followSymbolicLinks = false;
+    settings.playback.customCs2SteamRuntimeScriptLocationEnabled = false;
+    settings.playback.cs2SteamRuntimeScriptPath = '';
 
     return Promise.resolve(settings);
   },

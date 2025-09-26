@@ -7320,12 +7320,6 @@ msgctxt "Button"
 msgid "Reset default maps"
 msgstr "Redefinir mapas padrão"
 
-#: src/ui/settings/playback/cs-location.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
-msgid "Enable custom location"
-msgstr "Ativar localização personalizada"
-
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
 msgstr ""
@@ -7420,6 +7414,12 @@ msgstr "Use um algoritmo personalizado para gerar os piores momentos dos jogador
 msgctxt "Settings title"
 msgid "Lowlights"
 msgstr "Piores momentos"
+
+#: src/ui/settings/playback/executable-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "Enable custom location"
+msgstr "Ativar localização personalizada"
 
 #: src/ui/settings/playback/follow-symbolic-links.tsx
 msgid "Follow symbolic links when looking for the Steam runtime script used to launch Counter-Strike."
@@ -7519,6 +7519,22 @@ msgstr ""
 #: src/ui/settings/video/recording/recording-player-voices.tsx
 msgctxt "Settings title"
 msgid "Player voices"
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Steam runtime script location"
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "Path to the Steam runtime script used to start CS2. "
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "As of September 2025, this script is named <0>_v2-entry-point</0> and uses the Steam runtime 3 \"Sniper\"."
+msgstr ""
+
+#: src/ui/settings/playback/steam-runtime-script-location.tsx
+msgid "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
 msgstr ""
 
 #: src/ui/settings/playback/use-hlae.tsx
