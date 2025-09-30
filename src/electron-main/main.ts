@@ -40,6 +40,13 @@ if (settings.ui.enableHardwareAcceleration === false) {
   app.disableHardwareAcceleration();
 }
 
+app.commandLine.appendSwitch('disable-background-timer-throttling');
+app.commandLine.appendSwitch('disable-renderer-backgrounding');
+app.commandLine.appendSwitch(
+  'disable-features',
+  ['UseEcoQoSForBackgroundProcess', 'IntensiveWakeUpThrottling'].join(','),
+);
+
 async function start() {
   await app.whenReady();
 
