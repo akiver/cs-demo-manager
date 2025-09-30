@@ -6,6 +6,7 @@ import { SystemStartupBehavior } from './system-startup-behavior';
 import { ResetTablesState } from './reset-tables-state';
 import { InitialPageSelect } from './initial-page-select';
 import { RedirectDemoToMatch } from './redirect-demo-to-match';
+import { EnableHardwareAcceleration } from './enable-hardware-acceleration';
 
 export function UiSettings() {
   return (
@@ -15,6 +16,7 @@ export function UiSettings() {
       <SystemStartupBehavior />
       <InitialPageSelect />
       <RedirectDemoToMatch />
+      <EnableHardwareAcceleration />
       <ResetTablesState />
     </SettingsView>
   );

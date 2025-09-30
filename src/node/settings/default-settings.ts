@@ -38,6 +38,7 @@ export const defaultSettings: Settings = {
     theme: 'dark',
     initialPage: Page.Matches,
     redirectDemoToMatch: false,
+    enableHardwareAcceleration: true,
   },
   analyze: {
     maxConcurrentAnalyses: 4,

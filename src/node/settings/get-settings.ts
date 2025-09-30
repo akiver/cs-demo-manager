@@ -34,3 +34,23 @@ export async function getBanSettings() {
 
   return settings.ban ?? defaultSettings.ban;
 }
+
+// You should probably use the async version of this function.
+// This synchronous version is only intended for use during application bootstrap in order to access settings before the
+// Electron app 'ready' event is fired.
+export function getSettingsSync() {
+  try {
+    const settingsFilePath = getSettingsFilePath();
+    const settingsFileExists = fs.existsSync(settingsFilePath);
+    if (!settingsFileExists) {
+      return defaultSettings;
+    }
+
+    const json = fs.readFileSync(settingsFilePath, 'utf8');
+    return JSON.parse(json);
+  } catch (error) {
+    logger.error('Failed to parse settings file synchronously');
+    logger.error(error);
+    return defaultSettings;
+  }
+}

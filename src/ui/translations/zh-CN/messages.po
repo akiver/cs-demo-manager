@@ -7639,6 +7639,23 @@ msgstr "此名称过短"
 msgid "Invalid color"
 msgstr "颜色无效"
 
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Hardware Acceleration"
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Changing this setting will relaunch the application."
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgid "Uses your GPU to make the app smoother. Turn this off if you are experiencing visual problems."
+msgstr ""
+
+#: src/ui/settings/ui/enable-hardware-acceleration.tsx
+msgctxt "Settings title"
+msgid "Hardware Acceleration"
+msgstr ""
+
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Matches"

@@ -36,6 +36,7 @@ type UISettings = {
   theme: ThemeName;
   initialPage: Page;
   redirectDemoToMatch: boolean;
+  enableHardwareAcceleration: boolean;
 };
 
 type AnalyzeSettings = {

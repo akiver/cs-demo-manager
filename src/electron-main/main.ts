@@ -24,18 +24,25 @@ import { getSettingsFilePath } from 'csdm/node/settings/get-settings-file-path';
 import { updateSystemStartupBehavior } from 'csdm/electron-main/system-startup-behavior';
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import { initialize } from './auto-updater';
+import { getSettingsSync } from 'csdm/node/settings/get-settings';
 
 process.on('uncaughtException', logger.error);
 process.on('unhandledRejection', logger.error);
 
-// To show the correct app name/icon in notifications on Windows.
-app.setAppUserModelId('com.akiver.csdm');
-
 let tray: Tray | undefined;
 let isQuitting = false;
 
-const isFirstAppInstance = app.requestSingleInstanceLock();
-if (isFirstAppInstance) {
+// To show the correct app name/icon in notifications on Windows.
+app.setAppUserModelId('com.akiver.csdm');
+
+const settings = getSettingsSync();
+if (settings.ui.enableHardwareAcceleration === false) {
+  app.disableHardwareAcceleration();
+}
+
+async function start() {
+  await app.whenReady();
+
   const sendNavigateToDemo = (mainWindow: BrowserWindow, demoPath: string) => {
     mainWindow.webContents.send(IPCChannel.OpenDemFile, demoPath);
     mainWindow.show();
@@ -82,123 +89,126 @@ if (isFirstAppInstance) {
     }
   });
 
-  app.on('ready', async () => {
-    await injectPathVariableIntoProcess();
+  await injectPathVariableIntoProcess();
 
-    if (IS_PRODUCTION) {
-      createWebSocketServerProcess();
-    } else {
-      windowManager.createDevWindow();
+  if (IS_PRODUCTION) {
+    createWebSocketServerProcess();
+  } else {
+    windowManager.createDevWindow();
+  }
+
+  const demoPath = getDemoPathFromArguments(process.argv);
+  if (typeof demoPath === 'string') {
+    windowManager.setStartupArgument(ArgumentName.DemoPath, demoPath);
+  }
+
+  const settingsFilePath = getSettingsFilePath();
+  const settingsFileExists = await fs.pathExists(settingsFilePath);
+  if (!settingsFileExists) {
+    updateSystemStartupBehavior(StartupBehavior.Minimized);
+  }
+  const settings = await migrateSettings();
+  await loadI18n(settings.ui.locale);
+
+  tray = createTray();
+  createApplicationMenu();
+  const client = createWebSocketClient();
+  registerMainProcessListeners();
+
+  let isOpenedAtLogin = false;
+  let shouldStartMinimized = false;
+  if (isMac) {
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    const { wasOpenedAtLogin, wasOpenedAsHidden } = app.getLoginItemSettings();
+    isOpenedAtLogin = wasOpenedAtLogin;
+    shouldStartMinimized = isOpenedAtLogin && wasOpenedAsHidden;
+  } else {
+    isOpenedAtLogin = process.argv.includes('--login');
+    shouldStartMinimized = process.argv.includes('--minimized');
+  }
+
+  if (isOpenedAtLogin) {
+    windowManager.setStartupArgument(ArgumentName.AppOpenedAtLogin, 'true');
+  }
+
+  if (shouldStartMinimized) {
+    if (app.dock) {
+      app.dock.hide(); // Will be restored when the main window is shown.
     }
+    client.send({
+      name: MainClientMessageName.StartMinimizedMode,
+    });
+  } else {
+    windowManager.getOrCreateMainWindow();
+  }
 
-    const demoPath = getDemoPathFromArguments(process.argv);
-    if (typeof demoPath === 'string') {
-      windowManager.setStartupArgument(ArgumentName.DemoPath, demoPath);
-    }
-
-    const settingsFilePath = getSettingsFilePath();
-    const settingsFileExists = await fs.pathExists(settingsFilePath);
-    if (!settingsFileExists) {
-      updateSystemStartupBehavior(StartupBehavior.Minimized);
-    }
-    const settings = await migrateSettings();
-    await loadI18n(settings.ui.locale);
-
-    tray = createTray();
+  ipcMain.handle(IPCChannel.LocaleChanged, async (event, locale: string) => {
+    await loadI18n(locale);
+    tray?.setContextMenu(createTrayMenu());
     createApplicationMenu();
-    const client = createWebSocketClient();
-    registerMainProcessListeners();
+    const mainWindow = windowManager.getOrCreateMainWindow();
+    listenForContextMenu(mainWindow);
+  });
 
-    let isOpenedAtLogin = false;
-    let shouldStartMinimized = false;
-    if (isMac) {
-      // eslint-disable-next-line @typescript-eslint/no-deprecated
-      const { wasOpenedAtLogin, wasOpenedAsHidden } = app.getLoginItemSettings();
-      isOpenedAtLogin = wasOpenedAtLogin;
-      shouldStartMinimized = isOpenedAtLogin && wasOpenedAsHidden;
-    } else {
-      isOpenedAtLogin = process.argv.includes('--login');
-      shouldStartMinimized = process.argv.includes('--minimized');
+  if (IS_DEV) {
+    const { installDevTools } = await import('./install-dev-tools');
+    await installDevTools();
+  }
+
+  const quitApp = () => {
+    // ! Do not use app.quit() because if the navigation is blocked in the renderer process, it will not work.
+    // Using app.exit() bypass event listeners.
+    app.exit();
+  };
+
+  const onBeforeQuit = async (event: Event) => {
+    if (isQuitting || !client.isConnected) {
+      return;
     }
+    isQuitting = true;
+    event.preventDefault();
 
-    if (isOpenedAtLogin) {
-      windowManager.setStartupArgument(ArgumentName.AppOpenedAtLogin, 'true');
-    }
-
-    if (shouldStartMinimized) {
-      if (app.dock) {
-        app.dock.hide(); // Will be restored when the main window is shown.
-      }
-      client.send({
-        name: MainClientMessageName.StartMinimizedMode,
-      });
-    } else {
-      windowManager.getOrCreateMainWindow();
-    }
-
-    ipcMain.handle(IPCChannel.LocaleChanged, async (event, locale: string) => {
-      await loadI18n(locale);
-      tray?.setContextMenu(createTrayMenu());
-      createApplicationMenu();
-      const mainWindow = windowManager.getOrCreateMainWindow();
-      listenForContextMenu(mainWindow);
+    const hasPendingAnalyses: boolean = await client.send({
+      name: MainClientMessageName.HasPendingAnalyses,
     });
 
-    if (IS_DEV) {
-      const { installDevTools } = await import('./install-dev-tools');
-      await installDevTools();
-    }
-
-    const quitApp = () => {
-      // ! Do not use app.quit() because if the navigation is blocked in the renderer process, it will not work.
-      // Using app.exit() bypass event listeners.
-      app.exit();
-    };
-
-    const onBeforeQuit = async (event: Event) => {
-      if (isQuitting || !client.isConnected) {
-        return;
-      }
-      isQuitting = true;
-      event.preventDefault();
-
-      const hasPendingAnalyses: boolean = await client.send({
-        name: MainClientMessageName.HasPendingAnalyses,
-      });
-
-      if (hasPendingAnalyses) {
-        const mainWindow = windowManager.getOrCreateMainWindow();
-        const { response } = await dialog.showMessageBox(mainWindow, {
-          message: i18n.t({
-            id: 'dialog.quitApp.confirmation',
-            message: 'Demo analyses in progress, do you want to quit?',
+    if (hasPendingAnalyses) {
+      const mainWindow = windowManager.getOrCreateMainWindow();
+      const { response } = await dialog.showMessageBox(mainWindow, {
+        message: i18n.t({
+          id: 'dialog.quitApp.confirmation',
+          message: 'Demo analyses in progress, do you want to quit?',
+        }),
+        type: 'warning',
+        buttons: [
+          i18n.t({
+            id: 'yes',
+            message: 'Yes',
           }),
-          type: 'warning',
-          buttons: [
-            i18n.t({
-              id: 'yes',
-              message: 'Yes',
-            }),
-            i18n.t({
-              id: 'no',
-              message: 'No',
-            }),
-          ],
-        });
-        if (response === 0) {
-          quitApp();
-        } else {
-          isQuitting = false;
-        }
-      } else {
+          i18n.t({
+            id: 'no',
+            message: 'No',
+          }),
+        ],
+      });
+      if (response === 0) {
         quitApp();
+      } else {
+        isQuitting = false;
       }
-    };
+    } else {
+      quitApp();
+    }
+  };
 
-    app.on('before-quit', onBeforeQuit);
+  app.on('before-quit', onBeforeQuit);
 
-    initialize(settings.autoDownloadUpdates);
-  });
+  initialize(settings.autoDownloadUpdates);
+}
+
+const isFirstAppInstance = app.requestSingleInstanceLock();
+if (isFirstAppInstance) {
+  start();
 } else {
   const mainWindow = windowManager.getMainWindow();
   if (mainWindow !== null && !mainWindow.isDestroyed()) {
