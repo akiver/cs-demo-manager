@@ -40,8 +40,19 @@ export function registerMainProcessListeners() {
   });
 
   ipcMain.handle(IPCChannel.RestartApp, () => {
-    app.relaunch();
-    app.exit();
+    if (IS_DEV) {
+      const mainWindow = windowManager.getMainWindow();
+      if (mainWindow !== null && !mainWindow.isDestroyed()) {
+        dialog.showMessageBox(mainWindow, {
+          type: 'warning',
+          title: 'Warning',
+          message: 'You are running in development mode. You need to manually restart the app.',
+        });
+      }
+    } else {
+      app.relaunch();
+      app.exit();
+    }
   });
 
   ipcMain.handle(IPCChannel.GetStartupArguments, () => {
