@@ -528,7 +528,7 @@ msgstr "未找到文件夹"
 #: src/ui/components/buttons/reveal-log-file-button.tsx
 #: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
 msgid "The log file does not exist"
-msgstr ""
+msgstr "日志文件不存在"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
 msgid "Reveal log file"
@@ -6194,7 +6194,7 @@ msgstr "{matchWithCheaterCount, plural, other {# 与作弊者的比赛}}"
 
 #: src/ui/matches/table/matches-table.tsx
 msgid "Loading matches…"
-msgstr "加在比赛中…"
+msgstr "加载比赛中…"
 
 #: src/ui/matches/table/no-matches.tsx
 msgid "No match found with active filters."
@@ -6754,7 +6754,7 @@ msgstr "信息"
 
 #: src/ui/settings/about/about.tsx
 msgid "Logs"
-msgstr ""
+msgstr "日志"
 
 #: src/ui/settings/about/about.tsx
 msgid "Credits"
@@ -6815,7 +6815,7 @@ msgstr "重置设置"
 
 #: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
 msgid "Reveal {gameName} log file"
-msgstr ""
+msgstr "打开 {gameName} 日志文件"
 
 #: src/ui/settings/about/see-changelog-button.tsx
 msgctxt "Button"
@@ -7362,11 +7362,11 @@ msgstr "除非使用自定义版本，否则你需要在你的Steam库中选择 
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update."
-msgstr ""
+msgstr "你选择了兼容 CS2 ({update14095}) 更新到 {update14104} 更新之间版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.0.3\"</0> in your Steam library to use this version."
-msgstr ""
+msgstr "你需要在 Steam 库中选择 CS2 测试版分支 <0>\"1.41.0.3\"</0> 搭配使用，或者使用定制构建版本。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
@@ -7567,7 +7567,7 @@ msgstr "回合前延迟"
 
 #: src/ui/settings/playback/watch-round-before-delay.tsx
 msgid "How many seconds to start before the end of the round's freeze time."
-msgstr "在回合冻结时间结束之前开始多少秒钟。"
+msgstr "在回合冻结时间结束之前的倒计时。"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
