@@ -471,21 +471,21 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
     if (strcmp(pName, "Source2ServerConfig001") == 0)
     {
         auto vtable = *(void***)original;
+        serverConfigConnect = (AppSystemConnectFn)vtable[0];
+        serverConfigShutdown = (AppSystemShutdownFn)vtable[4];
 
 #if defined _WIN32
         DWORD oldProtect = 0;
-        if (!VirtualProtect(vtable, sizeof(void**), PAGE_EXECUTE_READWRITE, &oldProtect))
+        if (!VirtualProtect(vtable, sizeof(void*) * 5, PAGE_EXECUTE_READWRITE, &oldProtect))
         {
             PluginError("VirtualProtect PAGE_EXECUTE_READWRITE failed: %d", GetLastError());
         }
 
-        serverConfigConnect = (AppSystemConnectFn)vtable[0];
-        serverConfigShutdown = (AppSystemShutdownFn)vtable[1];
         vtable[0] = &Connect;
-        vtable[1] = &Shutdown;
+        vtable[4] = &Shutdown;
 
         DWORD ignore = 0;
-        if (!VirtualProtect(vtable, sizeof(void**), oldProtect, &ignore))
+        if (!VirtualProtect(vtable, sizeof(void*) * 5, oldProtect, &ignore))
         {
             PluginError("VirtualProtect restore failed: %d", GetLastError());
         }
@@ -496,8 +496,6 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
             PluginError("mprotect failed: %s", strerror(errno));
         }
 
-        serverConfigConnect = (AppSystemConnectFn)vtable[0];
-        serverConfigShutdown = (AppSystemShutdownFn)vtable[4];
         vtable[0] = reinterpret_cast<void*>(&Connect);
         vtable[4] = reinterpret_cast<void*>(&Shutdown);
 
