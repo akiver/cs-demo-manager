@@ -295,6 +295,14 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_golden',
+      game: Game.CS2,
+      position_x: -856,
+      position_y: 2399,
+      scale: 4.506695,
+      threshold_z: 0,
+    },
+    {
       name: 'de_grail',
       game: Game.CS2,
       position_x: -4395,
@@ -359,12 +367,28 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_palacio',
+      game: Game.CS2,
+      position_x: -2443,
+      position_y: 1896,
+      scale: 3.8676212,
+      threshold_z: 0,
+    },
+    {
       name: 'de_palais',
       game: Game.CS2,
       position_x: -1353,
       position_y: 2044,
       scale: 2.8003397,
       threshold_z: 103,
+    },
+    {
+      name: 'de_rooftop',
+      game: Game.CS2,
+      position_x: -1847,
+      position_y: 2301,
+      scale: 1.914732,
+      threshold_z: 0,
     },
     {
       name: 'de_thera',
