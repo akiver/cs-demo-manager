@@ -3,11 +3,12 @@ import { parseArgs } from 'node:util';
 import path from 'node:path';
 import fs from 'fs-extra';
 import { Command } from './command';
+import type { Player } from 'csdm/common/types/player';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
 import { generateVideo } from 'csdm/node/video/generation/generate-video';
-import type { Sequence } from 'csdm/common/types/sequence';
+import type { Parameters } from 'csdm/node/video/generation/generate-video';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { isValidEncoderSoftware } from 'csdm/common/types/encoder-software';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
@@ -28,6 +29,7 @@ import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
 export class VideoCommand extends Command {
   public static Name = 'video';
   private readonly outputFlag = 'output';
+  private readonly videoConfigFileFlag = 'video-config-file';
   private readonly framerateFlag = 'framerate';
   private readonly widthFlag = 'width';
   private readonly heightFlag = 'height';
@@ -58,6 +60,8 @@ export class VideoCommand extends Command {
   private readonly focusPlayerFlag = 'focus-player';
   private outputFolderPath: string | undefined;
   private demoPath: string = '';
+  private videoConfigFilePath: string | undefined;
+  private videoConfigJson: Partial<Parameters> | undefined;
   private startTick: number = 0;
   private endTick: number = 0;
   private framerate: number | undefined;
@@ -95,6 +99,7 @@ export class VideoCommand extends Command {
     console.log('The demo must have been analyzed and be present in the database.');
     console.log('');
     console.log('Options:');
+    console.log(`  --${this.videoConfigFileFlag} <path> (JSON file for video config)`);
     console.log(`  --${this.framerateFlag} <number>`);
     console.log(`  --${this.widthFlag} <number>`);
     console.log(`  --${this.heightFlag} <number>`);
@@ -132,95 +137,149 @@ export class VideoCommand extends Command {
       await migrateSettings();
 
       const settings = await getSettings();
-      const demo = await getDemoFromFilePath(this.demoPath);
-      const outputFolderPath = this.outputFolderPath ?? path.dirname(this.demoPath);
-      const sequence: Sequence = {
-        number: 1,
-        startTick: this.startTick,
-        endTick: this.endTick,
-        showXRay: this.showXRay ?? settings.video.showXRay,
-        showAssists: this.showAssists ?? settings.video.showAssists,
-        showOnlyDeathNotices: this.showOnlyDeathNotices ?? settings.video.showOnlyDeathNotices,
-        playersOptions: [],
-        cameras: [],
-        playerVoicesEnabled: this.playerVoices ?? settings.video.playerVoicesEnabled,
-        deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
-        cfg: this.cfg,
-      };
+      const controller = new AbortController();
 
-      if (this.focusPlayerSteamId) {
-        const player = await fetchPlayer(this.focusPlayerSteamId);
-        sequence.cameras.push({
-          tick: this.startTick,
-          playerSteamId: this.focusPlayerSteamId,
-          playerName: player.name,
-        });
+      let parameters: Parameters;
+      // Handle requests using video configuration JSON file.
+      if (this.videoConfigJson) {
+        // Null check required for type safety
+        if (!this.videoConfigJson.demoPath) {
+          throw new InvalidArgument('demoPath is required in video config JSON');
+        }
+
+        const demo = await getDemoFromFilePath(this.videoConfigJson.demoPath);
+
+        parameters = {
+          videoId: this.videoConfigJson.videoId ?? randomUUID(),
+          checksum: demo.checksum,
+          game: demo.game,
+          tickrate: demo.tickrate,
+          recordingSystem: this.videoConfigJson?.recordingSystem ?? settings.video.recordingSystem,
+          recordingOutput: this.videoConfigJson?.recordingOutput ?? settings.video.recordingOutput,
+          encoderSoftware: this.videoConfigJson?.encoderSoftware ?? settings.video.encoderSoftware,
+          framerate: this.videoConfigJson?.framerate ?? settings.video.framerate,
+          width: this.videoConfigJson?.width ?? settings.video.width,
+          height: this.videoConfigJson?.height ?? settings.video.height,
+          closeGameAfterRecording:
+            this.videoConfigJson?.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
+          concatenateSequences: this.videoConfigJson?.concatenateSequences ?? settings.video.concatenateSequences,
+          ffmpegSettings: this.videoConfigJson?.ffmpegSettings ?? settings.video.ffmpegSettings,
+          outputFolderPath: this.videoConfigJson?.outputFolderPath ?? path.dirname(this.demoPath),
+          demoPath: this.videoConfigJson?.demoPath ?? this.demoPath,
+          sequences: this.videoConfigJson?.sequences ?? [],
+          signal: controller.signal,
+          onGameStart: () => {
+            console.log('Counter-Strike started');
+          },
+          onMoveFilesStart: () => {
+            console.log('Moving files...');
+          },
+          onSequenceStart: (number) => {
+            console.log(`Converting sequence ${number}...`);
+          },
+          onConcatenateSequencesStart: () => {
+            console.log('Concatenating sequences...');
+          },
+        };
+      } else {
+        const demo = await getDemoFromFilePath(this.demoPath);
+
+        const player: Player | undefined = this.focusPlayerSteamId
+          ? await fetchPlayer(this.focusPlayerSteamId)
+          : undefined;
+
+        parameters = {
+          videoId: randomUUID(),
+          checksum: demo.checksum,
+          game: demo.game,
+          tickrate: demo.tickrate,
+          recordingSystem: this.recordingSystem ?? settings.video.recordingSystem,
+          recordingOutput: this.recordingOutput ?? settings.video.recordingOutput,
+          encoderSoftware: this.encoderSoftware ?? settings.video.encoderSoftware,
+          framerate: this.framerate ?? settings.video.framerate,
+          width: this.width ?? settings.video.width,
+          height: this.height ?? settings.video.height,
+          closeGameAfterRecording: this.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
+          concatenateSequences: this.concatenateSequences ?? settings.video.concatenateSequences,
+          ffmpegSettings: {
+            ...settings.video.ffmpegSettings,
+            audioBitrate: this.ffmpegAudioBitrate ?? settings.video.ffmpegSettings.audioBitrate,
+            constantRateFactor: this.ffmpegCrf ?? settings.video.ffmpegSettings.constantRateFactor,
+            videoCodec: this.ffmpegVideoCodec ?? settings.video.ffmpegSettings.videoCodec,
+            audioCodec: this.ffmpegAudioCodec ?? settings.video.ffmpegSettings.audioCodec,
+            videoContainer: this.ffmpegVideoContainer ?? settings.video.ffmpegSettings.videoContainer,
+            inputParameters: this.ffmpegInputParameters ?? settings.video.ffmpegSettings.inputParameters,
+            outputParameters: this.ffmpegOutputParameters ?? settings.video.ffmpegSettings.outputParameters,
+          },
+          outputFolderPath: this.outputFolderPath ?? path.dirname(this.demoPath),
+          demoPath: this.demoPath ?? this.demoPath,
+          sequences: [
+            {
+              number: 1,
+              startTick: this.startTick,
+              endTick: this.endTick,
+              showXRay: this.showXRay ?? settings.video.showXRay,
+              showAssists: this.showAssists ?? settings.video.showAssists,
+              showOnlyDeathNotices: this.showOnlyDeathNotices ?? settings.video.showOnlyDeathNotices,
+              playersOptions: [],
+              cameras:
+                player !== undefined && this.focusPlayerSteamId
+                  ? [
+                      {
+                        tick: this.startTick,
+                        playerSteamId: this.focusPlayerSteamId,
+                        playerName: player.name,
+                      },
+                    ]
+                  : [],
+              playerVoicesEnabled: this.playerVoices ?? settings.video.playerVoicesEnabled,
+              deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
+              cfg: this.cfg,
+            },
+          ],
+          signal: controller.signal,
+          onGameStart: () => {
+            console.log('Counter-Strike started');
+          },
+          onMoveFilesStart: () => {
+            console.log('Moving files...');
+          },
+          onSequenceStart: (number) => {
+            console.log(`Converting sequence ${number}...`);
+          },
+          onConcatenateSequencesStart: () => {
+            console.log('Concatenating sequences...');
+          },
+        };
       }
 
-      const recordingSystem = this.recordingSystem ?? settings.video.recordingSystem;
-      if (recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
+      if (parameters.recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
         console.log('Installing HLAE...');
         await installHlae();
       }
 
-      const recordingOutput = this.recordingOutput ?? settings.video.recordingOutput;
-      const shouldGenerateVideo = recordingOutput !== RecordingOutput.Images;
-      const encoderSoftware = this.encoderSoftware ?? settings.video.encoderSoftware;
-      if (shouldGenerateVideo && encoderSoftware === EncoderSoftware.VirtualDub && !(await isVirtualDubInstalled())) {
+      const shouldGenerateVideo = parameters.recordingOutput !== RecordingOutput.Images;
+      if (
+        shouldGenerateVideo &&
+        parameters.encoderSoftware === EncoderSoftware.VirtualDub &&
+        !(await isVirtualDubInstalled())
+      ) {
         console.log('Installing VirtualDub...');
         await downloadAndExtractVirtualDub();
       }
 
-      if (shouldGenerateVideo && encoderSoftware === EncoderSoftware.FFmpeg && !(await isFfmpegInstalled())) {
+      if (
+        shouldGenerateVideo &&
+        parameters.encoderSoftware === EncoderSoftware.FFmpeg &&
+        !(await isFfmpegInstalled())
+      ) {
         console.log('Installing FFmpeg...');
         await installFfmpeg();
       }
+      console.log(`Starting video generation...\n${JSON.stringify(parameters)}`);
+      await generateVideo(parameters);
 
-      const videoId = randomUUID();
-      const controller = new AbortController();
-
-      await generateVideo({
-        videoId,
-        checksum: demo.checksum,
-        game: demo.game,
-        tickrate: demo.tickrate,
-        recordingSystem,
-        recordingOutput,
-        encoderSoftware,
-        framerate: this.framerate ?? settings.video.framerate,
-        width: this.width ?? settings.video.width,
-        height: this.height ?? settings.video.height,
-        closeGameAfterRecording: this.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
-        concatenateSequences: this.concatenateSequences ?? settings.video.concatenateSequences,
-        ffmpegSettings: {
-          ...settings.video.ffmpegSettings,
-          audioBitrate: this.ffmpegAudioBitrate ?? settings.video.ffmpegSettings.audioBitrate,
-          constantRateFactor: this.ffmpegCrf ?? settings.video.ffmpegSettings.constantRateFactor,
-          videoCodec: this.ffmpegVideoCodec ?? settings.video.ffmpegSettings.videoCodec,
-          audioCodec: this.ffmpegAudioCodec ?? settings.video.ffmpegSettings.audioCodec,
-          videoContainer: this.ffmpegVideoContainer ?? settings.video.ffmpegSettings.videoContainer,
-          inputParameters: this.ffmpegInputParameters ?? settings.video.ffmpegSettings.inputParameters,
-          outputParameters: this.ffmpegOutputParameters ?? settings.video.ffmpegSettings.outputParameters,
-        },
-        outputFolderPath,
-        demoPath: this.demoPath,
-        sequences: [sequence],
-        signal: controller.signal,
-        onGameStart: () => {
-          console.log('Counter-Strike started');
-        },
-        onMoveFilesStart: () => {
-          console.log('Moving files...');
-        },
-        onSequenceStart: (number) => {
-          console.log(`Converting sequence ${number}...`);
-        },
-        onConcatenateSequencesStart: () => {
-          console.log('Concatenating sequences...');
-        },
-      });
-
-      console.log(`Video generated in ${outputFolderPath}`);
+      console.log(`Video generated in ${parameters.outputFolderPath}`);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -238,6 +297,7 @@ export class VideoCommand extends Command {
     super.parseArgs(this.args);
     const { values, positionals } = parseArgs({
       options: {
+        [this.videoConfigFileFlag]: { type: 'string' },
         [this.outputFlag]: { type: 'string', short: 'o' },
         [this.framerateFlag]: { type: 'string' },
         [this.widthFlag]: { type: 'string' },
@@ -271,6 +331,29 @@ export class VideoCommand extends Command {
       allowPositionals: true,
       args: this.args,
     });
+
+    // Parse video config file if provided
+    if (values[this.videoConfigFileFlag]) {
+      this.videoConfigFilePath = values[this.videoConfigFileFlag];
+      try {
+        if (!this.videoConfigFilePath) {
+          throw new InvalidArgument('Video config file path is undefined');
+        }
+
+        const jsonStr = await fs.readFile(this.videoConfigFilePath, { encoding: 'utf8' });
+
+        const matchHashComment = new RegExp(/(#.*)/, 'gi');
+        // Remove comments (//, /* */ and #) from JSONC file
+        const commentFreeJson = jsonStr
+          .replace(matchHashComment, '')
+          .replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '')
+          .trim();
+        this.videoConfigJson = JSON.parse(commentFreeJson);
+        return;
+      } catch (err) {
+        throw new InvalidArgument(`Failed to read or parse video config file: ${err}`);
+      }
+    }
 
     if (positionals.length < 3) {
       throw new InvalidArgument('Missing arguments');
