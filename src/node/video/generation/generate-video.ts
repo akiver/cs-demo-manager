@@ -38,7 +38,7 @@ type FfmpegSettings = {
   outputParameters: string;
 };
 
-type Parameters = {
+export type Parameters = {
   videoId: string;
   checksum: string;
   game: Game;
