@@ -29,7 +29,6 @@ import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
 export class VideoCommand extends Command {
   public static Name = 'video';
   private readonly outputFlag = 'output';
-  private readonly videoConfigFileFlag = 'video-config-file';
   private readonly framerateFlag = 'framerate';
   private readonly widthFlag = 'width';
   private readonly heightFlag = 'height';
@@ -60,10 +59,9 @@ export class VideoCommand extends Command {
   private readonly deathNoticesDurationFlag = 'death-notices-duration';
   private readonly cfgFlag = 'cfg';
   private readonly focusPlayerFlag = 'focus-player';
+  private readonly videoConfigFileFlag = 'video-config-file';
   private outputFolderPath: string | undefined;
   private demoPath: string = '';
-  private videoConfigFilePath: string | undefined;
-  private videoConfigJson: Partial<Parameters> | undefined;
   private startTick: number = 0;
   private endTick: number = 0;
   private framerate: number | undefined;
@@ -89,6 +87,7 @@ export class VideoCommand extends Command {
   private deathNoticesDuration: number | undefined;
   private cfg: string | undefined;
   private focusPlayerSteamId: string | undefined;
+  private videoConfigJson: Partial<Parameters> | undefined;
 
   public getDescription() {
     return 'Generate videos from demos.';
@@ -102,7 +101,6 @@ export class VideoCommand extends Command {
     console.log('The demo must have been analyzed and be present in the database.');
     console.log('');
     console.log('Options:');
-    console.log(`  --${this.videoConfigFileFlag} <path> (JSON file for video config)`);
     console.log(`  --${this.framerateFlag} <number>`);
     console.log(`  --${this.widthFlag} <number>`);
     console.log(`  --${this.heightFlag} <number>`);
@@ -133,6 +131,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.deathNoticesDurationFlag} <number>`);
     console.log(`  --${this.cfgFlag} <string>`);
     console.log(`  --${this.focusPlayerFlag} <steamId>`);
+    console.log(`  --${this.videoConfigFileFlag} <path> (JSON file for video config)`);
   }
 
   public async run() {
@@ -304,7 +303,6 @@ export class VideoCommand extends Command {
     super.parseArgs(this.args);
     const { values, positionals } = parseArgs({
       options: {
-        [this.videoConfigFileFlag]: { type: 'string' },
         [this.outputFlag]: { type: 'string', short: 'o' },
         [this.framerateFlag]: { type: 'string' },
         [this.widthFlag]: { type: 'string' },
@@ -336,6 +334,7 @@ export class VideoCommand extends Command {
         [this.deathNoticesDurationFlag]: { type: 'string' },
         [this.cfgFlag]: { type: 'string' },
         [this.focusPlayerFlag]: { type: 'string' },
+        [this.videoConfigFileFlag]: { type: 'string' },
       },
       allowPositionals: true,
       args: this.args,
@@ -343,13 +342,13 @@ export class VideoCommand extends Command {
 
     // Parse video config file if provided
     if (values[this.videoConfigFileFlag]) {
-      this.videoConfigFilePath = values[this.videoConfigFileFlag];
+      const videoConfigFilePath = values[this.videoConfigFileFlag];
       try {
-        if (!this.videoConfigFilePath) {
+        if (!videoConfigFilePath) {
           throw new InvalidArgument('Video config file path is undefined');
         }
 
-        const jsonStr = await fs.readFile(this.videoConfigFilePath, { encoding: 'utf8' });
+        const jsonStr = await fs.readFile(videoConfigFilePath, { encoding: 'utf8' });
 
         const matchHashComment = new RegExp(/(#.*)/, 'gi');
         // Remove comments (//, /* */ and #) from JSONC file
