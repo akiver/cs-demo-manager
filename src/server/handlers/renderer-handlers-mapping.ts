@@ -152,7 +152,7 @@ import { isCs2ConnectedToServerHandler } from './renderer-process/counter-strike
 import { fetchMigrationsHandler } from './renderer-process/migrations/fetch-migrations-handler';
 import type { Migration } from 'csdm/node/database/migrations/fetch-migrations';
 import { deleteDemosFromDatabaseHandler } from './renderer-process/demo/delete-demos-from-database-handler';
-import type { WatchDemoErrorPayload } from './renderer-process/counter-strike/counter-strike';
+import type { CounterStrikeErrorPayload, WatchDemoErrorPayload } from 'csdm/server/counter-strike';
 import {
   watchPlayerRoundsHandler,
   type WatchPlayerRoundsPayload,
@@ -189,6 +189,10 @@ import {
   updateSteamAccountNameHandler,
   type UpdateSteamAccountNamePayload,
 } from './renderer-process/steam-accounts/update-steam-account-name-handler';
+import {
+  startCounterStrikeHandler,
+  type StartCounterStrikePayload,
+} from './renderer-process/counter-strike/start-counter-strike-handler';
 import { resumeVideoQueueHandler } from './renderer-process/video/resume-video-queue-handler';
 import { pauseVideoQueueHandler } from './renderer-process/video/pause-video-queue-handler';
 import type { FiveEPlayAccount } from 'csdm/common/types/5eplay-account';
@@ -277,6 +281,10 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.FetchMatchDuelsMatrixRows]: Handler<string, DuelMatrixRow[]>;
   [RendererClientMessageName.FetchMatchGrenadesThrow]: Handler<string, GrenadeThrow[]>;
   [RendererClientMessageName.WatchDemo]: Handler<WatchDemoPayload, WatchDemoErrorPayload | undefined>;
+  [RendererClientMessageName.StartCounterStrike]: Handler<
+    StartCounterStrikePayload,
+    CounterStrikeErrorPayload | undefined
+  >;
   [RendererClientMessageName.WatchPlayerRounds]: Handler<WatchPlayerRoundsPayload, WatchDemoErrorPayload | undefined>;
   [RendererClientMessageName.WatchPlayerHighlights]: Handler<
     WatchPlayerHighlightsPayload,
@@ -387,6 +395,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.FetchMatchFlashbangMatrixRows]: fetchMatchFlashbangMatrixRowsHandler,
   [RendererClientMessageName.FetchMatchDuelsMatrixRows]: fetchMatchDuelsMatrixRowsHandler,
   [RendererClientMessageName.FetchMatchGrenadesThrow]: fetchMatchGrenadesThrowHandler,
+  [RendererClientMessageName.StartCounterStrike]: startCounterStrikeHandler,
   [RendererClientMessageName.WatchDemo]: watchDemoHandler,
   [RendererClientMessageName.WatchPlayerRounds]: watchPlayerRoundsHandler,
   [RendererClientMessageName.WatchPlayerHighlights]: watchPlayerHighlightsHandler,

@@ -227,6 +227,7 @@ msgid "Loading ban stats…"
 msgstr "Chargement des statistiques de ban…"
 
 #: src/ui/ban/stats/ban-stats.tsx
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 #: src/ui/comment/use-update-comment.tsx
 #: src/ui/components/buttons/export-html-element-as-image-button.tsx
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
@@ -241,7 +242,6 @@ msgstr "Chargement des statistiques de ban…"
 #: src/ui/downloads/five-eplay/use-update-current-5eplay-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
-#: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 #: src/ui/match/duels/players-duels-matrix.tsx
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
@@ -385,6 +385,96 @@ msgstr "L'API Steam a retourné une erreur 429"
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "An error occurred while checking for new banned Steam accounts (code {errorCode})"
 msgstr "Une erreur est survenue lors de la recherche de nouveaux comptes Steam bannis (code {errorCode})"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Demo not found"
+msgstr "Démo non trouvée"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Match not found"
+msgstr "Match non trouvé"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
+#: src/ui/match/video/video-loader.tsx
+msgid "Counter-Strike executable not found."
+msgstr "L'exécutable de Counter-Strike est introuvable."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
+msgstr "Assurez-vous que Steam n'est pas installé via Flatpak car il ce n'est pas supporté !"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
+msgstr "Veuillez vous assurer que CS:GO est installé en sélectionnant la branche \"csgo_legacy\" depuis l'onglet \"Betas\" des propriétés du jeu CS2 sur Steam."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Read the <0>documentation</0> for more information."
+msgstr "Lisez la <0>documentation</0> pour plus d'informations."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
+#: src/ui/match/video/video-loader.tsx
+msgid "Counter-Strike executable not found, check your app playback settings."
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "{game} is not supported on your operating system"
+msgstr "{game} n'est pas supporté sur votre système d'exploitation"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "HLAE executable not found"
+msgstr "L'exécutable de HLAE est introuvable"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "No kills found"
+msgstr "Aucun kill trouvé"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "This demo needs to be re-analyzed to make the camera focus work."
+msgstr "Cette démo doit être réanalyser pour que la caméra se place correctement sur les joueurs."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "No rounds found"
+msgstr "Aucun round trouvé"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "No deaths found"
+msgstr "Aucune mort trouvée"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
+msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
+msgstr "Le chemin de la démo contient des caractères qui ne sont pas pris en charge par Counter-Strike qui empêcheraient la lecture."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+#: src/ui/match/video/get-video-error-from-error-code.tsx
+msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
+msgstr "Vous devez déplacer la démo dans un dossier qui ne contient que des caractères latin de base - voir <0>cette documentation</0> pour plus de détails."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Steam is not running"
+msgstr "Steam n'est pas lancé"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "The game crashed, please see <0>this documentation</0> for help."
+msgstr "Le jeu a planté, merci de consulter <0>cette documentation</0> pour obtenir de l'aide."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "The game process exited with an access denied error."
+msgstr "Le processus de jeu s'est terminé avec une erreur \"access denied\"."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Make sure to close any anti-cheat software and retry."
+msgstr "Assurez-vous de fermer tout logiciel anti-triche et réessayez."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "{game} is already running"
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Counter-Strike starting…"
+msgstr "Lancement de Counter-Strike…"
 
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "The connection to the WebSocket server failed with code {code}."
@@ -3314,92 +3404,6 @@ msgstr "non"
 msgctxt "Toast"
 msgid "Copied to clipboard"
 msgstr "Copié dans le presse-papier"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Demo not found"
-msgstr "Démo non trouvée"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Match not found"
-msgstr "Match non trouvé"
-
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-#: src/ui/match/video/video-loader.tsx
-msgid "Counter-Strike executable not found."
-msgstr "L'exécutable de Counter-Strike est introuvable."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
-msgstr "Assurez-vous que Steam n'est pas installé via Flatpak car il ce n'est pas supporté !"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-msgstr "Veuillez vous assurer que CS:GO est installé en sélectionnant la branche \"csgo_legacy\" depuis l'onglet \"Betas\" des propriétés du jeu CS2 sur Steam."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Read the <0>documentation</0> for more information."
-msgstr "Lisez la <0>documentation</0> pour plus d'informations."
-
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-#: src/ui/match/video/video-loader.tsx
-msgid "Counter-Strike executable not found, check your app playback settings."
-msgstr ""
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "{game} is not supported on your operating system"
-msgstr "{game} n'est pas supporté sur votre système d'exploitation"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "HLAE executable not found"
-msgstr "L'exécutable de HLAE est introuvable"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "No kills found"
-msgstr "Aucun kill trouvé"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "This demo needs to be re-analyzed to make the camera focus work."
-msgstr "Cette démo doit être réanalyser pour que la caméra se place correctement sur les joueurs."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "No rounds found"
-msgstr "Aucun round trouvé"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "No deaths found"
-msgstr "Aucune mort trouvée"
-
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
-msgstr "Le chemin de la démo contient des caractères qui ne sont pas pris en charge par Counter-Strike qui empêcheraient la lecture."
-
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
-msgstr "Vous devez déplacer la démo dans un dossier qui ne contient que des caractères latin de base - voir <0>cette documentation</0> pour plus de détails."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Steam is not running"
-msgstr "Steam n'est pas lancé"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "The game crashed, please see <0>this documentation</0> for help."
-msgstr "Le jeu a planté, merci de consulter <0>cette documentation</0> pour obtenir de l'aide."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "The game process exited with an access denied error."
-msgstr "Le processus de jeu s'est terminé avec une erreur \"access denied\"."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Make sure to close any anti-cheat software and retry."
-msgstr "Assurez-vous de fermer tout logiciel anti-triche et réessayez."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Counter-Strike starting…"
-msgstr "Lancement de Counter-Strike…"
 
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 msgctxt "OS save dialog title"

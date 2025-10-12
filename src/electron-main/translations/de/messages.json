@@ -1,6 +1,7 @@
 {
   "notification.downloadAvailable.title": "Eine neue Version ist verfügbar!",
   "notification.downloadAvailable.body": "Klicken Sie hier zum Download.",
+  "menu.startCounterStrikeGlobalOffensive": "",
   "menu.about": "Über",
   "menu.preferences": "Einstellungen",
   "menu.services": "Dienste",
@@ -9,6 +10,7 @@
   "menu.showAll": "Alle anzeigen",
   "menu.quit": "CS:DM verlassen",
   "menu.file": "Datei",
+  "menu.startCounterStrike2": "",
   "menu.edit": "Bearbeiten",
   "menu.undo": "Rückgängig",
   "menu.redo": "Wiederholen",

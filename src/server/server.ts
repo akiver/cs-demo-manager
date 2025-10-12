@@ -215,7 +215,8 @@ class WebSocketServer {
       const { name, payload, uuid } = message;
       logger.log(`WS:: message with name ${name} and uuid ${uuid} received from main process`);
 
-      const handler: Handler<unknown, unknown> = mainHandlers[name];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const handler: Handler<any, unknown> = mainHandlers[name];
       if (typeof handler === 'function') {
         try {
           const result = await handler(payload);

@@ -1,6 +1,6 @@
 import { watchPlayerHighlights } from 'csdm/node/counter-strike/launcher/watch-player-highlights';
 import type { Perspective } from 'csdm/common/types/perspective';
-import { buildWatchDemoErrorPayload, onGameStart } from './counter-strike';
+import { handleWatchDemoError, onGameStart } from 'csdm/server/counter-strike';
 
 export type WatchPlayerHighlightsPayload = {
   demoPath: string;
@@ -15,6 +15,6 @@ export async function watchPlayerHighlightsHandler(payload: WatchPlayerHighlight
       onGameStart,
     });
   } catch (error) {
-    return buildWatchDemoErrorPayload(error, payload.demoPath, 'Error watching player highlights');
+    return handleWatchDemoError(error, payload.demoPath, 'Error watching player highlights');
   }
 }

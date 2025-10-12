@@ -1,6 +1,7 @@
 {
   "notification.downloadAvailable.title": "Une nouvelle mise à jour est disponible !",
   "notification.downloadAvailable.body": "Cliquez ici pour la télécharger.",
+  "menu.startCounterStrikeGlobalOffensive": "Lancer CS:GO",
   "menu.about": "À propos de",
   "menu.preferences": "Préférences",
   "menu.services": "Services",
@@ -9,6 +10,7 @@
   "menu.showAll": "Tout afficher",
   "menu.quit": "Quitter CS:DM",
   "menu.file": "Fichier",
+  "menu.startCounterStrike2": "Lancer CS2",
   "menu.edit": "Modifier",
   "menu.undo": "Annuler",
   "menu.redo": "Rétablir",

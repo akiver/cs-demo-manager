@@ -1,6 +1,7 @@
 {
   "notification.downloadAvailable.title": "A new update is available!",
   "notification.downloadAvailable.body": "Click here to download it.",
+  "menu.startCounterStrikeGlobalOffensive": "Start CS:GO",
   "menu.about": "About",
   "menu.preferences": "Preferences",
   "menu.services": "Services",
@@ -9,6 +10,7 @@
   "menu.showAll": "Show All",
   "menu.quit": "Quit CS:DM",
   "menu.file": "File",
+  "menu.startCounterStrike2": "Start CS2",
   "menu.edit": "Edit",
   "menu.undo": "Undo",
   "menu.redo": "Redo",

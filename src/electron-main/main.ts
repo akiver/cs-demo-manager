@@ -118,8 +118,8 @@ async function start() {
   await loadI18n(settings.ui.locale);
 
   tray = createTray();
-  createApplicationMenu();
   const client = createWebSocketClient();
+  createApplicationMenu(client);
   registerMainProcessListeners();
 
   let isOpenedAtLogin = false;
@@ -152,7 +152,7 @@ async function start() {
   ipcMain.handle(IPCChannel.LocaleChanged, async (event, locale: string) => {
     await loadI18n(locale);
     tray?.setContextMenu(createTrayMenu());
-    createApplicationMenu();
+    createApplicationMenu(client);
     const mainWindow = windowManager.getOrCreateMainWindow();
     listenForContextMenu(mainWindow);
   });

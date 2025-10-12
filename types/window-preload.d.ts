@@ -14,7 +14,7 @@ import type { getMapRadarBase64 } from 'csdm/node/filesystem/maps/get-map-radar-
 import type { getMapLowerRadarBase64 } from 'csdm/node/filesystem/maps/get-map-lower-radar-base64';
 import type { getMapThumbnailBase64 } from 'csdm/node/filesystem/maps/get-map-thumbnail-base64';
 import type { getPngInformation } from 'csdm/node/filesystem/get-png-information';
-import type { PremierRank, Rank } from 'csdm/common/types/counter-strike';
+import type { Game, PremierRank, Rank } from 'csdm/common/types/counter-strike';
 import type { writeTableState } from 'csdm/node/settings/table/write-table-state';
 import type { readTableState } from 'csdm/node/settings/table/read-table-state';
 import type { Argument } from 'csdm/common/types/argument';

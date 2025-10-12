@@ -27,6 +27,7 @@ export const ErrorCode = {
   TeamsNotFound: 426,
   MissingPlayerSlot: 427,
   CustomCounterStrikeExecutableNotFound: 428,
+  CounterStrikeAlreadyRunning: 429,
   InvalidDemoPath: 505,
   ChecksumsMismatch: 506,
   DuplicateTeamName: 507,

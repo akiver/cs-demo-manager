@@ -1,5 +1,5 @@
 import { watchDemo } from 'csdm/node/counter-strike/launcher/watch-demo';
-import { buildWatchDemoErrorPayload, onGameStart } from './counter-strike';
+import { handleWatchDemoError, onGameStart } from 'csdm/server/counter-strike';
 
 export type WatchDemoPayload = {
   demoPath: string;
@@ -15,6 +15,6 @@ export async function watchDemoHandler(payload: WatchDemoPayload) {
       onGameStart,
     });
   } catch (error) {
-    return buildWatchDemoErrorPayload(error, payload.demoPath, 'Error watching demo');
+    return handleWatchDemoError(error, payload.demoPath, 'Error watching demo');
   }
 }

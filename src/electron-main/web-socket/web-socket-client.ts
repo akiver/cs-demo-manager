@@ -89,7 +89,7 @@ export class WebSocketClient {
       if (this.isConnected) {
         this.socket.send(JSON.stringify(message));
       } else {
-        this.messageQueue.push(message);
+        this.messageQueue.push(message as SendableMessage);
       }
     }) as ReturnType<MainMessageHandlers[MessageName]>;
   }

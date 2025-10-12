@@ -25,15 +25,15 @@ import { isLinux } from 'csdm/node/os/is-linux';
 import type { PlaybackSettings, Settings } from 'csdm/node/settings/settings';
 
 type StartCounterStrikeOptions = {
-  demoPath: string;
+  demoPath?: string;
   game: Game;
   width?: number;
   height?: number;
   fullscreen?: boolean;
-  playDemoArgs?: string[];
+  additionalLaunchParameters?: string[];
   uninstallPluginOnExit?: boolean;
   signal?: AbortSignal;
-  onGameStart: () => void;
+  onGameStart?: () => void;
 };
 
 function buildUnixCommand(scriptPath: string, args: string, game: Game) {
@@ -118,7 +118,7 @@ async function buildCommand(executablePath: string, args: string, game: Game, se
 // Tip: to understand how Steam starts CS you can use the Steam client launch options: -dev -console
 // You would be able to see the command used to start CS in the console.
 export async function startCounterStrike(options: StartCounterStrikeOptions) {
-  const { demoPath, game, signal, playDemoArgs, fullscreen } = options;
+  const { demoPath, game, signal, additionalLaunchParameters, fullscreen } = options;
 
   if (game === Game.CS2 && isMac) {
     throw new UnsupportedGame(game);
@@ -126,11 +126,13 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
 
   await assertSteamIsRunning();
 
-  assertDemoPathIsValid(demoPath, game);
+  if (demoPath) {
+    assertDemoPathIsValid(demoPath, game);
 
-  const playbackStarted = await tryStartingDemoThroughWebSocket(demoPath);
-  if (playbackStarted) {
-    return;
+    const playbackStarted = await tryStartingDemoThroughWebSocket(demoPath);
+    if (playbackStarted) {
+      return;
+    }
   }
 
   const executablePath = await getCounterStrikeExecutablePath(game);
@@ -149,11 +151,12 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     // '-noassetbrowser',
     '-insecure',
     '-novid',
-    '+playdemo',
-    `"${demoPath}"`,
   ];
-  if (playDemoArgs) {
-    launchParameters.push(...playDemoArgs);
+  if (demoPath) {
+    launchParameters.push('+playdemo', `"${demoPath}"`);
+  }
+  if (additionalLaunchParameters) {
+    launchParameters.push(...additionalLaunchParameters);
   }
   launchParameters.push(userLaunchParameters);
   const width = options.width ?? userWidth;
@@ -169,7 +172,7 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   throwIfAborted(signal);
   logger.log('Starting game with command', command);
 
-  options.onGameStart();
+  options.onGameStart?.();
 
   const hasBeenKilled = await killCounterStrikeProcesses();
   // When we kill the process on Unix it may take a bit of time before the process actually releases files lock.
@@ -199,7 +202,9 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     gameProcess.on('exit', (code) => {
       logger.log('Game process exited with code', code);
 
-      deleteJsonActionsFile(demoPath);
+      if (demoPath) {
+        deleteJsonActionsFile(demoPath);
+      }
       if (options.uninstallPluginOnExit !== false) {
         uninstallCounterStrikeServerPlugin(game);
       }

@@ -4,9 +4,25 @@ import { i18n } from '@lingui/core';
 import { IPCChannel } from 'csdm/common/ipc-channel';
 import { isMac } from 'csdm/node/os/is-mac';
 import { windowManager } from 'csdm/electron-main/window-manager';
+import { Game } from 'csdm/common/types/counter-strike';
+import type { WebSocketClient } from './web-socket/web-socket-client';
+import { MainClientMessageName } from 'csdm/server/main-client-message-name';
 
-export function createApplicationMenu() {
+export function createApplicationMenu(client: WebSocketClient) {
   const template: MenuItemConstructorOptions[] = [];
+
+  const startCsgoItem: MenuItemConstructorOptions = {
+    label: i18n.t({
+      id: 'menu.startCounterStrikeGlobalOffensive',
+      message: 'Start CS:GO',
+    }),
+    click: () => {
+      client.send({
+        name: MainClientMessageName.StartCounterStrike,
+        payload: Game.CSGO,
+      });
+    },
+  };
 
   if (isMac) {
     template.push({
@@ -22,6 +38,8 @@ export function createApplicationMenu() {
             mainWindow.webContents.send(IPCChannel.ShowAbout);
           },
         },
+        { type: 'separator' },
+        startCsgoItem,
         { type: 'separator' },
         {
           label: i18n.t({
@@ -86,6 +104,19 @@ export function createApplicationMenu() {
         message: 'File',
       }),
       submenu: [
+        {
+          label: i18n.t({
+            id: 'menu.startCounterStrike2',
+            message: 'Start CS2',
+          }),
+          click: () => {
+            client.send({
+              name: MainClientMessageName.StartCounterStrike,
+              payload: Game.CS2,
+            });
+          },
+        },
+        startCsgoItem,
         {
           label: i18n.t({
             id: 'menu.preferences',
