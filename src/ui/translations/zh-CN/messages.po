@@ -7361,16 +7361,16 @@ msgid "You selected a version compatible with CS2 from the 'Animation' update ({
 msgstr "你选择了兼容 CS2「动画系统」更新({animationUpdateDate})到{update14095}更新之间版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
-msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.9.4\"</0> in your Steam library to use this version."
-msgstr "除非使用自定义版本，否则你需要在你的Steam库中选择 CS2 测试版分支 <0>\"1.40.9.4\"</0> 使用。"
-
-#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update."
 msgstr "你选择了兼容 CS2 ({update14095}) 更新到 {update14104} 更新之间版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
-msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.0.3\"</0> in your Steam library to use this version."
-msgstr "你需要在 Steam 库中选择 CS2 测试版分支 <0>\"1.41.0.3\"</0> 搭配使用，或者使用定制构建版本。"
+msgid "You selected a version compatible with CS2 from the {update14104} update up to the {update14112} update."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.1.2\"</0> in your Steam library to use this version."
+msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
