@@ -1,7 +1,7 @@
 {
   "notification.downloadAvailable.title": "存在可用的新版本!",
   "notification.downloadAvailable.body": "点击此处下载",
-  "menu.startCounterStrikeGlobalOffensive": "",
+  "menu.startCounterStrikeGlobalOffensive": "Start CS:GO",
   "menu.about": "关于",
   "menu.preferences": "设置",
   "menu.services": "服务",
@@ -10,7 +10,7 @@
   "menu.showAll": "显示所有",
   "menu.quit": "退出 CS:DM",
   "menu.file": "文件",
-  "menu.startCounterStrike2": "",
+  "menu.startCounterStrike2": "Start CS2",
   "menu.edit": "编辑",
   "menu.undo": "撤销",
   "menu.redo": "恢复",
