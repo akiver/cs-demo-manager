@@ -1857,12 +1857,12 @@ msgstr "STA"
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header tooltip"
 msgid "Score Team A"
-msgstr "Score Team A"
+msgstr "队伍 A 得分"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Dropdown column visibility"
 msgid "Score Team A"
-msgstr "Score Team A"
+msgstr "队伍 A 得分"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header score team B"
@@ -1872,12 +1872,12 @@ msgstr "STB"
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header tooltip"
 msgid "Score Team B"
-msgstr "Score Team B"
+msgstr "队伍 B 得分"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Dropdown column visibility"
 msgid "Score Team B"
-msgstr "Score Team B"
+msgstr "队伍 B 得分"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1888,7 +1888,7 @@ msgstr "Score Team B"
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header kill count"
 msgid "K"
-msgstr "K"
+msgstr "杀"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1918,7 +1918,7 @@ msgstr "击杀次数"
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header assist count"
 msgid "A"
-msgstr "A"
+msgstr "助"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1948,7 +1948,7 @@ msgstr "助攻"
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header death count"
 msgid "D"
-msgstr "D"
+msgstr "死"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -2043,7 +2043,7 @@ msgstr "HLTV 2.0"
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Estimated HLTV 2.0 rating"
-msgstr "Estimated HLTV 2.0 rating"
+msgstr "估计 HLTV 2.0 评分"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
@@ -2089,7 +2089,7 @@ msgstr "CK"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Collateral Kill (two or more enemies killed with a single bullet)"
-msgstr "附带击杀(两个或多个的敌人用一枚子弹击杀)"
+msgstr "附带击杀 (一枪击杀2个或以上的敌人)"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Dropdown column visibility"
@@ -3174,7 +3174,7 @@ msgstr "玩家在这一比赛中击杀、辅助、存活、补枪中的4项完�
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header average damage per round"
 msgid "ADR"
-msgstr "伤害/回合"
+msgstr "ADR"
 
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
@@ -3196,7 +3196,7 @@ msgstr "每回合平均伤害"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first kill count"
 msgid "FK"
-msgstr "FK"
+msgstr "首杀"
 
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
@@ -4349,13 +4349,13 @@ msgstr "正在加载……"
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "Rank"
-msgstr "排名"
+msgstr "段位"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Rank"
-msgstr "排名"
+msgstr "官匹段位"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header damage health"
@@ -4413,7 +4413,7 @@ msgstr "HLTV"
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "HLTV 1.0 rating"
-msgstr "Estimated HLTV 1.0 rating"
+msgstr "HLTV 1.0 评分"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header utility damage"
@@ -4423,7 +4423,7 @@ msgstr "UD"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Total Utility Damage Dealt"
-msgstr "总辅助伤害量"
+msgstr "投掷物总伤害量"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
@@ -4578,7 +4578,7 @@ msgstr "人质拯救"
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
 msgid "2K"
-msgstr "2K"
+msgstr "2杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
@@ -4951,7 +4951,7 @@ msgstr "错误"
 #: src/ui/match/video/assists-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Show assists"
-msgstr ""
+msgstr "显示助攻"
 
 #. js-lingui-explicit-id
 #: src/ui/match/video/cfg-input.tsx
@@ -7427,12 +7427,12 @@ msgstr "使用自定义位置"
 
 #: src/ui/settings/playback/follow-symbolic-links.tsx
 msgid "Follow symbolic links when looking for the Steam runtime script used to launch Counter-Strike."
-msgstr ""
+msgstr "在寻找用于启动 CS 的 Steam 运行时脚本时遵循符号链接。"
 
 #: src/ui/settings/playback/follow-symbolic-links.tsx
 msgctxt "Settings title"
 msgid "Follow symbolic Links"
-msgstr ""
+msgstr "跟随符号链接"
 
 #: src/ui/settings/playback/game-fullscreen.tsx
 msgid "Start the game in fullscreen mode"
@@ -7527,19 +7527,19 @@ msgstr "玩家语音"
 
 #: src/ui/settings/playback/steam-runtime-script-location.tsx
 msgid "Steam runtime script location"
-msgstr ""
+msgstr "Steam 运行时脚本位置"
 
 #: src/ui/settings/playback/steam-runtime-script-location.tsx
 msgid "Path to the Steam runtime script used to start CS2. "
-msgstr ""
+msgstr "启动 CS2 的 Steam 运行时脚本文件路径 "
 
 #: src/ui/settings/playback/steam-runtime-script-location.tsx
 msgid "As of September 2025, this script is named <0>_v2-entry-point</0> and uses the Steam runtime 3 \"Sniper\"."
-msgstr ""
+msgstr "截至2025年9月，此脚本名叫 <0>_v2-entry-point</0>，并使用 Steam 运行时3 \"Sniper\"。"
 
 #: src/ui/settings/playback/steam-runtime-script-location.tsx
 msgid "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
-msgstr ""
+msgstr "它应该位于 Steam 安装文件夹中的 <0>steamapps/common/SteamLinuxRuntime_sniper</0>。"
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
@@ -7645,20 +7645,20 @@ msgstr "颜色无效"
 
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx
 msgid "Hardware Acceleration"
-msgstr ""
+msgstr "硬件加速"
 
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx
 msgid "Changing this setting will relaunch the application."
-msgstr ""
+msgstr "更改此设置将重新启动应用程序。"
 
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx
 msgid "Uses your GPU to make the app smoother. Turn this off if you are experiencing visual problems."
-msgstr ""
+msgstr "使用 GPU 加速能让应用显示更加流畅。如果您遇到视觉效果问题，请关闭此功能。"
 
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx
 msgctxt "Settings title"
 msgid "Hardware Acceleration"
-msgstr ""
+msgstr "硬件加速"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
@@ -7786,12 +7786,12 @@ msgstr "默认录制设置"
 
 #: src/ui/settings/video/recording/recording-assists.tsx
 msgid "Show assists in kill feed."
-msgstr ""
+msgstr "在击杀镜头当中加入助攻镜头。"
 
 #: src/ui/settings/video/recording/recording-assists.tsx
 msgctxt "Settings title"
 msgid "Show Assists"
-msgstr ""
+msgstr "显示助攻"
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"
@@ -8128,7 +8128,7 @@ msgstr "X光"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Assists"
-msgstr ""
+msgstr "助攻"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"
