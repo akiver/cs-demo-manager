@@ -20,8 +20,8 @@ function compareVersions(version1: string, version2: string): number {
 }
 
 export async function checkForHlaeUpdate(currentVersion: string): Promise<boolean> {
-  const twoHoursInMilliseconds = 3600 * 2 * 1000;
-  const shouldCheck = await isTimestampExpired(TimestampName.HlaeUpdate, twoHoursInMilliseconds);
+  const thirtyMinutesInMilliseconds = 30 * 60 * 1000;
+  const shouldCheck = await isTimestampExpired(TimestampName.HlaeUpdate, thirtyMinutesInMilliseconds);
   if (!shouldCheck) {
     return false;
   }
