@@ -28,7 +28,7 @@ function OptimizeDatabaseDialog() {
       clearDemos: false,
     },
   });
-  const isConfirmButtonDisabled = !Object.values(state.payload).some(Boolean);
+  const isConfirmButtonDisabled = !Object.values(state.payload).some(Boolean) || state.isBusy;
 
   const onConfirmClick = async () => {
     try {
