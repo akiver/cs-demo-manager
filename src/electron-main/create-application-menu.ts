@@ -360,29 +360,42 @@ export function createApplicationMenu(client: WebSocketClient) {
     });
   }
 
+  const helpSubmenu: MenuItemConstructorOptions[] = [
+    {
+      label: i18n.t({
+        id: 'menu.documentation',
+        message: 'Documentation',
+      }),
+      click: () => {
+        shell.openExternal('https://cs-demo-manager.com/docs');
+      },
+    },
+    {
+      label: 'GitHub',
+      click: () => {
+        shell.openExternal('https://github.com/akiver/cs-demo-manager');
+      },
+    },
+  ];
+  if (!isMac) {
+    helpSubmenu.push({
+      label: i18n.t({
+        id: 'menu.about',
+        message: 'About',
+      }),
+      click: () => {
+        const mainWindow = windowManager.getOrCreateMainWindow();
+        mainWindow.webContents.send(IPCChannel.ShowAbout);
+      },
+    });
+  }
   template.push({
     label: i18n.t({
       id: 'menu.help',
       message: 'Help',
     }),
     role: 'help',
-    submenu: [
-      {
-        label: i18n.t({
-          id: 'menu.documentation',
-          message: 'Documentation',
-        }),
-        click: () => {
-          shell.openExternal('https://cs-demo-manager.com/docs');
-        },
-      },
-      {
-        label: 'GitHub',
-        click: () => {
-          shell.openExternal('https://github.com/akiver/cs-demo-manager');
-        },
-      },
-    ],
+    submenu: helpSubmenu,
   });
 
   const menu = Menu.buildFromTemplate(template);
