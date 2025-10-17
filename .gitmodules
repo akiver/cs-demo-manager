@@ -3,9 +3,8 @@
 	url = https://github.com/dhbaird/easywsclient
 [submodule "cs2-server-plugin/cs2-server-plugin/deps/hl2sdk"]
 	path = cs2-server-plugin/cs2-server-plugin/deps/hl2sdk
-	# TODO deps Replace with the official hl2sdk cs2 branch when possible
-	url = https://github.com/akiver/hl2sdk.git
-	branch = csdm
+	url = https://github.com/alliedmodders/hl2sdk
+	branch = cs2
 [submodule "cs2-server-plugin/cs2-server-plugin/deps/json"]
 	path = cs2-server-plugin/cs2-server-plugin/deps/json
 	url = https://github.com/nlohmann/json
