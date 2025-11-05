@@ -60,7 +60,10 @@ export class JSONActionsFileGenerator {
       });
       this.actions.push({
         cmd: `spec_player ${playerId}`,
-        tick: actionTick,
+        // Add a small delay to prevent spec_player from being ignored. Since an October 2025 CS2 update,
+        // executing spec_player on the same tick as demo_gototick's target tick may fail.
+        // https://github.com/akiver/cs-demo-manager/issues/1238
+        tick: actionTick + 4,
       });
     }
 

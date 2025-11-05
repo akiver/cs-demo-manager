@@ -11,11 +11,11 @@
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",
-        "tick": 64
+        "tick": 872
       },
       {
         "cmd": "spec_player_by_accountid fakeKillerSteamId",
-        "tick": 64
+        "tick": 872
       },
       {
         "cmd": "demo_gototick 10752",
@@ -23,11 +23,11 @@
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",
-        "tick": 5864
+        "tick": 10752
       },
       {
         "cmd": "spec_player_by_accountid fakeKillerSteamId",
-        "tick": 5864
+        "tick": 10752
       },
       {
         "cmd": "demo_gototick 16152",
@@ -35,11 +35,11 @@
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",
-        "tick": 13184
+        "tick": 16152
       },
       {
         "cmd": "spec_player_by_accountid fakeKillerSteamId",
-        "tick": 13184
+        "tick": 16152
       },
       {
         "cmd": "demo_gototick 21352",
@@ -47,11 +47,11 @@
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",
-        "tick": 18984
+        "tick": 21352
       },
       {
         "cmd": "spec_player_by_accountid fakeKillerSteamId",
-        "tick": 18984
+        "tick": 21352
       },
       {
         "cmd": "disconnect",

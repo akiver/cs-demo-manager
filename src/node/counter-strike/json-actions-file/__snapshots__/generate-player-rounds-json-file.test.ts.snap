@@ -26,11 +26,11 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_mode 1",
-        "tick": 64
+        "tick": 872
       },
       {
         "cmd": "spec_player 4",
-        "tick": 64
+        "tick": 876
       },
       {
         "cmd": "demo_gototick 10752",
@@ -38,11 +38,11 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_mode 1",
-        "tick": 5864
+        "tick": 10752
       },
       {
         "cmd": "spec_player 4",
-        "tick": 5864
+        "tick": 10756
       },
       {
         "cmd": "demo_gototick 16152",
@@ -50,11 +50,11 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_mode 1",
-        "tick": 13184
+        "tick": 16152
       },
       {
         "cmd": "spec_player 4",
-        "tick": 13184
+        "tick": 16156
       },
       {
         "cmd": "demo_gototick 21352",
@@ -62,11 +62,11 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_mode 1",
-        "tick": 18984
+        "tick": 21352
       },
       {
         "cmd": "spec_player 4",
-        "tick": 18984
+        "tick": 21356
       },
       {
         "cmd": "disconnect",
@@ -91,11 +91,11 @@ exports[`Generate player's rounds JSON file > CSGO 1`] = `
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",
-        "tick": 64
+        "tick": 872
       },
       {
         "cmd": "spec_player_by_accountid fakeKillerSteamId",
-        "tick": 64
+        "tick": 872
       },
       {
         "cmd": "demo_gototick 10752",
@@ -103,11 +103,11 @@ exports[`Generate player's rounds JSON file > CSGO 1`] = `
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",
-        "tick": 5864
+        "tick": 10752
       },
       {
         "cmd": "spec_player_by_accountid fakeKillerSteamId",
-        "tick": 5864
+        "tick": 10752
       },
       {
         "cmd": "demo_gototick 16152",
@@ -115,11 +115,11 @@ exports[`Generate player's rounds JSON file > CSGO 1`] = `
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",
-        "tick": 13184
+        "tick": 16152
       },
       {
         "cmd": "spec_player_by_accountid fakeKillerSteamId",
-        "tick": 13184
+        "tick": 16152
       },
       {
         "cmd": "demo_gototick 21352",
@@ -127,11 +127,11 @@ exports[`Generate player's rounds JSON file > CSGO 1`] = `
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",
-        "tick": 18984
+        "tick": 21352
       },
       {
         "cmd": "spec_player_by_accountid fakeKillerSteamId",
-        "tick": 18984
+        "tick": 21352
       },
       {
         "cmd": "disconnect",
