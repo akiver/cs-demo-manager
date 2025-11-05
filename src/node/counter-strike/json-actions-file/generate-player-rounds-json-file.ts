@@ -45,7 +45,7 @@ export async function generatePlayerRoundsJsonFile({
     if (currentTick + afterRoundTicks < startTick) {
       json.addSkipAhead(currentTick, startTick);
     }
-    json.addSpecPlayer(currentTick, playerId);
+    json.addSpecPlayer(startTick, playerId);
 
     if (round.deathTick !== null) {
       currentTick = round.deathTick + afterRoundTicks;
