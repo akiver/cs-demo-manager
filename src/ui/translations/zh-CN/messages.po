@@ -470,7 +470,7 @@ msgstr "确保关闭任何反作弊软件，然后重试。"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 msgid "{game} is already running"
-msgstr ""
+msgstr "{game}已经在运行中"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 msgid "Counter-Strike starting…"
@@ -7366,11 +7366,11 @@ msgstr "你选择了兼容 CS2 ({update14095}) 更新到 {update14104} 更新之
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the {update14104} update up to the {update14112} update."
-msgstr ""
+msgstr "你选择了兼容 CS2 {update14104} 更新到 {update14112} 更新之间版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.1.2\"</0> in your Steam library to use this version."
-msgstr ""
+msgstr "你需要在 Steam 库中选择 CS2 测试版分支 <0>\"1.41.1.2\"</0> 搭配使用，或者使用定制构建版本。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
