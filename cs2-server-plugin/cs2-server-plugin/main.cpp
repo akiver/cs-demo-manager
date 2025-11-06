@@ -294,14 +294,16 @@ void PlaybackLoop() {
                 if (action.tick != newTick) {
                     continue;
                 }
-                // Since an October 2025 CS2 update, the tick after executing demo_pause and then demo_resume may be "in the past".
-                // For example pausing the demo at tick 1000 and resuming it may result in the current tick being 998.
-                // To avoid re-executing actions, we ignore actions for ticks that are before or equal to the last pause tick.
-                if (lastPauseTick != -1 && action.tick <= lastPauseTick) {
-                    continue;
-                }
 
                 if (action.cmd == "pause_playback") {
+                    // Since an October 2025 CS2 update, the tick after executing demo_pause and then demo_resume may be "in the past".
+                    // For example pausing the demo at tick 1000 and resuming it may result in the current tick being 998.
+                    // To avoid pausing the demo indefinitely, we check if we already paused at this tick.
+                    if (lastPauseTick != -1 && lastPauseTick == newTick) {
+                        lastPauseTick = -1;
+                        continue;
+                    }
+
                     lastPauseTick = newTick;
                     Log("[%d] Pausing demo playback", newTick);
                     engine->ExecuteClientCmd(0, "demo_pause", true);
