@@ -57,6 +57,7 @@ export async function createCs2JsonActionsFileForRecording({
     'cl_hud_telemetry_serverrecvmargin_graph_show 0',
     'r_show_build_info 0',
     'mirv_streams record screen enabled 1',
+    'mirv_panorama panelstyle panelId=trueview_row opacity=0',
   ];
 
   for (let i = 0; i < sequences.length; i++) {
