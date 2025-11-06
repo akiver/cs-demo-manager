@@ -80,6 +80,7 @@ bool isPlayingDemo = false;
 int currentTick = -1;
 bool isQuitting = false;
 bool initialized = false;
+int lastPauseTick = -1;
 std::queue<Sequence> sequences;
 
 void LogToFile(const char* pMsg) {
@@ -290,22 +291,34 @@ void PlaybackLoop() {
 
             Sequence currentSequence = sequences.front();
             for (auto action : currentSequence.actions) {
-                if (action.tick == newTick) {
-                    if (action.cmd == "pause_playback") {
-                        Log("[%d] Pausing demo playback", newTick);
-                        engine->ExecuteClientCmd(0, "demo_pause", true);
-                        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-                        Log("[%d] Resuming demo playback", newTick);
-                        engine->ExecuteClientCmd(0, "demo_resume", true);
-                    } else if (action.cmd == "go_to_next_sequence") {
-                        Log("[%d] Going to next sequence, remaining sequences: %d", newTick, sequences.size() - 1);
-                        sequences.pop();
-                        engine->ExecuteClientCmd(0, "demo_gototick 0", true);
-                        currentTick = -1;
-                    } else {
-                        Log("[%d] Executing: %s", newTick, action.cmd.c_str());
-                        engine->ExecuteClientCmd(0, action.cmd.c_str(), true);
-                    }
+                if (action.tick != newTick) {
+                    continue;
+                }
+                // Since an October 2025 CS2 update, the tick after executing demo_pause and then demo_resume may be "in the past".
+                // For example pausing the demo at tick 1000 and resuming it may result in the current tick being 998.
+                // To avoid re-executing actions, we ignore actions for ticks that are before or equal to the last pause tick.
+                if (lastPauseTick != -1 && action.tick <= lastPauseTick) {
+                    continue;
+                }
+
+                if (action.cmd == "pause_playback") {
+                    lastPauseTick = newTick;
+                    Log("[%d] Pausing demo playback", newTick);
+                    engine->ExecuteClientCmd(0, "demo_pause", true);
+                    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                    Log("[%d] Resuming demo playback", newTick);
+                    engine->ExecuteClientCmd(0, "demo_resume", true);
+                }
+                else if (action.cmd == "go_to_next_sequence") {
+                    Log("[%d] Going to next sequence, remaining sequences: %d", newTick, sequences.size() - 1);
+                    sequences.pop();
+                    engine->ExecuteClientCmd(0, "demo_gototick 0", true);
+                    currentTick = -1;
+                    lastPauseTick = -1;
+                }
+                else {
+                    Log("[%d] Executing: %s", newTick, action.cmd.c_str());
+                    engine->ExecuteClientCmd(0, action.cmd.c_str(), true);
                 }
             }
         }
