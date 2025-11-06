@@ -161,6 +161,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          ssh-key: ${{ secrets.SSH_DEPLOYMENT_PRIVATE_KEY }}
+          persist-credentials: true
 
       - name: Setup node
         uses: actions/setup-node@v4
