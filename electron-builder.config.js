@@ -1,4 +1,5 @@
 const { Arch } = require('electron-builder');
+const pkg = require('./package.json');
 
 let shouldNotarize = process.platform === 'darwin';
 
@@ -29,6 +30,10 @@ const config = {
   productName: 'CS Demo Manager',
   publish: {
     provider: 'github',
+  },
+  releaseInfo: {
+    releaseName: `v${pkg.version}`,
+    releaseNotes: `https://cs-demo-manager.com/changelog#v${pkg.version.replaceAll('.', '')}`,
   },
   fileAssociations: {
     ext: 'dem',
