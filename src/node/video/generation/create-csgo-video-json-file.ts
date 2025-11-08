@@ -10,6 +10,7 @@ import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 
 type Options = {
+  type: 'record' | 'watch';
   recordingSystem: RecordingSystem;
   recordingOutput: RecordingOutput;
   encoderSoftware: EncoderSoftware;
@@ -43,6 +44,7 @@ function buildReplacePlayerNameCommand(player: SequencePlayerOptions) {
 }
 
 export async function createCsgoJsonFileForRecording({
+  type,
   recordingSystem,
   recordingOutput,
   encoderSoftware,
@@ -144,15 +146,17 @@ export async function createCsgoJsonFileForRecording({
       }
     }
 
-    if (recordingSystem === RecordingSystem.HLAE) {
-      json
-        .addExecCommand(sequence.startTick, 'mirv_streams add normal defaultNormal')
-        .addExecCommand(sequence.startTick, 'mirv_streams record start')
-        .addExecCommand(sequence.endTick, 'mirv_streams record end');
-    } else {
-      json
-        .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
-        .addExecCommand(sequence.endTick, 'endmovie');
+    if (type === 'record') {
+      if (recordingSystem === RecordingSystem.HLAE) {
+        json
+          .addExecCommand(sequence.startTick, 'mirv_streams add normal defaultNormal')
+          .addExecCommand(sequence.startTick, 'mirv_streams record start')
+          .addExecCommand(sequence.endTick, 'mirv_streams record end');
+      } else {
+        json
+          .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
+          .addExecCommand(sequence.endTick, 'endmovie');
+      }
     }
 
     if (closeGameAfterRecording && i === sequences.length - 1) {

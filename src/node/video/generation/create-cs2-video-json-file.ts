@@ -15,6 +15,7 @@ function getHlaeOutputFolderPath(outputFolderPath: string, sequence: Sequence) {
 }
 
 type Options = {
+  type: 'record' | 'watch';
   recordingSystem: RecordingSystem;
   recordingOutput: RecordingOutput;
   encoderSoftware: EncoderSoftware;
@@ -33,7 +34,8 @@ type Options = {
   };
 };
 
-export async function createCs2JsonActionsFileForRecording({
+export async function createCs2VideoJsonFile({
+  type,
   recordingSystem,
   recordingOutput,
   encoderSoftware,
@@ -172,14 +174,16 @@ export async function createCs2JsonActionsFileForRecording({
       }
     }
 
-    if (recordingSystem === RecordingSystem.HLAE) {
-      json
-        .addExecCommand(sequence.startTick, `mirv_streams record start`)
-        .addExecCommand(sequence.endTick, 'mirv_streams record end');
-    } else {
-      json
-        .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
-        .addExecCommand(sequence.endTick, 'endmovie');
+    if (type === 'record') {
+      if (recordingSystem === RecordingSystem.HLAE) {
+        json
+          .addExecCommand(sequence.startTick, `mirv_streams record start`)
+          .addExecCommand(sequence.endTick, 'mirv_streams record end');
+      } else {
+        json
+          .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
+          .addExecCommand(sequence.endTick, 'endmovie');
+      }
     }
 
     if (closeGameAfterRecording && i === sequences.length - 1) {

@@ -5799,6 +5799,11 @@ msgstr "VirtualDub has been installed"
 msgid "An error occurred while installing VirtualDub"
 msgstr "An error occurred while installing VirtualDub"
 
+#: src/ui/match/video/watch-sequences-button.tsx
+msgctxt "Button"
+msgid "Watch sequences"
+msgstr "Watch sequences"
+
 #: src/ui/match/video/width-resolution-input.tsx
 msgctxt "Input label"
 msgid "Width"

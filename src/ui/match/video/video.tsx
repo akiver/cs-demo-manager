@@ -22,6 +22,7 @@ import { EditSequencesSettingsButton } from './sequences/edit-sequences/edit-seq
 import { RecordingSystemSelect } from './recording-system-select';
 import { RecordingOutputSelect } from './recording-output-select';
 import { DocumentationLink } from 'csdm/ui/components/links/documentation-link';
+import { WatchSequencesButton } from './watch-sequences-button';
 
 export function MatchVideo() {
   return (
@@ -32,6 +33,7 @@ export function MatchVideo() {
           <AddNewSequenceButton />
           <GeneratePlayerSequencesButton />
           <EditSequencesSettingsButton />
+          <WatchSequencesButton />
           <ResetSettingsButton />
           <DeleteSequencesButton />
           <SequencesSummary />

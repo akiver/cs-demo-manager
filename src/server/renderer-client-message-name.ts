@@ -66,6 +66,7 @@ export const RendererClientMessageName = {
   AddVideoToQueue: 'add-video-to-queue',
   ResumeVideoQueue: 'resume-video-queue',
   PauseVideoQueue: 'pause-video-queue',
+  WatchVideoSequences: 'watch-video-sequences',
   InstallHlae: 'install-hlae',
   UpdateHlae: 'update-hlae',
   EnableHlaeCustomLocation: 'enable-hlae-custom-location',

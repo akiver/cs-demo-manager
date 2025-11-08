@@ -2,7 +2,7 @@ import { Game } from 'csdm/common/types/counter-strike';
 import { generateVideoWithVirtualDub } from 'csdm/node/video/generation/generate-video-with-virtual-dub';
 import { generateVideoWithFFmpeg } from 'csdm/node/video/generation/generate-video-with-ffmpeg';
 import { concatenateVideosFromSequences } from 'csdm/node/video/generation/concatenate-videos-from-sequences';
-import { createCsgoJsonFileForRecording } from 'csdm/node/video/generation/create-csgo-json-file-for-recording';
+import { createCsgoJsonFileForRecording } from 'csdm/node/video/generation/create-csgo-video-json-file';
 import { watchDemoWithHlae } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { killCounterStrikeProcesses } from 'csdm/node/counter-strike/kill-counter-strike-processes';
@@ -13,7 +13,7 @@ import { abortError, throwIfAborted } from 'csdm/node/errors/abort-error';
 import { killHlaeProcess } from 'csdm/node/video/hlae/kill-hlae-process';
 import { sleep } from 'csdm/common/sleep';
 import { sortSequencesByStartTick } from 'csdm/common/video/sort-sequences-by-start-tick';
-import { createCs2JsonActionsFileForRecording } from 'csdm/node/video/generation/create-cs2-json-actions-file-for-recording';
+import { createCs2VideoJsonFile } from 'csdm/node/video/generation/create-cs2-video-json-file';
 import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-counter-strike';
 import { deleteJsonActionsFile } from 'csdm/node/counter-strike/json-actions-file/delete-json-actions-file';
 import { moveStartMovieFilesToOutputFolder } from 'csdm/node/video/generation/move-startmovie-files-to-output-folder';
@@ -180,6 +180,7 @@ export async function generateVideo(parameters: Parameters) {
 
   if (game === Game.CSGO) {
     await createCsgoJsonFileForRecording({
+      type: 'record',
       recordingSystem,
       recordingOutput,
       encoderSoftware,
@@ -193,7 +194,8 @@ export async function generateVideo(parameters: Parameters) {
     });
   } else {
     const players = await fetchMatchPlayersSlots(checksum);
-    await createCs2JsonActionsFileForRecording({
+    await createCs2VideoJsonFile({
+      type: 'record',
       recordingSystem,
       recordingOutput,
       encoderSoftware,

@@ -184,7 +184,7 @@ import {
   updatePlayersTagsHandler,
   type UpdatePlayersTagsPayload,
 } from './renderer-process/tags/update-players-tags-handler';
-import type { AddVideoPayload } from 'csdm/common/types/video';
+import type { AddVideoPayload, WatchVideoSequencesPayload } from 'csdm/common/types/video';
 import {
   updateSteamAccountNameHandler,
   type UpdateSteamAccountNamePayload,
@@ -209,6 +209,7 @@ import {
   exportPlayersToXlsxHandler,
   type ExportPlayersToXlsxPayload,
 } from './renderer-process/player/export-players-to-xlsx-handler';
+import { watchVideoSequencesHandler } from './renderer-process/video/watch-video-sequences-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -266,6 +267,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.AddVideoToQueue]: Handler<AddVideoPayload>;
   [RendererClientMessageName.ResumeVideoQueue]: Handler;
   [RendererClientMessageName.PauseVideoQueue]: Handler;
+  [RendererClientMessageName.WatchVideoSequences]: Handler<WatchVideoSequencesPayload>;
   [RendererClientMessageName.UpdateMatchDemoLocation]: Handler<UpdateMatchDemoLocationPayload>;
   [RendererClientMessageName.InstallHlae]: Handler<void, string>;
   [RendererClientMessageName.UpdateHlae]: Handler<void, string>;
@@ -428,4 +430,5 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.Add5EPlayAccount]: add5EPlayAccountHandler,
   [RendererClientMessageName.Delete5EPlayAccount]: delete5EPlayAccountHandler,
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: updateCurrent5EPlayAccountHandler,
+  [RendererClientMessageName.WatchVideoSequences]: watchVideoSequencesHandler,
 };
