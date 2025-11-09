@@ -1492,6 +1492,11 @@ msgctxt "Input label"
 msgid "Radius"
 msgstr "Radius"
 
+#: src/ui/components/heatmap/reset-zoom-button.tsx
+msgctxt "Button"
+msgid "Reset zoom"
+msgstr ""
+
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
 msgid "Comment (Markdown supported)"

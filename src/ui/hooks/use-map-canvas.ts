@@ -5,16 +5,18 @@ import { useGetMapRadarSrc } from '../maps/use-get-map-radar-src';
 import type { Game } from 'csdm/common/types/counter-strike';
 import { RadarLevel } from '../maps/radar-level';
 import { loadImageFromFilePath } from '../shared/load-image-from-file-path';
+import { noop } from 'csdm/common/noop';
 
 type Options = {
   map: Map;
   game: Game;
   draw: (interactiveCanvas: InteractiveCanvas, context: CanvasRenderingContext2D) => void;
-  onClick: (event: MouseEvent) => void;
-  onContextMenu: (event: MouseEvent) => void;
+  onClick?: (event: MouseEvent) => void;
+  onContextMenu?: (event: MouseEvent) => void;
+  mode?: 'upper' | 'lower' | 'both';
 };
 
-export function useMapCanvas({ onClick, draw, map, game, onContextMenu }: Options) {
+export function useMapCanvas({ onClick = noop, draw, map, game, onContextMenu = noop, mode = 'both' }: Options) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const radarImage = useRef<HTMLImageElement | null>(null);
   const lowerRadarImage = useRef<HTMLImageElement | null>(null);
@@ -54,12 +56,21 @@ export function useMapCanvas({ onClick, draw, map, game, onContextMenu }: Option
       const radarSize = getScaledRadarSize();
       const x = zoomedX(0);
       const y = zoomedY(0);
-      if (radarImage.current !== null) {
-        context.drawImage(radarImage.current, x, y, radarSize, radarSize);
-      }
-
-      if (lowerRadarImage.current !== null) {
-        context.drawImage(lowerRadarImage.current, x, y + radarSize, radarSize, radarSize);
+      if (mode === 'both') {
+        if (radarImage.current !== null) {
+          context.drawImage(radarImage.current, x, y, radarSize, radarSize);
+        }
+        if (lowerRadarImage.current !== null) {
+          context.drawImage(lowerRadarImage.current, x, y + radarSize, radarSize, radarSize);
+        }
+      } else if (mode === 'upper') {
+        if (radarImage.current !== null) {
+          context.drawImage(radarImage.current, x, y, radarSize, radarSize);
+        }
+      } else if (mode === 'lower') {
+        if (lowerRadarImage.current !== null) {
+          context.drawImage(lowerRadarImage.current, x, y, radarSize, radarSize);
+        }
       }
       draw(interactiveCanvas, context);
 

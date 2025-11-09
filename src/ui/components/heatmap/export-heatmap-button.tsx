@@ -7,6 +7,40 @@ import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { WriteBase64FilePayload } from 'csdm/server/handlers/renderer-process/filesystem/write-base64-file-handler';
 import { useShowToast } from '../toasts/use-show-toast';
 
+function cropCanvasTransparentAreas(canvas: HTMLCanvasElement): HTMLCanvasElement {
+  const context = canvas.getContext('2d') as CanvasRenderingContext2D;
+  const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  const pixels = imageData.data;
+
+  // find the bounds of non-transparent pixels
+  let minX = canvas.width;
+  let minY = canvas.height;
+  let maxX = 0;
+  let maxY = 0;
+
+  for (let y = 0; y < canvas.height; y++) {
+    for (let x = 0; x < canvas.width; x++) {
+      const alpha = pixels[(y * canvas.width + x) * 4 + 3]; // each pixel has 4 values: RGBA and alpha is at index 3
+      if (alpha > 0) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+
+  const croppedWidth = maxX - minX + 1;
+  const croppedHeight = maxY - minY + 1;
+  const croppedCanvas = document.createElement('canvas');
+  croppedCanvas.width = croppedWidth;
+  croppedCanvas.height = croppedHeight;
+  const croppedContext = croppedCanvas.getContext('2d') as CanvasRenderingContext2D;
+  croppedContext.drawImage(canvas, minX, minY, croppedWidth, croppedHeight, 0, 0, croppedWidth, croppedHeight);
+
+  return croppedCanvas;
+}
+
 function buildImageBase64() {
   const radarCanvas = document.getElementById('radar-canvas') as HTMLCanvasElement | null;
   if (radarCanvas === null) {
@@ -24,7 +58,9 @@ function buildImageBase64() {
   context.drawImage(radarCanvas, 0, 0);
   context.drawImage(heatmapCanvas, 0, 0);
 
-  return canvas.toDataURL('image/png').replace(/^data:image\/png;base64,/, '');
+  const croppedCanvas = cropCanvasTransparentAreas(canvas);
+
+  return croppedCanvas.toDataURL('image/png').replace(/^data:image\/png;base64,/, '');
 }
 
 export function ExportHeatmapButton() {

@@ -14,6 +14,7 @@ import type { TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { HeatmapFilters } from 'csdm/ui/components/heatmap/heatmap-filters';
 import { useTeam } from 'csdm/ui/team/use-team';
 import { HeatmapSelectMap } from 'csdm/ui/components/heatmap/heatmap-select-map';
+import { ResetZoomButton } from 'csdm/ui/components/heatmap/reset-zoom-button';
 
 export function TeamHeatmapFilters() {
   const dispatch = useDispatch();
@@ -62,7 +63,10 @@ export function TeamHeatmapFilters() {
           fetchPoints({ sides });
         }}
       />
-      <ExportHeatmapButton />
+      <div className="flex flex-wrap gap-x-8">
+        <ResetZoomButton />
+        <ExportHeatmapButton />
+      </div>
     </HeatmapFilters>
   );
 }
