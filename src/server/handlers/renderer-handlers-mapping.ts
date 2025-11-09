@@ -210,6 +210,10 @@ import {
   type ExportPlayersToXlsxPayload,
 } from './renderer-process/player/export-players-to-xlsx-handler';
 import { watchVideoSequencesHandler } from './renderer-process/video/watch-video-sequences-handler';
+import {
+  updateRoundCommentHandler,
+  type UpdateRoundCommentPayload,
+} from './renderer-process/round/update-round-comment-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -225,6 +229,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.Fetch2DViewerData]: Handler<Fetch2dViewerDataPayload, Fetch2dViewerDataSuccessPayload>;
   [RendererClientMessageName.UpdateComment]: Handler<UpdateCommentPayload>;
   [RendererClientMessageName.UpdatePlayerComment]: Handler<UpdatePlayerCommentPayload>;
+  [RendererClientMessageName.UpdateRoundComment]: Handler<UpdateRoundCommentPayload>;
   [RendererClientMessageName.InitializeVideo]: Handler<InitializeVideoPayload, InitializeVideoSuccessPayload>;
   [RendererClientMessageName.FetchDemosTable]: Handler<DemosTableFilter, Demo[]>;
   [RendererClientMessageName.LoadDemoByPath]: Handler<string, Demo>;
@@ -344,6 +349,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.Fetch2DViewerData]: fetch2DViewerDataHandler,
   [RendererClientMessageName.UpdateComment]: updateCommentHandler,
   [RendererClientMessageName.UpdatePlayerComment]: updatePlayerCommentHandler,
+  [RendererClientMessageName.UpdateRoundComment]: updateRoundCommentHandler,
   [RendererClientMessageName.InitializeVideo]: initializeVideoHandler,
   [RendererClientMessageName.FetchDemosTable]: fetchDemosTableHandler,
   [RendererClientMessageName.LoadDemoByPath]: loadDemoHandler,

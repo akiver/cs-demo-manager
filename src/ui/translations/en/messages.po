@@ -242,6 +242,7 @@ msgstr "Loading ban stats…"
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 #: src/ui/match/heatmap/match-heatmap.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
+#: src/ui/match/rounds/round/use-update-round-comment.tsx
 #: src/ui/player/use-update-player-comment.tsx
 #: src/ui/players/players-tags-dialogs.tsx
 #: src/ui/search/filters/search-maps-input.tsx

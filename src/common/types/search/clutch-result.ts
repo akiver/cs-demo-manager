@@ -6,4 +6,5 @@ export type ClutchResult = Clutch & {
   mapName: string;
   date: string;
   demoPath: string;
+  roundComment: string;
 };

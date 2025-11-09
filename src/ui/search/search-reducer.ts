@@ -21,6 +21,7 @@ import {
 } from './search-actions';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import type { SearchResult } from 'csdm/common/types/search/search-result';
+import { roundCommentUpdated } from '../match/rounds/round/round-actions';
 
 type FinderState = {
   readonly status: Status;
@@ -100,6 +101,19 @@ export const searchReducer = createReducer(initialState, (builder) => {
     .addCase(periodChanged, (state, action) => {
       state.startDate = action.payload.startDate;
       state.endDate = action.payload.endDate;
+    })
+    .addCase(roundCommentUpdated, (state, action) => {
+      for (const result of state.result) {
+        if (result.matchChecksum !== action.payload.checksum) {
+          continue;
+        }
+
+        if ('comment' in result && result.number === action.payload.number) {
+          result.comment = action.payload.comment;
+        } else if ('roundComment' in result && result.roundNumber === action.payload.number) {
+          result.roundComment = action.payload.comment;
+        }
+      }
     })
     .addCase(searchStart, (state) => {
       state.status = Status.Loading;

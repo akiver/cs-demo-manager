@@ -6,4 +6,5 @@ export type NoScopeKillResult = Kill & {
   date: string;
   demoPath: string;
   game: Game;
+  roundComment: string;
 };

@@ -63,6 +63,7 @@ type Props = {
   placement?: Placement;
   delay?: number;
   renderInPortal?: boolean;
+  isEnabled?: boolean;
 };
 
 export function Tooltip({
@@ -71,6 +72,7 @@ export function Tooltip({
   delay = 500, // 500ms is the default on Windows/Linux. It's 2000ms on macOS but it's too long and annoying.
   placement,
   renderInPortal,
+  isEnabled = true,
 }: Props) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -112,6 +114,10 @@ export function Tooltip({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useMergeRefs([refs.setReference, (children as any).ref]);
+
+  if (!isEnabled) {
+    return children;
+  }
 
   const node = (
     <Wrapper

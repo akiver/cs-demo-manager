@@ -7,6 +7,7 @@ import { DotSeparator } from './dot-separator';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { MapImage, MatchDate, PlayerName, RoundNumber, Row, RowLeft, RowRight } from './result-row';
 import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
+import { RoundCommentIcon } from 'csdm/ui/match/rounds/round/round-comment-icon';
 
 type Props = {
   bombsDefused: NinjaDefuseResult[];
@@ -38,6 +39,12 @@ export function NinjaDefuseResults({ bombsDefused }: Props) {
               </p>
               <DotSeparator />
               <MatchDate date={bombDefused.date} />
+              {bombDefused.roundComment && (
+                <>
+                  <DotSeparator />
+                  <RoundCommentIcon comment={bombDefused.roundComment} />
+                </>
+              )}
             </RowLeft>
             <RowRight>
               <WatchButton

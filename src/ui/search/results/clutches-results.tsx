@@ -6,6 +6,7 @@ import { DotSeparator } from './dot-separator';
 import { MapImage, MatchDate, PlayerName, RoundNumber, Row, RowLeft, RowRight, TeamSideIcon } from './result-row';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
+import { RoundCommentIcon } from 'csdm/ui/match/rounds/round/round-comment-icon';
 
 type Props = {
   clutches: ClutchResult[];
@@ -28,6 +29,12 @@ export function ClutchesResults({ clutches }: Props) {
               <RoundNumber roundNumber={clutch.roundNumber} />
               <DotSeparator />
               <MatchDate date={clutch.date} />
+              {clutch.roundComment && (
+                <>
+                  <DotSeparator />
+                  <RoundCommentIcon comment={clutch.roundComment} />
+                </>
+              )}
             </RowLeft>
             <RowRight>
               <WatchButton

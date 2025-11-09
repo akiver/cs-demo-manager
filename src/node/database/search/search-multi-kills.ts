@@ -32,7 +32,10 @@ export async function searchMultiKills({
         .onRef('k1.killer_steam_id', '=', 'k2.killer_steam_id');
     })
     .innerJoin('matches', 'k1.match_checksum', 'matches.checksum')
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'matches.tickrate'])
+    .leftJoin('round_comments as rc', function (qb) {
+      return qb.onRef('k2.match_checksum', '=', 'rc.match_checksum').onRef('k2.round_number', '=', 'rc.number');
+    })
+    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'matches.tickrate', 'rc.comment'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -65,6 +68,7 @@ export async function searchMultiKills({
       'matches.date',
       'matches.game',
       'matches.tickrate',
+      'rc.comment',
     ])
     .having(sql<number>`COUNT(*)`, '=', killCount);
 
@@ -136,6 +140,7 @@ export async function searchMultiKills({
         mapName: kill.map_name,
         side: kill.killer_side,
         kills: [killRowToKill(kill)],
+        roundComment: kill.comment ?? '',
       });
     } else {
       multiKills[multiKills.length - 1].kills.push(killRowToKill(kill));

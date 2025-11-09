@@ -15,6 +15,7 @@ export const RendererClientMessageName = {
   Fetch2DViewerData: 'fetch-2d-viewer-data',
   UpdateComment: 'update-match-comment',
   UpdatePlayerComment: 'update-player-comment',
+  UpdateRoundComment: 'update-round-comment',
   UpdateMatchDemoLocation: 'update-match-demo-location',
   InitializeVideo: 'initialize-video',
   ExportMatchChatMessages: 'export-match-chat-messages',

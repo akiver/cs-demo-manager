@@ -6,4 +6,5 @@ export type ThroughSmokeKillResult = Kill & {
   date: string;
   demoPath: string;
   game: Game;
+  roundComment: string;
 };

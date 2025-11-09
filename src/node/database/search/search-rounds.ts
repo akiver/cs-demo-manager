@@ -20,7 +20,10 @@ export async function searchRounds({
     .selectAll('rounds')
     .distinct()
     .innerJoin('matches', 'matches.checksum', 'rounds.match_checksum')
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .leftJoin('round_comments as rc', function (qb) {
+      return qb.onRef('rounds.match_checksum', '=', 'rc.match_checksum').onRef('rounds.number', '=', 'rc.number');
+    })
+    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
     .leftJoin('round_tags', function (qb) {
       return qb
         .onRef('round_tags.checksum', '=', 'rounds.match_checksum')
@@ -63,7 +66,7 @@ export async function searchRounds({
     .orderBy('rounds.match_checksum')
     .orderBy('rounds.number')
     .orderBy('rounds.start_tick')
-    .groupBy(['rounds.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game']);
+    .groupBy(['rounds.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment']);
 
   if (mapNames.length > 0) {
     query = query.where('matches.map_name', 'in', mapNames);
@@ -86,6 +89,7 @@ export async function searchRounds({
       date: row.date.toISOString(),
       demoPath: row.demo_path,
       game: row.game,
+      comment: row.comment ?? '',
     };
   });
 

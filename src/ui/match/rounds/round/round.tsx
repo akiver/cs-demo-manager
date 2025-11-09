@@ -13,6 +13,7 @@ import { PlayersEconomyChart } from './players-economy-chart';
 import { RoundTags } from './round-tags';
 import { Message } from 'csdm/ui/components/message';
 import { Trans } from '@lingui/react/macro';
+import { RoundCommentInput } from './round-comment-input';
 
 export function Round() {
   const match = useCurrentMatch();
@@ -55,6 +56,9 @@ export function Round() {
           <Clutches />
           <EndReason />
           <RoundTags />
+          <div className="max-h-[250px] w-full max-w-[512px]">
+            <RoundCommentInput checksum={round.matchChecksum} number={round.number} comment={round.comment} />
+          </div>
         </div>
         <div className="mt-12">
           <PlayersEconomyChart />

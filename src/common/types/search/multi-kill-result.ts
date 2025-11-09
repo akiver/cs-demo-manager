@@ -15,4 +15,5 @@ export type MultiKillResult = {
   date: string;
   side: TeamNumber;
   kills: Kill[];
+  roundComment: string;
 };

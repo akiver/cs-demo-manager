@@ -22,7 +22,10 @@ export async function searchJumpKills({
     .selectAll('kills')
     .distinct()
     .innerJoin('matches', 'matches.checksum', 'kills.match_checksum')
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .leftJoin('round_comments as rc', function (qb) {
+      return qb.onRef('kills.match_checksum', '=', 'rc.match_checksum').onRef('kills.round_number', '=', 'rc.number');
+    })
+    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
     .where('kills.is_killer_airborne', '=', true)
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
@@ -45,7 +48,7 @@ export async function searchJumpKills({
     .orderBy('kills.round_number')
     .orderBy('kills.tick')
     .orderBy('kills.killer_name')
-    .groupBy(['kills.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game']);
+    .groupBy(['kills.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment']);
 
   if (steamIds.length > 0) {
     query = query.where('kills.killer_steam_id', 'in', steamIds);
@@ -80,6 +83,7 @@ export async function searchJumpKills({
       date: row.date.toISOString(),
       demoPath: row.demo_path,
       game: row.game,
+      roundComment: row.comment ?? '',
     };
   });
 
