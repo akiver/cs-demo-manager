@@ -88,7 +88,7 @@ export async function createCs2VideoJsonFile({
         : 'afxClassic';
 
     json
-      .addExecCommand(setupSequenceTick, `mirv_streams record startMovieWav 1`)
+      .addExecCommand(setupSequenceTick, `mirv_streams record startMovieWav ${sequence.recordAudio ? 1 : 0}`)
       .addExecCommand(setupSequenceTick, `mirv_streams record name "${hlaeOutputFolderPath}"`)
       .addExecCommand(setupSequenceTick, `mirv_deathmsg clear`)
       .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`)

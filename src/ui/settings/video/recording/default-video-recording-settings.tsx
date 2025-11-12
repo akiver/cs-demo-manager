@@ -7,6 +7,7 @@ import { RecordingPlayerVoices } from './recording-player-voices';
 import { RecordingDeathNoticesDuration } from './recording-death-notices-duration';
 import { RecordingShowOnlyDeathNotices } from './recording-show-only-death-notices';
 import { RecordingAssists } from './recording-assists';
+import { RecordingAudio } from './recording-audio';
 
 export function DefaultVideoRecordingSettings() {
   return (
@@ -19,6 +20,7 @@ export function DefaultVideoRecordingSettings() {
         <RecordingGameHeight />
         <RecordingXRay />
         <RecordingAssists />
+        <RecordingAudio />
         <RecordingPlayerVoices />
         <RecordingShowOnlyDeathNotices />
         {window.csdm.isWindows && <RecordingDeathNoticesDuration />}

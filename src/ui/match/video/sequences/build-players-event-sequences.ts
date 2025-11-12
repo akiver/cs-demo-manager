@@ -108,6 +108,7 @@ export function buildPlayersEventSequences({
       deathNoticesDuration: settings.deathNoticesDuration,
       showXRay: settings.showXRay,
       showAssists: settings.showAssists,
+      recordAudio: settings.recordAudio,
       playerVoicesEnabled: settings.playerVoicesEnabled,
       playersOptions,
       cameras: [

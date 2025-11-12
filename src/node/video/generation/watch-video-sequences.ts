@@ -6,7 +6,7 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import { sortSequencesByStartTick } from 'csdm/common/video/sort-sequences-by-start-tick';
 import type { FfmpegSettings } from 'csdm/node/settings/settings';
 import { assertVideoGenerationIsPossible } from './assert-video-generation-is-possible';
-import { createCsgoJsonFileForRecording } from './create-csgo-video-json-file';
+import { createCsgoVideoJsonFile } from './create-csgo-video-json-file';
 import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
 import { createCs2VideoJsonFile } from './create-cs2-video-json-file';
 import { watchDemoWithHlae } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
@@ -35,7 +35,7 @@ export async function watchVideoSequences(parameters: Parameters) {
 
   const { checksum, recordingSystem, demoPath, width, height, game } = parameters;
   if (game === Game.CSGO) {
-    await createCsgoJsonFileForRecording({
+    await createCsgoVideoJsonFile({
       type: 'watch',
       ...parameters,
       sequences,

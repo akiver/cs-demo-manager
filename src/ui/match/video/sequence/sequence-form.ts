@@ -11,6 +11,7 @@ export type SequenceForm = {
   showAssists: boolean;
   showOnlyDeathNotices: boolean;
   playerVoicesEnabled: boolean;
+  recordAudio: boolean;
   // @platform win32 Requires HLAE
   deathNoticesDuration: number;
   cfg?: string;

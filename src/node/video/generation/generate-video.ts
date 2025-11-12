@@ -2,7 +2,7 @@ import { Game } from 'csdm/common/types/counter-strike';
 import { generateVideoWithVirtualDub } from 'csdm/node/video/generation/generate-video-with-virtual-dub';
 import { generateVideoWithFFmpeg } from 'csdm/node/video/generation/generate-video-with-ffmpeg';
 import { concatenateVideosFromSequences } from 'csdm/node/video/generation/concatenate-videos-from-sequences';
-import { createCsgoJsonFileForRecording } from 'csdm/node/video/generation/create-csgo-video-json-file';
+import { createCsgoVideoJsonFile } from 'csdm/node/video/generation/create-csgo-video-json-file';
 import { watchDemoWithHlae } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { killCounterStrikeProcesses } from 'csdm/node/counter-strike/kill-counter-strike-processes';
@@ -86,6 +86,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
           recordingSystem,
           recordingOutput,
           game,
+          recordAudio: sequence.recordAudio,
           audioBitrate: ffmpegSettings.audioBitrate,
           constantRateFactor: ffmpegSettings.constantRateFactor,
           videoContainer: ffmpegSettings.videoContainer,
@@ -104,6 +105,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
         {
           recordingSystem,
           game,
+          recordAudio: sequence.recordAudio,
           framerate,
           outputFolderPath,
           sequence,
@@ -179,7 +181,7 @@ export async function generateVideo(parameters: Parameters) {
   await cleanupFiles();
 
   if (game === Game.CSGO) {
-    await createCsgoJsonFileForRecording({
+    await createCsgoVideoJsonFile({
       type: 'record',
       recordingSystem,
       recordingOutput,

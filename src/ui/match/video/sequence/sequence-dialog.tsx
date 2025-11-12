@@ -23,6 +23,7 @@ import { SequenceShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-
 import { useCanEditVideoPlayersOptions } from 'csdm/ui/match/video/use-can-edit-video-players-options';
 import { SequenceDeathNoticesDurationInput } from './sequence-death-notices-duration-input';
 import { SequenceAssistsCheckbox } from './sequence-assists-checkbox';
+import { SequenceRecordAudioCheckbox } from './sequence-record-audio-checkbox';
 
 type Props = {
   isVisible: boolean;
@@ -72,6 +73,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <EndTickInput />
                   </div>
                   <ManageCamerasButtons />
+                  <SequenceRecordAudioCheckbox />
                   <SequencePlayerVoicesCheckbox />
                   <SequenceXRayCheckbox />
                   <SequenceAssistsCheckbox />

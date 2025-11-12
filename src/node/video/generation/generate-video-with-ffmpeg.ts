@@ -69,6 +69,7 @@ type GenerateVideoWithFFmpegSettings = {
   sequence: Sequence;
   inputParameters: string;
   outputParameters: string;
+  recordAudio: boolean;
 };
 
 export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegSettings, signal: AbortSignal) {
@@ -88,6 +89,7 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
     outputFolderPath,
     videoContainer,
     recordingOutput,
+    recordAudio,
   } = settings;
 
   // It's important to create the output folder before running FFmpeg otherwise it will fail.
@@ -98,8 +100,7 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
     if (!videoFilePath) {
       throw new RawFilesNotFoundError();
     }
-    // The game generates PCM audio, we need to convert it to the desired format
-    const audioFilePath = await convertGameAudioFile(wavFilePath, audioCodec, audioBitrate, signal);
+
     const args = [
       '-y', // override the file if it exists
     ];
@@ -108,10 +109,23 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
       args.push(inputParameters);
     }
 
-    args.push(
-      ...[`-i "${videoFilePath}"`, `-i "${audioFilePath}"`, '-c copy', '-map 0:v:0', '-map 1:a:0', `"${outputPath}"`],
-    );
+    args.push(`-i "${videoFilePath}"`);
 
+    const hasAudio = recordAudio && wavFilePath;
+    if (hasAudio) {
+      // The game generates PCM audio, we need to convert it to the desired format
+      const audioFilePath = await convertGameAudioFile(wavFilePath, audioCodec, audioBitrate, signal);
+
+      args.push(`-i "${audioFilePath}"`);
+    }
+
+    args.push('-c copy', '-map 0:v:0');
+
+    if (hasAudio) {
+      args.push('-map 1:a:0');
+    }
+
+    args.push(`"${outputPath}"`);
     if (outputParameters !== '') {
       args.push(outputParameters);
     }
@@ -131,7 +145,6 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
     );
   }
 
-  const wavFileExists = await fs.pathExists(wavFilePath);
   const args: string[] = [
     '-y', // override the file if it exists
     `-framerate ${framerate}`,
@@ -140,13 +153,16 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
     args.push(inputParameters);
   }
   args.push(`-i "${rawFilesPathPattern}"`);
-  if (wavFileExists) {
+
+  const wavFileExists = wavFilePath ? await fs.pathExists(wavFilePath) : false;
+  const hasAudio = recordAudio && wavFileExists;
+  if (hasAudio) {
     args.push(`-i "${wavFilePath}"`);
   }
 
   args.push(`-vcodec ${videoCodec}`);
 
-  if (wavFileExists) {
+  if (hasAudio) {
     args.push(`-acodec ${audioCodec}`, `-b:a ${audioBitrate}K`);
   }
 

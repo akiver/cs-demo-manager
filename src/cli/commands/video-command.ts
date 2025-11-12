@@ -51,6 +51,8 @@ export class VideoCommand extends Command {
   private readonly noShowAssistsFlag = 'no-show-assists';
   private readonly showOnlyDeathNoticesFlag = 'show-only-death-notices';
   private readonly noShowOnlyDeathNoticesFlag = 'no-show-only-death-notices';
+  private readonly recordAudioFlag = 'record-audio';
+  private readonly noRecordAudioFlag = 'no-record-audio';
   private readonly playerVoicesFlag = 'player-voices';
   private readonly noPlayerVoicesFlag = 'no-player-voices';
   private readonly deathNoticesDurationFlag = 'death-notices-duration';
@@ -78,6 +80,7 @@ export class VideoCommand extends Command {
   private showXRay: boolean | undefined;
   private showAssists: boolean | undefined;
   private showOnlyDeathNotices: boolean | undefined;
+  private recordAudio: boolean | undefined;
   private playerVoices: boolean | undefined;
   private deathNoticesDuration: number | undefined;
   private cfg: string | undefined;
@@ -120,6 +123,8 @@ export class VideoCommand extends Command {
     console.log(`  --${this.noShowOnlyDeathNoticesFlag}`);
     console.log(`  --${this.playerVoicesFlag}`);
     console.log(`  --${this.noPlayerVoicesFlag}`);
+    console.log(`  --${this.recordAudioFlag}`);
+    console.log(`  --${this.noRecordAudioFlag}`);
     console.log(`  --${this.deathNoticesDurationFlag} <number>`);
     console.log(`  --${this.cfgFlag} <string>`);
     console.log(`  --${this.focusPlayerFlag} <steamId>`);
@@ -143,6 +148,7 @@ export class VideoCommand extends Command {
         showOnlyDeathNotices: this.showOnlyDeathNotices ?? settings.video.showOnlyDeathNotices,
         playersOptions: [],
         cameras: [],
+        recordAudio: this.recordAudio ?? settings.video.recordAudio,
         playerVoicesEnabled: this.playerVoices ?? settings.video.playerVoicesEnabled,
         deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
         cfg: this.cfg,
@@ -262,6 +268,8 @@ export class VideoCommand extends Command {
         [this.noShowAssistsFlag]: { type: 'boolean' },
         [this.showOnlyDeathNoticesFlag]: { type: 'boolean' },
         [this.noShowOnlyDeathNoticesFlag]: { type: 'boolean' },
+        [this.recordAudioFlag]: { type: 'boolean' },
+        [this.noRecordAudioFlag]: { type: 'boolean' },
         [this.playerVoicesFlag]: { type: 'boolean' },
         [this.noPlayerVoicesFlag]: { type: 'boolean' },
         [this.deathNoticesDurationFlag]: { type: 'string' },
@@ -455,6 +463,14 @@ export class VideoCommand extends Command {
     const noPlayerVoices = values[this.noPlayerVoicesFlag];
     if (noPlayerVoices !== undefined) {
       this.playerVoices = false;
+    }
+    const recordAudio = values[this.recordAudioFlag];
+    if (recordAudio !== undefined) {
+      this.recordAudio = true;
+    }
+    const noRecordAudio = values[this.noRecordAudioFlag];
+    if (noRecordAudio !== undefined) {
+      this.recordAudio = false;
     }
     if (values[this.deathNoticesDurationFlag]) {
       const deathNoticesDuration = Number(values[this.deathNoticesDurationFlag]);

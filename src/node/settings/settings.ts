@@ -148,6 +148,7 @@ export type VideoSettings = {
   showOnlyDeathNotices: boolean;
   showXRay: boolean;
   showAssists: boolean;
+  recordAudio: boolean;
   concatenateSequences: boolean;
   playerVoicesEnabled: boolean;
   ffmpegSettings: FfmpegSettings;

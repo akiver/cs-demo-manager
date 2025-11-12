@@ -5256,6 +5256,11 @@ msgctxt "Checkbox label"
 msgid "Player voices"
 msgstr "Player voices"
 
+#: src/ui/match/video/record-audio-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Record Audio"
+msgstr "Record Audio"
+
 #: src/ui/match/video/recording-output-select.tsx
 msgctxt "Select label"
 msgid "Output"
@@ -7802,6 +7807,15 @@ msgstr "Show assists in kill feed."
 msgctxt "Settings title"
 msgid "Show Assists"
 msgstr "Show Assists"
+
+#: src/ui/settings/video/recording/recording-audio.tsx
+msgid "Record audio during video recording."
+msgstr "Record audio during video recording."
+
+#: src/ui/settings/video/recording/recording-audio.tsx
+msgctxt "Settings title"
+msgid "Record Audio"
+msgstr "Record Audio"
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"

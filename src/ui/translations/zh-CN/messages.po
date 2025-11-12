@@ -5257,6 +5257,11 @@ msgctxt "Checkbox label"
 msgid "Player voices"
 msgstr "玩家语音"
 
+#: src/ui/match/video/record-audio-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Record Audio"
+msgstr ""
+
 #: src/ui/match/video/recording-output-select.tsx
 msgctxt "Select label"
 msgid "Output"
@@ -7803,6 +7808,15 @@ msgstr "在击杀镜头当中加入助攻镜头。"
 msgctxt "Settings title"
 msgid "Show Assists"
 msgstr "显示助攻"
+
+#: src/ui/settings/video/recording/recording-audio.tsx
+msgid "Record audio during video recording."
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-audio.tsx
+msgctxt "Settings title"
+msgid "Record Audio"
+msgstr ""
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"

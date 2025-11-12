@@ -43,7 +43,7 @@ function buildReplacePlayerNameCommand(player: SequencePlayerOptions) {
   return `mirv_exec mirv_replace_name filter add x${player.steamId} "${player.playerName.replaceAll('"', '{QUOTE}')}"`;
 }
 
-export async function createCsgoJsonFileForRecording({
+export async function createCsgoVideoJsonFile({
   type,
   recordingSystem,
   recordingOutput,
@@ -93,7 +93,7 @@ export async function createCsgoJsonFileForRecording({
         : 'afxClassic';
 
     json
-      .addExecCommand(setupSequenceTick, `mirv_streams record startMovieWav 1`)
+      .addExecCommand(setupSequenceTick, `mirv_streams record startMovieWav ${sequence.recordAudio ? 1 : 0}`)
       .addExecCommand(setupSequenceTick, `mirv_streams record name "${hlaeOutputFolderPath}"`)
       .addExecCommand(setupSequenceTick, `mirv_replace_name filter clear`)
       .addExecCommand(setupSequenceTick, `spec_show_xray ${sequence.showXRay ? 1 : 0}`)

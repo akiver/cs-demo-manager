@@ -55,7 +55,7 @@ export async function getHlaeTakeFolderPath(sequenceOutputFolderPath: string) {
   return takeFolderPath;
 }
 
-type RawFiles = { tgaFiles: string[]; wavFilePath: string; videoFilePath: string | null };
+type RawFiles = { tgaFiles: string[]; wavFilePath: string | null; videoFilePath: string | null };
 
 type GetHlaeRawFilesOptions = {
   sequence: Sequence;
@@ -63,6 +63,7 @@ type GetHlaeRawFilesOptions = {
   outputFolderPath: string;
   recordingOutput: RecordingOutput;
   videoContainer: VideoContainer;
+  recordAudio: boolean;
 };
 
 // Example C2 folder structure:
@@ -89,13 +90,17 @@ async function getHlaeRawFiles({
   outputFolderPath,
   recordingOutput,
   videoContainer,
+  recordAudio,
 }: GetHlaeRawFilesOptions): Promise<RawFiles> {
   const sequenceOutputFolderPath = getSequenceOutputFolderPath(sequence, outputFolderPath);
   await assertFolderExists(sequenceOutputFolderPath);
 
   const takeFolderPath = await getHlaeTakeFolderPath(sequenceOutputFolderPath);
-  const wavFilePath = path.resolve(takeFolderPath, 'audio.wav');
-  await assertWavFileExists(wavFilePath);
+  let wavFilePath: string | null = null;
+  if (recordAudio) {
+    wavFilePath = path.resolve(takeFolderPath, 'audio.wav');
+    await assertWavFileExists(wavFilePath);
+  }
 
   if (recordingOutput === RecordingOutput.Video) {
     const videoFilePath = path.resolve(sequenceOutputFolderPath, `video.${videoContainer}`);
@@ -162,6 +167,7 @@ type Options = {
   game: Game;
   outputFolderPath: string;
   videoContainer: VideoContainer;
+  recordAudio: boolean;
 };
 
 export async function getSequenceRawFiles({
@@ -171,6 +177,7 @@ export async function getSequenceRawFiles({
   sequence,
   game,
   outputFolderPath,
+  recordAudio,
 }: Options): Promise<RawFiles> {
   if (recordingSystem === RecordingSystem.HLAE) {
     return await getHlaeRawFiles({
@@ -179,6 +186,7 @@ export async function getSequenceRawFiles({
       recordingOutput,
       videoContainer,
       outputFolderPath,
+      recordAudio,
     });
   }
 

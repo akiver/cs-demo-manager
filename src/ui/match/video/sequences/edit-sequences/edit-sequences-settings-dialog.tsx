@@ -22,6 +22,7 @@ import { DeathNoticesDurationInput } from '../../death-notices-duration-input';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 import { AssistsCheckbox } from '../../assists-checkbox';
+import { RecordAudioCheckbox } from '../../record-audio-checkbox';
 
 type State = {
   overridePlayerFocusSteamId: boolean;
@@ -41,6 +42,7 @@ export function EditSequenceSettingsDialog() {
   const [showXRay, setShowXRay] = useState(false);
   const [showAssists, setShowAssists] = useState(true);
   const [playerVoicesEnabled, setPlayerVoicesEnabled] = useState(true);
+  const [recordAudioEnabled, setRecordAudioEnabled] = useState(true);
   const [cfg, setCfg] = useState<string | undefined>(undefined);
   const { options: playerOptions } = usePlayersOptions();
   const canEditPlayersOptions = useCanEditVideoPlayersOptions();
@@ -71,6 +73,7 @@ export function EditSequenceSettingsDialog() {
             ? deathNoticesDuration
             : sequence.deathNoticesDuration,
         playerVoicesEnabled,
+        recordAudio: recordAudioEnabled,
         cameras:
           state.overridePlayerFocusSteamId && playerFocusSteamId
             ? [{ tick: sequence.startTick, playerSteamId: playerFocusSteamId, playerName }]
@@ -121,6 +124,7 @@ export function EditSequenceSettingsDialog() {
               </div>
             )}
 
+            <RecordAudioCheckbox defaultChecked={recordAudioEnabled} onChange={setRecordAudioEnabled} />
             <PlayerVoicesCheckbox defaultChecked={playerVoicesEnabled} onChange={setPlayerVoicesEnabled} />
 
             <div className="flex flex-col gap-y-4">

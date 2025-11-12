@@ -5257,6 +5257,11 @@ msgctxt "Checkbox label"
 msgid "Player voices"
 msgstr ""
 
+#: src/ui/match/video/record-audio-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Record Audio"
+msgstr ""
+
 #: src/ui/match/video/recording-output-select.tsx
 msgctxt "Select label"
 msgid "Output"
@@ -7802,6 +7807,15 @@ msgstr ""
 #: src/ui/settings/video/recording/recording-assists.tsx
 msgctxt "Settings title"
 msgid "Show Assists"
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-audio.tsx
+msgid "Record audio during video recording."
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-audio.tsx
+msgctxt "Settings title"
+msgid "Record Audio"
 msgstr ""
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
