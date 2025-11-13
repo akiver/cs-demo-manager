@@ -57,9 +57,9 @@ export async function createCs2VideoJsonFile({
     'cl_hud_telemetry_net_misdelivery_show 0',
     'cl_hud_telemetry_ping_show 0',
     'cl_hud_telemetry_serverrecvmargin_graph_show 0',
+    'cl_trueview_show_status 0',
     'r_show_build_info 0',
     'mirv_streams record screen enabled 1',
-    'mirv_panorama panelstyle panelId=trueview_row opacity=0',
   ];
 
   for (let i = 0; i < sequences.length; i++) {
