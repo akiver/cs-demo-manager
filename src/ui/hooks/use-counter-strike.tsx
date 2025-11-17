@@ -92,5 +92,6 @@ export function useCounterStrike() {
     watchPlayerHighlights,
     watchPlayerAsSuspect,
     isKillCsRequired,
+    isCsRunning,
   };
 }

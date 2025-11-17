@@ -74,10 +74,10 @@ export function EditSequenceSettingsDialog() {
             : sequence.deathNoticesDuration,
         playerVoicesEnabled,
         recordAudio: recordAudioEnabled,
-        cameras:
+        playerCameras:
           state.overridePlayerFocusSteamId && playerFocusSteamId
             ? [{ tick: sequence.startTick, playerSteamId: playerFocusSteamId, playerName }]
-            : sequence.cameras,
+            : sequence.playerCameras,
         cfg: state.overrideCfg ? cfg : sequence.cfg,
         playersOptions: state.overridePlayerOptions ? playerOptions : sequence.playersOptions,
       };

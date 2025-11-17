@@ -8,7 +8,7 @@ import type {
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from 'electron';
-import { ipcRenderer, contextBridge, webUtils } from 'electron';
+import { ipcRenderer, contextBridge, webUtils, clipboard } from 'electron';
 import fs from 'fs-extra';
 import type { PreloadResult } from './preload-result';
 import { getRankImageSrc } from 'csdm/node/filesystem/get-rank-image-src';
@@ -19,11 +19,10 @@ import { IPCChannel } from 'csdm/common/ipc-channel';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { updateSettings } from 'csdm/node/settings/update-settings';
 import { isLinux } from 'csdm/node/os/is-linux';
-import { getUnknownMapThumbnailFilePath } from 'csdm/node/filesystem/maps/get-unknown-map-thumbnail-file-path';
+import { getUnknownImageFilePath } from 'csdm/node/filesystem/maps/get-unknown-image-file-path';
 import { getMapRadarBase64 } from 'csdm/node/filesystem/maps/get-map-radar-base64';
 import { getMapLowerRadarBase64 } from 'csdm/node/filesystem/maps/get-map-lower-radar-base64';
 import { getMapThumbnailBase64 } from 'csdm/node/filesystem/maps/get-map-thumbnail-base64';
-import { getPngInformation } from 'csdm/node/filesystem/get-png-information';
 import { getFfmpegExecutablePath } from 'csdm/node/video/ffmpeg/ffmpeg-location';
 import { writeTableState } from 'csdm/node/settings/table/write-table-state';
 import { readTableState } from 'csdm/node/settings/table/read-table-state';
@@ -40,6 +39,9 @@ import { getDemoAudioData } from 'csdm/preload/get-demo-audio-data';
 import { getDemoAudioFilePath } from 'csdm/node/demo/get-demo-audio-file-path';
 import { getCounterStrikeLogFilePath } from 'csdm/node/counter-strike/get-counter-strike-log-file-path';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
+import { getCameraPreviewBase64 } from 'csdm/node/filesystem/cameras/get-camera-preview-base64';
+import { getImageInformation } from 'csdm/node/filesystem/get-image-information';
+import { readImageFile } from 'csdm/node/filesystem/image';
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {
@@ -76,11 +78,12 @@ const api: PreloadApi = {
   isMac,
   isWindows,
   isLinux,
-  unknownMapThumbnailFilePath: getUnknownMapThumbnailFilePath(),
+  unknownImageFilePath: getUnknownImageFilePath(),
+  getCameraPreviewBase64,
   getMapRadarBase64,
   getMapLowerRadarBase64,
   getMapThumbnailBase64,
-  getPngInformation,
+  getImageInformation,
   parseSettingsFile: getSettings,
   updateSettings,
   resetSettings,
@@ -96,6 +99,7 @@ const api: PreloadApi = {
   getPathDirectoryName: path.dirname,
   getPathBasename: path.basename,
   elementToImage,
+  readImageFile,
 
   showMainWindow: () => {
     ipcRenderer.invoke(IPCChannel.ShowWindow);
@@ -282,6 +286,14 @@ const api: PreloadApi = {
     } catch (error) {
       return { error: { code: getErrorCodeFromError(error) } };
     }
+  },
+
+  clearClipboard: () => {
+    return clipboard.clear();
+  },
+
+  getClipboardText: () => {
+    return clipboard.readText();
   },
 };
 

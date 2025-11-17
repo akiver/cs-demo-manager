@@ -2,7 +2,7 @@ import React, { useId } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
-import { FieldError } from 'csdm/ui/settings/maps/map-dialog/field-error';
+import { FieldError } from 'csdm/ui/components/form/field-error';
 import { useMapFormField } from './use-map-form-field';
 
 export function CoordinateYInput() {

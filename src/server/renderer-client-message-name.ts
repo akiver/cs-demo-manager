@@ -56,6 +56,9 @@ export const RendererClientMessageName = {
   UpdateMap: 'update-map',
   DeleteMap: 'delete-map',
   ResetMaps: 'reset-maps',
+  AddCamera: 'add-camera',
+  UpdateCamera: 'update-camera',
+  DeleteCamera: 'delete-camera',
   WatchDemo: 'watch-demo',
   StartCounterStrike: 'start-counter-strike',
   WatchPlayerRounds: 'watch-player-rounds',
@@ -101,6 +104,7 @@ export const RendererClientMessageName = {
   FetchLastMigrations: 'fetch-last-migrations',
   DeleteDemosFromDatabase: 'delete-demos-from-database',
   ImportDataFromV2Backup: 'import-data-from-v2-backup',
+  CapturePlayerView: 'capture-player-view',
 } as const;
 
 export type RendererClientMessageName = (typeof RendererClientMessageName)[keyof typeof RendererClientMessageName];

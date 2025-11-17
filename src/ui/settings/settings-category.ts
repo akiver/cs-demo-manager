@@ -11,6 +11,7 @@ export const SettingsCategory = {
   Integrations: 'integrations',
   Ban: 'ban',
   About: 'about',
+  Cameras: 'cameras',
 } as const;
 
 export type SettingsCategory = (typeof SettingsCategory)[keyof typeof SettingsCategory];

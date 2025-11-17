@@ -23,9 +23,12 @@ import { glob } from 'csdm/node/filesystem/glob';
 import { CounterStrikeExecutableNotFound } from './errors/counter-strike-executable-not-found';
 import { isLinux } from 'csdm/node/os/is-linux';
 import type { PlaybackSettings, Settings } from 'csdm/node/settings/settings';
+import { getCsgoFolderPath } from '../get-csgo-folder-path';
+import path from 'node:path';
 
-type StartCounterStrikeOptions = {
+export type StartCounterStrikeOptions = {
   demoPath?: string;
+  map?: string;
   game: Game;
   width?: number;
   height?: number;
@@ -34,6 +37,7 @@ type StartCounterStrikeOptions = {
   uninstallPluginOnExit?: boolean;
   signal?: AbortSignal;
   onGameStart?: () => void;
+  mode?: 'playback' | 'spectate'; // 'spectate' starts CS on the given map with the player in free-roam spectator mode.
 };
 
 function buildUnixCommand(scriptPath: string, args: string, game: Game) {
@@ -118,7 +122,7 @@ async function buildCommand(executablePath: string, args: string, game: Game, se
 // Tip: to understand how Steam starts CS you can use the Steam client launch options: -dev -console
 // You would be able to see the command used to start CS in the console.
 export async function startCounterStrike(options: StartCounterStrikeOptions) {
-  const { demoPath, game, signal, additionalLaunchParameters, fullscreen } = options;
+  const { demoPath, game, signal, additionalLaunchParameters, fullscreen, mode, map } = options;
 
   if (game === Game.CS2 && isMac) {
     throw new UnsupportedGame(game);
@@ -129,9 +133,11 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   if (demoPath) {
     assertDemoPathIsValid(demoPath, game);
 
-    const playbackStarted = await tryStartingDemoThroughWebSocket(demoPath);
-    if (playbackStarted) {
+    try {
+      await tryStartingDemoThroughWebSocket(demoPath);
       return;
+    } catch {
+      // It failed, start CS normally
     }
   }
 
@@ -154,6 +160,8 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   ];
   if (demoPath) {
     launchParameters.push('+playdemo', `"${demoPath}"`);
+  } else if (map) {
+    launchParameters.push(`+map`, map);
   }
   if (additionalLaunchParameters) {
     launchParameters.push(...additionalLaunchParameters);
@@ -165,6 +173,42 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   launchParameters.push('-height', String(height));
   const enableFullscreen = fullscreen ?? userFullscreen;
   launchParameters.push(enableFullscreen ? '-fullscreen' : '-sw');
+  if (mode === 'spectate') {
+    const csgoFolderPath = await getCsgoFolderPath();
+    if (!csgoFolderPath) {
+      throw new CounterStrikeExecutableNotFound(game);
+    }
+    let cfgFolderPath: string;
+    let cfg: string;
+    if (game === Game.CSGO) {
+      launchParameters.push('+game_type 3', '+game_mode 0', 'forcespec'); // forcespec is our internal parameter to force spectator mode.
+      cfgFolderPath = path.join(csgoFolderPath, 'csgo', 'cfg');
+      cfg = `
+sv_cheats 1
+bot_quota 0
+cl_draw_only_deathnotices 1
+spec_mode 6
+echo "CS:DM config loaded"
+      `;
+    } else {
+      launchParameters.push('+game_alias custom');
+      cfgFolderPath = path.join(csgoFolderPath, 'game', 'csgo', 'cfg');
+      cfg = `
+sv_cheats 1
+bot_quota 0
+cl_draw_only_deathnotices 1
+sv_human_autojoin_team 1
+cl_hud_telemetry_frametime_show 0
+cl_hud_telemetry_net_misdelivery_show 0
+cl_hud_telemetry_ping_show 0
+cl_hud_telemetry_serverrecvmargin_graph_show 0
+cl_trueview_show_status 0
+r_show_build_info 0
+echo "CS:DM config loaded"
+`;
+    }
+    await fs.writeFile(path.join(cfgFolderPath, 'gamemode_custom_server.cfg'), cfg);
+  }
 
   const args = launchParameters.join(' ');
   const command = await buildCommand(executablePath, args, game, settings);
@@ -175,10 +219,10 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   options.onGameStart?.();
 
   const hasBeenKilled = await killCounterStrikeProcesses();
-  // When we kill the process on Unix it may take a bit of time before the process actually releases files lock.
+  // When we kill the process it may take a bit of time before the process actually releases files lock.
   // We wait a bit before starting the process again to avoid trying to start CS when it's still running. It would lead
   // to Source Engine error.
-  const shouldWait = hasBeenKilled && !isWindows;
+  const shouldWait = hasBeenKilled;
   if (shouldWait) {
     await sleep(2000);
   }
@@ -186,52 +230,48 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   await installCounterStrikeServerPlugin(game);
   defineCfgFolderLocation();
 
-  return new Promise<void>((resolve, reject) => {
-    const startTime = Date.now();
-    const gameProcess = exec(command, { windowsHide: true });
+  const startTime = Date.now();
+  const gameProcess = exec(command, { windowsHide: true });
 
-    const chunks: string[] = [];
-    gameProcess.stdout?.on('data', (data: string) => {
-      chunks.push(data);
-    });
+  const chunks: string[] = [];
+  gameProcess.stdout?.on('data', (data: string) => {
+    chunks.push(data);
+  });
 
-    gameProcess.stderr?.on('data', (data: string) => {
-      chunks.push(data);
-    });
+  gameProcess.stderr?.on('data', (data: string) => {
+    chunks.push(data);
+  });
 
-    gameProcess.on('exit', (code) => {
-      logger.log('Game process exited with code', code);
+  gameProcess.on('exit', async (code) => {
+    logger.log('Game process exited with code', code);
 
-      if (demoPath) {
-        deleteJsonActionsFile(demoPath);
-      }
-      if (options.uninstallPluginOnExit !== false) {
-        uninstallCounterStrikeServerPlugin(game);
-      }
+    if (demoPath) {
+      deleteJsonActionsFile(demoPath);
+    }
+    if (options.uninstallPluginOnExit !== false) {
+      await uninstallCounterStrikeServerPlugin(game);
+    }
 
-      if (signal?.aborted) {
-        return reject(abortError);
-      }
+    if (signal?.aborted) {
+      throw abortError;
+    }
 
-      const output = chunks.join('\n');
-      logger.log('Game output: \n', output);
+    const output = chunks.join('\n');
+    logger.log('Game output: \n', output);
 
-      const hasRunLongEnough = Date.now() - startTime >= 2000;
-      if (code !== 0) {
-        if (hasRunLongEnough) {
-          return reject(new GameError());
-        } else {
-          logger.error('An error occurred while starting the game');
+    const hasRunLongEnough = Date.now() - startTime >= 2000;
+    if (!hasBeenKilled && code !== 0) {
+      if (hasRunLongEnough) {
+        throw new GameError();
+      } else {
+        logger.error('An error occurred while starting the game');
 
-          if (output.includes('Access is denied')) {
-            return reject(new AccessDeniedError());
-          }
-
-          return reject(new StartCounterStrikeError(output));
+        if (output.includes('Access is denied')) {
+          throw new AccessDeniedError();
         }
-      }
 
-      return resolve();
-    });
+        throw new StartCounterStrikeError(output);
+      }
+    }
   });
 }

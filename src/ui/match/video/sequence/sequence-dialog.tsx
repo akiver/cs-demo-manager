@@ -16,14 +16,14 @@ import { SequenceDiskSpace } from './sequence-disk-space';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { SequenceXRayCheckbox } from './sequence-x-ray-checkbox';
 import { SequencePlayerVoicesCheckbox } from './sequence-player-voices-checkbox';
-import { SequenceCamerasTable } from './cameras/sequence-cameras-table';
-import { ManageCamerasButtons } from './cameras/manage-cameras-buttons';
+import { SequencePlayerCamerasTable } from './cameras/sequence-player-cameras-table';
 import { PlayersColors } from './players-colors';
 import { SequenceShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-checkbox';
 import { useCanEditVideoPlayersOptions } from 'csdm/ui/match/video/use-can-edit-video-players-options';
 import { SequenceDeathNoticesDurationInput } from './sequence-death-notices-duration-input';
 import { SequenceAssistsCheckbox } from './sequence-assists-checkbox';
 import { SequenceRecordAudioCheckbox } from './sequence-record-audio-checkbox';
+import { SequenceCustomCamerasTable } from './cameras/sequence-custom-cameras-table';
 
 type Props = {
   isVisible: boolean;
@@ -72,7 +72,6 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <StartTickInput />
                     <EndTickInput />
                   </div>
-                  <ManageCamerasButtons />
                   <SequenceRecordAudioCheckbox />
                   <SequencePlayerVoicesCheckbox />
                   <SequenceXRayCheckbox />
@@ -88,7 +87,10 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <CancelButton onClick={closeDialog} />
                   </div>
                 </div>
-                <SequenceCamerasTable />
+                <div className="flex flex-col gap-y-8 overflow-auto">
+                  <SequencePlayerCamerasTable />
+                  <SequenceCustomCamerasTable />
+                </div>
                 {canEditPlayersOptions && <SequencePlayers />}
                 <SequenceCfgInput />
               </div>

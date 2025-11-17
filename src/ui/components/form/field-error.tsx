@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 
 type Props = {
-  error?: string | undefined;
+  error?: ReactNode | undefined;
 };
 
 export function FieldError({ error }: Props) {
-  if (error === undefined) {
+  if (!error) {
     return null;
   }
 

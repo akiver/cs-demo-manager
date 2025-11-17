@@ -6,14 +6,16 @@ import { useSequenceForm } from '../use-sequence-form';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { getSequencePlayerColor } from '../get-sequence-player-color';
+import { useCameras } from 'csdm/ui/cameras/use-cameras';
 
 type Props = {
   tick: number;
 };
 
 export function TickContextMenu({ tick }: Props) {
-  const { setStartTick, setEndTick, setCameraOnPlayerAtTick } = useSequenceForm();
+  const { setStartTick, setEndTick, setCameraAtTick, setCameraOnPlayerAtTick } = useSequenceForm();
   const match = useCurrentMatch();
+  const cameras = useCameras(match.game, match.mapName);
 
   return (
     <ContextMenu>
@@ -53,6 +55,30 @@ export function TickContextMenu({ tick }: Props) {
           );
         })}
       </SubContextMenu>
+      {cameras.length > 0 && (
+        <SubContextMenu label={<Trans context="Context menu">Set camera</Trans>}>
+          {cameras.map((camera) => {
+            return (
+              <ContextMenuItem
+                key={camera.id}
+                onClick={() => {
+                  setCameraAtTick({
+                    tick,
+                    cameraId: camera.id,
+                  });
+                }}
+              >
+                <div className="flex items-center gap-x-12">
+                  <div className="size-12 rounded-full" style={{ backgroundColor: camera.color }} />
+                  <p className="max-w-[300px] truncate" title={camera.name}>
+                    {camera.name}
+                  </p>
+                </div>
+              </ContextMenuItem>
+            );
+          })}
+        </SubContextMenu>
+      )}
     </ContextMenu>
   );
 }

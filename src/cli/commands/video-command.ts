@@ -147,6 +147,7 @@ export class VideoCommand extends Command {
         showAssists: this.showAssists ?? settings.video.showAssists,
         showOnlyDeathNotices: this.showOnlyDeathNotices ?? settings.video.showOnlyDeathNotices,
         playersOptions: [],
+        playerCameras: [],
         cameras: [],
         recordAudio: this.recordAudio ?? settings.video.recordAudio,
         playerVoicesEnabled: this.playerVoices ?? settings.video.playerVoicesEnabled,
@@ -156,7 +157,7 @@ export class VideoCommand extends Command {
 
       if (this.focusPlayerSteamId) {
         const player = await fetchPlayer(this.focusPlayerSteamId);
-        sequence.cameras.push({
+        sequence.playerCameras.push({
           tick: this.startTick,
           playerSteamId: this.focusPlayerSteamId,
           playerName: player.name,

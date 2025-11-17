@@ -15,8 +15,11 @@ import { TickContextMenu } from './tick-context-menu';
 import { TimeMarker } from './time-marker';
 import { useSequenceForm } from '../use-sequence-form';
 import { CameraMarker } from './camera-marker';
-import type { CameraFocus } from 'csdm/common/types/camera-focus';
-import { CameraItem } from './camera-item';
+import type { PlayerCameraFocus } from 'csdm/common/types/player-camera-focus';
+import { PlayerCameraItem } from './camera-item';
+import { CameraItem } from './custom-camera-item';
+import { getSequencePlayerColor } from '../get-sequence-player-color';
+import type { CustomCameraFocus } from 'csdm/common/types/custom-camera-focus';
 
 function useBuildRoundsGroup(match: Match, pixelsPerTick: number, ticksPerSecond: number): Group {
   const { t } = useLingui();
@@ -131,7 +134,52 @@ function useBuildBombGroup(match: Match, pixelsPerTick: number): Group {
   };
 }
 
-function useBuildCamerasGroup(match: Match, cameras: CameraFocus[], pixelsPerTick: number): Group {
+function useBuildPlayerCamerasGroup(cameras: PlayerCameraFocus[], pixelsPerTick: number): Group {
+  const { t } = useLingui();
+
+  const items: Item[] = [];
+  let currentY = 0;
+  const iconSize = 12;
+  let groupHeight = iconSize;
+  for (let index = 0; index < cameras.length; index++) {
+    const camera = cameras[index];
+    const x = camera.tick * pixelsPerTick - iconSize / 2;
+    const previousCamera = cameras[index - 1];
+    if (previousCamera !== undefined) {
+      const previousCameraX = previousCamera.tick * pixelsPerTick - iconSize / 2;
+      if (x < previousCameraX + iconSize) {
+        currentY += iconSize;
+        if (currentY >= groupHeight) {
+          groupHeight = currentY + iconSize;
+        }
+      } else {
+        currentY = 0;
+      }
+    }
+
+    items.push({
+      startTick: camera.tick,
+      endTick: camera.tick + 1,
+      width: iconSize,
+      height: iconSize,
+      x,
+      y: currentY,
+      element: <PlayerCameraItem camera={camera} />,
+    });
+  }
+
+  return {
+    id: 'player-cameras',
+    label: t({
+      message: 'Player cameras',
+      context: 'Timeline group label',
+    }),
+    height: groupHeight,
+    items: items,
+  };
+}
+
+function useBuildCamerasGroup(cameras: CustomCameraFocus[], pixelsPerTick: number): Group {
   const { t } = useLingui();
 
   const items: Item[] = [];
@@ -196,12 +244,13 @@ export function MatchTimeline() {
   const roundsGroup = useBuildRoundsGroup(match, pixelsPerTick, ticksPerSecond);
   const killsGroup = useBuildKillsGroup(match, pixelsPerTick);
   const bombGroup = useBuildBombGroup(match, pixelsPerTick);
-  const camerasGroup = useBuildCamerasGroup(match, sequence.cameras, pixelsPerTick);
-  const groups = [roundsGroup, killsGroup, bombGroup, camerasGroup, timestampGroup];
+  const playerCamerasGroup = useBuildPlayerCamerasGroup(sequence.playerCameras, pixelsPerTick);
+  const camerasGroup = useBuildCamerasGroup(sequence.cameras, pixelsPerTick);
+  const groups = [roundsGroup, killsGroup, bombGroup, playerCamerasGroup, camerasGroup, timestampGroup];
 
-  const cameraMarkers: { [tick: number]: number } = {}; // tick -> playerIndex
-  for (const camera of sequence.cameras) {
-    if (cameraMarkers[camera.tick] !== undefined) {
+  const playerCameraMarkers: { [tick: number]: number } = {}; // tick -> playerIndex
+  for (const camera of sequence.playerCameras) {
+    if (playerCameraMarkers[camera.tick] !== undefined) {
       continue;
     }
 
@@ -210,7 +259,7 @@ export function MatchTimeline() {
       continue;
     }
 
-    cameraMarkers[camera.tick] = playerIndex;
+    playerCameraMarkers[camera.tick] = playerIndex;
   }
 
   return (
@@ -233,9 +282,24 @@ export function MatchTimeline() {
 
       <div {...wrapperProps}>
         <div {...timelineProps}>
-          {Object.entries(cameraMarkers).map(([tick, playerIndex]) => {
+          {Object.entries(playerCameraMarkers).map(([tick, playerIndex]) => {
             return (
-              <CameraMarker key={tick} tick={Number(tick)} pixelsPerTick={pixelsPerTick} playerIndex={playerIndex} />
+              <CameraMarker
+                key={tick}
+                tick={Number(tick)}
+                pixelsPerTick={pixelsPerTick}
+                backgroundColor={getSequencePlayerColor(playerIndex)}
+              />
+            );
+          })}
+          {sequence.cameras.map((camera) => {
+            return (
+              <CameraMarker
+                key={camera.tick}
+                tick={camera.tick}
+                pixelsPerTick={pixelsPerTick}
+                backgroundColor={camera.color}
+              />
             );
           })}
           {startTick > 0 && (

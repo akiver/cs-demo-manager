@@ -3,6 +3,7 @@ import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix
 import { Game, TeamNumber } from 'csdm/common/types/counter-strike';
 import { generatePlayerVoicesValues } from 'csdm/node/counter-strike/launcher/generate-player-voices-values';
 import type { PlayerWatchInfo } from 'csdm/common/types/player-watch-info';
+import type { Camera } from 'csdm/common/types/camera';
 
 type Action = {
   tick: number;
@@ -68,6 +69,13 @@ export class JSONActionsFileGenerator {
     }
 
     return this;
+  }
+
+  public addFocusCamera(tick: number, camera: Camera) {
+    this.actions.push({
+      cmd: `spec_goto ${camera.x} ${camera.y} ${camera.z} ${camera.pitch} ${camera.yaw}`,
+      tick: this.getValidTick(tick),
+    });
   }
 
   public addStopPlayback(tick: number) {

@@ -89,8 +89,8 @@ export function SequenceItem({ sequence, ticksPerSecond, onEditClick }: Props) {
     showContextMenu(event.nativeEvent, <SequenceContextMenu sequence={sequence} onEditClick={onEditClick} />);
   };
   const durationInSeconds = Math.round((sequence.endTick - sequence.startTick) / ticksPerSecond);
-  const cameraCount = sequence.cameras.length;
-  const [firstCamera] = sequence.cameras;
+  const cameraCount = sequence.playerCameras.length;
+  const [firstCamera] = sequence.playerCameras;
   const focusPlayerName = firstCamera?.playerName;
 
   return (

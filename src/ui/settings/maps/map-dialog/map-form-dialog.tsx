@@ -6,7 +6,7 @@ import { RadarInput } from 'csdm/ui/settings/maps/map-dialog/radar-input';
 import { CoordinateXInput } from 'csdm/ui/settings/maps/map-dialog/coordinate-x-input';
 import { CoordinateYInput } from 'csdm/ui/settings/maps/map-dialog/coordinate-y-input';
 import { ScaleInput } from 'csdm/ui/settings/maps/map-dialog/scale-input';
-import { FieldError } from 'csdm/ui/settings/maps/map-dialog/field-error';
+import { FieldError } from 'csdm/ui/components/form/field-error';
 import { LowerRadarInput } from 'csdm/ui/settings/maps/map-dialog/lower-radar-input';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { SaveButton } from 'csdm/ui/components/buttons/save-button';

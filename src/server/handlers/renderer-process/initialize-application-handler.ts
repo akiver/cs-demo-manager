@@ -18,10 +18,13 @@ import { videoQueue } from 'csdm/server/video-queue';
 import { type Video } from 'csdm/common/types/video';
 import type { FiveEPlayAccount } from 'csdm/common/types/5eplay-account';
 import { fetch5EPlayAccounts } from 'csdm/node/database/5play-account/fetch-5eplay-accounts';
+import type { Camera } from 'csdm/common/types/camera';
+import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
 
 export type InitializeApplicationSuccessPayload = {
   matchChecksums: string[];
   maps: Map[];
+  cameras: Camera[];
   analyses: Analysis[];
   tags: Tag[];
   settings: Settings;
@@ -34,10 +37,11 @@ export type InitializeApplicationSuccessPayload = {
 
 export async function initializeApplicationHandler() {
   try {
-    const [settings, maps, tags, matchChecksums, faceitAccounts, fiveEPlayAccounts, ignoredSteamAccounts] =
+    const [settings, maps, cameras, tags, matchChecksums, faceitAccounts, fiveEPlayAccounts, ignoredSteamAccounts] =
       await Promise.all([
         initializeSettings(),
         fetchMaps(),
+        fetchCameras(),
         fetchTags(),
         fetchMatchChecksums(),
         fetchFaceitAccounts(),
@@ -46,6 +50,7 @@ export async function initializeApplicationHandler() {
       ]);
     const payload: InitializeApplicationSuccessPayload = {
       maps,
+      cameras,
       tags,
       matchChecksums,
       settings,

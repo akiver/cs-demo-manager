@@ -26,6 +26,7 @@ import { uninstallCounterStrikeServerPlugin } from 'csdm/node/counter-strike/lau
 import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { moveHlaeRawFilesToOutputFolder } from './move-hlae-files-to-output-folder';
+import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
 
 type FfmpegSettings = {
   audioBitrate: number;
@@ -180,6 +181,7 @@ export async function generateVideo(parameters: Parameters) {
 
   await cleanupFiles();
 
+  const cameras = await fetchCameras(game);
   if (game === Game.CSGO) {
     await createCsgoVideoJsonFile({
       type: 'record',
@@ -208,6 +210,7 @@ export async function generateVideo(parameters: Parameters) {
       closeGameAfterRecording,
       tickrate,
       players,
+      cameras,
       ffmpegSettings,
     });
   }

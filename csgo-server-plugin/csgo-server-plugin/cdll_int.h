@@ -39,9 +39,9 @@ public:
     virtual void _UNUSED_GetSentence(void) = 0; // 15
     virtual void _UNUSED_GetSentenceLength(void) = 0; // 16
     virtual void _UNUSED_IsStreaming(void) = 0; // 17
-    virtual void _UNUSED_GetViewAngles(void) = 0; // 18
+    virtual void GetViewAngles(QAngle& angles) = 0; // 18
     virtual void _UNUSED_SetViewAngles(void) = 0; // 19
-    virtual void _UNUSED_GetMaxClients(void) = 0; // 20
+    virtual int GetMaxClients(void) = 0; // 20
     virtual void _UNUSED_Key_LookupBinding(void) = 0; // 21
     virtual void _UNUSED_Key_BindingForKey(void) = 0; // 22
     virtual void _UNUSED_Key_SetBinding(void) = 0; // 23

@@ -170,11 +170,15 @@ ISource2EngineToClient* GetEngine()
     return engineToClient;
 }
 
+void SendMsg(json msg) {
+    ws->send(msg.dump());
+}
+
 void SendStatusOk() {
     json msg;
     msg["name"] = "status";
     msg["payload"] = "ok";
-    ws->send(msg.dump());
+    SendMsg(msg);
 }
 
 void RestoreGameinfoFile() {
@@ -255,9 +259,15 @@ void PlaybackLoop() {
         }
 
         if (!initialized) {
+            // Required to make the spec_lock_to_accountid command working since the 25/04/2024 update - it looks like the command has been hidden.
+            // Also required to use the startmovie command.
+            UnhideCommandsAndCvars();
+
             // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default.
 			// We have to set the demo_ui_mode convar to 0 before starting the playback prevent the UI from being displayed.
             engine->ExecuteClientCmd(0, "demo_ui_mode 0", true);
+            engine->ExecuteClientCmd(0, "sv_cheats 1", true); // required to unlock commands such as getposcopy
+
             initialized = true;
         }
 
@@ -265,10 +275,6 @@ void PlaybackLoop() {
         if (newIsPlayingDemo && !isPlayingDemo) {
             Log("[%d] Demo playback started, sequences %d", currentTick, sequences.size());
             currentTick = -1;
-
-            // Required to make the spec_lock_to_accountid command working since the 25/04/2024 update - it looks like the command has been hidden.
-            // Also required to use the startmovie command.
-            UnhideCommandsAndCvars();
         }
         else if (!newIsPlayingDemo && isPlayingDemo) {
             Log("[%d] Demo playback stopped, sequences %d", currentTick, sequences.size());
@@ -349,6 +355,19 @@ void HandleWebSocketMessage(const std::string& message)
         Log("Starting demo: %s", cmd.c_str());
         auto engine = GetEngine();
         engine->ExecuteClientCmd(0, cmd.c_str(), true);
+    }
+    else if (msg["name"] == "capture-player-view") {
+        auto engine = GetEngine();
+        engine->ExecuteClientCmd(0, "getposcopy", true);
+        // The "screenshot" command works only on Windows when the -tools launch option is set.
+        // As a workaround, we use the startmovie command to take a screenshot.
+        engine->ExecuteClientCmd(0, "hideconsole", true);
+        engine->ExecuteClientCmd(0, "startmovie csdmcamera jpg", true);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        engine->ExecuteClientCmd(0, "endmovie", true);
+        json msg;
+        msg["name"] = "capture-player-view-result";
+        SendMsg(msg);
     }
 }
 

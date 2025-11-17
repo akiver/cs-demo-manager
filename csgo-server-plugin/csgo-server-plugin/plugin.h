@@ -20,7 +20,7 @@ public:
     virtual void GameFrame(bool simulating) {};
     virtual void LevelShutdown() {};
     virtual void ClientActive(edict_t* pEntity) {};
-    virtual void ClientFullyConnect(edict_t* pEntity) {};
+    virtual void ClientFullyConnect(edict_t* pEntity);
     virtual void ClientDisconnect(edict_t* pEntity) {};
     virtual void ClientPutInServer(edict_t* pEntity, const char* playername) {};
     virtual void SetCommandClient(int index) {};

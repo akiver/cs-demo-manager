@@ -9,7 +9,7 @@ import { RendererClientMessageName } from 'csdm/server/renderer-client-message-n
 import type { WatchVideoSequencesPayload } from 'csdm/common/types/video';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { ErrorCode } from 'csdm/common/error-code';
-import { getVideoErrorMessageFromErrorCode } from './get-video-error-from-error-code';
+import { getPlaybackErrorMessageFromErrorCode } from 'csdm/ui/shared/get-playback-error-from-error-code';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 
 export function WatchSequencesButton() {
@@ -36,7 +36,7 @@ export function WatchSequencesButton() {
       });
     } catch (error) {
       const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-      const message = getVideoErrorMessageFromErrorCode(match.game, errorCode);
+      const message = getPlaybackErrorMessageFromErrorCode(match.game, errorCode);
       showToast({
         type: 'error',
         content: message,

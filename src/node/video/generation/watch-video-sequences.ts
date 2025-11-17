@@ -11,6 +11,7 @@ import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-pla
 import { createCs2VideoJsonFile } from './create-cs2-video-json-file';
 import { watchDemoWithHlae } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
 import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-counter-strike';
+import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
 
 type Parameters = {
   checksum: string;
@@ -34,6 +35,7 @@ export async function watchVideoSequences(parameters: Parameters) {
   await assertVideoGenerationIsPossible(parameters);
 
   const { checksum, recordingSystem, demoPath, width, height, game } = parameters;
+  const cameras = await fetchCameras(game);
   if (game === Game.CSGO) {
     await createCsgoVideoJsonFile({
       type: 'watch',
@@ -47,6 +49,7 @@ export async function watchVideoSequences(parameters: Parameters) {
       ...parameters,
       sequences,
       players,
+      cameras,
     });
   }
 

@@ -9,8 +9,8 @@ import { WavFileNotFound } from 'csdm/node/video/errors/wav-file-not-found';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
-import { getCsgoFolderPathOrThrow } from 'csdm/node/counter-strike/get-csgo-folder-path';
 import { getSequenceOutputFolderPath } from './get-sequence-output-folder-path';
+import { getRecordingFolderPath } from 'csdm/node/counter-strike/get-recording-folder-path';
 
 async function assertWavFileExists(wavFilePath: string) {
   const exists = await fs.pathExists(wavFilePath);
@@ -125,17 +125,8 @@ type GetStartMovieRawFilesOptions = {
 };
 
 export async function getStartMovieRawFiles({ sequence, game }: GetStartMovieRawFilesOptions): Promise<RawFiles> {
-  const isCsgo = game === Game.CSGO;
-  const csgoFolderPath = await getCsgoFolderPathOrThrow(game);
-  let recordingFolderPath: string;
-  if (isCsgo) {
-    recordingFolderPath = path.join(csgoFolderPath, 'csgo');
-  } else {
-    // The "movie" folder is inside our plugin folder
-    recordingFolderPath = path.join(csgoFolderPath, 'game', 'csgo', 'csdm', 'movie');
-  }
+  const recordingFolderPath = await getRecordingFolderPath(game);
   await assertFolderExists(recordingFolderPath);
-
   const sequenceName = getSequenceName(sequence);
   const tgaFiles = await glob(`**/${sequenceName}*.tga`, {
     cwd: recordingFolderPath,
@@ -147,6 +138,7 @@ export async function getStartMovieRawFiles({ sequence, game }: GetStartMovieRaw
 
   const rawFilesFolderPath = path.dirname(tgaFiles[0]);
 
+  const isCsgo = game === Game.CSGO;
   let wavFileFolderPath = rawFilesFolderPath;
   if (!isCsgo) {
     // Since the "Armory" update the wav files are created inside csgo/movie instead of csgo/csdm/movie.
