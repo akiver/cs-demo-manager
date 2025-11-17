@@ -2,8 +2,7 @@ import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
-import { ImageDragZone } from './image-drop-zone';
-import { DragIcon } from 'csdm/ui/icons/drag-icon';
+import { ImageDropZone } from 'csdm/ui/components/inputs/image-drop-zone';
 import { useMapFormField } from './use-map-form-field';
 
 export function ThumbnailInput() {
@@ -14,7 +13,7 @@ export function ThumbnailInput() {
     try {
       const maxFileWidth = 600;
       const maxFileHeight = 340;
-      const png = await window.csdm.getPngInformation(imageFilePath);
+      const png = await window.csdm.getImageInformation(imageFilePath);
       if (png.width > maxFileWidth || png.height > maxFileHeight) {
         setField(value, t`Thumbnail image pixels must be smaller than ${maxFileWidth}x${maxFileHeight}`);
         return;
@@ -49,13 +48,11 @@ export function ThumbnailInput() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-y-8">
       <InputLabel>
         <Trans context="Input label">Thumbnail</Trans>
       </InputLabel>
-      <ImageDragZone onDrop={onDrop} onClick={selectThumbnailFile}>
-        {value ? <img src={value} /> : <DragIcon width={100} />}
-      </ImageDragZone>
+      <ImageDropZone onDrop={onDrop} onClick={selectThumbnailFile} src={value} />
     </div>
   );
 }

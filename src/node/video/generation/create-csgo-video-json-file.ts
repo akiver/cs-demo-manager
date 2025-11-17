@@ -124,7 +124,7 @@ export async function createCsgoVideoJsonFile({
 
     json.addSkipAhead(firstActionsTick, setupSequenceTick);
 
-    for (const camera of sequence.cameras) {
+    for (const camera of sequence.playerCameras) {
       json.addSpecPlayer(camera.tick, camera.playerSteamId);
     }
 

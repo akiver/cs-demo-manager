@@ -20,6 +20,10 @@
 #include "plugin.h"
 #include "cdll_int.h"
 #include "game_ui.h"
+#include "game/server/iplayerinfo.h"
+
+#define ENTINDEX(index) static_cast<edict_t *>(globalVars->pEdicts + (index))
+#define PLAYER_INFO_FROM_INDEX(index) static_cast<IPlayerInfo *>(playerInfoManager->GetPlayerInfo(ENTINDEX(index)))
 
 using easywsclient::WebSocket;
 using nlohmann::json;
@@ -49,6 +53,8 @@ EXPOSE_SINGLE_INTERFACE_GLOBALVAR(CServerPlugin, IServerPluginCallbacks, INTERFA
 void* client;
 IVEngineClient14* engine = NULL;
 CGameUI* gameUi = NULL;
+IPlayerInfoManager* playerInfoManager = NULL;
+CGlobalVars* globalVars = NULL;
 FrameStageNotifyFn originalFrameStageNotify = NULL;
 thread* wsConnectionThread = NULL;
 WebSocket::pointer ws;
@@ -58,6 +64,7 @@ bool isPlayingDemo = false;
 int mainMenuFrameCount = 0;
 int currentTick = -1;
 bool isQuitting = false;
+bool forceSpectatorMode = false;
 std::queue<Sequence> sequences;
 // Unlike CS2, executing client commands from a different thread than the main game thread may crash the game.
 // As the WebSocket connection runs in a separate thread, we defer the possible command execution when we receive a
@@ -84,11 +91,15 @@ void ExecutePendingCommand()
     }
 }
 
+void SendMsg(json msg) {
+    ws->send(msg.dump());
+}
+
 void SendStatusOk() {
     json msg;
     msg["name"] = "status";
     msg["payload"] = "ok";
-    ws->send(msg.dump());
+    SendMsg(msg);
 }
 
 void LoadSequencesFile(string demoPath) {
@@ -138,6 +149,40 @@ void HandleWebSocketMessage(const string& message)
 
         std::lock_guard<mutex> lock(pendingCmdMutex);
         pendingCmd = "playdemo \"" + demoPath + "\"";
+    } else if (msg["name"] == "capture-player-view") {
+        float x, y, z, pitch, yaw = 0;
+        for (int i = 1; i <= engine->GetMaxClients(); i++) {
+            IPlayerInfo* player = PLAYER_INFO_FROM_INDEX(i);
+            if (player && player->IsConnected() && player->GetNetworkIDString() != "BOT") {
+                auto position = player->GetAbsOrigin();
+                x = position.x;
+                y = position.y;
+                z = position.z;
+                // player->GetAbsAngles() is not reliable, use engine->GetViewAngles() instead.
+                QAngle viewAngles;
+                engine->GetViewAngles(viewAngles);
+                pitch = viewAngles.x;
+                yaw = viewAngles.y;
+                break;
+            }
+        }
+
+        // use the startmovie command to generate a screenshot like CS2 so we don't maintain two separate code paths.
+        engine->ExecuteClientCmd("hideconsole");
+        engine->ExecuteClientCmd("startmovie csdmcamera jpg");
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        engine->ExecuteClientCmd("endmovie");
+
+        json msg;
+        msg["name"] = "capture-player-view-result";
+        msg["payload"] = {
+            {"x", x},
+            {"y", y},
+            {"z", z},
+            {"pitch", pitch},
+            {"yaw", yaw}
+        };
+        SendMsg(msg);
     }
 }
 
@@ -272,10 +317,33 @@ void NewFrameStageNotify(void* thisptr, CClientFrameStage stage)
 #endif
 }
 
+void CServerPlugin::ClientFullyConnect(edict_t* pEntity) {
+    if (!forceSpectatorMode) {
+        return;
+    }
+    auto player = playerInfoManager->GetPlayerInfo(pEntity);
+    if (player) {
+        player->ChangeTeam(1);
+    }
+}
+
 // Called when the plugin is loaded ONLY if the -insecure launch parameter is set.
 bool CServerPlugin::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn gameServerFactory)
 {
     DeleteLogFile();
+
+    playerInfoManager = (IPlayerInfoManager*)gameServerFactory(INTERFACEVERSION_PLAYERINFOMANAGER, NULL);
+    if (!playerInfoManager)
+    {
+        Log("Could not find IPlayerInfoManager : %s", GetLastErrorString());
+        return false;
+    }
+
+    globalVars = playerInfoManager->GetGlobalVars();
+    if (!globalVars) {
+        Log("Could not find CGlobalVars : %s", GetLastErrorString());
+        return false;
+    }
 
     engine = (IVEngineClient14*)interfaceFactory("VEngineClient014", NULL);
     if (engine == NULL)
@@ -368,6 +436,10 @@ bool CServerPlugin::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn g
             LoadSequencesFile(demoPath);
             break;
         }
+
+        if (strcmp(param, "forcespec") == 0) {
+            forceSpectatorMode = true;
+        }
     }
 
     wsConnectionThread = new thread(ConnectToWebsocketServerLoop);
@@ -402,6 +474,15 @@ const char *CServerPlugin::GetPluginDescription()
     return "CS Demo Manager plugin";
 }
 
+void LogPlayers() {
+    for (int i = 1; i <= engine->GetMaxClients(); i++) {
+        IPlayerInfo* player = PLAYER_INFO_FROM_INDEX(i);
+        if (player && player->IsConnected()) {
+            Log("%s - userID: %d SteamID: %s", player->GetName(), player->GetUserID(), player->GetNetworkIDString());
+        }
+    }
+}
+
 CON_COMMAND(csdm_info, "Show info"){
     if (!demoPath.empty()) {
         Log("Demo path: %s", demoPath.c_str());
@@ -417,4 +498,6 @@ CON_COMMAND(csdm_info, "Show info"){
     else {
         Log("WebSocket not connected");
     }
+
+    LogPlayers();
 }

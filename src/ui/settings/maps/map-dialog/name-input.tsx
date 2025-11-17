@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
-import { FieldError } from 'csdm/ui/settings/maps/map-dialog/field-error';
+import { FieldError } from 'csdm/ui/components/form/field-error';
 import { useMapFormField } from './use-map-form-field';
 
 type Props = {

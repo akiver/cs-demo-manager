@@ -36,13 +36,14 @@ export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId
           showOnlyDeathNotices: settings.showOnlyDeathNotices,
           deathNoticesDuration: settings.deathNoticesDuration,
           playersOptions: [],
-          cameras: [
+          playerCameras: [
             {
               tick: startTick,
               playerSteamId: playerFocusSteamId,
               playerName: playerFocusName,
             },
           ],
+          cameras: [],
           showXRay: false,
           showAssists: true,
           recordAudio: settings.recordAudio,

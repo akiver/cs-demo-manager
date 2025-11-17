@@ -8,7 +8,7 @@ import type { GenerateCamerasForm } from 'csdm/ui/match/video/sequence/cameras/g
 import { FocusCameraPlayerSelect } from 'csdm/ui/match/video/focus-camera-player-select';
 import { KillFocusCameraPovSelect } from 'csdm/ui/match/video/sequence/cameras/focus-camera-kill-pov-input';
 import type { SequenceFormContextState } from '../sequence-form-provider';
-import type { CameraFocus } from 'csdm/common/types/camera-focus';
+import type { PlayerCameraFocus } from 'csdm/common/types/player-camera-focus';
 import { WeaponType } from 'csdm/common/types/counter-strike';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
@@ -30,7 +30,7 @@ export function GenerateCamerasDialog({ sequenceContext }: Props) {
   const onSubmit = () => {
     const startTick = Number(sequence.startTick);
     const endTick = Number(sequence.endTick);
-    const cameras: CameraFocus[] = [];
+    const cameras: PlayerCameraFocus[] = [];
     if (form.playerFocusSteamId) {
       cameras.push({
         tick: startTick,
@@ -67,7 +67,7 @@ export function GenerateCamerasDialog({ sequenceContext }: Props) {
     }
 
     updateSequence({
-      cameras,
+      playerCameras: cameras,
     });
 
     hideDialog();

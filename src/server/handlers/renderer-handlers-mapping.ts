@@ -214,6 +214,13 @@ import {
   updateRoundCommentHandler,
   type UpdateRoundCommentPayload,
 } from './renderer-process/round/update-round-comment-handler';
+import type { CameraPayload, UpdateCameraPayload } from './renderer-process/cameras/camera-payload';
+import type { Camera } from 'csdm/common/types/camera';
+import { addCameraHandler } from './renderer-process/cameras/add-camera-handler';
+import { updateCameraHandler } from './renderer-process/cameras/update-camera-handler';
+import { deleteCameraHandler } from './renderer-process/cameras/delete-camera-handler';
+import { capturePlayerViewHandler } from './renderer-process/counter-strike/capture-player-view-handler';
+import type { CapturePlayerViewPayload } from 'csdm/node/counter-strike/launcher/capture-player-view';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -266,6 +273,9 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.AddMap]: Handler<MapPayload, Map>;
   [RendererClientMessageName.UpdateMap]: Handler<MapPayload, Map>;
   [RendererClientMessageName.DeleteMap]: Handler<Map>;
+  [RendererClientMessageName.AddCamera]: Handler<CameraPayload, Camera>;
+  [RendererClientMessageName.UpdateCamera]: Handler<UpdateCameraPayload, Camera>;
+  [RendererClientMessageName.DeleteCamera]: Handler<string>;
   [RendererClientMessageName.FetchBanStats]: Handler<void, BanStats>;
   [RendererClientMessageName.DisconnectDatabase]: Handler;
   [RendererClientMessageName.ConnectDatabase]: Handler<DatabaseSettings | undefined, ConnectDatabaseError | undefined>;
@@ -332,6 +342,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.Add5EPlayAccount]: Handler<string, FiveEPlayAccount>;
   [RendererClientMessageName.Delete5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
+  [RendererClientMessageName.CapturePlayerView]: Handler<Game, CapturePlayerViewPayload>;
 }
 
 // Mapping between message names and server handlers sent from the Electron renderer process to the WebSocket server.
@@ -383,6 +394,9 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.AddMap]: addMapHandler,
   [RendererClientMessageName.UpdateMap]: updateMapHandler,
   [RendererClientMessageName.DeleteMap]: deleteMapHandler,
+  [RendererClientMessageName.AddCamera]: addCameraHandler,
+  [RendererClientMessageName.UpdateCamera]: updateCameraHandler,
+  [RendererClientMessageName.DeleteCamera]: deleteCameraHandler,
   [RendererClientMessageName.FetchBanStats]: fetchBanStatsHandler,
   [RendererClientMessageName.DisconnectDatabase]: disconnectDatabaseConnectionHandler,
   [RendererClientMessageName.ConnectDatabase]: connectDatabaseHandler,
@@ -437,4 +451,5 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.Delete5EPlayAccount]: delete5EPlayAccountHandler,
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: updateCurrent5EPlayAccountHandler,
   [RendererClientMessageName.WatchVideoSequences]: watchVideoSequencesHandler,
+  [RendererClientMessageName.CapturePlayerView]: capturePlayerViewHandler,
 };

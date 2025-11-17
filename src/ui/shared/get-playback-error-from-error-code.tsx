@@ -5,7 +5,7 @@ import { ExternalLink } from 'csdm/ui/components/external-link';
 import { Game } from 'csdm/common/types/counter-strike';
 import { HlaeError } from 'csdm/ui/components/messages/hlae-error';
 
-export function getVideoErrorMessageFromErrorCode(game: Game, errorCode: ErrorCode) {
+export function getPlaybackErrorMessageFromErrorCode(game: Game, errorCode: ErrorCode) {
   switch (errorCode) {
     case ErrorCode.DemoNotFound:
       return (
@@ -122,6 +122,12 @@ export function getVideoErrorMessageFromErrorCode(game: Game, errorCode: ErrorCo
       );
     case ErrorCode.HlaeError:
       return <HlaeError />;
+    case ErrorCode.CounterStrikeNotConnected:
+      return <Trans>Unable to communicate with Counter-Strike, make sure to start it from the application.</Trans>;
+    case ErrorCode.CounterStrikeNotRunning:
+      return <Trans>Counter-Strike is not running, please start it from the application.</Trans>;
+    case ErrorCode.CounterStrikeNoResponse:
+      return <Trans>Counter-Strike did not respond, please try again.</Trans>;
     default:
       return (
         <p>

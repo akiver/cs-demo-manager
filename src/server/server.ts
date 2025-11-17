@@ -45,7 +45,7 @@ type SendableMainMessage<MessageName extends MainServerMessageName = MainServerM
     });
 
 type SendableGameMessagePayload<MessageName extends GameServerMessageName> = GameServerMessagePayload[MessageName];
-type SendableGameMessage<MessageName extends GameServerMessageName = GameServerMessageName> = {
+export type SendableGameMessage<MessageName extends GameServerMessageName = GameServerMessageName> = {
   name: MessageName;
 } & (SendableGameMessagePayload<MessageName> extends void
   ? object
@@ -62,7 +62,7 @@ type SharedMessage<MessageName extends SharedServerMessageName = SharedServerMes
       payload: SharedMessagePayload<MessageName>;
     });
 
-type GameListener<MessageName extends GameClientMessageName = GameClientMessageName> = (
+export type GameListener<MessageName extends GameClientMessageName = GameClientMessageName> = (
   payload: GameClientMessagePayload[MessageName],
 ) => void;
 

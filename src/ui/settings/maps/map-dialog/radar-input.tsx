@@ -2,8 +2,7 @@ import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
-import { ImageDragZone } from './image-drop-zone';
-import { DragIcon } from 'csdm/ui/icons/drag-icon';
+import { ImageDropZone } from 'csdm/ui/components/inputs/image-drop-zone';
 import { useMapFormField } from './use-map-form-field';
 
 export function RadarInput() {
@@ -12,7 +11,7 @@ export function RadarInput() {
 
   const updateRadarFieldFromImageFilePath = async (imageFilePath: string) => {
     try {
-      const png = await window.csdm.getPngInformation(imageFilePath);
+      const png = await window.csdm.getImageInformation(imageFilePath);
       if (png.width !== png.height) {
         setField(value, t`The radar image must be a square.`);
         return;
@@ -47,13 +46,11 @@ export function RadarInput() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-y-8">
       <InputLabel>
         <Trans context="Input label">Radar</Trans>
       </InputLabel>
-      <ImageDragZone onDrop={onDrop} onClick={selectRadarImageFile}>
-        {value ? <img src={value} /> : <DragIcon width={100} />}
-      </ImageDragZone>
+      <ImageDropZone onDrop={onDrop} onClick={selectRadarImageFile} src={value} />
     </div>
   );
 }

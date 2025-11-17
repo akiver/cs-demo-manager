@@ -1,4 +1,5 @@
-import type { CameraFocus } from 'csdm/common/types/camera-focus';
+import type { PlayerCameraFocus } from 'csdm/common/types/player-camera-focus';
+import type { CustomCameraFocus } from 'csdm/common/types/custom-camera-focus';
 import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
 
 export type SequenceForm = {
@@ -6,7 +7,8 @@ export type SequenceForm = {
   startTick: string;
   endTick: string;
   playersOptions: SequencePlayerOptions[];
-  cameras: CameraFocus[];
+  playerCameras: PlayerCameraFocus[];
+  cameras: CustomCameraFocus[];
   showXRay: boolean;
   showAssists: boolean;
   showOnlyDeathNotices: boolean;

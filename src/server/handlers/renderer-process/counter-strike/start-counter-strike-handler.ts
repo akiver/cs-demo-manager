@@ -1,11 +1,13 @@
 import { handleCounterStrikeError } from 'csdm/server/counter-strike';
-import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-counter-strike';
-import type { Game } from 'csdm/common/types/counter-strike';
+import {
+  startCounterStrike,
+  type StartCounterStrikeOptions,
+} from 'csdm/node/counter-strike/launcher/start-counter-strike';
 
-export type StartCounterStrikePayload = {
-  game: Game;
-  additionalLaunchParameters?: string[];
-};
+export type StartCounterStrikePayload = Pick<
+  StartCounterStrikeOptions,
+  'game' | 'additionalLaunchParameters' | 'map' | 'mode'
+>;
 
 export async function startCounterStrikeHandler(payload: StartCounterStrikePayload) {
   try {

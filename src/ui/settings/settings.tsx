@@ -14,6 +14,7 @@ import { TagsSettings } from './tags/tags-settings';
 import { BanSettings } from './bans/ban-settings';
 import { assertNever } from 'csdm/common/assert-never';
 import { About } from './about/about';
+import { CamerasSettings } from './cameras/cameras-settings';
 
 export function Settings() {
   const { category } = useSettingsOverlay();
@@ -43,6 +44,8 @@ export function Settings() {
       return <IntegrationsSettings />;
     case SettingsCategory.About:
       return <About />;
+    case SettingsCategory.Cameras:
+      return <CamerasSettings />;
     default:
       return assertNever(category, `Unknown settings category: ${category}`);
   }

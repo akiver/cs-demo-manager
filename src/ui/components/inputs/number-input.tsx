@@ -15,6 +15,7 @@ type Props = {
   max?: number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void;
   maxWidth?: number;
 };
 

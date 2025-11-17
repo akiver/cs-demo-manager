@@ -9,6 +9,7 @@ import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { VideoContainer } from 'csdm/common/types/video-container';
+import type { Camera } from 'csdm/common/types/camera';
 
 function getHlaeOutputFolderPath(outputFolderPath: string, sequence: Sequence) {
   return `${windowsToUnixPathSeparator(outputFolderPath)}/${getSequenceName(sequence)}`;
@@ -26,6 +27,7 @@ type Options = {
   closeGameAfterRecording: boolean;
   tickrate: number;
   players: PlayerWatchInfo[];
+  cameras: Camera[];
   ffmpegSettings: {
     constantRateFactor: number;
     videoContainer: VideoContainer;
@@ -46,6 +48,7 @@ export async function createCs2VideoJsonFile({
   closeGameAfterRecording,
   tickrate,
   players,
+  cameras,
   ffmpegSettings,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath, Game.CS2);
@@ -132,10 +135,16 @@ export async function createCs2VideoJsonFile({
     // It may not if we do both the skip ahead and the setup cmds at the same tick.
     json.addSkipAhead(1, Math.max(1, setupSequenceTick - 1));
 
-    for (const camera of sequence.cameras) {
+    for (const camera of sequence.playerCameras) {
       const player = players.find((player) => player.steamId === camera.playerSteamId);
       if (player) {
         json.addSpecPlayer(camera.tick, player.slot);
+      }
+    }
+    for (const { id, tick } of sequence.cameras) {
+      const camera = cameras.find((camera) => id === camera.id);
+      if (camera) {
+        json.addFocusCamera(tick, camera);
       }
     }
 

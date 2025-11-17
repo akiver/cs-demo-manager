@@ -12,7 +12,7 @@ import { SequencesDuration } from 'csdm/ui/match/video/sequences/sequences-durat
 import { CheckCircleIcon } from 'csdm/ui/icons/check-circle-icon';
 import { TimesCircleIcon } from 'csdm/ui/icons/times-circle';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
-import { getVideoErrorMessageFromErrorCode } from 'csdm/ui/match/video/get-video-error-from-error-code';
+import { getPlaybackErrorMessageFromErrorCode } from 'csdm/ui/shared/get-playback-error-from-error-code';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { RevealButton } from 'csdm/ui/components/buttons/reveal-button';
@@ -137,7 +137,7 @@ export function VideoEntry({ video }: Props) {
 
   const renderCurrentStepMessage = (video: Video) => {
     const message = video.errorCode
-      ? getVideoErrorMessageFromErrorCode(video.game, video.errorCode)
+      ? getPlaybackErrorMessageFromErrorCode(video.game, video.errorCode)
       : getStatusMessage(video);
 
     switch (video.status) {
@@ -175,7 +175,7 @@ export function VideoEntry({ video }: Props) {
       });
     } catch (error) {
       const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-      const message = getVideoErrorMessageFromErrorCode(video.game, errorCode);
+      const message = getPlaybackErrorMessageFromErrorCode(video.game, errorCode);
       showDialog(<AddVideoToQueueErrorDialog>{message}</AddVideoToQueueErrorDialog>);
     }
   };
@@ -313,7 +313,7 @@ export function VideoEntry({ video }: Props) {
 
             <ul>
               {video.sequences.map((sequence) => {
-                const [firstCamera] = sequence.cameras;
+                const [firstCamera] = sequence.playerCameras;
 
                 return (
                   <li
@@ -326,7 +326,7 @@ export function VideoEntry({ video }: Props) {
                     <p>{sequence.showXRay ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.showAssists ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.playerVoicesEnabled ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
-                    <p>{sequence.cameras.length}</p>
+                    <p>{sequence.playerCameras.length}</p>
                     <p>{firstCamera?.playerName ? firstCamera.playerName : <Trans>None</Trans>}</p>
                   </li>
                 );

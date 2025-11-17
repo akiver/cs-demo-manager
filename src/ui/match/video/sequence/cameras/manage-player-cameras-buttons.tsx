@@ -8,22 +8,20 @@ import { GenerateCamerasDialog } from './generate-cameras-dialog';
 export function ManageCamerasButtons() {
   const { showDialog } = useDialog();
   const sequenceContext = useSequenceForm();
-  const { sequence } = sequenceContext;
 
   return (
-    <div className="flex gap-x-8">
+    <div className="flex items-center gap-x-8">
       <Button
         onClick={() => {
           showDialog(<GenerateCamerasDialog sequenceContext={sequenceContext} />);
         }}
       >
-        <Trans context="Button">Generate cameras</Trans>
+        <Trans context="Button">Generate</Trans>
       </Button>
-      {sequence.cameras.length > 0 && (
-        <Button onClick={sequenceContext.clearCameras}>
-          <Trans context="Button">Remove cameras</Trans>
-        </Button>
-      )}
+
+      <Button onClick={sequenceContext.clearPlayerCameras}>
+        <Trans context="Button">Clear</Trans>
+      </Button>
     </div>
   );
 }

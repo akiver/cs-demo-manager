@@ -17,6 +17,7 @@ import { searchReducer } from '../search/search-reducer';
 import { teamsReducer } from '../teams/teams-reducer';
 import { teamReducer } from '../team/team-reducer';
 import { videosReducer } from '../videos/videos-reducer';
+import { camerasReducer } from '../cameras/cameras-reducer';
 
 export const reducers = combineReducers({
   bootstrap: bootstrapReducer,
@@ -37,6 +38,7 @@ export const reducers = combineReducers({
   tags: tagsReducer,
   search: searchReducer,
   videos: videosReducer,
+  cameras: camerasReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;

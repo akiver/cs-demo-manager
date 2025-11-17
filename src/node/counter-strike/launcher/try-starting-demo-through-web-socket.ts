@@ -1,34 +1,13 @@
-import { server } from 'csdm/server/server';
 import { GameClientMessageName } from 'csdm/server/game-client-message-name';
 import { GameServerMessageName } from 'csdm/server/game-server-message-name';
-import { sleep } from 'csdm/common/sleep';
+import { sendMessageToGame } from 'csdm/server/counter-strike';
 
-export async function tryStartingDemoThroughWebSocket(demoPath: string): Promise<boolean> {
-  if (!server.isGameConnected()) {
-    return false;
-  }
-
-  let hasReceivedMessage = false;
-  const onGameResponse = () => {
-    hasReceivedMessage = true;
-  };
-
-  server.addGameMessageListener(GameClientMessageName.Status, onGameResponse);
-
-  server.sendMessageToGameProcess({
-    name: GameServerMessageName.PlayDemo,
-    payload: demoPath,
+export async function tryStartingDemoThroughWebSocket(demoPath: string) {
+  return await sendMessageToGame({
+    message: {
+      name: GameServerMessageName.PlayDemo,
+      payload: demoPath,
+    },
+    responseMessageName: GameClientMessageName.Status,
   });
-
-  await sleep(1000);
-
-  server.removeGameEventListeners(GameClientMessageName.Status);
-
-  if (hasReceivedMessage) {
-    return true;
-  }
-
-  logger.warn('CS is connected but we did not receive a response from it.');
-
-  return false;
 }

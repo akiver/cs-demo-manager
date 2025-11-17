@@ -185,6 +185,9 @@ export default [
             '^GitHub$',
             'Inter var$',
             'CS:DM',
+            'CS:GO',
+            'CS2 Limited Test',
+            '^setpos_exact',
           ],
           ignoreNames: [
             // Ignore matching className (case-insensitive)

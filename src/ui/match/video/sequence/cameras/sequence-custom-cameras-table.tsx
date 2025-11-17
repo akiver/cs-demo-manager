@@ -3,16 +3,15 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { useTable } from 'csdm/ui/components/table/use-table';
 import { Table } from 'csdm/ui/components/table/table';
 import type { Column } from 'csdm/ui/components/table/table-types';
-import type { CameraFocus } from 'csdm/common/types/camera-focus';
 import type { CellProps } from 'csdm/ui/components/table/table-types';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
-import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
-import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { useSequenceForm } from 'csdm/ui/match/video/sequence/use-sequence-form';
+import type { CustomCameraFocus } from 'csdm/common/types/custom-camera-focus';
+import { ManageCustomCamerasButtons } from './manage-custom-cameras-buttons';
 
-function TickCell({ data }: CellProps<CameraFocus>) {
-  const { setCameraOnPlayerAtTick } = useSequenceForm();
+function TickCell({ data }: CellProps<CustomCameraFocus>) {
+  const { setCameraAtTick } = useSequenceForm();
 
   return (
     <InputNumber
@@ -23,9 +22,9 @@ function TickCell({ data }: CellProps<CameraFocus>) {
           return;
         }
 
-        setCameraOnPlayerAtTick({
+        setCameraAtTick({
           tick: newTick,
-          playerSteamId: data.playerSteamId,
+          cameraId: data.id,
           oldTick: data.tick,
         });
       }}
@@ -33,42 +32,7 @@ function TickCell({ data }: CellProps<CameraFocus>) {
   );
 }
 
-function PlayerNameCell({ rowIndex, data }: CellProps<CameraFocus>) {
-  const match = useCurrentMatch();
-  const { sequence, setCameraOnPlayerAtTick } = useSequenceForm();
-  const options: SelectOption[] = match.players
-    .toSorted((playerA, playerB) => {
-      return playerA.name.localeCompare(playerB.name);
-    })
-    .map((player) => {
-      return {
-        value: player.steamId,
-        label: player.name,
-      };
-    });
-  const isDisabled = options.length === 0;
-
-  return (
-    <Select
-      options={options}
-      isDisabled={isDisabled}
-      value={data.playerSteamId}
-      onChange={(steamId: string) => {
-        const currentCamera = sequence.cameras[rowIndex];
-        if (!currentCamera) {
-          return;
-        }
-        setCameraOnPlayerAtTick({
-          tick: data.tick,
-          playerSteamId: steamId,
-          oldTick: currentCamera.tick,
-        });
-      }}
-    />
-  );
-}
-
-function ActionsCell({ data }: CellProps<CameraFocus>) {
+function ActionsCell({ data }: CellProps<CustomCameraFocus>) {
   const { removeCameraAtTick } = useSequenceForm();
 
   return (
@@ -82,15 +46,15 @@ function ActionsCell({ data }: CellProps<CameraFocus>) {
   );
 }
 
-function getRowId(row: CameraFocus) {
-  return `${row.tick}-${row.playerSteamId}`;
+function getRowId(row: CustomCameraFocus) {
+  return `${row.tick}-${row.id}`;
 }
 
-export function SequenceCamerasTable() {
+export function SequenceCustomCamerasTable() {
   const { sequence } = useSequenceForm();
   const { t } = useLingui();
 
-  const columns: readonly Column<CameraFocus>[] = [
+  const columns: readonly Column<CustomCameraFocus>[] = [
     {
       id: 'tick',
       accessor: 'tick',
@@ -113,24 +77,23 @@ export function SequenceCamerasTable() {
       },
     },
     {
-      id: 'player-name',
-      accessor: 'playerName',
+      id: 'camera-name',
+      accessor: 'name',
       headerText: t({
         context: 'Table header',
-        message: 'Player',
+        message: 'Name',
       }),
       headerTooltip: t({
         context: 'Table header tooltip',
-        message: 'Player',
+        message: 'Name',
       }),
       width: 200,
-      Cell: PlayerNameCell,
       allowSort: false,
       allowMove: false,
     },
     {
       id: 'actions',
-      accessor: 'playerSteamId',
+      accessor: 'id',
       headerText: t({
         context: 'Table header',
         message: 'Actions',
@@ -158,12 +121,15 @@ export function SequenceCamerasTable() {
 
   return (
     <div className="flex flex-col">
-      <h2>
-        <Trans>
-          Cameras (<strong>{cameraCount}</strong>)
-        </Trans>
-      </h2>
-      <Table<CameraFocus> table={table} />
+      <div className="mb-4 flex items-center justify-between">
+        <h2>
+          <Trans>
+            Custom cameras (<strong>{cameraCount}</strong>)
+          </Trans>
+        </h2>
+        <ManageCustomCamerasButtons />
+      </div>
+      <Table<CustomCameraFocus> table={table} />
     </div>
   );
 }

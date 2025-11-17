@@ -6,7 +6,7 @@ import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { scaleStyle } from 'csdm/ui/components/timeline/use-timeline';
 import { useSequenceForm } from '../use-sequence-form';
-import type { CameraFocus } from 'csdm/common/types/camera-focus';
+import type { PlayerCameraFocus } from 'csdm/common/types/player-camera-focus';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { getSequencePlayerColor } from '../get-sequence-player-color';
 import { Tick } from './tick';
@@ -34,7 +34,7 @@ function CameraContextMenu({ tick }: ContextMenuProps) {
 }
 
 type TooltipProps = {
-  camera: CameraFocus;
+  camera: PlayerCameraFocus;
 };
 
 function TooltipContent({ camera }: TooltipProps) {
@@ -53,10 +53,10 @@ function TooltipContent({ camera }: TooltipProps) {
 }
 
 type Props = {
-  camera: CameraFocus;
+  camera: PlayerCameraFocus;
 };
 
-export function CameraItem({ camera }: Props) {
+export function PlayerCameraItem({ camera }: Props) {
   const match = useCurrentMatch();
   const { showContextMenu } = useContextMenu();
 

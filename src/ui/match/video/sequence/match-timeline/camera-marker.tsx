@@ -1,14 +1,13 @@
 import React from 'react';
 import { scaleStyle } from 'csdm/ui/components/timeline/use-timeline';
-import { getSequencePlayerColor } from '../get-sequence-player-color';
 
 type Props = {
   tick: number;
   pixelsPerTick: number;
-  playerIndex: number;
+  backgroundColor: string;
 };
 
-export function CameraMarker({ tick, pixelsPerTick, playerIndex }: Props) {
+export function CameraMarker({ tick, pixelsPerTick, backgroundColor }: Props) {
   const x = tick * pixelsPerTick;
 
   return (
@@ -17,7 +16,7 @@ export function CameraMarker({ tick, pixelsPerTick, playerIndex }: Props) {
       style={{
         ...scaleStyle,
         left: `${x}px`,
-        backgroundColor: getSequencePlayerColor(playerIndex),
+        backgroundColor,
       }}
     />
   );

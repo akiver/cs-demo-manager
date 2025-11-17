@@ -52,13 +52,14 @@ export function buildPlayersRoundsSequences({
           recordAudio: settings.recordAudio,
           playerVoicesEnabled: settings.playerVoicesEnabled,
           playersOptions: [],
-          cameras: [
+          playerCameras: [
             {
               tick: startTick,
               playerSteamId: steamId,
               playerName: match.players.find((player) => player.steamId === steamId)?.name ?? '',
             },
           ],
+          cameras: [],
         });
       }
     }

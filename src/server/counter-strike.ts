@@ -2,8 +2,13 @@ import { ErrorCode } from 'csdm/common/error-code';
 import type { Game } from 'csdm/common/types/counter-strike';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { isValidGame } from 'csdm/common/types/is-valid-game';
-import { server } from 'csdm/server/server';
+import { server, type GameListener, type SendableGameMessage } from 'csdm/server/server';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import type { GameClientMessageName, GameClientMessagePayload } from 'csdm/server/game-client-message-name';
+import type { GameServerMessageName } from 'csdm/server/game-server-message-name';
+import { sleep } from 'csdm/common/sleep';
+import { CounterStrikeNotConnected } from 'csdm/node/counter-strike/launcher/errors/counter-strike-not-connected';
+import { CounterStrikeNoResponse } from 'csdm/node/counter-strike/launcher/errors/counter-strike-no-response';
 
 export function onGameStart() {
   server.sendMessageToRendererProcess({
@@ -59,4 +64,41 @@ export function handleWatchDemoError(error: unknown, demoPath: string, message: 
   });
 
   return payload;
+}
+
+type SendMessageToGameOptions<MessageName extends GameClientMessageName> = {
+  message: SendableGameMessage<GameServerMessageName>;
+  responseMessageName: MessageName;
+  onResponse?: GameListener<MessageName>;
+};
+
+export async function sendMessageToGame<MessageName extends GameClientMessageName>({
+  message,
+  responseMessageName,
+  onResponse,
+}: SendMessageToGameOptions<MessageName>): Promise<void> {
+  if (!server.isGameConnected()) {
+    throw new CounterStrikeNotConnected();
+  }
+
+  let hasReceivedMessage = false;
+  const handleResponse = (data: GameClientMessagePayload[MessageName]) => {
+    hasReceivedMessage = true;
+    onResponse?.(data);
+  };
+
+  server.addGameMessageListener(responseMessageName, handleResponse);
+  server.sendMessageToGameProcess(message);
+
+  await sleep(2000);
+
+  server.removeGameEventListeners(responseMessageName);
+
+  if (hasReceivedMessage) {
+    return;
+  }
+
+  logger.warn('CS is connected but we did not receive a response from it.');
+
+  throw new CounterStrikeNoResponse();
 }

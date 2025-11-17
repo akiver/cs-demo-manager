@@ -25,8 +25,6 @@ export function MapsSettings() {
             setGame(game);
           }}
         />
-      </div>
-      <div className="mb-12 flex gap-x-8">
         <AddMapButton game={game} />
         <ResetDefaultMapsButton game={game} />
       </div>

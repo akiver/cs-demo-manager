@@ -67,6 +67,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     showOnlyDeathNotices,
     deathNoticesDuration,
     playersOptions,
+    playerCameras: [],
     cameras: [],
     showXRay,
     showAssists,

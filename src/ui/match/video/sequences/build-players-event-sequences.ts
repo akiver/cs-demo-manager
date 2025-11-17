@@ -111,13 +111,14 @@ export function buildPlayersEventSequences({
       recordAudio: settings.recordAudio,
       playerVoicesEnabled: settings.playerVoicesEnabled,
       playersOptions,
-      cameras: [
+      playerCameras: [
         {
           tick: sequenceStartTick,
           playerSteamId: steamIdToFocus,
           playerName: match.players.find((player) => player.steamId === steamIdToFocus)?.name ?? '',
         },
       ],
+      cameras: [],
     });
   }
 
