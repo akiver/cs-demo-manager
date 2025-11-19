@@ -316,7 +316,16 @@ export function VideoEntry({ video }: Props) {
 
             <ul>
               {video.sequences.map((sequence) => {
-                const [firstCamera] = sequence.playerCameras;
+                const [firstPlayerCamera] = sequence.playerCameras;
+                const [firstCustomCamera] = sequence.cameras;
+                const firstCameras = [firstPlayerCamera, firstCustomCamera].filter(Boolean).sort((cameraA, cameraB) => {
+                  return cameraA.tick - cameraB.tick;
+                });
+                let firstCameraName = '';
+                const [firstCamera] = firstCameras;
+                if (firstCamera) {
+                  firstCameraName = 'playerName' in firstCamera ? firstCamera.playerName : firstCamera.name;
+                }
 
                 return (
                   <li
@@ -331,7 +340,7 @@ export function VideoEntry({ video }: Props) {
                     <p>{sequence.recordAudio ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.playerVoicesEnabled ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.playerCameras.length}</p>
-                    <p>{firstCamera?.playerName ? firstCamera.playerName : <Trans>None</Trans>}</p>
+                    <p>{firstCameraName ? firstCameraName : <Trans>None</Trans>}</p>
                   </li>
                 );
               })}
