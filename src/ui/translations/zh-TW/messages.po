@@ -7832,10 +7832,12 @@ msgstr ""
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr ""
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -8301,6 +8303,10 @@ msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "Assists"
+msgstr ""
+
+#: src/ui/videos/video-entry.tsx
+msgid "Audio"
 msgstr ""
 
 #: src/ui/videos/video-entry.tsx

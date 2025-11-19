@@ -7832,10 +7832,12 @@ msgstr "最小化"
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "否"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -8302,6 +8304,10 @@ msgstr "X光"
 #: src/ui/videos/video-entry.tsx
 msgid "Assists"
 msgstr "助攻"
+
+#: src/ui/videos/video-entry.tsx
+msgid "Audio"
+msgstr ""
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"
