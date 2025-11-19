@@ -205,7 +205,7 @@ export function CameraForm({ nameInput, error, onSubmit }: Props) {
       </DialogContent>
       <DialogFooter>
         <div className="mr-auto">
-          <ExternalLink href="https://cs-demo-manager.com/docs/guides/cameras#addingediting-a-camera">
+          <ExternalLink href="https://cs-demo-manager.com/docs/guides/cameras">
             <Trans>Documentation</Trans>
           </ExternalLink>
         </div>
