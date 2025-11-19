@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import type { ReactNode } from 'react';
 import { useLingui } from '@lingui/react/macro';
 import { Game } from 'csdm/common/types/counter-strike';
-import { extractCoordinatesFromSetPosCommand } from './extract-coordinates-from-setpos-command';
+import { extractCoordinatesFromCommand } from './extract-coordinates-from-setpos-command';
 
 export type CameraFormValues = {
   name: string;
@@ -33,7 +33,7 @@ export const CameraFormContext = createContext<{
   validate: () => boolean;
   setField: (field: FieldName, value: string, error?: string | undefined) => void;
   validateField: (field: FieldName) => void;
-  tryUpdatingCoordinatesFromSetposCommand: (command: string) => void;
+  tryUpdatingCoordinatesFromGameCommand: (command: string) => void;
 }>({
   game: Game.CS2,
   mapName: '',
@@ -47,8 +47,8 @@ export const CameraFormContext = createContext<{
   validateField: () => {
     throw new Error('validateField not implemented');
   },
-  tryUpdatingCoordinatesFromSetposCommand: () => {
-    throw new Error('tryUpdatingCoordinatesFromSetposCommand not implemented');
+  tryUpdatingCoordinatesFromGameCommand: () => {
+    throw new Error('tryUpdatingCoordinatesFromGameCommand not implemented');
   },
 });
 
@@ -169,9 +169,9 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     return isValid;
   };
 
-  const tryUpdatingCoordinatesFromSetposCommand = (command: string) => {
+  const tryUpdatingCoordinatesFromGameCommand = (command: string) => {
     try {
-      const { x, y, z, pitch, yaw } = extractCoordinatesFromSetPosCommand(command);
+      const { x, y, z, pitch, yaw } = extractCoordinatesFromCommand(command);
       setField('x', x.toString());
       setField('y', y.toString());
       setField('z', z.toString());
@@ -192,7 +192,7 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
         validate,
         setField,
         validateField,
-        tryUpdatingCoordinatesFromSetposCommand,
+        tryUpdatingCoordinatesFromGameCommand,
       }}
     >
       {children}

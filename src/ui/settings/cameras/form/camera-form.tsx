@@ -23,7 +23,7 @@ import { Game } from 'csdm/common/types/counter-strike';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { ErrorCode } from 'csdm/common/error-code';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
-import { extractCoordinatesFromSetPosCommand } from './extract-coordinates-from-setpos-command';
+import { extractCoordinatesFromCommand } from './extract-coordinates-from-setpos-command';
 import { sleep } from 'csdm/common/sleep';
 import { SpinnableButton } from 'csdm/ui/components/buttons/spinnable-button';
 import { CounterStrikeRunningDialog } from 'csdm/ui/components/dialogs/counter-strike-running-dialog';
@@ -149,7 +149,7 @@ export function CameraForm({ nameInput, error, onSubmit }: Props) {
                   if (!isCsgo) {
                     await sleep(500); // Wait a moment to ensure the clipboard is up-to-date.
                     const setposCommand = window.csdm.getClipboardText();
-                    coordinates = extractCoordinatesFromSetPosCommand(setposCommand);
+                    coordinates = extractCoordinatesFromCommand(setposCommand);
                   }
 
                   if (coordinates) {

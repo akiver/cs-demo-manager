@@ -10,7 +10,7 @@ type Props = {
 };
 
 export function CameraCoordinatesInputNumber({ id, name, value, onChange }: Props) {
-  const { tryUpdatingCoordinatesFromSetposCommand } = useCameraForm();
+  const { tryUpdatingCoordinatesFromGameCommand } = useCameraForm();
 
   return (
     <InputNumber
@@ -22,7 +22,7 @@ export function CameraCoordinatesInputNumber({ id, name, value, onChange }: Prop
       onPaste={(event) => {
         event.preventDefault();
         const pasteData = event.clipboardData.getData('text');
-        tryUpdatingCoordinatesFromSetposCommand(pasteData);
+        tryUpdatingCoordinatesFromGameCommand(pasteData);
       }}
       onChange={(event) => {
         onChange(event.target.value);
