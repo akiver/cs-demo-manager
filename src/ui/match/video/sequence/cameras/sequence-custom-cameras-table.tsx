@@ -32,6 +32,17 @@ function TickCell({ data }: CellProps<CustomCameraFocus>) {
   );
 }
 
+function NameCell({ data }: CellProps<CustomCameraFocus>) {
+  return (
+    <div className="flex items-center gap-x-8">
+      <div className="size-8 shrink-0 rounded-full" style={{ backgroundColor: data.color }}></div>
+      <p className="truncate" title={data.name}>
+        {data.name}
+      </p>
+    </div>
+  );
+}
+
 function ActionsCell({ data }: CellProps<CustomCameraFocus>) {
   const { removeCameraAtTick } = useSequenceForm();
 
@@ -79,6 +90,7 @@ export function SequenceCustomCamerasTable() {
     {
       id: 'camera-name',
       accessor: 'name',
+      Cell: NameCell,
       headerText: t({
         context: 'Table header',
         message: 'Name',
