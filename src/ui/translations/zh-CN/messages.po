@@ -1501,7 +1501,7 @@ msgstr "半径"
 #: src/ui/components/heatmap/reset-zoom-button.tsx
 msgctxt "Button"
 msgid "Reset zoom"
-msgstr ""
+msgstr "重置缩放"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
@@ -5223,7 +5223,7 @@ msgstr "玩家语音"
 #: src/ui/match/video/record-audio-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Record Audio"
-msgstr ""
+msgstr "录制音频"
 
 #: src/ui/match/video/recording-output-select.tsx
 msgctxt "Select label"
@@ -5790,7 +5790,7 @@ msgstr "安装VirtualDub时发生错误"
 #: src/ui/match/video/watch-sequences-button.tsx
 msgctxt "Button"
 msgid "Watch sequences"
-msgstr ""
+msgstr "观看序列"
 
 #: src/ui/match/video/width-resolution-input.tsx
 msgctxt "Input label"
@@ -7901,12 +7901,12 @@ msgstr "显示助攻"
 
 #: src/ui/settings/video/recording/recording-audio.tsx
 msgid "Record audio during video recording."
-msgstr ""
+msgstr "视频录制期间录制音频。"
 
 #: src/ui/settings/video/recording/recording-audio.tsx
 msgctxt "Settings title"
 msgid "Record Audio"
-msgstr ""
+msgstr "录制音频"
 
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"
