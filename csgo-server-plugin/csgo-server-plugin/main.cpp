@@ -107,7 +107,7 @@ void LoadSequencesFile(string demoPath) {
 
     string demoJsonPath = demoPath + ".json";
     if (FileExists(demoJsonPath)) {
-        std::ifstream jsonFile(demoJsonPath);
+        std::ifstream jsonFile(demoJsonPath, std::ios::binary);
         json jsonSequences = json::parse(jsonFile);
         if (jsonSequences.size() == 0) {
             Log("No sequences found in JSON file");

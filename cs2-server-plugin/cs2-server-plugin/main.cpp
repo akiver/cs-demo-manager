@@ -211,7 +211,7 @@ void LoadSequencesFile(string demoPath) {
     string demoJsonPath = demoPath + ".json";
     if (FileExists(demoJsonPath)) {
         Log("Loading JSON file %s",  demoJsonPath.c_str());
-        std::ifstream jsonFile(demoJsonPath);
+        std::ifstream jsonFile(demoJsonPath, std::ios::binary);
         json jsonSequences = json::parse(jsonFile);
 
         std::istringstream stream(jsonSequences.dump(2));

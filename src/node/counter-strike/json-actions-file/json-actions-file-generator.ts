@@ -235,7 +235,7 @@ export class JSONActionsFileGenerator {
       return;
     }
 
-    await fs.writeFile(this.filePath, JSON.stringify(this.sequences, null, 2));
+    await fs.writeFile(this.filePath, JSON.stringify(this.sequences, null, 2), 'utf8');
   }
 
   private getValidTick(tick: number): number {
