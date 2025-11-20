@@ -230,48 +230,52 @@ echo "CS:DM config loaded"
   await installCounterStrikeServerPlugin(game);
   defineCfgFolderLocation();
 
-  const startTime = Date.now();
-  const gameProcess = exec(command, { windowsHide: true });
+  return new Promise<void>((resolve, reject) => {
+    const startTime = Date.now();
+    const gameProcess = exec(command, { windowsHide: true });
 
-  const chunks: string[] = [];
-  gameProcess.stdout?.on('data', (data: string) => {
-    chunks.push(data);
-  });
+    const chunks: string[] = [];
+    gameProcess.stdout?.on('data', (data: string) => {
+      chunks.push(data);
+    });
 
-  gameProcess.stderr?.on('data', (data: string) => {
-    chunks.push(data);
-  });
+    gameProcess.stderr?.on('data', (data: string) => {
+      chunks.push(data);
+    });
 
-  gameProcess.on('exit', async (code) => {
-    logger.log('Game process exited with code', code);
+    gameProcess.on('exit', async (code) => {
+      logger.log('Game process exited with code', code);
 
-    if (demoPath) {
-      deleteJsonActionsFile(demoPath);
-    }
-    if (options.uninstallPluginOnExit !== false) {
-      await uninstallCounterStrikeServerPlugin(game);
-    }
-
-    if (signal?.aborted) {
-      throw abortError;
-    }
-
-    const output = chunks.join('\n');
-    logger.log('Game output: \n', output);
-
-    const hasRunLongEnough = Date.now() - startTime >= 2000;
-    if (!hasBeenKilled && code !== 0) {
-      if (hasRunLongEnough) {
-        throw new GameError();
-      } else {
-        logger.error('An error occurred while starting the game');
-
-        if (output.includes('Access is denied')) {
-          throw new AccessDeniedError();
-        }
-
-        throw new StartCounterStrikeError(output);
+      if (demoPath) {
+        await deleteJsonActionsFile(demoPath);
       }
-    }
+      if (options.uninstallPluginOnExit !== false) {
+        await uninstallCounterStrikeServerPlugin(game);
+      }
+
+      if (signal?.aborted) {
+        return reject(abortError);
+      }
+
+      const output = chunks.join('\n');
+      logger.log('Game output: \n', output);
+
+      const hasRunLongEnough = Date.now() - startTime >= 2000;
+      if (!hasBeenKilled && code !== 0) {
+        if (hasRunLongEnough) {
+          return reject(new GameError());
+        } else {
+          logger.error('An error occurred while starting the game');
+
+          if (output.includes('Access is denied')) {
+            return reject(new AccessDeniedError());
+          }
+
+          return reject(new StartCounterStrikeError(output));
+        }
+      }
+
+      return resolve();
+    });
   });
 }
