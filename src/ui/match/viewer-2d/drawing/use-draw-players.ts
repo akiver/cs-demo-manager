@@ -1,7 +1,7 @@
 import { GrenadeName, WeaponName } from 'csdm/common/types/counter-strike';
 import { degreesToRadians } from './degrees-to-radians';
 import type { InteractiveCanvas } from 'csdm/ui/hooks/use-interactive-map-canvas';
-import { useBombImage } from './use-bomb-image';
+import { getBombImage } from './get-bomb-image';
 import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { getGrenadeColor } from './get-grenade-color';
 import { useViewerContext } from '../use-viewer-context';
@@ -18,7 +18,7 @@ export function useDrawPlayers() {
     hostagesPickUpStart,
     hostagesPickedUp,
   } = useViewerContext();
-  const bombImage = useBombImage();
+  const bombImage = getBombImage();
 
   const drawPlayers = (
     context: CanvasRenderingContext2D,
