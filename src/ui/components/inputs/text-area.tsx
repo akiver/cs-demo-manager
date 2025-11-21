@@ -15,8 +15,6 @@ export function TextArea({ resizable = true, ref, ...props }: Props) {
         resizable ? 'resize-y' : 'resize-none',
       )}
       style={{
-        // @ts-expect-error CSS property supported by Chromium only ATM and not yet in TS defs.
-        // TODO Can be removed once this line triggers an error when upgrading TS.
         fieldSizing: 'content',
       }}
       {...props}

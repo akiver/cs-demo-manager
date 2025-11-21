@@ -13,7 +13,7 @@ const config: KnipConfig = {
   rules: {
     devDependencies: 'off',
   },
-  ignore: ['**/*/lingui.config.ts'],
+  ignore: ['**/*/lingui.config.ts', 'src/node/settings/migrations/*.ts', 'src/node/database/migrations/**/*.ts'],
   ignoreDependencies: ['@lingui/core'],
 };
 
