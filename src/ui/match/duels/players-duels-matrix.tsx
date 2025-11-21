@@ -206,7 +206,7 @@ export function PlayersDuelsMatrix() {
               {status === Status.Success && hasKills && (
                 <ExportHtmlElementAsImageButton
                   getElement={() => chart.current}
-                  fileName={`duels-matrix-${Date.now()}`}
+                  getFileName={() => `duels-matrix-${Date.now()}`}
                 />
               )}
             </div>

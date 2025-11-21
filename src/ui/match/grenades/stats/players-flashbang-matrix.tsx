@@ -151,7 +151,7 @@ export function PlayersFlashbangMatrix() {
           {status === Status.Success && (
             <ExportHtmlElementAsImageButton
               getElement={() => chart.current}
-              fileName={`flashbang-matrix-${Date.now()}`}
+              getFileName={() => `flashbang-matrix-${Date.now()}`}
             />
           )}
         </div>
