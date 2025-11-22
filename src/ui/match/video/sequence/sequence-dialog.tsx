@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MatchTimeline } from './match-timeline/match-timeline';
 import { SequencePlayers } from './sequence-players';
 import { StartTickInput } from './start-tick-input';
@@ -33,8 +33,7 @@ type Props = {
 };
 
 export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSequence }: Props) {
-  const element = useRef<HTMLDivElement>(document.createElement('div'));
-  const node = element.current;
+  const [node] = useState(() => document.createElement('div'));
   const canEditPlayersOptions = useCanEditVideoPlayersOptions();
 
   useEffect(() => {
@@ -101,6 +100,6 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
         </SequenceFormProvider>
       )}
     </FullScreenDialog>,
-    element.current,
+    node,
   );
 }

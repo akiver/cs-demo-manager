@@ -29,7 +29,7 @@ function HeatmapCanvas({ map, game, points, alpha, blur, radius, radarLevel }: H
   const heatmapCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const heatmapRendererRef = useRef<HeatmapRenderer | null>(null);
 
-  const { canvasRef, interactiveCanvas } = useMapCanvas({
+  const { setCanvas, interactiveCanvas } = useMapCanvas({
     map,
     game,
     mode: radarLevel === RadarLevel.Upper ? 'upper' : 'lower',
@@ -73,7 +73,7 @@ function HeatmapCanvas({ map, game, points, alpha, blur, radius, radarLevel }: H
 
   return (
     <div ref={setWrapper} className="relative flex size-full">
-      <canvas id="radar-canvas" ref={canvasRef} width={canvasSize.width} height={canvasSize.height} />
+      <canvas id="radar-canvas" ref={(el) => setCanvas(el)} width={canvasSize.width} height={canvasSize.height} />
       <canvas id="heatmap-canvas" ref={heatmapCanvasRef} className="hidden" />
     </div>
   );

@@ -123,7 +123,7 @@ export function PlayersFlashbangMatrix() {
               return (
                 <div key={player.steamId} className="flex w-[84px] flex-col gap-y-4">
                   <TeamIndicator teamNumber={player.teamNumber} />
-                  <p className="selectable overflow-hidden break-words" title={player.name}>
+                  <p className="selectable overflow-hidden wrap-break-word" title={player.name}>
                     {player.name}
                   </p>
                 </div>

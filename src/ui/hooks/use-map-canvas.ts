@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useInteractiveMapCanvas, type InteractiveCanvas } from './use-interactive-map-canvas';
 import type { Map } from 'csdm/common/types/map';
 import { useGetMapRadarSrc } from '../maps/use-get-map-radar-src';
@@ -17,14 +17,14 @@ type Options = {
 };
 
 export function useMapCanvas({ onClick = noop, draw, map, game, onContextMenu = noop, mode = 'both' }: Options) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const radarImage = useRef<HTMLImageElement | null>(null);
   const lowerRadarImage = useRef<HTMLImageElement | null>(null);
   const getMapRadarFileSrc = useGetMapRadarSrc();
   const animationId = useRef(0);
   const isMouseDown = useRef(false);
   const isDragging = useRef(false);
-  const interactiveCanvas = useInteractiveMapCanvas(canvasRef.current, map);
+  const interactiveCanvas = useInteractiveMapCanvas(canvas, map);
 
   useEffect(() => {
     const loadRadarImages = async () => {
@@ -43,7 +43,6 @@ export function useMapCanvas({ onClick = noop, draw, map, game, onContextMenu = 
   }, [getMapRadarFileSrc, game, map.name]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
@@ -96,7 +95,6 @@ export function useMapCanvas({ onClick = noop, draw, map, game, onContextMenu = 
   });
 
   useEffect(() => {
-    const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
@@ -130,10 +128,9 @@ export function useMapCanvas({ onClick = noop, draw, map, game, onContextMenu = 
       canvas.removeEventListener('mouseup', onMouseUp);
       canvas.removeEventListener('mousemove', onMouseMove);
     };
-  }, [onClick]);
+  }, [onClick, canvas]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
@@ -145,5 +142,5 @@ export function useMapCanvas({ onClick = noop, draw, map, game, onContextMenu = 
     };
   });
 
-  return { canvasRef, interactiveCanvas };
+  return { setCanvas, interactiveCanvas };
 }

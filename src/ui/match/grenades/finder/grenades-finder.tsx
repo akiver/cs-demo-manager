@@ -37,7 +37,7 @@ export function GrenadesFinder({ map, grenadesThrow }: Props) {
   const hoveredIdRef = useRef<string | undefined>(undefined);
   const filteredGrenadesThrow = useFilteredGrenadesThrow(grenadesThrow);
   const buildGrenadeDrawings = useBuildGrenadeDrawings();
-  const { canvasRef, interactiveCanvas } = useMapCanvas({
+  const { setCanvas, interactiveCanvas } = useMapCanvas({
     map,
     game: match.game,
     draw: async (interactiveCanvas, context) => {
@@ -117,7 +117,7 @@ export function GrenadesFinder({ map, grenadesThrow }: Props) {
       </div>
       <div className="relative flex flex-1 bg-gray-50" ref={setWrapper}>
         <div className="absolute top-0 size-full overflow-hidden">
-          <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} />
+          <canvas ref={(el) => setCanvas(el)} width={canvasSize.width} height={canvasSize.height} />
         </div>
       </div>
     </div>
