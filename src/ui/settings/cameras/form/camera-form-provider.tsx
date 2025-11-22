@@ -19,7 +19,7 @@ export type CameraFormValues = {
 type Field = {
   value: string;
   error: string | undefined;
-  validate(): string | undefined;
+  validate: (value: string) => string | undefined;
 };
 
 export type FieldName = keyof CameraFormValues;
@@ -66,8 +66,8 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     name: {
       value: initialValues?.name ?? '',
       error: undefined,
-      validate(this: Field) {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Name is required.`;
         }
       },
@@ -75,8 +75,8 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     color: {
       value: initialValues?.color ?? '#2fdecf',
       error: undefined,
-      validate(this: Field) {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Color is required.`;
         }
       },
@@ -84,8 +84,8 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     x: {
       value: initialValues?.x ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Coordinate X is required.`;
         }
       },
@@ -93,8 +93,8 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     y: {
       value: initialValues?.y ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Coordinate Y is required.`;
         }
       },
@@ -102,8 +102,8 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     z: {
       value: initialValues?.z ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Coordinate Z is required.`;
         }
       },
@@ -111,8 +111,8 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     pitch: {
       value: initialValues?.pitch ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Pitch is required.`;
         }
       },
@@ -120,8 +120,8 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     yaw: {
       value: initialValues?.yaw ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Yaw is required.`;
         }
       },
@@ -129,14 +129,14 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     previewBase64: {
       value: initialValues?.previewBase64 ?? '',
       error: undefined,
-      validate() {
+      validate: () => {
         return undefined;
       },
     },
     comment: {
       value: initialValues?.comment ?? '',
       error: undefined,
-      validate() {
+      validate: () => {
         return undefined;
       },
     },
@@ -149,7 +149,7 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
   };
 
   const validateField = (field: keyof CameraFormValues) => {
-    const error = fields[field].validate();
+    const error = fields[field].validate(fields[field].value);
     setFields((prev) => {
       return { ...prev, [field]: { ...prev[field], error } };
     });

@@ -17,7 +17,7 @@ export type MapFormValues = {
 type Field = {
   value: string;
   error: string | undefined;
-  validate(): string | undefined;
+  validate: (value: string) => string | undefined;
 };
 
 export type FieldName = keyof MapFormValues;
@@ -57,8 +57,8 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
     name: {
       value: initialValues?.name ?? '',
       error: undefined,
-      validate(this: Field) {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Name is required.`;
         }
       },
@@ -66,8 +66,8 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
     posX: {
       value: initialValues?.posX ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Coordinate X is required.`;
         }
       },
@@ -75,8 +75,8 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
     posY: {
       value: initialValues?.posY ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Coordinate Y is required.`;
         }
       },
@@ -84,8 +84,8 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
     thresholdZ: {
       value: initialValues?.thresholdZ ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Threshold Z is required.`;
         }
       },
@@ -93,8 +93,8 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
     scale: {
       value: initialValues?.scale ?? '0',
       error: undefined,
-      validate() {
-        if (this.value === '') {
+      validate: (value: string) => {
+        if (value === '') {
           return t`Scale is required.`;
         }
       },
@@ -102,21 +102,21 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
     radarBase64: {
       value: initialValues?.radarBase64 ?? '',
       error: undefined,
-      validate() {
+      validate: () => {
         return undefined;
       },
     },
     lowerRadarBase64: {
       value: initialValues?.lowerRadarBase64 ?? '',
       error: undefined,
-      validate() {
+      validate: () => {
         return undefined;
       },
     },
     thumbnailBase64: {
       value: initialValues?.thumbnailBase64 ?? '',
       error: undefined,
-      validate() {
+      validate: () => {
         return undefined;
       },
     },
@@ -133,13 +133,13 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
   };
 
   const validateField = (field: keyof MapFormValues) => {
-    const error = fields[field].validate();
+    const error = fields[field].validate(fields[field].value);
     setFields({ ...fields, [field]: { ...fields[field], error } });
   };
 
   const validate = () => {
     for (const field of Object.values(fields)) {
-      const hasError = field.validate() !== undefined;
+      const hasError = field.validate(field.value) !== undefined;
       if (hasError) {
         return false;
       }
