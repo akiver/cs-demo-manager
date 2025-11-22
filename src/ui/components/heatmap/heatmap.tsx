@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useHeatmapContext } from './heatmap-context';
 import { HeatmapRenderer, type HeatmapPoint } from 'csdm/ui/shared/heatmap-renderer';
@@ -8,7 +8,6 @@ import type { Map } from 'csdm/common/types/map';
 import type { Game } from 'csdm/common/types/counter-strike';
 import { useMaps } from 'csdm/ui/maps/use-maps';
 import { UnsupportedMap } from 'csdm/ui/components/unsupported-map';
-import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';
 import { useMapCanvas } from 'csdm/ui/hooks/use-map-canvas';
 import { RadarLevel } from 'csdm/ui/maps/radar-level';
@@ -80,24 +79,9 @@ function HeatmapCanvas({ map, game, points, alpha, blur, radius, radarLevel }: H
 }
 
 export function Heatmap() {
-  const [status, setStatus] = useState<Status>(Status.Loading);
   const { alpha, blur, radius, points, mapName, game, radarLevel } = useHeatmapContext();
-  const [map, setMap] = useState<Map | undefined>(undefined);
   const maps = useMaps();
-
-  useEffect(() => {
-    const foundMap = maps.find((map) => map.name === mapName);
-    setMap(foundMap);
-    setStatus(foundMap ? Status.Success : Status.Error);
-  }, [mapName, maps]);
-
-  if (status === Status.Loading) {
-    return <Message message={<Trans>Loading map…</Trans>} />;
-  }
-
-  if (status === Status.Error) {
-    return <Message message={<Trans>An error occurred while loading the map.</Trans>} />;
-  }
+  const map = maps.find((map) => map.name === mapName);
 
   if (mapName === '') {
     return <Message message={<Trans>Select a map.</Trans>} />;

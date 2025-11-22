@@ -18,13 +18,13 @@ function BanCountBadge({ banCount }: { banCount: number }) {
 }
 
 export function BansLink() {
-  const [newBannedAccountCount, setNewBannedAccountCount] = useState(0);
-  const client = useWebSocketClient();
   const location = useLocation();
+  const [{ count, lastPathname }, setBanData] = useState({ count: 0, lastPathname: location.pathname });
+  const client = useWebSocketClient();
 
   useEffect(() => {
     const onNewBannedAccounts = (steamIds: string[]) => {
-      setNewBannedAccountCount(steamIds.length);
+      setBanData((prevState) => ({ ...prevState, count: steamIds.length }));
     };
 
     client.on(SharedServerMessageName.NewBannedAccounts, onNewBannedAccounts);
@@ -34,17 +34,21 @@ export function BansLink() {
     };
   }, [client]);
 
-  useEffect(() => {
-    if (location.pathname === RoutePath.Ban) {
-      setNewBannedAccountCount(0);
-    }
-  }, [location.pathname]);
+  const currentPathname = location.pathname;
+  if (currentPathname !== lastPathname) {
+    // reset the counter only when navigating away from the bans page
+    const shouldReset = lastPathname === RoutePath.Ban && currentPathname !== RoutePath.Ban;
+    setBanData((prev) => ({
+      count: shouldReset ? 0 : prev.count,
+      lastPathname: currentPathname,
+    }));
+  }
 
   return (
     <LeftBarLink
       icon={
         <div className="relative size-full">
-          <BanCountBadge banCount={newBannedAccountCount} />
+          <BanCountBadge banCount={count} />
           <ShieldIcon />
         </div>
       }
