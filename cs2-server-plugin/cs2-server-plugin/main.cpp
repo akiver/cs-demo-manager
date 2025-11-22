@@ -292,11 +292,11 @@ void PlaybackLoop() {
         }
 
         int newTick = demo->GetDemoTick();
-        if (newTick != currentTick) {
+        if (newTick != currentTick && !sequences.empty()) {
             // Log("Tick: %d", newTick);
 
-            Sequence currentSequence = sequences.front();
-            for (auto action : currentSequence.actions) {
+            Sequence& currentSequence = sequences.front();
+            for (auto& action : currentSequence.actions) {
                 if (action.tick != newTick) {
                     continue;
                 }

@@ -229,7 +229,7 @@ void PlaybackFrame() {
     }
 
     int newTick = engine->GetDemoPlaybackTick();
-    if (newTick != currentTick) {
+    if (newTick != currentTick && !sequences.empty()) {
         Sequence& currentSequence = sequences.front();
         for (auto& action : currentSequence.actions) {
             // Also check for minus 1 because some ticks may not be "seen" when fast-forwarding the playback during a few ticks.
