@@ -12,6 +12,7 @@ type Props<ItemType> = {
 
 export function VirtualListResults<ItemType>({ items, renderItem }: Props<ItemType>) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  // eslint-disable-next-line react-hooks/incompatible-library
   const { getVirtualItems, getTotalSize } = useVirtualizer({
     count: items.length,
     getScrollElement: () => {

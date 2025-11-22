@@ -212,7 +212,6 @@ export function Viewer2DLoader() {
     return () => {
       if (state.audio) {
         state.audio.pause();
-        // eslint-disable-next-line react-hooks/react-compiler
         state.audio.currentTime = 0;
         state.audio.src = '';
       }

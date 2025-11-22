@@ -27,7 +27,7 @@ export function ToastsProvider({ children }: Props) {
       id: window.setTimeout(() => {
         removeToast(toastId);
       }, durationInMs),
-      startedAt: Date.now(),
+      startedAt: new Date().getTime(),
       msRemaining: durationInMs,
     });
 

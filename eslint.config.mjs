@@ -80,7 +80,7 @@ export default [
     },
 
     rules: {
-      ...reactHooks.configs.recommended.rules,
+      ...reactHooks.configs['recommended-latest'].rules,
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/ban-ts-comment': [
         'warn',
@@ -256,7 +256,6 @@ export default [
         },
       ],
       'react/prop-types': 0,
-      'react-hooks/react-compiler': 'error',
     },
   },
   {

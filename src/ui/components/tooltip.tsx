@@ -37,10 +37,13 @@ function Wrapper({ x, y, refs, children, strategy, placement, getFloatingProps }
     bottom: 'tooltip-bottom',
   };
   const arrowClassName = arrowClasses[placement] ?? '';
+  // Destructuring assignment to avoid false react compiler linting error.
+  // https://github.com/facebook/react/issues/34775#issuecomment-3558154592
+  const { setFloating } = refs;
 
   return (
     <div
-      ref={refs.setFloating}
+      ref={setFloating}
       className={clsx(
         'z-10 rounded border border-gray-400 bg-gray-75 p-8 transition-opacity duration-300 select-none',
         arrowClassName,

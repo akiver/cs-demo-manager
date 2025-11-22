@@ -143,6 +143,7 @@ export function PopoverTrigger({
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(
       children,
+      // eslint-disable-next-line react-hooks/refs
       context.getReferenceProps({
         ref,
         ...props,

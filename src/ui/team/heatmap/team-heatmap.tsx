@@ -29,6 +29,8 @@ export function TeamHeatmap() {
   const isInitialRender = useRef(true);
   const maps = useMaps();
 
+  // https://github.com/reactwg/react-compiler/discussions/18
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchPoints = async (filters?: Partial<TeamHeatmapFilter>) => {
     try {
       const newMapName = filters?.mapName ?? mapName;
@@ -72,7 +74,7 @@ export function TeamHeatmap() {
       isInitialRender.current = false;
       fetchPoints();
     }
-  });
+  }, [fetchPoints]);
 
   return (
     <Content>
