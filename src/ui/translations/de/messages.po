@@ -1473,14 +1473,6 @@ msgid "Map"
 msgstr "Karte"
 
 #: src/ui/components/heatmap/heatmap.tsx
-msgid "Loading map…"
-msgstr "Karte wird geladen…"
-
-#: src/ui/components/heatmap/heatmap.tsx
-msgid "An error occurred while loading the map."
-msgstr "Beim Laden der Karte ist ein Fehler aufgetreten."
-
-#: src/ui/components/heatmap/heatmap.tsx
 msgid "Select a map."
 msgstr "Karte auswählen..."
 
