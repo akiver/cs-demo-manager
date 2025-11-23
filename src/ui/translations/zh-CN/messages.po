@@ -6657,6 +6657,11 @@ msgid "No maps found"
 msgstr "没有找到相关地图"
 
 #: src/ui/search/filters/search-players-input.tsx
+msgctxt "Input label"
+msgid "Players"
+msgstr "玩家"
+
+#: src/ui/search/filters/search-players-input.tsx
 msgctxt "Input placeholder"
 msgid "Nickname or SteamID"
 msgstr "昵称或 SteamID"
@@ -6696,11 +6701,6 @@ msgstr "正在搜索…"
 #: src/ui/search/search-results.tsx
 msgid "No results found."
 msgstr "未找到结果。"
-
-#: src/ui/search/search.tsx
-msgctxt "Input label"
-msgid "Players"
-msgstr "玩家"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"

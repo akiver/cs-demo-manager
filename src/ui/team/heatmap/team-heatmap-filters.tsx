@@ -15,11 +15,12 @@ import { HeatmapFilters } from 'csdm/ui/components/heatmap/heatmap-filters';
 import { useTeam } from 'csdm/ui/team/use-team';
 import { HeatmapSelectMap } from 'csdm/ui/components/heatmap/heatmap-select-map';
 import { ResetZoomButton } from 'csdm/ui/components/heatmap/reset-zoom-button';
+import { SearchPlayersInput } from 'csdm/ui/search/filters/search-players-input';
 
 export function TeamHeatmapFilters() {
   const dispatch = useDispatch();
   const { mapName, game, radarLevel, fetchPoints } = useHeatmapContext<Partial<TeamHeatmapFilter>>();
-  const { sides, event } = useHeatmapState();
+  const { sides, event, players } = useHeatmapState();
   const { mapsStats } = useTeam();
   const mapNames = mapsStats.map(({ mapName }) => {
     return mapName;
@@ -47,6 +48,16 @@ export function TeamHeatmapFilters() {
         event={event}
         onChange={(event) => {
           fetchPoints({ event });
+        }}
+      />
+      <SearchPlayersInput
+        isDisabled={false}
+        selectedPlayers={players}
+        onPlayerSelected={(player) => {
+          fetchPoints({ players: [...players, player] });
+        }}
+        onPlayerRemoved={(player) => {
+          fetchPoints({ players: players.filter(({ steamId }) => steamId !== player.steamId) });
         }}
       />
       <RadarLevelSelect

@@ -6657,6 +6657,11 @@ msgid "No maps found"
 msgstr "Aucune map trouvée"
 
 #: src/ui/search/filters/search-players-input.tsx
+msgctxt "Input label"
+msgid "Players"
+msgstr "Joueurs"
+
+#: src/ui/search/filters/search-players-input.tsx
 msgctxt "Input placeholder"
 msgid "Nickname or SteamID"
 msgstr "Pseudo ou SteamID"
@@ -6696,11 +6701,6 @@ msgstr "Recherche en cours…"
 #: src/ui/search/search-results.tsx
 msgid "No results found."
 msgstr "Aucun résultat trouvé."
-
-#: src/ui/search/search.tsx
-msgctxt "Input label"
-msgid "Players"
-msgstr "Joueurs"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"

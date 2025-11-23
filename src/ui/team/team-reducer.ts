@@ -11,6 +11,7 @@ import { fetchTeamError, fetchTeamStart, fetchTeamSuccess, selectedMatchesChange
 import { RadarLevel } from 'csdm/ui/maps/radar-level';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import { blurChanged, fetchPointsSuccess, opacityChanged, radiusChanged } from './heatmap/team-heatmap-actions';
+import type { PlayerResult } from 'csdm/common/types/search/player-result';
 
 type HeatmapState = {
   readonly mapName: string;
@@ -20,6 +21,7 @@ type HeatmapState = {
   readonly event: HeatmapEvent;
   readonly radarLevel: RadarLevel;
   readonly sides: TeamNumber[]; // empty => all sides
+  readonly players: PlayerResult[];
 };
 
 type TeamState = {
@@ -43,6 +45,7 @@ const initialState: TeamState = {
     event: HeatmapEvent.Kills,
     radarLevel: RadarLevel.Upper,
     sides: [],
+    players: [],
   },
 };
 
@@ -128,6 +131,7 @@ export const teamReducer = createReducer(initialState, (builder) => {
       state.heatmap.event = action.payload.event;
       state.heatmap.mapName = action.payload.mapName;
       state.heatmap.sides = action.payload.sides;
+      state.heatmap.players = action.payload.players;
     })
     .addCase(tagDeleted, () => {
       return initialState;

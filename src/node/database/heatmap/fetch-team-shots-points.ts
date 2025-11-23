@@ -39,6 +39,14 @@ export async function fetchTeamShotsPoints(filters: TeamHeatmapFilter): Promise<
     query = query.where('player_side', 'in', filters.sides);
   }
 
+  if (filters.players.length > 0) {
+    query = query.where(
+      'player_steam_id',
+      'in',
+      filters.players.map((player) => player.steamId),
+    );
+  }
+
   if (filters.tagIds.length > 0) {
     query = query
       .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')

@@ -24,7 +24,7 @@ export function TeamHeatmap() {
   const game = games.includes(Game.CSGO) ? Game.CSGO : Game.CS2;
   const client = useWebSocketClient();
   const teamName = useCurrentTeamName();
-  const { alpha, blur, radius, event, sides, mapName, radarLevel } = useHeatmapState();
+  const { alpha, blur, radius, event, sides, mapName, radarLevel, players } = useHeatmapState();
   const [points, setPoints] = useState<Point[]>([]);
   const isInitialRender = useRef(true);
   const maps = useMaps();
@@ -45,6 +45,7 @@ export function TeamHeatmap() {
         games,
         mapName: newMapName,
         maxRounds,
+        players: filters?.players ?? players,
         radarLevel: filters?.radarLevel ?? radarLevel,
         sides: filters?.sides ?? sides,
         sources: demoSources,

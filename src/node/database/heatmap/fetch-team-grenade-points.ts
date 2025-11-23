@@ -63,6 +63,14 @@ export async function fetchTeamGrenadePoints(filters: TeamHeatmapFilter): Promis
     query = query.where('thrower_side', 'in', filters.sides);
   }
 
+  if (filters.players.length > 0) {
+    query = query.where(
+      'thrower_steam_id',
+      'in',
+      filters.players.map((player) => player.steamId),
+    );
+  }
+
   if (filters.tagIds.length > 0) {
     query = query
       .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
