@@ -31,3 +31,20 @@ export type TeamHeatmapFilter = {
   thresholdZ: number | null;
   players: PlayerResult[];
 };
+
+export type PlayerHeatmapFilter = {
+  steamId: string;
+  event: HeatmapEvent;
+  games: Game[];
+  mapName: string;
+  demoTypes: DemoType[];
+  startDate: string | undefined;
+  endDate: string | undefined;
+  gameModes: GameMode[];
+  maxRounds: number[];
+  sides: TeamNumber[];
+  sources: DemoSource[];
+  radarLevel: RadarLevel;
+  thresholdZ: number | null;
+  tagIds: string[];
+};

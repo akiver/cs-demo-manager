@@ -249,6 +249,7 @@ msgstr ""
 #: src/ui/match/heatmap/match-heatmap.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 #: src/ui/match/rounds/round/use-update-round-comment.tsx
+#: src/ui/player/heatmap/player-heatmap.tsx
 #: src/ui/player/use-update-player-comment.tsx
 #: src/ui/players/players-tags-dialogs.tsx
 #: src/ui/search/filters/search-maps-input.tsx
@@ -4168,6 +4169,7 @@ msgid "Players"
 msgstr "Jogadores"
 
 #: src/ui/match/match-tabs.tsx
+#: src/ui/player/player-tabs.tsx
 #: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Heatmap"

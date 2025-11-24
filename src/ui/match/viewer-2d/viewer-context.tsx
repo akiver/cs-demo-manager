@@ -35,6 +35,7 @@ import {
 import { useViewer2DState } from './use-viewer-state';
 import { deleteDemoAudioOffset, persistDemoAudioOffset } from './audio/audio-offset';
 import type { DrawingTool } from './drawing/use-drawable-canvas';
+import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
 
 type ViewerMode = 'drawing' | 'playback';
 
@@ -180,7 +181,7 @@ export function ViewerProvider({
   const remainingTickCount = round.endOfficiallyTick - currentTick;
   const tickrate = match.tickrate > 0 ? match.tickrate : 64;
   const timeRemaining = (remainingTickCount / tickrate) * 1000;
-  const shouldDrawBombs = match.mapName.startsWith('de_');
+  const shouldDrawBombs = isDefuseMapFromName(match.mapName);
   const navigate = useNavigate();
   const { audioOffsetSeconds, volume } = viewerState;
 

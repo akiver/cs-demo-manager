@@ -10,6 +10,7 @@ import { MatchOverviewContext } from './match-overview-context';
 import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu';
 import type { TableInstance } from 'csdm/ui/components/table/table-types';
 import { useTable } from 'csdm/ui/components/table/use-table';
+import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
 
 function getRowId(player: MatchPlayer) {
   return player.steamId;
@@ -28,7 +29,7 @@ export function MatchOverviewProvider({ children }: Props) {
   const match = useCurrentMatch();
   const playersTeamA = match.players.filter((player) => player.teamName === match.teamA.name);
   const playersTeamB = match.players.filter((player) => player.teamName === match.teamB.name);
-  const isDefuseMap = match.mapName.startsWith('de_');
+  const isDefuseMap = isDefuseMapFromName(match.mapName);
   const { showContextMenu } = useContextMenu();
   const columns = useScoreboardColumns(isDefuseMap);
   const navigateToMatchPlayer = useNavigateToMatchPlayer();

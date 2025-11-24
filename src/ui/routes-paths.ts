@@ -20,6 +20,7 @@ export const RoutePath = {
   PlayerRank: 'rank',
   PlayerMatches: 'matches',
   PlayerMaps: 'maps',
+  PlayerHeatmap: 'heatmap',
   PinnerPlayer: '/pinned-player',
   Search: '/search',
   Downloads: '/downloads',

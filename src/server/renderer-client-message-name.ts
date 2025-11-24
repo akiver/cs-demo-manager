@@ -28,6 +28,7 @@ export const RendererClientMessageName = {
   FetchTeamsTable: 'fetch-teams-table',
   FetchTeam: 'fetch-team',
   FetchTeamHeatmapPoints: 'fetch-team-heatmap-points',
+  FetchPlayerHeatmapPoints: 'fetch-player-heatmap-points',
   AddDemosToAnalyses: 'add-demos-to-analyses',
   RemoveDemosFromAnalyses: 'remove-demos-from-analyses',
   GenerateMatchPositions: 'generate-match-positions',
