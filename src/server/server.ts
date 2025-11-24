@@ -45,7 +45,7 @@ type SendableMainMessage<MessageName extends MainServerMessageName = MainServerM
     });
 
 type SendableGameMessagePayload<MessageName extends GameServerMessageName> = GameServerMessagePayload[MessageName];
-type SendableGameMessage<MessageName extends GameServerMessageName = GameServerMessageName> = {
+export type SendableGameMessage<MessageName extends GameServerMessageName = GameServerMessageName> = {
   name: MessageName;
 } & (SendableGameMessagePayload<MessageName> extends void
   ? object
@@ -62,7 +62,7 @@ type SharedMessage<MessageName extends SharedServerMessageName = SharedServerMes
       payload: SharedMessagePayload<MessageName>;
     });
 
-type GameListener<MessageName extends GameClientMessageName = GameClientMessageName> = (
+export type GameListener<MessageName extends GameClientMessageName = GameClientMessageName> = (
   payload: GameClientMessagePayload[MessageName],
 ) => void;
 
@@ -215,7 +215,8 @@ class WebSocketServer {
       const { name, payload, uuid } = message;
       logger.log(`WS:: message with name ${name} and uuid ${uuid} received from main process`);
 
-      const handler: Handler<unknown, unknown> = mainHandlers[name];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const handler: Handler<any, unknown> = mainHandlers[name];
       if (typeof handler === 'function') {
         try {
           const result = await handler(payload);

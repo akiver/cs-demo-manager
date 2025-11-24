@@ -47,7 +47,6 @@ export function SettingsOverlayProvider({ children }: Props) {
   };
 
   // https://github.com/reactwg/react-compiler/discussions/18
-  // eslint-disable-next-line react-hooks/react-compiler
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const openSettings = (category?: SettingsCategory) => {
     if (category) {
@@ -59,7 +58,6 @@ export function SettingsOverlayProvider({ children }: Props) {
   };
 
   // https://github.com/reactwg/react-compiler/discussions/18
-  // eslint-disable-next-line react-hooks/react-compiler
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const closeSettings = () => {
     makeElementNonInert(APP_ELEMENT_ID);

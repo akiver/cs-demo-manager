@@ -6,4 +6,5 @@ export type NinjaDefuseResult = BombDefused & {
   date: string;
   demoPath: string;
   game: Game;
+  roundComment: string;
 };

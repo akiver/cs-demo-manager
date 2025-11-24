@@ -35,7 +35,10 @@ export async function searchCollateralKills({
         ]);
     })
     .innerJoin('matches', 'matches.checksum', 'k1.match_checksum')
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .leftJoin('round_comments as rc', function (qb) {
+      return qb.onRef('k1.match_checksum', '=', 'rc.match_checksum').onRef('k1.round_number', '=', 'rc.number');
+    })
+    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -52,7 +55,7 @@ export async function searchCollateralKills({
         .where('round_tags.tag_id', 'in', roundTagIds)
         .groupBy('round_tags.tag_id');
     })
-    .groupBy(['k1.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .groupBy(['k1.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
     .orderBy('matches.date', 'desc')
     .orderBy('k1.match_checksum')
     .orderBy('k1.round_number')
@@ -118,6 +121,7 @@ export async function searchCollateralKills({
         mapName: row.map_name,
         side: row.killer_side,
         kills: [killRowToKill(row)],
+        roundComment: row.comment ?? '',
       });
     } else {
       kills[kills.length - 1].kills.push(killRowToKill(row));

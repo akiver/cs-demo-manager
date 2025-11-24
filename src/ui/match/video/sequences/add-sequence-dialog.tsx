@@ -44,6 +44,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   let playersOptions = defaultPlayersOptions;
   let showXRay = settings.settings.showXRay;
   let showAssists = settings.settings.showAssists;
+  let recordAudio = settings.settings.recordAudio;
   let playerVoicesEnabled = settings.settings.playerVoicesEnabled;
   let showOnlyDeathNotices = settings.settings.showOnlyDeathNotices;
   let deathNoticesDuration = settings.settings.deathNoticesDuration;
@@ -54,6 +55,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     playerVoicesEnabled = lastSequence.playerVoicesEnabled;
     showOnlyDeathNotices = lastSequence.showOnlyDeathNotices;
     deathNoticesDuration = lastSequence.deathNoticesDuration;
+    recordAudio = lastSequence.recordAudio;
   }
 
   const tickrate = Math.round(match.tickrate);
@@ -65,10 +67,12 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     showOnlyDeathNotices,
     deathNoticesDuration,
     playersOptions,
+    playerCameras: [],
     cameras: [],
     showXRay,
     showAssists,
     playerVoicesEnabled,
+    recordAudio,
   };
 
   return (

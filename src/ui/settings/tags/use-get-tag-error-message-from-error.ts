@@ -6,7 +6,7 @@ export function useGetTagErrorMessageFromError() {
 
   return (error: unknown) => {
     switch (error) {
-      case ErrorCode.TagNameAlreadyToken:
+      case ErrorCode.TagNameAlreadyTaken:
         return t`The name is already taken`;
       case ErrorCode.TagNameTooLong:
         return t`The name is too long`;

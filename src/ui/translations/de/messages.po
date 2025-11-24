@@ -87,6 +87,7 @@ msgstr "Keine Demo-Analyse im Gange."
 
 #: src/ui/analyses/table/context-menu/remove-demo-from-analyses-item.tsx
 #: src/ui/match/video/sequence/match-timeline/camera-item.tsx
+#: src/ui/match/video/sequence/match-timeline/custom-camera-item.tsx
 msgctxt "Context menu"
 msgid "Remove"
 msgstr "Entfernen"
@@ -227,6 +228,7 @@ msgid "Loading ban stats…"
 msgstr ""
 
 #: src/ui/ban/stats/ban-stats.tsx
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 #: src/ui/comment/use-update-comment.tsx
 #: src/ui/components/buttons/export-html-element-as-image-button.tsx
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
@@ -241,12 +243,13 @@ msgstr ""
 #: src/ui/downloads/five-eplay/use-update-current-5eplay-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
-#: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 #: src/ui/match/duels/players-duels-matrix.tsx
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 #: src/ui/match/heatmap/match-heatmap.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
+#: src/ui/match/rounds/round/use-update-round-comment.tsx
+#: src/ui/player/heatmap/player-heatmap.tsx
 #: src/ui/player/use-update-player-comment.tsx
 #: src/ui/players/players-tags-dialogs.tsx
 #: src/ui/search/filters/search-maps-input.tsx
@@ -254,6 +257,8 @@ msgstr ""
 #: src/ui/settings/about/clear-logs-button.tsx
 #: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
+#: src/ui/settings/cameras/add-camera-dialog.tsx
+#: src/ui/settings/cameras/edit-camera-dialog.tsx
 #: src/ui/settings/downloads/5eplay-accounts.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
 #: src/ui/settings/maps/add-map-dialog.tsx
@@ -386,6 +391,96 @@ msgstr "Die Steam-API hat einen Statuscode 429 zurückgegeben"
 msgid "An error occurred while checking for new banned Steam accounts (code {errorCode})"
 msgstr "Beim Überprüfen neuer gesperrter Steam-Konten ist ein Fehler aufgetreten (Code {errorCode})"
 
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Demo not found"
+msgstr "Demo nicht gefunden"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Match not found"
+msgstr "Spiel nicht gefunden"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+#: src/ui/match/video/video-loader.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike executable not found."
+msgstr "Counter-Strike kann nicht gefunden werden."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
+msgstr "Stelle sicher, dass Steam nicht über Flatpak installiert ist, da es nicht unterstützt wird!"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
+msgstr "Stelle bitte sicher, dass CS:GO installiert ist, indem du den \"csgo_legacy\"-Zweig aus dem CS2-\"Betas\"-Eigenschaften-Tab auf Steam auswählst."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Read the <0>documentation</0> for more information."
+msgstr "Lies die <0>Dokumentation</0> für weitere Informationen."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+#: src/ui/match/video/video-loader.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike executable not found, check your app playback settings."
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "{game} is not supported on your operating system"
+msgstr "{game} wird auf deinem Betriebssystem nicht unterstützt"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "HLAE executable not found"
+msgstr "HLAE Programmdatei nicht gefunden"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "No kills found"
+msgstr "Keine Tötungen gefunden"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "This demo needs to be re-analyzed to make the camera focus work."
+msgstr "Diese Demo muss neu analysiert werden, damit der Kamerafokus funktioniert."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "No rounds found"
+msgstr "Keine Runden gefunden"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "No deaths found"
+msgstr "Keine Tode gefunden"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
+msgstr "Der Demo-Pfad enthält Zeichen, die nicht von Counter-Strike unterstützt werden und die Wiedergabe verhindern würden."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
+msgstr "Die Demo muss sich in einem Ordner befinden, dessen Pfad nur grundlegende lateinische Zeichen enthält - siehe <0>diese Dokumentation</0> für Details."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Steam is not running"
+msgstr "Steam wird momentan nicht ausgeführt"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "The game crashed, please see <0>this documentation</0> for help."
+msgstr "Das Spiel ist abgestürzt, bitte lies <0>diese Dokumentation</0> für Hilfe."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "The game process exited with an access denied error."
+msgstr "Der Spielprozess wurde mit einem Zugriff verweigert Fehler beendet."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Make sure to close any anti-cheat software and retry."
+msgstr "Schließe bitte alle Anti-Cheat-Software und versuche es erneut."
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "{game} is already running"
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
+msgid "Counter-Strike starting…"
+msgstr "Counter-Strike startet…"
+
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "The connection to the WebSocket server failed with code {code}."
 msgstr "Die Verbindung zum WebSocket-Server ist mit dem Code {code} fehlgeschlagen."
@@ -487,7 +582,8 @@ msgid "Refresh"
 msgstr "Aktualisieren"
 
 #: src/ui/components/buttons/remove-button.tsx
-#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 #: src/ui/videos/video-entry.tsx
 msgctxt "Button"
 msgid "Remove"
@@ -764,7 +860,6 @@ msgstr "Sie müssen <0>Rosetta</0> installieren."
 #: src/ui/match/grenades/finder/grenades-finder-loader.tsx
 #: src/ui/match/match-loader.tsx
 #: src/ui/match/rounds/round/round-tags.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
 #: src/ui/match/video/update-demo-location.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
@@ -776,6 +871,7 @@ msgstr "Sie müssen <0>Rosetta</0> installieren."
 #: src/ui/players/players-table.tsx
 #: src/ui/search/search-results.tsx
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
+#: src/ui/settings/cameras/delete-camera-dialog.tsx
 #: src/ui/settings/database/database-size.tsx
 #: src/ui/settings/database/import-v2-data-button.tsx
 #: src/ui/settings/database/optimize-database-button.tsx
@@ -783,6 +879,7 @@ msgstr "Sie müssen <0>Rosetta</0> installieren."
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 #: src/ui/settings/maps/delete-map-dialog.tsx
 #: src/ui/settings/maps/reset-default-maps-button.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 #: src/ui/team/load-team-error.tsx
 #: src/ui/teams/teams-table.tsx
 msgid "An error occurred."
@@ -1025,9 +1122,9 @@ msgstr "{0, plural, one {Das Spiel wird nur aus der Datenbank gelöscht, nicht a
 
 #: src/ui/components/dialogs/demo-not-found-dialog.tsx
 #: src/ui/demo/demo-loader.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
 #: src/ui/match/video/video-loader.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Demo not found."
 msgstr "Demo nicht gefunden."
 
@@ -1377,14 +1474,6 @@ msgid "Map"
 msgstr "Karte"
 
 #: src/ui/components/heatmap/heatmap.tsx
-msgid "Loading map…"
-msgstr "Karte wird geladen…"
-
-#: src/ui/components/heatmap/heatmap.tsx
-msgid "An error occurred while loading the map."
-msgstr "Beim Laden der Karte ist ein Fehler aufgetreten."
-
-#: src/ui/components/heatmap/heatmap.tsx
 msgid "Select a map."
 msgstr "Karte auswählen..."
 
@@ -1402,6 +1491,11 @@ msgctxt "Input label"
 msgid "Radius"
 msgstr "Radius"
 
+#: src/ui/components/heatmap/reset-zoom-button.tsx
+msgctxt "Button"
+msgid "Reset zoom"
+msgstr ""
+
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
 msgid "Comment (Markdown supported)"
@@ -1409,6 +1503,7 @@ msgstr "Kommentar (Markdown unterstützt)"
 
 #: src/ui/components/inputs/database-name-input.tsx
 #: src/ui/dialogs/update-player-name-dialog.tsx
+#: src/ui/settings/cameras/form/name-input.tsx
 #: src/ui/settings/maps/map-dialog/name-input.tsx
 msgctxt "Input label"
 msgid "Name"
@@ -2036,6 +2131,7 @@ msgstr "Tickrate"
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
 #: src/ui/match/weapons/weapons-accuracy.tsx
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2049,6 +2145,7 @@ msgstr "Name"
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
@@ -3315,92 +3412,6 @@ msgctxt "Toast"
 msgid "Copied to clipboard"
 msgstr "In Zwischenablage kopiert"
 
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Demo not found"
-msgstr "Demo nicht gefunden"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Match not found"
-msgstr "Spiel nicht gefunden"
-
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-#: src/ui/match/video/video-loader.tsx
-msgid "Counter-Strike executable not found."
-msgstr "Counter-Strike kann nicht gefunden werden."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
-msgstr "Stelle sicher, dass Steam nicht über Flatpak installiert ist, da es nicht unterstützt wird!"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-msgstr "Stelle bitte sicher, dass CS:GO installiert ist, indem du den \"csgo_legacy\"-Zweig aus dem CS2-\"Betas\"-Eigenschaften-Tab auf Steam auswählst."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Read the <0>documentation</0> for more information."
-msgstr "Lies die <0>Dokumentation</0> für weitere Informationen."
-
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-#: src/ui/match/video/video-loader.tsx
-msgid "Counter-Strike executable not found, check your app playback settings."
-msgstr ""
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "{game} is not supported on your operating system"
-msgstr "{game} wird auf deinem Betriebssystem nicht unterstützt"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "HLAE executable not found"
-msgstr "HLAE Programmdatei nicht gefunden"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "No kills found"
-msgstr "Keine Tötungen gefunden"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "This demo needs to be re-analyzed to make the camera focus work."
-msgstr "Diese Demo muss neu analysiert werden, damit der Kamerafokus funktioniert."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "No rounds found"
-msgstr "Keine Runden gefunden"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "No deaths found"
-msgstr "Keine Tode gefunden"
-
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
-msgstr "Der Demo-Pfad enthält Zeichen, die nicht von Counter-Strike unterstützt werden und die Wiedergabe verhindern würden."
-
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
-msgstr "Die Demo muss sich in einem Ordner befinden, dessen Pfad nur grundlegende lateinische Zeichen enthält - siehe <0>diese Dokumentation</0> für Details."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Steam is not running"
-msgstr "Steam wird momentan nicht ausgeführt"
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "The game crashed, please see <0>this documentation</0> for help."
-msgstr "Das Spiel ist abgestürzt, bitte lies <0>diese Dokumentation</0> für Hilfe."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "The game process exited with an access denied error."
-msgstr "Der Spielprozess wurde mit einem Zugriff verweigert Fehler beendet."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Make sure to close any anti-cheat software and retry."
-msgstr "Schließe bitte alle Anti-Cheat-Software und versuche es erneut."
-
-#: src/ui/hooks/use-counter-strike.tsx
-msgid "Counter-Strike starting…"
-msgstr "Counter-Strike startet…"
-
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 msgctxt "OS save dialog title"
 msgid "Export"
@@ -3995,7 +4006,7 @@ msgid "No grenades found."
 msgstr "Keine Granaten gefunden."
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
-#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header"
@@ -4010,13 +4021,15 @@ msgid "Player's name"
 msgstr "Spielername"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
-#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 msgctxt "Table header"
 msgid "Tick"
 msgstr "Tick"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
-#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 msgctxt "Table header tooltip"
 msgid "Tick"
 msgstr "Tick"
@@ -4156,6 +4169,7 @@ msgid "Players"
 msgstr "Spieler"
 
 #: src/ui/match/match-tabs.tsx
+#: src/ui/player/player-tabs.tsx
 #: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Heatmap"
@@ -4903,6 +4917,7 @@ msgid "Tags"
 msgstr "Tag(s)"
 
 #: src/ui/match/rounds/round/round-tags.tsx
+#: src/ui/settings/cameras/camera-entry.tsx
 #: src/ui/settings/maps/map-entry.tsx
 msgctxt "Button"
 msgid "Edit"
@@ -5121,54 +5136,6 @@ msgctxt "Button"
 msgid "Generate player's sequences"
 msgstr "Spieler-Sequenzen generieren"
 
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "Failed to start the game, make sure Steam is running and you are connected."
-msgstr "Fehler beim Starten des Spiels, stelle sicher, dass Steam läuft und du verbunden bist."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
-msgstr "Stelle bitte sicher, dass CS:GO installiert ist, indem du den \"csgo_legacy\"-Zweig aus dem CS2-\"Betas\"-Eigenschaften-Tab auf Steam auswählst."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "HLAE is not installed."
-msgstr "HLAE ist nicht installiert."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "VirtualDub is not installed."
-msgstr "VirtualDub ist nicht installiert."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "FFmpeg is not installed."
-msgstr "FFmpeg ist nicht installiert."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "No sequences provided."
-msgstr "Keine Sequenzen angegeben."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "Steam is not running."
-msgstr "Steam wird nicht ausgeführt."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "FFmpeg returned an error."
-msgstr "FFmpeg hat einen Fehler zurückgegeben."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "VirtualDub returned an error."
-msgstr "VirtualDub hat einen Fehler zurückgegeben."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "WAV file not found."
-msgstr "WAV-Datei nicht gefunden."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "Raw files not found."
-msgstr "Rohdateien nicht gefunden."
-
-#: src/ui/match/video/get-video-error-from-error-code.tsx
-msgid "Counter-Strike crashed."
-msgstr ""
-
 #: src/ui/match/video/height-resolution-input.tsx
 msgctxt "Input label"
 msgid "Height"
@@ -5247,6 +5214,11 @@ msgctxt "Checkbox label"
 msgid "Player voices"
 msgstr ""
 
+#: src/ui/match/video/record-audio-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Record Audio"
+msgstr ""
+
 #: src/ui/match/video/recording-output-select.tsx
 msgctxt "Select label"
 msgid "Output"
@@ -5309,39 +5281,42 @@ msgid "Focus the camera on the following player when the sequence start"
 msgstr ""
 
 #: src/ui/match/video/sequence/cameras/generate-cameras-dialog.tsx
+#: src/ui/match/video/sequence/cameras/manage-player-cameras-buttons.tsx
 msgctxt "Button"
 msgid "Generate"
 msgstr ""
 
-#: src/ui/match/video/sequence/cameras/manage-cameras-buttons.tsx
+#: src/ui/match/video/sequence/cameras/manage-custom-cameras-buttons.tsx
+#: src/ui/match/video/sequence/cameras/manage-player-cameras-buttons.tsx
 msgctxt "Button"
-msgid "Generate cameras"
+msgid "Clear"
 msgstr ""
 
-#: src/ui/match/video/sequence/cameras/manage-cameras-buttons.tsx
-msgctxt "Button"
-msgid "Remove cameras"
-msgstr ""
-
-#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
-msgctxt "Table header tooltip"
-msgid "Player"
-msgstr ""
-
-#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 #: src/ui/match/video/sequence/sequence-players.tsx
 msgctxt "Table header"
 msgid "Actions"
 msgstr ""
 
-#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
+#: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 #: src/ui/match/video/sequence/sequence-players.tsx
 msgctxt "Table header tooltip"
 msgid "Actions"
 msgstr ""
 
-#: src/ui/match/video/sequence/cameras/sequence-cameras-table.tsx
-msgid "Cameras (<0>{cameraCount}</0>)"
+#: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
+msgid "Custom cameras (<0>{cameraCount}</0>)"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
+msgctxt "Table header tooltip"
+msgid "Player"
+msgstr ""
+
+#: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
+msgid "Player cameras (<0>{cameraCount}</0>)"
 msgstr ""
 
 #: src/ui/match/video/sequence/end-tick-input.tsx
@@ -5543,6 +5518,11 @@ msgstr "Bombe"
 
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
+msgid "Player cameras"
+msgstr ""
+
+#: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
 msgid "Cameras"
 msgstr "Kameras"
 
@@ -5600,6 +5580,11 @@ msgstr "End-Tick"
 msgctxt "Context menu"
 msgid "Focus camera"
 msgstr "Kamera fokussieren"
+
+#: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "Set camera"
+msgstr ""
 
 #: src/ui/match/video/sequence/match-timeline/tick.tsx
 msgid "Tick <0>{tick}</0>"
@@ -5795,6 +5780,11 @@ msgstr "VirtualDub wurde installiert"
 #: src/ui/match/video/virtualdub/virtual-dub-install-button.tsx
 msgid "An error occurred while installing VirtualDub"
 msgstr "Fehler beim Installieren von VirtualDub"
+
+#: src/ui/match/video/watch-sequences-button.tsx
+msgctxt "Button"
+msgid "Watch sequences"
+msgstr ""
 
 #: src/ui/match/video/width-resolution-input.tsx
 msgctxt "Input label"
@@ -6669,6 +6659,11 @@ msgid "No maps found"
 msgstr "Keine Karten gefunden"
 
 #: src/ui/search/filters/search-players-input.tsx
+msgctxt "Input label"
+msgid "Players"
+msgstr ""
+
+#: src/ui/search/filters/search-players-input.tsx
 msgctxt "Input placeholder"
 msgid "Nickname or SteamID"
 msgstr "Spitzname oder Steam-ID"
@@ -6707,11 +6702,6 @@ msgstr ""
 
 #: src/ui/search/search-results.tsx
 msgid "No results found."
-msgstr ""
-
-#: src/ui/search/search.tsx
-msgctxt "Input label"
-msgid "Players"
 msgstr ""
 
 #: src/ui/search/search.tsx
@@ -6900,6 +6890,144 @@ msgstr ""
 
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
 msgid "The Steam API returned an error."
+msgstr ""
+
+#: src/ui/settings/cameras/add-camera-button.tsx
+msgctxt "Button"
+msgid "Add a camera"
+msgstr ""
+
+#: src/ui/settings/cameras/camera-entry.tsx
+msgid "Copy spec_goto command"
+msgstr ""
+
+#: src/ui/settings/cameras/camera-entry.tsx
+msgid "spec_goto command copied to clipboard"
+msgstr ""
+
+#: src/ui/settings/cameras/cameras-game-input.tsx
+#: src/ui/settings/maps/maps-settings.tsx
+msgctxt "Select label"
+msgid "Game"
+msgstr ""
+
+#: src/ui/settings/cameras/cameras-map-input.tsx
+msgctxt "Select label"
+msgid "Map"
+msgstr ""
+
+#: src/ui/settings/cameras/cameras-settings.tsx
+msgid "No maps found for the selected game."
+msgstr ""
+
+#: src/ui/settings/cameras/cameras-settings.tsx
+msgid "Map not found"
+msgstr ""
+
+#: src/ui/settings/cameras/cameras.tsx
+msgid "No cameras found for {mapName}."
+msgstr ""
+
+#: src/ui/settings/cameras/delete-camera-dialog.tsx
+msgid "Delete camera"
+msgstr ""
+
+#: src/ui/settings/cameras/delete-camera-dialog.tsx
+msgid "Do you want to delete this camera?"
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-color-input.tsx
+msgctxt "Input label"
+msgid "Color"
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form-provider.tsx
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Name is required."
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form-provider.tsx
+msgid "Color is required."
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form-provider.tsx
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Coordinate X is required."
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form-provider.tsx
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Coordinate Y is required."
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form-provider.tsx
+msgid "Coordinate Z is required."
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form-provider.tsx
+msgid "Pitch is required."
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form-provider.tsx
+msgid "Yaw is required."
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form.tsx
+msgid "Start {gameName} on {mapName}"
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form.tsx
+msgctxt "Dialog title"
+msgid "Camera"
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form.tsx
+msgid "Unable to generate the screenshot, make sure the game is fully loaded and you are in‑game."
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form.tsx
+msgid "Generate camera from in‑game view"
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-form.tsx
+#: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
+msgid "Documentation"
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-preview-input.tsx
+msgid "Image Files"
+msgstr ""
+
+#: src/ui/settings/cameras/form/camera-preview-input.tsx
+msgctxt "Input label"
+msgid "Preview"
+msgstr ""
+
+#: src/ui/settings/cameras/form/coordinate-x-input.tsx
+#: src/ui/settings/maps/map-dialog/coordinate-x-input.tsx
+msgctxt "Input label"
+msgid "Coordinate X"
+msgstr ""
+
+#: src/ui/settings/cameras/form/coordinate-y-input.tsx
+#: src/ui/settings/maps/map-dialog/coordinate-y-input.tsx
+msgctxt "Input label"
+msgid "Coordinate Y"
+msgstr ""
+
+#: src/ui/settings/cameras/form/coordinate-z-input.tsx
+msgctxt "Input label"
+msgid "Coordinate Z"
+msgstr ""
+
+#: src/ui/settings/cameras/form/pitch-input.tsx
+msgctxt "Input label"
+msgid "Pitch"
+msgstr ""
+
+#: src/ui/settings/cameras/form/yaw-input.tsx
+msgctxt "Input label"
+msgid "Yaw"
 msgstr ""
 
 #: src/ui/settings/database/database-size.tsx
@@ -7213,16 +7341,6 @@ msgstr ""
 msgid "Do you want to delete this map?"
 msgstr ""
 
-#: src/ui/settings/maps/map-dialog/coordinate-x-input.tsx
-msgctxt "Input label"
-msgid "Coordinate X"
-msgstr ""
-
-#: src/ui/settings/maps/map-dialog/coordinate-y-input.tsx
-msgctxt "Input label"
-msgid "Coordinate Y"
-msgstr ""
-
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgid "The radar image must be a square."
@@ -7247,22 +7365,6 @@ msgstr ""
 #: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
 msgctxt "Dialog title"
 msgid "Map"
-msgstr ""
-
-#: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
-msgid "Documentation"
-msgstr ""
-
-#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
-msgid "Name is required."
-msgstr ""
-
-#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
-msgid "Coordinate X is required."
-msgstr ""
-
-#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
-msgid "Coordinate Y is required."
 msgstr ""
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
@@ -7299,11 +7401,6 @@ msgstr ""
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgctxt "Input label"
 msgid "Thumbnail"
-msgstr ""
-
-#: src/ui/settings/maps/maps-settings.tsx
-msgctxt "Select label"
-msgid "Game"
 msgstr ""
 
 #: src/ui/settings/maps/reset-default-maps-button.tsx
@@ -7357,15 +7454,15 @@ msgid "You selected a version compatible with CS2 from the 'Animation' update ({
 msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
-msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.40.9.4\"</0> in your Steam library to use this version."
-msgstr ""
-
-#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update."
 msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
-msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.0.3\"</0> in your Steam library to use this version."
+msgid "You selected a version compatible with CS2 from the {update14104} update up to the {update14112} update."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.1.2\"</0> in your Steam library to use this version."
 msgstr ""
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
@@ -7594,6 +7691,11 @@ msgid "Analyze"
 msgstr ""
 
 #: src/ui/settings/settings-tabs.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Cameras"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
 msgid "Ban"
 msgstr ""
 
@@ -7724,10 +7826,12 @@ msgstr ""
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr ""
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
@@ -7789,6 +7893,15 @@ msgctxt "Settings title"
 msgid "Show Assists"
 msgstr ""
 
+#: src/ui/settings/video/recording/recording-audio.tsx
+msgid "Record audio during video recording."
+msgstr ""
+
+#: src/ui/settings/video/recording/recording-audio.tsx
+msgctxt "Settings title"
+msgid "Record Audio"
+msgstr ""
+
 #: src/ui/settings/video/recording/recording-death-notices-duration.tsx
 msgctxt "Input placeholder"
 msgid "Duration"
@@ -7827,6 +7940,66 @@ msgstr ""
 #: src/ui/settings/video/recording/recording-x-ray.tsx
 msgctxt "Settings title"
 msgid "Show X-Ray"
+msgstr ""
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Failed to start the game, make sure Steam is running and you are connected."
+msgstr "Fehler beim Starten des Spiels, stelle sicher, dass Steam läuft und du verbunden bist."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
+msgstr "Stelle bitte sicher, dass CS:GO installiert ist, indem du den \"csgo_legacy\"-Zweig aus dem CS2-\"Betas\"-Eigenschaften-Tab auf Steam auswählst."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "HLAE is not installed."
+msgstr "HLAE ist nicht installiert."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "VirtualDub is not installed."
+msgstr "VirtualDub ist nicht installiert."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "FFmpeg is not installed."
+msgstr "FFmpeg ist nicht installiert."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No sequences provided."
+msgstr "Keine Sequenzen angegeben."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Steam is not running."
+msgstr "Steam wird nicht ausgeführt."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "FFmpeg returned an error."
+msgstr "FFmpeg hat einen Fehler zurückgegeben."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "VirtualDub returned an error."
+msgstr "VirtualDub hat einen Fehler zurückgegeben."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "WAV file not found."
+msgstr "WAV-Datei nicht gefunden."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Raw files not found."
+msgstr "Rohdateien nicht gefunden."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike crashed."
+msgstr ""
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Unable to communicate with Counter-Strike, make sure to start it from the application."
+msgstr ""
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike is not running, please start it from the application."
+msgstr ""
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike did not respond, please try again."
 msgstr ""
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
@@ -8127,11 +8300,11 @@ msgid "Assists"
 msgstr ""
 
 #: src/ui/videos/video-entry.tsx
-msgid "Player voices"
+msgid "Audio"
 msgstr ""
 
 #: src/ui/videos/video-entry.tsx
-msgid "Cameras"
+msgid "Player voices"
 msgstr ""
 
 #: src/ui/videos/video-entry.tsx

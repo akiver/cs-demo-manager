@@ -1,19 +1,18 @@
 import React from 'react';
-import { useMaps } from 'csdm/ui/maps/use-maps';
 import { MapEntry } from './map-entry';
 import type { Game } from 'csdm/common/types/counter-strike';
+import { useGameMaps } from 'csdm/ui/maps/use-game-maps';
 
 type Props = {
   game: Game;
 };
 
 export function Maps({ game }: Props) {
-  const maps = useMaps();
-  const gameMaps = maps.filter((map) => map.game === game);
+  const maps = useGameMaps(game);
 
   return (
     <div className="flex flex-wrap gap-8">
-      {gameMaps.map((map) => (
+      {maps.map((map) => (
         <MapEntry key={map.id} map={map} />
       ))}
     </div>

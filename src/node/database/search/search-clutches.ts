@@ -23,7 +23,12 @@ export async function searchClutches({
     .selectAll('clutches')
     .distinct()
     .innerJoin('matches', 'clutches.match_checksum', 'matches.checksum')
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .leftJoin('round_comments as rc', function (qb) {
+      return qb
+        .onRef('clutches.match_checksum', '=', 'rc.match_checksum')
+        .onRef('clutches.round_number', '=', 'rc.number');
+    })
+    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -53,6 +58,7 @@ export async function searchClutches({
       'matches.date',
       'matches.demo_path',
       'matches.game',
+      'rc.comment',
     ]);
 
   if (steamIds.length > 0) {
@@ -79,6 +85,7 @@ export async function searchClutches({
       date: row.date.toISOString(),
       demoPath: row.demo_path,
       game: row.game,
+      roundComment: row.comment ?? '',
     };
   });
 

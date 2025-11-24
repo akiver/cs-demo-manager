@@ -27,7 +27,7 @@ export function ToastsProvider({ children }: Props) {
       id: window.setTimeout(() => {
         removeToast(toastId);
       }, durationInMs),
-      startedAt: Date.now(),
+      startedAt: new Date().getTime(),
       msRemaining: durationInMs,
     });
 
@@ -67,7 +67,7 @@ export function ToastsProvider({ children }: Props) {
   return (
     <ToastsContext.Provider value={showToast}>
       {children}
-      <div className="absolute top-48 right-24 z-3 flex max-w-[448px] flex-col gap-y-8">
+      <div className="absolute top-48 right-24 z-10 flex max-w-[448px] flex-col gap-y-8">
         <AnimatePresence>
           {toasts.map((toast) => {
             const renderContent = () => {

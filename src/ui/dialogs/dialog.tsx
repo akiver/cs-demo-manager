@@ -4,6 +4,7 @@ import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
 import { useDialog } from '../components/dialogs/use-dialog';
 
 type BaseProps = {
+  id?: string;
   closeOnBackgroundClicked?: boolean;
   closeOnEscPressed?: boolean;
   onClose?: () => void;
@@ -13,6 +14,7 @@ type BaseProps = {
 };
 
 export function Dialog({
+  id,
   onClose,
   closeOnBackgroundClicked = true,
   closeOnEscPressed = true,
@@ -64,6 +66,7 @@ export function Dialog({
 
   return (
     <div
+      id={id}
       className="absolute inset-0 flex items-center justify-center bg-black/75 pt-[var(--title-bar-height)]"
       onMouseDown={onBackgroundLayerClick}
     >

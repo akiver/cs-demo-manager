@@ -86,7 +86,7 @@ import { insertTagHandler } from './renderer-process/tags/insert-tag-handler';
 import type { UpdateChecksumsTagsPayload } from './renderer-process/tags/update-checksums-tags-handler';
 import { updateChecksumsTagsHandler } from './renderer-process/tags/update-checksums-tags-handler';
 import { isCounterStrikeRunningHandler } from './renderer-process/counter-strike/is-counter-strike-running-handler';
-import type { MatchHeatmapFilter, TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
+import type { MatchHeatmapFilter, PlayerHeatmapFilter, TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import type { Demo } from 'csdm/common/types/demo';
 import type { Map } from 'csdm/common/types/map';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
@@ -152,7 +152,7 @@ import { isCs2ConnectedToServerHandler } from './renderer-process/counter-strike
 import { fetchMigrationsHandler } from './renderer-process/migrations/fetch-migrations-handler';
 import type { Migration } from 'csdm/node/database/migrations/fetch-migrations';
 import { deleteDemosFromDatabaseHandler } from './renderer-process/demo/delete-demos-from-database-handler';
-import type { WatchDemoErrorPayload } from './renderer-process/counter-strike/counter-strike';
+import type { CounterStrikeErrorPayload, WatchDemoErrorPayload } from 'csdm/server/counter-strike';
 import {
   watchPlayerRoundsHandler,
   type WatchPlayerRoundsPayload,
@@ -184,11 +184,15 @@ import {
   updatePlayersTagsHandler,
   type UpdatePlayersTagsPayload,
 } from './renderer-process/tags/update-players-tags-handler';
-import type { AddVideoPayload } from 'csdm/common/types/video';
+import type { AddVideoPayload, WatchVideoSequencesPayload } from 'csdm/common/types/video';
 import {
   updateSteamAccountNameHandler,
   type UpdateSteamAccountNamePayload,
 } from './renderer-process/steam-accounts/update-steam-account-name-handler';
+import {
+  startCounterStrikeHandler,
+  type StartCounterStrikePayload,
+} from './renderer-process/counter-strike/start-counter-strike-handler';
 import { resumeVideoQueueHandler } from './renderer-process/video/resume-video-queue-handler';
 import { pauseVideoQueueHandler } from './renderer-process/video/pause-video-queue-handler';
 import type { FiveEPlayAccount } from 'csdm/common/types/5eplay-account';
@@ -205,6 +209,19 @@ import {
   exportPlayersToXlsxHandler,
   type ExportPlayersToXlsxPayload,
 } from './renderer-process/player/export-players-to-xlsx-handler';
+import { watchVideoSequencesHandler } from './renderer-process/video/watch-video-sequences-handler';
+import {
+  updateRoundCommentHandler,
+  type UpdateRoundCommentPayload,
+} from './renderer-process/round/update-round-comment-handler';
+import type { CameraPayload, UpdateCameraPayload } from './renderer-process/cameras/camera-payload';
+import type { Camera } from 'csdm/common/types/camera';
+import { addCameraHandler } from './renderer-process/cameras/add-camera-handler';
+import { updateCameraHandler } from './renderer-process/cameras/update-camera-handler';
+import { deleteCameraHandler } from './renderer-process/cameras/delete-camera-handler';
+import { capturePlayerViewHandler } from './renderer-process/counter-strike/capture-player-view-handler';
+import type { CapturePlayerViewPayload } from 'csdm/node/counter-strike/launcher/capture-player-view';
+import { fetchPlayerHeatmapPointsHandler } from './renderer-process/player/fetch-player-heatmap-points-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -217,9 +234,11 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.FetchMatchByChecksum]: Handler<string, Match>;
   [RendererClientMessageName.FetchMatchHeatmapPoints]: Handler<MatchHeatmapFilter, Point[]>;
   [RendererClientMessageName.FetchTeamHeatmapPoints]: Handler<TeamHeatmapFilter, Point[]>;
+  [RendererClientMessageName.FetchPlayerHeatmapPoints]: Handler<PlayerHeatmapFilter, Point[]>;
   [RendererClientMessageName.Fetch2DViewerData]: Handler<Fetch2dViewerDataPayload, Fetch2dViewerDataSuccessPayload>;
   [RendererClientMessageName.UpdateComment]: Handler<UpdateCommentPayload>;
   [RendererClientMessageName.UpdatePlayerComment]: Handler<UpdatePlayerCommentPayload>;
+  [RendererClientMessageName.UpdateRoundComment]: Handler<UpdateRoundCommentPayload>;
   [RendererClientMessageName.InitializeVideo]: Handler<InitializeVideoPayload, InitializeVideoSuccessPayload>;
   [RendererClientMessageName.FetchDemosTable]: Handler<DemosTableFilter, Demo[]>;
   [RendererClientMessageName.LoadDemoByPath]: Handler<string, Demo>;
@@ -256,12 +275,16 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.AddMap]: Handler<MapPayload, Map>;
   [RendererClientMessageName.UpdateMap]: Handler<MapPayload, Map>;
   [RendererClientMessageName.DeleteMap]: Handler<Map>;
+  [RendererClientMessageName.AddCamera]: Handler<CameraPayload, Camera>;
+  [RendererClientMessageName.UpdateCamera]: Handler<UpdateCameraPayload, Camera>;
+  [RendererClientMessageName.DeleteCamera]: Handler<string>;
   [RendererClientMessageName.FetchBanStats]: Handler<void, BanStats>;
   [RendererClientMessageName.DisconnectDatabase]: Handler;
   [RendererClientMessageName.ConnectDatabase]: Handler<DatabaseSettings | undefined, ConnectDatabaseError | undefined>;
   [RendererClientMessageName.AddVideoToQueue]: Handler<AddVideoPayload>;
   [RendererClientMessageName.ResumeVideoQueue]: Handler;
   [RendererClientMessageName.PauseVideoQueue]: Handler;
+  [RendererClientMessageName.WatchVideoSequences]: Handler<WatchVideoSequencesPayload>;
   [RendererClientMessageName.UpdateMatchDemoLocation]: Handler<UpdateMatchDemoLocationPayload>;
   [RendererClientMessageName.InstallHlae]: Handler<void, string>;
   [RendererClientMessageName.UpdateHlae]: Handler<void, string>;
@@ -277,6 +300,10 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.FetchMatchDuelsMatrixRows]: Handler<string, DuelMatrixRow[]>;
   [RendererClientMessageName.FetchMatchGrenadesThrow]: Handler<string, GrenadeThrow[]>;
   [RendererClientMessageName.WatchDemo]: Handler<WatchDemoPayload, WatchDemoErrorPayload | undefined>;
+  [RendererClientMessageName.StartCounterStrike]: Handler<
+    StartCounterStrikePayload,
+    CounterStrikeErrorPayload | undefined
+  >;
   [RendererClientMessageName.WatchPlayerRounds]: Handler<WatchPlayerRoundsPayload, WatchDemoErrorPayload | undefined>;
   [RendererClientMessageName.WatchPlayerHighlights]: Handler<
     WatchPlayerHighlightsPayload,
@@ -317,6 +344,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.Add5EPlayAccount]: Handler<string, FiveEPlayAccount>;
   [RendererClientMessageName.Delete5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
+  [RendererClientMessageName.CapturePlayerView]: Handler<Game, CapturePlayerViewPayload>;
 }
 
 // Mapping between message names and server handlers sent from the Electron renderer process to the WebSocket server.
@@ -331,9 +359,11 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.FetchMatchByChecksum]: fetchMatchByChecksumHandler,
   [RendererClientMessageName.FetchMatchHeatmapPoints]: fetchMatchHeatmapPointsHandler,
   [RendererClientMessageName.FetchTeamHeatmapPoints]: fetchTeamHeatmapPointsHandler,
+  [RendererClientMessageName.FetchPlayerHeatmapPoints]: fetchPlayerHeatmapPointsHandler,
   [RendererClientMessageName.Fetch2DViewerData]: fetch2DViewerDataHandler,
   [RendererClientMessageName.UpdateComment]: updateCommentHandler,
   [RendererClientMessageName.UpdatePlayerComment]: updatePlayerCommentHandler,
+  [RendererClientMessageName.UpdateRoundComment]: updateRoundCommentHandler,
   [RendererClientMessageName.InitializeVideo]: initializeVideoHandler,
   [RendererClientMessageName.FetchDemosTable]: fetchDemosTableHandler,
   [RendererClientMessageName.LoadDemoByPath]: loadDemoHandler,
@@ -367,6 +397,9 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.AddMap]: addMapHandler,
   [RendererClientMessageName.UpdateMap]: updateMapHandler,
   [RendererClientMessageName.DeleteMap]: deleteMapHandler,
+  [RendererClientMessageName.AddCamera]: addCameraHandler,
+  [RendererClientMessageName.UpdateCamera]: updateCameraHandler,
+  [RendererClientMessageName.DeleteCamera]: deleteCameraHandler,
   [RendererClientMessageName.FetchBanStats]: fetchBanStatsHandler,
   [RendererClientMessageName.DisconnectDatabase]: disconnectDatabaseConnectionHandler,
   [RendererClientMessageName.ConnectDatabase]: connectDatabaseHandler,
@@ -387,6 +420,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.FetchMatchFlashbangMatrixRows]: fetchMatchFlashbangMatrixRowsHandler,
   [RendererClientMessageName.FetchMatchDuelsMatrixRows]: fetchMatchDuelsMatrixRowsHandler,
   [RendererClientMessageName.FetchMatchGrenadesThrow]: fetchMatchGrenadesThrowHandler,
+  [RendererClientMessageName.StartCounterStrike]: startCounterStrikeHandler,
   [RendererClientMessageName.WatchDemo]: watchDemoHandler,
   [RendererClientMessageName.WatchPlayerRounds]: watchPlayerRoundsHandler,
   [RendererClientMessageName.WatchPlayerHighlights]: watchPlayerHighlightsHandler,
@@ -419,4 +453,6 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.Add5EPlayAccount]: add5EPlayAccountHandler,
   [RendererClientMessageName.Delete5EPlayAccount]: delete5EPlayAccountHandler,
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: updateCurrent5EPlayAccountHandler,
+  [RendererClientMessageName.WatchVideoSequences]: watchVideoSequencesHandler,
+  [RendererClientMessageName.CapturePlayerView]: capturePlayerViewHandler,
 };

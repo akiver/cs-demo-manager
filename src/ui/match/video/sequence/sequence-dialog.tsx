@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MatchTimeline } from './match-timeline/match-timeline';
 import { SequencePlayers } from './sequence-players';
 import { StartTickInput } from './start-tick-input';
@@ -16,13 +16,14 @@ import { SequenceDiskSpace } from './sequence-disk-space';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { SequenceXRayCheckbox } from './sequence-x-ray-checkbox';
 import { SequencePlayerVoicesCheckbox } from './sequence-player-voices-checkbox';
-import { SequenceCamerasTable } from './cameras/sequence-cameras-table';
-import { ManageCamerasButtons } from './cameras/manage-cameras-buttons';
+import { SequencePlayerCamerasTable } from './cameras/sequence-player-cameras-table';
 import { PlayersColors } from './players-colors';
 import { SequenceShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-checkbox';
 import { useCanEditVideoPlayersOptions } from 'csdm/ui/match/video/use-can-edit-video-players-options';
 import { SequenceDeathNoticesDurationInput } from './sequence-death-notices-duration-input';
 import { SequenceAssistsCheckbox } from './sequence-assists-checkbox';
+import { SequenceRecordAudioCheckbox } from './sequence-record-audio-checkbox';
+import { SequenceCustomCamerasTable } from './cameras/sequence-custom-cameras-table';
 
 type Props = {
   isVisible: boolean;
@@ -32,8 +33,7 @@ type Props = {
 };
 
 export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSequence }: Props) {
-  const element = useRef<HTMLDivElement>(document.createElement('div'));
-  const node = element.current;
+  const [node] = useState(() => document.createElement('div'));
   const canEditPlayersOptions = useCanEditVideoPlayersOptions();
 
   useEffect(() => {
@@ -65,13 +65,13 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
         <SequenceFormProvider initialSequence={initialSequence}>
           <ContextMenuProvider>
             <div className="flex h-full flex-col overflow-auto bg-gray-50 p-16">
-              <div className="mb-12 flex max-h-[420px] gap-x-12">
-                <div className="flex flex-col gap-y-8">
+              <div className="mb-12 flex max-h-[520px] gap-x-12">
+                <div className="flex flex-col gap-y-8 overflow-auto">
                   <div className="flex flex-col gap-y-8">
                     <StartTickInput />
                     <EndTickInput />
                   </div>
-                  <ManageCamerasButtons />
+                  <SequenceRecordAudioCheckbox />
                   <SequencePlayerVoicesCheckbox />
                   <SequenceXRayCheckbox />
                   <SequenceAssistsCheckbox />
@@ -86,7 +86,10 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <CancelButton onClick={closeDialog} />
                   </div>
                 </div>
-                <SequenceCamerasTable />
+                <div className="flex flex-col gap-y-8 overflow-auto">
+                  <SequencePlayerCamerasTable />
+                  <SequenceCustomCamerasTable />
+                </div>
                 {canEditPlayersOptions && <SequencePlayers />}
                 <SequenceCfgInput />
               </div>
@@ -97,6 +100,6 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
         </SequenceFormProvider>
       )}
     </FullScreenDialog>,
-    element.current,
+    node,
   );
 }

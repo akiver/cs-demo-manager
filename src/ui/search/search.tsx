@@ -196,15 +196,12 @@ export function Search() {
             <Trans context="Input label">Event</Trans>
             <SearchEventInput />
           </div>
-          <div className="flex flex-col gap-y-8">
-            <Trans context="Input label">Players</Trans>
-            <SearchPlayersInput
-              isDisabled={isLoading}
-              selectedPlayers={players}
-              onPlayerSelected={onPlayerSelected}
-              onPlayerRemoved={onPlayerRemoved}
-            />
-          </div>
+          <SearchPlayersInput
+            isDisabled={isLoading}
+            selectedPlayers={players}
+            onPlayerSelected={onPlayerSelected}
+            onPlayerRemoved={onPlayerRemoved}
+          />
           {canFilterOnVictims && (
             <div className="flex flex-col gap-y-8">
               <Trans context="Input label">Victims</Trans>

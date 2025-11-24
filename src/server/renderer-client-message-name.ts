@@ -15,6 +15,7 @@ export const RendererClientMessageName = {
   Fetch2DViewerData: 'fetch-2d-viewer-data',
   UpdateComment: 'update-match-comment',
   UpdatePlayerComment: 'update-player-comment',
+  UpdateRoundComment: 'update-round-comment',
   UpdateMatchDemoLocation: 'update-match-demo-location',
   InitializeVideo: 'initialize-video',
   ExportMatchChatMessages: 'export-match-chat-messages',
@@ -27,6 +28,7 @@ export const RendererClientMessageName = {
   FetchTeamsTable: 'fetch-teams-table',
   FetchTeam: 'fetch-team',
   FetchTeamHeatmapPoints: 'fetch-team-heatmap-points',
+  FetchPlayerHeatmapPoints: 'fetch-player-heatmap-points',
   AddDemosToAnalyses: 'add-demos-to-analyses',
   RemoveDemosFromAnalyses: 'remove-demos-from-analyses',
   GenerateMatchPositions: 'generate-match-positions',
@@ -55,7 +57,11 @@ export const RendererClientMessageName = {
   UpdateMap: 'update-map',
   DeleteMap: 'delete-map',
   ResetMaps: 'reset-maps',
+  AddCamera: 'add-camera',
+  UpdateCamera: 'update-camera',
+  DeleteCamera: 'delete-camera',
   WatchDemo: 'watch-demo',
+  StartCounterStrike: 'start-counter-strike',
   WatchPlayerRounds: 'watch-player-rounds',
   WatchPlayerHighlights: 'watch-player-highlights',
   WatchPlayerLowlights: 'watch-player-lowlights',
@@ -65,6 +71,7 @@ export const RendererClientMessageName = {
   AddVideoToQueue: 'add-video-to-queue',
   ResumeVideoQueue: 'resume-video-queue',
   PauseVideoQueue: 'pause-video-queue',
+  WatchVideoSequences: 'watch-video-sequences',
   InstallHlae: 'install-hlae',
   UpdateHlae: 'update-hlae',
   EnableHlaeCustomLocation: 'enable-hlae-custom-location',
@@ -98,6 +105,7 @@ export const RendererClientMessageName = {
   FetchLastMigrations: 'fetch-last-migrations',
   DeleteDemosFromDatabase: 'delete-demos-from-database',
   ImportDataFromV2Backup: 'import-data-from-v2-backup',
+  CapturePlayerView: 'capture-player-view',
 } as const;
 
 export type RendererClientMessageName = (typeof RendererClientMessageName)[keyof typeof RendererClientMessageName];

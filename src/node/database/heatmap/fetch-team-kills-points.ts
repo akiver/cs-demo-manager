@@ -43,6 +43,14 @@ function buildQuery(filters: TeamHeatmapFilter) {
     query = query.where('killer_side', 'in', filters.sides);
   }
 
+  if (filters.players.length > 0) {
+    query = query.where(
+      'kills.killer_steam_id',
+      'in',
+      filters.players.map((player) => player.steamId),
+    );
+  }
+
   if (filters.tagIds.length > 0) {
     query = query
       .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')

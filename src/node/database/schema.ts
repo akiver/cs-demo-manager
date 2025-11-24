@@ -51,6 +51,8 @@ import type { SteamAccountTagTable } from './tags/steam-account-tag-table';
 import type { TagTable } from './tags/tag-table';
 import type { TeamTable } from './teams/team-table';
 import type { TimestampTable } from './timestamps/timestamp-table';
+import type { RoundCommentTable } from './comments/round-comments-table';
+import type { CamerasTable } from './cameras/cameras-table';
 
 export type Database = {
   bombs_defuse_start: BombDefuseStartTable;
@@ -58,6 +60,7 @@ export type Database = {
   bombs_exploded: BombExplodedTable;
   bombs_plant_start: BombPlantStartTable;
   bombs_planted: BombPlantedTable;
+  cameras: CamerasTable;
   chicken_deaths: ChickenDeathTable;
   clutches: ClutchTable;
   chat_messages: ChatMessageTable;
@@ -92,6 +95,7 @@ export type Database = {
   matches: MatchTable;
   player_ban_per_match: PlayerBanPerMatchTable;
   player_comments: PlayerCommentTable;
+  round_comments: RoundCommentTable;
   player_blinds: PlayerBlindTable;
   player_buys: PlayerBuyTable;
   player_economies: PlayerEconomyTable;

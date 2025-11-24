@@ -5,10 +5,10 @@ import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 
 type Props = {
   getElement: () => HTMLElement | null;
-  fileName: string;
+  getFileName: () => string;
 };
 
-export function ExportHtmlElementAsImageButton({ getElement, fileName }: Props) {
+export function ExportHtmlElementAsImageButton({ getElement, getFileName }: Props) {
   const showToast = useShowToast();
   const { t } = useLingui();
 
@@ -21,7 +21,7 @@ export function ExportHtmlElementAsImageButton({ getElement, fileName }: Props) 
     try {
       const filePath = await window.csdm.elementToImage({
         element,
-        fileName,
+        fileName: getFileName(),
         title: t({
           context: 'OS save dialog title',
           message: 'Export as PNG',

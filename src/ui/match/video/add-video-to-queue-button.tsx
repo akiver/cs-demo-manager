@@ -15,7 +15,7 @@ import type { AddVideoPayload } from 'csdm/common/types/video';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { ErrorCode } from 'csdm/common/error-code';
 import { AddVideoToQueueErrorDialog } from './add-video-to-queue-error-dialog';
-import { getVideoErrorMessageFromErrorCode } from './get-video-error-from-error-code';
+import { getPlaybackErrorMessageFromErrorCode } from '../../shared/get-playback-error-from-error-code';
 import { RoutePath } from 'csdm/ui/routes-paths';
 import { roundNumber } from 'csdm/common/math/round-number';
 
@@ -47,7 +47,7 @@ export function AddVideoToQueueButton() {
       navigate(RoutePath.Videos);
     } catch (error) {
       const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-      const message = getVideoErrorMessageFromErrorCode(match.game, errorCode);
+      const message = getPlaybackErrorMessageFromErrorCode(match.game, errorCode);
       showDialog(<AddVideoToQueueErrorDialog>{message}</AddVideoToQueueErrorDialog>);
     }
   };

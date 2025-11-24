@@ -22,7 +22,10 @@ export async function searchThroughSmokeKills({
     .selectAll('kills')
     .distinct()
     .innerJoin('matches', 'kills.match_checksum', 'matches.checksum')
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .leftJoin('round_comments as rc', function (qb) {
+      return qb.onRef('kills.match_checksum', '=', 'rc.match_checksum').onRef('kills.round_number', '=', 'rc.number');
+    })
+    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -45,7 +48,7 @@ export async function searchThroughSmokeKills({
     .orderBy('kills.round_number')
     .orderBy('kills.tick')
     .orderBy('kills.killer_name')
-    .groupBy(['kills.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game']);
+    .groupBy(['kills.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment']);
 
   if (steamIds.length > 0) {
     query = query.where('killer_steam_id', 'in', steamIds);
@@ -79,6 +82,7 @@ export async function searchThroughSmokeKills({
       date: row.date.toISOString(),
       demoPath: row.demo_path,
       game: row.game,
+      roundComment: row.comment ?? '',
     };
   });
 

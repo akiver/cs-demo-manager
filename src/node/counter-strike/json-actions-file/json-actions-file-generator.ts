@@ -3,6 +3,7 @@ import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix
 import { Game, TeamNumber } from 'csdm/common/types/counter-strike';
 import { generatePlayerVoicesValues } from 'csdm/node/counter-strike/launcher/generate-player-voices-values';
 import type { PlayerWatchInfo } from 'csdm/common/types/player-watch-info';
+import type { Camera } from 'csdm/common/types/camera';
 
 type Action = {
   tick: number;
@@ -60,11 +61,21 @@ export class JSONActionsFileGenerator {
       });
       this.actions.push({
         cmd: `spec_player ${playerId}`,
-        tick: actionTick,
+        // Add a small delay to prevent spec_player from being ignored. Since an October 2025 CS2 update,
+        // executing spec_player on the same tick as demo_gototick's target tick may fail.
+        // https://github.com/akiver/cs-demo-manager/issues/1238
+        tick: actionTick + 4,
       });
     }
 
     return this;
+  }
+
+  public addFocusCamera(tick: number, camera: Camera) {
+    this.actions.push({
+      cmd: `spec_goto ${camera.x} ${camera.y} ${camera.z} ${camera.pitch} ${camera.yaw}`,
+      tick: this.getValidTick(tick),
+    });
   }
 
   public addStopPlayback(tick: number) {

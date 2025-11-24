@@ -19,6 +19,7 @@ type GenerateVideoWithVirtualDubSettings = {
   outputFolderPath: string;
   framerate: number;
   sequence: Sequence;
+  recordAudio: boolean;
 };
 
 const SCRIPT_FILENAME = 'csdm.jobs';
@@ -73,6 +74,7 @@ async function writeVirtualDubScript({
   outputFolderPath,
   game,
   framerate,
+  recordAudio,
 }: GenerateVideoWithVirtualDubSettings) {
   const { tgaFiles, wavFilePath } = await getSequenceRawFiles({
     recordingSystem,
@@ -81,14 +83,15 @@ async function writeVirtualDubScript({
     outputFolderPath,
     recordingOutput: RecordingOutput.ImagesAndVideo,
     videoContainer: VideoContainer.AVI,
+    recordAudio,
   });
 
   const outputFilePath = sanitizePath(getSequenceOutputFilePath(outputFolderPath, sequence, VideoContainer.AVI));
-  const wavFileExists = await fs.pathExists(wavFilePath);
+  const wavFileExists = wavFilePath ? await fs.pathExists(wavFilePath) : false;
   const script = generateVirtualDubScript(
     framerate,
     sanitizePath(tgaFiles[0]),
-    wavFileExists ? sanitizePath(wavFilePath) : undefined,
+    recordAudio && wavFilePath && wavFileExists ? sanitizePath(wavFilePath) : undefined,
     tgaFiles.length,
     outputFilePath,
   );

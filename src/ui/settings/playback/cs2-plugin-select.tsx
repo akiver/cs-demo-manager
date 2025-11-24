@@ -24,6 +24,7 @@ export function Cs2PluginSelect() {
   const animationUpdateDate = formatDate('2025-07-28', dateOptions);
   const update14095 = formatDate('2025-08-14', dateOptions);
   const update14104 = formatDate('2025-09-17', dateOptions);
+  const update14112 = formatDate('2025-10-07', dateOptions);
 
   const options: SelectOption<PluginVersion>[] = Object.values(PluginVersion).map((version) => ({
     value: version,
@@ -60,32 +61,32 @@ export function Cs2PluginSelect() {
         );
       case PluginVersion[14094]:
         return (
-          <div>
-            <p>
-              <Trans>
-                You selected a version compatible with CS2 from the 'Animation' update ({animationUpdateDate}) up to the{' '}
-                {update14095} update.
-              </Trans>
-            </p>
-            <p>
-              <Trans>
-                If not using a custom build, you must select the CS2 beta branch <strong>"1.40.9.4"</strong> in your
-                Steam library to use this version.
-              </Trans>
-            </p>
-          </div>
+          <p>
+            <Trans>
+              You selected a version compatible with CS2 from the 'Animation' update ({animationUpdateDate}) up to the{' '}
+              {update14095} update.
+            </Trans>
+          </p>
         );
       case PluginVersion[14103]:
+        return (
+          <p>
+            <Trans>
+              You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update.
+            </Trans>
+          </p>
+        );
+      case PluginVersion[14112]:
         return (
           <div>
             <p>
               <Trans>
-                You selected a version compatible with CS2 from the {update14095} update up to the {update14104} update.
+                You selected a version compatible with CS2 from the {update14104} update up to the {update14112} update.
               </Trans>
             </p>
             <p>
               <Trans>
-                If not using a custom build, you must select the CS2 beta branch <strong>"1.41.0.3"</strong> in your
+                If not using a custom build, you must select the CS2 beta branch <strong>"1.41.1.2"</strong> in your
                 Steam library to use this version.
               </Trans>
             </p>

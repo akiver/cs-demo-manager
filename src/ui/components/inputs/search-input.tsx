@@ -110,7 +110,7 @@ export function SearchInput<Value = unknown>({
   };
 
   const renderResults = () => {
-    if (!isListVisible || inputRef.current?.value() === '') {
+    if (!isListVisible || results.length === 0) {
       return null;
     }
 

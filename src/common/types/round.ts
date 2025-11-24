@@ -30,4 +30,5 @@ export type Round = {
   winnerTeamName: string;
   winnerSide: TeamNumber;
   tagIds: string[];
+  comment: string;
 };

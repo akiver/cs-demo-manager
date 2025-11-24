@@ -22,6 +22,7 @@ export type InteractiveCanvas = {
   getMouseY: () => number;
   pixelToWorldX: (x: number) => number;
   pixelToWorldY: (y: number) => number;
+  resetZoom: () => void;
   canvasSize: { width: number; height: number };
 };
 
@@ -221,6 +222,14 @@ export function useInteractiveMapCanvas(
     return scaledY;
   };
 
+  const resetZoom = useCallback(() => {
+    worldOriginX.current = 0;
+    worldOriginY.current = 0;
+    screenOriginPixelX.current = 0;
+    screenOriginPixelY.current = 0;
+    updateCanvasSize();
+  }, [updateCanvasSize]);
+
   return {
     getScaledRadarSize,
     setWrapper,
@@ -233,6 +242,7 @@ export function useInteractiveMapCanvas(
     getMouseY: () => mousePixelY.current,
     pixelToWorldX,
     pixelToWorldY,
+    resetZoom,
     canvasSize,
   };
 }

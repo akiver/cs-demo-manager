@@ -22,7 +22,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
   const game = await detectDemoGame(demoPath);
   await deleteJsonActionsFile(demoPath);
 
-  const playDemoArgs: string[] = [];
+  const launchParameters: string[] = [];
   const settings = await getSettings();
   const { useCustomLowlights, lowlights, useHlae, playerVoicesEnabled } = settings.playback;
   const match = await getPlaybackMatch({
@@ -35,7 +35,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
     if (useCustomLowlights) {
       if (match === undefined) {
         // Fallback to CSGO built in lowlights
-        playDemoArgs.push(steamId, 'lowlights');
+        launchParameters.push(steamId, 'lowlights');
       } else {
         assertPlayerHasActions(match);
 
@@ -53,7 +53,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
         });
       }
     } else {
-      playDemoArgs.push(steamId, 'lowlights');
+      launchParameters.push(steamId, 'lowlights');
     }
   } else {
     // CS2 built-in lowlights is not yet available, so we always use custom lowlights
@@ -83,14 +83,14 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
     await watchDemoWithHlae({
       demoPath,
       game,
-      playDemoArgs,
+      additionalLaunchParameters: launchParameters,
       onGameStart,
     });
   } else {
     await startCounterStrike({
       demoPath,
       game,
-      playDemoArgs,
+      additionalLaunchParameters: launchParameters,
       onGameStart,
     });
   }

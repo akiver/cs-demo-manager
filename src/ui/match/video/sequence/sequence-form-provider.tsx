@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { SequenceForm } from './sequence-form';
 import { useCurrentMatch } from '../../use-current-match';
+import { useCameras } from 'csdm/ui/cameras/use-cameras';
 
 export type SequenceFormContextState = {
   sequence: SequenceForm;
@@ -10,8 +11,10 @@ export type SequenceFormContextState = {
   setStartTick: (tick: number) => void;
   setEndTick: (tick: number) => void;
   setCameraOnPlayerAtTick: (options: { playerSteamId: string; tick: number; oldTick?: number }) => void;
+  setCameraAtTick: (options: { cameraId: string; tick: number; oldTick?: number }) => void;
   removeCameraAtTick: (tick: number) => void;
-  clearCameras: () => void;
+  clearPlayerCameras: () => void;
+  clearCustomCameras: () => void;
 };
 
 export const SequenceFormContext = createContext<SequenceFormContextState>({
@@ -25,14 +28,20 @@ export const SequenceFormContext = createContext<SequenceFormContextState>({
   setEndTick: () => {
     throw new Error('setEndTick is not implemented');
   },
+  setCameraAtTick: () => {
+    throw new Error('setCameraAtTick is not implemented');
+  },
   setCameraOnPlayerAtTick: () => {
     throw new Error('setCameraOnPlayerAtTick is not implemented');
   },
   removeCameraAtTick: () => {
     throw new Error('removeCameraAtTick is not implemented');
   },
-  clearCameras: () => {
-    throw new Error('clearCameras is not implemented');
+  clearPlayerCameras: () => {
+    throw new Error('clearPlayerCameras is not implemented');
+  },
+  clearCustomCameras: () => {
+    throw new Error('clearCustomCameras is not implemented');
   },
 });
 
@@ -43,6 +52,7 @@ type Props = {
 
 export function SequenceFormProvider({ children, initialSequence }: Props) {
   const match = useCurrentMatch();
+  const cameras = useCameras(match.game, match.mapName);
   const [sequence, setSequence] = useState<SequenceForm>({
     ...initialSequence,
     startTick: String(initialSequence.startTick),
@@ -71,19 +81,39 @@ export function SequenceFormProvider({ children, initialSequence }: Props) {
     });
   };
 
+  const setCameraAtTick: SequenceFormContextState['setCameraAtTick'] = ({ cameraId, tick, oldTick }) => {
+    const newCameras = sequence.cameras.filter((camera) => camera.tick !== tick && camera.tick !== oldTick);
+    const camera = cameras.find((camera) => camera.id === cameraId);
+    if (!camera) {
+      return;
+    }
+
+    updateSequence({
+      cameras: [
+        ...newCameras,
+        {
+          tick,
+          id: camera.id,
+          name: camera.name,
+          color: camera.color,
+        },
+      ],
+    });
+  };
+
   const setCameraOnPlayerAtTick: SequenceFormContextState['setCameraOnPlayerAtTick'] = ({
     playerSteamId,
     tick,
     oldTick,
   }) => {
-    const newCameras = sequence.cameras.filter((camera) => camera.tick !== tick && camera.tick !== oldTick);
+    const newCameras = sequence.playerCameras.filter((camera) => camera.tick !== tick && camera.tick !== oldTick);
     const player = match.players.find((player) => player.steamId === playerSteamId);
     if (!player) {
       return;
     }
 
     updateSequence({
-      cameras: [
+      playerCameras: [
         ...newCameras,
         {
           tick,
@@ -96,11 +126,18 @@ export function SequenceFormProvider({ children, initialSequence }: Props) {
 
   const removeCameraAtTick = (tick: number) => {
     updateSequence({
+      playerCameras: sequence.playerCameras.filter((camera) => camera.tick !== tick),
       cameras: sequence.cameras.filter((camera) => camera.tick !== tick),
     });
   };
 
-  const clearCameras = () => {
+  const clearPlayerCameras = () => {
+    updateSequence({
+      playerCameras: [],
+    });
+  };
+
+  const clearCustomCameras = () => {
     updateSequence({
       cameras: [],
     });
@@ -113,9 +150,11 @@ export function SequenceFormProvider({ children, initialSequence }: Props) {
         updateSequence,
         setStartTick,
         setEndTick,
+        setCameraAtTick,
         setCameraOnPlayerAtTick,
         removeCameraAtTick,
-        clearCameras,
+        clearPlayerCameras,
+        clearCustomCameras,
       }}
     >
       {children}

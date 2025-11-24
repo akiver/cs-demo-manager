@@ -80,7 +80,7 @@ export default [
     },
 
     rules: {
-      ...reactHooks.configs.recommended.rules,
+      ...reactHooks.configs['recommended-latest'].rules,
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/ban-ts-comment': [
         'warn',
@@ -185,6 +185,9 @@ export default [
             '^GitHub$',
             'Inter var$',
             'CS:DM',
+            'CS:GO',
+            'CS2 Limited Test',
+            '^setpos_exact',
           ],
           ignoreNames: [
             // Ignore matching className (case-insensitive)
@@ -253,7 +256,6 @@ export default [
         },
       ],
       'react/prop-types': 0,
-      'react-hooks/react-compiler': 'error',
     },
   },
   {

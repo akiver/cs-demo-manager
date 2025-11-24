@@ -9,6 +9,8 @@ import { DotSeparator } from './dot-separator';
 import { MapImage, MatchDate, PlayerName, RoundNumber, RowLeft, RowRight, TeamSideIcon } from './result-row';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
+import { RoundCommentIcon } from 'csdm/ui/match/rounds/round/round-comment-icon';
+import { Markdown } from 'csdm/ui/components/markdown';
 
 type Props = {
   kills: CollateralKillResult[];
@@ -39,6 +41,12 @@ export function CollateralKillsResults({ kills }: Props) {
                   </p>
                   <DotSeparator />
                   <MatchDate date={kill.date} />
+                  {kill.roundComment && (
+                    <>
+                      <DotSeparator />
+                      <RoundCommentIcon comment={kill.roundComment} />
+                    </>
+                  )}
                 </RowLeft>
                 <RowRight>
                   <WatchButton
@@ -53,9 +61,18 @@ export function CollateralKillsResults({ kills }: Props) {
               </div>
             }
           >
-            {kill.kills.map((kill) => {
-              return <KillFeedEntry key={kill.id} kill={kill} />;
-            })}
+            <div className="flex gap-x-10 overflow-hidden">
+              <div className="flex flex-col">
+                {kill.kills.map((kill) => {
+                  return <KillFeedEntry key={kill.id} kill={kill} />;
+                })}
+              </div>
+              {kill.roundComment && (
+                <div className="max-h-[160px] w-full overflow-auto">
+                  <Markdown markdown={kill.roundComment} />
+                </div>
+              )}
+            </div>
           </CollapsePanel>
         );
       }}

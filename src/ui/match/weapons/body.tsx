@@ -74,13 +74,17 @@ function BodyTooltip({ children, content }: BodyTooltipProps) {
     };
   }, [refs, isVisible]);
 
+  // Destructuring assignment to avoid false react compiler linting error.
+  // https://github.com/facebook/react/issues/34775#issuecomment-3558154592
+  const { setReference, setFloating } = refs;
+
   return (
     <>
-      {React.cloneElement(children, { ref: refs.setReference })}
+      {React.cloneElement(children, { ref: setReference })}
       {/* Render the tooltip outside of the svg because a div inside a svg is invalid and so would not appears */}
       {ReactDOM.createPortal(
         <div
-          ref={refs.setFloating}
+          ref={setFloating}
           className="pointer-events-none z-10 rounded-8 border border-gray-400 bg-gray-100 p-8 transition-opacity duration-300"
           style={{
             position: strategy,

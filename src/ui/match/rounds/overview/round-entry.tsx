@@ -14,6 +14,8 @@ import { CollapsePanel } from 'csdm/ui/components/collapse-panel/collapse-panel'
 import type { Match } from 'csdm/common/types/match';
 import { useTranslateEconomyType } from '../../economy/team-economy-breakdown/use-translate-economy-type';
 import { useFormatMoney } from 'csdm/ui/hooks/use-format-money';
+import { RoundCommentInput } from 'csdm/ui/match/rounds/round/round-comment-input';
+import { RoundCommentIcon } from '../round/round-comment-icon';
 
 type AvatarsProps = {
   players: MatchPlayer[];
@@ -125,6 +127,10 @@ function Content({ round, kills, roundFreezetimeEndTick }: ContentProps) {
           valueTeamB={translateEconomyType(round.teamBEconomyType)}
         />
       </div>
+
+      <div className="ml-auto max-h-[160px] w-full max-w-[512px]">
+        <RoundCommentInput checksum={round.matchChecksum} number={round.number} comment={round.comment} />
+      </div>
     </div>
   );
 }
@@ -145,9 +151,12 @@ function PanelHeader({ round, playersTeamA, playersTeamB, kills, match }: PanelH
 
   return (
     <>
-      <p className="text-body-strong">
-        <Trans>Round {roundNumber}</Trans>
-      </p>
+      <div className="flex items-center gap-x-8">
+        <p className="text-body-strong">
+          <Trans>Round {roundNumber}</Trans>
+        </p>
+        {round.comment ? <RoundCommentIcon comment={round.comment} /> : <div className="size-16" />}
+      </div>
       <div className="flex flex-1 items-center justify-center">
         <Avatars players={playersTeamA} kills={kills} />
         <TeamText teamNumber={round.teamASide} className="mx-8 text-title">

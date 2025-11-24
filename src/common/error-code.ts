@@ -27,6 +27,10 @@ export const ErrorCode = {
   TeamsNotFound: 426,
   MissingPlayerSlot: 427,
   CustomCounterStrikeExecutableNotFound: 428,
+  CounterStrikeAlreadyRunning: 429,
+  CounterStrikeNotRunning: 430,
+  CounterStrikeNotConnected: 431,
+  CounterStrikeNoResponse: 432,
   InvalidDemoPath: 505,
   ChecksumsMismatch: 506,
   DuplicateTeamName: 507,
@@ -86,11 +90,13 @@ export const ErrorCode = {
   InvalidSteamCommunityUrl: 2002,
   SteamAccountNameTooLong: 2003,
 
-  TagNameAlreadyToken: 3000,
+  TagNameAlreadyTaken: 3000,
   TagNameTooShort: 3001,
   TagNameTooLong: 3002,
   InvalidTagColor: 3003,
   TagNotFound: 3004,
+
+  CameraAlreadyExists: 3010,
 
   InvalidDemoName: 3100,
   AnalyzeCorruptedDemo: 3200,

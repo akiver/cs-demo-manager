@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect, useState } from 'react';
 import clsx from 'clsx';
 import { PlaybackBar } from 'csdm/ui/match/viewer-2d/playback-bar/playback-bar';
 import { TeamPanel } from 'csdm/ui/match/viewer-2d/teams-panel/team-panel';
@@ -23,11 +23,9 @@ import { isCtrlOrCmdEvent } from 'csdm/ui/keyboard/keyboard';
 
 export function Viewer2D() {
   const match = useCurrentMatch();
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const drawingCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
-  const drawingCanvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
-  const lastRenderTime = useRef(performance.now());
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+  const [drawingCanvas, setDrawingCanvas] = useState<HTMLCanvasElement | null>(null);
+  const lastRenderTime = useRef(0);
   const animationIdRef = useRef(0);
   const isHoldingSpace = useRef(false);
   const { drawPlayers } = useDrawPlayers();
@@ -59,9 +57,9 @@ export function Viewer2D() {
     drawingColor,
     isDrawingMode,
   } = useViewerContext();
-  const interactiveCanvas = useInteractiveMapCanvas(canvasRef.current, map, lowerRadarOffsetX, lowerRadarOffsetY);
+  const interactiveCanvas = useInteractiveMapCanvas(canvas, map, lowerRadarOffsetX, lowerRadarOffsetY);
   const drawing = useDrawableCanvas({
-    canvas: drawingCanvasRef.current,
+    canvas: drawingCanvas,
     interactiveCanvas,
     isDrawingMode,
     tool: {
@@ -73,25 +71,12 @@ export function Viewer2D() {
   const { undo, redo, clear, drawStrokes } = drawing;
   const { canvasSize, setWrapper } = interactiveCanvas;
 
-  useEffect(() => {
-    if (canvasRef.current === null) {
-      throw new Error('Canvas not ready');
-    }
-
-    if (drawingCanvasRef.current === null) {
-      throw new Error('Drawing canvas not ready');
-    }
-
-    canvasContextRef.current = canvasRef.current.getContext('2d');
-    drawingCanvasContextRef.current = drawingCanvasRef.current.getContext('2d');
-  }, []);
-
   useLayoutEffect(() => {
     const animate = () => {
       animationIdRef.current = window.requestAnimationFrame(animate);
 
-      const context = canvasContextRef.current;
-      if (context === null) {
+      const context = canvas?.getContext('2d');
+      if (!context) {
         return;
       }
 
@@ -108,8 +93,9 @@ export function Viewer2D() {
       }
       drawChickens(context, interactiveCanvas);
 
-      if (drawingCanvasContextRef.current) {
-        drawStrokes(drawingCanvasContextRef.current);
+      const drawingContext = drawingCanvas?.getContext('2d');
+      if (drawingContext) {
+        drawStrokes(drawingContext);
       }
 
       if (!isPlaying) {
@@ -214,9 +200,9 @@ export function Viewer2D() {
             isDrawingMode && (drawingTool === 'eraser' ? 'cursor-pointer' : 'cursor-crosshair'),
           )}
         >
-          <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} className="absolute inset-0" />
+          <canvas ref={setCanvas} width={canvasSize.width} height={canvasSize.height} className="absolute inset-0" />
           <canvas
-            ref={drawingCanvasRef}
+            ref={setDrawingCanvas}
             width={canvasSize.width}
             height={canvasSize.height}
             className={clsx('absolute inset-0', {

@@ -12,6 +12,7 @@ import type {
 } from './handlers/renderer-process/demo/export-demo-players-voice-handler';
 import type { Video } from 'csdm/common/types/video';
 import type { ExportToXlsxProgressPayload, ExportToXlsxSuccessPayload } from 'csdm/common/types/xlsx';
+import type { CounterStrikeErrorPayload } from 'csdm/server/counter-strike';
 
 // Message names sent from the WebSocket server to the renderer Electron process.
 export const RendererServerMessageName = {
@@ -48,7 +49,8 @@ export const RendererServerMessageName = {
   ExportDemoPlayersVoiceProgress: 'export-demo-players-voice-progress',
   ExportDemoPlayersVoiceDone: 'export-demo-players-voice-done',
   ExportDemoPlayersVoiceError: 'export-demo-players-voice-error',
-  StartingGame: 'starting-game',
+  StartingCounterStrike: 'starting-counter-strike',
+  CounterStrikeError: 'counter-strike-error',
   ResetTablesStateSuccess: 'reset-tables-state-success',
   IgnoredSteamAccountsChanged: 'ignored-steam-accounts-changed',
   TeamNamesUpdated: 'team-names-updated',
@@ -95,7 +97,8 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.ExportDemoPlayersVoiceProgress]: ExportDemoPlayersVoiceProgressPayload;
   [RendererServerMessageName.ExportDemoPlayersVoiceDone]: void;
   [RendererServerMessageName.ExportDemoPlayersVoiceError]: ExportDemoPlayersVoiceErrorPayload;
-  [RendererServerMessageName.StartingGame]: void;
+  [RendererServerMessageName.StartingCounterStrike]: void;
+  [RendererServerMessageName.CounterStrikeError]: CounterStrikeErrorPayload;
   [RendererServerMessageName.ResetTablesStateSuccess]: void;
   [RendererServerMessageName.IgnoredSteamAccountsChanged]: void;
   [RendererServerMessageName.TeamNamesUpdated]: number;

@@ -147,7 +147,7 @@ function readSource2DemoHeader(buffer: Buffer) {
   const bytes = stream.readBytes(size);
   const msg = fromBinary(CDemoFileHeaderSchema, bytes);
   if (
-    !msg.networkProtocol ||
+    !msg.patchVersion ||
     !msg.serverName ||
     !msg.clientName ||
     !msg.mapName ||
@@ -160,7 +160,7 @@ function readSource2DemoHeader(buffer: Buffer) {
 
   const header: DemoHeader = {
     filestamp: 'PBDEMS2',
-    networkProtocol: msg.networkProtocol,
+    networkProtocol: msg.patchVersion,
     serverName: removeUnicodeReplacementChars(msg.serverName),
     clientName: removeUnicodeReplacementChars(msg.clientName),
     mapName: msg.mapName,

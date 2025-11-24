@@ -49,15 +49,17 @@ export function buildPlayersRoundsSequences({
           deathNoticesDuration: settings.deathNoticesDuration,
           showXRay: settings.showXRay,
           showAssists: settings.showAssists,
+          recordAudio: settings.recordAudio,
           playerVoicesEnabled: settings.playerVoicesEnabled,
           playersOptions: [],
-          cameras: [
+          playerCameras: [
             {
               tick: startTick,
               playerSteamId: steamId,
               playerName: match.players.find((player) => player.steamId === steamId)?.name ?? '',
             },
           ],
+          cameras: [],
         });
       }
     }

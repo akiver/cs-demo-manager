@@ -7,6 +7,7 @@ import { DotSeparator } from './dot-separator';
 import { MapImage, MatchDate, RoundNumber, Row, RowLeft, RowRight } from './result-row';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
+import { RoundCommentIcon } from 'csdm/ui/match/rounds/round/round-comment-icon';
 
 type Props = {
   kills: WallbangKillResult[];
@@ -30,6 +31,12 @@ export function WallbangKillsResults({ kills }: Props) {
               <RoundNumber roundNumber={kill.roundNumber} />
               <DotSeparator />
               <MatchDate date={kill.date} />
+              {kill.roundComment && (
+                <>
+                  <DotSeparator />
+                  <RoundCommentIcon comment={kill.roundComment} />
+                </>
+              )}
             </RowLeft>
             <RowRight>
               <WatchButton

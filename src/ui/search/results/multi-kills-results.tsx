@@ -17,6 +17,8 @@ import {
 } from './result-row';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
+import { RoundCommentIcon } from 'csdm/ui/match/rounds/round/round-comment-icon';
+import { Markdown } from 'csdm/ui/components/markdown';
 
 type Props = {
   multiKills: MultiKillResult[];
@@ -50,6 +52,12 @@ export function MultiKillsResults({ multiKills }: Props) {
                     endTick={lastKill?.tick ?? 0}
                     tickrate={multiKill.matchTickrate}
                   />
+                  {multiKill.roundComment && (
+                    <>
+                      <DotSeparator />
+                      <RoundCommentIcon comment={multiKill.roundComment} />
+                    </>
+                  )}
                 </RowLeft>
                 <RowRight>
                   <WatchButton
@@ -64,9 +72,18 @@ export function MultiKillsResults({ multiKills }: Props) {
               </div>
             }
           >
-            {multiKill.kills.map((kill) => {
-              return <KillFeedEntry key={kill.id} kill={kill} />;
-            })}
+            <div className="flex gap-x-10 overflow-hidden">
+              <div className="flex flex-col">
+                {multiKill.kills.map((kill) => {
+                  return <KillFeedEntry key={kill.id} kill={kill} />;
+                })}
+              </div>
+              {multiKill.roundComment && (
+                <div className="max-h-[160px] w-full overflow-auto">
+                  <Markdown markdown={multiKill.roundComment} />
+                </div>
+              )}
+            </div>
           </CollapsePanel>
         );
       }}

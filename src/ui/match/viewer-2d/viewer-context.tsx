@@ -35,6 +35,7 @@ import {
 import { useViewer2DState } from './use-viewer-state';
 import { deleteDemoAudioOffset, persistDemoAudioOffset } from './audio/audio-offset';
 import type { DrawingTool } from './drawing/use-drawable-canvas';
+import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
 
 type ViewerMode = 'drawing' | 'playback';
 
@@ -180,7 +181,7 @@ export function ViewerProvider({
   const remainingTickCount = round.endOfficiallyTick - currentTick;
   const tickrate = match.tickrate > 0 ? match.tickrate : 64;
   const timeRemaining = (remainingTickCount / tickrate) * 1000;
-  const shouldDrawBombs = match.mapName.startsWith('de_');
+  const shouldDrawBombs = isDefuseMapFromName(match.mapName);
   const navigate = useNavigate();
   const { audioOffsetSeconds, volume } = viewerState;
 
@@ -198,7 +199,7 @@ export function ViewerProvider({
       setCurrentTick(tick);
     }
     if (audio) {
-      // eslint-disable-next-line react-hooks/react-compiler
+      // eslint-disable-next-line react-hooks/immutability
       audio.currentTime = clampAudioTime((tick ?? currentTick) / tickrate + audioOffsetSeconds);
       try {
         await audio.play();
@@ -244,6 +245,7 @@ export function ViewerProvider({
           if (!audio) {
             return;
           }
+          // eslint-disable-next-line react-hooks/immutability
           audio.volume = volume;
           dispatch(volumeChanged({ volume }));
         },
@@ -252,6 +254,7 @@ export function ViewerProvider({
             return;
           }
 
+          // eslint-disable-next-line react-hooks/immutability
           audio.currentTime = clampAudioTime(currentTick / tickrate + seconds);
           dispatch(audioOffsetChanged({ seconds }));
           persistDemoAudioOffset(match.checksum, seconds);
@@ -297,6 +300,7 @@ export function ViewerProvider({
         setSpeed: (speed: number) => {
           dispatch(speedChanged({ speed }));
           if (audio) {
+            // eslint-disable-next-line react-hooks/immutability
             audio.playbackRate = speed;
           }
         },

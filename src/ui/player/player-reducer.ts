@@ -13,12 +13,28 @@ import {
   selectedMatchesChanged,
 } from './player-actions';
 import { demoRenamed } from '../demos/demos-actions';
+import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
+import { RadarLevel } from '../maps/radar-level';
+import type { TeamNumber } from '@akiver/cs-demo-analyzer';
+import { blurChanged, fetchPointsSuccess, opacityChanged, radiusChanged } from './heatmap/player-heatmap-actions';
+import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
+
+type HeatmapState = {
+  readonly mapName: string;
+  readonly radius: number;
+  readonly blur: number;
+  readonly alpha: number;
+  readonly event: HeatmapEvent;
+  readonly radarLevel: RadarLevel;
+  readonly sides: TeamNumber[]; // empty => all sides
+};
 
 type PlayerState = {
   status: Status;
   errorCode: ErrorCode;
   player: PlayerProfile | undefined;
   selectedMatchChecksums: string[];
+  heatmap: HeatmapState;
 };
 
 const initialState: PlayerState = {
@@ -26,6 +42,15 @@ const initialState: PlayerState = {
   status: Status.Idle,
   errorCode: ErrorCode.UnknownError,
   selectedMatchChecksums: [],
+  heatmap: {
+    mapName: '',
+    radius: 14,
+    blur: 20,
+    alpha: 1,
+    event: HeatmapEvent.Kills,
+    radarLevel: RadarLevel.Upper,
+    sides: [],
+  },
 };
 
 export const playerReducer = createReducer(initialState, (builder) => {
@@ -36,6 +61,14 @@ export const playerReducer = createReducer(initialState, (builder) => {
     .addCase(fetchPlayerSuccess, (state, action) => {
       state.status = Status.Success;
       state.player = action.payload;
+      if (action.payload.mapsStats.length > 0) {
+        const firstDefuseMap = action.payload.mapsStats.find((map) => isDefuseMapFromName(map.mapName));
+        if (firstDefuseMap) {
+          state.heatmap.mapName = firstDefuseMap.mapName;
+        } else {
+          state.heatmap.mapName = action.payload.mapsStats[0].mapName;
+        }
+      }
     })
     .addCase(fetchPlayerError, (state, action) => {
       state.status = Status.Error;
@@ -93,6 +126,25 @@ export const playerReducer = createReducer(initialState, (builder) => {
           match.name = action.payload.name;
         }
       }
+    })
+    .addCase(opacityChanged, (state, action) => {
+      state.heatmap.alpha = action.payload;
+    })
+    .addCase(blurChanged, (state, action) => {
+      state.heatmap.blur = action.payload;
+    })
+    .addCase(radiusChanged, (state, action) => {
+      state.heatmap.radius = action.payload;
+    })
+    .addCase(fetchPointsSuccess, (state, action) => {
+      if (state.heatmap.mapName !== action.payload.mapName) {
+        state.heatmap.radarLevel = RadarLevel.Upper;
+      } else {
+        state.heatmap.radarLevel = action.payload.radarLevel;
+      }
+      state.heatmap.event = action.payload.event;
+      state.heatmap.mapName = action.payload.mapName;
+      state.heatmap.sides = action.payload.sides;
     })
     .addCase(tagDeleted, () => {
       return initialState;

@@ -13,8 +13,7 @@ import type { UpdateSettingsOptions } from 'csdm/node/settings/update-settings';
 import type { getMapRadarBase64 } from 'csdm/node/filesystem/maps/get-map-radar-base64';
 import type { getMapLowerRadarBase64 } from 'csdm/node/filesystem/maps/get-map-lower-radar-base64';
 import type { getMapThumbnailBase64 } from 'csdm/node/filesystem/maps/get-map-thumbnail-base64';
-import type { getPngInformation } from 'csdm/node/filesystem/get-png-information';
-import type { PremierRank, Rank } from 'csdm/common/types/counter-strike';
+import type { Game, PremierRank, Rank } from 'csdm/common/types/counter-strike';
 import type { writeTableState } from 'csdm/node/settings/table/write-table-state';
 import type { readTableState } from 'csdm/node/settings/table/read-table-state';
 import type { Argument } from 'csdm/common/types/argument';
@@ -24,6 +23,8 @@ import type { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import type { AppInformation } from 'csdm/node/get-app-information';
 import type { getDemoAudioData } from 'csdm/preload/get-demo-audio-data';
 import type { getDemoAudioFilePath } from 'csdm/node/demo/get-demo-audio-file-path';
+import type { getCameraPreviewBase64 } from 'csdm/node/filesystem/cameras/get-camera-preview-base64';
+import type { getImageInformation } from 'csdm/node/filesystem/get-image-information';
 
 declare global {
   interface PreloadApi {
@@ -33,7 +34,7 @@ declare global {
     getAppInformation: () => AppInformation;
     isMac: boolean;
     isLinux: boolean;
-    unknownMapThumbnailFilePath: string;
+    unknownImageFilePath: string;
     IMAGES_FOLDER_PATH: string;
     ADDITIONAL_ARGUMENTS: string[];
     getStartupArguments: () => Promise<Argument[]>;
@@ -50,10 +51,11 @@ declare global {
     resetSettings: () => Promise<void>;
     readTableState: typeof readTableState;
     writeTableState: typeof writeTableState;
+    getCameraPreviewBase64: typeof getCameraPreviewBase64;
     getMapRadarBase64: typeof getMapRadarBase64;
     getMapLowerRadarBase64: typeof getMapLowerRadarBase64;
     getMapThumbnailBase64: typeof getMapThumbnailBase64;
-    getPngInformation: typeof getPngInformation;
+    getImageInformation: typeof getImageInformation;
     getDefaultPlayerAvatar: () => string;
     getRankImageSrc: (rankNumber: Rank) => string;
     getPremierRankImageSrc: (rank: PremierRank) => string;
@@ -94,6 +96,9 @@ declare global {
     getDemoAudioFilePath: typeof getDemoAudioFilePath;
     getDemoAudioData: typeof getDemoAudioData;
     getCounterStrikeLogFilePath: (game: Game) => Promise<PreloadResult<string>>;
+    clearClipboard: () => void;
+    getClipboardText: () => string;
+    readImageFile: (imagePath: string) => Promise<Buffer<ArrayBuffer>>;
   }
 
   interface Window {

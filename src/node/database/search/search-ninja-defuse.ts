@@ -20,7 +20,12 @@ export async function searchNinjaDefuse({
     .selectAll('bombs_defused')
     .distinct()
     .innerJoin('matches', 'matches.checksum', 'bombs_defused.match_checksum')
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .leftJoin('round_comments as rc', function (qb) {
+      return qb
+        .onRef('bombs_defused.match_checksum', '=', 'rc.match_checksum')
+        .onRef('bombs_defused.round_number', '=', 'rc.number');
+    })
+    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -42,7 +47,14 @@ export async function searchNinjaDefuse({
     .orderBy('bombs_defused.match_checksum')
     .orderBy('bombs_defused.round_number')
     .orderBy('bombs_defused.tick')
-    .groupBy(['bombs_defused.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game']);
+    .groupBy([
+      'bombs_defused.id',
+      'matches.map_name',
+      'matches.date',
+      'matches.demo_path',
+      'matches.game',
+      'rc.comment',
+    ]);
 
   if (steamIds.length > 0) {
     query = query.where('bombs_defused.defuser_steam_id', 'in', steamIds);
@@ -69,6 +81,7 @@ export async function searchNinjaDefuse({
       date: row.date.toISOString(),
       demoPath: row.demo_path,
       game: row.game,
+      roundComment: row.comment ?? '',
     };
   });
 

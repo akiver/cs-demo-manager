@@ -23,6 +23,8 @@ export async function moveStartMovieFilesToOutputFolder({ sequences, outputFolde
     await fs.ensureDir(destinationPath);
 
     await moveFiles(tgaFiles, destinationPath);
-    await fs.move(wavFilePath, path.join(destinationPath, `${sequenceName}.wav`));
+    if (wavFilePath) {
+      await fs.move(wavFilePath, path.join(destinationPath, `${sequenceName}.wav`));
+    }
   }
 }

@@ -28,7 +28,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
   const game = await detectDemoGame(demoPath);
   await deleteJsonActionsFile(demoPath);
 
-  const playDemoArgs: string[] = [];
+  const launchParameters: string[] = [];
   const settings = await getSettings();
   const { useCustomHighlights, highlights, useHlae, playerVoicesEnabled } = settings.playback;
   const match = await getPlaybackMatch({
@@ -41,7 +41,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     if (useCustomHighlights) {
       if (match === undefined) {
         // Fallback to CSGO built in highlights
-        playDemoArgs.push(steamId);
+        launchParameters.push(steamId);
       } else {
         assertPlayerHasActions(match);
 
@@ -58,7 +58,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
         });
       }
     } else {
-      playDemoArgs.push(steamId);
+      launchParameters.push(steamId);
     }
   } else {
     // CS2 built-in highlights is not yet available, so we always use custom highlights
@@ -86,14 +86,14 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     await watchDemoWithHlae({
       demoPath,
       game,
-      playDemoArgs,
+      additionalLaunchParameters: launchParameters,
       onGameStart,
     });
   } else {
     await startCounterStrike({
       demoPath,
       game,
-      playDemoArgs,
+      additionalLaunchParameters: launchParameters,
       onGameStart,
     });
   }

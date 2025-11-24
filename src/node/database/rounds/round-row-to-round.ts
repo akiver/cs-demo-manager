@@ -1,7 +1,7 @@
 import type { Round } from 'csdm/common/types/round';
 import type { RoundRow } from 'csdm/node/database/rounds/round-table';
 
-export function roundRowToRound(row: RoundRow, tagIds: string[]): Round {
+export function roundRowToRound(row: RoundRow, tagIds: string[], comment?: string): Round {
   return {
     id: row.id,
     number: row.number,
@@ -31,5 +31,6 @@ export function roundRowToRound(row: RoundRow, tagIds: string[]): Round {
     teamAEconomyType: row.team_a_economy_type,
     teamBEconomyType: row.team_b_economy_type,
     tagIds,
+    comment: comment ?? '',
   };
 }

@@ -1,5 +1,5 @@
 import { watchPlayerAsSuspect } from 'csdm/node/counter-strike/launcher/watch-player-as-suspect';
-import { buildWatchDemoErrorPayload, onGameStart } from './counter-strike';
+import { handleWatchDemoError, onGameStart } from 'csdm/server/counter-strike';
 
 export type WatchPlayerAsSuspectPayload = {
   demoPath: string;
@@ -13,6 +13,6 @@ export async function watchPlayerAsSuspectHandler(payload: WatchPlayerAsSuspectP
       onGameStart,
     });
   } catch (error) {
-    return buildWatchDemoErrorPayload(error, payload.demoPath, 'Error watching player as suspect');
+    return handleWatchDemoError(error, payload.demoPath, 'Error watching player as suspect');
   }
 }

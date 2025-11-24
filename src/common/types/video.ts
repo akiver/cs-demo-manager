@@ -36,3 +36,8 @@ export type AddVideoPayload = Omit<Video, 'id' | 'date' | 'status' | 'output'> &
   id?: string;
   date?: string;
 };
+
+export type WatchVideoSequencesPayload = Omit<
+  Video,
+  'id' | 'date' | 'status' | 'output' | 'errorCode' | 'currentSequence'
+>;

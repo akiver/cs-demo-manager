@@ -1,5 +1,4 @@
-import React, { useRef, type ReactNode } from 'react';
-import clsx from 'clsx';
+import React, { type ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -7,19 +6,15 @@ type Props = {
 };
 
 export function CollapseTransition({ children, isVisible }: Props) {
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const maxHeight = isVisible ? contentRef.current?.scrollHeight : 0;
-
   return (
     <div
-      ref={contentRef}
-      className={clsx(
-        'max-h-0 overflow-hidden transition-[max-height,opacity] duration-200 ease-out',
-        isVisible ? 'opacity-100' : 'opacity-0',
-      )}
-      style={{ maxHeight }}
+      className="grid transition-[grid-template-rows,opacity] duration-200 ease-out"
+      style={{
+        gridTemplateRows: isVisible ? '1fr' : '0fr',
+        opacity: isVisible ? 1 : 0,
+      }}
     >
-      {children}
+      <div className="overflow-hidden">{children}</div>
     </div>
   );
 }

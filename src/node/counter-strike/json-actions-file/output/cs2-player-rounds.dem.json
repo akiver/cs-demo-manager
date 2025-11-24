@@ -23,11 +23,11 @@
       },
       {
         "cmd": "spec_mode 1",
-        "tick": 64
+        "tick": 872
       },
       {
         "cmd": "spec_player 4",
-        "tick": 64
+        "tick": 876
       },
       {
         "cmd": "demo_gototick 10752",
@@ -35,11 +35,11 @@
       },
       {
         "cmd": "spec_mode 1",
-        "tick": 5864
+        "tick": 10752
       },
       {
         "cmd": "spec_player 4",
-        "tick": 5864
+        "tick": 10756
       },
       {
         "cmd": "demo_gototick 16152",
@@ -47,11 +47,11 @@
       },
       {
         "cmd": "spec_mode 1",
-        "tick": 13184
+        "tick": 16152
       },
       {
         "cmd": "spec_player 4",
-        "tick": 13184
+        "tick": 16156
       },
       {
         "cmd": "demo_gototick 21352",
@@ -59,11 +59,11 @@
       },
       {
         "cmd": "spec_mode 1",
-        "tick": 18984
+        "tick": 21352
       },
       {
         "cmd": "spec_player 4",
-        "tick": 18984
+        "tick": 21356
       },
       {
         "cmd": "disconnect",

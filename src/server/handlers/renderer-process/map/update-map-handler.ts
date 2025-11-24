@@ -9,7 +9,7 @@ import { writeMapLowerRadarFileFromBase64 } from 'csdm/node/filesystem/maps/writ
 import type { MapPayload } from './map-payload';
 import type { UpdatableMap } from 'csdm/node/database/maps/map-table';
 import { mapRowToMap } from 'csdm/node/database/maps/map-row-to-map';
-import { isPngBase64String } from 'csdm/node/filesystem/is-png-base64-string';
+import { isPngBase64String } from 'csdm/node/filesystem/image';
 import { handleError } from '../../handle-error';
 
 export async function updateMapHandler({

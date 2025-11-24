@@ -14,4 +14,5 @@ export type CollateralKillResult = {
   game: Game;
   matchChecksum: string;
   kills: Kill[];
+  roundComment: string;
 };

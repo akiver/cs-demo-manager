@@ -8,6 +8,7 @@ import { addIgnoredSteamAccountSuccess, deleteIgnoredSteamAccountSuccess } from 
 import { insertMatchSuccess } from '../analyses/analyses-actions';
 import { matchesTypeUpdated } from '../matches/matches-actions';
 import { steamAccountNameUpdated } from '../player/player-actions';
+import { roundCommentUpdated } from './rounds/round/round-actions';
 
 const initialState = null as Match | null;
 
@@ -19,6 +20,15 @@ export const entityReducer = createReducer(initialState, (builder) => {
     .addCase(commentUpdated, (state, action) => {
       if (state?.checksum === action.payload.checksum) {
         state.comment = action.payload.comment;
+      }
+    })
+    .addCase(roundCommentUpdated, (state, action) => {
+      if (!state || action.payload.checksum !== state.checksum) {
+        return;
+      }
+      const round = state.rounds.find((round) => round.number === action.payload.number);
+      if (round) {
+        round.comment = action.payload.comment;
       }
     })
     .addCase(demoRenamed, (state, action) => {

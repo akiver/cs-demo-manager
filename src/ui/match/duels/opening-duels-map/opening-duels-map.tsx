@@ -110,7 +110,7 @@ export function OpeningDuelsMap({ map, kills }: Props) {
   });
   const selectedKill = table.getSelectedRows()[0] ?? undefined;
 
-  const { canvasRef, interactiveCanvas } = useMapCanvas({
+  const { setCanvas, interactiveCanvas } = useMapCanvas({
     map,
     game: match.game,
     draw: (interactiveCanvas, context) => {
@@ -242,8 +242,7 @@ export function OpeningDuelsMap({ map, kills }: Props) {
         <div className="absolute top-0 size-full overflow-hidden">
           <canvas
             ref={(ref) => {
-              // eslint-disable-next-line react-hooks/react-compiler
-              canvasRef.current = ref;
+              setCanvas(ref);
               refs.setReference(ref);
             }}
             width={canvasSize.width}

@@ -7,6 +7,7 @@ import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
 import type { RoundResult } from 'csdm/common/types/search/round-result';
 import { Tags } from 'csdm/ui/components/tags/tags';
+import { RoundCommentIcon } from 'csdm/ui/match/rounds/round/round-comment-icon';
 
 type Props = {
   rounds: RoundResult[];
@@ -31,6 +32,12 @@ export function RoundsResult({ rounds }: Props) {
                 <>
                   <DotSeparator />
                   <Tags tagIds={round.tagIds} />
+                </>
+              )}
+              {round.comment && (
+                <>
+                  <DotSeparator />
+                  <RoundCommentIcon comment={round.comment} />
                 </>
               )}
             </RowLeft>

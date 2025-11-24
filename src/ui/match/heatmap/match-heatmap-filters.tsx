@@ -16,6 +16,7 @@ import type { MatchHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { TeamsSelect } from 'csdm/ui/components/inputs/select/teams-select';
 import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
 import { HeatmapFilters } from 'csdm/ui/components/heatmap/heatmap-filters';
+import { ResetZoomButton } from 'csdm/ui/components/heatmap/reset-zoom-button';
 
 export function MatchHeatmapFilters() {
   const dispatch = useDispatch();
@@ -82,7 +83,10 @@ export function MatchHeatmapFilters() {
           fetchPoints({ steamIds });
         }}
       />
-      <ExportHeatmapButton />
+      <div className="flex flex-wrap gap-x-8">
+        <ResetZoomButton />
+        <ExportHeatmapButton />
+      </div>
     </HeatmapFilters>
   );
 }

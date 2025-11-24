@@ -16,20 +16,20 @@ export async function watchPlayerAsSuspect({ demoPath, steamId, onGameStart }: O
 
   const settings = await getSettings();
   const { useHlae } = settings.playback;
-  const playDemoArgs = [steamId, 'anonsuspect'];
+  const launchParameters = [steamId, 'anonsuspect'];
 
   if (useHlae) {
     await watchDemoWithHlae({
       demoPath,
       game,
-      playDemoArgs,
+      additionalLaunchParameters: launchParameters,
       onGameStart,
     });
   } else {
     await startCounterStrike({
       demoPath,
       game,
-      playDemoArgs,
+      additionalLaunchParameters: launchParameters,
       onGameStart,
     });
   }

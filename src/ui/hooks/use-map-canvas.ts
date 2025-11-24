@@ -1,28 +1,30 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useInteractiveMapCanvas, type InteractiveCanvas } from './use-interactive-map-canvas';
 import type { Map } from 'csdm/common/types/map';
 import { useGetMapRadarSrc } from '../maps/use-get-map-radar-src';
 import type { Game } from 'csdm/common/types/counter-strike';
 import { RadarLevel } from '../maps/radar-level';
 import { loadImageFromFilePath } from '../shared/load-image-from-file-path';
+import { noop } from 'csdm/common/noop';
 
 type Options = {
   map: Map;
   game: Game;
   draw: (interactiveCanvas: InteractiveCanvas, context: CanvasRenderingContext2D) => void;
-  onClick: (event: MouseEvent) => void;
-  onContextMenu: (event: MouseEvent) => void;
+  onClick?: (event: MouseEvent) => void;
+  onContextMenu?: (event: MouseEvent) => void;
+  mode?: 'upper' | 'lower' | 'both';
 };
 
-export function useMapCanvas({ onClick, draw, map, game, onContextMenu }: Options) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+export function useMapCanvas({ onClick = noop, draw, map, game, onContextMenu = noop, mode = 'both' }: Options) {
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const radarImage = useRef<HTMLImageElement | null>(null);
   const lowerRadarImage = useRef<HTMLImageElement | null>(null);
   const getMapRadarFileSrc = useGetMapRadarSrc();
   const animationId = useRef(0);
   const isMouseDown = useRef(false);
   const isDragging = useRef(false);
-  const interactiveCanvas = useInteractiveMapCanvas(canvasRef.current, map);
+  const interactiveCanvas = useInteractiveMapCanvas(canvas, map);
 
   useEffect(() => {
     const loadRadarImages = async () => {
@@ -41,7 +43,6 @@ export function useMapCanvas({ onClick, draw, map, game, onContextMenu }: Option
   }, [getMapRadarFileSrc, game, map.name]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
@@ -54,12 +55,21 @@ export function useMapCanvas({ onClick, draw, map, game, onContextMenu }: Option
       const radarSize = getScaledRadarSize();
       const x = zoomedX(0);
       const y = zoomedY(0);
-      if (radarImage.current !== null) {
-        context.drawImage(radarImage.current, x, y, radarSize, radarSize);
-      }
-
-      if (lowerRadarImage.current !== null) {
-        context.drawImage(lowerRadarImage.current, x, y + radarSize, radarSize, radarSize);
+      if (mode === 'both') {
+        if (radarImage.current !== null) {
+          context.drawImage(radarImage.current, x, y, radarSize, radarSize);
+        }
+        if (lowerRadarImage.current !== null) {
+          context.drawImage(lowerRadarImage.current, x, y + radarSize, radarSize, radarSize);
+        }
+      } else if (mode === 'upper') {
+        if (radarImage.current !== null) {
+          context.drawImage(radarImage.current, x, y, radarSize, radarSize);
+        }
+      } else if (mode === 'lower') {
+        if (lowerRadarImage.current !== null) {
+          context.drawImage(lowerRadarImage.current, x, y, radarSize, radarSize);
+        }
       }
       draw(interactiveCanvas, context);
 
@@ -85,7 +95,6 @@ export function useMapCanvas({ onClick, draw, map, game, onContextMenu }: Option
   });
 
   useEffect(() => {
-    const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
@@ -119,10 +128,9 @@ export function useMapCanvas({ onClick, draw, map, game, onContextMenu }: Option
       canvas.removeEventListener('mouseup', onMouseUp);
       canvas.removeEventListener('mousemove', onMouseMove);
     };
-  }, [onClick]);
+  }, [onClick, canvas]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
@@ -134,5 +142,5 @@ export function useMapCanvas({ onClick, draw, map, game, onContextMenu }: Option
     };
   });
 
-  return { canvasRef, interactiveCanvas };
+  return { setCanvas, interactiveCanvas };
 }
