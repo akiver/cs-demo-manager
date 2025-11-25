@@ -25,6 +25,22 @@ import { downloadAndExtractVirtualDub } from 'csdm/node/video/virtual-dub/downlo
 import { isFfmpegInstalled } from 'csdm/node/video/ffmpeg/is-ffmpeg-installed';
 import { installFfmpeg } from 'csdm/node/video/ffmpeg/install-ffmpeg';
 import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
+import type { FfmpegSettings } from 'csdm/node/settings/settings';
+import type { Sequence } from 'csdm/common/types/sequence';
+
+type Config = {
+  recordingSystem?: RecordingSystem;
+  recordingOutput?: RecordingOutput;
+  encoderSoftware?: EncoderSoftware;
+  framerate?: number;
+  width?: number;
+  height?: number;
+  closeGameAfterRecording?: boolean;
+  concatenateSequences?: boolean;
+  ffmpegSettings?: FfmpegSettings;
+  outputFolderPath?: string;
+  sequences?: Sequence[];
+};
 
 export class VideoCommand extends Command {
   public static Name = 'video';
@@ -87,7 +103,7 @@ export class VideoCommand extends Command {
   private deathNoticesDuration: number | undefined;
   private cfg: string | undefined;
   private focusPlayerSteamId: string | undefined;
-  private config: Partial<Parameters> | undefined;
+  private config: Config | undefined;
 
   public getDescription() {
     return 'Generate videos from demos.';
@@ -141,80 +157,73 @@ export class VideoCommand extends Command {
       await migrateSettings();
 
       const settings = await getSettings();
+      const demo = await getDemoFromFilePath(this.demoPath);
       const controller = new AbortController();
 
-      let parameters: Parameters;
+      let parameters: Parameters = {
+        videoId: randomUUID(),
+        demoPath: this.demoPath,
+        outputFolderPath: this.outputFolderPath ?? path.dirname(this.demoPath),
+        signal: controller.signal,
+        checksum: demo.checksum,
+        game: demo.game,
+        tickrate: demo.tickrate,
+        recordingSystem: this.recordingSystem ?? settings.video.recordingSystem,
+        recordingOutput: this.recordingOutput ?? settings.video.recordingOutput,
+        encoderSoftware: this.encoderSoftware ?? settings.video.encoderSoftware,
+        framerate: this.framerate ?? settings.video.framerate,
+        width: this.width ?? settings.video.width,
+        height: this.height ?? settings.video.height,
+        closeGameAfterRecording: this.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
+        concatenateSequences: this.concatenateSequences ?? settings.video.concatenateSequences,
+        sequences: [],
+        ffmpegSettings: {
+          ...settings.video.ffmpegSettings,
+          audioBitrate: this.ffmpegAudioBitrate ?? settings.video.ffmpegSettings.audioBitrate,
+          constantRateFactor: this.ffmpegCrf ?? settings.video.ffmpegSettings.constantRateFactor,
+          videoCodec: this.ffmpegVideoCodec ?? settings.video.ffmpegSettings.videoCodec,
+          audioCodec: this.ffmpegAudioCodec ?? settings.video.ffmpegSettings.audioCodec,
+          videoContainer: this.ffmpegVideoContainer ?? settings.video.ffmpegSettings.videoContainer,
+          inputParameters: this.ffmpegInputParameters ?? settings.video.ffmpegSettings.inputParameters,
+          outputParameters: this.ffmpegOutputParameters ?? settings.video.ffmpegSettings.outputParameters,
+        },
+        onGameStart: () => {
+          console.log('Counter-Strike started');
+        },
+        onMoveFilesStart: () => {
+          console.log('Moving files…');
+        },
+        onSequenceStart: (number) => {
+          console.log(`Converting sequence ${number}…`);
+        },
+        onConcatenateSequencesStart: () => {
+          console.log('Concatenating sequences…');
+        },
+      };
+
       const config = this.config;
       if (config) {
-        if (!config.demoPath) {
-          throw new InvalidArgument('demoPath is required in config file');
-        }
-
-        const demo = await getDemoFromFilePath(config.demoPath);
-
         parameters = {
-          videoId: config.videoId ?? randomUUID(),
-          checksum: demo.checksum,
-          game: demo.game,
-          tickrate: demo.tickrate,
-          recordingSystem: config.recordingSystem ?? settings.video.recordingSystem,
-          recordingOutput: config.recordingOutput ?? settings.video.recordingOutput,
-          encoderSoftware: config.encoderSoftware ?? settings.video.encoderSoftware,
-          framerate: config.framerate ?? settings.video.framerate,
-          width: config.width ?? settings.video.width,
-          height: config.height ?? settings.video.height,
-          closeGameAfterRecording: config.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
-          concatenateSequences: config.concatenateSequences ?? settings.video.concatenateSequences,
-          ffmpegSettings: config.ffmpegSettings ?? settings.video.ffmpegSettings,
-          outputFolderPath: config.outputFolderPath ?? path.dirname(this.demoPath),
-          demoPath: config.demoPath ?? this.demoPath,
-          sequences: config.sequences ?? [],
-          signal: controller.signal,
-          onGameStart: () => {
-            console.log('Counter-Strike started');
-          },
-          onMoveFilesStart: () => {
-            console.log('Moving files…');
-          },
-          onSequenceStart: (number) => {
-            console.log(`Converting sequence ${number}…`);
-          },
-          onConcatenateSequencesStart: () => {
-            console.log('Concatenating sequences…');
-          },
+          ...parameters,
+          recordingSystem: config.recordingSystem ?? parameters.recordingSystem,
+          recordingOutput: config.recordingOutput ?? parameters.recordingOutput,
+          encoderSoftware: config.encoderSoftware ?? parameters.encoderSoftware,
+          framerate: config.framerate ?? parameters.framerate,
+          width: config.width ?? parameters.width,
+          height: config.height ?? parameters.height,
+          closeGameAfterRecording: config.closeGameAfterRecording ?? parameters.closeGameAfterRecording,
+          concatenateSequences: config.concatenateSequences ?? parameters.concatenateSequences,
+          ffmpegSettings: config.ffmpegSettings ?? parameters.ffmpegSettings,
+          outputFolderPath: config.outputFolderPath ?? parameters.outputFolderPath,
+          sequences: config.sequences ?? parameters.sequences,
         };
       } else {
-        const demo = await getDemoFromFilePath(this.demoPath);
-
         const player: Player | undefined = this.focusPlayerSteamId
           ? await fetchPlayer(this.focusPlayerSteamId)
           : undefined;
 
         parameters = {
-          videoId: randomUUID(),
-          checksum: demo.checksum,
-          game: demo.game,
-          tickrate: demo.tickrate,
-          recordingSystem: this.recordingSystem ?? settings.video.recordingSystem,
-          recordingOutput: this.recordingOutput ?? settings.video.recordingOutput,
-          encoderSoftware: this.encoderSoftware ?? settings.video.encoderSoftware,
-          framerate: this.framerate ?? settings.video.framerate,
-          width: this.width ?? settings.video.width,
-          height: this.height ?? settings.video.height,
-          closeGameAfterRecording: this.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
-          concatenateSequences: this.concatenateSequences ?? settings.video.concatenateSequences,
-          ffmpegSettings: {
-            ...settings.video.ffmpegSettings,
-            audioBitrate: this.ffmpegAudioBitrate ?? settings.video.ffmpegSettings.audioBitrate,
-            constantRateFactor: this.ffmpegCrf ?? settings.video.ffmpegSettings.constantRateFactor,
-            videoCodec: this.ffmpegVideoCodec ?? settings.video.ffmpegSettings.videoCodec,
-            audioCodec: this.ffmpegAudioCodec ?? settings.video.ffmpegSettings.audioCodec,
-            videoContainer: this.ffmpegVideoContainer ?? settings.video.ffmpegSettings.videoContainer,
-            inputParameters: this.ffmpegInputParameters ?? settings.video.ffmpegSettings.inputParameters,
-            outputParameters: this.ffmpegOutputParameters ?? settings.video.ffmpegSettings.outputParameters,
-          },
-          outputFolderPath: this.outputFolderPath ?? path.dirname(this.demoPath),
-          demoPath: this.demoPath ?? this.demoPath,
+          ...parameters,
           sequences: [
             {
               number: 1,
@@ -241,19 +250,6 @@ export class VideoCommand extends Command {
               cfg: this.cfg,
             },
           ],
-          signal: controller.signal,
-          onGameStart: () => {
-            console.log('Counter-Strike started');
-          },
-          onMoveFilesStart: () => {
-            console.log('Moving files…');
-          },
-          onSequenceStart: (number) => {
-            console.log(`Converting sequence ${number}…`);
-          },
-          onConcatenateSequencesStart: () => {
-            console.log('Concatenating sequences…');
-          },
         };
       }
 
