@@ -173,13 +173,13 @@ export class VideoCommand extends Command {
             console.log('Counter-Strike started');
           },
           onMoveFilesStart: () => {
-            console.log('Moving files...');
+            console.log('Moving files…');
           },
           onSequenceStart: (number) => {
-            console.log(`Converting sequence ${number}...`);
+            console.log(`Converting sequence ${number}…`);
           },
           onConcatenateSequencesStart: () => {
-            console.log('Concatenating sequences...');
+            console.log('Concatenating sequences…');
           },
         };
       } else {
@@ -245,41 +245,34 @@ export class VideoCommand extends Command {
             console.log('Counter-Strike started');
           },
           onMoveFilesStart: () => {
-            console.log('Moving files...');
+            console.log('Moving files…');
           },
           onSequenceStart: (number) => {
-            console.log(`Converting sequence ${number}...`);
+            console.log(`Converting sequence ${number}…`);
           },
           onConcatenateSequencesStart: () => {
-            console.log('Concatenating sequences...');
+            console.log('Concatenating sequences…');
           },
         };
       }
 
       if (parameters.recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
-        console.log('Installing HLAE...');
+        console.log('Installing HLAE…');
         await installHlae();
       }
 
       const shouldGenerateVideo = parameters.recordingOutput !== RecordingOutput.Images;
-      if (
-        shouldGenerateVideo &&
-        parameters.encoderSoftware === EncoderSoftware.VirtualDub &&
-        !(await isVirtualDubInstalled())
-      ) {
-        console.log('Installing VirtualDub...');
+      const { encoderSoftware } = parameters;
+      if (shouldGenerateVideo && encoderSoftware === EncoderSoftware.VirtualDub && !(await isVirtualDubInstalled())) {
+        console.log('Installing VirtualDub…');
         await downloadAndExtractVirtualDub();
       }
 
-      if (
-        shouldGenerateVideo &&
-        parameters.encoderSoftware === EncoderSoftware.FFmpeg &&
-        !(await isFfmpegInstalled())
-      ) {
-        console.log('Installing FFmpeg...');
+      if (shouldGenerateVideo && encoderSoftware === EncoderSoftware.FFmpeg && !(await isFfmpegInstalled())) {
+        console.log('Installing FFmpeg…');
         await installFfmpeg();
       }
-      console.log(`Starting video generation...\n${JSON.stringify(parameters)}`);
+
       await generateVideo(parameters);
 
       console.log(`Video generated in ${parameters.outputFolderPath}`);
@@ -350,6 +343,9 @@ export class VideoCommand extends Command {
         this.config = JSON.parse(commentFreeJson);
         return;
       } catch (error) {
+        if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+          throw new Error(`Config file not found "${configFilePath}"`, { cause: error });
+        }
         throw new Error('Failed to read or parse config file', { cause: error });
       }
     }

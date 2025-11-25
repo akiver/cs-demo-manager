@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import { getVirtualDubVersionFilePath } from './get-virtual-dub-version-file-path';
 import { getVirtualDubExecutablePath } from './get-virtual-dub-executable-path';
 
-export async function getInstalledVirtualDubVersion(): Promise<string | undefined> {
+export async function getInstalledVirtualDubVersion() {
   const versionFilePath = getVirtualDubVersionFilePath();
   if (!(await fs.pathExists(versionFilePath)) || !(await fs.pathExists(getVirtualDubExecutablePath()))) {
     return undefined;

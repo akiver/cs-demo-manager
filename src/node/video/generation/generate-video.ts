@@ -131,7 +131,8 @@ async function buildVideos({ signal, ...options }: Parameters) {
 }
 
 export async function generateVideo(parameters: Parameters) {
-  logger.log(`Generating video with id ${parameters.videoId}`);
+  logger.log('Generating video with parameters:');
+  logger.log(parameters);
 
   const {
     checksum,
