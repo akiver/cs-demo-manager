@@ -59,7 +59,7 @@ export class VideoCommand extends Command {
   private readonly deathNoticesDurationFlag = 'death-notices-duration';
   private readonly cfgFlag = 'cfg';
   private readonly focusPlayerFlag = 'focus-player';
-  private readonly videoConfigFileFlag = 'video-config-file';
+  private readonly configFileFlag = 'config-file';
   private outputFolderPath: string | undefined;
   private demoPath: string = '';
   private startTick: number = 0;
@@ -87,7 +87,7 @@ export class VideoCommand extends Command {
   private deathNoticesDuration: number | undefined;
   private cfg: string | undefined;
   private focusPlayerSteamId: string | undefined;
-  private videoConfigJson: Partial<Parameters> | undefined;
+  private config: Partial<Parameters> | undefined;
 
   public getDescription() {
     return 'Generate videos from demos.';
@@ -131,7 +131,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.deathNoticesDurationFlag} <number>`);
     console.log(`  --${this.cfgFlag} <string>`);
     console.log(`  --${this.focusPlayerFlag} <steamId>`);
-    console.log(`  --${this.videoConfigFileFlag} <path> (JSON file for video config)`);
+    console.log(`  --${this.configFileFlag} <path> (path to config JSON file)`);
   }
 
   public async run() {
@@ -144,33 +144,30 @@ export class VideoCommand extends Command {
       const controller = new AbortController();
 
       let parameters: Parameters;
-      // Handle requests using video configuration JSON file.
-      if (this.videoConfigJson) {
-        // Null check required for type safety
-        if (!this.videoConfigJson.demoPath) {
-          throw new InvalidArgument('demoPath is required in video config JSON');
+      if (this.config) {
+        if (!this.config.demoPath) {
+          throw new InvalidArgument('demoPath is required in config file');
         }
 
-        const demo = await getDemoFromFilePath(this.videoConfigJson.demoPath);
+        const demo = await getDemoFromFilePath(this.config.demoPath);
 
         parameters = {
-          videoId: this.videoConfigJson.videoId ?? randomUUID(),
+          videoId: this.config.videoId ?? randomUUID(),
           checksum: demo.checksum,
           game: demo.game,
           tickrate: demo.tickrate,
-          recordingSystem: this.videoConfigJson?.recordingSystem ?? settings.video.recordingSystem,
-          recordingOutput: this.videoConfigJson?.recordingOutput ?? settings.video.recordingOutput,
-          encoderSoftware: this.videoConfigJson?.encoderSoftware ?? settings.video.encoderSoftware,
-          framerate: this.videoConfigJson?.framerate ?? settings.video.framerate,
-          width: this.videoConfigJson?.width ?? settings.video.width,
-          height: this.videoConfigJson?.height ?? settings.video.height,
-          closeGameAfterRecording:
-            this.videoConfigJson?.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
-          concatenateSequences: this.videoConfigJson?.concatenateSequences ?? settings.video.concatenateSequences,
-          ffmpegSettings: this.videoConfigJson?.ffmpegSettings ?? settings.video.ffmpegSettings,
-          outputFolderPath: this.videoConfigJson?.outputFolderPath ?? path.dirname(this.demoPath),
-          demoPath: this.videoConfigJson?.demoPath ?? this.demoPath,
-          sequences: this.videoConfigJson?.sequences ?? [],
+          recordingSystem: this.config?.recordingSystem ?? settings.video.recordingSystem,
+          recordingOutput: this.config?.recordingOutput ?? settings.video.recordingOutput,
+          encoderSoftware: this.config?.encoderSoftware ?? settings.video.encoderSoftware,
+          framerate: this.config?.framerate ?? settings.video.framerate,
+          width: this.config?.width ?? settings.video.width,
+          height: this.config?.height ?? settings.video.height,
+          closeGameAfterRecording: this.config?.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
+          concatenateSequences: this.config?.concatenateSequences ?? settings.video.concatenateSequences,
+          ffmpegSettings: this.config?.ffmpegSettings ?? settings.video.ffmpegSettings,
+          outputFolderPath: this.config?.outputFolderPath ?? path.dirname(this.demoPath),
+          demoPath: this.config?.demoPath ?? this.demoPath,
+          sequences: this.config?.sequences ?? [],
           signal: controller.signal,
           onGameStart: () => {
             console.log('Counter-Strike started');
@@ -334,32 +331,26 @@ export class VideoCommand extends Command {
         [this.deathNoticesDurationFlag]: { type: 'string' },
         [this.cfgFlag]: { type: 'string' },
         [this.focusPlayerFlag]: { type: 'string' },
-        [this.videoConfigFileFlag]: { type: 'string' },
+        [this.configFileFlag]: { type: 'string', short: 'c' },
       },
       allowPositionals: true,
       args: this.args,
     });
 
-    // Parse video config file if provided
-    if (values[this.videoConfigFileFlag]) {
-      const videoConfigFilePath = values[this.videoConfigFileFlag];
+    const configFilePath = values[this.configFileFlag];
+    if (configFilePath) {
       try {
-        if (!videoConfigFilePath) {
-          throw new InvalidArgument('Video config file path is undefined');
-        }
-
-        const jsonStr = await fs.readFile(videoConfigFilePath, { encoding: 'utf8' });
-
+        const json = await fs.readFile(configFilePath, { encoding: 'utf8' });
         const matchHashComment = new RegExp(/(#.*)/, 'gi');
         // Remove comments (//, /* */ and #) from JSONC file
-        const commentFreeJson = jsonStr
+        const commentFreeJson = json
           .replace(matchHashComment, '')
           .replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '')
           .trim();
-        this.videoConfigJson = JSON.parse(commentFreeJson);
+        this.config = JSON.parse(commentFreeJson);
         return;
-      } catch (err) {
-        throw new InvalidArgument(`Failed to read or parse video config file: ${err}`);
+      } catch (error) {
+        throw new Error('Failed to read or parse config file', { cause: error });
       }
     }
 
