@@ -3,7 +3,6 @@ import { parseArgs } from 'node:util';
 import path from 'node:path';
 import fs from 'fs-extra';
 import { Command } from './command';
-import type { Player } from 'csdm/common/types/player';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
@@ -218,9 +217,7 @@ export class VideoCommand extends Command {
           sequences: config.sequences ?? parameters.sequences,
         };
       } else {
-        const player: Player | undefined = this.focusPlayerSteamId
-          ? await fetchPlayer(this.focusPlayerSteamId)
-          : undefined;
+        const player = this.focusPlayerSteamId ? await fetchPlayer(this.focusPlayerSteamId) : undefined;
 
         parameters = {
           ...parameters,
@@ -327,6 +324,16 @@ export class VideoCommand extends Command {
       args: this.args,
     });
 
+    if (positionals.length === 0) {
+      throw new InvalidArgument('Missing demo path');
+    }
+
+    const [demoPath] = positionals;
+    if (typeof demoPath !== 'string' || !demoPath.endsWith('.dem')) {
+      throw new InvalidArgument('Invalid demo path');
+    }
+    this.demoPath = demoPath;
+
     const configFilePath = values[this.configFileFlag];
     if (configFilePath) {
       try {
@@ -350,12 +357,6 @@ export class VideoCommand extends Command {
     if (positionals.length < 3) {
       throw new InvalidArgument('Missing arguments');
     }
-
-    const demoPath = positionals[0];
-    if (typeof demoPath !== 'string' || !demoPath.endsWith('.dem')) {
-      throw new InvalidArgument('Invalid demo path');
-    }
-    this.demoPath = demoPath;
 
     const startTick = Number(positionals[1]);
     if (Number.isNaN(startTick)) {
