@@ -144,30 +144,31 @@ export class VideoCommand extends Command {
       const controller = new AbortController();
 
       let parameters: Parameters;
-      if (this.config) {
-        if (!this.config.demoPath) {
+      const config = this.config;
+      if (config) {
+        if (!config.demoPath) {
           throw new InvalidArgument('demoPath is required in config file');
         }
 
-        const demo = await getDemoFromFilePath(this.config.demoPath);
+        const demo = await getDemoFromFilePath(config.demoPath);
 
         parameters = {
-          videoId: this.config.videoId ?? randomUUID(),
+          videoId: config.videoId ?? randomUUID(),
           checksum: demo.checksum,
           game: demo.game,
           tickrate: demo.tickrate,
-          recordingSystem: this.config?.recordingSystem ?? settings.video.recordingSystem,
-          recordingOutput: this.config?.recordingOutput ?? settings.video.recordingOutput,
-          encoderSoftware: this.config?.encoderSoftware ?? settings.video.encoderSoftware,
-          framerate: this.config?.framerate ?? settings.video.framerate,
-          width: this.config?.width ?? settings.video.width,
-          height: this.config?.height ?? settings.video.height,
-          closeGameAfterRecording: this.config?.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
-          concatenateSequences: this.config?.concatenateSequences ?? settings.video.concatenateSequences,
-          ffmpegSettings: this.config?.ffmpegSettings ?? settings.video.ffmpegSettings,
-          outputFolderPath: this.config?.outputFolderPath ?? path.dirname(this.demoPath),
-          demoPath: this.config?.demoPath ?? this.demoPath,
-          sequences: this.config?.sequences ?? [],
+          recordingSystem: config.recordingSystem ?? settings.video.recordingSystem,
+          recordingOutput: config.recordingOutput ?? settings.video.recordingOutput,
+          encoderSoftware: config.encoderSoftware ?? settings.video.encoderSoftware,
+          framerate: config.framerate ?? settings.video.framerate,
+          width: config.width ?? settings.video.width,
+          height: config.height ?? settings.video.height,
+          closeGameAfterRecording: config.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
+          concatenateSequences: config.concatenateSequences ?? settings.video.concatenateSequences,
+          ffmpegSettings: config.ffmpegSettings ?? settings.video.ffmpegSettings,
+          outputFolderPath: config.outputFolderPath ?? path.dirname(this.demoPath),
+          demoPath: config.demoPath ?? this.demoPath,
+          sequences: config.sequences ?? [],
           signal: controller.signal,
           onGameStart: () => {
             console.log('Counter-Strike started');
