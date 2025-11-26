@@ -35,7 +35,7 @@ export function createDatabaseConnection(settings: DatabaseSettings) {
       user: settings.username,
       password: settings.password,
       database: settings.database,
-      connectionTimeoutMillis: 3000,
+      connectionTimeoutMillis: 10000,
     }),
   });
 
