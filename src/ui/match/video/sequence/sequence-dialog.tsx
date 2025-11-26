@@ -66,7 +66,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
           <ContextMenuProvider>
             <div className="flex h-full flex-col overflow-auto bg-gray-50 p-16">
               <div className="mb-12 flex max-h-[520px] gap-x-12">
-                <div className="flex flex-col gap-y-8 overflow-auto">
+                <div className="flex max-w-[142px] flex-col gap-y-8 overflow-auto">
                   <div className="flex flex-col gap-y-8">
                     <StartTickInput />
                     <EndTickInput />

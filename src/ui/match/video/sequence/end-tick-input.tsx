@@ -34,19 +34,17 @@ export function EndTickInput() {
       <InputLabel htmlFor={id}>
         <Trans context="Input label">End tick</Trans>
       </InputLabel>
-      <div className="w-[112px]">
-        <InputNumber
-          id={id}
-          min={1}
-          placeholder={t({
-            context: 'Input placeholder',
-            message: 'End tick',
-          })}
-          value={sequence.endTick}
-          onChange={onChange}
-          onBlur={onBlur}
-        />
-      </div>
+      <InputNumber
+        id={id}
+        min={1}
+        placeholder={t({
+          context: 'Input placeholder',
+          message: 'End tick',
+        })}
+        value={sequence.endTick}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
     </div>
   );
 }
