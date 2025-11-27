@@ -23,6 +23,7 @@ import { RecordingSystemSelect } from './recording-system-select';
 import { RecordingOutputSelect } from './recording-output-select';
 import { DocumentationLink } from 'csdm/ui/components/links/documentation-link';
 import { WatchSequencesButton } from './watch-sequences-button';
+import { VideoActionsMenu } from './video-actions-menu';
 
 export function MatchVideo() {
   return (
@@ -36,6 +37,7 @@ export function MatchVideo() {
           <WatchSequencesButton />
           <ResetSettingsButton />
           <DeleteSequencesButton />
+          <VideoActionsMenu />
           <SequencesSummary />
           <div className="ml-auto">
             <DocumentationLink url="https://cs-demo-manager.com/docs/guides/video" />

@@ -42,6 +42,7 @@ import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { getCameraPreviewBase64 } from 'csdm/node/filesystem/cameras/get-camera-preview-base64';
 import { getImageInformation } from 'csdm/node/filesystem/get-image-information';
 import { readImageFile } from 'csdm/node/filesystem/image';
+import { writeJsonFile } from 'csdm/node/filesystem/write-json-file';
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {
@@ -100,6 +101,7 @@ const api: PreloadApi = {
   getPathBasename: path.basename,
   elementToImage,
   readImageFile,
+  writeJsonFile,
 
   showMainWindow: () => {
     ipcRenderer.invoke(IPCChannel.ShowWindow);

@@ -249,6 +249,7 @@ msgstr ""
 #: src/ui/match/heatmap/match-heatmap.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 #: src/ui/match/rounds/round/use-update-round-comment.tsx
+#: src/ui/match/video/video-actions-menu.tsx
 #: src/ui/player/heatmap/player-heatmap.tsx
 #: src/ui/player/use-update-player-comment.tsx
 #: src/ui/players/players-tags-dialogs.tsx
@@ -1684,6 +1685,14 @@ msgstr "Nome de usuário"
 msgctxt "Input placeholder"
 msgid "Username"
 msgstr "Nome de usuário"
+
+#: src/ui/components/kebab-menu.tsx
+msgid "Close menu"
+msgstr ""
+
+#: src/ui/components/kebab-menu.tsx
+msgid "Open menu"
+msgstr ""
 
 #: src/ui/components/last-matches.tsx
 msgid "No matches."
@@ -5760,6 +5769,21 @@ msgstr "Navegar"
 msgctxt "Software installation status"
 msgid "Not installed"
 msgstr "Não instalado"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Toast"
+msgid "File created, click here to reveal it"
+msgstr ""
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Copy as JSON"
+msgstr ""
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Export as JSON"
+msgstr ""
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"

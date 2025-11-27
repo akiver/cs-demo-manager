@@ -27,7 +27,8 @@ import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
 import type { FfmpegSettings } from 'csdm/node/settings/settings';
 import type { Sequence } from 'csdm/common/types/sequence';
 
-type Config = {
+export type VideoCommandConfig = {
+  demoPath: string;
   recordingSystem?: RecordingSystem;
   recordingOutput?: RecordingOutput;
   encoderSoftware?: EncoderSoftware;
@@ -102,7 +103,7 @@ export class VideoCommand extends Command {
   private deathNoticesDuration: number | undefined;
   private cfg: string | undefined;
   private focusPlayerSteamId: string | undefined;
-  private config: Config | undefined;
+  private config: VideoCommandConfig | undefined;
 
   public getDescription() {
     return 'Generate videos from demos.';
@@ -328,12 +329,6 @@ export class VideoCommand extends Command {
       throw new InvalidArgument('Missing demo path');
     }
 
-    const [demoPath] = positionals;
-    if (typeof demoPath !== 'string' || !demoPath.endsWith('.dem')) {
-      throw new InvalidArgument('Invalid demo path');
-    }
-    this.demoPath = demoPath;
-
     const configFilePath = values[this.configFileFlag];
     if (configFilePath) {
       try {
@@ -344,7 +339,13 @@ export class VideoCommand extends Command {
           .replace(matchHashComment, '')
           .replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '')
           .trim();
-        this.config = JSON.parse(commentFreeJson);
+        this.config = JSON.parse(commentFreeJson) as VideoCommandConfig;
+
+        const { demoPath } = this.config;
+        if (typeof demoPath !== 'string' || !demoPath.endsWith('.dem')) {
+          throw new InvalidArgument('Invalid demo path');
+        }
+        this.demoPath = demoPath;
         return;
       } catch (error) {
         if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
@@ -353,6 +354,12 @@ export class VideoCommand extends Command {
         throw new Error('Failed to read or parse config file', { cause: error });
       }
     }
+
+    const [demoPath] = positionals;
+    if (typeof demoPath !== 'string' || !demoPath.endsWith('.dem')) {
+      throw new InvalidArgument('Invalid demo path');
+    }
+    this.demoPath = demoPath;
 
     if (positionals.length < 3) {
       throw new InvalidArgument('Missing arguments');

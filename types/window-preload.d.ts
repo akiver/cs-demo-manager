@@ -25,6 +25,7 @@ import type { getDemoAudioData } from 'csdm/preload/get-demo-audio-data';
 import type { getDemoAudioFilePath } from 'csdm/node/demo/get-demo-audio-file-path';
 import type { getCameraPreviewBase64 } from 'csdm/node/filesystem/cameras/get-camera-preview-base64';
 import type { getImageInformation } from 'csdm/node/filesystem/get-image-information';
+import type { writeJsonFile } from 'csdm/node/filesystem/write-json-file';
 
 declare global {
   interface PreloadApi {
@@ -49,6 +50,7 @@ declare global {
     parseSettingsFile: () => Promise<Settings>;
     updateSettings: (settings: DeepPartial<Settings>, options?: UpdateSettingsOptions) => Promise<Settings>;
     resetSettings: () => Promise<void>;
+    writeJsonFile: typeof writeJsonFile;
     readTableState: typeof readTableState;
     writeTableState: typeof writeTableState;
     getCameraPreviewBase64: typeof getCameraPreviewBase64;
