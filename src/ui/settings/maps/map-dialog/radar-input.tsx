@@ -34,7 +34,7 @@ export function RadarInput() {
   const selectRadarImageFile = async () => {
     const options: OpenDialogOptions = {
       properties: ['openFile'],
-      filters: [{ extensions: ['png'], name: t`'PNG Files` }],
+      filters: [{ extensions: ['png'], name: t`PNG Files` }],
     };
     const { canceled, filePaths }: OpenDialogReturnValue = await window.csdm.showOpenDialog(options);
     if (canceled || filePaths.length === 0) {
