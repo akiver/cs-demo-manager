@@ -7377,6 +7377,7 @@ msgid "Invalid PNG file."
 msgstr ""
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
+#: src/ui/settings/maps/map-dialog/radar-input.tsx
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "PNG Files"
 msgstr ""
@@ -7397,10 +7398,6 @@ msgstr ""
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Scale is required."
-msgstr ""
-
-#: src/ui/settings/maps/map-dialog/radar-input.tsx
-msgid "'PNG Files"
 msgstr ""
 
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
