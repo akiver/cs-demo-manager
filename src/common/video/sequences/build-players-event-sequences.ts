@@ -3,7 +3,7 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { MatchPlayer } from 'csdm/common/types/match-player';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
-import { PlayerSequenceEvent } from './player-sequence-event';
+import { PlayerSequenceEvent } from 'csdm/common/types/player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 import type { Kill } from 'csdm/common/types/kill';
@@ -31,7 +31,10 @@ type Options = {
   rounds: number[];
   perspective: Perspective;
   weapons: WeaponName[];
-  settings: VideoSettings;
+  settings: Pick<
+    VideoSettings,
+    'showOnlyDeathNotices' | 'deathNoticesDuration' | 'showXRay' | 'showAssists' | 'recordAudio' | 'playerVoicesEnabled'
+  >;
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   firstSequenceNumber: number;

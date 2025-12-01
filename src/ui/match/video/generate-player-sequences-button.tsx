@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { PlayerSequenceEvent } from './sequences/player-sequence-event';
+import { PlayerSequenceEvent } from 'csdm/common/types/player-sequence-event';
 import { WeaponsFilter } from 'csdm/ui/components/dropdown-filter/weapons-filter';
 import { uniqueArray } from 'csdm/common/array/unique-array';
 import type { Match } from 'csdm/common/types/match';

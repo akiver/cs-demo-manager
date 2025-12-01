@@ -121,7 +121,7 @@ class WebSocketServer {
   };
 
   private onServerCreated = () => {
-    logger.log(`WS:: server listening on port ${WEB_SOCKET_SERVER_PORT}`);
+    logger.debug(`WS:: server listening on port ${WEB_SOCKET_SERVER_PORT}`);
   };
 
   private onConnection = (webSocket: WebSocket, request: IncomingMessage): void => {
@@ -135,19 +135,19 @@ class WebSocketServer {
     const processName = url.searchParams.get('process');
 
     if (processName === 'main') {
-      logger.log(`WS:: main process socket connected`);
+      logger.debug(`WS:: main process socket connected`);
       this.mainProcessSocket = webSocket;
       this.mainProcessSocket.on('close', this.onMainProcessSocketDisconnect);
       this.mainProcessSocket.on('error', this.onMainProcessSocketError);
       this.mainProcessSocket.on('message', this.onMainProcessSocketMessage);
     } else if (processName === 'renderer') {
-      logger.log(`WS:: renderer process socket connected`);
+      logger.debug(`WS:: renderer process socket connected`);
       this.rendererProcessSocket = webSocket;
       this.rendererProcessSocket.on('close', this.onRendererProcessSocketDisconnect);
       this.rendererProcessSocket.on('error', this.onRendererProcessSocketError);
       this.rendererProcessSocket.on('message', this.onRendererProcessSocketMessage);
     } else {
-      logger.log(`WS:: game process socket connected`);
+      logger.debug(`WS:: game process socket connected`);
       this.gameProcessSocket = webSocket;
       this.gameProcessSocket.on('close', this.onGameProcessSocketDisconnect);
       this.gameProcessSocket.on('error', this.onGameProcessSocketError);
@@ -295,7 +295,7 @@ class WebSocketServer {
     try {
       const message: Omit<IdentifiableClientMessage<GameClientMessageName>, 'uuid'> = JSON.parse(data.toString());
       const { name, payload } = message;
-      logger.log(`WS:: message with name ${name} received from game process`);
+      logger.debug(`WS:: message with name ${name} received from game process`);
 
       const listeners = this.gameListeners.get(name);
       if (listeners) {
@@ -310,7 +310,7 @@ class WebSocketServer {
   };
 
   private onGameProcessSocketDisconnect = (code: number, reason: string): void => {
-    logger.log('WS:: game process socket disconnected', code, reason);
+    logger.debug('WS:: game process socket disconnected', code, reason);
     this.gameProcessSocket = null;
 
     this.gameListeners.clear();
@@ -391,7 +391,7 @@ if (typeof window !== 'undefined') {
 export const server = new WebSocketServer();
 
 process.on('message', function (message) {
-  logger.log('WS:: message from main process', message);
+  logger.debug('WS:: message from main process', message);
   if (message === 'ping') {
     process.send?.('pong');
   }

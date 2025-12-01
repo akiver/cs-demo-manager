@@ -7,13 +7,14 @@ import type { VideoContainer } from 'csdm/common/types/video-container';
 import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 
 type ConcatenateVideoOptions = {
+  ffmpegExecutablePath: string;
   sequences: Sequence[];
   outputFolderPath: string;
   videoContainer: VideoContainer;
 };
 
 export async function concatenateVideosFromSequences(
-  { sequences, outputFolderPath, videoContainer }: ConcatenateVideoOptions,
+  { ffmpegExecutablePath, sequences, outputFolderPath, videoContainer }: ConcatenateVideoOptions,
   signal: AbortSignal,
 ) {
   const videoPaths = sequences.map((sequence) => {
@@ -38,7 +39,7 @@ export async function concatenateVideosFromSequences(
     '-c copy',
     `"${path.join(outputFolderPath, `output.${videoContainer}`)}"`,
   ];
-  await executeFfmpeg(args, signal);
+  await executeFfmpeg(ffmpegExecutablePath, args, signal);
 
   await Promise.all(videoPaths.map((videoPath) => fs.remove(videoPath)));
 }

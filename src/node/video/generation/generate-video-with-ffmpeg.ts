@@ -13,6 +13,7 @@ import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RawFilesNotFoundError } from '../errors/raw-files-not-found';
 
 async function convertGameAudioFile(
+  ffmpegExecutablePath: string,
   wavFilePath: string,
   audioCodec: string,
   audioBitrate: number,
@@ -47,7 +48,7 @@ async function convertGameAudioFile(
     `"${tmpFilePath}"`,
   ];
 
-  await executeFfmpeg(args, signal);
+  await executeFfmpeg(ffmpegExecutablePath, args, signal);
 
   const audioFilePath = wavFilePath.replace(/\.wav$/, extension);
   await fs.move(tmpFilePath, audioFilePath, { overwrite: true });
@@ -56,6 +57,7 @@ async function convertGameAudioFile(
 }
 
 type GenerateVideoWithFFmpegSettings = {
+  ffmpegExecutablePath: string;
   recordingSystem: RecordingSystem;
   recordingOutput: RecordingOutput;
   game: Game;
@@ -76,6 +78,7 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
   const { tgaFiles, wavFilePath, videoFilePath } = await getSequenceRawFiles(settings);
 
   const {
+    ffmpegExecutablePath,
     framerate,
     inputParameters,
     videoCodec,
@@ -114,7 +117,13 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
     const hasAudio = recordAudio && wavFilePath;
     if (hasAudio) {
       // The game generates PCM audio, we need to convert it to the desired format
-      const audioFilePath = await convertGameAudioFile(wavFilePath, audioCodec, audioBitrate, signal);
+      const audioFilePath = await convertGameAudioFile(
+        ffmpegExecutablePath,
+        wavFilePath,
+        audioCodec,
+        audioBitrate,
+        signal,
+      );
 
       args.push(`-i "${audioFilePath}"`);
     }
@@ -130,7 +139,7 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
       args.push(outputParameters);
     }
 
-    return await executeFfmpeg(args, signal);
+    return await executeFfmpeg(ffmpegExecutablePath, args, signal);
   }
 
   let rawFilesPathPattern: string;
@@ -174,5 +183,5 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
 
   args.push(`"${outputPath}"`);
 
-  await executeFfmpeg(args, signal);
+  await executeFfmpeg(ffmpegExecutablePath, args, signal);
 }

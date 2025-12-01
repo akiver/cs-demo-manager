@@ -18,7 +18,7 @@ import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-coun
 import { deleteJsonActionsFile } from 'csdm/node/counter-strike/json-actions-file/delete-json-actions-file';
 import { moveStartMovieFilesToOutputFolder } from 'csdm/node/video/generation/move-startmovie-files-to-output-folder';
 import type { Sequence } from 'csdm/common/types/sequence';
-import type { VideoContainer } from 'csdm/common/types/video-container';
+import type { FfmpegSettings } from 'csdm/node/settings/settings';
 import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
 import { assertVideoGenerationIsPossible } from './assert-video-generation-is-possible';
 import { deleteSequencesRawFiles } from './delete-sequences-raw-files';
@@ -27,16 +27,8 @@ import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { moveHlaeRawFilesToOutputFolder } from './move-hlae-files-to-output-folder';
 import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
-
-type FfmpegSettings = {
-  audioBitrate: number;
-  constantRateFactor: number;
-  videoContainer: VideoContainer;
-  videoCodec: string;
-  audioCodec: string;
-  inputParameters: string;
-  outputParameters: string;
-};
+import { getFfmpegExecutablePath } from '../ffmpeg/ffmpeg-location';
+import { isEmptyString } from 'csdm/common/string/is-empty-string';
 
 export type Parameters = {
   videoId: string;
@@ -51,7 +43,7 @@ export type Parameters = {
   height: number;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
-  ffmpegSettings: FfmpegSettings;
+  ffmpegSettings: Omit<FfmpegSettings, 'customLocationEnabled'>;
   outputFolderPath: string;
   demoPath: string;
   sequences: Sequence[];
@@ -84,6 +76,9 @@ async function buildVideos({ signal, ...options }: Parameters) {
     if (encoderSoftware === EncoderSoftware.FFmpeg) {
       await generateVideoWithFFmpeg(
         {
+          ffmpegExecutablePath: !isEmptyString(ffmpegSettings.customExecutableLocation)
+            ? ffmpegSettings.customExecutableLocation
+            : await getFfmpegExecutablePath(),
           recordingSystem,
           recordingOutput,
           game,
@@ -121,6 +116,9 @@ async function buildVideos({ signal, ...options }: Parameters) {
     onConcatenateSequencesStart();
     await concatenateVideosFromSequences(
       {
+        ffmpegExecutablePath: !isEmptyString(ffmpegSettings.customExecutableLocation)
+          ? ffmpegSettings.customExecutableLocation
+          : await getFfmpegExecutablePath(),
         outputFolderPath,
         sequences,
         videoContainer: ffmpegSettings.videoContainer,
@@ -131,8 +129,8 @@ async function buildVideos({ signal, ...options }: Parameters) {
 }
 
 export async function generateVideo(parameters: Parameters) {
-  logger.log('Generating video with parameters:');
-  logger.log(parameters);
+  logger.debug('Generating video with parameters:');
+  logger.debug(parameters);
 
   const {
     checksum,
@@ -158,12 +156,12 @@ export async function generateVideo(parameters: Parameters) {
   const sequences = sortSequencesByStartTick(parameters.sequences);
 
   const cleanupFiles = async () => {
-    logger.log(`Cleaning up files for video with id ${videoId}`);
+    logger.debug(`Cleaning up files for video with id ${videoId}`);
     await Promise.all([deleteJsonActionsFile(demoPath), deleteSequencesRawFiles(parameters)]);
   };
 
   async function onAbort() {
-    logger.log(`Aborting video generation with id ${videoId}`);
+    logger.debug(`Aborting video generation with id ${videoId}`);
     if (isWindows) {
       await Promise.all([killHlaeProcess(), killVirtualDubProcess()]);
     }
@@ -230,6 +228,7 @@ export async function generateVideo(parameters: Parameters) {
         signal,
         uninstallPluginOnExit: false,
         registerFfmpegLocation: shouldGenerateVideo,
+        onGameStart: parameters.onGameStart,
       });
     } else {
       await startCounterStrike({
@@ -273,7 +272,7 @@ export async function generateVideo(parameters: Parameters) {
     }
 
     await cleanupFiles();
-    logger.log(`Generating video with id ${videoId} ended`);
+    logger.debug(`Generating video with id ${videoId} ended`);
   } catch (error) {
     if (signal.aborted) {
       throw abortError;

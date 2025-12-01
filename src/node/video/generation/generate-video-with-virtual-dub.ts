@@ -106,14 +106,14 @@ async function executeVirtualDub(signal: AbortSignal) {
     }
 
     const command = `"${getVirtualDubExecutablePath()}" /s ${SCRIPT_FILENAME} /x`;
-    logger.log('Starting VirtualDub', command);
+    logger.debug('Starting VirtualDub', command);
     const virtualDubProcess = exec(command, {
       cwd: getVirtualDubFolderPath(),
       windowsHide: true,
     });
 
     virtualDubProcess.on('exit', (code) => {
-      logger.log('VirtualDub exit', code);
+      logger.debug('VirtualDub exit', code);
       if (signal.aborted) {
         return reject(abortError);
       }

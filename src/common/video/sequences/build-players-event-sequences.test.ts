@@ -3,7 +3,7 @@ import type { Kill } from 'csdm/common/types/kill';
 import type { Match } from 'csdm/common/types/match';
 import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { buildPlayersEventSequences } from './build-players-event-sequences';
-import { PlayerSequenceEvent } from './player-sequence-event';
+import { PlayerSequenceEvent } from 'csdm/common/types/player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
 import { defaultSettings } from 'csdm/node/settings/default-settings';
 

@@ -7,6 +7,7 @@ import { watch } from 'chokidar';
 import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 
 export interface ILogger {
+  debug: (...data: any[]) => void;
   log: (...data: any[]) => void;
   warn: (...data: any[]) => void;
   error: (...data: any[]) => void;
@@ -14,7 +15,7 @@ export interface ILogger {
   clear: () => Promise<void>;
 }
 
-type Level = 'log' | 'warn' | 'error';
+type Level = 'debug' | 'log' | 'warn' | 'error';
 
 class Logger implements ILogger {
   private logFolderPath: string;
@@ -23,6 +24,7 @@ class Logger implements ILogger {
   private watcher: FSWatcher | null = null;
   private cache: any[] = [];
   private shouldLogToGlobalConsole = true;
+  private isVerbose = true;
 
   public constructor() {
     this.logFolderPath = path.join(getAppFolderPath(), 'logs');
@@ -39,7 +41,19 @@ class Logger implements ILogger {
     // This flag has been added after noticing that on Windows, logging the insertion of many demos NOT already in the
     // database (tested with 256 demos) it blocks the WebSocket server process in production build.
     this.shouldLogToGlobalConsole = IS_DEV || process.type === 'renderer';
+    if (process.env.PROCESS_NAME === 'cli' && !process.argv.includes('--verbose')) {
+      this.isVerbose = false;
+    }
   }
+
+  public debug = (...data: any[]) => {
+    if (!this.isVerbose) {
+      return;
+    }
+
+    this.logToConsole(data, 'debug');
+    this.writeLogToFile(data, 'debug');
+  };
 
   public log = (...data: any[]) => {
     this.logToConsole(data, 'log');

@@ -21,7 +21,7 @@ async function deleteLogFile(csgoFolderPath: string) {
 
 export async function installCsGoServerPlugin() {
   try {
-    logger.log('Installing CSGO server plugin');
+    logger.debug('Installing CSGO server plugin');
     const csgoFolderPath = await getCsgoFolderPathOrThrow(Game.CSGO);
     const pluginFolder = getServerPluginFolder(csgoFolderPath);
     await deleteLogFile(csgoFolderPath);
@@ -40,7 +40,7 @@ export async function installCsGoServerPlugin() {
 
 export async function uninstallCsGoServerPlugin() {
   try {
-    logger.log('Uninstalling CSGO server plugin');
+    logger.debug('Uninstalling CSGO server plugin');
     const csgoFolderPath = await getCsgoFolderPathOrThrow(Game.CSGO);
     const pluginFolder = getServerPluginFolder(csgoFolderPath);
     const binaryName = getBinaryFileName();

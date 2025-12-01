@@ -71,7 +71,7 @@ type StartHlaeOptions = {
 };
 
 async function startHlae({ command, signal, game }: StartHlaeOptions) {
-  logger.log('Starting HLAE with command', command);
+  logger.debug('Starting HLAE with command', command);
 
   return new Promise<void>((resolve, reject) => {
     const hlaeProcess = exec(command, { windowsHide: true }, (error, stdout, stderr) => {
@@ -80,15 +80,15 @@ async function startHlae({ command, signal, game }: StartHlaeOptions) {
       }
 
       if (stdout) {
-        logger.log('HLAE stdout:', stdout);
+        logger.debug('HLAE stdout:', stdout);
       }
       if (stderr) {
-        logger.log('HLAE stderr:', stderr);
+        logger.debug('HLAE stderr:', stderr);
       }
     });
 
     hlaeProcess.on('exit', async (code) => {
-      logger.log('HLAE exited with code', code);
+      logger.debug('HLAE exited with code', code);
 
       if (signal?.aborted) {
         return reject(abortError);

@@ -1,3 +1,4 @@
+import { type ParseArgsOptionsConfig } from 'node:util';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { createDatabaseConnection } from 'csdm/node/database/database';
 import { migrateDatabase } from 'csdm/node/database/migrations/migrate-database';
@@ -7,6 +8,9 @@ export abstract class Command {
   public abstract printHelp(): void;
   public abstract run(): Promise<void>;
   protected args: string[];
+  protected readonly commonArgs: ParseArgsOptionsConfig = {
+    verbose: { type: 'boolean', short: 'v' },
+  };
 
   public constructor(args: string[]) {
     this.args = args;

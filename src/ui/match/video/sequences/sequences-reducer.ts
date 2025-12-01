@@ -10,9 +10,9 @@ import {
   replaceSequences,
   updateSequence,
 } from './sequences-actions';
-import { buildPlayersEventSequences } from './build-players-event-sequences';
-import { buildPlayersRoundsSequences } from './build-players-rounds-sequences';
-import { PlayerSequenceEvent } from './player-sequence-event';
+import { buildPlayersEventSequences } from 'csdm/common/video/sequences/build-players-event-sequences';
+import { PlayerSequenceEvent } from 'csdm/common/types/player-sequence-event';
+import { buildPlayersRoundsSequences } from 'csdm/common/video/sequences/build-players-rounds-sequences';
 
 export type SequencesByDemoFilePath = { [demoFilePath: string]: Sequence[] | undefined };
 

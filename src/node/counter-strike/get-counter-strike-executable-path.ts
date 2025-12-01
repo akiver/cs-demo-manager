@@ -50,12 +50,12 @@ async function getMacosCsgoRunScriptPath(csgoFolderPath: string) {
 export async function getCounterStrikeExecutablePath(game: Game): Promise<string> {
   const customExecutablePath = await getCustomCounterStrikeExecutablePath(game);
   if (customExecutablePath) {
-    logger.log('Using custom CS executable path:', customExecutablePath);
+    logger.debug('Using custom CS executable path:', customExecutablePath);
     return customExecutablePath;
   }
 
   const csgoFolderPath = await getCsgoFolderPath();
-  logger.log('CSGO folder path:', csgoFolderPath);
+  logger.debug('CSGO folder path:', csgoFolderPath);
   if (!csgoFolderPath) {
     throw new CounterStrikeExecutableNotFound(game);
   }

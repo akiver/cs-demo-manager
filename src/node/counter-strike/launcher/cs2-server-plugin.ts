@@ -36,7 +36,7 @@ async function getBundledBinaryName() {
 
 export async function installCs2ServerPlugin() {
   try {
-    logger.log('Installing CS2 server plugin');
+    logger.debug('Installing CS2 server plugin');
 
     const csgoFolderPath = await getCsgoFolderPathOrThrow(Game.CS2);
     const pluginFolder = getServerPluginFolderFromGamePath(csgoFolderPath);
@@ -62,7 +62,7 @@ export async function installCs2ServerPlugin() {
 
 export async function uninstallCs2ServerPlugin() {
   try {
-    logger.log('Uninstalling CS2 server plugin');
+    logger.debug('Uninstalling CS2 server plugin');
     const csgoFolderPath = await getCsgoFolderPathOrThrow(Game.CS2);
     const pluginFolder = getServerPluginFolderFromGamePath(csgoFolderPath);
     await fs.remove(pluginFolder);

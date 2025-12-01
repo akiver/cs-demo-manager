@@ -65,7 +65,7 @@ async function buildLinuxCommand(scriptPath: string, args: string, game: Game, s
       logger.error(`The provided Steam Linux Runtime script "${runSteamScriptPath}" doesn't exist.`);
       throw new CounterStrikeExecutableNotFound(game);
     }
-    logger.log(`Using custom Steam Linux Runtime script at "${runSteamScriptPath}"`);
+    logger.debug(`Using custom Steam Linux Runtime script at "${runSteamScriptPath}"`);
   } else {
     const result = await glob(`**/${steamScriptName}`, {
       cwd: steamFolderPath,
@@ -142,7 +142,7 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   }
 
   const executablePath = await getCounterStrikeExecutablePath(game);
-  logger.log('Found CS executable at:', executablePath);
+  logger.debug('Found CS executable at:', executablePath);
   const settings = await getSettings();
   const {
     width: userWidth,
@@ -214,7 +214,7 @@ echo "CS:DM config loaded"
   const command = await buildCommand(executablePath, args, game, settings);
 
   throwIfAborted(signal);
-  logger.log('Starting game with command', command);
+  logger.debug('Starting game with command', command);
 
   options.onGameStart?.();
 
@@ -244,7 +244,7 @@ echo "CS:DM config loaded"
     });
 
     gameProcess.on('exit', async (code) => {
-      logger.log('Game process exited with code', code);
+      logger.debug('Game process exited with code', code);
 
       if (demoPath) {
         await deleteJsonActionsFile(demoPath);
@@ -258,7 +258,7 @@ echo "CS:DM config loaded"
       }
 
       const output = chunks.join('\n');
-      logger.log('Game output: \n', output);
+      logger.debug('Game output: \n', output);
 
       const hasRunLongEnough = Date.now() - startTime >= 2000;
       if (!hasBeenKilled && code !== 0) {

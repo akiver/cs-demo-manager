@@ -8,7 +8,10 @@ type Options = {
   rounds: number[];
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
-  settings: VideoSettings;
+  settings: Pick<
+    VideoSettings,
+    'showOnlyDeathNotices' | 'deathNoticesDuration' | 'showXRay' | 'showAssists' | 'recordAudio' | 'playerVoicesEnabled'
+  >;
   firstSequenceNumber: number;
 };
 

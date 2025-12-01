@@ -1,4 +1,4 @@
-process.env.PROCESS_NAME = 'cli';
+import './cli-setup';
 import '../common/install-source-map-support';
 import 'csdm/node/logger';
 import { commands } from './commands';
