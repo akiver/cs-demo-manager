@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { useWebSocketClient } from '../../hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -12,16 +12,17 @@ type Props = {
   selectedPlayers: PlayerResult[];
   onPlayerSelected: (player: PlayerResult) => void;
   onPlayerRemoved: (player: PlayerResult) => void;
+  label?: ReactNode;
 };
 
-export function SearchPlayersInput({ isDisabled, selectedPlayers, onPlayerSelected, onPlayerRemoved }: Props) {
+export function SearchPlayersInput({ isDisabled, selectedPlayers, onPlayerSelected, onPlayerRemoved, label }: Props) {
   const client = useWebSocketClient();
   const showToast = useShowToast();
   const { t } = useLingui();
 
   return (
     <div className="flex flex-col gap-y-8">
-      <Trans context="Input label">Players</Trans>
+      {label ?? <Trans context="Input label">Players</Trans>}
       <SearchInput<PlayerResult>
         isDisabled={isDisabled}
         placeholder={t({

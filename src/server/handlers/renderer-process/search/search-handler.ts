@@ -2,22 +2,14 @@ import { assertNever } from 'csdm/common/assert-never';
 import { SearchEvent } from 'csdm/common/types/search/search-event';
 import { searchMultiKills } from 'csdm/node/database/search/search-multi-kills';
 import { searchClutches } from 'csdm/node/database/search/search-clutches';
-import { searchWallbangKills } from 'csdm/node/database/search/search-wallbang-kills';
-import { searchCollateralKills } from 'csdm/node/database/search/search-collateral-kills';
-import { searchKnifeKills } from 'csdm/node/database/search/search-knife-kills';
 import { searchNinjaDefuse } from 'csdm/node/database/search/search-ninja-defuse';
 import type { SearchResult } from 'csdm/common/types/search/search-result';
 import type { SearchFilter } from 'csdm/common/types/search/search-filter';
 import { handleError } from '../../handle-error';
-import { searchJumpKills } from 'csdm/node/database/search/search-jump-kills';
-import { searchTeamKills } from 'csdm/node/database/search/search-team-kills';
 import { searchRounds } from 'csdm/node/database/search/search-rounds';
-import { searchNoScopeKills } from 'csdm/node/database/search/search-no-scope-kills';
-import { searchThroughSmokeKills } from 'csdm/node/database/search/search-through-smoke-kills';
+import { searchKills, type SearchKillsFilter } from 'csdm/node/database/search/search-kills';
 
-export type SearchPayload = SearchFilter & {
-  event: SearchEvent;
-};
+export type SearchPayload = Omit<SearchKillsFilter, 'event'> & { event: SearchEvent };
 
 export async function searchHandler(payload: SearchPayload) {
   try {
@@ -33,6 +25,7 @@ export async function searchHandler(payload: SearchPayload) {
       roundTagIds: payload.roundTagIds,
       matchTagIds: payload.matchTagIds,
     };
+
     switch (payload.event) {
       case SearchEvent.FiveKill:
         result = await searchMultiKills({
@@ -64,35 +57,17 @@ export async function searchHandler(payload: SearchPayload) {
           opponentCount: 3,
         });
         break;
-      case SearchEvent.WallbangKills:
-        result = await searchWallbangKills(filter);
-        break;
-      case SearchEvent.CollateralKills:
-        result = await searchCollateralKills(filter);
-        break;
-      case SearchEvent.KnifeKills:
-        result = await searchKnifeKills(filter);
-        break;
       case SearchEvent.NinjaDefuse:
         result = await searchNinjaDefuse(filter);
-        break;
-      case SearchEvent.JumpKills:
-        result = await searchJumpKills(filter);
-        break;
-      case SearchEvent.NoScopeKills:
-        result = await searchNoScopeKills(filter);
-        break;
-      case SearchEvent.ThroughSmokeKills:
-        result = await searchThroughSmokeKills(filter);
-        break;
-      case SearchEvent.TeamKills:
-        result = await searchTeamKills(filter);
         break;
       case SearchEvent.RoundStart:
         result = await searchRounds(filter);
         break;
+      case SearchEvent.Kills:
+        result = await searchKills(payload as SearchKillsFilter);
+        break;
       default:
-        return assertNever(payload.event, `Unsupported search type ${payload.event}}`);
+        return assertNever(payload.event, `Unsupported search type ${payload.event}`);
     }
 
     return result;

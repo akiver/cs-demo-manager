@@ -18,10 +18,18 @@ import {
   victimSelected,
   victimRemoved,
   weaponNamesChanged,
+  headshotChanged,
+  noScopeChanged,
+  wallbangChanged,
+  jumpChanged,
+  throughSmokeChanged,
+  teamKillChanged,
+  collateralKillChanged,
 } from './search-actions';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import type { SearchResult } from 'csdm/common/types/search/search-result';
 import { roundCommentUpdated } from '../match/rounds/round/round-actions';
+import { TriStateFilter } from 'csdm/common/types/tri-state-filter';
 
 type FinderState = {
   readonly status: Status;
@@ -36,6 +44,13 @@ type FinderState = {
   readonly roundTagIds: string[];
   readonly matchTagIds: string[];
   readonly weaponNames: WeaponName[];
+  readonly headshot: TriStateFilter;
+  readonly noScope: TriStateFilter;
+  readonly wallbang: TriStateFilter;
+  readonly jump: TriStateFilter;
+  readonly throughSmoke: TriStateFilter;
+  readonly teamKill: TriStateFilter;
+  readonly collateralKill: TriStateFilter;
 };
 
 const initialState: FinderState = {
@@ -51,6 +66,13 @@ const initialState: FinderState = {
   roundTagIds: [],
   matchTagIds: [],
   weaponNames: [],
+  headshot: TriStateFilter.All,
+  noScope: TriStateFilter.All,
+  wallbang: TriStateFilter.All,
+  jump: TriStateFilter.All,
+  throughSmoke: TriStateFilter.All,
+  teamKill: TriStateFilter.All,
+  collateralKill: TriStateFilter.All,
 };
 
 export const searchReducer = createReducer(initialState, (builder) => {
@@ -97,6 +119,27 @@ export const searchReducer = createReducer(initialState, (builder) => {
     })
     .addCase(weaponNamesChanged, (state, action) => {
       state.weaponNames = action.payload.weaponNames;
+    })
+    .addCase(headshotChanged, (state, action) => {
+      state.headshot = action.payload.headshot;
+    })
+    .addCase(noScopeChanged, (state, action) => {
+      state.noScope = action.payload.noScope;
+    })
+    .addCase(wallbangChanged, (state, action) => {
+      state.wallbang = action.payload.wallbang;
+    })
+    .addCase(jumpChanged, (state, action) => {
+      state.jump = action.payload.jump;
+    })
+    .addCase(throughSmokeChanged, (state, action) => {
+      state.throughSmoke = action.payload.throughSmoke;
+    })
+    .addCase(teamKillChanged, (state, action) => {
+      state.teamKill = action.payload.teamKill;
+    })
+    .addCase(collateralKillChanged, (state, action) => {
+      state.collateralKill = action.payload.collateralKill;
     })
     .addCase(periodChanged, (state, action) => {
       state.startDate = action.payload.startDate;

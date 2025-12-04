@@ -4,6 +4,7 @@ import type { ErrorCode } from 'csdm/common/error-code';
 import type { SearchEvent } from 'csdm/common/types/search/search-event';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import type { SearchResult } from 'csdm/common/types/search/search-result';
+import type { TriStateFilter } from 'csdm/common/types/tri-state-filter';
 
 export const searchEventChanged = createAction<{ event: SearchEvent }>('search/searchEventChanged');
 export const playerSelected = createAction<{ player: PlayerResult }>('search/playerSelected');
@@ -16,6 +17,13 @@ export const demoSourcesChanged = createAction<{ demoSources: DemoSource[] }>('s
 export const roundTagIdsChanged = createAction<{ tagIds: string[] }>('search/roundTagIdsChanged');
 export const matchTagIdsChanged = createAction<{ tagIds: string[] }>('search/matchTagIdsChanged');
 export const weaponNamesChanged = createAction<{ weaponNames: WeaponName[] }>('search/weaponNamesChanged');
+export const headshotChanged = createAction<{ headshot: TriStateFilter }>('search/headshotChanged');
+export const noScopeChanged = createAction<{ noScope: TriStateFilter }>('search/noScopeChanged');
+export const wallbangChanged = createAction<{ wallbang: TriStateFilter }>('search/wallbangChanged');
+export const jumpChanged = createAction<{ jump: TriStateFilter }>('search/jumpChanged');
+export const throughSmokeChanged = createAction<{ throughSmoke: TriStateFilter }>('search/throughSmokeChanged');
+export const teamKillChanged = createAction<{ teamKill: TriStateFilter }>('search/teamKillChanged');
+export const collateralKillChanged = createAction<{ collateralKill: TriStateFilter }>('search/collateralKillChanged');
 export const periodChanged = createAction<{ startDate: string | undefined; endDate: string | undefined }>(
   'search/periodChanged',
 );

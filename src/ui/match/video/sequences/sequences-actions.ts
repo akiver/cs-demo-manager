@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { Perspective } from 'csdm/common/types/perspective';
-import type { WeaponName } from '@akiver/cs-demo-analyzer';
+import type { WeaponName } from 'csdm/common/types/counter-strike';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 
 export type GeneratePlayersEventPayload = {

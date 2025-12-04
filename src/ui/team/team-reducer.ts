@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import type { TeamNumber } from '@akiver/cs-demo-analyzer';
+import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { commentUpdated } from 'csdm/ui/comment/comment-actions';
 import { deleteMatchesSuccess, matchesTypeUpdated } from 'csdm/ui/matches/matches-actions';
 import { Status } from 'csdm/common/types/status';

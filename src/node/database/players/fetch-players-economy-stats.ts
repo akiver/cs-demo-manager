@@ -1,5 +1,5 @@
 import { sql } from 'kysely';
-import { EconomyType } from '@akiver/cs-demo-analyzer';
+import { EconomyType } from 'csdm/common/types/counter-strike';
 import { db } from 'csdm/node/database/database';
 import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filters';
 

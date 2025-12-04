@@ -4,7 +4,7 @@ import { Panel, PanelRow, PanelTitle, PanelValue } from 'csdm/ui/components/pane
 import { usePlayer } from '../use-player';
 import { WEAPONS_ICONS } from 'csdm/ui/components/weapons-icons';
 import { Tooltip } from 'csdm/ui/components/tooltip';
-import { WeaponName } from '@akiver/cs-demo-analyzer';
+import { WeaponName } from 'csdm/common/types/counter-strike';
 
 export function PlayerOpeningDuelsStats() {
   const player = usePlayer();

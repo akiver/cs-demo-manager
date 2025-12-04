@@ -1,4 +1,4 @@
-import { TeamLetter } from '@akiver/cs-demo-analyzer';
+import { TeamLetter } from 'csdm/common/types/counter-strike';
 import { db } from '../database';
 
 export type TeamNamesPerChecksum = { [checksum: string]: { teamNameA: string; teamNameB: string } };

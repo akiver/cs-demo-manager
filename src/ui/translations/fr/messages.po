@@ -1555,6 +1555,32 @@ msgctxt "Input placeholder"
 msgid "Port"
 msgstr "Port"
 
+#: src/ui/components/inputs/radio/radio-group-tri-state.tsx
+msgid "All"
+msgstr ""
+
+#: src/ui/components/inputs/radio/radio-group-tri-state.tsx
+#: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Yes"
+msgstr "Oui"
+
+#: src/ui/components/inputs/radio/radio-group-tri-state.tsx
+#: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "No"
+msgstr "Non"
+
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result select option"
 msgid "Won"
@@ -6603,6 +6629,39 @@ msgctxt "Table header tooltip"
 msgid "Last ban date"
 msgstr "Date du dernier ban"
 
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Headshot"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "No scope"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Wallbang"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Jump"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Through smoke"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Team kill"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Collateral"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Kills"
+msgstr ""
+
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "5 kills"
@@ -6627,41 +6686,6 @@ msgstr "1 contre 4"
 msgctxt "Select option label"
 msgid "1 versus 3"
 msgstr "1 contre 3"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Wallbang kills"
-msgstr "Wallbang kills"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Collateral kills"
-msgstr "Kills collatéraux"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Knife/Tazer kills"
-msgstr "Knife/Tazer kills"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Jump kills"
-msgstr "Jump kills"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "No scope kills"
-msgstr ""
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Through smoke kills"
-msgstr ""
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Team kills"
-msgstr "Team Kills"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -6696,7 +6720,7 @@ msgstr "Pseudo ou SteamID"
 msgid "No players found"
 msgstr "Aucun joueur trouvé"
 
-#: src/ui/search/results/collateral-kills-results.tsx
+#: src/ui/search/results/kills-results.tsx
 msgid "Deaths {deathCount}"
 msgstr "Morts {deathCount}"
 
@@ -7840,26 +7864,6 @@ msgstr "Réinitialiser les tables"
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "Minimized"
 msgstr "Minimisé"
-
-#: src/ui/settings/ui/system-startup-behavior.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-msgid "No"
-msgstr "Non"
-
-#: src/ui/settings/ui/system-startup-behavior.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-msgid "Yes"
-msgstr "Oui"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "Open the application automatically after you log in to your computer"

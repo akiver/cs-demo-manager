@@ -1,11 +1,13 @@
+import clsx from 'clsx';
 import React, { useEffect, useRef, useState, type ReactNode } from 'react';
 
 type Props = {
   header: ReactNode;
   children: ReactNode;
+  isEnabled?: boolean;
 };
 
-export function CollapsePanel({ header, children }: Props) {
+export function CollapsePanel({ header, children, isEnabled = true }: Props) {
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [height, setHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -21,8 +23,15 @@ export function CollapsePanel({ header, children }: Props) {
   return (
     <div>
       <div
-        className="flex cursor-pointer items-center rounded border border-gray-300 bg-gray-75 p-12"
-        onClick={() => setIsContentVisible((prevIsVisible) => !prevIsVisible)}
+        className={clsx(
+          'flex items-center rounded border border-gray-300 bg-gray-75 p-12',
+          isEnabled && 'cursor-pointer',
+        )}
+        onClick={() => {
+          if (isEnabled) {
+            setIsContentVisible((prevIsVisible) => !prevIsVisible);
+          }
+        }}
       >
         {header}
       </div>

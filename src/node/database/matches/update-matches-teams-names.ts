@@ -1,5 +1,5 @@
 import type { Transaction, UpdateResult } from 'kysely';
-import { TeamLetter } from '@akiver/cs-demo-analyzer';
+import { TeamLetter } from 'csdm/common/types/counter-strike';
 import { db } from '../database';
 import type { Database } from 'csdm/node/database/schema';
 import { isEmptyString } from 'csdm/common/string/is-empty-string';

@@ -7,10 +7,6 @@ import { SearchEvent } from 'csdm/common/types/search/search-event';
 import { MultiKillsResults } from './results/multi-kills-results';
 import { ClutchesResults } from './results/clutches-results';
 import { assertNever } from 'csdm/common/assert-never';
-import { WallbangKillsResults } from './results/wallbang-kills-results';
-import type { WallbangKillResult } from 'csdm/common/types/search/wallbang-kill-result';
-import { CollateralKillsResults } from './results/collateral-kills-results';
-import type { CollateralKillResult } from 'csdm/common/types/search/collateral-kill-result';
 import type { KillResult } from 'csdm/common/types/search/kill-result';
 import { KillsResults } from './results/kills-results';
 import { NinjaDefuseResults } from './results/ninja-defuse-results';
@@ -53,15 +49,7 @@ export function SearchResults() {
     case SearchEvent.OneVsFour:
     case SearchEvent.OneVsThree:
       return <ClutchesResults clutches={result as ClutchResult[]} />;
-    case SearchEvent.WallbangKills:
-      return <WallbangKillsResults kills={result as WallbangKillResult[]} />;
-    case SearchEvent.CollateralKills:
-      return <CollateralKillsResults kills={result as CollateralKillResult[]} />;
-    case SearchEvent.KnifeKills:
-    case SearchEvent.JumpKills:
-    case SearchEvent.TeamKills:
-    case SearchEvent.NoScopeKills:
-    case SearchEvent.ThroughSmokeKills:
+    case SearchEvent.Kills:
       return <KillsResults kills={result as KillResult[]} />;
     case SearchEvent.NinjaDefuse:
       return <NinjaDefuseResults bombsDefused={result as NinjaDefuseResult[]} />;

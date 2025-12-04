@@ -35,6 +35,7 @@ import { Trans } from '@lingui/react/macro';
 import { TagsFilter } from '../components/dropdown-filter/tags-filter';
 import { isCtrlOrCmdEvent } from '../keyboard/keyboard';
 import { WeaponsFilter } from '../components/dropdown-filter/weapons-filter';
+import { KillsFilter } from './filters/kills-filter';
 import { SearchEvent } from 'csdm/common/types/search/search-event';
 
 export function Search() {
@@ -52,11 +53,18 @@ export function Search() {
     roundTagIds,
     matchTagIds,
     weaponNames,
+    headshot,
+    noScope,
+    wallbang,
+    jump,
+    throughSmoke,
+    teamKill,
+    collateralKill,
   } = useSearchState();
   const isLoading = status === Status.Loading;
   const isEventWithKills = event.toLowerCase().includes('kill');
   const canFilterOnVictims = isEventWithKills;
-  const canFilterOnWeapons = isEventWithKills && event !== SearchEvent.KnifeKills;
+  const canFilterOnWeapons = isEventWithKills;
   const weapons = [
     WeaponName.Knife,
     WeaponName.Zeus,
@@ -159,6 +167,13 @@ export function Search() {
           roundTagIds,
           matchTagIds,
           victimSteamIds,
+          headshot,
+          noScope,
+          wallbang,
+          jump,
+          throughSmoke,
+          teamKill,
+          collateralKill,
         },
       });
 
@@ -196,6 +211,7 @@ export function Search() {
             <Trans context="Input label">Event</Trans>
             <SearchEventInput />
           </div>
+          <KillsFilter isVisible={event === SearchEvent.Kills} />
           <SearchPlayersInput
             isDisabled={isLoading}
             selectedPlayers={players}
@@ -204,8 +220,8 @@ export function Search() {
           />
           {canFilterOnVictims && (
             <div className="flex flex-col gap-y-8">
-              <Trans context="Input label">Victims</Trans>
               <SearchPlayersInput
+                label={<Trans context="Input label">Victims</Trans>}
                 isDisabled={isLoading}
                 selectedPlayers={victims}
                 onPlayerSelected={onVictimSelected}

@@ -1555,6 +1555,32 @@ msgctxt "Input placeholder"
 msgid "Port"
 msgstr "端口"
 
+#: src/ui/components/inputs/radio/radio-group-tri-state.tsx
+msgid "All"
+msgstr ""
+
+#: src/ui/components/inputs/radio/radio-group-tri-state.tsx
+#: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Yes"
+msgstr "是"
+
+#: src/ui/components/inputs/radio/radio-group-tri-state.tsx
+#: src/ui/settings/ui/system-startup-behavior.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "No"
+msgstr "否"
+
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result select option"
 msgid "Won"
@@ -6603,6 +6629,39 @@ msgctxt "Table header tooltip"
 msgid "Last ban date"
 msgstr "最后封禁的日期"
 
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Headshot"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "No scope"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Wallbang"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Jump"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Through smoke"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Team kill"
+msgstr ""
+
+#: src/ui/search/filters/kills-filter.tsx
+msgid "Collateral"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Kills"
+msgstr ""
+
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "5 kills"
@@ -6627,41 +6686,6 @@ msgstr "1v4"
 msgctxt "Select option label"
 msgid "1 versus 3"
 msgstr "1v3"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Wallbang kills"
-msgstr "穿墙击杀"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Collateral kills"
-msgstr "附带击杀"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Knife/Tazer kills"
-msgstr "近战武器/电击枪击杀"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Jump kills"
-msgstr "空中飞人击杀"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "No scope kills"
-msgstr "盲狙击杀"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Through smoke kills"
-msgstr "穿烟击杀"
-
-#: src/ui/search/filters/search-event-input.tsx
-msgctxt "Select option label"
-msgid "Team kills"
-msgstr "队友击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -6696,7 +6720,7 @@ msgstr "昵称或 SteamID"
 msgid "No players found"
 msgstr "未找到玩家"
 
-#: src/ui/search/results/collateral-kills-results.tsx
+#: src/ui/search/results/kills-results.tsx
 msgid "Deaths {deathCount}"
 msgstr "死亡数{deathCount}"
 
@@ -7840,26 +7864,6 @@ msgstr "重置表格"
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "Minimized"
 msgstr "最小化"
-
-#: src/ui/settings/ui/system-startup-behavior.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-msgid "No"
-msgstr "否"
-
-#: src/ui/settings/ui/system-startup-behavior.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-msgid "Yes"
-msgstr "是"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "Open the application automatically after you log in to your computer"

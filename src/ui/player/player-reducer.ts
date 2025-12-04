@@ -15,7 +15,7 @@ import {
 import { demoRenamed } from '../demos/demos-actions';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import { RadarLevel } from '../maps/radar-level';
-import type { TeamNumber } from '@akiver/cs-demo-analyzer';
+import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { blurChanged, fetchPointsSuccess, opacityChanged, radiusChanged } from './heatmap/player-heatmap-actions';
 import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
 

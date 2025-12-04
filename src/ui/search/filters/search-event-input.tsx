@@ -13,6 +13,13 @@ function useSearchEventOptions(): SelectOption<SearchEvent>[] {
   return [
     {
       label: t({
+        message: 'Kills',
+        context: 'Select option label',
+      }),
+      value: SearchEvent.Kills,
+    },
+    {
+      label: t({
         message: '5 kills',
         context: 'Select option label',
       }),
@@ -45,55 +52,6 @@ function useSearchEventOptions(): SelectOption<SearchEvent>[] {
         context: 'Select option label',
       }),
       value: SearchEvent.OneVsThree,
-    },
-    {
-      label: t({
-        message: 'Wallbang kills',
-        context: 'Select option label',
-      }),
-      value: SearchEvent.WallbangKills,
-    },
-    {
-      label: t({
-        message: 'Collateral kills',
-        context: 'Select option label',
-      }),
-      value: SearchEvent.CollateralKills,
-    },
-    {
-      label: t({
-        message: 'Knife/Tazer kills',
-        context: 'Select option label',
-      }),
-      value: SearchEvent.KnifeKills,
-    },
-    {
-      label: t({
-        message: 'Jump kills',
-        context: 'Select option label',
-      }),
-      value: SearchEvent.JumpKills,
-    },
-    {
-      label: t({
-        message: 'No scope kills',
-        context: 'Select option label',
-      }),
-      value: SearchEvent.NoScopeKills,
-    },
-    {
-      label: t({
-        message: 'Through smoke kills',
-        context: 'Select option label',
-      }),
-      value: SearchEvent.ThroughSmokeKills,
-    },
-    {
-      label: t({
-        message: 'Team kills',
-        context: 'Select option label',
-      }),
-      value: SearchEvent.TeamKills,
     },
     {
       label: t({
