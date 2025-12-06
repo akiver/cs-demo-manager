@@ -16,6 +16,7 @@ import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
+import { AccountAvatar } from './account-avatar';
 
 function AddAccountDialog() {
   const [nickname, setNickname] = useState('');
@@ -106,14 +107,14 @@ export function FaceitAccounts() {
       const avatarSrc = account.avatarUrl === '' ? window.csdm.getDefaultPlayerAvatar() : account.avatarUrl;
 
       return (
-        <div className="flex w-fit border-t border-gray-300 p-8 first:border-t-0" key={account.id}>
+        <div className="flex w-full rounded-8 border border-gray-300 p-8" key={account.id}>
           <a
-            className="mr-8 flex w-[224px] items-center gap-x-4"
+            className="mr-8 flex w-full items-center gap-x-4"
             href={`https://www.faceit.com/en/players/${account.nickname}`}
             target="_blank"
             rel="noreferrer"
           >
-            <img className="w-32" src={avatarSrc} />
+            <AccountAvatar url={avatarSrc} playerName={account.nickname} />
             <p className="truncate" title={account.nickname}>
               {account.nickname}
             </p>
@@ -140,21 +141,23 @@ export function FaceitAccounts() {
 
   return (
     <div>
-      <div className="my-12 flex items-center gap-x-16">
-        <p className="text-body-strong">
-          <Trans>Accounts</Trans>
-        </p>
-        <Button
-          variant={ButtonVariant.Primary}
-          onClick={() => {
-            showDialog(<AddAccountDialog />);
-          }}
-        >
-          <Trans context="Button">Add account</Trans>
-        </Button>
-      </div>
+      <h3 className="py-8 text-body-strong">
+        <Trans>Accounts</Trans>
+      </h3>
 
-      <div className="flex flex-col gap-y-4">{renderAccounts()}</div>
+      <div className="flex flex-col gap-y-8">
+        {renderAccounts()}
+        <div>
+          <Button
+            variant={ButtonVariant.Primary}
+            onClick={() => {
+              showDialog(<AddAccountDialog />);
+            }}
+          >
+            <Trans context="Button">Add account</Trans>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

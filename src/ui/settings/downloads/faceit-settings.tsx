@@ -8,7 +8,7 @@ export function FaceitSettings() {
   return (
     <div className="mt-12">
       <h2 className="text-subtitle">FACEIT</h2>
-      <div className="py-12">
+      <div className="py-8">
         <FaceitDownloadsWarning />
       </div>
       <AutoDownloadFaceitDemos />

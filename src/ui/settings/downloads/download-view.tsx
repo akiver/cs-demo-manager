@@ -8,10 +8,12 @@ import { FiveEPlaySettings } from './5eplay-settings';
 export function DownloadSettings() {
   return (
     <SettingsView>
-      <DownloadFolderPath />
-      <ValveSettings />
-      <FaceitSettings />
-      <FiveEPlaySettings />
+      <div className="flex flex-col gap-y-12">
+        <DownloadFolderPath />
+        <ValveSettings />
+        <FaceitSettings />
+        <FiveEPlaySettings />
+      </div>
     </SettingsView>
   );
 }
