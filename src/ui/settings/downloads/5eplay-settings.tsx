@@ -93,6 +93,7 @@ export function FiveEPlaySettings() {
   return (
     <ThirdPartySettings
       name="5EPlay"
+      logo={<img src={`file://${window.csdm.IMAGES_FOLDER_PATH}/sources/5eplay.png`} alt="" className="h-20" />}
       autoDownloadAtStartupSettingsKey="download5EPlayDemosAtStartup"
       autoDownloadInBackgroundSettingsKey="download5EPlayDemosInBackground"
     >

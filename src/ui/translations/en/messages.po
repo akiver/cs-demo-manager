@@ -238,6 +238,7 @@ msgstr "Loading ban stats…"
 #: src/ui/downloads/five-eplay/use-update-current-5eplay-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
+#: src/ui/downloads/renown/use-update-current-renown-account.tsx
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 #: src/ui/match/duels/players-duels-matrix.tsx
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
@@ -257,6 +258,7 @@ msgstr "Loading ban stats…"
 #: src/ui/settings/cameras/edit-camera-dialog.tsx
 #: src/ui/settings/downloads/5eplay-settings.tsx
 #: src/ui/settings/downloads/faceit-settings.tsx
+#: src/ui/settings/downloads/renown-settings.tsx
 #: src/ui/settings/maps/add-map-dialog.tsx
 #: src/ui/settings/maps/edit-map-dialog.tsx
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
@@ -852,6 +854,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/downloads/download-demos-button.tsx
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
+#: src/ui/downloads/renown/last-matches-loader.tsx
 #: src/ui/downloads/valve/last-matches-loader.tsx
 #: src/ui/match/grenades/finder/grenades-finder-loader.tsx
 #: src/ui/match/match-loader.tsx
@@ -873,6 +876,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/settings/database/optimize-database-button.tsx
 #: src/ui/settings/downloads/use-add-5eplay-account.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
+#: src/ui/settings/downloads/use-add-renown-account.tsx
 #: src/ui/settings/maps/delete-map-dialog.tsx
 #: src/ui/settings/maps/reset-default-maps-button.tsx
 #: src/ui/shared/get-playback-error-from-error-code.tsx
@@ -949,6 +953,16 @@ msgstr "Ignore player's bans"
 msgctxt "Context menu"
 msgid "Open FACEIT profile"
 msgstr "Open FACEIT profile"
+
+#: src/ui/components/context-menu/items/open-leetify-profile-item.tsx
+msgctxt "Context menu"
+msgid "Open Leetify profile"
+msgstr "Open Leetify profile"
+
+#: src/ui/components/context-menu/items/open-renown-profile-item.tsx
+msgctxt "Context menu"
+msgid "Open Renown profile"
+msgstr "Open Renown profile"
 
 #: src/ui/components/context-menu/items/open-steam-profile-item.tsx
 msgctxt "Context menu"
@@ -1918,6 +1932,7 @@ msgstr "Score Team B"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1929,6 +1944,7 @@ msgstr "K"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1948,6 +1964,7 @@ msgstr "Kills"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1959,6 +1976,7 @@ msgstr "A"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1978,6 +1996,7 @@ msgstr "Assists"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -1989,6 +2008,7 @@ msgstr "D"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2007,6 +2027,7 @@ msgstr "Deaths"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2017,6 +2038,7 @@ msgstr "5K"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2027,6 +2049,7 @@ msgstr "5-kill rounds"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2037,6 +2060,7 @@ msgstr "4K"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2047,6 +2071,7 @@ msgstr "4-kill rounds"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2057,6 +2082,7 @@ msgstr "3K"
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2160,6 +2186,7 @@ msgstr "Tickrate"
 #: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
 #: src/ui/match/weapons/weapons-accuracy.tsx
@@ -2174,6 +2201,7 @@ msgstr "Name"
 #: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
 #: src/ui/players/table/use-players-columns.ts
@@ -2559,6 +2587,7 @@ msgstr "Watch round"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
@@ -2568,6 +2597,7 @@ msgstr "Avatar"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2578,6 +2608,7 @@ msgstr "K/D diff"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -2587,6 +2618,7 @@ msgstr "Kill/Death difference"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header mvp count"
@@ -2595,6 +2627,8 @@ msgstr "MVP"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
@@ -3044,6 +3078,7 @@ msgstr "See on FACEIT"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
+#: src/ui/downloads/renown/last-matches-loader.tsx
 #: src/ui/downloads/valve/last-matches-loader.tsx
 msgid "Fetching last matches…"
 msgstr "Fetching last matches…"
@@ -3058,6 +3093,7 @@ msgid "The API returned an unauthorized status code, please check your API key."
 msgstr "The API returned an unauthorized status code, please check your API key."
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
+#: src/ui/downloads/renown/last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-5eplay-account.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "Invalid API request."
@@ -3065,12 +3101,15 @@ msgstr "Invalid API request."
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
+#: src/ui/downloads/renown/last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
+#: src/ui/settings/downloads/use-add-renown-account.tsx
 msgid "The API returned an error, please re-try later."
 msgstr "The API returned an error, please re-try later."
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
+#: src/ui/downloads/renown/last-matches-loader.tsx
 msgid "No matches found for the current account."
 msgstr "No matches found for the current account."
 
@@ -3090,6 +3129,7 @@ msgstr "The nickname is case sensitive!"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 #: src/ui/downloads/five-eplay/no-5eplay-account.tsx
+#: src/ui/downloads/renown/no-renown-account.tsx
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 #: src/ui/settings/tags/add-tag.tsx
 msgctxt "Button"
@@ -3098,6 +3138,7 @@ msgstr "Add"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3107,6 +3148,7 @@ msgstr "K/D"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3116,6 +3158,7 @@ msgstr "Kill-Death Ratio"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3125,6 +3168,7 @@ msgstr "HS"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3134,6 +3178,7 @@ msgstr "Headshot"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3143,6 +3188,7 @@ msgstr "HS%"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3206,6 +3252,7 @@ msgid "Percentage of rounds in which the player either had a kill, assist, survi
 msgstr "Percentage of rounds in which the player either had a kill, assist, survived or was traded"
 
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3214,6 +3261,7 @@ msgid "ADR"
 msgstr "ADR"
 
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3222,6 +3270,7 @@ msgid "Average Damage per Round"
 msgstr "Average Damage per Round"
 
 #: src/ui/downloads/five-eplay/use-5eplay-scoreboard-columns.ts
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
@@ -3286,6 +3335,68 @@ msgstr "No pending downloads."
 msgctxt "Button"
 msgid "Remove downloads"
 msgstr "Remove downloads"
+
+#: src/ui/downloads/renown/current-match.tsx
+msgctxt "Button"
+msgid "See on Renown"
+msgstr "See on Renown"
+
+#: src/ui/downloads/renown/current-match.tsx
+msgctxt "Button"
+msgid "See on Leetify"
+msgstr "See on Leetify"
+
+#: src/ui/downloads/renown/last-matches-loader.tsx
+msgid "Too many requests sent to the API."
+msgstr "Too many requests sent to the API."
+
+#: src/ui/downloads/renown/no-renown-account.tsx
+msgid "No Renown account configured yet. Enter your Steam ID to get started."
+msgstr "No Renown account configured yet. Enter your Steam ID to get started."
+
+#: src/ui/downloads/renown/no-renown-account.tsx
+msgctxt "Input placeholder"
+msgid "Steam ID"
+msgstr "Steam ID"
+
+#: src/ui/downloads/renown/no-renown-account.tsx
+msgid "Use the 64-bit version of your Steam ID (e.g., 76561198000000000)."
+msgstr "Use the 64-bit version of your Steam ID (e.g., 76561198000000000)."
+
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
+msgctxt "Table header kill count"
+msgid "LR"
+msgstr "LR"
+
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Leetify Rating"
+msgstr "Leetify Rating"
+
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header utility damage per round"
+msgid "UDR"
+msgstr "UDR"
+
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Utility damage per round"
+msgstr "Utility damage per round"
+
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Utility Damage per Round"
+msgstr "Utility Damage per Round"
+
+#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
+msgctxt "Table header"
+msgid "MVP"
+msgstr "MVP"
 
 #: src/ui/downloads/reveal-download-folder-in-explorer-button.tsx
 msgctxt "Button"
@@ -4414,23 +4525,6 @@ msgstr "Damages"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
-msgctxt "Table header utility damage per round"
-msgid "UDR"
-msgstr "UDR"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
-msgctxt "Table header tooltip"
-msgid "Utility damage per round"
-msgstr "Utility damage per round"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-msgctxt "Dropdown column visibility"
-msgid "Utility Damage per Round"
-msgstr "Utility Damage per Round"
-
-#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
-#: src/ui/players/table/use-players-columns.ts
 #: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Headshot"
@@ -4725,6 +4819,7 @@ msgstr "No players found."
 #: src/ui/match/players/match-players.tsx
 #: src/ui/settings/downloads/use-add-5eplay-account.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
+#: src/ui/settings/downloads/use-add-renown-account.tsx
 msgid "Player not found."
 msgstr "Player not found."
 
@@ -7271,6 +7366,20 @@ msgstr "FACEIT nickname"
 msgctxt "Input placeholder"
 msgid "Nickname"
 msgstr "Nickname"
+
+#: src/ui/settings/downloads/renown-settings.tsx
+msgid "Add Renown account"
+msgstr "Add Renown account"
+
+#: src/ui/settings/downloads/renown-settings.tsx
+msgctxt "Input label"
+msgid "Steam ID64"
+msgstr "Steam ID64"
+
+#: src/ui/settings/downloads/renown-settings.tsx
+msgctxt "Input placeholder"
+msgid "Steam ID64 (e.g. 76561198000000000)"
+msgstr "Steam ID64 (e.g. 76561198000000000)"
 
 #: src/ui/settings/downloads/third-party-accounts.tsx
 msgid "No accounts"

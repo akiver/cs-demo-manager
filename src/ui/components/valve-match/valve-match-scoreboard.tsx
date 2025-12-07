@@ -45,7 +45,6 @@ export function ValveMatchScoreboard({ players, demoPath, game, onPlayerSelected
     getRowId,
     rowSelection: 'single',
     onSelectionChanged,
-    width: 636,
     onContextMenu,
     sortedColumn: { id: 'kill-count', direction: 'desc' },
   });

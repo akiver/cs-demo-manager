@@ -3,7 +3,11 @@ import fs from 'fs-extra';
 import { DownloadStatus } from 'csdm/common/types/download-status';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 
-export async function getDownloadStatus(downloadFolderPath: string | undefined, matchId: string, demoUrl: string) {
+export async function getDownloadStatus(
+  downloadFolderPath: string | undefined,
+  matchId: string | number,
+  demoUrl: string,
+) {
   if (downloadFolderPath !== undefined) {
     const demoPath = path.join(downloadFolderPath, `${matchId}.dem`);
     const demoExists = await fs.pathExists(demoPath);

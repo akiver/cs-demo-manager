@@ -37,7 +37,6 @@ export function FiveEPlayScoreboard({ teamName, teamScore, players, scoreOpposit
     data: players,
     getRowId,
     rowSelection: 'single',
-    width: 1016,
     onContextMenu,
     sortedColumn: { id: 'kill-count', direction: 'desc' },
   });

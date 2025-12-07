@@ -53,6 +53,7 @@ import type { TeamTable } from './teams/team-table';
 import type { TimestampTable } from './timestamps/timestamp-table';
 import type { RoundCommentTable } from './comments/round-comments-table';
 import type { CamerasTable } from './cameras/cameras-table';
+import type { RenownAccountTable } from './renown-account/renown-account-row';
 
 export type Database = {
   bombs_defuse_start: BombDefuseStartTable;
@@ -101,6 +102,7 @@ export type Database = {
   player_economies: PlayerEconomyTable;
   player_positions: PlayerPositionTable;
   players: MatchPlayerTable;
+  renown_accounts: RenownAccountTable;
   round_tags: RoundTagTable;
   rounds: RoundTable;
   shots: ShotTable;

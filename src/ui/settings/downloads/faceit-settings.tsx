@@ -17,6 +17,7 @@ import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { FaceitDownloadsWarning } from './faceit-downloads-warning';
 import { ThirdPartyAccounts } from './third-party-accounts';
+import { FaceitLogo } from 'csdm/ui/logos/faceit-logo';
 
 function AddAccountDialog() {
   const [nickname, setNickname] = useState('');
@@ -97,6 +98,7 @@ export function FaceitSettings() {
   return (
     <ThirdPartySettings
       name="FACEIT"
+      logo={<FaceitLogo className="-mt-4 h-20" />}
       autoDownloadAtStartupSettingsKey="downloadFaceitDemosAtStartup"
       autoDownloadInBackgroundSettingsKey="downloadFaceitDemosInBackground"
       warning={<FaceitDownloadsWarning />}

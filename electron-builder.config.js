@@ -133,9 +133,8 @@ const config = {
     },
   ],
   beforePack: async (context) => {
-    const { installBoilerWritter, installCounterStrikeVoiceExtractor, installDemoAnalyzer } = await import(
-      './scripts/install-deps.mjs'
-    );
+    const { installBoilerWritter, installCounterStrikeVoiceExtractor, installDemoAnalyzer } =
+      await import('./scripts/install-deps.mjs');
     const arch = Arch[context.arch];
     const platform = context.packager.platform.nodeName;
     await Promise.all([

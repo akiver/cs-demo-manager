@@ -1,0 +1,32 @@
+import React from 'react';
+
+type Props = {
+  className?: string;
+};
+
+export function FaceitLogo({ className }: Props) {
+  return (
+    <svg viewBox="0 0 86 68" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path
+        d="M85.188,1.35C85.188,0.673 84.44,0.459 84.084,0.993C73.714,16.922 67.87,26.008 62.597,34.275L0.772,34.275C-0.011,34.275 -0.296,35.273 0.38,35.522C26.036,45.215 63.095,59.789 83.799,67.949C84.333,68.162 85.188,67.664 85.188,67.308L85.188,1.35Z"
+        fill="url(#gradient)"
+      />
+      <defs>
+        <linearGradient
+          id="gradient"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="matrix(3.0219e-09,-67.308,-67.308,-3.0219e-09,42.5944,0.692)"
+        >
+          <stop offset="0" stopColor="rgb(255,94,0)" stopOpacity={1} />
+          <stop offset="0.4" stopColor="rgb(255,106,11)" stopOpacity={1} />
+          <stop offset="0.5" stopColor="rgb(251,86,0)" stopOpacity={1} />
+          <stop offset="1" stopColor="rgb(255,105,0)" stopOpacity={1} />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}

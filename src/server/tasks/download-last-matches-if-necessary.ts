@@ -5,6 +5,7 @@ import { downloadLastFaceitMatches } from 'csdm/node/faceit/download-last-faceit
 import { deleteOldDownloadHistories } from 'csdm/node/database/download-history/delete-old-download-histories';
 import { downloadLast5EPlayMatches } from 'csdm/node/5eplay/download-last-5eplay-matches';
 import type { Download } from 'csdm/common/download/download-types';
+import { downloadLastRenownMatches } from 'csdm/node/renown/download-last-renown-matches';
 
 export async function downloadLastMatchesIfNecessary() {
   const [settings] = await Promise.all([getSettings(), deleteOldDownloadHistories()]);
@@ -19,6 +20,10 @@ export async function downloadLastMatchesIfNecessary() {
   const promises: Promise<Download[]>[] = [];
   if (settings.download.downloadFaceitDemosAtStartup) {
     promises.push(downloadLastFaceitMatches());
+  }
+
+  if (settings.download.downloadRenownDemosAtStartup) {
+    promises.push(downloadLastRenownMatches());
   }
 
   if (settings.download.download5EPlayDemosAtStartup) {

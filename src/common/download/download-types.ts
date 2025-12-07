@@ -2,11 +2,13 @@ import type { Game } from 'csdm/common/types/counter-strike';
 import type { FaceitMatch } from 'csdm/common/types/faceit-match';
 import type { ValveMatch } from 'csdm/common/types/valve-match';
 import type { FiveEPlayMatch } from '../types/5eplay-match';
+import type { RenownMatch } from '../types/renown-match';
 
 export const DownloadSource = {
   Valve: 'valve',
   Faceit: 'faceit',
   '5EPlay': '5eplay',
+  Renown: 'renown',
 } as const;
 export type DownloadSource = (typeof DownloadSource)[keyof typeof DownloadSource];
 
@@ -42,4 +44,9 @@ export type FiveEPlayDownload = BaseDownload & {
   match: FiveEPlayMatch;
 };
 
-export type Download = ValveDownload | FaceitDownload | FiveEPlayDownload;
+export type RenownDownload = BaseDownload & {
+  source: typeof DownloadSource.Renown;
+  match: RenownMatch;
+};
+
+export type Download = ValveDownload | FaceitDownload | FiveEPlayDownload | RenownDownload;

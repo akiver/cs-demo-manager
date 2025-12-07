@@ -37,7 +37,6 @@ export function Scoreboard({ teamName, teamScore, players, scoreOppositeTeam }: 
     data: players,
     getRowId,
     rowSelection: 'single',
-    width: 886,
     onContextMenu,
     sortedColumn: { id: 'kill-count', direction: 'desc' },
   });
