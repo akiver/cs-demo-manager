@@ -114,8 +114,10 @@ export type DownloadSettings = {
   folderPath: string | undefined;
   downloadValveDemosAtStartup: boolean;
   downloadFaceitDemosAtStartup: boolean;
+  downloadRenownDemosAtStartup: boolean;
   downloadValveDemosInBackground: boolean;
   downloadFaceitDemosInBackground: boolean;
+  downloadRenownDemosInBackground: boolean;
   download5EPlayDemosAtStartup: boolean;
   download5EPlayDemosInBackground: boolean;
 };

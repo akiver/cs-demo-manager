@@ -230,6 +230,7 @@ class DownloadDemoQueue {
       }
 
       const demo = await getDemoFromFilePath(demoPath);
+      demo.source = currentDownload.source;
       // for non-Valve demos, we update the demo's date with the one coming from the third-party API and insert it into
       // the database so that the date will be more accurate.
       // for Valve demos, the date is retrieved from the proto .info file.

@@ -4,6 +4,8 @@ import type { SharedServerMessagePayload, SharedServerMessageName } from './shar
 export const MainServerMessageName = {
   DownloadValveDemoStarted: 'download-valve-demo-started',
   DownloadFaceitDemoStarted: 'download-faceit-demo-started',
+  Download5EPlayDemoStarted: 'download-5eplay-demo-started',
+  DownloadRenownDemosStarted: 'download-renown-demos-started',
 } as const;
 
 export type MainServerMessageName =
@@ -13,4 +15,6 @@ export type MainServerMessageName =
 export interface MainServerMessagePayload extends SharedServerMessagePayload {
   [MainServerMessageName.DownloadValveDemoStarted]: number;
   [MainServerMessageName.DownloadFaceitDemoStarted]: number;
+  [MainServerMessageName.Download5EPlayDemoStarted]: number;
+  [MainServerMessageName.DownloadRenownDemosStarted]: number;
 }

@@ -3,16 +3,18 @@ import { Status } from 'csdm/common/types/status';
 import { DownloadStatus } from 'csdm/common/types/download-status';
 import type { ErrorCode } from 'csdm/common/error-code';
 import type { FaceitMatch } from 'csdm/common/types/faceit-match';
-import type { FaceitAccount } from '../../../common/types/faceit-account';
-import { initializeAppSuccess } from '../../bootstrap/bootstrap-actions';
-import { downloadDemoCorrupted, downloadsAdded } from '../downloads-actions';
-import { DownloadSource } from '../../../common/download/download-types';
-import { downloadDemoSuccess } from '../downloads-actions';
-import { downloadDemoExpired } from '../downloads-actions';
-import { downloadDemoError } from '../downloads-actions';
-import { abortDownload } from '../pending/pending-actions';
+import type { FaceitAccount } from 'csdm/common/types/faceit-account';
+import { initializeAppSuccess } from 'csdm/ui/bootstrap/bootstrap-actions';
+import {
+  downloadDemoCorrupted,
+  downloadsAdded,
+  downloadDemoExpired,
+  downloadDemoSuccess,
+  downloadDemoError,
+} from '../downloads-actions';
+import { DownloadSource } from 'csdm/common/download/download-types';
+import { abortDownload, abortDownloads } from '../pending/pending-actions';
 import { downloadFolderChanged } from '../../settings/settings-actions';
-import { abortDownloads } from '../pending/pending-actions';
 import { accountAdded, fetchLastMatchesStart, accountsUpdated, matchSelected } from './faceit-actions';
 import { fetchLastMatchesSuccess } from './faceit-actions';
 import { fetchLastMatchesError } from './faceit-actions';

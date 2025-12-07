@@ -20,6 +20,8 @@ import type { FiveEPlayAccount } from 'csdm/common/types/5eplay-account';
 import { fetch5EPlayAccounts } from 'csdm/node/database/5play-account/fetch-5eplay-accounts';
 import type { Camera } from 'csdm/common/types/camera';
 import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
+import type { RenownAccount } from 'csdm/common/types/renown-account';
+import { fetchRenownAccounts } from 'csdm/node/database/renown-account/fetch-renown-accounts';
 
 export type InitializeApplicationSuccessPayload = {
   matchChecksums: string[];
@@ -30,6 +32,7 @@ export type InitializeApplicationSuccessPayload = {
   settings: Settings;
   faceitAccounts: FaceitAccount[];
   fiveEPlayAccounts: FiveEPlayAccount[];
+  renownAccounts: RenownAccount[];
   downloads: Download[];
   ignoredSteamAccounts: IgnoredSteamAccount[];
   videos: Video[];
@@ -37,17 +40,27 @@ export type InitializeApplicationSuccessPayload = {
 
 export async function initializeApplicationHandler() {
   try {
-    const [settings, maps, cameras, tags, matchChecksums, faceitAccounts, fiveEPlayAccounts, ignoredSteamAccounts] =
-      await Promise.all([
-        initializeSettings(),
-        fetchMaps(),
-        fetchCameras(),
-        fetchTags(),
-        fetchMatchChecksums(),
-        fetchFaceitAccounts(),
-        fetch5EPlayAccounts(),
-        fetchIgnoredSteamAccounts(),
-      ]);
+    const [
+      settings,
+      maps,
+      cameras,
+      tags,
+      matchChecksums,
+      faceitAccounts,
+      fiveEPlayAccounts,
+      renownAccounts,
+      ignoredSteamAccounts,
+    ] = await Promise.all([
+      initializeSettings(),
+      fetchMaps(),
+      fetchCameras(),
+      fetchTags(),
+      fetchMatchChecksums(),
+      fetchFaceitAccounts(),
+      fetch5EPlayAccounts(),
+      fetchRenownAccounts(),
+      fetchIgnoredSteamAccounts(),
+    ]);
     const payload: InitializeApplicationSuccessPayload = {
       maps,
       cameras,
@@ -56,6 +69,7 @@ export async function initializeApplicationHandler() {
       settings,
       faceitAccounts,
       fiveEPlayAccounts,
+      renownAccounts,
       ignoredSteamAccounts,
       analyses: analysesListener.getAnalyses(),
       downloads: downloadDemoQueue.getDownloads(),

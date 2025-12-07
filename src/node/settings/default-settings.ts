@@ -124,6 +124,8 @@ export const defaultSettings: Settings = {
     downloadFaceitDemosInBackground: true,
     download5EPlayDemosAtStartup: true,
     download5EPlayDemosInBackground: true,
+    downloadRenownDemosAtStartup: true,
+    downloadRenownDemosInBackground: true,
   },
   matches: {
     gameModes: [],

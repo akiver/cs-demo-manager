@@ -4,6 +4,8 @@ import { MainServerMessageName } from 'csdm/server/main-server-message-name';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { downloadLastValveMatches } from './download-last-valve-matches';
 import { downloadLastFaceitMatches } from 'csdm/node/faceit/download-last-faceit-matches';
+import { downloadLast5EPlayMatches } from 'csdm/node/5eplay/download-last-5eplay-matches';
+import { downloadLastRenownMatches } from 'csdm/node/renown/download-last-renown-matches';
 
 const checkIntervalMs = 30_000;
 let wasRunning = false;
@@ -41,6 +43,26 @@ async function checkIfCounterStrikeHasBeenClosed() {
         if (downloadsAdded.length > 0) {
           server.sendMessageToMainProcess({
             name: MainServerMessageName.DownloadFaceitDemoStarted,
+            payload: downloadsAdded.length,
+          });
+        }
+      }
+
+      if (settings.download.download5EPlayDemosInBackground) {
+        const downloadsAdded = await downloadLast5EPlayMatches();
+        if (downloadsAdded.length > 0) {
+          server.sendMessageToMainProcess({
+            name: MainServerMessageName.Download5EPlayDemoStarted,
+            payload: downloadsAdded.length,
+          });
+        }
+      }
+
+      if (settings.download.downloadRenownDemosInBackground) {
+        const downloadsAdded = await downloadLastRenownMatches();
+        if (downloadsAdded.length > 0) {
+          server.sendMessageToMainProcess({
+            name: MainServerMessageName.DownloadRenownDemosStarted,
             payload: downloadsAdded.length,
           });
         }

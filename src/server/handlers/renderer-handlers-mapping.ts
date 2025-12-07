@@ -222,6 +222,12 @@ import { deleteCameraHandler } from './renderer-process/cameras/delete-camera-ha
 import { capturePlayerViewHandler } from './renderer-process/counter-strike/capture-player-view-handler';
 import type { CapturePlayerViewPayload } from 'csdm/node/counter-strike/launcher/capture-player-view';
 import { fetchPlayerHeatmapPointsHandler } from './renderer-process/player/fetch-player-heatmap-points-handler';
+import type { RenownAccount } from 'csdm/common/types/renown-account';
+import { addRenownAccountHandler } from './renderer-process/renown/add-renown-account-handler';
+import { deleteRenownAccountHandler } from './renderer-process/renown/delete-renown-account-handler';
+import { updateCurrentRenownAccountHandler } from './renderer-process/renown/update-current-renown-account-handler';
+import type { RenownMatch } from 'csdm/common/types/renown-match';
+import { fetchLastRenownMatchesHandler } from './renderer-process/renown/fetch-last-renown-matches-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -344,6 +350,10 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.Add5EPlayAccount]: Handler<string, FiveEPlayAccount>;
   [RendererClientMessageName.Delete5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
+  [RendererClientMessageName.FetchLastRenownMatches]: Handler<string, RenownMatch[]>;
+  [RendererClientMessageName.AddRenownAccount]: Handler<string, RenownAccount>;
+  [RendererClientMessageName.DeleteRenownAccount]: Handler<string, RenownAccount[]>;
+  [RendererClientMessageName.UpdateCurrentRenownAccount]: Handler<string, RenownAccount[]>;
   [RendererClientMessageName.CapturePlayerView]: Handler<Game, CapturePlayerViewPayload>;
 }
 
@@ -453,6 +463,10 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.Add5EPlayAccount]: add5EPlayAccountHandler,
   [RendererClientMessageName.Delete5EPlayAccount]: delete5EPlayAccountHandler,
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: updateCurrent5EPlayAccountHandler,
+  [RendererClientMessageName.FetchLastRenownMatches]: fetchLastRenownMatchesHandler,
+  [RendererClientMessageName.AddRenownAccount]: addRenownAccountHandler,
+  [RendererClientMessageName.DeleteRenownAccount]: deleteRenownAccountHandler,
+  [RendererClientMessageName.UpdateCurrentRenownAccount]: updateCurrentRenownAccountHandler,
   [RendererClientMessageName.WatchVideoSequences]: watchVideoSequencesHandler,
   [RendererClientMessageName.CapturePlayerView]: capturePlayerViewHandler,
 };

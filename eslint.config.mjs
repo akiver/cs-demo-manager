@@ -166,6 +166,7 @@ export default [
             '^VirtualDub$',
             '^Valve$',
             '^FACEIT$',
+            '^Renown$',
             '^CS Demo Manager$',
             '^Counter-Strike$',
             'rgba',

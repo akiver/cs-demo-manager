@@ -8,20 +8,17 @@ import { DownloadDemoButton } from '../download-demo-button';
 import { RevealDemoInExplorerButton } from '../reveal-demo-in-explorer-button';
 import { Match } from './match';
 import { useCurrentMatch } from './use-current-match';
-import { Button } from 'csdm/ui/components/buttons/button';
 import { SeeDemoButton } from 'csdm/ui/downloads/see-demo-button';
 import { CopyDemoLinkButton } from 'csdm/ui/components/buttons/copy-demo-link-button';
+import { OpenLinkButton } from 'csdm/ui/components/buttons/open-link-button';
 
 function SeeOnFaceitButton() {
   const match = useCurrentMatch();
-  const onClick = () => {
-    window.open(match.url);
-  };
 
   return (
-    <Button onClick={onClick}>
+    <OpenLinkButton url={match.url}>
       <Trans context="Button">See on FACEIT</Trans>
-    </Button>
+    </OpenLinkButton>
   );
 }
 

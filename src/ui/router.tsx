@@ -29,6 +29,7 @@ import { PendingDownloads } from 'csdm/ui/downloads/pending/pending-downloads';
 import { GrenadesStats } from 'csdm/ui/match/grenades/stats/grenades-stats';
 import { GrenadesFinderLoader } from 'csdm/ui/match/grenades/finder/grenades-finder-loader';
 import { LastMatches as FaceitLastMatches } from 'csdm/ui/downloads/faceit/last-matches';
+import { LastMatches as RenownLastMatches } from 'csdm/ui/downloads/renown/last-matches';
 import { BanStats } from 'csdm/ui/ban/stats/ban-stats';
 import { MatchPlayers } from 'csdm/ui/match/players/match-players';
 import { MatchPlayersLoader } from 'csdm/ui/match/players/match-players-loader';
@@ -111,6 +112,7 @@ export const router = createHashRouter(
       <Route path={RoutePath.Downloads} element={<Downloads />}>
         <Route index={true} element={<ValveLastMatchesLoader />} />
         <Route path={RoutePath.DownloadsFaceit} element={<FaceitLastMatches />} />
+        <Route path={RoutePath.DownloadsRenown} element={<RenownLastMatches />} />
         <Route path={RoutePath.Downloads5EPlay} element={<FiveEPlayLastMatches />} />
         <Route path={RoutePath.DownloadsPending} element={<PendingDownloads />} />
       </Route>

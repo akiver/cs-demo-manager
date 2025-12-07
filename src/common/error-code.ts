@@ -85,6 +85,11 @@ export const ErrorCode = {
   FiveEPlayApiResourceNotFound: 1201,
   FiveEPlayApiInvalidRequest: 1202,
 
+  RenownApiError: 1300,
+  RenownApiResourceNotFound: 1301,
+  RenownTooManyRequests: 1302,
+  RenownInvalidRequest: 1303,
+
   SteamAccountAlreadyIgnored: 2000,
   SteamAccountNotFound: 2001,
   InvalidSteamCommunityUrl: 2002,

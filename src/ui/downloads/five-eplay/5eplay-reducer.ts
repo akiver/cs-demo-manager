@@ -3,12 +3,15 @@ import { Status } from 'csdm/common/types/status';
 import { DownloadStatus } from 'csdm/common/types/download-status';
 import type { ErrorCode } from 'csdm/common/error-code';
 import type { FiveEPlayAccount } from 'csdm/common/types/5eplay-account';
-import { initializeAppSuccess } from '../../bootstrap/bootstrap-actions';
-import { downloadDemoCorrupted, downloadsAdded } from '../downloads-actions';
-import { DownloadSource } from '../../../common/download/download-types';
-import { downloadDemoSuccess } from '../downloads-actions';
-import { downloadDemoExpired } from '../downloads-actions';
-import { downloadDemoError } from '../downloads-actions';
+import { initializeAppSuccess } from 'csdm/ui/bootstrap/bootstrap-actions';
+import {
+  downloadDemoCorrupted,
+  downloadsAdded,
+  downloadDemoSuccess,
+  downloadDemoError,
+  downloadDemoExpired,
+} from '../downloads-actions';
+import { DownloadSource } from 'csdm/common/download/download-types';
 import { abortDownload } from '../pending/pending-actions';
 import { downloadFolderChanged } from '../../settings/settings-actions';
 import { abortDownloads } from '../pending/pending-actions';

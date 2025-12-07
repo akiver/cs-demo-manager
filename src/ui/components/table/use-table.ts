@@ -26,7 +26,6 @@ type Options<DataType extends Data> = {
   rowSelection: RowSelection;
   persistStateKey?: TableName;
   persistScrollKey?: TableName;
-  width?: number;
   fuzzySearchText?: string;
   fuzzySearchColumnIds?: string[];
   selectedRowIds?: string[];
@@ -55,7 +54,6 @@ export function useTable<DataType extends Data>({
   persistStateKey,
   persistScrollKey,
   getRowStyle,
-  width,
   selectedRowIds,
   sortedColumn,
 }: Options<DataType>): TableInstance<DataType> {
@@ -293,7 +291,7 @@ export function useTable<DataType extends Data>({
       return {
         ref: wrapperRef,
         style: {
-          width,
+          width: columns.reduce((sum, col) => sum + col.width, 0),
         },
       };
     },

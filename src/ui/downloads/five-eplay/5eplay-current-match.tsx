@@ -6,22 +6,19 @@ import type { FiveEPlayDownload } from 'csdm/common/download/download-types';
 import { DownloadSource } from 'csdm/common/download/download-types';
 import { DownloadDemoButton } from '../download-demo-button';
 import { RevealDemoInExplorerButton } from '../reveal-demo-in-explorer-button';
-import { Button } from 'csdm/ui/components/buttons/button';
 import { SeeDemoButton } from 'csdm/ui/downloads/see-demo-button';
 import { CopyDemoLinkButton } from 'csdm/ui/components/buttons/copy-demo-link-button';
 import { useCurrent5EPlayMatch } from './use-current-5eplay-match';
 import { FiveEPlayMatch } from './5eplay-match';
+import { OpenLinkButton } from 'csdm/ui/components/buttons/open-link-button';
 
-function SeeOnWebsiteButton() {
+function SeeOn5EplayButton() {
   const match = useCurrent5EPlayMatch();
-  const onClick = () => {
-    window.open(match.url);
-  };
 
   return (
-    <Button onClick={onClick}>
+    <OpenLinkButton url={match.url}>
       <Trans context="Button">See on 5EPlay</Trans>
-    </Button>
+    </OpenLinkButton>
   );
 }
 
@@ -51,7 +48,7 @@ function ActionBar() {
           <SeeDemoButton demoFileName={match.id} downloadStatus={match.downloadStatus} />
           <WatchDemoButton demoFileName={match.id} game={match.game} downloadStatus={match.downloadStatus} />
           {match.demoUrl && <CopyDemoLinkButton link={match.demoUrl} />}
-          <SeeOnWebsiteButton />
+          <SeeOn5EplayButton />
         </>
       }
     />
