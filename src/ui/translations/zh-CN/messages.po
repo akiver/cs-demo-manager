@@ -260,8 +260,8 @@ msgstr "正在加载封禁数据…"
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
 #: src/ui/settings/cameras/add-camera-dialog.tsx
 #: src/ui/settings/cameras/edit-camera-dialog.tsx
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
+#: src/ui/settings/downloads/5eplay-settings.tsx
+#: src/ui/settings/downloads/faceit-settings.tsx
 #: src/ui/settings/maps/add-map-dialog.tsx
 #: src/ui/settings/maps/edit-map-dialog.tsx
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
@@ -3089,7 +3089,7 @@ msgid "FACEIT nickname"
 msgstr "FACEIT 昵称"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
+#: src/ui/settings/downloads/faceit-settings.tsx
 msgid "The nickname is case sensitive!"
 msgstr "昵称对大小写敏感!"
 
@@ -7211,96 +7211,41 @@ msgctxt "Button"
 msgid "Reset database"
 msgstr "重置数据库"
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/5eplay-settings.tsx
 msgid "Add 5EPlay account"
 msgstr "添加5EPlay帐号"
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/5eplay-settings.tsx
 msgctxt "Input label"
 msgid "5EPlay ID"
 msgstr "5EPlay ID"
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/5eplay-settings.tsx
 msgctxt "Input placeholder"
 msgid "ID"
 msgstr "ID"
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "No accounts"
-msgstr "无账号"
+#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
+msgid "Automatically download {name} demos in the background."
+msgstr ""
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "Set as current account"
-msgstr "设置为当前账号"
-
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "Accounts"
-msgstr "账号"
-
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgctxt "Button"
-msgid "Add account"
-msgstr "增加一个账号"
-
-#: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
-msgid "Automatically download 5EPLay demos in the background."
-msgstr "在后台自动下载5E的demo。"
-
-#: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
-#: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
-#: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
+#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
 msgctxt "Settings title"
 msgid "Background download"
 msgstr "后台下载"
 
-#: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
-msgid "Automatically download 5EPlay demos at application startup."
-msgstr "在本程序启动时自动下载5E的demo。"
+#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
+msgid "Automatically download {name} demos at application startup."
+msgstr ""
 
-#: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
-#: src/ui/settings/downloads/auto-download-faceit-demos.tsx
-#: src/ui/settings/downloads/auto-download-valve-demos.tsx
+#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
 msgctxt "Settings title"
 msgid "Startup download"
 msgstr "启动下载"
 
-#: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
-msgid "Automatically download FACEIT demos in the background."
-msgstr "在后台自动下载 FACEIT 的 Demo。"
-
-#: src/ui/settings/downloads/auto-download-faceit-demos.tsx
-msgid "Automatically download FACEIT demos at application startup."
-msgstr "在本程序启动时自动下载 FACEIT 的 demo。"
-
-#: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
-msgid "Automatically download Valve matchmaking demos in the background."
-msgstr "在后台自动下载官匹的 Demo。"
-
-#: src/ui/settings/downloads/auto-download-valve-demos.tsx
-msgid "Automatically download Valve matchmaking demos at application startup."
-msgstr "在本程序启动时自动下载 Valve 官方匹配的 demo。"
-
 #: src/ui/settings/downloads/download-folder-path.tsx
 msgid "Download folder"
 msgstr "下载文件夹路径"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "Add FACEIT account"
-msgstr "添加FACEIT帐户"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgctxt "Input label"
-msgid "FACEIT nickname"
-msgstr "FACEIT昵称"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgctxt "Input placeholder"
-msgid "Nickname"
-msgstr "昵称"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "FACEIT restricted demo downloads through a <0>private API</0> and recently gave us a server-side API key with the maximum rate limit."
@@ -7313,6 +7258,37 @@ msgstr "你<0>无需询问</0> FACEIT 来获取一个 API 密钥。Demo 下载�
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "In the meantime, you have to download demos from your browser."
 msgstr "在这期间，您必须从您的浏览器手动下载 Demo。"
+
+#: src/ui/settings/downloads/faceit-settings.tsx
+msgid "Add FACEIT account"
+msgstr "添加FACEIT帐户"
+
+#: src/ui/settings/downloads/faceit-settings.tsx
+msgctxt "Input label"
+msgid "FACEIT nickname"
+msgstr "FACEIT昵称"
+
+#: src/ui/settings/downloads/faceit-settings.tsx
+msgctxt "Input placeholder"
+msgid "Nickname"
+msgstr "昵称"
+
+#: src/ui/settings/downloads/third-party-accounts.tsx
+msgid "No accounts"
+msgstr "无账号"
+
+#: src/ui/settings/downloads/third-party-accounts.tsx
+msgid "Set as current account"
+msgstr "设置为当前账号"
+
+#: src/ui/settings/downloads/third-party-accounts.tsx
+msgid "Accounts"
+msgstr "账号"
+
+#: src/ui/settings/downloads/third-party-accounts.tsx
+msgctxt "Button"
+msgid "Add account"
+msgstr "增加一个账号"
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The API returned a 401 code, please check you API key."

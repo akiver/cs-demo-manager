@@ -6,7 +6,7 @@ import { RendererClientMessageName } from 'csdm/server/renderer-client-message-n
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { accountAdded } from '../../downloads/faceit/faceit-actions';
 
-export function useAddFaceitAcount() {
+export function useAddFaceitAccount() {
   const client = useWebSocketClient();
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState<ReactNode | undefined>(undefined);

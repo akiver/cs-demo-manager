@@ -110,7 +110,7 @@ export type FfmpegSettings = {
   outputParameters: string;
 };
 
-type DownloadSettings = {
+export type DownloadSettings = {
   folderPath: string | undefined;
   downloadValveDemosAtStartup: boolean;
   downloadFaceitDemosAtStartup: boolean;

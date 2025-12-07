@@ -1,7 +1,5 @@
-export type FiveEPlayAccount = {
-  id: string;
+import type { ThirdPartyAccount } from './third-party-account';
+
+export type FiveEPlayAccount = ThirdPartyAccount & {
   domainId: string;
-  nickname: string;
-  avatarUrl: string;
-  isCurrent: boolean;
 };

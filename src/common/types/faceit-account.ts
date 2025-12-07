@@ -1,6 +1,3 @@
-export type FaceitAccount = {
-  id: string;
-  nickname: string;
-  avatarUrl: string;
-  isCurrent: boolean;
-};
+import type { ThirdPartyAccount } from './third-party-account';
+
+export type FaceitAccount = ThirdPartyAccount;

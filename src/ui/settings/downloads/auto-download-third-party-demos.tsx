@@ -4,23 +4,29 @@ import { Switch } from 'csdm/ui/components/inputs/switch';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
 import { useSettings } from '../use-settings';
 import { useUpdateSettings } from '../use-update-settings';
+import type { DownloadSettings } from 'csdm/node/settings/settings';
 
-export function AutoDownload5EPlayDemos() {
+type Props = {
+  name: string;
+  settingsKey: Extract<keyof DownloadSettings, `download${string}AtStartup`>;
+};
+
+export function AutoDownloadThirdPartyDemos({ name, settingsKey }: Props) {
   const { download } = useSettings();
   const updateSettings = useUpdateSettings();
 
   const onChange = async (isChecked: boolean) => {
     await updateSettings({
       download: {
-        download5EPlayDemosAtStartup: isChecked,
+        [settingsKey]: isChecked,
       },
     });
   };
 
   return (
     <SettingsEntry
-      interactiveComponent={<Switch isChecked={download.download5EPlayDemosAtStartup} onChange={onChange} />}
-      description={<Trans>Automatically download 5EPlay demos at application startup.</Trans>}
+      interactiveComponent={<Switch isChecked={download[settingsKey]} onChange={onChange} />}
+      description={<Trans>Automatically download {name} demos at application startup.</Trans>}
       title={<Trans context="Settings title">Startup download</Trans>}
     />
   );

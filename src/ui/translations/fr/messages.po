@@ -260,8 +260,8 @@ msgstr "Chargement des statistiques de ban…"
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
 #: src/ui/settings/cameras/add-camera-dialog.tsx
 #: src/ui/settings/cameras/edit-camera-dialog.tsx
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
+#: src/ui/settings/downloads/5eplay-settings.tsx
+#: src/ui/settings/downloads/faceit-settings.tsx
 #: src/ui/settings/maps/add-map-dialog.tsx
 #: src/ui/settings/maps/edit-map-dialog.tsx
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
@@ -3089,7 +3089,7 @@ msgid "FACEIT nickname"
 msgstr "Pseudo FACEIT"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
+#: src/ui/settings/downloads/faceit-settings.tsx
 msgid "The nickname is case sensitive!"
 msgstr "Le pseudo est sensible à la casse!"
 
@@ -7211,96 +7211,41 @@ msgctxt "Button"
 msgid "Reset database"
 msgstr "Réinitialiser la base de données"
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/5eplay-settings.tsx
 msgid "Add 5EPlay account"
 msgstr "Ajouter un compte 5EPlay"
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/5eplay-settings.tsx
 msgctxt "Input label"
 msgid "5EPlay ID"
 msgstr "Identifiant 5EPlay"
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
+#: src/ui/settings/downloads/5eplay-settings.tsx
 msgctxt "Input placeholder"
 msgid "ID"
 msgstr "Identifiant"
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "No accounts"
-msgstr "Aucun compte"
+#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
+msgid "Automatically download {name} demos in the background."
+msgstr ""
 
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "Set as current account"
-msgstr "Définir comme compte actuel"
-
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "Accounts"
-msgstr "Comptes"
-
-#: src/ui/settings/downloads/5eplay-accounts.tsx
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgctxt "Button"
-msgid "Add account"
-msgstr "Ajouter un compte"
-
-#: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
-msgid "Automatically download 5EPLay demos in the background."
-msgstr "Télécharger automatiquement les démos 5EPlay en arrière-plan."
-
-#: src/ui/settings/downloads/auto-download-5eplay-demos-background.tsx
-#: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
-#: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
+#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
 msgctxt "Settings title"
 msgid "Background download"
 msgstr "Téléchargement en arrière-plan"
 
-#: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
-msgid "Automatically download 5EPlay demos at application startup."
-msgstr "Télécharger automatiquement les démos 5EPlay au démarrage de l'application."
+#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
+msgid "Automatically download {name} demos at application startup."
+msgstr ""
 
-#: src/ui/settings/downloads/auto-download-5eplay-demos.tsx
-#: src/ui/settings/downloads/auto-download-faceit-demos.tsx
-#: src/ui/settings/downloads/auto-download-valve-demos.tsx
+#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
 msgctxt "Settings title"
 msgid "Startup download"
 msgstr "Téléchargement au démarrage"
 
-#: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
-msgid "Automatically download FACEIT demos in the background."
-msgstr "Télécharger automatiquement les démos FACEIT en arrière-plan."
-
-#: src/ui/settings/downloads/auto-download-faceit-demos.tsx
-msgid "Automatically download FACEIT demos at application startup."
-msgstr "Télécharger automatiquement les démos FACEIT au démarrage de l'application."
-
-#: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
-msgid "Automatically download Valve matchmaking demos in the background."
-msgstr "Télécharger automatiquement les démos matchmaking en arrière-plan."
-
-#: src/ui/settings/downloads/auto-download-valve-demos.tsx
-msgid "Automatically download Valve matchmaking demos at application startup."
-msgstr "Télécharger automatiquement les démos matchmaking Valve au démarrage de l'application."
-
 #: src/ui/settings/downloads/download-folder-path.tsx
 msgid "Download folder"
 msgstr "Dossier de téléchargement"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgid "Add FACEIT account"
-msgstr "Ajouter un compte FACEIT"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgctxt "Input label"
-msgid "FACEIT nickname"
-msgstr "Pseudo FACEIT"
-
-#: src/ui/settings/downloads/faceit-accounts.tsx
-msgctxt "Input placeholder"
-msgid "Nickname"
-msgstr "Pseudo"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "FACEIT restricted demo downloads through a <0>private API</0> and recently gave us a server-side API key with the maximum rate limit."
@@ -7313,6 +7258,37 @@ msgstr "Il <0>n'est pas nécessaire</0> de demander une clé d'API à FACEIT. Ce
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "In the meantime, you have to download demos from your browser."
 msgstr "En attendant, vous devez télécharger les démos à partir de votre navigateur."
+
+#: src/ui/settings/downloads/faceit-settings.tsx
+msgid "Add FACEIT account"
+msgstr "Ajouter un compte FACEIT"
+
+#: src/ui/settings/downloads/faceit-settings.tsx
+msgctxt "Input label"
+msgid "FACEIT nickname"
+msgstr "Pseudo FACEIT"
+
+#: src/ui/settings/downloads/faceit-settings.tsx
+msgctxt "Input placeholder"
+msgid "Nickname"
+msgstr "Pseudo"
+
+#: src/ui/settings/downloads/third-party-accounts.tsx
+msgid "No accounts"
+msgstr "Aucun compte"
+
+#: src/ui/settings/downloads/third-party-accounts.tsx
+msgid "Set as current account"
+msgstr "Définir comme compte actuel"
+
+#: src/ui/settings/downloads/third-party-accounts.tsx
+msgid "Accounts"
+msgstr "Comptes"
+
+#: src/ui/settings/downloads/third-party-accounts.tsx
+msgctxt "Button"
+msgid "Add account"
+msgstr "Ajouter un compte"
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The API returned a 401 code, please check you API key."
