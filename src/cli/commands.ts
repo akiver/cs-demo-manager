@@ -5,11 +5,13 @@ import { HelpCommand } from './commands/help-command';
 import { XlsxCommand } from './commands/xlsx-command';
 import { JsonCommand } from './commands/json-command';
 import { VideoCommand } from './commands/video-command';
+import { DownloadRenownCommand } from './commands/download-renown-command';
 
 export const commands = {
   [AnalyzeCommand.Name]: AnalyzeCommand,
   [DownloadFaceitCommand.Name]: DownloadFaceitCommand,
   [DownloadValveCommand.Name]: DownloadValveCommand,
+  [DownloadRenownCommand.Name]: DownloadRenownCommand,
   [HelpCommand.Name]: HelpCommand,
   [JsonCommand.Name]: JsonCommand,
   [XlsxCommand.Name]: XlsxCommand,
