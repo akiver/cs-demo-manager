@@ -61,7 +61,7 @@ type ListMatchDTO = {
 };
 
 async function fetchLastMatchesIds(steamId: string) {
-  const maxMatchCount = 8;
+  const maxMatchCount = 20;
   // https://renown.gg/api-docs#tag/players/get/v1/player/{steam_id}
   const response = await fetch(
     `https://api.renown.gg/v1/player/${steamId}/matches?page=1&limit=${maxMatchCount}&status=FINISHED`,

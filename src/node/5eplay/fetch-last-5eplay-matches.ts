@@ -33,7 +33,7 @@ async function fetchLastMatchIdsForGame(accountId: string, game: Game, limit: nu
 
 export async function fetchLast5EPlayMatches(accountId: string) {
   const matches: FiveEPlayMatch[] = [];
-  const maxMatchCount = 8;
+  const maxMatchCount = 20;
   const matchIds = await fetchLastMatchIdsForGame(accountId, Game.CS2, maxMatchCount);
 
   // We didn't find enough CS2 matches, find CS:GO matches

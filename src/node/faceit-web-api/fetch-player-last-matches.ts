@@ -85,7 +85,7 @@ async function fetchPlayerLastMatchesForGame(playerId: string, apiKey: string, g
 }
 
 export async function fetchPlayerLastMatches(playerId: string, apiKey: string) {
-  const maxMatchCount = 8;
+  const maxMatchCount = 20;
   const matches: FaceitMatchHistoryDTO[] = [];
   const cs2Matches = await fetchPlayerLastMatchesForGame(playerId, apiKey, 'cs2', maxMatchCount);
   if (cs2Matches.length > 0) {
