@@ -1,33 +1,31 @@
 import fs from 'fs-extra';
 import { request } from 'undici';
+import unzipper from 'unzipper';
 import { pipeline } from 'node:stream';
 import path from 'node:path';
-import zlib from 'node:zlib';
 import util from 'node:util';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
-import { fetchLastRenownMatches } from 'csdm/node/renown/fetch-last-renown-matches';
-import { fetchCurrentRenownAccount } from 'csdm/node/database/renown-account/fetch-current-renown-account';
-import { fetchRenownAccount } from 'csdm/node/renown/fetch-renown-account-from-steamid';
-import type { RenownMatch } from 'csdm/common/types/renown-match';
+import { fetchCurrent5EPlayAccount } from 'csdm/node/database/5play-account/fetch-current-5eplay-account';
+import { fetch5EPlayAccount } from 'csdm/node/5eplay/fetch-5eplay-player-account-from-domain';
+import { fetchLast5EPlayMatches } from 'csdm/node/5eplay/fetch-last-5eplay-matches';
+import type { FiveEPlayMatch } from 'csdm/common/types/5eplay-match';
 const streamPipeline = util.promisify(pipeline);
 
-export class DownloadRenownCommand extends DownloadBaseCommand {
-  public static Name = 'dl-renown';
-  private steamId: string | undefined;
+export class Download5EPlayCommand extends DownloadBaseCommand {
+  public static Name = 'dl-5eplay';
+  private id: string | undefined;
   private demoPathBeingDownloaded: string | undefined;
-  private steamIdFlag = '--steamid';
+  private idFlag = '--id';
 
   public getDescription() {
-    return 'Download the last demos of a Renown account.';
+    return 'Download the last demos of a 5EPlay account.';
   }
 
   public printHelp() {
     console.log(this.getDescription());
     console.log('');
-    console.log(
-      `Usage: csdm ${DownloadRenownCommand.Name} ${this.formatFlagsForHelp([this.outputFlag, this.steamIdFlag])}`,
-    );
+    console.log(`Usage: csdm ${Download5EPlayCommand.Name} ${this.formatFlagsForHelp([this.outputFlag, this.idFlag])}`);
     console.log('');
     console.log(`The ${this.outputFlag} flag specify the directory where demos will be downloaded.`);
     console.log(`Default value in order of preference:`);
@@ -37,14 +35,14 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     console.log('');
     console.log('Examples:');
     console.log('');
-    console.log('To download the last Renown demos of the current Renown account:');
-    console.log(`    csdm ${DownloadRenownCommand.Name}`);
+    console.log('To download the last 5EPlay demos of the current 5EPlay account:');
+    console.log(`    csdm ${Download5EPlayCommand.Name}`);
     console.log('');
-    console.log('To download demos of a specific account identified by its Steam ID:');
-    console.log(`    csdm ${DownloadRenownCommand.Name} ${this.steamIdFlag} 76561198000000000`);
+    console.log('To download demos of a specific account identified by its ID:');
+    console.log(`    csdm ${Download5EPlayCommand.Name} ${this.idFlag} "myid"`);
     console.log('');
     console.log('To change the directory where demos will be downloaded:');
-    console.log(`    csdm ${DownloadRenownCommand.Name} ${this.outputFlag} "C:\\Users\\username\\Downloads"`);
+    console.log(`    csdm ${Download5EPlayCommand.Name} ${this.outputFlag} "C:\\Users\\username\\Downloads"`);
   }
 
   public constructor(args: string[]) {
@@ -59,9 +57,9 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     await this.assertOutputFolderIsValid(this.outputFolderPath);
     await this.initDatabaseConnection();
     console.log('Finding account to download matches from...');
-    const steamId = await this.getAccountSteamId();
+    const id = await this.getAccountId();
     console.log('Finding matches to download...');
-    const matches = await fetchLastRenownMatches(steamId);
+    const matches = await fetchLast5EPlayMatches(id);
     console.log(`Found ${matches.length} matches to download.`);
     for (const match of matches) {
       await this.processMatch(match);
@@ -84,12 +82,12 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
               this.exitWithFailure();
             }
             break;
-          case this.steamIdFlag:
+          case this.idFlag:
             if (this.args.length > index + 1) {
               index += 1;
-              this.steamId = this.args[index];
+              this.id = this.args[index];
             } else {
-              console.log(`Missing ${this.steamIdFlag} value`);
+              console.log(`Missing ${this.idFlag} value`);
               this.exitWithFailure();
             }
             break;
@@ -104,7 +102,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     }
   }
 
-  private async processMatch(match: RenownMatch) {
+  private async processMatch(match: FiveEPlayMatch) {
     const demoPath = path.join(this.outputFolderPath, `${match.id}.dem`);
     const demoAlreadyExists = await fs.pathExists(demoPath);
     if (demoAlreadyExists) {
@@ -127,27 +125,27 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     }
 
     const out = fs.createWriteStream(demoPath);
-    const transformStream = zlib.createGunzip();
+    const transformStream = unzipper.ParseOne();
     await streamPipeline(response.body, transformStream, out);
     this.demoPathBeingDownloaded = undefined;
   }
 
-  private async getAccountSteamId() {
-    if (!this.steamId) {
-      const currentAccount = await fetchCurrentRenownAccount();
+  private async getAccountId() {
+    if (!this.id) {
+      const currentAccount = await fetchCurrent5EPlayAccount();
       if (!currentAccount) {
-        console.log('No current Renown account found.');
+        console.log('No current 5EPlay account found.');
         return this.exitWithFailure();
       }
 
-      return currentAccount.id;
+      return currentAccount.domainId;
     }
 
     try {
-      const account = await fetchRenownAccount(this.steamId);
-      return account.steam_id;
+      const account = await fetch5EPlayAccount(this.id);
+      return account.id;
     } catch (error) {
-      console.error(`Failed to retrieve account with Steam ID: ${this.steamId}`);
+      console.error(`Failed to retrieve account with ID: ${this.id}`);
       return this.exitWithFailure();
     }
   }

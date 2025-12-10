@@ -322,7 +322,7 @@ class WebSocketServer {
 
   private onError = (error: Error) => {
     // Ignore port already in use errors in CLI, it means the GUI is running and so the WS server too.
-    if (process.env.PROCESS_NAME === 'cli' && 'code' in error && error.code === 'EADDRINUSE') {
+    if ('code' in error && error.code === 'EADDRINUSE') {
       return;
     }
 
