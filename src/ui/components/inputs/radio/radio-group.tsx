@@ -1,6 +1,6 @@
 import React, { useId, type ReactNode } from 'react';
-import { Radio as BaseRadio } from '@base-ui-components/react/radio';
-import { RadioGroup as BaseRadioGroup } from '@base-ui-components/react/radio-group';
+import { Radio as BaseRadio } from '@base-ui/react/radio';
+import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group';
 
 type RadioProps = {
   value: string;

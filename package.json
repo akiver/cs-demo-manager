@@ -50,7 +50,7 @@
     "@akiver/boiler-writter": "1.6.0",
     "@akiver/cs-demo-analyzer": "1.7.7",
     "@akiver/csgo-voice-extractor": "3.1.2",
-    "@base-ui-components/react": "^1.0.0-beta.7",
+    "@base-ui/react": "1.0.0",
     "@crowdin/cli": "4.12.0",
     "@eslint/js": "9.39.1",
     "@floating-ui/react": "0.27.16",
