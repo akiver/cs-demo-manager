@@ -25,7 +25,7 @@ export function KillsFilter({ isVisible }: Props) {
   return (
     <div className={isVisible ? '' : '-mb-12'}>
       <CollapseTransition isVisible={isVisible}>
-        <div className="flex flex-wrap gap-x-24 gap-y-10 *:min-w-[100px]">
+        <div className="flex flex-wrap gap-x-24 gap-y-10 pl-4 *:min-w-[100px]">
           <RadioGroupTriState
             label={<Trans>Headshot</Trans>}
             value={headshot}
