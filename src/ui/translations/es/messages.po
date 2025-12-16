@@ -7037,11 +7037,15 @@ msgid "Add a camera"
 msgstr ""
 
 #: src/ui/settings/cameras/camera-entry.tsx
-msgid "Copy spec_goto command"
+msgid "Camera actions"
 msgstr ""
 
 #: src/ui/settings/cameras/camera-entry.tsx
 msgid "spec_goto command copied to clipboard"
+msgstr ""
+
+#: src/ui/settings/cameras/camera-entry.tsx
+msgid "Copy spec_goto command"
 msgstr ""
 
 #: src/ui/settings/cameras/cameras-game-input.tsx
