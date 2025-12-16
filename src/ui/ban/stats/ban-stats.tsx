@@ -112,7 +112,7 @@ export function BanStats() {
                 <PanelTitle>
                   <Trans context="Panel title">Players</Trans>
                 </PanelTitle>
-                <PanelValue variant={PanelValueVariant.Big}>{accountCount}</PanelValue>
+                <PanelValue variant={PanelValueVariant.Big}>{accountCount.toLocaleString()}</PanelValue>
               </>
             }
           />
@@ -122,7 +122,7 @@ export function BanStats() {
                 <PanelTitle>
                   <Trans context="Panel title">Banned players</Trans>
                 </PanelTitle>
-                <PanelValue variant={PanelValueVariant.Big}>{bannedAccountCount}</PanelValue>
+                <PanelValue variant={PanelValueVariant.Big}>{bannedAccountCount.toLocaleString()}</PanelValue>
               </>
             }
           />
@@ -132,7 +132,9 @@ export function BanStats() {
                 <PanelTitle>
                   <Trans context="Panel title">Banned players percentage</Trans>
                 </PanelTitle>
-                <PanelValue variant={PanelValueVariant.Big}>{`${bannedAccountPercentage}%`}</PanelValue>
+                <PanelValue
+                  variant={PanelValueVariant.Big}
+                >{`${bannedAccountPercentage.toLocaleString()}%`}</PanelValue>
               </>
             }
           />
@@ -142,7 +144,7 @@ export function BanStats() {
                 <PanelTitle>
                   <Trans context="Panel title">AVG banned players/match</Trans>
                 </PanelTitle>
-                <PanelValue variant={PanelValueVariant.Big}>{averageBannedAccountPerMatch}</PanelValue>
+                <PanelValue variant={PanelValueVariant.Big}>{averageBannedAccountPerMatch.toLocaleString()}</PanelValue>
               </>
             }
           />
