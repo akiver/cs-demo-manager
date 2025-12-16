@@ -1726,14 +1726,6 @@ msgctxt "Input placeholder"
 msgid "Username"
 msgstr "用户名"
 
-#: src/ui/components/kebab-menu.tsx
-msgid "Close menu"
-msgstr ""
-
-#: src/ui/components/kebab-menu.tsx
-msgid "Open menu"
-msgstr ""
-
 #: src/ui/components/last-matches.tsx
 msgid "No matches."
 msgstr "暂无比赛。"
@@ -5894,6 +5886,10 @@ msgstr "未安装"
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Toast"
 msgid "File created, click here to reveal it"
+msgstr ""
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgid "Video actions"
 msgstr ""
 
 #: src/ui/match/video/video-actions-menu.tsx

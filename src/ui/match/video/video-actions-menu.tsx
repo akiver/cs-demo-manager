@@ -1,7 +1,6 @@
 import React from 'react';
-import { Trans } from '@lingui/react/macro';
-import { KebabMenu } from 'csdm/ui/components/kebab-menu';
-import { MenuItem } from 'csdm/ui/components/menu';
+import { Trans, useLingui } from '@lingui/react/macro';
+import { KebabMenu, KebabMenuItem } from 'csdm/ui/components/kebab-menu';
 import { useClipboard } from 'csdm/ui/hooks/use-clipboard';
 import { useCurrentMatchSequences } from './sequences/use-current-match-sequences';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
@@ -37,6 +36,7 @@ export function VideoActionsMenu() {
   const { copyToClipboard } = useClipboard();
   const showToast = useShowToast();
   const getVideoCommandConfig = useGetVideoCommandConfig();
+  const { t } = useLingui();
 
   const onCopyClick = async () => {
     await copyToClipboard(JSON.stringify(getVideoCommandConfig(), null, 2));
@@ -71,13 +71,13 @@ export function VideoActionsMenu() {
   };
 
   return (
-    <KebabMenu>
-      <MenuItem onClick={onCopyClick}>
+    <KebabMenu label={t`Video actions`}>
+      <KebabMenuItem onClick={onCopyClick}>
         <Trans context="Button">Copy as JSON</Trans>
-      </MenuItem>
-      <MenuItem onClick={onExportClick}>
+      </KebabMenuItem>
+      <KebabMenuItem onClick={onExportClick}>
         <Trans context="Button">Export as JSON</Trans>
-      </MenuItem>
+      </KebabMenuItem>
     </KebabMenu>
   );
 }

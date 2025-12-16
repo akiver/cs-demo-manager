@@ -116,6 +116,8 @@
 
   --animate-grow-height: grow-height 0.3s ease-in;
 
+  --z-index-menu-item: 10;
+
   @keyframes grow-height {
     0% {
       max-height: 0%;
