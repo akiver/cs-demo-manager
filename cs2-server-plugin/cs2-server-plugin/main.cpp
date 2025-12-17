@@ -268,6 +268,16 @@ void PlaybackLoop() {
             engine->ExecuteClientCmd(0, "demo_ui_mode 0", true);
             engine->ExecuteClientCmd(0, "sv_cheats 1", true); // required to unlock commands such as getposcopy
 
+            // Workaround to start demo playback when Steam is in offline mode, the +playdemo launch option doesn't work in this case.
+            if (demoPath != NULL) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(6000));
+                if (!engine->IsPlayingDemo()) {
+                    string cmd = "playdemo \"" + string(demoPath) + "\"";
+                    Log("Force playing demo: %s", cmd.c_str());
+                    engine->ExecuteClientCmd(0, cmd.c_str(), true);
+                }
+            }
+
             initialized = true;
         }
 
