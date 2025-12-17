@@ -1571,7 +1571,7 @@ msgstr "端口"
 
 #: src/ui/components/inputs/radio/radio-group-tri-state.tsx
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: src/ui/components/inputs/radio/radio-group-tri-state.tsx
 #: src/ui/settings/ui/system-startup-behavior.tsx
@@ -3336,29 +3336,29 @@ msgstr "删除下载"
 #: src/ui/downloads/renown/current-match.tsx
 msgctxt "Button"
 msgid "See on Renown"
-msgstr ""
+msgstr "在 Renown 上查看"
 
 #: src/ui/downloads/renown/current-match.tsx
 msgctxt "Button"
 msgid "See on Leetify"
-msgstr ""
+msgstr "在 Leetify 上查看"
 
 #: src/ui/downloads/renown/last-matches-loader.tsx
 msgid "Too many requests sent to the API."
-msgstr ""
+msgstr "发送到API的请求过多。"
 
 #: src/ui/downloads/renown/no-renown-account.tsx
 msgid "No Renown account configured yet. Enter your Steam ID to get started."
-msgstr ""
+msgstr "尚未配置任何 Renown 账号。请输入你的 Steam ID以开始配置。"
 
 #: src/ui/downloads/renown/no-renown-account.tsx
 msgctxt "Input placeholder"
 msgid "Steam ID"
-msgstr ""
+msgstr "Steam ID"
 
 #: src/ui/downloads/renown/no-renown-account.tsx
 msgid "Use the 64-bit version of your Steam ID (e.g., 76561198000000000)."
-msgstr ""
+msgstr "请使用你的 64 位 Steam ID (如：765611980000000)。"
 
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 msgctxt "Table header kill count"
@@ -3368,7 +3368,7 @@ msgstr ""
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Leetify Rating"
-msgstr ""
+msgstr "Letify 评分"
 
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
@@ -3393,7 +3393,7 @@ msgstr "道具平均每回合伤害"
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 msgctxt "Table header"
 msgid "MVP"
-msgstr ""
+msgstr "MVP"
 
 #: src/ui/downloads/reveal-download-folder-in-explorer-button.tsx
 msgctxt "Button"
@@ -5895,12 +5895,12 @@ msgstr ""
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Button"
 msgid "Copy as JSON"
-msgstr ""
+msgstr "复制为 JSON 格式"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Button"
 msgid "Export as JSON"
-msgstr ""
+msgstr "导出为 JSON 文件"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
@@ -6317,11 +6317,11 @@ msgstr "更新队伍名称"
 
 #: src/ui/matches/table/match-count.tsx
 msgid "{matchCount, plural, one {# match} other {# matches}}"
-msgstr "{matchCount, plural, other {# 个匹配}}"
+msgstr "{matchCount, plural, other {# 场比赛}}"
 
 #: src/ui/matches/table/match-with-cheater-indicator.tsx
 msgid "{matchWithCheaterCount, plural, one {# match with a cheater} other {# matches with a cheater}}"
-msgstr "{matchWithCheaterCount, plural, other {# 与作弊者的比赛}}"
+msgstr "{matchWithCheaterCount, plural, other {# 场与作弊者的比赛}}"
 
 #: src/ui/matches/table/matches-table.tsx
 msgid "Loading matches…"
@@ -6338,7 +6338,7 @@ msgstr "尚未找到比赛，你必须先分析 demo 以生成比赛数据。"
 #. placeholder {0}: table.getSelectedRowCount()
 #: src/ui/matches/table/selected-match-count.tsx
 msgid "{0, plural, one {# match selected} other {# matches selected}}"
-msgstr "{0, plural, one {# 录像已选择} other {# 录像已选择}}"
+msgstr "{0, plural, other {# 场比赛已选择}}"
 
 #: src/ui/player/charts/average-damage-per-round-chart.tsx
 msgctxt "Chart title"
@@ -6722,23 +6722,23 @@ msgstr "最后封禁的日期"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Headshot"
-msgstr ""
+msgstr "爆头"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "No scope"
-msgstr ""
+msgstr "盲狙"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Wallbang"
-msgstr ""
+msgstr "穿墙"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Jump"
-msgstr ""
+msgstr "跳杀"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Through smoke"
-msgstr ""
+msgstr "穿烟"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Team kill"
@@ -6751,7 +6751,7 @@ msgstr ""
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Kills"
-msgstr ""
+msgstr "击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -7057,7 +7057,7 @@ msgstr "游戏"
 #: src/ui/settings/cameras/cameras-map-input.tsx
 msgctxt "Select label"
 msgid "Map"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/settings/cameras/cameras-settings.tsx
 msgid "No maps found for the selected game."
@@ -7082,7 +7082,7 @@ msgstr ""
 #: src/ui/settings/cameras/form/camera-color-input.tsx
 msgctxt "Input label"
 msgid "Color"
-msgstr ""
+msgstr "颜色"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
@@ -7322,7 +7322,7 @@ msgstr "ID"
 
 #: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
 msgid "Automatically download {name} demos in the background."
-msgstr ""
+msgstr "在后台自动下载 {name} 的 Demo。"
 
 #: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
 msgctxt "Settings title"
@@ -7331,7 +7331,7 @@ msgstr "后台下载"
 
 #: src/ui/settings/downloads/auto-download-third-party-demos.tsx
 msgid "Automatically download {name} demos at application startup."
-msgstr ""
+msgstr "在本程序启动时自动下载 {name} 的 demo。"
 
 #: src/ui/settings/downloads/auto-download-third-party-demos.tsx
 msgctxt "Settings title"
@@ -7370,17 +7370,17 @@ msgstr "昵称"
 
 #: src/ui/settings/downloads/renown-settings.tsx
 msgid "Add Renown account"
-msgstr ""
+msgstr "添加 Renown 平台账号"
 
 #: src/ui/settings/downloads/renown-settings.tsx
 msgctxt "Input label"
 msgid "Steam ID64"
-msgstr ""
+msgstr "Steam ID64"
 
 #: src/ui/settings/downloads/renown-settings.tsx
 msgctxt "Input placeholder"
 msgid "Steam ID64 (e.g. 76561198000000000)"
-msgstr ""
+msgstr "Steam ID64 (例 76561198000000000)"
 
 #: src/ui/settings/downloads/third-party-accounts.tsx
 msgid "No accounts"
@@ -8102,15 +8102,15 @@ msgstr "该死！CS 崩溃了。"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Unable to communicate with Counter-Strike, make sure to start it from the application."
-msgstr ""
+msgstr "无法与 Counter-Strike 建立通信, 请确保从本应用程序启动游戏。"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Counter-Strike is not running, please start it from the application."
-msgstr ""
+msgstr "Counter-Strike 未运行，请从应用中点击开始。"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Counter-Strike did not respond, please try again."
-msgstr ""
+msgstr "Counter-Strike 程序没有响应，请再试一次。"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"
@@ -8411,7 +8411,7 @@ msgstr "助攻"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Audio"
-msgstr ""
+msgstr "音频"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Player voices"
