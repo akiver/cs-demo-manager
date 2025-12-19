@@ -9,7 +9,7 @@ export abstract class Command {
   public abstract run(): Promise<void>;
   protected args: string[];
   protected readonly commonArgs: ParseArgsOptionsConfig = {
-    verbose: { type: 'boolean', short: 'v' },
+    verbose: { type: 'boolean', short: 'v', default: false },
   };
 
   public constructor(args: string[]) {

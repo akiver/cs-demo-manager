@@ -185,7 +185,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.cfgFlag} <string>`);
     console.log(`  --${this.focusPlayerFlag} <steamId>`);
     console.log(`  --${this.configFileFlag} <path> (path to config JSON file)`);
-    console.log(`  --${this.commonArgs.verbose}`);
+    console.log(`  --verbose`);
     console.log('');
     console.log(`Player mode options (when --mode ${Mode.Player}):`);
     console.log(`  --${this.eventFlag} <string> (${Object.values(PlayerSequenceEvent).join('|')})`);
