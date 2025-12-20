@@ -93,7 +93,7 @@
     "electron-devtools-installer": "4.0.0",
     "electron-updater": "6.6.2",
     "electron-window-state": "5.0.3",
-    "esbuild": "0.27.1",
+    "esbuild": "0.27.2",
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-better-tailwindcss": "3.8.0",
@@ -104,9 +104,9 @@
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.0.1",
-    "fs-extra": "11.3.2",
+    "fs-extra": "11.3.3",
     "html-to-image": "1.11.13",
-    "knip": "5.74.0",
+    "knip": "5.75.2",
     "kysely": "0.28.9",
     "match-sorter": "8.2.0",
     "milkdown-plugin-placeholder": "0.2.1",
@@ -116,10 +116,10 @@
     "pg": "8.16.3",
     "prettier": "3.7.4",
     "react": "19.2.3",
-    "react-day-picker": "9.12.0",
+    "react-day-picker": "9.13.0",
     "react-dom": "19.2.3",
     "react-redux": "9.2.0",
-    "react-router": "7.10.1",
+    "react-router": "7.11.0",
     "registry-js": "1.16.1",
     "rehype-external-links": "3.0.0",
     "rehype-raw": "7.0.0",
@@ -147,7 +147,7 @@
     "node": "22"
   },
   "overrides": {
-    "esbuild": "0.27.1",
+    "esbuild": "0.27.2",
     "node-gyp": "12.1.0"
   }
 }
