@@ -36,7 +36,7 @@ export function MatchPlayers() {
 
   const kills = match.kills.filter((kill) => kill.killerSteamId === steamId);
   const deaths = match.kills.filter((kill) => kill.victimSteamId === steamId);
-  const sortedPlayers = [...match.players].sort((playerA, playerB) => {
+  const sortedPlayers = match.players.toSorted((playerA, playerB) => {
     return playerA.name.localeCompare(playerB.name);
   });
 

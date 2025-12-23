@@ -8,6 +8,7 @@ import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { VideoContainer } from 'csdm/common/types/video-container';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Options = {
   type: 'record' | 'watch';
@@ -160,7 +161,7 @@ export async function createCsgoVideoJsonFile({
     }
 
     if (closeGameAfterRecording && i === sequences.length - 1) {
-      json.addExecCommand(sequences[sequences.length - 1].endTick + 1, 'quit');
+      json.addExecCommand(lastArrayItem(sequences).endTick + 1, 'quit');
     } else {
       json.addGoToNextSequence(sequence.endTick + tickrate);
     }

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import type { Data, TableInstance } from './table-types';
 import { ArrowDownLongIcon } from 'csdm/ui/icons/arrow-down-long-icon';
 import { ArrowUpLongIcon } from 'csdm/ui/icons/arrow-up-long-icon';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Props<DataType extends Data> = {
   table: TableInstance<DataType>;
@@ -15,7 +16,7 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
   const virtualItems = table.getVirtualItems();
   const totalSize = table.getTotalSize();
   const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
-  const paddingBottom = virtualItems.length > 0 ? totalSize - virtualItems[virtualItems.length - 1].end : 0;
+  const paddingBottom = virtualItems.length > 0 ? totalSize - lastArrayItem(virtualItems).end : 0;
   const tableStyle = {
     '--virtualPaddingTop': `${paddingTop}px`,
     '--virtualPaddingBottom': `${paddingBottom}px`,

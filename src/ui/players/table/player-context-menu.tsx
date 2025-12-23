@@ -13,6 +13,7 @@ import { Separator } from 'csdm/ui/components/context-menu/separator';
 import { UpdateNameItem } from 'csdm/ui/components/context-menu/items/update-name-item';
 import { UpdatePlayerNameDialog } from 'csdm/ui/dialogs/update-player-name-dialog';
 import { ExportPlayersItem } from './export-players-item';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Props = {
   players: PlayerTable[];
@@ -27,7 +28,7 @@ export function PlayerContextMenu({ players, onCommentClick }: Props) {
   }
 
   const playerSteamIds = players.map((player) => player.steamId);
-  const selectedPlayerSteamId = playerSteamIds[playerSteamIds.length - 1];
+  const selectedPlayerSteamId = lastArrayItem(playerSteamIds);
   const isMultipleSelection = playerSteamIds.length > 1;
 
   const onTagsClick = () => {

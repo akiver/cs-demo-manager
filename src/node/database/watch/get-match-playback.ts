@@ -127,7 +127,7 @@ export async function getPlaybackMatch({ demoPath, steamId, type, includeDamages
       fetchKills(checksum, steamId, type),
       fetchDamages(checksum, steamId, type),
     ]);
-    actions = kills.concat(damages);
+    actions = [...kills, ...damages];
     actions.sort((actionA, actionB) => {
       return actionA.tick - actionB.tick;
     });

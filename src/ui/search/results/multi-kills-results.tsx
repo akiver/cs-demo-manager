@@ -19,6 +19,7 @@ import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
 import { RoundCommentIcon } from 'csdm/ui/match/rounds/round/round-comment-icon';
 import { Markdown } from 'csdm/ui/components/markdown';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Props = {
   multiKills: MultiKillResult[];
@@ -29,8 +30,11 @@ export function MultiKillsResults({ multiKills }: Props) {
     <VirtualListResults
       items={multiKills}
       renderItem={(multiKill) => {
+        if (multiKill.kills.length < 2) {
+          return null;
+        }
         const [firstKill] = multiKill.kills;
-        const lastKill = multiKill.kills[multiKill.kills.length - 1];
+        const lastKill = lastArrayItem(multiKill.kills);
         return (
           <CollapsePanel
             key={multiKill.id}
@@ -48,8 +52,8 @@ export function MultiKillsResults({ multiKills }: Props) {
                   <MatchDate date={multiKill.date} />
                   <DotSeparator />
                   <ActionDuration
-                    startTick={firstKill?.tick ?? 0}
-                    endTick={lastKill?.tick ?? 0}
+                    startTick={firstKill.tick}
+                    endTick={lastKill.tick}
                     tickrate={multiKill.matchTickrate}
                   />
                   {multiKill.roundComment && (

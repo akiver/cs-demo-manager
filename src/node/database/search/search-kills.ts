@@ -6,6 +6,7 @@ import type { SearchFilter } from 'csdm/common/types/search/search-filter';
 import type { SearchEvent } from 'csdm/common/types/search/search-event';
 import { TriStateFilter } from 'csdm/common/types/tri-state-filter';
 import { WeaponType } from 'csdm/common/types/counter-strike';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 export type SearchKillsFilter = SearchFilter & {
   event: typeof SearchEvent.Kills;
@@ -174,8 +175,8 @@ export async function searchKills({
         kills: [killRowToKill(row)],
         roundComment: row.comment ?? '',
       });
-    } else {
-      result[result.length - 1].kills.push(killRowToKill(row));
+    } else if (result.length > 0) {
+      lastArrayItem(result).kills.push(killRowToKill(row));
     }
   }
 

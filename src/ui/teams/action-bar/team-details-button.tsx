@@ -4,6 +4,7 @@ import { useTeamsTable } from '../table/use-teams-table';
 import { useTeamsStatus } from '../use-teams-status';
 import { Status } from 'csdm/common/types/status';
 import { useNavigateToTeam } from 'csdm/ui/hooks/use-navigate-to-team';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 export function TeamDetailsButton() {
   const navigateToTeam = useNavigateToTeam();
@@ -17,7 +18,7 @@ export function TeamDetailsButton() {
       return;
     }
 
-    const name = selectedTeamNames[selectedTeamNames.length - 1];
+    const name = lastArrayItem(selectedTeamNames);
     navigateToTeam(name);
   };
 

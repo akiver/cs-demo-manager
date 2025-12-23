@@ -29,6 +29,7 @@ import { CopyItem } from 'csdm/ui/components/context-menu/items/copy-item';
 import { DeleteDemosFromDatabaseItem } from './delete-demos-from-database-item';
 import { DeleteDemosFromDatabaseDialog } from 'csdm/ui/components/dialogs/delete-demos-from-database-dialog';
 import { ExportDemosItem } from './export-demos-items';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type NavigateToMatchItemProps = {
   demos: Demo[];
@@ -74,7 +75,7 @@ export function DemoContextMenu({ onCommentClick, demos, siblingDemoPaths }: Pro
 
   const checksums = demos.map((demo) => demo.checksum);
   const filepaths = demos.map((demo) => demo.filePath);
-  const selectedDemo = demos[demos.length - 1];
+  const selectedDemo = lastArrayItem(demos);
 
   const onTagsClick = () => {
     showDialog(<DemosTagsDialog demos={demos} />);

@@ -7,6 +7,7 @@ import { getRecordingFolderPath } from '../get-recording-folder-path';
 import { Game } from 'csdm/common/types/counter-strike';
 import { glob } from 'csdm/node/filesystem/glob';
 import { RawFilesNotFoundError } from 'csdm/node/video/errors/raw-files-not-found';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type CapturePlayerViewCS2 = {
   game: typeof Game.CS2;
@@ -88,7 +89,7 @@ export async function capturePlayerView(game: Game): Promise<CapturePlayerViewPa
             onlyFiles: true,
           });
           assertScreenshotFilesNotEmpty(screenshotImages);
-          const screenshotPath = screenshotImages[screenshotImages.length - 1];
+          const screenshotPath = lastArrayItem(screenshotImages);
           if (game === Game.CSGO) {
             if (!coordinates) {
               return reject(new Error('No coordinates received from the game'));

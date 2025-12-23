@@ -10,6 +10,7 @@ import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import type { Camera } from 'csdm/common/types/camera';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 function getHlaeOutputFolderPath(outputFolderPath: string, sequence: Sequence) {
   return `${windowsToUnixPathSeparator(outputFolderPath)}/${getSequenceName(sequence)}`;
@@ -196,7 +197,7 @@ export async function createCs2VideoJsonFile({
     }
 
     if (closeGameAfterRecording && i === sequences.length - 1) {
-      json.addExecCommand(sequences[sequences.length - 1].endTick + 64, 'quit');
+      json.addExecCommand(lastArrayItem(sequences).endTick + 64, 'quit');
     } else {
       json.addGoToNextSequence(sequence.endTick + 64);
     }

@@ -5,6 +5,7 @@ import { useUpdateSettings } from '../use-update-settings';
 import { useFolders } from './use-folders';
 import { useCurrentDemoFolder } from './use-current-demo-folder';
 import { RemoveButton } from 'csdm/ui/components/buttons/remove-button';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Props = {
   folderPath: string;
@@ -20,8 +21,7 @@ export function RemoveFolderButton({ folderPath }: Props) {
     const newFolders = folders.filter((folder) => folder.path !== folderPath);
     let newCurrentFolderPath = '';
     if (newFolders.length > 0) {
-      newCurrentFolderPath =
-        currentFolderPath === folderPath ? newFolders[newFolders.length - 1].path : currentFolderPath;
+      newCurrentFolderPath = currentFolderPath === folderPath ? lastArrayItem(newFolders).path : currentFolderPath;
     }
 
     await updateSettings(

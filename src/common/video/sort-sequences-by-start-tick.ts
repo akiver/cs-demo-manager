@@ -1,7 +1,7 @@
 import type { Sequence } from 'csdm/common/types/sequence';
 
 export function sortSequencesByStartTick(sequences: Sequence[]) {
-  const sortedSequencesByStartTick: Sequence[] = [...sequences].sort((currentSequence, nextSequence) => {
+  const sortedSequencesByStartTick: Sequence[] = sequences.toSorted((currentSequence, nextSequence) => {
     if (currentSequence.startTick < nextSequence.startTick) {
       return -1;
     }

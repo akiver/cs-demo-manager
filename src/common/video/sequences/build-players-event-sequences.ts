@@ -7,6 +7,7 @@ import { PlayerSequenceEvent } from 'csdm/common/types/player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 import type { Kill } from 'csdm/common/types/kill';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 function buildPlayersOptions(players: MatchPlayer[]) {
   const options: SequencePlayerOptions[] = players.map((player) => {
@@ -107,7 +108,7 @@ export function buildPlayersEventSequences({
       }
     }
 
-    const previousSequence = sequences.length > 0 ? sequences[sequences.length - 1] : undefined;
+    const previousSequence = sequences.length > 0 ? lastArrayItem(sequences) : undefined;
     if (previousSequence !== undefined) {
       const areSequencesOverlapping = previousSequence.endTick + ticksRequiredBetweenTwoSequences >= sequenceStartTick;
       if (areSequencesOverlapping) {

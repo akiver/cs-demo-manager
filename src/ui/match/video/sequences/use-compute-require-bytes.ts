@@ -2,6 +2,7 @@ import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 /**
  * Maps CRF (Constant Rate Factor) to bitrate factor for libx264 (the default codec used).
@@ -26,8 +27,9 @@ function getCrfFactor(crf: number): number {
     return crfMap[0][1];
   }
 
-  if (crf >= crfMap[crfMap.length - 1][0]) {
-    return crfMap[crfMap.length - 1][1];
+  const [lowerCrf, lowerFactor] = lastArrayItem(crfMap);
+  if (crf >= lowerCrf) {
+    return lowerFactor;
   }
 
   for (let i = 0; i < crfMap.length - 1; i++) {

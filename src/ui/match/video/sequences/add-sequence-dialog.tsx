@@ -8,6 +8,7 @@ import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { addSequence } from './sequences-actions';
 import type { SequenceForm } from '../sequence/sequence-form';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Props = {
   isVisible: boolean;
@@ -40,7 +41,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   };
 
   const sequenceNumber = sequences.length + 1;
-  const lastSequence = sequences.length > 0 ? sequences[sequences.length - 1] : undefined;
+  const lastSequence = sequences.length > 0 ? lastArrayItem(sequences) : undefined;
   let playersOptions = defaultPlayersOptions;
   let showXRay = settings.settings.showXRay;
   let showAssists = settings.settings.showAssists;

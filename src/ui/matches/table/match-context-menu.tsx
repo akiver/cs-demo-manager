@@ -26,6 +26,7 @@ import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
 import { UpdateTeamNamesDialog } from '../dialogs/update-team-names-dialog';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { Trans } from '@lingui/react/macro';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Props = {
   matchChecksums: string[];
@@ -48,7 +49,7 @@ export function MatchContextMenu({ selectedMatches, matchChecksums, onCommentCli
     shareCodes.push(match.shareCode);
     filepaths.push(match.demoFilePath);
   }
-  const selectedMatch = selectedMatches[selectedMatches.length - 1];
+  const selectedMatch = lastArrayItem(selectedMatches);
 
   const onTagsClick = () => {
     showDialog(<MatchesTagsDialog matches={selectedMatches} />);

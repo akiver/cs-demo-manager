@@ -14,6 +14,7 @@ import { ValveMatchResult } from 'csdm/common/types/valve-match';
 import { getMapName } from './get-map-name';
 import { DownloadStatus } from 'csdm/common/types/download-status';
 import { unixTimestampToDate } from 'csdm/common/date/unix-timestamp-to-date';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 function sumNumberArray(numberArray: number[]): number {
   return numberArray.reduce((previous, current) => {
@@ -28,7 +29,7 @@ function steamId3ToSteamId64(steamId3: number) {
 export function getLastRoundStatsMessage(matchInfoMessage: CDataGCCStrike15_v2_MatchInfo) {
   const { roundstatsLegacy, roundstatsall } = matchInfoMessage;
 
-  return roundstatsLegacy ?? roundstatsall[roundstatsall.length - 1];
+  return roundstatsLegacy ?? lastArrayItem(roundstatsall);
 }
 
 function getMatchResult(lastRoundMsg: CMsgGCCStrike15_v2_MatchmakingServerRoundStats): ValveMatchResult {

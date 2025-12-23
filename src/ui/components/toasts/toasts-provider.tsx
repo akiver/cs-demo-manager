@@ -27,7 +27,9 @@ export function ToastsProvider({ children }: Props) {
       id: window.setTimeout(() => {
         removeToast(toastId);
       }, durationInMs),
-      startedAt: new Date().getTime(),
+      // https://github.com/facebook/react/issues/34834
+      // eslint-disable-next-line react-hooks/purity
+      startedAt: Date.now(),
       msRemaining: durationInMs,
     });
 

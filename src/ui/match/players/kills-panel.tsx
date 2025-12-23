@@ -17,7 +17,7 @@ type Props = {
 
 export function KillsPanel({ header, kills, demoPath, tickrate, rounds }: Props) {
   const match = useCurrentMatch();
-  const sortedKills = [...kills].sort((killA, killB) => killA.tick - killB.tick);
+  const sortedKills = kills.toSorted((killA, killB) => killA.tick - killB.tick);
 
   return (
     <Panel header={header} fitHeight={true}>

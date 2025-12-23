@@ -23,6 +23,7 @@ import { RenameMatchDialog } from 'csdm/ui/matches/dialogs/rename-match-dialog';
 import { WatchItem } from 'csdm/ui/components/context-menu/items/watch-item';
 import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
 import { MatchesTagsDialog } from 'csdm/ui/matches/dialogs/tags-dialog';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Props = {
   matchChecksums: string[];
@@ -45,7 +46,7 @@ export function TeamMatchContextMenu({ selectedMatches, matchChecksums, onCommen
     shareCodes.push(match.shareCode);
     filepaths.push(match.demoFilePath);
   }
-  const selectedMatch = selectedMatches[selectedMatches.length - 1];
+  const selectedMatch = lastArrayItem(selectedMatches);
 
   const onTagsClick = () => {
     showDialog(<MatchesTagsDialog matches={selectedMatches} />);

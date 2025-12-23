@@ -17,7 +17,7 @@ import { roundNumber } from 'csdm/common/math/round-number';
 import { useBanSettings } from 'csdm/ui/settings/bans/use-ban-settings';
 
 function formatDateToDurationYears(date: string) {
-  const now = new Date().getTime();
+  const now = Date.now();
   const duration = now - new Date(date).getTime();
 
   const millisecondsPerYear = 1000 * 60 * 60 * 24 * 365.25;

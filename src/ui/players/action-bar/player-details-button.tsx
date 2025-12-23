@@ -4,6 +4,7 @@ import { useNavigateToPlayer } from 'csdm/ui/hooks/use-navigate-to-player';
 import { usePlayersTable } from '../table/use-players-table';
 import { usePlayersStatus } from '../use-players-status';
 import { Status } from 'csdm/common/types/status';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 export function PlayerDetailsButton() {
   const navigateToPlayer = useNavigateToPlayer();
@@ -17,7 +18,7 @@ export function PlayerDetailsButton() {
       return;
     }
 
-    const steamId = selectedSteamIds[selectedSteamIds.length - 1];
+    const steamId = lastArrayItem(selectedSteamIds);
     navigateToPlayer(steamId);
   };
 

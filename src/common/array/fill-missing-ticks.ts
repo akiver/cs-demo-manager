@@ -1,4 +1,5 @@
 import type { ColumnID } from '../types/column-id';
+import { lastArrayItem } from './last-array-item';
 
 type ObjectWithTick = {
   id: ColumnID;
@@ -21,7 +22,7 @@ export function fillMissingTicks<T extends ObjectWithTick>(objects: T[]) {
   }
 
   const minTick = objects[0].tick;
-  const maxTick = objects[objects.length - 1].tick;
+  const maxTick = lastArrayItem(objects).tick;
 
   const newObjects: T[] = [];
   let lastTickObjects: T[] = [];

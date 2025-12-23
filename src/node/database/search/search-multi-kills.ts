@@ -3,6 +3,7 @@ import { db } from 'csdm/node/database/database';
 import { killRowToKill } from '../kills/kill-row-to-kill';
 import type { MultiKillResult } from 'csdm/common/types/search/multi-kill-result';
 import type { SearchFilter } from 'csdm/common/types/search/search-filter';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Filter = SearchFilter & {
   killCount: number;
@@ -142,8 +143,8 @@ export async function searchMultiKills({
         kills: [killRowToKill(kill)],
         roundComment: kill.comment ?? '',
       });
-    } else {
-      multiKills[multiKills.length - 1].kills.push(killRowToKill(kill));
+    } else if (multiKills.length > 0) {
+      lastArrayItem(multiKills).kills.push(killRowToKill(kill));
     }
   }
 

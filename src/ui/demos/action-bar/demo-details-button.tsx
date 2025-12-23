@@ -3,6 +3,7 @@ import { useSelectedDemosPaths } from 'csdm/ui/demos/use-selected-demos-paths';
 import { useDemosLoaded } from 'csdm/ui/demos/use-demos-loaded';
 import { useNavigateToDemo } from 'csdm/ui/hooks/use-navigate-to-demo';
 import { DetailsButton } from 'csdm/ui/components/buttons/details-button';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 export function DemoDetailsButton() {
   const navigateToDemo = useNavigateToDemo();
@@ -14,7 +15,7 @@ export function DemoDetailsButton() {
   }
 
   const onClick = () => {
-    const demoPath = selectedDemosPaths[selectedDemosPaths.length - 1];
+    const demoPath = lastArrayItem(selectedDemosPaths);
     navigateToDemo(demoPath);
   };
 

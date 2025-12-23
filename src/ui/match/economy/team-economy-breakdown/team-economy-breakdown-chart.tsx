@@ -50,7 +50,7 @@ export function TeamsEconomyBreakdownChart() {
       economyType: round.teamBEconomyType,
     };
   });
-  const roundsNumber = [...match.rounds].reverse().map((round) => round.number);
+  const roundsNumber = match.rounds.toReversed().map((round) => round.number);
 
   const barStyle = {
     color: ({ data }: { data: EconomyChartData }) => {

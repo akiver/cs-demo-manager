@@ -7,6 +7,7 @@ import localRules from 'eslint-plugin-local-rules';
 import lingui from 'eslint-plugin-lingui';
 import prettier from 'eslint-plugin-prettier/recommended';
 import eslintPluginBetterTailwindcss from 'eslint-plugin-better-tailwindcss';
+import e18e from '@e18e/eslint-plugin';
 
 export default [
   {
@@ -53,6 +54,7 @@ export default [
   js.configs.recommended,
   ...ts.configs.recommended,
   reactRecommended,
+  e18e.configs.recommended,
   prettier,
   {
     plugins: {
@@ -257,6 +259,12 @@ export default [
         },
       ],
       'react/prop-types': 0,
+      'e18e/ban-dependencies': [
+        'error',
+        {
+          allowed: ['fs-extra'],
+        },
+      ],
     },
   },
   {

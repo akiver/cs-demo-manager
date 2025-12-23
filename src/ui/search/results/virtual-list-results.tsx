@@ -1,5 +1,6 @@
 import React, { useRef, type ReactNode } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 function estimateSize() {
   return 58;
@@ -25,7 +26,7 @@ export function VirtualListResults<ItemType>({ items, renderItem }: Props<ItemTy
   const virtualItems = getVirtualItems();
   const totalSize = getTotalSize();
   const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
-  const paddingBottom = virtualItems.length > 0 ? totalSize - virtualItems[virtualItems.length - 1].end : 0;
+  const paddingBottom = virtualItems.length > 0 ? totalSize - lastArrayItem(virtualItems).end : 0;
   const containerStyle: React.CSSProperties = {
     paddingTop: `${paddingTop}px`,
     paddingBottom: `${paddingBottom}px`,

@@ -11,6 +11,7 @@ import type { VideoContainer } from 'csdm/common/types/video-container';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { getSequenceOutputFolderPath } from './get-sequence-output-folder-path';
 import { getRecordingFolderPath } from 'csdm/node/counter-strike/get-recording-folder-path';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 async function assertWavFileExists(wavFilePath: string) {
   const exists = await fs.pathExists(wavFilePath);
@@ -49,7 +50,7 @@ export async function getHlaeTakeFolderPath(sequenceOutputFolderPath: string) {
   });
   assertPathsNotEmpty(takeFolders);
 
-  const takeFolderPath = takeFolders[takeFolders.length - 1];
+  const takeFolderPath = lastArrayItem(takeFolders);
   await assertFolderExists(takeFolderPath);
 
   return takeFolderPath;

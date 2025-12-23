@@ -2,6 +2,7 @@ import React from 'react';
 import { WatchButton } from 'csdm/ui/components/buttons/watch-button';
 import { useMatchesLoaded } from '../use-matches-loaded';
 import { useMatchesTable } from '../table/use-matches-table';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 export function WatchMatchButton() {
   const table = useMatchesTable();
@@ -12,7 +13,7 @@ export function WatchMatchButton() {
     return null;
   }
 
-  const selectedMatch = selectedMatches[selectedMatches.length - 1];
+  const selectedMatch = lastArrayItem(selectedMatches);
 
   return <WatchButton isDisabled={!matchesLoaded} demoPath={selectedMatch.demoFilePath} game={selectedMatch.game} />;
 }
