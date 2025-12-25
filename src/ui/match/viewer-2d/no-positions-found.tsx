@@ -55,9 +55,8 @@ function GeneratingDialog({ onPositionsAvailable }: Props) {
           setError(<Trans>Demo not found.</Trans>);
       }
       setStatus(Status.Error);
-    } finally {
-      client.off(RendererServerMessageName.InsertingMatchPositions, onInsertingPositions);
     }
+    client.off(RendererServerMessageName.InsertingMatchPositions, onInsertingPositions);
   };
 
   return (

@@ -25,6 +25,7 @@ export function useAddRenownAccount() {
       });
       dispatch(accountAdded({ account }));
 
+      setIsBusy(false);
       return true;
     } catch (error) {
       let errorMessage: ReactNode;
@@ -40,9 +41,8 @@ export function useAddRenownAccount() {
       }
 
       setErrorMessage(errorMessage);
-      return false;
-    } finally {
       setIsBusy(false);
+      return false;
     }
   };
 

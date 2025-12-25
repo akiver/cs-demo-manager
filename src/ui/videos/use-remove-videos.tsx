@@ -21,9 +21,8 @@ export function useRemoveVideos() {
         content: <Trans>An error occurred</Trans>,
         type: 'error',
       });
-    } finally {
-      setIsRemovingVideos(false);
     }
+    setIsRemovingVideos(false);
   };
 
   return { isRemovingVideos, removeVideos };

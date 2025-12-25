@@ -24,6 +24,7 @@ export function useAddFaceitAccount() {
         payload: nickname,
       });
       dispatch(accountAdded({ account }));
+      setIsBusy(false);
 
       return true;
     } catch (error) {
@@ -49,9 +50,8 @@ export function useAddFaceitAccount() {
       }
 
       setErrorMessage(errorMessage);
-      return false;
-    } finally {
       setIsBusy(false);
+      return false;
     }
   };
 

@@ -25,9 +25,8 @@ function ResetDatabaseDialog() {
       } else {
         setError(JSON.stringify(error));
       }
-    } finally {
-      setIsBusy(false);
     }
+    setIsBusy(false);
   };
 
   return (

@@ -265,6 +265,8 @@ export default [
           allowed: ['fs-extra'],
         },
       ],
+      // Uncomment this rule to report syntax not supported by the React compiler instead of silently failing
+      // 'react-hooks/todo': 'error',
     },
   },
   {

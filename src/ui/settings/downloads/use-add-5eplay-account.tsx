@@ -24,6 +24,7 @@ export function useAdd5EPlayAcount() {
         payload: domainId,
       });
       dispatch(accountAdded({ account }));
+      setIsBusy(false);
 
       return true;
     } catch (error) {
@@ -40,9 +41,8 @@ export function useAdd5EPlayAcount() {
       }
 
       setErrorMessage(errorMessage);
-      return false;
-    } finally {
       setIsBusy(false);
+      return false;
     }
   };
 

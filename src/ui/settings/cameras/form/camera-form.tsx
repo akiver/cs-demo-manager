@@ -176,9 +176,8 @@ export function CameraForm({ nameInput, error, onSubmit }: Props) {
                     content: message,
                     type: 'error',
                   });
-                } finally {
-                  setIsLoading(false);
                 }
+                setIsLoading(false);
               }}
             >
               <Trans>Generate camera from in‑game view</Trans>

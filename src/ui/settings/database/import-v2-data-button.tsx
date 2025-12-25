@@ -53,20 +53,20 @@ function ImportV2DataDialog() {
   };
 
   const onImportClick = async () => {
-    try {
-      if (isBusy) {
-        return;
-      }
-      if (!importComments && !importStatuses) {
-        return setError(<Trans>You must select at least one data to import.</Trans>);
-      }
-      if (backupFilePath === '') {
-        return setError(<Trans>You must select a CS:DM V2 backup file.</Trans>);
-      }
-      if (folders.length === 0) {
-        return setError(<Trans>You need at least one folder.</Trans>);
-      }
+    if (isBusy) {
+      return;
+    }
+    if (!importComments && !importStatuses) {
+      return setError(<Trans>You must select at least one data to import.</Trans>);
+    }
+    if (backupFilePath === '') {
+      return setError(<Trans>You must select a CS:DM V2 backup file.</Trans>);
+    }
+    if (folders.length === 0) {
+      return setError(<Trans>You need at least one folder.</Trans>);
+    }
 
+    try {
       setError(null);
       setIsBusy(true);
       const result = await client.send({
@@ -91,9 +91,8 @@ function ImportV2DataDialog() {
           errorMessage = <Trans>An error occurred.</Trans>;
       }
       setError(errorMessage);
-    } finally {
-      setIsBusy(false);
     }
+    setIsBusy(false);
   };
 
   const renderForm = () => {

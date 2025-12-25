@@ -86,9 +86,8 @@ export function UpdateTeamNamesDialog({ matches }: Props) {
       }
       setError(errorMessage);
       setStatus(Status.Error);
-    } finally {
-      client.off(RendererServerMessageName.TeamNamesUpdated, setUpdatedCount);
     }
+    client.off(RendererServerMessageName.TeamNamesUpdated, setUpdatedCount);
   };
 
   const renderMessage = () => {
