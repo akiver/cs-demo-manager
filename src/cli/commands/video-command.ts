@@ -446,10 +446,6 @@ export class VideoCommand extends Command {
       args: this.args,
     });
 
-    if (positionals.length === 0) {
-      throw new InvalidArgument('Missing demo path');
-    }
-
     const configFilePath = values[this.configFileFlag];
     if (configFilePath) {
       try {
@@ -474,6 +470,10 @@ export class VideoCommand extends Command {
         }
         throw new Error('Failed to read or parse config file', { cause: error });
       }
+    }
+
+    if (positionals.length === 0) {
+      throw new InvalidArgument('Missing demo path');
     }
 
     const [demoPath] = positionals;
