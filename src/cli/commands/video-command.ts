@@ -462,7 +462,7 @@ export class VideoCommand extends Command {
         if (typeof demoPath !== 'string' || !demoPath.endsWith('.dem')) {
           throw new InvalidArgument('Invalid demo path');
         }
-        this.demoPath = demoPath;
+        this.demoPath = path.resolve(demoPath);
         return;
       } catch (error) {
         if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
@@ -480,7 +480,7 @@ export class VideoCommand extends Command {
     if (typeof demoPath !== 'string' || !demoPath.endsWith('.dem')) {
       throw new InvalidArgument('Invalid demo path');
     }
-    this.demoPath = demoPath;
+    this.demoPath = path.resolve(demoPath);
 
     const mode = values[this.modeFlag];
     if (typeof mode === 'string') {
