@@ -16,6 +16,7 @@ import { lastArrayItem } from 'csdm/common/array/last-array-item';
 async function assertWavFileExists(wavFilePath: string) {
   const exists = await fs.pathExists(wavFilePath);
   if (!exists) {
+    logger.error(`WAV file does not exist ${wavFilePath}`);
     throw new WavFileNotFound();
   }
 }
@@ -23,6 +24,7 @@ async function assertWavFileExists(wavFilePath: string) {
 async function assertVideoFileExists(videoFilePath: string) {
   const exists = await fs.pathExists(videoFilePath);
   if (!exists) {
+    logger.error(`Video file does not exist ${videoFilePath}`);
     throw new RawFilesNotFoundError();
   }
 }
@@ -37,11 +39,13 @@ async function assertFolderExists(folderPath: string) {
 
 function assertPathsNotEmpty(paths: string[]) {
   if (paths.length === 0) {
+    logger.error('No paths found');
     throw new RawFilesNotFoundError();
   }
 }
 
 export async function getHlaeTakeFolderPath(sequenceOutputFolderPath: string) {
+  logger.debug('Getting HLAE take folder path', sequenceOutputFolderPath);
   const takeFolders = await glob(`take*`, {
     cwd: sequenceOutputFolderPath,
     absolute: true,
@@ -93,6 +97,7 @@ async function getHlaeRawFiles({
   videoContainer,
   recordAudio,
 }: GetHlaeRawFilesOptions): Promise<RawFiles> {
+  logger.debug('Getting HLAE raw files', outputFolderPath);
   const sequenceOutputFolderPath = getSequenceOutputFolderPath(sequence, outputFolderPath);
   await assertFolderExists(sequenceOutputFolderPath);
 

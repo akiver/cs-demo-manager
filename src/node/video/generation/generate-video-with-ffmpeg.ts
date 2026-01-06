@@ -75,6 +75,8 @@ type GenerateVideoWithFFmpegSettings = {
 };
 
 export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegSettings, signal: AbortSignal) {
+  logger.debug('Generating video with FFmpeg');
+  logger.debug(settings);
   const { tgaFiles, wavFilePath, videoFilePath } = await getSequenceRawFiles(settings);
 
   const {
@@ -101,6 +103,7 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
   const outputPath = getSequenceOutputFilePath(outputFolderPath, sequence, videoContainer);
   if (recordingSystem === RecordingSystem.HLAE && recordingOutput === RecordingOutput.Video) {
     if (!videoFilePath) {
+      logger.error('Video file path is null for HLAE video output');
       throw new RawFilesNotFoundError();
     }
 
