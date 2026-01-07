@@ -269,9 +269,7 @@ export class VideoCommand extends Command {
           outputFolderPath: config.outputFolderPath ?? parameters.outputFolderPath,
           sequences: config.sequences ?? parameters.sequences,
         };
-      }
-
-      if (this.mode === 'player') {
+      } else if (this.mode === 'player') {
         if (this.steamIds.length === 0) {
           throw new InvalidArgument(`--${this.steamIdsFlag} is required for player mode`);
         }
