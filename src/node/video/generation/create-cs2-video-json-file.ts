@@ -75,6 +75,7 @@ export async function createCs2VideoJsonFile({
 
     json.addExecCommand(1, `cl_draw_only_deathnotices ${sequence.showOnlyDeathNotices ? 1 : 0}`);
     json.addExecCommand(1, `mirv_deathmsg lifetime ${sequence.deathNoticesDuration}`);
+    json.addExecCommand(1, `mirv_deathmsg filter clear`);
 
     if (sequence.playerVoicesEnabled) {
       json.enablePlayerVoices(1);
@@ -149,21 +150,26 @@ export async function createCs2VideoJsonFile({
       }
     }
 
+    // Block all death notices by default and then selectively allow them based on player's options.
+    json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add block=1`);
+
     for (const playerOptions of sequence.playersOptions) {
       // Unlike CS:GO, support for double quotes in player's name is not supported in CS2.
       // The reason is that the "mirv_exec" command used as a workaround in CS:GO is not available for CS2.
       const replacePlayerNameCommand = `mirv_replace_name byXuid add x${playerOptions.steamId} "${playerOptions.playerName}"`;
       json.addExecCommand(setupSequenceTick, replacePlayerNameCommand);
 
-      if (!playerOptions.showKill) {
+      json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add victimMatch=x${playerOptions.steamId} block=0`);
+
+      if (playerOptions.showKill) {
         json.addExecCommand(
           setupSequenceTick,
-          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} block=1`,
+          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerMatch=x${playerOptions.steamId} block=0`,
         );
-      } else if (playerOptions.highlightKill) {
+
         json.addExecCommand(
           setupSequenceTick,
-          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=1`,
+          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=${playerOptions.highlightKill ? '1' : '0'} block=0`,
         );
       }
 

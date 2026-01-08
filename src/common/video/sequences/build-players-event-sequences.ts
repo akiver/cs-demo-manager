@@ -9,10 +9,10 @@ import type { VideoSettings } from 'csdm/node/settings/settings';
 import type { Kill } from 'csdm/common/types/kill';
 import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
-function buildPlayersOptions(players: MatchPlayer[]) {
+function buildPlayersOptions(players: MatchPlayer[], targetSteamIds: string[]) {
   const options: SequencePlayerOptions[] = players.map((player) => {
     return {
-      highlightKill: false,
+      highlightKill: targetSteamIds.includes(player.steamId),
       playerName: player.name,
       showKill: true,
       steamId: player.steamId,
@@ -89,7 +89,7 @@ export function buildPlayersEventSequences({
   const minimumSecondsBetweenTwoEvents = 2;
   const maxSecondsBetweenEvents = 10;
 
-  const playersOptions = buildPlayersOptions(match.players);
+  const playersOptions = buildPlayersOptions(match.players, steamIds);
   const sequences: Sequence[] = [];
   const ticksRequiredBetweenTwoSequences = Math.round(match.tickrate * minimumSecondsBetweenTwoEvents);
   const additionalTicksBeforeEvent = Math.round(match.tickrate * startSecondsBeforeEvent);
