@@ -50,6 +50,7 @@ async function fetchPlayerRow(steamId: string, filters?: MatchFilters) {
       avg<number>('average_kill_per_round').as('averageKillsPerRound'),
       avg<number>('average_death_per_round').as('averageDeathsPerRound'),
       sum<number>('hostage_rescued_count').as('hostageRescuedCount'),
+      sum<number>('inspect_weapon_count').as('inspectWeaponCount'),
       (qb) => {
         let wallbangsQuery = qb
           .selectFrom('kills')
@@ -63,6 +64,20 @@ async function fetchPlayerRow(steamId: string, filters?: MatchFilters) {
         }
 
         return wallbangsQuery.as('wallbangKillCount');
+      },
+      (qb) => {
+        let inspectingWeaponDeathQuery = qb
+          .selectFrom('kills')
+          .select(count<number>('kills.id').as('deathWhileInspectingWeaponCount'))
+          .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
+          .where('victim_steam_id', '=', steamId)
+          .where('is_victim_inspecting_weapon', '=', true);
+
+        if (filters) {
+          inspectingWeaponDeathQuery = applyMatchFilters(inspectingWeaponDeathQuery, filters);
+        }
+
+        return inspectingWeaponDeathQuery.as('deathWhileInspectingWeaponCount');
       },
     ])
     .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
@@ -134,6 +149,8 @@ export async function fetchPlayer(steamId: string, filters?: MatchFilters): Prom
     isCommunityBanned: playerRow.isCommunityBanned ?? false,
     lastBanDate: playerRow.lastBanDate?.toISOString() ?? null,
     openingDuelsStats: openingDuelsStats.all,
+    inspectWeaponCount: playerRow.inspectWeaponCount ?? 0,
+    deathWhileInspectingWeaponCount: playerRow.deathWhileInspectingWeaponCount ?? 0,
   };
 
   return player;

@@ -21,6 +21,7 @@ import { HltvRatingPanel } from 'csdm/ui/components/panels/hltv-rating-panel';
 import { PlayerCommentInput } from './player-comment-input';
 import { PlayerUtilitiesPanel } from './player-utilities-panel';
 import { PlayerOpeningDuelsStats } from './player-opening-duels-panel';
+import { PlayerWeaponInspections } from './player-weapon-inspections';
 
 export function PlayerOverview() {
   const {
@@ -85,6 +86,7 @@ export function PlayerOverview() {
           <PlayerOpeningDuelsStats />
           <RoundsPanel roundCount={roundCount} roundCountAsCt={roundCountAsCt} roundCountAsT={roundCountAsT} />
           <PlayerMultiKillsPanel />
+          <PlayerWeaponInspections />
           <PlayerObjectivesPanel />
           <VacPanel />
         </div>

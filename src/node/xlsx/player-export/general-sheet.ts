@@ -152,6 +152,14 @@ export class GeneralSheet extends SinglePlayerExportSheet<Player> {
         cellFormatter: (row) => row.fiveKillCount,
       },
       {
+        name: 'weapon_inspection_count',
+        cellFormatter: (row) => row.inspectWeaponCount,
+      },
+      {
+        name: 'deaths_while_inspecting_weapon',
+        cellFormatter: (row) => row.deathWhileInspectingWeaponCount,
+      },
+      {
         name: 'round_count',
         cellFormatter: (row) => row.roundCount,
       },

@@ -57,5 +57,7 @@ export type Player = {
   isCommunityBanned: boolean;
   economyBan: EconomyBan;
   hasPrivateProfile: boolean;
+  inspectWeaponCount: number;
+  deathWhileInspectingWeaponCount: number;
   openingDuelsStats: PlayerOpeningDuelsStats;
 } & PlayerUtilityStats;

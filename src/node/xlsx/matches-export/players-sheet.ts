@@ -101,6 +101,14 @@ export class PlayersSheet extends MultipleMatchExportSheet<PlayerRow> {
         cellFormatter: (row) => row.winsCount,
       },
       {
+        name: 'weapon_inspection_count',
+        cellFormatter: (row) => row.inspectWeaponCount,
+      },
+      {
+        name: 'deaths_while_inspecting_weapon',
+        cellFormatter: (row) => row.deathWhileInspectingWeaponCount,
+      },
+      {
         name: '1v1',
         cellFormatter: (row) => row.vsOneCount,
       },

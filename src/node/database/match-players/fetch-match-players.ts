@@ -49,6 +49,7 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
       'players.score',
       'players.color',
       'players.crosshair_share_code as crosshairShareCode',
+      'players.inspect_weapon_count as inspectWeaponCount',
     ])
     .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
     .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'players.steam_id')
@@ -64,9 +65,12 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
     .leftJoin('steam_account_overrides', 'players.steam_id', 'steam_account_overrides.steam_id')
     .select([db.fn.coalesce('steam_account_overrides.name', 'players.name').as('name')])
     .leftJoin('kills', (join) => {
-      return join.on(({ and, eb, ref }) => {
+      return join.on(({ and, eb, or, ref }) => {
         return and([
-          eb('kills.killer_steam_id', '=', ref('players.steam_id')),
+          or([
+            eb('kills.killer_steam_id', '=', ref('players.steam_id')),
+            eb('kills.victim_steam_id', '=', ref('players.steam_id')),
+          ]),
           eb('kills.match_checksum', '=', ref('matches.checksum')),
         ]);
       });
@@ -79,6 +83,11 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
     .select(
       sql<number>`COUNT(kills.id) FILTER (WHERE kills.is_no_scope = true AND kills.killer_steam_id = players.steam_id)`.as(
         'noScopeKillCount',
+      ),
+    )
+    .select(
+      sql<number>`COUNT(kills.id) FILTER (WHERE kills.is_victim_inspecting_weapon = true AND kills.victim_steam_id = players.steam_id)`.as(
+        'deathWhileInspectingWeaponCount',
       ),
     )
     .where('players.match_checksum', '=', checksum)

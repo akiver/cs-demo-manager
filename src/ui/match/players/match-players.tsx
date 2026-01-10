@@ -23,6 +23,7 @@ import { HltvRating2Panel } from 'csdm/ui/components/panels/hltv-rating-2-panel'
 import { AverageKillsPerRoundPanel } from 'csdm/ui/components/panels/average-kills-per-round-panel';
 import { AverageDeathsPerRoundPanel } from 'csdm/ui/components/panels/average-deaths-per-round-panel';
 import { HltvRatingPanel } from 'csdm/ui/components/panels/hltv-rating-panel';
+import { WeaponInspectionsPanel } from 'csdm/ui/components/panels/weapon-inspections-panel';
 
 export function MatchPlayers() {
   const { t } = useLingui();
@@ -92,6 +93,10 @@ export function MatchPlayers() {
               bombDefusedCount={player.bombDefusedCount}
               bombPlantedCount={player.bombPlantedCount}
               hostageRescuedCount={player.hostageRescuedCount}
+            />
+            <WeaponInspectionsPanel
+              inspectionCount={player.inspectWeaponCount}
+              deathWhileInspectingCount={player.deathWhileInspectingWeaponCount}
             />
           </div>
           <div className="flex flex-wrap gap-8">

@@ -3,6 +3,7 @@ import type { Rank } from 'csdm/common/types/counter-strike';
 import { db } from 'csdm/node/database/database';
 import { fetchPlayersClutchStats } from '../players/fetch-players-clutch-stats';
 import { fetchLastPlayersData } from '../players/fetch-last-players-data';
+import { fetchPlayersWeaponInspectionsStats } from '../players/fetch-players-weapon-inspections-stats';
 
 type PlayerQueryResult = {
   steamId: string;
@@ -55,6 +56,8 @@ type PlayerQueryResult = {
   isCommunityBanned: boolean;
   vacBanCount: number;
   lastBanDate: string | null;
+  inspectWeaponCount: number;
+  deathWhileInspectingWeaponCount: number;
 };
 
 export type PlayerRow = PlayerQueryResult & {
@@ -88,6 +91,7 @@ export async function fetchPlayersRows(filters: Filters): Promise<PlayerRow[]> {
     .select(sum<number>('three_kill_count').as('threeKillCount'))
     .select(sum<number>('four_kill_count').as('fourKillCount'))
     .select(sum<number>('five_kill_count').as('fiveKillCount'))
+    .select(sum<number>('inspect_weapon_count').as('inspectWeaponCount'))
     .select(sum<number>('bomb_planted_count').as('bombPlantedCount'))
     .select(sum<number>('bomb_defused_count').as('bombDefusedCount'))
     .select(sum<number>('hostage_rescued_count').as('hostageRescuedCount'))
@@ -122,9 +126,10 @@ export async function fetchPlayersRows(filters: Filters): Promise<PlayerRow[]> {
   const players = await query.execute();
 
   const steamIds = players.map((player) => player.steamId);
-  const [lastPlayersData, playersClutchStats] = await Promise.all([
+  const [lastPlayersData, playersClutchStats, playersWeaponInspectionsStats] = await Promise.all([
     fetchLastPlayersData(steamIds),
     fetchPlayersClutchStats(checksums, steamIds),
+    fetchPlayersWeaponInspectionsStats(checksums, steamIds),
   ]);
 
   const rows: PlayerRow[] = players.map((player) => {
@@ -133,11 +138,14 @@ export async function fetchPlayersRows(filters: Filters): Promise<PlayerRow[]> {
     if (!lastData) {
       throw new Error(`Last player data not found for steamId: ${player.steamId}`);
     }
+    const weaponInspectionsStats = playersWeaponInspectionsStats.find((stats) => stats.steamId === player.steamId);
 
     return {
       ...player,
       ...lastData,
       teamName: 'teamName' in player && typeof player.teamName === 'string' ? player.teamName : '',
+      inspectWeaponCount: player.inspectWeaponCount ?? 0,
+      deathWhileInspectingWeaponCount: weaponInspectionsStats?.deathWhileInspectingWeaponCount ?? 0,
       gameBanCount: lastData.gameBanCount ?? 0,
       isCommunityBanned: lastData.isCommunityBanned ?? false,
       vacBanCount: lastData.vacBanCount ?? 0,

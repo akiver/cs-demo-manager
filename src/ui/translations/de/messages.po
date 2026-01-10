@@ -2481,6 +2481,21 @@ msgctxt "Panel label"
 msgid "Decoys"
 msgstr "Ködergranaten"
 
+#: src/ui/components/panels/weapon-inspections-panel.tsx
+msgctxt "Panel title"
+msgid "Weapon Inspections"
+msgstr ""
+
+#: src/ui/components/panels/weapon-inspections-panel.tsx
+msgctxt "Panel label"
+msgid "Total inspections"
+msgstr ""
+
+#: src/ui/components/panels/weapon-inspections-panel.tsx
+msgctxt "Panel label"
+msgid "Deaths while inspecting"
+msgstr ""
+
 #: src/ui/components/panels/win-rate-panel.tsx
 msgctxt "Panel title"
 msgid "Win ratio"
