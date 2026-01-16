@@ -58,7 +58,7 @@ async function buildLinuxCommand(scriptPath: string, args: string, game: Game, s
    */
   const steamScriptName = game === Game.CS2 ? 'SteamLinuxRuntime_sniper/_v2-entry-point' : 'steam-runtime/run.sh';
   let runSteamScriptPath: string | undefined;
-  if (settings.cs2SteamRuntimeScriptPath) {
+  if (game === Game.CS2 && settings.cs2SteamRuntimeScriptPath) {
     runSteamScriptPath = settings.cs2SteamRuntimeScriptPath;
     const scriptExists = await fs.pathExists(runSteamScriptPath);
     if (!scriptExists) {

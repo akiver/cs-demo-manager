@@ -41,15 +41,15 @@ export function PlaybackSettings() {
       <WatchRoundBeforeDelay />
       <WatchRoundAfterDelay />
       {window.csdm.isWindows && <UseHlae />}
-      {window.csdm.isLinux && (
-        <>
-          <FollowSymbolicLinks />
-          <SteamRuntimeScriptLocation />
-        </>
-      )}
       {!window.csdm.isMac && (
         <>
           <Cs2PluginSelect />
+          {window.csdm.isLinux && (
+            <>
+              <FollowSymbolicLinks />
+              <SteamRuntimeScriptLocation />
+            </>
+          )}
           <Cs2Location />
           <CsgoLocation />
         </>
