@@ -1,17 +1,24 @@
 import path from 'node:path';
 import fs from 'fs-extra';
-import type { Game } from 'csdm/common/types/counter-strike';
+import { Game } from 'csdm/common/types/counter-strike';
 import { getCounterStrikeExecutablePath } from './get-counter-strike-executable-path';
 import { FileNotFound } from '../filesystem/errors/file-not-found';
 import { ErrorCode } from 'csdm/common/error-code';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
+import { isLinux } from '../os/is-linux';
 
 // Returns the path to the Counter-Strike log file which is next to the game executable.
 export async function getCounterStrikeLogFilePath(game: Game) {
-  let logFilePath: string = '';
+  let logFilePath = '';
   try {
     const executablePath = await getCounterStrikeExecutablePath(game);
-    logFilePath = path.join(path.dirname(executablePath), 'csdm.log');
+    const executableDir = path.dirname(executablePath);
+
+    logFilePath =
+      isLinux && game !== Game.CSGO
+        ? path.join(executableDir, 'bin', 'linuxsteamrt64', 'csdm.log')
+        : path.join(executableDir, 'csdm.log');
+
     if (!(await fs.pathExists(logFilePath))) {
       throw new FileNotFound(logFilePath);
     }
