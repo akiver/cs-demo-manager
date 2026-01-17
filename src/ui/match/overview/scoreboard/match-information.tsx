@@ -73,7 +73,7 @@ export function MatchInformation({ match }: Props) {
           scoreTeamA={match.teamA.score}
           scoreTeamB={match.teamB.score}
         />
-        <p className="selectable">{formatDate(match.date)}</p>
+        <p className="selectable">{formatDate(match.date, { timeZone: 'UTC' })}</p>
         <p className="selectable">{secondsToFormattedMinutes(match.duration)}</p>
         <Tags tagIds={match.tagIds} onEditClick={onEditTagsClick} />
       </div>

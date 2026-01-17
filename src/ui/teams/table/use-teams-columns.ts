@@ -310,7 +310,7 @@ export function useTeamsColumns() {
       maxWidth: 250,
       sortFunction: dateSortFunction<TeamTable>,
       formatter: (date: string) => {
-        return formatDate(date);
+        return formatDate(date, { timeZone: 'UTC' });
       },
     },
   ];

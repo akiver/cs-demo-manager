@@ -16,9 +16,10 @@ export function Cs2PluginSelect() {
   const version = cs2PluginVersion ?? PluginVersion.latest;
 
   const dateOptions: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
+    hour: undefined,
+    minute: undefined,
+    second: undefined,
+    timeZone: 'UTC',
   };
   const armoryUpdateDate = formatDate('2024-10-03', dateOptions);
   const animationUpdateDate = formatDate('2025-07-28', dateOptions);

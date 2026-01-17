@@ -120,9 +120,9 @@ function Footer({ startDate, endDate, selectedPreset, onPresetClick, showFilterI
       {startDate && endDate && (
         <div className="flex items-center gap-x-8">
           <div>
-            <span>{formatDate(startDate, { year: 'numeric', month: 'numeric', day: 'numeric' })}</span>
+            <span>{formatDate(startDate, { hour: undefined, minute: undefined, second: undefined })}</span>
             <span> - </span>
-            <span>{formatDate(endDate, { year: 'numeric', month: 'numeric', day: 'numeric' })}</span>
+            <span>{formatDate(endDate, { hour: undefined, minute: undefined, second: undefined })}</span>
           </div>
           {showFilterIndicator && <ActiveFilterIndicator />}
         </div>

@@ -6,6 +6,7 @@ import { useTranslateEconomyBan } from 'csdm/ui/hooks/use-translate-economy-ban'
 import { ShieldIcon } from 'csdm/ui/icons/shield-icon';
 import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { useBooleanHuman } from 'csdm/ui/hooks/use-boolean-to-human';
+import { Tooltip } from 'csdm/ui/components/tooltip';
 
 export function VacPanel() {
   const { vacBanCount, gameBanCount, lastBanDate, economyBan, hasPrivateProfile, isCommunityBanned } = usePlayer();
@@ -44,11 +45,16 @@ export function VacPanel() {
         </p>
         {lastBanDate && (
           <PanelValue>
-            {formatDate(lastBanDate, {
-              year: 'numeric',
-              month: 'numeric',
-              day: 'numeric',
-            })}
+            <Tooltip content={formatDate(lastBanDate, { timeZone: 'UTC' })}>
+              <p>
+                {formatDate(lastBanDate, {
+                  hour: undefined,
+                  minute: undefined,
+                  second: undefined,
+                  timeZone: 'UTC',
+                })}
+              </p>
+            </Tooltip>
           </PanelValue>
         )}
       </PanelRow>

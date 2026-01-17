@@ -28,6 +28,7 @@ export function LastMatch({ match }: Props) {
             hour: undefined,
             minute: undefined,
             second: undefined,
+            timeZone: 'UTC',
           })}
         </p>
         <p>{match.mapName}</p>

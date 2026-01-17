@@ -56,9 +56,10 @@ export function MatchDate({ date }: { date: string }) {
   return (
     <p>
       {formatDate(date, {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
+        hour: undefined,
+        minute: undefined,
+        second: undefined,
+        timeZone: 'UTC',
       })}
     </p>
   );

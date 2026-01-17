@@ -197,7 +197,7 @@ export function useDemosColumns() {
       maxWidth: 200,
       sortFunction: dateSortFunction<Demo>,
       formatter: (value: string) => {
-        return formatDate(value);
+        return formatDate(value, { timeZone: 'UTC' });
       },
     },
     {

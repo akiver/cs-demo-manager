@@ -331,7 +331,7 @@ export function useMatchesColumns() {
       maxWidth: 200,
       sortFunction: dateSortFunction<MatchTable>,
       formatter: (date: string) => {
-        return formatDate(date);
+        return formatDate(date, { timeZone: 'UTC' });
       },
     },
     {

@@ -20,6 +20,7 @@ export function DemoDate({ date }: Props) {
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
+        timeZone: 'UTC',
       })}
     />
   );

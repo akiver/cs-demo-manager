@@ -441,7 +441,7 @@ export function usePlayersColumns() {
       maxWidth: 250,
       sortFunction: dateSortFunction<PlayerTable>,
       formatter: (date: string) => {
-        return formatDate(date);
+        return formatDate(date, { timeZone: 'UTC' });
       },
     },
     {
@@ -462,7 +462,7 @@ export function usePlayersColumns() {
         if (date === null) {
           return;
         }
-        return formatDate(date);
+        return formatDate(date, { timeZone: 'UTC' });
       },
     },
   ];
