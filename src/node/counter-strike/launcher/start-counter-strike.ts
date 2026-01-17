@@ -25,7 +25,6 @@ import { isLinux } from 'csdm/node/os/is-linux';
 import type { PlaybackSettings, Settings } from 'csdm/node/settings/settings';
 import { getCsgoFolderPath } from '../get-csgo-folder-path';
 import path from 'node:path';
-import { isLinuxWayland } from 'csdm/node/os/is-linux-wayland';
 
 export type StartCounterStrikeOptions = {
   demoPath?: string;
@@ -173,11 +172,11 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   const height = options.height ?? userHeight;
   launchParameters.push('-height', String(height));
   const enableFullscreen = fullscreen ?? userFullscreen;
-  // the -fullscreen parameter doesn't work on Linux Wayland sessions since a CS2 update of September 2025, see:
+  // the -fullscreen parameter doesn't work on Linux since a CS2 update of September 2025, see:
   // https://github.com/ValveSoftware/csgo-osx-linux/issues/4192
-  // if we set -fullscreen on Wayland, CS2 starts in a pseudo windowed mode and the window is stuck.
+  // if we set -fullscreen, CS2 starts in a pseudo windowed mode and the window is stuck.
   // https://github.com/akiver/cs-demo-manager/issues/1299
-  if (enableFullscreen && (!isLinuxWayland() || game === Game.CSGO)) {
+  if (enableFullscreen && (!isLinux || game === Game.CSGO)) {
     launchParameters.push('-fullscreen');
   } else if (!enableFullscreen) {
     launchParameters.push('-sw');
