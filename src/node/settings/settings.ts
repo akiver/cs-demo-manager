@@ -10,6 +10,7 @@ import type { VideoContainer } from 'csdm/common/types/video-container';
 import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filter';
 import type { RecordingSystem } from 'csdm/common/types/recording-system';
 import type { RecordingOutput } from 'csdm/common/types/recording-output';
+import type { DisplayMode } from 'csdm/common/types/display-mode';
 
 export type Folder = {
   path: string;
@@ -61,7 +62,7 @@ type PlaybackTypeSettings = {
 export type PlaybackSettings = {
   height: number;
   width: number;
-  fullscreen: boolean;
+  displayMode: DisplayMode;
   useCustomHighlights: boolean;
   useCustomLowlights: boolean;
   highlights: PlaybackTypeSettings;

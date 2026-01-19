@@ -31,6 +31,7 @@ export const ErrorCode = {
   CounterStrikeNotRunning: 430,
   CounterStrikeNotConnected: 431,
   CounterStrikeNoResponse: 432,
+  CounterStrikeVideoConfigNotFound: 433,
   InvalidDemoPath: 505,
   ChecksumsMismatch: 506,
   DuplicateTeamName: 507,

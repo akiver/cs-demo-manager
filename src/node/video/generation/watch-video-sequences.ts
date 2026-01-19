@@ -12,6 +12,7 @@ import { createCs2VideoJsonFile } from './create-cs2-video-json-file';
 import { watchDemoWithHlae } from 'csdm/node/counter-strike/launcher/watch-demo-with-hlae';
 import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-counter-strike';
 import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
+import { DisplayMode } from 'csdm/common/types/display-mode';
 
 type Parameters = {
   checksum: string;
@@ -59,7 +60,7 @@ export async function watchVideoSequences(parameters: Parameters) {
       game,
       width,
       height,
-      fullscreen: false,
+      displayMode: DisplayMode.Windowed,
     });
   } else {
     await startCounterStrike({
@@ -67,7 +68,7 @@ export async function watchVideoSequences(parameters: Parameters) {
       demoPath,
       width,
       height,
-      fullscreen: false,
+      displayMode: DisplayMode.Windowed,
     });
   }
 }

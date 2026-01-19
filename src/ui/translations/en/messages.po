@@ -7671,18 +7671,30 @@ msgctxt "Settings title"
 msgid "Follow symbolic Links"
 msgstr "Follow symbolic Links"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Windowed"
+msgstr "Windowed"
+
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Fullscreen Windowed"
+msgstr "Fullscreen Windowed"
+
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
+#: src/ui/settings/playback/game-display-mode.tsx
 msgid "Start the game in fullscreen mode"
 msgstr "Start the game in fullscreen mode"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
-msgid "Valve removed the CS2 fullscreen video option on Linux since a September 2025 game update. It means that enabling this option will have no effect if the CS2 version is newer than that!"
-msgstr "Valve removed the CS2 fullscreen video option on Linux since a September 2025 game update. It means that enabling this option will have no effect if the CS2 version is newer than that!"
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Valve removed the fullscreen option in a September 2025 game update!"
+msgstr "Valve removed the fullscreen option in a September 2025 game update!"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
+#: src/ui/settings/playback/game-display-mode.tsx
 msgctxt "Settings title"
-msgid "Fullscreen"
-msgstr "Fullscreen"
+msgid "Display mode"
+msgstr "Display mode"
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
@@ -8129,6 +8141,10 @@ msgstr "Counter-Strike is not running, please start it from the application."
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Counter-Strike did not respond, please try again."
 msgstr "Counter-Strike did not respond, please try again."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike video config file not found."
+msgstr "Counter-Strike video config file not found."
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"

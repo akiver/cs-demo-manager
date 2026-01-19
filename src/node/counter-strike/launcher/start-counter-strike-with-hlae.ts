@@ -18,11 +18,13 @@ import { GameError } from './errors/game-error';
 import { installCounterStrikeServerPlugin, uninstallCounterStrikeServerPlugin } from './cs-server-plugin';
 import { getFfmpegExecutablePath } from 'csdm/node/video/ffmpeg/ffmpeg-location';
 import { FfmpegNotInstalled } from 'csdm/node/video/errors/ffmpeg-not-installed';
+import { DisplayMode } from 'csdm/common/types/display-mode';
+import { enableFullscreenWindowed } from './video-config-file';
 
 export type HlaeOptions = {
   game: Game;
   demoPath?: string;
-  fullscreen?: boolean;
+  displayMode?: DisplayMode;
   width?: number;
   height?: number;
   additionalLaunchParameters?: string[];
@@ -144,7 +146,7 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   const {
     width: userWidth,
     height: userHeight,
-    fullscreen: userFullscreen,
+    displayMode: userDisplayMode,
     launchParameters: userLaunchParameters,
   } = settings.playback;
 
@@ -159,8 +161,19 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   launchParameters.push('-width', String(width));
   const height = options.height ?? userHeight;
   launchParameters.push('-height', String(height));
-  const enableFullscreen = options.fullscreen ?? userFullscreen;
-  launchParameters.push(enableFullscreen ? '-fullscreen' : '-sw');
+  const finalDisplayMode = options.displayMode ?? userDisplayMode;
+  switch (finalDisplayMode) {
+    case DisplayMode.Fullscreen:
+      launchParameters.push('-fullscreen');
+      break;
+    case DisplayMode.FullscreenWindowed:
+      await enableFullscreenWindowed(game);
+      break;
+    case DisplayMode.Windowed:
+    default:
+      launchParameters.push('-sw');
+      break;
+  }
   if (typeof userLaunchParameters === 'string' && userLaunchParameters !== '') {
     launchParameters.push(userLaunchParameters);
   }

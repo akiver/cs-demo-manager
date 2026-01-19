@@ -7672,18 +7672,30 @@ msgctxt "Settings title"
 msgid "Follow symbolic Links"
 msgstr "跟随符号链接"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Windowed"
+msgstr ""
+
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Fullscreen Windowed"
+msgstr ""
+
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Fullscreen"
+msgstr ""
+
+#: src/ui/settings/playback/game-display-mode.tsx
 msgid "Start the game in fullscreen mode"
 msgstr "以全屏模式开始游戏"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
-msgid "Valve removed the CS2 fullscreen video option on Linux since a September 2025 game update. It means that enabling this option will have no effect if the CS2 version is newer than that!"
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Valve removed the fullscreen option in a September 2025 game update!"
 msgstr ""
 
-#: src/ui/settings/playback/game-fullscreen.tsx
+#: src/ui/settings/playback/game-display-mode.tsx
 msgctxt "Settings title"
-msgid "Fullscreen"
-msgstr "全屏"
+msgid "Display mode"
+msgstr ""
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
@@ -8130,6 +8142,10 @@ msgstr "Counter-Strike 未运行，请从应用中点击开始。"
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Counter-Strike did not respond, please try again."
 msgstr "Counter-Strike 程序没有响应，请再试一次。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike video config file not found."
+msgstr ""
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"
