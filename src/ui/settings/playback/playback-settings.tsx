@@ -2,7 +2,7 @@ import React from 'react';
 import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { LaunchParameters } from './launch-parameters';
 import { CustomHighlights } from './custom-highlights';
-import { GameFullscreen } from './game-fullscreen';
+import { GameDisplayMode } from './game-display-mode';
 import { GameHeight } from './game-height';
 import { GameWidth } from './game-width';
 import { HighlightsWatchBeforeKillDelay } from './highlights-watch-before-kill-delay';
@@ -27,7 +27,7 @@ export function PlaybackSettings() {
     <SettingsView>
       <GameWidth />
       <GameHeight />
-      <GameFullscreen />
+      <GameDisplayMode />
       <LaunchParameters />
       <PlayerVoices />
       <CustomHighlights />

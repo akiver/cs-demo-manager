@@ -128,6 +128,8 @@ export function getPlaybackErrorMessageFromErrorCode(game: Game, errorCode: Erro
       return <Trans>Counter-Strike is not running, please start it from the application.</Trans>;
     case ErrorCode.CounterStrikeNoResponse:
       return <Trans>Counter-Strike did not respond, please try again.</Trans>;
+    case ErrorCode.CounterStrikeVideoConfigNotFound:
+      return <Trans>Counter-Strike video config file not found.</Trans>;
     default:
       return (
         <p>

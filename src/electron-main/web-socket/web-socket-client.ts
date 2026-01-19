@@ -1,16 +1,23 @@
 import WebSocket from 'ws';
 import { randomUUID } from 'node:crypto';
-import type { MainServerMessageName, MainServerMessagePayload } from 'csdm/server/main-server-message-name';
+import type {
+  MainServerMessageName,
+  MainServerMessagePayload,
+  MainServerMessageResponse,
+} from 'csdm/server/main-server-message-name';
 import type { MainClientMessageName } from 'csdm/server/main-client-message-name';
 import { WEB_SOCKET_SERVER_PORT } from 'csdm/server/port';
 import type { IdentifiableClientMessage } from 'csdm/server/identifiable-client-message';
 import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';
 import type { MainMessageHandlers } from 'csdm/server/handlers/main-handlers-mapping';
+import { ErrorCode } from 'csdm/common/error-code';
 
 type Listener<MessageName extends MainServerMessageName = MainServerMessageName> = (
-  client: WebSocketClient,
   payload: MainServerMessagePayload[MessageName],
-) => void;
+) =>
+  | (MessageName extends keyof MainServerMessageResponse ? MainServerMessageResponse[MessageName] : void)
+  | Promise<MessageName extends keyof MainServerMessageResponse ? MainServerMessageResponse[MessageName] : void>
+  | void;
 type Resolver<MessageName extends MainServerMessageName = MainServerMessageName> = (
   payload: MainServerMessagePayload[MessageName],
 ) => void;
@@ -125,7 +132,7 @@ export class WebSocketClient {
     this.isConnected = false;
   };
 
-  private onMessage = (messageEvent: WebSocket.MessageEvent): void => {
+  private onMessage = async (messageEvent: WebSocket.MessageEvent): Promise<void> => {
     try {
       const message: IdentifiableClientMessage<MainServerMessageName> = JSON.parse(messageEvent.data as string);
       const { name, payload, uuid } = message;
@@ -133,10 +140,6 @@ export class WebSocketClient {
       switch (name) {
         case SharedServerMessageName.Reply:
           {
-            if (uuid === undefined) {
-              logger.log(`WS:: missing uuid for message with name: "${name}", can't retrieve its reply handler`);
-              return;
-            }
             const replyHandler = this.replyHandlers.get(uuid);
             if (replyHandler) {
               replyHandler.resolve(payload);
@@ -148,11 +151,6 @@ export class WebSocketClient {
           break;
         case SharedServerMessageName.ReplyError:
           {
-            if (uuid === undefined) {
-              logger.log(`WS:: missing uuid for message with name: "${name}", can't retrieve its reply handler`);
-              return;
-            }
-
             const replyHandler = this.replyHandlers.get(uuid);
             if (replyHandler) {
               replyHandler.reject(payload);
@@ -167,7 +165,36 @@ export class WebSocketClient {
           const listeners = this.listeners.get(name);
           if (listeners) {
             for (const listener of listeners) {
-              listener(this, payload);
+              try {
+                const result = await listener(payload);
+                this.socket.send(
+                  JSON.stringify({
+                    name: SharedServerMessageName.Reply,
+                    payload: result,
+                    uuid,
+                  }),
+                );
+              } catch (error) {
+                let payload: ErrorCode | string = ErrorCode.UnknownError;
+                if (typeof error === 'string') {
+                  payload = error;
+                } else if (typeof error === 'number') {
+                  payload = error as ErrorCode;
+                }
+
+                if (typeof payload === 'string' || payload === ErrorCode.UnknownError) {
+                  logger.error(`WS:: error handling message with ${name} from server`);
+                  logger.error(error);
+                }
+
+                this.socket.send(
+                  JSON.stringify({
+                    name: SharedServerMessageName.ReplyError,
+                    payload: error,
+                    uuid,
+                  }),
+                );
+              }
             }
           } else {
             logger.log(`WS:: no listener for message with name: "${name}"`);

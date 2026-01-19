@@ -29,6 +29,7 @@ import { moveHlaeRawFilesToOutputFolder } from './move-hlae-files-to-output-fold
 import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
 import { getFfmpegExecutablePath } from '../ffmpeg/ffmpeg-location';
 import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { DisplayMode } from 'csdm/common/types/display-mode';
 
 export type Parameters = {
   videoId: string;
@@ -224,7 +225,7 @@ export async function generateVideo(parameters: Parameters) {
         game,
         width,
         height,
-        fullscreen: false,
+        displayMode: DisplayMode.Windowed,
         signal,
         uninstallPluginOnExit: false,
         registerFfmpegLocation: shouldGenerateVideo,
@@ -234,7 +235,7 @@ export async function generateVideo(parameters: Parameters) {
       await startCounterStrike({
         game,
         demoPath,
-        fullscreen: false,
+        displayMode: DisplayMode.Windowed,
         width,
         height,
         signal,

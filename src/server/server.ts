@@ -6,6 +6,7 @@ import type WebSocket from 'ws';
 import { WebSocketServer as WSServer } from 'ws';
 import type { IncomingMessage } from 'node:http';
 import { URL } from 'node:url';
+import { randomUUID } from 'node:crypto';
 import { rendererHandlers } from 'csdm/server/handlers/renderer-handlers-mapping';
 import { mainHandlers } from 'csdm/server/handlers/main-handlers-mapping';
 import type { MainClientMessageName } from './main-client-message-name';
@@ -14,7 +15,11 @@ import { WEB_SOCKET_SERVER_PORT } from './port';
 import type { SharedServerMessagePayload } from './shared-server-message-name';
 import { SharedServerMessageName } from './shared-server-message-name';
 import type { IdentifiableClientMessage } from './identifiable-client-message';
-import type { MainServerMessagePayload, MainServerMessageName } from './main-server-message-name';
+import type {
+  MainServerMessagePayload,
+  MainServerMessageName,
+  MainServerMessageResponse,
+} from './main-server-message-name';
 import { ErrorCode } from '../common/error-code';
 import { NetworkError } from '../node/errors/network-error';
 import type { RendererServerMessagePayload, RendererServerMessageName } from './renderer-server-message-name';
@@ -66,12 +71,18 @@ export type GameListener<MessageName extends GameClientMessageName = GameClientM
   payload: GameClientMessagePayload[MessageName],
 ) => void;
 
+type MainReplyHandler<T = unknown> = {
+  resolve: (payload: T) => void;
+  reject: (error: unknown) => void;
+};
+
 class WebSocketServer {
   private server: WSServer;
   private rendererProcessSocket: WebSocket | null = null;
   private mainProcessSocket: WebSocket | null = null;
   private gameProcessSocket: WebSocket | null = null;
   private gameListeners = new Map<GameClientMessageName, GameListener[]>();
+  private mainReplyHandlers = new Map<string, MainReplyHandler>();
 
   constructor() {
     this.server = new WSServer({
@@ -102,6 +113,24 @@ class WebSocketServer {
     } else {
       logger.warn(`WS:: mainProcessSocket is null, can't send message to main process`);
     }
+  };
+
+  public sendToMainAndWaitForReply = <MessageName extends MainServerMessageName>(
+    message: SendableMainMessage<MessageName>,
+  ): Promise<MessageName extends keyof MainServerMessageResponse ? MainServerMessageResponse[MessageName] : void> => {
+    return new Promise((resolve, reject) => {
+      if (!this.mainProcessSocket) {
+        return reject(new Error('Main process socket is not connected'));
+      }
+
+      const uuid = randomUUID();
+      (message as IdentifiableClientMessage<MessageName>).uuid = uuid;
+      this.mainReplyHandlers.set(uuid, {
+        resolve: resolve as (payload: unknown) => void,
+        reject,
+      });
+      this.mainProcessSocket.send(JSON.stringify(message));
+    });
   };
 
   public sendMessageToGameProcess = <MessageName extends GameServerMessageName>(
@@ -211,41 +240,67 @@ class WebSocketServer {
     }
 
     try {
-      const message: IdentifiableClientMessage<MainClientMessageName> = JSON.parse(data.toString());
+      const message: IdentifiableClientMessage<MainClientMessageName | SharedServerMessageName> = JSON.parse(
+        data.toString(),
+      );
       const { name, payload, uuid } = message;
       logger.log(`WS:: message with name ${name} and uuid ${uuid} received from main process`);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const handler: Handler<any, unknown> = mainHandlers[name];
-      if (typeof handler === 'function') {
-        try {
-          const result = await handler(payload);
-          this.sendMessageToMainProcess({
-            name: SharedServerMessageName.Reply,
-            payload: result,
-            uuid,
-          } as SendableMainMessage);
-        } catch (error) {
-          let payload: ErrorCode | string = ErrorCode.UnknownError;
-          if (typeof error === 'string') {
-            payload = error;
-          } else if (typeof error === 'number') {
-            payload = error as ErrorCode;
+      switch (name) {
+        case SharedServerMessageName.Reply: {
+          const replyHandler = this.mainReplyHandlers.get(uuid);
+          if (replyHandler) {
+            replyHandler.resolve(payload);
+            this.mainReplyHandlers.delete(uuid);
+          } else {
+            logger.log(`WS:: no reply handler for Reply message with uuid ${uuid}`);
           }
-
-          if (typeof payload === 'string' || payload === ErrorCode.UnknownError) {
-            logger.error(`WS:: error handling message with ${name} from main process`);
-            logger.error(error);
-          }
-
-          this.sendMessageToMainProcess({
-            name: SharedServerMessageName.ReplyError,
-            payload,
-            uuid,
-          } as SendableMainMessage);
+          break;
         }
-      } else {
-        logger.warn(`WS:: unknown message with name: ${name}`);
+        case SharedServerMessageName.ReplyError: {
+          const replyHandler = this.mainReplyHandlers.get(uuid);
+          if (replyHandler) {
+            replyHandler.reject(payload);
+            this.mainReplyHandlers.delete(uuid);
+          } else {
+            logger.log(`WS:: no reply handler for ReplyError message with uuid ${uuid}`);
+          }
+          break;
+        }
+        default: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const handler: Handler<any, unknown> = mainHandlers[name as MainClientMessageName];
+          if (typeof handler === 'function') {
+            try {
+              const result = await handler(payload);
+              this.sendMessageToMainProcess({
+                name: SharedServerMessageName.Reply,
+                payload: result,
+                uuid,
+              } as SendableMainMessage);
+            } catch (error) {
+              let payload: ErrorCode | string = ErrorCode.UnknownError;
+              if (typeof error === 'string') {
+                payload = error;
+              } else if (typeof error === 'number') {
+                payload = error as ErrorCode;
+              }
+
+              if (typeof payload === 'string' || payload === ErrorCode.UnknownError) {
+                logger.error(`WS:: error handling message with ${name} from main process`);
+                logger.error(error);
+              }
+
+              this.sendMessageToMainProcess({
+                name: SharedServerMessageName.ReplyError,
+                payload,
+                uuid,
+              } as SendableMainMessage);
+            }
+          } else {
+            logger.warn(`WS:: unknown message with name: ${name}`);
+          }
+        }
       }
     } catch (error) {
       logger.error('WS:: main process request error');
