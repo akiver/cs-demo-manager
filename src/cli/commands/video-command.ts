@@ -299,6 +299,7 @@ export class VideoCommand extends Command {
               deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
             },
             firstSequenceNumber: 1,
+            voiceEnabledPlayers: this.playerVoices ?? settings.video.playerVoicesEnabled,
           });
         } else {
           sequences = buildPlayersEventSequences({
@@ -319,6 +320,7 @@ export class VideoCommand extends Command {
             },
             weapons: [],
             firstSequenceNumber: 1,
+            voiceEnabledPlayers: settings.video.playerVoicesEnabled,
           });
         }
 
@@ -352,6 +354,7 @@ export class VideoCommand extends Command {
             playerVoicesEnabled: this.playerVoices ?? settings.video.playerVoicesEnabled,
             deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
             cfg: this.cfg,
+            voiceEnabledPlayers: this.playerVoices ?? settings.video.playerVoicesEnabled,
           },
         ];
       }
