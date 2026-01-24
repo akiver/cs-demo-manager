@@ -40,7 +40,8 @@ export async function insertFromCsv<Table>({
 }: InsertFromCsvOptions<Table>) {
   const { database, username, hostname, port, password } = databaseSettings;
   const columnNames = columns.join(',');
-  const command = `-c "\\copy ${tableName}(${columnNames}) FROM '${csvFilePath}' ENCODING 'UTF8' CSV DELIMITER ','" "postgresql://${username}:${encodeURIComponent(
+  const escapedCsvFilePath = csvFilePath.replaceAll("'", "''");
+  const command = `-c "\\copy ${tableName}(${columnNames}) FROM '${escapedCsvFilePath}' ENCODING 'UTF8' CSV DELIMITER ','" "postgresql://${username}:${encodeURIComponent(
     password,
   )}@${formatHostnameForUri(hostname)}:${port}/${database}"`;
   await executePsql(command);
