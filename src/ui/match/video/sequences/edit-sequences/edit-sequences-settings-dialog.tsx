@@ -38,11 +38,21 @@ export function EditSequenceSettingsDialog() {
   const sequences = useCurrentMatchSequences();
   const { settings } = useVideoSettings();
   const [playerFocusSteamId, setPlayerFocusSteamId] = useState<string | undefined>(undefined);
-  const [showOnlyDeathNotices, setShowOnlyDeathNotices] = useState(true);
-  const [showXRay, setShowXRay] = useState(false);
-  const [showAssists, setShowAssists] = useState(true);
-  const [playerVoicesEnabled, setPlayerVoicesEnabled] = useState(true);
-  const [recordAudioEnabled, setRecordAudioEnabled] = useState(true);
+  const [showOnlyDeathNotices, setShowOnlyDeathNotices] = useState(() => {
+    return sequences.every((sequence) => sequence.showOnlyDeathNotices);
+  });
+  const [showXRay, setShowXRay] = useState(() => {
+    return sequences.every((sequence) => sequence.showXRay);
+  });
+  const [showAssists, setShowAssists] = useState(() => {
+    return sequences.every((sequence) => sequence.showAssists);
+  });
+  const [playerVoicesEnabled, setPlayerVoicesEnabled] = useState(() => {
+    return sequences.every((sequence) => sequence.playerVoicesEnabled);
+  });
+  const [recordAudioEnabled, setRecordAudioEnabled] = useState(() => {
+    return sequences.every((sequence) => sequence.recordAudio);
+  });
   const [cfg, setCfg] = useState<string | undefined>(undefined);
   const { options: playerOptions } = usePlayersOptions();
   const canEditPlayersOptions = useCanEditVideoPlayersOptions();
