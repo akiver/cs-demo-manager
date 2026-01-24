@@ -296,7 +296,7 @@ void PlaybackLoop() {
             continue;
         }
 
-        auto demo = engine->GetDemoFile();
+        auto demo = engine->GetDemoPlayer();
         if (demo == NULL) {
             continue;
         }

@@ -7,24 +7,21 @@
 // Credits @dtugend https://github.com/advancedfx/advancedfx-prop/blob/prop/cs2/sdk_src/public/cdll_int.h
 #include "interface.h"
 
-abstract_class IDemoFile
+abstract_class IDemoPlayer
 {
 public:
     virtual void _Unknown_000(void) = 0;
     virtual void _Unknown_001(void) = 0;
-    virtual void _Unknown_002(void) = 0;
-    virtual void _Unknown_003(void) = 0;
-
 #if defined _WIN32
-    virtual int GetDemoTick(void) = 0; //:004
-    virtual int _GetDemoTick(void) = 0; //:005 Points to the same function as :004
-    virtual void _Unknown_006(void) = 0;
+    virtual int GetDemoStartTick(void) = 0; //:002
+    virtual int _GetDemoTick(void) = 0; // see :004
 #else
-    virtual void _Unknown_004(void) = 0;
-    virtual void _Unknown_005(void) = 0;
-    virtual int GetDemoTick(void) = 0; //:006
+    virtual int _Unknown_002(void) = 0;
+    virtual int GetDemoStartTick(void) = 0; //:003
 #endif
-
+    virtual int GetDemoTick(void) = 0; //:004 points to the same function as :003 on Windows
+    virtual int _Unknown_005(void) = 0;
+    virtual int _Unknown_006(void) = 0;
     virtual int _Unknown_007(void) = 0;
     virtual int _Unknown_008(void) = 0;
     virtual int _Unknown_009(void) = 0;
@@ -32,9 +29,6 @@ public:
     virtual int _Unknown_011(void) = 0;
     virtual bool IsPlayingDemo(void) = 0; //:012
     virtual bool IsDemoPaused(void) = 0; //:013
-
-    virtual int _Unknown_014(void) = 0;
-    virtual int _Unknown_015(void) = 0;
 };
 
 
@@ -108,25 +102,5 @@ public:
     virtual void _Unknown_064(void) = 0;
     virtual void _Unknown_065(void) = 0;
     virtual void _Unknown_066(void) = 0;
-    virtual IDemoFile* GetDemoFile(void) = 0; //:067
-};
-
-enum ClientFrameStage_t
-{
-    FRAME_UNDEFINED = -1,			// (haven't run any frames yet)
-    FRAME_START,
-
-    // A network packet is being recieved
-    FRAME_NET_UPDATE_START,
-    // Data has been received and we're going to start calling PostDataUpdate
-    FRAME_NET_UPDATE_POSTDATAUPDATE_START,
-    // Data has been received and we've called PostDataUpdate on all data recipients
-    FRAME_NET_UPDATE_POSTDATAUPDATE_END,
-    // We've received all packets, we can now do interpolation, prediction, etc..
-    FRAME_NET_UPDATE_END,
-
-    // We're about to start rendering the scene
-    FRAME_RENDER_START,
-    // We've finished rendering the scene.
-    FRAME_RENDER_END
+    virtual IDemoPlayer* GetDemoPlayer(void) = 0; //:067
 };
