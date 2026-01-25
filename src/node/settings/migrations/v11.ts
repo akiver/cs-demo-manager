@@ -8,6 +8,7 @@ const v11: Migration = {
     // @ts-expect-error Remove deprecated fullscreen setting
     delete settings.playback.fullscreen;
     settings.playback.displayMode = DisplayMode.Windowed;
+    settings.video.trueView = false;
 
     return Promise.resolve(settings);
   },

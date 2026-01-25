@@ -28,6 +28,7 @@ export type Video = {
   sequences: Sequence[];
   output: string;
   status: VideoStatus;
+  trueView: boolean;
   errorCode?: ErrorCode;
   currentSequence?: number;
 };

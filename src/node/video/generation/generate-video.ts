@@ -44,6 +44,7 @@ export type Parameters = {
   height: number;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
+  trueView: boolean;
   ffmpegSettings: Omit<FfmpegSettings, 'customLocationEnabled'>;
   outputFolderPath: string;
   demoPath: string;
@@ -148,6 +149,7 @@ export async function generateVideo(parameters: Parameters) {
     game,
     ffmpegSettings,
     outputFolderPath,
+    trueView,
     signal,
     onMoveFilesStart,
   } = parameters;
@@ -212,6 +214,7 @@ export async function generateVideo(parameters: Parameters) {
       players,
       cameras,
       ffmpegSettings,
+      trueView,
     });
   }
 

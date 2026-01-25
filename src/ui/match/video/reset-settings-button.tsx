@@ -7,38 +7,7 @@ import { defaultSettings } from 'csdm/node/settings/default-settings';
 export function ResetSettingsButton() {
   const { updateSettings } = useVideoSettings();
   const onClick = () => {
-    const {
-      recordingSystem,
-      recordingOutput,
-      closeGameAfterRecording,
-      concatenateSequences,
-      deathNoticesDuration,
-      encoderSoftware,
-      ffmpegSettings,
-      framerate,
-      height,
-      width,
-    } = defaultSettings.video;
-    updateSettings({
-      recordingSystem,
-      recordingOutput,
-      closeGameAfterRecording,
-      concatenateSequences,
-      deathNoticesDuration,
-      encoderSoftware,
-      ffmpegSettings: {
-        audioBitrate: ffmpegSettings.audioBitrate,
-        constantRateFactor: ffmpegSettings.constantRateFactor,
-        videoCodec: ffmpegSettings.videoCodec,
-        audioCodec: ffmpegSettings.audioCodec,
-        inputParameters: ffmpegSettings.inputParameters,
-        outputParameters: ffmpegSettings.outputParameters,
-        videoContainer: ffmpegSettings.videoContainer,
-      },
-      framerate,
-      height,
-      width,
-    });
+    updateSettings(defaultSettings.video);
   };
   return (
     <Button onClick={onClick}>

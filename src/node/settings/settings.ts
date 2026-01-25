@@ -160,6 +160,7 @@ export type VideoSettings = {
   // How long death notices will be displayed in seconds by default. It can be overridden in the sequence settings.
   deathNoticesDuration: number;
   hlae: HlaeSettings;
+  trueView: boolean; // CS2 only
 };
 
 type BanSettings = {

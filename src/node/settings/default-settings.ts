@@ -83,6 +83,7 @@ export const defaultSettings: Settings = {
     deathNoticesDuration: 5,
     playerVoicesEnabled: true,
     recordAudio: true,
+    trueView: false,
     encoderSoftware: EncoderSoftware.FFmpeg,
     ffmpegSettings: {
       audioBitrate: 256,

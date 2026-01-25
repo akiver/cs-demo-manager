@@ -26,6 +26,7 @@ type Options = {
   demoPath: string;
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
+  trueView: boolean;
   tickrate: number;
   players: PlayerWatchInfo[];
   cameras: Camera[];
@@ -47,6 +48,7 @@ export async function createCs2VideoJsonFile({
   demoPath,
   sequences,
   closeGameAfterRecording,
+  trueView,
   tickrate,
   players,
   cameras,
@@ -64,6 +66,7 @@ export async function createCs2VideoJsonFile({
     'cl_trueview_show_status 0',
     'r_show_build_info 0',
     'mirv_streams record screen enabled 1',
+    `cl_demo_predict ${trueView ? 1 : 0}`,
   ];
 
   for (let i = 0; i < sequences.length; i++) {

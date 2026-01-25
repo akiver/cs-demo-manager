@@ -43,6 +43,7 @@ export type VideoCommandConfig = {
   width?: number;
   height?: number;
   closeGameAfterRecording?: boolean;
+  trueView: boolean;
   concatenateSequences?: boolean;
   ffmpegSettings?: FfmpegSettings;
   outputFolderPath?: string;
@@ -69,6 +70,7 @@ export class VideoCommand extends Command {
   private readonly noCloseGameAfterRecordingFlag = 'no-close-game-after-recording';
   private readonly concatenateSequencesFlag = 'concatenate-sequences';
   private readonly noConcatenateSequencesFlag = 'no-concatenate-sequences';
+  private readonly trueViewFlag = 'true-view';
   private readonly encoderSoftwareFlag = 'encoder-software';
   private readonly recordingSystemFlag = 'recording-system';
   private readonly recordingOutputFlag = 'recording-output';
@@ -110,6 +112,7 @@ export class VideoCommand extends Command {
   private height: number | undefined;
   private closeGameAfterRecording: boolean | undefined;
   private concatenateSequences: boolean | undefined;
+  private trueView: boolean | undefined;
   private encoderSoftware: EncoderSoftware | undefined;
   private recordingSystem: RecordingSystem | undefined;
   private recordingOutput: RecordingOutput | undefined;
@@ -182,6 +185,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.recordAudioFlag}`);
     console.log(`  --${this.noRecordAudioFlag}`);
     console.log(`  --${this.deathNoticesDurationFlag} <number>`);
+    console.log(`  --${this.trueViewFlag}`);
     console.log(`  --${this.cfgFlag} <string>`);
     console.log(`  --${this.focusPlayerFlag} <steamId>`);
     console.log(`  --${this.configFileFlag} <path> (path to config JSON file)`);
@@ -228,6 +232,7 @@ export class VideoCommand extends Command {
         height: this.height ?? settings.video.height,
         closeGameAfterRecording: this.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
         concatenateSequences: this.concatenateSequences ?? settings.video.concatenateSequences,
+        trueView: this.trueView ?? settings.video.trueView,
         sequences: [],
         ffmpegSettings: {
           customExecutableLocation: this.ffmpegExecutablePath ?? settings.video.ffmpegSettings.customExecutableLocation,
@@ -263,6 +268,7 @@ export class VideoCommand extends Command {
           framerate: config.framerate ?? parameters.framerate,
           width: config.width ?? parameters.width,
           height: config.height ?? parameters.height,
+          trueView: config.trueView ?? parameters.trueView,
           closeGameAfterRecording: config.closeGameAfterRecording ?? parameters.closeGameAfterRecording,
           concatenateSequences: config.concatenateSequences ?? parameters.concatenateSequences,
           ffmpegSettings: config.ffmpegSettings ?? parameters.ffmpegSettings,
@@ -418,6 +424,7 @@ export class VideoCommand extends Command {
         [this.ffmpegVideoContainerFlag]: { type: 'string' },
         [this.ffmpegInputParametersFlag]: { type: 'string' },
         [this.ffmpegOutputParametersFlag]: { type: 'string' },
+        [this.trueViewFlag]: { type: 'boolean' },
         [this.showXRayFlag]: { type: 'boolean' },
         [this.noShowXRayFlag]: { type: 'boolean' },
         [this.showAssistsFlag]: { type: 'boolean' },

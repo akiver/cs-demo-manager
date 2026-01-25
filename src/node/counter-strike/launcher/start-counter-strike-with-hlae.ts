@@ -157,17 +157,31 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   if (Array.isArray(options.additionalLaunchParameters)) {
     launchParameters.push(...options.additionalLaunchParameters);
   }
+
+  const displayMode = options.displayMode ?? userDisplayMode;
   const width = options.width ?? userWidth;
-  launchParameters.push('-width', String(width));
   const height = options.height ?? userHeight;
-  launchParameters.push('-height', String(height));
-  const finalDisplayMode = options.displayMode ?? userDisplayMode;
-  switch (finalDisplayMode) {
+  if (displayMode !== DisplayMode.FullscreenWindowed) {
+    launchParameters.push('-width', String(width));
+    launchParameters.push('-height', String(height));
+  }
+
+  const { configFolderEnabled, configFolderPath, parameters: userHlaeParameters } = settings.video.hlae;
+  const cfgFolderPath = configFolderEnabled && configFolderPath !== '' ? configFolderPath : undefined;
+  defineCfgFolderLocation(cfgFolderPath);
+
+  switch (displayMode) {
     case DisplayMode.Fullscreen:
       launchParameters.push('-fullscreen');
       break;
     case DisplayMode.FullscreenWindowed:
-      await enableFullscreenWindowed(game);
+      await enableFullscreenWindowed({
+        game,
+        // The config files are created in a subfolder named "cfg" inside the folder defined by the USRLOCALCSGO env var
+        cfgFolderPath: cfgFolderPath ? path.join(cfgFolderPath, 'cfg') : undefined,
+        width,
+        height,
+      });
       break;
     case DisplayMode.Windowed:
     default:
@@ -179,11 +193,6 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   }
 
   const hlaeParameters = ['-noGui', '-autoStart', '-noConfig', '-afxDisableSteamStorage'];
-  const { configFolderEnabled, configFolderPath, parameters: userHlaeParameters } = settings.video.hlae;
-  if (configFolderEnabled && configFolderPath !== '') {
-    hlaeParameters.push('-mmcfgEnabled true', `-mmcfg "${configFolderPath}"`);
-  }
-
   if (game === Game.CSGO) {
     hlaeParameters.push(
       '-csgoLauncher',
@@ -200,7 +209,7 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   }
 
   await installCounterStrikeServerPlugin(game);
-  defineCfgFolderLocation();
+
   if (options.registerFfmpegLocation) {
     await registerFfmpegLocation(hlaeExecutablePath);
   }

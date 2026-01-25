@@ -29,6 +29,7 @@ type Parameters = {
   outputFolderPath: string;
   demoPath: string;
   sequences: Sequence[];
+  trueView: boolean;
 };
 
 export async function watchVideoSequences(parameters: Parameters) {

@@ -24,8 +24,13 @@ import { RecordingOutputSelect } from './recording-output-select';
 import { DocumentationLink } from 'csdm/ui/components/links/documentation-link';
 import { WatchSequencesButton } from './watch-sequences-button';
 import { VideoActionsMenu } from './video-actions-menu';
+import { ToggleTrueView } from './toggle-true-view';
+import { useCurrentMatch } from '../use-current-match';
+import { Game } from 'csdm/common/types/counter-strike';
 
 export function MatchVideo() {
+  const match = useCurrentMatch();
+
   return (
     <Content>
       <div className="flex flex-col">
@@ -61,6 +66,7 @@ export function MatchVideo() {
             <div className="flex flex-col gap-y-8">
               <OutputFolderPath />
               <div>
+                {match.game !== Game.CSGO && <ToggleTrueView />}
                 <CloseGameAfterRecordingCheckbox />
                 <ConcatenateSequencesCheckbox />
               </div>
