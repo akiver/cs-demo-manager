@@ -395,92 +395,6 @@ msgid "An error occurred while checking for new banned Steam accounts (code {err
 msgstr "Beim Überprüfen neuer gesperrter Steam-Konten ist ein Fehler aufgetreten (Code {errorCode})"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Demo not found"
-msgstr "Demo nicht gefunden"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Match not found"
-msgstr "Spiel nicht gefunden"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/match/video/video-loader.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike executable not found."
-msgstr "Counter-Strike kann nicht gefunden werden."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
-msgstr "Stelle sicher, dass Steam nicht über Flatpak installiert ist, da es nicht unterstützt wird!"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-msgstr "Stelle bitte sicher, dass CS:GO installiert ist, indem du den \"csgo_legacy\"-Zweig aus dem CS2-\"Betas\"-Eigenschaften-Tab auf Steam auswählst."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Read the <0>documentation</0> for more information."
-msgstr "Lies die <0>Dokumentation</0> für weitere Informationen."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/match/video/video-loader.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike executable not found, check your app playback settings."
-msgstr ""
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "{game} is not supported on your operating system"
-msgstr "{game} wird auf deinem Betriebssystem nicht unterstützt"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "HLAE executable not found"
-msgstr "HLAE Programmdatei nicht gefunden"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No kills found"
-msgstr "Keine Tötungen gefunden"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "This demo needs to be re-analyzed to make the camera focus work."
-msgstr "Diese Demo muss neu analysiert werden, damit der Kamerafokus funktioniert."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No rounds found"
-msgstr "Keine Runden gefunden"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No deaths found"
-msgstr "Keine Tode gefunden"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
-msgstr "Der Demo-Pfad enthält Zeichen, die nicht von Counter-Strike unterstützt werden und die Wiedergabe verhindern würden."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
-msgstr "Die Demo muss sich in einem Ordner befinden, dessen Pfad nur grundlegende lateinische Zeichen enthält - siehe <0>diese Dokumentation</0> für Details."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Steam is not running"
-msgstr "Steam wird momentan nicht ausgeführt"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "The game crashed, please see <0>this documentation</0> for help."
-msgstr "Das Spiel ist abgestürzt, bitte lies <0>diese Dokumentation</0> für Hilfe."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "The game process exited with an access denied error."
-msgstr "Der Spielprozess wurde mit einem Zugriff verweigert Fehler beendet."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Make sure to close any anti-cheat software and retry."
-msgstr "Schließe bitte alle Anti-Cheat-Software und versuche es erneut."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "{game} is already running"
-msgstr ""
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 msgid "Counter-Strike starting…"
 msgstr "Counter-Strike startet…"
 
@@ -5918,6 +5832,16 @@ msgid "Export as JSON"
 msgstr ""
 
 #: src/ui/match/video/video-loader.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike executable not found."
+msgstr "Counter-Strike kann nicht gefunden werden."
+
+#: src/ui/match/video/video-loader.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike executable not found, check your app playback settings."
+msgstr ""
+
+#: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
 msgstr "Ein Fehler ist aufgetreten. (Code {errorCode})"
 
@@ -8084,12 +8008,40 @@ msgid "Show X-Ray"
 msgstr ""
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Match not found"
+msgstr "Spiel nicht gefunden"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
+msgstr "Der Demo-Pfad enthält Zeichen, die nicht von Counter-Strike unterstützt werden und die Wiedergabe verhindern würden."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
+msgstr "Die Demo muss sich in einem Ordner befinden, dessen Pfad nur grundlegende lateinische Zeichen enthält - siehe <0>diese Dokumentation</0> für Details."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Failed to start the game, make sure Steam is running and you are connected."
 msgstr "Fehler beim Starten des Spiels, stelle sicher, dass Steam läuft und du verbunden bist."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
 msgstr "Stelle bitte sicher, dass CS:GO installiert ist, indem du den \"csgo_legacy\"-Zweig aus dem CS2-\"Betas\"-Eigenschaften-Tab auf Steam auswählst."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
+msgstr "Stelle sicher, dass Steam nicht über Flatpak installiert ist, da es nicht unterstützt wird!"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
+msgstr "Stelle bitte sicher, dass CS:GO installiert ist, indem du den \"csgo_legacy\"-Zweig aus dem CS2-\"Betas\"-Eigenschaften-Tab auf Steam auswählst."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Read the <0>documentation</0> for more information."
+msgstr "Lies die <0>Dokumentation</0> für weitere Informationen."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "{game} is not supported on your operating system"
+msgstr "{game} wird auf deinem Betriebssystem nicht unterstützt"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "HLAE is not installed."
@@ -8112,6 +8064,10 @@ msgid "Steam is not running."
 msgstr "Steam wird nicht ausgeführt."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No kills found"
+msgstr "Keine Tötungen gefunden"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "FFmpeg returned an error."
 msgstr "FFmpeg hat einen Fehler zurückgegeben."
 
@@ -8128,7 +8084,19 @@ msgid "Raw files not found."
 msgstr "Rohdateien nicht gefunden."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike crashed."
+msgid "The game crashed, please see <0>this documentation</0> for help."
+msgstr "Das Spiel ist abgestürzt, bitte lies <0>diese Dokumentation</0> für Hilfe."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "The game process exited with an access denied error."
+msgstr "Der Spielprozess wurde mit einem Zugriff verweigert Fehler beendet."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure to close any anti-cheat software and retry."
+msgstr "Schließe bitte alle Anti-Cheat-Software und versuche es erneut."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "{game} is already running"
 msgstr ""
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
@@ -8146,6 +8114,22 @@ msgstr ""
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Counter-Strike video config file not found."
 msgstr ""
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure the game has been launched at least once from Steam."
+msgstr ""
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "This demo needs to be re-analyzed to make the camera focus work."
+msgstr "Diese Demo muss neu analysiert werden, damit der Kamerafokus funktioniert."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No rounds found"
+msgstr "Keine Runden gefunden"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No deaths found"
+msgstr "Keine Tode gefunden"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"

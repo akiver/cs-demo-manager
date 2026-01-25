@@ -26,7 +26,7 @@ import type { PlaybackSettings, Settings } from 'csdm/node/settings/settings';
 import { getCsgoFolderPath } from '../get-csgo-folder-path';
 import path from 'node:path';
 import { DisplayMode } from 'csdm/common/types/display-mode';
-import { enableFullscreenWindowed, restoreVideoConfigFiles } from './video-config-file';
+import { enableFullscreenWindowed } from './video-config-file';
 
 export type StartCounterStrikeOptions = {
   demoPath?: string;
@@ -124,7 +124,7 @@ async function buildCommand(executablePath: string, args: string, game: Game, se
 // Tip: to understand how Steam starts CS you can use the Steam client launch options: -dev -console
 // You would be able to see the command used to start CS in the console.
 export async function startCounterStrike(options: StartCounterStrikeOptions) {
-  const { demoPath, game, signal, additionalLaunchParameters, displayMode, mode, map } = options;
+  const { demoPath, game, signal, additionalLaunchParameters, mode, map } = options;
 
   if (game === Game.CS2 && isMac) {
     throw new UnsupportedGame(game);
@@ -169,14 +169,16 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     launchParameters.push(...additionalLaunchParameters);
   }
   launchParameters.push(userLaunchParameters);
-  const finalDisplayMode = displayMode ?? userDisplayMode;
+  const displayMode = options.displayMode ?? userDisplayMode;
   const width = options.width ?? userWidth;
   const height = options.height ?? userHeight;
-  launchParameters.push('-width', String(width));
-  launchParameters.push('-height', String(height));
+  // the width and height must NOT be set when in fullscreen-windowed mode except on Linux.
+  if (displayMode !== DisplayMode.FullscreenWindowed || (isLinux && displayMode === DisplayMode.FullscreenWindowed)) {
+    launchParameters.push('-width', String(width));
+    launchParameters.push('-height', String(height));
+  }
 
-  let shouldRestoreVideoConfigFiles = false;
-  switch (finalDisplayMode) {
+  switch (displayMode) {
     case DisplayMode.Fullscreen: {
       // the -fullscreen parameter doesn't work on Linux since a CS2 update of September 2025, see:
       // https://github.com/ValveSoftware/csgo-osx-linux/issues/4192
@@ -184,16 +186,14 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
       // https://github.com/akiver/cs-demo-manager/issues/1299
       // The best we can do is to enable the fullscreen-windowed mode.
       if (isLinux) {
-        await enableFullscreenWindowed(game);
-        shouldRestoreVideoConfigFiles = true;
+        await enableFullscreenWindowed({ game, width, height });
       } else {
         launchParameters.push('-fullscreen');
       }
       break;
     }
     case DisplayMode.FullscreenWindowed:
-      await enableFullscreenWindowed(game);
-      shouldRestoreVideoConfigFiles = true;
+      await enableFullscreenWindowed({ game, width, height });
       break;
     case DisplayMode.Windowed:
     default:
@@ -261,12 +261,6 @@ echo "CS:DM config loaded"
   return new Promise<void>((resolve, reject) => {
     const startTime = Date.now();
     const gameProcess = exec(command, { windowsHide: true });
-    if (shouldRestoreVideoConfigFiles) {
-      setTimeout(async () => {
-        await restoreVideoConfigFiles();
-      }, 6_000);
-    }
-
     const chunks: string[] = [];
     gameProcess.stdout?.on('data', (data: string) => {
       chunks.push(data);
@@ -281,9 +275,6 @@ echo "CS:DM config loaded"
 
       if (demoPath) {
         await deleteJsonActionsFile(demoPath);
-      }
-      if (shouldRestoreVideoConfigFiles) {
-        await restoreVideoConfigFiles();
       }
       if (options.uninstallPluginOnExit !== false) {
         await uninstallCounterStrikeServerPlugin(game);

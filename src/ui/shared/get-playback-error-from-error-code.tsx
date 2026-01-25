@@ -13,6 +13,12 @@ export function getPlaybackErrorMessageFromErrorCode(game: Game, errorCode: Erro
           <Trans>Demo not found.</Trans>
         </p>
       );
+    case ErrorCode.MatchNotFound:
+      return (
+        <p>
+          <Trans>Match not found</Trans>
+        </p>
+      );
     case ErrorCode.InvalidDemoPath:
       return (
         <div>
@@ -50,14 +56,42 @@ export function getPlaybackErrorMessageFromErrorCode(game: Game, errorCode: Erro
       );
     case ErrorCode.CounterStrikeExecutableNotFound:
       return (
-        <p>
-          <Trans>Counter-Strike executable not found.</Trans>
-        </p>
+        <div>
+          <p>
+            <Trans>Counter-Strike executable not found.</Trans>
+          </p>
+          {window.csdm.isLinux && (
+            <p>
+              <Trans>Make sure Steam is not installed through Flatpak as it's not supported!</Trans>
+            </p>
+          )}
+          {game === Game.CSGO && (
+            <p>
+              <Trans>
+                Please make sure that CS:GO is installed by selecting the "csgo_legacy" branch from the CS2 "Betas"
+                property tab on Steam.
+              </Trans>
+            </p>
+          )}
+          <p>
+            <Trans>
+              Read the{' '}
+              <ExternalLink href="https://cs-demo-manager.com/docs/guides/playback">documentation</ExternalLink> for
+              more information.
+            </Trans>
+          </p>
+        </div>
       );
     case ErrorCode.CustomCounterStrikeExecutableNotFound:
       return (
         <p>
           <Trans>Counter-Strike executable not found, check your app playback settings.</Trans>
+        </p>
+      );
+    case ErrorCode.UnsupportedGame:
+      return (
+        <p>
+          <Trans>{game} is not supported on your operating system</Trans>
         </p>
       );
     case ErrorCode.HlaeNotInstalled:
@@ -90,6 +124,12 @@ export function getPlaybackErrorMessageFromErrorCode(game: Game, errorCode: Erro
           <Trans>Steam is not running.</Trans>
         </p>
       );
+    case ErrorCode.NoKillsFound:
+      return (
+        <p>
+          <Trans>No kills found</Trans>;
+        </p>
+      );
     case ErrorCode.FfmpegError:
       return (
         <p>
@@ -117,19 +157,82 @@ export function getPlaybackErrorMessageFromErrorCode(game: Game, errorCode: Erro
     case ErrorCode.GameError:
       return (
         <p>
-          <Trans>Counter-Strike crashed.</Trans>
+          <Trans>
+            The game crashed, please see{' '}
+            <ExternalLink href="https://cs-demo-manager.com/docs/guides/playback#cs2-demo-playback-doesnt-start-or-crashes">
+              this documentation
+            </ExternalLink>{' '}
+            for help.
+          </Trans>
         </p>
       );
+    case ErrorCode.AccessDenied:
+      return (
+        <div>
+          <p>
+            <Trans>The game process exited with an access denied error.</Trans>
+          </p>
+          <p>
+            <Trans>Make sure to close any anti-cheat software and retry.</Trans>
+          </p>
+        </div>
+      );
+    case ErrorCode.CounterStrikeAlreadyRunning: {
+      return (
+        <p>
+          <Trans>{game} is already running</Trans>;
+        </p>
+      );
+    }
     case ErrorCode.HlaeError:
       return <HlaeError />;
     case ErrorCode.CounterStrikeNotConnected:
-      return <Trans>Unable to communicate with Counter-Strike, make sure to start it from the application.</Trans>;
+      return (
+        <p>
+          <Trans>Unable to communicate with Counter-Strike, make sure to start it from the application.</Trans>
+        </p>
+      );
     case ErrorCode.CounterStrikeNotRunning:
-      return <Trans>Counter-Strike is not running, please start it from the application.</Trans>;
+      return (
+        <p>
+          <Trans>Counter-Strike is not running, please start it from the application.</Trans>
+        </p>
+      );
     case ErrorCode.CounterStrikeNoResponse:
-      return <Trans>Counter-Strike did not respond, please try again.</Trans>;
+      return (
+        <p>
+          <Trans>Counter-Strike did not respond, please try again.</Trans>
+        </p>
+      );
     case ErrorCode.CounterStrikeVideoConfigNotFound:
-      return <Trans>Counter-Strike video config file not found.</Trans>;
+      return (
+        <div>
+          <p>
+            <Trans>Counter-Strike video config file not found.</Trans>
+          </p>
+          <p>
+            <Trans>Make sure the game has been launched at least once from Steam.</Trans>
+          </p>
+        </div>
+      );
+    case ErrorCode.MissingPlayerSlot:
+      return (
+        <p>
+          <Trans>This demo needs to be re-analyzed to make the camera focus work.</Trans>
+        </p>
+      );
+    case ErrorCode.NoRoundsFound:
+      return (
+        <p>
+          <Trans>No rounds found</Trans>;
+        </p>
+      );
+    case ErrorCode.NoDeathsFound:
+      return (
+        <p>
+          <Trans>No deaths found</Trans>;
+        </p>
+      );
     default:
       return (
         <p>
