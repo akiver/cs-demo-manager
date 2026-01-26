@@ -130,6 +130,7 @@ export async function createCsgoVideoJsonFile({
       json.addSpecPlayer(camera.tick, camera.playerSteamId);
     }
 
+    json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter clear`);
     // Block all death notices by default and then selectively allow them based on player's options.
     json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add block=1`);
 
@@ -137,14 +138,7 @@ export async function createCsgoVideoJsonFile({
       const replacePlayerNameCommand = buildReplacePlayerNameCommand(playerOptions);
       json.addExecCommand(setupSequenceTick, replacePlayerNameCommand);
 
-      json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add victimMatch=x${playerOptions.steamId} block=0`);
-
       if (playerOptions.showKill) {
-        json.addExecCommand(
-          setupSequenceTick,
-          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerMatch=x${playerOptions.steamId} block=0`,
-        );
-
         json.addExecCommand(
           setupSequenceTick,
           `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=${playerOptions.highlightKill ? '1' : '0'} block=0`,
