@@ -876,12 +876,12 @@ msgstr "打开 FACEIT 配置文件"
 #: src/ui/components/context-menu/items/open-leetify-profile-item.tsx
 msgctxt "Context menu"
 msgid "Open Leetify profile"
-msgstr ""
+msgstr "打开 Leetify 配置文件"
 
 #: src/ui/components/context-menu/items/open-renown-profile-item.tsx
 msgctxt "Context menu"
 msgid "Open Renown profile"
-msgstr ""
+msgstr "打开 Renown 配置文件"
 
 #: src/ui/components/context-menu/items/open-steam-profile-item.tsx
 msgctxt "Context menu"
@@ -2398,17 +2398,17 @@ msgstr "诱饵弹"
 #: src/ui/components/panels/weapon-inspections-panel.tsx
 msgctxt "Panel title"
 msgid "Weapon Inspections"
-msgstr ""
+msgstr "检视武器"
 
 #: src/ui/components/panels/weapon-inspections-panel.tsx
 msgctxt "Panel label"
 msgid "Total inspections"
-msgstr ""
+msgstr "总检视次数"
 
 #: src/ui/components/panels/weapon-inspections-panel.tsx
 msgctxt "Panel label"
 msgid "Deaths while inspecting"
-msgstr ""
+msgstr "在检视期间死亡"
 
 #: src/ui/components/panels/win-rate-panel.tsx
 msgctxt "Panel title"
@@ -3292,7 +3292,7 @@ msgstr "请使用你的 64 位 Steam ID (如：765611980000000)。"
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 msgctxt "Table header kill count"
 msgid "LR"
-msgstr ""
+msgstr "LR"
 
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 msgctxt "Table header tooltip"
@@ -5341,7 +5341,7 @@ msgstr "生成"
 #: src/ui/match/video/sequence/cameras/manage-player-cameras-buttons.tsx
 msgctxt "Button"
 msgid "Clear"
-msgstr ""
+msgstr "清空"
 
 #: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
 #: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
@@ -5359,7 +5359,7 @@ msgstr "行为"
 
 #: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
 msgid "Custom cameras (<0>{cameraCount}</0>)"
-msgstr ""
+msgstr "相机总数: (<0>{cameraCount}</0>)"
 
 #: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 msgctxt "Table header tooltip"
@@ -5368,7 +5368,7 @@ msgstr "玩家"
 
 #: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 msgid "Player cameras (<0>{cameraCount}</0>)"
-msgstr ""
+msgstr "玩家相机: (<0>{cameraCount}</0>)"
 
 #: src/ui/match/video/sequence/end-tick-input.tsx
 msgctxt "Input label"
@@ -5570,7 +5570,7 @@ msgstr "炸弹"
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
 msgid "Player cameras"
-msgstr ""
+msgstr "玩家摄像机"
 
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
@@ -5635,7 +5635,7 @@ msgstr "聚焦玩家"
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "Set camera"
-msgstr ""
+msgstr "设置摄像机"
 
 #: src/ui/match/video/sequence/match-timeline/tick.tsx
 msgid "Tick <0>{tick}</0>"
@@ -5824,11 +5824,11 @@ msgstr ""
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Toast"
 msgid "File created, click here to reveal it"
-msgstr ""
+msgstr "文件已创建，点击此处显示"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgid "Video actions"
-msgstr ""
+msgstr "视频操作"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Button"
@@ -6690,11 +6690,11 @@ msgstr "穿烟"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Team kill"
-msgstr ""
+msgstr "队友击杀"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Collateral"
-msgstr ""
+msgstr "抵押品"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -6982,19 +6982,19 @@ msgstr "Steam API 返回了一个错误。"
 #: src/ui/settings/cameras/add-camera-button.tsx
 msgctxt "Button"
 msgid "Add a camera"
-msgstr ""
+msgstr "添加一个摄相头"
 
 #: src/ui/settings/cameras/camera-entry.tsx
 msgid "Camera actions"
-msgstr ""
+msgstr "摄像机操作"
 
 #: src/ui/settings/cameras/camera-entry.tsx
 msgid "spec_goto command copied to clipboard"
-msgstr ""
+msgstr "spec_goto命令已复制到剪贴板"
 
 #: src/ui/settings/cameras/camera-entry.tsx
 msgid "Copy spec_goto command"
-msgstr ""
+msgstr "复制spec_goto命令"
 
 #: src/ui/settings/cameras/cameras-game-input.tsx
 #: src/ui/settings/maps/maps-settings.tsx
@@ -7009,23 +7009,23 @@ msgstr "地图"
 
 #: src/ui/settings/cameras/cameras-settings.tsx
 msgid "No maps found for the selected game."
-msgstr ""
+msgstr "未找到选中的游戏地图。"
 
 #: src/ui/settings/cameras/cameras-settings.tsx
 msgid "Map not found"
-msgstr ""
+msgstr "未找到地图。"
 
 #: src/ui/settings/cameras/cameras.tsx
 msgid "No cameras found for {mapName}."
-msgstr ""
+msgstr "未找到{mapName}的摄像头。"
 
 #: src/ui/settings/cameras/delete-camera-dialog.tsx
 msgid "Delete camera"
-msgstr ""
+msgstr "删除摄像机"
 
 #: src/ui/settings/cameras/delete-camera-dialog.tsx
 msgid "Do you want to delete this camera?"
-msgstr ""
+msgstr "你想要删除这个摄像机吗？"
 
 #: src/ui/settings/cameras/form/camera-color-input.tsx
 msgctxt "Input label"
@@ -7039,7 +7039,7 @@ msgstr "名称必须填写"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 msgid "Color is required."
-msgstr ""
+msgstr "颜色是必需的。"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
@@ -7053,32 +7053,32 @@ msgstr "需要Y坐标。"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 msgid "Coordinate Z is required."
-msgstr ""
+msgstr "需要Z轴。"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 msgid "Pitch is required."
-msgstr ""
+msgstr "参数是必须的。"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 msgid "Yaw is required."
-msgstr ""
+msgstr "鼠标水平灵敏度调整必须填写。"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 msgid "Start {gameName} on {mapName}"
-msgstr ""
+msgstr "在{mapName}上开始{gameName}"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 msgctxt "Dialog title"
 msgid "Camera"
-msgstr ""
+msgstr "摄像头"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 msgid "Unable to generate the screenshot, make sure the game is fully loaded and you are in‑game."
-msgstr ""
+msgstr "无法生成截图，请确保游戏已完全加载且您处于游戏中。"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 msgid "Generate camera from in‑game view"
-msgstr ""
+msgstr "从游戏视角生成摄像机"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 #: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
@@ -7087,12 +7087,12 @@ msgstr "文档"
 
 #: src/ui/settings/cameras/form/camera-preview-input.tsx
 msgid "Image Files"
-msgstr ""
+msgstr "图像文件"
 
 #: src/ui/settings/cameras/form/camera-preview-input.tsx
 msgctxt "Input label"
 msgid "Preview"
-msgstr ""
+msgstr "预览"
 
 #: src/ui/settings/cameras/form/coordinate-x-input.tsx
 #: src/ui/settings/maps/map-dialog/coordinate-x-input.tsx
@@ -7109,17 +7109,17 @@ msgstr "Y 坐标"
 #: src/ui/settings/cameras/form/coordinate-z-input.tsx
 msgctxt "Input label"
 msgid "Coordinate Z"
-msgstr ""
+msgstr "Z 坐标"
 
 #: src/ui/settings/cameras/form/pitch-input.tsx
 msgctxt "Input label"
 msgid "Pitch"
-msgstr ""
+msgstr "配置"
 
 #: src/ui/settings/cameras/form/yaw-input.tsx
 msgctxt "Input label"
 msgid "Yaw"
-msgstr ""
+msgstr "鼠标水平灵敏度"
 
 #: src/ui/settings/database/database-size.tsx
 msgid "Database size: <0>{size}</0>."
