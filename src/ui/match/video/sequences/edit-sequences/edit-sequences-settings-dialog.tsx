@@ -185,7 +185,7 @@ export function EditSequenceSettingsDialog() {
                 />
 
                 <CollapseTransition isVisible={state.overridePlayerOptions}>
-                  <div className="max-h-[calc(300px-var(--table-row-height)-2px)] overflow-y-auto">
+                  <div className="max-h-[200px] overflow-y-auto">
                     <SequencePlayersOptions />
                   </div>
                 </CollapseTransition>
