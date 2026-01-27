@@ -71,6 +71,7 @@ export class VideoCommand extends Command {
   private readonly concatenateSequencesFlag = 'concatenate-sequences';
   private readonly noConcatenateSequencesFlag = 'no-concatenate-sequences';
   private readonly trueViewFlag = 'true-view';
+  private readonly noTrueViewFlag = 'no-true-view';
   private readonly encoderSoftwareFlag = 'encoder-software';
   private readonly recordingSystemFlag = 'recording-system';
   private readonly recordingOutputFlag = 'recording-output';
@@ -186,6 +187,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.noRecordAudioFlag}`);
     console.log(`  --${this.deathNoticesDurationFlag} <number>`);
     console.log(`  --${this.trueViewFlag}`);
+    console.log(`  --${this.noTrueViewFlag}`);
     console.log(`  --${this.cfgFlag} <string>`);
     console.log(`  --${this.focusPlayerFlag} <steamId>`);
     console.log(`  --${this.configFileFlag} <path> (path to config JSON file)`);
@@ -425,6 +427,7 @@ export class VideoCommand extends Command {
         [this.ffmpegInputParametersFlag]: { type: 'string' },
         [this.ffmpegOutputParametersFlag]: { type: 'string' },
         [this.trueViewFlag]: { type: 'boolean' },
+        [this.noTrueViewFlag]: { type: 'boolean' },
         [this.showXRayFlag]: { type: 'boolean' },
         [this.noShowXRayFlag]: { type: 'boolean' },
         [this.showAssistsFlag]: { type: 'boolean' },
@@ -728,6 +731,14 @@ export class VideoCommand extends Command {
     const noShowOnlyDeathNotices = values[this.noShowOnlyDeathNoticesFlag];
     if (noShowOnlyDeathNotices !== undefined) {
       this.showOnlyDeathNotices = false;
+    }
+    const trueView = values[this.trueViewFlag];
+    if (trueView !== undefined) {
+      this.trueView = true;
+    }
+    const noTrueView = values[this.noTrueViewFlag];
+    if (noTrueView !== undefined) {
+      this.trueView = false;
     }
     const playerVoices = values[this.playerVoicesFlag];
     if (playerVoices !== undefined) {
