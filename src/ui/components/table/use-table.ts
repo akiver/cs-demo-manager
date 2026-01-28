@@ -37,6 +37,7 @@ type Options<DataType extends Data> = {
   onContextMenu?: (event: MouseEvent, table: TableInstance<DataType>) => void;
   onKeyDown?: (event: KeyboardEvent, table: TableInstance<DataType>) => void;
   getRowStyle?: (data: DataType) => CSSProperties | undefined;
+  fixedColumnsWidth?: boolean;
 };
 
 export function useTable<DataType extends Data>({
@@ -56,6 +57,7 @@ export function useTable<DataType extends Data>({
   getRowStyle,
   selectedRowIds,
   sortedColumn,
+  fixedColumnsWidth,
 }: Options<DataType>): TableInstance<DataType> {
   const client = useWebSocketClient();
   const locale = useLocale();
@@ -291,7 +293,7 @@ export function useTable<DataType extends Data>({
       return {
         ref: wrapperRef,
         style: {
-          width: columns.reduce((sum, col) => sum + col.width, 0),
+          width: fixedColumnsWidth ? columns.reduce((sum, col) => sum + col.width, 0) : undefined,
         },
       };
     },
