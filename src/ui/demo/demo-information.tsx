@@ -10,6 +10,7 @@ import { DemoDate } from './demo-date';
 import { DemoTags } from './demo-tags';
 import { DemoField } from './demo-field';
 import { roundNumber } from 'csdm/common/math/round-number';
+import { DemoAnalyzeDate } from './demo-analyze-date';
 
 type Props = {
   demo: Demo;
@@ -23,9 +24,8 @@ export function DemoInformation({ demo }: Props) {
       <DemoDuration duration={demo.duration} />
       <Source source={demo.source} />
       <DemoField label={<Trans>Path:</Trans>} value={demo.filePath} isCopyable={true} />
-      {demo.shareCode !== '' && (
-        <DemoField label={<Trans>Share code:</Trans>} value={demo.shareCode} isCopyable={true} />
-      )}
+      {demo.shareCode && <DemoField label={<Trans>Share code:</Trans>} value={demo.shareCode} isCopyable={true} />}
+      {demo.analyzeDate && <DemoAnalyzeDate date={demo.analyzeDate} />}
       <DemoTags checksum={demo.checksum} tagIds={demo.tagIds} />
       <DemoNameInput checksum={demo.checksum} currentName={demo.name} />
       <DemoCommentInput currentComment={demo.comment} checksum={demo.checksum} />

@@ -207,6 +207,7 @@ async function buildDemoFromFilePath(filePath: string): Promise<Demo> {
     comment: '',
     shareCode: '',
     tagIds: [],
+    analyzeDate: null,
   };
 
   await updateDemoFromInfoFile(demo);

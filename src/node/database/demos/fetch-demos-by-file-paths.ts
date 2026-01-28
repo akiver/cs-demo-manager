@@ -15,6 +15,8 @@ export async function fetchDemosByFilePaths(filePaths: string[]): Promise<Demo[]
     .select(['demo_paths.file_path', 'demo_paths.checksum'])
     .leftJoin('comments', 'comments.checksum', 'demos.checksum')
     .select('comments.comment')
+    .innerJoin('matches', 'matches.checksum', 'demos.checksum')
+    .select('matches.analyze_date as analyzeDate')
     .where('demo_paths.file_path', 'in', filePaths)
     .execute();
 

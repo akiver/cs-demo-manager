@@ -2158,11 +2158,13 @@ msgid "Client name"
 msgstr ""
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Analyze date"
 msgstr ""
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Analyze date"
 msgstr ""
@@ -2576,6 +2578,10 @@ msgstr ""
 #: src/ui/components/valve-match/valve-match-overview.tsx
 #: src/ui/demo/demo-match-status.tsx
 msgid "Demo analysis in progress."
+msgstr ""
+
+#: src/ui/demo/demo-analyze-date.tsx
+msgid "Analyze date:"
 msgstr ""
 
 #: src/ui/demo/demo-comment-input.tsx

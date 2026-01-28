@@ -22,4 +22,5 @@ export type Demo = {
   shareCode: string;
   tagIds: string[];
   valveMatch?: ValveMatch;
+  analyzeDate: string | null;
 };

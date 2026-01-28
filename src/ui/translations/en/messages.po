@@ -2153,11 +2153,13 @@ msgid "Client name"
 msgstr "Client name"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Analyze date"
 msgstr "Analyze date"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Analyze date"
 msgstr "Analyze date"
@@ -2572,6 +2574,10 @@ msgstr "Score"
 #: src/ui/demo/demo-match-status.tsx
 msgid "Demo analysis in progress."
 msgstr "Demo analysis in progress."
+
+#: src/ui/demo/demo-analyze-date.tsx
+msgid "Analyze date:"
+msgstr "Analyze date:"
 
 #: src/ui/demo/demo-comment-input.tsx
 msgid "Comment:"

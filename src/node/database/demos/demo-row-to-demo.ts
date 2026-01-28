@@ -2,7 +2,14 @@ import type { Demo } from 'csdm/common/types/demo';
 import type { DemoRow } from 'csdm/node/database/demos/demo-table';
 import type { ColumnID } from 'csdm/common/types/column-id';
 
-export function demoRowToDemo(row: DemoRow, filePath: string, tagIds: ColumnID[], comment: string | null): Demo {
+export function demoRowToDemo(
+  row: DemoRow & {
+    analyzeDate: Date | null;
+  },
+  filePath: string,
+  tagIds: ColumnID[],
+  comment: string | null,
+): Demo {
   return {
     checksum: row.checksum,
     game: row.game,
@@ -20,7 +27,8 @@ export function demoRowToDemo(row: DemoRow, filePath: string, tagIds: ColumnID[]
     frameRate: row.framerate,
     duration: row.duration,
     mapName: row.map_name,
-    shareCode: row.share_code,
+    shareCode: row.share_code ?? '',
+    analyzeDate: row.analyzeDate ? row.analyzeDate.toISOString() : null,
     comment: comment ?? '',
     tagIds: tagIds.map(String),
   };
