@@ -1227,11 +1227,13 @@ msgid "Filters"
 msgstr "Filter"
 
 #: src/ui/components/dropdown-filter/filter-selection.tsx
+#: src/ui/components/inputs/select/players-select-with-team.tsx
 msgctxt "Button filter"
 msgid "All"
 msgstr "Alle"
 
 #: src/ui/components/dropdown-filter/filter-selection.tsx
+#: src/ui/components/inputs/select/players-select-with-team.tsx
 msgctxt "Button filter"
 msgid "None"
 msgstr "Keine"
@@ -1537,6 +1539,7 @@ msgctxt "Select label"
 msgid "Point of view"
 msgstr ""
 
+#: src/ui/components/inputs/select/players-select-with-team.tsx
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
 msgid "Players"
@@ -5187,6 +5190,11 @@ msgstr "Spieler-Sequenzen generieren"
 msgctxt "Select label"
 msgid "Event"
 msgstr "Ereignis"
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Voice enabled players"
+msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Button"

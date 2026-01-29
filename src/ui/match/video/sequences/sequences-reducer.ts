@@ -82,8 +82,15 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(generatePlayersRoundsSequences, (state, action) => {
-      const { match, steamIds, settings, startSecondsBeforeEvent, endSecondsAfterEvent, preserveExistingSequences } =
-        action.payload;
+      const {
+        match,
+        steamIds,
+        settings,
+        startSecondsBeforeEvent,
+        endSecondsAfterEvent,
+        preserveExistingSequences,
+        voiceEnabledPlayers,
+      } = action.payload;
       const existingSequences = state[match.demoFilePath] ?? [];
       const sequences = buildPlayersRoundsSequences({
         match,
@@ -93,6 +100,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
         endSecondsAfterEvent,
         settings,
         firstSequenceNumber: preserveExistingSequences ? existingSequences.length + 1 : 1,
+        voiceEnabledPlayers: voiceEnabledPlayers,
       });
       if (preserveExistingSequences) {
         state[match.demoFilePath] = [...existingSequences, ...sequences];

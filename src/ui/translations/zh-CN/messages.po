@@ -1227,11 +1227,13 @@ msgid "Filters"
 msgstr "筛选器"
 
 #: src/ui/components/dropdown-filter/filter-selection.tsx
+#: src/ui/components/inputs/select/players-select-with-team.tsx
 msgctxt "Button filter"
 msgid "All"
 msgstr "全部"
 
 #: src/ui/components/dropdown-filter/filter-selection.tsx
+#: src/ui/components/inputs/select/players-select-with-team.tsx
 msgctxt "Button filter"
 msgid "None"
 msgstr "无"
@@ -1537,6 +1539,7 @@ msgctxt "Select label"
 msgid "Point of view"
 msgstr "视角"
 
+#: src/ui/components/inputs/select/players-select-with-team.tsx
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
 msgid "Players"
@@ -5187,6 +5190,11 @@ msgstr "创建玩家序列"
 msgctxt "Select label"
 msgid "Event"
 msgstr "事件"
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Input label"
+msgid "Voice enabled players"
+msgstr ""
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Button"

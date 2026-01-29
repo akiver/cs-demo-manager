@@ -46,6 +46,7 @@ export function GeneratePlayerEventsDialog({
       startSecondsBeforeEvent,
       endSecondsAfterEvent,
       preserveExistingSequences: false,
+      voiceEnabledPlayers: settings.playerVoicesEnabled,
     });
 
     setTimeout(() => {

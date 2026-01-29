@@ -74,6 +74,7 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     showAssists,
     playerVoicesEnabled,
     recordAudio,
+    voiceEnabledPlayers: playerVoicesEnabled,
   };
 
   return (
