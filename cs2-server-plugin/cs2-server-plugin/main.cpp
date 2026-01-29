@@ -250,15 +250,18 @@ void PlaybackLoop() {
 
     while (true) {
         if (isQuitting) {
+            Log("[%d] Exiting playback loop", currentTick);
             break;
         }
 
         auto engine = GetEngine();
         if (engine == NULL) {
+            Log("[%d] Engine interface not found", currentTick);
             continue;
         }
 
         if (!initialized) {
+            Log("[%d] Initializing", currentTick);
             // Required to make the spec_lock_to_accountid command working since the 25/04/2024 update - it looks like the command has been hidden.
             // Also required to use the startmovie command.
             UnhideCommandsAndCvars();
@@ -279,6 +282,7 @@ void PlaybackLoop() {
             }
 
             initialized = true;
+            Log("[%d] Initialized", currentTick);
         }
 
         bool newIsPlayingDemo = engine->IsPlayingDemo();
@@ -298,6 +302,7 @@ void PlaybackLoop() {
 
         auto demo = engine->GetDemoPlayer();
         if (demo == NULL) {
+            Log("[%d] Demo player interface not found", currentTick);
             continue;
         }
 
@@ -337,6 +342,7 @@ void PlaybackLoop() {
                 else {
                     Log("[%d] Executing: %s", newTick, action.cmd.c_str());
                     engine->ExecuteClientCmd(0, action.cmd.c_str(), true);
+                    Log("[%d] Executed: %s", newTick, action.cmd.c_str());
                 }
             }
         }
@@ -365,6 +371,7 @@ void HandleWebSocketMessage(const std::string& message)
         Log("Starting demo: %s", cmd.c_str());
         auto engine = GetEngine();
         engine->ExecuteClientCmd(0, cmd.c_str(), true);
+        Log("Demo started: %s", cmd.c_str());
     }
     else if (msg["name"] == "capture-player-view") {
         auto engine = GetEngine();
