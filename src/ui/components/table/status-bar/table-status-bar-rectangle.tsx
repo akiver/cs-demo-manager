@@ -6,5 +6,5 @@ type Props = {
 };
 
 export function TableStatusBarRectangle({ className }: Props) {
-  return <div className={clsx('h-16 w-28 rounded', className)} />;
+  return <div className={clsx('h-16 w-28 rounded-4', className)} />;
 }

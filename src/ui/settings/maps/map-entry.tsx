@@ -18,7 +18,7 @@ export function MapEntry({ map }: Props) {
   const { showDialog } = useDialog();
 
   return (
-    <div className="w-[256px] rounded border border-gray-300">
+    <div className="w-[256px] rounded-4 border border-gray-300">
       <img src={getMapThumbnailSrc(map.name, map.game)} alt={map.name} />
       <div className="p-8">
         <p>{map.name}</p>

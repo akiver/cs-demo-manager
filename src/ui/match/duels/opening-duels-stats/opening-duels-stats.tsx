@@ -73,7 +73,7 @@ function TeamChart({ teamName, players, kills, result, sides }: TeamChartProps) 
   const openDuelLostPercentage = roundNumberPercentage(openDuelTeamLostCount / openDuelTeamCount);
 
   return (
-    <div className="flex flex-col rounded border border-gray-300 bg-gray-75 p-8">
+    <div className="flex flex-col rounded-4 border border-gray-300 bg-gray-75 p-8">
       <div className="flex flex-col">
         <div className="flex justify-between">
           <p className="text-body-strong">{teamName}</p>

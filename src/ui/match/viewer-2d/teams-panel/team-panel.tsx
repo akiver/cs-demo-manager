@@ -58,7 +58,7 @@ export function TeamPanel({ teamNumber, teamName, teamScore }: Props) {
   const players: PlayerRowProps[] = buildPlayersFromPositions(tickPositions, teamNumber);
 
   return (
-    <div className="flex flex-col rounded border border-gray-300 bg-gray-50">
+    <div className="flex flex-col rounded-4 border border-gray-300 bg-gray-50">
       <div
         className="flex items-center justify-between border-b bg-gray-50 p-8"
         style={{

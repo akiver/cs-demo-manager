@@ -20,7 +20,7 @@ function EconomyStats({ percentage, economyType }: EconomyStatsProps) {
   return (
     <div className="flex items-center">
       <div
-        className="mr-4 size-24 rounded"
+        className="mr-4 size-24 rounded-4"
         style={{
           backgroundColor: color,
         }}

@@ -105,7 +105,7 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
             })}
           </tr>
         </thead>
-        <tbody className="before:block before:pt-[var(--virtualPaddingTop)] before:content-[''] after:block after:pb-[var(--virtualPaddingBottom)] after:content-['']">
+        <tbody className="before:block before:pt-(--virtualPaddingTop) before:content-[''] after:block after:pb-(--virtualPaddingBottom) after:content-['']">
           {table.getVirtualItems().map((item, index) => {
             const row = rows[item.index];
             const rowIndex = item.index;
@@ -117,7 +117,7 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
             return (
               <tr
                 className={clsx(
-                  'h-[var(--table-row-height)] outline-hidden',
+                  'h-(--table-row-height) outline-hidden',
                   isSelected ? 'bg-gray-300!' : isSelectionEnabled && 'bg-gray-50 hover:bg-gray-200!',
                 )}
                 key={rowId}

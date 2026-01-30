@@ -47,7 +47,7 @@ function Avatars({ players, kills }: AvatarsProps) {
                 return (
                   <div
                     key={kill.id}
-                    className="size-8 rounded"
+                    className="size-8 rounded-4"
                     style={{
                       backgroundColor: getTeamColor(kill.killerSide),
                     }}

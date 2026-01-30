@@ -32,7 +32,7 @@ export function KebabMenuItem({ children, isDisabled, onClick }: MenuItemProps) 
     <BaseMenu.Item
       onClick={onClick}
       disabled={isDisabled}
-      className="flex h-32 items-center rounded px-16 leading-none opacity-100 select-none data-disabled:opacity-50 data-highlighted:bg-gray-200 data-highlighted:text-gray-900 data-disabled:data-highlighted:bg-transparent"
+      className="flex h-32 items-center rounded-4 px-16 leading-none opacity-100 select-none data-disabled:opacity-50 data-highlighted:bg-gray-200 data-highlighted:text-gray-900 data-disabled:data-highlighted:bg-transparent"
     >
       {children}
     </BaseMenu.Item>

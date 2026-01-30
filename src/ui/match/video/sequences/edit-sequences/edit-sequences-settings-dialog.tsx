@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent } from 'react';
+import React, { useState, type SubmitEvent } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
@@ -64,7 +64,7 @@ export function EditSequenceSettingsDialog() {
     overrideCfg: false,
   });
 
-  const onConfirm = (event: FormEvent) => {
+  const onConfirm = (event: SubmitEvent) => {
     event.preventDefault();
     if (!(event.target instanceof HTMLFormElement)) {
       return;

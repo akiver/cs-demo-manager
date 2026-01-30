@@ -67,12 +67,12 @@ export function Dialog({
   return (
     <div
       id={id}
-      className="absolute inset-0 flex items-center justify-center bg-black/75 pt-[var(--title-bar-height)]"
+      className="absolute inset-0 flex items-center justify-center bg-black/75 pt-(--title-bar-height)"
       onMouseDown={onBackgroundLayerClick}
     >
       <div
         ref={container}
-        className="flex max-h-[calc(100vh-140px)] min-w-[524px] flex-col overflow-y-auto rounded bg-gray-50 text-gray-800 shadow-[0_0_0_1px_var(--color-gray-300)] focus-visible:outline-hidden"
+        className="flex max-h-[calc(100vh-140px)] min-w-[524px] flex-col overflow-y-auto rounded-4 bg-gray-50 text-gray-800 shadow-[0_0_0_1px_var(--color-gray-300)] focus-visible:outline-hidden"
         tabIndex={-1}
         onMouseDown={onMouseDown}
         onKeyDown={onKeyDown}

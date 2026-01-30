@@ -40,7 +40,7 @@ export function BombPlantedIndicator({ tick, leftX, planterName, site }: Props) 
         }}
       >
         <div
-          className="z-1 flex h-24 items-center justify-center rounded bg-[#c9252d]"
+          className="z-1 flex h-24 items-center justify-center rounded-4 bg-[#c9252d]"
           style={{
             width: siteBlockWidth,
           }}

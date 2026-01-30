@@ -67,7 +67,7 @@ function GeneratingDialog({ onPositionsAvailable }: Props) {
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
-        <div className="flex max-w-2xl flex-col gap-y-12">
+        <div className="flex max-w-[42rem] flex-col gap-y-12">
           <p>
             <Trans>It will analyze the demo and generate positions required for the 2D viewer.</Trans>
           </p>

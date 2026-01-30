@@ -14,7 +14,7 @@ export function Radio({ value, children }: RadioProps) {
         value={value}
         className="m-0 flex size-16 items-center justify-center rounded-full p-0 outline-0 focus-visible:outline-2 focus-visible:outline-offset-2 data-checked:bg-gray-900 data-unchecked:border data-unchecked:border-gray-700 data-unchecked:bg-transparent"
       >
-        <BaseRadio.Indicator className="flex items-center justify-center before:h-8 before:w-8 before:rounded-full before:bg-gray-50 before:content-[''] data-unchecked:hidden" />
+        <BaseRadio.Indicator className="flex items-center justify-center before:size-8 before:rounded-full before:bg-gray-50 before:content-[''] data-unchecked:hidden" />
       </BaseRadio.Root>
       {children}
     </label>

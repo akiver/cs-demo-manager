@@ -15,7 +15,7 @@ export function DemoMap({ mapName, game }: Props) {
   return (
     <div className="flex gap-x-8">
       <DemoField label={<Trans>Map:</Trans>} value={mapName} />
-      <img className="h-40 rounded" src={getMapThumbnailSrc(mapName, game)} alt={mapName} />
+      <img className="h-40 rounded-4" src={getMapThumbnailSrc(mapName, game)} alt={mapName} />
     </div>
   );
 }

@@ -68,7 +68,7 @@ export function InputNumber({
       ref={inputRef}
       id={id ?? randomId}
       type="number"
-      className="h-[30px] appearance-none rounded border border-gray-300 bg-gray-50 px-12 text-gray-800 outline-hidden transition-all duration-85 placeholder:text-gray-500 focus:border-gray-900 hover:enabled:border-gray-600 hover:enabled:focus:border-gray-900 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500"
+      className="h-30 appearance-none rounded-4 border border-gray-300 bg-gray-50 px-12 text-gray-800 outline-hidden transition-all duration-85 placeholder:text-gray-500 focus:border-gray-900 hover:enabled:border-gray-600 hover:enabled:focus:border-gray-900 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500"
       min={allowNegativeNumber ? undefined : 0}
       onKeyDown={onKeyDown}
       disabled={isDisabled}

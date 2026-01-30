@@ -35,10 +35,6 @@ export function TeamEconomyAdvantageChart() {
   });
 
   const option: ChartOption = {
-    grid: {
-      top: 60,
-      bottom: 30,
-    },
     color: [colors.teamA, colors.teamB],
     legend: {
       data: [
@@ -88,6 +84,9 @@ export function TeamEconomyAdvantageChart() {
           message: 'Round',
           context: 'Chart axis label',
         }),
+        axisLabel: {
+          color: colors.axisColor,
+        },
         axisLine: {
           onZero: false,
           lineStyle: {
@@ -117,6 +116,9 @@ export function TeamEconomyAdvantageChart() {
           lineStyle: {
             color: colors.axisColor,
           },
+        },
+        axisLabel: {
+          show: false,
         },
         axisPointer: {
           label: {

@@ -44,7 +44,7 @@ export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
               <div
                 key={tag.id}
                 className={clsx(
-                  'flex cursor-default rounded border border-gray-300 hover:text-gray-900',
+                  'flex cursor-default rounded-4 border border-gray-300 hover:text-gray-900',
                   isSelected
                     ? 'border-gray-400 bg-gray-50 text-gray-900 hover:bg-gray-100'
                     : 'border-transparent bg-gray-200 text-gray-600',
@@ -57,7 +57,7 @@ export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
                 }}
               >
                 <div
-                  className="w-12 rounded-l border-r"
+                  className="w-12 rounded-l-4 border-r"
                   style={{
                     backgroundColor: tag.color,
                     opacity: isSelected ? 1 : 0.5,

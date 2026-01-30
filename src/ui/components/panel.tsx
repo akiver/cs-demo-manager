@@ -58,7 +58,7 @@ export function Panel({ header, children, fitHeight, minWidth, overflowX = true 
   return (
     <div
       className={clsx(
-        'flex min-w-[152px] flex-col rounded border border-gray-300 bg-gray-75 p-8',
+        'flex min-w-[152px] flex-col rounded-4 border border-gray-300 bg-gray-75 p-8',
         fitHeight ? 'h-fit' : 'h-auto',
         overflowX && 'overflow-x-auto',
       )}

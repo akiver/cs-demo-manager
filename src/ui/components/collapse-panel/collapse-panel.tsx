@@ -24,7 +24,7 @@ export function CollapsePanel({ header, children, isEnabled = true }: Props) {
     <div>
       <div
         className={clsx(
-          'flex items-center rounded border border-gray-300 bg-gray-75 p-12',
+          'flex items-center rounded-4 border border-gray-300 bg-gray-75 p-12',
           isEnabled && 'cursor-pointer',
         )}
         onClick={() => {

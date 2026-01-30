@@ -69,6 +69,9 @@ export default [
       parser: ts.parser,
       parserOptions: {
         project: true,
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
     },
 
@@ -152,7 +155,7 @@ export default [
       ...eslintPluginBetterTailwindcss.configs['recommended-warn'].rules,
       ...eslintPluginBetterTailwindcss.configs['recommended-error'].rules,
       'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
-      'better-tailwindcss/no-unregistered-classes': ['error', { ignore: ['dark', 'changelog', 'waveform'] }],
+      'better-tailwindcss/no-unknown-classes': ['error', { ignore: ['dark', 'changelog', 'waveform'] }],
       'lingui/no-unlocalized-strings': [
         'error',
         {

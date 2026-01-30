@@ -20,7 +20,7 @@ export function ContextMenuItem({ onClick, children, isDisabled }: Props) {
   return (
     <div
       className={clsx(
-        'flex h-32 min-w-[224px] items-center rounded px-16 leading-none select-none hover:bg-gray-200',
+        'flex h-32 min-w-[224px] items-center rounded-4 px-16 leading-none select-none hover:bg-gray-200',
         isDisabled ? 'pointer-events-none opacity-50' : 'pointer-events-auto opacity-100 hover:text-gray-900',
       )}
       onClick={handleClick}

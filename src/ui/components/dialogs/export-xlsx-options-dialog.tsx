@@ -33,12 +33,12 @@ export function ExportXlsxOptionsDialog({ ids, onOutputSelected, renderCheckboxe
     return false;
   };
 
-  const onFormChange = (event: React.FormEvent<HTMLFormElement>) => {
+  const onFormChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
     setAtLeastOneSheetSelected(isAtLeastOneSheetSelected(formData));
   };
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     if (isExportButtonDisabled) {
       return;
     }

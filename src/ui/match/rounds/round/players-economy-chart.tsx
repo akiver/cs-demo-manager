@@ -169,7 +169,6 @@ function useEconomyChartOption() {
     },
     yAxis: {
       ...commonOption.yAxis,
-      type: 'category',
       position: 'right',
       data: playerNamesTeamA,
     },
@@ -202,7 +201,6 @@ function useEconomyChartOption() {
     yAxis: {
       ...commonOption.yAxis,
       position: 'left',
-      type: 'category',
       data: playerNamesTeamB,
     },
     series: [

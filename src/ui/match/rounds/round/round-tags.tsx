@@ -83,7 +83,7 @@ export function RoundTags() {
           )}
           {hiddenTagIds.length > 0 && (
             <Tooltip content={<TagsTooltip tagIds={hiddenTagIds} />}>
-              <div className="flex items-center justify-center rounded border border-transparent bg-gray-75 px-8 py-4">
+              <div className="flex items-center justify-center rounded-4 border border-transparent bg-gray-75 px-8 py-4">
                 <p className="text-caption">+{hiddenTagIds.length}</p>
               </div>
             </Tooltip>

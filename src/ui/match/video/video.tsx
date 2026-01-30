@@ -49,7 +49,7 @@ export function MatchVideo() {
           </div>
         </div>
         <div className="mt-12 flex gap-x-12">
-          <div className="flex flex-col rounded border border-gray-400 p-8">
+          <div className="flex flex-col rounded-4 border border-gray-400 p-8">
             <div className="flex gap-x-12">
               <div className="flex flex-col">
                 {window.csdm.isWindows && <RecordingSystemSelect />}

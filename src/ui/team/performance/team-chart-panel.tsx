@@ -35,5 +35,5 @@ type Props = {
 };
 
 export function TeamChartPanel({ children }: Props) {
-  return <div className="flex flex-col rounded border border-gray-300 bg-gray-100 p-8">{children}</div>;
+  return <div className="flex flex-col rounded-4 border border-gray-300 bg-gray-100 p-8">{children}</div>;
 }
