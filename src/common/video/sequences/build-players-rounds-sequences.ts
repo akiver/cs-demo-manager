@@ -1,6 +1,7 @@
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { VideoSettings } from 'csdm/node/settings/settings';
+import type { VoiceEnabledPlayers } from 'csdm/common/types/voice-enabled-players';
 
 type Options = {
   match: Match;
@@ -13,6 +14,7 @@ type Options = {
     'showOnlyDeathNotices' | 'deathNoticesDuration' | 'showXRay' | 'showAssists' | 'recordAudio' | 'playerVoicesEnabled'
   >;
   firstSequenceNumber: number;
+  voiceEnabledPlayers: VoiceEnabledPlayers;
 };
 
 export function buildPlayersRoundsSequences({
@@ -63,6 +65,7 @@ export function buildPlayersRoundsSequences({
             },
           ],
           cameras: [],
+          voiceEnabledPlayers: settings.playerVoicesEnabled,
         });
       }
     }

@@ -8,6 +8,7 @@ import { Perspective } from 'csdm/common/types/perspective';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 import type { Kill } from 'csdm/common/types/kill';
 import { lastArrayItem } from 'csdm/common/array/last-array-item';
+import type { VoiceEnabledPlayers } from 'csdm/common/types/voice-enabled-players';
 
 function buildPlayersOptions(players: MatchPlayer[], targetSteamIds: string[]) {
   const options: SequencePlayerOptions[] = players.map((player) => {
@@ -39,6 +40,7 @@ type Options = {
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   firstSequenceNumber: number;
+  voiceEnabledPlayers: VoiceEnabledPlayers;
 };
 
 function getSteamIdToFocus(
@@ -68,6 +70,7 @@ export function buildPlayersEventSequences({
   startSecondsBeforeEvent,
   endSecondsAfterEvent,
   firstSequenceNumber,
+  voiceEnabledPlayers,
 }: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
   let playerEvents = match.kills.filter((kill) => {
@@ -126,7 +129,6 @@ export function buildPlayersEventSequences({
         continue;
       }
     }
-
     sequences.push({
       number: firstSequenceNumber + sequences.length,
       startTick: sequenceStartTick,
@@ -137,6 +139,7 @@ export function buildPlayersEventSequences({
       showAssists: settings.showAssists,
       recordAudio: settings.recordAudio,
       playerVoicesEnabled: settings.playerVoicesEnabled,
+      voiceEnabledPlayers: voiceEnabledPlayers,
       playersOptions,
       playerCameras: [
         {
