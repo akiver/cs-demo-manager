@@ -15,8 +15,6 @@ import { Ffmpeg } from './ffmpeg/ffmpeg';
 import { FramerateInput } from './framerate-input';
 import { ConcatenateSequencesCheckbox } from './concatenate-sequences-checkbox';
 import { GeneratePlayerSequencesButton } from './generate-player-sequences-button';
-import { DeleteSequencesButton } from './sequences/delete-sequences-button';
-import { ResetSettingsButton } from './reset-settings-button';
 import { SequencesSummary } from './sequences-summary';
 import { EditSequencesSettingsButton } from './sequences/edit-sequences/edit-sequences-settings-button';
 import { RecordingSystemSelect } from './recording-system-select';
@@ -40,8 +38,6 @@ export function MatchVideo() {
           <GeneratePlayerSequencesButton />
           <EditSequencesSettingsButton />
           <WatchSequencesButton />
-          <ResetSettingsButton />
-          <DeleteSequencesButton />
           <VideoActionsMenu />
           <SequencesSummary />
           <div className="ml-auto">

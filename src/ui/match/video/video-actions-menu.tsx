@@ -8,6 +8,9 @@ import { useCurrentMatch } from '../use-current-match';
 import type { VideoCommandConfig } from 'csdm/cli/commands/video-command';
 import type { SaveDialogOptions } from 'electron';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
+import { defaultSettings } from 'csdm/node/settings/default-settings';
+import { useDispatch } from 'csdm/ui/store/use-dispatch';
+import { deleteSequences } from './sequences/sequences-actions';
 
 function useGetVideoCommandConfig(): () => VideoCommandConfig {
   const sequences = useCurrentMatchSequences();
@@ -37,6 +40,10 @@ export function VideoActionsMenu() {
   const { copyToClipboard } = useClipboard();
   const showToast = useShowToast();
   const getVideoCommandConfig = useGetVideoCommandConfig();
+  const { updateSettings } = useVideoSettings();
+  const dispatch = useDispatch();
+  const match = useCurrentMatch();
+  const sequences = useCurrentMatchSequences();
   const { t } = useLingui();
 
   const onCopyClick = async () => {
@@ -71,6 +78,18 @@ export function VideoActionsMenu() {
     }
   };
 
+  const onDeleteSequencesClick = () => {
+    dispatch(
+      deleteSequences({
+        demoFilePath: match.demoFilePath,
+      }),
+    );
+  };
+
+  const onResetSettingsClick = () => {
+    updateSettings(defaultSettings.video);
+  };
+
   return (
     <KebabMenu label={t`Video actions`}>
       <KebabMenuItem onClick={onCopyClick}>
@@ -78,6 +97,14 @@ export function VideoActionsMenu() {
       </KebabMenuItem>
       <KebabMenuItem onClick={onExportClick}>
         <Trans context="Button">Export as JSON</Trans>
+      </KebabMenuItem>
+      {sequences.length > 0 && (
+        <KebabMenuItem onClick={onDeleteSequencesClick}>
+          <Trans context="Button">Delete sequences</Trans>
+        </KebabMenuItem>
+      )}
+      <KebabMenuItem onClick={onResetSettingsClick}>
+        <Trans context="Button">Reset settings</Trans>
       </KebabMenuItem>
     </KebabMenu>
   );

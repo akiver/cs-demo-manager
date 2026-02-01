@@ -5299,11 +5299,6 @@ msgctxt "Select label"
 msgid "Recording system"
 msgstr ""
 
-#: src/ui/match/video/reset-settings-button.tsx
-msgctxt "Button"
-msgid "Reset settings"
-msgstr "Redefinir configurações"
-
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Select option"
 msgid "Killer"
@@ -5724,11 +5719,6 @@ msgctxt "Button"
 msgid "Add new sequence"
 msgstr "Adicionar nova sequência"
 
-#: src/ui/match/video/sequences/delete-sequences-button.tsx
-msgctxt "Button"
-msgid "Delete sequences"
-msgstr "Excluir sequências"
-
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgid "No sequences to edit"
 msgstr ""
@@ -5845,6 +5835,16 @@ msgstr ""
 msgctxt "Button"
 msgid "Export as JSON"
 msgstr ""
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Delete sequences"
+msgstr "Excluir sequências"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Reset settings"
+msgstr "Redefinir configurações"
 
 #: src/ui/match/video/video-loader.tsx
 #: src/ui/shared/get-playback-error-from-error-code.tsx

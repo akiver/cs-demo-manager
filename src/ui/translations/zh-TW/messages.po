@@ -5299,11 +5299,6 @@ msgctxt "Select label"
 msgid "Recording system"
 msgstr "錄製系統"
 
-#: src/ui/match/video/reset-settings-button.tsx
-msgctxt "Button"
-msgid "Reset settings"
-msgstr "重置設置"
-
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Select option"
 msgid "Killer"
@@ -5724,11 +5719,6 @@ msgctxt "Button"
 msgid "Add new sequence"
 msgstr "增加新的鏡頭"
 
-#: src/ui/match/video/sequences/delete-sequences-button.tsx
-msgctxt "Button"
-msgid "Delete sequences"
-msgstr "刪除鏡頭"
-
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgid "No sequences to edit"
 msgstr "沒有要編輯的序列"
@@ -5845,6 +5835,16 @@ msgstr "複製為 JSON 格式"
 msgctxt "Button"
 msgid "Export as JSON"
 msgstr "導出為 JSON 文件"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Delete sequences"
+msgstr "刪除鏡頭"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Reset settings"
+msgstr "重置設置"
 
 #: src/ui/match/video/video-loader.tsx
 #: src/ui/shared/get-playback-error-from-error-code.tsx
