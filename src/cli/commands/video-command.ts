@@ -191,6 +191,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.cfgFlag} <string>`);
     console.log(`  --${this.focusPlayerFlag} <steamId>`);
     console.log(`  --${this.configFileFlag} <path> (path to config JSON file)`);
+    console.log(`  --${this.outputFlag} <path> (output folder for generated videos)`);
     console.log(`  --verbose`);
     console.log('');
     console.log(`Player mode options (when --mode ${Mode.Player}):`);
