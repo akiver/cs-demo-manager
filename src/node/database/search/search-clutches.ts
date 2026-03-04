@@ -23,12 +23,13 @@ export async function searchClutches({
     .selectAll('clutches')
     .distinct()
     .innerJoin('matches', 'clutches.match_checksum', 'matches.checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .leftJoin('round_comments as rc', function (qb) {
       return qb
         .onRef('clutches.match_checksum', '=', 'rc.match_checksum')
         .onRef('clutches.round_number', '=', 'rc.number');
     })
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
+    .select(['demos.map_name', 'demos.date', 'matches.demo_path', 'demos.game', 'rc.comment'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -47,17 +48,17 @@ export async function searchClutches({
     })
     .where('opponent_count', '=', opponentCount)
     .where('won', '=', true)
-    .orderBy('matches.date', 'desc')
+    .orderBy('demos.date', 'desc')
     .orderBy('clutches.match_checksum')
     .orderBy('clutches.round_number')
     .orderBy('clutches.tick')
     .groupBy([
       'clutches.id',
       'matches.checksum',
-      'matches.map_name',
-      'matches.date',
+      'demos.map_name',
+      'demos.date',
       'matches.demo_path',
-      'matches.game',
+      'demos.game',
       'rc.comment',
     ]);
 
@@ -66,15 +67,15 @@ export async function searchClutches({
   }
 
   if (mapNames.length > 0) {
-    query = query.where('matches.map_name', 'in', mapNames);
+    query = query.where('demos.map_name', 'in', mapNames);
   }
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
   }
 
   if (demoSources.length > 0) {
-    query = query.where('matches.source', 'in', demoSources);
+    query = query.where('demos.source', 'in', demoSources);
   }
 
   const rows = await query.execute();

@@ -1,5 +1,5 @@
 import type { DemoType } from 'csdm/common/types/counter-strike';
-import { updateMatchesType } from 'csdm/node/database/matches/update-matches-type';
+import { updateDemosType } from 'csdm/node/database/demos/update-demos-type';
 import { handleError } from '../../handle-error';
 
 export type UpdateMatchesTypePayload = {
@@ -9,7 +9,7 @@ export type UpdateMatchesTypePayload = {
 
 export async function updateMatchesTypeHandler({ checksums, type }: UpdateMatchesTypePayload) {
   try {
-    await updateMatchesType(checksums, type);
+    await updateDemosType(checksums, type);
   } catch (error) {
     handleError(error, 'Error while updating matches type');
   }

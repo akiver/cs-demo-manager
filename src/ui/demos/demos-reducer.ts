@@ -19,6 +19,7 @@ import { commentUpdated } from 'csdm/ui/comment/comment-actions';
 import { demoDownloadedInCurrentFolderLoaded } from 'csdm/ui/downloads/downloads-actions';
 import { checksumsTagsUpdated, tagDeleted } from 'csdm/ui/tags/tags-actions';
 import { insertMatchSuccess } from '../analyses/analyses-actions';
+import { matchesTypeUpdated } from '../matches/matches-actions';
 
 export type DemosState = {
   readonly status: Status;
@@ -84,6 +85,12 @@ export const demosReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(demosTypeUpdated, (state, action) => {
+      const demos = state.entities.filter((demo) => action.payload.checksums.includes(demo.checksum));
+      for (const demo of demos) {
+        demo.type = action.payload.type;
+      }
+    })
+    .addCase(matchesTypeUpdated, (state, action) => {
       const demos = state.entities.filter((demo) => action.payload.checksums.includes(demo.checksum));
       for (const demo of demos) {
         demo.type = action.payload.type;

@@ -1,5 +1,6 @@
-import { sql } from 'kysely';
+import { sql, type ExpressionBuilder } from 'kysely';
 import type { Migration } from '../migration';
+import type { Database } from '../../schema';
 
 const createSteamAccountsTable: Migration = {
   schemaVersion: 1,
@@ -71,11 +72,16 @@ const createSteamAccountsTable: Migration = {
       .as(
         transaction
           .with('match_steam_ids_with_date', (qb) => {
-            return qb
-              .selectFrom('matches')
-              .select(['matches.checksum', 'matches.date as match_date'])
-              .leftJoin('players', 'matches.checksum', 'players.match_checksum')
-              .select(['players.steam_id']);
+            return (
+              qb
+                .selectFrom('matches')
+                // @ts-expect-error The date column has been removed from the matches table in the v12 migration.
+                // Since the v12 migration, the date for both matches and demos is stored in the demos table to serve as
+                // a single source of truth.
+                .select(['matches.checksum', 'matches.date as match_date'])
+                .leftJoin('players', 'matches.checksum', 'players.match_checksum')
+                .select(['players.steam_id'])
+            );
           })
           .selectFrom('match_steam_ids_with_date')
           .select([
@@ -84,7 +90,7 @@ const createSteamAccountsTable: Migration = {
           ])
           .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'match_steam_ids_with_date.steam_id')
           .whereRef('steam_accounts.last_ban_date', '>=', 'match_steam_ids_with_date.match_date')
-          .where('steam_accounts.steam_id', 'not in', (qb) => {
+          .where('steam_accounts.steam_id', 'not in', (qb: ExpressionBuilder<Database, 'ignored_steam_accounts'>) => {
             return qb.selectFrom('ignored_steam_accounts').select('steam_id');
           })
           .groupBy(['match_steam_ids_with_date.checksum']),

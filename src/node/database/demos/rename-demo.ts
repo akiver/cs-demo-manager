@@ -14,11 +14,4 @@ export async function renameDemo(checksum: string, name: string) {
     })
     .where('checksum', '=', checksum)
     .execute();
-  await db
-    .updateTable('matches')
-    .set({
-      name,
-    })
-    .where('checksum', '=', checksum)
-    .execute();
 }

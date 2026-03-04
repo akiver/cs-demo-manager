@@ -22,7 +22,8 @@ export async function fetchPlayerOpeningDuelsStats(
         .select(({ fn }) => {
           return [fn.min('tick').as('first_tick'), 'match_checksum', 'round_number'];
         })
-        .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
+        .innerJoin('matches', 'matches.checksum', 'kills.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum')
         .groupBy(['match_checksum', 'round_number']);
 
       if (filters) {

@@ -42,10 +42,11 @@ export async function searchKills({
     .selectAll('kills')
     .distinct()
     .innerJoin('matches', 'matches.checksum', 'kills.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .leftJoin('round_comments as rc', function (qb) {
       return qb.onRef('kills.match_checksum', '=', 'rc.match_checksum').onRef('kills.round_number', '=', 'rc.number');
     })
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
+    .select(['demos.map_name', 'demos.date', 'matches.demo_path', 'demos.game', 'rc.comment'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -62,12 +63,12 @@ export async function searchKills({
         .where('round_tags.tag_id', 'in', roundTagIds)
         .groupBy('round_tags.tag_id');
     })
-    .orderBy('matches.date', 'desc')
+    .orderBy('demos.date', 'desc')
     .orderBy('kills.match_checksum')
     .orderBy('kills.round_number')
     .orderBy('kills.tick')
     .orderBy('kills.killer_name')
-    .groupBy(['kills.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment']);
+    .groupBy(['kills.id', 'demos.map_name', 'demos.date', 'matches.demo_path', 'demos.game', 'rc.comment']);
 
   if (weaponNames.length > 0) {
     query = query.where('kills.weapon_name', 'in', weaponNames);
@@ -138,15 +139,15 @@ export async function searchKills({
   }
 
   if (mapNames.length > 0) {
-    query = query.where('matches.map_name', 'in', mapNames);
+    query = query.where('demos.map_name', 'in', mapNames);
   }
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
   }
 
   if (demoSources.length > 0) {
-    query = query.where('matches.source', 'in', demoSources);
+    query = query.where('demos.source', 'in', demoSources);
   }
 
   const rows = await query.execute();

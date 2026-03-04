@@ -30,39 +30,58 @@ export async function fetchMatchesRows(checksums: string[]) {
   const { count } = db.fn;
   const rows: MatchRow[] = await db
     .selectFrom('matches')
-    .select([
-      'matches.checksum',
-      'matches.name',
-      'matches.demo_path as demoPath',
-      'date',
-      'source',
-      'map_name as mapName',
-      'server_name as serverName',
-      'client_name as clientName',
-      'duration',
-      'tickrate',
-      'tick_count as tickCount',
-      'kill_count as killCount',
-      'assist_count as assistCount',
-      'death_count as deathCount',
-      'framerate as frameRate',
-    ])
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .innerJoin('teams as teamA', function (qb) {
       return qb.onRef('teamA.match_checksum', '=', 'matches.checksum').on('teamA.letter', '=', TeamLetter.A);
     })
-    .select(['teamA.name as nameTeamA', 'teamA.score as scoreTeamA'])
     .innerJoin('teams as teamB', function (qb) {
       return qb.onRef('teamB.match_checksum', '=', 'matches.checksum').on('teamB.letter', '=', TeamLetter.B);
     })
-    .select(['teamB.name as nameTeamB', 'teamB.score as scoreTeamB'])
     .leftJoin('bombs_planted', 'bombs_planted.match_checksum', 'matches.checksum')
-    .select(count<number>('bombs_planted.id').distinct().as('bombPlantedCount'))
     .leftJoin('bombs_defused', 'bombs_defused.match_checksum', 'matches.checksum')
-    .select(count<number>('bombs_defused.id').distinct().as('bombDefusedCount'))
     .leftJoin('clutches', 'clutches.match_checksum', 'matches.checksum')
-    .select(count<number>('clutches.id').distinct().as('clutchCount'))
-    .where('checksum', 'in', checksums)
-    .groupBy(['matches.checksum', 'nameTeamA', 'nameTeamB', 'scoreTeamA', 'scoreTeamB'])
+    .where('matches.checksum', 'in', checksums)
+    .select([
+      'matches.checksum',
+      'matches.demo_path as demoPath',
+      'matches.kill_count as killCount',
+      'matches.death_count as deathCount',
+      'matches.assist_count as assistCount',
+      'demos.name',
+      'demos.source',
+      'demos.date',
+      'demos.map_name as mapName',
+      'demos.tick_count as tickCount',
+      'demos.tickrate',
+      'demos.framerate as frameRate',
+      'demos.duration',
+      'demos.server_name as serverName',
+      'demos.client_name as clientName',
+      'teamA.name as nameTeamA',
+      'teamA.score as scoreTeamA',
+      'teamB.name as nameTeamB',
+      'teamB.score as scoreTeamB',
+      count<number>('bombs_planted.id').distinct().as('bombPlantedCount'),
+      count<number>('bombs_defused.id').distinct().as('bombDefusedCount'),
+      count<number>('clutches.id').distinct().as('clutchCount'),
+    ])
+    .groupBy([
+      'matches.checksum',
+      'nameTeamA',
+      'nameTeamB',
+      'scoreTeamA',
+      'scoreTeamB',
+      'demos.name',
+      'demos.source',
+      'demos.date',
+      'demos.map_name',
+      'demos.tick_count',
+      'demos.tickrate',
+      'demos.framerate',
+      'demos.duration',
+      'demos.server_name',
+      'demos.client_name',
+    ])
     .execute();
 
   return rows;

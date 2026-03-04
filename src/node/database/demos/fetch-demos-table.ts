@@ -66,11 +66,6 @@ export async function fetchDemosTable(filter: DemosTableFilter, { onProgress }: 
       const filePath = filePaths[i];
       onProgress(i + 1, filePaths.length);
 
-      const isAlreadyLoaded = demos.some((demo) => demo.filePath === filePath);
-      if (isAlreadyLoaded) {
-        continue;
-      }
-
       try {
         const demoInDatabase = demosInDatabase.find((demo) => demo.filePath === filePath);
         if (demoInDatabase !== undefined) {

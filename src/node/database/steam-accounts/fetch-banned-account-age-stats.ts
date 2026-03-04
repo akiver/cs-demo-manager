@@ -13,11 +13,11 @@ export async function fetchBannedAccountAgeStats(ignoreBanBeforeFirstSeen: boole
     .where('steam_accounts.last_ban_date', 'is not', null)
     .where('steam_accounts.creation_date', 'is not', null)
     .leftJoin('players', 'players.steam_id', 'steam_accounts.steam_id')
-    .leftJoin('matches', 'matches.checksum', 'players.match_checksum');
+    .leftJoin('demos', 'demos.checksum', 'players.match_checksum');
 
   if (ignoreBanBeforeFirstSeen) {
     const { ref } = db.dynamic;
-    query = query.whereRef('steam_accounts.last_ban_date', '>=', ref('matches.date'));
+    query = query.whereRef('steam_accounts.last_ban_date', '>=', ref('demos.date'));
   }
 
   const result = await query.executeTakeFirst();

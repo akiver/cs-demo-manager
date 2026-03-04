@@ -35,9 +35,10 @@ function buildMatchStatsQuery({ name, ...filters }: TeamFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('matches')
-    .leftJoin('teams', 'teams.match_checksum', 'matches.checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .innerJoin('teams', 'teams.match_checksum', 'matches.checksum')
     .select([
-      'matches.map_name as mapName',
+      'demos.map_name as mapName',
       count<number>('matches.checksum').distinct().as('matchCount'),
       sql<number>`COUNT(CASE WHEN matches.winner_name = ${sql`${name}`} THEN 1 END)`.as('winCount'),
       sql<number>`COUNT(CASE WHEN matches.winner_name IS NOT NULL AND matches.winner_name != ${sql`${name}`} THEN 1 END)`.as(
@@ -57,12 +58,13 @@ function buildStatsQuery({ name, ...filters }: TeamFilters) {
   const { avg } = db.fn;
   let query = db
     .selectFrom('matches')
-    .leftJoin('teams', 'teams.match_checksum', 'matches.checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .innerJoin('teams', 'teams.match_checksum', 'matches.checksum')
     .innerJoin('players', function (qb) {
       return qb.onRef('players.match_checksum', '=', 'matches.checksum').onRef('players.team_name', '=', 'teams.name');
     })
     .select([
-      'matches.map_name as mapName',
+      'demos.map_name as mapName',
       avg<number>('players.kill_death_ratio').as('killDeathRatio'),
       avg<number>('players.average_damage_per_round').as('averageDamagesPerRound'),
       avg<number>('players.kast').as('kast'),
@@ -81,9 +83,10 @@ function buildRoundsQuery({ name, ...filters }: TeamFilters) {
   let query = db
     .selectFrom('rounds')
     .innerJoin('matches', 'rounds.match_checksum', 'matches.checksum')
-    .leftJoin('teams', 'teams.match_checksum', 'matches.checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .innerJoin('teams', 'teams.match_checksum', 'matches.checksum')
     .select([
-      'matches.map_name as mapName',
+      'demos.map_name as mapName',
       sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_name = ${sql`${name}`})`.as('roundWinCount'),
       sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_name IS NOT NULL AND rounds.winner_name != ${sql`${name}`})`.as(
         'roundLostCount',

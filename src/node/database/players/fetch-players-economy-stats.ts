@@ -27,7 +27,8 @@ export async function fetchPlayersEconomyStats(
       sql<number>`COUNT(CASE WHEN player_economies.type = ${EconomyType.ForceBuy} THEN 1 END)`.as('forceBuyCount'),
       sql<number>`COUNT(CASE WHEN player_economies.type = ${EconomyType.Full} THEN 1 END)`.as('fullBuyCount'),
     ])
-    .leftJoin('matches', 'matches.checksum', 'player_economies.match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'player_economies.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .where('player_steam_id', 'in', steamIds)
     .orderBy('player_steam_id')
     .groupBy(['player_steam_id']);

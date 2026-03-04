@@ -11,15 +11,15 @@ export async function fetchPlayerCompetitiveRankHistory(
   let query = db
     .selectFrom('players')
     .select(['rank as rank', 'old_rank as oldRank', 'wins_count as winCount'])
-    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .select('matches.date')
+    .innerJoin('demos', 'demos.checksum', 'players.match_checksum')
+    .select('demos.date')
     .where('steam_id', '=', steamId)
     .where('rank', '>', CompetitiveRank.Unknown)
     .where('rank', '<=', CompetitiveRank.GlobalElite)
     .orderBy('date', 'asc');
 
   if (startDate && endDate) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
   }
 
   const rows = await query.execute();

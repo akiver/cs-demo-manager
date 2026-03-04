@@ -4,14 +4,15 @@ import type { MapNamesFilter } from 'csdm/common/types/search/map-names-filter';
 
 export async function searchMapNames({ name, ignoredNames }: MapNamesFilter) {
   const query = db
-    .selectFrom('matches')
-    .select(['matches.map_name'])
-    .distinctOn(['matches.map_name'])
+    .selectFrom('demos')
+    .innerJoin('matches', 'matches.checksum', 'demos.checksum')
+    .select(['demos.map_name'])
+    .distinctOn(['demos.map_name'])
     .where(({ eb, or, and }) => {
-      const filters: Expression<SqlBool>[] = [or([eb('matches.map_name', 'ilike', `%${name}%`)])];
+      const filters: Expression<SqlBool>[] = [or([eb('demos.map_name', 'ilike', `%${name}%`)])];
 
       if (ignoredNames.length > 0) {
-        filters.push(eb('matches.map_name', 'not in', ignoredNames));
+        filters.push(eb('demos.map_name', 'not in', ignoredNames));
       }
 
       return and(filters);

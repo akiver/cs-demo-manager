@@ -24,8 +24,8 @@ export async function fetchTeamsTable(filter: TeamsTableFilter): Promise<TeamTab
       avg<number>('hltv_rating_2').as('hltvRating2'),
       avg<number>('average_damage_per_round').as('averageDamagePerRound'),
     ])
-    .leftJoin('matches', 'matches.checksum', 'teams.match_checksum')
-    .select([max(sql<string>`to_char(matches.date, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')`).as('lastMatchDate')])
+    .innerJoin('demos', 'demos.checksum', 'teams.match_checksum')
+    .select([max(sql<string>`to_char(demos.date, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')`).as('lastMatchDate')])
     .leftJoin('players', (join) => {
       return join
         .onRef('players.match_checksum', '=', 'teams.match_checksum')
@@ -36,7 +36,7 @@ export async function fetchTeamsTable(filter: TeamsTableFilter): Promise<TeamTab
 
   const { startDate, endDate } = filter;
   if (startDate && endDate) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
   }
 
   const teams = await query.execute();

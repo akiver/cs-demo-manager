@@ -17,7 +17,7 @@ export type MatchFilters = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function applyMatchFilters(query: any, filters: MatchFilters) {
   if (filters.startDate && filters.endDate) {
-    query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${filters.startDate} and ${filters.endDate}`);
   }
 
   if (filters.ranking && filters.ranking !== RankingFilter.All) {
@@ -25,15 +25,15 @@ export function applyMatchFilters(query: any, filters: MatchFilters) {
   }
 
   if (filters.demoSources.length > 0) {
-    query = query.where('matches.source', 'in', filters.demoSources);
+    query = query.where('demos.source', 'in', filters.demoSources);
   }
 
   if (filters.games.length > 0) {
-    query = query.where('matches.game', 'in', filters.games);
+    query = query.where('demos.game', 'in', filters.games);
   }
 
   if (filters.demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', filters.demoTypes);
+    query = query.where('demos.type', 'in', filters.demoTypes);
   }
 
   if (filters.gameModes.length > 0) {

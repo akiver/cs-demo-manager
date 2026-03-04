@@ -20,10 +20,11 @@ export async function searchRounds({
     .selectAll('rounds')
     .distinct()
     .innerJoin('matches', 'matches.checksum', 'rounds.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .leftJoin('round_comments as rc', function (qb) {
       return qb.onRef('rounds.match_checksum', '=', 'rc.match_checksum').onRef('rounds.number', '=', 'rc.number');
     })
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment'])
+    .select(['demos.map_name', 'demos.date', 'matches.demo_path', 'demos.game', 'rc.comment'])
     .leftJoin('round_tags', function (qb) {
       return qb
         .onRef('round_tags.checksum', '=', 'rounds.match_checksum')
@@ -62,22 +63,22 @@ export async function searchRounds({
         .leftJoin('players', 'players.match_checksum', 'matches.checksum')
         .where('players.steam_id', 'in', steamIds);
     })
-    .orderBy('matches.date', 'desc')
+    .orderBy('demos.date', 'desc')
     .orderBy('rounds.match_checksum')
     .orderBy('rounds.number')
     .orderBy('rounds.start_tick')
-    .groupBy(['rounds.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'rc.comment']);
+    .groupBy(['rounds.id', 'demos.map_name', 'demos.date', 'matches.demo_path', 'demos.game', 'rc.comment']);
 
   if (mapNames.length > 0) {
-    query = query.where('matches.map_name', 'in', mapNames);
+    query = query.where('demos.map_name', 'in', mapNames);
   }
 
   if (startDate && endDate) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
   }
 
   if (demoSources.length > 0) {
-    query = query.where('matches.source', 'in', demoSources);
+    query = query.where('demos.source', 'in', demoSources);
   }
 
   const rows = await query.execute();

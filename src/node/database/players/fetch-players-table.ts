@@ -55,12 +55,12 @@ async function fetchPlayersStats(filter: PlayersTableFilter): Promise<PlayersSta
     ])
     .leftJoin('player_comments', 'player_comments.steam_id', 'players.steam_id')
     .select('player_comments.comment')
-    .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
+    .leftJoin('demos', 'demos.checksum', 'players.match_checksum')
     .groupBy(['players.steam_id', 'player_comments.comment']);
 
   const { startDate, endDate, tagIds } = filter;
   if (startDate && endDate) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
   }
 
   if (Array.isArray(tagIds) && tagIds.length > 0) {

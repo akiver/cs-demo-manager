@@ -18,20 +18,20 @@ type LastPlayerData = {
 export async function fetchLastPlayerData(steamId: string, filters?: MatchFilters): Promise<LastPlayerData> {
   let query = db
     .selectFrom('players')
-    .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'players.match_checksum')
     .leftJoin('steam_account_overrides', 'players.steam_id', 'steam_account_overrides.steam_id')
     .select([db.fn.coalesce('steam_account_overrides.name', 'players.name').as('name'), 'wins_count as winsCount'])
     .where('players.steam_id', '=', steamId)
-    .orderBy('date', 'desc');
+    .orderBy('demos.date', 'desc');
 
   if (filters) {
     const { games, startDate, endDate } = filters;
     if (games.length > 0) {
-      query = query.where('matches.game', 'in', games);
+      query = query.where('demos.game', 'in', games);
     }
 
     if (startDate !== undefined && endDate !== undefined) {
-      query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+      query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
     }
   }
 

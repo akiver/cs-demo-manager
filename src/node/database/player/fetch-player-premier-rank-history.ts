@@ -11,14 +11,14 @@ export async function fetchPlayerPremierRankHistory(
   let query = db
     .selectFrom('players')
     .select(['rank as rank', 'wins_count as winCount'])
-    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .select(sql<string>`to_char(matches.date, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')`.as('matchDate'))
+    .innerJoin('demos', 'demos.checksum', 'players.match_checksum')
+    .select(sql<string>`to_char(demos.date, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')`.as('matchDate'))
     .where('steam_id', '=', steamId)
     .where('rank', '>', CompetitiveRank.GlobalElite)
-    .orderBy('date', 'asc');
+    .orderBy('demos.date', 'asc');
 
   if (startDate && endDate) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
   }
 
   const history = await query.execute();

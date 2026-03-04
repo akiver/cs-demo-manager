@@ -1023,10 +1023,8 @@ msgstr "{0, plural, other {#個 demo 已被刪除。}}"
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr "{0, plural, other {#個 demo 未被刪除。}}"
 
-#. placeholder {0}: checksums.length
 #. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
 msgstr "{0, plural, other {刪除 demo}}"
 
@@ -1034,11 +1032,6 @@ msgstr "{0, plural, other {刪除 demo}}"
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
 msgstr "{0, plural, other {Demo 文件將會從系統中刪除, 不會刪除數據庫中的數據。}}"
-
-#. placeholder {0}: checksums.length
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
-msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
-msgstr "{0, plural, other {Demo 數據將會從數據庫中刪除, 不會刪除文件。}}"
 
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "Delete matches"
@@ -2688,10 +2681,6 @@ msgstr "包括子文件夾"
 msgctxt "Checkbox label"
 msgid "See all folders"
 msgstr "查看所有文件夾"
-
-#: src/ui/demos/table/delete-demos-from-database-item.tsx
-msgid "Delete from database"
-msgstr "從數據庫中刪除"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Pending analysis…"

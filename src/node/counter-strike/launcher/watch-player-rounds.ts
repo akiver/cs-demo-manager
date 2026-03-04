@@ -45,12 +45,8 @@ async function fetchRounds(checksum: string, steamId: string) {
   return rounds;
 }
 
-async function fetchMatchTickrate(checksum: string) {
-  const row = await db
-    .selectFrom('matches')
-    .select(['tickrate'])
-    .where('matches.checksum', '=', checksum)
-    .executeTakeFirst();
+async function fetchDemoTickrate(checksum: string) {
+  const row = await db.selectFrom('demos').select(['tickrate']).where('checksum', '=', checksum).executeTakeFirst();
 
   return row?.tickrate ?? 64;
 }
@@ -85,7 +81,7 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
     playerId = player.slot;
   }
 
-  const tickrate = await fetchMatchTickrate(checksum);
+  const tickrate = await fetchDemoTickrate(checksum);
   await generatePlayerRoundsJsonFile({
     tickrate,
     demoPath,

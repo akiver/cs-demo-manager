@@ -26,8 +26,6 @@ import { RenameDemoDialog } from './rename-demo-dialog';
 import { ChangeDemosSourceDialog } from 'csdm/ui/components/dialogs/change-demos-source-dialog';
 import { UpdateDemosTypeItem } from './update-demos-type-item';
 import { CopyItem } from 'csdm/ui/components/context-menu/items/copy-item';
-import { DeleteDemosFromDatabaseItem } from './delete-demos-from-database-item';
-import { DeleteDemosFromDatabaseDialog } from 'csdm/ui/components/dialogs/delete-demos-from-database-dialog';
 import { ExportDemosItem } from './export-demos-items';
 import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
@@ -89,10 +87,6 @@ export function DemoContextMenu({ onCommentClick, demos, siblingDemoPaths }: Pro
     showDialog(<DeleteDemosDialog demos={demos} />);
   };
 
-  const onDeleteFromDatabaseClick = () => {
-    showDialog(<DeleteDemosFromDatabaseDialog checksums={checksums} />);
-  };
-
   const onChangeSourceClick = () => {
     const initialSource = demos.length === 1 ? demos[0].source : undefined;
     showDialog(<ChangeDemosSourceDialog checksums={checksums} initialSource={initialSource} />);
@@ -125,7 +119,6 @@ export function DemoContextMenu({ onCommentClick, demos, siblingDemoPaths }: Pro
       <RevealFileInExplorerItem filePath={selectedDemo.filePath} onFileNotFound={onDemoNotFound} />
       <Separator />
       <DeleteItem onClick={onDeleteClick} />
-      <DeleteDemosFromDatabaseItem onClick={onDeleteFromDatabaseClick} />
     </ContextMenu>
   );
 }

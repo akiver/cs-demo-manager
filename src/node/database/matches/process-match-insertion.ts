@@ -6,8 +6,6 @@ import { insertSteamAccounts } from '../steam-accounts/insert-steam-accounts';
 import { fetchMatchTable } from './fetch-match-table';
 import type { InsertMatchParameters } from './insert-match';
 import { insertMatch } from './insert-match';
-import { Game } from 'csdm/common/types/counter-strike';
-import { updateDemo } from '../demos/update-demo';
 
 export async function processMatchInsertion({ checksum, demoPath, outputFolderPath }: InsertMatchParameters) {
   await insertMatch({
@@ -34,10 +32,6 @@ export async function processMatchInsertion({ checksum, demoPath, outputFolderPa
   }
 
   const match = await fetchMatchTable(checksum);
-
-  if (match.game !== Game.CSGO) {
-    await updateDemo(checksum, match);
-  }
 
   return match;
 }

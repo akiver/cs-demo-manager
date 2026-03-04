@@ -40,11 +40,11 @@ export async function fetchLastPlayersData(steamIds: string[]): Promise<LastPlay
       'game_ban_count as gameBanCount',
       'economy_ban as economyBan',
     ])
-    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .select(['matches.date as lastMatchDate', 'matches.game as game'])
+    .innerJoin('demos', 'demos.checksum', 'players.match_checksum')
+    .select(['demos.date as lastMatchDate', 'demos.game as game'])
     .where((eb) => eb('players.steam_id', '=', eb.fn.any(eb.val(steamIds))))
     .groupBy([
-      'matches.checksum',
+      'demos.checksum',
       'players.steam_id',
       'players.name',
       'players.rank',
@@ -57,7 +57,7 @@ export async function fetchLastPlayersData(steamIds: string[]): Promise<LastPlay
       'gameBanCount',
       'economyBan',
     ])
-    .orderBy('matches.date', 'desc')
+    .orderBy('demos.date', 'desc')
     .execute();
 
   return lastPlayersData;

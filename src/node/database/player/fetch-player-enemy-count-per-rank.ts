@@ -4,9 +4,10 @@ import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filte
 
 async function fetchMatchChecksumsWithPlayer(steamId: string, filters: MatchFilters) {
   let query = db
-    .selectFrom('matches')
-    .select(['matches.checksum', 'date'])
-    .leftJoin('players', 'players.match_checksum', 'matches.checksum')
+    .selectFrom('demos')
+    .select(['demos.checksum', 'demos.date'])
+    .innerJoin('matches', 'matches.checksum', 'demos.checksum')
+    .innerJoin('players', 'players.match_checksum', 'matches.checksum')
     .where('steam_id', '=', steamId);
 
   query = applyMatchFilters(query, { ...filters, demoSources: [DemoSource.Valve] });
@@ -21,12 +22,13 @@ async function fetchPlayerEnemiesRankInMatches(steamId: string, checksums: strin
   let query = db
     .selectFrom('players')
     .select(['rank'])
-    .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .select('date')
+    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'players.match_checksum')
+    .select('demos.date')
     .where('steam_id', '<>', steamId);
 
   if (checksums.length > 0) {
-    query = query.where('matches.checksum', 'in', checksums);
+    query = query.where('demos.checksum', 'in', checksums);
   }
 
   query = applyMatchFilters(query, { ...filters, demoSources: [DemoSource.Valve] });
