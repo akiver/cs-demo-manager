@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import { deleteMatchesByChecksums } from './delete-matches-by-checksums';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import type { ShotTable } from '../shots/shot-table';
@@ -37,6 +38,8 @@ import {
 import { insertMatchPositions } from './insert-match-positions';
 import { InsertRoundsError } from './errors/insert-rounds-error';
 import { DuplicatedMatchChecksum } from './errors/duplicated-match-checksum';
+import { db } from '../database';
+import type { DemoSource, DemoType, Game } from 'csdm/common/types/counter-strike';
 
 async function insertShots({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_shots.csv');
@@ -762,6 +765,44 @@ async function insertChickenDeaths({ outputFolderPath, demoName, databaseSetting
   });
 }
 
+async function insertDemoFromCsv({ outputFolderPath, demoName }: InsertOptions) {
+  const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_demo.csv');
+  const content = await fs.readFile(csvFilePath, 'utf-8');
+  const values = content.split(',').map((value) => value.trim());
+
+  await db
+    .insertInto('demos')
+    .values({
+      checksum: values[0],
+      game: values[1] as Game,
+      name: values[2],
+      date: new Date(values[3]),
+      source: values[4] as DemoSource,
+      type: values[5] as DemoType,
+      share_code: values[6],
+      map_name: values[7],
+      server_name: values[8],
+      client_name: values[9],
+      tick_count: parseInt(values[10], 10),
+      tickrate: parseInt(values[11], 10),
+      framerate: parseFloat(values[12]),
+      duration: parseFloat(values[13]),
+      network_protocol: parseInt(values[14], 10),
+      build_number: parseInt(values[15], 10),
+    })
+    .onConflict((oc) => {
+      return oc.column('checksum').doUpdateSet({
+        map_name: (b) => b.ref('excluded.map_name'),
+        tick_count: (b) => b.ref('excluded.tick_count'),
+        tickrate: (b) => b.ref('excluded.tickrate'),
+        framerate: (b) => b.ref('excluded.framerate'),
+        duration: (b) => b.ref('excluded.duration'),
+        share_code: (b) => b.ref('excluded.share_code'),
+      });
+    })
+    .execute();
+}
+
 async function insertMatchFromCsv({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
   try {
     const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_match.csv');
@@ -772,22 +813,7 @@ async function insertMatchFromCsv({ outputFolderPath, demoName, databaseSettings
       csvFilePath,
       columns: [
         'checksum',
-        'game',
         'demo_path',
-        'name',
-        'date',
-        'source',
-        'type',
-        'share_code',
-        'map_name',
-        'server_name',
-        'client_name',
-        'tick_count',
-        'tickrate',
-        'framerate',
-        'duration',
-        'network_protocol',
-        'build_number',
         'game_type',
         'game_mode',
         'game_mode_str',
@@ -978,6 +1004,12 @@ export async function insertMatch({ checksum, demoPath, outputFolderPath }: Inse
         outputFolderPath,
       }),
     ]);
+
+    await insertDemoFromCsv({
+      databaseSettings,
+      outputFolderPath,
+      demoName,
+    });
   } catch (error) {
     // It's not possible to use a transaction since data are inserted with the psql CLI.
     // Mimic a rollback in case of error by deleting the match we were trying to insert.

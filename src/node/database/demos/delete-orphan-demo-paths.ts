@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import { db } from 'csdm/node/database/database';
 import type { DemoPathRow } from './demo-path-table';
 
-export async function deleteOrphanDemos() {
+export async function deleteOrphanDemoPaths() {
   const rows: DemoPathRow[] = await db.selectFrom('demo_paths').selectAll().execute();
 
   const demosToDelete: DemoPathRow[] = [];
@@ -16,13 +16,7 @@ export async function deleteOrphanDemos() {
   await Promise.all(demoPathExistsPromises);
 
   if (demosToDelete.length > 0) {
-    const checksums = demosToDelete.map((row) => row.checksum);
     const paths = demosToDelete.map((row) => row.file_path);
-    await db.transaction().execute(async (transaction) => {
-      await Promise.all([
-        transaction.deleteFrom('demo_paths').where('file_path', 'in', paths).execute(),
-        transaction.deleteFrom('demos').where('checksum', 'in', checksums).execute(),
-      ]);
-    });
+    await db.deleteFrom('demo_paths').where('file_path', 'in', paths).execute();
   }
 }

@@ -8,16 +8,16 @@ export async function fetchPlayerLastPremierRank(steamId: string, filters?: Matc
   let query = db
     .selectFrom('players')
     .select(['rank'])
-    .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'players.match_checksum')
     .where('steam_id', '=', steamId)
-    .where('source', '=', DemoSource.Valve)
-    .where('matches.game', '!=', Game.CSGO)
+    .where('demos.source', '=', DemoSource.Valve)
+    .where('demos.game', '!=', Game.CSGO)
     .where('players.rank', '>', CompetitiveRank.Unknown)
     .where('players.rank', '>', CompetitiveRank.GlobalElite)
-    .orderBy('matches.date', 'desc');
+    .orderBy('demos.date', 'desc');
 
   if (filters && filters.startDate && filters.endDate) {
-    query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${filters.startDate} and ${filters.endDate}`);
   }
 
   const row = await query.executeTakeFirst();

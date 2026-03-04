@@ -37,7 +37,7 @@ export function matchTableRowToMatchTable(
     teamAScore: row.teamAScore,
     teamBName: row.teamBName,
     teamBScore: row.teamBScore,
-    shareCode: row.share_code,
+    shareCode: row.share_code ?? '',
     fiveKillCount: row.fiveKillCount,
     fourKillCount: row.fourKillCount,
     threeKillCount: row.threeKillCount,

@@ -6,8 +6,9 @@ function buildQuery({ name, ...filters }: TeamFilters) {
   const { count } = db.fn;
   let query = db
     .selectFrom('matches')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .innerJoin('teams', 'teams.match_checksum', 'matches.checksum')
     .select(count<number>('matches.checksum').as('matchCount'))
-    .leftJoin('teams', 'teams.match_checksum', 'matches.checksum')
     .where('teams.name', '=', name);
 
   query = applyMatchFilters(query, filters);

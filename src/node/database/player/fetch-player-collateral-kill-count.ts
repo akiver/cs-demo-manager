@@ -8,7 +8,8 @@ export async function fetchPlayerCollateralKillCount(steamId: string, filters?: 
     let query = db
       .selectFrom('kills')
       .select(['killer_steam_id', count<number>('tick').as('tick')])
-      .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
+      .innerJoin('matches', 'matches.checksum', 'kills.match_checksum')
+      .innerJoin('demos', 'demos.checksum', 'matches.checksum')
       .where('killer_steam_id', '=', steamId)
       .where('weapon_type', 'not in', [WeaponType.Equipment, WeaponType.Grenade, WeaponType.Unknown, WeaponType.World])
       .groupBy(['tick', 'killer_steam_id'])

@@ -2,7 +2,7 @@ import { sql } from 'kysely';
 import { server } from 'csdm/server/server';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
 import { deletePositions } from 'csdm/node/database/delete-positions';
-import { deleteOrphanDemos } from 'csdm/node/database/demos/delete-orphan-demos';
+import { deleteOrphanDemoPaths } from 'csdm/node/database/demos/delete-orphan-demo-paths';
 import { deleteDemos } from 'csdm/node/database/demos/delete-demos';
 import { db } from 'csdm/node/database/database';
 
@@ -21,7 +21,7 @@ export async function optimizeDatabaseHandler({
     if (clearDemos) {
       await deleteDemos();
     } else if (clearOrphanDemos) {
-      await deleteOrphanDemos();
+      await deleteOrphanDemoPaths();
     }
 
     if (clearPositions) {

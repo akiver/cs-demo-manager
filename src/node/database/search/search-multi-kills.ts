@@ -33,10 +33,11 @@ export async function searchMultiKills({
         .onRef('k1.killer_steam_id', '=', 'k2.killer_steam_id');
     })
     .innerJoin('matches', 'k1.match_checksum', 'matches.checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .leftJoin('round_comments as rc', function (qb) {
       return qb.onRef('k2.match_checksum', '=', 'rc.match_checksum').onRef('k2.round_number', '=', 'rc.number');
     })
-    .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game', 'matches.tickrate', 'rc.comment'])
+    .select(['demos.map_name', 'demos.date', 'matches.demo_path', 'demos.game', 'demos.tickrate', 'rc.comment'])
     .$if(matchTagIds.length > 0, (qb) => {
       return qb
         .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
@@ -53,7 +54,7 @@ export async function searchMultiKills({
         .where('round_tags.tag_id', 'in', roundTagIds)
         .groupBy('round_tags.tag_id');
     })
-    .orderBy('matches.date', 'desc')
+    .orderBy('demos.date', 'desc')
     .orderBy('k1.match_checksum')
     .orderBy('k1.killer_name')
     .orderBy('k1.round_number')
@@ -64,11 +65,11 @@ export async function searchMultiKills({
       'k1.killer_name',
       'k1.round_number',
       'k1.match_checksum',
-      'matches.map_name',
+      'demos.map_name',
       'matches.demo_path',
-      'matches.date',
-      'matches.game',
-      'matches.tickrate',
+      'demos.date',
+      'demos.game',
+      'demos.tickrate',
       'rc.comment',
     ])
     .having(sql<number>`COUNT(*)`, '=', killCount);
@@ -106,15 +107,15 @@ export async function searchMultiKills({
   }
 
   if (mapNames.length > 0) {
-    query = query.where('matches.map_name', 'in', mapNames);
+    query = query.where('demos.map_name', 'in', mapNames);
   }
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${startDate} and ${endDate}`);
   }
 
   if (demoSources.length > 0) {
-    query = query.where('matches.source', 'in', demoSources);
+    query = query.where('demos.source', 'in', demoSources);
   }
 
   const rows = await query.execute();

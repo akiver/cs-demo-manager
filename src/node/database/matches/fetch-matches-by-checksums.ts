@@ -22,10 +22,12 @@ import { fetchMatchTeamsEconomyStats } from '../match/fetch-match-teams-economy-
 export async function fetchMatchesByChecksums(checksums: string[]) {
   const rows = await db
     .selectFrom('matches')
-    .selectAll('matches')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .leftJoin('comments', 'comments.checksum', 'matches.checksum')
-    .select('comments.comment')
     .where('matches.checksum', 'in', checksums)
+    .selectAll('matches')
+    .selectAll('demos')
+    .select(['comments.comment'])
     .execute();
 
   const collateralKillCountPerMatch = await fetchCollateralKillCountPerMatch();

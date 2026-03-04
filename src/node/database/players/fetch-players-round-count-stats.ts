@@ -36,7 +36,8 @@ export async function fetchPlayersRoundCountStats(
             )
           )`.as('roundCountAsT'),
     ])
-    .leftJoin('matches', 'matches.checksum', 'rounds.match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'rounds.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .innerJoin('players', 'players.match_checksum', 'rounds.match_checksum')
     .select(['players.steam_id as steamId'])
     .where('players.steam_id', 'in', steamIds)

@@ -33,8 +33,9 @@ export async function fetchTeamRoundCount({ name, ...filters }: TeamFilters): Pr
             )
           )`.as('roundCountAsT'),
     ])
-    .leftJoin('matches', 'matches.checksum', 'rounds.match_checksum')
-    .leftJoin('teams', 'teams.match_checksum', 'rounds.match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'rounds.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .innerJoin('teams', 'teams.match_checksum', 'rounds.match_checksum')
     .where((eb) => {
       return eb('teams.name', '=', name).or('teams.name', '=', name);
     });

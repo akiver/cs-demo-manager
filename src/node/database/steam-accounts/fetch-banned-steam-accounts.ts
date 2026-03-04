@@ -14,14 +14,14 @@ export async function fetchBannedSteamAccounts(ignoreBanBeforeFirstSeen: boolean
     })
     .leftJoin('players', 'players.steam_id', 'steam_accounts.steam_id')
     .select('players.rank')
-    .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .select('matches.date as match_date')
+    .leftJoin('demos', 'demos.checksum', 'players.match_checksum')
+    .select('demos.date as match_date')
     .orderBy('steam_accounts.last_ban_date', 'desc')
     .orderBy('steam_accounts.steam_id', 'asc')
-    .orderBy('matches.date', 'desc');
+    .orderBy('demos.date', 'desc');
 
   if (ignoreBanBeforeFirstSeen) {
-    query = query.whereRef('steam_accounts.last_ban_date', '>=', ref('matches.date'));
+    query = query.whereRef('steam_accounts.last_ban_date', '>=', ref('demos.date'));
   }
 
   const rows = await query.execute();

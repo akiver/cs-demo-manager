@@ -43,7 +43,8 @@ async function fetchPlayersAverageBlindTime(steamIds: string[], filters?: MatchF
     .select(() => {
       return [sql<number>`ROUND(AVG(blinds.duration)::numeric, 1)`.as('average_duration')];
     })
-    .leftJoin('matches', 'matches.checksum', 'blinds.match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'blinds.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .orderBy('steamId')
     .groupBy('blinds.flasher_steam_id');
 
@@ -63,7 +64,8 @@ async function fetchPlayersAverageEnemiesFlashed(steamIds: string[], filters?: M
     .with('enemies_flashed', (db) => {
       let subQuery = db
         .selectFrom('player_blinds')
-        .leftJoin('matches', 'matches.checksum', 'player_blinds.match_checksum')
+        .innerJoin('matches', 'matches.checksum', 'player_blinds.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum')
         .select(({ fn }) => ['flasher_steam_id', fn.count('player_blinds.id').as('flashed_count')])
         .where((eb) => eb('flasher_steam_id', '=', eb.fn.any(eb.val(steamIds))))
         .whereRef('player_blinds.flasher_side', '!=', 'player_blinds.flashed_side')
@@ -83,7 +85,8 @@ async function fetchPlayersAverageEnemiesFlashed(steamIds: string[], filters?: M
         .selectFrom('shots')
         .select('player_steam_id')
         .select(({ fn }) => [fn.count('id').as('total_count')])
-        .leftJoin('matches', 'matches.checksum', 'shots.match_checksum')
+        .innerJoin('matches', 'matches.checksum', 'shots.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum')
         .where('player_steam_id', 'in', steamIds)
         .where('shots.weapon_name', '=', WeaponName.Flashbang)
         .where('shots.is_player_controlling_bot', '=', false)
@@ -121,7 +124,8 @@ async function fetchPlayersAverageHeGrenadeDamage(steamIds: string[], filters?: 
         .whereRef('attacker_side', '!=', 'victim_side')
         .where('is_attacker_controlling_bot', '=', false)
         .groupBy('attacker_steam_id')
-        .leftJoin('matches', 'matches.checksum', 'damages.match_checksum');
+        .innerJoin('matches', 'matches.checksum', 'damages.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum');
 
       if (filters) {
         subQuery = applyMatchFilters(subQuery, filters);
@@ -137,7 +141,8 @@ async function fetchPlayersAverageHeGrenadeDamage(steamIds: string[], filters?: 
         .where((eb) => eb('player_steam_id', '=', eb.fn.any(eb.val(steamIds))))
         .where('shots.weapon_name', '=', WeaponName.HEGrenade)
         .where('shots.is_player_controlling_bot', '=', false)
-        .leftJoin('matches', 'matches.checksum', 'shots.match_checksum')
+        .innerJoin('matches', 'matches.checksum', 'shots.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum')
         .groupBy('player_steam_id');
 
       if (filters) {
@@ -170,7 +175,8 @@ async function fetchPlayersAverageSmokesThrownPerMatch(steamIds: string[], filte
         .where((eb) => eb('player_steam_id', '=', eb.fn.any(eb.val(steamIds))))
         .where('shots.weapon_name', '=', WeaponName.Smoke)
         .where('shots.is_player_controlling_bot', '=', false)
-        .leftJoin('matches', 'matches.checksum', 'shots.match_checksum')
+        .innerJoin('matches', 'matches.checksum', 'shots.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum')
         .where('matches.game_mode_str', '!=', GameMode.Scrimmage2V2)
         .groupBy(['match_checksum', 'shots.player_steam_id']);
 

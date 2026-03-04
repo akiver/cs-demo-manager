@@ -8,8 +8,9 @@ export async function fetchTeamClutches({ name, ...filters }: TeamFilters): Prom
   let query = db
     .selectFrom('clutches')
     .selectAll()
-    .leftJoin('matches', 'matches.checksum', 'clutches.match_checksum')
-    .leftJoin('teams', 'teams.match_checksum', 'clutches.match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'clutches.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .innerJoin('teams', 'teams.match_checksum', 'clutches.match_checksum')
     .where('teams.name', '=', name);
 
   query = applyMatchFilters(query, filters);

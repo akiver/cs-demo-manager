@@ -19,7 +19,7 @@ export async function fetchDemoByChecksum(checksum: string): Promise<Demo | unde
     .select('demos.checksum as checksum')
     .innerJoin('demo_paths', 'demo_paths.checksum', 'demos.checksum')
     .select('demo_paths.file_path')
-    .innerJoin('matches', 'matches.checksum', 'demos.checksum')
+    .leftJoin('matches', 'matches.checksum', 'demos.checksum')
     .select('matches.analyze_date as analyzeDate')
     .leftJoin('comments', 'comments.checksum', 'demos.checksum')
     .select('comments.comment')

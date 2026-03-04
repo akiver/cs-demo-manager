@@ -51,14 +51,14 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
       'players.crosshair_share_code as crosshairShareCode',
       'players.inspect_weapon_count as inspectWeaponCount',
     ])
-    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'players.match_checksum')
     .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'players.steam_id')
     .select('steam_accounts.avatar')
     .leftJoin('ignored_steam_accounts', 'ignored_steam_accounts.steam_id', 'steam_accounts.steam_id')
     .select(
       // Set the last ban date column only if the steam account is not ignored and the ban occurred after the match's date.
       // The left join on the steam_accounts table preserve possible players not present in the steam_accounts table.
-      sql<Date | null>`CASE WHEN steam_accounts.last_ban_date > matches.date AND ignored_steam_accounts.steam_id IS NULL THEN steam_accounts.last_ban_date END`.as(
+      sql<Date | null>`CASE WHEN steam_accounts.last_ban_date > demos.date AND ignored_steam_accounts.steam_id IS NULL THEN steam_accounts.last_ban_date END`.as(
         'last_ban_date',
       ),
     )
@@ -71,7 +71,7 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
             eb('kills.killer_steam_id', '=', ref('players.steam_id')),
             eb('kills.victim_steam_id', '=', ref('players.steam_id')),
           ]),
-          eb('kills.match_checksum', '=', ref('matches.checksum')),
+          eb('kills.match_checksum', '=', ref('demos.checksum')),
         ]);
       });
     })
@@ -93,7 +93,7 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
     .where('players.match_checksum', '=', checksum)
     .groupBy([
       'players.id',
-      'matches.date',
+      'demos.date',
       'steam_accounts.avatar',
       'last_ban_date',
       'ignored_steam_accounts.steam_id',

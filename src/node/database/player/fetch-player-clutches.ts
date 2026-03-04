@@ -7,7 +7,8 @@ export async function fetchPlayerClutches(steamId: string, filters?: MatchFilter
   let query = db
     .selectFrom('clutches')
     .selectAll()
-    .leftJoin('matches', 'matches.checksum', 'clutches.match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'clutches.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .where('clutches.clutcher_steam_id', '=', steamId);
 
   if (filters) {

@@ -22,7 +22,9 @@ import { fetchGrenadeProjectileDestroy } from 'csdm/node/database/grenade-projec
 export async function fetchMatchesForJsonExport(checksums: string[]): Promise<MatchJson[]> {
   const rows = await db
     .selectFrom('matches')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .selectAll('matches')
+    .selectAll('demos')
     .leftJoin('comments', 'comments.checksum', 'matches.checksum')
     .select('comments.comment')
     .where('matches.checksum', 'in', checksums)

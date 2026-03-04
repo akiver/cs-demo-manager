@@ -6,7 +6,8 @@ function buildQuery(steamId: string, filters?: MatchFilters) {
   let query = db
     .selectFrom('matches')
     .select(count<number>('matches.checksum').as('matchCount'))
-    .leftJoin('players', 'players.match_checksum', 'matches.checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .innerJoin('players', 'players.match_checksum', 'matches.checksum')
     .where('players.steam_id', '=', steamId);
 
   if (filters) {

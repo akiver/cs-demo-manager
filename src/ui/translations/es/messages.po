@@ -1023,21 +1023,14 @@ msgstr ""
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr ""
 
-#. placeholder {0}: checksums.length
 #. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
 msgstr ""
 
 #. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
-msgstr ""
-
-#. placeholder {0}: checksums.length
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
-msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
 msgstr ""
 
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
@@ -2687,10 +2680,6 @@ msgstr ""
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
 msgid "See all folders"
-msgstr ""
-
-#: src/ui/demos/table/delete-demos-from-database-item.tsx
-msgid "Delete from database"
 msgstr ""
 
 #: src/ui/demos/table/demo-status-cell.tsx

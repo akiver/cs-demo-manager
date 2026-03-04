@@ -1023,10 +1023,8 @@ msgstr "{0, plural,one {A demo foi excluída.} other {# demos excluídas.}}"
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr "{0, plural,one {A demo não foi deletada.} other {# demos não foram deletadas.}}"
 
-#. placeholder {0}: checksums.length
 #. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
 msgstr "{0, plural,one {Apagar demo} other {Apagar demos}}"
 
@@ -1034,11 +1032,6 @@ msgstr "{0, plural,one {Apagar demo} other {Apagar demos}}"
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
 msgstr "{0, plural,one {A demo será excluída apenas do seu sistema de arquivos, mas não do banco de dados.} other {As demos serão excluídas apenas do seu sistema de arquivos, mas não do banco de dados.}}"
-
-#. placeholder {0}: checksums.length
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
-msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
-msgstr "{0, plural,one {A demo será excluída do banco de dados, mas não do seu sistema de arquivos.} other {As demos serão excluídas do banco de dados, mas não do seu sistema de arquivos.}}"
 
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "Delete matches"
@@ -2688,10 +2681,6 @@ msgstr "Incluir sub-pastas"
 msgctxt "Checkbox label"
 msgid "See all folders"
 msgstr "Mostrar todas as pastas"
-
-#: src/ui/demos/table/delete-demos-from-database-item.tsx
-msgid "Delete from database"
-msgstr "Remover do banco de dados"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Pending analysis…"
