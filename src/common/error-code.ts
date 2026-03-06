@@ -112,6 +112,8 @@ export const ErrorCode = {
   SteamNotRunning: 4000,
 
   InvalidBackupFile: 4100,
+  InvalidFileExtension: 4101,
+  InvalidJson: 4102,
 } as const;
 
 export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];

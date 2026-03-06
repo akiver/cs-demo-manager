@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { KebabMenu, KebabMenuItem } from 'csdm/ui/components/kebab-menu';
 import { useClipboard } from 'csdm/ui/hooks/use-clipboard';
@@ -11,6 +11,8 @@ import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { defaultSettings } from 'csdm/node/settings/default-settings';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { deleteSequences } from './sequences/sequences-actions';
+import { ErrorCode } from 'csdm/common/error-code';
+import { isSuccessResult } from 'csdm/preload/preload-result';
 
 function useGetVideoCommandConfig(): () => VideoCommandConfig {
   const sequences = useCurrentMatchSequences();
@@ -52,15 +54,14 @@ export function VideoActionsMenu() {
 
   const onExportClick = async () => {
     const options: SaveDialogOptions = {
-      defaultPath: 'video',
+      defaultPath: 'video.json',
       filters: [{ name: 'JSON', extensions: ['json'] }],
     };
     const { canceled, filePath } = await window.csdm.showSaveDialog(options);
     if (!canceled && filePath) {
-      try {
-        await window.csdm.writeJsonFile(filePath, JSON.stringify(getVideoCommandConfig(), null, 2));
-
-        showToast({
+      const result = await window.csdm.writeJsonFile(filePath, JSON.stringify(getVideoCommandConfig(), null, 2));
+      if (isSuccessResult(result)) {
+        return showToast({
           id: 'export-video-json-success',
           content: <Trans context="Toast">File created, click here to reveal it</Trans>,
           type: 'success',
@@ -68,13 +69,30 @@ export function VideoActionsMenu() {
             window.csdm.browseToFile(filePath);
           },
         });
-      } catch (error) {
-        showToast({
-          id: 'export-video-json-error',
-          content: <Trans>An error occurred</Trans>,
-          type: 'error',
-        });
       }
+
+      let message: ReactNode;
+      switch (result.error.code) {
+        case ErrorCode.InvalidJson:
+          message = <Trans>The exported data is not valid JSON.</Trans>;
+          break;
+        case ErrorCode.InvalidFileExtension:
+          message = (
+            <Trans>
+              The file extension must be <strong>.json</strong>
+            </Trans>
+          );
+          break;
+        default:
+          message = <Trans>An error occurred</Trans>;
+          break;
+      }
+
+      showToast({
+        id: 'export-video-json-error',
+        content: message,
+        type: 'error',
+      });
     }
   };
 

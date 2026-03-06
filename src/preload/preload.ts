@@ -43,11 +43,20 @@ import { getCameraPreviewBase64 } from 'csdm/node/filesystem/cameras/get-camera-
 import { getImageInformation } from 'csdm/node/filesystem/get-image-information';
 import { readImageFile } from 'csdm/node/filesystem/image';
 import { writeJsonFile } from 'csdm/node/filesystem/write-json-file';
+import { ErrorCode } from 'csdm/common/error-code';
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {
   logger.error(error.reason);
 });
+
+function handleError(error: unknown) {
+  const code = getErrorCodeFromError(error);
+  if (code === ErrorCode.UnknownError) {
+    logger.error(error);
+  }
+  return { error: { code } };
+}
 
 const api: PreloadApi = {
   logger,
@@ -101,7 +110,14 @@ const api: PreloadApi = {
   getPathBasename: path.basename,
   elementToImage,
   readImageFile,
-  writeJsonFile,
+  writeJsonFile: async (filePath, data) => {
+    try {
+      await writeJsonFile(filePath, data);
+      return { success: true };
+    } catch (error) {
+      return handleError(error);
+    }
+  },
 
   showMainWindow: () => {
     ipcRenderer.invoke(IPCChannel.ShowWindow);
@@ -286,7 +302,7 @@ const api: PreloadApi = {
       const logFilePath = await getCounterStrikeLogFilePath(game);
       return { success: logFilePath };
     } catch (error) {
-      return { error: { code: getErrorCodeFromError(error) } };
+      return handleError(error);
     }
   },
 

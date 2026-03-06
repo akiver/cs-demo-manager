@@ -1,13 +1,15 @@
 import fs from 'fs-extra';
 import { isValidJson } from 'csdm/common/json';
+import { InvalidFileExtension } from '../errors/invalid-file-extension';
+import { InvalidJson } from '../errors/invalid-json';
 
 export async function writeJsonFile(filePath: string, data: string) {
   if (!filePath.endsWith('.json')) {
-    throw new Error('File must end with .json extension');
+    throw new InvalidFileExtension();
   }
 
   if (!isValidJson(data)) {
-    throw new Error('Invalid JSON data');
+    throw new InvalidJson();
   }
 
   await fs.writeFile(filePath, data);
