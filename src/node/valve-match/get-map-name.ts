@@ -19,10 +19,10 @@ export function getMapName(gameType: number) {
   const wingmanMode: GameMode = 10;
 
   const mapping = {
-    [1 << 0]: 'de_grail',
+    [1 << 0]: 'de_warden',
     [1 << 1]: 'de_dust2',
     [1 << 2]: 'de_train',
-    [1 << 3]: 'de_warden',
+    [1 << 3]: 'de_ancient',
     [1 << 4]: 'de_inferno',
     [1 << 5]: 'de_nuke',
     [1 << 6]: 'de_vertigo',
