@@ -103,7 +103,7 @@ export async function createCs2VideoJsonFile({
       .addExecCommand(setupSequenceTick, `mp_display_kill_assists ${sequence.showAssists ? 1 : 0}`);
 
     if (presetName !== 'afxClassic') {
-      let presetParameters = `-c:v ${ffmpegSettings.videoCodec}`;
+      let presetParameters = `-c:v ${ffmpegSettings.videoCodec} -pix_fmt yuv420p`;
       if (ffmpegSettings.outputParameters === '') {
         presetParameters += ` -crf ${ffmpegSettings.constantRateFactor}`;
       } else {
