@@ -2575,7 +2575,7 @@ msgstr "Demo 分析正在进行中。"
 
 #: src/ui/demo/demo-analyze-date.tsx
 msgid "Analyze date:"
-msgstr ""
+msgstr "分析日期："
 
 #: src/ui/demo/demo-comment-input.tsx
 msgid "Comment:"
@@ -5800,11 +5800,11 @@ msgstr "未安装"
 #: src/ui/match/video/toggle-true-view.tsx
 msgctxt "Checkbox label"
 msgid "Enable TrueView mode"
-msgstr ""
+msgstr "启用 TrueView 模式"
 
 #: src/ui/match/video/toggle-true-view.tsx
 msgid "Enabling TrueView may lead to lags in recordings!"
-msgstr ""
+msgstr "启用 TrueView 可能会导致录制过程中出现延迟！"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Toast"
@@ -6977,7 +6977,7 @@ msgstr "Steam API 返回了一个错误。"
 #: src/ui/settings/cameras/add-camera-button.tsx
 msgctxt "Button"
 msgid "Add a camera"
-msgstr "添加一个摄相头"
+msgstr "添加一个摄像机位"
 
 #: src/ui/settings/cameras/camera-entry.tsx
 msgid "Camera actions"
@@ -7602,15 +7602,15 @@ msgstr "跟随符号链接"
 
 #: src/ui/settings/playback/game-display-mode.tsx
 msgid "Windowed"
-msgstr ""
+msgstr "窗口"
 
 #: src/ui/settings/playback/game-display-mode.tsx
 msgid "Fullscreen Windowed"
-msgstr ""
+msgstr "无边框全屏"
 
 #: src/ui/settings/playback/game-display-mode.tsx
 msgid "Fullscreen"
-msgstr ""
+msgstr "全屏"
 
 #: src/ui/settings/playback/game-display-mode.tsx
 msgid "Start the game in fullscreen mode"
@@ -7623,7 +7623,7 @@ msgstr ""
 #: src/ui/settings/playback/game-display-mode.tsx
 msgctxt "Settings title"
 msgid "Display mode"
-msgstr ""
+msgstr "CS 显示模式"
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
@@ -8117,11 +8117,11 @@ msgstr "Counter-Strike 程序没有响应，请再试一次。"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Counter-Strike video config file not found."
-msgstr ""
+msgstr "未找到 CS 视频配置文件。"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Make sure the game has been launched at least once from Steam."
-msgstr ""
+msgstr "请确保游戏至少从Steam启动一次。"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "This demo needs to be re-analyzed to make the camera focus work."
