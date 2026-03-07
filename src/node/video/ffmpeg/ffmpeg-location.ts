@@ -2,6 +2,7 @@ import path from 'node:path';
 import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { getSettings } from 'csdm/node/settings/get-settings';
+import { isMac } from 'csdm/node/os/is-mac';
 
 export function getDefaultFfmpegInstallationPath() {
   return path.join(getAppFolderPath(), 'ffmpeg');
@@ -9,12 +10,12 @@ export function getDefaultFfmpegInstallationPath() {
 
 export function getDefaultFfmpegExecutablePath() {
   const ffmpegFolderPath = getDefaultFfmpegInstallationPath();
-  if (isWindows) {
-    // The FFmpeg executable is located inside a "bin" folder on Windows
-    return path.join(ffmpegFolderPath, 'bin', 'ffmpeg.exe');
+
+  if (isMac) {
+    return path.join(ffmpegFolderPath, 'ffmpeg');
   }
 
-  return path.join(ffmpegFolderPath, 'ffmpeg');
+  return path.join(ffmpegFolderPath, 'bin', isWindows ? 'ffmpeg.exe' : 'ffmpeg');
 }
 
 export async function getFfmpegExecutablePath() {
