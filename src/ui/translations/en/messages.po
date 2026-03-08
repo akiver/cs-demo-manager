@@ -5811,6 +5811,14 @@ msgid "File created, click here to reveal it"
 msgstr "File created, click here to reveal it"
 
 #: src/ui/match/video/video-actions-menu.tsx
+msgid "The exported data is not valid JSON."
+msgstr "The exported data is not valid JSON."
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgid "The file extension must be <0>.json</0>"
+msgstr "The file extension must be <0>.json</0>"
+
+#: src/ui/match/video/video-actions-menu.tsx
 msgid "Video actions"
 msgstr "Video actions"
 

@@ -5812,6 +5812,14 @@ msgid "File created, click here to reveal it"
 msgstr "文件已建立，點此開啟所在資料夾"
 
 #: src/ui/match/video/video-actions-menu.tsx
+msgid "The exported data is not valid JSON."
+msgstr ""
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgid "The file extension must be <0>.json</0>"
+msgstr ""
+
+#: src/ui/match/video/video-actions-menu.tsx
 msgid "Video actions"
 msgstr "影片動作"
 
