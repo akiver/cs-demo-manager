@@ -5,7 +5,7 @@ import { ExternalLink } from 'csdm/ui/components/external-link';
 import { Game } from 'csdm/common/types/counter-strike';
 import { HlaeError } from 'csdm/ui/components/messages/hlae-error';
 
-export function getPlaybackErrorMessageFromErrorCode(game: Game, errorCode: ErrorCode) {
+export function getPlaybackErrorMessageFromErrorCode(errorCode: ErrorCode, game?: Game) {
   switch (errorCode) {
     case ErrorCode.DemoNotFound:
       return (

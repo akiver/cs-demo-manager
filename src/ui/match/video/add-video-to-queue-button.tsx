@@ -47,7 +47,7 @@ export function AddVideoToQueueButton() {
       navigate(RoutePath.Videos);
     } catch (error) {
       const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-      const message = getPlaybackErrorMessageFromErrorCode(match.game, errorCode);
+      const message = getPlaybackErrorMessageFromErrorCode(errorCode, match.game);
       showDialog(<AddVideoToQueueErrorDialog>{message}</AddVideoToQueueErrorDialog>);
     }
   };

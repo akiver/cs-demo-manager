@@ -162,7 +162,7 @@ export function CameraForm({ nameInput, error, onSubmit }: Props) {
                   }
                 } catch (error) {
                   const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-                  let message = getPlaybackErrorMessageFromErrorCode(game, errorCode);
+                  let message = getPlaybackErrorMessageFromErrorCode(errorCode, game);
                   if (errorCode === ErrorCode.RawFilesNotFound) {
                     message = (
                       <p>

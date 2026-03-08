@@ -228,7 +228,6 @@ msgid "Loading ban stats…"
 msgstr "正在加載封禁數據…"
 
 #: src/ui/ban/stats/ban-stats.tsx
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 #: src/ui/comment/use-update-comment.tsx
 #: src/ui/components/buttons/export-html-element-as-image-button.tsx
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx

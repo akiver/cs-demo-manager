@@ -137,7 +137,7 @@ export function VideoEntry({ video }: Props) {
 
   const renderCurrentStepMessage = (video: Video) => {
     const message = video.errorCode
-      ? getPlaybackErrorMessageFromErrorCode(video.game, video.errorCode)
+      ? getPlaybackErrorMessageFromErrorCode(video.errorCode, video.game)
       : getStatusMessage(video);
 
     switch (video.status) {
@@ -175,7 +175,7 @@ export function VideoEntry({ video }: Props) {
       });
     } catch (error) {
       const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-      const message = getPlaybackErrorMessageFromErrorCode(video.game, errorCode);
+      const message = getPlaybackErrorMessageFromErrorCode(errorCode, video.game);
       showDialog(<AddVideoToQueueErrorDialog>{message}</AddVideoToQueueErrorDialog>);
     }
   };
