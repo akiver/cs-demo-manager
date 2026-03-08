@@ -28,7 +28,6 @@ export function AddVideoToQueueButton() {
   const requiredBytes = useSequencesRequiredDiskSpace();
   const client = useWebSocketClient();
   const navigate = useNavigate();
-
   const addVideoToQueue = async () => {
     try {
       const payload: AddVideoPayload = {
