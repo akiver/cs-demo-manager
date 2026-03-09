@@ -343,6 +343,7 @@ void PlaybackLoop() {
                     engine->ExecuteClientCmd(0, "demo_gototick 0", true);
                     currentTick = -1;
                     lastPauseTick = -1;
+                    break;
                 }
                 else {
                     Log("[%d] Executing: %s", newTick, action.cmd.c_str());
