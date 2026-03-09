@@ -73,7 +73,7 @@ export async function generatePlayerHighlightsJsonFile({
 
       // It's the first action so just skip ahead and focus the camera on the player
       const toTick = Math.max(0, action.tick - tickBeforeDelayCount);
-      json.addSkipAhead(0, toTick);
+      json.addGoToTick(0, toTick);
       json.addSpecPlayer(toTick, idToFocus);
       isFirstAction = false;
     }
@@ -93,7 +93,7 @@ export async function generatePlayerHighlightsJsonFile({
       if (isNextActionTooFarAway) {
         const skipAheadTick = action.tick + tickNextDelayCount;
         const toTick = nextAction.tick - tickBeforeDelayCount;
-        json.addSkipAhead(skipAheadTick, toTick);
+        json.addGoToTick(skipAheadTick, toTick);
         json.addSpecPlayer(toTick, playerIdToFocus);
       } else {
         // The next action is too close, only move the camera on the player

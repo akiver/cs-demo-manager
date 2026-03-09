@@ -141,7 +141,7 @@ export async function createCs2VideoJsonFile({
     // Since an October 2025 CS2 update, executing spec_player and demo_gototick on the same tick may cause
     // spec_player to be ignored. It's important to go to the setup tick before executing any spec_player command.
     // https://github.com/akiver/cs-demo-manager/issues/1238
-    json.addSkipAhead(1, Math.max(1, setupSequenceTick - 1));
+    json.addGoToTick(1, Math.max(1, setupSequenceTick - 1));
 
     for (const camera of sequence.playerCameras) {
       const player = players.find((player) => player.steamId === camera.playerSteamId);

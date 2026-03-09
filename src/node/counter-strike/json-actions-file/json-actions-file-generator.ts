@@ -29,7 +29,7 @@ export class JSONActionsFileGenerator {
     this.filePath = windowsToUnixPathSeparator(`${demoPath}.json`);
   }
 
-  public addSkipAhead(startTick: number, toTick: number) {
+  public addGoToTick(startTick: number, toTick: number) {
     this.actions.push({
       cmd: `demo_gototick ${this.getValidTick(toTick)}`,
       tick: this.getValidTick(startTick),

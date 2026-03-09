@@ -43,7 +43,7 @@ export async function generatePlayerRoundsJsonFile({
     const round = rounds[index];
     const startTick = Math.max(round.freezeTimeEndTick - beforeRoundTicks, 0);
     if (currentTick + afterRoundTicks < startTick) {
-      json.addSkipAhead(currentTick, startTick);
+      json.addGoToTick(currentTick, startTick);
     }
     json.addSpecPlayer(startTick, playerId);
 
