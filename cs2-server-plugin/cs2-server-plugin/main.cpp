@@ -171,7 +171,12 @@ ISource2EngineToClient* GetEngine()
 }
 
 void SendMsg(json msg) {
-    ws->send(msg.dump());
+    if (ws != NULL) {
+        ws->send(msg.dump());
+    }
+    else {
+        Log("Cannot send message, WebSocket not connected");
+    }
 }
 
 void SendStatusOk() {
@@ -370,11 +375,20 @@ void HandleWebSocketMessage(const std::string& message)
         string cmd = "playdemo \"" + demoPath + "\"";
         Log("Starting demo: %s", cmd.c_str());
         auto engine = GetEngine();
+        if (engine == NULL) {
+            Log("Engine interface not found");
+            return;
+        }
         engine->ExecuteClientCmd(0, cmd.c_str(), true);
         Log("Demo started: %s", cmd.c_str());
     }
     else if (msg["name"] == "capture-player-view") {
+        Log("Capturing player view");
         auto engine = GetEngine();
+        if (engine == NULL) {
+            Log("Engine interface not found");
+            return;
+        }
         engine->ExecuteClientCmd(0, "getposcopy", true);
         // The "screenshot" command works only on Windows when the -tools launch option is set.
         // As a workaround, we use the startmovie command to take a screenshot.
@@ -382,9 +396,9 @@ void HandleWebSocketMessage(const std::string& message)
         engine->ExecuteClientCmd(0, "startmovie csdmcamera jpg", true);
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         engine->ExecuteClientCmd(0, "endmovie", true);
-        json msg;
-        msg["name"] = "capture-player-view-result";
-        SendMsg(msg);
+        json responseMsg;
+        responseMsg["name"] = "capture-player-view-result";
+        SendMsg(responseMsg);
     }
 }
 
