@@ -6,10 +6,6 @@ import { RendererServerMessageName } from 'csdm/server/renderer-server-message-n
 import type { CounterStrikeErrorPayload, WatchDemoErrorPayload } from 'csdm/server/counter-strike';
 import { getPlaybackErrorMessageFromErrorCode } from 'csdm/ui/shared/get-playback-error-from-error-code';
 
-function getErrorMessageFromError(error: WatchDemoErrorPayload | CounterStrikeErrorPayload) {
-  return getPlaybackErrorMessageFromErrorCode(error.errorCode, error.game);
-}
-
 export function useRegisterCounterStrikeListeners(client: WebSocketClient) {
   const showToast = useShowToast();
   const { t } = useLingui();
@@ -23,7 +19,7 @@ export function useRegisterCounterStrikeListeners(client: WebSocketClient) {
     };
 
     const onError = (error: CounterStrikeErrorPayload | WatchDemoErrorPayload) => {
-      const message = getErrorMessageFromError(error);
+      const message = getPlaybackErrorMessageFromErrorCode(error.errorCode, error.game);
       showToast({
         content: message,
         id: 'game-starting',

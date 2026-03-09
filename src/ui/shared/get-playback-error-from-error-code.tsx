@@ -127,7 +127,7 @@ export function getPlaybackErrorMessageFromErrorCode(errorCode: ErrorCode, game?
     case ErrorCode.NoKillsFound:
       return (
         <p>
-          <Trans>No kills found</Trans>;
+          <Trans>No kills found</Trans>
         </p>
       );
     case ErrorCode.FfmpegError:
