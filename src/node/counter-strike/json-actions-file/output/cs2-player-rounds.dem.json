@@ -27,7 +27,7 @@
       },
       {
         "cmd": "spec_player 4",
-        "tick": 876
+        "tick": 872
       },
       {
         "cmd": "demo_gototick 10752",
@@ -39,7 +39,7 @@
       },
       {
         "cmd": "spec_player 4",
-        "tick": 10756
+        "tick": 10752
       },
       {
         "cmd": "demo_gototick 16152",
@@ -51,7 +51,7 @@
       },
       {
         "cmd": "spec_player 4",
-        "tick": 16156
+        "tick": 16152
       },
       {
         "cmd": "demo_gototick 21352",
@@ -63,7 +63,7 @@
       },
       {
         "cmd": "spec_player 4",
-        "tick": 21356
+        "tick": 21352
       },
       {
         "cmd": "disconnect",

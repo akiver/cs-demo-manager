@@ -87,7 +87,7 @@ export async function createCs2VideoJsonFile({
     }
 
     const roundedTickrate = Math.round(tickrate);
-    const setupSequenceTick = sequence.startTick - roundedTickrate > 0 ? sequence.startTick - roundedTickrate : 1;
+    const setupSequenceTick = Math.max(1, sequence.startTick - roundedTickrate);
 
     const hlaeOutputFolderPath = getHlaeOutputFolderPath(outputFolderPath, sequence);
     const presetName =
@@ -134,10 +134,13 @@ export async function createCs2VideoJsonFile({
     // Do it a few ticks before the sequence's start tick because some ticks may be skipped between the time that the
     // plugin pauses the playback and the time that the game actually pauses the playback (it would result in
     // startmovie commands not being executed and so missing sequences).
-    json.addPausePlayback(sequence.startTick - 4);
+    json.addPausePlayback(Math.max(1, sequence.startTick - 4));
 
-    // Skip ahead 1 tick before the setup tick to make sure the setup commands are executed.
+    // Go to 1 tick before the sequence's setup tick to make sure the setup commands are executed.
     // It may not if we do both the skip ahead and the setup cmds at the same tick.
+    // Since an October 2025 CS2 update, executing spec_player and demo_gototick on the same tick may cause
+    // spec_player to be ignored. It's important to go to the setup tick before executing any spec_player command.
+    // https://github.com/akiver/cs-demo-manager/issues/1238
     json.addSkipAhead(1, Math.max(1, setupSequenceTick - 1));
 
     for (const camera of sequence.playerCameras) {
