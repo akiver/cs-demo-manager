@@ -13,11 +13,11 @@ public:
     virtual void _Unknown_000(void) = 0;
     virtual void _Unknown_001(void) = 0;
 #if defined _WIN32
-    virtual int GetDemoStartTick(void) = 0; //:002
-    virtual int _GetDemoTick(void) = 0; // see :004
+    virtual int _Unknown_002(void) = 0;
+    virtual int _GetDemoTick(void) = 0; // :003 see :004
 #else
     virtual int _Unknown_002(void) = 0;
-    virtual int GetDemoStartTick(void) = 0; //:003
+    virtual int _Unknown_003(void) = 0;
 #endif
     virtual int GetDemoTick(void) = 0; //:004 points to the same function as :003 on Windows
     virtual int _Unknown_005(void) = 0;
@@ -26,9 +26,8 @@ public:
     virtual int _Unknown_008(void) = 0;
     virtual int _Unknown_009(void) = 0;
     virtual int _Unknown_010(void) = 0;
-    virtual int _Unknown_011(void) = 0;
-    virtual bool IsPlayingDemo(void) = 0; //:012
-    virtual bool IsDemoPaused(void) = 0; //:013
+    virtual bool IsPlayingDemo(void) = 0; //:011
+    virtual bool IsDemoPaused(void) = 0; //:012
 };
 
 
@@ -103,4 +102,66 @@ public:
     virtual void _Unknown_065(void) = 0;
     virtual void _Unknown_066(void) = 0;
     virtual IDemoPlayer* GetDemoPlayer(void) = 0; //:067
+};
+
+enum class ClientFrameStage_t : int
+{
+    // (haven't run any frames yet)
+    FRAME_UNDEFINED = -1,
+    FRAME_START = 0,
+    // A network packet is being recieved
+    FRAME_NET_UPDATE_START,
+    // Data has been received and we're going to start calling PostDataUpdate
+    FRAME_NET_UPDATE_POSTDATAUPDATE_START,
+    // Data has been received and we've called PostDataUpdate on all data recipients
+    FRAME_NET_UPDATE_POSTDATAUPDATE_END,
+    // We've received all packets, we can now do interpolation, prediction, etc..
+    FRAME_NET_UPDATE_END,
+    // We're about to start rendering the scene
+    FRAME_RENDER_START,
+    // We've finished rendering the scene.
+    FRAME_RENDER_END
+};
+
+
+abstract_class ISource2Client
+{
+public:
+    virtual void _Unknown_000(void) = 0;
+    virtual void _Unknown_001(void) = 0;
+    virtual void _Unknown_002(void) = 0;
+    virtual void _Unknown_003(void) = 0;
+    virtual void _Unknown_004(void) = 0;
+    virtual void _Unknown_005(void) = 0;
+    virtual void _Unknown_006(void) = 0;
+    virtual void _Unknown_007(void) = 0;
+    virtual void _Unknown_008(void) = 0;
+    virtual void _Unknown_009(void) = 0;
+    virtual void _Unknown_010(void) = 0;
+    virtual void _Unknown_011(void) = 0;
+    virtual void _Unknown_012(void) = 0;
+    virtual void _Unknown_013(void) = 0;
+    virtual void _Unknown_014(void) = 0;
+    virtual void _Unknown_015(void) = 0;
+    virtual void _Unknown_016(void) = 0;
+    virtual void _Unknown_017(void) = 0;
+    virtual void _Unknown_018(void) = 0;
+    virtual void _Unknown_019(void) = 0;
+    virtual void _Unknown_020(void) = 0;
+    virtual void _Unknown_021(void) = 0;
+    virtual void _Unknown_022(void) = 0;
+    virtual void _Unknown_023(void) = 0;
+    virtual void _Unknown_024(void) = 0;
+    virtual void _Unknown_025(void) = 0;
+    virtual void _Unknown_026(void) = 0;
+    virtual void _Unknown_027(void) = 0;
+    virtual void _Unknown_028(void) = 0;
+    virtual void _Unknown_029(void) = 0;
+    virtual void _Unknown_030(void) = 0;
+    virtual void _Unknown_031(void) = 0;
+    virtual void _Unknown_032(void) = 0;
+    virtual void _Unknown_033(void) = 0;
+    virtual void _Unknown_034(void) = 0;
+    virtual void _Unknown_035(void) = 0;
+    virtual void FrameStageNotify(ClientFrameStage_t curStage);
 };
