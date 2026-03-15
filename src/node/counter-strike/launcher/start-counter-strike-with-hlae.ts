@@ -140,7 +140,7 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   }
 
   const hlaeExecutablePath = await getHlaeExecutablePathOrThrow();
-  await killCounterStrikeProcesses();
+  const hasBeenKilled = await killCounterStrikeProcesses();
   const csExecutablePath = await getCounterStrikeExecutablePath(game);
   const settings = await getSettings();
   const {
@@ -208,6 +208,13 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
     );
   }
 
+  // When we kill the process it may take a bit of time before the process actually releases files lock.
+  // We wait a bit before starting the process again to avoid trying to start CS when it's still running. It would lead
+  // to Source Engine error.
+  const shouldWait = hasBeenKilled;
+  if (shouldWait) {
+    await sleep(2000);
+  }
   await installCounterStrikeServerPlugin(game);
 
   if (options.registerFfmpegLocation) {
