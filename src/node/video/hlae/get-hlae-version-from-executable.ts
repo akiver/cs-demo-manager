@@ -18,7 +18,9 @@ export async function getHlaeVersionFromExecutable(executablePath: string): Prom
   return new Promise((resolve, reject) => {
     const sanitizedExecutablePath = sanitizeExecutablePath(executablePath);
 
-    // TODO wmic is deprecated. https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmic
+    // TODO wmic is deprecated https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmic
+    // But since it's really slow when using the alternative PowerShell, we will keep using wmic for now.
+    // We should re-migrate to PowerShell only when wmic is removed (see commit ea0486205c38e50856abc12ccfee457525f8c2c2)
     exec(
       `wmic datafile where 'name="${sanitizedExecutablePath}"' get version`,
       { windowsHide: true },
