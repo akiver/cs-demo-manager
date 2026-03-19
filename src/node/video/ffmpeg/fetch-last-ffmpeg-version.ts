@@ -5,36 +5,55 @@ type EvermeetResponse = {
   version: string;
 };
 
-function findVersionFromGitHubRelease(release: GitHubReleaseResponse) {
-  let versionsFound: string[] = [];
+export type FfmpegRelease = {
+  version: string;
+  assetName: string;
+};
+
+function compareSemver(a: string, b: string): number {
+  const aParts = a.split('.').map(Number);
+  const bParts = b.split('.').map(Number);
+  for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+    const diff = (aParts[i] ?? 0) - (bParts[i] ?? 0);
+    if (diff !== 0) {
+      return diff;
+    }
+  }
+  return 0;
+}
+
+function findFfmpegGitHubAsset(release: GitHubReleaseResponse): FfmpegRelease {
+  const assetsFound: FfmpegRelease[] = [];
   for (const asset of release.assets) {
     const regex = isWindows
-      ? /ffmpeg-n.*-latest-win64-gpl-(\d+\.\d+(\.\d+)?)\.zip/g
-      : /ffmpeg-n.*-latest-linux64-gpl-(\d+\.\d+(\.\d+)?)\.tar\.xz/g;
-    const matches = regex.exec(asset.name);
-    if (matches !== null) {
-      versionsFound = [...versionsFound, matches[1]];
+      ? /^ffmpeg-n([\d.]+)-\d+-g[a-f0-9]+-win64-gpl-[\d.]+\.zip$/
+      : /^ffmpeg-n([\d.]+)-\d+-g[a-f0-9]+-linux64-gpl-[\d.]+\.tar\.xz$/;
+    const match = regex.exec(asset.name);
+    if (match !== null) {
+      assetsFound.push({ version: match[1], assetName: asset.name });
     }
   }
 
-  if (versionsFound.length === 0) {
+  if (assetsFound.length === 0) {
     throw new Error('FFMpeg version not found');
   }
 
-  return versionsFound.sort().reverse()[0];
+  return assetsFound.sort((a, b) => compareSemver(b.version, a.version))[0];
 }
 
-export async function fetchLastFfmpegVersion(): Promise<string> {
-  let version: string;
+export async function fetchLastFfmpegRelease(): Promise<FfmpegRelease> {
   if (isMac) {
     const response = await fetch('https://evermeet.cx/ffmpeg/info/ffmpeg/release');
     const data: EvermeetResponse = await response.json();
-    version = data.version;
-  } else {
-    const response = await fetch('https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest');
-    const release: GitHubReleaseResponse = await response.json();
-    version = findVersionFromGitHubRelease(release);
+    return { version: data.version, assetName: `ffmpeg-${data.version}.zip` };
   }
 
+  const response = await fetch('https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest');
+  const release: GitHubReleaseResponse = await response.json();
+  return findFfmpegGitHubAsset(release);
+}
+
+export async function fetchLastFfmpegVersion(): Promise<string> {
+  const { version } = await fetchLastFfmpegRelease();
   return version;
 }
