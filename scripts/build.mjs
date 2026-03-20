@@ -23,17 +23,19 @@ async function buildRendererProcessBundle() {
     build: {
       emptyOutDir: true,
       sourcemap: true,
-      chunkSizeWarningLimit: 3000,
+      chunkSizeWarningLimit: 4000,
+      rolldownOptions: {
+        output: {
+          // Do not minify identifiers in order to have real functions name in logs that are written on the FS.
+          // I didn't find a way to have logs in production builds pointing to the actual .ts/.tsx file.
+          // Unfortunately the module source-map-support doesn't help here even when using the browser version.
+          // It increases the bundle size but makes logs much more readable.
+          // Note: Opening the DevTools console in production builds will show the original .ts/.tsx file.
+          keepNames: true,
+        },
+      },
     },
     configFile: path.join(rootFolderPath, 'vite.config.mts'),
-    esbuild: {
-      // Do not minify identifiers in order to have real functions name in logs that are written on the FS.
-      // I didn't find a way to have logs in production builds pointing to the actual .ts/.tsx file.
-      // Unfortunately the module source-map-support doesn't help here even when using the browser version.
-      // It increases the bundle size but makes logs much more readable.
-      // Note: Opening the DevTools console in production builds will show the original .ts/.tsx file.
-      minifyIdentifiers: false,
-    },
     define: {
       ...commonDefine,
       REACT_STRICT_MODE_ENABLED: false,
