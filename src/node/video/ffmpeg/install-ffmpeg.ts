@@ -12,11 +12,11 @@ import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 function getArchiveName(version: string) {
   switch (true) {
     case isWindows:
-      return `ffmpeg-n${version}-latest-win64-gpl-${version}.zip`;
+      return `ffmpeg-n${version}-latest-win64-gpl-${version}`;
     case isMac:
-      return `ffmpeg-${version}.zip`;
+      return `ffmpeg-${version}`;
     default:
-      return `ffmpeg-n${version}-latest-linux64-gpl-${version}.tar.xz`;
+      return `ffmpeg-n${version}-latest-linux64-gpl-${version}`;
   }
 }
 
@@ -25,7 +25,7 @@ function getArchiveUrl(archiveName: string) {
     case isMac:
       return `https://evermeet.cx/ffmpeg/${archiveName}.zip`;
     default:
-      return `https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/${archiveName}`;
+      return `https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/${archiveName}${isWindows ? '.zip' : '.tar.xz'}`;
   }
 }
 
