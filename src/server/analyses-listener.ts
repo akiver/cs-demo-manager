@@ -174,6 +174,7 @@ class AnalysesListener {
     } catch (error) {
       logger.error('Error while inserting match');
       logger.error(error);
+      logger.error(JSON.stringify(error));
       let errorOutput: string;
       if (error instanceof Error) {
         errorOutput = error.message;
@@ -183,6 +184,7 @@ class AnalysesListener {
         if (error.cause) {
           errorOutput += `\n${error.cause}`;
         }
+        errorOutput += `\n${JSON.stringify(error)}`;
       } else {
         errorOutput = String(error);
       }

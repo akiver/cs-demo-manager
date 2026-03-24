@@ -40,6 +40,7 @@ import { InsertRoundsError } from './errors/insert-rounds-error';
 import { DuplicatedMatchChecksum } from './errors/duplicated-match-checksum';
 import { db } from '../database';
 import type { DemoSource, DemoType, Game } from 'csdm/common/types/counter-strike';
+import { InvalidMatchDate } from './errors/invalid-match-date';
 
 async function insertShots({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_shots.csv');
@@ -769,6 +770,10 @@ async function insertDemoFromCsv({ outputFolderPath, demoName }: InsertOptions) 
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_demo.csv');
   const content = await fs.readFile(csvFilePath, 'utf-8');
   const values = content.split(',').map((value) => value.trim());
+  const date = new Date(values[3]);
+  if (isNaN(date.getTime())) {
+    throw new InvalidMatchDate(values[3]);
+  }
 
   await db
     .insertInto('demos')
@@ -776,7 +781,7 @@ async function insertDemoFromCsv({ outputFolderPath, demoName }: InsertOptions) 
       checksum: values[0],
       game: values[1] as Game,
       name: values[2],
-      date: new Date(values[3]),
+      date,
       source: values[4] as DemoSource,
       type: values[5] as DemoType,
       share_code: values[6],

@@ -105,6 +105,7 @@ export const ErrorCode = {
   CameraAlreadyExists: 3010,
 
   InvalidDemoName: 3100,
+  InvalidMatchDate: 3101,
   AnalyzeCorruptedDemo: 3200,
   InsertMatchDuplicatedChecksum: 3201,
   InsertRoundsError: 3210,
