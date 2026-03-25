@@ -194,6 +194,7 @@ export default [
             'CS:GO',
             'CS2 Limited Test',
             '^setpos_exact',
+            'dd/MM/yyyy HH:mm:ss',
           ],
           ignoreNames: [
             // Ignore matching className (case-insensitive)

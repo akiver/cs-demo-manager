@@ -7837,6 +7837,23 @@ msgstr "Le nom est trop court"
 msgid "Invalid color"
 msgstr "Couleur invalide"
 
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "Invalid date format."
+msgstr ""
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "Format used to display dates in the UI."
+msgstr ""
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "View all format tokens"
+msgstr ""
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgctxt "Settings title"
+msgid "Date format"
+msgstr ""
+
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx
 msgid "Hardware Acceleration"
 msgstr "Accélération Matérielle"

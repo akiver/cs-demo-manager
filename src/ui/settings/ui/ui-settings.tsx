@@ -7,12 +7,14 @@ import { ResetTablesState } from './reset-tables-state';
 import { InitialPageSelect } from './initial-page-select';
 import { RedirectDemoToMatch } from './redirect-demo-to-match';
 import { EnableHardwareAcceleration } from './enable-hardware-acceleration';
+import { DateFormatInput } from './date-format-input';
 
 export function UiSettings() {
   return (
     <SettingsView>
       <ThemeSelect />
       <LanguageSelect />
+      <DateFormatInput />
       <SystemStartupBehavior />
       <InitialPageSelect />
       <RedirectDemoToMatch />

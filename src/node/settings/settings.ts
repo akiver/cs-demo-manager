@@ -38,6 +38,7 @@ type UISettings = {
   initialPage: Page;
   redirectDemoToMatch: boolean;
   enableHardwareAcceleration: boolean;
+  dateFormat?: string;
 };
 
 type AnalyzeSettings = {
