@@ -7762,6 +7762,15 @@ msgstr "回合前延迟"
 msgid "How many seconds to start before the end of the round's freeze time."
 msgstr "在回合冻结时间结束之前的倒计时。"
 
+#: src/ui/settings/playback/watch-round-wait-round-end.tsx
+msgid "Wait for the round to end before skipping to the next round when watching player's rounds."
+msgstr ""
+
+#: src/ui/settings/playback/watch-round-wait-round-end.tsx
+msgctxt "Settings title"
+msgid "Wait for round end"
+msgstr ""
+
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
 msgstr "UI设置"

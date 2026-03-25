@@ -21,6 +21,7 @@ import { Cs2Location } from './cs2-location';
 import { CsgoLocation } from './csgo-location';
 import { FollowSymbolicLinks } from './follow-symbolic-links';
 import { SteamRuntimeScriptLocation } from './steam-runtime-script-location';
+import { WatchRoundWaitRoundEnd } from './watch-round-wait-round-end';
 
 export function PlaybackSettings() {
   return (
@@ -40,6 +41,7 @@ export function PlaybackSettings() {
       <LowlightsIncludeDamages />
       <WatchRoundBeforeDelay />
       <WatchRoundAfterDelay />
+      <WatchRoundWaitRoundEnd />
       {window.csdm.isWindows && <UseHlae />}
       {!window.csdm.isMac && (
         <>

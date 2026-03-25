@@ -7762,6 +7762,15 @@ msgstr "Délai avant début de round"
 msgid "How many seconds to start before the end of the round's freeze time."
 msgstr "Combien de secondes avant la fin du freeze time démarrera la lecture."
 
+#: src/ui/settings/playback/watch-round-wait-round-end.tsx
+msgid "Wait for the round to end before skipping to the next round when watching player's rounds."
+msgstr ""
+
+#: src/ui/settings/playback/watch-round-wait-round-end.tsx
+msgctxt "Settings title"
+msgid "Wait for round end"
+msgstr ""
+
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
 msgstr "UI"

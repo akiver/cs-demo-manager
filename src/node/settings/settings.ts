@@ -72,6 +72,7 @@ export type PlaybackSettings = {
   round: {
     beforeRoundDelayInSeconds: number; // how many seconds the playback should start before the end of rounds freeze time
     afterRoundDelayInSeconds: number; // how many seconds to wait before skipping to the next round (on round end or player death)
+    waitForRoundEnd: boolean; // If enabled, the playback will wait for the round to end before skipping to the next round when watching player's rounds.
   };
   launchParameters: string;
   useHlae: boolean;

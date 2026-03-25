@@ -64,6 +64,7 @@ export const defaultSettings: Settings = {
     round: {
       beforeRoundDelayInSeconds: 0,
       afterRoundDelayInSeconds: 2,
+      waitForRoundEnd: false,
     },
     launchParameters: '',
     useHlae: false,
