@@ -36,6 +36,7 @@ async function findFilesInSteamFolder(pattern: string) {
   }
 
   const rootSteamPath = isLinux ? path.join(steamFolderPath, '..') : steamFolderPath;
+  logger.debug(`Looking for files matching ${pattern} in Steam folder ${rootSteamPath}`);
   const files = await glob(pattern, {
     cwd: rootSteamPath,
     absolute: true,
@@ -99,6 +100,8 @@ async function enableFullscreenWindowedForCSGO(options: EnableFullscreenWindowed
  */
 async function enableFullscreenWindowedForCS2(options: EnableFullscreenWindowedOptions) {
   const videoConfigFiles = await findFilesInSteamFolder('**/cs2_video.txt');
+  logger.debug(`Found ${videoConfigFiles.length} cs2_video.txt files in Steam folder`);
+  logger.debug(videoConfigFiles);
   if (videoConfigFiles.length === 0) {
     throw new CounterStrikeVideoConfigNotFound();
   }
