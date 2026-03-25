@@ -45,6 +45,7 @@ export type VideoCommandConfig = {
   closeGameAfterRecording?: boolean;
   trueView: boolean;
   concatenateSequences?: boolean;
+  concatenatedFileName?: string;
   ffmpegSettings?: FfmpegSettings;
   outputFolderPath?: string;
   sequences?: Sequence[];
@@ -70,6 +71,7 @@ export class VideoCommand extends Command {
   private readonly noCloseGameAfterRecordingFlag = 'no-close-game-after-recording';
   private readonly concatenateSequencesFlag = 'concatenate-sequences';
   private readonly noConcatenateSequencesFlag = 'no-concatenate-sequences';
+  private readonly concatenatedFileNameFlag = 'concatenated-file-name';
   private readonly trueViewFlag = 'true-view';
   private readonly noTrueViewFlag = 'no-true-view';
   private readonly encoderSoftwareFlag = 'encoder-software';
@@ -113,6 +115,7 @@ export class VideoCommand extends Command {
   private height: number | undefined;
   private closeGameAfterRecording: boolean | undefined;
   private concatenateSequences: boolean | undefined;
+  private concatenatedFileName: string | undefined;
   private trueView: boolean | undefined;
   private encoderSoftware: EncoderSoftware | undefined;
   private recordingSystem: RecordingSystem | undefined;
@@ -164,6 +167,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.noCloseGameAfterRecordingFlag}`);
     console.log(`  --${this.concatenateSequencesFlag}`);
     console.log(`  --${this.noConcatenateSequencesFlag}`);
+    console.log(`  --${this.concatenatedFileNameFlag} <string>`);
     console.log(`  --${this.encoderSoftwareFlag} <string> (FFmpeg or VirtualDub)`);
     console.log(`  --${this.recordingSystemFlag} <string> (HLAE or CS)`);
     console.log(`  --${this.recordingOutputFlag} <string> (video, images, or images-and-video)`);
@@ -226,6 +230,7 @@ export class VideoCommand extends Command {
         signal: controller.signal,
         checksum: demo.checksum,
         game: demo.game,
+        mapName: demo.mapName,
         tickrate: demo.tickrate,
         recordingSystem: this.recordingSystem ?? settings.video.recordingSystem,
         recordingOutput: this.recordingOutput ?? settings.video.recordingOutput,
@@ -235,6 +240,7 @@ export class VideoCommand extends Command {
         height: this.height ?? settings.video.height,
         closeGameAfterRecording: this.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
         concatenateSequences: this.concatenateSequences ?? settings.video.concatenateSequences,
+        concatenatedFileName: this.concatenatedFileName ?? settings.video.concatenatedFileName,
         trueView: this.trueView ?? settings.video.trueView,
         sequences: [],
         ffmpegSettings: {
@@ -274,6 +280,7 @@ export class VideoCommand extends Command {
           trueView: config.trueView ?? parameters.trueView,
           closeGameAfterRecording: config.closeGameAfterRecording ?? parameters.closeGameAfterRecording,
           concatenateSequences: config.concatenateSequences ?? parameters.concatenateSequences,
+          concatenatedFileName: config.concatenatedFileName ?? parameters.concatenatedFileName,
           ffmpegSettings: config.ffmpegSettings ?? parameters.ffmpegSettings,
           outputFolderPath: config.outputFolderPath ?? parameters.outputFolderPath,
           sequences: config.sequences ?? parameters.sequences,
@@ -416,6 +423,7 @@ export class VideoCommand extends Command {
         [this.noCloseGameAfterRecordingFlag]: { type: 'boolean' },
         [this.concatenateSequencesFlag]: { type: 'boolean' },
         [this.noConcatenateSequencesFlag]: { type: 'boolean' },
+        [this.concatenatedFileNameFlag]: { type: 'string' },
         [this.encoderSoftwareFlag]: { type: 'string' },
         [this.recordingSystemFlag]: { type: 'string' },
         [this.recordingOutputFlag]: { type: 'string' },
@@ -640,6 +648,10 @@ export class VideoCommand extends Command {
     const noConcatenateSequences = values[this.noConcatenateSequencesFlag];
     if (noConcatenateSequences !== undefined) {
       this.concatenateSequences = false;
+    }
+    const concatenatedFileName = values[this.concatenatedFileNameFlag];
+    if (typeof concatenatedFileName === 'string') {
+      this.concatenatedFileName = concatenatedFileName;
     }
     const encoderSoftware = values[this.encoderSoftwareFlag];
     if (encoderSoftware !== undefined) {

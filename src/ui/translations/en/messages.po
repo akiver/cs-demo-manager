@@ -5024,6 +5024,52 @@ msgctxt "Checkbox label"
 msgid "Concatenate sequences into 1 video"
 msgstr "Concatenate sequences into 1 video"
 
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "Map name (e.g., de_dust2)"
+msgstr "Map name (e.g., de_dust2)"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "Match checksum/ID"
+msgstr "Match checksum/ID"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "Game (CS2 or CSGO)"
+msgstr "Game (CS2 or CSGO)"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "Current date (YYYY-MM-DD)"
+msgstr "Current date (YYYY-MM-DD)"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "Current time (HH-MM-SS)"
+msgstr "Current time (HH-MM-SS)"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Encoder software"
+msgstr "Encoder software"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "Resolution (e.g., 1920x1080)"
+msgstr "Resolution (e.g., 1920x1080)"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "Framerate (e.g., 30)"
+msgstr "Framerate (e.g., 30)"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "Available placeholders:"
+msgstr "Available placeholders:"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgctxt "Input label"
+msgid "Output filename"
+msgstr "Output filename"
+
+#: src/ui/match/video/concatenated-file-name-input.tsx
+msgid "?"
+msgstr "?"
+
 #: src/ui/match/video/death-notices-duration-input.tsx
 msgid "Death notices duration (seconds)"
 msgstr "Death notices duration (seconds)"
@@ -8427,10 +8473,6 @@ msgstr "Sequences"
 #: src/ui/videos/video-entry.tsx
 msgid "Disk space"
 msgstr "Disk space"
-
-#: src/ui/videos/video-entry.tsx
-msgid "Encoder software"
-msgstr "Encoder software"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Resolution"

@@ -30,11 +30,13 @@ import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
 import { getFfmpegExecutablePath } from '../ffmpeg/ffmpeg-location';
 import { isEmptyString } from 'csdm/common/string/is-empty-string';
 import { DisplayMode } from 'csdm/common/types/display-mode';
+import { replaceFilenamePlaceholders } from './replace-filename-placeholders';
 
 export type Parameters = {
   videoId: string;
   checksum: string;
   game: Game;
+  mapName: string;
   tickrate: number;
   recordingSystem: RecordingSystem;
   recordingOutput: RecordingOutput;
@@ -44,6 +46,7 @@ export type Parameters = {
   height: number;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
+  concatenatedFileName: string;
   trueView: boolean;
   ffmpegSettings: Omit<FfmpegSettings, 'customLocationEnabled'>;
   outputFolderPath: string;
@@ -67,6 +70,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
     sequences,
     outputFolderPath,
     concatenateSequences,
+    concatenatedFileName,
     ffmpegSettings,
     game,
     onSequenceStart,
@@ -116,6 +120,15 @@ async function buildVideos({ signal, ...options }: Parameters) {
   const shouldConcatenate = concatenateSequences && sequences.length > 1;
   if (shouldConcatenate) {
     onConcatenateSequencesStart();
+    const processedFileName = replaceFilenamePlaceholders(concatenatedFileName, {
+      mapName: options.mapName,
+      checksum: options.checksum,
+      game: options.game,
+      encoderSoftware: options.encoderSoftware,
+      width: options.width,
+      height: options.height,
+      framerate: options.framerate,
+    });
     await concatenateVideosFromSequences(
       {
         ffmpegExecutablePath: !isEmptyString(ffmpegSettings.customExecutableLocation)
@@ -124,6 +137,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
         outputFolderPath,
         sequences,
         videoContainer: ffmpegSettings.videoContainer,
+        fileName: processedFileName,
       },
       signal,
     );

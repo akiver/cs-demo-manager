@@ -14,6 +14,7 @@ import { EncoderSoftwareSelect } from './encoder-software-select';
 import { Ffmpeg } from './ffmpeg/ffmpeg';
 import { FramerateInput } from './framerate-input';
 import { ConcatenateSequencesCheckbox } from './concatenate-sequences-checkbox';
+import { ConcatenatedFileNameInput } from './concatenated-file-name-input';
 import { GeneratePlayerSequencesButton } from './generate-player-sequences-button';
 import { SequencesSummary } from './sequences-summary';
 import { EditSequencesSettingsButton } from './sequences/edit-sequences/edit-sequences-settings-button';
@@ -65,6 +66,7 @@ export function MatchVideo() {
                 {match.game !== Game.CSGO && <ToggleTrueView />}
                 <CloseGameAfterRecordingCheckbox />
                 <ConcatenateSequencesCheckbox />
+                <ConcatenatedFileNameInput />
               </div>
             </div>
           </div>
