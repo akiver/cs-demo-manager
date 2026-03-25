@@ -11,10 +11,11 @@ type ConcatenateVideoOptions = {
   sequences: Sequence[];
   outputFolderPath: string;
   videoContainer: VideoContainer;
+  fileName: string;
 };
 
 export async function concatenateVideosFromSequences(
-  { ffmpegExecutablePath, sequences, outputFolderPath, videoContainer }: ConcatenateVideoOptions,
+  { ffmpegExecutablePath, sequences, outputFolderPath, videoContainer, fileName }: ConcatenateVideoOptions,
   signal: AbortSignal,
 ) {
   const videoPaths = sequences.map((sequence) => {
@@ -37,7 +38,7 @@ export async function concatenateVideosFromSequences(
     '-safe 0',
     `-i "${listFilePath}"`,
     '-c copy',
-    `"${path.join(outputFolderPath, `output.${videoContainer}`)}"`,
+    `"${path.join(outputFolderPath, `${fileName}.${videoContainer}`)}"`,
   ];
   await executeFfmpeg(ffmpegExecutablePath, args, signal);
 
