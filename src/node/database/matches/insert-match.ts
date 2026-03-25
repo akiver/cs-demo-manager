@@ -1,4 +1,4 @@
-import fs from 'node:fs/promises';
+import { parseFile } from '@fast-csv/parse';
 import { deleteMatchesByChecksums } from './delete-matches-by-checksums';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import type { ShotTable } from '../shots/shot-table';
@@ -767,45 +767,50 @@ async function insertChickenDeaths({ outputFolderPath, demoName, databaseSetting
 }
 
 async function insertDemoFromCsv({ outputFolderPath, demoName }: InsertOptions) {
-  const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_demo.csv');
-  const content = await fs.readFile(csvFilePath, 'utf-8');
-  const values = content.split(',').map((value) => value.trim());
-  const date = new Date(values[3]);
-  if (isNaN(date.getTime())) {
-    throw new InvalidMatchDate(values[3]);
-  }
+  return new Promise<void>((resolve, reject) => {
+    const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_demo.csv');
+    parseFile(csvFilePath, { headers: false })
+      .on('error', reject)
+      .on('data', async (row) => {
+        const date = new Date(row[3]);
+        if (isNaN(date.getTime())) {
+          return reject(new InvalidMatchDate(`Invalid match date: ${row[3]}`));
+        }
 
-  await db
-    .insertInto('demos')
-    .values({
-      checksum: values[0],
-      game: values[1] as Game,
-      name: values[2],
-      date,
-      source: values[4] as DemoSource,
-      type: values[5] as DemoType,
-      share_code: values[6],
-      map_name: values[7],
-      server_name: values[8],
-      client_name: values[9],
-      tick_count: parseInt(values[10], 10),
-      tickrate: parseInt(values[11], 10),
-      framerate: parseFloat(values[12]),
-      duration: parseFloat(values[13]),
-      network_protocol: parseInt(values[14], 10),
-      build_number: parseInt(values[15], 10),
-    })
-    .onConflict((oc) => {
-      return oc.column('checksum').doUpdateSet({
-        map_name: (b) => b.ref('excluded.map_name'),
-        tick_count: (b) => b.ref('excluded.tick_count'),
-        tickrate: (b) => b.ref('excluded.tickrate'),
-        framerate: (b) => b.ref('excluded.framerate'),
-        duration: (b) => b.ref('excluded.duration'),
-        share_code: (b) => b.ref('excluded.share_code'),
-      });
-    })
-    .execute();
+        await db
+          .insertInto('demos')
+          .values({
+            checksum: row[0],
+            game: row[1] as Game,
+            name: row[2],
+            date,
+            source: row[4] as DemoSource,
+            type: row[5] as DemoType,
+            share_code: row[6],
+            map_name: row[7],
+            server_name: row[8],
+            client_name: row[9],
+            tick_count: parseInt(row[10], 10),
+            tickrate: parseInt(row[11], 10),
+            framerate: parseFloat(row[12]),
+            duration: parseFloat(row[13]),
+            network_protocol: parseInt(row[14], 10),
+            build_number: parseInt(row[15], 10),
+          })
+          .onConflict((oc) => {
+            return oc.column('checksum').doUpdateSet({
+              map_name: (b) => b.ref('excluded.map_name'),
+              tick_count: (b) => b.ref('excluded.tick_count'),
+              tickrate: (b) => b.ref('excluded.tickrate'),
+              framerate: (b) => b.ref('excluded.framerate'),
+              duration: (b) => b.ref('excluded.duration'),
+              share_code: (b) => b.ref('excluded.share_code'),
+            });
+          })
+          .execute();
+      })
+      .on('end', resolve);
+  });
 }
 
 async function insertMatchFromCsv({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
@@ -1014,12 +1019,6 @@ export async function insertMatch({ checksum, demoPath, outputFolderPath }: Inse
         outputFolderPath,
       }),
     ]);
-
-    await insertDemoFromCsv({
-      databaseSettings,
-      outputFolderPath,
-      demoName,
-    });
   } catch (error) {
     // It's not possible to use a transaction since data are inserted with the psql CLI.
     // Mimic a rollback in case of error by deleting the match we were trying to insert.
