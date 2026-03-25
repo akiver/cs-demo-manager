@@ -64,12 +64,12 @@ export function DateFormatInput() {
       description={
         <div className="flex flex-col gap-y-4">
           <p>
-            <Trans>Format used to display dates in the UI.</Trans>{' '}
-          </p>
-          <p className="text-caption">
-            <ExternalLink href="https://date-fns.org/docs/format">
-              <Trans>View all format tokens</Trans>
-            </ExternalLink>
+            <Trans>Defines how dates are displayed.</Trans>{' '}
+            <span>
+              <Trans>
+                See all <ExternalLink href="https://date-fns.org/docs/format">available tokens</ExternalLink>.
+              </Trans>
+            </span>
           </p>
         </div>
       }

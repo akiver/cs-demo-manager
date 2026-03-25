@@ -8,6 +8,7 @@ import { InitialPageSelect } from './initial-page-select';
 import { RedirectDemoToMatch } from './redirect-demo-to-match';
 import { EnableHardwareAcceleration } from './enable-hardware-acceleration';
 import { DateFormatInput } from './date-format-input';
+import { DateTimezoneInput } from './date-timezone-input';
 
 export function UiSettings() {
   return (
@@ -15,6 +16,7 @@ export function UiSettings() {
       <ThemeSelect />
       <LanguageSelect />
       <DateFormatInput />
+      <DateTimezoneInput />
       <SystemStartupBehavior />
       <InitialPageSelect />
       <RedirectDemoToMatch />

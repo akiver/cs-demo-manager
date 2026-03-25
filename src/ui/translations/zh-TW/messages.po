@@ -7842,16 +7842,29 @@ msgid "Invalid date format."
 msgstr ""
 
 #: src/ui/settings/ui/date-format-input.tsx
-msgid "Format used to display dates in the UI."
+msgid "Defines how dates are displayed."
 msgstr ""
 
 #: src/ui/settings/ui/date-format-input.tsx
-msgid "View all format tokens"
+msgid "See all <0>available tokens</0>."
 msgstr ""
 
 #: src/ui/settings/ui/date-format-input.tsx
 msgctxt "Settings title"
 msgid "Date format"
+msgstr ""
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgid "Invalid timezone."
+msgstr ""
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgid "Timezone used to display dates. Uses the <0>IANA timezone format</0>."
+msgstr ""
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgctxt "Settings title"
+msgid "Date timezone"
 msgstr ""
 
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx

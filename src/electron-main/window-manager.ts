@@ -192,6 +192,7 @@ class WindowManager {
       'https://esplay.com/',
       'https://leetify.com/',
       'https://date-fns.org/',
+      'https://wikipedia.org/',
     ];
 
     for (const website of allowedWebsites) {

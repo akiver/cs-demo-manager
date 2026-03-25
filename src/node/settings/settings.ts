@@ -39,6 +39,7 @@ type UISettings = {
   redirectDemoToMatch: boolean;
   enableHardwareAcceleration: boolean;
   dateFormat?: string;
+  dateTimezone?: string;
 };
 
 type AnalyzeSettings = {
