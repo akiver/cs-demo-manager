@@ -22,36 +22,36 @@ export function DemosFilterDropdown() {
     useActiveDemosFilters();
   const fetchDemos = useFetchDemos();
 
-  const onPeriodChange = (range: DateRange | undefined) => {
+  const onPeriodChange = async (range: DateRange | undefined) => {
     const startDate = formatDate(range?.from);
     const endDate = formatDate(range?.to);
-    fetchDemos({
+    await fetchDemos({
       startDate,
       endDate,
     });
   };
-  const onSourcesChange = (sources: DemoSource[]) => {
-    fetchDemos({
+  const onSourcesChange = async (sources: DemoSource[]) => {
+    await fetchDemos({
       sources,
     });
   };
-  const onDemoTypesChange = (types: DemoType[]) => {
-    fetchDemos({
+  const onDemoTypesChange = async (types: DemoType[]) => {
+    await fetchDemos({
       types,
     });
   };
-  const onGamesChange = (games: Game[]) => {
-    fetchDemos({
+  const onGamesChange = async (games: Game[]) => {
+    await fetchDemos({
       games,
     });
   };
-  const onAnalysisStatusChange = (analysisStatus: AnalysisStatusFilter) => {
-    updateSettings({
+  const onAnalysisStatusChange = async (analysisStatus: AnalysisStatusFilter) => {
+    await updateSettings({
       analysisStatus,
     });
   };
-  const onTagsChange = (tagIds: string[]) => {
-    fetchDemos({
+  const onTagsChange = async (tagIds: string[]) => {
+    await fetchDemos({
       tagIds,
     });
   };

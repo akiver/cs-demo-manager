@@ -39,8 +39,8 @@ function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps
         preserveExistingSequences: false,
       }),
     );
-    setTimeout(() => {
-      navigate(buildMatchVideoPath(match.checksum));
+    setTimeout(async () => {
+      await navigate(buildMatchVideoPath(match.checksum));
     }, 300);
   };
 

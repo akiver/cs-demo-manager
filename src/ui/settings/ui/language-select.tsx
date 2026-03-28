@@ -10,7 +10,7 @@ export function LanguageSelect() {
   const locale = useLocale();
   const updateSettings = useUpdateSettings();
 
-  /* eslint-disable lingui/no-unlocalized-strings */
+  /* oxlint-disable lingui/no-unlocalized-strings */
   const options: SelectOption[] = [
     {
       value: 'en',
@@ -37,7 +37,7 @@ export function LanguageSelect() {
       label: 'Deutsch',
     },
   ];
-  /* eslint-enable lingui/no-unlocalized-strings */
+  /* oxlint-enable lingui/no-unlocalized-strings */
 
   return (
     <SettingsEntry

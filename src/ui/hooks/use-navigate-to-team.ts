@@ -4,7 +4,7 @@ import { buildTeamPath } from 'csdm/ui/routes-paths';
 export function useNavigateToTeam() {
   const navigate = useNavigate();
 
-  return (name: string) => {
-    navigate(buildTeamPath(name));
+  return async (name: string) => {
+    await navigate(buildTeamPath(name));
   };
 }

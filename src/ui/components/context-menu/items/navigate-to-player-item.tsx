@@ -8,8 +8,8 @@ type Props = {
 
 export function NavigateToPlayerItem({ steamId }: Props) {
   const navigateToPlayer = useNavigateToPlayer();
-  const onClick = () => {
-    navigateToPlayer(steamId);
+  const onClick = async () => {
+    await navigateToPlayer(steamId);
   };
 
   return <DetailsItem onClick={onClick} />;

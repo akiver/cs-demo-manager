@@ -14,7 +14,7 @@ export function useProcessDemosToAnalyze() {
   const matchChecksums = useMatchChecksums();
   const { showDialog } = useDialog();
 
-  return (demos: Demo[]) => {
+  return async (demos: Demo[]) => {
     const analyzableDemos: Demo[] = [];
     let demosSourceNotSupportedCount = 0;
     let demosAnalysesInProgressCount = 0;
@@ -43,7 +43,7 @@ export function useProcessDemosToAnalyze() {
     const isSelectionAnalyzable =
       demosAlreadyInDatabase.length === 0 && demosAnalysesInProgressCount === 0 && demosSourceNotSupportedCount === 0;
     if (isSelectionAnalyzable) {
-      addDemosToAnalyses(analyzableDemos);
+      await addDemosToAnalyses(analyzableDemos);
     } else {
       showDialog(
         <AnalyzeConfirmationDialog

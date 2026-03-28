@@ -66,9 +66,9 @@ function useKeyboardNavigation(to: string, direction: Direction) {
 
     const directionKey = direction === 'left' ? 'ArrowLeft' : 'ArrowRight';
 
-    const onKeyDown = (event: KeyboardEvent) => {
+    const onKeyDown = async (event: KeyboardEvent) => {
       if (isNavigationEvent(event) && event.key === directionKey) {
-        navigate(to, {
+        await navigate(to, {
           state: location.state,
         });
       }

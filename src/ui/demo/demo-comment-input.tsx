@@ -11,12 +11,12 @@ type Props = {
 export function DemoCommentInput({ checksum, currentComment }: Props) {
   const updateComment = useUpdateComment();
 
-  const onBlur = (comment: string) => {
+  const onBlur = async (comment: string) => {
     if (comment === currentComment) {
       return;
     }
 
-    updateComment({
+    await updateComment({
       checksum,
       comment,
     });

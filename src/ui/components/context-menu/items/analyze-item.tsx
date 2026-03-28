@@ -11,8 +11,8 @@ type Props = {
 export function AnalyzeItem({ demos }: Props) {
   const isDisabled = demos.length === 0;
   const processDemosToAnalyze = useProcessDemosToAnalyze();
-  const onClick = () => {
-    processDemosToAnalyze(demos);
+  const onClick = async () => {
+    await processDemosToAnalyze(demos);
   };
 
   return (

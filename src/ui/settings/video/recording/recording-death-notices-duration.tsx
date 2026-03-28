@@ -12,13 +12,13 @@ export function RecordingDeathNoticesDuration() {
     <SettingsEntry
       interactiveComponent={
         <InputNumber
-          onBlur={(event) => {
+          onBlur={async (event) => {
             const duration = Number.parseInt(event.target.value);
             if (isNaN(duration)) {
               return;
             }
 
-            updateSettings({
+            await updateSettings({
               deathNoticesDuration: duration,
             });
           }}

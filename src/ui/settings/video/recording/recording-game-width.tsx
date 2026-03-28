@@ -5,12 +5,12 @@ import { GameWidthInput } from 'csdm/ui/settings/shared/game-width-input';
 export function RecordingGameWidth() {
   const { settings, updateSettings } = useVideoSettings();
 
-  const onBlur = (width: number | undefined) => {
+  const onBlur = async (width: number | undefined) => {
     if (!width) {
       return;
     }
 
-    updateSettings({
+    await updateSettings({
       width,
     });
   };

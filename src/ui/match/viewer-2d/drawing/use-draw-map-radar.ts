@@ -24,7 +24,7 @@ export function useDrawMapRadar() {
       }
     };
 
-    loadRadarImages();
+    void loadRadarImages();
   }, [getMapRadarFileSrc, game, map.name]);
 
   const drawMapRadar = (

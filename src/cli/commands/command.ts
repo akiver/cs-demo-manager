@@ -41,9 +41,9 @@ export abstract class Command {
     return arg.startsWith('--');
   }
 
-  protected formatFlagForHelp(flag: string) {
+  protected formatFlagForHelp = (flag: string) => {
     return `[${flag}]`;
-  }
+  };
 
   protected formatFlagsForHelp(flags: string[]) {
     return flags.map(this.formatFlagForHelp).join(' ');

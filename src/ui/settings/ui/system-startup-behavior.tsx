@@ -19,7 +19,7 @@ export function SystemStartupBehavior() {
   );
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       setBehavior(await window.csdm.getSystemStartupBehavior());
     })();
   }, []);
@@ -39,16 +39,14 @@ export function SystemStartupBehavior() {
       ];
 
   options.push(
-    ...[
-      {
-        value: StartupBehavior.Off,
-        label: <Trans>No</Trans>,
-      },
-      {
-        value: StartupBehavior.On,
-        label: <Trans>Yes</Trans>,
-      },
-    ],
+    {
+      value: StartupBehavior.Off,
+      label: <Trans>No</Trans>,
+    },
+    {
+      value: StartupBehavior.On,
+      label: <Trans>Yes</Trans>,
+    },
   );
 
   return (

@@ -191,11 +191,12 @@ class WebSocketServer {
     }
 
     try {
+      // oxlint-disable-next-line typescript/no-base-to-string
       const message: IdentifiableClientMessage<RendererClientMessageName> = JSON.parse(data.toString());
       const { name, payload, uuid } = message;
       logger.log(`WS:: message with name ${name} and uuid ${uuid} received from renderer process`);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       const handler: Handler<any, any> = rendererHandlers[name];
       if (typeof handler === 'function') {
         try {
@@ -241,6 +242,7 @@ class WebSocketServer {
 
     try {
       const message: IdentifiableClientMessage<MainClientMessageName | SharedServerMessageName> = JSON.parse(
+        // oxlint-disable-next-line typescript/no-base-to-string
         data.toString(),
       );
       const { name, payload, uuid } = message;
@@ -268,7 +270,7 @@ class WebSocketServer {
           break;
         }
         default: {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // oxlint-disable-next-line typescript/no-explicit-any
           const handler: Handler<any, unknown> = mainHandlers[name as MainClientMessageName];
           if (typeof handler === 'function') {
             try {
@@ -313,13 +315,13 @@ class WebSocketServer {
     this.rendererProcessSocket = null;
   };
 
-  private onRendererProcessSocketError(error: unknown) {
+  private onRendererProcessSocketError = (error: unknown) => {
     logger.error('WS:: renderer process socket error', error);
-  }
+  };
 
-  private onMainProcessSocketError(error: unknown) {
+  private onMainProcessSocketError = (error: unknown) => {
     logger.error('WS:: main process socket error', error);
-  }
+  };
 
   private onMainProcessSocketDisconnect = (code: number, reason: string): void => {
     logger.log('WS:: main process socket disconnected', code, reason);
@@ -348,6 +350,7 @@ class WebSocketServer {
 
   private onGameProcessSocketMessage = (data: RawData) => {
     try {
+      // oxlint-disable-next-line typescript/no-base-to-string
       const message: Omit<IdentifiableClientMessage<GameClientMessageName>, 'uuid'> = JSON.parse(data.toString());
       const { name, payload } = message;
       logger.debug(`WS:: message with name ${name} received from game process`);
@@ -371,9 +374,9 @@ class WebSocketServer {
     this.gameListeners.clear();
   };
 
-  private onGameProcessSocketError(error: unknown) {
+  private onGameProcessSocketError = (error: unknown) => {
     logger.error('WS:: game process socket error', error);
-  }
+  };
 
   private onError = (error: Error) => {
     // Ignore port already in use errors in CLI, it means the GUI is running and so the WS server too.
@@ -403,7 +406,8 @@ globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestIni
     // See fetch API spec: https://fetch.spec.whatwg.org/#fetch-api
     // > If response is a network error, then reject p with a TypeError and terminate these substeps.
     if (error instanceof TypeError) {
-      logger.error(`Network error while calling ${input.toString()}`);
+      logger.error('Network error while calling:');
+      logger.error(input);
       logger.error(error);
       throw new NetworkError();
     }
@@ -435,7 +439,6 @@ if (typeof window !== 'undefined') {
         clearTimeout(timeoutId);
         return timeout;
       },
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       _onTimeout() {},
     };
 

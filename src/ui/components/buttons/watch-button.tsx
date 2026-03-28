@@ -19,11 +19,11 @@ export function WatchButton({ game, isDisabled, demoPath, tick, focusSteamId }: 
   const { watchDemo, isKillCsRequired } = useCounterStrike();
   const { showDialog } = useDialog();
 
-  const startWatchDemo = () => {
+  const startWatchDemo = async () => {
     if (demoPath === undefined) {
       return;
     }
-    watchDemo({
+    await watchDemo({
       demoPath,
       startTick: tick,
       focusSteamId,
@@ -37,7 +37,7 @@ export function WatchButton({ game, isDisabled, demoPath, tick, focusSteamId }: 
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog onConfirmClick={startWatchDemo} />);
     } else {
-      startWatchDemo();
+      await startWatchDemo();
     }
     setIsCheckingForCsStatus(false);
   };

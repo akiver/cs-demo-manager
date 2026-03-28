@@ -23,5 +23,4 @@ const createChatMessagesTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createChatMessagesTable;

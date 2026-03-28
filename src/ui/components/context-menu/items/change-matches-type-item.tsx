@@ -37,12 +37,12 @@ export function ChangeMatchesTypeItem({ checksums }: Props) {
     }
   };
 
-  const onGotvClick = () => {
-    updateDemosType(DemoType.GOTV);
+  const onGotvClick = async () => {
+    await updateDemosType(DemoType.GOTV);
   };
 
-  const onPovClick = () => {
-    updateDemosType(DemoType.POV);
+  const onPovClick = async () => {
+    await updateDemosType(DemoType.POV);
   };
 
   return (

@@ -24,8 +24,8 @@ export function LastMatchesLoader() {
   const getBoilerErrorMessageFromErrorCode = useGetBoilerErrorMessageFromErrorCode();
   const { t } = useLingui();
 
-  const fetchLastMatches = () => {
-    client.send({
+  const fetchLastMatches = async () => {
+    await client.send({
       name: RendererClientMessageName.FetchLastValveMatches,
     });
   };

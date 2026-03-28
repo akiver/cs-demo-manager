@@ -7,12 +7,12 @@ import { defaultSettings } from 'csdm/node/settings/default-settings';
 export function AudioCodecInput() {
   const { settings, updateSettings } = useVideoSettings();
 
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     const newAudioCodec = event.target.value.trim();
     if (newAudioCodec === '') {
       event.target.value = defaultSettings.video.ffmpegSettings.audioCodec;
     } else if (newAudioCodec !== settings.ffmpegSettings.audioCodec) {
-      updateSettings({
+      await updateSettings({
         ffmpegSettings: {
           audioCodec: newAudioCodec,
         },

@@ -104,8 +104,8 @@ export function VideoActionsMenu() {
     );
   };
 
-  const onResetSettingsClick = () => {
-    updateSettings(defaultSettings.video);
+  const onResetSettingsClick = async () => {
+    await updateSettings(defaultSettings.video);
   };
 
   return (

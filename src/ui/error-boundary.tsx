@@ -1,5 +1,5 @@
 // Translation is not possible here as the locale provider is under the error boundary.
-/* eslint-disable lingui/no-unlocalized-strings */
+/* oxlint-disable lingui/no-unlocalized-strings */
 import React, { useEffect } from 'react';
 import { useRouteError } from 'react-router';
 import { Button, ButtonVariant } from './components/buttons/button';
@@ -58,8 +58,8 @@ export function ErrorBoundary() {
               Start submitting an issue on GitHub
             </Button>
             <Button
-              onClick={() => {
-                navigator.clipboard.writeText(errorData);
+              onClick={async () => {
+                await navigator.clipboard.writeText(errorData);
               }}
             >
               Copy error

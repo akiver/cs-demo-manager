@@ -21,8 +21,8 @@ export function OpeningDuelContextMenu({ kill, onWatchClick }: Props) {
     <ContextMenu>
       {isCounterStrikeStartable(match.game) && (
         <ContextMenuItem
-          onClick={() => {
-            onWatchClick(kill);
+          onClick={async () => {
+            await onWatchClick(kill);
           }}
         >
           {<Trans context="Context menu">Watch</Trans>}
@@ -30,8 +30,8 @@ export function OpeningDuelContextMenu({ kill, onWatchClick }: Props) {
       )}
       {kill.killerSteamId !== '0' && (
         <ContextMenuItem
-          onClick={() => {
-            navigateToMatchPlayer(match.checksum, kill.killerSteamId);
+          onClick={async () => {
+            await navigateToMatchPlayer(match.checksum, kill.killerSteamId);
           }}
         >
           {<Trans context="Context menu">See killer details</Trans>}
@@ -39,8 +39,8 @@ export function OpeningDuelContextMenu({ kill, onWatchClick }: Props) {
       )}
       {kill.victimSteamId !== '0' && (
         <ContextMenuItem
-          onClick={() => {
-            navigateToMatchPlayer(match.checksum, kill.victimSteamId);
+          onClick={async () => {
+            await navigateToMatchPlayer(match.checksum, kill.victimSteamId);
           }}
         >
           {<Trans context="Context menu">See victim details</Trans>}

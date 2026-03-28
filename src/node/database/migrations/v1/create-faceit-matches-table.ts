@@ -20,5 +20,4 @@ const createFaceitMatchesTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createFaceitMatchesTable;

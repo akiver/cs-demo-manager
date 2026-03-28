@@ -10,9 +10,9 @@ export function RemoveAllAnalysesButton() {
   const client = useWebSocketClient();
   const isDisabled = analyses.length === 0;
 
-  const onClick = () => {
+  const onClick = async () => {
     const checksums = analyses.map((analysis) => analysis.demoChecksum);
-    client.send({
+    await client.send({
       name: RendererClientMessageName.RemoveDemosFromAnalyses,
       payload: checksums,
     });

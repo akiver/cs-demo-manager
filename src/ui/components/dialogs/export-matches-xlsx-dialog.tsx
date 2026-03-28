@@ -48,11 +48,8 @@ export function ExportMatchesAsXlsxDialog({ matches }: Props) {
           </>
         );
       }}
-      onOutputSelected={(type, outputPath, formData) => {
-        const commonPayload: Omit<
-          ExportMatchesToXlsxPayload,
-          'exportEachMatchToSingleFile' | 'outputFilePath' | 'outputFilePath'
-        > = {
+      onOutputSelected={async (type, outputPath, formData) => {
+        const commonPayload: Omit<ExportMatchesToXlsxPayload, 'exportEachMatchToSingleFile' | 'outputFilePath'> = {
           sheets: {
             [SheetName.General]: formData.has('sheets.general'),
             [SheetName.Players]: formData.has('sheets.players'),
@@ -80,7 +77,7 @@ export function ExportMatchesAsXlsxDialog({ matches }: Props) {
           };
         }
 
-        client.send({
+        await client.send({
           name: RendererClientMessageName.ExportMatchesToXlsx,
           payload,
         });

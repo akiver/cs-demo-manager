@@ -460,7 +460,7 @@ export function usePlayersColumns() {
       sortFunction: dateSortFunction<PlayerTable>,
       formatter: (date: string | null) => {
         if (date === null) {
-          return;
+          return null;
         }
         return formatDate(date, { timeZone: 'UTC' });
       },

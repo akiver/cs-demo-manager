@@ -9,12 +9,12 @@ export function RemoveDemoFromAnalysesItem() {
   const selectedAnalysis = useSelectedAnalysis();
   const client = useWebSocketClient();
 
-  const onClick = () => {
+  const onClick = async () => {
     if (selectedAnalysis === undefined) {
       return;
     }
 
-    client.send({
+    await client.send({
       name: RendererClientMessageName.RemoveDemosFromAnalyses,
       payload: [selectedAnalysis.demoChecksum],
     });

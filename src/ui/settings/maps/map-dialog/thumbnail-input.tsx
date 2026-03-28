@@ -25,11 +25,11 @@ export function ThumbnailInput() {
     }
   };
 
-  const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const onDrop = async (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const { files } = event.dataTransfer;
     if (files.length > 0) {
-      updateFieldFromImageFilePath(window.csdm.getWebFilePath(files[0]));
+      await updateFieldFromImageFilePath(window.csdm.getWebFilePath(files[0]));
     }
   };
 
@@ -44,7 +44,7 @@ export function ThumbnailInput() {
     }
 
     const [imagePath] = filePaths;
-    updateFieldFromImageFilePath(imagePath);
+    await updateFieldFromImageFilePath(imagePath);
   };
 
   return (

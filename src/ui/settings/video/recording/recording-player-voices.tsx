@@ -13,8 +13,8 @@ export function RecordingPlayerVoices() {
       interactiveComponent={
         <Switch
           isChecked={settings.playerVoicesEnabled}
-          onChange={(isChecked) => {
-            updateSettings({ playerVoicesEnabled: isChecked });
+          onChange={async (isChecked) => {
+            await updateSettings({ playerVoicesEnabled: isChecked });
           }}
         />
       }

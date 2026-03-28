@@ -13,7 +13,7 @@ export function Matches() {
 
   useEffect(() => {
     if (status === Status.Idle) {
-      fetchMatches();
+      void fetchMatches();
     }
   });
 

@@ -67,28 +67,28 @@ async function start() {
     }
   });
 
-  app.on('activate', () => {
-    windowManager.getOrCreateMainWindow();
+  app.on('activate', async () => {
+    await windowManager.getOrCreateMainWindow();
   });
 
   // MacOS only, triggered when the user opens a file with an extension registered by the app.
-  app.on('open-file', (event, filePath) => {
+  app.on('open-file', async (event, filePath) => {
     if (!filePath.endsWith('.dem')) {
       return;
     }
 
     windowManager.setStartupArgument(ArgumentName.DemoPath, filePath);
-    const mainWindow = windowManager.getOrCreateMainWindow();
+    const mainWindow = await windowManager.getOrCreateMainWindow();
     sendNavigateToDemo(mainWindow, filePath);
   });
 
-  app.on('second-instance', (event, args: string[]) => {
+  app.on('second-instance', async (event, args: string[]) => {
     const demoPath = getDemoPathFromArguments(args);
     if (typeof demoPath === 'string') {
       windowManager.setStartupArgument(ArgumentName.DemoPath, demoPath);
     }
 
-    const mainWindow = windowManager.getOrCreateMainWindow();
+    const mainWindow = await windowManager.getOrCreateMainWindow();
     mainWindow.show();
 
     if (typeof demoPath === 'string') {
@@ -101,7 +101,7 @@ async function start() {
   if (IS_PRODUCTION) {
     createWebSocketServerProcess();
   } else {
-    windowManager.createDevWindow();
+    await windowManager.createDevWindow();
   }
 
   const demoPath = getDemoPathFromArguments(process.argv);
@@ -112,7 +112,7 @@ async function start() {
   const settingsFilePath = getSettingsFilePath();
   const settingsFileExists = await fs.pathExists(settingsFilePath);
   if (!settingsFileExists) {
-    updateSystemStartupBehavior(StartupBehavior.Minimized);
+    await updateSystemStartupBehavior(StartupBehavior.Minimized);
   }
   const settings = await migrateSettings();
   await loadI18n(settings.ui.locale);
@@ -125,7 +125,7 @@ async function start() {
   let isOpenedAtLogin = false;
   let shouldStartMinimized = false;
   if (isMac) {
-    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    // oxlint-disable-next-line typescript/no-deprecated
     const { wasOpenedAtLogin, wasOpenedAsHidden } = app.getLoginItemSettings();
     isOpenedAtLogin = wasOpenedAtLogin;
     shouldStartMinimized = isOpenedAtLogin && wasOpenedAsHidden;
@@ -142,18 +142,18 @@ async function start() {
     if (app.dock) {
       app.dock.hide(); // Will be restored when the main window is shown.
     }
-    client.send({
+    await client.send({
       name: MainClientMessageName.StartMinimizedMode,
     });
   } else {
-    windowManager.getOrCreateMainWindow();
+    await windowManager.getOrCreateMainWindow();
   }
 
   ipcMain.handle(IPCChannel.LocaleChanged, async (event, locale: string) => {
     await loadI18n(locale);
     tray?.setContextMenu(createTrayMenu());
     createApplicationMenu(client);
-    const mainWindow = windowManager.getOrCreateMainWindow();
+    const mainWindow = await windowManager.getOrCreateMainWindow();
     listenForContextMenu(mainWindow);
   });
 
@@ -180,7 +180,7 @@ async function start() {
     });
 
     if (hasPendingAnalyses) {
-      const mainWindow = windowManager.getOrCreateMainWindow();
+      const mainWindow = await windowManager.getOrCreateMainWindow();
       const { response } = await dialog.showMessageBox(mainWindow, {
         message: i18n.t({
           id: 'dialog.quitApp.confirmation',
@@ -210,12 +210,12 @@ async function start() {
 
   app.on('before-quit', onBeforeQuit);
 
-  initialize(settings.autoDownloadUpdates);
+  await initialize(settings.autoDownloadUpdates);
 }
 
 const isFirstAppInstance = app.requestSingleInstanceLock();
 if (isFirstAppInstance) {
-  start();
+  void start();
 } else {
   const mainWindow = windowManager.getMainWindow();
   if (mainWindow !== null && !mainWindow.isDestroyed()) {

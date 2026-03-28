@@ -10,8 +10,8 @@ type Props = {
 export function NavigateToDemoItem({ demoPath, siblingDemoPaths }: Props) {
   const navigateToDemo = useNavigateToDemo();
 
-  const onClick = () => {
-    navigateToDemo(demoPath, {
+  const onClick = async () => {
+    await navigateToDemo(demoPath, {
       state: {
         siblingDemoPaths,
       },

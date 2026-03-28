@@ -14,24 +14,24 @@ export function PlayersFilterDropdown() {
   const { bans, startDate, endDate, tagIds } = usePlayersSettings();
   const { hasActiveFilter, hasActiveBanFilters, hasActiveTagsFilter } = useActivePlayersFilters();
 
-  const onBansChange = (bans: BanFilter[]) => {
-    fetchPlayers({
+  const onBansChange = async (bans: BanFilter[]) => {
+    await fetchPlayers({
       bans,
     });
   };
 
-  const onPeriodChange = (range: DateRange | undefined) => {
+  const onPeriodChange = async (range: DateRange | undefined) => {
     const startDate = formatDate(range?.from);
     const endDate = formatDate(range?.to);
 
-    fetchPlayers({
+    await fetchPlayers({
       startDate,
       endDate,
     });
   };
 
-  const onTagsChange = (tagIds: string[]) => {
-    fetchPlayers({
+  const onTagsChange = async (tagIds: string[]) => {
+    await fetchPlayers({
       tagIds,
     });
   };

@@ -129,7 +129,7 @@ function SelectPlayerDialog() {
         );
         break;
       default:
-        return assertNever(selectedEvent, `Unknown player sequence event: ${selectedEvent}`);
+        return assertNever(selectedEvent, `Unknown player sequence event: ${selectedEvent as string}`);
     }
 
     hideDialog();

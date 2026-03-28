@@ -20,8 +20,8 @@ export function onDownloadThirdPartyServiceDemosStarted(params: Params) {
     body: params.message,
   });
 
-  notification.on('click', () => {
-    const mainWindow = windowManager.getOrCreateMainWindow();
+  notification.on('click', async () => {
+    const mainWindow = await windowManager.getOrCreateMainWindow();
     windowManager.setStartupArgument(ArgumentName.StartPath, StartPath.Downloads);
     mainWindow.webContents.send(IPCChannel.NavigateToPendingDownloads);
     mainWindow.show();

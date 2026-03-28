@@ -57,5 +57,4 @@ const createPlayerPositionsTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createPlayerPositionsTable;

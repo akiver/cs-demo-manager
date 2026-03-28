@@ -15,9 +15,9 @@ export function SeeDemoButton({ demoFileName, downloadStatus }: Props) {
   const navigateToDemo = useNavigateToDemo();
   const isDisabled = downloadStatus !== undefined && downloadStatus !== DownloadStatus.Downloaded;
 
-  const onClick = () => {
+  const onClick = async () => {
     const demoPath = `${downloadFolderPath}/${demoFileName}.dem`;
-    navigateToDemo(demoPath);
+    await navigateToDemo(demoPath);
   };
 
   if (isDisabled) {

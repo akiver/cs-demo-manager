@@ -14,7 +14,7 @@ export type MatchFilters = {
   maxRounds: number[];
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export function applyMatchFilters(query: any, filters: MatchFilters) {
   if (filters.startDate && filters.endDate) {
     query = query.where(sql<boolean>`demos.date between ${filters.startDate} and ${filters.endDate}`);

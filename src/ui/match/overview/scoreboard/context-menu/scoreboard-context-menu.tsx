@@ -36,8 +36,8 @@ export function ScoreboardContextMenu({ steamId, name, demoPath }: Props) {
   return (
     <ContextMenu>
       <DetailsItem
-        onClick={() => {
-          navigateToMatchPlayer(match.checksum, steamId);
+        onClick={async () => {
+          await navigateToMatchPlayer(match.checksum, steamId);
         }}
       />
       {canStartCs && <WatchPlayerItem demoPath={demoPath} steamId={steamId} game={match.game} />}

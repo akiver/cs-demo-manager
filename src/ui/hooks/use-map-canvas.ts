@@ -39,7 +39,7 @@ export function useMapCanvas({ onClick = noop, draw, map, game, onContextMenu = 
       }
     };
 
-    loadRadarImages();
+    void loadRadarImages();
   }, [getMapRadarFileSrc, game, map.name]);
 
   useEffect(() => {

@@ -10,8 +10,8 @@ type Props = {
 export function NavigateToMatchItem({ checksum, siblingChecksums }: Props) {
   const navigateToMatch = useNavigateToMatch();
 
-  const onClick = () => {
-    navigateToMatch(checksum, {
+  const onClick = async () => {
+    await navigateToMatch(checksum, {
       state: {
         siblingChecksums,
       },

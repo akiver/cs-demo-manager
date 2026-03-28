@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import React from 'react';
 import clsx from 'clsx';
 import type { Data, TableInstance } from './table-types';
@@ -133,7 +132,7 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
 
                   const { accessor, formatter, Cell } = column;
                   const value = typeof accessor === 'string' ? row[accessor] : accessor(row);
-                  const formattedValue = typeof formatter === 'function' ? formatter(value) : (value as ReactNode);
+                  const formattedValue = typeof formatter === 'function' ? formatter(value) : (value as string);
 
                   return (
                     <td

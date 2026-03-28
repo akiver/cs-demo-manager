@@ -5,12 +5,12 @@ import { GameHeightInput } from 'csdm/ui/settings/shared/game-height-input';
 export function RecordingGameHeight() {
   const { settings, updateSettings } = useVideoSettings();
 
-  const onBlur = (height: number | undefined) => {
+  const onBlur = async (height: number | undefined) => {
     if (!height) {
       return;
     }
 
-    updateSettings({
+    await updateSettings({
       height,
     });
   };

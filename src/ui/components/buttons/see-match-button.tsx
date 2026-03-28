@@ -12,8 +12,8 @@ export function SeeMatchButton({ checksum }: Props) {
 
   return (
     <Button
-      onClick={() => {
-        navigateToMatch(checksum);
+      onClick={async () => {
+        await navigateToMatch(checksum);
       }}
     >
       <Trans context="Button">See match</Trans>

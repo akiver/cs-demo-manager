@@ -47,7 +47,7 @@ export function DemoLoader() {
       }
     };
 
-    loadDemo();
+    void loadDemo();
   }, [client, dispatch, demoPath]);
 
   if (status === Status.Loading) {
@@ -61,8 +61,8 @@ export function DemoLoader() {
           <UpdateDemoLocation
             demoFilePath={demoPath}
             checksum={location.state.checksum}
-            onUpdated={(demoPath) => {
-              navigateToDemo(demoPath);
+            onUpdated={async (demoPath) => {
+              await navigateToDemo(demoPath);
             }}
           />
         );

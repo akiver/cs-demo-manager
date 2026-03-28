@@ -22,5 +22,4 @@ const createFaceitMatchTeamsTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createFaceitMatchTeamsTable;

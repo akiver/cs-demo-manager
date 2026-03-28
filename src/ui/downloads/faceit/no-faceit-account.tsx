@@ -11,8 +11,8 @@ export function NoFaceitAccount() {
   const [nickname, setNickname] = useState('');
   const { addFaceitAccount, errorMessage, isBusy } = useAddFaceitAccount();
 
-  const submit = () => {
-    addFaceitAccount(nickname);
+  const submit = async () => {
+    await addFaceitAccount(nickname);
   };
 
   const isDisabled = isBusy || nickname === '';

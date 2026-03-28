@@ -15,8 +15,8 @@ export function MatchCommentInput({ isResizable = false }: Props) {
     <CommentInput
       isResizable={isResizable}
       currentComment={match.comment}
-      updateComment={(comment) => {
-        updateComment({
+      updateComment={async (comment) => {
+        await updateComment({
           checksum: match.checksum,
           comment,
         });

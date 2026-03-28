@@ -32,7 +32,7 @@ export function SettingsProvider({ children }: Props): ReactElement {
       }
     };
 
-    loadSettings();
+    void loadSettings();
   }, [dispatch]);
 
   if (status === Status.Loading) {

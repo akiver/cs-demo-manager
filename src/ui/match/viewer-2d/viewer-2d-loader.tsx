@@ -195,7 +195,7 @@ export function Viewer2DLoader() {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [
     showToast,
     client,

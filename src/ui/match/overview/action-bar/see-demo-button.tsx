@@ -13,7 +13,7 @@ export function SeeDemoButton() {
   const onClick = async () => {
     const demoExists = await window.csdm.pathExists(match.demoFilePath);
     if (demoExists) {
-      navigateToDemo(match.demoFilePath);
+      await navigateToDemo(match.demoFilePath);
     } else {
       showDialog(<UpdateDemoLocationDialog checksum={match.checksum} demoFilePath={match.demoFilePath} />);
     }

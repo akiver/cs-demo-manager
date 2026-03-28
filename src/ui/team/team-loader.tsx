@@ -14,8 +14,8 @@ export function TeamLoader() {
 
   useEffect(() => {
     if (status === Status.Idle || shouldFetch.current) {
-      fetchTeam();
       shouldFetch.current = false;
+      void fetchTeam();
     }
   });
 

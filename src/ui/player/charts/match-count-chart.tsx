@@ -43,7 +43,7 @@ function buildChartData({ chartsData, axis }: { chartsData: PlayerChartsData[]; 
         break;
       }
       default:
-        assertNever(axis, `Unsupported axis: ${axis}`);
+        assertNever(axis, `Unsupported axis: ${axis as string}`);
     }
 
     if (valuePerTimestamp[timestamp] === undefined) {
@@ -53,7 +53,7 @@ function buildChartData({ chartsData, axis }: { chartsData: PlayerChartsData[]; 
     }
   }
 
-  const data: [string, number][] = [...Object.entries(valuePerTimestamp)];
+  const data: [string, number][] = Object.entries(valuePerTimestamp);
 
   return data;
 }

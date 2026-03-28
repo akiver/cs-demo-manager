@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+// oxlint-disable-next-line typescript/no-require-imports
 const nativeModule = require('./build/Release/get_running_process_exit_code.node');
 
 export async function getRunningProcessExitCode(processName: string): Promise<number> {

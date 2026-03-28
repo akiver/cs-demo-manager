@@ -60,7 +60,7 @@ export function DemosTableProvider({ children }: Props) {
 
   useEffect(() => {
     if (status === Status.Idle) {
-      fetchDemos();
+      void fetchDemos();
     }
   });
 
@@ -75,11 +75,11 @@ export function DemosTableProvider({ children }: Props) {
     );
   };
 
-  const handleNavigateToDemo = (demo: Demo, table: TableInstance<Demo>) => {
+  const handleNavigateToDemo = async (demo: Demo, table: TableInstance<Demo>) => {
     if (redirectDemoToMatch && isDemoInDatabase(demo.checksum)) {
-      navigateToMatch(demo.checksum);
+      await navigateToMatch(demo.checksum);
     } else {
-      navigateToDemo(demo.filePath, {
+      await navigateToDemo(demo.filePath, {
         state: {
           siblingDemoPaths: table.getRowIds(),
         },

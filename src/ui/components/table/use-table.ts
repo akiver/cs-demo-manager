@@ -149,7 +149,7 @@ export function useTable<DataType extends Data>({
       render();
     };
 
-    loadPersistedState();
+    void loadPersistedState();
   }, [persistStateKey, client, render]);
 
   useEffect(() => {
@@ -210,7 +210,7 @@ export function useTable<DataType extends Data>({
     return orderedColumns;
   };
 
-  const persistTableState = () => {
+  const persistTableState = async () => {
     if (!persistStateKey) {
       return;
     }
@@ -224,7 +224,7 @@ export function useTable<DataType extends Data>({
         sortDirection: sortedColumnRef.current?.id === column.id ? sortedColumnRef.current.direction : undefined,
       };
     });
-    window.csdm.writeTableState(persistStateKey, columnsState);
+    await window.csdm.writeTableState(persistStateKey, columnsState);
   };
 
   const table: TableInstance<DataType> = {
@@ -268,14 +268,14 @@ export function useTable<DataType extends Data>({
     deselectAll: () => {
       updateSelection([]);
     },
-    showColumn: (columnId) => {
+    showColumn: async (columnId) => {
       columnVisibilityRef.current[columnId] = true;
-      persistTableState();
+      await persistTableState();
       render();
     },
-    hideColumn: (columnId) => {
+    hideColumn: async (columnId) => {
       columnVisibilityRef.current[columnId] = false;
-      persistTableState();
+      await persistTableState();
       render();
     },
     scrollToRow: (rowId) => {
@@ -314,7 +314,7 @@ export function useTable<DataType extends Data>({
         mouseDownEventOccurred = true;
       };
 
-      const onMouseUp = () => {
+      const onMouseUp = async () => {
         if (!mouseDownEventOccurred) {
           return;
         }
@@ -341,8 +341,8 @@ export function useTable<DataType extends Data>({
           }
         }
 
-        persistTableState();
         render();
+        await persistTableState();
       };
 
       const onResizerMouseMove = (event: MouseEvent) => {
@@ -360,13 +360,13 @@ export function useTable<DataType extends Data>({
         }
       };
 
-      const onResizerMouseUp = () => {
+      const onResizerMouseUp = async () => {
         document.removeEventListener('mousemove', onResizerMouseMove);
         document.removeEventListener('mouseup', onResizerMouseUp);
 
         if (columnRef && newWidth !== 0) {
           columnsWidthRef.current[column.id] = newWidth;
-          persistTableState();
+          await persistTableState();
         }
       };
 
@@ -418,7 +418,7 @@ export function useTable<DataType extends Data>({
         render();
       };
 
-      const onDrop = () => {
+      const onDrop = async () => {
         if (draggedColumnIndex.current < 0 || index < 0) {
           return;
         }
@@ -434,7 +434,7 @@ export function useTable<DataType extends Data>({
         draggedColumnIndex.current = -1;
 
         render();
-        persistTableState();
+        await persistTableState();
       };
 
       const setupRef = (ref: HTMLTableCellElement | null) => {

@@ -78,7 +78,7 @@ function useGenerateLogs() {
         );
         break;
       default:
-        assertNever(analysis.status, `Unsupported analysis status: ${analysis.status}`);
+        assertNever(analysis.status, `Unsupported analysis status: ${analysis.status as string}`);
     }
 
     return logs;

@@ -21,11 +21,11 @@ export function WatchPlayerLowlightsItem({ demoPath, steamId, game }: Props) {
   const { isKillCsRequired, watchPlayerLowlights } = useCounterStrike();
   const { useCustomLowlights } = usePlaybackSettings();
 
-  const startPlayerLowlights = () => {
+  const startPlayerLowlights = async () => {
     if (useCustomLowlights || game !== Game.CSGO) {
       showDialog(<SelectActionsPovDialog demoPath={demoPath} playerSteamId={steamId} type={WatchType.Lowlights} />);
     } else {
-      watchPlayerLowlights({
+      await watchPlayerLowlights({
         demoPath,
         steamId,
         perspective: Perspective.Player,
@@ -38,7 +38,7 @@ export function WatchPlayerLowlightsItem({ demoPath, steamId, game }: Props) {
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog closeOnConfirm={false} onConfirmClick={startPlayerLowlights} />);
     } else {
-      startPlayerLowlights();
+      await startPlayerLowlights();
     }
   };
 

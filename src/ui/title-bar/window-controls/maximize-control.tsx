@@ -7,7 +7,7 @@ export function MaximizeControl() {
   const [isMaximized, setIsMaximized] = useState(false);
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const isWindowMaximized = await window.csdm.isWindowMaximized();
       setIsMaximized(isWindowMaximized);
     })();

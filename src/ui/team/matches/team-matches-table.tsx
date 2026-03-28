@@ -38,8 +38,8 @@ export function TeamMatchesTable() {
     hideWidget,
   } = useTableCommentWidgetVisibility();
 
-  const onRowDoubleClick = (match: MatchTable) => {
-    navigateToMatch(match.checksum, {
+  const onRowDoubleClick = async (match: MatchTable) => {
+    await navigateToMatch(match.checksum, {
       state: {
         siblingChecksums: table.getRowIds(),
       },

@@ -2,7 +2,6 @@ import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
   entry: [
-    'src/ui/renderer.tsx',
     'src/server/server.ts',
     'src/cli/cli.ts',
     'src/electron-main/main.ts',
@@ -13,7 +12,7 @@ const config: KnipConfig = {
   rules: {
     devDependencies: 'off',
   },
-  ignore: ['**/*/lingui.config.ts', 'src/node/settings/migrations/*.ts', 'src/node/database/migrations/**/*.ts'],
+  ignore: ['**/*/lingui.config.ts'],
   ignoreDependencies: ['@lingui/core'],
 };
 

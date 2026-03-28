@@ -20,7 +20,7 @@ export function FiveEPlayLastMatchesLoader() {
 
   useEffect(() => {
     if (status === Status.Idle) {
-      fetchLastMatches();
+      void fetchLastMatches();
     }
   }, [status, fetchLastMatches]);
 

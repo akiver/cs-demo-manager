@@ -10,8 +10,8 @@ type Props = {
 export function CopyNameItem({ names }: Props) {
   const { copyToClipboard } = useClipboard();
 
-  const onClick = () => {
-    copyToClipboard(names.join(','));
+  const onClick = async () => {
+    await copyToClipboard(names.join(','));
   };
 
   return (

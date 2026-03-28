@@ -42,8 +42,8 @@ export function PlayersTableProvider({ children }: Props) {
     hideWidget,
   } = useTableCommentWidgetVisibility();
 
-  const showPlayer = (player: PlayerTable) => {
-    navigateToPlayer(player.steamId);
+  const showPlayer = async (player: PlayerTable) => {
+    await navigateToPlayer(player.steamId);
   };
 
   const onContextMenu = (event: MouseEvent, table: TableInstance<PlayerTable>) => {

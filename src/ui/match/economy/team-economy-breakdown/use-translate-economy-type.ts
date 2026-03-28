@@ -33,7 +33,7 @@ export function useTranslateEconomyType() {
           message: 'Full buy',
         });
       default:
-        assertNever(type, `Unknown economy type: ${type}`);
+        assertNever(type, `Unknown economy type: ${type as string}`);
     }
   };
 

@@ -46,7 +46,8 @@ export function MatchLoader() {
         setStatus(Status.Error);
       }
     };
-    fetchMatch();
+
+    void fetchMatch();
   }, [dispatch, client, checksum, isCurrentMatch]);
 
   if (status === Status.Loading) {

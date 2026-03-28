@@ -61,8 +61,8 @@ export function PlayerActionBar({ player }: Props) {
         <>
           <CopySteamIdButton steamId={player.steamId} />
           <Button
-            onClick={() => {
-              navigate(buildPlayerPath(player.steamId));
+            onClick={async () => {
+              await navigate(buildPlayerPath(player.steamId));
             }}
           >
             <Trans context="Button">See global stats</Trans>

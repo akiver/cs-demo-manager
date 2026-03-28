@@ -6,8 +6,8 @@ import { TextInput } from 'csdm/ui/components/inputs/text-input';
 export function HlaeParameters() {
   const { hlaeSettings, updateHlaeSettings } = useHlaeSettings();
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateHlaeSettings({
+  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    await updateHlaeSettings({
       parameters: event.target.value,
     });
   };

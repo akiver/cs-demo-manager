@@ -66,8 +66,8 @@ const api: PreloadApi = {
   getStartupArguments: () => {
     return ipcRenderer.invoke(IPCChannel.GetStartupArguments);
   },
-  clearStartupArguments: () => {
-    ipcRenderer.invoke(IPCChannel.ClearStartupArguments);
+  clearStartupArguments: async () => {
+    await ipcRenderer.invoke(IPCChannel.ClearStartupArguments);
   },
   getTheme: async () => {
     const settings = await getSettings();
@@ -106,8 +106,12 @@ const api: PreloadApi = {
   getRankImageSrc,
   getPremierRankImageSrc,
   pathExists: fs.pathExists,
-  getPathDirectoryName: path.dirname,
-  getPathBasename: path.basename,
+  getPathDirectoryName: (filePath: string) => {
+    return path.dirname(filePath);
+  },
+  getPathBasename: (filePath: string) => {
+    return path.basename(filePath);
+  },
   elementToImage,
   readImageFile,
   writeJsonFile: async (filePath, data) => {
@@ -119,12 +123,12 @@ const api: PreloadApi = {
     }
   },
 
-  showMainWindow: () => {
-    ipcRenderer.invoke(IPCChannel.ShowWindow);
+  showMainWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.ShowWindow);
   },
 
-  localeChanged: (locale: string) => {
-    ipcRenderer.invoke(IPCChannel.LocaleChanged, locale);
+  localeChanged: async (locale: string) => {
+    await ipcRenderer.invoke(IPCChannel.LocaleChanged, locale);
   },
 
   isWindowMaximized: async () => {
@@ -132,20 +136,20 @@ const api: PreloadApi = {
     return isWindowMaximized;
   },
 
-  maximizeWindow: () => {
-    ipcRenderer.invoke(IPCChannel.MaximizeWindow);
+  maximizeWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.MaximizeWindow);
   },
 
-  unMaximizeWindow: () => {
-    ipcRenderer.invoke(IPCChannel.UnMazimizeWindow);
+  unMaximizeWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.UnMazimizeWindow);
   },
 
-  closeWindow: () => {
-    ipcRenderer.invoke(IPCChannel.CloseWindow);
+  closeWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.CloseWindow);
   },
 
-  minimizeWindow: () => {
-    ipcRenderer.invoke(IPCChannel.MinimizeWindow);
+  minimizeWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.MinimizeWindow);
   },
 
   onWindowClose: (callback: () => void) => {
@@ -182,8 +186,8 @@ const api: PreloadApi = {
     };
   },
 
-  showTitleBarMenu: () => {
-    ipcRenderer.invoke(IPCChannel.ShowTitleBarMenu);
+  showTitleBarMenu: async () => {
+    await ipcRenderer.invoke(IPCChannel.ShowTitleBarMenu);
   },
 
   canGoBack: async () => {
@@ -220,12 +224,12 @@ const api: PreloadApi = {
     };
   },
 
-  reloadWindow: () => {
-    ipcRenderer.invoke(IPCChannel.ReloadWindow);
+  reloadWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.ReloadWindow);
   },
 
-  restartApp: () => {
-    ipcRenderer.invoke(IPCChannel.RestartApp);
+  restartApp: async () => {
+    await ipcRenderer.invoke(IPCChannel.RestartApp);
   },
 
   showSaveDialog: async (options: SaveDialogOptions) => {
@@ -238,12 +242,12 @@ const api: PreloadApi = {
     return result;
   },
 
-  browseToFolder: (folderPath: string) => {
-    ipcRenderer.invoke(IPCChannel.BrowseToFolder, folderPath);
+  browseToFolder: async (folderPath: string) => {
+    await ipcRenderer.invoke(IPCChannel.BrowseToFolder, folderPath);
   },
 
-  browseToFile: (filePath: string) => {
-    ipcRenderer.invoke(IPCChannel.BrowseToFile, filePath);
+  browseToFile: async (filePath: string) => {
+    await ipcRenderer.invoke(IPCChannel.BrowseToFile, filePath);
   },
 
   onNavigateToPendingDownloads: (callback: () => void) => {
@@ -274,12 +278,12 @@ const api: PreloadApi = {
     return ipcRenderer.invoke(IPCChannel.HasUpdateReadyToInstall);
   },
 
-  installUpdate: () => {
-    ipcRenderer.invoke(IPCChannel.InstallUpdate);
+  installUpdate: async () => {
+    await ipcRenderer.invoke(IPCChannel.InstallUpdate);
   },
 
-  toggleAutoDownloadUpdates: (isEnabled: boolean) => {
-    ipcRenderer.invoke(IPCChannel.ToggleAutoUpdate, isEnabled);
+  toggleAutoDownloadUpdates: async (isEnabled: boolean) => {
+    await ipcRenderer.invoke(IPCChannel.ToggleAutoUpdate, isEnabled);
   },
 
   shouldShowChangelog: async () => {

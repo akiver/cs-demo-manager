@@ -11,8 +11,8 @@ export function No5EPlayAccount() {
   const [domainId, setDomainId] = useState('');
   const { add5EPlayAccount, errorMessage, isBusy } = useAdd5EPlayAcount();
 
-  const submit = () => {
-    add5EPlayAccount(domainId);
+  const submit = async () => {
+    await add5EPlayAccount(domainId);
   };
 
   const isDisabled = isBusy || domainId === '';

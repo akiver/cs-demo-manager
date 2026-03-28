@@ -8,5 +8,4 @@ const v11: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default v11;

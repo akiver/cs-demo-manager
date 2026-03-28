@@ -1,7 +1,8 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.oxc": "explicit"
   },
+  "oxc.typeAware": true,
   "files.associations": {
     "*.css": "tailwindcss"
   },
@@ -10,5 +11,5 @@
     "csgo-server-plugin/csgo-server-plugin/deps": true
   },
   "tailwindCSS.rootFontSize": 14,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
 }

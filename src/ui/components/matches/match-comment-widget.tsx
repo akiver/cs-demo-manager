@@ -17,12 +17,12 @@ export function MatchCommentWidget({ onClose, matches }: Props) {
 
   const selectedMatch = matches[0];
 
-  const onBlur = (comment: string) => {
+  const onBlur = async (comment: string) => {
     if (comment === selectedMatch.comment) {
       return;
     }
 
-    updateComment({
+    await updateComment({
       checksum: selectedMatch.checksum,
       comment,
     });

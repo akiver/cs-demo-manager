@@ -23,7 +23,7 @@ export function DatabaseSize() {
 
     client.on(RendererServerMessageName.OptimizeDatabaseSuccess, getDatabaseSize);
 
-    getDatabaseSize();
+    void getDatabaseSize();
 
     return () => {
       client.off(RendererServerMessageName.OptimizeDatabaseSuccess, getDatabaseSize);

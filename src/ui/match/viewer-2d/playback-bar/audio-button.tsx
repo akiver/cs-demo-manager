@@ -25,7 +25,7 @@ function useWavSurfer(container: RefObject<HTMLDivElement | null>, audioBytes: U
     let instance: WaveSurfer | null = null;
     let unsubscribeFns: (() => void)[] = [];
 
-    (async () => {
+    void (async () => {
       if (!container?.current) {
         return;
       }
@@ -148,8 +148,8 @@ function AudioPopover() {
               <div className="flex items-center gap-x-8">
                 <button
                   className="size-16 shrink-0 cursor-pointer"
-                  onClick={() => {
-                    ws.playPause();
+                  onClick={async () => {
+                    await ws.playPause();
                   }}
                   ref={(element) => {
                     if (element && !focused.current) {

@@ -102,7 +102,7 @@ function getStatusMessage(video: Video) {
         </p>
       );
     default:
-      assertNever(video.status, `Unsupported video status: ${video.status}`);
+      assertNever(video.status, `Unsupported video status: ${video.status as string}`);
   }
 }
 

@@ -7,11 +7,11 @@ import { useNavigateToDemo } from 'csdm/ui/hooks/use-navigate-to-demo';
 export function SeeDemoItem() {
   const selectedAnalysis = useSelectedAnalysis();
   const navigateToDemo = useNavigateToDemo();
-  const onClick = () => {
+  const onClick = async () => {
     if (selectedAnalysis === undefined) {
       return;
     }
-    navigateToDemo(selectedAnalysis.demoPath);
+    await navigateToDemo(selectedAnalysis.demoPath);
   };
   const isDisabled = selectedAnalysis === undefined;
 

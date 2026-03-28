@@ -34,7 +34,7 @@ export function ArgumentsProvider({ children }: Props) {
       setStatus(Status.Success);
     };
 
-    getStartupArguments();
+    void getStartupArguments();
   }, []);
 
   const clearArguments = () => {

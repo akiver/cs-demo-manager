@@ -31,46 +31,46 @@ export function MatchesFilterDropdown() {
     hasActiveGamesFilter,
   } = useActiveMatchesFilters();
 
-  const onSourcesChange = (sources: DemoSource[]) => {
-    fetchMatches({
+  const onSourcesChange = async (sources: DemoSource[]) => {
+    await fetchMatches({
       demoSources: sources,
     });
   };
-  const onGamesChange = (games: Game[]) => {
-    fetchMatches({
+  const onGamesChange = async (games: Game[]) => {
+    await fetchMatches({
       games,
     });
   };
-  const onGameModesChange = (gameModes: GameMode[]) => {
-    fetchMatches({
+  const onGameModesChange = async (gameModes: GameMode[]) => {
+    await fetchMatches({
       gameModes,
     });
   };
-  const onTagsChange = (tagIds: string[]) => {
-    fetchMatches({
+  const onTagsChange = async (tagIds: string[]) => {
+    await fetchMatches({
       tagIds,
     });
   };
-  const onRankingChange = (ranking: RankingFilter) => {
-    fetchMatches({
+  const onRankingChange = async (ranking: RankingFilter) => {
+    await fetchMatches({
       ranking,
     });
   };
-  const onMatchLengthChanged = (maxRounds: number[]) => {
-    fetchMatches({
+  const onMatchLengthChanged = async (maxRounds: number[]) => {
+    await fetchMatches({
       maxRounds,
     });
   };
-  const onDemoTypesChanged = (demoTypes: DemoType[]) => {
-    fetchMatches({
+  const onDemoTypesChanged = async (demoTypes: DemoType[]) => {
+    await fetchMatches({
       demoTypes,
     });
   };
-  const onPeriodChange = (range: DateRange | undefined) => {
+  const onPeriodChange = async (range: DateRange | undefined) => {
     const startDate = formatDate(range?.from);
     const endDate = formatDate(range?.to);
 
-    fetchMatches({
+    await fetchMatches({
       startDate,
       endDate,
     });

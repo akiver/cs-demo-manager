@@ -5,8 +5,8 @@ import { buildDemoPath } from 'csdm/ui/routes-paths';
 export function useNavigateToDemo() {
   const navigate = useNavigate();
 
-  return (demoFilePath: string, options?: NavigateOptions) => {
+  return async (demoFilePath: string, options?: NavigateOptions) => {
     const demoPath = buildDemoPath(demoFilePath);
-    navigate(demoPath, options);
+    await navigate(demoPath, options);
   };
 }

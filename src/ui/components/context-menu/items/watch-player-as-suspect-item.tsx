@@ -14,8 +14,8 @@ export function WatchPlayerAsSuspectItem({ demoPath, steamId }: Props) {
   const { showDialog } = useDialog();
   const { isKillCsRequired, watchPlayerAsSuspect } = useCounterStrike();
 
-  const startWatching = () => {
-    watchPlayerAsSuspect({
+  const startWatching = async () => {
+    await watchPlayerAsSuspect({
       demoPath,
       steamId,
     });
@@ -26,7 +26,7 @@ export function WatchPlayerAsSuspectItem({ demoPath, steamId }: Props) {
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog onConfirmClick={startWatching} />);
     } else {
-      startWatching();
+      await startWatching();
     }
   };
 
