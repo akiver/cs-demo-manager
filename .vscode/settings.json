@@ -3,6 +3,9 @@
     "source.fixAll.oxc": "explicit"
   },
   "oxc.typeAware": true,
+  "oxc.fmt.configPath": "oxfmt.config.ts",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
   "files.associations": {
     "*.css": "tailwindcss"
   },

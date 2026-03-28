@@ -4,7 +4,6 @@ export default defineConfig({
   plugins: ['eslint', 'typescript', 'react', 'unicorn', 'import'],
   jsPlugins: [
     '@e18e/eslint-plugin',
-    'eslint-plugin-prettier',
     'eslint-plugin-check-file',
     'eslint-plugin-better-tailwindcss',
     'eslint-plugin-lingui',
@@ -137,8 +136,6 @@ export default defineConfig({
     'e18e/prefer-spread-syntax': 'error',
     'e18e/prefer-url-canparse': 'error',
     'e18e/ban-dependencies': ['error', { allowed: ['fs-extra'] }],
-
-    'prettier/prettier': 'error',
 
     // File naming rules
     'check-file/filename-naming-convention': [
