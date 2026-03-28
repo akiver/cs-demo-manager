@@ -2,31 +2,25 @@
   "name": "cs-demo-manager",
   "version": "3.18.4",
   "description": "Companion application for your Counter-Strike demos.",
+  "keywords": [
+    "CS",
+    "CS2",
+    "CS:GO",
+    "CSGO",
+    "Counter-Strike",
+    "electron",
+    "react"
+  ],
+  "homepage": "https://cs-demo-manager.com",
+  "bugs": {
+    "url": "https://github.com/akiver/cs-demo-manager/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "AkiVer",
     "email": "ys.renaud@gmail.com"
   },
-  "license": "MIT",
-  "homepage": "https://cs-demo-manager.com",
   "repository": "https://github.com/akiver/cs-demo-manager",
-  "bugs": {
-    "url": "https://github.com/akiver/cs-demo-manager/issues"
-  },
-  "tutorial": {
-    "url": "https://cs-demo-manager.com/docs"
-  },
-  "download": {
-    "url": "https://cs-demo-manager.com/download"
-  },
-  "keywords": [
-    "Counter-Strike",
-    "CS",
-    "CSGO",
-    "CS:GO",
-    "CS2",
-    "electron",
-    "react"
-  ],
   "main": "main.js",
   "scripts": {
     "build": "node ./scripts/build.mjs",
@@ -35,7 +29,7 @@
     "dev": "node ./scripts/develop.mjs",
     "dev:cli": "node ./scripts/develop-cli.mjs",
     "electron": "electron ./out/main.js",
-    "format": "prettier --write \"**\"",
+    "format": "oxfmt",
     "i18n:extract": "lingui extract --config ./lingui.config.ts --clean --overwrite && lingui extract --config ./src/electron-main/lingui.config.ts --clean --overwrite",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
@@ -100,11 +94,9 @@
     "electron-window-state": "5.0.3",
     "esbuild": "0.27.3",
     "eslint": "9.39.2",
-    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-better-tailwindcss": "4.3.2",
     "eslint-plugin-check-file": "3.3.1",
     "eslint-plugin-lingui": "0.11.0",
-    "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-react": "7.37.5",
     "fs-extra": "11.3.4",
     "html-to-image": "1.11.13",
@@ -115,10 +107,10 @@
     "motion": "12.35.1",
     "navigation-api-types": "0.6.1",
     "node-stream-zip": "1.15.0",
+    "oxfmt": "^0.42.0",
     "oxlint": "1.57.0",
     "oxlint-tsgolint": "0.17.4",
     "pg": "8.20.0",
-    "prettier": "3.8.1",
     "react": "19.2.4",
     "react-day-picker": "9.14.0",
     "react-dom": "19.2.4",
@@ -146,11 +138,17 @@
     "wavesurfer.js": "7.12.1",
     "ws": "8.19.0"
   },
-  "engines": {
-    "node": "24"
-  },
   "overrides": {
     "esbuild": "0.27.3",
     "node-gyp": "12.2.0"
+  },
+  "engines": {
+    "node": "24"
+  },
+  "download": {
+    "url": "https://cs-demo-manager.com/download"
+  },
+  "tutorial": {
+    "url": "https://cs-demo-manager.com/docs"
   }
 }
