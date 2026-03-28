@@ -66,8 +66,10 @@ export function InitialRouteRedirector() {
       }
     }
 
-    navigate(to, { replace: true });
-    hasRedirected.current = true;
+    void (async () => {
+      await navigate(to, { replace: true });
+      hasRedirected.current = true;
+    })();
   }, [defaultPage, navigate, openSettings, startPathArgument]);
 
   return null;

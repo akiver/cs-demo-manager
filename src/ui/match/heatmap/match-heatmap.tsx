@@ -25,8 +25,6 @@ export function MatchHeatmap() {
   const [points, setPoints] = useState<Point[]>([]);
   const isInitialRender = useRef(true);
 
-  // https://github.com/reactwg/react-compiler/discussions/18
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchPoints = async (filters?: Partial<MatchHeatmapFilter>) => {
     try {
       const payload: MatchHeatmapFilter = {
@@ -57,9 +55,9 @@ export function MatchHeatmap() {
   useEffect(() => {
     if (isInitialRender.current) {
       isInitialRender.current = false;
-      fetchPoints();
+      void fetchPoints();
     }
-  }, [fetchPoints]);
+  });
 
   return (
     <Content>

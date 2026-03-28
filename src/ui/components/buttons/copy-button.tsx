@@ -12,8 +12,8 @@ export function CopyButton({ data, children, isDisabled }: Props) {
   return (
     <Button
       isDisabled={isDisabled}
-      onClick={() => {
-        navigator.clipboard.writeText(data);
+      onClick={async () => {
+        await navigator.clipboard.writeText(data);
       }}
     >
       {children ? children : <Trans context="Button">Copy</Trans>}

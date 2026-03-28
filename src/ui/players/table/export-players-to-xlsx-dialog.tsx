@@ -79,11 +79,8 @@ export function ExportPlayersToXlsxDialog({ steamIds, filters }: Props) {
           </>
         );
       }}
-      onOutputSelected={(type, outputPath, formData) => {
-        const commonPayload: Omit<
-          ExportPlayersToXlsxPayload,
-          'exportEachPlayerToSingleFile' | 'outputFilePath' | 'outputFilePath'
-        > = {
+      onOutputSelected={async (type, outputPath, formData) => {
+        const commonPayload: Omit<ExportPlayersToXlsxPayload, 'exportEachPlayerToSingleFile' | 'outputFilePath'> = {
           steamIds,
           sheets: {
             [PlayerSheetName.General]: formData.has('sheets.general'),
@@ -111,7 +108,7 @@ export function ExportPlayersToXlsxDialog({ steamIds, filters }: Props) {
           };
         }
 
-        client.send({
+        await client.send({
           name: RendererClientMessageName.ExportPlayersToXlsx,
           payload,
         });

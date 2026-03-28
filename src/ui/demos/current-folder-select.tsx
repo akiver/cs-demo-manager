@@ -33,7 +33,7 @@ export function CurrentFolderSelect() {
               },
             });
 
-            fetchDemos();
+            await fetchDemos();
           }}
           value={currentFolderPath}
           options={folders.map((folder) => {
@@ -66,7 +66,7 @@ export function CurrentFolderSelect() {
               showAllFolders: isChecked,
             },
           });
-          fetchDemos();
+          await fetchDemos();
         }}
       />
     </div>

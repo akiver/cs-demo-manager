@@ -13,5 +13,4 @@ const createChecksumTagsTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createChecksumTagsTable;

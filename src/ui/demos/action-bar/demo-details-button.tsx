@@ -14,9 +14,9 @@ export function DemoDetailsButton() {
     return null;
   }
 
-  const onClick = () => {
+  const onClick = async () => {
     const demoPath = lastArrayItem(selectedDemosPaths);
-    navigateToDemo(demoPath);
+    await navigateToDemo(demoPath);
   };
 
   return <DetailsButton onClick={onClick} isDisabled={!demosLoaded} />;

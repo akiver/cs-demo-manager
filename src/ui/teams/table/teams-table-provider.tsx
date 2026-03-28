@@ -34,8 +34,8 @@ export function TeamsTableProvider({ children }: Props) {
   const selectedTeamNames = useSelectedTeamNames();
   const fuzzySearchText = useFuzzySearchText();
 
-  const showTeam = (team: TeamTable) => {
-    navigateToTeam(team.name);
+  const showTeam = async (team: TeamTable) => {
+    await navigateToTeam(team.name);
   };
 
   const onContextMenu = (event: MouseEvent, table: TableInstance<TeamTable>) => {

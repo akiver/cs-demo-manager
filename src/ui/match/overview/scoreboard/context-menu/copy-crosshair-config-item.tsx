@@ -28,11 +28,11 @@ export function CopyCrosshairConfig({ steamId }: Props) {
     return null;
   }
 
-  const onClick = () => {
+  const onClick = async () => {
     try {
       const crosshair = decodeCrosshairShareCode(crosshairShareCode);
       const config = crosshairToConVars(crosshair);
-      copyToClipboard(config);
+      await copyToClipboard(config);
     } catch (error) {
       const message =
         error instanceof InvalidCrosshairShareCode ? (

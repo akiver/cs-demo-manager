@@ -17,7 +17,7 @@ function renderLabelsForGrenade(grenade: GrenadeOption) {
     case GrenadeOption.Smoke:
       return null;
     default:
-      logger.warn(`Unknown grenade type ${grenade}`);
+      logger.warn(`Unknown grenade type ${grenade as string}`);
       return null;
   }
 }

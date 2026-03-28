@@ -67,7 +67,7 @@ export async function searchHandler(payload: SearchPayload) {
         result = await searchKills(payload as SearchKillsFilter);
         break;
       default:
-        return assertNever(payload.event, `Unsupported search type ${payload.event}`);
+        return assertNever(payload.event, `Unsupported search type ${payload.event as string}`);
     }
 
     return result;

@@ -17,12 +17,12 @@ export function PlayerCommentWidget({ onClose, players }: Props) {
 
   const selectedPlayer = players[0];
 
-  const onBlur = (comment: string) => {
+  const onBlur = async (comment: string) => {
     if (comment === selectedPlayer.comment) {
       return;
     }
 
-    updateComment({
+    await updateComment({
       steamId: selectedPlayer.steamId,
       comment,
     });

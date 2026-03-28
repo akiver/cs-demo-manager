@@ -32,5 +32,4 @@ const createChickenPositionsTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createChickenPositionsTable;

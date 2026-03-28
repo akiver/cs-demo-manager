@@ -17,9 +17,9 @@ export function showNewBannedPlayersNotification(playerCount: number) {
       message: 'Click to see players',
     }),
   });
-  notification.on('click', () => {
+  notification.on('click', async () => {
     windowManager.setStartupArgument(ArgumentName.StartPath, StartPath.Bans);
-    const mainWindow = windowManager.getOrCreateMainWindow();
+    const mainWindow = await windowManager.getOrCreateMainWindow();
     mainWindow.show();
     mainWindow.webContents.send(IPCChannel.NavigateToBans);
   });

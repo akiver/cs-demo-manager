@@ -17,12 +17,12 @@ export function DemoCommentWidget({ onClose, demos }: Props) {
 
   const [selectedDemo] = demos;
 
-  const onBlur = (comment: string) => {
+  const onBlur = async (comment: string) => {
     if (comment === selectedDemo.comment) {
       return;
     }
 
-    updateComment({
+    await updateComment({
       checksum: selectedDemo.checksum,
       comment,
     });

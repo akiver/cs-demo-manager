@@ -8,8 +8,8 @@ type Props = {
 
 export function NavigateToTeamItem({ teamName }: Props) {
   const navigateToTeam = useNavigateToTeam();
-  const onClick = () => {
-    navigateToTeam(teamName);
+  const onClick = async () => {
+    await navigateToTeam(teamName);
   };
 
   return <DetailsItem onClick={onClick} />;

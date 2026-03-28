@@ -47,6 +47,6 @@ export function Settings() {
     case SettingsCategory.Cameras:
       return <CamerasSettings />;
     default:
-      return assertNever(category, `Unknown settings category: ${category}`);
+      return assertNever(category, `Unknown settings category: ${category as string}`);
   }
 }

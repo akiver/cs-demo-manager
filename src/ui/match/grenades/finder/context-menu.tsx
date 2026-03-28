@@ -13,14 +13,14 @@ type Props = {
 
 export function GrenadesFinderContextMenu({ grenadeThrow, onWatchClick }: Props) {
   const match = useCurrentMatch();
-  const onCopyPositionClick = () => {
+  const onCopyPositionClick = async () => {
     if (grenadeThrow === undefined || grenadeThrow.positions.length === 0) {
       return;
     }
 
     const [firstPosition] = grenadeThrow.positions;
     const command = `setpos ${firstPosition.x} ${firstPosition.y} ${firstPosition.z}; setang ${grenadeThrow.throwerPitch} ${grenadeThrow.throwerYaw}`;
-    navigator.clipboard.writeText(command);
+    await navigator.clipboard.writeText(command);
   };
 
   return (

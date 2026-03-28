@@ -19,8 +19,8 @@ export function IgnoreSteamAccountBanItem({ steamId }: Props) {
   if (account) {
     return (
       <ContextMenuItem
-        onClick={() => {
-          removeIgnoredSteamAccount(account);
+        onClick={async () => {
+          await removeIgnoredSteamAccount(account);
         }}
       >
         <Trans context="Context menu">Stop ignoring player's bans</Trans>

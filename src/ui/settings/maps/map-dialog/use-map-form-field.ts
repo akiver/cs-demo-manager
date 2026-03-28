@@ -7,6 +7,6 @@ export function useMapFormField(name: FieldName) {
   return {
     ...form.fields[name],
     validate: form.validateField.bind(form, name),
-    setField: (value: string, error?: string | undefined) => form.setField(name, value, error),
+    setField: (value: string, error?: string) => form.setField(name, value, error),
   };
 }

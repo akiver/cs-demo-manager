@@ -44,9 +44,9 @@ class WindowManager {
     }
   };
 
-  public getOrCreateMainWindow = () => {
+  public getOrCreateMainWindow = async () => {
     if (this.mainWindow === null || this.mainWindow.isDestroyed()) {
-      this.mainWindow = this.createMainWindow();
+      this.mainWindow = await this.createMainWindow();
     }
 
     return this.mainWindow;
@@ -60,7 +60,7 @@ class WindowManager {
     return this.devWindow;
   }
 
-  public createDevWindow(): BrowserWindow {
+  public async createDevWindow(): Promise<BrowserWindow> {
     const windowState = windowStateKeeper({
       defaultWidth: 1024,
       defaultHeight: 768,
@@ -87,12 +87,12 @@ class WindowManager {
     });
 
     devWindow.webContents.openDevTools();
-    devWindow.loadFile('dev.html');
+    await devWindow.loadFile('dev.html');
 
     return devWindow;
   }
 
-  private createMainWindow() {
+  private async createMainWindow() {
     const windowState = windowStateKeeper({
       defaultWidth: 1024,
       defaultHeight: 768,
@@ -136,15 +136,15 @@ class WindowManager {
       mainWindow.show();
     });
 
-    mainWindow.on('show', () => {
+    mainWindow.on('show', async () => {
       if (app.dock) {
-        app.dock.show();
+        await app.dock.show();
       }
     });
 
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       if (this.isAllowedUrl(url)) {
-        shell.openExternal(url);
+        void shell.openExternal(url);
       }
 
       return { action: 'deny' };
@@ -164,9 +164,9 @@ class WindowManager {
     }
 
     if (IS_DEV) {
-      mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
+      await mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
     } else {
-      mainWindow.loadFile('index.html');
+      await mainWindow.loadFile('index.html');
     }
 
     listenForContextMenu(mainWindow);

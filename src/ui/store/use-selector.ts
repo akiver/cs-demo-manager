@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// oxlint-disable-next-line
 import { useSelector as useSelectorRedux } from 'react-redux';
 import type { RootState } from './reducers';
 

@@ -126,10 +126,10 @@ export function ConnectDatabase() {
   }, [client, databaseSettings, dispatch, updateSettings]);
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
+    const onKeyDown = async (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
         event.stopPropagation();
-        connectDatabase();
+        await connectDatabase();
       }
     };
 

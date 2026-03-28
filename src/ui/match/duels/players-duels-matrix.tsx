@@ -89,7 +89,7 @@ export function PlayersDuelsMatrix() {
       }
     };
 
-    fetchRows();
+    void fetchRows();
   }, [client, match.checksum]);
 
   const playersTeamCt: PlayerInfo[] = [];

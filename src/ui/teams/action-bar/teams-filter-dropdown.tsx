@@ -11,11 +11,11 @@ export function TeamsFilterDropdown() {
   const { startDate, endDate } = useTeamsSettings();
   const { hasActiveFilter } = useActiveTeamsFilters();
 
-  const onPeriodChange = (range: DateRange | undefined) => {
+  const onPeriodChange = async (range: DateRange | undefined) => {
     const startDate = formatDate(range?.from);
     const endDate = formatDate(range?.to);
 
-    fetchTeams({
+    await fetchTeams({
       startDate,
       endDate,
     });

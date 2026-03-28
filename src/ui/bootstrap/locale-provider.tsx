@@ -24,7 +24,7 @@ export function LocaleProvider({ children }: Props) {
       }
     };
 
-    loadLocaleMessages();
+    void loadLocaleMessages();
   }, [locale]);
 
   return <I18nProvider i18n={i18n}>{children}</I18nProvider>;

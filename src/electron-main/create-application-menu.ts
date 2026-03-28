@@ -16,8 +16,8 @@ export function createApplicationMenu(client: WebSocketClient) {
       id: 'menu.startCounterStrikeGlobalOffensive',
       message: 'Start CS:GO',
     }),
-    click: () => {
-      client.send({
+    click: async () => {
+      await client.send({
         name: MainClientMessageName.StartCounterStrike,
         payload: Game.CSGO,
       });
@@ -33,8 +33,8 @@ export function createApplicationMenu(client: WebSocketClient) {
             id: 'menu.about',
             message: 'About',
           }),
-          click: () => {
-            const mainWindow = windowManager.getOrCreateMainWindow();
+          click: async () => {
+            const mainWindow = await windowManager.getOrCreateMainWindow();
             mainWindow.webContents.send(IPCChannel.ShowAbout);
           },
         },
@@ -46,8 +46,8 @@ export function createApplicationMenu(client: WebSocketClient) {
             id: 'menu.preferences',
             message: 'Preferences',
           }),
-          click: () => {
-            const mainWindow = windowManager.getOrCreateMainWindow();
+          click: async () => {
+            const mainWindow = await windowManager.getOrCreateMainWindow();
             mainWindow.webContents.send(IPCChannel.ToggleSettingsVisibility);
           },
           accelerator: 'CmdOrCtrl+,',
@@ -109,8 +109,8 @@ export function createApplicationMenu(client: WebSocketClient) {
             id: 'menu.startCounterStrike2',
             message: 'Start CS2',
           }),
-          click: () => {
-            client.send({
+          click: async () => {
+            await client.send({
               name: MainClientMessageName.StartCounterStrike,
               payload: Game.CS2,
             });
@@ -122,8 +122,8 @@ export function createApplicationMenu(client: WebSocketClient) {
             id: 'menu.preferences',
             message: 'Preferences',
           }),
-          click: () => {
-            const mainWindow = windowManager.getOrCreateMainWindow();
+          click: async () => {
+            const mainWindow = await windowManager.getOrCreateMainWindow();
             mainWindow.webContents.send(IPCChannel.ToggleSettingsVisibility);
           },
           accelerator: 'CmdOrCtrl+,',
@@ -319,10 +319,10 @@ export function createApplicationMenu(client: WebSocketClient) {
             id: 'menu.tileWindowToLeftOfScreen',
             message: 'Tile Window to Left of Screen',
           }),
-          click: () => {
+          click: async () => {
             const display = screen.getPrimaryDisplay();
             const { width, height } = display.bounds;
-            const mainWindow = windowManager.getOrCreateMainWindow();
+            const mainWindow = await windowManager.getOrCreateMainWindow();
             mainWindow.setBounds({
               x: 0,
               y: height,
@@ -336,10 +336,10 @@ export function createApplicationMenu(client: WebSocketClient) {
             id: 'menu.tileWindowToRightOfScreen',
             message: 'Tile Window to Right of Screen',
           }),
-          click: () => {
+          click: async () => {
             const display = screen.getPrimaryDisplay();
             const { width, height } = display.bounds;
-            const mainWindow = windowManager.getOrCreateMainWindow();
+            const mainWindow = await windowManager.getOrCreateMainWindow();
             mainWindow.setBounds({
               x: width / 2,
               y: height,
@@ -366,14 +366,14 @@ export function createApplicationMenu(client: WebSocketClient) {
         id: 'menu.documentation',
         message: 'Documentation',
       }),
-      click: () => {
-        shell.openExternal('https://cs-demo-manager.com/docs');
+      click: async () => {
+        await shell.openExternal('https://cs-demo-manager.com/docs');
       },
     },
     {
       label: 'GitHub',
-      click: () => {
-        shell.openExternal('https://github.com/akiver/cs-demo-manager');
+      click: async () => {
+        await shell.openExternal('https://github.com/akiver/cs-demo-manager');
       },
     },
   ];
@@ -383,8 +383,8 @@ export function createApplicationMenu(client: WebSocketClient) {
         id: 'menu.about',
         message: 'About',
       }),
-      click: () => {
-        const mainWindow = windowManager.getOrCreateMainWindow();
+      click: async () => {
+        const mainWindow = await windowManager.getOrCreateMainWindow();
         mainWindow.webContents.send(IPCChannel.ShowAbout);
       },
     });

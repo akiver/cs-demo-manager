@@ -15,15 +15,15 @@ export function SelectActionsPovDialog({ playerSteamId, demoPath, type }: Props)
   const { watchPlayerHighlights, watchPlayerLowlights } = useCounterStrike();
   const { hideDialog } = useDialog();
 
-  const startGame = (perspective: Perspective) => {
+  const startGame = async (perspective: Perspective) => {
     if (type === WatchType.Highlights) {
-      watchPlayerHighlights({
+      await watchPlayerHighlights({
         demoPath,
         steamId: playerSteamId,
         perspective,
       });
     } else {
-      watchPlayerLowlights({
+      await watchPlayerLowlights({
         demoPath,
         steamId: playerSteamId,
         perspective,
@@ -33,12 +33,12 @@ export function SelectActionsPovDialog({ playerSteamId, demoPath, type }: Props)
     hideDialog();
   };
 
-  const onEnemyPovClick = () => {
-    startGame(Perspective.Enemy);
+  const onEnemyPovClick = async () => {
+    await startGame(Perspective.Enemy);
   };
 
-  const onPlayerPovClick = () => {
-    startGame(Perspective.Player);
+  const onPlayerPovClick = async () => {
+    await startGame(Perspective.Player);
   };
 
   return <SelectPovDialog onEnemyClick={onEnemyPovClick} onPlayerClick={onPlayerPovClick} />;

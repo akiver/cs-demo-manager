@@ -48,8 +48,8 @@ export function GeneratePlayerEventsDialog({
       preserveExistingSequences: false,
     });
 
-    setTimeout(() => {
-      navigate(buildMatchVideoPath(match.checksum));
+    setTimeout(async () => {
+      await navigate(buildMatchVideoPath(match.checksum));
     }, 300);
   };
 

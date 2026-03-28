@@ -70,5 +70,4 @@ const createPlayersTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createPlayersTable;

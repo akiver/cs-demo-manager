@@ -12,8 +12,8 @@ export function RecordingAudio() {
       interactiveComponent={
         <Switch
           isChecked={settings.recordAudio}
-          onChange={(isChecked) => {
-            updateSettings({ recordAudio: isChecked });
+          onChange={async (isChecked) => {
+            await updateSettings({ recordAudio: isChecked });
           }}
         />
       }

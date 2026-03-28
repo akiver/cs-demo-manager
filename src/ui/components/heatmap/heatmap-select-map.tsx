@@ -26,8 +26,8 @@ export function HeatmapSelectMap({ mapNames }: Props) {
       <Select
         options={options}
         value={mapName}
-        onChange={(mapName) => {
-          fetchPoints({ mapName });
+        onChange={async (mapName) => {
+          await fetchPoints({ mapName });
         }}
       />
     </div>

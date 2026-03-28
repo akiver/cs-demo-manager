@@ -31,7 +31,7 @@ export const CameraFormContext = createContext<{
   mapName: string;
   fields: Record<FieldName, Field>;
   validate: () => boolean;
-  setField: (field: FieldName, value: string, error?: string | undefined) => void;
+  setField: (field: FieldName, value: string, error?: string) => void;
   validateField: (field: FieldName) => void;
   tryUpdatingCoordinatesFromGameCommand: (command: string) => void;
 }>({
@@ -142,7 +142,7 @@ export function CameraFormProvider({ children, id, game, mapName, initialValues 
     },
   });
 
-  const setField = (name: FieldName, value: string, error?: string | undefined) => {
+  const setField = (name: FieldName, value: string, error?: string) => {
     setFields((prev) => {
       return { ...prev, [name]: { ...prev[name], value, error } };
     });

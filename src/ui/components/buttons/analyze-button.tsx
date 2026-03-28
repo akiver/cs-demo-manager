@@ -18,8 +18,8 @@ export function AnalyzeButton({ demos, isDisabled }: Props) {
     return null;
   }
 
-  const onClick = () => {
-    processDemosToAnalyze(demos);
+  const onClick = async () => {
+    await processDemosToAnalyze(demos);
   };
 
   return (

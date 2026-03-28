@@ -110,7 +110,7 @@ function DownloadDemoFromShareCodeDialog() {
         status: Status.Loading,
         error: undefined,
       });
-      sendDownloadDemoFromShareCode();
+      await sendDownloadDemoFromShareCode();
     }
   };
 

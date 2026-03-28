@@ -45,7 +45,7 @@ export function PlayersFlashbangMatrix() {
       }
     };
 
-    fetchRows();
+    void fetchRows();
   }, [client, match.checksum]);
 
   let maxDuration = 0;

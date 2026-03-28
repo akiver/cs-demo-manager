@@ -122,12 +122,13 @@ export function MapFormProvider({ children, id, game, initialValues }: Props) {
     },
   });
 
-  const setField = (name: FieldName, value: string, error?: string | undefined) => {
+  const setField = (name: FieldName, value: string, error?: string) => {
     setFields({
       ...fields,
       [name]: {
         ...fields[name],
-        ...{ value, error },
+        value,
+        error,
       },
     });
   };

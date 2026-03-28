@@ -39,11 +39,11 @@ export function registerMainProcessListeners() {
     }
   });
 
-  ipcMain.handle(IPCChannel.RestartApp, () => {
+  ipcMain.handle(IPCChannel.RestartApp, async () => {
     if (IS_DEV) {
       const mainWindow = windowManager.getMainWindow();
       if (mainWindow !== null && !mainWindow.isDestroyed()) {
-        dialog.showMessageBox(mainWindow, {
+        await dialog.showMessageBox(mainWindow, {
           type: 'warning',
           title: 'Warning',
           message: 'You are running in development mode. You need to manually restart the app.',
@@ -107,13 +107,13 @@ export function registerMainProcessListeners() {
     return false;
   });
 
-  ipcMain.handle(IPCChannel.ShowSaveDialog, (event, options: SaveDialogOptions) => {
-    const mainWindow = windowManager.getOrCreateMainWindow();
+  ipcMain.handle(IPCChannel.ShowSaveDialog, async (event, options: SaveDialogOptions) => {
+    const mainWindow = await windowManager.getOrCreateMainWindow();
     return dialog.showSaveDialog(mainWindow, options);
   });
 
-  ipcMain.handle(IPCChannel.ShowOpenDialog, (event, options: OpenDialogOptions) => {
-    const mainWindow = windowManager.getOrCreateMainWindow();
+  ipcMain.handle(IPCChannel.ShowOpenDialog, async (event, options: OpenDialogOptions) => {
+    const mainWindow = await windowManager.getOrCreateMainWindow();
     return dialog.showOpenDialog(mainWindow, options);
   });
 

@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
-import type { ChartOption } from 'csdm/ui/hooks/use-chart';
+import type { ChartOption, XAXisComponentOption, YAXisComponentOption } from 'csdm/ui/hooks/use-chart';
 import type { BarSeriesOption } from 'csdm/ui/hooks/use-chart';
 import { useChart } from 'csdm/ui/hooks/use-chart';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
@@ -164,11 +164,11 @@ function useEconomyChartOption() {
   const chartOptionTeamA: ChartOption = {
     ...commonOption,
     xAxis: {
-      ...commonOption.xAxis,
+      ...(commonOption.xAxis as XAXisComponentOption),
       inverse: true,
     },
     yAxis: {
-      ...commonOption.yAxis,
+      ...(commonOption.yAxis as YAXisComponentOption),
       position: 'right',
       data: playerNamesTeamA,
     },
@@ -199,7 +199,7 @@ function useEconomyChartOption() {
   const chartOptionTeamB: ChartOption = {
     ...commonOption,
     yAxis: {
-      ...commonOption.yAxis,
+      ...(commonOption.yAxis as YAXisComponentOption),
       position: 'left',
       data: playerNamesTeamB,
     },

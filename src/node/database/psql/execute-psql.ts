@@ -11,7 +11,7 @@ type Options = {
   timeoutMs: number;
 };
 
-export async function executePsql(command: string, options?: Options | undefined) {
+export async function executePsql(command: string, options?: Options) {
   return new Promise<void>((resolve, reject) => {
     exec(
       `psql ${command}`,

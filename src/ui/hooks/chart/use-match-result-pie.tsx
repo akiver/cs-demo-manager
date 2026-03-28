@@ -37,7 +37,7 @@ export function useMatchResultPie({ won, lost, tie }: Options) {
           context: 'Match result',
         });
       default:
-        return assertNever(result, `Unknown match result: ${result}`);
+        return assertNever(result, `Unknown match result: ${result as string}`);
     }
   };
 

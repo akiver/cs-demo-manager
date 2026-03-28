@@ -20,7 +20,7 @@ export function LastMatchesLoader() {
 
   useEffect(() => {
     if (status === Status.Idle) {
-      fetchLastFaceitMatches();
+      void fetchLastFaceitMatches();
     }
   }, [status, fetchLastFaceitMatches]);
 

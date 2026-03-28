@@ -71,7 +71,7 @@ export function BanStats() {
       }
     };
 
-    fetchStats();
+    void fetchStats();
 
     client.on(RendererServerMessageName.IgnoredSteamAccountsChanged, fetchStats);
 

@@ -15,10 +15,10 @@ export function Rounds() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
+    const onKeyDown = async (event: KeyboardEvent) => {
       const { rounds } = match;
       if (event.key === 'ArrowRight' && rounds.length > 1) {
-        navigate(buildMatchRoundPath(checksum as string, 1));
+        await navigate(buildMatchRoundPath(checksum as string, 1));
       }
     };
 

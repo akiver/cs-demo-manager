@@ -13,8 +13,8 @@ export function SeeMatchButton() {
   const demo = useCurrentDemo();
   const isDemoInDatabase = useIsDemoInDatabase();
 
-  const onClick = () => {
-    navigateToMatch(demo.checksum);
+  const onClick = async () => {
+    await navigateToMatch(demo.checksum);
   };
 
   let isDisabled = false;

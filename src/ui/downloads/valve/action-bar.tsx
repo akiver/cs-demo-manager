@@ -20,8 +20,8 @@ function RefreshMatchesButton() {
   const isCsRunning = useIsCsRunning();
   const { showDialog } = useDialog();
 
-  const fetchLastMatches = () => {
-    client.send({
+  const fetchLastMatches = async () => {
+    await client.send({
       name: RendererClientMessageName.FetchLastValveMatches,
     });
   };
@@ -31,7 +31,7 @@ function RefreshMatchesButton() {
     if (csIsRunning) {
       showDialog(<CounterStrikeRunningDialog onConfirmClick={fetchLastMatches} />);
     } else {
-      fetchLastMatches();
+      await fetchLastMatches();
     }
   };
 

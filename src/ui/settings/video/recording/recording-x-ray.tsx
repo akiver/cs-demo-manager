@@ -12,8 +12,8 @@ export function RecordingXRay() {
       interactiveComponent={
         <Switch
           isChecked={settings.showXRay}
-          onChange={(isChecked) => {
-            updateSettings({ showXRay: isChecked });
+          onChange={async (isChecked) => {
+            await updateSettings({ showXRay: isChecked });
           }}
         />
       }

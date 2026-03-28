@@ -14,8 +14,8 @@ export function WatchPlayerRoundsItem({ demoPath, steamId }: Props) {
   const { showDialog } = useDialog();
   const { isKillCsRequired, watchPlayerRounds } = useCounterStrike();
 
-  const startPlayback = () => {
-    watchPlayerRounds({
+  const startPlayback = async () => {
+    await watchPlayerRounds({
       demoPath,
       steamId,
     });
@@ -26,7 +26,7 @@ export function WatchPlayerRoundsItem({ demoPath, steamId }: Props) {
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog closeOnConfirm={false} onConfirmClick={startPlayback} />);
     } else {
-      startPlayback();
+      await startPlayback();
     }
   };
 

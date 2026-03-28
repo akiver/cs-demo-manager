@@ -35,7 +35,7 @@ export function DatabaseLoader({ children }: Props) {
       }
     };
 
-    connectDatabase();
+    void connectDatabase();
   }, [databaseStatus, client, dispatch]);
 
   if (databaseStatus === DatabaseStatus.Idle) {

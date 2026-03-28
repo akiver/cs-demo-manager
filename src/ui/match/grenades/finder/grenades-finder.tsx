@@ -68,12 +68,12 @@ export function GrenadesFinder({ map, grenadesThrow }: Props) {
   });
   const { canvasSize, setWrapper } = interactiveCanvas;
 
-  const watchGrenadeThrow = () => {
+  const watchGrenadeThrow = async () => {
     if (selectedGrenadeThrow === undefined) {
       return;
     }
 
-    watchDemo({
+    await watchDemo({
       demoPath: match.demoFilePath,
       startTick: selectedGrenadeThrow.tick - match.tickrate * 5,
       focusSteamId: selectedGrenadeThrow.throwerSteamId,
@@ -85,7 +85,7 @@ export function GrenadesFinder({ map, grenadesThrow }: Props) {
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog onConfirmClick={watchGrenadeThrow} />);
     } else {
-      watchGrenadeThrow();
+      await watchGrenadeThrow();
     }
   };
 

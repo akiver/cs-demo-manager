@@ -10,5 +10,4 @@ const v12: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default v12;

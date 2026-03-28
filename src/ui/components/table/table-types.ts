@@ -1,5 +1,5 @@
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
 
 export type Data = Record<string, unknown>;
 
@@ -44,8 +44,8 @@ export type Column<DataType extends Data = Data> = {
   noPadding?: boolean | undefined;
   maxWidth?: number | undefined;
   Cell?: ((props: CellProps<DataType>) => React.ReactElement | null) | undefined;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  formatter?: ((value: any) => ReactNode) | undefined;
+  // oxlint-disable-next-line typescript/no-explicit-any
+  formatter?: ((value: any) => string | number | null) | undefined;
   sortFunction?: SortFunction<DataType> | undefined;
 };
 

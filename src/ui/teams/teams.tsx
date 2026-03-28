@@ -10,7 +10,7 @@ export function Teams() {
 
   useEffect(() => {
     if (shouldFetch.current) {
-      fetchTeams();
+      void fetchTeams();
       shouldFetch.current = false;
     }
   });

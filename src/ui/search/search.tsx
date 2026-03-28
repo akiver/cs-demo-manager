@@ -190,9 +190,9 @@ export function Search() {
   };
 
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
+    const onKeyDown = async (e: KeyboardEvent) => {
       if (e.key === 'Enter' && isCtrlOrCmdEvent(e)) {
-        search();
+        await search();
       }
     };
 

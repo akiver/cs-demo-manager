@@ -115,7 +115,7 @@ export function Tooltip({
     useRole(context, { role: 'tooltip' }),
   ]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   const ref = useMergeRefs([refs.setReference, (children as any).ref]);
 
   if (!isEnabled) {

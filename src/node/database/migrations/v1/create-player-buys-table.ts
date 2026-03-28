@@ -25,5 +25,4 @@ const createPlayerBuysTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createPlayerBuysTable;

@@ -102,7 +102,7 @@ export class WebSocketClient {
     this.socket.addEventListener('close', this.onDisconnect);
   };
 
-  private onConnect = (): void => {
+  private onConnect = async () => {
     logger.log('WS:: connected');
     this.isConnected = true;
     this.socket.addEventListener('message', this.onMessage);
@@ -110,7 +110,7 @@ export class WebSocketClient {
     this.socket.addEventListener('error', this.onError);
     this.onConnectionSuccess();
     for (const message of this.messageQueue) {
-      this.send(message);
+      await this.send(message);
     }
     this.messageQueue = [];
   };

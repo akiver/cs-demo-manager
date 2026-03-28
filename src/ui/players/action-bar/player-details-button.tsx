@@ -13,13 +13,13 @@ export function PlayerDetailsButton() {
   const status = usePlayersStatus();
   const isDisabled = status === Status.Loading || selectedSteamIds.length === 0;
 
-  const onClick = () => {
+  const onClick = async () => {
     if (selectedSteamIds.length === 0) {
       return;
     }
 
     const steamId = lastArrayItem(selectedSteamIds);
-    navigateToPlayer(steamId);
+    await navigateToPlayer(steamId);
   };
 
   return <DetailsButton onClick={onClick} isDisabled={isDisabled} />;

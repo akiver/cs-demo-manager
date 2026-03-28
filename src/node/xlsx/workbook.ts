@@ -83,7 +83,7 @@ export class Workbook {
         }
         xml += `<is><t>${value}</t></is>`;
       } else {
-        xml += `<v>${cell}</v>`;
+        xml += `<v>${String(cell)}</v>`;
       }
       xml += '</c>';
     }
@@ -173,7 +173,7 @@ export class Workbook {
       });
       zip.directory(this.tempFolderPath, false);
       zip.pipe(output);
-      zip.finalize();
+      void zip.finalize();
     });
   }
 

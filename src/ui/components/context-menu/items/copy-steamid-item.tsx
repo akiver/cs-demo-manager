@@ -11,8 +11,8 @@ type Props = {
 export function CopySteamIdItem({ steamIds, children }: Props) {
   const { copyToClipboard } = useClipboard();
 
-  const onClick = () => {
-    copyToClipboard(steamIds.join(','));
+  const onClick = async () => {
+    await copyToClipboard(steamIds.join(','));
   };
 
   return (

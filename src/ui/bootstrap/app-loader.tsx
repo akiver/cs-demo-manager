@@ -39,7 +39,7 @@ export function AppLoader() {
       }
     };
 
-    initializeApplication();
+    void initializeApplication();
   }, [t, client, dispatch, status]);
 
   if (status === Status.Loading) {

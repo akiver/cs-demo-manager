@@ -44,7 +44,7 @@ export function AddVideoToQueueButton() {
         name: RendererClientMessageName.AddVideoToQueue,
         payload,
       });
-      navigate(RoutePath.Videos);
+      await navigate(RoutePath.Videos);
     } catch (error) {
       const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
       const message = getPlaybackErrorMessageFromErrorCode(errorCode, match.game);
@@ -52,7 +52,7 @@ export function AddVideoToQueueButton() {
     }
   };
 
-  const onClick = () => {
+  const onClick = async () => {
     const tryAddingVideoToQueue = async () => {
       setIsAddingVideoToQueue(true);
       await addVideoToQueue();
@@ -81,7 +81,7 @@ export function AddVideoToQueueButton() {
         </ConfirmDialog>,
       );
     } else {
-      tryAddingVideoToQueue();
+      await tryAddingVideoToQueue();
     }
   };
 

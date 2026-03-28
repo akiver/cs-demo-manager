@@ -7,8 +7,8 @@ type Props = {
 };
 
 export function CopyFilepathItem({ filepaths }: Props) {
-  const onClick = () => {
-    navigator.clipboard.writeText(filepaths.join('\n'));
+  const onClick = async () => {
+    await navigator.clipboard.writeText(filepaths.join('\n'));
   };
 
   return (

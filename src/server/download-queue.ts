@@ -52,7 +52,7 @@ class DownloadDemoQueue {
       payload: [download],
     });
 
-    this.loopUntilDownloadsDone();
+    void this.loopUntilDownloadsDone();
   };
 
   public addDownloads = async (downloads: Download[]) => {
@@ -88,12 +88,12 @@ class DownloadDemoQueue {
 
     this.downloads.push(...validDownloads);
 
-    this.loopUntilDownloadsDone();
-
     server.sendMessageToRendererProcess({
       name: RendererServerMessageName.DownloadsAdded,
       payload: validDownloads,
     });
+
+    void this.loopUntilDownloadsDone();
 
     return validDownloads;
   };
@@ -142,7 +142,7 @@ class DownloadDemoQueue {
       this.currentDownload = this.downloads.shift();
       await this.processCurrentDownload();
     } finally {
-      this.loopUntilDownloadsDone();
+      void this.loopUntilDownloadsDone();
     }
   }
 

@@ -20,6 +20,6 @@ export async function startMinimizedModeHandler(): Promise<void> {
     // Retry multiple times to start in minimized mode because when it's automatically launched at startup the database
     // process might not be ready yet.
     timer = globalThis.setInterval(startMinimizedMode, 10_000);
-    startMinimizedMode();
+    void startMinimizedMode();
   });
 }

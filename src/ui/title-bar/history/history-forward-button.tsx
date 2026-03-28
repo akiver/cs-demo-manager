@@ -15,11 +15,11 @@ export function HistoryForwardButton() {
       setCanGoForward(canGoForward);
     };
 
-    onLocationChanged();
+    void onLocationChanged();
   }, [location]);
 
-  const onClick = () => {
-    navigate(1);
+  const onClick = async () => {
+    await navigate(1);
   };
 
   const isDisabled = !canGoForward;

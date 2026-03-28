@@ -27,40 +27,40 @@ export function TeamFilterDropdown() {
     hasActiveDemoTypesFilter,
   } = useActiveTeamFilters();
 
-  const onGamesChange = (games: Game[]) => {
-    fetchTeam({
+  const onGamesChange = async (games: Game[]) => {
+    await fetchTeam({
       games,
     });
   };
-  const onSourcesChange = (sources: DemoSource[]) => {
-    fetchTeam({
+  const onSourcesChange = async (sources: DemoSource[]) => {
+    await fetchTeam({
       demoSources: sources,
     });
   };
-  const onGameModesChange = (modes: GameMode[]) => {
-    fetchTeam({
+  const onGameModesChange = async (modes: GameMode[]) => {
+    await fetchTeam({
       gameModes: modes,
     });
   };
-  const onTagsChange = (tagIds: string[]) => {
-    fetchTeam({
+  const onTagsChange = async (tagIds: string[]) => {
+    await fetchTeam({
       tagIds,
     });
   };
-  const onMatchLengthChange = (maxRounds: number[]) => {
-    fetchTeam({
+  const onMatchLengthChange = async (maxRounds: number[]) => {
+    await fetchTeam({
       maxRounds,
     });
   };
-  const onDemoTypesChange = (demoTypes: DemoType[]) => {
-    fetchTeam({
+  const onDemoTypesChange = async (demoTypes: DemoType[]) => {
+    await fetchTeam({
       demoTypes,
     });
   };
-  const onPeriodChange = (range: DateRange | undefined) => {
+  const onPeriodChange = async (range: DateRange | undefined) => {
     const startDate = formatDate(range?.from);
     const endDate = formatDate(range?.to);
-    fetchTeam({
+    await fetchTeam({
       startDate,
       endDate,
     });

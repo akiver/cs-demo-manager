@@ -96,6 +96,10 @@ export function TeamEconomyAdvantageChart() {
         axisPointer: {
           label: {
             formatter: ({ value: roundNumber }) => {
+              if (typeof roundNumber !== 'string') {
+                return '';
+              }
+
               return t({
                 message: `Round ${roundNumber}`,
                 context: 'Chart tooltip',
@@ -123,6 +127,10 @@ export function TeamEconomyAdvantageChart() {
         axisPointer: {
           label: {
             formatter: ({ value: winnerName }) => {
+              if (typeof winnerName !== 'string') {
+                return '';
+              }
+
               return t({
                 message: `Winner: ${winnerName}`,
                 context: 'Chart tooltip',

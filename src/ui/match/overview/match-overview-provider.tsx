@@ -48,8 +48,8 @@ export function MatchOverviewProvider({ children }: Props) {
     );
   };
 
-  const navigateToPlayer = (player: MatchPlayer) => {
-    navigateToMatchPlayer(match.checksum, player.steamId);
+  const navigateToPlayer = async (player: MatchPlayer) => {
+    await navigateToMatchPlayer(match.checksum, player.steamId);
   };
 
   const tableTeamA = useTable({

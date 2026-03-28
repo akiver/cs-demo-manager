@@ -23,11 +23,11 @@ export function RadarInput() {
     }
   };
 
-  const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const onDrop = async (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const { files } = event.dataTransfer;
     if (files.length > 0) {
-      updateRadarFieldFromImageFilePath(window.csdm.getWebFilePath(files[0]));
+      await updateRadarFieldFromImageFilePath(window.csdm.getWebFilePath(files[0]));
     }
   };
 
@@ -42,7 +42,7 @@ export function RadarInput() {
     }
 
     const [imagePath] = filePaths;
-    updateRadarFieldFromImageFilePath(imagePath);
+    await updateRadarFieldFromImageFilePath(imagePath);
   };
 
   return (

@@ -31,7 +31,7 @@ function useGetTimeAxisTitle() {
           message: 'Match',
         });
       default:
-        assertNever(axis, `Unsupported axis: ${axis}`);
+        assertNever(axis, `Unsupported axis: ${axis as string}`);
     }
   };
 

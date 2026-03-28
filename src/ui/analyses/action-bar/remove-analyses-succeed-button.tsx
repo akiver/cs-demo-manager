@@ -12,9 +12,9 @@ export function RemoveAnalysesSucceedButton() {
   const analysesSucceed = analyses.filter((analysis) => analysis.status === AnalysisStatus.InsertSuccess);
   const isDisabled = analysesSucceed.length === 0;
 
-  const onClick = () => {
+  const onClick = async () => {
     const checksums = analysesSucceed.map((analysis) => analysis.demoChecksum);
-    client.send({
+    await client.send({
       name: RendererClientMessageName.RemoveDemosFromAnalyses,
       payload: checksums,
     });

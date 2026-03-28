@@ -8,11 +8,11 @@ import { useNavigateToMatch } from 'csdm/ui/hooks/use-navigate-to-match';
 export function SeeMatchItem() {
   const selectedAnalysis = useSelectedAnalysis();
   const navigateToMatch = useNavigateToMatch();
-  const onClick = () => {
+  const onClick = async () => {
     if (selectedAnalysis === undefined) {
       return;
     }
-    navigateToMatch(selectedAnalysis.demoChecksum);
+    await navigateToMatch(selectedAnalysis.demoChecksum);
   };
   const isDisabled = selectedAnalysis === undefined || selectedAnalysis.status !== AnalysisStatus.InsertSuccess;
 

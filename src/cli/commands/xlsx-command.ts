@@ -30,7 +30,7 @@ export class XlsxCommand extends ExportCommand {
     console.log(this.getDescription());
     console.log('');
     console.log(
-      `Usage: csdm ${XlsxCommand.Name} demoPaths... ${this.commonFlags.map((flag) => `[${flag}]`)} [${this.singleFlag}] [${this.sheetsFlag}]`,
+      `Usage: csdm ${XlsxCommand.Name} demoPaths... ${this.commonFlags.map((flag) => `[${flag}]`).join(' ')} [${this.singleFlag}] [${this.sheetsFlag}]`,
     );
     console.log('');
     console.log('Demos path can be either a .dem files path or a directory. It can be relative or absolute.');

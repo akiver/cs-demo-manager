@@ -43,44 +43,44 @@ export function MatchHeatmapFilters() {
       />
       <HeatmapSelectEvent
         event={event}
-        onChange={(event) => {
-          fetchPoints({ event });
+        onChange={async (event) => {
+          await fetchPoints({ event });
         }}
       />
       <RadarLevelSelect
         mapName={mapName}
         game={game}
-        onChange={(radarLevel) => {
-          fetchPoints({ radarLevel });
+        onChange={async (radarLevel) => {
+          await fetchPoints({ radarLevel });
         }}
         selectedRadarLevel={radarLevel}
       />
       <RoundsSelect
-        onChange={(rounds) => {
-          fetchPoints({ rounds });
+        onChange={async (rounds) => {
+          await fetchPoints({ rounds });
         }}
         rounds={match.rounds}
         selectedRoundNumbers={rounds}
       />
       <HeatmapSideSelect
         sides={sides}
-        onChange={(sides) => {
-          fetchPoints({ sides });
+        onChange={async (sides) => {
+          await fetchPoints({ sides });
         }}
       />
       <TeamsSelect
         teamNameA={match.teamA.name}
         teamNameB={match.teamB.name}
         selectedTeamNames={teamNames}
-        onChange={(teamName: string | undefined) => {
-          fetchPoints({ teamNames: teamName ? [teamName] : [] });
+        onChange={async (teamName: string | undefined) => {
+          await fetchPoints({ teamNames: teamName ? [teamName] : [] });
         }}
       />
       <PlayersSelect
         players={match.players}
         selectedSteamIds={steamIds}
-        onChange={(steamIds: string[]) => {
-          fetchPoints({ steamIds });
+        onChange={async (steamIds: string[]) => {
+          await fetchPoints({ steamIds });
         }}
       />
       <div className="flex flex-wrap gap-x-8">

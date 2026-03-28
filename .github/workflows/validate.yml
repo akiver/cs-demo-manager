@@ -51,7 +51,7 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint -- --concurrency 2
+        run: npm run lint
 
       - name: Code format
         run: npm run format -- --check

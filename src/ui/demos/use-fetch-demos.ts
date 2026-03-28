@@ -31,7 +31,7 @@ export function useFetchDemos() {
         name: RendererClientMessageName.FetchDemosTable,
         payload: filter,
       });
-      updateSettings({
+      await updateSettings({
         sources: options?.sources ?? sources,
         types: options?.types ?? types,
         games: options?.games ?? games,

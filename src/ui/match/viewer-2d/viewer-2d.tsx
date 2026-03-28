@@ -128,7 +128,7 @@ export function Viewer2D() {
   });
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
+    const onKeyDown = async (event: KeyboardEvent) => {
       switch (event.key.toLowerCase()) {
         case ' ':
           event.preventDefault();
@@ -136,7 +136,7 @@ export function Viewer2D() {
             toggleMode();
             isHoldingSpace.current = true;
           } else if (!event.repeat) {
-            playPause();
+            await playPause();
           }
           break;
         case 'escape':

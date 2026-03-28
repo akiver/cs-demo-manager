@@ -10,6 +10,6 @@ export function getGameName(game: Game) {
     case Game.CS2LT:
       return 'CS2 Limited Test';
     default:
-      assertNever(game, `Unknown game: ${game}`);
+      assertNever(game, `Unknown game: ${game as string}`);
   }
 }

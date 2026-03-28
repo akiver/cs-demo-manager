@@ -37,7 +37,6 @@ export function SteamRuntimeScriptLocation() {
           ...(isEnabled !== undefined ? { customCs2SteamRuntimeScriptLocationEnabled: isEnabled } : {}),
           ...(executablePath !== undefined ? { cs2SteamRuntimeScriptPath: executablePath } : {}),
         };
-        console.log(payload);
         await updateSettings(payload);
       }}
     />

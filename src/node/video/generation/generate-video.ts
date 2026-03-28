@@ -173,7 +173,7 @@ export async function generateVideo(parameters: Parameters) {
 
     // Wait a few seconds before deleting files because they may still locked by software processes
     await sleep(2000);
-    cleanupFiles();
+    await cleanupFiles();
   }
   signal.addEventListener('abort', onAbort, { once: true });
 
@@ -282,7 +282,7 @@ export async function generateVideo(parameters: Parameters) {
       throw abortError;
     }
 
-    cleanupFiles();
+    await cleanupFiles();
     throw error;
   } finally {
     await uninstallCounterStrikeServerPlugin(game);

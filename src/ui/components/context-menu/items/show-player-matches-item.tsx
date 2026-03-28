@@ -11,9 +11,9 @@ type Props = {
 export function ShowPlayerMatchesItem({ steamIds }: Props) {
   const navigate = useNavigate();
 
-  const onClick = () => {
+  const onClick = async () => {
     const url = buildPlayerMatchesPath(steamIds[0]);
-    navigate(url);
+    await navigate(url);
   };
 
   return (

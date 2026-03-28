@@ -44,7 +44,7 @@ function useDemoSourceImageSrc(source: DemoSource) {
       fileName = 'unknown.png';
       break;
     default:
-      return assertNever(source, `Unknown source: ${source}`);
+      return assertNever(source, `Unknown source: ${source as string}`);
   }
 
   return `file://${window.csdm.IMAGES_FOLDER_PATH}/sources/${fileName}`;

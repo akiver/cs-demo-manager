@@ -48,8 +48,8 @@ function NavigateToMatchItem({ demos }: NavigateToMatchItemProps) {
     return !isDemoInDatabase(selectedDemo.checksum) || isDemoAnalysisInProgress(selectedDemo.checksum);
   };
 
-  const onClick = () => {
-    navigateToMatch(demos[0].checksum);
+  const onClick = async () => {
+    await navigateToMatch(demos[0].checksum);
   };
 
   return (

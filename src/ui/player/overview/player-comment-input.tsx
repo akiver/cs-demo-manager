@@ -11,8 +11,8 @@ export function PlayerCommentInput() {
     <CommentInput
       isResizable={true}
       currentComment={player.comment}
-      updateComment={(comment) => {
-        updateComment({
+      updateComment={async (comment) => {
+        await updateComment({
           steamId: player.steamId,
           comment,
         });

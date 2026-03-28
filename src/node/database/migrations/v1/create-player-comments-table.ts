@@ -12,5 +12,4 @@ const createPlayerCommentsTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createPlayerCommentsTable;

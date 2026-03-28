@@ -4,16 +4,16 @@ import { useClipboard } from 'csdm/ui/hooks/use-clipboard';
 
 type Props = {
   label: ReactNode;
-  value: ReactNode;
+  value: string | number;
   isCopyable?: boolean;
 };
 
 export function DemoField({ label, value, isCopyable }: Props) {
   const { copyToClipboard } = useClipboard();
 
-  const onClick = () => {
+  const onClick = async () => {
     if (isCopyable) {
-      copyToClipboard(String(value));
+      await copyToClipboard(String(value));
     }
   };
 
