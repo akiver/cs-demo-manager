@@ -26,7 +26,10 @@ export function useFetchMatches() {
       };
       dispatch(fetchMatchesStart());
       await updateSettings(payload);
-      const matches = await client.send({ name: RendererClientMessageName.FetchMatchesTable, payload });
+      const matches = await client.send({
+        name: RendererClientMessageName.FetchMatchesTable,
+        payload,
+      });
       dispatch(
         fetchMatchesSuccess({
           matches,

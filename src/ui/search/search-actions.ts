@@ -24,9 +24,10 @@ export const jumpChanged = createAction<{ jump: TriStateFilter }>('search/jumpCh
 export const throughSmokeChanged = createAction<{ throughSmoke: TriStateFilter }>('search/throughSmokeChanged');
 export const teamKillChanged = createAction<{ teamKill: TriStateFilter }>('search/teamKillChanged');
 export const collateralKillChanged = createAction<{ collateralKill: TriStateFilter }>('search/collateralKillChanged');
-export const periodChanged = createAction<{ startDate: string | undefined; endDate: string | undefined }>(
-  'search/periodChanged',
-);
+export const periodChanged = createAction<{
+  startDate: string | undefined;
+  endDate: string | undefined;
+}>('search/periodChanged');
 export const searchStart = createAction('search/searchStart');
 export const searchSuccess = createAction<{ result: SearchResult }>('search/searchSuccess');
 export const searchError = createAction<{ errorCode: ErrorCode }>('search/searchError');

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import fs from 'fs-extra';
 import { WebSocketServer as WSServer } from 'ws';
-import { createServer, createLogger } from 'vite';
+import { createServer, createLogger } from 'vite-plus';
 import electronPath from 'electron';
 import esbuild from 'esbuild';
 import chokidar from 'chokidar';
@@ -88,7 +88,7 @@ async function buildAndWatchRendererProcessBundle() {
       watch: {},
     },
     logLevel: 'warn',
-    configFile: path.join(rootFolderPath, 'vite.config.mts'),
+    configFile: path.join(rootFolderPath, 'vite.config.ts'),
     define: {
       ...commonDefine,
       REACT_STRICT_MODE_ENABLED: process.env.REACT_STRICT_MODE_ENABLED ?? false,

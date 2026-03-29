@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import fs from 'node:fs/promises';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
 import { Perspective } from 'csdm/common/types/perspective';
 import type { PlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
 import { generatePlayerHighlightsJsonFile } from './generate-player-highlights-json-file';
