@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vite-plus/test';
 import type { Kill } from 'csdm/common/types/kill';
 import type { Match } from 'csdm/common/types/match';
 import type { MatchPlayer } from 'csdm/common/types/match-player';

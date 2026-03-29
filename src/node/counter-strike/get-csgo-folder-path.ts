@@ -7,7 +7,9 @@ import { Game } from 'csdm/common/types/counter-strike';
 import { getCustomCounterStrikeExecutablePath } from './get-custom-counter-strike-executable-path';
 import { isWindows } from '../os/is-windows';
 
-type LibraryFolders = { libraryfolders: Record<string, { path: string; apps: Record<string, string> }> };
+type LibraryFolders = {
+  libraryfolders: Record<string, { path: string; apps: Record<string, string> }>;
+};
 
 /**
  * Return the path to the "Counter-Strike Global Offensive" folder.

@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
@@ -22,7 +22,7 @@ jobs:
           EOF
 
       - name: Upload build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: csgo-macos
           path: static/csdm.dylib
@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
@@ -64,14 +64,14 @@ jobs:
 
       - name: Upload CS:GO binary
         if: steps.check-changes.outputs.changed == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: csgo-linux
           path: static/csdm_client.so
 
       - name: Upload CS2 binary
         if: steps.check-changes.outputs.changed == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cs2-linux
           path: static/cs2/libserver.so
@@ -82,12 +82,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
       - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v1.3.1
+        uses: microsoft/setup-msbuild@v3
 
       - name: Build CS:GO binary
         run: |
@@ -100,13 +100,13 @@ jobs:
           msbuild /p:Configuration=Release /p:Platform=x64 cs2-server-plugin.sln
 
       - name: Upload CS:GO binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: csgo-windows
           path: static/csdm.dll
 
       - name: Upload CS2 binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cs2-windows
           path: static/cs2/server.dll
@@ -117,10 +117,10 @@ jobs:
     needs: [build-macos, build-linux, build-windows]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
 
@@ -151,7 +151,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.check-artifacts.outputs.linux_artifacts_exist == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GH_TOKEN }}
           commit-message: 'chore: update CS server binaries'

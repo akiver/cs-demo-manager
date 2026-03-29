@@ -29,17 +29,18 @@
     "dev": "node ./scripts/develop.mjs",
     "dev:cli": "node ./scripts/develop-cli.mjs",
     "electron": "electron ./out/main.js",
-    "format": "oxfmt",
+    "format": "vp fmt",
     "i18n:extract": "lingui extract --config ./lingui.config.ts --clean --overwrite && lingui extract --config ./src/electron-main/lingui.config.ts --clean --overwrite",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix",
+    "lint": "vp lint",
+    "lint:fix": "vp lint --fix",
     "package": "electron-builder --config electron-builder.config.mjs",
     "package:dir": "npm run package -- --dir",
     "postinstall": "electron-builder install-app-deps && node ./scripts/postinstall.mjs && node ./scripts/build-linter-rules.mjs",
+    "prepare": "vp config",
     "t": "npm run test",
     "tw": "npm run test:watch",
-    "test": "vitest --run",
-    "test:watch": "vitest"
+    "test": "vp test",
+    "test:watch": "vp test --watch"
   },
   "devDependencies": {
     "@akiver/boiler-writter": "1.7.0",
@@ -107,9 +108,6 @@
     "motion": "12.35.1",
     "navigation-api-types": "0.6.1",
     "node-stream-zip": "1.15.0",
-    "oxfmt": "^0.42.0",
-    "oxlint": "1.57.0",
-    "oxlint-tsgolint": "0.17.4",
     "pg": "8.20.0",
     "react": "19.2.4",
     "react-day-picker": "9.14.0",
@@ -133,18 +131,21 @@
     "unist-util-visit": "5.1.0",
     "unzipper": "0.12.3",
     "vdf-parser": "1.2.1",
-    "vite": "8.0.0",
-    "vitest": "4.1.0",
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vite-plus": "latest",
     "wavesurfer.js": "7.12.1",
     "ws": "8.19.0"
   },
   "overrides": {
     "esbuild": "0.27.3",
-    "node-gyp": "12.2.0"
+    "node-gyp": "12.2.0",
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
   },
   "engines": {
     "node": "24"
   },
+  "packageManager": "npm@11.12.1",
   "download": {
     "url": "https://cs-demo-manager.com/download"
   },

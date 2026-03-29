@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import fs from 'node:fs/promises';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
 import type { Round } from '../launcher/watch-player-rounds';
 import { generatePlayerRoundsJsonFile } from './generate-player-rounds-json-file';
 import { Game } from 'csdm/common/types/counter-strike';

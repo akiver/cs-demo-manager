@@ -57,7 +57,9 @@ export function TeamHeatmapFilters() {
           await fetchPoints({ players: [...players, player] });
         }}
         onPlayerRemoved={async (player) => {
-          await fetchPoints({ players: players.filter(({ steamId }) => steamId !== player.steamId) });
+          await fetchPoints({
+            players: players.filter(({ steamId }) => steamId !== player.steamId),
+          });
         }}
       />
       <RadarLevelSelect
