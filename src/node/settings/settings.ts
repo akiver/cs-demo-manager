@@ -156,7 +156,7 @@ export type VideoSettings = {
   showAssists: boolean;
   recordAudio: boolean;
   concatenateSequences: boolean;
-  concatenatedFileName: string;
+  outputFileName: string;
   playerVoicesEnabled: boolean;
   ffmpegSettings: FfmpegSettings;
   outputFolderPath: string;

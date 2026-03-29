@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vite-plus/test';
 import { replaceFilenamePlaceholders } from './replace-filename-placeholders';
 import { Game } from 'csdm/common/types/counter-strike';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
@@ -55,18 +55,24 @@ describe('replaceFilenamePlaceholders', () => {
   });
 
   it('should replace {date} with current date in YYYY-MM-DD format', () => {
+    vi.setSystemTime(new Date(2025, 2, 29, 12, 0, 0));
     const result = replaceFilenamePlaceholders('{date}', mockVideo);
-    expect(result).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(result).toBe('2025-03-29');
+    vi.useRealTimers();
   });
 
   it('should replace {time} with current time in HH-MM-SS format', () => {
+    vi.setSystemTime(new Date(2025, 2, 29, 14, 30, 45));
     const result = replaceFilenamePlaceholders('{time}', mockVideo);
-    expect(result).toMatch(/^\d{2}-\d{2}-\d{2}$/);
+    expect(result).toBe('14-30-45');
+    vi.useRealTimers();
   });
 
   it('should replace multiple placeholders including date and time', () => {
+    vi.setSystemTime(new Date(2025, 2, 29, 14, 30, 45));
     const result = replaceFilenamePlaceholders('{map}_{date}_{time}', mockVideo);
-    expect(result).toMatch(/^de_mirage_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}$/);
+    expect(result).toBe('de_mirage_2025-03-29_14-30-45');
+    vi.useRealTimers();
   });
 
   it('should return "output" when filename contains only whitespace', () => {
@@ -80,11 +86,13 @@ describe('replaceFilenamePlaceholders', () => {
   });
 
   it('should handle all placeholders together', () => {
+    vi.setSystemTime(new Date(2025, 2, 29, 14, 30, 45));
     const result = replaceFilenamePlaceholders(
       '{map}_{game}_{encoder}_{resolution}_{framerate}fps_{checksum}',
       mockVideo,
     );
     expect(result).toBe('de_mirage_CS2_FFmpeg_1920x1080_60fps_abc123xyz');
+    vi.useRealTimers();
   });
 
   it('should sanitize colon character', () => {

@@ -23,7 +23,7 @@ export type Video = {
   height: number;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
-  concatenatedFileName: string;
+  outputFileName: string;
   ffmpegSettings: FfmpegSettings;
   outputFolderPath: string;
   sequences: Sequence[];
