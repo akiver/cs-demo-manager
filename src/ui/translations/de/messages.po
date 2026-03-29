@@ -5025,52 +5025,6 @@ msgctxt "Checkbox label"
 msgid "Concatenate sequences into 1 video"
 msgstr "Sequenzen in 1 Video zusammenführen"
 
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "Map name (e.g., de_dust2)"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "Match checksum/ID"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "Game (CS2 or CSGO)"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "Current date (YYYY-MM-DD)"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "Current time (HH-MM-SS)"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-#: src/ui/videos/video-entry.tsx
-msgid "Encoder software"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "Resolution (e.g., 1920x1080)"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "Framerate (e.g., 30)"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "Available placeholders:"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgctxt "Input label"
-msgid "Output filename"
-msgstr ""
-
-#: src/ui/match/video/concatenated-file-name-input.tsx
-msgid "?"
-msgstr ""
-
 #: src/ui/match/video/death-notices-duration-input.tsx
 msgid "Death notices duration (seconds)"
 msgstr "Dauer von Todesmeldungen (Sekunden)"
@@ -5284,6 +5238,52 @@ msgstr "HLAE wurde aktualisiert"
 #: src/ui/match/video/hlae/hlae-update-button.tsx
 msgid "An error occurred while updating HLAE"
 msgstr "Beim Aktualisieren von HLAE ist ein Fehler aufgetreten"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Map name (e.g., de_dust2)"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Match checksum/ID"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Game (CS2 or CSGO)"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Current date (YYYY-MM-DD)"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Current time (HH-MM-SS)"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Encoder software"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Resolution (e.g., 1920x1080)"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Framerate (e.g., 30)"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Available placeholders:"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgctxt "Input label"
+msgid "Output filename"
+msgstr ""
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "?"
+msgstr ""
 
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
