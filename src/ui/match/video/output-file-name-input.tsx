@@ -5,7 +5,7 @@ import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { Tooltip } from 'csdm/ui/components/tooltip';
-import { AVAILABLE_PLACEHOLDERS } from './concatenated-file-name-utils';
+import { AVAILABLE_PLACEHOLDERS } from './output-file-name-utils';
 
 function getPlaceholderDescription(placeholder: (typeof AVAILABLE_PLACEHOLDERS)[number]) {
   switch (placeholder) {
@@ -28,13 +28,13 @@ function getPlaceholderDescription(placeholder: (typeof AVAILABLE_PLACEHOLDERS)[
   }
 }
 
-export function ConcatenatedFileNameInput() {
+export function OutputFileNameInput() {
   const { settings, updateSettings } = useVideoSettings();
 
   const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     const fileName = event.target.value.trim();
     await updateSettings({
-      concatenatedFileName: fileName,
+      outputFileName: fileName,
     });
   };
 
@@ -66,7 +66,7 @@ export function ConcatenatedFileNameInput() {
     <div className="flex items-center gap-x-8">
       <TextInput
         label={<Trans context="Input label">Output filename</Trans>}
-        defaultValue={settings.concatenatedFileName}
+        defaultValue={settings.outputFileName}
         onBlur={onBlur}
         placeholder="output"
       />

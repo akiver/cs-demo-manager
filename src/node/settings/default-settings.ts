@@ -78,7 +78,7 @@ export const defaultSettings: Settings = {
     recordingOutput: RecordingOutput.Video,
     closeGameAfterRecording: true,
     concatenateSequences: false,
-    concatenatedFileName: '',
+    outputFileName: '',
     showXRay: true,
     showAssists: true,
     showOnlyDeathNotices: true,

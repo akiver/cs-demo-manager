@@ -46,7 +46,7 @@ export type Parameters = {
   height: number;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
-  concatenatedFileName: string;
+  outputFileName: string;
   trueView: boolean;
   ffmpegSettings: Omit<FfmpegSettings, 'customLocationEnabled'>;
   outputFolderPath: string;
@@ -70,7 +70,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
     sequences,
     outputFolderPath,
     concatenateSequences,
-    concatenatedFileName,
+    outputFileName,
     ffmpegSettings,
     game,
     onSequenceStart,
@@ -120,7 +120,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
   const shouldConcatenate = concatenateSequences && sequences.length > 1;
   if (shouldConcatenate) {
     onConcatenateSequencesStart();
-    const processedFileName = replaceFilenamePlaceholders(concatenatedFileName, {
+    const processedFileName = replaceFilenamePlaceholders(outputFileName, {
       mapName: options.mapName,
       checksum: options.checksum,
       game: options.game,
