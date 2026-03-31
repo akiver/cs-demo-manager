@@ -236,7 +236,11 @@ export class JSONActionsFileGenerator {
   }
 
   private getValidTick(tick: number): number {
-    return Math.max(64, tick);
+    // Commands must be executed at least ~1.5 seconds (tickrate 64) after a "demo_gototick 0" command because the game
+    // may skip these first ticks.
+    // https://github.com/akiver/cs-demo-manager/issues/1343
+    // The demo in this issue starts at tick 68 after a "demo_gototick 0" command.
+    return Math.max(96, tick);
   }
 
   private get actions() {

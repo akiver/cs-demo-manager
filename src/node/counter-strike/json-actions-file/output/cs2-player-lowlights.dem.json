@@ -3,23 +3,23 @@
     "actions": [
       {
         "cmd": "tv_listen_voice_indices -1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "tv_listen_voice_indices_h -1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "alias \"voice_all\" \"tv_listen_voice_indices -1; tv_listen_voice_indices_h -1; echo Listening to all players\"",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "echo \"[CSDM] Type voice_all to listen to all players\"",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "demo_gototick 872",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "spec_mode 1",

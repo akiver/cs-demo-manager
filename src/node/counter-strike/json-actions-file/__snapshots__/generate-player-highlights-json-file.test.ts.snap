@@ -6,15 +6,15 @@ exports[`Generate player's highlights JSON file > CS2 1`] = `
     "actions": [
       {
         "cmd": "tv_listen_voice_indices -1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "tv_listen_voice_indices_h -1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "demo_gototick 872",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "spec_mode 1",
@@ -67,11 +67,11 @@ exports[`Generate player's highlights JSON file > CSGO 1`] = `
     "actions": [
       {
         "cmd": "voice_enable 1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "demo_gototick 872",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "spec_lock_to_accountid fakePlayerSteamId",
