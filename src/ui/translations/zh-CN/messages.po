@@ -2673,6 +2673,10 @@ msgctxt "Tooltip"
 msgid "This demo has not been analyzed yet."
 msgstr "这个 demo 还没有被分析过。"
 
+#: src/ui/demos/action-bar/analyze-not-analyzed-demos-button.tsx
+msgid "Analyze all demos"
+msgstr ""
+
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
 msgid "Include subfolders"
