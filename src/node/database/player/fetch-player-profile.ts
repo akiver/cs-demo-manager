@@ -22,7 +22,7 @@ export async function fetchPlayerProfile(steamId: string, filters: MatchFilters)
     matches,
     mapsStats,
     clutches,
-    tagIds,
+    tagIdsPerSteamId,
   ] = await Promise.all([
     fetchPlayer(steamId, filters),
     fetchPlayerCompetitiveRankHistory(steamId, filters),
@@ -45,7 +45,7 @@ export async function fetchPlayerProfile(steamId: string, filters: MatchFilters)
     matches,
     mapsStats,
     clutches,
-    tagIds,
+    tagIds: tagIdsPerSteamId[steamId] ?? [],
   };
 
   return playerProfile;

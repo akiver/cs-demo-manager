@@ -102,7 +102,7 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
     .execute();
 
   const steamIds = rows.map((row) => row.steamId);
-  const [collateralKillCountPerSteamId, playersClutchStats, tagIds] = await Promise.all([
+  const [collateralKillCountPerSteamId, playersClutchStats, tagIdsPerSteamId] = await Promise.all([
     fetchCollateralKillCountPerSteamId(checksum),
     fetchPlayersClutchStats([checksum], steamIds),
     fetchPlayersTagIds(steamIds),
@@ -130,7 +130,7 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
       vsFiveCount: clutchStats?.vsFiveCount ?? 0,
       vsFiveWonCount: clutchStats?.vsFiveWonCount ?? 0,
       vsFiveLostCount: clutchStats?.vsFiveLostCount ?? 0,
-      tagIds,
+      tagIds: tagIdsPerSteamId[row.steamId] ?? [],
     };
   });
 

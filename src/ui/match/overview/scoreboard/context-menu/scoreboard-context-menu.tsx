@@ -16,14 +16,17 @@ import { IgnoreSteamAccountBanItem } from 'csdm/ui/components/context-menu/items
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { UpdatePlayerNameDialog } from 'csdm/ui/dialogs/update-player-name-dialog';
 import { UpdateNameItem } from 'csdm/ui/components/context-menu/items/update-name-item';
+import { TagsItem } from 'csdm/ui/components/context-menu/items/tags-item';
+import { PlayersTagsDialog } from 'csdm/ui/players/players-tags-dialogs';
 
 type Props = {
   steamId: string;
   name: string;
   demoPath: string;
+  tagIds: string[];
 };
 
-export function ScoreboardContextMenu({ steamId, name, demoPath }: Props) {
+export function ScoreboardContextMenu({ steamId, name, demoPath, tagIds }: Props) {
   const match = useCurrentMatch();
   const { showDialog } = useDialog();
   const navigateToMatchPlayer = useNavigateToMatchPlayer();
@@ -31,6 +34,10 @@ export function ScoreboardContextMenu({ steamId, name, demoPath }: Props) {
 
   const onUpdateNameClick = () => {
     showDialog(<UpdatePlayerNameDialog steamId={steamId} name={name} />);
+  };
+
+  const onTagsClick = () => {
+    showDialog(<PlayersTagsDialog steamIds={[steamId]} defaultTagIds={tagIds} />);
   };
 
   return (
@@ -48,6 +55,7 @@ export function ScoreboardContextMenu({ steamId, name, demoPath }: Props) {
       <Separator />
       <CopyPlayerDataItem steamId={steamId} />
       <Separator />
+      <TagsItem onClick={onTagsClick} />
       {isVideoGenerationAvailable(match.game) && <GeneratePlayerVideoItem steamId={steamId} />}
       <PinPlayerItem steamId={steamId} />
       <IgnoreSteamAccountBanItem steamId={steamId} />

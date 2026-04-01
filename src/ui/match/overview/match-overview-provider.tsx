@@ -11,6 +11,8 @@ import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu
 import type { TableInstance } from 'csdm/ui/components/table/table-types';
 import { useTable } from 'csdm/ui/components/table/use-table';
 import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
+import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { PlayersTagsDialog } from 'csdm/ui/players/players-tags-dialogs';
 
 function getRowId(player: MatchPlayer) {
   return player.steamId;
@@ -33,6 +35,7 @@ export function MatchOverviewProvider({ children }: Props) {
   const { showContextMenu } = useContextMenu();
   const columns = useScoreboardColumns(isDefuseMap);
   const navigateToMatchPlayer = useNavigateToMatchPlayer();
+  const { showDialog } = useDialog();
 
   const onContextMenu = (event: MouseEvent, table: TableInstance<MatchPlayer>) => {
     const players = table.getSelectedRows();
@@ -44,12 +47,32 @@ export function MatchOverviewProvider({ children }: Props) {
 
     showContextMenu(
       event,
-      <ScoreboardContextMenu steamId={player.steamId} name={player.name} demoPath={match.demoFilePath} />,
+      <ScoreboardContextMenu
+        steamId={player.steamId}
+        name={player.name}
+        demoPath={match.demoFilePath}
+        tagIds={player.tagIds}
+      />,
     );
   };
 
   const navigateToPlayer = async (player: MatchPlayer) => {
     await navigateToMatchPlayer(match.checksum, player.steamId);
+  };
+
+  const onKeyDown = (event: KeyboardEvent, table: TableInstance<MatchPlayer>) => {
+    switch (event.key) {
+      case 't':
+        const players = table.getSelectedRows();
+        // It's not possible to select multiple players on the scoreboard
+        if (players.length !== 1) {
+          return;
+        }
+
+        const [player] = players;
+        showDialog(<PlayersTagsDialog defaultTagIds={player.tagIds} steamIds={[player.steamId]} />);
+        break;
+    }
   };
 
   const tableTeamA = useTable({
@@ -60,6 +83,7 @@ export function MatchOverviewProvider({ children }: Props) {
     getRowId,
     onContextMenu,
     onRowDoubleClick: navigateToPlayer,
+    onKeyDown,
     onSelectWithKeyboard: navigateToPlayer,
     sortedColumn: { id: 'damage-health', direction: 'desc' },
   });
@@ -72,6 +96,7 @@ export function MatchOverviewProvider({ children }: Props) {
     getRowId,
     onContextMenu,
     onRowDoubleClick: navigateToPlayer,
+    onKeyDown,
     onSelectWithKeyboard: navigateToPlayer,
     sortedColumn: { id: 'damage-health', direction: 'desc' },
   });
