@@ -100,6 +100,10 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.Esplay;
   }
 
+  if (serverName.includes('pracc.com')) {
+    return DemoSource.Pracc;
+  }
+
   return DemoSource.Unknown;
 }
 

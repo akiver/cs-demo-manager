@@ -87,6 +87,11 @@ export function useGetDemoSourceName() {
           context: 'Demo source name',
           message: 'Valve',
         });
+      case DemoSource.Pracc:
+        return t({
+          context: 'Demo source name',
+          message: 'PRACC',
+        });
       case DemoSource.Unknown:
         return t({
           context: 'Demo source name',

@@ -2838,6 +2838,11 @@ msgid "Valve"
 msgstr "Valve"
 
 #: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "PRACC"
+msgstr "PRACC"
+
+#: src/ui/demos/use-demo-sources.ts
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Unknown"

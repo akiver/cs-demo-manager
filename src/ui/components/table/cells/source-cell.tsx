@@ -23,6 +23,7 @@ function useDemoSourceImageSrc(source: DemoSource) {
     case DemoSource.Gamersclub:
     case DemoSource.PerfectWorld:
     case DemoSource.Renown:
+    case DemoSource.Pracc:
       fileName = isDarkTheme ? `${source}-white.png` : `${source}-black.png`;
       break;
     case DemoSource.Challengermode:
