@@ -28,7 +28,6 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       allowHiding: false,
       allowResize: false,
       allowSort: false,
-      allowMove: false,
     },
     {
       id: 'tags',
@@ -45,7 +44,6 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       Cell: TagsCell,
       width: 20,
       allowResize: false,
-      allowMove: true,
       allowSort: false,
     },
     {
@@ -63,7 +61,6 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       Cell: BansCell,
       width: 20,
       allowResize: false,
-      allowMove: false,
       allowSort: false,
     },
     {
@@ -82,7 +79,6 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       Cell: RankCell,
       allowResize: false,
       allowSort: false,
-      allowMove: false,
     },
     {
       id: 'name',
