@@ -7602,6 +7602,10 @@ msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.4
 msgstr "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.1.2\"</0> in your Steam library to use this version."
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
+msgstr "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
 msgstr "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
 

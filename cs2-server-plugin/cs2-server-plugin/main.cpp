@@ -658,5 +658,27 @@ CON_COMMAND(csdm_info, "Prints CS:DM plugin info")
         std::lock_guard<std::mutex> lock(sequencesMutex);
         Log("Sequence count: %d", sequences.size());
     }
+
+    auto engine = GetEngine();
+    if (engine == NULL) {
+        Log("Engine interface not found");
+        return;
+    }
+
+    Log("Is connected %d", engine->IsConnected());
+    Log("Is playing demo %d", engine->IsPlayingDemo());
+    Log("Is recording demo %d", engine->IsRecordingDemo());
+    Log("Map %s", engine->GetLevelNameShort());
+    int width, height;
+    engine->GetScreenSize(width, height);
+    Log("Screen size: %dx%d", width, height);
+
+    auto demo = engine->GetDemoPlayer();
+    if (demo == NULL) {
+        Log("Demo player interface not found");
+        return;
+    }
+
+    Log("Demo tick: %d", demo->GetDemoTick());
 }
 #endif
