@@ -7603,6 +7603,10 @@ msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.4
 msgstr "你需要在 Steam 庫中選擇 CS2 測試版分支 <0>\"1.41.1.2\"</0> 搭配使用，或者使用定製構建版本。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
 msgstr "只有當你想要觀看與最新的 CS2 更新不兼容的舊 demo 時才更改這個選項！"
 

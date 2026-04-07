@@ -7,6 +7,7 @@ export const CS2PluginVersion = {
   '14094': '14094', // Support between the 28th July 2025 update ("Animation") and the 14th August 2025 update.
   '14103': '14103', // Support between the 14th August 2025 update and the 17th September 2025 update.
   '14112': '14112', // Support between the 17th September 2025 update and the 15th October 2025 update.
+  '14152': '14152', // Support between the 15th October 2025 update and the 8th April 2026 update ("Animgraph 2")
   latest: 'latest',
 } as const;
 
