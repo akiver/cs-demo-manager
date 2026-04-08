@@ -18,6 +18,7 @@ export async function getHlaeVersionFromExecutable(executablePath: string): Prom
   return new Promise((resolve, reject) => {
     const sanitizedExecutablePath = sanitizeExecutablePath(executablePath);
 
+    // TODO find an alternative to PowerShell, it's too slow, ~6s on my machine
     exec(
       `powershell -Command "(Get-Item '${sanitizedExecutablePath}').VersionInfo.FileVersion"`,
       { windowsHide: true },
