@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es2022",
+    "module": "ESNext",
     "jsx": "react",
     "target": "ESNext",
     "moduleResolution": "bundler",
@@ -11,7 +11,6 @@
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "noErrorTruncation": true,
-    "strict": true,
     "paths": {
       "csdm/*": ["./src/*"]
     }
