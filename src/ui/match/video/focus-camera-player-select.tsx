@@ -4,6 +4,7 @@ import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
+import { CollapseTransition } from 'csdm/ui/components/transitions/collapse-transition';
 
 type Props = {
   playerFocusSteamId: string | undefined;
@@ -47,17 +48,17 @@ export function FocusCameraPlayerSelect({ playerFocusSteamId, onChange, label }:
           }}
         />
       </div>
-      <div>
+      <CollapseTransition isVisible={!isDisabled}>
         <Select
           options={options}
           isDisabled={isDisabled}
-          value={playerFocusSteamId}
-          onChange={(steamId: string) => {
+          value={playerFocusSteamId ?? ''}
+          onChange={(steamId) => {
             onChange(steamId);
             lastSelectedSteamId.current = steamId;
           }}
         />
-      </div>
+      </CollapseTransition>
     </div>
   );
 }

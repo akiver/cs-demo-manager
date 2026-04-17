@@ -1384,7 +1384,7 @@ msgid "Decoy"
 msgstr "Ködergranate"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
-#: src/ui/search/search.tsx
+#: src/ui/search/filters/search-event-input.tsx
 msgctxt "Input label"
 msgid "Event"
 msgstr "Ereignis"

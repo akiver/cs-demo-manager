@@ -54,7 +54,7 @@ export function KebabMenu({ children, label }: Props) {
         <EllipsisVerticalIcon className="h-full" />
       </BaseMenu.Trigger>
       <BaseMenu.Portal>
-        <BaseMenu.Positioner className="z-menu-item outline-none" sideOffset={8}>
+        <BaseMenu.Positioner className="z-1 outline-none" sideOffset={8}>
           <BaseMenu.Popup className="rounded-8 border border-gray-500 bg-gray-100 p-4 transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0">
             <BaseMenu.Arrow className="data-[side=bottom]:-top-8 data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:-bottom-8 data-[side=top]:rotate-180">
               <Arrow className="h-10 w-20" />

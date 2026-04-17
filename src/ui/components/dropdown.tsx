@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import React, { useState } from 'react';
-import { ChevronDown } from 'csdm/ui/icons/chevron-down-icon';
+import { ChevronDownIcon } from 'csdm/ui/icons/chevron-down-icon';
 import { Button } from './buttons/button';
 import { useOutsideClick } from 'csdm/ui/hooks/use-outside-click';
 
@@ -28,7 +28,7 @@ export function Dropdown({ togglerContent, children, isDisabled = false }: Props
       <Button isDisabled={isDisabled} onClick={onClick}>
         {togglerContent}
         <div className="ml-8 flex items-center">
-          <ChevronDown width={14} />
+          <ChevronDownIcon className="size-16" />
         </div>
       </Button>
       <div ref={content}>
