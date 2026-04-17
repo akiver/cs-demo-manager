@@ -170,6 +170,10 @@ export function useDemoSources() {
       name: getDemoSourceName(DemoSource.Popflash),
     },
     {
+      value: DemoSource.Pracc,
+      name: getDemoSourceName(DemoSource.Pracc),
+    },
+    {
       value: DemoSource.Renown,
       name: getDemoSourceName(DemoSource.Renown),
     },
