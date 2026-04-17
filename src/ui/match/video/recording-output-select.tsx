@@ -2,7 +2,6 @@ import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { RecordingOutput as Output } from 'csdm/common/types/recording-output';
 import { RecordingOutput } from './recording-output';
@@ -19,10 +18,8 @@ export function RecordingOutputSelect() {
 
   return (
     <div className="mb-8 flex w-[152px] flex-col gap-y-8">
-      <InputLabel>
-        <Trans context="Select label">Output</Trans>
-      </InputLabel>
       <Select
+        label={<Trans context="Select label">Output</Trans>}
         options={options}
         value={settings.recordingOutput}
         onChange={async (recordingOutput) => {

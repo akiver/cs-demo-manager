@@ -2,7 +2,6 @@ import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
@@ -27,10 +26,8 @@ export function EncoderSoftwareSelect() {
 
   return (
     <div className="mb-8 flex w-[152px] flex-col gap-y-8">
-      <InputLabel>
-        <Trans context="Select label of video encoder">Encoder software</Trans>
-      </InputLabel>
       <Select
+        label={<Trans context="Select label of video encoder">Encoder software</Trans>}
         options={options}
         value={settings.encoderSoftware}
         onChange={async (encoderSoftware) => {

@@ -20,7 +20,6 @@ import { ExternalLink } from 'csdm/ui/components/external-link';
 import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 import { ExportVoiceMode } from 'csdm/node/csgo-voice-extractor/export-voice-mode';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 import { PlayersSelect } from '../../inputs/select/players-select';
 import type { MatchTablePlayer } from 'csdm/common/types/match-table';
@@ -194,17 +193,17 @@ function SelectExportModeDialog({ onSelect, players }: SelectExportModeDialogPro
         </DialogHeader>
         <DialogContent>
           <div className="flex flex-col gap-y-8">
-            <InputLabel>
-              <Trans>Choose how you want the voice audio to be exported</Trans>
-            </InputLabel>
-            <div>
-              <Select options={options} value={mode} onChange={setMode} />
-              {players && players.length > 0 && (
-                <div className="mt-12 max-h-[220px] overflow-auto">
-                  <PlayersSelect players={players} selectedSteamIds={steamIds} onChange={setSteamIds} filter={null} />
-                </div>
-              )}
-            </div>
+            <Select
+              options={options}
+              value={mode}
+              onChange={setMode}
+              label={<Trans>Choose how you want the voice audio to be exported</Trans>}
+            />
+            {players && players.length > 0 && (
+              <div className="mt-12 max-h-[220px] overflow-auto">
+                <PlayersSelect players={players} selectedSteamIds={steamIds} onChange={setSteamIds} filter={null} />
+              </div>
+            )}
           </div>
         </DialogContent>
         <DialogFooter>

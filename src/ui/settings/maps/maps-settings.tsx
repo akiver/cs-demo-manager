@@ -6,7 +6,6 @@ import { Maps } from 'csdm/ui/settings/maps/maps';
 import { AddMapButton } from './add-map-button';
 import { ResetDefaultMapsButton } from './reset-default-maps-button';
 import { Select } from 'csdm/ui/components/inputs/select';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { useGameOptions } from 'csdm/ui/hooks/use-game-options';
 
 export function MapsSettings() {
@@ -16,11 +15,10 @@ export function MapsSettings() {
   return (
     <SettingsView>
       <div className="mb-12 flex items-center gap-x-8">
-        <InputLabel>
-          <Trans context="Select label">Game</Trans>
-        </InputLabel>
         <Select
+          label={<Trans context="Select label">Game</Trans>}
           options={gameOptions}
+          value={game}
           onChange={(game) => {
             setGame(game);
           }}

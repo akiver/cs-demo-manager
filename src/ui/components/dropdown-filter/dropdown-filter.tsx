@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
-import { ChevronDown } from 'csdm/ui/icons/chevron-down-icon';
+import { ChevronDownIcon } from 'csdm/ui/icons/chevron-down-icon';
 import { useOutsideClick } from 'csdm/ui/hooks/use-outside-click';
 import { ActiveFilterIndicator } from 'csdm/ui/components/dropdown-filter/active-filter-indicator';
 
@@ -32,7 +32,7 @@ export function DropdownFilter({ children, isDisabled, hasActiveFilter }: Props)
           <span>
             <Trans context="Button">Filters</Trans>
           </span>
-          <ChevronDown width={14} className="ml-8" />
+          <ChevronDownIcon className="ml-8 size-16" />
         </div>
         {hasActiveFilter && (
           <div className="absolute right-4 bottom-4">

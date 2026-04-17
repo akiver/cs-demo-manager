@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLingui } from '@lingui/react/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 import { SearchEvent } from 'csdm/common/types/search/search-event';
 import { Status } from 'csdm/common/types/status';
@@ -80,5 +80,15 @@ export function SearchEventInput() {
     dispatch(searchEventChanged({ event }));
   };
 
-  return <Select<SearchEvent> options={options} onChange={onChange} value={event} isDisabled={isLoading} />;
+  return (
+    <div className="flex flex-col gap-y-8">
+      <Select<SearchEvent>
+        label={<Trans context="Input label">Event</Trans>}
+        options={options}
+        onChange={onChange}
+        value={event}
+        isDisabled={isLoading}
+      />
+    </div>
+  );
 }

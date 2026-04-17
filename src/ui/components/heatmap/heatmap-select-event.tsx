@@ -1,6 +1,5 @@
 import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
@@ -57,10 +56,7 @@ export function HeatmapSelectEvent({ event, onChange }: Props) {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <InputLabel>
-        <Trans context="Input label">Event</Trans>
-      </InputLabel>
-      <Select onChange={onChange} value={event} options={options} />
+      <Select onChange={onChange} value={event} options={options} label={<Trans context="Input label">Event</Trans>} />
     </div>
   );
 }

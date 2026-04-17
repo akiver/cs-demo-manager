@@ -1,7 +1,6 @@
 import React from 'react';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Trans } from '@lingui/react/macro';
 
@@ -16,10 +15,8 @@ export function FfmpegAudioBitrateSelect() {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <InputLabel>
-        <Trans context="Input label">Audio bitrate</Trans>
-      </InputLabel>
       <Select
+        label={<Trans context="Input label">Audio bitrate</Trans>}
         options={options}
         value={settings.ffmpegSettings.audioBitrate}
         onChange={async (audioBitrate) => {

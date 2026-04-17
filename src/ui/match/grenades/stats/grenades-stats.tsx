@@ -29,17 +29,15 @@ export function GrenadesStats() {
       <div className="flex flex-col gap-y-12">
         <Panel
           header={
-            <div>
-              <GrenadeSelect
-                selectedGrenade={filters.grenade}
-                onChange={(grenade: GrenadeOption) => {
-                  setFilters({
-                    ...filters,
-                    grenade,
-                  });
-                }}
-              />
-            </div>
+            <GrenadeSelect
+              selectedGrenade={filters.grenade}
+              onChange={(grenade: GrenadeOption) => {
+                setFilters({
+                  ...filters,
+                  grenade,
+                });
+              }}
+            />
           }
         >
           <div className="grid self-start">
