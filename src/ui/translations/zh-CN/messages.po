@@ -2675,7 +2675,7 @@ msgstr "这个 demo 还没有被分析过。"
 
 #: src/ui/demos/action-bar/analyze-not-analyzed-demos-button.tsx
 msgid "Analyze all demos"
-msgstr ""
+msgstr "分析所有 demo 文件"
 
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
@@ -5252,23 +5252,23 @@ msgstr "在更新 HLAE 时发生了错误"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Map name (e.g., de_dust2)"
-msgstr ""
+msgstr "地图名称(如：de_dust2)"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Match checksum/ID"
-msgstr ""
+msgstr "比赛校验和 / ID"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Game (CS2 or CSGO)"
-msgstr ""
+msgstr "游戏 (CS2 或 CSGO)"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Current date (YYYY-MM-DD)"
-msgstr ""
+msgstr "当前日期 (YYYY-MM-DD)"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Current time (HH-MM-SS)"
-msgstr ""
+msgstr "当前时间 (HH-MM-SS)"
 
 #: src/ui/match/video/output-file-name-input.tsx
 #: src/ui/videos/video-entry.tsx
@@ -5277,24 +5277,24 @@ msgstr "编码器"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Resolution (e.g., 1920x1080)"
-msgstr ""
+msgstr "分辨率 (例如1920x1080)"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Framerate (e.g., 30)"
-msgstr ""
+msgstr "帧率(例如30)"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Available placeholders:"
-msgstr ""
+msgstr "可用的占位符："
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgctxt "Input label"
 msgid "Output filename"
-msgstr ""
+msgstr "输出文件名"
 
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "?"
-msgstr ""
+msgstr "？"
 
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
@@ -5869,11 +5869,11 @@ msgstr "文件已创建，点击此处显示"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgid "The exported data is not valid JSON."
-msgstr ""
+msgstr "导出的数据并非有效 JSON 格式。"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgid "The file extension must be <0>.json</0>"
-msgstr ""
+msgstr "文件扩展名必须是 <0>.json</0>"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgid "Video actions"
@@ -7682,7 +7682,7 @@ msgstr "以全屏模式开始游戏"
 
 #: src/ui/settings/playback/game-display-mode.tsx
 msgid "Valve removed the fullscreen option in a September 2025 game update!"
-msgstr ""
+msgstr "Valve 已在2025年9月的游戏更新中移除全屏选项！"
 
 #: src/ui/settings/playback/game-display-mode.tsx
 msgctxt "Settings title"
@@ -7826,7 +7826,7 @@ msgstr ""
 #: src/ui/settings/playback/watch-round-wait-round-end.tsx
 msgctxt "Settings title"
 msgid "Wait for round end"
-msgstr ""
+msgstr "等待回合结束"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
@@ -7905,33 +7905,33 @@ msgstr "颜色无效"
 
 #: src/ui/settings/ui/date-format-input.tsx
 msgid "Invalid date format."
-msgstr ""
+msgstr "无效的日期格式。"
 
 #: src/ui/settings/ui/date-format-input.tsx
 msgid "Defines how dates are displayed."
-msgstr ""
+msgstr "设定日期的显示方式。"
 
 #: src/ui/settings/ui/date-format-input.tsx
 msgid "See all <0>available tokens</0>."
-msgstr ""
+msgstr "点击查看所有<0>可用格式</0>。"
 
 #: src/ui/settings/ui/date-format-input.tsx
 msgctxt "Settings title"
 msgid "Date format"
-msgstr ""
+msgstr "日期格式"
 
 #: src/ui/settings/ui/date-timezone-input.tsx
 msgid "Invalid timezone."
-msgstr ""
+msgstr "无效的时区。"
 
 #: src/ui/settings/ui/date-timezone-input.tsx
 msgid "Timezone used to display dates. Uses the <0>IANA timezone format</0>."
-msgstr ""
+msgstr "用于显示日期的时区。请使用<0>IANA时区格式</0>。"
 
 #: src/ui/settings/ui/date-timezone-input.tsx
 msgctxt "Settings title"
 msgid "Date timezone"
-msgstr ""
+msgstr "时区"
 
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx
 msgid "Hardware Acceleration"
