@@ -46,7 +46,7 @@ export function Select<ValueType extends string | number = string>({
         </BaseSelect.Icon>
       </BaseSelect.Trigger>
       <BaseSelect.Portal>
-        <BaseSelect.Positioner className="z-1 outline-hidden" sideOffset={4} alignItemWithTrigger={false}>
+        <BaseSelect.Positioner className="z-select outline-hidden" sideOffset={4} alignItemWithTrigger={false}>
           <BaseSelect.Popup className="max-h-[min(24rem,var(--available-height))] min-w-(--anchor-width) origin-(--transform-origin) overflow-y-auto rounded-4 border border-gray-400 bg-gray-50 py-4 shadow-lg transition-[transform,scale,opacity] duration-100 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0">
             <BaseSelect.List className="outline-hidden">
               {options.map((option) => {
