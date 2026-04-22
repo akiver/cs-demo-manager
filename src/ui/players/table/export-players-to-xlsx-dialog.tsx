@@ -16,12 +16,21 @@ type Props = {
 };
 
 export function ExportPlayersToXlsxDialog({ steamIds, filters }: Props) {
-  const [isExporting, setIsExporting] = useState(false);
+  const [exportPayload, setExportPayload] = useState<ExportPlayersToXlsxPayload | undefined>(undefined);
   const { t } = useLingui();
   const client = useWebSocketClient();
 
-  if (isExporting) {
-    return <ExportingToXlsxDialog />;
+  if (exportPayload !== undefined) {
+    return (
+      <ExportingToXlsxDialog
+        sendStartExportMessage={async () => {
+          await client.send({
+            name: RendererClientMessageName.ExportPlayersToXlsx,
+            payload: exportPayload,
+          });
+        }}
+      />
+    );
   }
 
   return (
@@ -79,7 +88,7 @@ export function ExportPlayersToXlsxDialog({ steamIds, filters }: Props) {
           </>
         );
       }}
-      onOutputSelected={async (type, outputPath, formData) => {
+      onOutputSelected={(type, outputPath, formData) => {
         const commonPayload: Omit<ExportPlayersToXlsxPayload, 'exportEachPlayerToSingleFile' | 'outputFilePath'> = {
           steamIds,
           sheets: {
@@ -108,11 +117,7 @@ export function ExportPlayersToXlsxDialog({ steamIds, filters }: Props) {
           };
         }
 
-        await client.send({
-          name: RendererClientMessageName.ExportPlayersToXlsx,
-          payload,
-        });
-        setIsExporting(true);
+        setExportPayload(payload);
       }}
     />
   );
