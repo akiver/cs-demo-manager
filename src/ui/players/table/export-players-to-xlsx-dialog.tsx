@@ -21,7 +21,7 @@ export function ExportPlayersToXlsxDialog({ steamIds, filters }: Props) {
   const client = useWebSocketClient();
 
   if (isExporting) {
-    return <ExportingToXlsxDialog totalCount={steamIds.length} />;
+    return <ExportingToXlsxDialog />;
   }
 
   return (

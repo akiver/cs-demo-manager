@@ -23,7 +23,7 @@ export function ExportMatchesAsXlsxDialog({ matches }: Props) {
   const checksums = matches.map((match) => match.checksum);
 
   if (isExporting) {
-    return <ExportingToXlsxDialog totalCount={matches.length} />;
+    return <ExportingToXlsxDialog />;
   }
 
   return (

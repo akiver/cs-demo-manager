@@ -26,11 +26,7 @@ function Header() {
   );
 }
 
-type Props = {
-  totalCount: number;
-};
-
-export function ExportingToXlsxDialog({ totalCount }: Props) {
+export function ExportingToXlsxDialog() {
   const { t } = useLingui();
   const client = useWebSocketClient();
   const { hideDialog } = useDialog();
@@ -75,7 +71,7 @@ export function ExportingToXlsxDialog({ totalCount }: Props) {
       client.off(RendererServerMessageName.ExportToXlsxSuccess, onSuccess);
       client.off(RendererServerMessageName.ExportToXlsxError, onError);
     };
-  }, [client, totalCount]);
+  }, [client]);
 
   const renderRevealInExplorerButton = () => {
     if (output === undefined) {
