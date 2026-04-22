@@ -167,6 +167,22 @@ export class PlayersSheet extends SingleMatchExportSheet<MatchPlayer> {
         cellFormatter: (row) => row.vsFiveLostCount,
       },
       {
+        name: '2k',
+        cellFormatter: (row) => row.twoKillCount,
+      },
+      {
+        name: '3k',
+        cellFormatter: (row) => row.threeKillCount,
+      },
+      {
+        name: '4k',
+        cellFormatter: (row) => row.fourKillCount,
+      },
+      {
+        name: '5k',
+        cellFormatter: (row) => row.fiveKillCount,
+      },
+      {
         name: 'bomb_planted_count',
         cellFormatter: (row) => row.bombPlantedCount,
       },

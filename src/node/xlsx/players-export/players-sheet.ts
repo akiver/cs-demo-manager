@@ -99,6 +99,10 @@ export class PlayersSheet extends MultiplePlayerExportSheet<PlayerRow> {
         cellFormatter: (row) => roundNumber(row.averageDeathsPerRound, 1),
       },
       {
+        name: '2k',
+        cellFormatter: (row) => row.twoKillCount,
+      },
+      {
         name: '3k',
         cellFormatter: (row) => row.threeKillCount,
       },
