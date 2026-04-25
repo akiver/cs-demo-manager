@@ -183,6 +183,7 @@ async function buildDemoFromFilePath(filePath: string): Promise<Demo> {
     }
   } else {
     buildNumber = header.buildNumber;
+    tickrate = 64;
     // The build number of CS2 when it was publicly available is 9832, everything below is coming from the limited test.
     if (buildNumber < 9832) {
       game = Game.CS2LT;
