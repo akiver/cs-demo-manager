@@ -167,7 +167,7 @@ async function buildDemoFromFilePath(filePath: string): Promise<Demo> {
   const source = getDemoSource(header, name);
   const type = getDemoType(header);
 
-  let tickrate = 0;
+  let tickrate = 64;
   let frameRate = 0;
   let tickCount = 0;
   let duration = 0;
@@ -183,7 +183,6 @@ async function buildDemoFromFilePath(filePath: string): Promise<Demo> {
     }
   } else {
     buildNumber = header.buildNumber;
-    tickrate = 64;
     // The build number of CS2 when it was publicly available is 9832, everything below is coming from the limited test.
     if (buildNumber < 9832) {
       game = Game.CS2LT;
