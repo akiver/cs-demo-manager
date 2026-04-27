@@ -16,9 +16,14 @@ export async function getWindowsExeVersion(executablePath: string): Promise<stri
     throw new Error('Version info not found');
   }
 
+  // https://learn.microsoft.com/en-us/windows/win32/menurc/vs-versioninfo
   // https://learn.microsoft.com/en-us/windows/win32/api/verrsrc/ns-verrsrc-vs_fixedfileinfo
-  // The VS_FIXEDFILEINFO structure immediately follows the 'VS_VERSION_INFO' string.
-  const base = index + magic.length + 2; // 2 bytes for its null terminator
+  // VS_VERSION_INFO layout before VS_FIXEDFILEINFO (all offsets relative to 'index'):
+  //   -6 bytes: wLength + wValueLength + wType (3 × WORD)
+  //   +0 bytes: szKey = "VS_VERSION_INFO\0" in UTF-16LE = 32 bytes
+  //   +32 bytes: 2 bytes of DWORD-alignment padding
+  //   +34 bytes: VS_FIXEDFILEINFO begins
+  const base = index + magic.length + 2 + 2; // 2 bytes for its null terminator + 2 bytes of padding
   // VS_FIXEDFILEINFO layout (all fields are 4 bytes, little-endian):
   //   offset  0: dwSignature      (magic value 0xFEEF04BD)
   //   offset  4: dwStrucVersion
