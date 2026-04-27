@@ -416,33 +416,47 @@ globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestIni
 };
 
 if (typeof window !== 'undefined') {
-  const originalSetTimeout = globalThis.setTimeout;
-  // @ts-ignore Undici uses Node Timeout since v6.20.0, we mimic it in dev mode as the server process runs in a
-  // BrowserWindow, not in a Node process.
-  globalThis.setTimeout = (callback: (...args: unknown[]) => void, ms: number, ...args: unknown[]): NodeJS.Timeout => {
-    const wrappedCallback = () => {
-      callback.apply(this, args);
-    };
-
-    const timeoutId = originalSetTimeout.call(window, wrappedCallback, ms ?? 0);
+  function createNodeTimeout(
+    id: ReturnType<typeof globalThis.setTimeout>,
+    clearFn: (id: ReturnType<typeof globalThis.setTimeout>) => void,
+  ): NodeJS.Timeout {
     const timeout: NodeJS.Timeout = {
       hasRef: () => true,
       ref: () => timeout,
       refresh: () => timeout,
       unref: () => timeout,
-      [Symbol.toPrimitive]: () => Number(timeoutId),
+      [Symbol.toPrimitive]: () => Number(id),
       [Symbol.dispose]: () => {
-        clearTimeout(timeoutId);
-        return timeoutId;
+        clearFn(id);
+        return id;
       },
       close: () => {
-        clearTimeout(timeoutId);
+        clearFn(id);
         return timeout;
       },
       _onTimeout() {},
     };
-
     return timeout;
+  }
+
+  const originalSetTimeout = globalThis.setTimeout;
+  // @ts-ignore Undici uses Node Timeout since v6.20.0, we mimic it in dev mode as the server process runs in a
+  // BrowserWindow, not in a Node process.
+  globalThis.setTimeout = (callback: (...args: unknown[]) => void, ms: number, ...args: unknown[]): NodeJS.Timeout => {
+    const id = originalSetTimeout.call(window, () => callback.apply(this, args), ms ?? 0);
+    return createNodeTimeout(id, clearTimeout);
+  };
+
+  const originalSetInterval = globalThis.setInterval;
+  // @ts-ignore Undici uses Node SetInterval since v8.0.0, we mimic it in dev mode as the server process runs in a
+  // BrowserWindow, not in a Node process.
+  globalThis.setInterval = <TArgs extends unknown[]>(
+    callback: (...args: TArgs) => void,
+    ms?: number,
+    ...args: TArgs
+  ): NodeJS.Timeout => {
+    const id = originalSetInterval.call(window, () => callback.apply(this, args), ms ?? 0);
+    return createNodeTimeout(id, clearInterval);
   };
 }
 
