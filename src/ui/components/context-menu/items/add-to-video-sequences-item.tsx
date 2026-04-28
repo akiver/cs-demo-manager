@@ -47,7 +47,7 @@ export function AddToVideoSequencesItem({ startTick, endTick, playerFocusSteamId
           showXRay: false,
           showAssists: true,
           recordAudio: settings.recordAudio,
-          playerVoicesEnabled: false,
+          voiceEnabledSteamIds: [],
         },
       }),
     );

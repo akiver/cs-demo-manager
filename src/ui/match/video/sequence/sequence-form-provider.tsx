@@ -57,7 +57,7 @@ export function SequenceFormProvider({ children, initialSequence }: Props) {
     ...initialSequence,
     startTick: String(initialSequence.startTick),
     endTick: String(initialSequence.endTick),
-    playerVoicesEnabled: true,
+    playerVoicesEnabled: initialSequence.voiceEnabledSteamIds.length > 0,
   });
 
   const updateSequence = (partialSequence: Partial<SequenceForm>) => {

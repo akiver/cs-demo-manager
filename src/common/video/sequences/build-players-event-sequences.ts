@@ -25,6 +25,14 @@ function buildPlayersOptions(players: MatchPlayer[], targetSteamIds: string[]) {
 
 type PlayerEventType = typeof PlayerSequenceEvent.Kills | typeof PlayerSequenceEvent.Deaths;
 
+function getVoiceEnabledSteamIds(players: MatchPlayer[], voiceEnabledSteamIds: string[] | boolean) {
+  if (Array.isArray(voiceEnabledSteamIds)) {
+    return voiceEnabledSteamIds;
+  }
+
+  return voiceEnabledSteamIds ? players.map((player) => player.steamId) : [];
+}
+
 type Options = {
   event: PlayerEventType;
   match: Match;
@@ -34,11 +42,12 @@ type Options = {
   weapons: WeaponName[];
   settings: Pick<
     VideoSettings,
-    'showOnlyDeathNotices' | 'deathNoticesDuration' | 'showXRay' | 'showAssists' | 'recordAudio' | 'playerVoicesEnabled'
+    'showOnlyDeathNotices' | 'deathNoticesDuration' | 'showXRay' | 'showAssists' | 'recordAudio'
   >;
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   firstSequenceNumber: number;
+  voiceEnabledSteamIds: string[] | boolean;
 };
 
 function getSteamIdToFocus(
@@ -68,6 +77,7 @@ export function buildPlayersEventSequences({
   startSecondsBeforeEvent,
   endSecondsAfterEvent,
   firstSequenceNumber,
+  voiceEnabledSteamIds,
 }: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
   let playerEvents = match.kills.filter((kill) => {
@@ -90,6 +100,7 @@ export function buildPlayersEventSequences({
   const maxSecondsBetweenEvents = 10;
 
   const playersOptions = buildPlayersOptions(match.players, steamIds);
+  const sequenceVoiceEnabledSteamIds = getVoiceEnabledSteamIds(match.players, voiceEnabledSteamIds);
   const sequences: Sequence[] = [];
   const ticksRequiredBetweenTwoSequences = Math.round(match.tickrate * minimumSecondsBetweenTwoEvents);
   const additionalTicksBeforeEvent = Math.round(match.tickrate * startSecondsBeforeEvent);
@@ -126,7 +137,6 @@ export function buildPlayersEventSequences({
         continue;
       }
     }
-
     sequences.push({
       number: firstSequenceNumber + sequences.length,
       startTick: sequenceStartTick,
@@ -136,7 +146,7 @@ export function buildPlayersEventSequences({
       showXRay: settings.showXRay,
       showAssists: settings.showAssists,
       recordAudio: settings.recordAudio,
-      playerVoicesEnabled: settings.playerVoicesEnabled,
+      voiceEnabledSteamIds: sequenceVoiceEnabledSteamIds,
       playersOptions,
       playerCameras: [
         {

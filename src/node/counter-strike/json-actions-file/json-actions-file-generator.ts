@@ -146,6 +146,24 @@ export class JSONActionsFileGenerator {
     return this;
   }
 
+  public setEnabledVoicesKey(lowValue: number, highValue: number, tick?: number) {
+    if (this.game === Game.CSGO) {
+      return this;
+    }
+
+    const actionTick = this.getValidTick(tick ?? 1);
+    this.actions.push({
+      cmd: `tv_listen_voice_indices ${lowValue}`,
+      tick: actionTick,
+    });
+    this.actions.push({
+      cmd: `tv_listen_voice_indices_h ${highValue}`,
+      tick: actionTick,
+    });
+
+    return this;
+  }
+
   // Generates aliases to control which player/team's voices are heard.
   // CS2 only.
   public generateVoiceAliases(players: PlayerWatchInfo[]) {
