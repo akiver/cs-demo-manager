@@ -45,7 +45,7 @@ describe('generate player kills sequences', () => {
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
       firstSequenceNumber: 1,
-      voiceEnabledPlayers: defaultSettings.video.playerVoicesEnabled,
+      voiceEnabledSteamIds: defaultSettings.video.playerVoicesEnabled,
     });
 
     expect(sequences.length).toBe(1);
@@ -94,7 +94,7 @@ describe('generate player kills sequences', () => {
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
       firstSequenceNumber: 1,
-      voiceEnabledPlayers: defaultSettings.video.playerVoicesEnabled,
+      voiceEnabledSteamIds: defaultSettings.video.playerVoicesEnabled,
     });
 
     expect(sequences.length).toBe(3);
@@ -138,7 +138,7 @@ describe('generate player kills sequences', () => {
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
       firstSequenceNumber: 1,
-      voiceEnabledPlayers: defaultSettings.video.playerVoicesEnabled,
+      voiceEnabledSteamIds: defaultSettings.video.playerVoicesEnabled,
     });
 
     expect(sequences.length).toBe(1);
@@ -175,7 +175,7 @@ describe('generate player kills sequences', () => {
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
       firstSequenceNumber: 1,
-      voiceEnabledPlayers: defaultSettings.video.playerVoicesEnabled,
+      voiceEnabledSteamIds: defaultSettings.video.playerVoicesEnabled,
     });
 
     expect(sequences.length).toBe(1);
@@ -207,7 +207,7 @@ describe('generate player kills sequences', () => {
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
       firstSequenceNumber: 1,
-      voiceEnabledPlayers: defaultSettings.video.playerVoicesEnabled,
+      voiceEnabledSteamIds: defaultSettings.video.playerVoicesEnabled,
     });
 
     expect(sequences[0].startTick).toBe(1);
@@ -236,7 +236,7 @@ describe('generate player kills sequences', () => {
       startSecondsBeforeEvent: 5,
       endSecondsAfterEvent: 2,
       firstSequenceNumber: 1,
-      voiceEnabledPlayers: defaultSettings.video.playerVoicesEnabled,
+      voiceEnabledSteamIds: defaultSettings.video.playerVoicesEnabled,
     });
 
     expect(sequences[0].endTick).toBe(100);

@@ -78,7 +78,9 @@ function SelectPlayerDialog() {
   const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(2);
   const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(2);
   const [preserveExistingSequences, setPreserveExistingSequences] = useState(false);
-  const [voiceEnabledPlayers, setVoiceEnabledPlayers] = useState<string[]>([]);
+  const [voiceEnabledSteamIds, setVoiceEnabledSteamIds] = useState<string[]>(() => {
+    return settings.playerVoicesEnabled ? match.players.map((player) => player.steamId) : [];
+  });
 
   const onConfirm = () => {
     if (!selectedSteamIds) {
@@ -97,7 +99,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
-            voiceEnabledPlayers,
+            voiceEnabledSteamIds,
           }),
         );
         break;
@@ -113,7 +115,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
-            voiceEnabledPlayers,
+            voiceEnabledSteamIds,
           }),
         );
         break;
@@ -127,7 +129,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
-            voiceEnabledPlayers,
+            voiceEnabledSteamIds,
           }),
         );
         break;
@@ -270,9 +272,9 @@ function SelectPlayerDialog() {
           <PlayersSelectWithTeam
             label={<Trans context="Input label">Voice enabled players</Trans>}
             players={match.players}
-            selectedSteamIds={voiceEnabledPlayers}
+            selectedSteamIds={voiceEnabledSteamIds}
             onChange={(steamIds: string[]) => {
-              setVoiceEnabledPlayers(steamIds);
+              setVoiceEnabledSteamIds(steamIds);
             }}
           />
         </div>

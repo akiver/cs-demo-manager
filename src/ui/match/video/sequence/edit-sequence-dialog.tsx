@@ -16,10 +16,12 @@ export function EditSequenceDialog({ closeDialog, sequence }: Props) {
   const match = useCurrentMatch();
 
   const onSaveClick = (sequenceForm: SequenceForm) => {
+    const { playerVoicesEnabled, ...sequenceValues } = sequenceForm;
     const sequence: Sequence = {
-      ...sequenceForm,
+      ...sequenceValues,
       startTick: Number(sequenceForm.startTick),
       endTick: Number(sequenceForm.endTick),
+      voiceEnabledSteamIds: playerVoicesEnabled ? sequenceForm.voiceEnabledSteamIds : [],
     };
     dispatch(updateSequence({ demoFilePath: match.demoFilePath, sequence }));
   };

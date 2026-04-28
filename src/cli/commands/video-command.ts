@@ -311,11 +311,10 @@ export class VideoCommand extends Command {
               showXRay: this.showXRay ?? settings.video.showXRay,
               showAssists: this.showAssists ?? settings.video.showAssists,
               recordAudio: this.recordAudio ?? settings.video.recordAudio,
-              playerVoicesEnabled: this.playerVoices ?? settings.video.playerVoicesEnabled,
               deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
             },
             firstSequenceNumber: 1,
-            voiceEnabledPlayers: this.playerVoices ?? settings.video.playerVoicesEnabled,
+            voiceEnabledSteamIds: this.playerVoices ?? settings.video.playerVoicesEnabled,
           });
         } else {
           sequences = buildPlayersEventSequences({
@@ -331,12 +330,11 @@ export class VideoCommand extends Command {
               showXRay: this.showXRay ?? settings.video.showXRay,
               showAssists: this.showAssists ?? settings.video.showAssists,
               recordAudio: this.recordAudio ?? settings.video.recordAudio,
-              playerVoicesEnabled: this.playerVoices ?? settings.video.playerVoicesEnabled,
               deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
             },
             weapons: [],
             firstSequenceNumber: 1,
-            voiceEnabledPlayers: settings.video.playerVoicesEnabled,
+            voiceEnabledSteamIds: this.playerVoices ?? settings.video.playerVoicesEnabled,
           });
         }
 
@@ -347,6 +345,11 @@ export class VideoCommand extends Command {
         parameters.sequences = sequences;
       } else {
         const player = this.focusPlayerSteamId ? await fetchPlayer(this.focusPlayerSteamId) : undefined;
+        const arePlayerVoicesEnabled = this.playerVoices ?? settings.video.playerVoicesEnabled;
+        const [match] = arePlayerVoicesEnabled ? await fetchMatchesByChecksums([demo.checksum]) : [];
+        const voiceEnabledSteamIds = arePlayerVoicesEnabled
+          ? (match?.players.map((player) => player.steamId) ?? (player ? [player.steamId] : []))
+          : [];
         parameters.sequences = [
           {
             number: 1,
@@ -367,10 +370,9 @@ export class VideoCommand extends Command {
                   },
                 ]
               : [],
-            playerVoicesEnabled: this.playerVoices ?? settings.video.playerVoicesEnabled,
             deathNoticesDuration: this.deathNoticesDuration ?? settings.video.deathNoticesDuration,
             cfg: this.cfg,
-            voiceEnabledPlayers: this.playerVoices ?? settings.video.playerVoicesEnabled,
+            voiceEnabledSteamIds,
           },
         ];
       }

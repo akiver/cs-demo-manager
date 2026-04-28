@@ -4,7 +4,6 @@ import type { Match } from 'csdm/common/types/match';
 import type { Perspective } from 'csdm/common/types/perspective';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import type { VideoSettings } from 'csdm/node/settings/settings';
-import type { VoiceEnabledPlayers } from 'csdm/common/types/voice-enabled-players';
 
 export type GeneratePlayersEventPayload = {
   steamIds: string[];
@@ -16,7 +15,7 @@ export type GeneratePlayersEventPayload = {
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   preserveExistingSequences: boolean;
-  voiceEnabledPlayers: VoiceEnabledPlayers;
+  voiceEnabledSteamIds: string[] | boolean;
 };
 
 export const addSequence = createAction<{ demoFilePath: string; sequence: Sequence }>('match/video/sequences/add');
@@ -44,5 +43,5 @@ export const generatePlayersRoundsSequences = createAction<{
   settings: VideoSettings;
   rounds: number[];
   preserveExistingSequences: boolean;
-  voiceEnabledPlayers: VoiceEnabledPlayers;
+  voiceEnabledSteamIds: string[] | boolean;
 }>('match/video/sequences/generatePlayersRounds');

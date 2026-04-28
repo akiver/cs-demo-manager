@@ -1,7 +1,6 @@
 import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
 import type { PlayerCameraFocus } from './player-camera-focus';
 import type { CustomCameraFocus } from './custom-camera-focus';
-import type { VoiceEnabledPlayers } from './voice-enabled-players';
 
 export type Sequence = {
   number: number;
@@ -13,10 +12,9 @@ export type Sequence = {
   playersOptions: SequencePlayerOptions[];
   playerCameras: PlayerCameraFocus[];
   cameras: CustomCameraFocus[];
-  playerVoicesEnabled: boolean;
   recordAudio: boolean;
   // @platform win32 Requires HLAE
   deathNoticesDuration: number;
   cfg?: string;
-  voiceEnabledPlayers: VoiceEnabledPlayers;
+  voiceEnabledSteamIds: string[];
 };

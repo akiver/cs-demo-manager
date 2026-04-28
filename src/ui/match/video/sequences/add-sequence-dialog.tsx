@@ -32,10 +32,12 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   });
 
   const onSaveClick = (sequenceForm: SequenceForm) => {
+    const { playerVoicesEnabled, ...sequenceValues } = sequenceForm;
     const sequence: Sequence = {
-      ...sequenceForm,
+      ...sequenceValues,
       startTick: Number(sequenceForm.startTick),
       endTick: Number(sequenceForm.endTick),
+      voiceEnabledSteamIds: playerVoicesEnabled ? sequenceForm.voiceEnabledSteamIds : [],
     };
     dispatch(addSequence({ demoFilePath: match.demoFilePath, sequence }));
   };
@@ -46,14 +48,14 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   let showXRay = settings.settings.showXRay;
   let showAssists = settings.settings.showAssists;
   let recordAudio = settings.settings.recordAudio;
-  let playerVoicesEnabled = settings.settings.playerVoicesEnabled;
+  let voiceEnabledSteamIds = settings.settings.playerVoicesEnabled ? match.players.map((player) => player.steamId) : [];
   let showOnlyDeathNotices = settings.settings.showOnlyDeathNotices;
   let deathNoticesDuration = settings.settings.deathNoticesDuration;
   if (lastSequence !== undefined) {
     playersOptions = lastSequence.playersOptions;
     showXRay = lastSequence.showXRay;
     showAssists = lastSequence.showAssists;
-    playerVoicesEnabled = lastSequence.playerVoicesEnabled;
+    voiceEnabledSteamIds = lastSequence.voiceEnabledSteamIds;
     showOnlyDeathNotices = lastSequence.showOnlyDeathNotices;
     deathNoticesDuration = lastSequence.deathNoticesDuration;
     recordAudio = lastSequence.recordAudio;
@@ -72,9 +74,8 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
     cameras: [],
     showXRay,
     showAssists,
-    playerVoicesEnabled,
     recordAudio,
-    voiceEnabledPlayers: playerVoicesEnabled,
+    voiceEnabledSteamIds,
   };
 
   return (

@@ -89,7 +89,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
         startSecondsBeforeEvent,
         endSecondsAfterEvent,
         preserveExistingSequences,
-        voiceEnabledPlayers,
+        voiceEnabledSteamIds,
       } = action.payload;
       const existingSequences = state[match.demoFilePath] ?? [];
       const sequences = buildPlayersRoundsSequences({
@@ -100,7 +100,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
         endSecondsAfterEvent,
         settings,
         firstSequenceNumber: preserveExistingSequences ? existingSequences.length + 1 : 1,
-        voiceEnabledPlayers: voiceEnabledPlayers,
+        voiceEnabledSteamIds,
       });
       if (preserveExistingSequences) {
         state[match.demoFilePath] = [...existingSequences, ...sequences];

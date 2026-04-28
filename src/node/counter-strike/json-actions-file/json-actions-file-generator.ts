@@ -146,23 +146,20 @@ export class JSONActionsFileGenerator {
     return this;
   }
 
-  public setEnabledVoicesKey(key: number, tick?: number) {
-    const actionTick = this.getValidTick(tick ?? 1);
+  public setEnabledVoicesKey(lowValue: number, highValue: number, tick?: number) {
     if (this.game === Game.CSGO) {
-      this.actions.push({
-        cmd: 'voice_enable 0',
-        tick: actionTick,
-      });
-    } else {
-      this.actions.push({
-        cmd: `tv_listen_voice_indices ${key}`,
-        tick: actionTick,
-      });
-      this.actions.push({
-        cmd: `tv_listen_voice_indices_h ${key}`,
-        tick: actionTick,
-      });
+      return this;
     }
+
+    const actionTick = this.getValidTick(tick ?? 1);
+    this.actions.push({
+      cmd: `tv_listen_voice_indices ${lowValue}`,
+      tick: actionTick,
+    });
+    this.actions.push({
+      cmd: `tv_listen_voice_indices_h ${highValue}`,
+      tick: actionTick,
+    });
 
     return this;
   }
