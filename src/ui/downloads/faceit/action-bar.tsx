@@ -37,11 +37,7 @@ function AccountSelect() {
     return null;
   }
 
-  return (
-    <div>
-      <Select options={options} value={currentAccount?.id} onChange={onChange} isDisabled={isDisabled} />
-    </div>
-  );
+  return <Select options={options} value={currentAccount?.id} onChange={onChange} isDisabled={isDisabled} />;
 }
 
 function RefreshMatchesButton() {

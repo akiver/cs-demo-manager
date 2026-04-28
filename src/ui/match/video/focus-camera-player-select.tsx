@@ -29,25 +29,23 @@ export function FocusCameraPlayerSelect({ playerFocusSteamId, onChange, label }:
   const isDisabled = options.length === 0 || playerFocusSteamId === undefined;
 
   return (
-    <div className="flex flex-col gap-y-8">
-      <div className="flex gap-x-8">
-        <Checkbox
-          label={label ?? <Trans context="Checkbox label">Focus camera on player</Trans>}
-          isChecked={isChecked}
-          onChange={(event) => {
-            let newSelectedSteamId: string | undefined = undefined;
-            if (event.target.checked) {
-              if (lastSelectedSteamId.current) {
-                newSelectedSteamId = lastSelectedSteamId.current;
-              } else {
-                newSelectedSteamId = options.length > 0 ? options[0].value : undefined;
-              }
+    <div className={`flex flex-col ${!isDisabled ? 'gap-y-8' : ''}`}>
+      <Checkbox
+        label={label ?? <Trans context="Checkbox label">Focus camera on player</Trans>}
+        isChecked={isChecked}
+        onChange={(event) => {
+          let newSelectedSteamId: string | undefined = undefined;
+          if (event.target.checked) {
+            if (lastSelectedSteamId.current) {
+              newSelectedSteamId = lastSelectedSteamId.current;
+            } else {
+              newSelectedSteamId = options.length > 0 ? options[0].value : undefined;
             }
-            onChange(newSelectedSteamId);
-            lastSelectedSteamId.current = playerFocusSteamId;
-          }}
-        />
-      </div>
+          }
+          onChange(newSelectedSteamId);
+          lastSelectedSteamId.current = playerFocusSteamId;
+        }}
+      />
       <CollapseTransition isVisible={!isDisabled}>
         <Select
           options={options}
