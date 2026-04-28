@@ -28,7 +28,7 @@ import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { moveHlaeRawFilesToOutputFolder } from './move-hlae-files-to-output-folder';
 import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
 import { getFfmpegExecutablePath } from '../ffmpeg/ffmpeg-location';
-import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { isBlankString } from 'csdm/common/string/is-empty-string';
 import { DisplayMode } from 'csdm/common/types/display-mode';
 import { replaceFilenamePlaceholders } from './replace-filename-placeholders';
 
@@ -82,7 +82,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
     if (encoderSoftware === EncoderSoftware.FFmpeg) {
       await generateVideoWithFFmpeg(
         {
-          ffmpegExecutablePath: !isEmptyString(ffmpegSettings.customExecutableLocation)
+          ffmpegExecutablePath: !isBlankString(ffmpegSettings.customExecutableLocation)
             ? ffmpegSettings.customExecutableLocation
             : await getFfmpegExecutablePath(),
           recordingSystem,
@@ -131,7 +131,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
     });
     await concatenateVideosFromSequences(
       {
-        ffmpegExecutablePath: !isEmptyString(ffmpegSettings.customExecutableLocation)
+        ffmpegExecutablePath: !isBlankString(ffmpegSettings.customExecutableLocation)
           ? ffmpegSettings.customExecutableLocation
           : await getFfmpegExecutablePath(),
         outputFolderPath,

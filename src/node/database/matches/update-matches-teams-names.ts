@@ -2,7 +2,7 @@ import type { Transaction, UpdateResult } from 'kysely';
 import { TeamLetter } from 'csdm/common/types/counter-strike';
 import { db } from '../database';
 import type { Database } from 'csdm/node/database/schema';
-import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { isBlankString } from 'csdm/common/string/is-empty-string';
 import { DuplicateTeamNameError } from 'csdm/node/database/teams/errors/duplicate-team-name-error';
 import {
   fetchTeamNamesPerChecksum,
@@ -27,7 +27,7 @@ async function updateTeamName({
   letter,
   opponentTeamName,
 }: UpdateTeamNameArgs) {
-  if (isEmptyString(newName) || newName === oldName) {
+  if (isBlankString(newName) || newName === oldName) {
     return oldName;
   }
 
@@ -228,7 +228,7 @@ export async function updateMatchesTeamNames({
         oldName: names.teamNameA,
         newName: teamNameA,
         letter: TeamLetter.A,
-        opponentTeamName: isEmptyString(teamNameB) ? names.teamNameB : teamNameB,
+        opponentTeamName: isBlankString(teamNameB) ? names.teamNameB : teamNameB,
       });
       const newTeamNameB = await updateTeamName({
         transaction,
@@ -236,7 +236,7 @@ export async function updateMatchesTeamNames({
         oldName: names.teamNameB,
         newName: teamNameB,
         letter: TeamLetter.B,
-        opponentTeamName: isEmptyString(teamNameA) ? names.teamNameA : teamNameA,
+        opponentTeamName: isBlankString(teamNameA) ? names.teamNameA : teamNameA,
       });
 
       if (newTeamNameA !== names.teamNameA || newTeamNameB !== names.teamNameB) {

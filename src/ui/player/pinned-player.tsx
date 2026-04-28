@@ -4,12 +4,12 @@ import { Trans } from '@lingui/react/macro';
 import { usePinnedPlayerSteamId } from 'csdm/ui/settings/use-pinned-player-steamid';
 import { CenteredContent } from 'csdm/ui/components/content';
 import { buildPlayerPath } from '../routes-paths';
-import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { isBlankString } from 'csdm/common/string/is-empty-string';
 
 export function PinnedPlayer() {
   const pinnedPlayerSteamId = usePinnedPlayerSteamId();
 
-  if (pinnedPlayerSteamId === undefined || isEmptyString(pinnedPlayerSteamId)) {
+  if (pinnedPlayerSteamId === undefined || isBlankString(pinnedPlayerSteamId)) {
     return (
       <CenteredContent>
         <p>

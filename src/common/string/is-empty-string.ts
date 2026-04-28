@@ -1,3 +1,3 @@
-export function isEmptyString(value: string) {
+export function isBlankString(value: string) {
   return !/\S/.test(value);
 }

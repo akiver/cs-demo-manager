@@ -4,7 +4,7 @@ import { RendererClientMessageName } from 'csdm/server/renderer-client-message-n
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { RenameDemoPayload } from 'csdm/server/handlers/renderer-process/demo/rename-demo-handler';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
-import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { isBlankString } from 'csdm/common/string/is-empty-string';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { demoRenamed } from 'csdm/ui/demos/demos-actions';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
@@ -21,7 +21,7 @@ export function DemoNameInput({ checksum, currentName }: Props) {
   const [name, setName] = useState<string>(currentName);
 
   const onBlur = async () => {
-    const isNameValid = name !== currentName && !isEmptyString(name);
+    const isNameValid = name !== currentName && !isBlankString(name);
     if (!isNameValid) {
       return;
     }

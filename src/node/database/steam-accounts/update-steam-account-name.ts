@@ -1,9 +1,9 @@
-import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { isBlankString } from 'csdm/common/string/is-empty-string';
 import { db } from '../database';
 import { SteamAccountNameTooLong } from './errors/steam-account-name-too-long';
 
 export async function updateSteamAccountName(steamId: string, name: string) {
-  const shouldDeleteOverride = isEmptyString(name);
+  const shouldDeleteOverride = isBlankString(name);
   if (shouldDeleteOverride) {
     await db.deleteFrom('steam_account_overrides').where('steam_id', '=', steamId).execute();
 

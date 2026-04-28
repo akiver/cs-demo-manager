@@ -8,7 +8,7 @@ import { RendererClientMessageName } from 'csdm/server/renderer-client-message-n
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { demoRenamed } from 'csdm/ui/demos/demos-actions';
 import { ErrorCode } from 'csdm/common/error-code';
-import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { isBlankString } from 'csdm/common/string/is-empty-string';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { ErrorMessage } from '../error-message';
 
@@ -58,7 +58,7 @@ export function RenameDialog({ checksum, currentName }: Props) {
   };
 
   const isBusy = status === Status.Loading;
-  const isValidName = isEmptyString(name);
+  const isValidName = isBlankString(name);
 
   return (
     <ConfirmDialog

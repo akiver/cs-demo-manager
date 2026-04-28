@@ -1,9 +1,9 @@
-import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { isBlankString } from 'csdm/common/string/is-empty-string';
 import { db } from 'csdm/node/database/database';
 import { InvalidDemoName } from './errors/invalid-demo-name';
 
 export async function renameDemo(checksum: string, name: string) {
-  if (isEmptyString(name)) {
+  if (isBlankString(name)) {
     throw new InvalidDemoName();
   }
 
