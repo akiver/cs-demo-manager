@@ -10,8 +10,8 @@ type Props = {
 export function PinPlayerItem({ steamId }: Props) {
   const updateSettings = useUpdateSettings();
 
-  const onClick = () => {
-    updateSettings({
+  const onClick = async () => {
+    await updateSettings({
       pinnedPlayerSteamId: steamId,
     });
   };

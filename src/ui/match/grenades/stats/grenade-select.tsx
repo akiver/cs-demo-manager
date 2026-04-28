@@ -47,5 +47,9 @@ export function GrenadeSelect({ onChange, selectedGrenade }: Props) {
     onChange(grenadeName);
   };
 
-  return <Select options={options} value={selectedGrenade} onChange={handleChange} />;
+  return (
+    <div className="w-fit">
+      <Select options={options} value={selectedGrenade} onChange={handleChange} />
+    </div>
+  );
 }

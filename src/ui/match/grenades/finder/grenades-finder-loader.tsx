@@ -54,7 +54,7 @@ export function GrenadesFinderLoader() {
       }
     };
 
-    fetchGrenades();
+    void fetchGrenades();
   }, [client, state, checksum]);
 
   const { status, grenadesThrow } = state;

@@ -3,7 +3,7 @@ import './load-dot-env-variables.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import fs from 'fs-extra';
-import { build } from 'vite';
+import { build } from 'vite-plus';
 import esbuild from 'esbuild';
 import nativeNodeModulesPlugin from './esbuild-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
@@ -23,17 +23,19 @@ async function buildRendererProcessBundle() {
     build: {
       emptyOutDir: true,
       sourcemap: true,
-      chunkSizeWarningLimit: 3000,
+      chunkSizeWarningLimit: 4000,
+      rolldownOptions: {
+        output: {
+          // Do not minify identifiers in order to have real functions name in logs that are written on the FS.
+          // I didn't find a way to have logs in production builds pointing to the actual .ts/.tsx file.
+          // Unfortunately the module source-map-support doesn't help here even when using the browser version.
+          // It increases the bundle size but makes logs much more readable.
+          // Note: Opening the DevTools console in production builds will show the original .ts/.tsx file.
+          keepNames: true,
+        },
+      },
     },
-    configFile: path.join(rootFolderPath, 'vite.config.mts'),
-    esbuild: {
-      // Do not minify identifiers in order to have real functions name in logs that are written on the FS.
-      // I didn't find a way to have logs in production builds pointing to the actual .ts/.tsx file.
-      // Unfortunately the module source-map-support doesn't help here even when using the browser version.
-      // It increases the bundle size but makes logs much more readable.
-      // Note: Opening the DevTools console in production builds will show the original .ts/.tsx file.
-      minifyIdentifiers: false,
-    },
+    configFile: path.join(rootFolderPath, 'vite.config.ts'),
     define: {
       ...commonDefine,
       REACT_STRICT_MODE_ENABLED: false,

@@ -190,9 +190,9 @@ export function Search() {
   };
 
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
+    const onKeyDown = async (e: KeyboardEvent) => {
       if (e.key === 'Enter' && isCtrlOrCmdEvent(e)) {
-        search();
+        await search();
       }
     };
 
@@ -207,10 +207,7 @@ export function Search() {
     <div className="flex flex-1 flex-col overflow-y-auto">
       <div className="flex h-full gap-x-12">
         <div className="flex w-[324px] flex-none flex-col gap-y-12 overflow-y-auto border-r border-gray-200 py-16 pr-8 pl-16 scrollbar-stable">
-          <div className="flex flex-col gap-y-8">
-            <Trans context="Input label">Event</Trans>
-            <SearchEventInput />
-          </div>
+          <SearchEventInput />
           <KillsFilter isVisible={event === SearchEvent.Kills} />
           <SearchPlayersInput
             isDisabled={isLoading}

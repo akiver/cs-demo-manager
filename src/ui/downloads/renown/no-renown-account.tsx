@@ -10,8 +10,8 @@ export function NoRenownAccount() {
   const [steamId, setSteamId] = useState('');
   const { addAccount, errorMessage, isBusy } = useAddRenownAccount();
 
-  const submit = () => {
-    addAccount(steamId);
+  const submit = async () => {
+    await addAccount(steamId);
   };
 
   const isDisabled = isBusy || steamId === '';

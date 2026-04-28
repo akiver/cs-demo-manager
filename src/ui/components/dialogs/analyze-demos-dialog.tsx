@@ -29,8 +29,8 @@ export function AnalyzeConfirmationDialog({
   const isConfirmButtonDisabled = demosToAnalyze.length === 0;
   const demoAlreadyInDatabaseCount = demosAlreadyInDatabase.length;
 
-  const onConfirm = () => {
-    addDemosToAnalyses(demosToAnalyze);
+  const onConfirm = async () => {
+    await addDemosToAnalyses(demosToAnalyze);
   };
 
   return (

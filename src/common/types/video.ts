@@ -23,11 +23,13 @@ export type Video = {
   height: number;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
+  outputFileName: string;
   ffmpegSettings: FfmpegSettings;
   outputFolderPath: string;
   sequences: Sequence[];
   output: string;
   status: VideoStatus;
+  trueView: boolean;
   errorCode?: ErrorCode;
   currentSequence?: number;
 };

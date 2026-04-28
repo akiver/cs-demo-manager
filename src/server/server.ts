@@ -6,6 +6,7 @@ import type WebSocket from 'ws';
 import { WebSocketServer as WSServer } from 'ws';
 import type { IncomingMessage } from 'node:http';
 import { URL } from 'node:url';
+import { randomUUID } from 'node:crypto';
 import { rendererHandlers } from 'csdm/server/handlers/renderer-handlers-mapping';
 import { mainHandlers } from 'csdm/server/handlers/main-handlers-mapping';
 import type { MainClientMessageName } from './main-client-message-name';
@@ -14,7 +15,11 @@ import { WEB_SOCKET_SERVER_PORT } from './port';
 import type { SharedServerMessagePayload } from './shared-server-message-name';
 import { SharedServerMessageName } from './shared-server-message-name';
 import type { IdentifiableClientMessage } from './identifiable-client-message';
-import type { MainServerMessagePayload, MainServerMessageName } from './main-server-message-name';
+import type {
+  MainServerMessagePayload,
+  MainServerMessageName,
+  MainServerMessageResponse,
+} from './main-server-message-name';
 import { ErrorCode } from '../common/error-code';
 import { NetworkError } from '../node/errors/network-error';
 import type { RendererServerMessagePayload, RendererServerMessageName } from './renderer-server-message-name';
@@ -66,12 +71,18 @@ export type GameListener<MessageName extends GameClientMessageName = GameClientM
   payload: GameClientMessagePayload[MessageName],
 ) => void;
 
+type MainReplyHandler<T = unknown> = {
+  resolve: (payload: T) => void;
+  reject: (error: unknown) => void;
+};
+
 class WebSocketServer {
   private server: WSServer;
   private rendererProcessSocket: WebSocket | null = null;
   private mainProcessSocket: WebSocket | null = null;
   private gameProcessSocket: WebSocket | null = null;
   private gameListeners = new Map<GameClientMessageName, GameListener[]>();
+  private mainReplyHandlers = new Map<string, MainReplyHandler>();
 
   constructor() {
     this.server = new WSServer({
@@ -102,6 +113,24 @@ class WebSocketServer {
     } else {
       logger.warn(`WS:: mainProcessSocket is null, can't send message to main process`);
     }
+  };
+
+  public sendToMainAndWaitForReply = <MessageName extends MainServerMessageName>(
+    message: SendableMainMessage<MessageName>,
+  ): Promise<MessageName extends keyof MainServerMessageResponse ? MainServerMessageResponse[MessageName] : void> => {
+    return new Promise((resolve, reject) => {
+      if (!this.mainProcessSocket) {
+        return reject(new Error('Main process socket is not connected'));
+      }
+
+      const uuid = randomUUID();
+      (message as IdentifiableClientMessage<MessageName>).uuid = uuid;
+      this.mainReplyHandlers.set(uuid, {
+        resolve: resolve as (payload: unknown) => void,
+        reject,
+      });
+      this.mainProcessSocket.send(JSON.stringify(message));
+    });
   };
 
   public sendMessageToGameProcess = <MessageName extends GameServerMessageName>(
@@ -162,11 +191,12 @@ class WebSocketServer {
     }
 
     try {
+      // oxlint-disable-next-line typescript/no-base-to-string
       const message: IdentifiableClientMessage<RendererClientMessageName> = JSON.parse(data.toString());
       const { name, payload, uuid } = message;
       logger.log(`WS:: message with name ${name} and uuid ${uuid} received from renderer process`);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       const handler: Handler<any, any> = rendererHandlers[name];
       if (typeof handler === 'function') {
         try {
@@ -211,41 +241,68 @@ class WebSocketServer {
     }
 
     try {
-      const message: IdentifiableClientMessage<MainClientMessageName> = JSON.parse(data.toString());
+      const message: IdentifiableClientMessage<MainClientMessageName | SharedServerMessageName> = JSON.parse(
+        // oxlint-disable-next-line typescript/no-base-to-string
+        data.toString(),
+      );
       const { name, payload, uuid } = message;
       logger.log(`WS:: message with name ${name} and uuid ${uuid} received from main process`);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const handler: Handler<any, unknown> = mainHandlers[name];
-      if (typeof handler === 'function') {
-        try {
-          const result = await handler(payload);
-          this.sendMessageToMainProcess({
-            name: SharedServerMessageName.Reply,
-            payload: result,
-            uuid,
-          } as SendableMainMessage);
-        } catch (error) {
-          let payload: ErrorCode | string = ErrorCode.UnknownError;
-          if (typeof error === 'string') {
-            payload = error;
-          } else if (typeof error === 'number') {
-            payload = error as ErrorCode;
+      switch (name) {
+        case SharedServerMessageName.Reply: {
+          const replyHandler = this.mainReplyHandlers.get(uuid);
+          if (replyHandler) {
+            replyHandler.resolve(payload);
+            this.mainReplyHandlers.delete(uuid);
+          } else {
+            logger.log(`WS:: no reply handler for Reply message with uuid ${uuid}`);
           }
-
-          if (typeof payload === 'string' || payload === ErrorCode.UnknownError) {
-            logger.error(`WS:: error handling message with ${name} from main process`);
-            logger.error(error);
-          }
-
-          this.sendMessageToMainProcess({
-            name: SharedServerMessageName.ReplyError,
-            payload,
-            uuid,
-          } as SendableMainMessage);
+          break;
         }
-      } else {
-        logger.warn(`WS:: unknown message with name: ${name}`);
+        case SharedServerMessageName.ReplyError: {
+          const replyHandler = this.mainReplyHandlers.get(uuid);
+          if (replyHandler) {
+            replyHandler.reject(payload);
+            this.mainReplyHandlers.delete(uuid);
+          } else {
+            logger.log(`WS:: no reply handler for ReplyError message with uuid ${uuid}`);
+          }
+          break;
+        }
+        default: {
+          // oxlint-disable-next-line typescript/no-explicit-any
+          const handler: Handler<any, unknown> = mainHandlers[name as MainClientMessageName];
+          if (typeof handler === 'function') {
+            try {
+              const result = await handler(payload);
+              this.sendMessageToMainProcess({
+                name: SharedServerMessageName.Reply,
+                payload: result,
+                uuid,
+              } as SendableMainMessage);
+            } catch (error) {
+              let payload: ErrorCode | string = ErrorCode.UnknownError;
+              if (typeof error === 'string') {
+                payload = error;
+              } else if (typeof error === 'number') {
+                payload = error as ErrorCode;
+              }
+
+              if (typeof payload === 'string' || payload === ErrorCode.UnknownError) {
+                logger.error(`WS:: error handling message with ${name} from main process`);
+                logger.error(error);
+              }
+
+              this.sendMessageToMainProcess({
+                name: SharedServerMessageName.ReplyError,
+                payload,
+                uuid,
+              } as SendableMainMessage);
+            }
+          } else {
+            logger.warn(`WS:: unknown message with name: ${name}`);
+          }
+        }
       }
     } catch (error) {
       logger.error('WS:: main process request error');
@@ -258,13 +315,13 @@ class WebSocketServer {
     this.rendererProcessSocket = null;
   };
 
-  private onRendererProcessSocketError(error: unknown) {
+  private onRendererProcessSocketError = (error: unknown) => {
     logger.error('WS:: renderer process socket error', error);
-  }
+  };
 
-  private onMainProcessSocketError(error: unknown) {
+  private onMainProcessSocketError = (error: unknown) => {
     logger.error('WS:: main process socket error', error);
-  }
+  };
 
   private onMainProcessSocketDisconnect = (code: number, reason: string): void => {
     logger.log('WS:: main process socket disconnected', code, reason);
@@ -293,6 +350,7 @@ class WebSocketServer {
 
   private onGameProcessSocketMessage = (data: RawData) => {
     try {
+      // oxlint-disable-next-line typescript/no-base-to-string
       const message: Omit<IdentifiableClientMessage<GameClientMessageName>, 'uuid'> = JSON.parse(data.toString());
       const { name, payload } = message;
       logger.debug(`WS:: message with name ${name} received from game process`);
@@ -316,9 +374,9 @@ class WebSocketServer {
     this.gameListeners.clear();
   };
 
-  private onGameProcessSocketError(error: unknown) {
+  private onGameProcessSocketError = (error: unknown) => {
     logger.error('WS:: game process socket error', error);
-  }
+  };
 
   private onError = (error: Error) => {
     // Ignore port already in use errors in CLI, it means the GUI is running and so the WS server too.
@@ -348,7 +406,8 @@ globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestIni
     // See fetch API spec: https://fetch.spec.whatwg.org/#fetch-api
     // > If response is a network error, then reject p with a TypeError and terminate these substeps.
     if (error instanceof TypeError) {
-      logger.error(`Network error while calling ${input.toString()}`);
+      logger.error('Network error while calling:');
+      logger.error(input);
       logger.error(error);
       throw new NetworkError();
     }
@@ -357,34 +416,47 @@ globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestIni
 };
 
 if (typeof window !== 'undefined') {
-  const originalSetTimeout = globalThis.setTimeout;
-  // @ts-ignore Undici uses Node Timeout since v6.20.0, we mimic it in dev mode as the server process runs in a
-  // BrowserWindow, not in a Node process.
-  globalThis.setTimeout = (callback: (...args: unknown[]) => void, ms: number, ...args: unknown[]): NodeJS.Timeout => {
-    const wrappedCallback = () => {
-      callback.apply(this, args);
-    };
-
-    const timeoutId = originalSetTimeout.call(window, wrappedCallback, ms ?? 0);
+  function createNodeTimeout(
+    id: ReturnType<typeof globalThis.setTimeout>,
+    clearFn: (id: ReturnType<typeof globalThis.setTimeout>) => void,
+  ): NodeJS.Timeout {
     const timeout: NodeJS.Timeout = {
       hasRef: () => true,
       ref: () => timeout,
       refresh: () => timeout,
       unref: () => timeout,
-      [Symbol.toPrimitive]: () => Number(timeoutId),
+      [Symbol.toPrimitive]: () => Number(id),
       [Symbol.dispose]: () => {
-        clearTimeout(timeoutId);
-        return timeoutId;
+        clearFn(id);
+        return id;
       },
       close: () => {
-        clearTimeout(timeoutId);
+        clearFn(id);
         return timeout;
       },
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       _onTimeout() {},
     };
-
     return timeout;
+  }
+
+  const originalSetTimeout = globalThis.setTimeout;
+  // @ts-ignore Undici uses Node Timeout since v6.20.0, we mimic it in dev mode as the server process runs in a
+  // BrowserWindow, not in a Node process.
+  globalThis.setTimeout = (callback: (...args: unknown[]) => void, ms: number, ...args: unknown[]): NodeJS.Timeout => {
+    const id = originalSetTimeout.call(window, () => callback.apply(this, args), ms ?? 0);
+    return createNodeTimeout(id, clearTimeout);
+  };
+
+  const originalSetInterval = globalThis.setInterval;
+  // @ts-ignore Undici uses Node SetInterval since v8.0.0, we mimic it in dev mode as the server process runs in a
+  // BrowserWindow, not in a Node process.
+  globalThis.setInterval = <TArgs extends unknown[]>(
+    callback: (...args: TArgs) => void,
+    ms?: number,
+    ...args: TArgs
+  ): NodeJS.Timeout => {
+    const id = originalSetInterval.call(window, () => callback.apply(this, args), ms ?? 0);
+    return createNodeTimeout(id, clearInterval);
   };
 }
 

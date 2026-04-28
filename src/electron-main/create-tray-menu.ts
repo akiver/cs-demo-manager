@@ -12,8 +12,8 @@ export function createTrayMenu() {
         id: 'trayMenu.openApp',
         message: 'Open CS:DM',
       }),
-      click: () => {
-        const mainWindow = windowManager.getOrCreateMainWindow();
+      click: async () => {
+        const mainWindow = await windowManager.getOrCreateMainWindow();
         mainWindow.show();
       },
     },
@@ -22,11 +22,11 @@ export function createTrayMenu() {
         id: 'trayMenu.settings',
         message: 'Settings',
       }),
-      click: () => {
+      click: async () => {
         let mainWindow = windowManager.getMainWindow();
         if (mainWindow === null || mainWindow.isDestroyed()) {
           windowManager.setStartupArgument(ArgumentName.StartPath, StartPath.Settings);
-          mainWindow = windowManager.getOrCreateMainWindow();
+          mainWindow = await windowManager.getOrCreateMainWindow();
         } else {
           mainWindow.webContents.send(IPCChannel.OpenSettings);
         }

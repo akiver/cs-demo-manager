@@ -14,5 +14,4 @@ const createFaceitAccountsTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createFaceitAccountsTable;

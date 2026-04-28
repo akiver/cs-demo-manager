@@ -2,7 +2,7 @@ import React from 'react';
 import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { LaunchParameters } from './launch-parameters';
 import { CustomHighlights } from './custom-highlights';
-import { GameFullscreen } from './game-fullscreen';
+import { GameDisplayMode } from './game-display-mode';
 import { GameHeight } from './game-height';
 import { GameWidth } from './game-width';
 import { HighlightsWatchBeforeKillDelay } from './highlights-watch-before-kill-delay';
@@ -21,13 +21,14 @@ import { Cs2Location } from './cs2-location';
 import { CsgoLocation } from './csgo-location';
 import { FollowSymbolicLinks } from './follow-symbolic-links';
 import { SteamRuntimeScriptLocation } from './steam-runtime-script-location';
+import { WatchRoundWaitRoundEnd } from './watch-round-wait-round-end';
 
 export function PlaybackSettings() {
   return (
     <SettingsView>
       <GameWidth />
       <GameHeight />
-      <GameFullscreen />
+      <GameDisplayMode />
       <LaunchParameters />
       <PlayerVoices />
       <CustomHighlights />
@@ -40,6 +41,7 @@ export function PlaybackSettings() {
       <LowlightsIncludeDamages />
       <WatchRoundBeforeDelay />
       <WatchRoundAfterDelay />
+      <WatchRoundWaitRoundEnd />
       {window.csdm.isWindows && <UseHlae />}
       {!window.csdm.isMac && (
         <>

@@ -16,8 +16,9 @@ export async function fetchTeamsEconomyStats(
   const teamsQuery = db.with('team_data', (db) => {
     let query = db
       .selectFrom('teams')
-      .leftJoin('rounds', 'rounds.match_checksum', 'teams.match_checksum')
-      .leftJoin('matches', 'matches.checksum', 'teams.match_checksum')
+      .innerJoin('rounds', 'rounds.match_checksum', 'teams.match_checksum')
+      .innerJoin('matches', 'matches.checksum', 'teams.match_checksum')
+      .innerJoin('demos', 'demos.checksum', 'matches.checksum')
       .select((eb) => [
         'teams.name',
         'rounds.winner_name',

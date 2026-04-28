@@ -15,9 +15,9 @@ export function MatchDetailsButton() {
     return null;
   }
 
-  const onClick = () => {
+  const onClick = async () => {
     const checksum = lastArrayItem(selectedChecksums);
-    navigateToMatch(checksum);
+    await navigateToMatch(checksum);
   };
 
   return <DetailsButton onClick={onClick} isDisabled={!matchesLoaded} />;

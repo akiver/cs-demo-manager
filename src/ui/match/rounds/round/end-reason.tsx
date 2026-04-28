@@ -4,7 +4,7 @@ import { RoundEndReason } from 'csdm/common/types/counter-strike';
 import { Panel } from 'csdm/ui/components/panel';
 import { useCurrentRound } from './use-current-round';
 
-/* eslint-disable lingui/no-unlocalized-strings */
+/* oxlint-disable lingui/no-unlocalized-strings */
 const roundEndReasonText: Record<number, string> = {
   [RoundEndReason.TargetBombed]: 'Target Successfully Bombed!',
   [RoundEndReason.TerroristsEscaped]: 'Terrorists escaped!',
@@ -24,7 +24,7 @@ const roundEndReasonText: Record<number, string> = {
   [RoundEndReason.TerroristsPlanted]: 'Terrorists Planted the bomb!',
   [RoundEndReason.CounterTerroristsReachedHostage]: 'Counter-Terrorists Reached the hostage!',
 };
-/* eslint-enable lingui/no-unlocalized-strings */
+/* oxlint-enable lingui/no-unlocalized-strings */
 
 export function EndReason() {
   const round = useCurrentRound();

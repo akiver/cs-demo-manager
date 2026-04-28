@@ -24,7 +24,7 @@ async function generateJsonActionsFile(
   }
 
   if (startTick) {
-    json.addSkipAhead(0, startTick);
+    json.addGoToTick(0, startTick);
   }
 
   if (steamId || game !== Game.CSGO) {

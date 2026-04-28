@@ -22,11 +22,11 @@ export function LowerRadarInput() {
     }
   };
 
-  const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const onDrop = async (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const { files } = event.dataTransfer;
     if (files.length > 0) {
-      updateLowerRadarFieldFromImageFilePath(window.csdm.getWebFilePath(files[0]));
+      await updateLowerRadarFieldFromImageFilePath(window.csdm.getWebFilePath(files[0]));
     }
   };
 
@@ -41,7 +41,7 @@ export function LowerRadarInput() {
     }
 
     const [imagePath] = filePaths;
-    updateLowerRadarFieldFromImageFilePath(imagePath);
+    await updateLowerRadarFieldFromImageFilePath(imagePath);
   };
 
   return (

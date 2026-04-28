@@ -20,7 +20,8 @@ function renderCellsForGrenade(grenade: GrenadeOption, playerSteamId: string) {
     case GrenadeOption.Smoke:
       return <SmokeCells playerSteamId={playerSteamId} />;
     default:
-      logger.warn(`Unknown grenade ${grenade}`);
+      logger.warn(`Unknown grenade ${grenade as string}`);
+      return null;
   }
 }
 

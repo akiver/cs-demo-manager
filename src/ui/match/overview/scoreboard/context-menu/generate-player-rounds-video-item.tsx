@@ -40,8 +40,8 @@ function GeneratePlayerRoundsDialog({ steamId }: GeneratePlayerRoundsDialogProps
         voiceEnabledPlayers: settings.playerVoicesEnabled,
       }),
     );
-    setTimeout(() => {
-      navigate(buildMatchVideoPath(match.checksum));
+    setTimeout(async () => {
+      await navigate(buildMatchVideoPath(match.checksum));
     }, 300);
   };
 

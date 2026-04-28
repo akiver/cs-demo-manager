@@ -57,6 +57,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
       `This command is currently disabled, see https://cs-demo-manager.com/docs/guides/downloads#why-faceit-downloads-are-disabled.`,
     );
     return;
+    // oxlint-disable no-unreachable
     this.parseArgs();
 
     this.outputFolderPath = await this.getOutputFolder();
@@ -68,6 +69,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     for (const match of matches) {
       await this.processMatch(match);
     }
+    // oxlint-enable no-unreachable
   }
 
   protected parseArgs() {

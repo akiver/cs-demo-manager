@@ -18,11 +18,13 @@ import { GameError } from './errors/game-error';
 import { installCounterStrikeServerPlugin, uninstallCounterStrikeServerPlugin } from './cs-server-plugin';
 import { getFfmpegExecutablePath } from 'csdm/node/video/ffmpeg/ffmpeg-location';
 import { FfmpegNotInstalled } from 'csdm/node/video/errors/ffmpeg-not-installed';
+import { DisplayMode } from 'csdm/common/types/display-mode';
+import { enableFullscreenWindowed } from './video-config-file';
 
 export type HlaeOptions = {
   game: Game;
   demoPath?: string;
-  fullscreen?: boolean;
+  displayMode?: DisplayMode;
   width?: number;
   height?: number;
   additionalLaunchParameters?: string[];
@@ -138,13 +140,13 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   }
 
   const hlaeExecutablePath = await getHlaeExecutablePathOrThrow();
-  await killCounterStrikeProcesses();
+  const hasBeenKilled = await killCounterStrikeProcesses();
   const csExecutablePath = await getCounterStrikeExecutablePath(game);
   const settings = await getSettings();
   const {
     width: userWidth,
     height: userHeight,
-    fullscreen: userFullscreen,
+    displayMode: userDisplayMode,
     launchParameters: userLaunchParameters,
   } = settings.playback;
 
@@ -155,22 +157,42 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   if (Array.isArray(options.additionalLaunchParameters)) {
     launchParameters.push(...options.additionalLaunchParameters);
   }
+
+  const displayMode = options.displayMode ?? userDisplayMode;
   const width = options.width ?? userWidth;
-  launchParameters.push('-width', String(width));
   const height = options.height ?? userHeight;
-  launchParameters.push('-height', String(height));
-  const enableFullscreen = options.fullscreen ?? userFullscreen;
-  launchParameters.push(enableFullscreen ? '-fullscreen' : '-sw');
+  if (displayMode !== DisplayMode.FullscreenWindowed) {
+    launchParameters.push('-width', String(width));
+    launchParameters.push('-height', String(height));
+  }
+
+  const { configFolderEnabled, configFolderPath, parameters: userHlaeParameters } = settings.video.hlae;
+  const cfgFolderPath = configFolderEnabled && configFolderPath !== '' ? configFolderPath : undefined;
+  defineCfgFolderLocation(cfgFolderPath);
+
+  switch (displayMode) {
+    case DisplayMode.Fullscreen:
+      launchParameters.push('-fullscreen');
+      break;
+    case DisplayMode.FullscreenWindowed:
+      await enableFullscreenWindowed({
+        game,
+        // The config files are created in a subfolder named "cfg" inside the folder defined by the USRLOCALCSGO env var
+        cfgFolderPath: cfgFolderPath ? path.join(cfgFolderPath, 'cfg') : undefined,
+        width,
+        height,
+      });
+      break;
+    case DisplayMode.Windowed:
+    default:
+      launchParameters.push('-sw');
+      break;
+  }
   if (typeof userLaunchParameters === 'string' && userLaunchParameters !== '') {
     launchParameters.push(userLaunchParameters);
   }
 
   const hlaeParameters = ['-noGui', '-autoStart', '-noConfig', '-afxDisableSteamStorage'];
-  const { configFolderEnabled, configFolderPath, parameters: userHlaeParameters } = settings.video.hlae;
-  if (configFolderEnabled && configFolderPath !== '') {
-    hlaeParameters.push('-mmcfgEnabled true', `-mmcfg "${configFolderPath}"`);
-  }
-
   if (game === Game.CSGO) {
     hlaeParameters.push(
       '-csgoLauncher',
@@ -186,8 +208,15 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
     );
   }
 
+  // When we kill the process it may take a bit of time before the process actually releases files lock.
+  // We wait a bit before starting the process again to avoid trying to start CS when it's still running. It would lead
+  // to Source Engine error.
+  const shouldWait = hasBeenKilled;
+  if (shouldWait) {
+    await sleep(2000);
+  }
   await installCounterStrikeServerPlugin(game);
-  defineCfgFolderLocation();
+
   if (options.registerFfmpegLocation) {
     await registerFfmpegLocation(hlaeExecutablePath);
   }

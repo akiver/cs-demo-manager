@@ -14,7 +14,7 @@ export function PlayerLoader() {
 
   useEffect(() => {
     if (status === Status.Idle || shouldFetchPlayer.current) {
-      fetchPlayer();
+      void fetchPlayer();
       shouldFetchPlayer.current = false;
     }
   });

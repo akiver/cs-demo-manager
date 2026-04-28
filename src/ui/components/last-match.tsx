@@ -13,8 +13,8 @@ export function LastMatch({ match }: Props) {
   const formatDate = useFormatDate();
   const getMapThumbnailSrc = useGetMapThumbnailSrc();
   const navigateToMatch = useNavigateToMatch();
-  const onClick = () => {
-    navigateToMatch(match.checksum);
+  const onClick = async () => {
+    await navigateToMatch(match.checksum);
   };
   const isTieGame = match.winnerName === '';
   const hasPlayerWon = match.winnerName === match.focusTeamName;

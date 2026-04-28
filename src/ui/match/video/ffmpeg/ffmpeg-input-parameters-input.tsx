@@ -6,10 +6,10 @@ import { TextInput } from 'csdm/ui/components/inputs/text-input';
 export function FfmpegInputParametersInput() {
   const { settings, updateSettings } = useVideoSettings();
 
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     const inputParameters = event.target.value;
     if (inputParameters !== settings.ffmpegSettings.inputParameters) {
-      updateSettings({
+      await updateSettings({
         ffmpegSettings: {
           inputParameters,
         },

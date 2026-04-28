@@ -223,7 +223,6 @@ msgid "Loading ban stats…"
 msgstr "Loading ban stats…"
 
 #: src/ui/ban/stats/ban-stats.tsx
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 #: src/ui/comment/use-update-comment.tsx
 #: src/ui/components/buttons/export-html-element-as-image-button.tsx
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
@@ -388,92 +387,6 @@ msgstr "Steam API returned a 429 status code"
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "An error occurred while checking for new banned Steam accounts (code {errorCode})"
 msgstr "An error occurred while checking for new banned Steam accounts (code {errorCode})"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Demo not found"
-msgstr "Demo not found"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Match not found"
-msgstr "Match not found"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/match/video/video-loader.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike executable not found."
-msgstr "Counter-Strike executable not found."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
-msgstr "Make sure Steam is not installed through Flatpak as it's not supported!"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-msgstr "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Read the <0>documentation</0> for more information."
-msgstr "Read the <0>documentation</0> for more information."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/match/video/video-loader.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike executable not found, check your app playback settings."
-msgstr "Counter-Strike executable not found, check your app playback settings."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "{game} is not supported on your operating system"
-msgstr "{game} is not supported on your operating system"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "HLAE executable not found"
-msgstr "HLAE executable not found"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No kills found"
-msgstr "No kills found"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "This demo needs to be re-analyzed to make the camera focus work."
-msgstr "This demo needs to be re-analyzed to make the camera focus work."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No rounds found"
-msgstr "No rounds found"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No deaths found"
-msgstr "No deaths found"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
-msgstr "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
-msgstr "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Steam is not running"
-msgstr "Steam is not running"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "The game crashed, please see <0>this documentation</0> for help."
-msgstr "The game crashed, please see <0>this documentation</0> for help."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "The game process exited with an access denied error."
-msgstr "The game process exited with an access denied error."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Make sure to close any anti-cheat software and retry."
-msgstr "Make sure to close any anti-cheat software and retry."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "{game} is already running"
-msgstr "{game} is already running"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 msgid "Counter-Strike starting…"
@@ -1104,10 +1017,8 @@ msgstr "{0, plural, one {The demo has been deleted.} other {# demos deleted.}}"
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 
-#. placeholder {0}: checksums.length
 #. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
 msgstr "{0, plural, one {Delete demo} other {Delete demos}}"
 
@@ -1115,11 +1026,6 @@ msgstr "{0, plural, one {Delete demo} other {Delete demos}}"
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
 msgstr "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
-
-#. placeholder {0}: checksums.length
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
-msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
-msgstr "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
 
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "Delete matches"
@@ -1475,7 +1381,7 @@ msgid "Decoy"
 msgstr "Decoy"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
-#: src/ui/search/search.tsx
+#: src/ui/search/filters/search-event-input.tsx
 msgctxt "Input label"
 msgid "Event"
 msgstr "Event"
@@ -1823,6 +1729,7 @@ msgstr "Comment"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Tags"
@@ -1830,6 +1737,7 @@ msgstr "Tags"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Tags"
@@ -2242,11 +2150,13 @@ msgid "Client name"
 msgstr "Client name"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Analyze date"
 msgstr "Analyze date"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Analyze date"
 msgstr "Analyze date"
@@ -2662,6 +2572,10 @@ msgstr "Score"
 msgid "Demo analysis in progress."
 msgstr "Demo analysis in progress."
 
+#: src/ui/demo/demo-analyze-date.tsx
+msgid "Analyze date:"
+msgstr "Analyze date:"
+
 #: src/ui/demo/demo-comment-input.tsx
 msgid "Comment:"
 msgstr "Comment:"
@@ -2757,6 +2671,10 @@ msgctxt "Tooltip"
 msgid "This demo has not been analyzed yet."
 msgstr "This demo has not been analyzed yet."
 
+#: src/ui/demos/action-bar/analyze-not-analyzed-demos-button.tsx
+msgid "Analyze all demos"
+msgstr "Analyze all demos"
+
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
 msgid "Include subfolders"
@@ -2766,10 +2684,6 @@ msgstr "Include subfolders"
 msgctxt "Checkbox label"
 msgid "See all folders"
 msgstr "See all folders"
-
-#: src/ui/demos/table/delete-demos-from-database-item.tsx
-msgid "Delete from database"
-msgstr "Delete from database"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Pending analysis…"
@@ -2931,6 +2845,11 @@ msgstr "Renown"
 msgctxt "Demo source name"
 msgid "Valve"
 msgstr "Valve"
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "PRACC"
+msgstr "PRACC"
 
 #: src/ui/demos/use-demo-sources.ts
 #: src/ui/demos/use-demo-sources.ts
@@ -5338,6 +5257,52 @@ msgstr "HLAE has been updated"
 msgid "An error occurred while updating HLAE"
 msgstr "An error occurred while updating HLAE"
 
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Map name (e.g., de_dust2)"
+msgstr "Map name (e.g., de_dust2)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Match checksum/ID"
+msgstr "Match checksum/ID"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Game (CS2 or CSGO)"
+msgstr "Game (CS2 or CSGO)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Current date (YYYY-MM-DD)"
+msgstr "Current date (YYYY-MM-DD)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Current time (HH-MM-SS)"
+msgstr "Current time (HH-MM-SS)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Encoder software"
+msgstr "Encoder software"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Resolution (e.g., 1920x1080)"
+msgstr "Resolution (e.g., 1920x1080)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Framerate (e.g., 30)"
+msgstr "Framerate (e.g., 30)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Available placeholders:"
+msgstr "Available placeholders:"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgctxt "Input label"
+msgid "Output filename"
+msgstr "Output filename"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "?"
+msgstr "?"
+
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
 msgid "Output folder"
@@ -5385,11 +5350,6 @@ msgstr "Images + video"
 msgctxt "Select label"
 msgid "Recording system"
 msgstr "Recording system"
-
-#: src/ui/match/video/reset-settings-button.tsx
-msgctxt "Button"
-msgid "Reset settings"
-msgstr "Reset settings"
 
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Select option"
@@ -5811,11 +5771,6 @@ msgctxt "Button"
 msgid "Add new sequence"
 msgstr "Add new sequence"
 
-#: src/ui/match/video/sequences/delete-sequences-button.tsx
-msgctxt "Button"
-msgid "Delete sequences"
-msgstr "Delete sequences"
-
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgid "No sequences to edit"
 msgstr "No sequences to edit"
@@ -5905,10 +5860,27 @@ msgctxt "Software installation status"
 msgid "Not installed"
 msgstr "Not installed"
 
+#: src/ui/match/video/toggle-true-view.tsx
+msgctxt "Checkbox label"
+msgid "Enable TrueView mode"
+msgstr "Enable TrueView mode"
+
+#: src/ui/match/video/toggle-true-view.tsx
+msgid "Enabling TrueView may lead to lags in recordings!"
+msgstr "Enabling TrueView may lead to lags in recordings!"
+
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Toast"
 msgid "File created, click here to reveal it"
 msgstr "File created, click here to reveal it"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgid "The exported data is not valid JSON."
+msgstr "The exported data is not valid JSON."
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgid "The file extension must be <0>.json</0>"
+msgstr "The file extension must be <0>.json</0>"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgid "Video actions"
@@ -5923,6 +5895,26 @@ msgstr "Copy as JSON"
 msgctxt "Button"
 msgid "Export as JSON"
 msgstr "Export as JSON"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Delete sequences"
+msgstr "Delete sequences"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Reset settings"
+msgstr "Reset settings"
+
+#: src/ui/match/video/video-loader.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike executable not found."
+msgstr "Counter-Strike executable not found."
+
+#: src/ui/match/video/video-loader.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike executable not found, check your app playback settings."
+msgstr "Counter-Strike executable not found, check your app playback settings."
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
@@ -7618,6 +7610,10 @@ msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.4
 msgstr "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.1.2\"</0> in your Steam library to use this version."
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
+msgstr "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
 msgstr "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
 
@@ -7679,18 +7675,30 @@ msgctxt "Settings title"
 msgid "Follow symbolic Links"
 msgstr "Follow symbolic Links"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Windowed"
+msgstr "Windowed"
+
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Fullscreen Windowed"
+msgstr "Fullscreen Windowed"
+
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
+#: src/ui/settings/playback/game-display-mode.tsx
 msgid "Start the game in fullscreen mode"
 msgstr "Start the game in fullscreen mode"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
-msgid "Valve removed the CS2 fullscreen video option on Linux since a September 2025 game update. It means that enabling this option will have no effect if the CS2 version is newer than that!"
-msgstr "Valve removed the CS2 fullscreen video option on Linux since a September 2025 game update. It means that enabling this option will have no effect if the CS2 version is newer than that!"
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Valve removed the fullscreen option in a September 2025 game update!"
+msgstr "Valve removed the fullscreen option in a September 2025 game update!"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
+#: src/ui/settings/playback/game-display-mode.tsx
 msgctxt "Settings title"
-msgid "Fullscreen"
-msgstr "Fullscreen"
+msgid "Display mode"
+msgstr "Display mode"
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
@@ -7822,6 +7830,15 @@ msgstr "Before round delay"
 msgid "How many seconds to start before the end of the round's freeze time."
 msgstr "How many seconds to start before the end of the round's freeze time."
 
+#: src/ui/settings/playback/watch-round-wait-round-end.tsx
+msgid "Wait for the round to end before skipping to the next round when watching player's rounds."
+msgstr "Wait for the round to end before skipping to the next round when watching player's rounds."
+
+#: src/ui/settings/playback/watch-round-wait-round-end.tsx
+msgctxt "Settings title"
+msgid "Wait for round end"
+msgstr "Wait for round end"
+
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
 msgstr "UI"
@@ -7896,6 +7913,36 @@ msgstr "The name is too short"
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "Invalid color"
 msgstr "Invalid color"
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "Invalid date format."
+msgstr "Invalid date format."
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "Defines how dates are displayed."
+msgstr "Defines how dates are displayed."
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "See all <0>available tokens</0>."
+msgstr "See all <0>available tokens</0>."
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgctxt "Settings title"
+msgid "Date format"
+msgstr "Date format"
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgid "Invalid timezone."
+msgstr "Invalid timezone."
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgid "Timezone used to display dates. Uses the <0>IANA timezone format</0>."
+msgstr "Timezone used to display dates. Uses the <0>IANA timezone format</0>."
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgctxt "Settings title"
+msgid "Date timezone"
+msgstr "Date timezone"
 
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx
 msgid "Hardware Acceleration"
@@ -8079,12 +8126,40 @@ msgid "Show X-Ray"
 msgstr "Show X-Ray"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Match not found"
+msgstr "Match not found"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
+msgstr "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
+msgstr "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Failed to start the game, make sure Steam is running and you are connected."
 msgstr "Failed to start the game, make sure Steam is running and you are connected."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
 msgstr "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
+msgstr "Make sure Steam is not installed through Flatpak as it's not supported!"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
+msgstr "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Read the <0>documentation</0> for more information."
+msgstr "Read the <0>documentation</0> for more information."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "{game} is not supported on your operating system"
+msgstr "{game} is not supported on your operating system"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "HLAE is not installed."
@@ -8107,6 +8182,10 @@ msgid "Steam is not running."
 msgstr "Steam is not running."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No kills found"
+msgstr "No kills found"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "FFmpeg returned an error."
 msgstr "FFmpeg returned an error."
 
@@ -8123,8 +8202,20 @@ msgid "Raw files not found."
 msgstr "Raw files not found."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike crashed."
-msgstr "Counter-Strike crashed."
+msgid "The game crashed, please see <0>this documentation</0> for help."
+msgstr "The game crashed, please see <0>this documentation</0> for help."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "The game process exited with an access denied error."
+msgstr "The game process exited with an access denied error."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure to close any anti-cheat software and retry."
+msgstr "Make sure to close any anti-cheat software and retry."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "{game} is already running"
+msgstr "{game} is already running"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Unable to communicate with Counter-Strike, make sure to start it from the application."
@@ -8137,6 +8228,26 @@ msgstr "Counter-Strike is not running, please start it from the application."
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Counter-Strike did not respond, please try again."
 msgstr "Counter-Strike did not respond, please try again."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike video config file not found."
+msgstr "Counter-Strike video config file not found."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure the game has been launched at least once from Steam."
+msgstr "Make sure the game has been launched at least once from Steam."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "This demo needs to be re-analyzed to make the camera focus work."
+msgstr "This demo needs to be re-analyzed to make the camera focus work."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No rounds found"
+msgstr "No rounds found"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No deaths found"
+msgstr "No deaths found"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"
@@ -8385,10 +8496,6 @@ msgstr "Sequences"
 #: src/ui/videos/video-entry.tsx
 msgid "Disk space"
 msgstr "Disk space"
-
-#: src/ui/videos/video-entry.tsx
-msgid "Encoder software"
-msgstr "Encoder software"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Resolution"

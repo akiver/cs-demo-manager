@@ -132,7 +132,7 @@ function SelectPlayerDialog() {
         );
         break;
       default:
-        return assertNever(selectedEvent, `Unknown player sequence event: ${selectedEvent}`);
+        return assertNever(selectedEvent, `Unknown player sequence event: ${selectedEvent as string}`);
     }
 
     hideDialog();
@@ -163,27 +163,23 @@ function SelectPlayerDialog() {
     return (
       <>
         <div className="flex flex-col gap-y-8">
-          <label htmlFor="pov">
-            <Trans context="Select label">POV</Trans>
-          </label>
-          <div>
-            <Select
-              id="pov"
-              options={[
-                {
-                  value: Perspective.Player,
-                  label: <Trans context="Select option">Player</Trans>,
-                },
-                {
-                  value: Perspective.Enemy,
-                  label: <Trans context="Select option">Enemy</Trans>,
-                },
-              ]}
-              value={perspective}
-              onChange={setPerspective}
-            />
-          </div>
+          <Select
+            label={<Trans context="Select label">POV</Trans>}
+            options={[
+              {
+                value: Perspective.Player,
+                label: <Trans context="Select option">Player</Trans>,
+              },
+              {
+                value: Perspective.Enemy,
+                label: <Trans context="Select option">Enemy</Trans>,
+              },
+            ]}
+            value={perspective}
+            onChange={setPerspective}
+          />
         </div>
+
         <SecondsInput
           label={<Trans context="Input label">Seconds before each kill to start the sequence</Trans>}
           defaultValue={startSecondsBeforeEvent}
@@ -251,28 +247,23 @@ function SelectPlayerDialog() {
           />
 
           <div className="flex flex-col gap-y-8">
-            <label htmlFor="event">
-              <Trans context="Select label">Event</Trans>
-            </label>
-            <div>
-              <Select
-                id="event"
-                options={eventOptions}
-                value={selectedEvent}
-                onChange={(event) => {
-                  setSelectedEvent(event);
-                  const selectedWeapons = getVisibleWeapons(event, selectedSteamIds, match);
-                  setSelectedWeapons(selectedWeapons);
-                  if (event === PlayerSequenceEvent.Rounds) {
-                    setStartSecondsBeforeEvent(0);
-                    setEndSecondsAfterEvent(2);
-                  } else {
-                    setStartSecondsBeforeEvent(2);
-                    setEndSecondsAfterEvent(2);
-                  }
-                }}
-              />
-            </div>
+            <Select
+              label={<Trans context="Select label">Event</Trans>}
+              options={eventOptions}
+              value={selectedEvent}
+              onChange={(event) => {
+                setSelectedEvent(event);
+                const selectedWeapons = getVisibleWeapons(event, selectedSteamIds, match);
+                setSelectedWeapons(selectedWeapons);
+                if (event === PlayerSequenceEvent.Rounds) {
+                  setStartSecondsBeforeEvent(0);
+                  setEndSecondsAfterEvent(2);
+                } else {
+                  setStartSecondsBeforeEvent(2);
+                  setEndSecondsAfterEvent(2);
+                }
+              }}
+            />
           </div>
           <RoundsSelect rounds={match.rounds} selectedRoundNumbers={selectedRounds} onChange={setSelectedRounds} />
           {renderSelectedEventOptions()}

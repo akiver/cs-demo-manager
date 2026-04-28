@@ -40,6 +40,7 @@ export function Scoreboard({ teamName, teamScore, players, scoreOppositeTeam, is
     rowSelection: 'single',
     onContextMenu,
     sortedColumn: isOnLeetify ? { id: 'leetify-rating', direction: 'desc' } : { id: 'kill-count', direction: 'asc' },
+    fixedColumnsWidth: true,
   });
 
   return (

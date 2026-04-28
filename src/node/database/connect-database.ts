@@ -7,7 +7,7 @@ import { ensurePsqlIsInstalled } from 'csdm/node/database/psql/ensure-psql-is-in
 import { PsqlTimeout } from 'csdm/node/database/psql/errors/psql-timeout';
 import { startBackgroundTasks } from 'csdm/server/start-background-tasks';
 
-export async function connectDatabase(databaseSettings?: DatabaseSettings | undefined) {
+export async function connectDatabase(databaseSettings?: DatabaseSettings) {
   await ensurePsqlIsInstalled();
 
   if (databaseSettings === undefined) {
@@ -26,5 +26,5 @@ export async function connectDatabase(databaseSettings?: DatabaseSettings | unde
 
   createDatabaseConnection(databaseSettings);
   await migrateDatabase();
-  startBackgroundTasks();
+  void startBackgroundTasks();
 }

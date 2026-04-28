@@ -10,6 +10,7 @@ import type { VideoContainer } from 'csdm/common/types/video-container';
 import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filter';
 import type { RecordingSystem } from 'csdm/common/types/recording-system';
 import type { RecordingOutput } from 'csdm/common/types/recording-output';
+import type { DisplayMode } from 'csdm/common/types/display-mode';
 
 export type Folder = {
   path: string;
@@ -37,6 +38,8 @@ type UISettings = {
   initialPage: Page;
   redirectDemoToMatch: boolean;
   enableHardwareAcceleration: boolean;
+  dateFormat?: string;
+  dateTimezone?: string;
 };
 
 type AnalyzeSettings = {
@@ -61,7 +64,7 @@ type PlaybackTypeSettings = {
 export type PlaybackSettings = {
   height: number;
   width: number;
-  fullscreen: boolean;
+  displayMode: DisplayMode;
   useCustomHighlights: boolean;
   useCustomLowlights: boolean;
   highlights: PlaybackTypeSettings;
@@ -69,6 +72,7 @@ export type PlaybackSettings = {
   round: {
     beforeRoundDelayInSeconds: number; // how many seconds the playback should start before the end of rounds freeze time
     afterRoundDelayInSeconds: number; // how many seconds to wait before skipping to the next round (on round end or player death)
+    waitForRoundEnd: boolean; // If enabled, the playback will wait for the round to end before skipping to the next round when watching player's rounds.
   };
   launchParameters: string;
   useHlae: boolean;
@@ -152,6 +156,7 @@ export type VideoSettings = {
   showAssists: boolean;
   recordAudio: boolean;
   concatenateSequences: boolean;
+  outputFileName: string;
   playerVoicesEnabled: boolean;
   ffmpegSettings: FfmpegSettings;
   outputFolderPath: string;
@@ -159,6 +164,7 @@ export type VideoSettings = {
   // How long death notices will be displayed in seconds by default. It can be overridden in the sequence settings.
   deathNoticesDuration: number;
   hlae: HlaeSettings;
+  trueView: boolean; // CS2 only
 };
 
 type BanSettings = {

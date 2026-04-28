@@ -16,6 +16,7 @@ export type Round = {
   tickEnd: number;
   freezeTimeEndTick: number;
   deathTick: number | null;
+  killerSteamId: string | null;
 };
 
 async function fetchRounds(checksum: string, steamId: string) {
@@ -29,7 +30,7 @@ async function fetchRounds(checksum: string, steamId: string) {
         .onRef('kills.round_number', '=', 'rounds.number')
         .on('kills.victim_steam_id', '=', steamId);
     })
-    .select(['kills.tick as deathTick'])
+    .select(['kills.tick as deathTick', 'kills.killer_steam_id as killerSteamId'])
     .orderBy('rounds.freeze_time_end_tick', 'asc')
     .execute();
 
@@ -39,18 +40,15 @@ async function fetchRounds(checksum: string, steamId: string) {
       tickEnd: row.end_tick,
       freezeTimeEndTick: row.freeze_time_end_tick,
       deathTick: row.deathTick,
+      killerSteamId: row.killerSteamId,
     };
   });
 
   return rounds;
 }
 
-async function fetchMatchTickrate(checksum: string) {
-  const row = await db
-    .selectFrom('matches')
-    .select(['tickrate'])
-    .where('matches.checksum', '=', checksum)
-    .executeTakeFirst();
+async function fetchDemoTickrate(checksum: string) {
+  const row = await db.selectFrom('demos').select(['tickrate']).where('checksum', '=', checksum).executeTakeFirst();
 
   return row?.tickrate ?? 64;
 }
@@ -73,7 +71,7 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
 
   const settings = await getSettings();
   const { round, playerVoicesEnabled } = settings.playback;
-  const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds } = round;
+  const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds, waitForRoundEnd } = round;
   let players: PlayerWatchInfo[] = [];
   let playerId: number | string = steamId;
   if (game !== Game.CSGO) {
@@ -85,7 +83,7 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
     playerId = player.slot;
   }
 
-  const tickrate = await fetchMatchTickrate(checksum);
+  const tickrate = await fetchDemoTickrate(checksum);
   await generatePlayerRoundsJsonFile({
     tickrate,
     demoPath,
@@ -94,6 +92,7 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
     playerId,
     beforeDelaySeconds: beforeRoundDelayInSeconds,
     afterDelaySeconds: afterRoundDelayInSeconds,
+    waitForRoundEnd,
     playerVoicesEnabled,
     players,
   });

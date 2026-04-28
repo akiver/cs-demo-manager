@@ -151,7 +151,6 @@ import {
 import { isCs2ConnectedToServerHandler } from './renderer-process/counter-strike/is-cs2-connected-to-server-handler';
 import { fetchMigrationsHandler } from './renderer-process/migrations/fetch-migrations-handler';
 import type { Migration } from 'csdm/node/database/migrations/fetch-migrations';
-import { deleteDemosFromDatabaseHandler } from './renderer-process/demo/delete-demos-from-database-handler';
 import type { CounterStrikeErrorPayload, WatchDemoErrorPayload } from 'csdm/server/counter-strike';
 import {
   watchPlayerRoundsHandler,
@@ -344,7 +343,6 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.SearchPlayers]: Handler<PlayersFilter, PlayerResult[]>;
   [RendererClientMessageName.SearchMaps]: Handler<MapNamesFilter, string[]>;
   [RendererClientMessageName.FetchLastMigrations]: Handler<void, Migration[]>;
-  [RendererClientMessageName.DeleteDemosFromDatabase]: Handler<string[]>;
   [RendererClientMessageName.ImportDataFromV2Backup]: Handler<ImportV2BackupOptions, ImportV2BackupResult>;
   [RendererClientMessageName.FetchLast5EPlayMatches]: Handler<string, FiveEPlayMatch[]>;
   [RendererClientMessageName.Add5EPlayAccount]: Handler<string, FiveEPlayAccount>;
@@ -457,7 +455,6 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.SearchPlayers]: searchPlayersHandler,
   [RendererClientMessageName.SearchMaps]: searchMapNamesHandler,
   [RendererClientMessageName.FetchLastMigrations]: fetchMigrationsHandler,
-  [RendererClientMessageName.DeleteDemosFromDatabase]: deleteDemosFromDatabaseHandler,
   [RendererClientMessageName.ImportDataFromV2Backup]: importDataFromV2BackupHandler,
   [RendererClientMessageName.FetchLast5EPlayMatches]: fetchLast5EPlayMatchesHandler,
   [RendererClientMessageName.Add5EPlayAccount]: add5EPlayAccountHandler,

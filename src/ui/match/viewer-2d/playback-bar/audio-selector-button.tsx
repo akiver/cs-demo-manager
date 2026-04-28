@@ -173,10 +173,10 @@ function AudioSelectorDialog({ loadAudioFile }: Props) {
                   <Trans>The following issues were found:</Trans>
                 </p>
               </div>
-              <ul className="flex max-h-[224px] max-w-[824px] flex-col gap-y-8 overflow-auto rounded bg-gray-100 p-8">
+              <ul className="flex max-h-[224px] max-w-[824px] flex-col gap-y-8 overflow-auto rounded-4 bg-gray-100 p-8">
                 {warnings.map((warning, index) => {
                   return (
-                    <li key={`${warning}${index}`} className="selectable break-all select-text">
+                    <li key={index} className="selectable break-all select-text">
                       {warning}
                     </li>
                   );
@@ -190,8 +190,8 @@ function AudioSelectorDialog({ loadAudioFile }: Props) {
           <SpinnableButton
             isLoading={isExporting}
             variant={ButtonVariant.Primary}
-            onClick={() => {
-              client.send({
+            onClick={async () => {
+              await client.send({
                 name: RendererClientMessageName.ExportDemoPlayersVoice,
                 payload: {
                   demoPaths: [demoFilePath],

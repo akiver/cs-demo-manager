@@ -29,7 +29,7 @@ export class JSONActionsFileGenerator {
     this.filePath = windowsToUnixPathSeparator(`${demoPath}.json`);
   }
 
-  public addSkipAhead(startTick: number, toTick: number) {
+  public addGoToTick(startTick: number, toTick: number) {
     this.actions.push({
       cmd: `demo_gototick ${this.getValidTick(toTick)}`,
       tick: this.getValidTick(startTick),
@@ -61,10 +61,7 @@ export class JSONActionsFileGenerator {
       });
       this.actions.push({
         cmd: `spec_player ${playerId}`,
-        // Add a small delay to prevent spec_player from being ignored. Since an October 2025 CS2 update,
-        // executing spec_player on the same tick as demo_gototick's target tick may fail.
-        // https://github.com/akiver/cs-demo-manager/issues/1238
-        tick: actionTick + 4,
+        tick: actionTick,
       });
     }
 
@@ -260,7 +257,11 @@ export class JSONActionsFileGenerator {
   }
 
   private getValidTick(tick: number): number {
-    return Math.max(64, tick);
+    // Commands must be executed at least ~1.5 seconds (tickrate 64) after a "demo_gototick 0" command because the game
+    // may skip these first ticks.
+    // https://github.com/akiver/cs-demo-manager/issues/1343
+    // The demo in this issue starts at tick 68 after a "demo_gototick 0" command.
+    return Math.max(96, tick);
   }
 
   private get actions() {

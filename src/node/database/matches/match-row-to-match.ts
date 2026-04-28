@@ -3,9 +3,10 @@ import type { MatchRow } from 'csdm/node/database/matches/match-table';
 import { fetchChecksumTagIds } from '../tags/fetch-checksum-tag-ids';
 import type { Team } from '../../../common/types/team';
 import type { CollateralKillPerMatch } from './fetch-collateral-kill-count-per-match';
+import type { DemoRow } from '../demos/demo-table';
 
 export async function matchRowToMatch(
-  row: MatchRow,
+  row: DemoRow & MatchRow,
   teamA: Team,
   teamB: Team,
   collateralKillCountPerMatch: CollateralKillPerMatch,
@@ -38,7 +39,7 @@ export async function matchRowToMatch(
     gameMode: row.game_mode_str,
     isRanked: row.is_ranked,
     maxRounds: row.max_rounds,
-    shareCode: row.share_code,
+    shareCode: row.share_code ?? '',
     hasVacLiveBan: row.has_vac_live_ban,
     teamA,
     teamB,

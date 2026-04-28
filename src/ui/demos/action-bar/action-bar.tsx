@@ -8,6 +8,7 @@ import { DemosColumnsVisibility } from 'csdm/ui/demos/table/demos-columns-visibi
 import { DemoDetailsButton } from 'csdm/ui/demos/action-bar/demo-details-button';
 import { FuzzySearchTextInput } from 'csdm/ui/demos/action-bar/fuzzy-search-text-input';
 import { DemosFilterDropdown } from 'csdm/ui/demos/action-bar/demos-filter-dropdown';
+import { AnalyzeNotaAnalyzedDemosButton } from './analyze-not-analyzed-demos-button';
 
 export function DemosActionBar() {
   return (
@@ -18,6 +19,7 @@ export function DemosActionBar() {
           <WatchDemoButton />
           <RevealDemosInExplorerButton />
           <AnalyzeDemosButton />
+          <AnalyzeNotaAnalyzedDemosButton />
         </>
       }
       right={

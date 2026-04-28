@@ -26,6 +26,7 @@ type Options = {
   demoPath: string;
   sequences: Sequence[];
   closeGameAfterRecording: boolean;
+  trueView: boolean;
   tickrate: number;
   players: PlayerWatchInfo[];
   cameras: Camera[];
@@ -47,6 +48,7 @@ export async function createCs2VideoJsonFile({
   demoPath,
   sequences,
   closeGameAfterRecording,
+  trueView,
   tickrate,
   players,
   cameras,
@@ -64,6 +66,7 @@ export async function createCs2VideoJsonFile({
     'cl_trueview_show_status 0',
     'r_show_build_info 0',
     'mirv_streams record screen enabled 1',
+    `cl_demo_predict ${trueView ? 1 : 0}`,
   ];
 
   for (let i = 0; i < sequences.length; i++) {
@@ -94,7 +97,7 @@ export async function createCs2VideoJsonFile({
     json.setEnabledVoicesKey(voiceEnableKey);
 
     const roundedTickrate = Math.round(tickrate);
-    const setupSequenceTick = sequence.startTick - roundedTickrate > 0 ? sequence.startTick - roundedTickrate : 1;
+    const setupSequenceTick = Math.max(1, sequence.startTick - roundedTickrate);
 
     const hlaeOutputFolderPath = getHlaeOutputFolderPath(outputFolderPath, sequence);
     const presetName =
@@ -110,7 +113,7 @@ export async function createCs2VideoJsonFile({
       .addExecCommand(setupSequenceTick, `mp_display_kill_assists ${sequence.showAssists ? 1 : 0}`);
 
     if (presetName !== 'afxClassic') {
-      let presetParameters = `-c:v ${ffmpegSettings.videoCodec}`;
+      let presetParameters = `-c:v ${ffmpegSettings.videoCodec} -pix_fmt yuv420p`;
       if (ffmpegSettings.outputParameters === '') {
         presetParameters += ` -crf ${ffmpegSettings.constantRateFactor}`;
       } else {
@@ -141,11 +144,14 @@ export async function createCs2VideoJsonFile({
     // Do it a few ticks before the sequence's start tick because some ticks may be skipped between the time that the
     // plugin pauses the playback and the time that the game actually pauses the playback (it would result in
     // startmovie commands not being executed and so missing sequences).
-    json.addPausePlayback(sequence.startTick - 4);
+    json.addPausePlayback(Math.max(1, sequence.startTick - 4));
 
-    // Skip ahead 1 tick before the setup tick to make sure the setup commands are executed.
+    // Go to 1 tick before the sequence's setup tick to make sure the setup commands are executed.
     // It may not if we do both the skip ahead and the setup cmds at the same tick.
-    json.addSkipAhead(1, Math.max(1, setupSequenceTick - 1));
+    // Since an October 2025 CS2 update, executing spec_player and demo_gototick on the same tick may cause
+    // spec_player to be ignored. It's important to go to the setup tick before executing any spec_player command.
+    // https://github.com/akiver/cs-demo-manager/issues/1238
+    json.addGoToTick(1, Math.max(1, setupSequenceTick - 1));
 
     for (const camera of sequence.playerCameras) {
       const player = players.find((player) => player.steamId === camera.playerSteamId);
@@ -160,8 +166,11 @@ export async function createCs2VideoJsonFile({
       }
     }
 
-    // Block all death notices by default and then selectively allow them based on player's options.
-    json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add block=1`);
+    json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter clear`);
+    if (sequence.playersOptions.length > 0) {
+      // Block all death notices by default and then selectively allow them based on player's options.
+      json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add block=1`);
+    }
 
     for (const playerOptions of sequence.playersOptions) {
       // Unlike CS:GO, support for double quotes in player's name is not supported in CS2.
@@ -169,14 +178,7 @@ export async function createCs2VideoJsonFile({
       const replacePlayerNameCommand = `mirv_replace_name byXuid add x${playerOptions.steamId} "${playerOptions.playerName}"`;
       json.addExecCommand(setupSequenceTick, replacePlayerNameCommand);
 
-      json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add victimMatch=x${playerOptions.steamId} block=0`);
-
       if (playerOptions.showKill) {
-        json.addExecCommand(
-          setupSequenceTick,
-          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerMatch=x${playerOptions.steamId} block=0`,
-        );
-
         json.addExecCommand(
           setupSequenceTick,
           `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=${playerOptions.highlightKill ? '1' : '0'} block=0`,

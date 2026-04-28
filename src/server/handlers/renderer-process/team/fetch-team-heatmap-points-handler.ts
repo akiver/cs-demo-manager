@@ -26,7 +26,7 @@ export async function fetchTeamHeatmapPointsHandler(filter: TeamHeatmapFilter) {
         points = await fetchTeamGrenadePoints(filter);
         break;
       default:
-        assertNever(filter.event, `Unsupported heatmap event: ${filter.event}`);
+        assertNever(filter.event, `Unsupported heatmap event: ${filter.event as string}`);
     }
 
     return points;

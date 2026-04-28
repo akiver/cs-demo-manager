@@ -13,8 +13,8 @@ type Props = {
 export function RoundContextMenu({ round, demoPath }: Props) {
   const { watchDemo } = useCounterStrike();
 
-  const onWatchRoundClick = () => {
-    watchDemo({
+  const onWatchRoundClick = async () => {
+    await watchDemo({
       demoPath,
       additionalArguments: [`startround:${round.number}`],
     });

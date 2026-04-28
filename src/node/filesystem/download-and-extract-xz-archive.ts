@@ -9,7 +9,11 @@ const streamPipeline = util.promisify(pipeline);
 const execAsync = util.promisify(exec);
 
 export async function downloadAndExtractXzArchive(archiveUrl: string, destinationPath: string): Promise<void> {
-  const response = await request(archiveUrl);
+  let response = await request(archiveUrl);
+  const isRedirection = response.statusCode === 301 || response.statusCode === 302;
+  if (isRedirection && typeof response.headers.location === 'string') {
+    response = await request(response.headers.location);
+  }
 
   const archivePath = path.join(getAppFolderPath(), path.basename(archiveUrl));
   if (response.body) {
@@ -19,6 +23,6 @@ export async function downloadAndExtractXzArchive(archiveUrl: string, destinatio
   }
 
   await fs.mkdirp(destinationPath);
-  await execAsync(`tar -xf ${archivePath} -C ${destinationPath} --strip=1`);
+  await execAsync(`tar -xJf ${archivePath} -C ${destinationPath} --strip=1`);
   await fs.remove(archivePath);
 }

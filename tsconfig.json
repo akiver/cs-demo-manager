@@ -3,7 +3,7 @@
     "module": "ESNext",
     "jsx": "react",
     "target": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "sourceMap": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
@@ -11,8 +11,6 @@
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "noErrorTruncation": true,
-    "baseUrl": ".",
-    "strict": true,
     "paths": {
       "csdm/*": ["./src/*"]
     }

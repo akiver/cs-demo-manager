@@ -7,8 +7,8 @@ type Props = {
 };
 
 export function CopyShareCodeItem({ shareCodes }: Props) {
-  const onClick = () => {
-    navigator.clipboard.writeText(shareCodes.join('\n'));
+  const onClick = async () => {
+    await navigator.clipboard.writeText(shareCodes.join('\n'));
   };
   const isDisabled = shareCodes.includes('');
 

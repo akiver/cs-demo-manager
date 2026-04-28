@@ -20,8 +20,8 @@ export function PlayDemoAtTickButton({ tick, focusSteamId, demoPath, game, toolt
   const [isCheckingCsStatus, setIsCheckingForCsStatus] = useState(false);
   const { showDialog } = useDialog();
 
-  const startWatchDemo = () => {
-    watchDemo({
+  const startWatchDemo = async () => {
+    await watchDemo({
       demoPath,
       startTick: tick,
       focusSteamId,
@@ -39,7 +39,7 @@ export function PlayDemoAtTickButton({ tick, focusSteamId, demoPath, game, toolt
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog onConfirmClick={startWatchDemo} />);
     } else {
-      startWatchDemo();
+      await startWatchDemo();
     }
     setIsCheckingForCsStatus(false);
   };

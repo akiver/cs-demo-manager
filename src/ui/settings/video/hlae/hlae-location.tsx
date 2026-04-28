@@ -87,10 +87,10 @@ export function HlaeLocation() {
         newExecutablePath = executablePath;
       }
 
-      enableCustomLocation(newExecutablePath);
+      await enableCustomLocation(newExecutablePath);
     } else {
       const clearCustomLocation = false;
-      disableCustomLocation(clearCustomLocation);
+      await disableCustomLocation(clearCustomLocation);
     }
   };
 
@@ -103,9 +103,9 @@ export function HlaeLocation() {
     await enableCustomLocation(executablePath);
   };
 
-  const onResetClick = () => {
+  const onResetClick = async () => {
     const clearCustomLocation = true;
-    disableCustomLocation(clearCustomLocation);
+    await disableCustomLocation(clearCustomLocation);
   };
 
   const isBrowseButtonDisabled = customExecutableLocation === '';

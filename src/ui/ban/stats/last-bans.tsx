@@ -31,7 +31,7 @@ export function LastBans({ bannedAccounts }: Props) {
             return (
               <Link
                 key={account.steamId}
-                className="flex flex-none gap-x-4 rounded p-8 hover:bg-gray-100"
+                className="flex flex-none gap-x-4 rounded-4 p-8 hover:bg-gray-100"
                 to={buildPlayerPath(account.steamId)}
                 viewTransition={true}
               >

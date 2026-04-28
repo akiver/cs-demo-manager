@@ -23,14 +23,14 @@ export function Round() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
+    const onKeyDown = async (event: KeyboardEvent) => {
       if (event.key === 'ArrowRight' && match.rounds.length > roundNumber) {
-        navigate(buildMatchRoundPath(matchChecksum, roundNumber + 1));
+        await navigate(buildMatchRoundPath(matchChecksum, roundNumber + 1));
       } else if (event.key === 'ArrowLeft') {
         if (roundNumber > 1) {
-          navigate(buildMatchRoundPath(matchChecksum, roundNumber - 1));
+          await navigate(buildMatchRoundPath(matchChecksum, roundNumber - 1));
         } else {
-          navigate(buildMatchRoundsPath(matchChecksum));
+          await navigate(buildMatchRoundsPath(matchChecksum));
         }
       }
     };

@@ -44,7 +44,7 @@ export function ChangelogDialog() {
   const [html, setHtml] = useState('');
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       try {
         const response = await fetch(
           'https://raw.githubusercontent.com/akiver/cs-demo-manager.com/refs/heads/main/src/pages/changelog.mdx',

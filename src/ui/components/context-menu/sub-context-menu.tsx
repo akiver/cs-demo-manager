@@ -1,4 +1,4 @@
-import { ChevronDown } from 'csdm/ui/icons/chevron-down-icon';
+import { ChevronDownIcon } from 'csdm/ui/icons/chevron-down-icon';
 import React, { useRef } from 'react';
 import type { ReactNode } from 'react';
 
@@ -57,10 +57,10 @@ export function SubContextMenu({ label, children }: Props) {
     >
       <div className="flex flex-1 items-center justify-between">
         <span>{label}</span>
-        <ChevronDown width={12} height={12} className="-rotate-90" />
+        <ChevronDownIcon className="size-16 -rotate-90" />
       </div>
       <div ref={subMenuRef} className="absolute top-0 hidden">
-        <div className="rounded bg-gray-100 p-8 shadow-[0_0_4px_0_var(--color-gray-500)]">{children}</div>
+        <div className="rounded-4 bg-gray-100 p-8 shadow-[0_0_4px_0_var(--color-gray-500)]">{children}</div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import { checkForNewBannedSteamAccounts } from './tasks/check-for-new-banned-ste
 
 let scheduledTasksIntervalId: NodeJS.Timeout | null = null;
 
-export function startBackgroundTasks() {
+export async function startBackgroundTasks() {
   // Prevents starting background tasks multiple times.
   // e.g. when the renderer window is closed and opened again.
   if (scheduledTasksIntervalId) {
@@ -15,13 +15,13 @@ export function startBackgroundTasks() {
   }
 
   listenForCounterStrikeClosed();
-  downloadLastMatchesIfNecessary();
+  await downloadLastMatchesIfNecessary();
 
   const runScheduledTasks = async () => {
     await checkForNewBannedSteamAccounts();
   };
 
-  runScheduledTasks();
+  await runScheduledTasks();
   const intervalInMs = 3_600_000; // 1 hour
   scheduledTasksIntervalId = setInterval(runScheduledTasks, intervalInMs);
 }

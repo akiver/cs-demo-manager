@@ -25,6 +25,7 @@ export const SupportedDemoSourcesPerGame: Record<Game, DemoSource[]> = {
     DemoSource.FiveEPlay,
     DemoSource.MatchZy,
     DemoSource.PerfectWorld,
+    DemoSource.Pracc,
     DemoSource.Renown,
     DemoSource.Valve,
   ],

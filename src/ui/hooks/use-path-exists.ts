@@ -9,7 +9,7 @@ export function usePathExists(filePath: string) {
       setPathExists(exists);
     };
 
-    checkIfPathExists();
+    void checkIfPathExists();
   }, [filePath]);
 
   return pathExists;

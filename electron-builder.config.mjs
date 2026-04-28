@@ -1,5 +1,5 @@
-const { Arch } = require('electron-builder');
-const pkg = require('./package.json');
+import { Arch } from 'electron-builder';
+import pkg from './package.json' with { type: 'json' };
 
 let shouldNotarize = process.platform === 'darwin';
 
@@ -145,4 +145,4 @@ const config = {
   },
 };
 
-module.exports = config;
+export default config;

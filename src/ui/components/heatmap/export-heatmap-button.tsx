@@ -85,7 +85,7 @@ export function ExportHeatmapButton() {
         data: base64,
       };
 
-      client.send({
+      await client.send({
         name: RendererClientMessageName.WriteBase64File,
         payload,
       });

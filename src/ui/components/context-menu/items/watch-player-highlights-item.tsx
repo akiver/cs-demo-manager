@@ -21,11 +21,11 @@ export function WatchPlayerHighlightsItem({ demoPath, steamId, game }: Props) {
   const { isKillCsRequired, watchPlayerHighlights } = useCounterStrike();
   const { useCustomHighlights } = usePlaybackSettings();
 
-  const startPlayerHighlights = () => {
+  const startPlayerHighlights = async () => {
     if (useCustomHighlights || game !== Game.CSGO) {
       showDialog(<SelectActionsPovDialog demoPath={demoPath} playerSteamId={steamId} type={WatchType.Highlights} />);
     } else {
-      watchPlayerHighlights({
+      await watchPlayerHighlights({
         demoPath,
         steamId,
         perspective: Perspective.Player,
@@ -38,7 +38,7 @@ export function WatchPlayerHighlightsItem({ demoPath, steamId, game }: Props) {
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog closeOnConfirm={false} onConfirmClick={startPlayerHighlights} />);
     } else {
-      startPlayerHighlights();
+      await startPlayerHighlights();
     }
   };
 

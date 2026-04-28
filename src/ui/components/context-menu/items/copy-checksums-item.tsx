@@ -7,8 +7,8 @@ type Props = {
 };
 
 export function CopyChecksumsItem({ checksums }: Props) {
-  const onClick = () => {
-    navigator.clipboard.writeText(checksums.join(','));
+  const onClick = async () => {
+    await navigator.clipboard.writeText(checksums.join(','));
   };
 
   return (

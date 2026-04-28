@@ -11,8 +11,9 @@ export async function fetchPlayerChartsData(steamId: string, filters: MatchFilte
       'average_damage_per_round as averageDamagePerRound',
       'kill_death_ratio as killDeathRatio',
     ])
-    .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
-    .select(sql<string>`to_char(matches.date, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')`.as('matchDate'))
+    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .select(sql<string>`to_char(demos.date, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')`.as('matchDate'))
     .leftJoin('clutches', function (qb) {
       return qb
         .onRef('clutches.match_checksum', '=', 'players.match_checksum')
@@ -24,7 +25,7 @@ export async function fetchPlayerChartsData(steamId: string, filters: MatchFilte
       ),
     ])
     .where('steam_id', '=', steamId)
-    .groupBy(['headshotPercentage', 'averageDamagePerRound', 'killDeathRatio', 'matches.date'])
+    .groupBy(['headshotPercentage', 'averageDamagePerRound', 'killDeathRatio', 'demos.date'])
     .orderBy('date', 'asc');
 
   query = applyMatchFilters(query, filters);

@@ -16,6 +16,6 @@ export function RecordingOutput({ output }: Props) {
     case Output.ImagesAndVideo:
       return <Trans>Images + video</Trans>;
     default:
-      return assertNever(output, `Unknown recording output: ${output}`);
+      return assertNever(output, `Unknown recording output: ${output as string}`);
   }
 }

@@ -49,8 +49,8 @@ function StartGameButton() {
   return (
     <Button
       onClick={async () => {
-        const start = () => {
-          startGame({
+        const start = async () => {
+          await startGame({
             game,
             map: mapName,
             mode: 'spectate',
@@ -61,7 +61,7 @@ function StartGameButton() {
         if (csIsRunning) {
           showDialog(<CounterStrikeRunningDialog onConfirmClick={start} />);
         } else {
-          start();
+          await start();
         }
       }}
     >
@@ -85,7 +85,7 @@ export function CameraForm({ nameInput, error, onSubmit }: Props) {
   const showToast = useShowToast();
   const [isLoading, setIsLoading] = useState(false);
 
-  const validateAndSubmit = () => {
+  const validateAndSubmit = async () => {
     const isValid = validate();
     if (isValid) {
       const payload: CameraPayload = {
@@ -103,15 +103,15 @@ export function CameraForm({ nameInput, error, onSubmit }: Props) {
         color: fields.color.value,
       };
 
-      onSubmit(payload);
+      await onSubmit(payload);
     }
   };
 
   return (
     <Dialog
-      onEnterPressed={(event) => {
+      onEnterPressed={async (event) => {
         event.preventDefault();
-        validateAndSubmit();
+        await validateAndSubmit();
       }}
     >
       <DialogHeader>
@@ -162,7 +162,7 @@ export function CameraForm({ nameInput, error, onSubmit }: Props) {
                   }
                 } catch (error) {
                   const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-                  let message = getPlaybackErrorMessageFromErrorCode(game, errorCode);
+                  let message = getPlaybackErrorMessageFromErrorCode(errorCode, game);
                   if (errorCode === ErrorCode.RawFilesNotFound) {
                     message = (
                       <p>

@@ -5,8 +5,8 @@ import { buildMatchPath } from 'csdm/ui/routes-paths';
 export function useNavigateToMatch() {
   const navigate = useNavigate();
 
-  return (checksum: string, options?: NavigateOptions) => {
+  return async (checksum: string, options?: NavigateOptions) => {
     const matchPath = buildMatchPath(checksum);
-    navigate(matchPath, options);
+    await navigate(matchPath, options);
   };
 }

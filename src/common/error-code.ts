@@ -31,6 +31,7 @@ export const ErrorCode = {
   CounterStrikeNotRunning: 430,
   CounterStrikeNotConnected: 431,
   CounterStrikeNoResponse: 432,
+  CounterStrikeVideoConfigNotFound: 433,
   InvalidDemoPath: 505,
   ChecksumsMismatch: 506,
   DuplicateTeamName: 507,
@@ -104,6 +105,7 @@ export const ErrorCode = {
   CameraAlreadyExists: 3010,
 
   InvalidDemoName: 3100,
+  InvalidMatchDate: 3101,
   AnalyzeCorruptedDemo: 3200,
   InsertMatchDuplicatedChecksum: 3201,
   InsertRoundsError: 3210,
@@ -111,6 +113,8 @@ export const ErrorCode = {
   SteamNotRunning: 4000,
 
   InvalidBackupFile: 4100,
+  InvalidFileExtension: 4101,
+  InvalidJson: 4102,
 } as const;
 
 export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];

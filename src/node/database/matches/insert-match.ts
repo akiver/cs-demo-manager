@@ -1,3 +1,4 @@
+import { parseFile } from '@fast-csv/parse';
 import { deleteMatchesByChecksums } from './delete-matches-by-checksums';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import type { ShotTable } from '../shots/shot-table';
@@ -37,6 +38,9 @@ import {
 import { insertMatchPositions } from './insert-match-positions';
 import { InsertRoundsError } from './errors/insert-rounds-error';
 import { DuplicatedMatchChecksum } from './errors/duplicated-match-checksum';
+import { db } from '../database';
+import type { DemoSource, DemoType, Game } from 'csdm/common/types/counter-strike';
+import { InvalidMatchDate } from './errors/invalid-match-date';
 
 async function insertShots({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_shots.csv');
@@ -762,6 +766,53 @@ async function insertChickenDeaths({ outputFolderPath, demoName, databaseSetting
   });
 }
 
+async function insertDemoFromCsv({ outputFolderPath, demoName }: InsertOptions) {
+  return new Promise<void>((resolve, reject) => {
+    const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_demo.csv');
+    parseFile(csvFilePath, { headers: false })
+      .on('error', reject)
+      .on('data', async (row) => {
+        const date = new Date(row[3]);
+        if (isNaN(date.getTime())) {
+          return reject(new InvalidMatchDate(`Invalid match date: ${row[3]}`));
+        }
+
+        await db
+          .insertInto('demos')
+          .values({
+            checksum: row[0],
+            game: row[1] as Game,
+            name: row[2],
+            date,
+            source: row[4] as DemoSource,
+            type: row[5] as DemoType,
+            share_code: row[6],
+            map_name: row[7],
+            server_name: row[8],
+            client_name: row[9],
+            tick_count: parseInt(row[10], 10),
+            tickrate: parseInt(row[11], 10),
+            framerate: parseFloat(row[12]),
+            duration: parseFloat(row[13]),
+            network_protocol: parseInt(row[14], 10),
+            build_number: parseInt(row[15], 10),
+          })
+          .onConflict((oc) => {
+            return oc.column('checksum').doUpdateSet({
+              map_name: (b) => b.ref('excluded.map_name'),
+              tick_count: (b) => b.ref('excluded.tick_count'),
+              tickrate: (b) => b.ref('excluded.tickrate'),
+              framerate: (b) => b.ref('excluded.framerate'),
+              duration: (b) => b.ref('excluded.duration'),
+              share_code: (b) => b.ref('excluded.share_code'),
+            });
+          })
+          .execute();
+      })
+      .on('end', resolve);
+  });
+}
+
 async function insertMatchFromCsv({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
   try {
     const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_match.csv');
@@ -772,22 +823,7 @@ async function insertMatchFromCsv({ outputFolderPath, demoName, databaseSettings
       csvFilePath,
       columns: [
         'checksum',
-        'game',
         'demo_path',
-        'name',
-        'date',
-        'source',
-        'type',
-        'share_code',
-        'map_name',
-        'server_name',
-        'client_name',
-        'tick_count',
-        'tickrate',
-        'framerate',
-        'duration',
-        'network_protocol',
-        'build_number',
         'game_type',
         'game_mode',
         'game_mode_str',
@@ -835,6 +871,11 @@ export async function insertMatch({ checksum, demoPath, outputFolderPath }: Inse
     await deleteMatchesByChecksums([checksum]);
 
     const demoName = getDemoNameFromPath(demoPath);
+    await insertDemoFromCsv({
+      databaseSettings,
+      outputFolderPath,
+      demoName,
+    });
     await insertMatchFromCsv({
       databaseSettings,
       outputFolderPath,

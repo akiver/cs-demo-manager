@@ -16,18 +16,16 @@ function getArchiveName(version: string) {
     case isMac:
       return `ffmpeg-${version}`;
     default:
-      return 'ffmpeg-release-amd64-static';
+      return `ffmpeg-n${version}-latest-linux64-gpl-${version}`;
   }
 }
 
 function getArchiveUrl(archiveName: string) {
   switch (true) {
-    case isWindows:
-      return `https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/${archiveName}.zip`;
     case isMac:
       return `https://evermeet.cx/ffmpeg/${archiveName}.zip`;
     default:
-      return `https://johnvansickle.com/ffmpeg/releases/${archiveName}.tar.xz`;
+      return `https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/${archiveName}${isWindows ? '.zip' : '.tar.xz'}`;
   }
 }
 

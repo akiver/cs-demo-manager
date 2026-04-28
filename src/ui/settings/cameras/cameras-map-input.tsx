@@ -1,7 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import type { Map } from 'csdm/common/types/map';
 
 type Props = {
@@ -24,10 +23,12 @@ export function CamerasMapInput({ maps, mapName, onChange }: Props) {
 
   return (
     <div className="flex items-center gap-x-8">
-      <InputLabel>
-        <Trans context="Select label">Map</Trans>
-      </InputLabel>
-      <Select options={mapsOptions} value={mapName} onChange={onChange} />
+      <Select
+        label={<Trans context="Select label">Map</Trans>}
+        options={mapsOptions}
+        value={mapName}
+        onChange={onChange}
+      />
     </div>
   );
 }

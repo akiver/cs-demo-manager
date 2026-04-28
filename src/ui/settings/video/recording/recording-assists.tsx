@@ -12,8 +12,8 @@ export function RecordingAssists() {
       interactiveComponent={
         <Switch
           isChecked={settings.showAssists}
-          onChange={(isChecked) => {
-            updateSettings({ showAssists: isChecked });
+          onChange={async (isChecked) => {
+            await updateSettings({ showAssists: isChecked });
           }}
         />
       }

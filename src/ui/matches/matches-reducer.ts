@@ -15,7 +15,7 @@ import {
 } from './matches-actions';
 import { commentUpdated } from 'csdm/ui/comment/comment-actions';
 import { checksumsTagsUpdated, tagDeleted } from 'csdm/ui/tags/tags-actions';
-import { demoRenamed } from 'csdm/ui/demos/demos-actions';
+import { demoRenamed, demosSourceUpdated, demosTypeUpdated } from 'csdm/ui/demos/demos-actions';
 import { addIgnoredSteamAccountSuccess, deleteIgnoredSteamAccountSuccess } from '../ban/ban-actions';
 import { initializeAppSuccess } from '../bootstrap/bootstrap-actions';
 
@@ -100,6 +100,18 @@ export const matchesReducer = createReducer(initialState, (builder) => {
       const matches = state.entities.filter((match) => action.payload.checksums.includes(match.checksum));
       for (const match of matches) {
         match.type = action.payload.type;
+      }
+    })
+    .addCase(demosTypeUpdated, (state, action) => {
+      const matches = state.entities.filter((match) => action.payload.checksums.includes(match.checksum));
+      for (const match of matches) {
+        match.type = action.payload.type;
+      }
+    })
+    .addCase(demosSourceUpdated, (state, action) => {
+      const matches = state.entities.filter((match) => action.payload.checksums.includes(match.checksum));
+      for (const match of matches) {
+        match.source = action.payload.source;
       }
     })
     .addCase(insertMatchSuccess, (state, action) => {

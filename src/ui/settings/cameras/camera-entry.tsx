@@ -22,7 +22,7 @@ export function CameraEntry({ camera }: Props) {
   const { t } = useLingui();
 
   return (
-    <div className="w-[294px] rounded border border-gray-300">
+    <div className="w-[294px] rounded-4 border border-gray-300">
       <img src={getCameraImageSrc(camera.id)} alt={camera.name} />
       <div className="p-8">
         <div className="flex items-center gap-x-8">

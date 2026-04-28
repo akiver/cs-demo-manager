@@ -26,7 +26,7 @@ class AnalysesListener {
     this.analyses = this.analyses.filter((analysis) => {
       return !checksums.includes(analysis.demoChecksum);
     });
-    logger.log(`${checksums} removed from analyses`);
+    logger.log(`checksums removed from analyses`, checksums);
   }
 
   public async addDemosToAnalyses(demos: Demo[]) {
@@ -174,6 +174,7 @@ class AnalysesListener {
     } catch (error) {
       logger.error('Error while inserting match');
       logger.error(error);
+      logger.error(JSON.stringify(error));
       let errorOutput: string;
       if (error instanceof Error) {
         errorOutput = error.message;
@@ -181,8 +182,9 @@ class AnalysesListener {
           errorOutput += `\n${error.stack}`;
         }
         if (error.cause) {
-          errorOutput += `\n${error.cause}`;
+          errorOutput += `\n${error.cause as string}`;
         }
+        errorOutput += `\n${JSON.stringify(error)}`;
       } else {
         errorOutput = String(error);
       }

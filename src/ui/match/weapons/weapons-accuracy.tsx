@@ -314,7 +314,7 @@ function WeaponsTable({ weapons, title }: WeaponTableProps) {
   return (
     <div className="flex flex-col">
       <p className="mb-8 text-body-strong">{title}</p>
-      <div className="grid grid-cols-6 rounded-t bg-gray-100 py-4">
+      <div className="grid grid-cols-6 rounded-t-4 bg-gray-100 py-4">
         <HeaderCell
           onClick={() => {
             updateSort('name');
@@ -368,7 +368,7 @@ function WeaponsTable({ weapons, title }: WeaponTableProps) {
         const WeaponIcon = WEAPONS_ICONS[weapon.name];
 
         return (
-          <div key={weapon.name} className="grid grid-cols-6 border border-gray-200 py-4 last:rounded-b">
+          <div key={weapon.name} className="grid grid-cols-6 border border-gray-200 py-4 last:rounded-b-4">
             <Cell>
               <div className="flex items-center gap-x-4">
                 {WeaponIcon ? <WeaponIcon height={20} /> : <span>?</span>}

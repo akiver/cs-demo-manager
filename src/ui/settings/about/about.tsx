@@ -26,7 +26,7 @@ export function About() {
   const updateSettings = useUpdateSettings();
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const result = await client.send({
         name: RendererClientMessageName.FetchLastMigrations,
       });
@@ -35,7 +35,7 @@ export function About() {
     })();
   }, [client]);
 
-  /* eslint-disable lingui/no-unlocalized-strings */
+  /* oxlint-disable lingui/no-unlocalized-strings */
   const data: string[] = [
     `Version: ${APP_VERSION}`,
     `OS: ${info.platform} ${info.arch} ${info.osVersion}`,
@@ -44,7 +44,7 @@ export function About() {
     'Last database migrations:',
     ...migrations.map((migration) => `v${migration.version} - ${migration.date}`),
   ];
-  /* eslint-enable lingui/no-unlocalized-strings */
+  /* oxlint-enable lingui/no-unlocalized-strings */
 
   return (
     <SettingsView>
@@ -56,9 +56,9 @@ export function About() {
             interactiveComponent={
               <Switch
                 isChecked={autoDownloadUpdates}
-                onChange={(isChecked: boolean) => {
+                onChange={async (isChecked: boolean) => {
                   window.csdm.toggleAutoDownloadUpdates(isChecked);
-                  updateSettings({
+                  await updateSettings({
                     autoDownloadUpdates: isChecked,
                   });
                 }}

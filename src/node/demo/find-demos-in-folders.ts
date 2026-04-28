@@ -1,5 +1,6 @@
 import { glob } from 'csdm/node/filesystem/glob';
 import type { Folder } from '../settings/settings';
+import { uniqueArray } from 'csdm/common/array/unique-array';
 
 export async function findDemosInFolders(folders: Folder[]) {
   const demoPaths: string[] = [];
@@ -12,5 +13,5 @@ export async function findDemosInFolders(folders: Folder[]) {
     demoPaths.push(...files);
   }
 
-  return demoPaths;
+  return uniqueArray(demoPaths);
 }

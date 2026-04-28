@@ -13,13 +13,13 @@ export function TeamDetailsButton() {
   const status = useTeamsStatus();
   const isDisabled = status === Status.Loading || selectedTeamNames.length === 0;
 
-  const onClick = () => {
+  const onClick = async () => {
     if (selectedTeamNames.length === 0) {
       return;
     }
 
     const name = lastArrayItem(selectedTeamNames);
-    navigateToTeam(name);
+    await navigateToTeam(name);
   };
 
   return <DetailsButton onClick={onClick} isDisabled={isDisabled} />;

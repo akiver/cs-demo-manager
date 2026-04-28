@@ -124,27 +124,23 @@ export async function createCsgoVideoJsonFile({
       }
     }
 
-    json.addSkipAhead(firstActionsTick, setupSequenceTick);
+    json.addGoToTick(firstActionsTick, setupSequenceTick);
 
     for (const camera of sequence.playerCameras) {
       json.addSpecPlayer(camera.tick, camera.playerSteamId);
     }
 
-    // Block all death notices by default and then selectively allow them based on player's options.
-    json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add block=1`);
+    json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter clear`);
+    if (sequence.playersOptions.length > 0) {
+      // Block all death notices by default and then selectively allow them based on player's options.
+      json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add block=1`);
+    }
 
     for (const playerOptions of sequence.playersOptions) {
       const replacePlayerNameCommand = buildReplacePlayerNameCommand(playerOptions);
       json.addExecCommand(setupSequenceTick, replacePlayerNameCommand);
 
-      json.addExecCommand(setupSequenceTick, `mirv_deathmsg filter add victimMatch=x${playerOptions.steamId} block=0`);
-
       if (playerOptions.showKill) {
-        json.addExecCommand(
-          setupSequenceTick,
-          `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerMatch=x${playerOptions.steamId} block=0`,
-        );
-
         json.addExecCommand(
           setupSequenceTick,
           `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=${playerOptions.highlightKill ? '1' : '0'} block=0`,

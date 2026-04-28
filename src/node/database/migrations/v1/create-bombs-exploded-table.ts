@@ -25,5 +25,4 @@ const createBombsExplodedTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createBombsExplodedTable;

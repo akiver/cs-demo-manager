@@ -46,8 +46,6 @@ export function SettingsOverlayProvider({ children }: Props) {
     setCategory(category);
   };
 
-  // https://github.com/reactwg/react-compiler/discussions/18
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const openSettings = (category?: SettingsCategory) => {
     if (category) {
       showCategory(category);
@@ -57,8 +55,6 @@ export function SettingsOverlayProvider({ children }: Props) {
     setAreSettingsVisible(true);
   };
 
-  // https://github.com/reactwg/react-compiler/discussions/18
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const closeSettings = () => {
     makeElementNonInert(APP_ELEMENT_ID);
     focusElement();
@@ -75,6 +71,8 @@ export function SettingsOverlayProvider({ children }: Props) {
     return () => {
       unListen();
     };
+    // https://github.com/reactwg/react-compiler/discussions/18
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [openSettings]);
 
   useEffect(() => {
@@ -91,6 +89,8 @@ export function SettingsOverlayProvider({ children }: Props) {
     return () => {
       unListen();
     };
+    // https://github.com/reactwg/react-compiler/discussions/18
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [openSettings, closeSettings, areSettingsVisible]);
 
   useEffect(() => {
@@ -103,6 +103,8 @@ export function SettingsOverlayProvider({ children }: Props) {
     return () => {
       unListen();
     };
+    // https://github.com/reactwg/react-compiler/discussions/18
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [openSettings]);
 
   return (

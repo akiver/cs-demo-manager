@@ -30,25 +30,26 @@ export async function fetchTeamGrenadePoints(filters: TeamHeatmapFilter): Promis
   let query = db
     .selectFrom('grenade_projectiles_destroy')
     .select(['x', 'y'])
-    .leftJoin('matches', 'checksum', 'match_checksum')
-    .where('matches.map_name', '=', filters.mapName)
+    .innerJoin('matches', 'checksum', 'match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .where('demos.map_name', '=', filters.mapName)
     .where('thrower_team_name', '=', filters.teamName)
     .where('grenade_name', 'in', grenadeNames);
 
   if (filters.startDate !== undefined && filters.endDate !== undefined) {
-    query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);
+    query = query.where(sql<boolean>`demos.date between ${filters.startDate} and ${filters.endDate}`);
   }
 
   if (filters.sources.length > 0) {
-    query = query.where('matches.source', 'in', filters.sources);
+    query = query.where('demos.source', 'in', filters.sources);
   }
 
   if (filters.games.length > 0) {
-    query = query.where('matches.game', 'in', filters.games);
+    query = query.where('demos.game', 'in', filters.games);
   }
 
   if (filters.demoTypes.length > 0) {
-    query = query.where('matches.type', 'in', filters.demoTypes);
+    query = query.where('demos.type', 'in', filters.demoTypes);
   }
 
   if (filters.gameModes.length > 0) {
@@ -73,7 +74,7 @@ export async function fetchTeamGrenadePoints(filters: TeamHeatmapFilter): Promis
 
   if (filters.tagIds.length > 0) {
     query = query
-      .leftJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
+      .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
       .where('checksum_tags.tag_id', 'in', filters.tagIds);
   }
 

@@ -21,7 +21,7 @@ export function App() {
   }, [clearArguments]);
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       if (await window.csdm.shouldShowChangelog()) {
         showDialog(<ChangelogDialog />);
       }

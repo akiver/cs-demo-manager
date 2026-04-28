@@ -14,6 +14,6 @@ export function getEconomyTypeColor(type: EconomyType) {
     case EconomyType.Full:
       return '#14532d';
     default:
-      assertNever(type, `Unknown economy type: ${type}`);
+      assertNever(type, `Unknown economy type: ${type as string}`);
   }
 }

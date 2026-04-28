@@ -7,6 +7,7 @@ import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { VideoContainer } from 'csdm/common/types/video-container';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
+import { DisplayMode } from 'csdm/common/types/display-mode';
 
 export const defaultSettings: Settings = {
   schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -47,7 +48,7 @@ export const defaultSettings: Settings = {
   playback: {
     width: 1024,
     height: 768,
-    fullscreen: false,
+    displayMode: DisplayMode.Windowed,
     useCustomHighlights: true,
     useCustomLowlights: true,
     highlights: {
@@ -63,6 +64,7 @@ export const defaultSettings: Settings = {
     round: {
       beforeRoundDelayInSeconds: 0,
       afterRoundDelayInSeconds: 2,
+      waitForRoundEnd: false,
     },
     launchParameters: '',
     useHlae: false,
@@ -76,12 +78,14 @@ export const defaultSettings: Settings = {
     recordingOutput: RecordingOutput.Video,
     closeGameAfterRecording: true,
     concatenateSequences: false,
+    outputFileName: '',
     showXRay: true,
     showAssists: true,
     showOnlyDeathNotices: true,
     deathNoticesDuration: 5,
     playerVoicesEnabled: true,
     recordAudio: true,
+    trueView: false,
     encoderSoftware: EncoderSoftware.FFmpeg,
     ffmpegSettings: {
       audioBitrate: 256,

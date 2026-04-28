@@ -151,6 +151,14 @@ export function getDefaultMaps(game?: Game) {
 
   const cs2Maps: InsertableMap[] = [
     {
+      name: 'cs_alpine',
+      game: Game.CS2,
+      position_x: -2107,
+      position_y: 4687,
+      scale: 6.5296063,
+      threshold_z: 0,
+    },
+    {
       name: 'cs_agency',
       game: Game.CS2,
       position_x: -2597,
@@ -383,11 +391,35 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 103,
     },
     {
+      name: 'de_poseidon',
+      game: Game.CS2,
+      position_x: -1046,
+      position_y: 1166,
+      scale: 3.0124886,
+      threshold_z: 0,
+    },
+    {
       name: 'de_rooftop',
       game: Game.CS2,
       position_x: -1847,
       position_y: 2301,
       scale: 1.914732,
+      threshold_z: 0,
+    },
+    {
+      name: 'de_sanctum',
+      game: Game.CS2,
+      position_x: -1846,
+      position_y: 674,
+      scale: 3.658203,
+      threshold_z: 0,
+    },
+    {
+      name: 'de_stronghold',
+      game: Game.CS2,
+      position_x: -2786,
+      position_y: 2598,
+      scale: 2.9476247,
       threshold_z: 0,
     },
     {
@@ -413,6 +445,14 @@ export function getDefaultMaps(game?: Game) {
       position_y: 1762,
       scale: 4,
       threshold_z: 11700,
+    },
+    {
+      name: 'de_warden',
+      game: Game.CS2,
+      position_x: -3150,
+      position_y: 2681,
+      scale: 5.642361,
+      threshold_z: 0,
     },
     {
       name: 'de_whistle',

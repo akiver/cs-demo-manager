@@ -36,7 +36,7 @@ export function WatchSequencesButton() {
       });
     } catch (error) {
       const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-      const message = getPlaybackErrorMessageFromErrorCode(match.game, errorCode);
+      const message = getPlaybackErrorMessageFromErrorCode(errorCode, match.game);
       showToast({
         type: 'error',
         content: message,

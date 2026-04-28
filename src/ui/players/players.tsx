@@ -10,8 +10,8 @@ export function Players() {
 
   useEffect(() => {
     if (shouldFetchPlayers.current) {
-      fetchPlayers();
       shouldFetchPlayers.current = false;
+      void fetchPlayers();
     }
   });
 

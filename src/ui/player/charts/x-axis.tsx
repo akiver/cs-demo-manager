@@ -1,6 +1,5 @@
 import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 
@@ -52,11 +51,9 @@ export function XAxis({ selectedAxis, onChange }: Props) {
   const options = useXAxisOptions();
 
   return (
-    <div className="flex gap-x-12">
-      <InputLabel>
-        <Trans context="Input label">X Axis</Trans>
-      </InputLabel>
+    <div className="flex items-center gap-x-12">
       <Select
+        label={<Trans context="Input label">X Axis</Trans>}
         options={options}
         value={selectedAxis}
         onChange={(axis) => {

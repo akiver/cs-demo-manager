@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import fs from 'node:fs/promises';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
 import type { Round } from '../launcher/watch-player-rounds';
 import { generatePlayerRoundsJsonFile } from './generate-player-rounds-json-file';
 import { Game } from 'csdm/common/types/counter-strike';
@@ -15,24 +15,28 @@ describe(`Generate player's rounds JSON file`, () => {
         freezeTimeEndTick: 1000,
         tickEnd: 5480,
         deathTick: null,
+        killerSteamId: null,
       },
       {
         number: 2,
         freezeTimeEndTick: 10880,
         tickEnd: 14680,
         deathTick: 12800,
+        killerSteamId: null,
       },
       {
         number: 3,
         freezeTimeEndTick: 16280,
         tickEnd: 19880,
         deathTick: 18600,
+        killerSteamId: null,
       },
       {
         number: 4,
         freezeTimeEndTick: 21480,
         tickEnd: 24680,
         deathTick: null,
+        killerSteamId: null,
       },
     ];
 
@@ -46,6 +50,7 @@ describe(`Generate player's rounds JSON file`, () => {
       game: Game.CSGO,
       playerVoicesEnabled: true,
       players: [],
+      waitForRoundEnd: false,
     });
 
     const content = await fs.readFile(`${demoPath}.json`, 'utf8');
@@ -61,24 +66,28 @@ describe(`Generate player's rounds JSON file`, () => {
         freezeTimeEndTick: 1000,
         tickEnd: 5480,
         deathTick: null,
+        killerSteamId: null,
       },
       {
         number: 2,
         freezeTimeEndTick: 10880,
         tickEnd: 14680,
         deathTick: 12800,
+        killerSteamId: null,
       },
       {
         number: 3,
         freezeTimeEndTick: 16280,
         tickEnd: 19880,
         deathTick: 18600,
+        killerSteamId: null,
       },
       {
         number: 4,
         freezeTimeEndTick: 21480,
         tickEnd: 24680,
         deathTick: null,
+        killerSteamId: null,
       },
     ];
 
@@ -92,6 +101,7 @@ describe(`Generate player's rounds JSON file`, () => {
       game: Game.CS2,
       playerVoicesEnabled: true,
       players: [],
+      waitForRoundEnd: false,
     });
 
     const content = await fs.readFile(`${demoPath}.json`, 'utf8');

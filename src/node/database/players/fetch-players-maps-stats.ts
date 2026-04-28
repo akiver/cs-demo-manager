@@ -33,9 +33,10 @@ function buildStatsQuery(steamIds: string[], filters?: MatchFilters) {
   let query = db
     .selectFrom('matches')
     .innerJoin('players', 'players.match_checksum', 'matches.checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .select([
       'players.steam_id as steamId',
-      'matches.map_name as mapName',
+      'demos.map_name as mapName',
       sql<number>`COUNT(matches.checksum) FILTER (WHERE matches.winner_name = players.team_name)`.as('winCount'),
       sql<number>`COUNT(matches.checksum) FILTER (WHERE matches.winner_name IS NOT NULL AND matches.winner_name != players.team_name)`.as(
         'lostCount',
@@ -64,10 +65,11 @@ function buildRoundsQuery(steamIds: string[], filters?: MatchFilters) {
   let query = db
     .selectFrom('rounds')
     .innerJoin('matches', 'rounds.match_checksum', 'matches.checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .innerJoin('players', 'players.match_checksum', 'matches.checksum')
     .select([
       'players.steam_id as steamId',
-      'matches.map_name as mapName',
+      'demos.map_name as mapName',
       sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_name = players.team_name)`.as('roundWinCount'),
       sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_name IS NOT NULL AND rounds.winner_name != players.team_name)`.as(
         'roundLostCount',

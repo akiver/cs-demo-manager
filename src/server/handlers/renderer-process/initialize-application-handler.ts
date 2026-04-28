@@ -76,7 +76,7 @@ export async function initializeApplicationHandler() {
       videos: videoQueue.getVideos(),
     };
 
-    startBackgroundTasks();
+    void startBackgroundTasks();
 
     return payload;
   } catch (error) {

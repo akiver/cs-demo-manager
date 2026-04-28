@@ -35,10 +35,6 @@ export function TeamEconomyAdvantageChart() {
   });
 
   const option: ChartOption = {
-    grid: {
-      top: 60,
-      bottom: 30,
-    },
     color: [colors.teamA, colors.teamB],
     legend: {
       data: [
@@ -88,6 +84,9 @@ export function TeamEconomyAdvantageChart() {
           message: 'Round',
           context: 'Chart axis label',
         }),
+        axisLabel: {
+          color: colors.axisColor,
+        },
         axisLine: {
           onZero: false,
           lineStyle: {
@@ -97,6 +96,10 @@ export function TeamEconomyAdvantageChart() {
         axisPointer: {
           label: {
             formatter: ({ value: roundNumber }) => {
+              if (typeof roundNumber !== 'string') {
+                return '';
+              }
+
               return t({
                 message: `Round ${roundNumber}`,
                 context: 'Chart tooltip',
@@ -118,9 +121,16 @@ export function TeamEconomyAdvantageChart() {
             color: colors.axisColor,
           },
         },
+        axisLabel: {
+          show: false,
+        },
         axisPointer: {
           label: {
             formatter: ({ value: winnerName }) => {
+              if (typeof winnerName !== 'string') {
+                return '';
+              }
+
               return t({
                 message: `Winner: ${winnerName}`,
                 context: 'Chart tooltip',

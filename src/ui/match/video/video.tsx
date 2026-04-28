@@ -14,9 +14,8 @@ import { EncoderSoftwareSelect } from './encoder-software-select';
 import { Ffmpeg } from './ffmpeg/ffmpeg';
 import { FramerateInput } from './framerate-input';
 import { ConcatenateSequencesCheckbox } from './concatenate-sequences-checkbox';
+import { OutputFileNameInput } from './output-file-name-input';
 import { GeneratePlayerSequencesButton } from './generate-player-sequences-button';
-import { DeleteSequencesButton } from './sequences/delete-sequences-button';
-import { ResetSettingsButton } from './reset-settings-button';
 import { SequencesSummary } from './sequences-summary';
 import { EditSequencesSettingsButton } from './sequences/edit-sequences/edit-sequences-settings-button';
 import { RecordingSystemSelect } from './recording-system-select';
@@ -24,8 +23,13 @@ import { RecordingOutputSelect } from './recording-output-select';
 import { DocumentationLink } from 'csdm/ui/components/links/documentation-link';
 import { WatchSequencesButton } from './watch-sequences-button';
 import { VideoActionsMenu } from './video-actions-menu';
+import { ToggleTrueView } from './toggle-true-view';
+import { useCurrentMatch } from '../use-current-match';
+import { Game } from 'csdm/common/types/counter-strike';
 
 export function MatchVideo() {
+  const match = useCurrentMatch();
+
   return (
     <Content>
       <div className="flex flex-col">
@@ -35,8 +39,6 @@ export function MatchVideo() {
           <GeneratePlayerSequencesButton />
           <EditSequencesSettingsButton />
           <WatchSequencesButton />
-          <ResetSettingsButton />
-          <DeleteSequencesButton />
           <VideoActionsMenu />
           <SequencesSummary />
           <div className="ml-auto">
@@ -44,7 +46,7 @@ export function MatchVideo() {
           </div>
         </div>
         <div className="mt-12 flex gap-x-12">
-          <div className="flex flex-col rounded border border-gray-400 p-8">
+          <div className="flex flex-col rounded-4 border border-gray-400 p-8">
             <div className="flex gap-x-12">
               <div className="flex flex-col">
                 {window.csdm.isWindows && <RecordingSystemSelect />}
@@ -61,8 +63,10 @@ export function MatchVideo() {
             <div className="flex flex-col gap-y-8">
               <OutputFolderPath />
               <div>
+                {match.game !== Game.CSGO && <ToggleTrueView />}
                 <CloseGameAfterRecordingCheckbox />
                 <ConcatenateSequencesCheckbox />
+                <OutputFileNameInput />
               </div>
             </div>
           </div>

@@ -39,11 +39,11 @@ function useNavigateWithKeyboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
+    const onKeyDown = async (event: KeyboardEvent) => {
       if (isBackwardEvent(event)) {
-        navigate(-1);
+        await navigate(-1);
       } else if (isForwardEvent(event)) {
-        navigate(1);
+        await navigate(1);
       }
     };
 

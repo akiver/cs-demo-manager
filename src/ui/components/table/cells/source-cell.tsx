@@ -23,6 +23,7 @@ function useDemoSourceImageSrc(source: DemoSource) {
     case DemoSource.Gamersclub:
     case DemoSource.PerfectWorld:
     case DemoSource.Renown:
+    case DemoSource.Pracc:
       fileName = isDarkTheme ? `${source}-white.png` : `${source}-black.png`;
       break;
     case DemoSource.Challengermode:
@@ -44,7 +45,7 @@ function useDemoSourceImageSrc(source: DemoSource) {
       fileName = 'unknown.png';
       break;
     default:
-      return assertNever(source, `Unknown source: ${source}`);
+      return assertNever(source, `Unknown source: ${source as string}`);
   }
 
   return `file://${window.csdm.IMAGES_FOLDER_PATH}/sources/${fileName}`;

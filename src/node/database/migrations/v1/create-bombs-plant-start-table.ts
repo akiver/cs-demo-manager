@@ -29,5 +29,4 @@ const createBombsPlantStartTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createBombsPlantStartTable;

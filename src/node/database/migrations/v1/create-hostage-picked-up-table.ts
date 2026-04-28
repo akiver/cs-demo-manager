@@ -28,5 +28,4 @@ const createHostagePickedUpTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createHostagePickedUpTable;

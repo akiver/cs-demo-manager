@@ -55,7 +55,8 @@ async function fetchPlayerRow(steamId: string, filters?: MatchFilters) {
         let wallbangsQuery = qb
           .selectFrom('kills')
           .select(count<number>('kills.id').as('wallbangKillCount'))
-          .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
+          .innerJoin('matches', 'matches.checksum', 'kills.match_checksum')
+          .innerJoin('demos', 'demos.checksum', 'matches.checksum')
           .where('killer_steam_id', '=', steamId)
           .where('penetrated_objects', '>', 0);
 
@@ -69,7 +70,8 @@ async function fetchPlayerRow(steamId: string, filters?: MatchFilters) {
         let inspectingWeaponDeathQuery = qb
           .selectFrom('kills')
           .select(count<number>('kills.id').as('deathWhileInspectingWeaponCount'))
-          .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
+          .innerJoin('matches', 'matches.checksum', 'kills.match_checksum')
+          .innerJoin('demos', 'demos.checksum', 'matches.checksum')
           .where('victim_steam_id', '=', steamId)
           .where('is_victim_inspecting_weapon', '=', true);
 
@@ -80,7 +82,8 @@ async function fetchPlayerRow(steamId: string, filters?: MatchFilters) {
         return inspectingWeaponDeathQuery.as('deathWhileInspectingWeaponCount');
       },
     ])
-    .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'players.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'players.steam_id')
     .select([
       'vac_ban_count as vacBanCount',

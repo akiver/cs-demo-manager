@@ -31,10 +31,6 @@ export function TeamEquipmentValuesChart() {
   const teamNameB: string = match.teamB.name;
 
   const option: ChartOption = {
-    grid: {
-      top: 60,
-      bottom: 30,
-    },
     color: [colors.teamA, colors.teamB],
     tooltip: {
       trigger: 'axis',
@@ -81,9 +77,16 @@ export function TeamEquipmentValuesChart() {
             color: colors.axisColor,
           },
         },
+        axisLabel: {
+          color: colors.axisColor,
+        },
         axisPointer: {
           label: {
             formatter: ({ value: roundNumber }) => {
+              if (typeof roundNumber !== 'string') {
+                return '';
+              }
+
               return t({
                 message: `Round ${roundNumber}`,
                 context: 'Chart axis tooltip',
@@ -105,9 +108,16 @@ export function TeamEquipmentValuesChart() {
             color: colors.axisColor,
           },
         },
+        axisLabel: {
+          show: false,
+        },
         axisPointer: {
           label: {
             formatter: ({ value: winnerName }) => {
+              if (typeof winnerName !== 'string') {
+                return '';
+              }
+
               return t({
                 message: `Winner: ${winnerName}`,
                 context: 'Chart tooltip',

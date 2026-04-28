@@ -14,8 +14,8 @@ export function ResumeOrPauseVideoQueueButton() {
     <>
       <Button
         variant={isPaused ? ButtonVariant.Primary : ButtonVariant.Default}
-        onClick={() => {
-          client.send({
+        onClick={async () => {
+          await client.send({
             name: isPaused ? RendererClientMessageName.ResumeVideoQueue : RendererClientMessageName.PauseVideoQueue,
           });
         }}

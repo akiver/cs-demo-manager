@@ -26,7 +26,7 @@ export async function fetchMatchHeatmapPointsHandler(filter: MatchHeatmapFilter)
         points = await fetchMatchGrenadePoints(filter);
         break;
       default:
-        assertNever(filter.event, `Unsupported heatmap event: ${filter.event}`);
+        assertNever(filter.event, `Unsupported heatmap event: ${filter.event as string}`);
     }
 
     return points;

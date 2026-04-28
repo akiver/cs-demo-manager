@@ -56,7 +56,7 @@ export function ExportMatchesToJsonDialog({ checksums }: Props) {
     setOutputFolderPath(outputFolderPath);
   };
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     if (isExportPossible) {
       return;
     }

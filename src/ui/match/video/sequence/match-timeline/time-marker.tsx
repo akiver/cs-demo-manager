@@ -19,7 +19,7 @@ export function TimeMarker({ tick, pixelsPerTick, text }: Props) {
       }}
     >
       <p
-        className="absolute bottom-0 flex h-24 w-[100px] flex-wrap items-center rounded-r bg-blue-700 pl-4 text-ellipsis text-white"
+        className="absolute bottom-0 flex h-24 w-[100px] flex-wrap items-center rounded-r-4 bg-blue-700 pl-4 text-ellipsis text-white"
         title={text}
       >
         {text}

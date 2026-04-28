@@ -92,10 +92,10 @@ export function FfmpegLocation() {
         newExecutablePath = executablePath;
       }
 
-      enableFfmpegCustomLocation(newExecutablePath);
+      await enableFfmpegCustomLocation(newExecutablePath);
     } else {
       const clearCustomLocation = false;
-      disableFfmpegCustomLocation(clearCustomLocation);
+      await disableFfmpegCustomLocation(clearCustomLocation);
     }
   };
 
@@ -108,9 +108,9 @@ export function FfmpegLocation() {
     await enableFfmpegCustomLocation(executablePath);
   };
 
-  const onResetClick = () => {
+  const onResetClick = async () => {
     const clearCustomLocation = true;
-    disableFfmpegCustomLocation(clearCustomLocation);
+    await disableFfmpegCustomLocation(clearCustomLocation);
   };
 
   const isBrowseButtonDisabled = customExecutableLocation === '';

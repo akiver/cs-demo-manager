@@ -10,8 +10,8 @@ type Props = {
 export function SeePlayerProfileItem({ steamId }: Props) {
   const navigateToPlayer = useNavigateToPlayer();
 
-  const onClick = () => {
-    navigateToPlayer(steamId);
+  const onClick = async () => {
+    await navigateToPlayer(steamId);
   };
 
   return (

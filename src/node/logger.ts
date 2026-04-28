@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import path from 'node:path';
 import { format } from 'node:util';
 import fs from 'fs-extra';
@@ -52,22 +52,22 @@ class Logger implements ILogger {
     }
 
     this.logToConsole(data, 'debug');
-    this.writeLogToFile(data, 'debug');
+    void this.writeLogToFile(data, 'debug');
   };
 
   public log = (...data: any[]) => {
     this.logToConsole(data, 'log');
-    this.writeLogToFile(data, 'log');
+    void this.writeLogToFile(data, 'log');
   };
 
   public warn = (...data: any[]) => {
     this.logToConsole(data, 'warn');
-    this.writeLogToFile(data, 'warn');
+    void this.writeLogToFile(data, 'warn');
   };
 
   public error = (...data: any[]) => {
     this.logToConsole(data, 'error');
-    this.writeLogToFile(data, 'error');
+    void this.writeLogToFile(data, 'error');
   };
 
   public getLogFilePath = () => {
@@ -97,7 +97,7 @@ class Logger implements ILogger {
   private jsonStringifyReplacer = (key: any, value: any) => {
     if (value instanceof Error) {
       if (value.cause) {
-        return `${value.stack}\n\tCAUSE: ${value.cause}`;
+        return `${value.stack}\n\tCAUSE: ${value.cause as string}`;
       }
 
       return value.stack;
@@ -169,8 +169,8 @@ class Logger implements ILogger {
     }
   };
 
-  private watchForFileDeletion = () => {
-    this.watcher?.close();
+  private watchForFileDeletion = async () => {
+    await this.watcher?.close();
     this.watcher = watch(this.logFolderPath).on('unlink', this.onFileDeleted);
   };
 
@@ -180,7 +180,7 @@ class Logger implements ILogger {
 
     if (this.fileStream === null) {
       this.fileStream = fs.createWriteStream(this.logFilePath, { flags: 'a' });
-      this.watchForFileDeletion();
+      await this.watchForFileDeletion();
     }
 
     const line = this.buildLogLine(data, level);

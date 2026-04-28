@@ -66,8 +66,8 @@ export function MatchesTableProvider({ children }: Props) {
     );
   };
 
-  const navigateToMatch = (match: MatchTable) => {
-    navigate(match.checksum, {
+  const navigateToMatch = async (match: MatchTable) => {
+    await navigate(match.checksum, {
       state: {
         siblingChecksums: table.getRowIds(),
       },

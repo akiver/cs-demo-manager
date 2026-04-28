@@ -23,8 +23,8 @@ export function NavigationListener({ children }: Props) {
   const demoPathArgument = useArgument(ArgumentName.DemoPath);
 
   useEffect(() => {
-    const navigateToBans = () => {
-      navigate(RoutePath.Ban);
+    const navigateToBans = async () => {
+      await navigate(RoutePath.Ban);
     };
 
     const unListen = window.csdm.onNavigateToBans(navigateToBans);
@@ -35,8 +35,8 @@ export function NavigationListener({ children }: Props) {
   }, [navigate]);
 
   useEffect(() => {
-    const navigateToPendingDownloads = () => {
-      navigate(buildPendingDownloadPath());
+    const navigateToPendingDownloads = async () => {
+      await navigate(buildPendingDownloadPath());
     };
 
     const unListen = window.csdm.onNavigateToPendingDownloads(navigateToPendingDownloads);
@@ -63,18 +63,18 @@ export function NavigationListener({ children }: Props) {
   }, [client, navigateToMatch]);
 
   useEffect(() => {
-    const sendNavigateToDemoOrMatch = (demoPath: string) => {
-      client.send({
+    const sendNavigateToDemoOrMatch = async (demoPath: string) => {
+      await client.send({
         name: RendererClientMessageName.NavigateToDemoOrMatch,
         payload: demoPath,
       });
     };
-    const onOpenDemoFile = (event: IpcRendererEvent, demoPath: string) => {
-      sendNavigateToDemoOrMatch(demoPath);
+    const onOpenDemoFile = async (event: IpcRendererEvent, demoPath: string) => {
+      await sendNavigateToDemoOrMatch(demoPath);
     };
 
     if (demoPathArgument !== undefined) {
-      sendNavigateToDemoOrMatch(demoPathArgument);
+      void sendNavigateToDemoOrMatch(demoPathArgument);
     }
 
     const unListen = window.csdm.onOpenDemoFile(onOpenDemoFile);

@@ -24,7 +24,7 @@ export function Ffmpeg() {
   }
 
   return (
-    <div className="flex flex-col gap-y-8 rounded border border-gray-400 p-8">
+    <div className="flex flex-col gap-y-8 rounded-4 border border-gray-400 p-8">
       <Software name="FFmpeg" websiteLink="https://ffmpeg.org/documentation.html" version={installedFfmpegVersion}>
         <FfmpegInstallButton />
         <FfmpegUpdateButton />

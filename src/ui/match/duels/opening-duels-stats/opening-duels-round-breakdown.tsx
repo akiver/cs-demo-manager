@@ -138,8 +138,8 @@ export function OpeningDuelsRoundBreakdown({ openingKills }: Props) {
   const { watchDemo, isKillCsRequired } = useCounterStrike();
   const { showDialog } = useDialog();
 
-  const watchKill = (kill: Kill) => {
-    watchDemo({
+  const watchKill = async (kill: Kill) => {
+    await watchDemo({
       demoPath: match.demoFilePath,
       startTick: kill.tick - match.tickrate * 5,
       focusSteamId: kill.killerSteamId,
@@ -151,13 +151,13 @@ export function OpeningDuelsRoundBreakdown({ openingKills }: Props) {
     if (shouldKillCs) {
       showDialog(
         <CounterStrikeRunningDialog
-          onConfirmClick={() => {
-            watchKill(kill);
+          onConfirmClick={async () => {
+            await watchKill(kill);
           }}
         />,
       );
     } else {
-      watchKill(kill);
+      await watchKill(kill);
     }
   };
 

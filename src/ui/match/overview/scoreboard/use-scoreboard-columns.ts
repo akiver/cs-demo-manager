@@ -8,6 +8,7 @@ import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { ScoreboardAvatarCell } from './scoreboard-avatar-cell';
 import { BansCell } from './bans-cell';
 import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-diff-sort-function';
+import { TagsCell } from 'csdm/ui/components/table/cells/tags-cell';
 
 export function useScoreboardColumns(isDefuseMap: boolean) {
   const { t } = useLingui();
@@ -27,7 +28,23 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       allowHiding: false,
       allowResize: false,
       allowSort: false,
-      allowMove: false,
+    },
+    {
+      id: 'tags',
+      accessor: 'tagIds',
+      headerText: '',
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Tags',
+      }),
+      visibilityText: t({
+        context: 'Dropdown column visibility',
+        message: 'Tags',
+      }),
+      Cell: TagsCell,
+      width: 20,
+      allowResize: false,
+      allowSort: false,
     },
     {
       id: 'bans',
@@ -44,7 +61,6 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       Cell: BansCell,
       width: 20,
       allowResize: false,
-      allowMove: false,
       allowSort: false,
     },
     {
@@ -63,7 +79,6 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       Cell: RankCell,
       allowResize: false,
       allowSort: false,
-      allowMove: false,
     },
     {
       id: 'name',

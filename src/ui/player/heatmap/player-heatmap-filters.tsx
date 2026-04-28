@@ -45,22 +45,22 @@ export function PlayerHeatmapFilters() {
       <HeatmapSelectMap mapNames={mapNames} />
       <HeatmapSelectEvent
         event={event}
-        onChange={(event) => {
-          fetchPoints({ event });
+        onChange={async (event) => {
+          await fetchPoints({ event });
         }}
       />
       <RadarLevelSelect
         mapName={mapName}
         game={game}
-        onChange={(radarLevel) => {
-          fetchPoints({ radarLevel });
+        onChange={async (radarLevel) => {
+          await fetchPoints({ radarLevel });
         }}
         selectedRadarLevel={radarLevel}
       />
       <HeatmapSideSelect
         sides={sides}
-        onChange={(sides) => {
-          fetchPoints({ sides });
+        onChange={async (sides) => {
+          await fetchPoints({ sides });
         }}
       />
       <div className="flex flex-wrap gap-x-8">

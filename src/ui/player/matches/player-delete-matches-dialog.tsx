@@ -12,8 +12,8 @@ export function PlayerDeleteMatchesDialog({ checksums }: Props) {
   return (
     <DeleteMatchesDialog
       checksums={checksums}
-      onDeleteSuccess={() => {
-        fetchPlayer();
+      onDeleteSuccess={async () => {
+        await fetchPlayer();
       }}
     />
   );

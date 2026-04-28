@@ -7,6 +7,7 @@ import { onDownloadValveDemoStarted } from './listeners/on-download-valve-demos-
 import { onDownloadFaceitDemoStarted } from './listeners/on-download-faceit-demos-started';
 import { onDownload5EplayDemoStarted } from './listeners/on-download-5eplay-demos-started';
 import { onDownloadRenownDemosStarted } from './listeners/on-download-renown-demos-started';
+import { onGetScreenSize } from './listeners/on-get-screen-size';
 
 export function createWebSocketClient() {
   const client = new WebSocketClient();
@@ -16,6 +17,7 @@ export function createWebSocketClient() {
   client.on(MainServerMessageName.DownloadFaceitDemoStarted, onDownloadFaceitDemoStarted);
   client.on(MainServerMessageName.Download5EPlayDemoStarted, onDownload5EplayDemoStarted);
   client.on(MainServerMessageName.DownloadRenownDemosStarted, onDownloadRenownDemosStarted);
+  client.on(MainServerMessageName.GetScreenSize, onGetScreenSize);
 
   return client;
 }

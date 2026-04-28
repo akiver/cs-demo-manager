@@ -36,7 +36,7 @@ export function KillsFeed() {
           return (
             <motion.div
               key={kill.id}
-              className="mb-4 flex items-center rounded bg-black/30 p-8"
+              className="mb-4 flex items-center rounded-4 bg-black/30 p-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.3 } }}
               exit={{ opacity: 0 }}

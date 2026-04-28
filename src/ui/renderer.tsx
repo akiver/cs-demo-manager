@@ -34,7 +34,7 @@ async function updateThemeClassName() {
   }
 }
 
-updateThemeClassName();
+void updateThemeClassName();
 
 function onError(error: unknown, errorInfo: ErrorInfo) {
   logger.error(error);

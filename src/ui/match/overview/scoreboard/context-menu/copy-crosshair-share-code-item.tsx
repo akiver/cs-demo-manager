@@ -24,8 +24,8 @@ export function CopyCrosshairShareCode({ steamId }: Props) {
     return null;
   }
 
-  const onClick = () => {
-    copyToClipboard(crosshairShareCode);
+  const onClick = async () => {
+    await copyToClipboard(crosshairShareCode);
   };
 
   return (

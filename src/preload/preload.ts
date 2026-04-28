@@ -43,11 +43,20 @@ import { getCameraPreviewBase64 } from 'csdm/node/filesystem/cameras/get-camera-
 import { getImageInformation } from 'csdm/node/filesystem/get-image-information';
 import { readImageFile } from 'csdm/node/filesystem/image';
 import { writeJsonFile } from 'csdm/node/filesystem/write-json-file';
+import { ErrorCode } from 'csdm/common/error-code';
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {
   logger.error(error.reason);
 });
+
+function handleError(error: unknown) {
+  const code = getErrorCodeFromError(error);
+  if (code === ErrorCode.UnknownError) {
+    logger.error(error);
+  }
+  return { error: { code } };
+}
 
 const api: PreloadApi = {
   logger,
@@ -57,8 +66,8 @@ const api: PreloadApi = {
   getStartupArguments: () => {
     return ipcRenderer.invoke(IPCChannel.GetStartupArguments);
   },
-  clearStartupArguments: () => {
-    ipcRenderer.invoke(IPCChannel.ClearStartupArguments);
+  clearStartupArguments: async () => {
+    await ipcRenderer.invoke(IPCChannel.ClearStartupArguments);
   },
   getTheme: async () => {
     const settings = await getSettings();
@@ -97,18 +106,29 @@ const api: PreloadApi = {
   getRankImageSrc,
   getPremierRankImageSrc,
   pathExists: fs.pathExists,
-  getPathDirectoryName: path.dirname,
-  getPathBasename: path.basename,
+  getPathDirectoryName: (filePath: string) => {
+    return path.dirname(filePath);
+  },
+  getPathBasename: (filePath: string) => {
+    return path.basename(filePath);
+  },
   elementToImage,
   readImageFile,
-  writeJsonFile,
-
-  showMainWindow: () => {
-    ipcRenderer.invoke(IPCChannel.ShowWindow);
+  writeJsonFile: async (filePath, data) => {
+    try {
+      await writeJsonFile(filePath, data);
+      return { success: true };
+    } catch (error) {
+      return handleError(error);
+    }
   },
 
-  localeChanged: (locale: string) => {
-    ipcRenderer.invoke(IPCChannel.LocaleChanged, locale);
+  showMainWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.ShowWindow);
+  },
+
+  localeChanged: async (locale: string) => {
+    await ipcRenderer.invoke(IPCChannel.LocaleChanged, locale);
   },
 
   isWindowMaximized: async () => {
@@ -116,20 +136,20 @@ const api: PreloadApi = {
     return isWindowMaximized;
   },
 
-  maximizeWindow: () => {
-    ipcRenderer.invoke(IPCChannel.MaximizeWindow);
+  maximizeWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.MaximizeWindow);
   },
 
-  unMaximizeWindow: () => {
-    ipcRenderer.invoke(IPCChannel.UnMazimizeWindow);
+  unMaximizeWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.UnMazimizeWindow);
   },
 
-  closeWindow: () => {
-    ipcRenderer.invoke(IPCChannel.CloseWindow);
+  closeWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.CloseWindow);
   },
 
-  minimizeWindow: () => {
-    ipcRenderer.invoke(IPCChannel.MinimizeWindow);
+  minimizeWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.MinimizeWindow);
   },
 
   onWindowClose: (callback: () => void) => {
@@ -166,8 +186,8 @@ const api: PreloadApi = {
     };
   },
 
-  showTitleBarMenu: () => {
-    ipcRenderer.invoke(IPCChannel.ShowTitleBarMenu);
+  showTitleBarMenu: async () => {
+    await ipcRenderer.invoke(IPCChannel.ShowTitleBarMenu);
   },
 
   canGoBack: async () => {
@@ -204,12 +224,12 @@ const api: PreloadApi = {
     };
   },
 
-  reloadWindow: () => {
-    ipcRenderer.invoke(IPCChannel.ReloadWindow);
+  reloadWindow: async () => {
+    await ipcRenderer.invoke(IPCChannel.ReloadWindow);
   },
 
-  restartApp: () => {
-    ipcRenderer.invoke(IPCChannel.RestartApp);
+  restartApp: async () => {
+    await ipcRenderer.invoke(IPCChannel.RestartApp);
   },
 
   showSaveDialog: async (options: SaveDialogOptions) => {
@@ -222,12 +242,12 @@ const api: PreloadApi = {
     return result;
   },
 
-  browseToFolder: (folderPath: string) => {
-    ipcRenderer.invoke(IPCChannel.BrowseToFolder, folderPath);
+  browseToFolder: async (folderPath: string) => {
+    await ipcRenderer.invoke(IPCChannel.BrowseToFolder, folderPath);
   },
 
-  browseToFile: (filePath: string) => {
-    ipcRenderer.invoke(IPCChannel.BrowseToFile, filePath);
+  browseToFile: async (filePath: string) => {
+    await ipcRenderer.invoke(IPCChannel.BrowseToFile, filePath);
   },
 
   onNavigateToPendingDownloads: (callback: () => void) => {
@@ -258,12 +278,12 @@ const api: PreloadApi = {
     return ipcRenderer.invoke(IPCChannel.HasUpdateReadyToInstall);
   },
 
-  installUpdate: () => {
-    ipcRenderer.invoke(IPCChannel.InstallUpdate);
+  installUpdate: async () => {
+    await ipcRenderer.invoke(IPCChannel.InstallUpdate);
   },
 
-  toggleAutoDownloadUpdates: (isEnabled: boolean) => {
-    ipcRenderer.invoke(IPCChannel.ToggleAutoUpdate, isEnabled);
+  toggleAutoDownloadUpdates: async (isEnabled: boolean) => {
+    await ipcRenderer.invoke(IPCChannel.ToggleAutoUpdate, isEnabled);
   },
 
   shouldShowChangelog: async () => {
@@ -286,7 +306,7 @@ const api: PreloadApi = {
       const logFilePath = await getCounterStrikeLogFilePath(game);
       return { success: logFilePath };
     } catch (error) {
-      return { error: { code: getErrorCodeFromError(error) } };
+      return handleError(error);
     }
   },
 

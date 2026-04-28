@@ -111,13 +111,13 @@ type Options = {
 
 export async function getPlaybackMatch({ demoPath, steamId, type, includeDamages }: Options) {
   const checksum = await getDemoChecksumFromDemoPath(demoPath);
-  const match = await db
-    .selectFrom('matches')
+  const demo = await db
+    .selectFrom('demos')
     .select(['checksum', 'tickrate', 'tick_count as tickCount'])
     .where('checksum', '=', checksum)
     .executeTakeFirst();
 
-  if (!match) {
+  if (!demo) {
     return undefined;
   }
 
@@ -136,9 +136,9 @@ export async function getPlaybackMatch({ demoPath, steamId, type, includeDamages
   }
 
   const playbackMatch: PlaybackMatch = {
-    checksum: match.checksum,
-    tickrate: match.tickrate,
-    tickCount: match.tickCount,
+    checksum: demo.checksum,
+    tickrate: demo.tickrate,
+    tickCount: demo.tickCount,
     demoPath,
     actions,
   };

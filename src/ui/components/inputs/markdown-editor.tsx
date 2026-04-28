@@ -29,7 +29,7 @@ function MilkdownEditor({ defaultValue, isResizable, autoFocus, placeholder, onR
           ctx.update(editorViewOptionsCtx, (prev) => ({
             ...prev,
             attributes: {
-              class: `appearance-none outline-hidden rounded duration-85 transition-all bg-gray-50 size-full p-8 text-gray-800 border border-gray-400 focus:border-gray-900 placeholder:text-gray-500 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500 hover:enabled:focus:border-gray-900 hover:enabled:border-gray-600 overflow-y-auto ${isResizable ? 'resize-y' : 'resize-none'}`,
+              class: `appearance-none outline-hidden rounded-4 duration-85 transition-all bg-gray-50 size-full p-8 text-gray-800 border border-gray-400 focus:border-gray-900 placeholder:text-gray-500 disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-500 hover:enabled:focus:border-gray-900 hover:enabled:border-gray-600 overflow-y-auto ${isResizable ? 'resize-y' : 'resize-none'}`,
               spellcheck: 'false',
             },
           }));

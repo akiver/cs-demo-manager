@@ -47,6 +47,7 @@ export function ValveMatchScoreboard({ players, demoPath, game, onPlayerSelected
     onSelectionChanged,
     onContextMenu,
     sortedColumn: { id: 'kill-count', direction: 'desc' },
+    fixedColumnsWidth: true,
   });
 
   return <Table<ValvePlayer> table={table} />;

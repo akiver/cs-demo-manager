@@ -19,11 +19,20 @@ type Props = {
 export function ExportMatchesAsXlsxDialog({ matches }: Props) {
   const { t } = useLingui();
   const client = useWebSocketClient();
-  const [isExporting, setIsExporting] = useState(false);
+  const [exportPayload, setExportPayload] = useState<ExportMatchesToXlsxPayload | undefined>(undefined);
   const checksums = matches.map((match) => match.checksum);
 
-  if (isExporting) {
-    return <ExportingToXlsxDialog totalCount={matches.length} />;
+  if (exportPayload !== undefined) {
+    return (
+      <ExportingToXlsxDialog
+        sendStartExportMessage={async () => {
+          await client.send({
+            name: RendererClientMessageName.ExportMatchesToXlsx,
+            payload: exportPayload,
+          });
+        }}
+      />
+    );
   }
 
   return (
@@ -49,10 +58,7 @@ export function ExportMatchesAsXlsxDialog({ matches }: Props) {
         );
       }}
       onOutputSelected={(type, outputPath, formData) => {
-        const commonPayload: Omit<
-          ExportMatchesToXlsxPayload,
-          'exportEachMatchToSingleFile' | 'outputFilePath' | 'outputFilePath'
-        > = {
+        const commonPayload: Omit<ExportMatchesToXlsxPayload, 'exportEachMatchToSingleFile' | 'outputFilePath'> = {
           sheets: {
             [SheetName.General]: formData.has('sheets.general'),
             [SheetName.Players]: formData.has('sheets.players'),
@@ -80,11 +86,7 @@ export function ExportMatchesAsXlsxDialog({ matches }: Props) {
           };
         }
 
-        client.send({
-          name: RendererClientMessageName.ExportMatchesToXlsx,
-          payload,
-        });
-        setIsExporting(true);
+        setExportPayload(payload);
       }}
     />
   );

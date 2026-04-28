@@ -292,6 +292,28 @@ export function useDemosColumns() {
       }),
       width: 200,
     },
+    {
+      id: 'analyzeDate',
+      accessor: 'analyzeDate',
+      headerText: t({
+        context: 'Table header',
+        message: 'Analyze date',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Analyze date',
+      }),
+      width: 180,
+      maxWidth: 250,
+      sortFunction: dateSortFunction<Demo>,
+      formatter: (analyzeDate: string | null) => {
+        if (!analyzeDate) {
+          return '';
+        }
+
+        return formatDate(analyzeDate);
+      },
+    },
   ];
 
   return columns;

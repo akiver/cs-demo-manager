@@ -100,6 +100,10 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.Esplay;
   }
 
+  if (serverName.includes('pracc.com')) {
+    return DemoSource.Pracc;
+  }
+
   return DemoSource.Unknown;
 }
 
@@ -163,7 +167,7 @@ async function buildDemoFromFilePath(filePath: string): Promise<Demo> {
   const source = getDemoSource(header, name);
   const type = getDemoType(header);
 
-  let tickrate = 0;
+  let tickrate = 64;
   let frameRate = 0;
   let tickCount = 0;
   let duration = 0;
@@ -207,6 +211,7 @@ async function buildDemoFromFilePath(filePath: string): Promise<Demo> {
     comment: '',
     shareCode: '',
     tagIds: [],
+    analyzeDate: null,
   };
 
   await updateDemoFromInfoFile(demo);

@@ -12,8 +12,8 @@ export function RecordingShowOnlyDeathNotices() {
       interactiveComponent={
         <Switch
           isChecked={settings.showOnlyDeathNotices}
-          onChange={(isChecked) => {
-            updateSettings({ showOnlyDeathNotices: isChecked });
+          onChange={async (isChecked) => {
+            await updateSettings({ showOnlyDeathNotices: isChecked });
           }}
         />
       }

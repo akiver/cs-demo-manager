@@ -27,10 +27,10 @@ function Header() {
 }
 
 type Props = {
-  totalCount: number;
+  sendStartExportMessage: () => Promise<void>;
 };
 
-export function ExportingToXlsxDialog({ totalCount }: Props) {
+export function ExportingToXlsxDialog({ sendStartExportMessage }: Props) {
   const { t } = useLingui();
   const client = useWebSocketClient();
   const { hideDialog } = useDialog();
@@ -68,6 +68,7 @@ export function ExportingToXlsxDialog({ totalCount }: Props) {
     client.on(RendererServerMessageName.ExportToXlsxSheetProgress, onSheetProgress);
     client.on(RendererServerMessageName.ExportToXlsxSuccess, onSuccess);
     client.on(RendererServerMessageName.ExportToXlsxError, onError);
+    void sendStartExportMessage();
 
     return () => {
       client.off(RendererServerMessageName.ExportToXlsxProgress, onProgress);
@@ -75,7 +76,7 @@ export function ExportingToXlsxDialog({ totalCount }: Props) {
       client.off(RendererServerMessageName.ExportToXlsxSuccess, onSuccess);
       client.off(RendererServerMessageName.ExportToXlsxError, onError);
     };
-  }, [client, totalCount]);
+  }, [client, sendStartExportMessage]);
 
   const renderRevealInExplorerButton = () => {
     if (output === undefined) {

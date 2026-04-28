@@ -26,5 +26,4 @@ const createDemosTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createDemosTable;

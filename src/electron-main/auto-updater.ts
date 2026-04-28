@@ -14,12 +14,12 @@ autoUpdater.logger = {
 autoUpdater.disableWebInstaller = true;
 autoUpdater.autoDownload = false;
 
-export function initialize(autoDownloadUpdates: boolean) {
+export async function initialize(autoDownloadUpdates: boolean) {
   let lastDownloadedVersion: string | null = null;
   let isDownloading = false;
   let shouldDownloadUpdatesAutomatically = autoDownloadUpdates;
 
-  autoUpdater.on('update-available', (event) => {
+  autoUpdater.on('update-available', async (event) => {
     const isAlreadyDownloadedVersion = lastDownloadedVersion !== null && lastDownloadedVersion === event.version;
     if (isAlreadyDownloadedVersion) {
       return;
@@ -27,7 +27,7 @@ export function initialize(autoDownloadUpdates: boolean) {
 
     if (shouldDownloadUpdatesAutomatically) {
       isDownloading = true;
-      autoUpdater.downloadUpdate();
+      await autoUpdater.downloadUpdate();
       return;
     }
 
@@ -41,8 +41,8 @@ export function initialize(autoDownloadUpdates: boolean) {
         message: 'Click here to download it.',
       }),
     });
-    notification.on('click', () => {
-      autoUpdater.downloadUpdate();
+    notification.on('click', async () => {
+      await autoUpdater.downloadUpdate();
     });
     notification.show();
   });
@@ -70,11 +70,11 @@ export function initialize(autoDownloadUpdates: boolean) {
   });
 
   const checkInterval = 1000 * 60 * 60 * 12; // 12 hours
-  setInterval(() => {
+  setInterval(async () => {
     if (!isDownloading) {
-      autoUpdater.checkForUpdates();
+      await autoUpdater.checkForUpdates();
     }
   }, checkInterval);
 
-  autoUpdater.checkForUpdates();
+  await autoUpdater.checkForUpdates();
 }

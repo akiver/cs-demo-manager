@@ -1,7 +1,6 @@
 import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { GrenadeName } from 'csdm/common/types/counter-strike';
-import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
@@ -64,10 +63,12 @@ export function GrenadeNameSelect() {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <InputLabel>
-        <Trans context="Input label">Grenade</Trans>
-      </InputLabel>
-      <Select onChange={onChange} options={options} value={selectedGrenadeName} />
+      <Select
+        label={<Trans context="Input label">Grenade</Trans>}
+        onChange={onChange}
+        options={options}
+        value={selectedGrenadeName}
+      />
     </div>
   );
 }

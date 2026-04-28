@@ -113,6 +113,11 @@ export function getValveMatchFromMatchInfoProtobufMesssage(matchInfoMessage: CDa
       }
       const { accountIds } = roundMessage.reservation as CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve;
       for (const [playerIndex, steamId3] of accountIds.entries()) {
+        // accountIds has a fixed length of 10, so some slots may be empty (0) when it's not a 5v5 match
+        if (steamId3 === 0) {
+          continue;
+        }
+
         const steamId64 = steamId3ToSteamId64(steamId3);
         let player = players.find((player) => player.steamId === steamId64);
 

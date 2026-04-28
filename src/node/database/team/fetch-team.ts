@@ -51,7 +51,8 @@ function buildQuery({ name, ...filters }: TeamFilters) {
           .select(({ fn }) => {
             return fn.coalesce<KillsRef, KillsRef>(fn.count('kills.id'), sql`0`).as('wallbangKillCount');
           })
-          .leftJoin('matches', 'matches.checksum', 'kills.match_checksum')
+          .innerJoin('matches', 'matches.checksum', 'kills.match_checksum')
+          .innerJoin('demos', 'demos.checksum', 'matches.checksum')
           .where('killer_team_name', '=', name)
           .where('penetrated_objects', '>', 0);
 
@@ -60,8 +61,9 @@ function buildQuery({ name, ...filters }: TeamFilters) {
         return wallbangsQuery.as('wallbangKillCount');
       },
     ])
-    .leftJoin('matches', 'matches.checksum', 'teams.match_checksum')
-    .leftJoin('players', (join) => {
+    .innerJoin('matches', 'matches.checksum', 'teams.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .innerJoin('players', (join) => {
       return join
         .onRef('players.match_checksum', '=', 'teams.match_checksum')
         .onRef('players.team_name', '=', 'teams.name');

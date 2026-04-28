@@ -12,8 +12,8 @@ type Props = {
 export function ExportChatMessagesButton({ checksum, messages }: Props) {
   const exportMessages = useExportMatchChatMessages();
 
-  const onClick = () => {
-    exportMessages(checksum, messages);
+  const onClick = async () => {
+    await exportMessages(checksum, messages);
   };
 
   return (

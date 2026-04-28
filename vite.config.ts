@@ -1,0 +1,360 @@
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { defineConfig } from 'vite-plus';
+import react, { reactCompilerPreset } from '@vitejs/plugin-react';
+import { lingui } from '@lingui/vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
+import babel, { defineRolldownBabelPreset } from '@rolldown/plugin-babel';
+import { chrome } from './scripts/electron-vendors.mjs';
+import pkg from './package.json' with { type: 'json' };
+
+const currentFolderPath = fileURLToPath(new URL('.', import.meta.url));
+const srcFolderPath = path.resolve(currentFolderPath, 'src');
+const rendererFolderPath = path.resolve(srcFolderPath, 'ui');
+// https://github.com/lingui/js-lingui/issues/2477#issuecomment-4068015629
+const linguiPreset = defineRolldownBabelPreset({
+  preset: () => ({ plugins: ['@lingui/babel-plugin-lingui-macro'] }),
+  rolldown: {
+    filter: {
+      code: /from ['"]@lingui\/(?:react|core)\/macro['"]/,
+    },
+  },
+});
+
+export default defineConfig({
+  staged: {
+    '*': 'vp check --fix',
+  },
+  root: process.env.VITEST ? '' : rendererFolderPath,
+  resolve: {
+    alias: {
+      csdm: srcFolderPath,
+    },
+  },
+  base: '',
+  build: {
+    outDir: path.resolve(currentFolderPath, 'out'),
+    target: `chrome${chrome}`,
+    sourcemap: true,
+  },
+  define: {
+    APP_VERSION: `"${pkg.version}"`,
+  },
+  plugins: [
+    react(),
+    lingui(),
+    babel({
+      presets: [reactCompilerPreset(), linguiPreset],
+    }),
+    tailwindcss(),
+    {
+      name: 'write-changelog-file',
+      async closeBundle() {
+        // Write a dummy changelog file that will be used to determine if the changelog dialog should be shown.
+        await fs.writeFile('./static/changelog', '', 'utf-8');
+      },
+    },
+  ],
+  lint: {
+    plugins: ['eslint', 'typescript', 'react', 'unicorn', 'import'],
+    jsPlugins: [
+      '@e18e/eslint-plugin',
+      'eslint-plugin-check-file',
+      'eslint-plugin-better-tailwindcss',
+      'eslint-plugin-lingui',
+      { name: 'react-js', specifier: 'eslint-plugin-react' },
+      './lint-plugin.js',
+    ],
+    globals: {
+      logger: 'readonly',
+      IS_DEV: 'readonly',
+      IS_PRODUCTION: 'readonly',
+      APP_VERSION: 'readonly',
+      REACT_STRICT_MODE_ENABLED: 'readonly',
+    },
+    categories: {
+      correctness: 'error',
+    },
+    env: {
+      browser: true,
+      node: true,
+    },
+    options: {
+      typeAware: true,
+      typeCheck: true,
+    },
+    settings: {
+      react: {
+        version: '19',
+      },
+      'better-tailwindcss': {
+        entryPoint: 'src/ui/index.css',
+      },
+    },
+    ignorePatterns: [
+      '.DS_Store',
+      'node_modules',
+      'LICENSE',
+      'package-lock.json',
+      '.npmrc',
+      '**/*.config.{ts,mjs,mts,js}',
+      'knip.ts',
+      'cs2-server-plugin',
+      'csgo-server-plugin',
+      'linter',
+      'scripts',
+      'dist',
+      'out',
+      'static',
+      '*.po',
+      '*.png',
+      '*.html',
+      '*.md',
+      '*.svg',
+      '*.jpg',
+      '*.sh',
+      '*.yml',
+      '*.dem',
+      '*.vdm',
+      '*.log',
+      '*.json',
+      '*.snap',
+      '*.info',
+      '*.icns',
+      '*.ico',
+      '*.css',
+      '*.woff2',
+      '*.cmd',
+      '*.nsh',
+      '*.data',
+      '*.dll',
+    ],
+    rules: {
+      eqeqeq: 'error',
+      'no-array-constructor': 'error',
+      'no-console': 'error',
+      'no-empty': 'error',
+      'no-fallthrough': 'error',
+      'no-prototype-builtins': 'error',
+      'no-redeclare': 'error',
+      'no-regex-spaces': 'error',
+      'no-undef': 'error',
+      'no-unreachable': 'error',
+      'no-unused-vars': ['error', { args: 'after-used', ignoreRestSiblings: true, caughtErrors: 'none' }],
+
+      'typescript/ban-ts-comment': ['warn', { 'ts-ignore': 'allow-with-description' }],
+      'typescript/no-deprecated': 'error',
+      'typescript/no-empty-object-type': 'error',
+      'typescript/no-explicit-any': 'error',
+      'typescript/no-namespace': 'error',
+      'typescript/no-require-imports': 'error',
+      'typescript/no-unnecessary-type-constraint': 'error',
+      'typescript/no-unsafe-function-type': 'error',
+      'typescript/require-await': 'error',
+      'typescript/unbound-method': 'off',
+
+      // Built-in oxlint React rules
+      'react/display-name': 'error',
+      'react/exhaustive-deps': 'error',
+      'react/jsx-boolean-value': ['error', 'always'],
+      'react/jsx-no-comment-textnodes': 'error',
+      'react/jsx-no-target-blank': 'error',
+      'react/no-unknown-property': 'error',
+      'react/react-in-jsx-scope': 'error',
+      'react/require-render-return': 'error',
+      'react/rules-of-hooks': 'error',
+      // It reports false positives for translations and unlike the eslint-plugin-react rule, it doesn't allow to ignore
+      // specific characters.
+      'react/no-unescaped-entities': 'off',
+
+      // React rules still using the JS ESLint React plugin.
+      'react-js/function-component-definition': [
+        'error',
+        {
+          namedComponents: 'function-declaration',
+        },
+      ],
+
+      // e18e rules
+      'e18e/prefer-array-from-map': 'error',
+      'e18e/prefer-timer-args': 'error',
+      'e18e/prefer-date-now': 'error',
+      'e18e/prefer-regex-test': 'error',
+      'e18e/prefer-array-some': 'error',
+      'e18e/prefer-array-at': 'error',
+      'e18e/prefer-array-fill': 'error',
+      'e18e/prefer-includes': 'error',
+      'e18e/prefer-array-to-reversed': 'error',
+      'e18e/prefer-array-to-sorted': 'error',
+      'e18e/prefer-array-to-spliced': 'error',
+      'e18e/prefer-nullish-coalescing': 'error',
+      'e18e/prefer-object-has-own': 'error',
+      'e18e/prefer-spread-syntax': 'error',
+      'e18e/prefer-url-canparse': 'error',
+      'e18e/ban-dependencies': ['error', { allowed: ['fs-extra'] }],
+
+      // File naming rules
+      'check-file/filename-naming-convention': [
+        'error',
+        { '**/*.{ts,tsx,mjs,md}': '+([a-z0-9])*([a-z0-9])*(-+([a-z0-9]))' },
+        { ignoreMiddleExtensions: true },
+      ],
+      'check-file/folder-naming-convention': ['error', { 'src/**/': '+([a-z0-9])*([a-z0-9])*(-+([a-z0-9]))' }],
+      'check-file/no-index': 'error',
+
+      // Import rules
+      'import/no-default-export': 'error',
+
+      // Tailwind CSS rules
+      'better-tailwindcss/enforce-consistent-class-order': 'error',
+      'better-tailwindcss/no-deprecated-classes': 'error',
+      'better-tailwindcss/no-duplicate-classes': 'error',
+      'better-tailwindcss/no-unnecessary-whitespace': 'error',
+      'better-tailwindcss/enforce-canonical-classes': 'error',
+      'better-tailwindcss/no-conflicting-classes': 'error',
+      'better-tailwindcss/no-unknown-classes': ['error', { ignore: ['dark', 'changelog', 'waveform'] }],
+
+      // Lingui rules
+      'lingui/no-unlocalized-strings': [
+        'error',
+        {
+          ignore: [
+            '^(?![A-Z])\\S+$',
+            '^[A-Z0-9_-]+$',
+            '^#',
+            '^HLAE$',
+            '^HLAE.exe$',
+            '^FFmpeg$',
+            '^VirtualDub$',
+            '^Valve$',
+            '^FACEIT$',
+            '^Renown$',
+            '^CS Demo Manager$',
+            '^Counter-Strike$',
+            'rgba',
+            '^setpos ',
+            '^Ctrl+',
+            '^CTRL+',
+            '^Cmd+',
+            '^Shift+',
+            '^Control+',
+            '^Alt+',
+            '^Enter$',
+            '^translateX',
+            '^ArrowLeft$',
+            '^ArrowRight$',
+            '^https://',
+            '^Toggle Developer Tools$',
+            '^GitHub$',
+            'Inter var$',
+            'CS:DM',
+            'CS:GO',
+            'CS2 Limited Test',
+            '^setpos_exact',
+            'dd/MM/yyyy HH:mm:ss',
+          ],
+          ignoreNames: [
+            { regex: { pattern: 'className', flags: 'i' } },
+            'displayName',
+            'Authorization',
+            'Content-Type',
+            'fontFamily',
+            'd',
+            'fillStyle',
+            'class',
+            'current',
+            'not-current',
+            'gridTemplateColumns',
+            'accelerator',
+          ],
+          ignoreFunctions: [
+            'Error',
+            'TypeError',
+            'console.*',
+            '*.warn',
+            '*.error',
+            '*.log',
+            '*.setAttribute',
+            'assertNever',
+            'spawn',
+            '*.includes',
+            '*.indexOf',
+            '*.endsWith',
+            '*.startsWith',
+          ],
+          useTsTypes: false,
+          ignoreMethodsOnTypes: ['Map.get', 'Map.has', 'Set.has'],
+        },
+      ],
+      'lingui/t-call-in-function': 'error',
+      'lingui/no-single-variables-to-translate': 'error',
+      'lingui/no-expression-in-message': 'error',
+      'lingui/no-single-tag-to-translate': 'error',
+      'lingui/no-trans-inside-trans': 'error',
+
+      // Custom rules
+      'csdm/lingui-js-usage': 'error',
+      'csdm/no-react-redux-import': 'error',
+    },
+    overrides: [
+      {
+        files: ['src/**/*.test.ts', 'src/node/**', 'src/server/**', 'src/cli/**', 'src/electron-main/**'],
+        rules: {
+          'lingui/no-unlocalized-strings': 'off',
+        },
+      },
+      {
+        files: ['src/cli/**'],
+        rules: {
+          'no-console': 'off',
+        },
+      },
+      {
+        files: ['src/node/settings/migrations/**/*.ts', 'src/node/database/migrations/**/*.ts'],
+        rules: {
+          'import/no-default-export': 'off',
+        },
+      },
+    ],
+  },
+  fmt: {
+    singleQuote: true,
+    printWidth: 120,
+    ignorePatterns: [
+      'node_modules',
+      'package-lock.json',
+      '.npmrc',
+      'build',
+      'build-assets',
+      'out',
+      'output',
+      'dist',
+      'static',
+      '.DS_Store',
+      '.*ignore',
+      '.gitattributes',
+      '.gitmodules',
+      '*.png',
+      '*.jpg',
+      '.env*',
+      'LICENSE',
+      '*.dem',
+      '*.info',
+      '*.vdm',
+      '*.log',
+      '*.sh',
+      '*.snap',
+      '*.data',
+      '*.po',
+      '*.ai',
+      '*.bat',
+      '*.woff2',
+      '*.cpp',
+      '*.gyp',
+      '.node-version',
+      'cs2-server-plugin',
+      'csgo-server-plugin',
+    ],
+  },
+});

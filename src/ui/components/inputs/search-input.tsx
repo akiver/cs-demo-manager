@@ -117,7 +117,7 @@ export function SearchInput<Value = unknown>({
     return (
       <div className="absolute z-10 w-full">
         <div
-          className="flex max-h-[200px] flex-col gap-y-4 overflow-auto rounded border border-gray-400 bg-gray-50"
+          className="flex max-h-[200px] flex-col gap-y-4 overflow-auto rounded-4 border border-gray-400 bg-gray-50"
           ref={resultsRef}
         >
           {results.length > 0 ? (
@@ -155,7 +155,7 @@ export function SearchInput<Value = unknown>({
           return (
             <div
               key={getValueId(value)}
-              className="flex items-center justify-center gap-x-8 rounded border px-8 py-4 text-gray-700"
+              className="flex items-center justify-center gap-x-8 rounded-4 border px-8 py-4 text-gray-700"
             >
               {renderValue(value)}
               <button

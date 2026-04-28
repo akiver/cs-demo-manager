@@ -13,12 +13,12 @@ export function DropZone({ children }: Props) {
     event.preventDefault();
   };
 
-  const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const onDrop = async (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     for (const file of event.dataTransfer.files) {
       const path = window.csdm.getWebFilePath(file);
       if (path.endsWith('.dem')) {
-        navigateToDemo(path);
+        await navigateToDemo(path);
         break;
       }
     }

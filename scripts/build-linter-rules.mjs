@@ -19,7 +19,7 @@ async function main() {
     bundle: false,
     outdir: rulesFolderPath,
     platform: 'node',
-    format: 'cjs',
+    format: 'esm',
   };
   if (shouldWatch) {
     const ctx = await esbuild.context(options);

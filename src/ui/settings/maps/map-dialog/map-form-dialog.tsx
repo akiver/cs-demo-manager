@@ -31,7 +31,7 @@ export function MapFormDialog({ nameInput, error, onSubmit }: Props) {
   const { fields, validate, id, game } = useMapForm();
   const { hideDialog } = useDialog();
 
-  const validateAndSubmit = () => {
+  const validateAndSubmit = async () => {
     const isValid = validate();
     if (isValid) {
       const payload: MapPayload = {
@@ -47,15 +47,15 @@ export function MapFormDialog({ nameInput, error, onSubmit }: Props) {
         thumbnailBase64: fields.thumbnailBase64.value,
       };
 
-      onSubmit(payload);
+      await onSubmit(payload);
     }
   };
 
   return (
     <Dialog
-      onEnterPressed={(event) => {
+      onEnterPressed={async (event) => {
         event.preventDefault();
-        validateAndSubmit();
+        await validateAndSubmit();
       }}
     >
       <DialogHeader>

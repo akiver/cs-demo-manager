@@ -14,8 +14,8 @@ export function RoundCommentInput({ checksum, number, comment }: Props) {
   return (
     <CommentInput
       currentComment={comment}
-      updateComment={(comment) => {
-        updateComment({
+      updateComment={async (comment) => {
+        await updateComment({
           checksum,
           number,
           comment,

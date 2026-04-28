@@ -8,7 +8,8 @@ import type { TeamFilters } from './team-filters';
 export async function fetchTeamMatchSideStats(filters: TeamFilters): Promise<TeamMatchSideStats> {
   let query = db
     .selectFrom('teams')
-    .leftJoin('matches', 'matches.checksum', 'teams.match_checksum')
+    .innerJoin('matches', 'matches.checksum', 'teams.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .select((eb) => [
       eb.fn.count<number>('matches.checksum').as('matchCount'),
       sql<number>`COUNT(CASE WHEN teams.letter = ${TeamLetter.A} THEN 1 END)`.as('matchCountStartedAsCt'),

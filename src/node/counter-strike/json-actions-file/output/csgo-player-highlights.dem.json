@@ -3,11 +3,11 @@
     "actions": [
       {
         "cmd": "voice_enable 1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "demo_gototick 872",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "spec_lock_to_accountid fakePlayerSteamId",

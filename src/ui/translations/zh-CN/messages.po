@@ -228,7 +228,6 @@ msgid "Loading ban stats…"
 msgstr "正在加载封禁数据…"
 
 #: src/ui/ban/stats/ban-stats.tsx
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 #: src/ui/comment/use-update-comment.tsx
 #: src/ui/components/buttons/export-html-element-as-image-button.tsx
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
@@ -393,92 +392,6 @@ msgstr "Steam API 返回了 429 状态代码"
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "An error occurred while checking for new banned Steam accounts (code {errorCode})"
 msgstr "在检查新的被封禁的 Steam 账户时发生了错误 (代码 {errorCode})"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Demo not found"
-msgstr "未找到 demo"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Match not found"
-msgstr "未找到比赛"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/match/video/video-loader.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike executable not found."
-msgstr "未找到 Counter-Strike 可执行文件。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
-msgstr "确保Steam不是通过Flatpak安装的，因为它不被支持！"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-msgstr "请确保通过在 Steam 上选择 CS2 的 \"Betas\" 属性中的 \"csgo_legacy\" 分支来安装 CS:GO。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Read the <0>documentation</0> for more information."
-msgstr "阅读<0>文档</0>以了解更多信息."
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/match/video/video-loader.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike executable not found, check your app playback settings."
-msgstr "找不到 Counter-Strike 可执行程序，请检查你的播放设置页中的选项。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "{game} is not supported on your operating system"
-msgstr "您的操作系统不支持 {game}"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "HLAE executable not found"
-msgstr "未找到HLAE可执行文件"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No kills found"
-msgstr "没有发现击杀"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "This demo needs to be re-analyzed to make the camera focus work."
-msgstr "这个 demo 需要重新分析才能使摄像机聚焦正常工作。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No rounds found"
-msgstr "未发现回合"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "No deaths found"
-msgstr "未找到死亡"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
-msgstr "Demo 路径中包含不受 Counter-Strike 支持的字符，因此无法播放。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
-msgstr "您必须将 Demo 移动到只包含基本拉丁字符的文件夹中 - 详情请参阅<0>本文档</0>。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Steam is not running"
-msgstr "未运行Steam"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "The game crashed, please see <0>this documentation</0> for help."
-msgstr "游戏崩溃了，请查看<0>此文档</0>以获取帮助。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "The game process exited with an access denied error."
-msgstr "游戏进程因拒绝访问错误而退出。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "Make sure to close any anti-cheat software and retry."
-msgstr "确保关闭任何反作弊软件，然后重试。"
-
-#: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
-msgid "{game} is already running"
-msgstr "{game}已经在运行中"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 msgid "Counter-Strike starting…"
@@ -962,12 +875,12 @@ msgstr "打开 FACEIT 配置文件"
 #: src/ui/components/context-menu/items/open-leetify-profile-item.tsx
 msgctxt "Context menu"
 msgid "Open Leetify profile"
-msgstr ""
+msgstr "打开 Leetify 配置文件"
 
 #: src/ui/components/context-menu/items/open-renown-profile-item.tsx
 msgctxt "Context menu"
 msgid "Open Renown profile"
-msgstr ""
+msgstr "打开 Renown 配置文件"
 
 #: src/ui/components/context-menu/items/open-steam-profile-item.tsx
 msgctxt "Context menu"
@@ -1109,10 +1022,8 @@ msgstr "{0, plural, other {#个 demo 已被删除。}}"
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
 msgstr "{0, plural, other {#个 demo 未被删除。}}"
 
-#. placeholder {0}: checksums.length
 #. placeholder {0}: demos.length
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
 msgstr "{0, plural, other {删除 demo}}"
 
@@ -1120,11 +1031,6 @@ msgstr "{0, plural, other {删除 demo}}"
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
 msgstr "{0, plural, other {Demo 文件将会从系统中删除, 不会删除数据库中的数据。}}"
-
-#. placeholder {0}: checksums.length
-#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
-msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
-msgstr "{0, plural, other {Demo 数据将会从数据库中删除, 不会删除文件。}}"
 
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "Delete matches"
@@ -1480,7 +1386,7 @@ msgid "Decoy"
 msgstr "诱饵弹"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
-#: src/ui/search/search.tsx
+#: src/ui/search/filters/search-event-input.tsx
 msgctxt "Input label"
 msgid "Event"
 msgstr "事件"
@@ -1828,6 +1734,7 @@ msgstr "评论"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Tags"
@@ -1835,6 +1742,7 @@ msgstr "标签"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Tags"
@@ -2247,11 +2155,13 @@ msgid "Client name"
 msgstr "用户名称"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Analyze date"
 msgstr "分析日期"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Analyze date"
 msgstr "分析日期"
@@ -2487,17 +2397,17 @@ msgstr "诱饵弹"
 #: src/ui/components/panels/weapon-inspections-panel.tsx
 msgctxt "Panel title"
 msgid "Weapon Inspections"
-msgstr ""
+msgstr "检视武器"
 
 #: src/ui/components/panels/weapon-inspections-panel.tsx
 msgctxt "Panel label"
 msgid "Total inspections"
-msgstr ""
+msgstr "总检视次数"
 
 #: src/ui/components/panels/weapon-inspections-panel.tsx
 msgctxt "Panel label"
 msgid "Deaths while inspecting"
-msgstr ""
+msgstr "在检视期间死亡"
 
 #: src/ui/components/panels/win-rate-panel.tsx
 msgctxt "Panel title"
@@ -2667,6 +2577,10 @@ msgstr "Score"
 msgid "Demo analysis in progress."
 msgstr "Demo 分析正在进行中。"
 
+#: src/ui/demo/demo-analyze-date.tsx
+msgid "Analyze date:"
+msgstr "分析日期："
+
 #: src/ui/demo/demo-comment-input.tsx
 msgid "Comment:"
 msgstr "评论:"
@@ -2762,6 +2676,10 @@ msgctxt "Tooltip"
 msgid "This demo has not been analyzed yet."
 msgstr "这个 demo 还没有被分析过。"
 
+#: src/ui/demos/action-bar/analyze-not-analyzed-demos-button.tsx
+msgid "Analyze all demos"
+msgstr "分析所有 demo 文件"
+
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
 msgid "Include subfolders"
@@ -2771,10 +2689,6 @@ msgstr "包括子文件夹"
 msgctxt "Checkbox label"
 msgid "See all folders"
 msgstr "查看所有文件夹"
-
-#: src/ui/demos/table/delete-demos-from-database-item.tsx
-msgid "Delete from database"
-msgstr "从数据库中删除"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Pending analysis…"
@@ -2936,6 +2850,11 @@ msgstr "Renown"
 msgctxt "Demo source name"
 msgid "Valve"
 msgstr "Valve"
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "PRACC"
+msgstr ""
 
 #: src/ui/demos/use-demo-sources.ts
 #: src/ui/demos/use-demo-sources.ts
@@ -3381,7 +3300,7 @@ msgstr "请使用你的 64 位 Steam ID (如：765611980000000)。"
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 msgctxt "Table header kill count"
 msgid "LR"
-msgstr ""
+msgstr "LR"
 
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 msgctxt "Table header tooltip"
@@ -5339,6 +5258,52 @@ msgstr "HLAE 已更新"
 msgid "An error occurred while updating HLAE"
 msgstr "在更新 HLAE 时发生了错误"
 
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Map name (e.g., de_dust2)"
+msgstr "地图名称(如：de_dust2)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Match checksum/ID"
+msgstr "比赛校验和 / ID"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Game (CS2 or CSGO)"
+msgstr "游戏 (CS2 或 CSGO)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Current date (YYYY-MM-DD)"
+msgstr "当前日期 (YYYY-MM-DD)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Current time (HH-MM-SS)"
+msgstr "当前时间 (HH-MM-SS)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+#: src/ui/videos/video-entry.tsx
+msgid "Encoder software"
+msgstr "编码器"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Resolution (e.g., 1920x1080)"
+msgstr "分辨率 (例如1920x1080)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Framerate (e.g., 30)"
+msgstr "帧率(例如30)"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "Available placeholders:"
+msgstr "可用的占位符："
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgctxt "Input label"
+msgid "Output filename"
+msgstr "输出文件名"
+
+#: src/ui/match/video/output-file-name-input.tsx
+msgid "?"
+msgstr "？"
+
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
 msgid "Output folder"
@@ -5387,11 +5352,6 @@ msgctxt "Select label"
 msgid "Recording system"
 msgstr "录制系统"
 
-#: src/ui/match/video/reset-settings-button.tsx
-msgctxt "Button"
-msgid "Reset settings"
-msgstr "重置设置"
-
 #: src/ui/match/video/sequence/cameras/focus-camera-kill-pov-input.tsx
 msgctxt "Select option"
 msgid "Killer"
@@ -5435,7 +5395,7 @@ msgstr "生成"
 #: src/ui/match/video/sequence/cameras/manage-player-cameras-buttons.tsx
 msgctxt "Button"
 msgid "Clear"
-msgstr ""
+msgstr "清空"
 
 #: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
 #: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
@@ -5453,7 +5413,7 @@ msgstr "行为"
 
 #: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
 msgid "Custom cameras (<0>{cameraCount}</0>)"
-msgstr ""
+msgstr "相机总数: (<0>{cameraCount}</0>)"
 
 #: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 msgctxt "Table header tooltip"
@@ -5462,7 +5422,7 @@ msgstr "玩家"
 
 #: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 msgid "Player cameras (<0>{cameraCount}</0>)"
-msgstr ""
+msgstr "玩家相机: (<0>{cameraCount}</0>)"
 
 #: src/ui/match/video/sequence/end-tick-input.tsx
 msgctxt "Input label"
@@ -5664,7 +5624,7 @@ msgstr "炸弹"
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
 msgid "Player cameras"
-msgstr ""
+msgstr "玩家摄像机"
 
 #: src/ui/match/video/sequence/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
@@ -5729,7 +5689,7 @@ msgstr "聚焦玩家"
 #: src/ui/match/video/sequence/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "Set camera"
-msgstr ""
+msgstr "设置摄像机"
 
 #: src/ui/match/video/sequence/match-timeline/tick.tsx
 msgid "Tick <0>{tick}</0>"
@@ -5811,11 +5771,6 @@ msgstr "{0, plural, one {# 录像} other {# 录像}}"
 msgctxt "Button"
 msgid "Add new sequence"
 msgstr "增加新的镜头"
-
-#: src/ui/match/video/sequences/delete-sequences-button.tsx
-msgctxt "Button"
-msgid "Delete sequences"
-msgstr "删除镜头"
 
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-button.tsx
 msgid "No sequences to edit"
@@ -5906,14 +5861,31 @@ msgctxt "Software installation status"
 msgid "Not installed"
 msgstr "未安装"
 
+#: src/ui/match/video/toggle-true-view.tsx
+msgctxt "Checkbox label"
+msgid "Enable TrueView mode"
+msgstr "启用 TrueView 模式"
+
+#: src/ui/match/video/toggle-true-view.tsx
+msgid "Enabling TrueView may lead to lags in recordings!"
+msgstr "启用 TrueView 可能会导致录制过程中出现延迟！"
+
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Toast"
 msgid "File created, click here to reveal it"
-msgstr ""
+msgstr "文件已创建，点击此处显示"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgid "The exported data is not valid JSON."
+msgstr "导出的数据并非有效 JSON 格式。"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgid "The file extension must be <0>.json</0>"
+msgstr "文件扩展名必须是 <0>.json</0>"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgid "Video actions"
-msgstr ""
+msgstr "视频操作"
 
 #: src/ui/match/video/video-actions-menu.tsx
 msgctxt "Button"
@@ -5924,6 +5896,26 @@ msgstr "复制为 JSON 格式"
 msgctxt "Button"
 msgid "Export as JSON"
 msgstr "导出为 JSON 文件"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Delete sequences"
+msgstr "删除镜头"
+
+#: src/ui/match/video/video-actions-menu.tsx
+msgctxt "Button"
+msgid "Reset settings"
+msgstr "重置设置"
+
+#: src/ui/match/video/video-loader.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike executable not found."
+msgstr "未找到 Counter-Strike 可执行文件。"
+
+#: src/ui/match/video/video-loader.tsx
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike executable not found, check your app playback settings."
+msgstr "找不到 Counter-Strike 可执行程序，请检查你的播放设置页中的选项。"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
@@ -6765,11 +6757,11 @@ msgstr "穿烟"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Team kill"
-msgstr ""
+msgstr "队友击杀"
 
 #: src/ui/search/filters/kills-filter.tsx
 msgid "Collateral"
-msgstr ""
+msgstr "抵押品"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -7057,19 +7049,19 @@ msgstr "Steam API 返回了一个错误。"
 #: src/ui/settings/cameras/add-camera-button.tsx
 msgctxt "Button"
 msgid "Add a camera"
-msgstr ""
+msgstr "添加一个摄像机位"
 
 #: src/ui/settings/cameras/camera-entry.tsx
 msgid "Camera actions"
-msgstr ""
+msgstr "摄像机操作"
 
 #: src/ui/settings/cameras/camera-entry.tsx
 msgid "spec_goto command copied to clipboard"
-msgstr ""
+msgstr "spec_goto命令已复制到剪贴板"
 
 #: src/ui/settings/cameras/camera-entry.tsx
 msgid "Copy spec_goto command"
-msgstr ""
+msgstr "复制spec_goto命令"
 
 #: src/ui/settings/cameras/cameras-game-input.tsx
 #: src/ui/settings/maps/maps-settings.tsx
@@ -7084,23 +7076,23 @@ msgstr "地图"
 
 #: src/ui/settings/cameras/cameras-settings.tsx
 msgid "No maps found for the selected game."
-msgstr ""
+msgstr "未找到选中的游戏地图。"
 
 #: src/ui/settings/cameras/cameras-settings.tsx
 msgid "Map not found"
-msgstr ""
+msgstr "未找到地图。"
 
 #: src/ui/settings/cameras/cameras.tsx
 msgid "No cameras found for {mapName}."
-msgstr ""
+msgstr "未找到{mapName}的摄像头。"
 
 #: src/ui/settings/cameras/delete-camera-dialog.tsx
 msgid "Delete camera"
-msgstr ""
+msgstr "删除摄像机"
 
 #: src/ui/settings/cameras/delete-camera-dialog.tsx
 msgid "Do you want to delete this camera?"
-msgstr ""
+msgstr "你想要删除这个摄像机吗？"
 
 #: src/ui/settings/cameras/form/camera-color-input.tsx
 msgctxt "Input label"
@@ -7114,7 +7106,7 @@ msgstr "名称必须填写"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 msgid "Color is required."
-msgstr ""
+msgstr "颜色是必需的。"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
@@ -7128,32 +7120,32 @@ msgstr "需要Y坐标。"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 msgid "Coordinate Z is required."
-msgstr ""
+msgstr "需要Z轴。"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 msgid "Pitch is required."
-msgstr ""
+msgstr "参数是必须的。"
 
 #: src/ui/settings/cameras/form/camera-form-provider.tsx
 msgid "Yaw is required."
-msgstr ""
+msgstr "鼠标水平灵敏度调整必须填写。"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 msgid "Start {gameName} on {mapName}"
-msgstr ""
+msgstr "在{mapName}上开始{gameName}"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 msgctxt "Dialog title"
 msgid "Camera"
-msgstr ""
+msgstr "摄像头"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 msgid "Unable to generate the screenshot, make sure the game is fully loaded and you are in‑game."
-msgstr ""
+msgstr "无法生成截图，请确保游戏已完全加载且您处于游戏中。"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 msgid "Generate camera from in‑game view"
-msgstr ""
+msgstr "从游戏视角生成摄像机"
 
 #: src/ui/settings/cameras/form/camera-form.tsx
 #: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
@@ -7162,12 +7154,12 @@ msgstr "文档"
 
 #: src/ui/settings/cameras/form/camera-preview-input.tsx
 msgid "Image Files"
-msgstr ""
+msgstr "图像文件"
 
 #: src/ui/settings/cameras/form/camera-preview-input.tsx
 msgctxt "Input label"
 msgid "Preview"
-msgstr ""
+msgstr "预览"
 
 #: src/ui/settings/cameras/form/coordinate-x-input.tsx
 #: src/ui/settings/maps/map-dialog/coordinate-x-input.tsx
@@ -7184,17 +7176,17 @@ msgstr "Y 坐标"
 #: src/ui/settings/cameras/form/coordinate-z-input.tsx
 msgctxt "Input label"
 msgid "Coordinate Z"
-msgstr ""
+msgstr "Z 坐标"
 
 #: src/ui/settings/cameras/form/pitch-input.tsx
 msgctxt "Input label"
 msgid "Pitch"
-msgstr ""
+msgstr "配置"
 
 #: src/ui/settings/cameras/form/yaw-input.tsx
 msgctxt "Input label"
 msgid "Yaw"
-msgstr ""
+msgstr "鼠标水平灵敏度"
 
 #: src/ui/settings/database/database-size.tsx
 msgid "Database size: <0>{size}</0>."
@@ -7619,6 +7611,10 @@ msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.4
 msgstr "你需要在 Steam 库中选择 CS2 测试版分支 <0>\"1.41.1.2\"</0> 搭配使用，或者使用定制构建版本。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
+msgstr ""
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
 msgstr "只有当你想要观看与最新的 CS2 更新不兼容的旧 demo 时才更改这个选项！"
 
@@ -7680,18 +7676,30 @@ msgctxt "Settings title"
 msgid "Follow symbolic Links"
 msgstr "跟随符号链接"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Windowed"
+msgstr "窗口"
+
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Fullscreen Windowed"
+msgstr "无边框全屏"
+
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Fullscreen"
+msgstr "全屏"
+
+#: src/ui/settings/playback/game-display-mode.tsx
 msgid "Start the game in fullscreen mode"
 msgstr "以全屏模式开始游戏"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
-msgid "Valve removed the CS2 fullscreen video option on Linux since a September 2025 game update. It means that enabling this option will have no effect if the CS2 version is newer than that!"
-msgstr ""
+#: src/ui/settings/playback/game-display-mode.tsx
+msgid "Valve removed the fullscreen option in a September 2025 game update!"
+msgstr "Valve 已在2025年9月的游戏更新中移除全屏选项！"
 
-#: src/ui/settings/playback/game-fullscreen.tsx
+#: src/ui/settings/playback/game-display-mode.tsx
 msgctxt "Settings title"
-msgid "Fullscreen"
-msgstr "全屏"
+msgid "Display mode"
+msgstr "CS 显示模式"
 
 #: src/ui/settings/playback/highlights-include-damages.tsx
 msgid "Include health damages above 40HP that did not result into a player's kill in highlights"
@@ -7823,6 +7831,15 @@ msgstr "回合前延迟"
 msgid "How many seconds to start before the end of the round's freeze time."
 msgstr "在回合冻结时间结束之前的倒计时。"
 
+#: src/ui/settings/playback/watch-round-wait-round-end.tsx
+msgid "Wait for the round to end before skipping to the next round when watching player's rounds."
+msgstr ""
+
+#: src/ui/settings/playback/watch-round-wait-round-end.tsx
+msgctxt "Settings title"
+msgid "Wait for round end"
+msgstr "等待回合结束"
+
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
 msgstr "UI设置"
@@ -7897,6 +7914,36 @@ msgstr "此名称过短"
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "Invalid color"
 msgstr "颜色无效"
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "Invalid date format."
+msgstr "无效的日期格式。"
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "Defines how dates are displayed."
+msgstr "设定日期的显示方式。"
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgid "See all <0>available tokens</0>."
+msgstr "点击查看所有<0>可用格式</0>。"
+
+#: src/ui/settings/ui/date-format-input.tsx
+msgctxt "Settings title"
+msgid "Date format"
+msgstr "日期格式"
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgid "Invalid timezone."
+msgstr "无效的时区。"
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgid "Timezone used to display dates. Uses the <0>IANA timezone format</0>."
+msgstr "用于显示日期的时区。请使用<0>IANA时区格式</0>。"
+
+#: src/ui/settings/ui/date-timezone-input.tsx
+msgctxt "Settings title"
+msgid "Date timezone"
+msgstr "时区"
 
 #: src/ui/settings/ui/enable-hardware-acceleration.tsx
 msgid "Hardware Acceleration"
@@ -8080,12 +8127,40 @@ msgid "Show X-Ray"
 msgstr "开启 X 光"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Match not found"
+msgstr "未找到比赛"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
+msgstr "Demo 路径中包含不受 Counter-Strike 支持的字符，因此无法播放。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
+msgstr "您必须将 Demo 移动到只包含基本拉丁字符的文件夹中 - 详情请参阅<0>本文档</0>。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Failed to start the game, make sure Steam is running and you are connected."
 msgstr "游戏启动失败，请确保 Steam 正在运行并且您已连接"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
 msgstr "请确保通过在 Steam 上选择 CS2 的 \"Betas\" 属性中的 <0>csgo_legacy</0>分支来安装 CS:GO"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
+msgstr "确保Steam不是通过Flatpak安装的，因为它不被支持！"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
+msgstr "请确保通过在 Steam 上选择 CS2 的 \"Betas\" 属性中的 \"csgo_legacy\" 分支来安装 CS:GO。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Read the <0>documentation</0> for more information."
+msgstr "阅读<0>文档</0>以了解更多信息."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "{game} is not supported on your operating system"
+msgstr "您的操作系统不支持 {game}"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "HLAE is not installed."
@@ -8108,6 +8183,10 @@ msgid "Steam is not running."
 msgstr "Steam不在运行"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No kills found"
+msgstr "没有发现击杀"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "FFmpeg returned an error."
 msgstr "FFmpeg返回了一个错误"
 
@@ -8124,8 +8203,20 @@ msgid "Raw files not found."
 msgstr "未找到原始文件"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Counter-Strike crashed."
-msgstr "该死！CS 崩溃了。"
+msgid "The game crashed, please see <0>this documentation</0> for help."
+msgstr "游戏崩溃了，请查看<0>此文档</0>以获取帮助。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "The game process exited with an access denied error."
+msgstr "游戏进程因拒绝访问错误而退出。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure to close any anti-cheat software and retry."
+msgstr "确保关闭任何反作弊软件，然后重试。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "{game} is already running"
+msgstr "{game}已经在运行中"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Unable to communicate with Counter-Strike, make sure to start it from the application."
@@ -8138,6 +8229,26 @@ msgstr "Counter-Strike 未运行，请从应用中点击开始。"
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Counter-Strike did not respond, please try again."
 msgstr "Counter-Strike 程序没有响应，请再试一次。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Counter-Strike video config file not found."
+msgstr "未找到 CS 视频配置文件。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure the game has been launched at least once from Steam."
+msgstr "请确保游戏至少从Steam启动一次。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "This demo needs to be re-analyzed to make the camera focus work."
+msgstr "这个 demo 需要重新分析才能使摄像机聚焦正常工作。"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No rounds found"
+msgstr "未发现回合"
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "No deaths found"
+msgstr "未找到死亡"
 
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Won percentage"
@@ -8386,10 +8497,6 @@ msgstr "视频序列"
 #: src/ui/videos/video-entry.tsx
 msgid "Disk space"
 msgstr "磁盘空间"
-
-#: src/ui/videos/video-entry.tsx
-msgid "Encoder software"
-msgstr "编码器"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Resolution"

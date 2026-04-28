@@ -13,5 +13,4 @@ const createCommentsTable: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default createCommentsTable;

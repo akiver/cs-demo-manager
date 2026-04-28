@@ -19,7 +19,10 @@ function BanCountBadge({ banCount }: { banCount: number }) {
 
 export function BansLink() {
   const location = useLocation();
-  const [{ count, lastPathname }, setBanData] = useState({ count: 0, lastPathname: location.pathname });
+  const [{ count, lastPathname }, setBanData] = useState({
+    count: 0,
+    lastPathname: location.pathname,
+  });
   const client = useWebSocketClient();
 
   useEffect(() => {

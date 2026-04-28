@@ -17,7 +17,7 @@ export type DemoTable = {
   framerate: number;
   duration: number;
   map_name: string;
-  share_code: string;
+  share_code: string | null;
 };
 
 export type DemoRow = Selectable<DemoTable>;

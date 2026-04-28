@@ -6,23 +6,23 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
     "actions": [
       {
         "cmd": "tv_listen_voice_indices -1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "tv_listen_voice_indices_h -1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "alias \\"voice_all\\" \\"tv_listen_voice_indices -1; tv_listen_voice_indices_h -1; echo Listening to all players\\"",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "echo \\"[CSDM] Type voice_all to listen to all players\\"",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "demo_gototick 872",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "spec_mode 1",
@@ -30,7 +30,7 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_player 4",
-        "tick": 876
+        "tick": 872
       },
       {
         "cmd": "demo_gototick 10752",
@@ -42,7 +42,7 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_player 4",
-        "tick": 10756
+        "tick": 10752
       },
       {
         "cmd": "demo_gototick 16152",
@@ -54,7 +54,7 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_player 4",
-        "tick": 16156
+        "tick": 16152
       },
       {
         "cmd": "demo_gototick 21352",
@@ -66,7 +66,7 @@ exports[`Generate player's rounds JSON file > CS2 1`] = `
       },
       {
         "cmd": "spec_player 4",
-        "tick": 21356
+        "tick": 21352
       },
       {
         "cmd": "disconnect",
@@ -83,11 +83,11 @@ exports[`Generate player's rounds JSON file > CSGO 1`] = `
     "actions": [
       {
         "cmd": "voice_enable 1",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "demo_gototick 872",
-        "tick": 64
+        "tick": 96
       },
       {
         "cmd": "spec_lock_to_accountid fakeKillerSteamId",

@@ -45,7 +45,7 @@ function Wrapper({ x, y, refs, children, strategy, placement, getFloatingProps }
     <div
       ref={setFloating}
       className={clsx(
-        'z-10 rounded border border-gray-400 bg-gray-75 p-8 transition-opacity duration-300 select-none',
+        'z-10 rounded-4 border border-gray-400 bg-gray-75 p-8 transition-opacity duration-300 select-none',
         arrowClassName,
       )}
       style={{
@@ -115,7 +115,7 @@ export function Tooltip({
     useRole(context, { role: 'tooltip' }),
   ]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   const ref = useMergeRefs([refs.setReference, (children as any).ref]);
 
   if (!isEnabled) {

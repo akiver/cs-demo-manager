@@ -102,7 +102,7 @@ function getStatusMessage(video: Video) {
         </p>
       );
     default:
-      assertNever(video.status, `Unsupported video status: ${video.status}`);
+      assertNever(video.status, `Unsupported video status: ${video.status as string}`);
   }
 }
 
@@ -137,7 +137,7 @@ export function VideoEntry({ video }: Props) {
 
   const renderCurrentStepMessage = (video: Video) => {
     const message = video.errorCode
-      ? getPlaybackErrorMessageFromErrorCode(video.game, video.errorCode)
+      ? getPlaybackErrorMessageFromErrorCode(video.errorCode, video.game)
       : getStatusMessage(video);
 
     switch (video.status) {
@@ -175,7 +175,7 @@ export function VideoEntry({ video }: Props) {
       });
     } catch (error) {
       const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-      const message = getPlaybackErrorMessageFromErrorCode(video.game, errorCode);
+      const message = getPlaybackErrorMessageFromErrorCode(errorCode, video.game);
       showDialog(<AddVideoToQueueErrorDialog>{message}</AddVideoToQueueErrorDialog>);
     }
   };
@@ -286,7 +286,7 @@ export function VideoEntry({ video }: Props) {
               <Trans>Sequences</Trans>
             </h2>
 
-            <div className="grid grid-cols-[60px_100px_100px_100px_100px_100px_100px_100px_1fr] gap-4 rounded-t bg-gray-200 p-4">
+            <div className="grid grid-cols-[60px_100px_100px_100px_100px_100px_100px_100px_1fr] gap-4 rounded-t-4 bg-gray-200 p-4">
               <SequenceListHeader>#</SequenceListHeader>
               <SequenceListHeader>
                 <Trans>Start tick</Trans>
@@ -330,7 +330,7 @@ export function VideoEntry({ video }: Props) {
                 return (
                   <li
                     key={sequence.number}
-                    className="grid grid-cols-[60px_100px_100px_100px_100px_100px_100px_100px_1fr] gap-4 border border-gray-200 p-4 last:rounded-b"
+                    className="grid grid-cols-[60px_100px_100px_100px_100px_100px_100px_100px_1fr] gap-4 border border-gray-200 p-4 last:rounded-b-4"
                   >
                     <p>{sequence.number}</p>
                     <p>{sequence.startTick}</p>

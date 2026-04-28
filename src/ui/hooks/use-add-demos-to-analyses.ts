@@ -5,8 +5,8 @@ import { useWebSocketClient } from './use-web-socket-client';
 export function useAddDemosToAnalyses() {
   const client = useWebSocketClient();
 
-  return (demos: Demo[]) => {
-    client.send({
+  return async (demos: Demo[]) => {
+    await client.send({
       name: RendererClientMessageName.AddDemosToAnalyses,
       payload: demos,
     });

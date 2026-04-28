@@ -40,7 +40,7 @@ export function VideoLoader() {
       }
     };
 
-    initialize();
+    void initialize();
   }, [dispatch, client, match]);
 
   if (errorCode) {

@@ -94,7 +94,7 @@ export function TeamsEconomyBreakdownChart() {
     show: true,
     color: '#fff',
     position: 'insideLeft' as const,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     formatter: (params: any) => {
       const data = params.data as EconomyChartData;
       return formatMoney(data.value);
@@ -107,7 +107,7 @@ export function TeamsEconomyBreakdownChart() {
     textStyle: {
       color: colors.tooltipTextColor,
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     formatter: (params: any) => {
       const {
         seriesName: teamName,
@@ -139,7 +139,7 @@ export function TeamsEconomyBreakdownChart() {
         message: `Equipment value: ${moneyValue}`,
       });
 
-      // eslint-disable-next-line lingui/no-unlocalized-strings
+      // oxlint-disable-next-line lingui/no-unlocalized-strings
       return `${teamName}<br />${round}<br />${economyType} ${marker}<br />${equipmentValue}`;
     },
   };

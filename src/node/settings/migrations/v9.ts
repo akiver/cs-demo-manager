@@ -14,5 +14,4 @@ const v9: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default v9;

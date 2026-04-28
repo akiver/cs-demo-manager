@@ -13,8 +13,8 @@ export function WatchItem({ demoPath }: Props) {
   const { watchDemo, isKillCsRequired } = useCounterStrike();
   const { showDialog } = useDialog();
 
-  const startWatchDemo = () => {
-    watchDemo({
+  const startWatchDemo = async () => {
+    await watchDemo({
       demoPath,
     });
   };
@@ -24,7 +24,7 @@ export function WatchItem({ demoPath }: Props) {
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog onConfirmClick={startWatchDemo} />);
     } else {
-      startWatchDemo();
+      await startWatchDemo();
     }
   };
 

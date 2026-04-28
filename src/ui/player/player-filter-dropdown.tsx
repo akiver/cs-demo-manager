@@ -30,45 +30,45 @@ export function PlayerFilterDropdown() {
     hasActiveDemoTypesFilter,
   } = useActivePlayerFilters();
 
-  const onGamesChange = (games: Game[]) => {
-    fetchPlayer({
+  const onGamesChange = async (games: Game[]) => {
+    await fetchPlayer({
       games,
     });
   };
-  const onSourcesChange = (sources: DemoSource[]) => {
-    fetchPlayer({
+  const onSourcesChange = async (sources: DemoSource[]) => {
+    await fetchPlayer({
       demoSources: sources,
     });
   };
-  const onGameModesChange = (modes: GameMode[]) => {
-    fetchPlayer({
+  const onGameModesChange = async (modes: GameMode[]) => {
+    await fetchPlayer({
       gameModes: modes,
     });
   };
-  const onTagsChange = (tagIds: string[]) => {
-    fetchPlayer({
+  const onTagsChange = async (tagIds: string[]) => {
+    await fetchPlayer({
       tagIds,
     });
   };
-  const onRankingChange = (ranking: RankingFilter) => {
-    fetchPlayer({
+  const onRankingChange = async (ranking: RankingFilter) => {
+    await fetchPlayer({
       ranking,
     });
   };
-  const onMatchLengthChange = (maxRounds: number[]) => {
-    fetchPlayer({
+  const onMatchLengthChange = async (maxRounds: number[]) => {
+    await fetchPlayer({
       maxRounds,
     });
   };
-  const onDemoTypesChange = (demoTypes: DemoType[]) => {
-    fetchPlayer({
+  const onDemoTypesChange = async (demoTypes: DemoType[]) => {
+    await fetchPlayer({
       demoTypes,
     });
   };
-  const onPeriodChange = (range: DateRange | undefined) => {
+  const onPeriodChange = async (range: DateRange | undefined) => {
     const startDate = formatDate(range?.from);
     const endDate = formatDate(range?.to);
-    fetchPlayer({
+    await fetchPlayer({
       startDate,
       endDate,
     });

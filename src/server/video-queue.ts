@@ -22,10 +22,10 @@ class VideoQueue {
     }
 
     this.isPaused = false;
-    this.loopUntilRecodingDone();
     server.sendMessageToRendererProcess({
       name: RendererServerMessageName.VideoQueueResumed,
     });
+    void this.loopUntilRecodingDone();
   }
 
   public pause() {
@@ -68,7 +68,7 @@ class VideoQueue {
     });
 
     if (!this.isPaused) {
-      this.loopUntilRecodingDone();
+      void this.loopUntilRecodingDone();
     }
   }
 

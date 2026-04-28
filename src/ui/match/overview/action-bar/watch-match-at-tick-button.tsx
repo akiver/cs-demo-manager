@@ -17,8 +17,8 @@ function WatchAtTickDialog() {
   const match = useCurrentMatch();
   const { hideDialog } = useDialog();
 
-  const startWatchDemo = () => {
-    watchDemo({
+  const startWatchDemo = async () => {
+    await watchDemo({
       demoPath: match.demoFilePath,
       startTick: Number(tick),
     });
@@ -35,13 +35,13 @@ function WatchAtTickDialog() {
     if (shouldKillCs) {
       setIsCsRunningDialogVisible(true);
     } else {
-      startWatchDemo();
+      await startWatchDemo();
     }
   };
 
   if (isCsRunningDialogVisible) {
-    const onConfirmClick = () => {
-      startWatchDemo();
+    const onConfirmClick = async () => {
+      await startWatchDemo();
     };
 
     return <CounterStrikeRunningDialog onConfirmClick={onConfirmClick} />;

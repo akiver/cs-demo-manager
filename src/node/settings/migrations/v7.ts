@@ -14,5 +14,4 @@ const v7: Migration = {
   },
 };
 
-// eslint-disable-next-line no-restricted-syntax
 export default v7;

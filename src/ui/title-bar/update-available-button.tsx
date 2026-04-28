@@ -7,7 +7,7 @@ export function UpdateAvailableButton() {
   const [updateAvailable, setUpdateAvailable] = useState(false);
 
   useEffect(() => {
-    window.csdm.hasUpdateReadyToInstall().then(setUpdateAvailable);
+    void window.csdm.hasUpdateReadyToInstall().then(setUpdateAvailable);
   }, []);
 
   const onClick = () => {

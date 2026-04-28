@@ -12,6 +12,7 @@ type Options = {
   playerId: number | string;
   beforeDelaySeconds: number;
   afterDelaySeconds: number;
+  waitForRoundEnd: boolean;
   playerVoicesEnabled: boolean;
 };
 
@@ -24,6 +25,7 @@ export async function generatePlayerRoundsJsonFile({
   playerId,
   beforeDelaySeconds,
   afterDelaySeconds,
+  waitForRoundEnd,
   playerVoicesEnabled,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath, game);
@@ -43,11 +45,17 @@ export async function generatePlayerRoundsJsonFile({
     const round = rounds[index];
     const startTick = Math.max(round.freezeTimeEndTick - beforeRoundTicks, 0);
     if (currentTick + afterRoundTicks < startTick) {
-      json.addSkipAhead(currentTick, startTick);
+      json.addGoToTick(currentTick, startTick);
     }
     json.addSpecPlayer(startTick, playerId);
 
-    if (round.deathTick !== null) {
+    if (waitForRoundEnd) {
+      if (round.deathTick && round.killerSteamId) {
+        json.addSpecPlayer(round.deathTick + afterRoundTicks, round.killerSteamId);
+      }
+
+      currentTick = round.tickEnd + afterRoundTicks;
+    } else if (round.deathTick !== null) {
       currentTick = round.deathTick + afterRoundTicks;
     } else {
       currentTick = round.tickEnd + afterRoundTicks;

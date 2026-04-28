@@ -29,11 +29,14 @@ import { moveHlaeRawFilesToOutputFolder } from './move-hlae-files-to-output-fold
 import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
 import { getFfmpegExecutablePath } from '../ffmpeg/ffmpeg-location';
 import { isEmptyString } from 'csdm/common/string/is-empty-string';
+import { DisplayMode } from 'csdm/common/types/display-mode';
+import { replaceFilenamePlaceholders } from './replace-filename-placeholders';
 
 export type Parameters = {
   videoId: string;
   checksum: string;
   game: Game;
+  mapName: string;
   tickrate: number;
   recordingSystem: RecordingSystem;
   recordingOutput: RecordingOutput;
@@ -43,6 +46,8 @@ export type Parameters = {
   height: number;
   closeGameAfterRecording: boolean;
   concatenateSequences: boolean;
+  outputFileName: string;
+  trueView: boolean;
   ffmpegSettings: Omit<FfmpegSettings, 'customLocationEnabled'>;
   outputFolderPath: string;
   demoPath: string;
@@ -65,6 +70,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
     sequences,
     outputFolderPath,
     concatenateSequences,
+    outputFileName,
     ffmpegSettings,
     game,
     onSequenceStart,
@@ -114,6 +120,15 @@ async function buildVideos({ signal, ...options }: Parameters) {
   const shouldConcatenate = concatenateSequences && sequences.length > 1;
   if (shouldConcatenate) {
     onConcatenateSequencesStart();
+    const processedFileName = replaceFilenamePlaceholders(outputFileName, {
+      mapName: options.mapName,
+      checksum: options.checksum,
+      game: options.game,
+      encoderSoftware: options.encoderSoftware,
+      width: options.width,
+      height: options.height,
+      framerate: options.framerate,
+    });
     await concatenateVideosFromSequences(
       {
         ffmpegExecutablePath: !isEmptyString(ffmpegSettings.customExecutableLocation)
@@ -122,6 +137,7 @@ async function buildVideos({ signal, ...options }: Parameters) {
         outputFolderPath,
         sequences,
         videoContainer: ffmpegSettings.videoContainer,
+        fileName: processedFileName,
       },
       signal,
     );
@@ -147,6 +163,7 @@ export async function generateVideo(parameters: Parameters) {
     game,
     ffmpegSettings,
     outputFolderPath,
+    trueView,
     signal,
     onMoveFilesStart,
   } = parameters;
@@ -170,7 +187,7 @@ export async function generateVideo(parameters: Parameters) {
 
     // Wait a few seconds before deleting files because they may still locked by software processes
     await sleep(2000);
-    cleanupFiles();
+    await cleanupFiles();
   }
   signal.addEventListener('abort', onAbort, { once: true });
 
@@ -211,6 +228,7 @@ export async function generateVideo(parameters: Parameters) {
       players,
       cameras,
       ffmpegSettings,
+      trueView,
     });
   }
 
@@ -224,7 +242,7 @@ export async function generateVideo(parameters: Parameters) {
         game,
         width,
         height,
-        fullscreen: false,
+        displayMode: DisplayMode.Windowed,
         signal,
         uninstallPluginOnExit: false,
         registerFfmpegLocation: shouldGenerateVideo,
@@ -234,7 +252,7 @@ export async function generateVideo(parameters: Parameters) {
       await startCounterStrike({
         game,
         demoPath,
-        fullscreen: false,
+        displayMode: DisplayMode.Windowed,
         width,
         height,
         signal,
@@ -278,7 +296,7 @@ export async function generateVideo(parameters: Parameters) {
       throw abortError;
     }
 
-    cleanupFiles();
+    await cleanupFiles();
     throw error;
   } finally {
     await uninstallCounterStrikeServerPlugin(game);

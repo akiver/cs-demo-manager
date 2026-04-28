@@ -11,7 +11,8 @@ export async function fetchTeamBombsStats(filters: TeamFilters): Promise<TeamBom
       let query = db
         .selectFrom('rounds')
         .select(['rounds.match_checksum', 'rounds.number as round_number', 'rounds.winner_name'])
-        .leftJoin('matches', 'matches.checksum', 'rounds.match_checksum')
+        .innerJoin('matches', 'matches.checksum', 'rounds.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum')
         .where(({ eb, or }) => {
           return or([eb('rounds.team_a_name', '=', teamName), eb('rounds.team_b_name', '=', teamName)]);
         });
@@ -24,7 +25,8 @@ export async function fetchTeamBombsStats(filters: TeamFilters): Promise<TeamBom
       let query = db
         .selectFrom('bombs_exploded')
         .select(['bombs_exploded.match_checksum', 'bombs_exploded.round_number'])
-        .leftJoin('matches', 'matches.checksum', 'bombs_exploded.match_checksum');
+        .innerJoin('matches', 'matches.checksum', 'bombs_exploded.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum');
 
       query = applyMatchFilters(query, filters);
 
@@ -34,7 +36,8 @@ export async function fetchTeamBombsStats(filters: TeamFilters): Promise<TeamBom
       let query = db
         .selectFrom('bombs_defused')
         .select(['bombs_defused.match_checksum', 'bombs_defused.round_number'])
-        .leftJoin('matches', 'matches.checksum', 'bombs_defused.match_checksum');
+        .innerJoin('matches', 'matches.checksum', 'bombs_defused.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum');
 
       query = applyMatchFilters(query, filters);
 
@@ -52,7 +55,8 @@ export async function fetchTeamBombsStats(filters: TeamFilters): Promise<TeamBom
             ]),
           ),
         )
-        .leftJoin('matches', 'matches.checksum', 'bombs_planted.match_checksum')
+        .innerJoin('matches', 'matches.checksum', 'bombs_planted.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum')
         .where('players.team_name', '=', teamName);
 
       query = applyMatchFilters(query, filters);
@@ -71,7 +75,8 @@ export async function fetchTeamBombsStats(filters: TeamFilters): Promise<TeamBom
             ]),
           ),
         )
-        .leftJoin('matches', 'matches.checksum', 'bombs_planted.match_checksum')
+        .innerJoin('matches', 'matches.checksum', 'bombs_planted.match_checksum')
+        .innerJoin('demos', 'demos.checksum', 'matches.checksum')
         .where('players.team_name', '!=', teamName);
 
       query = applyMatchFilters(query, filters);

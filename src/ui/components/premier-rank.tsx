@@ -55,7 +55,7 @@ export function PremierRank({ rank }: Props) {
       </svg>
 
       <div className="absolute top-0 left-0 ml-[14px] flex h-full items-center">
-        <p className="-skew-x-12 text-[14px] font-semibold brightness-[1.7] [text-shadow:_1px_1px_black]">
+        <p className="-skew-x-12 text-[14px] font-semibold brightness-[1.7] [text-shadow:1px_1px_black]">
           {major === '0' ? '---' : major}
           {minor !== undefined && <small className="text-[10px]">{`,${minor}`}</small>}
         </p>

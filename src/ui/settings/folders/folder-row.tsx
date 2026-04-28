@@ -13,7 +13,7 @@ type Props = {
 
 export function FolderRow({ folder }: Props) {
   return (
-    <div className="flex flex-col rounded border border-gray-300 p-8">
+    <div className="flex flex-col rounded-4 border border-gray-300 p-8">
       <p className="selectable font-semibold">{folder.path}</p>
       <div className="mt-4 flex items-center justify-between">
         <IncludeSubFoldersSwitch folder={folder} />

@@ -43,7 +43,9 @@ export type VideoCommandConfig = {
   width?: number;
   height?: number;
   closeGameAfterRecording?: boolean;
+  trueView: boolean;
   concatenateSequences?: boolean;
+  outputFileName?: string;
   ffmpegSettings?: FfmpegSettings;
   outputFolderPath?: string;
   sequences?: Sequence[];
@@ -69,6 +71,9 @@ export class VideoCommand extends Command {
   private readonly noCloseGameAfterRecordingFlag = 'no-close-game-after-recording';
   private readonly concatenateSequencesFlag = 'concatenate-sequences';
   private readonly noConcatenateSequencesFlag = 'no-concatenate-sequences';
+  private readonly outputFileNameFlag = 'output-file-name';
+  private readonly trueViewFlag = 'true-view';
+  private readonly noTrueViewFlag = 'no-true-view';
   private readonly encoderSoftwareFlag = 'encoder-software';
   private readonly recordingSystemFlag = 'recording-system';
   private readonly recordingOutputFlag = 'recording-output';
@@ -110,6 +115,8 @@ export class VideoCommand extends Command {
   private height: number | undefined;
   private closeGameAfterRecording: boolean | undefined;
   private concatenateSequences: boolean | undefined;
+  private outputFileName: string | undefined;
+  private trueView: boolean | undefined;
   private encoderSoftware: EncoderSoftware | undefined;
   private recordingSystem: RecordingSystem | undefined;
   private recordingOutput: RecordingOutput | undefined;
@@ -160,6 +167,7 @@ export class VideoCommand extends Command {
     console.log(`  --${this.noCloseGameAfterRecordingFlag}`);
     console.log(`  --${this.concatenateSequencesFlag}`);
     console.log(`  --${this.noConcatenateSequencesFlag}`);
+    console.log(`  --${this.outputFileNameFlag} <string>`);
     console.log(`  --${this.encoderSoftwareFlag} <string> (FFmpeg or VirtualDub)`);
     console.log(`  --${this.recordingSystemFlag} <string> (HLAE or CS)`);
     console.log(`  --${this.recordingOutputFlag} <string> (video, images, or images-and-video)`);
@@ -182,9 +190,12 @@ export class VideoCommand extends Command {
     console.log(`  --${this.recordAudioFlag}`);
     console.log(`  --${this.noRecordAudioFlag}`);
     console.log(`  --${this.deathNoticesDurationFlag} <number>`);
+    console.log(`  --${this.trueViewFlag}`);
+    console.log(`  --${this.noTrueViewFlag}`);
     console.log(`  --${this.cfgFlag} <string>`);
     console.log(`  --${this.focusPlayerFlag} <steamId>`);
     console.log(`  --${this.configFileFlag} <path> (path to config JSON file)`);
+    console.log(`  --${this.outputFlag} <path> (output folder for generated videos)`);
     console.log(`  --verbose`);
     console.log('');
     console.log(`Player mode options (when --mode ${Mode.Player}):`);
@@ -219,6 +230,7 @@ export class VideoCommand extends Command {
         signal: controller.signal,
         checksum: demo.checksum,
         game: demo.game,
+        mapName: demo.mapName,
         tickrate: demo.tickrate,
         recordingSystem: this.recordingSystem ?? settings.video.recordingSystem,
         recordingOutput: this.recordingOutput ?? settings.video.recordingOutput,
@@ -228,6 +240,8 @@ export class VideoCommand extends Command {
         height: this.height ?? settings.video.height,
         closeGameAfterRecording: this.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
         concatenateSequences: this.concatenateSequences ?? settings.video.concatenateSequences,
+        outputFileName: this.outputFileName ?? settings.video.outputFileName,
+        trueView: this.trueView ?? settings.video.trueView,
         sequences: [],
         ffmpegSettings: {
           customExecutableLocation: this.ffmpegExecutablePath ?? settings.video.ffmpegSettings.customExecutableLocation,
@@ -263,8 +277,10 @@ export class VideoCommand extends Command {
           framerate: config.framerate ?? parameters.framerate,
           width: config.width ?? parameters.width,
           height: config.height ?? parameters.height,
+          trueView: config.trueView ?? parameters.trueView,
           closeGameAfterRecording: config.closeGameAfterRecording ?? parameters.closeGameAfterRecording,
           concatenateSequences: config.concatenateSequences ?? parameters.concatenateSequences,
+          outputFileName: config.outputFileName ?? parameters.outputFileName,
           ffmpegSettings: config.ffmpegSettings ?? parameters.ffmpegSettings,
           outputFolderPath: config.outputFolderPath ?? parameters.outputFolderPath,
           sequences: config.sequences ?? parameters.sequences,
@@ -410,6 +426,7 @@ export class VideoCommand extends Command {
         [this.noCloseGameAfterRecordingFlag]: { type: 'boolean' },
         [this.concatenateSequencesFlag]: { type: 'boolean' },
         [this.noConcatenateSequencesFlag]: { type: 'boolean' },
+        [this.outputFileNameFlag]: { type: 'string' },
         [this.encoderSoftwareFlag]: { type: 'string' },
         [this.recordingSystemFlag]: { type: 'string' },
         [this.recordingOutputFlag]: { type: 'string' },
@@ -421,6 +438,8 @@ export class VideoCommand extends Command {
         [this.ffmpegVideoContainerFlag]: { type: 'string' },
         [this.ffmpegInputParametersFlag]: { type: 'string' },
         [this.ffmpegOutputParametersFlag]: { type: 'string' },
+        [this.trueViewFlag]: { type: 'boolean' },
+        [this.noTrueViewFlag]: { type: 'boolean' },
         [this.showXRayFlag]: { type: 'boolean' },
         [this.noShowXRayFlag]: { type: 'boolean' },
         [this.showAssistsFlag]: { type: 'boolean' },
@@ -633,6 +652,10 @@ export class VideoCommand extends Command {
     if (noConcatenateSequences !== undefined) {
       this.concatenateSequences = false;
     }
+    const outputFileName = values[this.outputFileNameFlag];
+    if (typeof outputFileName === 'string') {
+      this.outputFileName = outputFileName;
+    }
     const encoderSoftware = values[this.encoderSoftwareFlag];
     if (encoderSoftware !== undefined) {
       if (!isValidEncoderSoftware(encoderSoftware)) {
@@ -724,6 +747,14 @@ export class VideoCommand extends Command {
     const noShowOnlyDeathNotices = values[this.noShowOnlyDeathNoticesFlag];
     if (noShowOnlyDeathNotices !== undefined) {
       this.showOnlyDeathNotices = false;
+    }
+    const trueView = values[this.trueViewFlag];
+    if (trueView !== undefined) {
+      this.trueView = true;
+    }
+    const noTrueView = values[this.noTrueViewFlag];
+    if (noTrueView !== undefined) {
+      this.trueView = false;
     }
     const playerVoices = values[this.playerVoicesFlag];
     if (playerVoices !== undefined) {
