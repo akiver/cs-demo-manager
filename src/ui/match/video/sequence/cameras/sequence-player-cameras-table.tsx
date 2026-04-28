@@ -11,6 +11,7 @@ import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { useSequenceForm } from 'csdm/ui/match/video/sequence/use-sequence-form';
 import { ManageCamerasButtons } from './manage-player-cameras-buttons';
+import { getSequencePlayerColor } from '../get-sequence-player-color';
 
 function TickCell({ data }: CellProps<PlayerCameraFocus>) {
   const { setCameraOnPlayerAtTick } = useSequenceForm();
@@ -64,6 +65,16 @@ function PlayerNameCell({ rowIndex, data }: CellProps<PlayerCameraFocus>) {
           playerSteamId: steamId,
           oldTick: currentCamera.tick,
         });
+      }}
+      renderItem={(option) => {
+        const playerIndex = match.players.findIndex((player) => player.steamId === option.value);
+
+        return (
+          <div className="flex w-full items-center gap-x-10">
+            <div className="size-12 rounded-full" style={{ backgroundColor: getSequencePlayerColor(playerIndex) }} />
+            <p>{option.label}</p>
+          </div>
+        );
       }}
     />
   );

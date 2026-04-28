@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React, { type ReactElement, type ReactNode } from 'react';
 import { Select as BaseSelect } from '@base-ui/react/select';
 import { CheckIcon } from 'csdm/ui/icons/check-icon';
 import { ChevronDownIcon } from 'csdm/ui/icons/chevron-down-icon';
@@ -15,6 +15,7 @@ type Props<ValueType extends string | number = string> = {
   value?: ValueType;
   label?: ReactNode;
   onChange: (value: ValueType) => void;
+  renderItem?: (option: SelectOption<ValueType>) => ReactElement;
 };
 
 export function Select<ValueType extends string | number = string>({
@@ -24,6 +25,7 @@ export function Select<ValueType extends string | number = string>({
   isDisabled = false,
   id,
   label,
+  renderItem,
 }: Props<ValueType>) {
   return (
     <BaseSelect.Root
@@ -39,8 +41,22 @@ export function Select<ValueType extends string | number = string>({
       multiple={false}
     >
       {label && <BaseSelect.Label className="cursor-default">{label}</BaseSelect.Label>}
-      <BaseSelect.Trigger className="flex h-30 w-full items-center rounded-4 border border-gray-400 bg-gray-50 pr-8 pl-12 outline-hidden not-data-disabled:hover:border-gray-900 focus:border-gray-900 data-disabled:bg-gray-400">
-        <BaseSelect.Value className="flex-1 text-left" />
+      <BaseSelect.Trigger className="flex h-30 items-center rounded-4 border border-gray-400 bg-gray-50 pr-8 pl-12 outline-hidden not-data-disabled:hover:border-gray-900 focus:border-gray-900 data-disabled:bg-gray-400">
+        <BaseSelect.Value
+          className="flex-1 text-left"
+          render={
+            renderItem
+              ? (props, state) => {
+                  const option = options.find((option) => option.value === state.value);
+                  if (!option) {
+                    return <></>;
+                  }
+
+                  return renderItem(option);
+                }
+              : undefined
+          }
+        />
         <BaseSelect.Icon className="ml-4 flex items-center">
           <ChevronDownIcon className="size-16" />
         </BaseSelect.Icon>
@@ -59,7 +75,9 @@ export function Select<ValueType extends string | number = string>({
                     <BaseSelect.ItemIndicator className="col-start-1">
                       <CheckIcon className="size-12" />
                     </BaseSelect.ItemIndicator>
-                    <BaseSelect.ItemText className="col-start-2">{option.label}</BaseSelect.ItemText>
+                    <BaseSelect.ItemText className="col-start-2">
+                      {renderItem ? renderItem(option) : option.label}
+                    </BaseSelect.ItemText>
                   </BaseSelect.Item>
                 );
               })}
