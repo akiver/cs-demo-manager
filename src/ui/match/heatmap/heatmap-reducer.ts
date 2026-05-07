@@ -6,6 +6,7 @@ import {
   fetchPointsSuccess,
   opacityChanged,
   radiusChanged,
+  timeRangeChanged,
 } from 'csdm/ui/match/heatmap/match-heatmap-actions';
 import { fetchMatchSuccess } from 'csdm/ui/match/match-actions';
 import { RadarLevel } from 'csdm/ui/maps/radar-level';
@@ -20,6 +21,8 @@ export type MatchHeatmapState = {
   readonly steamIds: string[]; // empty => all players
   readonly teamNames: string[]; // empty => all teams
   readonly radarLevel: RadarLevel;
+  readonly startSeconds: number;
+  readonly endSeconds: number;
 };
 
 const initialState: MatchHeatmapState = {
@@ -32,6 +35,8 @@ const initialState: MatchHeatmapState = {
   steamIds: [],
   teamNames: [],
   radarLevel: RadarLevel.Upper,
+  startSeconds: 0,
+  endSeconds: Infinity,
 };
 
 export const heatmapReducer = createReducer(initialState, (builder) => {
@@ -44,6 +49,10 @@ export const heatmapReducer = createReducer(initialState, (builder) => {
     })
     .addCase(radiusChanged, (state, action) => {
       state.radius = action.payload;
+    })
+    .addCase(timeRangeChanged, (state, action) => {
+      state.startSeconds = action.payload.startSeconds;
+      state.endSeconds = action.payload.endSeconds;
     })
     .addCase(fetchPointsSuccess, (state, action) => {
       state.event = action.payload.event;

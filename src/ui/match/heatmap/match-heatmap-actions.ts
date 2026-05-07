@@ -5,3 +5,6 @@ export const fetchPointsSuccess = createAction<MatchHeatmapFilter>('match/heatma
 export const radiusChanged = createAction<number>('match/heatmap/radiusChanged');
 export const blurChanged = createAction<number>('match/heatmap/blurChanged');
 export const opacityChanged = createAction<number>('match/heatmap/opacityChanged');
+export const timeRangeChanged = createAction<{ startSeconds: number; endSeconds: number }>(
+  'match/heatmap/timeRangeChanged',
+);

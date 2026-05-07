@@ -12,6 +12,10 @@ export type MatchHeatmapFilter = {
   teamNames: string[];
   radarLevel: RadarLevel;
   thresholdZ: number | null;
+  // Per-round tick ranges for the Positions event.
+  // Each entry maps a round number to the absolute tick window.
+  // Computed on the frontend from seconds × tickrate.
+  tickRanges: Array<{ roundNumber: number; startTick: number; endTick: number }>;
 };
 
 export type TeamHeatmapFilter = {

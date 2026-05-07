@@ -25,6 +25,8 @@ export async function fetchPlayerHeatmapPointsHandler(filter: PlayerHeatmapFilte
       case HeatmapEvent.Decoy:
         points = await fetchPlayerGrenadePoints(filter);
         break;
+      case HeatmapEvent.Positions:
+        throw new Error('Positions heatmap event is only supported for match heatmaps');
       default:
         assertNever(filter.event, `Unsupported heatmap event: ${filter.event as string}`);
     }

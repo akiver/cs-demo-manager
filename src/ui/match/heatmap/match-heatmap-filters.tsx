@@ -5,7 +5,7 @@ import { HeatmapInputBlur } from 'csdm/ui/components/heatmap/input-blur';
 import { HeatmapSideSelect } from 'csdm/ui/components/heatmap/heatmap-side-select';
 import { HeatmapInputOpacity } from 'csdm/ui/components/heatmap/heatmap-input-opacity';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { blurChanged, opacityChanged, radiusChanged } from './match-heatmap-actions';
+import { blurChanged, opacityChanged, radiusChanged, timeRangeChanged } from './match-heatmap-actions';
 import { HeatmapSelectEvent } from 'csdm/ui/components/heatmap/heatmap-select-event';
 import { useHeatmapState } from './use-heatmap-state';
 import { useHeatmapContext } from 'csdm/ui/components/heatmap/heatmap-context';
@@ -17,12 +17,26 @@ import { TeamsSelect } from 'csdm/ui/components/inputs/select/teams-select';
 import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
 import { HeatmapFilters } from 'csdm/ui/components/heatmap/heatmap-filters';
 import { ResetZoomButton } from 'csdm/ui/components/heatmap/reset-zoom-button';
+import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
+import { TimeRangeSlider } from 'csdm/ui/components/heatmap/time-range-slider';
 
 export function MatchHeatmapFilters() {
   const dispatch = useDispatch();
   const match = useCurrentMatch();
-  const { event, radarLevel, rounds, sides, teamNames, steamIds } = useHeatmapState();
+  const { event, radarLevel, rounds, sides, teamNames, steamIds, startSeconds, endSeconds } = useHeatmapState();
   const { mapName, game, fetchPoints } = useHeatmapContext<Partial<MatchHeatmapFilter>>();
+
+  const isPositionsEvent = event === HeatmapEvent.Positions;
+
+  // Compute time-related values for the slider from selected rounds
+  // All times are relative to freeze time end (0 = freeze time end)
+  const selectedRounds = rounds.length > 0 ? match.rounds.filter((r) => rounds.includes(r.number)) : match.rounds;
+
+  const maxRoundDurationSeconds = selectedRounds.reduce((max, round) => {
+    const durationTicks = round.endTick - round.freezetimeEndTick;
+    const durationSeconds = durationTicks / match.tickrate;
+    return Math.max(max, durationSeconds);
+  }, 0);
 
   return (
     <HeatmapFilters>
@@ -83,6 +97,17 @@ export function MatchHeatmapFilters() {
           await fetchPoints({ steamIds });
         }}
       />
+      {isPositionsEvent && (
+        <TimeRangeSlider
+          startSeconds={startSeconds}
+          endSeconds={Math.min(endSeconds, maxRoundDurationSeconds)}
+          maxDurationSeconds={maxRoundDurationSeconds}
+          onChange={(start, end) => {
+            dispatch(timeRangeChanged({ startSeconds: start, endSeconds: end }));
+            void fetchPoints({});
+          }}
+        />
+      )}
       <div className="flex flex-wrap gap-x-8">
         <ResetZoomButton />
         <ExportHeatmapButton />
