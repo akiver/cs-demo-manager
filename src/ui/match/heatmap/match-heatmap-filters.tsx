@@ -24,7 +24,9 @@ export function MatchHeatmapFilters() {
   const dispatch = useDispatch();
   const match = useCurrentMatch();
   const { event, radarLevel, rounds, sides, teamNames, steamIds, startSeconds, endSeconds } = useHeatmapState();
-  const { mapName, game, fetchPoints } = useHeatmapContext<Partial<MatchHeatmapFilter>>();
+  const { mapName, game, fetchPoints } = useHeatmapContext<
+    Partial<MatchHeatmapFilter> & { startSeconds?: number; endSeconds?: number }
+  >();
 
   const isPositionsEvent = event === HeatmapEvent.Positions;
 
@@ -119,7 +121,7 @@ export function MatchHeatmapFilters() {
               bombPlantSeconds={bombPlantSeconds}
               onChange={(start, end) => {
                 dispatch(timeRangeChanged({ startSeconds: start, endSeconds: end }));
-                void fetchPoints({});
+                void fetchPoints({ startSeconds: start, endSeconds: end });
               }}
             />
           );

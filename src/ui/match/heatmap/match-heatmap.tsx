@@ -48,12 +48,14 @@ export function MatchHeatmap() {
       .filter((range) => range.startTick <= range.endTick);
   };
 
-  const fetchPoints = async (filters?: Partial<MatchHeatmapFilter>) => {
+  const fetchPoints = async (
+    filters?: Partial<MatchHeatmapFilter> & { startSeconds?: number; endSeconds?: number },
+  ) => {
     try {
       const effectiveEvent = filters?.event ?? event;
       const effectiveRounds = filters?.rounds ?? rounds;
-      const effectiveStartSeconds = startSeconds;
-      const effectiveEndSeconds = endSeconds;
+      const effectiveStartSeconds = filters?.startSeconds ?? startSeconds;
+      const effectiveEndSeconds = filters?.endSeconds ?? endSeconds;
 
       // For Positions event, require a team or player to be selected
       const isPositions = effectiveEvent === HeatmapEvent.Positions;
