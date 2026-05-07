@@ -1360,6 +1360,11 @@ msgstr "射击次数"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
+msgid "Positions"
+msgstr ""
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
 msgid "HE"
 msgstr "高爆手雷"
 
@@ -1384,10 +1389,20 @@ msgid "Decoy"
 msgstr "诱饵弹"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event tooltip"
+msgid "Available in match heatmaps only"
+msgstr ""
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Input label"
 msgid "Event"
 msgstr "事件"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event note"
+msgid "Some events are only available in match heatmaps."
+msgstr ""
 
 #: src/ui/components/heatmap/heatmap-select-map.tsx
 msgctxt "Input label"
@@ -1416,6 +1431,56 @@ msgstr "半径"
 msgctxt "Button"
 msgid "Reset zoom"
 msgstr "重置缩放"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "Full Round"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "First 20s"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "Last 20s"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "Pre-plant"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "Post-plant"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap filter label"
+msgid "Time Range"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time slider"
+msgid "Drag handles to select time range"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time marker"
+msgid "Bomb planted ({formattedTime})"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time slider"
+msgid "Start time"
+msgstr ""
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time slider"
+msgid "End time"
+msgstr ""
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"

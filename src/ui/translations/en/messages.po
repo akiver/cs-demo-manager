@@ -1355,6 +1355,11 @@ msgstr "Shots"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
+msgid "Positions"
+msgstr "Positions"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
 msgid "HE"
 msgstr "HE"
 
@@ -1379,10 +1384,20 @@ msgid "Decoy"
 msgstr "Decoy"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event tooltip"
+msgid "Available in match heatmaps only"
+msgstr "Available in match heatmaps only"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Input label"
 msgid "Event"
 msgstr "Event"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event note"
+msgid "Some events are only available in match heatmaps."
+msgstr "Some events are only available in match heatmaps."
 
 #: src/ui/components/heatmap/heatmap-select-map.tsx
 msgctxt "Input label"
@@ -1411,6 +1426,56 @@ msgstr "Radius"
 msgctxt "Button"
 msgid "Reset zoom"
 msgstr "Reset zoom"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "Full Round"
+msgstr "Full Round"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "First 20s"
+msgstr "First 20s"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "Last 20s"
+msgstr "Last 20s"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "Pre-plant"
+msgstr "Pre-plant"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time preset"
+msgid "Post-plant"
+msgstr "Post-plant"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap filter label"
+msgid "Time Range"
+msgstr "Time Range"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time slider"
+msgid "Drag handles to select time range"
+msgstr "Drag handles to select time range"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time marker"
+msgid "Bomb planted ({formattedTime})"
+msgstr "Bomb planted ({formattedTime})"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time slider"
+msgid "Start time"
+msgstr "Start time"
+
+#: src/ui/components/heatmap/time-range-slider.tsx
+msgctxt "Heatmap time slider"
+msgid "End time"
+msgstr "End time"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
