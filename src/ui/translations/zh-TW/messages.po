@@ -1361,7 +1361,7 @@ msgstr "射擊次數"
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
 msgid "Positions"
-msgstr ""
+msgstr "位"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
