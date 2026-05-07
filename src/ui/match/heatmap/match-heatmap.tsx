@@ -59,11 +59,6 @@ export function MatchHeatmap() {
       const isPositions = effectiveEvent === HeatmapEvent.Positions;
       const effectiveTeamNames = filters?.teamNames ?? teamNames;
       const effectiveSteamIds = filters?.steamIds ?? steamIds;
-      if (isPositions && effectiveTeamNames.length === 0 && effectiveSteamIds.length === 0) {
-        setPoints([]);
-        return;
-      }
-
       // Compute tick ranges for Positions event
       const tickRanges = isPositions
         ? computeTickRanges(effectiveRounds, effectiveStartSeconds, effectiveEndSeconds)
@@ -80,6 +75,13 @@ export function MatchHeatmap() {
         thresholdZ: filters?.thresholdZ ?? map?.thresholdZ ?? null,
         tickRanges,
       };
+
+      if (isPositions && effectiveTeamNames.length === 0 && effectiveSteamIds.length === 0) {
+        setPoints([]);
+        dispatch(fetchPointsSuccess(payload));
+        return;
+      }
+
       const points = await client.send({
         name: RendererClientMessageName.FetchMatchHeatmapPoints,
         payload,

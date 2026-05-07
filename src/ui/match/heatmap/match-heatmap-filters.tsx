@@ -97,17 +97,33 @@ export function MatchHeatmapFilters() {
           await fetchPoints({ steamIds });
         }}
       />
-      {isPositionsEvent && (
-        <TimeRangeSlider
-          startSeconds={startSeconds}
-          endSeconds={Math.min(endSeconds, maxRoundDurationSeconds)}
-          maxDurationSeconds={maxRoundDurationSeconds}
-          onChange={(start, end) => {
-            dispatch(timeRangeChanged({ startSeconds: start, endSeconds: end }));
-            void fetchPoints({});
-          }}
-        />
-      )}
+      {isPositionsEvent &&
+        (() => {
+          // Show bomb plant marker only when exactly 1 round is selected
+          let bombPlantSeconds: number | null = null;
+          if (rounds.length === 1) {
+            const bp = match.bombsPlanted.find((bp) => bp.roundNumber === rounds[0]);
+            if (bp) {
+              const round = match.rounds.find((r) => r.number === rounds[0]);
+              if (round) {
+                bombPlantSeconds = (bp.tick - round.freezetimeEndTick) / match.tickrate;
+              }
+            }
+          }
+
+          return (
+            <TimeRangeSlider
+              startSeconds={startSeconds}
+              endSeconds={Math.min(endSeconds, maxRoundDurationSeconds)}
+              maxDurationSeconds={maxRoundDurationSeconds}
+              bombPlantSeconds={bombPlantSeconds}
+              onChange={(start, end) => {
+                dispatch(timeRangeChanged({ startSeconds: start, endSeconds: end }));
+                void fetchPoints({});
+              }}
+            />
+          );
+        })()}
       <div className="flex flex-wrap gap-x-8">
         <ResetZoomButton />
         <ExportHeatmapButton />

@@ -5,6 +5,7 @@ type Props = {
   startSeconds: number;
   endSeconds: number;
   maxDurationSeconds: number;
+  bombPlantSeconds?: number | null;
   onChange: (startSeconds: number, endSeconds: number) => void;
 };
 
@@ -23,7 +24,7 @@ function formatTime(seconds: number): string {
   return `${secs}s`;
 }
 
-export function TimeRangeSlider({ startSeconds, endSeconds, maxDurationSeconds, onChange }: Props) {
+export function TimeRangeSlider({ startSeconds, endSeconds, maxDurationSeconds, bombPlantSeconds, onChange }: Props) {
   const { t } = useLingui();
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState<'start' | 'end' | null>(null);
@@ -108,6 +109,21 @@ export function TimeRangeSlider({ startSeconds, endSeconds, maxDurationSeconds, 
     },
   ];
 
+  if (bombPlantSeconds !== undefined && bombPlantSeconds !== null && bombPlantSeconds > 0) {
+    presets.push(
+      {
+        label: <Trans context="Heatmap time preset">Pre-plant</Trans>,
+        startSeconds: 0,
+        endSeconds: bombPlantSeconds,
+      },
+      {
+        label: <Trans context="Heatmap time preset">Post-plant</Trans>,
+        startSeconds: bombPlantSeconds,
+        endSeconds: clampedMax,
+      },
+    );
+  }
+
   const handlePresetClick = (preset: PresetButton) => {
     const newStart = Math.max(0, Math.min(preset.startSeconds, clampedMax));
     const newEnd = Math.max(newStart, Math.min(preset.endSeconds, clampedMax));
@@ -130,6 +146,24 @@ export function TimeRangeSlider({ startSeconds, endSeconds, maxDurationSeconds, 
         className="relative h-8 cursor-pointer rounded-4 bg-gray-300"
         title={t({ context: 'Heatmap time slider', message: 'Drag handles to select time range' })}
       >
+        {/* Bomb plant marker (shown when a single round is selected) */}
+        {bombPlantSeconds !== undefined &&
+          bombPlantSeconds !== null &&
+          bombPlantSeconds > 0 &&
+          (() => {
+            const percent = (bombPlantSeconds / clampedMax) * 100;
+            const formattedTime = formatTime(bombPlantSeconds);
+            return percent > 0 && percent < 100 ? (
+              <div
+                className="absolute -top-4 h-16 w-[2px] bg-orange-600"
+                style={{ left: `${percent}%` }}
+                title={t({
+                  context: 'Heatmap time marker',
+                  message: `Bomb planted (${formattedTime})`,
+                })}
+              />
+            ) : null;
+          })()}
         {/* Selected range highlight */}
         <div
           className="absolute h-full rounded-4 bg-blue-400"
@@ -140,7 +174,7 @@ export function TimeRangeSlider({ startSeconds, endSeconds, maxDurationSeconds, 
         />
         {/* Start handle */}
         <div
-          className="absolute top-1/2 z-10 size-16 -translate-1/2  cursor-grab rounded-full border-2 border-blue-600 bg-gray-50 active:cursor-grabbing"
+          className="absolute top-1/2 z-10 size-16 -translate-1/2 cursor-grab rounded-full border-2 border-blue-600 bg-gray-50 active:cursor-grabbing"
           style={{ left: `${startPercent}%` }}
           onMouseDown={handleMouseDown('start')}
           role="slider"
@@ -152,7 +186,7 @@ export function TimeRangeSlider({ startSeconds, endSeconds, maxDurationSeconds, 
         />
         {/* End handle */}
         <div
-          className="absolute top-1/2 z-10 size-16 -translate-1/2  cursor-grab rounded-full border-2 border-blue-600 bg-gray-50 active:cursor-grabbing"
+          className="absolute top-1/2 z-10 size-16 -translate-1/2 cursor-grab rounded-full border-2 border-blue-600 bg-gray-50 active:cursor-grabbing"
           style={{ left: `${endPercent}%` }}
           onMouseDown={handleMouseDown('end')}
           role="slider"
