@@ -181,7 +181,9 @@ void PatchVTableEntry(void** vtable, int index, void* newFunc) {
         PluginError("VirtualProtect restore failed: %d", GetLastError());
     }
 #else
-    void* pageStart = (void*)((uintptr_t)vtable & ~(PAGESIZE - 1));
+    // Use the page containing the slot we're writing, not the page containing table's base
+    void* slotAddr = (void*)&vtable[index];                                                                      
+    void* pageStart = (void*)((uintptr_t)slotAddr & ~(PAGESIZE - 1)); 
     if (mprotect(pageStart, PAGESIZE, PROT_READ | PROT_WRITE | PROT_EXEC) != 0)
     {
         PluginError("mprotect failed: %s", strerror(errno));
