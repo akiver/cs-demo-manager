@@ -182,8 +182,8 @@ void PatchVTableEntry(void** vtable, int index, void* newFunc) {
     }
 #else
     // Use the page containing the slot we're writing, not the page containing table's base
-    void* slotAddr = (void*)&vtable[index];                                                                      
-    void* pageStart = (void*)((uintptr_t)slotAddr & ~(PAGESIZE - 1)); 
+    void* slotAddr = (void*)&vtable[index];
+    void* pageStart = (void*)((uintptr_t)slotAddr & ~(PAGESIZE - 1));
     if (mprotect(pageStart, PAGESIZE, PROT_READ | PROT_WRITE | PROT_EXEC) != 0)
     {
         PluginError("mprotect failed: %s", strerror(errno));
