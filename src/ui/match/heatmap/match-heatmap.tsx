@@ -59,10 +59,12 @@ export function MatchHeatmap() {
 
       // For Positions event, require a team or player to be selected
       const isPositions = effectiveEvent === HeatmapEvent.Positions;
+      const isTimeRangeSupported = effectiveEvent !== HeatmapEvent.Shots && effectiveEvent !== HeatmapEvent.Decoy;
+
       const effectiveTeamNames = filters?.teamNames ?? teamNames;
       const effectiveSteamIds = filters?.steamIds ?? steamIds;
-      // Compute tick ranges for Positions event
-      const tickRanges = isPositions
+      // Compute tick ranges if supported for this event
+      const tickRanges = isTimeRangeSupported
         ? computeTickRanges(effectiveRounds, effectiveStartSeconds, effectiveEndSeconds)
         : [];
 

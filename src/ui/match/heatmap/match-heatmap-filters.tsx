@@ -28,7 +28,7 @@ export function MatchHeatmapFilters() {
     Partial<MatchHeatmapFilter> & { startSeconds?: number; endSeconds?: number }
   >();
 
-  const isPositionsEvent = event === HeatmapEvent.Positions;
+  const isTimeRangeSupported = event !== HeatmapEvent.Shots && event !== HeatmapEvent.Decoy;
 
   // Compute time-related values for the slider from selected rounds
   // All times are relative to freeze time end (0 = freeze time end)
@@ -99,7 +99,7 @@ export function MatchHeatmapFilters() {
           await fetchPoints({ steamIds });
         }}
       />
-      {isPositionsEvent &&
+      {isTimeRangeSupported &&
         (() => {
           // Show bomb plant marker only when exactly 1 round is selected
           let bombPlantSeconds: number | null = null;
