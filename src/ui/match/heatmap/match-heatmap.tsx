@@ -64,9 +64,11 @@ export function MatchHeatmap() {
       const effectiveTeamNames = filters?.teamNames ?? teamNames;
       const effectiveSteamIds = filters?.steamIds ?? steamIds;
       // Compute tick ranges if supported for this event
-      const tickRanges = isTimeRangeSupported
-        ? computeTickRanges(effectiveRounds, effectiveStartSeconds, effectiveEndSeconds)
-        : [];
+      const hasTimeFiltering = effectiveStartSeconds !== 0 || effectiveEndSeconds !== Infinity;
+      const tickRanges =
+        isTimeRangeSupported && (hasTimeFiltering || isPositions)
+          ? computeTickRanges(effectiveRounds, effectiveStartSeconds, effectiveEndSeconds)
+          : [];
 
       const payload: MatchHeatmapFilter = {
         checksum: match.checksum,
