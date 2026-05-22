@@ -17,3 +17,4 @@ static/csgove
 static/changelog
 build
 !build/Release/*.node
+*.local.json
