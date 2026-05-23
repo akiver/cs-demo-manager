@@ -97,7 +97,6 @@ export default defineConfig({
       'node_modules',
       'LICENSE',
       'package-lock.json',
-      '.npmrc',
       '**/*.config.{ts,mjs,mts,js}',
       'knip.ts',
       'cs2-server-plugin',
@@ -324,8 +323,7 @@ export default defineConfig({
     printWidth: 120,
     ignorePatterns: [
       'node_modules',
-      'package-lock.json',
-      '.npmrc',
+      'pnpm-lock.yaml',
       'build',
       'build-assets',
       'out',

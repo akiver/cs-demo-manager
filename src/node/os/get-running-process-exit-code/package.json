@@ -1,6 +1,7 @@
 {
   "name": "get-running-process-exit-code",
   "scripts": {
+    "install": "node -e \"\"",
     "node-gyp": "node-gyp",
     "build": "node-gyp build"
   },

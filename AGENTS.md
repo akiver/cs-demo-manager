@@ -9,7 +9,7 @@ ban tracking, voice audio extraction and more.
 
 ## Stack
 
-> **Important**: This project uses **Vite+** (`vp`). Always use `vp` instead of `npm` to manage dependencies and run scripts. The `vp` CLI must be installed, see the [Vite+ documentation](https://viteplus.dev/guide/).
+> **Important**: This project uses **Vite+** (`vp`). Always use `vp` instead of `pnpm` to manage dependencies and run scripts. The `vp` CLI must be installed, see the [Vite+ documentation](https://viteplus.dev/guide/).
 
 - **Desktop framework**: Electron.
 - **Languages**: TypeScript (app/CLI), C++ (CS2/CS:GO plugins and Node.js native addons).

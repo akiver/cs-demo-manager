@@ -6,7 +6,10 @@ import { gfm } from '@milkdown/kit/preset/gfm';
 import { listener, listenerCtx } from '@milkdown/kit/plugin/listener';
 import { history } from '@milkdown/kit/plugin/history';
 import { getMarkdown } from '@milkdown/kit/utils';
-import { placeholder as placeholderPlugin, placeholderCtx } from 'milkdown-plugin-placeholder';
+import {
+  placeholder as placeholderPlugin,
+  placeholderCtx,
+} from 'csdm/ui/components/inputs/milkdown-placeholder-plugin';
 
 type Props = {
   defaultValue: string;

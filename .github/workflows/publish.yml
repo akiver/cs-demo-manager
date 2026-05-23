@@ -69,22 +69,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Setup node
-        uses: actions/setup-node@v6
+      - uses: voidzero-dev/setup-vp@d51b91a0f18f0858378d1f46f03ef57cf81fa37d # v1
         with:
+          run-install: true
           node-version-file: .node-version
 
       - name: Create new version
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+          pnpm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
 
       - name: Package and create release
         run: |
-          npm install
-          npm run build
-          npm run package -- --mac --publish always
+          vp run build
+          vp run package -- --mac --publish always
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
@@ -102,22 +101,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Setup node
-        uses: actions/setup-node@v6
+      - uses: voidzero-dev/setup-vp@d51b91a0f18f0858378d1f46f03ef57cf81fa37d # v1
         with:
+          run-install: true
           node-version-file: .node-version
 
       - name: Create new version
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+          pnpm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
 
       - name: Package and create release
         run: |
-          npm install
-          npm run build
-          npm run package -- --linux --publish always
+          vp run build
+          vp run package -- --linux --publish always
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
@@ -132,22 +130,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Setup node
-        uses: actions/setup-node@v6
+      - uses: voidzero-dev/setup-vp@d51b91a0f18f0858378d1f46f03ef57cf81fa37d # v1
         with:
+          run-install: true
           node-version-file: .node-version
 
       - name: Create new version
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+          pnpm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
 
       - name: Package and create release
         run: |
-          npm install
-          npm run build
-          npm run package -- --win --publish=always
+          vp run build
+          vp run package -- --win --publish=always
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
@@ -165,8 +162,7 @@ jobs:
           ssh-key: ${{ secrets.SSH_DEPLOYMENT_PRIVATE_KEY }}
           persist-credentials: true
 
-      - name: Setup node
-        uses: actions/setup-node@v6
+      - uses: voidzero-dev/setup-vp@d51b91a0f18f0858378d1f46f03ef57cf81fa37d # v1
         with:
           node-version-file: .node-version
 
@@ -174,7 +170,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+          pnpm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
 
       - name: Push the tag to GitHub
         run: git push origin main --tags

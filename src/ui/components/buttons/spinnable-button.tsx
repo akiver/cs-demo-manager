@@ -6,7 +6,7 @@ type Props = ButtonProps & {
   isLoading: boolean;
 };
 
-export function SpinnableButton({ children, isLoading = false, isDisabled, variant, ...props }: Props) {
+export function SpinnableButton({ children, isLoading, isDisabled, variant, ...props }: Props) {
   return (
     <Button isDisabled={isDisabled ?? isLoading} variant={variant ?? ButtonVariant.Primary} {...props}>
       <div className={isLoading ? 'opacity-0' : 'opacity-100'}>{children}</div>
