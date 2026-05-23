@@ -7,7 +7,7 @@ import type { ValvePlayer } from 'csdm/common/types/valve-match';
 import { loadDemoSuccess, selectPlayer } from './demo-actions';
 import { insertMatchSuccess } from '../analyses/analyses-actions';
 
-const getPlayerWithBestScore = (players: ValvePlayer[]) => {
+function getPlayerWithBestScore(players: ValvePlayer[]) {
   let playerWithBestScore: ValvePlayer | undefined;
   let bestScore = -1;
   for (const player of players) {
@@ -18,7 +18,7 @@ const getPlayerWithBestScore = (players: ValvePlayer[]) => {
   }
 
   return playerWithBestScore;
-};
+}
 
 export type DemoState = {
   demo?: Demo;

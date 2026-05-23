@@ -296,6 +296,7 @@ export default defineConfig({
       // Custom rules
       'csdm/lingui-js-usage': 'error',
       'csdm/no-react-redux-import': 'error',
+      'csdm/no-top-level-arrow-functions': 'error',
     },
     overrides: [
       {
