@@ -16,7 +16,19 @@ export async function fetchMatchKillsPoints(filters: MatchHeatmapFilter): Promis
         query = query.where('killer_z', filters.radarLevel === RadarLevel.Upper ? '>=' : '<', filters.thresholdZ);
       }
 
-      if (filters.rounds.length > 0) {
+      if (filters.tickRanges.length > 0) {
+        query = query.where((eb) => {
+          return eb.or(
+            filters.tickRanges.map((range) =>
+              eb.and([
+                eb('round_number', '=', range.roundNumber),
+                eb('tick', '>=', range.startTick),
+                eb('tick', '<=', range.endTick),
+              ]),
+            ),
+          );
+        });
+      } else if (filters.rounds.length > 0) {
         query = query.where('round_number', 'in', filters.rounds);
       }
       if (filters.sides.length > 0) {
@@ -43,7 +55,19 @@ export async function fetchMatchKillsPoints(filters: MatchHeatmapFilter): Promis
         query = query.where('victim_z', filters.radarLevel === RadarLevel.Upper ? '>=' : '<', filters.thresholdZ);
       }
 
-      if (filters.rounds.length > 0) {
+      if (filters.tickRanges.length > 0) {
+        query = query.where((eb) => {
+          return eb.or(
+            filters.tickRanges.map((range) =>
+              eb.and([
+                eb('round_number', '=', range.roundNumber),
+                eb('tick', '>=', range.startTick),
+                eb('tick', '<=', range.endTick),
+              ]),
+            ),
+          );
+        });
+      } else if (filters.rounds.length > 0) {
         query = query.where('round_number', 'in', filters.rounds);
       }
       if (filters.sides.length > 0) {

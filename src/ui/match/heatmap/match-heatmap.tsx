@@ -14,6 +14,7 @@ import { fetchPointsSuccess } from './match-heatmap-actions';
 import { HeatmapProvider } from 'csdm/ui/components/heatmap/heatmap-provider';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { useCurrentMatchMap } from '../use-current-match-map';
+import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 
 export function MatchHeatmap() {
   const match = useCurrentMatch();
@@ -21,22 +22,72 @@ export function MatchHeatmap() {
   const client = useWebSocketClient();
   const dispatch = useDispatch();
   const showToast = useShowToast();
-  const { alpha, blur, radius, event, sides, radarLevel, rounds, steamIds, teamNames } = useHeatmapState();
+  const { alpha, blur, radius, event, sides, radarLevel, rounds, steamIds, teamNames, startSeconds, endSeconds } =
+    useHeatmapState();
   const [points, setPoints] = useState<Point[]>([]);
   const isInitialRender = useRef(true);
 
-  const fetchPoints = async (filters?: Partial<MatchHeatmapFilter>) => {
+  const computeTickRanges = (filterRounds: number[], filterStartSeconds: number, filterEndSeconds: number) => {
+    const selectedRounds =
+      filterRounds.length > 0 ? match.rounds.filter((r) => filterRounds.includes(r.number)) : match.rounds;
+
+    return selectedRounds
+      .map((round) => {
+        // Seconds are relative to freeze time end (0 = freeze time end)
+        const startTick = round.freezetimeEndTick + Math.round(filterStartSeconds * match.tickrate);
+        const endTick = Math.min(
+          round.freezetimeEndTick + Math.round(filterEndSeconds * match.tickrate),
+          round.endTick,
+        );
+        return {
+          roundNumber: round.number,
+          startTick,
+          endTick,
+        };
+      })
+      .filter((range) => range.startTick <= range.endTick);
+  };
+
+  const fetchPoints = async (
+    filters?: Partial<MatchHeatmapFilter> & { startSeconds?: number; endSeconds?: number },
+  ) => {
     try {
+      const effectiveEvent = filters?.event ?? event;
+      const effectiveRounds = filters?.rounds ?? rounds;
+      const effectiveStartSeconds = filters?.startSeconds ?? startSeconds;
+      const effectiveEndSeconds = filters?.endSeconds ?? endSeconds;
+
+      // For Positions event, require a team or player to be selected
+      const isPositions = effectiveEvent === HeatmapEvent.Positions;
+      const isTimeRangeSupported = effectiveEvent !== HeatmapEvent.Shots && effectiveEvent !== HeatmapEvent.Decoy;
+
+      const effectiveTeamNames = filters?.teamNames ?? teamNames;
+      const effectiveSteamIds = filters?.steamIds ?? steamIds;
+      // Compute tick ranges if supported for this event
+      const hasTimeFiltering = effectiveStartSeconds !== 0 || effectiveEndSeconds !== Infinity;
+      const tickRanges =
+        isTimeRangeSupported && (hasTimeFiltering || isPositions)
+          ? computeTickRanges(effectiveRounds, effectiveStartSeconds, effectiveEndSeconds)
+          : [];
+
       const payload: MatchHeatmapFilter = {
         checksum: match.checksum,
-        event: filters?.event ?? event,
-        rounds: filters?.rounds ?? rounds,
+        event: effectiveEvent,
+        rounds: effectiveRounds,
         sides: filters?.sides ?? sides,
-        teamNames: filters?.teamNames ?? teamNames,
-        steamIds: filters?.steamIds ?? steamIds,
+        teamNames: effectiveTeamNames,
+        steamIds: effectiveSteamIds,
         radarLevel: filters?.radarLevel ?? radarLevel,
         thresholdZ: filters?.thresholdZ ?? map?.thresholdZ ?? null,
+        tickRanges,
       };
+
+      if (isPositions && effectiveTeamNames.length === 0 && effectiveSteamIds.length === 0) {
+        setPoints([]);
+        dispatch(fetchPointsSuccess(payload));
+        return;
+      }
+
       const points = await client.send({
         name: RendererClientMessageName.FetchMatchHeatmapPoints,
         payload,

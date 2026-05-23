@@ -43,7 +43,19 @@ export async function fetchMatchGrenadePoints(filters: MatchHeatmapFilter): Prom
   if (filters.steamIds.length > 0) {
     query = query.where('thrower_steam_id', 'in', filters.steamIds);
   }
-  if (filters.rounds.length > 0) {
+  if (filters.tickRanges.length > 0) {
+    query = query.where((eb) => {
+      return eb.or(
+        filters.tickRanges.map((range) =>
+          eb.and([
+            eb('round_number', '=', range.roundNumber),
+            eb('tick', '>=', range.startTick),
+            eb('tick', '<=', range.endTick),
+          ]),
+        ),
+      );
+    });
+  } else if (filters.rounds.length > 0) {
     query = query.where('round_number', 'in', filters.rounds);
   }
   if (filters.teamNames.length > 0) {

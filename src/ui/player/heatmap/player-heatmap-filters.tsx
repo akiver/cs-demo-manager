@@ -10,6 +10,7 @@ import { useHeatmapContext } from 'csdm/ui/components/heatmap/heatmap-context';
 import { HeatmapSideSelect } from 'csdm/ui/components/heatmap/heatmap-side-select';
 import { useHeatmapState } from './use-heatmap-state';
 import { HeatmapSelectEvent } from 'csdm/ui/components/heatmap/heatmap-select-event';
+import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import type { PlayerHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { HeatmapFilters } from 'csdm/ui/components/heatmap/heatmap-filters';
 import { usePlayer } from '../use-player';
@@ -48,6 +49,7 @@ export function PlayerHeatmapFilters() {
         onChange={async (event) => {
           await fetchPoints({ event });
         }}
+        disabledEvents={[HeatmapEvent.Positions]}
       />
       <RadarLevelSelect
         mapName={mapName}
