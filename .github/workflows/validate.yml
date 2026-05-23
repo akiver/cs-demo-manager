@@ -28,7 +28,7 @@ jobs:
           cache: true
 
       - name: TS compile
-        run: npm run compile
+        run: vp run compile
 
   lint:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
           cache: true
 
       - name: Lint
-        run: npm run lint
+        run: vp run lint
 
   format:
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
           cache: true
 
       - name: Code format
-        run: npm run format -- --check
+        run: vp run format -- --check
 
   test:
     runs-on: ubuntu-latest
@@ -67,20 +67,20 @@ jobs:
           cache: true
 
       - name: Test
-        run: npm run test
+        run: vp run test
 
       - name: Check if all translations have been extracted
         id: git-diff
         run: |
-          npm run i18n:extract
+          vp run i18n:extract
           git diff --ignore-blank-lines src/ui/translations src/electron-main/translations
           echo "MODIFIED=$(if [ -n "$(git diff --ignore-blank-lines src/ui/translations src/electron-main/translations)" ]; then echo "true"; else echo "false"; fi)" >> "$GITHUB_OUTPUT"
 
       - name: Fail if all translations have not been extracted
         if: steps.git-diff.outputs.MODIFIED == 'true'
         run: |
-          echo "::error title=Translations not up-to-date::Some translations are not extracted. Please run 'npm run i18n:extract' and commit the changes."
+          echo "::error title=Translations not up-to-date::Some translations are not extracted. Please run 'vp run i18n:extract' and commit the changes."
           exit 1
 
       - name: Find dead code
-        run: npm run deadcode
+        run: vp run deadcode

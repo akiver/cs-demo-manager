@@ -1,0 +1,26 @@
+nodeLinker: hoisted
+
+packages:
+  - src/node/os/get-running-process-exit-code
+
+allowBuilds:
+  electron: true
+  electron-winstaller: true
+  esbuild: true
+  registry-js: true
+
+overrides:
+  esbuild: '$esbuild'
+  node-gyp: '$node-gyp'
+  vite: '$vite'
+  vitest: '$vitest'
+  # To remove when https://github.com/electron/electron/issues/51619 is resolved
+  yauzl: '3.3.1'
+
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: '*'
+    vitest: '*'

@@ -2,7 +2,7 @@
 
 /*
 * Show the possible placeholder when the editor is empty, the plugin inserts and updates it through `data-placeholder`.
-* https://github.com/HexMox/milkdown-plugin-placeholder
+* See milkdown-placeholder-plugin.ts.
 */
 .ProseMirror[data-placeholder]::before {
   position: absolute;
