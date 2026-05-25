@@ -2851,7 +2851,7 @@ msgstr "Valve"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "PRACC"
-msgstr ""
+msgstr "PRACC"
 
 #: src/ui/demos/use-demo-sources.ts
 #: src/ui/demos/use-demo-sources.ts
@@ -7604,7 +7604,7 @@ msgstr "你需要在 Steam 库中选择 CS2 测试版分支 <0>\"1.41.1.2\"</0> 
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
-msgstr ""
+msgstr "你选择了兼容 CS2 {update14112} 更新到 {animgraph2UpdateDate} 更新之间版本的插件。"
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
