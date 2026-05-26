@@ -1,14 +1,19 @@
 import type { MatchPlayer } from 'csdm/common/types/match-player';
 import { playerColorToString } from 'csdm/node/demo-analyzer/player-color-to-string';
+import { fetchPlayersEnemiesFlashedCount } from 'csdm/node/database/players/fetch-players-enemies-flashed-count';
 import type { Column } from '../column';
 import { SingleMatchExportSheet } from './single-match-export-sheet';
 
-export class PlayersSheet extends SingleMatchExportSheet<MatchPlayer> {
+type PlayerRow = MatchPlayer & {
+  enemiesFlashedCount: number;
+};
+
+export class PlayersSheet extends SingleMatchExportSheet<PlayerRow> {
   protected getName() {
     return 'Players';
   }
 
-  protected getColumns(): Column<MatchPlayer>[] {
+  protected getColumns(): Column<PlayerRow>[] {
     return [
       {
         name: 'steam_id',
@@ -85,6 +90,14 @@ export class PlayersSheet extends SingleMatchExportSheet<MatchPlayer> {
       {
         name: 'adr',
         cellFormatter: (row) => row.averageDamagePerRound,
+      },
+      {
+        name: 'utility_damage',
+        cellFormatter: (row) => row.utilityDamage,
+      },
+      {
+        name: 'enemies_flashed',
+        cellFormatter: (row) => row.enemiesFlashedCount,
       },
       {
         name: 'rank',
@@ -199,9 +212,14 @@ export class PlayersSheet extends SingleMatchExportSheet<MatchPlayer> {
     ];
   }
 
-  public generate() {
+  public async generate() {
+    const enemiesFlashedCounts = await fetchPlayersEnemiesFlashedCount({ checksums: [this.match.checksum] });
     for (const player of this.match.players) {
-      this.writeRow(player);
+      const enemiesFlashed = enemiesFlashedCounts.find((stats) => stats.steamId === player.steamId);
+      this.writeRow({
+        ...player,
+        enemiesFlashedCount: enemiesFlashed?.enemiesFlashedCount ?? 0,
+      });
     }
   }
 }

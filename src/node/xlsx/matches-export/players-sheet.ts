@@ -93,6 +93,14 @@ export class PlayersSheet extends MultipleMatchExportSheet<PlayerRow> {
         cellFormatter: (row) => roundNumber(row.averageDamagePerRound, 1),
       },
       {
+        name: 'utility_damage',
+        cellFormatter: (row) => row.utilityDamage,
+      },
+      {
+        name: 'enemies_flashed',
+        cellFormatter: (row) => row.enemiesFlashedCount,
+      },
+      {
         name: 'rank',
         cellFormatter: (row) => row.rank,
       },
