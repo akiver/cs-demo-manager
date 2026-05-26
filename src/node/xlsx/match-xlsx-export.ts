@@ -47,7 +47,7 @@ export class MatchXlsxExport {
       }
       if (this.options.sheets[SheetName.Players]) {
         const sheet = new PlayersSheet(this.workbook, match);
-        sheet.generate();
+        await sheet.generate();
       }
       if (this.options.sheets[SheetName.Kills]) {
         const sheet = new KillsSheet(this.workbook, match);

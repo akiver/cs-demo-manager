@@ -117,3 +117,8 @@ Only unit tests exist today — integration and E2E tests may be added later. Te
 ### i18n
 
 Use the `/i18n` skill when adding or updating any user-visible string in the UI.
+
+### Git commits
+
+- Use conventional commits format for commit messages, e.g. `<type>(<scope>): <description>`. Example: `feat(demos): add tickrate column in table`.
+- Never add yourself or an AI tool as a co-author.

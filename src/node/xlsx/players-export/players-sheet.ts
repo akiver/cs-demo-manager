@@ -91,6 +91,10 @@ export class PlayersSheet extends MultiplePlayerExportSheet<PlayerRow> {
         cellFormatter: (row) => roundNumber(row.averageUtilityDamagePerRound, 1),
       },
       {
+        name: 'enemies_flashed',
+        cellFormatter: (row) => row.enemiesFlashedCount,
+      },
+      {
         name: 'avg_kills_per_round',
         cellFormatter: (row) => roundNumber(row.averageKillsPerRound, 1),
       },

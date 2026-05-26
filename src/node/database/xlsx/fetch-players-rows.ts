@@ -4,6 +4,7 @@ import { db } from 'csdm/node/database/database';
 import { fetchPlayersClutchStats } from '../players/fetch-players-clutch-stats';
 import { fetchLastPlayersData } from '../players/fetch-last-players-data';
 import { fetchPlayersWeaponInspectionsStats } from '../players/fetch-players-weapon-inspections-stats';
+import { fetchPlayersEnemiesFlashedCount } from '../players/fetch-players-enemies-flashed-count';
 
 type PlayerQueryResult = {
   steamId: string;
@@ -50,6 +51,7 @@ type PlayerQueryResult = {
   hostageRescuedCount: number;
   utilityDamage: number;
   averageUtilityDamagePerRound: number;
+  enemiesFlashedCount: number;
   score: number;
   mvpCount: number;
   gameBanCount: number;
@@ -126,11 +128,13 @@ export async function fetchPlayersRows(filters: Filters): Promise<PlayerRow[]> {
   const players = await query.execute();
 
   const steamIds = players.map((player) => player.steamId);
-  const [lastPlayersData, playersClutchStats, playersWeaponInspectionsStats] = await Promise.all([
-    fetchLastPlayersData(steamIds),
-    fetchPlayersClutchStats(checksums, steamIds),
-    fetchPlayersWeaponInspectionsStats(checksums, steamIds),
-  ]);
+  const [lastPlayersData, playersClutchStats, playersWeaponInspectionsStats, playersEnemiesFlashedCount] =
+    await Promise.all([
+      fetchLastPlayersData(steamIds),
+      fetchPlayersClutchStats(checksums, steamIds),
+      fetchPlayersWeaponInspectionsStats(checksums, steamIds),
+      fetchPlayersEnemiesFlashedCount({ checksums, steamIds }),
+    ]);
 
   const rows: PlayerRow[] = players.map((player) => {
     const lastData = lastPlayersData.find((data) => data.steamId === player.steamId);
@@ -139,6 +143,7 @@ export async function fetchPlayersRows(filters: Filters): Promise<PlayerRow[]> {
       throw new Error(`Last player data not found for steamId: ${player.steamId}`);
     }
     const weaponInspectionsStats = playersWeaponInspectionsStats.find((stats) => stats.steamId === player.steamId);
+    const enemiesFlashed = playersEnemiesFlashedCount.find((stats) => stats.steamId === player.steamId);
 
     return {
       ...player,
@@ -146,6 +151,7 @@ export async function fetchPlayersRows(filters: Filters): Promise<PlayerRow[]> {
       teamName: 'teamName' in player && typeof player.teamName === 'string' ? player.teamName : '',
       inspectWeaponCount: player.inspectWeaponCount ?? 0,
       deathWhileInspectingWeaponCount: weaponInspectionsStats?.deathWhileInspectingWeaponCount ?? 0,
+      enemiesFlashedCount: enemiesFlashed?.enemiesFlashedCount ?? 0,
       gameBanCount: lastData.gameBanCount ?? 0,
       isCommunityBanned: lastData.isCommunityBanned ?? false,
       vacBanCount: lastData.vacBanCount ?? 0,
