@@ -48,7 +48,7 @@ jobs:
             --volume "$GITHUB_WORKSPACE:/workspace" \
             --workdir /workspace/cs2-server-plugin/cs2-server-plugin \
             registry.gitlab.steamos.cloud/steamrt/sniper/sdk:latest \
-            make build
+            bash -c "ldd --version && make build"
 
       # Rely on Linux ELF binaries to detect changes since they are by default more deterministic than Windows PE binaries.
       # We have to check if the binaries have changed in this step rather than the next step because uploading/downloading
