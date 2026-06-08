@@ -34,12 +34,12 @@ export function WatchButton({ game, isDisabled, demoPath, tick, focusSteamId }: 
     event.stopPropagation();
     setIsCheckingForCsStatus(true);
     const shouldKillCs = await isKillCsRequired();
+    setIsCheckingForCsStatus(false);
     if (shouldKillCs) {
       showDialog(<CounterStrikeRunningDialog onConfirmClick={startWatchDemo} />);
     } else {
       await startWatchDemo();
     }
-    setIsCheckingForCsStatus(false);
   };
 
   if (!isCounterStrikeStartable(game)) {
