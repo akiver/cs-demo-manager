@@ -44,8 +44,11 @@ jobs:
 
       - name: Build CS2 binary
         run: |
-          cd cs2-server-plugin/cs2-server-plugin
-          make build
+          docker run --rm \
+            --volume "$GITHUB_WORKSPACE:/workspace" \
+            --workdir /workspace/cs2-server-plugin/cs2-server-plugin \
+            registry.gitlab.steamos.cloud/steamrt/sniper/sdk:latest \
+            make build
 
       # Rely on Linux ELF binaries to detect changes since they are by default more deterministic than Windows PE binaries.
       # We have to check if the binaries have changed in this step rather than the next step because uploading/downloading
@@ -55,11 +58,11 @@ jobs:
         run: |
           git status
           if git diff --quiet static/csdm_client.so static/cs2/libserver.so; then
-            echo "Changes detected!"
+            echo "No changes detected!"
             echo "changed=false" >> $GITHUB_OUTPUT
           else
+            echo "Changes detected!"
             echo "changed=true" >> $GITHUB_OUTPUT
-            echo "No changes detected!"
           fi
 
       - name: Upload CS:GO binary
