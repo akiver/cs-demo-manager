@@ -1,7 +1,7 @@
 import type { LinguiConfig } from '@lingui/conf';
 
 const config: LinguiConfig = {
-  locales: ['en', 'fr', 'es', 'pt-BR', 'zh-CN', 'zh-TW', 'de'],
+  locales: ['en', 'fr', 'es', 'pt-BR', 'zh-CN', 'zh-TW', 'de', 'ru'],
   sourceLocale: 'en',
   orderBy: 'origin',
   formatOptions: {

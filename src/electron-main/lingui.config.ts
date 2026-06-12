@@ -2,7 +2,7 @@ import type { LinguiConfig } from '@lingui/conf';
 import { formatter } from '@lingui/format-json';
 
 const config: LinguiConfig = {
-  locales: ['en', 'fr', 'es', 'pt-BR', 'zh-CN', 'zh-TW', 'de'],
+  locales: ['en', 'fr', 'es', 'pt-BR', 'zh-CN', 'zh-TW', 'de', 'ru'],
   sourceLocale: 'en',
   rootDir: '.',
   format: formatter({ style: 'minimal' }),

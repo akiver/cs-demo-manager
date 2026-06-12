@@ -36,6 +36,10 @@ export function LanguageSelect() {
       value: 'de',
       label: 'Deutsch',
     },
+    {
+      value: 'ru',
+      label: 'Русский',
+    },
   ];
   /* oxlint-enable lingui/no-unlocalized-strings */
 

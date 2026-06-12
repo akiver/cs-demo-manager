@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { enUS, fr, zhCN, ptBR, de } from 'react-day-picker/locale';
+import { enUS, fr, zhCN, ptBR, de, ru } from 'react-day-picker/locale';
 import { DayPicker } from 'react-day-picker';
 import type { DateRange } from 'react-day-picker';
 import { useReducedMotion } from 'motion/react';
@@ -15,6 +15,8 @@ function getLocaleObject(locale: string) {
       return zhCN;
     case 'de':
       return de;
+    case 'ru':
+      return ru;
     default:
       return enUS;
   }
