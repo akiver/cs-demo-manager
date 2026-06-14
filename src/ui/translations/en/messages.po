@@ -2800,6 +2800,11 @@ msgstr "Esportal"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "Esportligaen"
+msgstr "Esportligaen"
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "FACEIT"
 msgstr "FACEIT"
 

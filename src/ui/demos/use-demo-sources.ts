@@ -42,6 +42,11 @@ export function useGetDemoSourceName() {
           context: 'Demo source name',
           message: 'Esportal',
         });
+      case DemoSource.Esportligaen:
+        return t({
+          context: 'Demo source name',
+          message: 'Esportligaen',
+        });
       case DemoSource.FaceIt:
         return t({
           context: 'Demo source name',
@@ -140,6 +145,10 @@ export function useDemoSources() {
     {
       value: DemoSource.Esportal,
       name: getDemoSourceName(DemoSource.Esportal),
+    },
+    {
+      value: DemoSource.Esportligaen,
+      name: getDemoSourceName(DemoSource.Esportligaen),
     },
     {
       value: DemoSource.FaceIt,

@@ -100,6 +100,13 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.Esplay;
   }
 
+  // Esportligaen servers name follow the pattern "[{MATCH_ID}] {MAP}: {TEAM1} vs. {TEAM2}".
+  // Example: "[37980] de_mirage: Trelleborg Marine Systems DK vs. ForeFeit B"
+  const esportligaenServerNameRegex = /^\[\d+\] [a-z0-9_]+: .+ vs\. .+$/;
+  if (esportligaenServerNameRegex.exec(serverName) !== null) {
+    return DemoSource.Esportligaen;
+  }
+
   if (serverName.includes('pracc.com')) {
     return DemoSource.Pracc;
   }

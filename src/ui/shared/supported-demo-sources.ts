@@ -20,6 +20,7 @@ export const SupportedDemoSourcesPerGame: Record<Game, DemoSource[]> = {
     DemoSource.Esl,
     DemoSource.Esplay,
     DemoSource.Esportal,
+    DemoSource.Esportligaen,
     DemoSource.FaceIt,
     DemoSource.Fastcup,
     DemoSource.FiveEPlay,

@@ -7,6 +7,7 @@ allowBuilds:
   electron-winstaller: true
   esbuild: true
   registry-js: true
+  '@akiver/cs-demo-analyzer': true
 
 overrides:
   esbuild: '$esbuild'
@@ -23,3 +24,6 @@ peerDependencyRules:
   allowedVersions:
     vite: '*'
     vitest: '*'
+
+minimumReleaseAgeExclude:
+  - '@akiver/cs-demo-analyzer'
