@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import { pipeline } from 'node:stream';
 import { Client, interceptors } from 'undici';
 import b2 from 'unbzip2-stream';
-import unzipper from 'unzipper';
+import { extract5EPlayDemoFromZipStream } from 'csdm/node/5eplay/extract-5eplay-demo-from-zip-stream';
 import zlib from 'node:zlib';
 import path from 'node:path';
 import util from 'node:util';
@@ -165,10 +165,15 @@ class DownloadDemoQueue {
     try {
       const url = new URL(currentDownload.demoUrl);
       const client = new Client(url.origin).compose(interceptors.redirect({ maxRedirections: 1 }));
+      const headers: Record<string, string> = {};
+      if (url.hostname.endsWith('5eplaycdn.com')) {
+        headers.referer = 'https://arena.5eplay.com/';
+      }
       const response = await client.request({
-        path: url.pathname,
+        path: url.pathname + url.search,
         signal: controller.signal,
         method: 'GET',
+        headers,
       });
       if (response.statusCode === 404) {
         server.sendMessageToRendererProcess({
@@ -208,20 +213,22 @@ class DownloadDemoQueue {
         }
       });
 
-      const out = fs.createWriteStream(demoPath);
-      let transformStream: NodeJS.WritableStream;
       const { demoUrl } = currentDownload;
-      if (demoUrl.endsWith('.gz')) {
-        transformStream = zlib.createGunzip();
-      } else if (demoUrl.endsWith('.bz2')) {
-        transformStream = b2();
-      } else if (demoUrl.endsWith('.zip')) {
-        transformStream = unzipper.ParseOne();
+      if (demoUrl.endsWith('.zip')) {
+        await extract5EPlayDemoFromZipStream(response.body, demoPath);
       } else {
-        throw new Error('Unsupported demo archive');
-      }
+        const out = fs.createWriteStream(demoPath);
+        let transformStream: NodeJS.WritableStream;
+        if (demoUrl.endsWith('.gz')) {
+          transformStream = zlib.createGunzip();
+        } else if (demoUrl.endsWith('.bz2')) {
+          transformStream = b2();
+        } else {
+          throw new Error('Unsupported demo archive');
+        }
 
-      await streamPipeline(response.body, transformStream, out);
+        await streamPipeline(response.body, transformStream, out);
+      }
       if (currentDownload.source === DownloadSource.Valve) {
         const { protobufBytes } = currentDownload.match;
         if (protobufBytes !== undefined) {

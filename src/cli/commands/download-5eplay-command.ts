@@ -1,17 +1,13 @@
 import fs from 'fs-extra';
 import { request } from 'undici';
-import unzipper from 'unzipper';
-import { pipeline } from 'node:stream';
 import path from 'node:path';
-import util from 'node:util';
+import { extract5EPlayDemoFromZipStream } from 'csdm/node/5eplay/extract-5eplay-demo-from-zip-stream';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
 import { fetchCurrent5EPlayAccount } from 'csdm/node/database/5play-account/fetch-current-5eplay-account';
 import { fetch5EPlayAccount } from 'csdm/node/5eplay/fetch-5eplay-player-account-from-domain';
 import { fetchLast5EPlayMatches } from 'csdm/node/5eplay/fetch-last-5eplay-matches';
 import type { FiveEPlayMatch } from 'csdm/common/types/5eplay-match';
-const streamPipeline = util.promisify(pipeline);
-
 export class Download5EPlayCommand extends DownloadBaseCommand {
   public static Name = 'dl-5eplay';
   private id: string | undefined;
@@ -118,15 +114,18 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
 
     console.log(`Downloading ${match.demoUrl}...`);
     this.demoPathBeingDownloaded = demoPath;
-    const response = await request(match.demoUrl, { method: 'GET' });
+    const demoUrl = new URL(match.demoUrl);
+    const headers: Record<string, string> = {};
+    if (demoUrl.hostname.endsWith('5eplaycdn.com')) {
+      headers.referer = 'https://arena.5eplay.com/';
+    }
+    const response = await request(match.demoUrl, { method: 'GET', headers });
     if (!response.body) {
       console.log('Request error.');
       return;
     }
 
-    const out = fs.createWriteStream(demoPath);
-    const transformStream = unzipper.ParseOne();
-    await streamPipeline(response.body, transformStream, out);
+    await extract5EPlayDemoFromZipStream(response.body, demoPath);
     this.demoPathBeingDownloaded = undefined;
   }
 
@@ -138,7 +137,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
         return this.exitWithFailure();
       }
 
-      return currentAccount.domainId;
+      return currentAccount.id;
     }
 
     try {
