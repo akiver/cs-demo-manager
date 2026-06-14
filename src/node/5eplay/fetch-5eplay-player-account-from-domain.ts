@@ -53,7 +53,7 @@ type UserInterfaceHeaderResponsePayload =
     };
 
 async function fetchPlayerInformation(id: string) {
-  const response = await fetch(`https://gate.5eplay.com/userinterface/pt/v1/userinterface/header/${id}`);
+  const response = await fetch(`https://gate.5eplay.com/userinterface/http/v1/userinterface/header?v=${id}`);
 
   if (response.status === 500) {
     // The API returns a 500 status code when the player doesn't exist ¯\_(ツ)_/¯
