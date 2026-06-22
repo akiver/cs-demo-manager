@@ -35,9 +35,9 @@ function TickCell({ data }: CellProps<PlayerCameraFocus>) {
   );
 }
 
-function PlayerNameCell({ rowIndex, data }: CellProps<PlayerCameraFocus>) {
+function PlayerNameCell({ data }: CellProps<PlayerCameraFocus>) {
   const match = useCurrentMatch();
-  const { sequence, setCameraOnPlayerAtTick } = useSequenceForm();
+  const { setCameraOnPlayerAtTick } = useSequenceForm();
   const options: SelectOption[] = match.players
     .toSorted((playerA, playerB) => {
       return playerA.name.localeCompare(playerB.name);
@@ -56,14 +56,9 @@ function PlayerNameCell({ rowIndex, data }: CellProps<PlayerCameraFocus>) {
       isDisabled={isDisabled}
       value={data.playerSteamId}
       onChange={(steamId: string) => {
-        const currentCamera = sequence.playerCameras[rowIndex];
-        if (!currentCamera) {
-          return;
-        }
         setCameraOnPlayerAtTick({
           tick: data.tick,
           playerSteamId: steamId,
-          oldTick: currentCamera.tick,
         });
       }}
       renderItem={(option) => {
