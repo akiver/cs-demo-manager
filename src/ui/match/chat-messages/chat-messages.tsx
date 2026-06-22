@@ -10,7 +10,8 @@ import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 
 export function ChatMessages() {
   const match = useCurrentMatch();
-  const [teamName, setTeamName] = useState('');
+  const internalAllTeamValue = 'csdm-all-teams';
+  const [teamName, setTeamName] = useState(internalAllTeamValue);
   const [fuzzySearchText, setFuzzySearchText] = useState('');
 
   const { chatMessages, checksum } = match;
@@ -26,7 +27,7 @@ export function ChatMessages() {
     });
   }
 
-  if (teamName !== '') {
+  if (teamName !== internalAllTeamValue) {
     const teamPlayers = match.players.filter((player) => player.teamName === teamName);
     visibleChatMessages = visibleChatMessages.filter(({ senderSteamId }) =>
       teamPlayers.some((player) => player.steamId === senderSteamId),
@@ -34,7 +35,7 @@ export function ChatMessages() {
   }
 
   const options: SelectOption[] = [
-    { value: '', label: <Trans>All teams</Trans> },
+    { value: internalAllTeamValue, label: <Trans>All teams</Trans> },
     { value: match.teamA.name, label: match.teamA.name },
     { value: match.teamB.name, label: match.teamB.name },
   ];
