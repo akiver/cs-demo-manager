@@ -268,8 +268,6 @@ msgstr "正在加载封禁数据…"
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 #: src/ui/settings/ui/reset-tables-state.tsx
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
-#: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/team/heatmap/team-heatmap.tsx
 #: src/ui/videos/use-remove-videos.tsx
@@ -327,7 +325,6 @@ msgstr "尚无封禁"
 msgid "No VAC ban stats to show, you must analyze demos to generate stats."
 msgstr "没有 VAC 封禁的统计数据，你需要先分析 demo 才能生成统计数据。"
 
-#: src/ui/bootstrap/app-loader.tsx
 #: src/ui/bootstrap/app-loader.tsx
 msgid "An error occurred while loading the application."
 msgstr "加载应用程序时发生错误。"
@@ -780,8 +777,6 @@ msgstr "您需要安装 <0>Rosetta</0>。"
 #: src/ui/match/video/update-demo-location.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
-#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
-#: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 #: src/ui/matches/table/matches-table.tsx
 #: src/ui/player/load-player-error.tsx
@@ -803,7 +798,6 @@ msgstr "您需要安装 <0>Rosetta</0>。"
 msgid "An error occurred."
 msgstr "出现错误。"
 
-#: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Players voice export"
 msgstr "导出玩家语音"
@@ -837,7 +831,6 @@ msgid "Choose how you want the voice audio to be exported"
 msgstr "选择您希望如何导出语音音频"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 #: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 msgctxt "Button label"
 msgid "Export"
@@ -1482,21 +1475,11 @@ msgstr "全部"
 #: src/ui/components/inputs/radio/radio-group-tri-state.tsx
 #: src/ui/settings/ui/system-startup-behavior.tsx
 #: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
 msgid "Yes"
 msgstr "是"
 
 #: src/ui/components/inputs/radio/radio-group-tri-state.tsx
 #: src/ui/settings/ui/system-startup-behavior.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 msgid "No"
 msgstr "否"
@@ -1657,18 +1640,15 @@ msgid "Matches"
 msgstr "比赛"
 
 #: src/ui/components/maps-stats.tsx
-#: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches.tsx
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total"
 msgstr "总计"
 
 #: src/ui/components/maps-stats.tsx
-#: src/ui/components/maps-stats.tsx
 msgid "Win"
 msgstr "赢"
 
-#: src/ui/components/maps-stats.tsx
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches.tsx
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
@@ -2550,7 +2530,6 @@ msgstr "MVP"
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
-#: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
@@ -2858,7 +2837,6 @@ msgctxt "Demo source name"
 msgid "PRACC"
 msgstr "PRACC"
 
-#: src/ui/demos/use-demo-sources.ts
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Unknown"
@@ -4030,7 +4008,6 @@ msgstr "获胜方"
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
-#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Equipment value"
 msgstr "装备价值"
@@ -4761,13 +4738,11 @@ msgstr "未找到该玩家"
 
 #: src/ui/match/players/match-players.tsx
 #: src/ui/match/rounds/round/players-information.tsx
-#: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Kills"
 msgstr "击杀数"
 
 #: src/ui/match/players/match-players.tsx
-#: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Deaths"
 msgstr "死亡"
@@ -4819,13 +4794,11 @@ msgstr "精准度"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
-#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash"
 msgstr "经济"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
-#: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-economy-chart.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash spent"
@@ -4985,7 +4958,6 @@ msgid "Edit"
 msgstr "编辑"
 
 #: src/ui/match/rounds/round/round.tsx
-#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "Round number {roundNumber} not found."
 msgstr "回合{roundNumber} 未找到"
@@ -5955,7 +5927,6 @@ msgctxt "Checkbox label"
 msgid "Show X-Ray"
 msgstr "开启X光"
 
-#: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "It will analyze the demo and generate positions required for the 2D viewer."
 msgstr "它将分析 demo 并生成2D查看器所需的位置。"
@@ -8487,7 +8458,6 @@ msgid "Video ID"
 msgstr "视频 ID"
 
 #: src/ui/videos/video-entry.tsx
-#: src/ui/videos/video-entry.tsx
 msgid "Sequences"
 msgstr "视频序列"
 
@@ -8503,7 +8473,6 @@ msgstr "分辨率"
 msgid "Merge sequences into single file"
 msgstr "将序列合并为单个视频文件…"
 
-#: src/ui/videos/video-entry.tsx
 #: src/ui/videos/video-entry.tsx
 msgid "Output"
 msgstr "输出"

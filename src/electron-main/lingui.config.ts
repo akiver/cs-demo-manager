@@ -5,10 +5,7 @@ const config: LinguiConfig = {
   locales: ['en', 'fr', 'es', 'pt-BR', 'zh-CN', 'zh-TW', 'de', 'ru'],
   sourceLocale: 'en',
   rootDir: '.',
-  format: formatter({ style: 'minimal' }),
-  formatOptions: {
-    lineNumbers: false,
-  },
+  format: formatter({ style: 'minimal', lineNumbers: false }),
   orderBy: 'origin',
   catalogs: [
     {

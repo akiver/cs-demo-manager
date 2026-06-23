@@ -9,10 +9,9 @@ export async function updateValvePlayersFromSteam(players: ValvePlayer[]) {
   try {
     const steamIds = players.map((player) => player.steamId);
     let accounts: InsertableSteamAccount[] = await fetchSteamAccounts(steamIds);
-    const needsToFetchPlayersFromSteam =
-      steamIds.filter((steamId) => {
-        return !accounts.some((account) => account.steam_id === steamId);
-      }).length > 0;
+    const needsToFetchPlayersFromSteam = steamIds.some((steamId) => {
+      return !accounts.some((account) => account.steam_id === steamId);
+    });
 
     if (needsToFetchPlayersFromSteam) {
       accounts = await buildSteamAccountsFromSteamIds(steamIds);

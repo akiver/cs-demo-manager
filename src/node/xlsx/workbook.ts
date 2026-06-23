@@ -1,5 +1,5 @@
 import path from 'node:path';
-import archiver from 'archiver';
+import { ZipArchive } from 'archiver';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import type { WriteStream } from 'node:fs';
@@ -167,7 +167,7 @@ export class Workbook {
         resolve();
       });
 
-      const zip = archiver('zip');
+      const zip = new ZipArchive();
       zip.on('error', (error) => {
         reject(error);
       });

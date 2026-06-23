@@ -148,20 +148,33 @@ Combine with `Trans` for complex messages:
 
 ## Formatting Dates and Numbers
 
-Use `i18n.date()` and `i18n.number()` for locale-aware formatting:
+Use the native `Intl` API directly with the current locale.
+
+For date formatting, prefer the `useFormatDate` hook:
 
 ```jsx
-import { useLingui } from '@lingui/react/macro';
+import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 
 function MyComponent() {
-  const { i18n } = useLingui();
+  const formatDate = useFormatDate();
   const lastLogin = new Date();
 
-  return <Trans>Last login: {i18n.date(lastLogin)}</Trans>;
+  return <Trans>Last login: {formatDate(lastLogin)}</Trans>;
 }
 ```
 
-These use the browser's `Intl` API for proper locale formatting.
+For number formatting, use `Intl.NumberFormat` with the current locale:
+
+```jsx
+import { useLocale } from 'csdm/ui/settings/ui/use-locale';
+
+function MyComponent({ score }: { score: number }) {
+  const locale = useLocale();
+  const formatted = new Intl.NumberFormat(locale).format(score);
+
+  return <Trans>Score: {formatted}</Trans>;
+}
+```
 
 ## Message IDs and Context
 

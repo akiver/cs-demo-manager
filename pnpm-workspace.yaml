@@ -1,4 +1,5 @@
 nodeLinker: hoisted
+minimumReleaseAge: 1440
 
 packages:
   - src/node/os/get-running-process-exit-code
@@ -9,11 +10,17 @@ allowBuilds:
   registry-js: true
   '@akiver/cs-demo-analyzer': true
 
+catalog:
+  esbuild: 0.28.1
+  node-gyp: 13.0.0
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.1
+  vitest: 4.1.9
+
 overrides:
-  esbuild: '$esbuild'
-  node-gyp: '$node-gyp'
-  vite: '$vite'
-  vitest: '$vitest'
+  esbuild: 'catalog:'
+  node-gyp: 'catalog:'
+  vite: 'catalog:'
+  vitest: 'catalog:'
   # To remove when https://github.com/electron/electron/issues/51619 is resolved
   yauzl: '3.3.1'
 
