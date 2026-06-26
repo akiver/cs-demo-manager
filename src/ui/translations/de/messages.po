@@ -660,6 +660,19 @@ msgid "Enter"
 msgstr "Eingabe"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+msgid "Chat messages export"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+msgid "Select the players whose chat messages you want to export."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+msgctxt "Button"
+msgid "Export all players"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Button label"
 msgid "Select"
@@ -3742,6 +3755,10 @@ msgstr "*TOT*"
 
 #: src/ui/match/chat-messages/chat-messages.tsx
 msgid "All teams"
+msgstr ""
+
+#: src/ui/match/chat-messages/chat-messages.tsx
+msgid "All players"
 msgstr ""
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx

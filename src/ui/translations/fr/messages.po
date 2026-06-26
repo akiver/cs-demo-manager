@@ -660,6 +660,19 @@ msgid "Enter"
 msgstr "Entrer"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+msgid "Chat messages export"
+msgstr "Export des messages de chat"
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+msgid "Select the players whose chat messages you want to export."
+msgstr "Sélectionnez les joueurs dont vous voulez exporter les messages."
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
+msgctxt "Button"
+msgid "Export all players"
+msgstr "Exporter tous les joueurs"
+
+#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Button label"
 msgid "Select"
@@ -3743,6 +3756,10 @@ msgstr "*MORT*"
 #: src/ui/match/chat-messages/chat-messages.tsx
 msgid "All teams"
 msgstr "Toutes les équipes"
+
+#: src/ui/match/chat-messages/chat-messages.tsx
+msgid "All players"
+msgstr "Tous les joueurs"
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "Chat messages are available only if the <0>.info</0> file of the demo is next to its <1>.dem</1> file during analysis."

@@ -34,6 +34,8 @@ export function ExportMatchesItem({ matches }: Props) {
       }
     }
   }
+  // Sort players alphabetically so they are easier to find in the voice/chat export dialogs.
+  players.sort((playerA, playerB) => playerA.name.localeCompare(playerB.name));
 
   const onExportToXlsxClick = () => {
     showDialog(<ExportMatchesAsXlsxDialog matches={matches} />);
@@ -44,7 +46,7 @@ export function ExportMatchesItem({ matches }: Props) {
       <ExportToXlsxItem onClick={onExportToXlsxClick} />
       <ExportMatchesToJsonItem checksums={checksums} />
       <ExportPlayersVoiceItem demoPaths={filepaths} players={players} />
-      <ExportChatMessagesItem checksums={checksums} />
+      <ExportChatMessagesItem checksums={checksums} players={players} />
     </SubContextMenu>
   );
 }
