@@ -12,7 +12,7 @@ export function useExportMatchChatMessages() {
   const showToast = useShowToast();
   const { t } = useLingui();
 
-  return async (checksum: string, messages?: ChatMessage[]) => {
+  return async (checksum: string, messages?: ChatMessage[], steamIds?: string[]) => {
     const options: SaveDialogOptions = {
       defaultPath: `messages-${checksum}.txt`,
       title: t({
@@ -31,6 +31,7 @@ export function useExportMatchChatMessages() {
         checksum,
         filePath,
         messages,
+        steamIds,
       };
       const hasMessages = await client.send({
         name: RendererClientMessageName.ExportMatchChatMessages,

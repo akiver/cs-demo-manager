@@ -11,7 +11,9 @@ import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 export function ChatMessages() {
   const match = useCurrentMatch();
   const internalAllTeamValue = 'csdm-all-teams';
+  const internalAllPlayersValue = 'csdm-all-players';
   const [teamName, setTeamName] = useState(internalAllTeamValue);
+  const [playerSteamId, setPlayerSteamId] = useState(internalAllPlayersValue);
   const [fuzzySearchText, setFuzzySearchText] = useState('');
 
   const { chatMessages, checksum } = match;
@@ -34,10 +36,30 @@ export function ChatMessages() {
     );
   }
 
+  if (playerSteamId !== internalAllPlayersValue) {
+    visibleChatMessages = visibleChatMessages.filter((message) => message.senderSteamId === playerSteamId);
+  }
+
   const options: SelectOption[] = [
     { value: internalAllTeamValue, label: <Trans>All teams</Trans> },
     { value: match.teamA.name, label: match.teamA.name },
     { value: match.teamB.name, label: match.teamB.name },
+  ];
+
+  // Build the player list from the chat senders so everyone who actually spoke is selectable,
+  // including players who are no longer part of the match's final players list.
+  const senderNameBySteamId = new Map<string, string>();
+  for (const { senderSteamId, senderName } of match.chatMessages) {
+    // Skip empty SteamIDs since an empty string can't be used as a Select option value.
+    if (senderSteamId !== '' && !senderNameBySteamId.has(senderSteamId)) {
+      senderNameBySteamId.set(senderSteamId, senderName);
+    }
+  }
+  const playerOptions: SelectOption[] = [
+    { value: internalAllPlayersValue, label: <Trans>All players</Trans> },
+    ...Array.from(senderNameBySteamId, ([steamId, name]) => ({ value: steamId, label: name })).sort((a, b) =>
+      String(a.label).localeCompare(String(b.label)),
+    ),
   ];
 
   return (
@@ -51,6 +73,13 @@ export function ChatMessages() {
               value={teamName}
               onChange={(teamName) => {
                 setTeamName(teamName);
+              }}
+            />
+            <Select
+              options={playerOptions}
+              value={playerSteamId}
+              onChange={(playerSteamId) => {
+                setPlayerSteamId(playerSteamId);
               }}
             />
             <TextInputFilter value={fuzzySearchText} onChange={setFuzzySearchText} />

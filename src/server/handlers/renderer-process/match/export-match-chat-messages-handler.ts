@@ -7,11 +7,17 @@ export type ExportChatMessagesPayload = {
   checksum: string;
   filePath: string;
   messages?: ChatMessage[];
+  steamIds?: string[];
 };
 
-export async function exportMatchChatMessagesHandler({ checksum, filePath, messages }: ExportChatMessagesPayload) {
+export async function exportMatchChatMessagesHandler({
+  checksum,
+  filePath,
+  messages,
+  steamIds,
+}: ExportChatMessagesPayload) {
   try {
-    return await exportMatchChatMessages(checksum, filePath, messages);
+    return await exportMatchChatMessages(checksum, filePath, messages, steamIds);
   } catch (error) {
     handleError(error, 'Error while exporting chat messages');
   }
