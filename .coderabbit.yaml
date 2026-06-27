@@ -1,0 +1,72 @@
+language: en-US
+
+knowledge_base:
+  opt_out: false
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - '**/AGENTS.md'
+      - '**/skills/**/*.md'
+
+reviews:
+  path_filters:
+    - '!**/node_modules/**'
+    - '!**/dist/**'
+    - '!**/out/**'
+
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  review_status: true
+  commit_status: false
+  fail_commit_status: false
+  collapse_walkthrough: false
+  changed_files_summary: true
+  sequence_diagrams: false
+  estimate_code_review_effort: false
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+  suggested_labels: false
+  suggested_reviewers: true
+  in_progress_fortune: false
+  poem: false
+  abort_on_close: true
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+    ignore_title_keywords:
+      - 'WIP'
+      - '[WIP]'
+    base_branches:
+      - main
+
+  tools:
+    shellcheck:
+      enabled: true
+    github-checks:
+      enabled: true
+    yamllint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    eslint:
+      enabled: true
+    actionlint:
+      enabled: true
+    semgrep:
+      enabled: true
+    oxc:
+      enabled: true
+    cppcheck:
+      enabled: true
+
+chat:
+  auto_reply: true
+
+issue_enrichment:
+  auto_enrich:
+    enabled: false
