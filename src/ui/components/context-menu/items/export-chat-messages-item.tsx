@@ -68,7 +68,7 @@ export function ExportChatMessagesItem({ checksums, players }: Props) {
 
   const exportChatMessagesForSteamIds = async (steamIds: string[]) => {
     if (checksums.length === 1) {
-      return exportChatMessages(checksums[0], undefined, steamIds);
+      return exportChatMessages({ checksum: checksums[0], steamIds });
     }
 
     const { filePaths, canceled } = await window.csdm.showOpenDialog({

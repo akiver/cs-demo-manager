@@ -13,7 +13,7 @@ export function ExportChatMessagesButton({ checksum, messages }: Props) {
   const exportMessages = useExportMatchChatMessages();
 
   const onClick = async () => {
-    await exportMessages(checksum, messages);
+    await exportMessages({ checksum, messages });
   };
 
   return (
