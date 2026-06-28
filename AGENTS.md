@@ -116,6 +116,10 @@ Only unit tests exist today — integration and E2E tests may be added later. Te
 
 ### i18n
 
+The app is localized with **LinguiJS**. Source strings are written in English and extracted with `vp run i18n:extract` into per-locale catalogs (`src/ui/translations/{locale}/messages.po` for the renderer, `src/electron-main/translations/{locale}/*.json` for the main process).
+
+Actual translations are managed through **Crowdin**, not by hand. When you add or change a string, only commit the updated English source plus the extracted (untranslated) entries in the other catalogs — leaving non-English entries empty/untranslated in a PR or commit is expected. Crowdin contributors fill them in and the translations are synced back later, so do **not** manually translate the `.po`/`.json` files yourself.
+
 Use the `/i18n` skill when adding or updating any user-visible string in the UI.
 
 ### Git commits
