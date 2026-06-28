@@ -668,11 +668,6 @@ msgid "Select the players whose chat messages you want to export."
 msgstr ""
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
-msgctxt "Button"
-msgid "Export all players"
-msgstr ""
-
-#: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Button label"
 msgid "Select"
