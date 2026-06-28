@@ -2,6 +2,14 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 
+function getVoiceEnabledSteamIds(match: Match, voiceEnabledSteamIds: string[] | boolean) {
+  if (Array.isArray(voiceEnabledSteamIds)) {
+    return voiceEnabledSteamIds;
+  }
+
+  return voiceEnabledSteamIds ? match.players.map((player) => player.steamId) : [];
+}
+
 type Options = {
   match: Match;
   steamIds: string[];
@@ -10,9 +18,10 @@ type Options = {
   endSecondsAfterEvent: number;
   settings: Pick<
     VideoSettings,
-    'showOnlyDeathNotices' | 'deathNoticesDuration' | 'showXRay' | 'showAssists' | 'recordAudio' | 'playerVoicesEnabled'
+    'showOnlyDeathNotices' | 'deathNoticesDuration' | 'showXRay' | 'showAssists' | 'recordAudio'
   >;
   firstSequenceNumber: number;
+  voiceEnabledSteamIds: string[] | boolean;
 };
 
 export function buildPlayersRoundsSequences({
@@ -23,8 +32,10 @@ export function buildPlayersRoundsSequences({
   endSecondsAfterEvent,
   settings,
   firstSequenceNumber,
+  voiceEnabledSteamIds,
 }: Options) {
   const sequences: Sequence[] = [];
+  const sequenceVoiceEnabledSteamIds = getVoiceEnabledSteamIds(match, voiceEnabledSteamIds);
   const startSecondsBeforeEventTick = startSecondsBeforeEvent;
   const endSecondsAfterEventTick = endSecondsAfterEvent;
 
@@ -53,7 +64,7 @@ export function buildPlayersRoundsSequences({
           showXRay: settings.showXRay,
           showAssists: settings.showAssists,
           recordAudio: settings.recordAudio,
-          playerVoicesEnabled: settings.playerVoicesEnabled,
+          voiceEnabledSteamIds: sequenceVoiceEnabledSteamIds,
           playersOptions: [],
           playerCameras: [
             {

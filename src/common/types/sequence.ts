@@ -12,9 +12,9 @@ export type Sequence = {
   playersOptions: SequencePlayerOptions[];
   playerCameras: PlayerCameraFocus[];
   cameras: CustomCameraFocus[];
-  playerVoicesEnabled: boolean;
   recordAudio: boolean;
   // @platform win32 Requires HLAE
   deathNoticesDuration: number;
   cfg?: string;
+  voiceEnabledSteamIds: string[];
 };

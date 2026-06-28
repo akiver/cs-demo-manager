@@ -338,7 +338,7 @@ export function VideoEntry({ video }: Props) {
                     <p>{sequence.showXRay ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.showAssists ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.recordAudio ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
-                    <p>{sequence.playerVoicesEnabled ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
+                    <p>{sequence.voiceEnabledSteamIds.length > 0 ? <Trans>Yes</Trans> : <Trans>No</Trans>}</p>
                     <p>{sequence.playerCameras.length}</p>
                     <p>{firstCameraName ? firstCameraName : <Trans>None</Trans>}</p>
                   </li>
