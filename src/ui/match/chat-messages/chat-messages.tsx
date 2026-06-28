@@ -46,20 +46,16 @@ export function ChatMessages() {
     { value: match.teamB.name, label: match.teamB.name },
   ];
 
-  // Build the player list from the chat senders so everyone who actually spoke is selectable,
-  // including players who are no longer part of the match's final players list.
-  const senderNameBySteamId = new Map<string, string>();
-  for (const { senderSteamId, senderName } of match.chatMessages) {
-    // Skip empty SteamIDs since an empty string can't be used as a Select option value.
-    if (senderSteamId !== '' && !senderNameBySteamId.has(senderSteamId)) {
-      senderNameBySteamId.set(senderSteamId, senderName);
-    }
-  }
+  const selectablePlayers =
+    teamName === internalAllTeamValue ? match.players : match.players.filter((player) => player.teamName === teamName);
   const playerOptions: SelectOption[] = [
     { value: internalAllPlayersValue, label: <Trans>All players</Trans> },
-    ...Array.from(senderNameBySteamId, ([steamId, name]) => ({ value: steamId, label: name })).sort((a, b) =>
-      String(a.label).localeCompare(String(b.label)),
-    ),
+    ...selectablePlayers
+      .map((player) => ({
+        value: player.steamId,
+        label: player.name,
+      }))
+      .sort((playerA, playerB) => playerA.label.localeCompare(playerB.label)),
   ];
 
   return (
@@ -73,6 +69,7 @@ export function ChatMessages() {
               value={teamName}
               onChange={(teamName) => {
                 setTeamName(teamName);
+                setPlayerSteamId(internalAllPlayersValue);
               }}
             />
             <Select
