@@ -11,6 +11,8 @@ export async function exportMatchChatMessages(
   let chatMessages: ChatMessage[];
   if (!messages) {
     chatMessages = await fetchChatMessages(checksum, steamIds);
+  } else if (Array.isArray(steamIds) && steamIds.length > 0) {
+    chatMessages = messages.filter((chatMessage) => steamIds.includes(chatMessage.senderSteamId));
   } else {
     chatMessages = messages;
   }
