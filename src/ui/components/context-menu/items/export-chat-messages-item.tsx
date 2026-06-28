@@ -118,20 +118,20 @@ export function ExportChatMessagesItem({ checksums, players }: Props) {
     }
   };
 
-  const onClick = () => {
+  const onClick = async () => {
     if (players && players.length > 0) {
-      showDialog(
+      return showDialog(
         <SelectPlayersDialog
           players={players}
-          onConfirm={(steamIds) => {
+          onConfirm={async (steamIds) => {
             hideDialog();
-            void exportChatMessagesForSteamIds(steamIds);
+            await exportChatMessagesForSteamIds(steamIds);
           }}
         />,
       );
-    } else {
-      void exportChatMessagesForSteamIds([]);
     }
+
+    await exportChatMessagesForSteamIds([]);
   };
 
   return (
