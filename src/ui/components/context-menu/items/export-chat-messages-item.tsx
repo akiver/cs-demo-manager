@@ -8,7 +8,6 @@ import type { ExportMatchesChatMessagesPayload } from 'csdm/server/handlers/rend
 import { useExportMatchChatMessages } from 'csdm/ui/hooks/use-export-match-chat-messages';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { Button } from 'csdm/ui/components/buttons/button';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
 import { PlayersSelect } from '../../inputs/select/players-select';
@@ -21,11 +20,11 @@ type SelectPlayersDialogProps = {
 
 function SelectPlayersDialog({ players, onConfirm }: SelectPlayersDialogProps) {
   const { hideDialog } = useDialog();
-  const [steamIds, setSteamIds] = useState<string[]>([]);
+  const [steamIds, setSteamIds] = useState<string[]>(() => players.map((player) => player.steamId));
 
   return (
     <Dialog>
-      <div className="w-[768px]">
+      <div className="w-[512px]">
         <DialogHeader>
           <DialogTitle>
             <Trans>Chat messages export</Trans>
@@ -37,18 +36,11 @@ function SelectPlayersDialog({ players, onConfirm }: SelectPlayersDialogProps) {
               <Trans>Select the players whose chat messages you want to export.</Trans>
             </p>
             <div className="max-h-[220px] overflow-auto">
-              <PlayersSelect players={players} selectedSteamIds={steamIds} onChange={setSteamIds} filter={null} />
+              <PlayersSelect players={players} selectedSteamIds={steamIds} onChange={setSteamIds} />
             </div>
           </div>
         </DialogContent>
         <DialogFooter>
-          <Button
-            onClick={() => {
-              onConfirm([]);
-            }}
-          >
-            <Trans context="Button">Export all players</Trans>
-          </Button>
           <ConfirmButton
             onClick={() => {
               onConfirm(steamIds);

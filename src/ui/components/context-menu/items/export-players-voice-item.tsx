@@ -167,7 +167,7 @@ type SelectExportModeDialogProps = {
 function SelectExportModeDialog({ onSelect, players }: SelectExportModeDialogProps) {
   const { hideDialog } = useDialog();
   const [mode, setMode] = useState<ExportVoiceMode>(ExportVoiceMode.SingleFull);
-  const [steamIds, setSteamIds] = useState<string[]>([]);
+  const [steamIds, setSteamIds] = useState<string[]>(() => players?.map((player) => player.steamId) ?? []);
   const options: SelectOption<ExportVoiceMode>[] = [
     {
       label: <Trans context="Voice mode export label">One file per player (no silence, only voice)</Trans>,
@@ -185,7 +185,7 @@ function SelectExportModeDialog({ onSelect, players }: SelectExportModeDialogPro
 
   return (
     <Dialog>
-      <div className="w-[768px]">
+      <div className="w-[512px]">
         <DialogHeader>
           <DialogTitle>
             <Trans>Players voice export</Trans>
@@ -201,7 +201,7 @@ function SelectExportModeDialog({ onSelect, players }: SelectExportModeDialogPro
             />
             {players && players.length > 0 && (
               <div className="mt-12 max-h-[220px] overflow-auto">
-                <PlayersSelect players={players} selectedSteamIds={steamIds} onChange={setSteamIds} filter={null} />
+                <PlayersSelect players={players} selectedSteamIds={steamIds} onChange={setSteamIds} />
               </div>
             )}
           </div>
@@ -211,6 +211,7 @@ function SelectExportModeDialog({ onSelect, players }: SelectExportModeDialogPro
             onClick={() => {
               onSelect(mode, steamIds);
             }}
+            isDisabled={players && players.length > 0 && steamIds.length === 0}
           />
           <CancelButton onClick={hideDialog} />
         </DialogFooter>
