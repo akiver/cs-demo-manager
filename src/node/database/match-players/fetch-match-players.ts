@@ -91,6 +91,7 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
       ),
     )
     .where('players.match_checksum', '=', checksum)
+    .orderBy('players.name', 'asc')
     .groupBy([
       'players.id',
       'demos.date',

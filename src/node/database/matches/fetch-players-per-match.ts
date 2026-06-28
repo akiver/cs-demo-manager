@@ -6,6 +6,7 @@ export async function fetchPlayersPerMatch(checksums: string[]): Promise<Record<
     .selectFrom('players')
     .select(['steam_id as steamId', 'name', 'match_checksum as checksum'])
     .where((eb) => eb('players.match_checksum', '=', eb.fn.any(eb.val(checksums))))
+    .orderBy('players.name', 'asc')
     .execute();
 
   const playersPerMatch: Record<string, MatchTablePlayer[]> = {};

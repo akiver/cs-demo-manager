@@ -14,16 +14,12 @@ type Props = {
 
 export function FocusCameraPlayerSelect({ playerFocusSteamId, onChange, label }: Props) {
   const match = useCurrentMatch();
-  const options: SelectOption[] = match.players
-    .toSorted((playerA, playerB) => {
-      return playerA.name.localeCompare(playerB.name);
-    })
-    .map((player) => {
-      return {
-        value: player.steamId,
-        label: player.name,
-      };
-    });
+  const options: SelectOption[] = match.players.map((player) => {
+    return {
+      value: player.steamId,
+      label: player.name,
+    };
+  });
   const lastSelectedSteamId = useRef<string | undefined>(playerFocusSteamId);
   const isChecked = playerFocusSteamId !== undefined;
   const isDisabled = options.length === 0 || playerFocusSteamId === undefined;

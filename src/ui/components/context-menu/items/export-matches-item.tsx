@@ -34,8 +34,6 @@ export function ExportMatchesItem({ matches }: Props) {
       }
     }
   }
-  // Sort players alphabetically so they are easier to find in the voice/chat export dialogs.
-  players.sort((playerA, playerB) => playerA.name.localeCompare(playerB.name));
 
   const onExportToXlsxClick = () => {
     showDialog(<ExportMatchesAsXlsxDialog matches={matches} />);

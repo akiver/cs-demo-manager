@@ -37,14 +37,11 @@ export function MatchPlayers() {
 
   const kills = match.kills.filter((kill) => kill.killerSteamId === steamId);
   const deaths = match.kills.filter((kill) => kill.victimSteamId === steamId);
-  const sortedPlayers = match.players.toSorted((playerA, playerB) => {
-    return playerA.name.localeCompare(playerB.name);
-  });
 
   return (
     <>
       <TabLinks>
-        {sortedPlayers.map((player) => {
+        {match.players.map((player) => {
           return (
             <TabLink key={player.steamId} url={buildMatchPlayerPath(match.checksum, player.steamId)}>
               <div className="flex items-center gap-x-4">

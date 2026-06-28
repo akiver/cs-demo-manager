@@ -38,16 +38,12 @@ function TickCell({ data }: CellProps<PlayerCameraFocus>) {
 function PlayerNameCell({ data }: CellProps<PlayerCameraFocus>) {
   const match = useCurrentMatch();
   const { setCameraOnPlayerAtTick } = useSequenceForm();
-  const options: SelectOption[] = match.players
-    .toSorted((playerA, playerB) => {
-      return playerA.name.localeCompare(playerB.name);
-    })
-    .map((player) => {
-      return {
-        value: player.steamId,
-        label: player.name,
-      };
-    });
+  const options: SelectOption[] = match.players.map((player) => {
+    return {
+      value: player.steamId,
+      label: player.name,
+    };
+  });
   const isDisabled = options.length === 0;
 
   return (

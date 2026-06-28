@@ -50,12 +50,10 @@ export function ChatMessages() {
     teamName === internalAllTeamValue ? match.players : match.players.filter((player) => player.teamName === teamName);
   const playerOptions: SelectOption[] = [
     { value: internalAllPlayersValue, label: <Trans>All players</Trans> },
-    ...selectablePlayers
-      .map((player) => ({
-        value: player.steamId,
-        label: player.name,
-      }))
-      .sort((playerA, playerB) => playerA.label.localeCompare(playerB.label)),
+    ...selectablePlayers.map((player) => ({
+      value: player.steamId,
+      label: player.name,
+    })),
   ];
 
   return (
