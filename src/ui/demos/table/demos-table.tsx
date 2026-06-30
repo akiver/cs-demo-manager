@@ -15,12 +15,12 @@ import { useDemosState } from '../use-demos-state';
 
 export function DemosTable() {
   const status = useDemosStatus();
-  const { loadedDemoCount, demoToLoadCount } = useDemosState();
+  const { progress } = useDemosState();
   const table = useDemosTable();
   const folders = useFolders();
 
   if (status === Status.Idle || status === Status.Loading || !table.isReady()) {
-    return <LoadingDemosMessage loadedDemoCount={loadedDemoCount} demoToLoadCount={demoToLoadCount} />;
+    return <LoadingDemosMessage progress={progress} />;
   }
 
   if (folders.length === 0) {
