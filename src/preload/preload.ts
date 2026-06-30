@@ -44,6 +44,7 @@ import { getImageInformation } from 'csdm/node/filesystem/get-image-information'
 import { readImageFile } from 'csdm/node/filesystem/image';
 import { writeJsonFile } from 'csdm/node/filesystem/write-json-file';
 import { ErrorCode } from 'csdm/common/error-code';
+import { getWebSocketServerPort } from 'csdm/server/port';
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {
@@ -61,6 +62,7 @@ function handleError(error: unknown) {
 const api: PreloadApi = {
   logger,
   ADDITIONAL_ARGUMENTS: process.argv,
+  WEB_SOCKET_SERVER_PORT: getWebSocketServerPort(),
   IMAGES_FOLDER_PATH: path.join(getStaticFolderPath(), 'images'),
   getAppInformation,
   getStartupArguments: () => {

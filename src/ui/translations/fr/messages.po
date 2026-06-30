@@ -395,8 +395,8 @@ msgid "Counter-Strike starting…"
 msgstr "Lancement de Counter-Strike…"
 
 #: src/ui/bootstrap/web-socket-provider.tsx
-msgid "The connection to the WebSocket server failed with code {code}."
-msgstr "La connexion au serveur WebSocket a échoué avec le code {code}."
+msgid "The connection to the local server on port {port} failed with code {code}. The port might be reserved or blocked by another application. Restarting your computer or freeing the port may fix the issue."
+msgstr ""
 
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "An error occurred connecting to the WebSocket server."

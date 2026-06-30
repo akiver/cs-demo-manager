@@ -25,6 +25,8 @@ import { updateSystemStartupBehavior } from 'csdm/electron-main/system-startup-b
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import { initialize } from './auto-updater';
 import { getSettingsSync } from 'csdm/node/settings/get-settings';
+import { resolveWebSocketServerPort } from './resolve-web-socket-server-port';
+import { WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
 
 process.on('uncaughtException', logger.error);
 process.on('unhandledRejection', logger.error);
@@ -97,6 +99,12 @@ async function start() {
   });
 
   await injectPathVariableIntoProcess();
+
+  // Resolve the WebSocket server port before starting any process so they all connect to the same port.
+  // It's exposed through an environment variable inherited by the server, renderer and main processes.
+  const webSocketServerPort = await resolveWebSocketServerPort();
+  process.env[WEB_SOCKET_SERVER_PORT_ENV_NAME] = String(webSocketServerPort);
+  logger.log(`WebSocket server port resolved to ${webSocketServerPort}`);
 
   if (IS_PRODUCTION) {
     createWebSocketServerProcess();

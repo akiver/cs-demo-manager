@@ -1,6 +1,5 @@
 import type { RendererMessageHandlers } from 'csdm/server/handlers/renderer-handlers-mapping';
 import type { IdentifiableClientMessage } from 'csdm/server/identifiable-client-message';
-import { WEB_SOCKET_SERVER_PORT } from 'csdm/server/port';
 import type { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import type { RendererServerMessagePayload, RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
 import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';
@@ -96,7 +95,7 @@ export class WebSocketClient {
 
   private connect = () => {
     logger.log('WS:: connecting to server');
-    const url = `ws://localhost:${WEB_SOCKET_SERVER_PORT}?process=renderer`;
+    const url = `ws://localhost:${window.csdm.WEB_SOCKET_SERVER_PORT}?process=renderer`;
     this.socket = new WebSocket(url);
     this.socket.addEventListener('open', this.onConnect);
     this.socket.addEventListener('close', this.onDisconnect);

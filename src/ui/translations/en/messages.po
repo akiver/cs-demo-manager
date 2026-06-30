@@ -390,8 +390,8 @@ msgid "Counter-Strike starting…"
 msgstr "Counter-Strike starting…"
 
 #: src/ui/bootstrap/web-socket-provider.tsx
-msgid "The connection to the WebSocket server failed with code {code}."
-msgstr "The connection to the WebSocket server failed with code {code}."
+msgid "The connection to the local server on port {port} failed with code {code}. The port might be reserved or blocked by another application. Restarting your computer or freeing the port may fix the issue."
+msgstr "The connection to the local server on port {port} failed with code {code}. The port might be reserved or blocked by another application. Restarting your computer or freeing the port may fix the issue."
 
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "An error occurred connecting to the WebSocket server."

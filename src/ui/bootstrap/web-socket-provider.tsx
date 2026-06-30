@@ -27,7 +27,10 @@ export function WebSocketProvider({ children }: Props) {
 
       const onConnectionError = (event: CloseEvent) => {
         const code = event.code;
-        setError(t`The connection to the WebSocket server failed with code ${code}.`);
+        const port = window.csdm.WEB_SOCKET_SERVER_PORT;
+        setError(
+          t`The connection to the local server on port ${port} failed with code ${code}. The port might be reserved or blocked by another application. Restarting your computer or freeing the port may fix the issue.`,
+        );
         setStatus(Status.Error);
       };
 

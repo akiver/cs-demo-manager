@@ -20,6 +20,7 @@ import { getFfmpegExecutablePath } from 'csdm/node/video/ffmpeg/ffmpeg-location'
 import { FfmpegNotInstalled } from 'csdm/node/video/errors/ffmpeg-not-installed';
 import { DisplayMode } from 'csdm/common/types/display-mode';
 import { enableFullscreenWindowed } from './video-config-file';
+import { getWebSocketServerPort, WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
 
 export type HlaeOptions = {
   game: Game;
@@ -76,7 +77,9 @@ async function startHlae({ command, signal, game }: StartHlaeOptions) {
   logger.debug('Starting HLAE with command', command);
 
   return new Promise<void>((resolve, reject) => {
-    const hlaeProcess = exec(command, { windowsHide: true }, (error, stdout, stderr) => {
+    // Forward the resolved WebSocket server port so the game server plugin can connect to the WebSocket server.
+    const env = { ...process.env, [WEB_SOCKET_SERVER_PORT_ENV_NAME]: String(getWebSocketServerPort()) };
+    const hlaeProcess = exec(command, { windowsHide: true, env }, (error, stdout, stderr) => {
       if (signal?.aborted) {
         return;
       }

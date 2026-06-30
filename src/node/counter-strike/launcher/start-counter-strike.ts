@@ -27,6 +27,7 @@ import { getCsgoFolderPath } from '../get-csgo-folder-path';
 import path from 'node:path';
 import { DisplayMode } from 'csdm/common/types/display-mode';
 import { enableFullscreenWindowed } from './video-config-file';
+import { getWebSocketServerPort, WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
 
 export type StartCounterStrikeOptions = {
   demoPath?: string;
@@ -260,7 +261,11 @@ echo "CS:DM config loaded"
 
   return new Promise<void>((resolve, reject) => {
     const startTime = Date.now();
-    const gameProcess = exec(command, { windowsHide: true });
+    // Forward the resolved WebSocket server port so the game server plugin can connect to the WebSocket server.
+    const gameProcess = exec(command, {
+      windowsHide: true,
+      env: { ...process.env, [WEB_SOCKET_SERVER_PORT_ENV_NAME]: String(getWebSocketServerPort()) },
+    });
     const chunks: string[] = [];
     gameProcess.stdout?.on('data', (data: string) => {
       chunks.push(data);
