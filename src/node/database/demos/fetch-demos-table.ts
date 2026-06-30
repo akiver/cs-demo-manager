@@ -7,6 +7,7 @@ import { fetchChecksumTags } from 'csdm/node/database/tags/fetch-checksum-tags';
 import { fetchComments } from 'csdm/node/database/comments/fetch-comments';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import type { DemosTableFilter } from 'csdm/node/database/demos/demos-table-filter';
+import { LoadDemosStep, type LoadDemosProgress } from 'csdm/common/types/load-demos-progress';
 
 function applyFilters(filter: DemosTableFilter, demos: Demo[]) {
   const startDate = filter.startDate !== undefined ? new Date(filter.startDate) : undefined;
@@ -48,23 +49,38 @@ function applyFilters(filter: DemosTableFilter, demos: Demo[]) {
 }
 
 type Options = {
-  onProgress: (demoLoadedCount: number, demoToLoadCount: number) => void;
+  onProgress: (progress: LoadDemosProgress) => void;
 };
 
 export async function fetchDemosTable(filter: DemosTableFilter, { onProgress }: Options) {
   try {
-    const filePaths = await getDemosFilePathsToLoad();
+    const filePaths = await getDemosFilePathsToLoad({
+      onScanArchivesProgress: (scannedArchiveNumber, archiveCount) => {
+        onProgress({
+          step: LoadDemosStep.ScanningArchives,
+          current: scannedArchiveNumber,
+          total: archiveCount,
+        });
+      },
+      onExtractDemosProgress: (extractingDemoNumber, demoToExtractCount) => {
+        onProgress({
+          step: LoadDemosStep.ExtractingArchives,
+          current: extractingDemoNumber,
+          total: demoToExtractCount,
+        });
+      },
+    });
     const demosInDatabase = await fetchDemosByFilePaths(filePaths);
     const tags = await fetchChecksumTags();
     const comments = await fetchComments();
 
-    onProgress(0, filePaths.length);
+    onProgress({ step: LoadDemosStep.LoadingDemos, current: 0, total: filePaths.length });
 
     const demosToInsert: Demo[] = [];
     const demos: Demo[] = [];
     for (let i = 0; i < filePaths.length; i++) {
       const filePath = filePaths[i];
-      onProgress(i + 1, filePaths.length);
+      onProgress({ step: LoadDemosStep.LoadingDemos, current: i + 1, total: filePaths.length });
 
       try {
         const demoInDatabase = demosInDatabase.find((demo) => demo.filePath === filePath);

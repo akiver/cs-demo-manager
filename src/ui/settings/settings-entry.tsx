@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import React from 'react';
 
 type Props = {
-  description: string | ReactNode;
+  description?: string | ReactNode;
   title: string | ReactNode;
   interactiveComponent: ReactNode;
 };
@@ -12,7 +12,7 @@ export function SettingsEntry({ title, interactiveComponent, description }: Prop
     <div className="flex items-center justify-between border-b border-b-gray-300 py-8">
       <div className="pr-16">
         <p className="text-body-strong">{title}</p>
-        <div className="mt-4">{description}</div>
+        {description && <div className="mt-4">{description}</div>}
       </div>
       <div>{interactiveComponent}</div>
     </div>

@@ -3,6 +3,7 @@ import type { Analysis } from 'csdm/common/types/analysis';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import type { Download, DownloadDemoProgressPayload, DownloadDemoSuccess } from 'csdm/common/download/download-types';
 import type { Demo } from '../common/types/demo';
+import type { LoadDemosProgress } from '../common/types/load-demos-progress';
 import type { ErrorCode } from '../common/error-code';
 import type { ValveMatch } from '../common/types/valve-match';
 import type { SharedServerMessagePayload, SharedServerMessageName } from './shared-server-message-name';
@@ -63,10 +64,7 @@ export type RendererServerMessageName =
 export interface RendererServerMessagePayload extends SharedServerMessagePayload {
   [RendererServerMessageName.SettingsUpdated]: Settings;
   [RendererServerMessageName.OptimizeDatabaseSuccess]: void;
-  [RendererServerMessageName.FetchDemosProgress]: {
-    demoLoadedCount: number;
-    demoToLoadCount: number;
-  };
+  [RendererServerMessageName.FetchDemosProgress]: LoadDemosProgress;
   [RendererServerMessageName.NavigateToDemo]: string;
   [RendererServerMessageName.NavigateToMatch]: string;
   [RendererServerMessageName.DemosAddedToAnalyses]: Analysis[];
