@@ -4,7 +4,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import fs from 'fs-extra';
-import { WebSocketServer as WSServer } from 'ws';
 import { createServer, createLogger } from 'vite-plus';
 import electronPath from 'electron';
 import esbuild from 'esbuild';
@@ -235,37 +234,8 @@ async function buildAndWatchMainProcessBundles() {
   });
 }
 
-async function assertWebSocketServerIsAvailable() {
-  const port = 4574;
-  return new Promise((resolve) => {
-    const server = new WSServer({
-      port,
-    });
-
-    server.on('error', (error) => {
-      if (error.code === 'EACCES') {
-        console.error(`You don't have permission to run the WebSocket server on port ${port}.`);
-      }
-      if (error.code === 'EADDRINUSE') {
-        console.error(
-          `A WebSocket server is already running on port ${port}. Please make sure to quit all running CS:DM application and retry.`,
-        );
-      } else {
-        console.error(error);
-      }
-      process.exit(1);
-    });
-
-    server.on('listening', () => {
-      server.close();
-      return resolve();
-    });
-  });
-}
-
 try {
   await fs.ensureDir(outFolderPath);
-  await assertWebSocketServerIsAvailable();
 
   await Promise.all([buildAndWatchRendererProcessBundle(), buildAndWatchMainProcessBundles(), copyDevRendererHtml()]);
   startElectron();
