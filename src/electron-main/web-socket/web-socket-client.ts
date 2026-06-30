@@ -6,7 +6,7 @@ import type {
   MainServerMessageResponse,
 } from 'csdm/server/main-server-message-name';
 import type { MainClientMessageName } from 'csdm/server/main-client-message-name';
-import { WEB_SOCKET_SERVER_PORT } from 'csdm/server/port';
+import { getWebSocketServerPort } from 'csdm/server/port';
 import type { IdentifiableClientMessage } from 'csdm/server/identifiable-client-message';
 import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';
 import type { MainMessageHandlers } from 'csdm/server/handlers/main-handlers-mapping';
@@ -103,7 +103,7 @@ export class WebSocketClient {
 
   private connect = () => {
     logger.log('WS:: connecting to server');
-    const url = `ws://localhost:${WEB_SOCKET_SERVER_PORT}?process=main`;
+    const url = `ws://localhost:${getWebSocketServerPort()}?process=main`;
     this.socket = new WebSocket(url);
     this.socket.addEventListener('open', this.onConnect);
     this.socket.addEventListener('error', this.onDisconnect);

@@ -37,6 +37,7 @@ declare global {
     unknownImageFilePath: string;
     IMAGES_FOLDER_PATH: string;
     ADDITIONAL_ARGUMENTS: string[];
+    WEB_SOCKET_SERVER_PORT: number;
     getStartupArguments: () => Promise<Argument[]>;
     getTheme: () => Promise<ThemeName>;
     getWebFilePath: (file: File) => string;

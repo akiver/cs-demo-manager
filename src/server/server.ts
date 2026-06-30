@@ -11,7 +11,7 @@ import { rendererHandlers } from 'csdm/server/handlers/renderer-handlers-mapping
 import { mainHandlers } from 'csdm/server/handlers/main-handlers-mapping';
 import type { MainClientMessageName } from './main-client-message-name';
 import type { RendererClientMessageName } from './renderer-client-message-name';
-import { WEB_SOCKET_SERVER_PORT } from './port';
+import { getWebSocketServerPort } from './port';
 import type { SharedServerMessagePayload } from './shared-server-message-name';
 import { SharedServerMessageName } from './shared-server-message-name';
 import type { IdentifiableClientMessage } from './identifiable-client-message';
@@ -86,7 +86,7 @@ class WebSocketServer {
 
   constructor() {
     this.server = new WSServer({
-      port: WEB_SOCKET_SERVER_PORT,
+      port: getWebSocketServerPort(),
     });
 
     this.server.on('listening', this.onServerCreated);
@@ -150,7 +150,7 @@ class WebSocketServer {
   };
 
   private onServerCreated = () => {
-    logger.debug(`WS:: server listening on port ${WEB_SOCKET_SERVER_PORT}`);
+    logger.debug(`WS:: server listening on port ${getWebSocketServerPort()}`);
   };
 
   private onConnection = (webSocket: WebSocket, request: IncomingMessage): void => {

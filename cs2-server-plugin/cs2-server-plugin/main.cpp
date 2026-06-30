@@ -4,6 +4,8 @@
 #include <mutex>
 #include <queue>
 #include <sstream>
+#include <cstdlib>
+#include <string>
 #include <nlohmann/json.hpp>
 #include <easywsclient.hpp>
 #include "icvar.h"
@@ -455,9 +457,26 @@ void HandleWebSocketMessage(const std::string& message)
     }
 }
 
+// Must be kept in sync with DEFAULT_WEB_SOCKET_SERVER_PORT in src/server/port.ts.
+const int DEFAULT_WEB_SOCKET_SERVER_PORT = 4574;
+
+int GetWebSocketServerPort() {
+    const char* portValue = getenv("CSDM_WS_PORT");
+    if (portValue != NULL) {
+        int port = atoi(portValue);
+        if (port > 0) {
+            return port;
+        }
+    }
+
+    return DEFAULT_WEB_SOCKET_SERVER_PORT;
+}
+
 void ConnectToWebsocketServer() {
-    Log("Connecting to WebSocket server...");
-    ws = WebSocket::from_url("ws://localhost:4574?process=game");
+    int port = GetWebSocketServerPort();
+    string url = "ws://localhost:" + std::to_string(port) + "?process=game";
+    Log("Connecting to WebSocket server on port %d...", port);
+    ws = WebSocket::from_url(url);
     if (ws == NULL)
     {
         Log("Failed to connect to WebSocket server.");
