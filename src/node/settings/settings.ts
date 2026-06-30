@@ -11,6 +11,7 @@ import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filt
 import type { RecordingSystem } from 'csdm/common/types/recording-system';
 import type { RecordingOutput } from 'csdm/common/types/recording-output';
 import type { DisplayMode } from 'csdm/common/types/display-mode';
+import type { ArchiveFormat } from 'csdm/common/types/archive-format';
 
 export type Folder = {
   path: string;
@@ -176,6 +177,7 @@ export type Settings = {
   autoDownloadUpdates: boolean;
   database: DatabaseSettings;
   folders: Folder[];
+  autoExtractDemosFromArchives: ArchiveFormat[];
   demos: DemosSettings;
   steamApiKey: string;
   faceitApiKey: string;

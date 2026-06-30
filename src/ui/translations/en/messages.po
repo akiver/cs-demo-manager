@@ -2708,12 +2708,20 @@ msgid "No folders found."
 msgstr "No folders found."
 
 #: src/ui/demos/table/loading-demos-message.tsx
+msgid "Scanning archive {current} of {total}…"
+msgstr "Scanning archive {current} of {total}…"
+
+#: src/ui/demos/table/loading-demos-message.tsx
+msgid "Extracting demo {current} of {total} from archives…"
+msgstr "Extracting demo {current} of {total} from archives…"
+
+#: src/ui/demos/table/loading-demos-message.tsx
 msgid "Loading demos…"
 msgstr "Loading demos…"
 
 #: src/ui/demos/table/loading-demos-message.tsx
-msgid "Loading {loadedDemoCount} of {demoToLoadCount} demos…"
-msgstr "Loading {loadedDemoCount} of {demoToLoadCount} demos…"
+msgid "Loading {current} of {total} demos…"
+msgstr "Loading {current} of {total} demos…"
 
 #: src/ui/demos/table/no-demos.tsx
 msgid "No demos found with current filters."
@@ -7401,9 +7409,26 @@ msgctxt "Button"
 msgid "Add a folder"
 msgstr "Add a folder"
 
+#: src/ui/settings/folders/demo-archive-extraction-settings.tsx
+msgid "Automatic demo extraction from archives"
+msgstr "Automatic demo extraction from archives"
+
+#: src/ui/settings/folders/demo-archive-extraction-settings.tsx
+msgid "Automatically extract demos contained in archives found in your folders when scanning for demos. Extracted demos are placed next to their archive."
+msgstr "Automatically extract demos contained in archives found in your folders when scanning for demos. Extracted demos are placed next to their archive."
+
+#: src/ui/settings/folders/demo-archive-extraction-settings.tsx
+msgid "Enabling automatic extraction has an impact on demo loading speed!"
+msgstr "Enabling automatic extraction has an impact on demo loading speed!"
+
 #: src/ui/settings/folders/folder-row.tsx
 msgid "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
 msgstr "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
+
+#: src/ui/settings/folders/folders-settings.tsx
+#: src/ui/settings/settings-tabs.tsx
+msgid "Folders"
+msgstr "Folders"
 
 #: src/ui/settings/folders/include-sub-folders-switch.tsx
 msgid "Include subfolders"
@@ -7821,10 +7846,6 @@ msgstr "Wait for round end"
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
 msgstr "UI"
-
-#: src/ui/settings/settings-tabs.tsx
-msgid "Folders"
-msgstr "Folders"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Maps"
