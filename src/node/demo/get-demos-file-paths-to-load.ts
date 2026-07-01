@@ -1,6 +1,6 @@
 import type { Folder } from 'csdm/node/settings/settings';
 import { getSettings } from 'csdm/node/settings/get-settings';
-import { findDemosInFolders } from './find-demos-in-folders';
+import { findDemosInFolders, type FindDemosProgressCallbacks } from './find-demos-in-folders';
 
 async function getFoldersToInclude(): Promise<Folder[]> {
   const settings = await getSettings();
@@ -20,9 +20,9 @@ async function getFoldersToInclude(): Promise<Folder[]> {
   return foldersToInclude;
 }
 
-export async function getDemosFilePathsToLoad() {
+export async function getDemosFilePathsToLoad(progressCallbacks: FindDemosProgressCallbacks = {}) {
   const foldersToInclude = await getFoldersToInclude();
-  const filePaths = await findDemosInFolders(foldersToInclude);
+  const filePaths = await findDemosInFolders(foldersToInclude, progressCallbacks);
 
   return filePaths;
 }

@@ -20,6 +20,7 @@ export const defaultSettings: Settings = {
     database: 'csdm',
   },
   folders: [],
+  autoExtractDemosFromArchives: [],
   demos: {
     showAllFolders: false,
     currentFolderPath: '',

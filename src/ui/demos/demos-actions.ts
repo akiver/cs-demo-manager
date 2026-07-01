@@ -1,12 +1,10 @@
 import { createAction } from '@reduxjs/toolkit';
 import type { DemoSource, DemoType } from 'csdm/common/types/counter-strike';
 import type { Demo } from 'csdm/common/types/demo';
+import type { LoadDemosProgress } from 'csdm/common/types/load-demos-progress';
 
 export const fetchDemosStart = createAction('demos/fetchStart');
-export const fetchDemosProgress = createAction<{
-  demoLoadedCount: number;
-  demoToLoadCount: number;
-}>('demos/fetchProgress');
+export const fetchDemosProgress = createAction<LoadDemosProgress>('demos/fetchProgress');
 export const fetchDemosError = createAction('demos/fetchError');
 export const fetchDemosSuccess = createAction<Demo[]>('demos/fetchSuccess');
 export const deleteDemosSuccess = createAction<string[]>('demos/deleteSuccess');

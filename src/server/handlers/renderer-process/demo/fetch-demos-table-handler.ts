@@ -7,13 +7,10 @@ import { handleError } from '../../handle-error';
 export async function fetchDemosTableHandler(filter: DemosTableFilter) {
   try {
     const demos = fetchDemosTable(filter, {
-      onProgress: (demoLoadedCount, demoToLoadCount) => {
+      onProgress: (progress) => {
         server.sendMessageToRendererProcess({
           name: RendererServerMessageName.FetchDemosProgress,
-          payload: {
-            demoLoadedCount,
-            demoToLoadCount,
-          },
+          payload: progress,
         });
       },
     });

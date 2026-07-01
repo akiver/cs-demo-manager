@@ -2713,12 +2713,20 @@ msgid "No folders found."
 msgstr "未找到文件夹。"
 
 #: src/ui/demos/table/loading-demos-message.tsx
+msgid "Scanning archive {current} of {total}…"
+msgstr ""
+
+#: src/ui/demos/table/loading-demos-message.tsx
+msgid "Extracting demo {current} of {total} from archives…"
+msgstr ""
+
+#: src/ui/demos/table/loading-demos-message.tsx
 msgid "Loading demos…"
 msgstr "加载 demo 中…"
 
 #: src/ui/demos/table/loading-demos-message.tsx
-msgid "Loading {loadedDemoCount} of {demoToLoadCount} demos…"
-msgstr "{demoToLoadCount} 个 demo 已加载 {loadedDemoCount} 个…"
+msgid "Loading {current} of {total} demos…"
+msgstr ""
 
 #: src/ui/demos/table/no-demos.tsx
 msgid "No demos found with current filters."
@@ -7403,9 +7411,26 @@ msgctxt "Button"
 msgid "Add a folder"
 msgstr "增加一个文件夹"
 
+#: src/ui/settings/folders/demo-archive-extraction-settings.tsx
+msgid "Automatic demo extraction from archives"
+msgstr ""
+
+#: src/ui/settings/folders/demo-archive-extraction-settings.tsx
+msgid "Automatically extract demos contained in archives found in your folders when scanning for demos. Extracted demos are placed next to their archive."
+msgstr ""
+
+#: src/ui/settings/folders/demo-archive-extraction-settings.tsx
+msgid "Enabling automatic extraction has an impact on demo loading speed!"
+msgstr ""
+
 #: src/ui/settings/folders/folder-row.tsx
 msgid "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
 msgstr "此文件夹包含在启动CS:GO时阻止demo播放的字符！(不是CS2)"
+
+#: src/ui/settings/folders/folders-settings.tsx
+#: src/ui/settings/settings-tabs.tsx
+msgid "Folders"
+msgstr "文件夹"
 
 #: src/ui/settings/folders/include-sub-folders-switch.tsx
 msgid "Include subfolders"
@@ -7823,10 +7848,6 @@ msgstr "等待回合结束"
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
 msgstr "UI设置"
-
-#: src/ui/settings/settings-tabs.tsx
-msgid "Folders"
-msgstr "文件夹"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Maps"

@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import type { Demo } from 'csdm/common/types/demo';
 import { Status } from 'csdm/common/types/status';
+import { LoadDemosStep, type LoadDemosProgress } from 'csdm/common/types/load-demos-progress';
 import { folderRemoved, folderAdded, folderUpdated } from 'csdm/ui/settings/folders/folder-actions';
 import {
   deleteDemosSuccess,
@@ -26,8 +27,7 @@ export type DemosState = {
   readonly entities: Demo[];
   readonly selectedDemosPath: string[];
   readonly fuzzySearchText: string;
-  readonly loadedDemoCount: number;
-  readonly demoToLoadCount: number;
+  readonly progress: LoadDemosProgress;
 };
 
 const initialState: DemosState = {
@@ -35,8 +35,11 @@ const initialState: DemosState = {
   entities: [],
   selectedDemosPath: [],
   fuzzySearchText: '',
-  loadedDemoCount: 0,
-  demoToLoadCount: 0,
+  progress: {
+    step: LoadDemosStep.LoadingDemos,
+    current: 0,
+    total: 0,
+  },
 };
 
 export const demosReducer = createReducer(initialState, (builder) => {
@@ -44,8 +47,7 @@ export const demosReducer = createReducer(initialState, (builder) => {
     .addCase(fetchDemosStart, (state) => {
       state.status = Status.Loading;
       state.entities = [];
-      state.demoToLoadCount = 0;
-      state.loadedDemoCount = 0;
+      state.progress = initialState.progress;
     })
     .addCase(fetchDemosSuccess, (state, action) => {
       state.status = Status.Success;
@@ -55,8 +57,7 @@ export const demosReducer = createReducer(initialState, (builder) => {
       state.status = Status.Error;
     })
     .addCase(fetchDemosProgress, (state, action) => {
-      state.demoToLoadCount = action.payload.demoToLoadCount;
-      state.loadedDemoCount = action.payload.demoLoadedCount;
+      state.progress = action.payload;
     })
     .addCase(deleteDemosSuccess, (state, action) => {
       state.entities = state.entities.filter((demo) => {
