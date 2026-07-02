@@ -2793,7 +2793,7 @@ msgstr "Esportal"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Esportligaen"
-msgstr ""
+msgstr "Esportligaen"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -7813,7 +7813,7 @@ msgstr "在回合冻结时间结束之前的倒计时。"
 
 #: src/ui/settings/playback/watch-round-wait-round-end.tsx
 msgid "Wait for the round to end before skipping to the next round when watching player's rounds."
-msgstr ""
+msgstr "在观看玩家的回合时，请等待当前回合结束，再跳转到下一回合。"
 
 #: src/ui/settings/playback/watch-round-wait-round-end.tsx
 msgctxt "Settings title"
