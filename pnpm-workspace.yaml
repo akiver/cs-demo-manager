@@ -13,7 +13,7 @@ allowBuilds:
 catalog:
   esbuild: 0.28.1
   node-gyp: 13.0.0
-  vite: npm:@voidzero-dev/vite-plus-core@0.2.1
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.2
   vitest: 4.1.9
 
 overrides:

@@ -75,7 +75,6 @@ export async function updateSystemStartupBehavior(behavior: StartupBehavior) {
     const args = behavior === StartupBehavior.Minimized ? ['--login', '--minimized'] : ['--login'];
     app.setLoginItemSettings({
       openAtLogin: behavior !== StartupBehavior.Off,
-      openAsHidden: behavior === StartupBehavior.Minimized,
       args,
     });
 
