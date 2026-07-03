@@ -1,5 +1,5 @@
 import { MAX_STEAM_IDS_PER_REQUEST } from './steam-constants';
-import { getSteamApiKey } from './get-steam-api-key';
+import { getSteamApiKey, isValidSteamApiKey } from './get-steam-api-key';
 import { SteamApiForbiddenError } from './steam-api-forbidden-error';
 import { SteamApiError } from './steamapi-error';
 import { SteamTooMayRequests } from './steam-too-many-requests';
@@ -35,6 +35,9 @@ export async function getUsersSummary(steamIds: string[]): Promise<PlayerSummary
   const players: PlayerSummary[] = [];
   let promises: Promise<void>[] = [];
   const steamApiKey = await getSteamApiKey();
+  if (!isValidSteamApiKey(steamApiKey)) {
+    return players;
+  }
 
   const maxParallelRequestCount = 10;
   const requestToMakeCount = Math.ceil(steamIds.length / MAX_STEAM_IDS_PER_REQUEST);
