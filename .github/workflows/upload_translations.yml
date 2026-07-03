@@ -1,27 +1,27 @@
-name: Upload translations to Crowdin
+name: Upload sources to Crowdin
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'src/ui/translations/**/*.po'
-      - 'src/electron-main/translations/**/*.json'
+      - 'src/ui/translations/en/*.po'
+      - 'src/electron-main/translations/en/*.json'
   workflow_dispatch:
 
 jobs:
-  upload-translations-to-crowdin:
+  upload-sources-to-crowdin:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Upload translations to Crowdin
+      - name: Upload sources to Crowdin
         uses: crowdin/github-action@v2
         with:
           upload_sources: true
-          upload_translations: true
+          upload_translations: false
           download_translations: false
           create_pull_request: false
         env:

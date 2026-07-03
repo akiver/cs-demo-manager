@@ -2,6 +2,7 @@
 import './load-dot-env-variables.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 import fs from 'fs-extra';
 import { build } from 'vite-plus';
 import esbuild from 'esbuild';
@@ -16,6 +17,33 @@ const commonDefine = {
   IS_PRODUCTION: 'true',
   IS_DEV: 'false',
 };
+
+function downloadTranslations() {
+  if (!process.env.CROWDIN_PERSONAL_TOKEN) {
+    console.warn(
+      'CROWDIN_PERSONAL_TOKEN is not set, skipping translations download. The build will only include English.',
+    );
+    console.warn(
+      `If you want to download translations, you must:
+      1. Create a Crowdin account (https://crowdin.com)
+      2. Request to join the project on Crowdin and wait to be granted access
+      3. Generate a personal access token (https://crowdin.com/settings#api-key)
+      4. Set the CROWDIN_PERSONAL_TOKEN environment variable to your token
+      5. Re-run this build script`,
+    );
+    return;
+  }
+
+  const result = spawnSync('crowdin download', {
+    cwd: rootFolderPath,
+    stdio: 'inherit',
+    shell: true,
+  });
+
+  if (result.status !== 0) {
+    throw new Error('Failed to download translations from Crowdin.');
+  }
+}
 
 async function buildRendererProcessBundle() {
   await build({
@@ -137,6 +165,7 @@ async function buildCliBundle() {
 }
 
 try {
+  downloadTranslations();
   await buildRendererProcessBundle();
   await Promise.all([buildWebSocketServerBundle(), buildMainProcessBundle(), buildPreloadBundle(), buildCliBundle()]);
 } catch (error) {

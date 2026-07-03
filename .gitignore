@@ -18,3 +18,10 @@ static/changelog
 build
 !build/Release/*.node
 *.local.json
+
+# Only the English source catalogs are committed. The other locales are managed on
+# Crowdin and downloaded at build time.
+src/ui/translations/*
+!src/ui/translations/en
+src/electron-main/translations/*
+!src/electron-main/translations/en
