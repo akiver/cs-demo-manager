@@ -24,7 +24,7 @@ import { assertNever } from 'csdm/common/assert-never';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { SecondsInput } from 'csdm/ui/components/inputs/seconds-input';
 import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
-import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
+import { PlayersSelectWithTeam } from 'csdm/ui/components/inputs/select/players-select-with-team';
 import { RoundsSelect } from 'csdm/ui/components/inputs/select/rounds-select';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 
@@ -78,12 +78,14 @@ function SelectPlayerDialog() {
   const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(2);
   const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(2);
   const [preserveExistingSequences, setPreserveExistingSequences] = useState(false);
+  const [voiceEnabledSteamIds, setVoiceEnabledSteamIds] = useState<string[]>(() => {
+    return settings.playerVoicesEnabled ? match.players.map((player) => player.steamId) : [];
+  });
 
   const onConfirm = () => {
     if (!selectedSteamIds) {
       return;
     }
-
     switch (selectedEvent) {
       case PlayerSequenceEvent.Deaths:
         dispatch(
@@ -97,6 +99,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
+            voiceEnabledSteamIds,
           }),
         );
         break;
@@ -112,6 +115,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
+            voiceEnabledSteamIds,
           }),
         );
         break;
@@ -125,6 +129,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
+            voiceEnabledSteamIds,
           }),
         );
         break;
@@ -233,7 +238,7 @@ function SelectPlayerDialog() {
       </DialogHeader>
       <DialogContent>
         <div className="flex w-[512px] flex-col gap-y-12">
-          <PlayersSelect
+          <PlayersSelectWithTeam
             players={match.players}
             selectedSteamIds={selectedSteamIds}
             onChange={(steamIds: string[]) => {
@@ -264,6 +269,14 @@ function SelectPlayerDialog() {
           </div>
           <RoundsSelect rounds={match.rounds} selectedRoundNumbers={selectedRounds} onChange={setSelectedRounds} />
           {renderSelectedEventOptions()}
+          <PlayersSelectWithTeam
+            label={<Trans context="Input label">Voice enabled players</Trans>}
+            players={match.players}
+            selectedSteamIds={voiceEnabledSteamIds}
+            onChange={(steamIds: string[]) => {
+              setVoiceEnabledSteamIds(steamIds);
+            }}
+          />
         </div>
       </DialogContent>
       <DialogFooter>

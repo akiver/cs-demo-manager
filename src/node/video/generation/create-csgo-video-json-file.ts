@@ -79,7 +79,7 @@ export async function createCsgoVideoJsonFile({
     json.addExecCommand(firstActionsTick, `mirv_deathmsg lifetime ${sequence.deathNoticesDuration}`);
     json.addExecCommand(1, `mirv_deathmsg filter clear`);
 
-    if (sequence.playerVoicesEnabled) {
+    if (sequence.voiceEnabledSteamIds.length > 0) {
       json.enablePlayerVoices(firstActionsTick);
     } else {
       json.disablePlayerVoices(firstActionsTick);

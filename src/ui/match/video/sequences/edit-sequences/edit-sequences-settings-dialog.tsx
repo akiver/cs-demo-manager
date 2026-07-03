@@ -48,7 +48,7 @@ export function EditSequenceSettingsDialog() {
     return sequences.every((sequence) => sequence.showAssists);
   });
   const [playerVoicesEnabled, setPlayerVoicesEnabled] = useState(() => {
-    return sequences.every((sequence) => sequence.playerVoicesEnabled);
+    return sequences.every((sequence) => sequence.voiceEnabledSteamIds.length > 0);
   });
   const [recordAudioEnabled, setRecordAudioEnabled] = useState(() => {
     return sequences.every((sequence) => sequence.recordAudio);
@@ -82,7 +82,7 @@ export function EditSequenceSettingsDialog() {
           state.overrideDeathNoticesDuration && !isNaN(deathNoticesDuration)
             ? deathNoticesDuration
             : sequence.deathNoticesDuration,
-        playerVoicesEnabled,
+        voiceEnabledSteamIds: playerVoicesEnabled ? match.players.map((player) => player.steamId) : [],
         recordAudio: recordAudioEnabled,
         playerCameras:
           state.overridePlayerFocusSteamId && playerFocusSteamId

@@ -17,4 +17,5 @@ export type SequenceForm = {
   // @platform win32 Requires HLAE
   deathNoticesDuration: number;
   cfg?: string;
+  voiceEnabledSteamIds: string[];
 };

@@ -80,11 +80,14 @@ export async function createCs2VideoJsonFile({
     json.addExecCommand(1, `mirv_deathmsg lifetime ${sequence.deathNoticesDuration}`);
     json.addExecCommand(1, `mirv_deathmsg filter clear`);
 
-    if (sequence.playerVoicesEnabled) {
-      json.enablePlayerVoices(1);
-    } else {
-      json.disablePlayerVoices(1);
-    }
+    const voiceEnabledUserIds = sequence.voiceEnabledSteamIds
+      .map((steamId) => {
+        return players.find((player) => player.steamId === steamId)?.slot;
+      })
+      .filter((slot): slot is number => slot !== undefined)
+      .map((slot) => slot - 1);
+    const { valueLow, valueHigh } = generatePlayerVoicesValues(voiceEnabledUserIds);
+    json.setEnabledVoicesKey(valueLow, valueHigh);
 
     const roundedTickrate = Math.round(tickrate);
     const setupSequenceTick = Math.max(1, sequence.startTick - roundedTickrate);
