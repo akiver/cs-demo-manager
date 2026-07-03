@@ -217,8 +217,10 @@ Add context for translators:
 
 ## After adding or changing strings
 
-Re-generate `.po` files (both UI and electron-main catalogs):
+Re-generate the catalogs (both UI and electron-main):
 
 ```sh
 vp run i18n:extract
 ```
+
+Only the **English** source catalogs (`src/ui/translations/en/messages.po` and `src/electron-main/translations/en/messages.json`) are committed — commit those. The other locales are gitignored, managed on Crowdin, and downloaded at build time, so leave them untracked and never translate them by hand.

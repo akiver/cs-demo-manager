@@ -52,7 +52,7 @@ Before submitting changes, all of the following must pass:
 1. `vp check` — lint, format, and type-check
 2. `vp run test` — all tests
 3. `vp run deadcode` — no unused code introduced
-4. `vp run i18n:extract` — if any user-visible strings were added or changed, run this and commit the updated `.po` files
+4. `vp run i18n:extract` — if any user-visible strings were added or changed, run this and commit the updated English source catalogs.
 
 ## Architecture
 
@@ -118,7 +118,9 @@ Only unit tests exist today — integration and E2E tests may be added later. Te
 
 The app is localized with **LinguiJS**. Source strings are written in English and extracted with `vp run i18n:extract` into per-locale catalogs (`src/ui/translations/{locale}/messages.po` for the renderer, `src/electron-main/translations/{locale}/*.json` for the main process).
 
-Actual translations are managed through **Crowdin**, not by hand. When you add or change a string, only commit the updated English source plus the extracted (untranslated) entries in the other catalogs — leaving non-English entries empty/untranslated in a PR or commit is expected. Crowdin contributors fill them in and the translations are synced back later, so do **not** manually translate the `.po`/`.json` files yourself.
+Only the **English** source catalogs (`en/messages.po` and `en/messages.json`) are committed to the repository. The other locales are managed on **Crowdin** and downloaded at build time (`scripts/build.mjs`), so they are gitignored and never committed. Local/dev builds without a `CROWDIN_PERSONAL_TOKEN` skip the download and fall back to English at runtime.
+
+When you add or change a string, only commit the updated English source. Do **not** manually translate the `.po`/`.json` files yourself — Crowdin contributors fill in the other locales and the build pulls them in.
 
 Use the `/i18n` skill when adding or updating any user-visible string in the UI.
 
