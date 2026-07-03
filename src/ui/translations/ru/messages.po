@@ -20,212 +20,212 @@ msgstr ""
 
 #: src/ui/analyses/action-bar/remove-all-analyses-button.tsx
 msgid "Remove all"
-msgstr ""
+msgstr "Удалить всё"
 
 #: src/ui/analyses/action-bar/remove-analyses-succeed-button.tsx
 msgid "Remove succeed analyses"
-msgstr ""
+msgstr "Удалить успешные анализы"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Pending analysis…"
-msgstr ""
+msgstr "В ожидании анализа…"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Analyzing demo…"
-msgstr ""
+msgstr "Анализ демо…"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "An error occurred while analyzing the demo."
-msgstr ""
+msgstr "Произошла ошибка при анализе демо."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Analysis succeed."
-msgstr ""
+msgstr "Анализ прошёл успешно."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Inserting match…"
-msgstr ""
+msgstr "Вставка матча…"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Match inserted into the database."
-msgstr ""
+msgstr "Матч добавлен в базу данных."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "An error occurred while inserting the match into the database."
-msgstr ""
+msgstr "Произошла ошибка при добавлении матча в базу данных."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "The analysis failed with the error code: <0>{errorCode}</0>"
-msgstr ""
+msgstr "Ошибка анализа с кодом ошибки: <0>{errorCode}</0>"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read the error codes <0>documentation</0> to understand the code signification and what you can do."
-msgstr ""
+msgstr "Пожалуйста, прочтите коды ошибок <0>документация</0> для понимания кода и того, что вы можете сделать."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read and follow the instructions on <0>GitHub</0> to report the issue <1>only if the documentation says you should for this error code</1>."
-msgstr ""
+msgstr "Пожалуйста, прочитайте и следуйте инструкциям на <0>GitHub</0>, чтобы сообщить о проблеме <1>только если в документации это указано для кода ошибки</1>."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read and follow the instructions on <0>GitHub</0> to report the issue."
-msgstr ""
+msgstr "Пожалуйста, прочитайте и следуйте инструкциям на <0>GitHub</0>, чтобы сообщить о проблеме."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Logs:"
-msgstr ""
+msgstr "Логи:"
 
 #: src/ui/analyses/no-analysis.tsx
 msgid "No demo analysis in progress."
-msgstr ""
+msgstr "Нет демо анализа в прогрессе."
 
 #: src/ui/analyses/table/context-menu/remove-demo-from-analyses-item.tsx
 #: src/ui/match/video/sequence/match-timeline/camera-item.tsx
 #: src/ui/match/video/sequence/match-timeline/custom-camera-item.tsx
 msgctxt "Context menu"
 msgid "Remove"
-msgstr ""
+msgstr "Удалить"
 
 #: src/ui/analyses/table/context-menu/see-demo-item.tsx
 #: src/ui/components/context-menu/items/navigate-to-matches-demo-item.tsx
 msgctxt "Context menu"
 msgid "See demo"
-msgstr ""
+msgstr "Смотреть демо"
 
 #: src/ui/analyses/table/context-menu/see-match-item.tsx
 #: src/ui/demos/table/demo-context-menu.tsx
 msgctxt "Context menu"
 msgid "See match"
-msgstr ""
+msgstr "Смотреть совпадения"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Analyzing"
-msgstr ""
+msgstr "Анализ"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Error"
-msgstr ""
+msgstr "Ошибка"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Inserting"
-msgstr ""
+msgstr "Вставка"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Done"
-msgstr ""
+msgstr "Готово"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Pending"
-msgstr ""
+msgstr "В ожидании"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Source"
-msgstr ""
+msgstr "Источник"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Source"
-msgstr ""
+msgstr "Источник"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header"
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header"
 msgid "Demo path"
-msgstr ""
+msgstr "Путь демо"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header tooltip"
 msgid "Demo path"
-msgstr ""
+msgstr "Путь демо"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Map"
-msgstr ""
+msgstr "Карта"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Map"
-msgstr ""
+msgstr "Карта"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header"
 msgid "Date added"
-msgstr ""
+msgstr "Дата добавления"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header tooltip"
 msgid "Date added"
-msgstr ""
+msgstr "Дата добавления"
 
 #: src/ui/ban/stats/ban-per-competitive-rank-chart.tsx
 msgctxt "Chart title"
 msgid "Ban per competitive rank"
-msgstr ""
+msgstr "Бан по рангу"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 #: src/ui/player/rank/player-competitive-rank-history.tsx
 #: src/ui/player/rank/player-premier-rank-history.tsx
 msgctxt "Chart axis label"
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 msgctxt "Chart axis label"
 msgid "Bans"
-msgstr ""
+msgstr "Баны"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Bans"
-msgstr ""
+msgstr "Баны"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 msgid "Ban count over time"
-msgstr ""
+msgstr "Количество банов за время"
 
 #: src/ui/ban/stats/ban-per-premier-rank-chart.tsx
 msgid "Tier {tier}: {bannedCount}"
-msgstr ""
+msgstr "Уровень {tier}: {bannedCount}"
 
 #: src/ui/ban/stats/ban-per-premier-rank-chart.tsx
 msgctxt "Chart title"
 msgid "Ban per Premier rank"
-msgstr ""
+msgstr "Бан по Premier рангу"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "Loading ban stats…"
-msgstr ""
+msgstr "Загрузка статистики бана…"
 
 #: src/ui/ban/stats/ban-stats.tsx
 #: src/ui/comment/use-update-comment.tsx
@@ -273,226 +273,226 @@ msgstr ""
 #: src/ui/videos/use-remove-videos.tsx
 #: src/ui/videos/video-entry.tsx
 msgid "An error occurred"
-msgstr ""
+msgstr "Произошла ошибка"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Players"
-msgstr ""
+msgstr "Игроки"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Banned players"
-msgstr ""
+msgstr "Забаненые игроки"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Banned players percentage"
-msgstr ""
+msgstr "Процент забаненных игроков"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "AVG banned players/match"
-msgstr ""
+msgstr " АВГ забаненных игроков/матч"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "AVG banned account age"
-msgstr ""
+msgstr "АВГ возраст забаненных аккаунтов"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "{averageBannedAccountAgeInYears, plural, one {# year} other {# years}}"
-msgstr ""
+msgstr "{averageBannedAccountAgeInYears, plural, one {# год} few {# лет} many {# лет} other {# лет}}"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Median banned account age"
-msgstr ""
+msgstr "Среднее число возраста забаненных аккаунтов"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "{medianBannedAccountAgeInYears, plural, one {# year} other {# years}}"
-msgstr ""
+msgstr "{medianBannedAccountAgeInYears, plural, one {# год} few {# лет} many {# лет} other {# лет}}"
 
 #: src/ui/ban/stats/last-bans.tsx
 msgid "Last bans"
-msgstr ""
+msgstr "Последние баны"
 
 #: src/ui/ban/stats/no-ban-message.tsx
 msgid "No bans yet"
-msgstr ""
+msgstr "Пока нет банов"
 
 #: src/ui/ban/stats/no-stats.tsx
 msgid "No VAC ban stats to show, you must analyze demos to generate stats."
-msgstr ""
+msgstr "Нет статистики VAC бана для отображения, вы должны проанализировать демо, чтобы генерировать статистику."
 
 #: src/ui/bootstrap/app-loader.tsx
 msgid "An error occurred while loading the application."
-msgstr ""
+msgstr "Произошла ошибка при загрузке приложения."
 
 #: src/ui/bootstrap/connect-database/connect-database-button.tsx
 msgctxt "Button"
 msgid "Connect"
-msgstr ""
+msgstr "Подключиться"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It looks like you installed an older version of CS Demo Manager and the current database schema is not compatible with it."
-msgstr ""
+msgstr "Похоже, вы установили старую версию CS Demo Manager и текущая схема базы данных не совместима с ней."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
-msgstr ""
+msgstr "Вы можете обновить CS Demo Manager до последней версии или сбросить базу данных, чтобы начать с нуля."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that PostgreSQL is not installed on your system or the path to the <0>psql</0> executable is not in your <1>PATH</1> environment variable."
-msgstr ""
+msgstr "Обычно это означает, что PostgreSQL не установлен в вашей системе или путь к исполняемому файлу <0>psql</0> отсутствует в вашей переменной окружения <1>PATH</1>."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that the PostgreSQL service is not running, make sure it's running."
-msgstr ""
+msgstr "Обычно это означает, что служба PostgreSQL не запущен, убедитесь, что он запущен."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "This error usually means that the database is not running or that the connection settings are incorrect."
-msgstr ""
+msgstr "Эта ошибка обычно означает, что база данных не запущена или что настройки подключения неверны."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "Make sure PostgreSQL is running and your settings are correct."
-msgstr ""
+msgstr "Убедитесь, что работает PostgreSQL и ваши настройки корректны."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "The connection to the database failed with the following error:"
-msgstr ""
+msgstr "Не удалось подключиться к базе данных со следующей ошибкой:"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "CS Demo Manager requires a PostgreSQL database."
-msgstr ""
+msgstr "CS Demo Manager требует базу данных PostgreSQL."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "{secondsBeforeNextTry, plural, one {Retrying in # second…} other {Retrying in # seconds…}}"
-msgstr ""
+msgstr "{secondsBeforeNextTry, plural, one {Повтор через # секунды…} few {Повтор через # секунд…} many {Повтор через # секунд…} other {Повтор через # секунд…}}"
 
 #: src/ui/bootstrap/connect-database/help-link.tsx
 msgid "Please read the <0>documentation</0> for help."
-msgstr ""
+msgstr "Пожалуйста, прочтите <0>документацию</0> для помощи."
 
 #: src/ui/bootstrap/settings-provider.tsx
 msgid "An error occurred while loading settings."
-msgstr ""
+msgstr "Произошла ошибка при загрузке настроек."
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "The Steam API returned a forbidden error"
-msgstr ""
+msgstr "Steam API вернул запрещенную ошибку"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "Steam API returned a 429 status code"
-msgstr ""
+msgstr "API Steam вернул код статуса 429"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "An error occurred while checking for new banned Steam accounts (code {errorCode})"
-msgstr ""
+msgstr "Произошла ошибка при проверке новых заблокированных аккаунтов Steam (код {errorCode})"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-counter-strike-listeners.tsx
 msgid "Counter-Strike starting…"
-msgstr ""
+msgstr "Counter-Strike запускается…"
 
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "The connection to the WebSocket server failed with code {code}."
-msgstr ""
+msgstr "Подключение к серверу WebSocket завершилось с кодом {code}."
 
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "An error occurred connecting to the WebSocket server."
-msgstr ""
+msgstr "Произошла ошибка при подключении к серверу WebSocket."
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Failed to load changelog."
-msgstr ""
+msgstr "Не удалось загрузить список изменений."
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Changelog version {APP_VERSION}"
-msgstr ""
+msgstr "Список изменений {APP_VERSION}"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Visit website"
-msgstr ""
+msgstr "Перейти на сайт"
 
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
 msgid "Analyze"
-msgstr ""
+msgstr "Анализ"
 
 #: src/ui/components/buttons/apply-button.tsx
 msgctxt "Button"
 msgid "Apply"
-msgstr ""
+msgstr "Применить"
 
 #: src/ui/components/buttons/cancel-button.tsx
 msgctxt "Button"
 msgid "Cancel"
-msgstr ""
+msgstr "Отменить"
 
 #: src/ui/components/buttons/change-button.tsx
 msgctxt "Button"
 msgid "Change"
-msgstr ""
+msgstr "Изменить"
 
 #: src/ui/components/buttons/close-button.tsx
 msgctxt "Button"
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 #: src/ui/components/buttons/confirm-button.tsx
 #: src/ui/dialogs/confirm-dialog.tsx
 msgctxt "Button"
 msgid "Confirm"
-msgstr ""
+msgstr "Подтвердить"
 
 #: src/ui/components/buttons/copy-button.tsx
 msgctxt "Button"
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
 #: src/ui/components/buttons/copy-demo-link-button.tsx
 msgctxt "Button"
 msgid "Copy demo link"
-msgstr ""
+msgstr "Копировать демо ссылку"
 
 #: src/ui/components/buttons/copy-share-code-button.tsx
 msgctxt "Button"
 msgid "Copy share code"
-msgstr ""
+msgstr "Скопировать код обмена"
 
 #: src/ui/components/buttons/copy-steamid-button.tsx
 msgid "Copy SteamID"
-msgstr ""
+msgstr "Копировать SteamID"
 
 #: src/ui/components/buttons/delete-button.tsx
 msgctxt "Button"
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: src/ui/components/buttons/details-button.tsx
 msgctxt "Button"
 msgid "Details"
-msgstr ""
+msgstr "Подробности"
 
 #: src/ui/components/buttons/export-html-element-as-image-button.tsx
 msgctxt "OS save dialog title"
 msgid "Export as PNG"
-msgstr ""
+msgstr "Экспортировать в PNG"
 
 #: src/ui/components/buttons/export-html-element-as-image-button.tsx
 msgctxt "Button"
 msgid "Export as PNG"
-msgstr ""
+msgstr "Экспортировать в PNG"
 
 #: src/ui/components/buttons/install-button.tsx
 msgctxt "Button"
 msgid "Install"
-msgstr ""
+msgstr "Установить"
 
 #: src/ui/components/buttons/refresh-button.tsx
 msgctxt "Button"
 msgid "Refresh"
-msgstr ""
+msgstr "Обновить"
 
 #: src/ui/components/buttons/remove-button.tsx
 #: src/ui/match/video/sequence/cameras/sequence-custom-cameras-table.tsx
@@ -500,164 +500,164 @@ msgstr ""
 #: src/ui/videos/video-entry.tsx
 msgctxt "Button"
 msgid "Remove"
-msgstr ""
+msgstr "Удалить"
 
 #: src/ui/components/buttons/reset-button.tsx
 msgctxt "Button"
 msgid "Reset"
-msgstr ""
+msgstr "Сбросить"
 
 #: src/ui/components/buttons/retry-button.tsx
 msgctxt "Button"
 msgid "Retry"
-msgstr ""
+msgstr "Повторить"
 
 #: src/ui/components/buttons/reveal-button.tsx
 msgctxt "Button"
 msgid "Reveal"
-msgstr ""
+msgstr "Показать"
 
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 msgid "File not found"
-msgstr ""
+msgstr "Файл не найден"
 
 #. placeholder {0}: window.csdm.platform
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 #: src/ui/components/context-menu/items/reveal-file-in-explorer-item.tsx
 msgid "{0, select, darwin {Reveal in Finder} win32 {Reveal in Explorer} other {Reveal in files explorer}}"
-msgstr ""
+msgstr "{0, select, darwin {Показать в Finder} win32 {Показать в Explorer} other {Показать в обозревателе файлов}}"
 
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 msgid "Folder not found"
-msgstr ""
+msgstr "Папка не найдена"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
 #: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
 msgid "The log file does not exist"
-msgstr ""
+msgstr "Файл журнала не существует"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
 msgid "Reveal log file"
-msgstr ""
+msgstr "Показать файл журнала"
 
 #: src/ui/components/buttons/save-button.tsx
 msgctxt "Button"
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: src/ui/components/buttons/see-demo-button.tsx
 msgctxt "Button"
 msgid "See demo"
-msgstr ""
+msgstr "Смотреть демо"
 
 #: src/ui/components/buttons/see-match-button.tsx
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Button"
 msgid "See match"
-msgstr ""
+msgstr "Смотреть матч"
 
 #: src/ui/components/buttons/update-button.tsx
 #: src/ui/matches/dialogs/update-team-names-dialog.tsx
 msgctxt "Button"
 msgid "Update"
-msgstr ""
+msgstr "Обновить"
 
 #: src/ui/components/buttons/watch-button.tsx
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgctxt "Button"
 msgid "Watch"
-msgstr ""
+msgstr "Смотреть"
 
 #: src/ui/components/buttons/xlsx-export-button.tsx
 msgctxt "Button"
 msgid "XLSX export"
-msgstr ""
+msgstr "Экспорт в XLSX"
 
 #: src/ui/components/context-menu/items/add-to-video-sequences-item.tsx
 msgctxt "Context menu"
 msgid "Add to video sequences"
-msgstr ""
+msgstr "Добавить в видео последовательность"
 
 #: src/ui/components/context-menu/items/analyze-item.tsx
 msgctxt "Context menu"
 msgid "Analyze"
-msgstr ""
+msgstr "Анализ"
 
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
 #: src/ui/demos/table/update-demos-type-item.tsx
 msgctxt "Context menu"
 msgid "Change type"
-msgstr ""
+msgstr "Изменить тип"
 
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
 msgctxt "Context menu"
 msgid "GOTV"
-msgstr ""
+msgstr "GOTV"
 
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
 msgctxt "Context menu"
 msgid "POV"
-msgstr ""
+msgstr "POV"
 
 #: src/ui/components/context-menu/items/change-source-item.tsx
 msgctxt "Context menu"
 msgid "Change source"
-msgstr ""
+msgstr "Сменить Источник"
 
 #: src/ui/components/context-menu/items/comment-item.tsx
 msgctxt "Context menu"
 msgid "Comment"
-msgstr ""
+msgstr "Комментарии"
 
 #: src/ui/components/context-menu/items/copy-checksums-item.tsx
 msgctxt "Copy context menu"
 msgid "Checksum"
-msgstr ""
+msgstr "Контрольная сумма"
 
 #: src/ui/components/context-menu/items/copy-filepath-item.tsx
 msgctxt "Copy context menu"
 msgid "File path"
-msgstr ""
+msgstr "Путь к файлу"
 
 #: src/ui/components/context-menu/items/copy-item.tsx
 msgctxt "Context menu"
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
 #: src/ui/components/context-menu/items/copy-name-item.tsx
 msgctxt "Context menu"
 msgid "Copy name"
-msgstr ""
+msgstr "Скопировать имя"
 
 #: src/ui/components/context-menu/items/copy-sharecode-item.tsx
 msgctxt "Copy context menu"
 msgid "Share code"
-msgstr ""
+msgstr "Поделиться кодом"
 
 #: src/ui/components/context-menu/items/copy-steamid-item.tsx
 msgctxt "Context menu"
 msgid "Copy Steam ID"
-msgstr ""
+msgstr "Копировать SteamID"
 
 #: src/ui/components/context-menu/items/delete-item.tsx
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgctxt "Context menu"
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: src/ui/components/context-menu/items/details-item.tsx
 msgctxt "Context menu"
 msgid "Details"
-msgstr ""
+msgstr "Подробности"
 
 #: src/ui/components/context-menu/items/details-item.tsx
 #: src/ui/components/context-menu/items/rename-item.tsx
 msgctxt "Keyboard shortcut"
 msgid "Enter"
-msgstr ""
+msgstr "Войти"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 msgid "Chat messages export"
@@ -671,100 +671,100 @@ msgstr ""
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Button label"
 msgid "Select"
-msgstr ""
+msgstr "Выбрать"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 msgctxt "Toast"
 msgid "Chat messages exported, click here to reveal the folder"
-msgstr ""
+msgstr "Сообщения в чате экспортированы, нажмите здесь, чтобы открыть в папке"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 msgid "No chat messages to export"
-msgstr ""
+msgstr "Нет сообщений для экспорта"
 
 #: src/ui/components/context-menu/items/export-chat-messages-item.tsx
 msgctxt "Context menu"
 msgid "Chat messages"
-msgstr ""
+msgstr "Сообщения чата"
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
 #: src/ui/demos/table/export-demos-items.tsx
 #: src/ui/players/table/export-players-item.tsx
 msgctxt "Context menu"
 msgid "Export"
-msgstr ""
+msgstr "Экспортировать"
 
 #: src/ui/components/context-menu/items/export-matches-to-json-item.tsx
 msgctxt "Context menu"
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgid "Export in progress…"
-msgstr ""
+msgstr "Выполняется экспорт…"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Exporting demo {demoNumber} of {totalDemoCount}..."
-msgstr ""
+msgstr "Экспортируется демо {demoNumber} из {totalDemoCount}..."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/exporting-to-xlsx-dialog.tsx
 msgid "Export done."
-msgstr ""
+msgstr "Экспорт завершён"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Demo not found: {demoPath}"
-msgstr ""
+msgstr "Демо не найден: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Decoding error: {demoPath}"
-msgstr ""
+msgstr "Ошибка расшифровки: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "No voice data found for demo: {demoPath}"
-msgstr ""
+msgstr "Не найдено голосовых данных для демо: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Failed to parse demo: {demoPath}"
-msgstr ""
+msgstr "Не удалось проанализировать демо: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Unsupported audio codec: {demoPath}"
-msgstr ""
+msgstr "Неподдерживаемый аудио кодек: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Failed to create audio file: {demoPath}"
-msgstr ""
+msgstr "Не удалось создать аудиофайл: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Invalid arguments for demo: {demoPath}"
-msgstr ""
+msgstr "Недопустимые аргументы для демо: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Failed to load the Counter-Strike audio library."
-msgstr ""
+msgstr "Не удалось загрузить аудио библиотеку Counter-Strike."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Failed to open the demo file."
-msgstr ""
+msgstr "Не удалось открыть демо файл."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Some required library files are missing."
-msgstr ""
+msgstr "Отсутствуют некоторые необходимые файлы библиотеки."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "This demo format is not supported."
-msgstr ""
+msgstr "Этот демо формат не поддерживается."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "You need to install <0>Rosetta</0>."
-msgstr ""
+msgstr "Вам нужно установить <0>Rosetta</0>."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
@@ -804,69 +804,69 @@ msgstr ""
 #: src/ui/team/load-team-error.tsx
 #: src/ui/teams/teams-table.tsx
 msgid "An error occurred."
-msgstr ""
+msgstr "Произошла ошибка."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Players voice export"
-msgstr ""
+msgstr "Экспорт голоса игроков"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/match/viewer-2d/playback-bar/audio-selector-button.tsx
 msgid "Valve Matchmaking demos do not contain voice audio data!"
-msgstr ""
+msgstr "Демо от Valve Matchmaking не содержит звуковых данных!"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Warnings:"
-msgstr ""
+msgstr "Предупреждения:"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Voice mode export label"
 msgid "One file per player (no silence, only voice)"
-msgstr ""
+msgstr "Один файл на каждого игрока (без тишины, только голос)"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Voice mode export label"
 msgid "One file per player (with silence, demo length)"
-msgstr ""
+msgstr "Один файл на игрока (с тишиной, длиной демо)"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Voice mode export label"
 msgid "Single file (all players, with silence, demo length)"
-msgstr ""
+msgstr "Один файл (все игроки, с тишиной, длиной демо)"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Choose how you want the voice audio to be exported"
-msgstr ""
+msgstr "Выберите, как вы хотите, чтобы голосовое аудио было экспортировано"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-xlsx-options-dialog.tsx
 msgctxt "Button label"
 msgid "Export"
-msgstr ""
+msgstr "Экспортировать"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Context menu"
 msgid "Players voice"
-msgstr ""
+msgstr "Голос игроков"
 
 #: src/ui/components/context-menu/items/export-to-xlsx-item.tsx
 msgctxt "Context menu"
 msgid "XLSX"
-msgstr ""
+msgstr "XLSX"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
 msgid "Stop ignoring player's bans"
-msgstr ""
+msgstr "Прекратить игнорировать баны игроков"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgid "Steam account added to ignored list"
-msgstr ""
+msgstr "Аккаунт Steam добавлен в игнорируемый список"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
 msgid "Ignore player's bans"
-msgstr ""
+msgstr "Игнорировать баны игроков"
 
 #: src/ui/components/context-menu/items/open-faceit-profile-item.tsx
 msgctxt "Context menu"
