@@ -117,6 +117,8 @@ async function start() {
   const settings = await migrateSettings();
   await loadI18n(settings.ui.locale);
 
+  initialize(settings.autoDownloadUpdates);
+
   tray = createTray();
   const client = createWebSocketClient();
   createApplicationMenu(client);
@@ -209,8 +211,6 @@ async function start() {
   };
 
   app.on('before-quit', onBeforeQuit);
-
-  await initialize(settings.autoDownloadUpdates);
 }
 
 const isFirstAppInstance = app.requestSingleInstanceLock();

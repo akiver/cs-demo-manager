@@ -14,7 +14,7 @@ autoUpdater.logger = {
 autoUpdater.disableWebInstaller = true;
 autoUpdater.autoDownload = false;
 
-export async function initialize(autoDownloadUpdates: boolean) {
+export function initialize(autoDownloadUpdates: boolean) {
   let lastDownloadedVersion: string | null = null;
   let isDownloading = false;
   let shouldDownloadUpdatesAutomatically = autoDownloadUpdates;
@@ -76,5 +76,5 @@ export async function initialize(autoDownloadUpdates: boolean) {
     }
   }, checkInterval);
 
-  await autoUpdater.checkForUpdates();
+  void autoUpdater.checkForUpdates();
 }
