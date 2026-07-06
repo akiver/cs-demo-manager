@@ -27,6 +27,7 @@ import { initialize } from './auto-updater';
 import { getSettingsSync } from 'csdm/node/settings/get-settings';
 import { resolveWebSocketServerPort } from './resolve-web-socket-server-port';
 import { WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
+import { APP_USER_MODEL_ID } from 'csdm/common/app-identity';
 
 process.on('uncaughtException', logger.error);
 process.on('unhandledRejection', logger.error);
@@ -35,7 +36,7 @@ let tray: Tray | undefined;
 let isQuitting = false;
 
 // To show the correct app name/icon in notifications on Windows.
-app.setAppUserModelId('com.akiver.csdm');
+app.setAppUserModelId(APP_USER_MODEL_ID);
 
 const settings = getSettingsSync();
 if (settings.ui.enableHardwareAcceleration === false) {

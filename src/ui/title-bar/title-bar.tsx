@@ -5,6 +5,7 @@ import { HistoryNavigation } from './history/history-navigation';
 import { MenuButton } from './menu-button';
 import { WindowControls } from './window-controls/window-controls';
 import { UpdateAvailableButton } from './update-available-button';
+import { APP_TITLE } from 'csdm/common/app-identity';
 
 export function TitleBar() {
   const databaseStatus = useDatabaseStatus();
@@ -29,7 +30,7 @@ export function TitleBar() {
       {!window.csdm.isMac && <MenuButton />}
       <div className="mx-auto flex items-center gap-x-16">
         {databaseStatus === DatabaseStatus.Connected && <HistoryNavigation />}
-        <p>{`CS Demo Manager ${APP_VERSION}`}</p>
+        <p>{`${APP_TITLE} ${APP_VERSION}`}</p>
         <UpdateAvailableButton />
       </div>
       {!window.csdm.isMac && <WindowControls />}

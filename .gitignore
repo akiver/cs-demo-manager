@@ -2,6 +2,7 @@ node_modules
 .DS_Store
 thumbs.db
 dist
+dist-custom/
 out
 .env
 *.dem
@@ -25,3 +26,4 @@ src/ui/translations/*
 !src/ui/translations/en
 src/electron-main/translations/*
 !src/electron-main/translations/en
+.pnpm-store/

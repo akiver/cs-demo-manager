@@ -1,14 +1,16 @@
 globalThis.logger = window.csdm.logger;
-document.title = 'CS Demo Manager';
 import React, { type ErrorInfo } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router';
+import { APP_TITLE } from 'csdm/common/app-identity';
 import { onWindowError } from 'csdm/common/on-window-error';
 import { router } from 'csdm/ui/router';
 import { ThemeName } from 'csdm/common/types/theme-name';
 import { isSelectAllKeyboardEvent } from 'csdm/ui/keyboard/keyboard';
 import { APP_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 import './index.css';
+
+document.title = APP_TITLE;
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {

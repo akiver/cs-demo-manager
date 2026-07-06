@@ -17,6 +17,7 @@ import { Donate } from 'csdm/ui/components/donate';
 import { SeeChangelogButton } from './see-changelog-button';
 import { RevealCounterStrikeLogFileButton } from './reveal-counter-strike-log-file-button';
 import { Game } from 'csdm/common/types/counter-strike';
+import { APP_TITLE } from 'csdm/common/app-identity';
 
 export function About() {
   const client = useWebSocketClient();
@@ -49,7 +50,7 @@ export function About() {
   return (
     <SettingsView>
       <div className="flex flex-col gap-y-20">
-        <h2 className="text-title">CS Demo Manager</h2>
+        <h2 className="text-title">{APP_TITLE}</h2>
 
         <section className="flex flex-col gap-y-8">
           <SettingsEntry

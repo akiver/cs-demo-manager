@@ -5,6 +5,7 @@ import { windowManager } from './window-manager';
 import { isMac } from 'csdm/node/os/is-mac';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { getStaticFolderPath } from 'csdm/node/filesystem/get-static-folder-path';
+import { APP_TITLE } from 'csdm/common/app-identity';
 
 export function createTray() {
   const iconName = isMac ? 'trayTemplate.png' : isWindows ? 'tray.ico' : 'tray.png';
@@ -24,7 +25,7 @@ export function createTray() {
 
   const contextMenu = createTrayMenu();
   tray.setContextMenu(contextMenu);
-  tray.setToolTip('CS Demo Manager');
+  tray.setToolTip(APP_TITLE);
 
   return tray;
 }

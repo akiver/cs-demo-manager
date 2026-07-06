@@ -13,6 +13,7 @@ import { isWindows } from 'csdm/node/os/is-windows';
 import { isMac } from 'csdm/node/os/is-mac';
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import { getRegistryStringKey, writeRegistryStringKey } from 'csdm/node/os/windows-registry';
+import { APP_TITLE, APP_USER_MODEL_ID } from 'csdm/common/app-identity';
 
 // @platform linux
 function getDesktopFilePath() {
@@ -29,7 +30,7 @@ export async function getSystemStartupBehavior(): Promise<StartupBehavior> {
     // start minimized or not, we have to check the registry.
     const data = await getRegistryStringKey({
       path: 'Software\\Microsoft\\Windows\\CurrentVersion\\Run',
-      name: 'com.akiver.csdm',
+      name: APP_USER_MODEL_ID,
     });
     if (!data) {
       return StartupBehavior.Off;
@@ -84,7 +85,7 @@ export async function updateSystemStartupBehavior(behavior: StartupBehavior) {
     if (isWindows && exePath.includes(' ')) {
       await writeRegistryStringKey({
         path: 'Software\\Microsoft\\Windows\\CurrentVersion\\Run',
-        name: 'com.akiver.csdm',
+        name: APP_USER_MODEL_ID,
         data: `"${exePath}" ${args.join(' ')}`,
       });
     }
@@ -105,7 +106,7 @@ export async function updateSystemStartupBehavior(behavior: StartupBehavior) {
 Version=1.0
 Type=Application
 ${execLine}
-Name=CS Demo Manager
+Name=${APP_TITLE}
 Comment=Counter-Strike Demo Manager
 Terminal=false
 `;

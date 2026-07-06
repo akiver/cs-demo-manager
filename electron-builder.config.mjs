@@ -25,9 +25,9 @@ if (shouldNotarize) {
  * @see https://www.electron.build/configuration/configuration
  */
 const config = {
-  appId: 'com.akiver.csdm',
+  appId: 'com.heavenkaras.csdm.custom',
   copyright: 'Copyright © 2014-present AkiVer',
-  productName: 'CS Demo Manager',
+  productName: 'CS Demo Manager Custom',
   publish: {
     provider: 'github',
   },
@@ -46,7 +46,7 @@ const config = {
       target: 'nsis',
       arch: ['x64'],
     },
-    executableName: 'cs-demo-manager',
+    executableName: 'cs-demo-manager-custom',
     extraFiles: [
       {
         from: 'build-assets/bin/csdm.cmd',
@@ -75,7 +75,7 @@ const config = {
       },
     ],
     category: 'public.app-category.developer-tools',
-    appId: 'com.akiver.csdm',
+    appId: 'com.heavenkaras.csdm.custom',
     notarize: shouldNotarize,
     extraResources: [
       // From https://developer.apple.com/forums/thread/128166
@@ -122,7 +122,7 @@ const config = {
     ],
   },
   directories: {
-    output: 'dist',
+    output: 'dist-custom',
     buildResources: 'build-assets',
   },
   files: [
