@@ -14,6 +14,41 @@ The first implementation should focus on useful cross-match averages:
 - Fire impact: damage, damage per throw, damage per match.
 - Optional flashbang matchup table showing who this player flashes most often.
 
+## Implementation Status
+
+Status on 2026-07-08: implemented and locally committed.
+
+Related commits:
+
+- `14d10ced feat(player): add grenades statistics tab`
+- `a6866cfb feat(player): refine grenades statistics`
+
+Current behavior:
+
+- The player profile has a `Grenades` tab.
+- The tab fetches stats lazily through `FetchPlayerGrenadesStats`.
+- The first row uses summary panels for high-signal per-match stats.
+- `Grenade averages` is a fixed table, so labels and numbers stay close while resizing the window.
+- Flashbang matchup data is split into two tables:
+  - `Players flashed by this player`
+  - `Players who flashed this player`
+- Metrics intentionally count enemy impact only for flash, HE damage, fire damage, and HE kills.
+
+Validation last run:
+
+- `vp run compile`
+- `vp run lint`
+- `vp run test`
+- `vp run deadcode`
+- `vp run build`
+
+Notes:
+
+- `vp check` could not run in the current Codex shell because Vite+ could not resolve the `node` binary path, but the
+  individual checks above passed.
+- `vp run package --dir` was blocked by sandboxed network access. The preview build was produced by repacking the
+  current `out` folder into an existing custom `win-unpacked` shell.
+
 ## Merge-Friendly Constraints
 
 - Do not change the demo analyzer.
@@ -40,6 +75,39 @@ flowchart LR
   Handler --> UI
 ```
 
+## Code Map
+
+Feature entry points:
+
+- `src/ui/player/player-tabs.tsx`: tab link.
+- `src/ui/router.tsx`: player route registration.
+- `src/ui/player/grenades/player-grenades.tsx`: renderer UI, table layout, fetch state.
+- `src/server/renderer-client-message-name.ts`: renderer message enum.
+- `src/server/handlers/renderer-process/player/fetch-player-grenades-stats-handler.ts`: WebSocket handler.
+- `src/server/handlers/renderer-handlers-mapping.ts`: handler registration.
+- `src/node/database/player/fetch-player-grenades-stats.ts`: Kysely queries and metric aggregation.
+- `src/common/types/player-grenades-stats.ts`: payload contract shared by server and renderer.
+- `src/ui/translations/en/messages.po`: extracted English source strings.
+
+Data direction:
+
+```mermaid
+sequenceDiagram
+  participant PlayerPage as Player Grenades UI
+  participant Client as WebSocket client
+  participant Handler as Renderer handler
+  participant Query as fetchPlayerGrenadesStats
+  participant DB as PostgreSQL
+
+  PlayerPage->>Client: FetchPlayerGrenadesStats(filters + steamId)
+  Client->>Handler: renderer message
+  Handler->>Query: fetchPlayerGrenadesStats(steamId, filters)
+  Query->>DB: aggregate shots, blinds, damage, kills
+  DB-->>Query: rows
+  Query-->>Handler: PlayerGrenadesStats
+  Handler-->>PlayerPage: summary + matchup tables
+```
+
 ## Data Sources
 
 Use existing database tables only:
@@ -59,7 +127,7 @@ All queries should reuse `applyMatchFilters` from `src/node/database/match/apply
 Create `src/common/types/player-grenades-stats.ts`.
 
 ```ts
-export type PlayerGrenadeSummary = {
+type PlayerGrenadeSummary = {
   steamId: string;
   matchCount: number;
   roundCount: number;
@@ -90,20 +158,22 @@ export type PlayerGrenadeSummary = {
 };
 
 export type PlayerFlashbangMatchup = {
-  flashedSteamId: string;
-  flashedName: string;
-  flashedCount: number;
+  steamId: string;
+  name: string;
+  count: number;
   totalDuration: number;
   averageDuration: number;
 };
 
 export type PlayerGrenadesStats = {
   summary: PlayerGrenadeSummary;
-  flashbangMatchups: PlayerFlashbangMatchup[];
+  flashedPlayers: PlayerFlashbangMatchup[];
+  flashedByPlayers: PlayerFlashbangMatchup[];
 };
 ```
 
-The exact field names can be adjusted during implementation, but keep the payload compact and specific to this tab.
+`PlayerGrenadeSummary` is intentionally private to the file because only the full `PlayerGrenadesStats` payload is used
+across module boundaries.
 
 ## Metric Definitions
 
@@ -118,6 +188,11 @@ Use these definitions for the first version:
   - `flasher_side != flashed_side`.
   - `is_flasher_controlling_bot = false`.
 - Enemy blind duration: sum/average of `player_blinds.duration` using the same enemy flash filter.
+- Flashed players matchup: grouped by `flashed_steam_id` using the same enemy flash filter.
+- Flashed by players matchup: rows in `player_blinds` where:
+  - `flashed_steam_id` is the current player.
+  - `flasher_side != flashed_side`.
+  - `is_flasher_controlling_bot = false`.
 - HE damage: sum of `damages.health_damage` where:
   - `attacker_steam_id` is the current player.
   - `weapon_name` is HE.
@@ -148,15 +223,16 @@ Files:
 
 Tasks:
 
-- [ ] Define the `PlayerGrenadesStats` payload type.
-- [ ] Implement `fetchPlayerGrenadesStats(steamId: string, filters: MatchFilters)`.
-- [ ] Build a filtered matches/player CTE so every subquery shares the same filter scope.
-- [ ] Aggregate match count and round count.
-- [ ] Aggregate throws from `shots`.
-- [ ] Aggregate flash impact from `player_blinds`.
-- [ ] Aggregate HE/fire damage from `damages`.
-- [ ] Aggregate HE kills from `kills`.
-- [ ] Return a fully populated object with zeros for missing data.
+- [x] Define the `PlayerGrenadesStats` payload type.
+- [x] Implement `fetchPlayerGrenadesStats(steamId: string, filters: MatchFilters)`.
+- [x] Reuse `applyMatchFilters` for every query.
+- [x] Aggregate match count and round count.
+- [x] Aggregate throws from `shots`.
+- [x] Aggregate flash impact from `player_blinds`.
+- [x] Aggregate HE/fire damage from `damages`.
+- [x] Aggregate HE kills from `kills`.
+- [x] Return a fully populated object with zeros for missing data.
+- [x] Return both flashbang matchup directions.
 
 Notes:
 
@@ -166,8 +242,8 @@ Notes:
 
 Validation:
 
-- [ ] `vp run compile`
-- [ ] `vp run lint`
+- [x] `vp run compile`
+- [x] `vp run lint`
 
 Suggested commit:
 
@@ -183,16 +259,16 @@ Files:
 
 Tasks:
 
-- [ ] Add `FetchPlayerGrenadesStats: 'fetch-player-grenades-stats'`.
-- [ ] Define handler payload as `MatchFilters & { steamId: string }`.
-- [ ] Call `fetchPlayerGrenadesStats(payload.steamId, payload)`.
-- [ ] Register handler type in `RendererMessageHandlers`.
-- [ ] Register handler implementation in `rendererHandlers`.
+- [x] Add `FetchPlayerGrenadesStats: 'fetch-player-grenades-stats'`.
+- [x] Define handler payload as `MatchFilters & { steamId: string }`.
+- [x] Call `fetchPlayerGrenadesStats(payload.steamId, payload)`.
+- [x] Register handler type in `RendererMessageHandlers`.
+- [x] Register handler implementation in `rendererHandlers`.
 
 Validation:
 
-- [ ] `vp run compile`
-- [ ] `vp run lint`
+- [x] `vp run compile`
+- [x] `vp run lint`
 
 Suggested commit:
 
@@ -210,12 +286,12 @@ Files:
 
 Tasks:
 
-- [ ] Add `RoutePath.PlayerGrenades = 'grenades'`.
-- [ ] Add the `Grenades` tab link in `PlayerTabs`.
-- [ ] Add a player child route for `PlayerGrenades`.
-- [ ] In `PlayerGrenades`, read the current player Steam ID and active player filters.
-- [ ] Fetch stats lazily with `RendererClientMessageName.FetchPlayerGrenadesStats`.
-- [ ] Show local loading, error, and empty states.
+- [x] Add `RoutePath.PlayerGrenades = 'grenades'`.
+- [x] Add the `Grenades` tab link in `PlayerTabs`.
+- [x] Add a player child route for `PlayerGrenades`.
+- [x] In `PlayerGrenades`, read the current player Steam ID and active player filters.
+- [x] Fetch stats lazily with `RendererClientMessageName.FetchPlayerGrenadesStats`.
+- [x] Show local loading, error, and empty states.
 
 UI wording:
 
@@ -227,9 +303,9 @@ Because this batch adds user-visible strings, run i18n extraction.
 
 Validation:
 
-- [ ] `vp run compile`
-- [ ] `vp run lint`
-- [ ] `vp run i18n:extract`
+- [x] `vp run compile`
+- [x] `vp run lint`
+- [x] `vp run i18n:extract`
 
 Suggested commit:
 
@@ -246,12 +322,12 @@ Files:
 
 Tasks:
 
-- [ ] Add summary panels for the most important per-match averages.
-- [ ] Add a compact table for grenade type rows.
-- [ ] Add optional flashbang matchup table.
-- [ ] Keep Tailwind classes to existing spacing/text/color tokens.
-- [ ] Avoid arbitrary Tailwind values unless the existing component pattern already requires them.
-- [ ] Add tooltips only for ambiguous metrics.
+- [x] Add summary panels for the most important per-match averages.
+- [x] Add a compact table for grenade type rows.
+- [x] Split flashbang matchup tables by direction.
+- [x] Keep Tailwind classes to existing spacing/text/color tokens.
+- [x] Avoid arbitrary Tailwind values unless the existing component pattern already requires them.
+- [x] Clarify ambiguous metrics in labels and subtitles.
 
 Suggested initial summary cards:
 
@@ -271,9 +347,9 @@ Suggested table rows:
 
 Validation:
 
-- [ ] `vp run compile`
-- [ ] `vp run lint`
-- [ ] `vp run i18n:extract`
+- [x] `vp run compile`
+- [x] `vp run lint`
+- [x] `vp run i18n:extract`
 
 Suggested commit:
 
@@ -283,11 +359,11 @@ Suggested commit:
 
 Tasks:
 
-- [ ] `vp run compile`
-- [ ] `vp run lint`
-- [ ] `vp run build`
-- [ ] `vp run i18n:extract`
-- [ ] Optional: `vp run package --dir`
+- [x] `vp run compile`
+- [x] `vp run lint`
+- [x] `vp run build`
+- [x] `vp run i18n:extract`
+- [ ] Optional: `vp run package --dir` blocked by sandboxed network access.
 
 Manual checks:
 

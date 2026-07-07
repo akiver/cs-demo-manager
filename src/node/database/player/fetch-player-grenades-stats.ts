@@ -139,23 +139,23 @@ async function fetchPlayerHeKillCount(steamId: string, filters: MatchFilters) {
   return toNumber(row?.heKillCount);
 }
 
-async function fetchPlayerFlashbangMatchups(steamId: string, filters: MatchFilters): Promise<PlayerFlashbangMatchup[]> {
+async function fetchPlayersFlashedByPlayer(steamId: string, filters: MatchFilters): Promise<PlayerFlashbangMatchup[]> {
   let query = db
     .selectFrom('player_blinds')
     .innerJoin('matches', 'matches.checksum', 'player_blinds.match_checksum')
     .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .leftJoin('steam_account_overrides', 'steam_account_overrides.steam_id', 'player_blinds.flashed_steam_id')
     .select([
-      'player_blinds.flashed_steam_id as flashedSteamId',
-      (eb) => eb.fn.coalesce('steam_account_overrides.name', 'player_blinds.flashed_name').as('flashedName'),
-      sql<number>`COUNT(player_blinds.id)`.as('flashedCount'),
+      'player_blinds.flashed_steam_id as steamId',
+      (eb) => eb.fn.coalesce('steam_account_overrides.name', 'player_blinds.flashed_name').as('name'),
+      sql<number>`COUNT(player_blinds.id)`.as('count'),
       sql<number>`COALESCE(SUM(player_blinds.duration), 0)`.as('totalDuration'),
       sql<number>`COALESCE(AVG(player_blinds.duration), 0)`.as('averageDuration'),
     ])
     .where('player_blinds.flasher_steam_id', '=', steamId)
     .whereRef('player_blinds.flasher_side', '!=', 'player_blinds.flashed_side')
     .where('player_blinds.is_flasher_controlling_bot', '=', false)
-    .groupBy(['player_blinds.flashed_steam_id', 'flashedName'])
+    .groupBy(['player_blinds.flashed_steam_id', 'player_blinds.flashed_name', 'steam_account_overrides.name'])
     .orderBy('totalDuration', 'desc')
     .limit(20);
 
@@ -164,22 +164,56 @@ async function fetchPlayerFlashbangMatchups(steamId: string, filters: MatchFilte
   const rows = await query.execute();
 
   return rows.map((row) => ({
-    flashedSteamId: row.flashedSteamId,
-    flashedName: row.flashedName,
-    flashedCount: toNumber(row.flashedCount),
+    steamId: row.steamId,
+    name: row.name,
+    count: toNumber(row.count),
+    totalDuration: roundNumber(toNumber(row.totalDuration), 2),
+    averageDuration: roundNumber(toNumber(row.averageDuration), 2),
+  }));
+}
+
+async function fetchPlayersWhoFlashedPlayer(steamId: string, filters: MatchFilters): Promise<PlayerFlashbangMatchup[]> {
+  let query = db
+    .selectFrom('player_blinds')
+    .innerJoin('matches', 'matches.checksum', 'player_blinds.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .leftJoin('steam_account_overrides', 'steam_account_overrides.steam_id', 'player_blinds.flasher_steam_id')
+    .select([
+      'player_blinds.flasher_steam_id as steamId',
+      (eb) => eb.fn.coalesce('steam_account_overrides.name', 'player_blinds.flasher_name').as('name'),
+      sql<number>`COUNT(player_blinds.id)`.as('count'),
+      sql<number>`COALESCE(SUM(player_blinds.duration), 0)`.as('totalDuration'),
+      sql<number>`COALESCE(AVG(player_blinds.duration), 0)`.as('averageDuration'),
+    ])
+    .where('player_blinds.flashed_steam_id', '=', steamId)
+    .whereRef('player_blinds.flasher_side', '!=', 'player_blinds.flashed_side')
+    .where('player_blinds.is_flasher_controlling_bot', '=', false)
+    .groupBy(['player_blinds.flasher_steam_id', 'player_blinds.flasher_name', 'steam_account_overrides.name'])
+    .orderBy('totalDuration', 'desc')
+    .limit(20);
+
+  query = applyMatchFilters(query, filters);
+
+  const rows = await query.execute();
+
+  return rows.map((row) => ({
+    steamId: row.steamId,
+    name: row.name,
+    count: toNumber(row.count),
     totalDuration: roundNumber(toNumber(row.totalDuration), 2),
     averageDuration: roundNumber(toNumber(row.averageDuration), 2),
   }));
 }
 
 export async function fetchPlayerGrenadesStats(steamId: string, filters: MatchFilters): Promise<PlayerGrenadesStats> {
-  const [counts, throws, flashbangs, damages, heKillCount, flashbangMatchups] = await Promise.all([
+  const [counts, throws, flashbangs, damages, heKillCount, flashedPlayers, flashedByPlayers] = await Promise.all([
     fetchPlayerMatchAndRoundCounts(steamId, filters),
     fetchPlayerGrenadesThrownCounts(steamId, filters),
     fetchPlayerFlashbangStats(steamId, filters),
     fetchPlayerGrenadeDamageStats(steamId, filters),
     fetchPlayerHeKillCount(steamId, filters),
-    fetchPlayerFlashbangMatchups(steamId, filters),
+    fetchPlayersFlashedByPlayer(steamId, filters),
+    fetchPlayersWhoFlashedPlayer(steamId, filters),
   ]);
 
   return {
@@ -206,6 +240,7 @@ export async function fetchPlayerGrenadesStats(steamId: string, filters: MatchFi
       averageFireDamagePerThrow: average(damages.fireDamage, throws.fireGrenadesThrownCount),
       averageFireDamagePerMatch: average(damages.fireDamage, counts.matchCount),
     },
-    flashbangMatchups,
+    flashedPlayers,
+    flashedByPlayers,
   };
 }

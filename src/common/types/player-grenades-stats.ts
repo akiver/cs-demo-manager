@@ -1,4 +1,4 @@
-export type PlayerGrenadeSummary = {
+type PlayerGrenadeSummary = {
   steamId: string;
   matchCount: number;
   roundCount: number;
@@ -29,14 +29,15 @@ export type PlayerGrenadeSummary = {
 };
 
 export type PlayerFlashbangMatchup = {
-  flashedSteamId: string;
-  flashedName: string;
-  flashedCount: number;
+  steamId: string;
+  name: string;
+  count: number;
   totalDuration: number;
   averageDuration: number;
 };
 
 export type PlayerGrenadesStats = {
   summary: PlayerGrenadeSummary;
-  flashbangMatchups: PlayerFlashbangMatchup[];
+  flashedPlayers: PlayerFlashbangMatchup[];
+  flashedByPlayers: PlayerFlashbangMatchup[];
 };

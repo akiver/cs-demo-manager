@@ -1504,6 +1504,7 @@ msgid "Opening duel result"
 msgstr "Opening duel result"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
+#: src/ui/player/grenades/player-grenades.tsx
 msgid "Player"
 msgstr "Player"
 
@@ -1645,7 +1646,6 @@ msgstr "Matches"
 
 #: src/ui/components/maps-stats.tsx
 #: src/ui/components/panels/clutches.tsx
-#: src/ui/player/grenades/player-grenades.tsx
 #: src/ui/team/economy/teams-round-outcomes-by-economy-type-chart.tsx
 msgid "Total"
 msgstr "Total"
@@ -4203,6 +4203,7 @@ msgid "Players flashbang matrix"
 msgstr "Players flashbang matrix"
 
 #: src/ui/match/grenades/stats/stats-label.tsx
+#: src/ui/player/grenades/player-grenades.tsx
 msgid "Thrown"
 msgstr "Thrown"
 
@@ -4757,6 +4758,7 @@ msgstr "Player not found."
 #: src/ui/match/players/match-players.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/weapons/weapons-accuracy.tsx
+#: src/ui/player/grenades/player-grenades.tsx
 msgid "Kills"
 msgstr "Kills"
 
@@ -6434,6 +6436,58 @@ msgid "X Axis"
 msgstr "X Axis"
 
 #: src/ui/player/grenades/player-grenades.tsx
+msgid "Flashbang"
+msgstr "Flashbang"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "HE grenade"
+msgstr "HE grenade"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Molotov / Incendiary"
+msgstr "Molotov / Incendiary"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Smoke grenade"
+msgstr "Smoke grenade"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Grenade averages"
+msgstr "Grenade averages"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Grenade"
+msgstr "Grenade"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Avg / match"
+msgstr "Avg / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Avg / round"
+msgstr "Avg / round"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Enemy damage"
+msgstr "Enemy damage"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Damage / throw"
+msgstr "Damage / throw"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Flashes"
+msgstr "Flashes"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Total blind time"
+msgstr "Total blind time"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Avg blind time"
+msgstr "Avg blind time"
+
+#: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Seconds"
 msgid "{totalDuration}s"
 msgstr "{totalDuration}s"
@@ -6444,44 +6498,28 @@ msgid "{averageDuration}s"
 msgstr "{averageDuration}s"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Flashbang matchups"
-msgstr "Flashbang matchups"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Count"
-msgstr "Count"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Avg"
-msgstr "Avg"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "No flashbang matchup found for the current filters."
-msgstr "No flashbang matchup found for the current filters."
-
-#: src/ui/player/grenades/player-grenades.tsx
 msgid "No grenade stats found for the current filters."
 msgstr "No grenade stats found for the current filters."
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Flashbangs / match"
-msgstr "Flashbangs / match"
+msgid "Flashbangs thrown / match"
+msgstr "Flashbangs thrown / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "{flashbangsThrownCount} thrown total"
-msgstr "{flashbangsThrownCount} thrown total"
+msgid "Thrown by this player: {flashbangsThrownCount}"
+msgstr "Thrown by this player: {flashbangsThrownCount}"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgid "Enemies flashed / match"
 msgstr "Enemies flashed / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "{flashedEnemyCount} enemies flashed"
-msgstr "{flashedEnemyCount} enemies flashed"
+msgid "Enemies flashed by this player: {flashedEnemyCount}"
+msgstr "Enemies flashed by this player: {flashedEnemyCount}"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Avg blind time"
-msgstr "Avg blind time"
+msgid "Enemy blind time / flash"
+msgstr "Enemy blind time / flash"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Seconds"
@@ -6489,60 +6527,56 @@ msgid "{averageEnemyBlindDuration}s"
 msgstr "{averageEnemyBlindDuration}s"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "{totalEnemyBlindDuration}s total blind time"
-msgstr "{totalEnemyBlindDuration}s total blind time"
+msgid "Total enemy blind time caused: {totalEnemyBlindDuration}s"
+msgstr "Total enemy blind time caused: {totalEnemyBlindDuration}s"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "HE damage / match"
-msgstr "HE damage / match"
+msgid "Enemy HE damage / match"
+msgstr "Enemy HE damage / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "{heDamage} total damage"
-msgstr "{heDamage} total damage"
+msgid "Damage dealt to enemies: {heDamage}"
+msgstr "Damage dealt to enemies: {heDamage}"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Fire damage / match"
-msgstr "Fire damage / match"
+msgid "Enemy fire damage / match"
+msgstr "Enemy fire damage / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "{fireDamage} total damage"
-msgstr "{fireDamage} total damage"
+msgid "Damage dealt to enemies: {fireDamage}"
+msgstr "Damage dealt to enemies: {fireDamage}"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Smokes / match"
-msgstr "Smokes / match"
+msgid "Smokes thrown / match"
+msgstr "Smokes thrown / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "{smokeGrenadesThrownCount} thrown total"
-msgstr "{smokeGrenadesThrownCount} thrown total"
+msgid "Thrown by this player: {smokeGrenadesThrownCount}"
+msgstr "Thrown by this player: {smokeGrenadesThrownCount}"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Grenade averages"
-msgstr "Grenade averages"
+msgid "Players flashed by this player"
+msgstr "Players flashed by this player"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "HE grenades / match"
-msgstr "HE grenades / match"
+msgid "Enemy players flashed by this player only."
+msgstr "Enemy players flashed by this player only."
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Fire grenades / match"
-msgstr "Fire grenades / match"
+msgid "No enemy player was flashed by this player for the current filters."
+msgstr "No enemy player was flashed by this player for the current filters."
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Flashbangs / round"
-msgstr "Flashbangs / round"
+msgid "Players who flashed this player"
+msgstr "Players who flashed this player"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "HE kills"
-msgstr "HE kills"
+msgid "Enemy players who flashed this player only."
+msgstr "Enemy players who flashed this player only."
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Matches / rounds"
-msgstr "Matches / rounds"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "{matchCount} matches, {roundCount} rounds"
-msgstr "{matchCount} matches, {roundCount} rounds"
+msgid "No enemy player flashed this player for the current filters."
+msgstr "No enemy player flashed this player for the current filters."
 
 #: src/ui/player/load-player-error.tsx
 #: src/ui/team/load-team-error.tsx
