@@ -25,6 +25,7 @@ export const RendererClientMessageName = {
   NavigateToDemoOrMatch: 'navigate-to-demo-or-match',
   FetchPlayersTable: 'fetch-players-table',
   FetchPlayerStats: 'fetch-player-stats',
+  FetchPlayerGrenadesStats: 'fetch-player-grenades-stats',
   FetchTeamsTable: 'fetch-teams-table',
   FetchTeam: 'fetch-team',
   FetchTeamHeatmapPoints: 'fetch-team-heatmap-points',

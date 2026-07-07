@@ -19,6 +19,9 @@ export function PlayerTabs() {
       <TabLink url={RoutePath.PlayerHeatmap}>
         <Trans context="Tab link">Heatmap</Trans>
       </TabLink>
+      <TabLink url={RoutePath.PlayerGrenades}>
+        <Trans context="Tab link">Grenades</Trans>
+      </TabLink>
       <TabLink url={RoutePath.PlayerRank}>
         <Trans context="Tab link">Rank</Trans>
       </TabLink>

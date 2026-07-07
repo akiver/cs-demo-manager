@@ -21,6 +21,7 @@ export const RoutePath = {
   PlayerMatches: 'matches',
   PlayerMaps: 'maps',
   PlayerHeatmap: 'heatmap',
+  PlayerGrenades: 'grenades',
   PinnerPlayer: '/pinned-player',
   Search: '/search',
   Downloads: '/downloads',

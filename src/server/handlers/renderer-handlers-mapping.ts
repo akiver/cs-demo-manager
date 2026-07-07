@@ -79,6 +79,10 @@ import { writeBase64FileHandler } from './renderer-process/filesystem/write-base
 import type { UpdateDemosSourcePayload } from './renderer-process/demo/update-demos-source-handler';
 import { updateDemosSourceHandler } from './renderer-process/demo/update-demos-source-handler';
 import { fetchPlayerHandler, type FetchPlayerPayload } from './renderer-process/player/fetch-player-handler';
+import {
+  fetchPlayerGrenadesStatsHandler,
+  type FetchPlayerGrenadesStatsPayload,
+} from './renderer-process/player/fetch-player-grenades-stats-handler';
 import { resetDatabaseHandler } from './renderer-process/database/reset-database-handler';
 import { updateTagHandler } from './renderer-process/tags/update-tag-handler';
 import { deleteTagHandler } from './renderer-process/tags/delete-tag-handler';
@@ -112,6 +116,7 @@ import type { Point } from 'csdm/common/types/point';
 import type { IgnoredSteamAccount } from 'csdm/common/types/ignored-steam-account';
 import type { BanStats } from 'csdm/common/types/ban-stats';
 import type { PlayerProfile } from 'csdm/common/types/player-profile';
+import type { PlayerGrenadesStats } from 'csdm/common/types/player-grenades-stats';
 import type { PlayerTable } from 'csdm/common/types/player-table';
 import type { UpdateDemosTypePayload } from './renderer-process/demo/update-demos-type-handler';
 import { updateDemosTypeHandler } from './renderer-process/demo/update-demos-type-handler';
@@ -326,6 +331,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.ExportMatchesChatMessages]: Handler<ExportMatchesChatMessagesPayload, boolean>;
   [RendererClientMessageName.WriteBase64File]: Handler<WriteBase64FilePayload>;
   [RendererClientMessageName.FetchPlayerStats]: Handler<FetchPlayerPayload, PlayerProfile>;
+  [RendererClientMessageName.FetchPlayerGrenadesStats]: Handler<FetchPlayerGrenadesStatsPayload, PlayerGrenadesStats>;
   [RendererClientMessageName.InsertTag]: Handler<Omit<Tag, 'id'>, Tag>;
   [RendererClientMessageName.UpdateTag]: Handler<Tag>;
   [RendererClientMessageName.DeleteTag]: Handler<ColumnID>;
@@ -438,6 +444,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.ExportMatchesChatMessages]: exportMatchesChatMessagesHandler,
   [RendererClientMessageName.WriteBase64File]: writeBase64FileHandler,
   [RendererClientMessageName.FetchPlayerStats]: fetchPlayerHandler,
+  [RendererClientMessageName.FetchPlayerGrenadesStats]: fetchPlayerGrenadesStatsHandler,
   [RendererClientMessageName.InsertTag]: insertTagHandler,
   [RendererClientMessageName.UpdateTag]: updateTagHandler,
   [RendererClientMessageName.DeleteTag]: deleteTagHandler,
