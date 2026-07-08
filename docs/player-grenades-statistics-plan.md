@@ -36,7 +36,13 @@ Current behavior:
   - `Players who flashed this player`
 - Flashbang matchup tables also use the shared project `Table` component and persist their column state with dedicated
   table names.
-- Metrics intentionally count enemy impact only for flash, HE damage, fire damage, and HE kills.
+- Flashbang stats include enemy and teammate directions:
+  - teammates flashed by the current player
+  - times the current player was flashed by enemies
+  - times the current player was flashed by teammates
+  - matchup rows are marked with a `Relation` column so enemy and teammate rows can be sorted together.
+- Damage and kill metrics intentionally count enemy impact only. Flashbang metrics include both enemy and teammate
+  directions where the label says so.
 
 Validation last run:
 
@@ -194,11 +200,18 @@ Use these definitions for the first version:
   - `flasher_steam_id` is the current player.
   - `flasher_side != flashed_side`.
   - `is_flasher_controlling_bot = false`.
+- Teammate flash count caused: rows in `player_blinds` where:
+  - `flasher_steam_id` is the current player.
+  - `flasher_side = flashed_side`.
+  - `flashed_steam_id` is not the current player, so self-flashes are excluded.
+  - `is_flasher_controlling_bot = false`.
 - Enemy blind duration: sum/average of `player_blinds.duration` using the same enemy flash filter.
-- Flashed players matchup: grouped by `flashed_steam_id` using the same enemy flash filter.
+- Flashed players matchup: grouped by `flashed_steam_id` plus relation, including enemies and teammates while excluding
+  self-flashes.
 - Flashed by players matchup: rows in `player_blinds` where:
   - `flashed_steam_id` is the current player.
-  - `flasher_side != flashed_side`.
+  - enemy rows use `flasher_side != flashed_side`.
+  - teammate rows use `flasher_side = flashed_side` and exclude `flasher_steam_id` equal to the current player.
   - `is_flasher_controlling_bot = false`.
 - HE damage: sum of `damages.health_damage` where:
   - `attacker_steam_id` is the current player.

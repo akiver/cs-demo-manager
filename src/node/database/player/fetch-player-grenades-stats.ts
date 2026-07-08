@@ -1,6 +1,10 @@
 import { sql } from 'kysely';
 import { roundNumber } from 'csdm/common/math/round-number';
-import type { PlayerFlashbangMatchup, PlayerGrenadesStats } from 'csdm/common/types/player-grenades-stats';
+import type {
+  FlashbangPlayerRelation,
+  PlayerFlashbangMatchup,
+  PlayerGrenadesStats,
+} from 'csdm/common/types/player-grenades-stats';
 import { WeaponName } from 'csdm/common/types/counter-strike';
 import { db } from 'csdm/node/database/database';
 import { applyMatchFilters, type MatchFilters } from '../match/apply-match-filters';
@@ -75,12 +79,26 @@ async function fetchPlayerFlashbangStats(steamId: string, filters: MatchFilters)
     .innerJoin('matches', 'matches.checksum', 'player_blinds.match_checksum')
     .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .select([
-      sql<number>`COUNT(player_blinds.id)`.as('flashedEnemyCount'),
-      sql<number>`COALESCE(SUM(player_blinds.duration), 0)`.as('totalEnemyBlindDuration'),
-      sql<number>`COALESCE(AVG(player_blinds.duration), 0)`.as('averageEnemyBlindDuration'),
+      sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side)`.as(
+        'flashedEnemyCount',
+      ),
+      sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flashed_steam_id != ${steamId})`.as(
+        'flashedTeammateCount',
+      ),
+      sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side), 0)`.as(
+        'totalEnemyBlindDuration',
+      ),
+      sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flashed_steam_id != ${steamId}), 0)`.as(
+        'totalTeammateBlindDuration',
+      ),
+      sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side), 0)`.as(
+        'averageEnemyBlindDuration',
+      ),
+      sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flashed_steam_id != ${steamId}), 0)`.as(
+        'averageTeammateBlindDuration',
+      ),
     ])
     .where('player_blinds.flasher_steam_id', '=', steamId)
-    .whereRef('player_blinds.flasher_side', '!=', 'player_blinds.flashed_side')
     .where('player_blinds.is_flasher_controlling_bot', '=', false);
 
   query = applyMatchFilters(query, filters);
@@ -89,8 +107,53 @@ async function fetchPlayerFlashbangStats(steamId: string, filters: MatchFilters)
 
   return {
     flashedEnemyCount: toNumber(row?.flashedEnemyCount),
+    flashedTeammateCount: toNumber(row?.flashedTeammateCount),
     totalEnemyBlindDuration: roundNumber(toNumber(row?.totalEnemyBlindDuration), 2),
+    totalTeammateBlindDuration: roundNumber(toNumber(row?.totalTeammateBlindDuration), 2),
     averageEnemyBlindDuration: roundNumber(toNumber(row?.averageEnemyBlindDuration), 2),
+    averageTeammateBlindDuration: roundNumber(toNumber(row?.averageTeammateBlindDuration), 2),
+  };
+}
+
+async function fetchPlayerIncomingFlashbangStats(steamId: string, filters: MatchFilters) {
+  let query = db
+    .selectFrom('player_blinds')
+    .innerJoin('matches', 'matches.checksum', 'player_blinds.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .select([
+      sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side)`.as(
+        'flashedByEnemyCount',
+      ),
+      sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flasher_steam_id != ${steamId})`.as(
+        'flashedByTeammateCount',
+      ),
+      sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side), 0)`.as(
+        'totalBlindDurationFromEnemies',
+      ),
+      sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flasher_steam_id != ${steamId}), 0)`.as(
+        'totalBlindDurationFromTeammates',
+      ),
+      sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side), 0)`.as(
+        'averageBlindDurationFromEnemies',
+      ),
+      sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flasher_steam_id != ${steamId}), 0)`.as(
+        'averageBlindDurationFromTeammates',
+      ),
+    ])
+    .where('player_blinds.flashed_steam_id', '=', steamId)
+    .where('player_blinds.is_flasher_controlling_bot', '=', false);
+
+  query = applyMatchFilters(query, filters);
+
+  const row = await query.executeTakeFirst();
+
+  return {
+    flashedByEnemyCount: toNumber(row?.flashedByEnemyCount),
+    flashedByTeammateCount: toNumber(row?.flashedByTeammateCount),
+    totalBlindDurationFromEnemies: roundNumber(toNumber(row?.totalBlindDurationFromEnemies), 2),
+    totalBlindDurationFromTeammates: roundNumber(toNumber(row?.totalBlindDurationFromTeammates), 2),
+    averageBlindDurationFromEnemies: roundNumber(toNumber(row?.averageBlindDurationFromEnemies), 2),
+    averageBlindDurationFromTeammates: roundNumber(toNumber(row?.averageBlindDurationFromTeammates), 2),
   };
 }
 
@@ -140,6 +203,7 @@ async function fetchPlayerHeKillCount(steamId: string, filters: MatchFilters) {
 }
 
 async function fetchPlayersFlashedByPlayer(steamId: string, filters: MatchFilters): Promise<PlayerFlashbangMatchup[]> {
+  const relation = sql<FlashbangPlayerRelation>`CASE WHEN player_blinds.flasher_side != player_blinds.flashed_side THEN 'enemy' ELSE 'teammate' END`;
   let query = db
     .selectFrom('player_blinds')
     .innerJoin('matches', 'matches.checksum', 'player_blinds.match_checksum')
@@ -148,14 +212,15 @@ async function fetchPlayersFlashedByPlayer(steamId: string, filters: MatchFilter
     .select([
       'player_blinds.flashed_steam_id as steamId',
       (eb) => eb.fn.coalesce('steam_account_overrides.name', 'player_blinds.flashed_name').as('name'),
+      relation.as('relation'),
       sql<number>`COUNT(player_blinds.id)`.as('count'),
       sql<number>`COALESCE(SUM(player_blinds.duration), 0)`.as('totalDuration'),
       sql<number>`COALESCE(AVG(player_blinds.duration), 0)`.as('averageDuration'),
     ])
     .where('player_blinds.flasher_steam_id', '=', steamId)
-    .whereRef('player_blinds.flasher_side', '!=', 'player_blinds.flashed_side')
+    .where('player_blinds.flashed_steam_id', '!=', steamId)
     .where('player_blinds.is_flasher_controlling_bot', '=', false)
-    .groupBy(['player_blinds.flashed_steam_id', 'player_blinds.flashed_name', 'steam_account_overrides.name'])
+    .groupBy(['player_blinds.flashed_steam_id', 'player_blinds.flashed_name', 'steam_account_overrides.name', relation])
     .orderBy('totalDuration', 'desc')
     .limit(20);
 
@@ -166,6 +231,7 @@ async function fetchPlayersFlashedByPlayer(steamId: string, filters: MatchFilter
   return rows.map((row) => ({
     steamId: row.steamId,
     name: row.name,
+    relation: row.relation,
     count: toNumber(row.count),
     totalDuration: roundNumber(toNumber(row.totalDuration), 2),
     averageDuration: roundNumber(toNumber(row.averageDuration), 2),
@@ -173,6 +239,7 @@ async function fetchPlayersFlashedByPlayer(steamId: string, filters: MatchFilter
 }
 
 async function fetchPlayersWhoFlashedPlayer(steamId: string, filters: MatchFilters): Promise<PlayerFlashbangMatchup[]> {
+  const relation = sql<FlashbangPlayerRelation>`CASE WHEN player_blinds.flasher_side != player_blinds.flashed_side THEN 'enemy' ELSE 'teammate' END`;
   let query = db
     .selectFrom('player_blinds')
     .innerJoin('matches', 'matches.checksum', 'player_blinds.match_checksum')
@@ -181,14 +248,15 @@ async function fetchPlayersWhoFlashedPlayer(steamId: string, filters: MatchFilte
     .select([
       'player_blinds.flasher_steam_id as steamId',
       (eb) => eb.fn.coalesce('steam_account_overrides.name', 'player_blinds.flasher_name').as('name'),
+      relation.as('relation'),
       sql<number>`COUNT(player_blinds.id)`.as('count'),
       sql<number>`COALESCE(SUM(player_blinds.duration), 0)`.as('totalDuration'),
       sql<number>`COALESCE(AVG(player_blinds.duration), 0)`.as('averageDuration'),
     ])
     .where('player_blinds.flashed_steam_id', '=', steamId)
-    .whereRef('player_blinds.flasher_side', '!=', 'player_blinds.flashed_side')
+    .where('player_blinds.flasher_steam_id', '!=', steamId)
     .where('player_blinds.is_flasher_controlling_bot', '=', false)
-    .groupBy(['player_blinds.flasher_steam_id', 'player_blinds.flasher_name', 'steam_account_overrides.name'])
+    .groupBy(['player_blinds.flasher_steam_id', 'player_blinds.flasher_name', 'steam_account_overrides.name', relation])
     .orderBy('totalDuration', 'desc')
     .limit(20);
 
@@ -199,6 +267,7 @@ async function fetchPlayersWhoFlashedPlayer(steamId: string, filters: MatchFilte
   return rows.map((row) => ({
     steamId: row.steamId,
     name: row.name,
+    relation: row.relation,
     count: toNumber(row.count),
     totalDuration: roundNumber(toNumber(row.totalDuration), 2),
     averageDuration: roundNumber(toNumber(row.averageDuration), 2),
@@ -206,15 +275,17 @@ async function fetchPlayersWhoFlashedPlayer(steamId: string, filters: MatchFilte
 }
 
 export async function fetchPlayerGrenadesStats(steamId: string, filters: MatchFilters): Promise<PlayerGrenadesStats> {
-  const [counts, throws, flashbangs, damages, heKillCount, flashedPlayers, flashedByPlayers] = await Promise.all([
-    fetchPlayerMatchAndRoundCounts(steamId, filters),
-    fetchPlayerGrenadesThrownCounts(steamId, filters),
-    fetchPlayerFlashbangStats(steamId, filters),
-    fetchPlayerGrenadeDamageStats(steamId, filters),
-    fetchPlayerHeKillCount(steamId, filters),
-    fetchPlayersFlashedByPlayer(steamId, filters),
-    fetchPlayersWhoFlashedPlayer(steamId, filters),
-  ]);
+  const [counts, throws, flashbangs, incomingFlashbangs, damages, heKillCount, flashedPlayers, flashedByPlayers] =
+    await Promise.all([
+      fetchPlayerMatchAndRoundCounts(steamId, filters),
+      fetchPlayerGrenadesThrownCounts(steamId, filters),
+      fetchPlayerFlashbangStats(steamId, filters),
+      fetchPlayerIncomingFlashbangStats(steamId, filters),
+      fetchPlayerGrenadeDamageStats(steamId, filters),
+      fetchPlayerHeKillCount(steamId, filters),
+      fetchPlayersFlashedByPlayer(steamId, filters),
+      fetchPlayersWhoFlashedPlayer(steamId, filters),
+    ]);
 
   return {
     summary: {
@@ -222,6 +293,7 @@ export async function fetchPlayerGrenadesStats(steamId: string, filters: MatchFi
       ...counts,
       ...throws,
       ...flashbangs,
+      ...incomingFlashbangs,
       heDamage: damages.heDamage,
       fireDamage: damages.fireDamage,
       heKillCount,
@@ -234,7 +306,11 @@ export async function fetchPlayerGrenadesStats(steamId: string, filters: MatchFi
       averageSmokeGrenadesThrownPerRound: average(throws.smokeGrenadesThrownCount, counts.roundCount),
       averageFireGrenadesThrownPerRound: average(throws.fireGrenadesThrownCount, counts.roundCount),
       averageFlashedEnemiesPerFlashbang: average(flashbangs.flashedEnemyCount, throws.flashbangsThrownCount),
+      averageFlashedTeammatesPerFlashbang: average(flashbangs.flashedTeammateCount, throws.flashbangsThrownCount),
       averageFlashedEnemiesPerMatch: average(flashbangs.flashedEnemyCount, counts.matchCount),
+      averageFlashedTeammatesPerMatch: average(flashbangs.flashedTeammateCount, counts.matchCount),
+      averageFlashedByEnemiesPerMatch: average(incomingFlashbangs.flashedByEnemyCount, counts.matchCount),
+      averageFlashedByTeammatesPerMatch: average(incomingFlashbangs.flashedByTeammateCount, counts.matchCount),
       averageHeDamagePerThrow: average(damages.heDamage, throws.heGrenadesThrownCount),
       averageHeDamagePerMatch: average(damages.heDamage, counts.matchCount),
       averageFireDamagePerThrow: average(damages.fireDamage, throws.fireGrenadesThrownCount),

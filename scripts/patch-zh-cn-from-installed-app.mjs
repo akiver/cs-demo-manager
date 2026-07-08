@@ -202,6 +202,38 @@ function createManualTranslations() {
   set('{totalDuration}s', [['totalDuration'], '秒'], 'Seconds');
   set('{averageDuration}s', [['averageDuration'], '秒'], 'Seconds');
 
+  set('Total blind time', ['总致盲时间'], 'Table header tooltip');
+  set('Enemies flashed / match', ['场均闪白敌人'], 'Table header');
+  set('Enemy players flashed by this player per match', ['该玩家场均闪白敌方玩家'], 'Table header tooltip');
+  set('Teammates flashed / match', ['场均闪白队友'], 'Table header');
+  set('Teammates flashed by this player per match', ['该玩家场均闪白队友'], 'Table header tooltip');
+  set('Flashed by enemies / match', ['场均被敌人闪白'], 'Table header');
+  set('Times this player was flashed by enemies per match', ['该玩家场均被敌人闪白次数'], 'Table header tooltip');
+  set('Flashed by teammates / match', ['场均被队友闪白'], 'Table header');
+  set('Times this player was flashed by teammates per match', ['该玩家场均被队友闪白次数'], 'Table header tooltip');
+  set('Relation', ['关系'], 'Table header');
+  set('Player relation', ['玩家关系'], 'Table header tooltip');
+  set('Teammates flashed / match', ['场均闪白队友']);
+  set('Flashed by enemies / match', ['场均被敌人闪白']);
+  set('Flashed by teammates / match', ['场均被队友闪白']);
+  set('Teammates flashed by this player: {flashedTeammateCount}', ['该玩家闪白队友：', ['flashedTeammateCount']]);
+  set('Times this player was flashed by enemies: {flashedByEnemyCount}', [
+    '该玩家被敌人闪白次数：',
+    ['flashedByEnemyCount'],
+  ]);
+  set('Times this player was flashed by teammates: {flashedByTeammateCount}', [
+    '该玩家被队友闪白次数：',
+    ['flashedByTeammateCount'],
+  ]);
+  set('Players flashed by this player', ['该玩家闪到的玩家']);
+  set('Enemy and teammate players flashed by this player.', ['该玩家闪到的敌方和队友玩家。']);
+  set('No player was flashed by this player for the current filters.', ['当前筛选条件下，该玩家没有闪到其他玩家。']);
+  set('Players who flashed this player', ['闪到该玩家的玩家']);
+  set('Enemy and teammate players who flashed this player.', ['闪到该玩家的敌方和队友玩家。']);
+  set('No player flashed this player for the current filters.', ['当前筛选条件下，没有其他玩家闪到该玩家。']);
+  set('Enemy', ['敌人']);
+  set('Teammate', ['队友']);
+
   return translations;
 }
 

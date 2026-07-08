@@ -1508,6 +1508,7 @@ msgid "Player"
 msgstr "Player"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
+#: src/ui/player/grenades/player-grenades.tsx
 msgid "Enemy"
 msgstr "Enemy"
 
@@ -6477,6 +6478,46 @@ msgstr "Average thrown per round"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
+msgid "Enemies flashed / match"
+msgstr "Enemies flashed / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Enemy players flashed by this player per match"
+msgstr "Enemy players flashed by this player per match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Teammates flashed / match"
+msgstr "Teammates flashed / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Teammates flashed by this player per match"
+msgstr "Teammates flashed by this player per match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Flashed by enemies / match"
+msgstr "Flashed by enemies / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Times this player was flashed by enemies per match"
+msgstr "Times this player was flashed by enemies per match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Flashed by teammates / match"
+msgstr "Flashed by teammates / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Times this player was flashed by teammates per match"
+msgstr "Times this player was flashed by teammates per match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
 msgid "Enemy damage"
 msgstr "Enemy damage"
 
@@ -6531,6 +6572,20 @@ msgid "{averageDuration}s"
 msgstr "{averageDuration}s"
 
 #: src/ui/player/grenades/player-grenades.tsx
+msgid "Teammate"
+msgstr "Teammate"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Relation"
+msgstr "Relation"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Player relation"
+msgstr "Player relation"
+
+#: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
 msgid "Steam ID"
 msgstr "Steam ID"
@@ -6557,8 +6612,8 @@ msgstr "Total blind time"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header tooltip"
-msgid "Total enemy blind time"
-msgstr "Total enemy blind time"
+msgid "Total blind time"
+msgstr "Total blind time"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
@@ -6589,6 +6644,30 @@ msgstr "Enemies flashed / match"
 #: src/ui/player/grenades/player-grenades.tsx
 msgid "Enemies flashed by this player: {flashedEnemyCount}"
 msgstr "Enemies flashed by this player: {flashedEnemyCount}"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Teammates flashed / match"
+msgstr "Teammates flashed / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Teammates flashed by this player: {flashedTeammateCount}"
+msgstr "Teammates flashed by this player: {flashedTeammateCount}"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Flashed by enemies / match"
+msgstr "Flashed by enemies / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Times this player was flashed by enemies: {flashedByEnemyCount}"
+msgstr "Times this player was flashed by enemies: {flashedByEnemyCount}"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Flashed by teammates / match"
+msgstr "Flashed by teammates / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgid "Times this player was flashed by teammates: {flashedByTeammateCount}"
+msgstr "Times this player was flashed by teammates: {flashedByTeammateCount}"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgid "Enemy blind time / flash"
@@ -6632,24 +6711,24 @@ msgid "Players flashed by this player"
 msgstr "Players flashed by this player"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Enemy players flashed by this player only."
-msgstr "Enemy players flashed by this player only."
+msgid "Enemy and teammate players flashed by this player."
+msgstr "Enemy and teammate players flashed by this player."
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "No enemy player was flashed by this player for the current filters."
-msgstr "No enemy player was flashed by this player for the current filters."
+msgid "No player was flashed by this player for the current filters."
+msgstr "No player was flashed by this player for the current filters."
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgid "Players who flashed this player"
 msgstr "Players who flashed this player"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Enemy players who flashed this player only."
-msgstr "Enemy players who flashed this player only."
+msgid "Enemy and teammate players who flashed this player."
+msgstr "Enemy and teammate players who flashed this player."
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "No enemy player flashed this player for the current filters."
-msgstr "No enemy player flashed this player for the current filters."
+msgid "No player flashed this player for the current filters."
+msgstr "No player flashed this player for the current filters."
 
 #: src/ui/player/load-player-error.tsx
 #: src/ui/team/load-team-error.tsx

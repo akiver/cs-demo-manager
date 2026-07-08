@@ -39,6 +39,11 @@ type GrenadeAverageRow = {
   thrownCount: number;
   averagePerMatch: number;
   averagePerRound: number;
+  enemiesFlashedPerMatch: number;
+  teammatesFlashedPerMatch: number;
+  flashedByEnemiesPerMatch: number;
+  flashedByTeammatesPerMatch: number;
+  hasFlashbangStats: boolean;
   enemyDamage: number;
   hasEnemyDamage: boolean;
   enemyDamagePerThrow: number;
@@ -61,6 +66,22 @@ function EnemyDamagePerThrowCell({ data }: CellProps<GrenadeAverageRow>) {
 
 function EnemyKillCountCell({ data }: CellProps<GrenadeAverageRow>) {
   return <>{data.hasEnemyKillCount ? data.enemyKillCount : '-'}</>;
+}
+
+function EnemiesFlashedPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasFlashbangStats ? data.enemiesFlashedPerMatch : '-'}</>;
+}
+
+function TeammatesFlashedPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasFlashbangStats ? data.teammatesFlashedPerMatch : '-'}</>;
+}
+
+function FlashedByEnemiesPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasFlashbangStats ? data.flashedByEnemiesPerMatch : '-'}</>;
+}
+
+function FlashedByTeammatesPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasFlashbangStats ? data.flashedByTeammatesPerMatch : '-'}</>;
 }
 
 function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summary'] }) {
@@ -126,6 +147,70 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       textAlign: 'right',
     },
     {
+      id: 'enemies-flashed-per-match',
+      accessor: 'enemiesFlashedPerMatch',
+      headerText: t({
+        context: 'Table header',
+        message: 'Enemies flashed / match',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Enemy players flashed by this player per match',
+      }),
+      width: 150,
+      maxWidth: 220,
+      textAlign: 'right',
+      Cell: EnemiesFlashedPerMatchCell,
+    },
+    {
+      id: 'teammates-flashed-per-match',
+      accessor: 'teammatesFlashedPerMatch',
+      headerText: t({
+        context: 'Table header',
+        message: 'Teammates flashed / match',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Teammates flashed by this player per match',
+      }),
+      width: 160,
+      maxWidth: 230,
+      textAlign: 'right',
+      Cell: TeammatesFlashedPerMatchCell,
+    },
+    {
+      id: 'flashed-by-enemies-per-match',
+      accessor: 'flashedByEnemiesPerMatch',
+      headerText: t({
+        context: 'Table header',
+        message: 'Flashed by enemies / match',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Times this player was flashed by enemies per match',
+      }),
+      width: 160,
+      maxWidth: 230,
+      textAlign: 'right',
+      Cell: FlashedByEnemiesPerMatchCell,
+    },
+    {
+      id: 'flashed-by-teammates-per-match',
+      accessor: 'flashedByTeammatesPerMatch',
+      headerText: t({
+        context: 'Table header',
+        message: 'Flashed by teammates / match',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Times this player was flashed by teammates per match',
+      }),
+      width: 170,
+      maxWidth: 240,
+      textAlign: 'right',
+      Cell: FlashedByTeammatesPerMatchCell,
+    },
+    {
       id: 'enemy-damage',
       accessor: 'enemyDamage',
       headerText: t({
@@ -183,6 +268,11 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       thrownCount: summary.flashbangsThrownCount,
       averagePerMatch: summary.averageFlashbangsThrownPerMatch,
       averagePerRound: summary.averageFlashbangsThrownPerRound,
+      enemiesFlashedPerMatch: summary.averageFlashedEnemiesPerMatch,
+      teammatesFlashedPerMatch: summary.averageFlashedTeammatesPerMatch,
+      flashedByEnemiesPerMatch: summary.averageFlashedByEnemiesPerMatch,
+      flashedByTeammatesPerMatch: summary.averageFlashedByTeammatesPerMatch,
+      hasFlashbangStats: true,
       enemyDamage: 0,
       hasEnemyDamage: false,
       enemyDamagePerThrow: 0,
@@ -198,6 +288,11 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       thrownCount: summary.heGrenadesThrownCount,
       averagePerMatch: summary.averageHeGrenadesThrownPerMatch,
       averagePerRound: summary.averageHeGrenadesThrownPerRound,
+      enemiesFlashedPerMatch: 0,
+      teammatesFlashedPerMatch: 0,
+      flashedByEnemiesPerMatch: 0,
+      flashedByTeammatesPerMatch: 0,
+      hasFlashbangStats: false,
       enemyDamage: summary.heDamage,
       hasEnemyDamage: true,
       enemyDamagePerThrow: summary.averageHeDamagePerThrow,
@@ -213,6 +308,11 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       thrownCount: summary.fireGrenadesThrownCount,
       averagePerMatch: summary.averageFireGrenadesThrownPerMatch,
       averagePerRound: summary.averageFireGrenadesThrownPerRound,
+      enemiesFlashedPerMatch: 0,
+      teammatesFlashedPerMatch: 0,
+      flashedByEnemiesPerMatch: 0,
+      flashedByTeammatesPerMatch: 0,
+      hasFlashbangStats: false,
       enemyDamage: summary.fireDamage,
       hasEnemyDamage: true,
       enemyDamagePerThrow: summary.averageFireDamagePerThrow,
@@ -228,6 +328,11 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       thrownCount: summary.smokeGrenadesThrownCount,
       averagePerMatch: summary.averageSmokeGrenadesThrownPerMatch,
       averagePerRound: summary.averageSmokeGrenadesThrownPerRound,
+      enemiesFlashedPerMatch: 0,
+      teammatesFlashedPerMatch: 0,
+      flashedByEnemiesPerMatch: 0,
+      flashedByTeammatesPerMatch: 0,
+      hasFlashbangStats: false,
       enemyDamage: 0,
       hasEnemyDamage: false,
       enemyDamagePerThrow: 0,
@@ -260,7 +365,7 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
 }
 
 function getFlashbangMatchupRowId(row: PlayerFlashbangMatchup) {
-  return row.steamId;
+  return `${row.relation}-${row.steamId}`;
 }
 
 function TotalBlindTimeCell({ data }: CellProps<PlayerFlashbangMatchup>) {
@@ -273,6 +378,22 @@ function AverageBlindTimeCell({ data }: CellProps<PlayerFlashbangMatchup>) {
   const { averageDuration } = data;
 
   return <Trans context="Seconds">{averageDuration}s</Trans>;
+}
+
+function RelationCell({ data }: CellProps<PlayerFlashbangMatchup>) {
+  if (data.relation === 'enemy') {
+    return (
+      <span className="text-red-700">
+        <Trans>Enemy</Trans>
+      </span>
+    );
+  }
+
+  return (
+    <span className="text-green-700">
+      <Trans>Teammate</Trans>
+    </span>
+  );
 }
 
 type FlashbangMatchupsTableProps = {
@@ -305,6 +426,21 @@ function FlashbangMatchupsTable({
       }),
       width: 200,
       maxWidth: 400,
+    },
+    {
+      id: 'relation',
+      accessor: 'relation',
+      headerText: t({
+        context: 'Table header',
+        message: 'Relation',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Player relation',
+      }),
+      width: 100,
+      maxWidth: 160,
+      Cell: RelationCell,
     },
     {
       id: 'steam-id',
@@ -344,7 +480,7 @@ function FlashbangMatchupsTable({
       }),
       headerTooltip: t({
         context: 'Table header tooltip',
-        message: 'Total enemy blind time',
+        message: 'Total blind time',
       }),
       width: 130,
       maxWidth: 200,
@@ -398,13 +534,19 @@ function GrenadesContent({ stats }: { stats: PlayerGrenadesStats }) {
     averageEnemyBlindDuration,
     averageFireDamagePerMatch,
     averageFlashbangsThrownPerMatch,
+    averageFlashedByEnemiesPerMatch,
+    averageFlashedByTeammatesPerMatch,
     averageFlashedEnemiesPerMatch,
+    averageFlashedTeammatesPerMatch,
     averageHeDamagePerMatch,
     averageSmokeGrenadesThrownPerMatch,
     fireDamage,
     fireGrenadesThrownCount,
     flashbangsThrownCount,
+    flashedByEnemyCount,
+    flashedByTeammateCount,
     flashedEnemyCount,
+    flashedTeammateCount,
     heDamage,
     heGrenadesThrownCount,
     smokeGrenadesThrownCount,
@@ -416,6 +558,9 @@ function GrenadesContent({ stats }: { stats: PlayerGrenadesStats }) {
     smokeGrenadesThrownCount > 0 ||
     fireGrenadesThrownCount > 0 ||
     flashedEnemyCount > 0 ||
+    flashedTeammateCount > 0 ||
+    flashedByEnemyCount > 0 ||
+    flashedByTeammateCount > 0 ||
     heDamage > 0 ||
     fireDamage > 0;
 
@@ -436,6 +581,21 @@ function GrenadesContent({ stats }: { stats: PlayerGrenadesStats }) {
             title={<Trans>Enemies flashed / match</Trans>}
             value={averageFlashedEnemiesPerMatch}
             subtitle={<Trans>Enemies flashed by this player: {flashedEnemyCount}</Trans>}
+          />
+          <StatPanel
+            title={<Trans>Teammates flashed / match</Trans>}
+            value={averageFlashedTeammatesPerMatch}
+            subtitle={<Trans>Teammates flashed by this player: {flashedTeammateCount}</Trans>}
+          />
+          <StatPanel
+            title={<Trans>Flashed by enemies / match</Trans>}
+            value={averageFlashedByEnemiesPerMatch}
+            subtitle={<Trans>Times this player was flashed by enemies: {flashedByEnemyCount}</Trans>}
+          />
+          <StatPanel
+            title={<Trans>Flashed by teammates / match</Trans>}
+            value={averageFlashedByTeammatesPerMatch}
+            subtitle={<Trans>Times this player was flashed by teammates: {flashedByTeammateCount}</Trans>}
           />
           <StatPanel
             title={<Trans>Enemy blind time / flash</Trans>}
@@ -461,15 +621,15 @@ function GrenadesContent({ stats }: { stats: PlayerGrenadesStats }) {
         <GrenadeAveragesTable summary={summary} />
         <FlashbangMatchupsTable
           title={<Trans>Players flashed by this player</Trans>}
-          description={<Trans>Enemy players flashed by this player only.</Trans>}
-          emptyMessage={<Trans>No enemy player was flashed by this player for the current filters.</Trans>}
+          description={<Trans>Enemy and teammate players flashed by this player.</Trans>}
+          emptyMessage={<Trans>No player was flashed by this player for the current filters.</Trans>}
           matchups={stats.flashedPlayers}
           tableName={TableName.PlayerGrenadesFlashedPlayers}
         />
         <FlashbangMatchupsTable
           title={<Trans>Players who flashed this player</Trans>}
-          description={<Trans>Enemy players who flashed this player only.</Trans>}
-          emptyMessage={<Trans>No enemy player flashed this player for the current filters.</Trans>}
+          description={<Trans>Enemy and teammate players who flashed this player.</Trans>}
+          emptyMessage={<Trans>No player flashed this player for the current filters.</Trans>}
           matchups={stats.flashedByPlayers}
           tableName={TableName.PlayerGrenadesFlashedByPlayers}
         />

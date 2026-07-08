@@ -15,10 +15,23 @@ type PlayerGrenadeSummary = {
   averageSmokeGrenadesThrownPerRound: number;
   averageFireGrenadesThrownPerRound: number;
   flashedEnemyCount: number;
+  flashedTeammateCount: number;
+  flashedByEnemyCount: number;
+  flashedByTeammateCount: number;
   totalEnemyBlindDuration: number;
+  totalTeammateBlindDuration: number;
+  totalBlindDurationFromEnemies: number;
+  totalBlindDurationFromTeammates: number;
   averageEnemyBlindDuration: number;
+  averageTeammateBlindDuration: number;
+  averageBlindDurationFromEnemies: number;
+  averageBlindDurationFromTeammates: number;
   averageFlashedEnemiesPerFlashbang: number;
+  averageFlashedTeammatesPerFlashbang: number;
   averageFlashedEnemiesPerMatch: number;
+  averageFlashedTeammatesPerMatch: number;
+  averageFlashedByEnemiesPerMatch: number;
+  averageFlashedByTeammatesPerMatch: number;
   heDamage: number;
   averageHeDamagePerThrow: number;
   averageHeDamagePerMatch: number;
@@ -28,9 +41,12 @@ type PlayerGrenadeSummary = {
   averageFireDamagePerMatch: number;
 };
 
+export type FlashbangPlayerRelation = 'enemy' | 'teammate';
+
 export type PlayerFlashbangMatchup = {
   steamId: string;
   name: string;
+  relation: FlashbangPlayerRelation;
   count: number;
   totalDuration: number;
   averageDuration: number;
