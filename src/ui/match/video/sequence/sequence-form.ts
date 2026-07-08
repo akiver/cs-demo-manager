@@ -3,7 +3,7 @@ import type { CustomCameraFocus } from 'csdm/common/types/custom-camera-focus';
 import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
 
 export type SequenceForm = {
-  number: number;
+  number: string;
   startTick: string;
   endTick: string;
   playersOptions: SequencePlayerOptions[];

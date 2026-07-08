@@ -5,6 +5,7 @@ import { getSequenceOutputFilePath } from 'csdm/node/video/generation/get-sequen
 import { executeFfmpeg } from 'csdm/node/video/ffmpeg/execute-ffmpeg';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
+import { sortSequencesByNumber } from 'csdm/common/video/sequences/sort-sequences-by-number';
 
 type ConcatenateVideoOptions = {
   ffmpegExecutablePath: string;
@@ -18,7 +19,8 @@ export async function concatenateVideosFromSequences(
   { ffmpegExecutablePath, sequences, outputFolderPath, videoContainer, fileName }: ConcatenateVideoOptions,
   signal: AbortSignal,
 ) {
-  const videoPaths = sequences.map((sequence) => {
+  const sortedSequences = sortSequencesByNumber(sequences);
+  const videoPaths = sortedSequences.map((sequence) => {
     return getSequenceOutputFilePath(outputFolderPath, sequence, videoContainer);
   });
   const listFilePath = path.join(getAppFolderPath(), 'videos.txt');

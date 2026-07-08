@@ -8,11 +8,14 @@ import {
   generatePlayersKillsSequences,
   generatePlayersRoundsSequences,
   replaceSequences,
+  swapSequences,
   updateSequence,
 } from './sequences-actions';
 import { buildPlayersEventSequences } from 'csdm/common/video/sequences/build-players-event-sequences';
 import { PlayerSequenceEvent } from 'csdm/common/types/player-sequence-event';
 import { buildPlayersRoundsSequences } from 'csdm/common/video/sequences/build-players-rounds-sequences';
+import { getNextSequenceNumber } from 'csdm/common/video/sequences/get-next-sequence-number';
+import { sortSequencesByNumber } from 'csdm/common/video/sequences/sort-sequences-by-number';
 
 export type SequencesByDemoFilePath = { [demoFilePath: string]: Sequence[] | undefined };
 
@@ -24,7 +27,7 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       const { sequence, demoFilePath } = action.payload;
       const sequences = state[demoFilePath] ?? [];
       sequences.push(sequence);
-      state[demoFilePath] = sequences;
+      state[demoFilePath] = sortSequencesByNumber(sequences);
     })
     .addCase(deleteSequence, (state, action) => {
       const sequences = state[action.payload.demoFilePath] ?? [];
@@ -35,17 +38,29 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     .addCase(updateSequence, (state, action) => {
       const sequences = state[action.payload.demoFilePath] ?? [];
       const sequenceToUpdateIndex = sequences.findIndex(
-        (sequence) => sequence.number === action.payload.sequence.number,
+        (sequence) => sequence.number === action.payload.previousNumber,
       );
       if (sequenceToUpdateIndex > -1) {
         sequences[sequenceToUpdateIndex] = action.payload.sequence;
+        state[action.payload.demoFilePath] = sortSequencesByNumber(sequences);
+      }
+    })
+    .addCase(swapSequences, (state, action) => {
+      const { demoFilePath, currentNumber, newNumber } = action.payload;
+      const sequences = state[demoFilePath] ?? [];
+      const firstSequence = sequences.find((sequence) => sequence.number === currentNumber);
+      const secondSequence = sequences.find((sequence) => sequence.number === newNumber);
+      if (firstSequence !== undefined && secondSequence !== undefined) {
+        firstSequence.number = newNumber;
+        secondSequence.number = currentNumber;
+        state[demoFilePath] = sortSequencesByNumber(sequences);
       }
     })
     .addCase(deleteSequences, (state, action) => {
       state[action.payload.demoFilePath] = [];
     })
     .addCase(replaceSequences, (state, action) => {
-      state[action.payload.demoFilePath] = action.payload.sequences;
+      state[action.payload.demoFilePath] = sortSequencesByNumber(action.payload.sequences);
     })
     .addCase(generatePlayersKillsSequences, (state, action) => {
       const {
@@ -56,10 +71,10 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       const sequences = buildPlayersEventSequences({
         event: PlayerSequenceEvent.Kills,
         ...action.payload,
-        firstSequenceNumber: preserveExistingSequences ? existingSequences.length + 1 : 1,
+        firstSequenceNumber: preserveExistingSequences ? getNextSequenceNumber(existingSequences) : 1,
       });
       if (preserveExistingSequences) {
-        state[demoFilePath] = [...existingSequences, ...sequences];
+        state[demoFilePath] = sortSequencesByNumber([...existingSequences, ...sequences]);
       } else {
         state[demoFilePath] = sequences;
       }
@@ -73,10 +88,10 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       const sequences = buildPlayersEventSequences({
         event: PlayerSequenceEvent.Deaths,
         ...action.payload,
-        firstSequenceNumber: preserveExistingSequences ? existingSequences.length + 1 : 1,
+        firstSequenceNumber: preserveExistingSequences ? getNextSequenceNumber(existingSequences) : 1,
       });
       if (preserveExistingSequences) {
-        state[demoFilePath] = [...existingSequences, ...sequences];
+        state[demoFilePath] = sortSequencesByNumber([...existingSequences, ...sequences]);
       } else {
         state[demoFilePath] = sequences;
       }
@@ -92,10 +107,10 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
         startSecondsBeforeEvent,
         endSecondsAfterEvent,
         settings,
-        firstSequenceNumber: preserveExistingSequences ? existingSequences.length + 1 : 1,
+        firstSequenceNumber: preserveExistingSequences ? getNextSequenceNumber(existingSequences) : 1,
       });
       if (preserveExistingSequences) {
-        state[match.demoFilePath] = [...existingSequences, ...sequences];
+        state[match.demoFilePath] = sortSequencesByNumber([...existingSequences, ...sequences]);
       } else {
         state[match.demoFilePath] = sequences;
       }

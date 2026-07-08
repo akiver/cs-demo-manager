@@ -78,10 +78,12 @@ export function SequencesTimeline() {
           <div {...timelineProps}>{render(groups)}</div>
         </div>
       </div>
-      <EditSequenceDialog
-        sequence={selectedSequenceOnTimeline}
-        closeDialog={() => setSelectedSequenceOnTimeline(undefined)}
-      />
+      {selectedSequenceOnTimeline && (
+        <EditSequenceDialog
+          sequence={selectedSequenceOnTimeline}
+          closeDialog={() => setSelectedSequenceOnTimeline(undefined)}
+        />
+      )}
     </>
   );
 }

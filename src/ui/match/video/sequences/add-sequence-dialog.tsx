@@ -9,6 +9,7 @@ import { addSequence } from './sequences-actions';
 import type { SequenceForm } from '../sequence/sequence-form';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { lastArrayItem } from 'csdm/common/array/last-array-item';
+import { getNextSequenceNumber } from 'csdm/common/video/sequences/get-next-sequence-number';
 
 type Props = {
   isVisible: boolean;
@@ -34,13 +35,14 @@ export function AddSequenceDialog({ isVisible, closeDialog }: Props) {
   const onSaveClick = (sequenceForm: SequenceForm) => {
     const sequence: Sequence = {
       ...sequenceForm,
+      number: Number(sequenceForm.number),
       startTick: Number(sequenceForm.startTick),
       endTick: Number(sequenceForm.endTick),
     };
     dispatch(addSequence({ demoFilePath: match.demoFilePath, sequence }));
   };
 
-  const sequenceNumber = sequences.length + 1;
+  const sequenceNumber = getNextSequenceNumber(sequences);
   const lastSequence = sequences.length > 0 ? lastArrayItem(sequences) : undefined;
   let playersOptions = defaultPlayersOptions;
   let showXRay = settings.settings.showXRay;

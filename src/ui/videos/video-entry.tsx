@@ -74,11 +74,12 @@ function getStatusMessage(video: Video) {
       );
     case VideoStatus.Converting: {
       const number = video.currentSequence;
+      const position = video.currentSequencePosition;
       const sequenceCount = video.sequences.length;
       return (
         <p>
           <Trans>
-            Generating video for sequence {number} / {sequenceCount}…
+            Generating video for sequence #{number} ({position} / {sequenceCount})…
           </Trans>
         </p>
       );

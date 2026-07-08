@@ -18,8 +18,11 @@ export type GeneratePlayersEventPayload = {
 };
 
 export const addSequence = createAction<{ demoFilePath: string; sequence: Sequence }>('match/video/sequences/add');
-export const updateSequence = createAction<{ demoFilePath: string; sequence: Sequence }>(
+export const updateSequence = createAction<{ demoFilePath: string; sequence: Sequence; previousNumber: number }>(
   'match/video/sequences/update',
+);
+export const swapSequences = createAction<{ demoFilePath: string; currentNumber: number; newNumber: number }>(
+  'match/video/sequences/swap',
 );
 export const deleteSequence = createAction<{ demoFilePath: string; sequence: Sequence }>(
   'match/video/sequences/delete',

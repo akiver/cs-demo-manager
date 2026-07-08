@@ -32,6 +32,7 @@ export type Video = {
   trueView: boolean;
   errorCode?: ErrorCode;
   currentSequence?: number;
+  currentSequencePosition?: number;
 };
 
 export type AddVideoPayload = Omit<Video, 'id' | 'date' | 'status' | 'output'> & {
@@ -41,5 +42,5 @@ export type AddVideoPayload = Omit<Video, 'id' | 'date' | 'status' | 'output'> &
 
 export type WatchVideoSequencesPayload = Omit<
   Video,
-  'id' | 'date' | 'status' | 'output' | 'errorCode' | 'currentSequence'
+  'id' | 'date' | 'status' | 'output' | 'errorCode' | 'currentSequence' | 'currentSequencePosition'
 >;

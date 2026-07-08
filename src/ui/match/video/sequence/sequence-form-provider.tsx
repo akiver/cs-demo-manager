@@ -7,6 +7,7 @@ import { useCameras } from 'csdm/ui/cameras/use-cameras';
 
 export type SequenceFormContextState = {
   sequence: SequenceForm;
+  initialNumber: number;
   updateSequence: (sequence: Partial<SequenceForm>) => void;
   setStartTick: (tick: number) => void;
   setEndTick: (tick: number) => void;
@@ -19,6 +20,7 @@ export type SequenceFormContextState = {
 
 export const SequenceFormContext = createContext<SequenceFormContextState>({
   sequence: {} as SequenceForm,
+  initialNumber: 0,
   updateSequence: () => {
     throw new Error('updateSequence is not implemented');
   },
@@ -55,6 +57,7 @@ export function SequenceFormProvider({ children, initialSequence }: Props) {
   const cameras = useCameras(match.game, match.mapName);
   const [sequence, setSequence] = useState<SequenceForm>({
     ...initialSequence,
+    number: String(initialSequence.number),
     startTick: String(initialSequence.startTick),
     endTick: String(initialSequence.endTick),
     playerVoicesEnabled: true,
@@ -147,6 +150,7 @@ export function SequenceFormProvider({ children, initialSequence }: Props) {
     <SequenceFormContext
       value={{
         sequence,
+        initialNumber: initialSequence.number,
         updateSequence,
         setStartTick,
         setEndTick,
