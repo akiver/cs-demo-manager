@@ -5,26 +5,30 @@ import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { Tooltip } from 'csdm/ui/components/tooltip';
-import { AVAILABLE_PLACEHOLDERS } from './output-file-name-utils';
+import { QuestionIcon } from 'csdm/ui/icons/question-icon';
+import { VideoFilenamePlaceholder } from 'csdm/common/types/video-filename-placeholders';
+import { assertNever } from 'csdm/common/assert-never';
 
-function getPlaceholderDescription(placeholder: (typeof AVAILABLE_PLACEHOLDERS)[number]) {
+function getPlaceholderDescription(placeholder: VideoFilenamePlaceholder) {
   switch (placeholder) {
-    case '{map}':
+    case VideoFilenamePlaceholder.Map:
       return <Trans>Map name (e.g., de_dust2)</Trans>;
-    case '{checksum}':
+    case VideoFilenamePlaceholder.Checksum:
       return <Trans>Match checksum/ID</Trans>;
-    case '{game}':
+    case VideoFilenamePlaceholder.Game:
       return <Trans>Game (CS2 or CSGO)</Trans>;
-    case '{date}':
+    case VideoFilenamePlaceholder.Date:
       return <Trans>Current date (YYYY-MM-DD)</Trans>;
-    case '{time}':
+    case VideoFilenamePlaceholder.Time:
       return <Trans>Current time (HH-MM-SS)</Trans>;
-    case '{encoder}':
+    case VideoFilenamePlaceholder.Encoder:
       return <Trans>Encoder software</Trans>;
-    case '{resolution}':
+    case VideoFilenamePlaceholder.Resolution:
       return <Trans>Resolution (e.g., 1920x1080)</Trans>;
-    case '{framerate}':
+    case VideoFilenamePlaceholder.Framerate:
       return <Trans>Framerate (e.g., 30)</Trans>;
+    default:
+      return assertNever(placeholder, `Unknown placeholder: ${placeholder as string}`);
   }
 }
 
@@ -46,35 +50,43 @@ export function OutputFileNameInput() {
     return null;
   }
 
-  const tooltipContent = (
-    <div className="flex flex-col gap-y-4">
-      <p className="font-semibold">
-        <Trans>Available placeholders:</Trans>
-      </p>
-      <ul className="flex flex-col gap-y-4">
-        {AVAILABLE_PLACEHOLDERS.map((placeholder) => (
-          <li key={placeholder} className="flex gap-x-4">
-            <code className="bg-gray-700 px-8 py-4">{placeholder}</code>
-            <span>{getPlaceholderDescription(placeholder)}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-
   return (
     <div className="flex items-center gap-x-8">
       <TextInput
-        label={<Trans context="Input label">Output filename</Trans>}
+        label={
+          <div className="flex items-center gap-x-8">
+            <p>
+              <Trans context="Input label">Output filename</Trans>
+            </p>
+            <Tooltip
+              keepOpenOnHover={true}
+              renderInPortal={true}
+              content={
+                <div className="flex flex-col gap-y-8">
+                  <p className="text-body-strong">
+                    <Trans>Available placeholders</Trans>
+                  </p>
+                  <ul className="flex flex-col gap-y-8">
+                    {Object.values(VideoFilenamePlaceholder).map((placeholder) => {
+                      return (
+                        <li key={placeholder} className="flex gap-x-8">
+                          <p className="selectable bg-black text-white">{placeholder}</p>
+                          <span>{getPlaceholderDescription(placeholder)}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              }
+            >
+              <QuestionIcon className="size-12" />
+            </Tooltip>
+          </div>
+        }
         defaultValue={settings.outputFileName}
         onBlur={onBlur}
         placeholder="output"
       />
-      <Tooltip content={tooltipContent}>
-        <div className="cursor-help text-gray-600">
-          <Trans>?</Trans>
-        </div>
-      </Tooltip>
     </div>
   );
 }

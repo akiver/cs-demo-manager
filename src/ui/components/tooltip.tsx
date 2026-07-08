@@ -15,6 +15,7 @@ import {
   autoPlacement,
   useMergeRefs,
   useClientPoint,
+  safePolygon,
 } from '@floating-ui/react';
 
 type Placement = 'top' | 'right' | 'bottom' | 'left';
@@ -67,6 +68,7 @@ type Props = {
   delay?: number;
   renderInPortal?: boolean;
   isEnabled?: boolean;
+  keepOpenOnHover?: boolean; // Keeps the tooltip open while the cursor is over it
 };
 
 export function Tooltip({
@@ -76,6 +78,7 @@ export function Tooltip({
   placement,
   renderInPortal,
   isEnabled = true,
+  keepOpenOnHover = false,
 }: Props) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -110,6 +113,7 @@ export function Tooltip({
         open: delay,
         close: 0,
       },
+      handleClose: keepOpenOnHover ? safePolygon() : null,
     }),
     useFocus(context),
     useRole(context, { role: 'tooltip' }),

@@ -5280,17 +5280,13 @@ msgid "Framerate (e.g., 30)"
 msgstr "Framerate (e.g., 30)"
 
 #: src/ui/match/video/output-file-name-input.tsx
-msgid "Available placeholders:"
-msgstr "Available placeholders:"
-
-#: src/ui/match/video/output-file-name-input.tsx
 msgctxt "Input label"
 msgid "Output filename"
 msgstr "Output filename"
 
 #: src/ui/match/video/output-file-name-input.tsx
-msgid "?"
-msgstr "?"
+msgid "Available placeholders"
+msgstr "Available placeholders"
 
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
