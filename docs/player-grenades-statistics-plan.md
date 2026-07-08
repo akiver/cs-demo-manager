@@ -22,16 +22,20 @@ Related commits:
 
 - `14d10ced feat(player): add grenades statistics tab`
 - `a6866cfb feat(player): refine grenades statistics`
+- Current follow-up: reuse the project table component for sortable/resizable Grenades tables and patch local zh-CN
+  preview translations from the installed app.
 
 Current behavior:
 
 - The player profile has a `Grenades` tab.
 - The tab fetches stats lazily through `FetchPlayerGrenadesStats`.
 - The first row uses summary panels for high-signal per-match stats.
-- `Grenade averages` is a fixed table, so labels and numbers stay close while resizing the window.
+- `Grenade averages` uses the shared project `Table` component, so columns can be sorted and resized like Players/Teams.
 - Flashbang matchup data is split into two tables:
   - `Players flashed by this player`
   - `Players who flashed this player`
+- Flashbang matchup tables also use the shared project `Table` component and persist their column state with dedicated
+  table names.
 - Metrics intentionally count enemy impact only for flash, HE damage, fire damage, and HE kills.
 
 Validation last run:
@@ -88,6 +92,9 @@ Feature entry points:
 - `src/node/database/player/fetch-player-grenades-stats.ts`: Kysely queries and metric aggregation.
 - `src/common/types/player-grenades-stats.ts`: payload contract shared by server and renderer.
 - `src/ui/translations/en/messages.po`: extracted English source strings.
+- `src/node/settings/table/table-name.ts`: persistent table names for the three player Grenades tables.
+- `scripts/patch-zh-cn-from-installed-app.mjs`: local preview-only zh-CN patcher for installed-app translations plus
+  custom Grenades strings.
 
 Data direction:
 
@@ -323,8 +330,9 @@ Files:
 Tasks:
 
 - [x] Add summary panels for the most important per-match averages.
-- [x] Add a compact table for grenade type rows.
+- [x] Add a sortable/resizable table for grenade type rows.
 - [x] Split flashbang matchup tables by direction.
+- [x] Reuse the shared project `Table` component for all player Grenades tables.
 - [x] Keep Tailwind classes to existing spacing/text/color tokens.
 - [x] Avoid arbitrary Tailwind values unless the existing component pattern already requires them.
 - [x] Clarify ambiguous metrics in labels and subtitles.

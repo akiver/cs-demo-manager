@@ -36,6 +36,9 @@ importers:
       '@e18e/eslint-plugin':
         specifier: 0.5.1
         version: 0.5.1(eslint@10.6.0(jiti@2.7.0))(oxlint@1.72.0(oxlint-tsgolint@0.24.0)(vite-plus@0.2.2(@types/node@24.13.2)(@voidzero-dev/vite-plus-core@0.2.2(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0)))
+      '@electron/asar':
+        specifier: 3.4.1
+        version: 3.4.1
       '@fast-csv/parse':
         specifier: 5.0.7
         version: 5.0.7

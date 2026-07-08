@@ -36,8 +36,8 @@ network access during packaging.
 Manual preview packaging flow used on 2026-07-08:
 
 1. Run `vp run build`.
-2. Copy the installed official Simplified Chinese renderer chunk into the generated `out` zh-CN chunk.
-3. Copy the installed official Simplified Chinese main-process `messages.json` into `out/translations/zh-CN`.
+2. Run `vp run i18n:patch-zh-cn`.
+3. Verify the generated `out` zh-CN renderer chunk has the same keys as the English chunk.
 4. Copy `out` plus `package.json` into a temporary app-asar folder under `dist-custom`.
 5. Run `asar pack` into `dist-custom/player-grenades-tables-zh-preview/resources/app.asar`.
 
@@ -64,22 +64,29 @@ The build script prints this when no Crowdin token exists:
 
 `CROWDIN_PERSONAL_TOKEN is not set, skipping translations download. The build will only include English.`
 
-For the preview exe, the Simplified Chinese resources were copied from the already installed official app:
+For the preview exe, `scripts/patch-zh-cn-from-installed-app.mjs` merges Simplified Chinese resources from the already
+installed official app:
 
-- Renderer source chunk:
-  `dist-custom/installed-asar-inspect/assets/messages-fcCENWFC.js`
-- Main-process source JSON:
-  `dist-custom/installed-asar-inspect/translations/zh-CN/messages.json`
+- Installed source: `C:\Users\Karas\AppData\Local\Programs\cs-demo-manager\resources\app.asar`
+- Renderer target example: `out/assets/messages-BLYSqNEi.js`
+- Main-process target: `out/translations/zh-CN/messages.json`
 
-The current build's zh-CN renderer target was:
+The script uses the current English renderer chunk as the key source, then fills each key in this order:
 
-- `out/assets/messages-vx8JQGiM.js`
+1. Manual translations for custom strings added in this fork.
+2. Official installed Simplified Chinese translations.
+3. English fallback for current-version strings that are not present in the installed app.
 
-Verification after grafting:
+It also normalizes old Lingui message IDs that use `+` and `/` into the current `-` and `_` form. Without this, settings
+labels such as `HSh8u_` can appear as raw IDs even though the installed app has the matching translation under the old
+ID shape.
 
-- Renderer `Overview` resolves to the official Simplified Chinese translation.
-- Renderer `Application language` resolves to the official Simplified Chinese translation.
-- Main-process `menu.preferences` resolves to the official Simplified Chinese translation.
+Latest patch result:
+
+- Renderer messages: 1807 total, 1729 official, 67 manual, 11 English fallback.
+- Main-process messages: 62 total.
+- Verification: English and zh-CN renderer chunks have matching key counts, 0 missing keys, and 0 values equal to their
+  raw ID.
 
 ## Long-Term Localization Options
 

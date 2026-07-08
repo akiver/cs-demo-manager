@@ -1504,7 +1504,6 @@ msgid "Opening duel result"
 msgstr "Opening duel result"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
-#: src/ui/player/grenades/player-grenades.tsx
 msgid "Player"
 msgstr "Player"
 
@@ -4080,6 +4079,7 @@ msgstr "No grenades found."
 #: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
+#: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
 msgid "Player"
 msgstr "Player"
@@ -4203,7 +4203,6 @@ msgid "Players flashbang matrix"
 msgstr "Players flashbang matrix"
 
 #: src/ui/match/grenades/stats/stats-label.tsx
-#: src/ui/player/grenades/player-grenades.tsx
 msgid "Thrown"
 msgstr "Thrown"
 
@@ -4758,7 +4757,6 @@ msgstr "Player not found."
 #: src/ui/match/players/match-players.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/weapons/weapons-accuracy.tsx
-#: src/ui/player/grenades/player-grenades.tsx
 msgid "Kills"
 msgstr "Kills"
 
@@ -5408,6 +5406,7 @@ msgid "Custom cameras (<0>{cameraCount}</0>)"
 msgstr "Custom cameras (<0>{cameraCount}</0>)"
 
 #: src/ui/match/video/sequence/cameras/sequence-player-cameras-table.tsx
+#: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header tooltip"
 msgid "Player"
 msgstr "Player"
@@ -6197,6 +6196,7 @@ msgid "Hits"
 msgstr "Hits"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
+#: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
 msgid "Kills"
 msgstr "Kills"
@@ -6436,6 +6436,71 @@ msgid "X Axis"
 msgstr "X Axis"
 
 #: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Grenade"
+msgstr "Grenade"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Grenade"
+msgstr "Grenade"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Thrown"
+msgstr "Thrown"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Thrown by this player"
+msgstr "Thrown by this player"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Avg / match"
+msgstr "Avg / match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Average thrown per match"
+msgstr "Average thrown per match"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Avg / round"
+msgstr "Avg / round"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Average thrown per round"
+msgstr "Average thrown per round"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Enemy damage"
+msgstr "Enemy damage"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Damage dealt to enemies"
+msgstr "Damage dealt to enemies"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Damage / throw"
+msgstr "Damage / throw"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Damage dealt to enemies per throw"
+msgstr "Damage dealt to enemies per throw"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Enemy kills"
+msgstr "Enemy kills"
+
+#: src/ui/player/grenades/player-grenades.tsx
 msgid "Flashbang"
 msgstr "Flashbang"
 
@@ -6456,38 +6521,6 @@ msgid "Grenade averages"
 msgstr "Grenade averages"
 
 #: src/ui/player/grenades/player-grenades.tsx
-msgid "Grenade"
-msgstr "Grenade"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Avg / match"
-msgstr "Avg / match"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Avg / round"
-msgstr "Avg / round"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Enemy damage"
-msgstr "Enemy damage"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Damage / throw"
-msgstr "Damage / throw"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Flashes"
-msgstr "Flashes"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Total blind time"
-msgstr "Total blind time"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgid "Avg blind time"
-msgstr "Avg blind time"
-
-#: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Seconds"
 msgid "{totalDuration}s"
 msgstr "{totalDuration}s"
@@ -6496,6 +6529,46 @@ msgstr "{totalDuration}s"
 msgctxt "Seconds"
 msgid "{averageDuration}s"
 msgstr "{averageDuration}s"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Steam ID"
+msgstr "Steam ID"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Steam ID"
+msgstr "Steam ID"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Flashes"
+msgstr "Flashes"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Flashbang count"
+msgstr "Flashbang count"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Total blind time"
+msgstr "Total blind time"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Total enemy blind time"
+msgstr "Total enemy blind time"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header"
+msgid "Avg blind time"
+msgstr "Avg blind time"
+
+#: src/ui/player/grenades/player-grenades.tsx
+msgctxt "Table header tooltip"
+msgid "Average blind time"
+msgstr "Average blind time"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgid "No grenade stats found for the current filters."

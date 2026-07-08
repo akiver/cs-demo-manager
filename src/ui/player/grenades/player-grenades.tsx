@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Trans } from '@lingui/react/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { PlayerFlashbangMatchup, PlayerGrenadesStats } from 'csdm/common/types/player-grenades-stats';
 import { Status } from 'csdm/common/types/status';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -8,7 +8,11 @@ import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { Message } from 'csdm/ui/components/message';
 import { Panel, PanelTitle, PanelValue, PanelValueVariant } from 'csdm/ui/components/panel';
 import { Spinner } from 'csdm/ui/components/spinner';
+import { Table } from 'csdm/ui/components/table/table';
+import type { CellProps, Column } from 'csdm/ui/components/table/table-types';
+import { useTable } from 'csdm/ui/components/table/use-table';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
+import { TableName } from 'csdm/node/settings/table/table-name';
 import { usePlayerProfileSettings } from 'csdm/ui/settings/use-player-profile-settings';
 import { useCurrentPlayerSteamId } from 'csdm/ui/player/use-current-player-steam-id';
 
@@ -29,91 +33,218 @@ function StatPanel({ title, value, subtitle }: StatPanelProps) {
   );
 }
 
-type TextAlign = 'left' | 'right';
-
-type TableCellProps = {
-  children: React.ReactNode;
-  textAlign?: TextAlign;
-  title?: string;
-};
-
-function HeaderCell({ children, textAlign = 'left' }: TableCellProps) {
-  const textAlignClassName = textAlign === 'right' ? 'text-right' : 'text-left';
-
-  return (
-    <th className="h-32 border-y border-r border-gray-300 bg-gray-50 px-8 last:border-r-0" scope="col">
-      <span className={`block truncate text-body-strong ${textAlignClassName}`}>{children}</span>
-    </th>
-  );
-}
-
-function BodyCell({ children, textAlign = 'left', title }: TableCellProps) {
-  const textAlignClassName = textAlign === 'right' ? 'text-right' : 'text-left';
-
-  return (
-    <td
-      className={`max-w-0 selectable truncate overflow-hidden border-r border-b border-gray-300 px-8 py-4 last:border-r-0 ${textAlignClassName}`}
-      title={title}
-    >
-      {children}
-    </td>
-  );
-}
-
 type GrenadeAverageRow = {
   id: string;
-  name: React.ReactNode;
+  name: string;
   thrownCount: number;
   averagePerMatch: number;
   averagePerRound: number;
-  enemyDamage: React.ReactNode;
-  enemyDamagePerThrow: React.ReactNode;
-  enemyKillCount: React.ReactNode;
+  enemyDamage: number;
+  hasEnemyDamage: boolean;
+  enemyDamagePerThrow: number;
+  hasEnemyDamagePerThrow: boolean;
+  enemyKillCount: number;
+  hasEnemyKillCount: boolean;
 };
 
+function getGrenadeAverageRowId(row: GrenadeAverageRow) {
+  return row.id;
+}
+
+function EnemyDamageCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasEnemyDamage ? data.enemyDamage : '-'}</>;
+}
+
+function EnemyDamagePerThrowCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasEnemyDamagePerThrow ? data.enemyDamagePerThrow : '-'}</>;
+}
+
+function EnemyKillCountCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasEnemyKillCount ? data.enemyKillCount : '-'}</>;
+}
+
 function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summary'] }) {
+  const { t } = useLingui();
+  const columns: readonly Column<GrenadeAverageRow>[] = [
+    {
+      id: 'grenade',
+      accessor: 'name',
+      headerText: t({
+        context: 'Table header',
+        message: 'Grenade',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Grenade',
+      }),
+      width: 170,
+      maxWidth: 300,
+    },
+    {
+      id: 'thrown',
+      accessor: 'thrownCount',
+      headerText: t({
+        context: 'Table header',
+        message: 'Thrown',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Thrown by this player',
+      }),
+      width: 80,
+      maxWidth: 140,
+      textAlign: 'right',
+    },
+    {
+      id: 'average-per-match',
+      accessor: 'averagePerMatch',
+      headerText: t({
+        context: 'Table header',
+        message: 'Avg / match',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Average thrown per match',
+      }),
+      width: 100,
+      maxWidth: 160,
+      textAlign: 'right',
+    },
+    {
+      id: 'average-per-round',
+      accessor: 'averagePerRound',
+      headerText: t({
+        context: 'Table header',
+        message: 'Avg / round',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Average thrown per round',
+      }),
+      width: 100,
+      maxWidth: 160,
+      textAlign: 'right',
+    },
+    {
+      id: 'enemy-damage',
+      accessor: 'enemyDamage',
+      headerText: t({
+        context: 'Table header',
+        message: 'Enemy damage',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Damage dealt to enemies',
+      }),
+      width: 110,
+      maxWidth: 180,
+      textAlign: 'right',
+      Cell: EnemyDamageCell,
+    },
+    {
+      id: 'damage-per-throw',
+      accessor: 'enemyDamagePerThrow',
+      headerText: t({
+        context: 'Table header',
+        message: 'Damage / throw',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Damage dealt to enemies per throw',
+      }),
+      width: 120,
+      maxWidth: 190,
+      textAlign: 'right',
+      Cell: EnemyDamagePerThrowCell,
+    },
+    {
+      id: 'kills',
+      accessor: 'enemyKillCount',
+      headerText: t({
+        context: 'Table header',
+        message: 'Kills',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Enemy kills',
+      }),
+      width: 70,
+      maxWidth: 120,
+      textAlign: 'right',
+      Cell: EnemyKillCountCell,
+    },
+  ];
   const rows: GrenadeAverageRow[] = [
     {
       id: 'flashbang',
-      name: <Trans>Flashbang</Trans>,
+      name: t({
+        message: 'Flashbang',
+      }),
       thrownCount: summary.flashbangsThrownCount,
       averagePerMatch: summary.averageFlashbangsThrownPerMatch,
       averagePerRound: summary.averageFlashbangsThrownPerRound,
-      enemyDamage: '-',
-      enemyDamagePerThrow: '-',
-      enemyKillCount: '-',
+      enemyDamage: 0,
+      hasEnemyDamage: false,
+      enemyDamagePerThrow: 0,
+      hasEnemyDamagePerThrow: false,
+      enemyKillCount: 0,
+      hasEnemyKillCount: false,
     },
     {
       id: 'he',
-      name: <Trans>HE grenade</Trans>,
+      name: t({
+        message: 'HE grenade',
+      }),
       thrownCount: summary.heGrenadesThrownCount,
       averagePerMatch: summary.averageHeGrenadesThrownPerMatch,
       averagePerRound: summary.averageHeGrenadesThrownPerRound,
       enemyDamage: summary.heDamage,
+      hasEnemyDamage: true,
       enemyDamagePerThrow: summary.averageHeDamagePerThrow,
+      hasEnemyDamagePerThrow: true,
       enemyKillCount: summary.heKillCount,
+      hasEnemyKillCount: true,
     },
     {
       id: 'fire',
-      name: <Trans>Molotov / Incendiary</Trans>,
+      name: t({
+        message: 'Molotov / Incendiary',
+      }),
       thrownCount: summary.fireGrenadesThrownCount,
       averagePerMatch: summary.averageFireGrenadesThrownPerMatch,
       averagePerRound: summary.averageFireGrenadesThrownPerRound,
       enemyDamage: summary.fireDamage,
+      hasEnemyDamage: true,
       enemyDamagePerThrow: summary.averageFireDamagePerThrow,
-      enemyKillCount: '-',
+      hasEnemyDamagePerThrow: true,
+      enemyKillCount: 0,
+      hasEnemyKillCount: false,
     },
     {
       id: 'smoke',
-      name: <Trans>Smoke grenade</Trans>,
+      name: t({
+        message: 'Smoke grenade',
+      }),
       thrownCount: summary.smokeGrenadesThrownCount,
       averagePerMatch: summary.averageSmokeGrenadesThrownPerMatch,
       averagePerRound: summary.averageSmokeGrenadesThrownPerRound,
-      enemyDamage: '-',
-      enemyDamagePerThrow: '-',
-      enemyKillCount: '-',
+      enemyDamage: 0,
+      hasEnemyDamage: false,
+      enemyDamagePerThrow: 0,
+      hasEnemyDamagePerThrow: false,
+      enemyKillCount: 0,
+      hasEnemyKillCount: false,
     },
   ];
+  const table = useTable({
+    columns,
+    data: rows,
+    fixedColumnsWidth: true,
+    getRowId: getGrenadeAverageRowId,
+    persistStateKey: TableName.PlayerGrenadeAverages,
+    rowSelection: 'none',
+    sortedColumn: { id: 'grenade', direction: 'asc' },
+  });
 
   return (
     <Panel
@@ -123,52 +254,25 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
         </PanelTitle>
       }
     >
-      <div className="overflow-auto">
-        <table className="w-full table-fixed border-collapse border-spacing-0">
-          <thead>
-            <tr>
-              <HeaderCell>
-                <Trans>Grenade</Trans>
-              </HeaderCell>
-              <HeaderCell textAlign="right">
-                <Trans>Thrown</Trans>
-              </HeaderCell>
-              <HeaderCell textAlign="right">
-                <Trans>Avg / match</Trans>
-              </HeaderCell>
-              <HeaderCell textAlign="right">
-                <Trans>Avg / round</Trans>
-              </HeaderCell>
-              <HeaderCell textAlign="right">
-                <Trans>Enemy damage</Trans>
-              </HeaderCell>
-              <HeaderCell textAlign="right">
-                <Trans>Damage / throw</Trans>
-              </HeaderCell>
-              <HeaderCell textAlign="right">
-                <Trans>Kills</Trans>
-              </HeaderCell>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row) => {
-              return (
-                <tr className="h-32" key={row.id}>
-                  <BodyCell>{row.name}</BodyCell>
-                  <BodyCell textAlign="right">{row.thrownCount}</BodyCell>
-                  <BodyCell textAlign="right">{row.averagePerMatch}</BodyCell>
-                  <BodyCell textAlign="right">{row.averagePerRound}</BodyCell>
-                  <BodyCell textAlign="right">{row.enemyDamage}</BodyCell>
-                  <BodyCell textAlign="right">{row.enemyDamagePerThrow}</BodyCell>
-                  <BodyCell textAlign="right">{row.enemyKillCount}</BodyCell>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <Table<GrenadeAverageRow> table={table} />
     </Panel>
   );
+}
+
+function getFlashbangMatchupRowId(row: PlayerFlashbangMatchup) {
+  return row.steamId;
+}
+
+function TotalBlindTimeCell({ data }: CellProps<PlayerFlashbangMatchup>) {
+  const { totalDuration } = data;
+
+  return <Trans context="Seconds">{totalDuration}s</Trans>;
+}
+
+function AverageBlindTimeCell({ data }: CellProps<PlayerFlashbangMatchup>) {
+  const { averageDuration } = data;
+
+  return <Trans context="Seconds">{averageDuration}s</Trans>;
 }
 
 type FlashbangMatchupsTableProps = {
@@ -176,9 +280,104 @@ type FlashbangMatchupsTableProps = {
   description: React.ReactNode;
   emptyMessage: React.ReactNode;
   matchups: PlayerFlashbangMatchup[];
+  tableName: TableName;
 };
 
-function FlashbangMatchupsTable({ description, emptyMessage, matchups, title }: FlashbangMatchupsTableProps) {
+function FlashbangMatchupsTable({
+  description,
+  emptyMessage,
+  matchups,
+  tableName,
+  title,
+}: FlashbangMatchupsTableProps) {
+  const { t } = useLingui();
+  const columns: readonly Column<PlayerFlashbangMatchup>[] = [
+    {
+      id: 'player',
+      accessor: 'name',
+      headerText: t({
+        context: 'Table header',
+        message: 'Player',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Player',
+      }),
+      width: 200,
+      maxWidth: 400,
+    },
+    {
+      id: 'steam-id',
+      accessor: 'steamId',
+      headerText: t({
+        context: 'Table header',
+        message: 'Steam ID',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Steam ID',
+      }),
+      width: 170,
+      maxWidth: 250,
+    },
+    {
+      id: 'flashes',
+      accessor: 'count',
+      headerText: t({
+        context: 'Table header',
+        message: 'Flashes',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Flashbang count',
+      }),
+      width: 90,
+      maxWidth: 150,
+      textAlign: 'right',
+    },
+    {
+      id: 'total-blind-time',
+      accessor: 'totalDuration',
+      headerText: t({
+        context: 'Table header',
+        message: 'Total blind time',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Total enemy blind time',
+      }),
+      width: 130,
+      maxWidth: 200,
+      textAlign: 'right',
+      Cell: TotalBlindTimeCell,
+    },
+    {
+      id: 'average-blind-time',
+      accessor: 'averageDuration',
+      headerText: t({
+        context: 'Table header',
+        message: 'Avg blind time',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Average blind time',
+      }),
+      width: 130,
+      maxWidth: 200,
+      textAlign: 'right',
+      Cell: AverageBlindTimeCell,
+    },
+  ];
+  const table = useTable({
+    columns,
+    data: matchups,
+    fixedColumnsWidth: true,
+    getRowId: getFlashbangMatchupRowId,
+    persistStateKey: tableName,
+    rowSelection: 'none',
+    sortedColumn: { id: 'total-blind-time', direction: 'desc' },
+  });
+
   return (
     <Panel
       header={
@@ -188,53 +387,7 @@ function FlashbangMatchupsTable({ description, emptyMessage, matchups, title }: 
         </div>
       }
     >
-      {matchups.length === 0 ? (
-        <Message message={emptyMessage} />
-      ) : (
-        <div className="overflow-auto">
-          <table className="w-full table-fixed border-collapse border-spacing-0">
-            <thead>
-              <tr>
-                <HeaderCell>
-                  <Trans>Player</Trans>
-                </HeaderCell>
-                <HeaderCell textAlign="right">
-                  <Trans>Flashes</Trans>
-                </HeaderCell>
-                <HeaderCell textAlign="right">
-                  <Trans>Total blind time</Trans>
-                </HeaderCell>
-                <HeaderCell textAlign="right">
-                  <Trans>Avg blind time</Trans>
-                </HeaderCell>
-              </tr>
-            </thead>
-            <tbody>
-              {matchups.map((matchup) => {
-                const { averageDuration, count, name, steamId, totalDuration } = matchup;
-
-                return (
-                  <tr className="h-48" key={steamId}>
-                    <BodyCell title={name}>
-                      <div className="min-w-0">
-                        <p className="truncate">{name}</p>
-                        <p className="truncate text-caption text-gray-700">{steamId}</p>
-                      </div>
-                    </BodyCell>
-                    <BodyCell textAlign="right">{count}</BodyCell>
-                    <BodyCell textAlign="right">
-                      <Trans context="Seconds">{totalDuration}s</Trans>
-                    </BodyCell>
-                    <BodyCell textAlign="right">
-                      <Trans context="Seconds">{averageDuration}s</Trans>
-                    </BodyCell>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      )}
+      {matchups.length === 0 ? <Message message={emptyMessage} /> : <Table<PlayerFlashbangMatchup> table={table} />}
     </Panel>
   );
 }
@@ -311,12 +464,14 @@ function GrenadesContent({ stats }: { stats: PlayerGrenadesStats }) {
           description={<Trans>Enemy players flashed by this player only.</Trans>}
           emptyMessage={<Trans>No enemy player was flashed by this player for the current filters.</Trans>}
           matchups={stats.flashedPlayers}
+          tableName={TableName.PlayerGrenadesFlashedPlayers}
         />
         <FlashbangMatchupsTable
           title={<Trans>Players who flashed this player</Trans>}
           description={<Trans>Enemy players who flashed this player only.</Trans>}
           emptyMessage={<Trans>No enemy player flashed this player for the current filters.</Trans>}
           matchups={stats.flashedByPlayers}
+          tableName={TableName.PlayerGrenadesFlashedByPlayers}
         />
       </div>
     </Content>
