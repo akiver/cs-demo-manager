@@ -82,19 +82,19 @@ async function fetchPlayerFlashbangStats(steamId: string, filters: MatchFilters)
       sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side)`.as(
         'flashedEnemyCount',
       ),
-      sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flashed_steam_id != ${steamId})`.as(
+      sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side)`.as(
         'flashedTeammateCount',
       ),
       sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side), 0)`.as(
         'totalEnemyBlindDuration',
       ),
-      sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flashed_steam_id != ${steamId}), 0)`.as(
+      sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side), 0)`.as(
         'totalTeammateBlindDuration',
       ),
       sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side), 0)`.as(
         'averageEnemyBlindDuration',
       ),
-      sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flashed_steam_id != ${steamId}), 0)`.as(
+      sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side), 0)`.as(
         'averageTeammateBlindDuration',
       ),
     ])
@@ -124,19 +124,19 @@ async function fetchPlayerIncomingFlashbangStats(steamId: string, filters: Match
       sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side)`.as(
         'flashedByEnemyCount',
       ),
-      sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flasher_steam_id != ${steamId})`.as(
+      sql<number>`COUNT(player_blinds.id) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side)`.as(
         'flashedByTeammateCount',
       ),
       sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side), 0)`.as(
         'totalBlindDurationFromEnemies',
       ),
-      sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flasher_steam_id != ${steamId}), 0)`.as(
+      sql<number>`COALESCE(SUM(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side), 0)`.as(
         'totalBlindDurationFromTeammates',
       ),
       sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side != player_blinds.flashed_side), 0)`.as(
         'averageBlindDurationFromEnemies',
       ),
-      sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side AND player_blinds.flasher_steam_id != ${steamId}), 0)`.as(
+      sql<number>`COALESCE(AVG(player_blinds.duration) FILTER (WHERE player_blinds.flasher_side = player_blinds.flashed_side), 0)`.as(
         'averageBlindDurationFromTeammates',
       ),
     ])
@@ -218,7 +218,6 @@ async function fetchPlayersFlashedByPlayer(steamId: string, filters: MatchFilter
       sql<number>`COALESCE(AVG(player_blinds.duration), 0)`.as('averageDuration'),
     ])
     .where('player_blinds.flasher_steam_id', '=', steamId)
-    .where('player_blinds.flashed_steam_id', '!=', steamId)
     .where('player_blinds.is_flasher_controlling_bot', '=', false)
     .groupBy(['player_blinds.flashed_steam_id', 'player_blinds.flashed_name', 'steam_account_overrides.name', relation])
     .orderBy('totalDuration', 'desc')
@@ -254,7 +253,6 @@ async function fetchPlayersWhoFlashedPlayer(steamId: string, filters: MatchFilte
       sql<number>`COALESCE(AVG(player_blinds.duration), 0)`.as('averageDuration'),
     ])
     .where('player_blinds.flashed_steam_id', '=', steamId)
-    .where('player_blinds.flasher_steam_id', '!=', steamId)
     .where('player_blinds.is_flasher_controlling_bot', '=', false)
     .groupBy(['player_blinds.flasher_steam_id', 'player_blinds.flasher_name', 'steam_account_overrides.name', relation])
     .orderBy('totalDuration', 'desc')

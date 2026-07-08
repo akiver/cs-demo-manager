@@ -203,15 +203,14 @@ Use these definitions for the first version:
 - Teammate flash count caused: rows in `player_blinds` where:
   - `flasher_steam_id` is the current player.
   - `flasher_side = flashed_side`.
-  - `flashed_steam_id` is not the current player, so self-flashes are excluded.
+  - Self-flashes are included and counted as teammate-side flashes.
   - `is_flasher_controlling_bot = false`.
 - Enemy blind duration: sum/average of `player_blinds.duration` using the same enemy flash filter.
-- Flashed players matchup: grouped by `flashed_steam_id` plus relation, including enemies and teammates while excluding
-  self-flashes.
+- Flashed players matchup: grouped by `flashed_steam_id` plus relation, including enemies, teammates, and self-flashes.
 - Flashed by players matchup: rows in `player_blinds` where:
   - `flashed_steam_id` is the current player.
   - enemy rows use `flasher_side != flashed_side`.
-  - teammate rows use `flasher_side = flashed_side` and exclude `flasher_steam_id` equal to the current player.
+  - teammate rows use `flasher_side = flashed_side`; self-flashes are included.
   - `is_flasher_controlling_bot = false`.
 - HE damage: sum of `damages.health_damage` where:
   - `attacker_steam_id` is the current player.
