@@ -68,7 +68,7 @@ For the preview exe, `scripts/patch-zh-cn-from-installed-app.mjs` merges Simplif
 installed official app:
 
 - Installed source: `C:\Users\Karas\AppData\Local\Programs\cs-demo-manager\resources\app.asar`
-- Renderer target example: `out/assets/messages-BLYSqNEi.js`
+- Renderer target example: `out/assets/messages-CxQ99Eme.js`
 - Main-process target: `out/translations/zh-CN/messages.json`
 
 The script uses the current English renderer chunk as the key source, then fills each key in this order:
@@ -83,7 +83,7 @@ ID shape.
 
 Latest patch result:
 
-- Renderer messages: 1807 total, 1729 official, 67 manual, 11 English fallback.
+- Renderer messages: 1817 total, 1726 official, 80 manual, 11 English fallback.
 - Main-process messages: 62 total.
 - Verification: English and zh-CN renderer chunks have matching key counts, 0 missing keys, and 0 values equal to their
   raw ID.

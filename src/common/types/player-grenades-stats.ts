@@ -33,12 +33,24 @@ type PlayerGrenadeSummary = {
   averageFlashedByEnemiesPerMatch: number;
   averageFlashedByTeammatesPerMatch: number;
   heDamage: number;
+  heTeammateDamage: number;
+  heDamageTakenFromEnemies: number;
+  heDamageTakenFromTeammates: number;
   averageHeDamagePerThrow: number;
   averageHeDamagePerMatch: number;
+  averageHeTeammateDamagePerMatch: number;
+  averageHeDamageTakenFromEnemiesPerMatch: number;
+  averageHeDamageTakenFromTeammatesPerMatch: number;
   heKillCount: number;
   fireDamage: number;
+  fireTeammateDamage: number;
+  fireDamageTakenFromEnemies: number;
+  fireDamageTakenFromTeammates: number;
   averageFireDamagePerThrow: number;
   averageFireDamagePerMatch: number;
+  averageFireTeammateDamagePerMatch: number;
+  averageFireDamageTakenFromEnemiesPerMatch: number;
+  averageFireDamageTakenFromTeammatesPerMatch: number;
 };
 
 export type FlashbangPlayerRelation = 'enemy' | 'teammate';

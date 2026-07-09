@@ -233,6 +233,15 @@ function createManualTranslations() {
   set('No player flashed this player for the current filters.', ['当前筛选条件下，没有其他玩家闪到该玩家。']);
   set('Enemy', ['敌人']);
   set('Teammate', ['队友']);
+  set('Enemy impact / match', ['场均对敌影响'], 'Table header');
+  set('Teammate impact / match', ['场均对队友影响'], 'Table header');
+  set('Enemy impact received / match', ['场均受到敌人影响'], 'Table header');
+  set('Teammate impact received / match', ['场均受到队友影响'], 'Table header');
+  set(
+    'Flash count for flashbangs, damage for HE and fire grenades',
+    ['闪光弹显示闪白次数，高爆和火显示伤害'],
+    'Table header tooltip',
+  );
 
   return translations;
 }

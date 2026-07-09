@@ -39,15 +39,11 @@ type GrenadeAverageRow = {
   thrownCount: number;
   averagePerMatch: number;
   averagePerRound: number;
-  enemiesFlashedPerMatch: number;
-  teammatesFlashedPerMatch: number;
-  flashedByEnemiesPerMatch: number;
-  flashedByTeammatesPerMatch: number;
-  hasFlashbangStats: boolean;
-  enemyDamage: number;
-  hasEnemyDamage: boolean;
-  enemyDamagePerThrow: number;
-  hasEnemyDamagePerThrow: boolean;
+  enemyImpactPerMatch: number;
+  teammateImpactPerMatch: number;
+  enemyImpactReceivedPerMatch: number;
+  teammateImpactReceivedPerMatch: number;
+  hasImpactStats: boolean;
   enemyKillCount: number;
   hasEnemyKillCount: boolean;
 };
@@ -56,32 +52,24 @@ function getGrenadeAverageRowId(row: GrenadeAverageRow) {
   return row.id;
 }
 
-function EnemyDamageCell({ data }: CellProps<GrenadeAverageRow>) {
-  return <>{data.hasEnemyDamage ? data.enemyDamage : '-'}</>;
-}
-
-function EnemyDamagePerThrowCell({ data }: CellProps<GrenadeAverageRow>) {
-  return <>{data.hasEnemyDamagePerThrow ? data.enemyDamagePerThrow : '-'}</>;
-}
-
 function EnemyKillCountCell({ data }: CellProps<GrenadeAverageRow>) {
   return <>{data.hasEnemyKillCount ? data.enemyKillCount : '-'}</>;
 }
 
-function EnemiesFlashedPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
-  return <>{data.hasFlashbangStats ? data.enemiesFlashedPerMatch : '-'}</>;
+function EnemyImpactPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasImpactStats ? data.enemyImpactPerMatch : '-'}</>;
 }
 
-function TeammatesFlashedPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
-  return <>{data.hasFlashbangStats ? data.teammatesFlashedPerMatch : '-'}</>;
+function TeammateImpactPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasImpactStats ? data.teammateImpactPerMatch : '-'}</>;
 }
 
-function FlashedByEnemiesPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
-  return <>{data.hasFlashbangStats ? data.flashedByEnemiesPerMatch : '-'}</>;
+function EnemyImpactReceivedPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasImpactStats ? data.enemyImpactReceivedPerMatch : '-'}</>;
 }
 
-function FlashedByTeammatesPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
-  return <>{data.hasFlashbangStats ? data.flashedByTeammatesPerMatch : '-'}</>;
+function TeammateImpactReceivedPerMatchCell({ data }: CellProps<GrenadeAverageRow>) {
+  return <>{data.hasImpactStats ? data.teammateImpactReceivedPerMatch : '-'}</>;
 }
 
 function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summary'] }) {
@@ -147,100 +135,68 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       textAlign: 'right',
     },
     {
-      id: 'enemies-flashed-per-match',
-      accessor: 'enemiesFlashedPerMatch',
+      id: 'enemy-impact-per-match',
+      accessor: 'enemyImpactPerMatch',
       headerText: t({
         context: 'Table header',
-        message: 'Enemies flashed / match',
+        message: 'Enemy impact / match',
       }),
       headerTooltip: t({
         context: 'Table header tooltip',
-        message: 'Enemy players flashed by this player per match',
+        message: 'Flash count for flashbangs, damage for HE and fire grenades',
       }),
-      width: 150,
+      width: 140,
       maxWidth: 220,
       textAlign: 'right',
-      Cell: EnemiesFlashedPerMatchCell,
+      Cell: EnemyImpactPerMatchCell,
     },
     {
-      id: 'teammates-flashed-per-match',
-      accessor: 'teammatesFlashedPerMatch',
+      id: 'teammate-impact-per-match',
+      accessor: 'teammateImpactPerMatch',
       headerText: t({
         context: 'Table header',
-        message: 'Teammates flashed / match',
+        message: 'Teammate impact / match',
       }),
       headerTooltip: t({
         context: 'Table header tooltip',
-        message: 'Teammates flashed by this player per match',
+        message: 'Flash count for flashbangs, damage for HE and fire grenades',
       }),
-      width: 160,
+      width: 150,
       maxWidth: 230,
       textAlign: 'right',
-      Cell: TeammatesFlashedPerMatchCell,
+      Cell: TeammateImpactPerMatchCell,
     },
     {
-      id: 'flashed-by-enemies-per-match',
-      accessor: 'flashedByEnemiesPerMatch',
+      id: 'enemy-impact-received-per-match',
+      accessor: 'enemyImpactReceivedPerMatch',
       headerText: t({
         context: 'Table header',
-        message: 'Flashed by enemies / match',
+        message: 'Enemy impact received / match',
       }),
       headerTooltip: t({
         context: 'Table header tooltip',
-        message: 'Times this player was flashed by enemies per match',
-      }),
-      width: 160,
-      maxWidth: 230,
-      textAlign: 'right',
-      Cell: FlashedByEnemiesPerMatchCell,
-    },
-    {
-      id: 'flashed-by-teammates-per-match',
-      accessor: 'flashedByTeammatesPerMatch',
-      headerText: t({
-        context: 'Table header',
-        message: 'Flashed by teammates / match',
-      }),
-      headerTooltip: t({
-        context: 'Table header tooltip',
-        message: 'Times this player was flashed by teammates per match',
+        message: 'Flash count for flashbangs, damage for HE and fire grenades',
       }),
       width: 170,
-      maxWidth: 240,
+      maxWidth: 250,
       textAlign: 'right',
-      Cell: FlashedByTeammatesPerMatchCell,
+      Cell: EnemyImpactReceivedPerMatchCell,
     },
     {
-      id: 'enemy-damage',
-      accessor: 'enemyDamage',
+      id: 'teammate-impact-received-per-match',
+      accessor: 'teammateImpactReceivedPerMatch',
       headerText: t({
         context: 'Table header',
-        message: 'Enemy damage',
+        message: 'Teammate impact received / match',
       }),
       headerTooltip: t({
         context: 'Table header tooltip',
-        message: 'Damage dealt to enemies',
+        message: 'Flash count for flashbangs, damage for HE and fire grenades',
       }),
-      width: 110,
-      maxWidth: 180,
+      width: 180,
+      maxWidth: 260,
       textAlign: 'right',
-      Cell: EnemyDamageCell,
-    },
-    {
-      id: 'damage-per-throw',
-      accessor: 'enemyDamagePerThrow',
-      headerText: t({
-        context: 'Table header',
-        message: 'Damage / throw',
-      }),
-      headerTooltip: t({
-        context: 'Table header tooltip',
-        message: 'Damage dealt to enemies per throw',
-      }),
-      width: 120,
-      maxWidth: 190,
-      textAlign: 'right',
-      Cell: EnemyDamagePerThrowCell,
+      Cell: TeammateImpactReceivedPerMatchCell,
     },
     {
       id: 'kills',
@@ -268,15 +224,11 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       thrownCount: summary.flashbangsThrownCount,
       averagePerMatch: summary.averageFlashbangsThrownPerMatch,
       averagePerRound: summary.averageFlashbangsThrownPerRound,
-      enemiesFlashedPerMatch: summary.averageFlashedEnemiesPerMatch,
-      teammatesFlashedPerMatch: summary.averageFlashedTeammatesPerMatch,
-      flashedByEnemiesPerMatch: summary.averageFlashedByEnemiesPerMatch,
-      flashedByTeammatesPerMatch: summary.averageFlashedByTeammatesPerMatch,
-      hasFlashbangStats: true,
-      enemyDamage: 0,
-      hasEnemyDamage: false,
-      enemyDamagePerThrow: 0,
-      hasEnemyDamagePerThrow: false,
+      enemyImpactPerMatch: summary.averageFlashedEnemiesPerMatch,
+      teammateImpactPerMatch: summary.averageFlashedTeammatesPerMatch,
+      enemyImpactReceivedPerMatch: summary.averageFlashedByEnemiesPerMatch,
+      teammateImpactReceivedPerMatch: summary.averageFlashedByTeammatesPerMatch,
+      hasImpactStats: true,
       enemyKillCount: 0,
       hasEnemyKillCount: false,
     },
@@ -288,15 +240,11 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       thrownCount: summary.heGrenadesThrownCount,
       averagePerMatch: summary.averageHeGrenadesThrownPerMatch,
       averagePerRound: summary.averageHeGrenadesThrownPerRound,
-      enemiesFlashedPerMatch: 0,
-      teammatesFlashedPerMatch: 0,
-      flashedByEnemiesPerMatch: 0,
-      flashedByTeammatesPerMatch: 0,
-      hasFlashbangStats: false,
-      enemyDamage: summary.heDamage,
-      hasEnemyDamage: true,
-      enemyDamagePerThrow: summary.averageHeDamagePerThrow,
-      hasEnemyDamagePerThrow: true,
+      enemyImpactPerMatch: summary.averageHeDamagePerMatch,
+      teammateImpactPerMatch: summary.averageHeTeammateDamagePerMatch,
+      enemyImpactReceivedPerMatch: summary.averageHeDamageTakenFromEnemiesPerMatch,
+      teammateImpactReceivedPerMatch: summary.averageHeDamageTakenFromTeammatesPerMatch,
+      hasImpactStats: true,
       enemyKillCount: summary.heKillCount,
       hasEnemyKillCount: true,
     },
@@ -308,15 +256,11 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       thrownCount: summary.fireGrenadesThrownCount,
       averagePerMatch: summary.averageFireGrenadesThrownPerMatch,
       averagePerRound: summary.averageFireGrenadesThrownPerRound,
-      enemiesFlashedPerMatch: 0,
-      teammatesFlashedPerMatch: 0,
-      flashedByEnemiesPerMatch: 0,
-      flashedByTeammatesPerMatch: 0,
-      hasFlashbangStats: false,
-      enemyDamage: summary.fireDamage,
-      hasEnemyDamage: true,
-      enemyDamagePerThrow: summary.averageFireDamagePerThrow,
-      hasEnemyDamagePerThrow: true,
+      enemyImpactPerMatch: summary.averageFireDamagePerMatch,
+      teammateImpactPerMatch: summary.averageFireTeammateDamagePerMatch,
+      enemyImpactReceivedPerMatch: summary.averageFireDamageTakenFromEnemiesPerMatch,
+      teammateImpactReceivedPerMatch: summary.averageFireDamageTakenFromTeammatesPerMatch,
+      hasImpactStats: true,
       enemyKillCount: 0,
       hasEnemyKillCount: false,
     },
@@ -328,15 +272,11 @@ function GrenadeAveragesTable({ summary }: { summary: PlayerGrenadesStats['summa
       thrownCount: summary.smokeGrenadesThrownCount,
       averagePerMatch: summary.averageSmokeGrenadesThrownPerMatch,
       averagePerRound: summary.averageSmokeGrenadesThrownPerRound,
-      enemiesFlashedPerMatch: 0,
-      teammatesFlashedPerMatch: 0,
-      flashedByEnemiesPerMatch: 0,
-      flashedByTeammatesPerMatch: 0,
-      hasFlashbangStats: false,
-      enemyDamage: 0,
-      hasEnemyDamage: false,
-      enemyDamagePerThrow: 0,
-      hasEnemyDamagePerThrow: false,
+      enemyImpactPerMatch: 0,
+      teammateImpactPerMatch: 0,
+      enemyImpactReceivedPerMatch: 0,
+      teammateImpactReceivedPerMatch: 0,
+      hasImpactStats: false,
       enemyKillCount: 0,
       hasEnemyKillCount: false,
     },
@@ -541,14 +481,20 @@ function GrenadesContent({ stats }: { stats: PlayerGrenadesStats }) {
     averageHeDamagePerMatch,
     averageSmokeGrenadesThrownPerMatch,
     fireDamage,
+    fireDamageTakenFromEnemies,
+    fireDamageTakenFromTeammates,
     fireGrenadesThrownCount,
+    fireTeammateDamage,
     flashbangsThrownCount,
     flashedByEnemyCount,
     flashedByTeammateCount,
     flashedEnemyCount,
     flashedTeammateCount,
     heDamage,
+    heDamageTakenFromEnemies,
+    heDamageTakenFromTeammates,
     heGrenadesThrownCount,
+    heTeammateDamage,
     smokeGrenadesThrownCount,
     totalEnemyBlindDuration,
   } = summary;
@@ -562,7 +508,13 @@ function GrenadesContent({ stats }: { stats: PlayerGrenadesStats }) {
     flashedByEnemyCount > 0 ||
     flashedByTeammateCount > 0 ||
     heDamage > 0 ||
-    fireDamage > 0;
+    heTeammateDamage > 0 ||
+    heDamageTakenFromEnemies > 0 ||
+    heDamageTakenFromTeammates > 0 ||
+    fireDamage > 0 ||
+    fireTeammateDamage > 0 ||
+    fireDamageTakenFromEnemies > 0 ||
+    fireDamageTakenFromTeammates > 0;
 
   if (!hasData) {
     return <Message message={<Trans>No grenade stats found for the current filters.</Trans>} />;

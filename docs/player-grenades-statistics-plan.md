@@ -36,6 +36,11 @@ Current behavior:
   - `Players who flashed this player`
 - Flashbang matchup tables also use the shared project `Table` component and persist their column state with dedicated
   table names.
+- `Grenade averages` uses shared impact columns:
+  - flashbang rows show flash counts.
+  - HE and fire rows show health damage.
+  - columns are split into impact against enemies, impact against teammates, impact received from enemies, and impact
+    received from teammates.
 - Flashbang stats include enemy and teammate directions:
   - teammates flashed by the current player
   - times the current player was flashed by enemies
@@ -217,7 +222,10 @@ Use these definitions for the first version:
   - `weapon_name` is HE.
   - `attacker_side != victim_side`.
   - `is_attacker_controlling_bot = false`.
-- Fire damage: same as HE damage, but weapon is `Molotov` or `Incendiary`.
+- HE teammate damage: same as HE damage, but `attacker_side = victim_side`; self-damage is included in the teammate
+  side bucket.
+- HE damage received from enemies/teammates: same relation buckets, but with `victim_steam_id` as the current player.
+- Fire damage: same four relation buckets as HE damage, but weapon is `Molotov` or `Incendiary`.
 - HE kills: rows in `kills` where:
   - `killer_steam_id` is the current player.
   - weapon is HE.

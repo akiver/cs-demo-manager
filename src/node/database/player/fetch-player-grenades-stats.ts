@@ -158,29 +158,66 @@ async function fetchPlayerIncomingFlashbangStats(steamId: string, filters: Match
 }
 
 async function fetchPlayerGrenadeDamageStats(steamId: string, filters: MatchFilters) {
-  let query = db
+  let outgoingQuery = db
     .selectFrom('damages')
     .innerJoin('matches', 'matches.checksum', 'damages.match_checksum')
     .innerJoin('demos', 'demos.checksum', 'matches.checksum')
     .select([
-      sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name = ${WeaponName.HEGrenade}), 0)`.as(
+      sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name = ${WeaponName.HEGrenade} AND damages.attacker_side != damages.victim_side), 0)`.as(
         'heDamage',
+      ),
+      sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name = ${WeaponName.HEGrenade} AND damages.attacker_side = damages.victim_side), 0)`.as(
+        'heTeammateDamage',
       ),
       sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name IN (${sql.join(
         fireGrenadeNames,
-      )})), 0)`.as('fireDamage'),
+      )}) AND damages.attacker_side != damages.victim_side), 0)`.as('fireDamage'),
+      sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name IN (${sql.join(
+        fireGrenadeNames,
+      )}) AND damages.attacker_side = damages.victim_side), 0)`.as('fireTeammateDamage'),
     ])
     .where('damages.attacker_steam_id', '=', steamId)
-    .whereRef('damages.attacker_side', '!=', 'damages.victim_side')
     .where('damages.is_attacker_controlling_bot', '=', false);
 
-  query = applyMatchFilters(query, filters);
+  outgoingQuery = applyMatchFilters(outgoingQuery, filters);
 
-  const row = await query.executeTakeFirst();
+  let incomingQuery = db
+    .selectFrom('damages')
+    .innerJoin('matches', 'matches.checksum', 'damages.match_checksum')
+    .innerJoin('demos', 'demos.checksum', 'matches.checksum')
+    .select([
+      sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name = ${WeaponName.HEGrenade} AND damages.attacker_side != damages.victim_side), 0)`.as(
+        'heDamageTakenFromEnemies',
+      ),
+      sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name = ${WeaponName.HEGrenade} AND damages.attacker_side = damages.victim_side), 0)`.as(
+        'heDamageTakenFromTeammates',
+      ),
+      sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name IN (${sql.join(
+        fireGrenadeNames,
+      )}) AND damages.attacker_side != damages.victim_side), 0)`.as('fireDamageTakenFromEnemies'),
+      sql<number>`COALESCE(SUM(damages.health_damage) FILTER (WHERE damages.weapon_name IN (${sql.join(
+        fireGrenadeNames,
+      )}) AND damages.attacker_side = damages.victim_side), 0)`.as('fireDamageTakenFromTeammates'),
+    ])
+    .where('damages.victim_steam_id', '=', steamId)
+    .where('damages.is_attacker_controlling_bot', '=', false);
+
+  incomingQuery = applyMatchFilters(incomingQuery, filters);
+
+  const [outgoingRow, incomingRow] = await Promise.all([
+    outgoingQuery.executeTakeFirst(),
+    incomingQuery.executeTakeFirst(),
+  ]);
 
   return {
-    heDamage: toNumber(row?.heDamage),
-    fireDamage: toNumber(row?.fireDamage),
+    heDamage: toNumber(outgoingRow?.heDamage),
+    heTeammateDamage: toNumber(outgoingRow?.heTeammateDamage),
+    heDamageTakenFromEnemies: toNumber(incomingRow?.heDamageTakenFromEnemies),
+    heDamageTakenFromTeammates: toNumber(incomingRow?.heDamageTakenFromTeammates),
+    fireDamage: toNumber(outgoingRow?.fireDamage),
+    fireTeammateDamage: toNumber(outgoingRow?.fireTeammateDamage),
+    fireDamageTakenFromEnemies: toNumber(incomingRow?.fireDamageTakenFromEnemies),
+    fireDamageTakenFromTeammates: toNumber(incomingRow?.fireDamageTakenFromTeammates),
   };
 }
 
@@ -293,7 +330,13 @@ export async function fetchPlayerGrenadesStats(steamId: string, filters: MatchFi
       ...flashbangs,
       ...incomingFlashbangs,
       heDamage: damages.heDamage,
+      heTeammateDamage: damages.heTeammateDamage,
+      heDamageTakenFromEnemies: damages.heDamageTakenFromEnemies,
+      heDamageTakenFromTeammates: damages.heDamageTakenFromTeammates,
       fireDamage: damages.fireDamage,
+      fireTeammateDamage: damages.fireTeammateDamage,
+      fireDamageTakenFromEnemies: damages.fireDamageTakenFromEnemies,
+      fireDamageTakenFromTeammates: damages.fireDamageTakenFromTeammates,
       heKillCount,
       averageFlashbangsThrownPerMatch: average(throws.flashbangsThrownCount, counts.matchCount),
       averageHeGrenadesThrownPerMatch: average(throws.heGrenadesThrownCount, counts.matchCount),
@@ -311,8 +354,14 @@ export async function fetchPlayerGrenadesStats(steamId: string, filters: MatchFi
       averageFlashedByTeammatesPerMatch: average(incomingFlashbangs.flashedByTeammateCount, counts.matchCount),
       averageHeDamagePerThrow: average(damages.heDamage, throws.heGrenadesThrownCount),
       averageHeDamagePerMatch: average(damages.heDamage, counts.matchCount),
+      averageHeTeammateDamagePerMatch: average(damages.heTeammateDamage, counts.matchCount),
+      averageHeDamageTakenFromEnemiesPerMatch: average(damages.heDamageTakenFromEnemies, counts.matchCount),
+      averageHeDamageTakenFromTeammatesPerMatch: average(damages.heDamageTakenFromTeammates, counts.matchCount),
       averageFireDamagePerThrow: average(damages.fireDamage, throws.fireGrenadesThrownCount),
       averageFireDamagePerMatch: average(damages.fireDamage, counts.matchCount),
+      averageFireTeammateDamagePerMatch: average(damages.fireTeammateDamage, counts.matchCount),
+      averageFireDamageTakenFromEnemiesPerMatch: average(damages.fireDamageTakenFromEnemies, counts.matchCount),
+      averageFireDamageTakenFromTeammatesPerMatch: average(damages.fireDamageTakenFromTeammates, counts.matchCount),
     },
     flashedPlayers,
     flashedByPlayers,

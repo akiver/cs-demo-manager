@@ -6478,63 +6478,28 @@ msgstr "Average thrown per round"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
-msgid "Enemies flashed / match"
-msgstr "Enemies flashed / match"
+msgid "Enemy impact / match"
+msgstr "Enemy impact / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header tooltip"
-msgid "Enemy players flashed by this player per match"
-msgstr "Enemy players flashed by this player per match"
+msgid "Flash count for flashbangs, damage for HE and fire grenades"
+msgstr "Flash count for flashbangs, damage for HE and fire grenades"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
-msgid "Teammates flashed / match"
-msgstr "Teammates flashed / match"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgctxt "Table header tooltip"
-msgid "Teammates flashed by this player per match"
-msgstr "Teammates flashed by this player per match"
+msgid "Teammate impact / match"
+msgstr "Teammate impact / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
-msgid "Flashed by enemies / match"
-msgstr "Flashed by enemies / match"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgctxt "Table header tooltip"
-msgid "Times this player was flashed by enemies per match"
-msgstr "Times this player was flashed by enemies per match"
+msgid "Enemy impact received / match"
+msgstr "Enemy impact received / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header"
-msgid "Flashed by teammates / match"
-msgstr "Flashed by teammates / match"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgctxt "Table header tooltip"
-msgid "Times this player was flashed by teammates per match"
-msgstr "Times this player was flashed by teammates per match"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgctxt "Table header"
-msgid "Enemy damage"
-msgstr "Enemy damage"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgctxt "Table header tooltip"
-msgid "Damage dealt to enemies"
-msgstr "Damage dealt to enemies"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgctxt "Table header"
-msgid "Damage / throw"
-msgstr "Damage / throw"
-
-#: src/ui/player/grenades/player-grenades.tsx
-msgctxt "Table header tooltip"
-msgid "Damage dealt to enemies per throw"
-msgstr "Damage dealt to enemies per throw"
+msgid "Teammate impact received / match"
+msgstr "Teammate impact received / match"
 
 #: src/ui/player/grenades/player-grenades.tsx
 msgctxt "Table header tooltip"
