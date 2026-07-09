@@ -4419,6 +4419,14 @@ msgid "Checksum"
 msgstr "Checksum"
 
 #: src/ui/match/overview/scoreboard/rounds-timeline.tsx
+msgid "Show stats through round {roundNumber}"
+msgstr "Show stats through round {roundNumber}"
+
+#: src/ui/match/overview/scoreboard/rounds-timeline.tsx
+msgid "Round {roundNumber}: {winnerTeamName} won"
+msgstr "Round {roundNumber}: {winnerTeamName} won"
+
+#: src/ui/match/overview/scoreboard/rounds-timeline.tsx
 #: src/ui/match/rounds/overview/rounds-entries.tsx
 msgctxt "Tooltip"
 msgid "Switch sides"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import type { ReactNode } from 'react';
 import { TableName } from 'csdm/node/settings/table/table-name';
 import { useCurrentMatch } from '../use-current-match';
@@ -13,6 +13,7 @@ import { useTable } from 'csdm/ui/components/table/use-table';
 import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { PlayersTagsDialog } from 'csdm/ui/players/players-tags-dialogs';
+import { buildCumulativeMatchPlayers } from './build-cumulative-match-players';
 
 function getRowId(player: MatchPlayer) {
   return player.steamId;
@@ -24,13 +25,20 @@ type ChildrenProps = {
 };
 
 type Props = {
+  selectedRoundNumber: number;
   children: ({ tableTeamA, tableTeamB }: ChildrenProps) => ReactNode;
 };
 
-export function MatchOverviewProvider({ children }: Props) {
+export function MatchOverviewProvider({ selectedRoundNumber, children }: Props) {
   const match = useCurrentMatch();
-  const playersTeamA = match.players.filter((player) => player.teamName === match.teamA.name);
-  const playersTeamB = match.players.filter((player) => player.teamName === match.teamB.name);
+  const lastRoundNumber = match.rounds.at(-1)?.number ?? 0;
+  const players = useMemo(() => {
+    return selectedRoundNumber >= lastRoundNumber
+      ? match.players
+      : buildCumulativeMatchPlayers(match, selectedRoundNumber);
+  }, [lastRoundNumber, match, selectedRoundNumber]);
+  const playersTeamA = players.filter((player) => player.teamName === match.teamA.name);
+  const playersTeamB = players.filter((player) => player.teamName === match.teamB.name);
   const isDefuseMap = isDefuseMapFromName(match.mapName);
   const { showContextMenu } = useContextMenu();
   const columns = useScoreboardColumns(isDefuseMap);
