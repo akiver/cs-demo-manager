@@ -16,6 +16,53 @@ The preferred interaction is to reuse the existing winner timeline between the t
 This document is intended for a clean-context Agent. It includes enough code map and implementation order to start the
 feature without doing a broad repository scan.
 
+## Implementation Status
+
+Status: implemented on 2026-07-09.
+
+Implementation commit: `f18eb04f feat(match): add overview round progress stats`.
+
+Completed scope:
+
+- The Overview page defaults to full-match stats by selecting the last round.
+- The existing winner timeline is now a clickable cumulative progress selector.
+- Selecting round `N` recomputes scoreboard rows from rounds `1..N`.
+- The last round uses original `match.players` to preserve current full-match behavior and avoid formula drift.
+- A pure helper, `buildCumulativeMatchPlayers`, recomputes phase 1 scoreboard fields from loaded match events.
+- Unit tests cover full range, round filtering, first kill/death, trade and multi-kill stats, and KAST.
+- English Lingui catalog entries were extracted for the new timeline labels/tooltips.
+
+Implemented cumulative fields:
+
+- Kills, deaths, assists, K/D ratio, KPR, DPR.
+- Health damage, armor damage, ADR.
+- Utility damage and utility damage per round from grenade damage events.
+- Headshot count and percentage.
+- First kill/death, trade kill/death, first trade kill/death.
+- One-kill through five-kill round counts.
+- Wallbang, no-scope, and collateral kills.
+- Bomb plant/defuse counts.
+- Clutch counts and won/lost counts for 1v1 through 1v5.
+- KAST from kill, assist, survived, or traded criteria.
+
+Remaining known gaps:
+
+- `mvpCount`, `score`, `hltvRating`, `hltvRating2`, `hostageRescuedCount`, `inspectWeaponCount`, and
+  `deathWhileInspectingWeaponCount` remain copied from the full-match row in filtered mode because no per-round source
+  is currently loaded in `Match`.
+- Unsupported filtered columns remain visible instead of being hidden or marked; this keeps the table implementation
+  unchanged but should be revisited if those columns are important for filtered analysis.
+- Utility damage uses `WeaponType.Grenade`; if analyzer parity becomes important, compare against analyzer-side utility
+  damage definitions.
+
+Validation performed:
+
+- `vp run compile`
+- `vp run i18n:extract`
+- Targeted `vitest` for `src/ui/match/overview/build-cumulative-match-players.test.ts`
+- Targeted `oxlint` for modified Overview files
+- Pre-commit `vp check --fix`
+
 ## Current Code Map
 
 Overview page:
@@ -23,14 +70,20 @@ Overview page:
 - `src/ui/match/overview/match-overview.tsx`
   - Renders `MatchInformation`, team A `Scoreboard`, `RoundsTimeline`, and team B `Scoreboard`.
   - Gets the full `match` object from `useCurrentMatch()`.
+  - Owns the selected cumulative round state and resets it when `match.checksum` changes.
 - `src/ui/match/overview/match-overview-provider.tsx`
-  - Splits `match.players` into `playersTeamA` and `playersTeamB`.
+  - Uses original `match.players` when the last round is selected.
+  - Uses `buildCumulativeMatchPlayers(match, selectedRoundNumber)` when an earlier round is selected.
+  - Splits the active player rows into `playersTeamA` and `playersTeamB`.
   - Creates two `useTable` instances.
-  - Current table data is always full-match player data from `match.players`.
 - `src/ui/match/overview/scoreboard/rounds-timeline.tsx`
   - Renders one `Line` per `Round`.
   - Each `Line` uses `round.winnerSide`, `round.teamASide`, and `getTeamColor()`.
+  - Accepts `selectedRoundNumber` and `onSelectRound`.
+  - Renders each segment as a button with an accessible label and tooltip.
   - Side switches are shown with `SyncIcon`.
+- `src/ui/match/overview/build-cumulative-match-players.ts`
+  - Pure helper that creates new `MatchPlayer` rows from match event arrays without mutating `match.players`.
 - `src/ui/match/overview/scoreboard/use-scoreboard-columns.ts`
   - Scoreboard columns read fields from `MatchPlayer`.
   - Sorting, resizing, hiding, and formatting already live in the existing table system.
@@ -289,23 +342,23 @@ Decide before coding full scope:
   `match.players` at the last round to guarantee current behavior and avoid formula drift.
 - Should selection include warmup or surrender edge cases? Recommended: only use `match.rounds`.
 
-## Implementation Steps
+## Implementation Steps And Status
 
-1. Add this plan to `AGENTS.md` as the canonical design document for the feature.
-2. Add `selectedRoundNumber` state to `MatchOverview`.
-3. Update `RoundsTimeline` to accept `selectedRoundNumber` and `onSelectRound`.
-4. Make each round line clickable and keyboard accessible.
-5. Pass `selectedRoundNumber` into `MatchOverviewProvider`.
-6. Add `buildCumulativeMatchPlayers`.
-7. In the provider, use `match.players` when the last round is selected; otherwise use the cumulative helper.
-8. Add tests for the helper:
+1. [x] Add this plan to `AGENTS.md` as the canonical design document for the feature.
+2. [x] Add `selectedRoundNumber` state to `MatchOverview`.
+3. [x] Update `RoundsTimeline` to accept `selectedRoundNumber` and `onSelectRound`.
+4. [x] Make each round line clickable and keyboard accessible.
+5. [x] Pass `selectedRoundNumber` into `MatchOverviewProvider`.
+6. [x] Add `buildCumulativeMatchPlayers`.
+7. [x] In the provider, use `match.players` when the last round is selected; otherwise use the cumulative helper.
+8. [x] Add tests for the helper:
    - Full range returns values matching a simple fixture's expected final totals.
    - Selecting round 1 only excludes round 2 events.
    - First kill/death works per included round.
    - Trade and multi-kill counts work.
    - KAST handles kill, assist, survived, and traded cases.
-9. Run `vp run i18n:extract` if new visible strings are added.
-10. Run `vp run compile` or `vp check` for validation.
+9. [x] Run `vp run i18n:extract` if new visible strings are added.
+10. [x] Run `vp run compile` or `vp check` for validation.
 
 ## Merge Safety
 

@@ -114,6 +114,9 @@ src/
 - `csdm/*` resolves to `src/*`. Use this alias for cross-directory imports.
 - Keep customizations narrowly scoped so upstream merges stay manageable.
 - Prefer adding small helper modules next to the feature instead of modifying shared core code unless necessary.
+- Every completed modification must leave a Markdown record. Update the closest relevant plan or note under `docs/`
+  when behavior, architecture, data flow, validation, or known gaps change. If a feature was implemented from a plan,
+  update that plan after completion with the final status, implemented scope, validation, and remaining decisions.
 
 ### Styling
 
