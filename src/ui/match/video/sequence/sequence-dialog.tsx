@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { useState, useEffect } from 'react';
 import { MatchTimeline } from './match-timeline/match-timeline';
 import { SequencePlayers } from './sequence-players';
+import { SequenceNumberInput } from './sequence-number-input';
 import { StartTickInput } from './start-tick-input';
 import { EndTickInput } from './end-tick-input';
 import { SequenceDuration } from './sequence-duration';
@@ -29,7 +30,7 @@ type Props = {
   isVisible: boolean;
   closeDialog: () => void;
   onSaveClick: (sequence: SequenceForm) => void;
-  initialSequence: Sequence | undefined;
+  initialSequence: Sequence;
 };
 
 export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSequence }: Props) {
@@ -61,44 +62,43 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
 
   return ReactDOM.createPortal(
     <FullScreenDialog isVisible={isVisible}>
-      {initialSequence !== undefined && (
-        <SequenceFormProvider initialSequence={initialSequence}>
-          <ContextMenuProvider>
-            <div className="flex h-full flex-col overflow-auto bg-gray-50 p-16">
-              <div className="mb-12 flex max-h-[520px] gap-x-12">
-                <div className="flex max-w-[300px] flex-col gap-y-8 overflow-auto">
-                  <div className="flex flex-col gap-y-8">
-                    <StartTickInput />
-                    <EndTickInput />
-                  </div>
-                  <SequenceRecordAudioCheckbox />
-                  <SequencePlayerVoicesCheckbox />
-                  <SequenceXRayCheckbox />
-                  <SequenceAssistsCheckbox />
-                  <SequenceShowOnlyDeathNoticesCheckbox />
-                  {window.csdm.isWindows && <SequenceDeathNoticesDurationInput />}
-                  <div className="flex items-center gap-x-12">
-                    <SequenceDuration />
-                    <SequenceDiskSpace />
-                  </div>
-                  <div className="mt-12 flex gap-x-8">
-                    <SaveSequenceButton onClick={onSaveClick} closeDialog={closeDialog} />
-                    <CancelButton onClick={closeDialog} />
-                  </div>
+      <SequenceFormProvider initialSequence={initialSequence}>
+        <ContextMenuProvider>
+          <div className="flex h-full flex-col overflow-auto bg-gray-50 p-16">
+            <div className="mb-12 flex max-h-[520px] gap-x-12">
+              <div className="flex max-w-[300px] flex-col gap-y-8 overflow-auto">
+                <div className="flex flex-col gap-y-8">
+                  <SequenceNumberInput />
+                  <StartTickInput />
+                  <EndTickInput />
                 </div>
-                <div className="flex flex-col gap-y-8 overflow-auto">
-                  <SequencePlayerCamerasTable />
-                  <SequenceCustomCamerasTable />
+                <SequenceRecordAudioCheckbox />
+                <SequencePlayerVoicesCheckbox />
+                <SequenceXRayCheckbox />
+                <SequenceAssistsCheckbox />
+                <SequenceShowOnlyDeathNoticesCheckbox />
+                {window.csdm.isWindows && <SequenceDeathNoticesDurationInput />}
+                <div className="flex items-center gap-x-12">
+                  <SequenceDuration />
+                  <SequenceDiskSpace />
                 </div>
-                {canEditPlayersOptions && <SequencePlayers />}
-                <SequenceCfgInput />
+                <div className="mt-12 flex gap-x-8">
+                  <SaveSequenceButton onClick={onSaveClick} closeDialog={closeDialog} />
+                  <CancelButton onClick={closeDialog} />
+                </div>
               </div>
-              <PlayersColors />
-              <MatchTimeline />
+              <div className="flex flex-col gap-y-8 overflow-auto">
+                <SequencePlayerCamerasTable />
+                <SequenceCustomCamerasTable />
+              </div>
+              {canEditPlayersOptions && <SequencePlayers />}
+              <SequenceCfgInput />
             </div>
-          </ContextMenuProvider>
-        </SequenceFormProvider>
-      )}
+            <PlayersColors />
+            <MatchTimeline />
+          </div>
+        </ContextMenuProvider>
+      </SequenceFormProvider>
     </FullScreenDialog>,
     node,
   );

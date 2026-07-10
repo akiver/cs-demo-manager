@@ -55,7 +55,7 @@ export type Parameters = {
   signal: AbortSignal;
   onGameStart: () => void;
   onMoveFilesStart: () => void;
-  onSequenceStart: (sequenceNumber: number) => void;
+  onSequenceStart: (sequenceNumber: number, sequencePosition: number) => void;
   onConcatenateSequencesStart: () => void;
 };
 
@@ -77,8 +77,8 @@ async function buildVideos({ signal, ...options }: Parameters) {
     onConcatenateSequencesStart,
   } = options;
 
-  for (const sequence of sequences) {
-    onSequenceStart(sequence.number);
+  for (const [index, sequence] of sequences.entries()) {
+    onSequenceStart(sequence.number, index + 1);
     if (encoderSoftware === EncoderSoftware.FFmpeg) {
       await generateVideoWithFFmpeg(
         {

@@ -259,8 +259,8 @@ export class VideoCommand extends Command {
         onMoveFilesStart: () => {
           console.log('Moving files...');
         },
-        onSequenceStart: (number) => {
-          console.log(`Converting sequence ${number}...`);
+        onSequenceStart: (number, position) => {
+          console.log(`Converting sequence #${number} (${position}/${parameters.sequences.length})...`);
         },
         onConcatenateSequencesStart: () => {
           console.log('Concatenating sequences...');

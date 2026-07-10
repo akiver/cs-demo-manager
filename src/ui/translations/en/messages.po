@@ -5015,6 +5015,7 @@ msgid "Add to queue"
 msgstr "Add to queue"
 
 #: src/ui/match/video/add-video-to-queue-error-dialog.tsx
+#: src/ui/match/video/sequence/save-sequence-button.tsx
 msgctxt "Dialog title"
 msgid "Error"
 msgstr "Error"
@@ -5291,17 +5292,13 @@ msgid "Framerate (e.g., 30)"
 msgstr "Framerate (e.g., 30)"
 
 #: src/ui/match/video/output-file-name-input.tsx
-msgid "Available placeholders:"
-msgstr "Available placeholders:"
-
-#: src/ui/match/video/output-file-name-input.tsx
 msgctxt "Input label"
 msgid "Output filename"
 msgstr "Output filename"
 
 #: src/ui/match/video/output-file-name-input.tsx
-msgid "?"
-msgstr "?"
+msgid "Available placeholders"
+msgstr "Available placeholders"
 
 #. Input placeholder
 #: src/ui/match/video/output-folder-path.tsx
@@ -5699,6 +5696,14 @@ msgstr "Tick <0>{tick}</0>"
 msgid "End tick must be greater than start tick"
 msgstr "End tick must be greater than start tick"
 
+#: src/ui/match/video/sequence/save-sequence-button.tsx
+msgid "Sequence number must be greater than 0"
+msgstr "Sequence number must be greater than 0"
+
+#: src/ui/match/video/sequence/save-sequence-button.tsx
+msgid "A sequence with the number {sequenceNumber} already exists"
+msgstr "A sequence with the number {sequenceNumber} already exists"
+
 #: src/ui/match/video/sequence/sequence-cfg-input.tsx
 msgctxt "Input label"
 msgid "CFG"
@@ -5712,6 +5717,16 @@ msgstr "~<0>{requiredDiskSpace}</0>GB"
 msgctxt "Duration"
 msgid "<0>{seconds}</0> seconds"
 msgstr "<0>{seconds}</0> seconds"
+
+#: src/ui/match/video/sequence/sequence-number-input.tsx
+msgctxt "Input label"
+msgid "Number"
+msgstr "Number"
+
+#: src/ui/match/video/sequence/sequence-number-input.tsx
+msgctxt "Input placeholder"
+msgid "Number"
+msgstr "Number"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
@@ -5829,6 +5844,16 @@ msgstr "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
 msgctxt "Context menu"
 msgid "Edit"
 msgstr "Edit"
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgctxt "Context menu"
+msgid "Move earlier in video"
+msgstr "Move earlier in video"
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgctxt "Context menu"
+msgid "Move later in video"
+msgstr "Move later in video"
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgid "Sequence <0>#{number}</0>"
@@ -8738,8 +8763,8 @@ msgid "Moving final files…"
 msgstr "Moving final files…"
 
 #: src/ui/videos/video-entry.tsx
-msgid "Generating video for sequence {number} / {sequenceCount}…"
-msgstr "Generating video for sequence {number} / {sequenceCount}…"
+msgid "Generating video for sequence #{number} ({position} / {sequenceCount})…"
+msgstr "Generating video for sequence #{number} ({position} / {sequenceCount})…"
 
 #: src/ui/videos/video-entry.tsx
 msgid "Merging videos into a single file…"

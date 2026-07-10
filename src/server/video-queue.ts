@@ -126,10 +126,11 @@ class VideoQueue {
         onMoveFilesStart: () => {
           this.updateCurrentVideoAnNotifyRendererProcess({ status: VideoStatus.MovingFiles });
         },
-        onSequenceStart: (sequenceNumber) => {
+        onSequenceStart: (sequenceNumber, sequencePosition) => {
           this.updateCurrentVideoAnNotifyRendererProcess({
             status: VideoStatus.Converting,
             currentSequence: sequenceNumber,
+            currentSequencePosition: sequencePosition,
           });
         },
         onConcatenateSequencesStart: () => {

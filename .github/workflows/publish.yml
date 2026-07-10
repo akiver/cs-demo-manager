@@ -69,16 +69,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - uses: voidzero-dev/setup-vp@d51b91a0f18f0858378d1f46f03ef57cf81fa37d # v1
+      - uses: voidzero-dev/setup-vp@250f29ce396baf5e8f24498e17c0dfdebabc26eb # v1
         with:
           run-install: true
-          node-version-file: .node-version
+          version-file: package.json
 
       - name: Create new version
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          pnpm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
 
       - name: Package and create release
         run: |
@@ -102,16 +102,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - uses: voidzero-dev/setup-vp@d51b91a0f18f0858378d1f46f03ef57cf81fa37d # v1
+      - uses: voidzero-dev/setup-vp@250f29ce396baf5e8f24498e17c0dfdebabc26eb # v1
         with:
           run-install: true
-          node-version-file: .node-version
+          version-file: package.json
 
       - name: Create new version
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          pnpm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
 
       - name: Package and create release
         run: |
@@ -141,7 +141,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          pnpm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
 
       - name: Package and create release
         run: |
@@ -165,15 +165,15 @@ jobs:
           ssh-key: ${{ secrets.SSH_DEPLOYMENT_PRIVATE_KEY }}
           persist-credentials: true
 
-      - uses: voidzero-dev/setup-vp@d51b91a0f18f0858378d1f46f03ef57cf81fa37d # v1
+      - uses: voidzero-dev/setup-vp@250f29ce396baf5e8f24498e17c0dfdebabc26eb # v1
         with:
-          node-version-file: .node-version
+          version-file: package.json
 
       - name: Create new version
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          pnpm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
 
       - name: Push the tag to GitHub
         run: git push origin main --tags

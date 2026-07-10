@@ -7,7 +7,7 @@ import { updateSequence } from '../sequences/sequences-actions';
 import type { SequenceForm } from './sequence-form';
 
 type Props = {
-  sequence: Sequence | undefined;
+  sequence: Sequence;
   closeDialog: () => void;
 };
 
@@ -16,12 +16,19 @@ export function EditSequenceDialog({ closeDialog, sequence }: Props) {
   const match = useCurrentMatch();
 
   const onSaveClick = (sequenceForm: SequenceForm) => {
-    const sequence: Sequence = {
+    const updatedSequence: Sequence = {
       ...sequenceForm,
+      number: Number(sequenceForm.number),
       startTick: Number(sequenceForm.startTick),
       endTick: Number(sequenceForm.endTick),
     };
-    dispatch(updateSequence({ demoFilePath: match.demoFilePath, sequence }));
+    dispatch(
+      updateSequence({
+        demoFilePath: match.demoFilePath,
+        sequence: updatedSequence,
+        previousNumber: sequence.number,
+      }),
+    );
   };
 
   return (

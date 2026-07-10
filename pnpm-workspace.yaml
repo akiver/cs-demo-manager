@@ -12,17 +12,15 @@ allowBuilds:
 
 catalog:
   esbuild: 0.28.1
-  node-gyp: 13.0.0
-  vite: npm:@voidzero-dev/vite-plus-core@0.2.2
-  vitest: 4.1.9
+  node-gyp: 13.0.1
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.3
+  vitest: 4.1.10
 
 overrides:
   esbuild: 'catalog:'
   node-gyp: 'catalog:'
   vite: 'catalog:'
   vitest: 'catalog:'
-  # To remove when https://github.com/electron/electron/issues/51619 is resolved
-  yauzl: '3.3.1'
 
 peerDependencyRules:
   allowAny:
