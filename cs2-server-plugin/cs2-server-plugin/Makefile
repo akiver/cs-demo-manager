@@ -17,7 +17,8 @@ INCLUDE_DIRS =  -I./deps/json/include \
 				-I./deps/easywsclient \
 				-I./deps/hl2sdk/public \
 				-I./deps/hl2sdk/public/tier0 \
-				-I./deps/hl2sdk/public/tier1
+				-I./deps/hl2sdk/public/tier1 \
+				-I./deps/hl2sdk/public/mathlib
 
 LIB_DIRS = -L./deps/hl2sdk/lib/linux64
 LIBS = -ldl -ltier0 -l:tier1.a

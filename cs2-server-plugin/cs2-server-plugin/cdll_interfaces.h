@@ -11,23 +11,25 @@ abstract_class IDemoPlayer
 {
 public:
     virtual void _Unknown_000(void) = 0;
-    virtual void _Unknown_001(void) = 0;
 #if defined _WIN32
-    virtual int _Unknown_002(void) = 0;
-    virtual int _GetDemoTick(void) = 0; // :003 see :004
+    virtual void _Unknown_001(void) = 0;
 #else
-    virtual int _Unknown_002(void) = 0;
-    virtual int _Unknown_003(void) = 0;
+    // Linux (Itanium ABI): the virtual destructor uses two vtable slots (complete +
+    // deleting) instead of one on MSVC, so every method below is one slot higher.
+    virtual void _Unknown_001(void) = 0;
+    virtual void _Unknown_002(void) = 0;
 #endif
-    virtual int GetDemoTick(void) = 0; //:004 points to the same function as :003 on Windows
+    virtual int GetDemoStartTick(void) = 0; // win:002 linux:003
+    virtual int GetDemoTick(void) = 0; // win:003 linux:004
+    virtual int _Unknown_004(void) = 0;
     virtual int _Unknown_005(void) = 0;
     virtual int _Unknown_006(void) = 0;
     virtual int _Unknown_007(void) = 0;
     virtual int _Unknown_008(void) = 0;
     virtual int _Unknown_009(void) = 0;
     virtual int _Unknown_010(void) = 0;
-    virtual bool IsPlayingDemo(void) = 0; //:011
-    virtual bool IsDemoPaused(void) = 0; //:012
+    virtual bool IsPlayingDemo(void) = 0; // win:011 linux:012
+    virtual bool IsDemoPaused(void) = 0; // win:012 linux:013
 };
 
 
@@ -77,15 +79,15 @@ public:
     virtual void _Unknown_040(void) = 0;
     virtual void _Unknown_041(void) = 0;
     virtual bool IsPlayingDemo(void) = 0; //:042
-    virtual void _Unknown_043(void) = 0; // Demo related
-    virtual bool IsRecordingDemo(void) = 0; //:044
-    virtual void _Unknown_045(void) = 0; // Demo related
-    virtual void _Unknown_046(void) = 0;
+    virtual void _Unknown_043(void) = 0; // slot inserted by the CS2 update; shifts everything below +1
+    virtual void _Unknown_044(void) = 0; // Demo related
+    virtual bool IsRecordingDemo(void) = 0; //:045
+    virtual void _Unknown_046(void) = 0; // Demo related
     virtual void _Unknown_047(void) = 0;
     virtual void _Unknown_048(void) = 0;
     virtual void _Unknown_049(void) = 0;
-    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue) = 0; //:050
-    virtual void _Unknown_051(void) = 0;
+    virtual void _Unknown_050(void) = 0;
+    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue) = 0; //:051
     virtual void _Unknown_052(void) = 0;
     virtual void _Unknown_053(void) = 0;
     virtual void _Unknown_054(void) = 0;
@@ -94,15 +96,16 @@ public:
     virtual void _Unknown_057(void) = 0;
     virtual void _Unknown_058(void) = 0;
     virtual void _Unknown_059(void) = 0;
-    virtual void GetScreenSize(int& width, int& height) = 0; //:060
-    virtual void _Unknown_061(void) = 0;
+    virtual void _Unknown_060(void) = 0;
+    virtual void GetScreenSize(int& width, int& height) = 0; //:061
     virtual void _Unknown_062(void) = 0;
-    virtual char const* GetLevelName(void) = 0; //:063
-    virtual char const* GetLevelNameShort(void) = 0; //:064
-    virtual void _Unknown_065(void) = 0;
+    virtual void _Unknown_063(void) = 0;
+    virtual char const* GetLevelName(void) = 0; //:064
+    virtual char const* GetLevelNameShort(void) = 0; //:065
     virtual void _Unknown_066(void) = 0;
     virtual void _Unknown_067(void) = 0;
-    virtual IDemoPlayer* GetDemoPlayer(void) = 0; //:068
+    virtual void _Unknown_068(void) = 0;
+    virtual IDemoPlayer* GetDemoPlayer(void) = 0; //:069
 };
 
 enum class ClientFrameStage_t : int
