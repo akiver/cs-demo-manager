@@ -84,8 +84,8 @@ public:
     virtual void _Unknown_047(void) = 0;
     virtual void _Unknown_048(void) = 0;
     virtual void _Unknown_049(void) = 0;
-    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue) = 0; //:050
-    virtual void _Unknown_051(void) = 0;
+    virtual void _Unknown_050(void) = 0;
+    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue) = 0; //:051
     virtual void _Unknown_052(void) = 0;
     virtual void _Unknown_053(void) = 0;
     virtual void _Unknown_054(void) = 0;
@@ -94,15 +94,16 @@ public:
     virtual void _Unknown_057(void) = 0;
     virtual void _Unknown_058(void) = 0;
     virtual void _Unknown_059(void) = 0;
-    virtual void GetScreenSize(int& width, int& height) = 0; //:060
-    virtual void _Unknown_061(void) = 0;
+    virtual void _Unknown_060(void) = 0;
+    virtual void GetScreenSize(int& width, int& height) = 0; //:061
     virtual void _Unknown_062(void) = 0;
-    virtual char const* GetLevelName(void) = 0; //:063
-    virtual char const* GetLevelNameShort(void) = 0; //:064
-    virtual void _Unknown_065(void) = 0;
+    virtual void _Unknown_063(void) = 0;
+    virtual char const* GetLevelName(void) = 0; //:064
+    virtual char const* GetLevelNameShort(void) = 0; //:065
     virtual void _Unknown_066(void) = 0;
     virtual void _Unknown_067(void) = 0;
-    virtual IDemoPlayer* GetDemoPlayer(void) = 0; //:068
+    virtual void _Unknown_068(void) = 0;
+    virtual IDemoPlayer* GetDemoPlayer(void) = 0; //:069
 };
 
 enum class ClientFrameStage_t : int
