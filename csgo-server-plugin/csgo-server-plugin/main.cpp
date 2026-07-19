@@ -23,9 +23,8 @@
 #include "cdll_int.h"
 #include "game_ui.h"
 #include "game/server/iplayerinfo.h"
-
-#define ENTINDEX(index) static_cast<edict_t *>(globalVars->pEdicts + (index))
-#define PLAYER_INFO_FROM_INDEX(index) static_cast<IPlayerInfo *>(playerInfoManager->GetPlayerInfo(ENTINDEX(index)))
+#include "icliententity.h"
+#include "icliententitylist.h"
 
 using easywsclient::WebSocket;
 using nlohmann::json;
@@ -45,9 +44,9 @@ struct Sequence {
 };
 
 #ifdef _WIN32
-typedef void(__stdcall *FrameStageNotifyFn) (CClientFrameStage);
+typedef void(__stdcall *FrameStageNotifyFn) (ClientFrameStage_t);
 #else
-typedef void (*FrameStageNotifyFn)(void*, CClientFrameStage);
+typedef void (*FrameStageNotifyFn)(void*, ClientFrameStage_t);
 #endif
 
 CServerPlugin g_Plugin;
@@ -56,7 +55,7 @@ void* client;
 IVEngineClient14* engine = NULL;
 CGameUI* gameUi = NULL;
 IPlayerInfoManager* playerInfoManager = NULL;
-CGlobalVars* globalVars = NULL;
+IClientEntityList* clientEntityList = NULL;
 FrameStageNotifyFn originalFrameStageNotify = NULL;
 thread* wsConnectionThread = NULL;
 WebSocket::pointer ws;
@@ -152,21 +151,28 @@ void HandleWebSocketMessage(const string& message)
         std::lock_guard<mutex> lock(pendingCmdMutex);
         pendingCmd = "playdemo \"" + demoPath + "\"";
     } else if (msg["name"] == "capture-player-view") {
-        float x, y, z, pitch, yaw = 0;
+        float x = 0, y = 0, z = 0, pitch = 0, yaw = 0;
         for (int i = 1; i <= engine->GetMaxClients(); i++) {
-            IPlayerInfo* player = PLAYER_INFO_FROM_INDEX(i);
-            if (player && player->IsConnected() && player->GetNetworkIDString() != "BOT") {
-                auto position = player->GetAbsOrigin();
-                x = position.x;
-                y = position.y;
-                z = position.z;
-                // player->GetAbsAngles() is not reliable, use engine->GetViewAngles() instead.
-                QAngle viewAngles;
-                engine->GetViewAngles(viewAngles);
-                pitch = viewAngles.x;
-                yaw = viewAngles.y;
-                break;
+            player_info_t player;
+            if (!engine->GetPlayerInfo(i, &player) || player.fakeplayer || player.ishltv) {
+                continue;
             }
+
+            IClientEntity* entity = clientEntityList->GetClientEntity(i);
+            if (entity == NULL) {
+                continue;
+            }
+
+            const Vector& position = entity->GetAbsOrigin();
+            x = position.x;
+            y = position.y;
+            z = position.z;
+            // entity->GetAbsAngles() is not reliable, use engine->GetViewAngles() instead.
+            QAngle viewAngles;
+            engine->GetViewAngles(viewAngles);
+            pitch = viewAngles.x;
+            yaw = viewAngles.y;
+            break;
         }
 
         // use the startmovie command to generate a screenshot like CS2 so we don't maintain two separate code paths.
@@ -320,9 +326,9 @@ CServerPlugin::~CServerPlugin()
 }
 
 #ifdef _WIN32
-void __stdcall NewFrameStageNotify(CClientFrameStage stage)
+void __stdcall NewFrameStageNotify(ClientFrameStage_t stage)
 #else
-void NewFrameStageNotify(void* thisptr, CClientFrameStage stage)
+void NewFrameStageNotify(void* thisptr, ClientFrameStage_t stage)
 #endif
 {
     ExecuteInitialDemoPlayback();
@@ -358,12 +364,6 @@ bool CServerPlugin::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn g
         return false;
     }
 
-    globalVars = playerInfoManager->GetGlobalVars();
-    if (!globalVars) {
-        Log("Could not find CGlobalVars : %s", GetLastErrorString());
-        return false;
-    }
-
     engine = (IVEngineClient14*)interfaceFactory("VEngineClient014", NULL);
     if (engine == NULL)
     {
@@ -390,6 +390,13 @@ bool CServerPlugin::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn g
     if (createInterface == NULL)
     {
         Log("Could not find CreateInterface : %s", GetLastErrorString());
+        return false;
+    }
+
+    clientEntityList = (IClientEntityList*)createInterface(VCLIENTENTITYLIST_INTERFACE_VERSION, NULL);
+    if (clientEntityList == NULL)
+    {
+        Log("Could not find %s : %s", VCLIENTENTITYLIST_INTERFACE_VERSION, GetLastErrorString());
         return false;
     }
 
@@ -495,9 +502,9 @@ const char *CServerPlugin::GetPluginDescription()
 
 void LogPlayers() {
     for (int i = 1; i <= engine->GetMaxClients(); i++) {
-        IPlayerInfo* player = PLAYER_INFO_FROM_INDEX(i);
-        if (player && player->IsConnected()) {
-            Log("%s - userID: %d SteamID: %s", player->GetName(), player->GetUserID(), player->GetNetworkIDString());
+        player_info_t player;
+        if (engine->GetPlayerInfo(i, &player)) {
+            Log("%s - userID: %d SteamID: %s bot: %d", player.name, player.userID, player.guid, player.fakeplayer);
         }
     }
 }

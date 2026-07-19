@@ -1,22 +1,6 @@
 #pragma once
 
-class ECommandMsgBoxSlot;
-
-enum CClientFrameStage
-{
-    FRAME_UNDEFINED = -1,
-    FRAME_START,
-
-    FRAME_NET_UPDATE_START,
-    FRAME_NET_UPDATE_POSTDATAUPDATE_START,
-    FRAME_NET_UPDATE_POSTDATAUPDATE_END,
-    FRAME_NET_UPDATE_END,
-
-    FRAME_RENDER_START,
-    FRAME_RENDER_END,
-
-    FRAME_NET_FULL_FRAME_UPDATE_ON_REMOVE
-};
+#include <cdll_int.h>
 
 class IVEngineClient14
 {
@@ -29,7 +13,7 @@ public:
     virtual void _UNUSED_GetScreenSize(void) = 0; // 5
     virtual void _UNUSED_ServerCmd(void) = 0; // 6
     virtual void _UNUSED_ClientCmd(void) = 0; // 7
-    virtual void _UNUSED_GetPlayerInfo(void) = 0; // 8
+    virtual bool GetPlayerInfo(int ent_num, player_info_t* pinfo) = 0; // 8
     virtual void _UNUSED_GetPlayerForUserID(void) = 0; // 9
     virtual void _UNUSED_TextMessageGet(void) = 0; // 10
     virtual void _UNUSED_Con_IsVisible(void) = 0; // 11
