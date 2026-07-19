@@ -27,6 +27,7 @@ export function Cs2PluginSelect() {
   const update14104 = formatDate('2025-09-17', dateOptions);
   const update14112 = formatDate('2025-10-07', dateOptions);
   const animgraph2UpdateDate = formatDate('2026-04-21', dateOptions);
+  const update14168 = formatDate('2026-07-09', dateOptions);
 
   const options: SelectOption<PluginVersion>[] = Object.values(PluginVersion).map((version) => ({
     value: version,
@@ -95,6 +96,15 @@ export function Cs2PluginSelect() {
           </div>
         );
       case PluginVersion[14152]:
+        return (
+          <p>
+            <Trans>
+              You selected a version compatible with CS2 from the {animgraph2UpdateDate} update up to the {update14168}{' '}
+              update.
+            </Trans>
+          </p>
+        );
+      case PluginVersion[14168]:
         return (
           <p>
             <Trans>
