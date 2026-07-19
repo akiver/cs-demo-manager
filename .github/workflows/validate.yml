@@ -54,7 +54,7 @@ jobs:
           cache: true
 
       - name: Code format
-        run: vp run format -- --check
+        run: vp run format --check
 
   test:
     runs-on: ubuntu-latest
