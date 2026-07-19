@@ -51,7 +51,7 @@ async function buildRendererProcessBundle() {
     build: {
       emptyOutDir: true,
       sourcemap: true,
-      chunkSizeWarningLimit: 4000,
+      chunkSizeWarningLimit: 4500,
       rolldownOptions: {
         output: {
           // Do not minify identifiers in order to have real functions name in logs that are written on the FS.
