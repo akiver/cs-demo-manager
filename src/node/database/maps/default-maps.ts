@@ -199,6 +199,14 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'cs_shelter',
+      game: Game.CS2,
+      position_x: -3448,
+      position_y: 3805,
+      scale: 3.311857,
+      threshold_z: 0,
+    },
+    {
       name: 'de_ancient',
       game: Game.CS2,
       position_x: -2953,
@@ -239,6 +247,14 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_boulder',
+      game: Game.CS2,
+      position_x: -3273,
+      position_y: 2930,
+      scale: 2.8491137,
+      threshold_z: 62,
+    },
+    {
       name: 'de_brewery',
       game: Game.CS2,
       position_x: -4122,
@@ -271,6 +287,14 @@ export function getDefaultMaps(game?: Game) {
       threshold_z: 0,
     },
     {
+      name: 'de_debris',
+      game: Game.CS2,
+      position_x: -3015,
+      position_y: 2919,
+      scale: 1.9445695,
+      threshold_z: 0,
+    },
+    {
       name: 'de_dogtown',
       game: Game.CS2,
       position_x: -1741,
@@ -300,6 +324,22 @@ export function getDefaultMaps(game?: Game) {
       position_x: -383,
       position_y: 4420,
       scale: 4.803717,
+      threshold_z: 0,
+    },
+    {
+      name: 'de_eldorado',
+      game: Game.CS2,
+      position_x: -3548,
+      position_y: 2571,
+      scale: 2.0656068,
+      threshold_z: 0,
+    },
+    {
+      name: 'de_fachwerk',
+      game: Game.CS2,
+      position_x: -2311,
+      position_y: 2874,
+      scale: 2.5537856,
       threshold_z: 0,
     },
     {
