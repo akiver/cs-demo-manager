@@ -50,10 +50,15 @@ else ifeq ($(UNAME_S),Darwin)
 	CXXFLAGS += -DOSX=1 -fdeclspec
 	TARGET_NAME=csdm.dylib
 	LIB_DIRS = -L$(SDK_DIR)/lib/osx64
-	LIBS =  -ldl -ltier0 -lvstdlib \
-			$(SDK_DIR)/lib/osx64/tier1.a \
-			$(SDK_DIR)/lib/osx64/mathlib.a \
-			$(SDK_DIR)/lib/osx64/interfaces.a
+	# The linker since Xcode 16 rejects archives whose members are not 8-byte
+	# aligned, which is the case for some prebuilt HL2SDK archives. Repack them
+	# (see rule below) to fix the alignment before linking. The objects must be
+	# extracted with ar first: merging archive-to-archive with libtool chokes on
+	# the same misaligned members and silently drops them.
+	SDK_STATIC_LIBS =   $(BUILD_DIR)/tier1.a \
+						$(BUILD_DIR)/mathlib.a \
+						$(BUILD_DIR)/interfaces.a
+	LIBS =  -ldl -ltier0 -lvstdlib $(SDK_STATIC_LIBS)
 endif
 
 TARGET = $(BUILD_DIR)/$(TARGET_NAME)
@@ -77,7 +82,13 @@ $(PLUGIN_OBJ_DIR)/easywsclient.o: ./deps/easywsclient/easywsclient.cpp | dirs
 $(TIER0_OBJ_DIR)/%.o: $(SDK_DIR)/public/tier0/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(INCLUDE_DIRS) -c $< -o $@
 
-$(TARGET): $(PLUGIN_OBJS) $(TIER0_OBJS)
+$(BUILD_DIR)/%.a: $(SDK_DIR)/lib/osx64/%.a | dirs
+	rm -rf $(BUILD_DIR)/$*_objs
+	mkdir -p $(BUILD_DIR)/$*_objs
+	cd $(BUILD_DIR)/$*_objs && ar x $(CURDIR)/$<
+	libtool -static -o $@ $(BUILD_DIR)/$*_objs/*.o
+
+$(TARGET): $(PLUGIN_OBJS) $(TIER0_OBJS) $(SDK_STATIC_LIBS)
 	$(CXX) $(CXXFLAGS) -o $@ $(PLUGIN_OBJS) $(TIER0_OBJS) $(LIB_DIRS) $(LIBS)
 
 build: clean $(TARGET)
