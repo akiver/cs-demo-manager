@@ -3289,7 +3289,7 @@ msgid "Use the 64-bit version of your Steam ID (e.g., 76561198000000000)."
 msgstr "Use the 64-bit version of your Steam ID (e.g., 76561198000000000)."
 
 #: src/ui/downloads/renown/use-renown-scoreboard-columns.ts
-msgctxt "Table header kill count"
+msgctxt "Table header Leetify rating"
 msgid "LR"
 msgstr "LR"
 

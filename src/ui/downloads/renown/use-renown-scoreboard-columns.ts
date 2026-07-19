@@ -44,7 +44,7 @@ export function useRenownScoreboardColumns() {
       id: 'leetify-rating',
       accessor: 'leetifyRating',
       headerText: t({
-        context: 'Table header kill count',
+        context: 'Table header Leetify rating',
         message: 'LR',
       }),
       headerTooltip: t({
