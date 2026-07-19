@@ -83,7 +83,7 @@ jobs:
       - name: Package and create release
         run: |
           vp run build
-          vp run package -- --mac --publish always
+          vp run package --mac --publish always
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
@@ -116,7 +116,7 @@ jobs:
       - name: Package and create release
         run: |
           vp run build
-          vp run package -- --linux --publish always
+          vp run package --linux --publish always
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
@@ -146,7 +146,7 @@ jobs:
       - name: Package and create release
         run: |
           vp run build
-          vp run package -- --win --publish=always
+          vp run package --win --publish=always
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
