@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLingui } from '@lingui/react/macro';
 import { differenceInDays } from 'date-fns';
-import type { DateRange } from 'react-day-picker';
+import type { DateRange } from '@daypicker/react';
 import { subtractDateDays } from 'csdm/common/date/subtract-date-days';
 import { FilterValue } from 'csdm/ui/components/dropdown-filter/filter-value';
 import { useFormatDate } from 'csdm/ui/hooks/use-format-date';

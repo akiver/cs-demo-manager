@@ -1,7 +1,6 @@
 import React, { type ReactNode } from 'react';
-import { enUS, fr, zhCN, ptBR, de, ru } from 'react-day-picker/locale';
-import { DayPicker } from 'react-day-picker';
-import type { DateRange } from 'react-day-picker';
+import { enUS, fr, zhCN, ptBR, de, ru } from '@daypicker/react/locale';
+import { type DateRange, DayPicker } from '@daypicker/react';
 import { useReducedMotion } from 'motion/react';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 

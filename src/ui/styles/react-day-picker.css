@@ -1,5 +1,5 @@
-/* https://github.com/gpbl/react-day-picker/blob/main/src/style.css */
-@import 'react-day-picker/dist/style.css';
+/* https://github.com/gpbl/react-day-picker/blob/main/packages/react-day-picker/src/style.css */
+@import '@daypicker/react/style.css';
 
 .rdp-root {
   --rdp-accent-color: var(--gray-800);
