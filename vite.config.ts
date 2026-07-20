@@ -3,24 +3,15 @@ import fs from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite-plus';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
-import { lingui } from '@lingui/vite-plugin';
+import { lingui, linguiTransformerBabelPreset } from '@lingui/vite-plugin';
+import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
-import babel, { defineRolldownBabelPreset } from '@rolldown/plugin-babel';
 import { chrome } from './scripts/electron-vendors.mjs';
 import pkg from './package.json' with { type: 'json' };
 
 const currentFolderPath = fileURLToPath(new URL('.', import.meta.url));
 const srcFolderPath = path.resolve(currentFolderPath, 'src');
 const rendererFolderPath = path.resolve(srcFolderPath, 'ui');
-// https://github.com/lingui/js-lingui/issues/2477#issuecomment-4068015629
-const linguiPreset = defineRolldownBabelPreset({
-  preset: () => ({ plugins: ['@lingui/babel-plugin-lingui-macro'] }),
-  rolldown: {
-    filter: {
-      code: /from ['"]@lingui\/(?:react|core)\/macro['"]/,
-    },
-  },
-});
 
 export default defineConfig({
   staged: {
@@ -44,9 +35,7 @@ export default defineConfig({
   plugins: [
     react(),
     lingui(),
-    babel({
-      presets: [reactCompilerPreset(), linguiPreset],
-    }),
+    babel({ presets: [reactCompilerPreset(), linguiTransformerBabelPreset()] }),
     tailwindcss(),
     {
       name: 'write-changelog-file',
