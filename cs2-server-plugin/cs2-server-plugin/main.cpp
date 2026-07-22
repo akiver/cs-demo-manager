@@ -164,8 +164,8 @@ static void UnhideCommandsAndCvars()
 }
 
 void PatchVTableEntry(void** vtable, int index, void* newFunc) {
-    size_t protectSize = sizeof(void*) * (index + 1);
 #ifdef _WIN32
+    size_t protectSize = sizeof(void*) * (index + 1);
     DWORD oldProtect = 0;
     if (!VirtualProtect(vtable, protectSize, PAGE_EXECUTE_READWRITE, &oldProtect))
     {

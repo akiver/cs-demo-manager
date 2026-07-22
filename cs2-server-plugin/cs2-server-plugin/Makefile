@@ -2,6 +2,7 @@ CXX = g++
 
 CXXFLAGS =  -std=c++17 \
 			-Wall \
+			-Wno-switch \
 			-shared \
 			-fPIC \
 			-DPOSIX=1 \
