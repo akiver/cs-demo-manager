@@ -126,13 +126,7 @@ void PluginError(const char* msg, ...)
     vsnprintf(buf, sizeof(buf), msg, args);
     va_end(args);
 
-    // Since the "Armory" update, calling Plat_FatalErrorFunc crashes the game on Windows.
-#ifdef _WIN32
-    Plat_MessageBox("Error", buf);
-    Plat_ExitProcess(1);
-#else
-    Plat_FatalErrorFunc("%s", buf);
-#endif
+    Plat_FatalError("%s", buf);
 }
 
 inline bool FileExists(const std::string& name) {
