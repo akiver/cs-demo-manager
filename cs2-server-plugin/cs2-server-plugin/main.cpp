@@ -19,11 +19,6 @@
 #define PAGESIZE 4096
 #endif
 
-// IDKW registering a cmd on Linux makes the game process exit with a non zero code (Segmentation fault)
-#ifdef _WIN32
-#define CON_COMMAND_ENABLED 1
-#endif
-
 using easywsclient::WebSocket;
 using nlohmann::json;
 using std::string;
@@ -522,9 +517,7 @@ bool Connect(IAppSystem* appSystem, CreateInterfaceFn factoryFn)
     // Required to make the spec_lock_to_accountid command working since the 25/04/2024 update - it looks like the command has been hidden.
     // Also required to use the startmovie command.
     UnhideCommandsAndCvars();
-#ifdef CON_COMMAND_ENABLED
     ConVar_Register();
-#endif
 
     wsConnectionThread = new std::thread(ConnectToWebsocketServerLoop);
 
@@ -542,10 +535,6 @@ void Shutdown()
         serverConfigShutdown();
     }
 
-#ifdef CON_COMMAND_ENABLED
-    ConVar_Unregister();
-#endif
-
     if (ws != NULL) {
         ws->close();
     }
@@ -554,6 +543,13 @@ void Shutdown()
         wsConnectionThread->join();
         wsConnectionThread = NULL;
     }
+
+    ConVar_Unregister();
+
+    // Our static ConCommands unregister themselves in their destructor at plugin unload, but by then
+    // the engine has already freed its cvar system, so g_pCVar is dangling and calling into it crashes
+    // (Linux only). Null it here, while the cvar system is still alive, to make that a no-op.
+    g_pCVar = NULL;
 }
 
 void AssertInsecureParameterIsPresent()
@@ -662,7 +658,6 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
     return original;
 }
 
-#ifdef CON_COMMAND_ENABLED
 CON_COMMAND(csdm_info, "Prints CS:DM plugin info")
 {
     Log("Tick: %d", currentTick.load());
@@ -702,4 +697,3 @@ CON_COMMAND(csdm_info, "Prints CS:DM plugin info")
 
     Log("Demo tick: %d", demo->GetDemoTick());
 }
-#endif
