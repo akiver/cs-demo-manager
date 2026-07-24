@@ -265,9 +265,9 @@ export function getDefaultMaps(game?: Game) {
     {
       name: 'de_cache',
       game: Game.CS2,
-      position_x: -2000,
-      position_y: 3250,
-      scale: 5.5,
+      position_x: -1953,
+      position_y: 3094,
+      scale: 2.644154,
       threshold_z: 0,
     },
     {
