@@ -18,8 +18,8 @@ importers:
         specifier: 1.7.0
         version: 1.7.0
       '@akiver/cs-demo-analyzer':
-        specifier: 1.10.4
-        version: 1.10.4
+        specifier: 1.10.5
+        version: 1.10.5
       '@akiver/csgo-voice-extractor':
         specifier: 3.1.6
         version: 3.1.6
@@ -307,8 +307,8 @@ packages:
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
 
-  '@akiver/cs-demo-analyzer@1.10.4':
-    resolution: {integrity: sha512-7rbQbuNg7jEqOvWdfMKr0/9QkVahyeaCv2kOSLqLkwS+GBvLfHrujMBQ/3i9jDl06cZtYFrOAs7gQloydUKLiw==}
+  '@akiver/cs-demo-analyzer@1.10.5':
+    resolution: {integrity: sha512-6qmDXS3H6HPXYb1BqBto5w4UzovgkzGfsrAcK0ZskQ+SpdBHNzz+Sj22ioNhx8cnNvo+iNmnDGr9jhXugvJXZQ==}
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
     hasBin: true
@@ -5732,7 +5732,7 @@ snapshots:
 
   '@akiver/boiler-writter@1.7.0': {}
 
-  '@akiver/cs-demo-analyzer@1.10.4': {}
+  '@akiver/cs-demo-analyzer@1.10.5': {}
 
   '@akiver/csgo-voice-extractor@3.1.6': {}
 
@@ -7900,7 +7900,7 @@ snapshots:
       '@vue/shared': 3.5.38
       estree-walker: 2.0.2
       magic-string: 0.30.21
-      postcss: 8.5.15
+      postcss: 8.5.19
       source-map-js: 1.2.1
 
   '@vue/compiler-ssr@3.5.38':
