@@ -5,21 +5,21 @@ preserve_hierarchy: true
 
 files:
   - source: /src/ui/translations/en/*.po
-    translation: /src/ui/translations/%two_letters_code%/%original_file_name%
+    translation: /src/ui/translations/%locale%/%original_file_name%
     update_option: update_without_changes
     languages_mapping:
-      two_letters_code:
+      locale:
+        de: de
         es-ES: es
-        pt-BR: pt-BR
-        zh-CN: zh-CN
-        zh-TW: zh-TW
+        fr: fr
+        ru: ru
 
   - source: /src/electron-main/translations/en/*.json
-    translation: /src/electron-main/translations/%two_letters_code%/%original_file_name%
+    translation: /src/electron-main/translations/%locale%/%original_file_name%
     update_option: update_without_changes
     languages_mapping:
-      two_letters_code:
+      locale:
+        de: de
         es-ES: es
-        pt-BR: pt-BR
-        zh-CN: zh-CN
-        zh-TW: zh-TW
+        fr: fr
+        ru: ru
