@@ -7,9 +7,9 @@ const v14: Migration = {
     await transaction
       .updateTable('maps')
       .set({
-        position_x: -1953,
-        position_y: 3094,
-        scale: 2.644154,
+        position_x: -2000,
+        position_y: 3250,
+        scale: 5.5,
       })
       .where('name', '=', 'de_cache')
       .where('game', '=', Game.CS2)
