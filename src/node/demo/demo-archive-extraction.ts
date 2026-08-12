@@ -1,14 +1,14 @@
 import path from 'node:path';
-import zlib from 'node:zlib';
 import { pipeline } from 'node:stream/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
 import fs from 'fs-extra';
 import StreamZip from 'node-stream-zip';
-import bz2 from 'unbzip2-stream';
-import type { ArchiveFormat } from 'csdm/common/types/archive-format';
+import { type ArchiveFormat, isSingleStreamArchiveFormat } from 'csdm/common/types/archive-format';
+import { createDecompressStream } from './create-decompress-stream';
 
 export type DemoArchiveEntry = {
-  // Name (path) of the .dem entry inside the archive. For single-stream archives (.gz/.bz2) it's the demo file name.
+  // Name (path) of the .dem entry inside the archive. For single-stream archives (.gz/.bz2/.zst) it's the demo
+  // file name.
   entryName: string;
   // Path where the demo is extracted on the filesystem, flat next to the archive.
   destinationPath: string;
@@ -75,8 +75,8 @@ export async function getDemosToExtractFromArchive(
     return demosToExtract;
   }
 
-  // .gz/.bz2 hold a single compressed demo; its extracted name is the archive name minus the compression extension
-  // (e.g. match.dem.gz -> match.dem).
+  // .gz/.bz2/.zst hold a single compressed demo; its extracted name is the archive name minus the compression
+  // extension (e.g. match.dem.gz -> match.dem).
   const destinationPath = archivePath.slice(0, -extension.length);
   const isDemFile = destinationPath.toLowerCase().endsWith('.dem');
   const isQueued = queuedDestinationPaths.has(destinationPath);
@@ -127,7 +127,13 @@ export async function extractDemosFromArchive(
 
   const [{ destinationPath }] = demosToExtract;
   onExtractingDemo?.();
-  const decompressStream = extension === '.bz2' ? bz2() : zlib.createGunzip();
+  const format = extension.slice(1);
+  if (!isSingleStreamArchiveFormat(format)) {
+    throw new Error(`Unsupported archive format ${extension}`);
+  }
+
+  const decompressStream = createDecompressStream(format);
+
   const tempDestinationPath = `${destinationPath}.tmp`;
   try {
     await pipeline(createReadStream(archivePath), decompressStream, createWriteStream(tempDestinationPath));
