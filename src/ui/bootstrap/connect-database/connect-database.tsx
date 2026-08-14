@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Plural, Trans } from '@lingui/react/macro';
+import { Plural, Trans, useLingui } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
+import type { SelectOption } from 'csdm/ui/components/inputs/select';
+import { Select } from 'csdm/ui/components/inputs/select';
+import { InputLabel } from 'csdm/ui/components/inputs/input-label';
+import { DatabaseMode } from 'csdm/common/types/database-mode';
 import { PortInput } from 'csdm/ui/components/inputs/port-input';
 import { DatabaseNameInput } from 'csdm/ui/components/inputs/database-name-input';
 import { UsernameInput } from 'csdm/ui/components/inputs/username-input';
@@ -52,6 +56,15 @@ function getHintFromError({ code, message }: ConnectDatabaseError) {
   switch (code) {
     case ErrorCode.DatabaseSchemaVersionMismatch:
       return <DatabaseSchemaVersionMismatch />;
+    case ErrorCode.EmbeddedDatabaseLocked:
+      return (
+        <p>
+          <Trans>
+            It usually means that another instance of CS Demo Manager or its command line interface is already using the
+            database. Close it and try again.
+          </Trans>
+        </p>
+      );
   }
 
   if (message.includes('ECONNREFUSED')) {
@@ -68,6 +81,44 @@ function getHintFromError({ code, message }: ConnectDatabaseError) {
     <p>
       <Trans>Make sure PostgreSQL is running and your settings are correct.</Trans>
     </p>
+  );
+}
+
+function DatabaseModeSelect({
+  mode,
+  onChange,
+  isDisabled,
+}: {
+  mode: DatabaseMode;
+  onChange: (mode: DatabaseMode) => void;
+  isDisabled: boolean;
+}) {
+  const { t } = useLingui();
+
+  const options: SelectOption<DatabaseMode>[] = [
+    {
+      value: DatabaseMode.Embedded,
+      label: t({
+        context: 'Select option database mode',
+        message: 'Embedded (default)',
+      }),
+    },
+    {
+      value: DatabaseMode.PostgreSql,
+      label: t({
+        context: 'Select option database mode',
+        message: 'PostgreSQL server',
+      }),
+    },
+  ];
+
+  return (
+    <div className="flex flex-col gap-y-8">
+      <InputLabel>
+        <Trans context="Input label">Database</Trans>
+      </InputLabel>
+      <Select options={options} value={mode} onChange={onChange} isDisabled={isDisabled} />
+    </div>
   );
 }
 
@@ -179,66 +230,89 @@ export function ConnectDatabase() {
         <div className="m-auto flex flex-col">
           <div className="m-auto flex w-[400px] flex-col">
             <div>
-              <p>
-                <Trans>CS Demo Manager requires a PostgreSQL database.</Trans>
-              </p>
+              {databaseSettings.mode === DatabaseMode.Embedded ? (
+                <p>
+                  <Trans>
+                    CS Demo Manager uses an embedded database by default, no configuration is required. You can also use
+                    a PostgreSQL server.
+                  </Trans>
+                </p>
+              ) : (
+                <p>
+                  <Trans>CS Demo Manager requires a PostgreSQL database.</Trans>
+                </p>
+              )}
               <HelpLink />
             </div>
             <div className="mt-12 flex flex-col gap-12">
-              <div className="flex gap-x-8">
-                <div className="w-full">
-                  <HostnameInput
-                    hostname={databaseSettings.hostname}
+              <DatabaseModeSelect
+                mode={databaseSettings.mode}
+                onChange={(mode: DatabaseMode) => {
+                  setDatabaseSettings({
+                    ...databaseSettings,
+                    mode,
+                  });
+                }}
+                isDisabled={isConnecting}
+              />
+              {databaseSettings.mode === DatabaseMode.PostgreSql && (
+                <>
+                  <div className="flex gap-x-8">
+                    <div className="w-full">
+                      <HostnameInput
+                        hostname={databaseSettings.hostname}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                          setDatabaseSettings({
+                            ...databaseSettings,
+                            hostname: event.target.value,
+                          });
+                        }}
+                        isDisabled={isConnecting}
+                      />
+                    </div>
+                    <PortInput
+                      port={databaseSettings.port}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setDatabaseSettings({
+                          ...databaseSettings,
+                          port: +event.target.value,
+                        });
+                      }}
+                      isDisabled={isConnecting}
+                    />
+                  </div>
+                  <DatabaseNameInput
+                    databaseName={databaseSettings.database}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                       setDatabaseSettings({
                         ...databaseSettings,
-                        hostname: event.target.value,
+                        database: event.target.value,
                       });
                     }}
                     isDisabled={isConnecting}
                   />
-                </div>
-                <PortInput
-                  port={databaseSettings.port}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setDatabaseSettings({
-                      ...databaseSettings,
-                      port: +event.target.value,
-                    });
-                  }}
-                  isDisabled={isConnecting}
-                />
-              </div>
-              <DatabaseNameInput
-                databaseName={databaseSettings.database}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setDatabaseSettings({
-                    ...databaseSettings,
-                    database: event.target.value,
-                  });
-                }}
-                isDisabled={isConnecting}
-              />
-              <UsernameInput
-                username={databaseSettings.username}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setDatabaseSettings({
-                    ...databaseSettings,
-                    username: event.target.value,
-                  });
-                }}
-                isDisabled={isConnecting}
-              />
-              <PasswordInput
-                password={databaseSettings.password}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setDatabaseSettings({
-                    ...databaseSettings,
-                    password: event.target.value,
-                  });
-                }}
-                isDisabled={isConnecting}
-              />
+                  <UsernameInput
+                    username={databaseSettings.username}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setDatabaseSettings({
+                        ...databaseSettings,
+                        username: event.target.value,
+                      });
+                    }}
+                    isDisabled={isConnecting}
+                  />
+                  <PasswordInput
+                    password={databaseSettings.password}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setDatabaseSettings({
+                        ...databaseSettings,
+                        password: event.target.value,
+                      });
+                    }}
+                    isDisabled={isConnecting}
+                  />
+                </>
+              )}
               <div className="flex items-center justify-between">
                 <ConnectDatabaseButton isLoading={isConnecting} onClick={connectDatabase} />
                 {secondsBeforeNextTry > 0 && (

@@ -338,6 +338,10 @@ msgid "You can either update CS Demo Manager to the latest version or reset the 
 msgstr "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "It usually means that another instance of CS Demo Manager or its command line interface is already using the database. Close it and try again."
+msgstr "It usually means that another instance of CS Demo Manager or its command line interface is already using the database. Close it and try again."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "This error usually means that the database is not running or that the connection settings are incorrect."
 msgstr "This error usually means that the database is not running or that the connection settings are incorrect."
 
@@ -346,8 +350,27 @@ msgid "Make sure PostgreSQL is running and your settings are correct."
 msgstr "Make sure PostgreSQL is running and your settings are correct."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+msgctxt "Select option database mode"
+msgid "Embedded (default)"
+msgstr "Embedded (default)"
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgctxt "Select option database mode"
+msgid "PostgreSQL server"
+msgstr "PostgreSQL server"
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgctxt "Input label"
+msgid "Database"
+msgstr "Database"
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "The connection to the database failed with the following error:"
 msgstr "The connection to the database failed with the following error:"
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "CS Demo Manager uses an embedded database by default, no configuration is required. You can also use a PostgreSQL server."
+msgstr "CS Demo Manager uses an embedded database by default, no configuration is required. You can also use a PostgreSQL server."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "CS Demo Manager requires a PostgreSQL database."
@@ -7195,6 +7218,14 @@ msgstr "Yaw"
 #: src/ui/settings/database/database-size.tsx
 msgid "Database size: <0>{size}</0>."
 msgstr "Database size: <0>{size}</0>."
+
+#: src/ui/settings/database/database.tsx
+msgid "The database is embedded with CS Demo Manager, no configuration is required."
+msgstr "The database is embedded with CS Demo Manager, no configuration is required."
+
+#: src/ui/settings/database/database.tsx
+msgid "To use a PostgreSQL server instead, disconnect and select it from the connection screen."
+msgstr "To use a PostgreSQL server instead, disconnect and select it from the connection screen."
 
 #: src/ui/settings/database/disconnect-database-button.tsx
 msgctxt "Dialog title"

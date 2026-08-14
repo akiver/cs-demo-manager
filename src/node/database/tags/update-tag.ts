@@ -1,5 +1,5 @@
-import { DatabaseError } from 'pg';
 import { db } from 'csdm/node/database/database';
+import { getDatabaseErrorCode } from 'csdm/node/database/get-database-error-code';
 import { PostgresqlErrorCode } from '../postgresql-error-code';
 import { assertValidTag } from './assert-valid-tag';
 import { TagNameAlreadyTaken } from './errors/tag-name-already-taken';
@@ -11,11 +11,8 @@ export async function updateTag(tag: Tag) {
   try {
     await db.updateTable('tags').set(tag).where('id', '=', tag.id).execute();
   } catch (error) {
-    if (error instanceof DatabaseError) {
-      switch (error.code) {
-        case PostgresqlErrorCode.UniqueViolation:
-          throw new TagNameAlreadyTaken();
-      }
+    if (getDatabaseErrorCode(error) === PostgresqlErrorCode.UniqueViolation) {
+      throw new TagNameAlreadyTaken();
     }
     throw error;
   }

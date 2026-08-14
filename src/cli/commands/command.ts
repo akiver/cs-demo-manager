@@ -4,6 +4,7 @@ import { createDatabaseConnection } from 'csdm/node/database/database';
 import { migrateDatabase } from 'csdm/node/database/migrations/migrate-database';
 import { createDaemonConnection } from 'csdm/cli/create-daemon-connection';
 import type { CliWebSocketClient } from 'csdm/cli/web-socket/cli-web-socket-client';
+import { EmbeddedDatabaseLocked } from 'csdm/node/database/pglite/errors/embedded-database-locked';
 
 export abstract class Command {
   public abstract getDescription(): string;
@@ -35,7 +36,17 @@ export abstract class Command {
 
   protected async initDatabaseConnection() {
     const settings = await getSettings();
-    createDatabaseConnection(settings.database);
+    try {
+      await createDatabaseConnection(settings.database);
+    } catch (error) {
+      if (error instanceof EmbeddedDatabaseLocked) {
+        console.error(
+          'The embedded database is already in use, probably by the CS Demo Manager app. Close it and try again.',
+        );
+        this.exitWithFailure();
+      }
+      throw error;
+    }
     await migrateDatabase();
   }
 

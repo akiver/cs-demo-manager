@@ -1,6 +1,6 @@
 import { db } from 'csdm/node/database/database';
 import type { InsertableCamera } from './cameras-table';
-import { DatabaseError } from 'pg';
+import { getDatabaseErrorCode } from 'csdm/node/database/get-database-error-code';
 import { PostgresqlErrorCode } from '../postgresql-error-code';
 import { CameraAlreadyExists } from './errors/camera-already-exists';
 
@@ -14,11 +14,8 @@ export async function insertCamera(camera: InsertableCamera) {
 
     return rows[0];
   } catch (error) {
-    if (error instanceof DatabaseError) {
-      switch (error.code) {
-        case PostgresqlErrorCode.UniqueViolation:
-          throw new CameraAlreadyExists();
-      }
+    if (getDatabaseErrorCode(error) === PostgresqlErrorCode.UniqueViolation) {
+      throw new CameraAlreadyExists();
     }
 
     throw error;

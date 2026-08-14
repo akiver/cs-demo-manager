@@ -51,6 +51,7 @@
     "@date-fns/tz": "1.5.0",
     "@daypicker/react": "10.0.1",
     "@e18e/eslint-plugin": "0.5.1",
+    "@electric-sql/pglite": "0.5.8",
     "@fast-csv/parse": "5.0.7",
     "@floating-ui/react": "0.27.20",
     "@lingui/babel-plugin-lingui-macro": "6.5.0",

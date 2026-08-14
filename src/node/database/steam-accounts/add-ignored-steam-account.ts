@@ -1,5 +1,5 @@
-import { DatabaseError } from 'pg';
 import { db } from '../database';
+import { getDatabaseErrorCode } from 'csdm/node/database/get-database-error-code';
 import { getPlayerSteamIdFromSteamUrl } from 'csdm/node/steam-web-api/get-player-steam-id-from-steam-url';
 import { SteamAccountAlreadyIgnored } from 'csdm/node/database/steam-accounts/errors/steam-account-already-ignored';
 import { fetchIgnoredSteamAccounts } from 'csdm/node/database/steam-accounts/fetch-ignored-steam-accounts';
@@ -27,11 +27,8 @@ export async function addIgnoredSteamAccount(steamIdentifier: string) {
     };
     await db.insertInto('ignored_steam_accounts').values(row).execute();
   } catch (error) {
-    if (error instanceof DatabaseError) {
-      switch (error.code) {
-        case PostgresqlErrorCode.UniqueViolation:
-          throw new SteamAccountAlreadyIgnored();
-      }
+    if (getDatabaseErrorCode(error) === PostgresqlErrorCode.UniqueViolation) {
+      throw new SteamAccountAlreadyIgnored();
     }
     throw error;
   }

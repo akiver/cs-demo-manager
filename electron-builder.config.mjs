@@ -132,6 +132,8 @@ const config = {
       to: '.',
     },
   ],
+  // PGlite loads its WASM/data files from the filesystem at runtime, keep them outside the asar archive.
+  asarUnpack: ['node_modules/@electric-sql/pglite/**'],
   beforePack: async (context) => {
     const { installBoilerWritter, installCounterStrikeVoiceExtractor, installDemoAnalyzer } =
       await import('./scripts/install-deps.mjs');
