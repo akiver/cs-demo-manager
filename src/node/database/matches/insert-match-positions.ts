@@ -1,16 +1,15 @@
-import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import type { PlayerPositionTable } from '../player-position/player-position-table';
 import type { GrenadePositionTable } from '../grenade-position/grenade-position-table';
 import type { InfernoPositionTable } from '../inferno-position/inferno-position-table';
 import type { HostagePositionTable } from '../hostage-position/hostage-position-table';
 import type { ChickenPositionTable } from '../chicken-position/chicken-position-table';
-import { getCsvFilePath, insertFromCsv, type InsertOptions } from './match-insertion';
+import { getCsvFilePath, type InsertOptions } from './match-insertion';
+import { copyCsvIntoTable } from 'csdm/node/database/copy-csv-into-table';
 
-async function insertPlayersPositions({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
+async function insertPlayersPositions({ outputFolderPath, demoName }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_positions.csv');
 
-  await insertFromCsv<PlayerPositionTable>({
-    databaseSettings,
+  await copyCsvIntoTable<PlayerPositionTable>({
     csvFilePath,
     tableName: 'player_positions',
     columns: [
@@ -50,11 +49,10 @@ async function insertPlayersPositions({ outputFolderPath, demoName, databaseSett
   });
 }
 
-async function insertGrenadePositions({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
+async function insertGrenadePositions({ outputFolderPath, demoName }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_grenade_positions.csv');
 
-  await insertFromCsv<GrenadePositionTable>({
-    databaseSettings,
+  await copyCsvIntoTable<GrenadePositionTable>({
     tableName: 'grenade_positions',
     csvFilePath,
     columns: [
@@ -81,11 +79,10 @@ async function insertGrenadePositions({ outputFolderPath, demoName, databaseSett
   });
 }
 
-async function insertInfernoPositions({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
+async function insertInfernoPositions({ outputFolderPath, demoName }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_inferno_positions.csv');
 
-  await insertFromCsv<InfernoPositionTable>({
-    databaseSettings,
+  await copyCsvIntoTable<InfernoPositionTable>({
     tableName: 'inferno_positions',
     csvFilePath,
     columns: [
@@ -104,22 +101,20 @@ async function insertInfernoPositions({ outputFolderPath, demoName, databaseSett
   });
 }
 
-async function insertHostagePositions({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
+async function insertHostagePositions({ outputFolderPath, demoName }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_hostage_positions.csv');
 
-  await insertFromCsv<HostagePositionTable>({
-    databaseSettings,
+  await copyCsvIntoTable<HostagePositionTable>({
     tableName: 'hostage_positions',
     csvFilePath,
     columns: ['frame', 'tick', 'round_number', 'x', 'y', 'z', 'state', 'match_checksum'],
   });
 }
 
-async function insertChickenPositions({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
+async function insertChickenPositions({ outputFolderPath, demoName }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_chicken_positions.csv');
 
-  await insertFromCsv<ChickenPositionTable>({
-    databaseSettings,
+  await copyCsvIntoTable<ChickenPositionTable>({
     tableName: 'chicken_positions',
     csvFilePath,
     columns: ['frame', 'tick', 'round_number', 'x', 'y', 'z', 'match_checksum'],
@@ -127,39 +122,29 @@ async function insertChickenPositions({ outputFolderPath, demoName, databaseSett
 }
 
 type InsertMatchPositionsParameters = {
-  databaseSettings: DatabaseSettings;
   demoName: string;
   outputFolderPath: string;
 };
 
-export async function insertMatchPositions({
-  demoName,
-  outputFolderPath,
-  databaseSettings,
-}: InsertMatchPositionsParameters) {
+export async function insertMatchPositions({ demoName, outputFolderPath }: InsertMatchPositionsParameters) {
   await Promise.all([
     insertPlayersPositions({
-      databaseSettings,
       outputFolderPath,
       demoName,
     }),
     insertGrenadePositions({
-      databaseSettings,
       outputFolderPath,
       demoName,
     }),
     insertInfernoPositions({
-      databaseSettings,
       outputFolderPath,
       demoName,
     }),
     insertHostagePositions({
-      databaseSettings,
       outputFolderPath,
       demoName,
     }),
     insertChickenPositions({
-      databaseSettings,
       outputFolderPath,
       demoName,
     }),

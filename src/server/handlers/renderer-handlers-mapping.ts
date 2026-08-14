@@ -59,6 +59,10 @@ import { updateFfmpegHandler } from './renderer-process/video/update-ffmpeg-hand
 import { removeVideosFromQueueHandler } from './renderer-process/video/remove-videos-from-queue-handler';
 import { fetchMatchGrenadesThrowHandler } from './renderer-process/match/fetch-match-grenades-throw-handler';
 import { getDatabaseSizeHandler } from './renderer-process/database/get-database-size-handler';
+import {
+  getEmbeddedDatabaseInfoHandler,
+  type EmbeddedDatabaseInfo,
+} from './renderer-process/database/get-embedded-database-info-handler';
 import type { OptimizeDatabasePayload } from './renderer-process/database/optimize-database-handler';
 import { optimizeDatabaseHandler } from './renderer-process/database/optimize-database-handler';
 import { fetchPlayersHandler } from './renderer-process/player/fetch-players-table-handler';
@@ -233,6 +237,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.IsCs2ConnectedToServer]: Handler<void, boolean>;
   [RendererClientMessageName.AbortCurrentTask]: Handler;
   [RendererClientMessageName.GetDatabaseSize]: Handler<void, string>;
+  [RendererClientMessageName.GetEmbeddedDatabaseInfo]: Handler<void, EmbeddedDatabaseInfo>;
   [RendererClientMessageName.ResetDatabase]: Handler;
   [RendererClientMessageName.OptimizeDatabase]: Handler<OptimizeDatabasePayload>;
   [RendererClientMessageName.FetchMatchesTable]: Handler<FetchMatchesTablePayload, MatchTable[]>;
@@ -361,6 +366,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.IsCs2ConnectedToServer]: isCs2ConnectedToServerHandler,
   [RendererClientMessageName.AbortCurrentTask]: abortCurrentTaskHandler,
   [RendererClientMessageName.GetDatabaseSize]: getDatabaseSizeHandler,
+  [RendererClientMessageName.GetEmbeddedDatabaseInfo]: getEmbeddedDatabaseInfoHandler,
   [RendererClientMessageName.ResetDatabase]: resetDatabaseHandler,
   [RendererClientMessageName.OptimizeDatabase]: optimizeDatabaseHandler,
   [RendererClientMessageName.FetchMatchesTable]: fetchMatchesTableHandler,

@@ -3,6 +3,7 @@ export const MainClientMessageName = {
   StartMinimizedMode: 'start-minimized-mode',
   HasPendingAnalyses: 'has-pending-analyses',
   StartCounterStrike: 'start-counter-strike',
+  PrepareToQuit: 'prepare-to-quit',
 } as const;
 
 export type MainClientMessageName = (typeof MainClientMessageName)[keyof typeof MainClientMessageName];

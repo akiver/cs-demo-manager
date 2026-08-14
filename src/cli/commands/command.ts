@@ -1,7 +1,5 @@
 import { type ParseArgsOptionsConfig } from 'node:util';
-import { getSettings } from 'csdm/node/settings/get-settings';
-import { createDatabaseConnection } from 'csdm/node/database/database';
-import { migrateDatabase } from 'csdm/node/database/migrations/migrate-database';
+import { openDatabase } from 'csdm/node/database/open-database';
 
 export abstract class Command {
   public abstract getDescription(): string;
@@ -32,9 +30,8 @@ export abstract class Command {
   }
 
   protected async initDatabaseConnection() {
-    const settings = await getSettings();
-    createDatabaseConnection(settings.database);
-    await migrateDatabase();
+    // ! The CLI never stops the embedded cluster, the app may be running and using it.
+    await openDatabase();
   }
 
   protected isFlagArgument(arg: string) {

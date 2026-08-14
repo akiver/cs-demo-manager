@@ -1,7 +1,13 @@
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { pipeline } from 'node:stream/promises';
 import fs from 'fs-extra';
+import unzipper from 'unzipper';
 
+const execFileAsync = promisify(execFile);
 const projectPath = fileURLToPath(new URL('..', import.meta.url));
 const staticFolderPath = fileURLToPath(new URL('../static', import.meta.url));
 
@@ -50,4 +56,197 @@ export async function installDemoAnalyzer(platform = process.platform, arch = pr
   const npmBinPath = path.join(projectPath, 'node_modules/@akiver/cs-demo-analyzer/dist/bin', getBinarySubpath());
   const destinationPath = path.join(staticFolderPath, platform === 'win32' ? 'csda.exe' : 'csda');
   await fs.copy(npmBinPath, destinationPath);
+}
+
+/**
+ * PostgreSQL major version of the embedded cluster.
+ * ! Bumping the major version makes existing data folders unreadable, it requires a data migration.
+ * The cluster's PG_VERSION file is checked against this value at startup, see initialize-cluster.ts.
+ */
+export const POSTGRES_VERSION = '17.10.0';
+
+// Prebuilt PostgreSQL binaries published on Maven Central by the zonky project.
+// They contain only "initdb", "pg_ctl" and "postgres", which is everything the app needs since
+// matches are inserted with the COPY protocol instead of the psql CLI.
+const POSTGRES_MAVEN_ARTIFACTS = {
+  'win32-x64': 'windows-amd64',
+  'darwin-x64': 'darwin-amd64',
+  'darwin-arm64': 'darwin-arm64v8',
+  'linux-x64': 'linux-amd64',
+};
+
+async function downloadFile(url, destinationPath) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to download ${url}: ${response.status} ${response.statusText}`);
+  }
+
+  await fs.ensureDir(path.dirname(destinationPath));
+  await pipeline(response.body, fs.createWriteStream(destinationPath));
+}
+
+async function downloadPostgresArchive(artifact) {
+  const fileName = `embedded-postgres-binaries-${artifact}-${POSTGRES_VERSION}.jar`;
+  const url = `https://repo1.maven.org/maven2/io/zonky/test/postgres/embedded-postgres-binaries-${artifact}/${POSTGRES_VERSION}/${fileName}`;
+  const cacheFolderPath = path.join(projectPath, 'node_modules/.cache/postgres');
+  const archivePath = path.join(cacheFolderPath, fileName);
+
+  const expectedChecksum = (await (await fetch(`${url}.sha1`)).text()).trim().toLowerCase();
+  const isArchiveValid = async () => {
+    if (!(await fs.pathExists(archivePath))) {
+      return false;
+    }
+
+    const checksum = crypto
+      .createHash('sha1')
+      .update(await fs.readFile(archivePath))
+      .digest('hex');
+    return checksum === expectedChecksum;
+  };
+
+  if (await isArchiveValid()) {
+    return archivePath;
+  }
+
+  await downloadFile(url, archivePath);
+  if (!(await isArchiveValid())) {
+    throw new Error(`Checksum mismatch for ${fileName}`);
+  }
+
+  return archivePath;
+}
+
+async function extractPostgresArchive(archivePath, destinationFolderPath) {
+  // The .jar is a ZIP that contains a single .txz archive holding the bin/lib/share folders.
+  const directory = await unzipper.Open.file(archivePath);
+  const entry = directory.files.find((file) => {
+    return file.path.endsWith('.txz');
+  });
+  if (entry === undefined) {
+    throw new Error(`No .txz entry found in ${archivePath}`);
+  }
+
+  const tarballPath = `${archivePath}.txz`;
+  await pipeline(entry.stream(), fs.createWriteStream(tarballPath));
+
+  await fs.emptyDir(destinationFolderPath);
+  // bsdtar (macOS, Windows 10+) and GNU tar (Linux) both handle xz through -xf.
+  await execFileAsync('tar', ['-xf', tarballPath, '-C', destinationFolderPath]);
+  await fs.remove(tarballPath);
+}
+
+async function prunePostgresFolder(folderPath, platform) {
+  const foldersToRemove = [
+    'doc',
+    'include',
+    'share/doc',
+    'share/man',
+    // Translated server messages. The app forces LC_MESSAGES=C so the cluster logs stay in English.
+    'share/locale',
+    'lib/pkgconfig',
+  ];
+  await Promise.all(
+    foldersToRemove.map((folder) => {
+      return fs.remove(path.join(folderPath, folder));
+    }),
+  );
+
+  const libFolderPath = path.join(folderPath, 'lib');
+  if (await fs.pathExists(libFolderPath)) {
+    const libFiles = await fs.readdir(libFolderPath);
+    await Promise.all(
+      libFiles
+        .filter((file) => {
+          return file.endsWith('.a') || file.endsWith('.lib');
+        })
+        .map((file) => {
+          return fs.remove(path.join(libFolderPath, file));
+        }),
+    );
+  }
+
+  if (platform === 'win32') {
+    // wxWidgets is only used by EDB's StackBuilder GUI and testplug is a regression test module.
+    const binFolderPath = path.join(folderPath, 'bin');
+    const binFiles = await fs.readdir(binFolderPath);
+    await Promise.all(
+      binFiles
+        .filter((file) => {
+          return file.startsWith('wx') || file === 'testplug.dll';
+        })
+        .map((file) => {
+          return fs.remove(path.join(binFolderPath, file));
+        }),
+    );
+  }
+}
+
+async function listFilesRecursively(folderPath) {
+  const entries = await fs.readdir(folderPath, { withFileTypes: true });
+  const files = await Promise.all(
+    entries.map((entry) => {
+      const entryPath = path.join(folderPath, entry.name);
+      return entry.isDirectory() ? listFilesRecursively(entryPath) : [entryPath];
+    }),
+  );
+
+  return files.flat();
+}
+
+// The macOS binaries published by EDB are universal, keeping both slices would double the app size.
+async function thinMacOsBinaries(folderPath, arch) {
+  const machoArch = arch === 'arm64' ? 'arm64' : 'x86_64';
+  const filePaths = [
+    ...(await listFilesRecursively(path.join(folderPath, 'bin'))),
+    ...(await listFilesRecursively(path.join(folderPath, 'lib'))),
+  ];
+
+  for (const filePath of filePaths) {
+    try {
+      const { stdout } = await execFileAsync('lipo', ['-info', filePath]);
+      if (!stdout.includes('Architectures in the fat file')) {
+        continue;
+      }
+      await execFileAsync('lipo', ['-thin', machoArch, '-output', filePath, filePath]);
+    } catch {
+      // Not a Mach-O file, nothing to thin.
+    }
+  }
+}
+
+async function makePostgresBinariesExecutable(folderPath) {
+  const filePaths = [
+    ...(await listFilesRecursively(path.join(folderPath, 'bin'))),
+    ...(await listFilesRecursively(path.join(folderPath, 'lib'))),
+  ];
+
+  // The execute bit must be set at packaging time: AppImage mounts its content read-only.
+  await Promise.all(
+    filePaths.map((filePath) => {
+      return fs.chmod(filePath, 0o755);
+    }),
+  );
+}
+
+export async function installPostgres(platform = process.platform, arch = process.arch) {
+  const platformKey = `${platform}-${arch}`;
+  const artifact = POSTGRES_MAVEN_ARTIFACTS[platformKey];
+  if (artifact === undefined) {
+    throw new Error(`Unsupported platform: ${platformKey}`);
+  }
+
+  const archivePath = await downloadPostgresArchive(artifact);
+  const destinationPath = path.join(staticFolderPath, 'postgres');
+  await extractPostgresArchive(archivePath, destinationPath);
+  await prunePostgresFolder(destinationPath, platform);
+
+  if (platform === 'darwin') {
+    await thinMacOsBinaries(destinationPath, arch);
+  }
+
+  if (platform !== 'win32') {
+    await makePostgresBinariesExecutable(destinationPath);
+  }
+
+  await fs.writeFile(path.join(destinationPath, 'VERSION'), POSTGRES_VERSION);
 }
