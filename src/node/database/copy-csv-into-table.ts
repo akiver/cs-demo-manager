@@ -1,7 +1,7 @@
 import { createReadStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import { from as copyFrom } from 'pg-copy-streams';
-import { getIngestionPool } from './database';
+import { acquireIngestionClient, releaseIngestionClient } from './database';
 import type { Database } from './schema';
 
 type Options<Table> = {
@@ -15,7 +15,7 @@ type Options<Table> = {
 // are forwarded as-is to the server, there is no parsing on the JS side.
 export async function copyCsvIntoTable<Table>({ csvFilePath, tableName, columns }: Options<Table>) {
   const columnNames = columns.map((column) => `"${String(column)}"`).join(',');
-  const client = await getIngestionPool().connect();
+  const client = await acquireIngestionClient();
 
   try {
     const stream = client.query(
@@ -24,6 +24,6 @@ export async function copyCsvIntoTable<Table>({ csvFilePath, tableName, columns 
     // On error the pipeline destroys the stream, which sends a CopyFail to the backend.
     await pipeline(createReadStream(csvFilePath), stream);
   } finally {
-    client.release();
+    releaseIngestionClient(client);
   }
 }
