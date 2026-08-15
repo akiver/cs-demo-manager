@@ -10,6 +10,7 @@ let connectedSettings: DatabaseSettings | undefined;
 let ingestionPool: Pool | undefined;
 const ingestionClients = new Set<PoolClient>();
 const pendingAcquisitions = new Set<(error: Error) => void>();
+const DATABASE_CLOSED_MESSAGE = 'The database connection has been closed';
 
 // Convert int8 values that are "safe" JS integers into Numbers otherwise leave them as strings.
 // Postgres returns int8 values for int8 columns but also aggregate functions (COUNT(), SUM()...).
@@ -70,9 +71,9 @@ export function createDatabaseConnection(settings: DatabaseSettings) {
 
   // ! The ingestion pool is built from these settings, it must not survive a reconnection to another
   // server, otherwise match insertion would keep writing to the previous one.
-  const previousIngestionPool = ingestionPool;
-  ingestionPool = undefined;
-  previousIngestionPool?.end().catch((error: unknown) => {
+  // Reconnecting is not necessarily preceded by destroyDatabaseConnection(): start-minimized-mode
+  // retries connectDatabase() on an interval without waiting for the previous attempt to settle.
+  discardIngestionPool()?.catch((error: unknown) => {
     logger.error('Failed to close the previous ingestion pool');
     logger.error(error);
   });
@@ -120,16 +121,40 @@ function getIngestionPool(): Pool {
   return ingestionPool;
 }
 
-const DATABASE_CLOSED_MESSAGE = 'The database connection has been closed';
+/**
+ * Releases the ingestion pool and everything that depends on it, and returns the pending end().
+ *
+ * ! It must be the only way the pool is discarded: closing it without going through this leaves the
+ * COPY commands that were using it hanging, see the two loops below.
+ */
+function discardIngestionPool() {
+  const pool = ingestionPool;
+  ingestionPool = undefined;
+
+  // ! Waiting for the checked-out clients is not an option, an in-flight COPY takes minutes on a
+  // demo with positions and pool.end() only resolves once every client is back. Releasing them with
+  // an error destroys their connection instead, which aborts the COPY server-side.
+  for (const client of ingestionClients) {
+    client.release(new Error(DATABASE_CLOSED_MESSAGE));
+  }
+  ingestionClients.clear();
+
+  // ! These would never settle on their own: pg-pool stops serving its pending queue as soon as
+  // end() is called, so a connect() already queued at that point is neither resolved nor rejected.
+  for (const reject of pendingAcquisitions) {
+    reject(new Error(DATABASE_CLOSED_MESSAGE));
+  }
+  pendingAcquisitions.clear();
+
+  return pool?.end();
+}
 
 /**
- * Checked-out clients are tracked so that disconnecting can abort the COPY commands running on them,
- * and so are the acquisitions still waiting for a connection.
+ * Checked-out clients are tracked so that discarding the pool can abort the COPY commands running on
+ * them, and so are the acquisitions still waiting for a connection.
  *
- * ! The waiting ones matter because a match insertion sends far more COPY commands than the pool
- * size, so most of them sit in the pool queue. pg-pool stops serving that queue as soon as end() is
- * called, and a connect() already queued at that point never settles, neither resolved nor rejected.
- * Without rejecting them here, disconnecting during an insertion would leave it hanging forever.
+ * The waiting ones matter because a match insertion sends far more COPY commands than the pool size,
+ * so most of them sit in the pool queue rather than holding a connection.
  */
 export async function acquireIngestionClient(): Promise<PoolClient> {
   const pool = getIngestionPool();
@@ -141,7 +166,7 @@ export async function acquireIngestionClient(): Promise<PoolClient> {
         if (pendingAcquisitions.delete(reject)) {
           resolve(connectedClient);
         } else {
-          // destroyDatabaseConnection() already rejected this acquisition.
+          // discardIngestionPool() already rejected this acquisition.
           connectedClient.release(new Error(DATABASE_CLOSED_MESSAGE));
         }
       },
@@ -164,7 +189,7 @@ export async function acquireIngestionClient(): Promise<PoolClient> {
 }
 
 export function releaseIngestionClient(client: PoolClient) {
-  // Already destroyed by destroyDatabaseConnection(), releasing it again would throw.
+  // Already destroyed by discardIngestionPool(), releasing it again would throw.
   if (!ingestionClients.delete(client)) {
     return;
   }
@@ -173,23 +198,7 @@ export function releaseIngestionClient(client: PoolClient) {
 }
 
 export async function destroyDatabaseConnection() {
-  const pool = ingestionPool;
-  ingestionPool = undefined;
   connectedSettings = undefined;
 
-  // ! Disconnecting must not wait for an in-flight COPY to finish, which can take minutes on a demo
-  // with positions: pool.end() only resolves once every checked-out client is back. Releasing them
-  // with an error destroys their connection instead, which aborts the COPY server-side.
-  for (const client of ingestionClients) {
-    client.release(new Error(DATABASE_CLOSED_MESSAGE));
-  }
-  ingestionClients.clear();
-
-  // See acquireIngestionClient(): these would never settle on their own once the pool is ending.
-  for (const reject of pendingAcquisitions) {
-    reject(new Error(DATABASE_CLOSED_MESSAGE));
-  }
-  pendingAcquisitions.clear();
-
-  await Promise.all([db?.destroy(), pool?.end()]);
+  await Promise.all([db?.destroy(), discardIngestionPool()]);
 }
