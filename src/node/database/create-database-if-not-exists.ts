@@ -1,12 +1,10 @@
-import { Client } from 'pg';
+import { Client, escapeIdentifier } from 'pg';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import { PostgresqlErrorCode } from './postgresql-error-code';
 
-export function escapeIdentifier(identifier: string) {
-  return `"${identifier.replaceAll('"', '""')}"`;
-}
+const TIMEOUT_IN_MS = 10000;
 
-export async function createDatabaseIfNotExists(settings: DatabaseSettings) {
+async function createDatabase(settings: DatabaseSettings) {
   // Connecting to the "postgres" maintenance database because the app's one may not exist yet.
   const client = new Client({
     host: settings.hostname,
@@ -14,7 +12,9 @@ export async function createDatabaseIfNotExists(settings: DatabaseSettings) {
     user: settings.username,
     password: settings.password,
     database: 'postgres',
-    connectionTimeoutMillis: 10000,
+    connectionTimeoutMillis: TIMEOUT_IN_MS,
+    // ! Without it a server that accepts the connection but never answers would hang the startup.
+    statement_timeout: TIMEOUT_IN_MS,
   });
 
   await client.connect();
@@ -39,5 +39,22 @@ export async function createDatabaseIfNotExists(settings: DatabaseSettings) {
     }
   } finally {
     await client.end();
+  }
+}
+
+/**
+ * Creates the app's database when it doesn't exist yet.
+ *
+ * ! Failures are logged, not thrown: the "postgres" maintenance database may not exist or may not be
+ * reachable by the user's role, which is common on managed servers where the database has been
+ * provisioned by someone else. Whether the app can run is decided by the connection to its own
+ * database that follows, not by this function.
+ */
+export async function createDatabaseIfNotExists(settings: DatabaseSettings) {
+  try {
+    await createDatabase(settings);
+  } catch (error) {
+    logger.warn(`Unable to create the database "${settings.database}", assuming it already exists`);
+    logger.warn(error);
   }
 }
