@@ -1,7 +1,6 @@
 export const ErrorCode = {
   UnknownError: 1,
   NetworkError: 2,
-  PsqlTimeout: 3,
   RoundNotFound: 403,
   DemoNotFound: 404,
   MatchNotFound: 405,
@@ -36,7 +35,6 @@ export const ErrorCode = {
   ChecksumsMismatch: 506,
   DuplicateTeamName: 507,
   MapAlreadyExists: 600,
-  PsqlNotFound: 700,
   DatabaseSchemaVersionMismatch: 701,
   BoilerInvalidArgs: 800,
   BoilerCommunicationFailure: 801,

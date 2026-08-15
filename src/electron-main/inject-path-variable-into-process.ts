@@ -40,8 +40,8 @@ export async function injectPathVariableIntoProcess() {
   /**
    * On macOS/Linux, starting an app with a GUI from the OS files explorer doesn't inherit the environment variables
    * defined in user's dotfiles.
-   * It means that the PATH variable which contains the location of the "psql" binary used to create the database
-   * and insert matches from CSV files will be missing.
+   * It means that the PATH variable which contains the location of binaries looked up by name, such as "ffmpeg",
+   * will be missing.
    * Note: On macOS, using "open MyApp.app" from the command line does inherit environment variables properly.
    *
    * To make sure the PATH variable is correct, we update it by reading the output of the shell command "env".

@@ -50,21 +50,6 @@ function DatabaseSchemaVersionMismatch() {
 
 function getHintFromError({ code, message }: ConnectDatabaseError) {
   switch (code) {
-    case ErrorCode.PsqlNotFound:
-      return (
-        <p>
-          <Trans>
-            It usually means that PostgreSQL is not installed on your system or the path to the <strong>psql</strong>{' '}
-            executable is not in your <strong>PATH</strong> environment variable.
-          </Trans>
-        </p>
-      );
-    case ErrorCode.PsqlTimeout:
-      return (
-        <p>
-          <Trans>It usually means that the PostgreSQL service is not running, make sure it's running.</Trans>
-        </p>
-      );
     case ErrorCode.DatabaseSchemaVersionMismatch:
       return <DatabaseSchemaVersionMismatch />;
   }
