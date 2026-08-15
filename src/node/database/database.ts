@@ -9,6 +9,7 @@ export let db: Kysely<Database>;
 let connectedSettings: DatabaseSettings | undefined;
 let ingestionPool: Pool | undefined;
 const ingestionClients = new Set<PoolClient>();
+const pendingAcquisitions = new Set<(error: Error) => void>();
 
 // Convert int8 values that are "safe" JS integers into Numbers otherwise leave them as strings.
 // Postgres returns int8 values for int8 columns but also aggregate functions (COUNT(), SUM()...).
@@ -121,14 +122,37 @@ function getIngestionPool(): Pool {
 
 const DATABASE_CLOSED_MESSAGE = 'The database connection has been closed';
 
-// Checked-out clients are tracked so that disconnecting can abort the COPY commands still running on
-// them, see destroyDatabaseConnection().
+/**
+ * Checked-out clients are tracked so that disconnecting can abort the COPY commands running on them,
+ * and so are the acquisitions still waiting for a connection.
+ *
+ * ! The waiting ones matter because a match insertion sends far more COPY commands than the pool
+ * size, so most of them sit in the pool queue. pg-pool stops serving that queue as soon as end() is
+ * called, and a connect() already queued at that point never settles, neither resolved nor rejected.
+ * Without rejecting them here, disconnecting during an insertion would leave it hanging forever.
+ */
 export async function acquireIngestionClient(): Promise<PoolClient> {
   const pool = getIngestionPool();
-  const client = await pool.connect();
+  const client = await new Promise<PoolClient>((resolve, reject) => {
+    pendingAcquisitions.add(reject);
 
-  // ! The pool has been replaced while this connection was pending: it is not in the tracked set, so
-  // destroyDatabaseConnection() could not abort it and pool.end() would be waiting for it.
+    pool.connect().then(
+      (connectedClient) => {
+        if (pendingAcquisitions.delete(reject)) {
+          resolve(connectedClient);
+        } else {
+          // destroyDatabaseConnection() already rejected this acquisition.
+          connectedClient.release(new Error(DATABASE_CLOSED_MESSAGE));
+        }
+      },
+      (error: unknown) => {
+        pendingAcquisitions.delete(reject);
+        reject(error instanceof Error ? error : new Error(String(error)));
+      },
+    );
+  });
+
+  // The pool has been replaced between the connection being handed out and this line.
   if (pool !== ingestionPool) {
     client.release(new Error(DATABASE_CLOSED_MESSAGE));
     throw new Error(DATABASE_CLOSED_MESSAGE);
@@ -160,6 +184,12 @@ export async function destroyDatabaseConnection() {
     client.release(new Error(DATABASE_CLOSED_MESSAGE));
   }
   ingestionClients.clear();
+
+  // See acquireIngestionClient(): these would never settle on their own once the pool is ending.
+  for (const reject of pendingAcquisitions) {
+    reject(new Error(DATABASE_CLOSED_MESSAGE));
+  }
+  pendingAcquisitions.clear();
 
   await Promise.all([db?.destroy(), pool?.end()]);
 }
