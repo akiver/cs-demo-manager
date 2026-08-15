@@ -12,9 +12,12 @@ async function createDatabase(settings: DatabaseSettings) {
     user: settings.username,
     password: settings.password,
     database: 'postgres',
+    // The three of them are needed to bound the startup: connectionTimeoutMillis only covers the
+    // handshake, statement_timeout is server-side so it can't fire on a server that stopped
+    // answering, and query_timeout is the client-side timer that covers that case.
     connectionTimeoutMillis: TIMEOUT_IN_MS,
-    // ! Without it a server that accepts the connection but never answers would hang the startup.
     statement_timeout: TIMEOUT_IN_MS,
+    query_timeout: TIMEOUT_IN_MS,
   });
 
   await client.connect();

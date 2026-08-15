@@ -1,4 +1,4 @@
-import { types, Pool } from 'pg';
+import { types, Pool, type PoolClient } from 'pg';
 import type { KyselyConfig, LogEvent, Logger } from 'kysely';
 import { Kysely, PostgresDialect } from 'kysely';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
@@ -8,6 +8,7 @@ export let db: Kysely<Database>;
 
 let connectedSettings: DatabaseSettings | undefined;
 let ingestionPool: Pool | undefined;
+const ingestionClients = new Set<PoolClient>();
 
 // Convert int8 values that are "safe" JS integers into Numbers otherwise leave them as strings.
 // Postgres returns int8 values for int8 columns but also aggregate functions (COUNT(), SUM()...).
@@ -96,7 +97,7 @@ function getConnectedDatabaseSettings(): DatabaseSettings {
 // been streamed. Sharing the Kysely pool would starve the app queries and, worse, the queued
 // acquisitions would be rejected by its connectionTimeoutMillis, which also applies to the time
 // spent waiting in the pool queue.
-export function getIngestionPool(): Pool {
+function getIngestionPool(): Pool {
   if (ingestionPool === undefined) {
     const settings = getConnectedDatabaseSettings();
     ingestionPool = new Pool({
@@ -118,10 +119,36 @@ export function getIngestionPool(): Pool {
   return ingestionPool;
 }
 
+// Checked-out clients are tracked so that disconnecting can abort the COPY commands still running on
+// them, see destroyDatabaseConnection().
+export async function acquireIngestionClient(): Promise<PoolClient> {
+  const client = await getIngestionPool().connect();
+  ingestionClients.add(client);
+
+  return client;
+}
+
+export function releaseIngestionClient(client: PoolClient) {
+  // Already destroyed by destroyDatabaseConnection(), releasing it again would throw.
+  if (!ingestionClients.delete(client)) {
+    return;
+  }
+
+  client.release();
+}
+
 export async function destroyDatabaseConnection() {
   const pool = ingestionPool;
   ingestionPool = undefined;
   connectedSettings = undefined;
+
+  // ! Disconnecting must not wait for an in-flight COPY to finish, which can take minutes on a demo
+  // with positions: pool.end() only resolves once every checked-out client is back. Releasing them
+  // with an error destroys their connection instead, which aborts the COPY server-side.
+  for (const client of ingestionClients) {
+    client.release(new Error('The database connection has been closed'));
+  }
+  ingestionClients.clear();
 
   await Promise.all([db?.destroy(), pool?.end()]);
 }
