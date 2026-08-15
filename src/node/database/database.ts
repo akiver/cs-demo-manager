@@ -119,10 +119,21 @@ function getIngestionPool(): Pool {
   return ingestionPool;
 }
 
+const DATABASE_CLOSED_MESSAGE = 'The database connection has been closed';
+
 // Checked-out clients are tracked so that disconnecting can abort the COPY commands still running on
 // them, see destroyDatabaseConnection().
 export async function acquireIngestionClient(): Promise<PoolClient> {
-  const client = await getIngestionPool().connect();
+  const pool = getIngestionPool();
+  const client = await pool.connect();
+
+  // ! The pool has been replaced while this connection was pending: it is not in the tracked set, so
+  // destroyDatabaseConnection() could not abort it and pool.end() would be waiting for it.
+  if (pool !== ingestionPool) {
+    client.release(new Error(DATABASE_CLOSED_MESSAGE));
+    throw new Error(DATABASE_CLOSED_MESSAGE);
+  }
+
   ingestionClients.add(client);
 
   return client;
@@ -146,7 +157,7 @@ export async function destroyDatabaseConnection() {
   // with positions: pool.end() only resolves once every checked-out client is back. Releasing them
   // with an error destroys their connection instead, which aborts the COPY server-side.
   for (const client of ingestionClients) {
-    client.release(new Error('The database connection has been closed'));
+    client.release(new Error(DATABASE_CLOSED_MESSAGE));
   }
   ingestionClients.clear();
 
