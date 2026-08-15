@@ -6,6 +6,9 @@ import type { Database } from './schema';
 
 export let db: Kysely<Database>;
 
+let connectedSettings: DatabaseSettings | undefined;
+let ingestionPool: Pool | undefined;
+
 // Convert int8 values that are "safe" JS integers into Numbers otherwise leave them as strings.
 // Postgres returns int8 values for int8 columns but also aggregate functions (COUNT(), SUM()...).
 // By default node-pg parses int8 values into strings.
@@ -63,5 +66,49 @@ export function createDatabaseConnection(settings: DatabaseSettings) {
     log: loggerFunction,
   };
 
+  connectedSettings = settings;
   db = new Kysely<Database>(config);
+}
+
+// The settings the app is currently connected with.
+// They are not necessarily the ones stored in the settings file: connectDatabase() also accepts the
+// settings coming from the connection form, which are persisted only once the connection succeeded.
+function getConnectedDatabaseSettings(): DatabaseSettings {
+  if (connectedSettings === undefined) {
+    throw new Error('The database is not connected');
+  }
+
+  return connectedSettings;
+}
+
+// Dedicated pool for match insertion.
+// It's separated from the Kysely pool because a match insertion sends dozens of concurrent COPY
+// commands (see insert-match.ts) and each of them holds its connection until the whole CSV file has
+// been streamed. Sharing the Kysely pool would starve the app queries and, worse, the queued
+// acquisitions would be rejected by its connectionTimeoutMillis, which also applies to the time
+// spent waiting in the pool queue.
+export function getIngestionPool(): Pool {
+  if (ingestionPool === undefined) {
+    const settings = getConnectedDatabaseSettings();
+    ingestionPool = new Pool({
+      host: settings.hostname,
+      port: settings.port,
+      user: settings.username,
+      password: settings.password,
+      database: settings.database,
+      max: 8,
+      // COPY commands may take minutes, waiting for a free connection must not time out.
+      connectionTimeoutMillis: 0,
+    });
+  }
+
+  return ingestionPool;
+}
+
+export async function destroyDatabaseConnection() {
+  const pool = ingestionPool;
+  ingestionPool = undefined;
+  connectedSettings = undefined;
+
+  await Promise.all([db?.destroy(), pool?.end()]);
 }

@@ -14,7 +14,7 @@ const config: KnipConfig = {
   },
   ignore: ['**/*/lingui.config.ts'],
   ignoreDependencies: ['@lingui/core'],
-  ignoreBinaries: ['tasklist', 'psql', 'pgrep'],
+  ignoreBinaries: ['tasklist', 'pgrep'],
 };
 
 export default config;
