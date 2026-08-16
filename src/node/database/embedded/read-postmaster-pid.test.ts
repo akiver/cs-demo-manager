@@ -95,15 +95,18 @@ describe('findRunningCluster', () => {
         resolve(typeof address === 'object' && address !== null ? address.port : 0);
       });
     });
-    await writePostmasterPid(`${process.pid}\n${dataFolderPath}\n1751490000\n${port}\n`);
+    try {
+      await writePostmasterPid(`${process.pid}\n${dataFolderPath}\n1751490000\n${port}\n`);
 
-    await expect(findRunningCluster(dataFolderPath)).resolves.toEqual({
-      pid: process.pid,
-      dataFolderPath,
-      port,
-    });
-
-    await new Promise((resolve) => server.close(resolve));
+      await expect(findRunningCluster(dataFolderPath)).resolves.toEqual({
+        pid: process.pid,
+        dataFolderPath,
+        port,
+      });
+    } finally {
+      // A failing assertion would otherwise leave the socket bound and the event loop open.
+      await new Promise((resolve) => server.close(resolve));
+    }
   });
 
   it('should return undefined when the data folder does not match', async () => {

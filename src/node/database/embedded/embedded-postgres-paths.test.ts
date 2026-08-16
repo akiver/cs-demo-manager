@@ -11,7 +11,12 @@ vi.mock('csdm/node/filesystem/get-app-folder-path', () => {
 const localAppDataFolderPath = process.env.LOCALAPPDATA;
 
 afterEach(() => {
-  process.env.LOCALAPPDATA = localAppDataFolderPath;
+  // Assigning undefined would store the string "undefined", which is a path like any other.
+  if (localAppDataFolderPath === undefined) {
+    delete process.env.LOCALAPPDATA;
+  } else {
+    process.env.LOCALAPPDATA = localAppDataFolderPath;
+  }
 });
 
 describe('getClusterFolderPath', () => {

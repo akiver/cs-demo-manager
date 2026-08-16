@@ -15,10 +15,26 @@ function getVersionFilePath(dataFolderPath: string) {
   return path.join(dataFolderPath, 'PG_VERSION');
 }
 
-// PG_VERSION is written by initdb, it's what tells an initialized data folder apart from an empty
-// or half-initialized one.
-export function isClusterInitialized(dataFolderPath: string) {
-  return fs.pathExists(getVersionFilePath(dataFolderPath));
+/**
+ * PG_VERSION is written by initdb, it's what tells an initialized data folder apart from an empty
+ * or half-initialized one.
+ *
+ * ! Not fs.pathExists, which answers false for a permission or I/O failure too. Reporting an
+ * unreadable cluster as absent is what makes readOrCreateClusterState generate a password and
+ * overwrite the only copy of the one the cluster expects.
+ */
+export async function isClusterInitialized(dataFolderPath: string) {
+  try {
+    await fs.access(getVersionFilePath(dataFolderPath));
+
+    return true;
+  } catch (error) {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+      return false;
+    }
+
+    throw error;
+  }
 }
 
 async function readClusterMajorVersion(dataFolderPath: string) {
@@ -54,44 +70,33 @@ export async function assertClusterVersionMatchesBinaries(dataFolderPath: string
   }
 }
 
-async function isFolderEmpty(folderPath: string) {
-  try {
-    const entries = await fs.readdir(folderPath);
-
-    return entries.length === 0;
-  } catch (error) {
-    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
-      return true;
-    }
-
-    throw error;
-  }
-}
-
+/**
+ * Runs initdb on the first launch.
+ *
+ * ! It never runs on the data folder itself. A folder this call owns is used instead and moved into
+ * place once initdb succeeded, which means the cleanup below can only ever delete what this call
+ * created. Running it in the data folder would put two things at risk: a folder holding a cluster
+ * whose PG_VERSION was lost, which makes initdb fail and used to be deleted with the demos it holds,
+ * and the cluster another process is creating at the same time, since the lock serializing them is
+ * a plain file and cannot be made race-free.
+ */
 export async function initializeClusterIfNeeded(password: string) {
   const dataFolderPath = getClusterDataFolderPath();
   if (await isClusterInitialized(dataFolderPath)) {
     return;
   }
 
-  // ! initdb refuses to run on a folder that is not empty, and the failure path below deletes the
-  // folder. Content without PG_VERSION is not necessarily ours: it may be a cluster whose
-  // PG_VERSION has been lost, and deleting it would destroy the demos it holds.
-  if (!(await isFolderEmpty(dataFolderPath))) {
-    throw new EmbeddedPostgresInitFailed(
-      `The built-in database folder exists but is not a valid PostgreSQL data folder, it has to be inspected before being reused or deleted: ${dataFolderPath}`,
-    );
-  }
-
+  const stagingFolderPath = `${dataFolderPath}.${process.pid}.init`;
   // ! The password must not be passed through argv, it would be visible in the process list.
   const passwordFilePath = path.join(os.tmpdir(), `csdm-pg-${crypto.randomBytes(8).toString('hex')}`);
   await fs.writeFile(passwordFilePath, password, { mode: 0o600 });
 
   try {
-    await fs.ensureDir(dataFolderPath);
+    await fs.remove(stagingFolderPath);
+    await fs.ensureDir(stagingFolderPath);
     await runPostgresCommand(getPostgresBinaryPath('initdb'), [
       '--pgdata',
-      dataFolderPath,
+      stagingFolderPath,
       '--username',
       CLUSTER_USERNAME,
       '--pwfile',
@@ -103,13 +108,18 @@ export async function initializeClusterIfNeeded(password: string) {
       '--locale',
       'C',
     ]);
+
+    // A data folder is relocatable, initdb writes no absolute path into it.
+    // ! move() refuses an existing destination, which is what leaves a folder that isn't ours alone.
+    await fs.move(stagingFolderPath, dataFolderPath);
   } catch (error) {
-    // A half-initialized data folder makes every next start fail, start over on the next attempt.
-    // Safe to delete: the folder was empty above, everything in it has been written by this initdb.
-    await fs.remove(dataFolderPath);
     const message = error instanceof Error ? error.message : 'Unknown error';
-    throw new EmbeddedPostgresInitFailed(`Failed to create the built-in database: ${message}`, error);
+    throw new EmbeddedPostgresInitFailed(
+      `Failed to create the built-in database in ${dataFolderPath}: ${message}`,
+      error,
+    );
   } finally {
-    await fs.remove(passwordFilePath);
+    // A half-initialized folder makes every next attempt fail, and it's ours to delete.
+    await Promise.all([fs.remove(passwordFilePath), fs.remove(stagingFolderPath)]);
   }
 }

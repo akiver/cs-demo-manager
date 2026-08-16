@@ -7245,6 +7245,10 @@ msgid "Yaw"
 msgstr "Yaw"
 
 #: src/ui/settings/database/database-mode-selector.tsx
+msgid "Unknown error"
+msgstr "Unknown error"
+
+#: src/ui/settings/database/database-mode-selector.tsx
 msgctxt "Dialog title"
 msgid "Change database"
 msgstr "Change database"

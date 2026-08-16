@@ -29,9 +29,13 @@ function parseClusterState(content: string): ClusterState | undefined {
     return undefined;
   }
 
+  // ! An out-of-range port is dropped rather than kept: it's only a hint, and passing it to
+  // net.listen() would fail the whole start instead of resolving a new port.
+  const isPortUsable = typeof port === 'number' && Number.isInteger(port) && port > 0 && port <= 65_535;
+
   return {
     password,
-    port: typeof port === 'number' ? port : undefined,
+    port: isPortUsable ? port : undefined,
   };
 }
 

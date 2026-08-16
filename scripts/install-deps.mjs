@@ -166,8 +166,34 @@ async function extractPostgresArchive(archivePath, destinationFolderPath) {
     await execFileAsync('tar', ['-xf', tarballFileName], { cwd: stagingFolderPath });
     await fs.remove(path.join(stagingFolderPath, tarballFileName));
 
-    await fs.remove(destinationFolderPath);
-    await fs.move(stagingFolderPath, destinationFolderPath);
+    // ! The previous binaries are moved out of the way rather than deleted, and only deleted once
+    // the new ones are in place: deleting first would leave the app without any if the move failed,
+    // and a running cluster keeps its DLLs open on Windows, which makes deleting them fail while
+    // renaming their folder still works.
+    // ! Kept outside the static folder: a leftover there would be packaged into the app.
+    const previousFolderPath = path.join(path.dirname(archivePath), 'previous');
+    await fs.remove(previousFolderPath);
+    if (await fs.pathExists(destinationFolderPath)) {
+      await fs.move(destinationFolderPath, previousFolderPath);
+    }
+
+    try {
+      await fs.move(stagingFolderPath, destinationFolderPath);
+    } catch (error) {
+      if (await fs.pathExists(previousFolderPath)) {
+        await fs.move(previousFolderPath, destinationFolderPath);
+      }
+
+      throw error;
+    }
+
+    try {
+      await fs.remove(previousFolderPath);
+    } catch (error) {
+      // The new binaries are in place, this is only the cleanup of the old ones. It happens when a
+      // cluster started from them is still running, and the next run removes them anyway.
+      console.warn(`Failed to remove the previous PostgreSQL binaries in ${previousFolderPath}: ${error.message}`);
+    }
   } finally {
     await fs.remove(stagingFolderPath);
   }
@@ -246,6 +272,13 @@ async function thinMacOsBinaries(folderPath, arch) {
     } catch {
       // Not a Mach-O file, nothing to thin.
       continue;
+    }
+
+    // ! "lipo -info" lists the architectures of both forms. A Mach-O file that doesn't contain the
+    // one being packaged is unusable, and shipping it would only be discovered by a user whose app
+    // refuses to start.
+    if (!stdout.includes(machoArch)) {
+      throw new Error(`${filePath} does not contain the ${machoArch} architecture: ${stdout.trim()}`);
     }
 
     if (!stdout.includes('Architectures in the fat file')) {

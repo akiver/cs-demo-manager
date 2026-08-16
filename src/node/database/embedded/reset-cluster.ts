@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
-import { getClusterFolderPath } from './embedded-postgres-paths';
+import { getClusterDataFolderPath, getClusterFolderPath } from './embedded-postgres-paths';
+import { findRunningCluster } from './read-postmaster-pid';
 import { stopEmbeddedCluster } from './stop-cluster';
 
 /**
@@ -11,5 +12,12 @@ import { stopEmbeddedCluster } from './stop-cluster';
  */
 export async function resetEmbeddedCluster() {
   await stopEmbeddedCluster();
+
+  // ! stopEmbeddedCluster() logs and swallows its errors, so it succeeding is not proof the server
+  // is gone. Deleting the folder under a running one corrupts it wherever open files can be removed.
+  if ((await findRunningCluster(getClusterDataFolderPath())) !== undefined) {
+    throw new Error('The built-in database could not be stopped, it has to be stopped before being reset.');
+  }
+
   await fs.remove(getClusterFolderPath());
 }

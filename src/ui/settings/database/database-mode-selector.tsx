@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/react/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { DatabaseMode } from 'csdm/node/settings/settings';
 import { RadioInput } from 'csdm/ui/components/inputs/radio-input';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
@@ -15,6 +15,16 @@ import { disconnectDatabaseSuccess } from 'csdm/ui/bootstrap/bootstrap-actions';
 import { useUpdateSettings } from 'csdm/ui/settings/use-update-settings';
 import { useDatabaseSettings } from './use-database-settings';
 
+// ! JSON.stringify(new Error()) is "{}", and it throws on a circular value: the message would be
+// replaced by an empty object exactly when there is something to tell the user.
+function formatError(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return typeof error === 'string' ? error : undefined;
+}
+
 function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
   const databaseSettings = useDatabaseSettings();
   const connect = useConnectDatabase();
@@ -22,6 +32,7 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
   const dispatch = useDispatch();
   const updateSettings = useUpdateSettings();
   const { hideDialog } = useDialog();
+  const { t } = useLingui();
   const [error, setError] = useState<string | undefined>(undefined);
   const [isBusy, setIsBusy] = useState(false);
 
@@ -40,9 +51,24 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
         mode: 'external',
       },
     });
-    await client.send({
-      name: RendererClientMessageName.DisconnectDatabase,
-    });
+
+    try {
+      await client.send({
+        name: RendererClientMessageName.DisconnectDatabase,
+      });
+    } catch (error) {
+      // ! The mode has to go back to what it was: the app is still connected to the built-in
+      // database and the settings would claim otherwise, including on the next start.
+      await updateSettings({
+        database: {
+          ...databaseSettings,
+          mode: 'embedded',
+        },
+      });
+
+      throw error;
+    }
+
     dispatch(disconnectDatabaseSuccess());
     closeDialog();
   };
@@ -67,7 +93,7 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
       await (mode === 'embedded' ? switchToEmbeddedDatabase() : switchToExternalServer());
     } catch (error) {
       logger.error(error);
-      setError(typeof error === 'string' ? error : JSON.stringify(error));
+      setError(formatError(error) ?? t`Unknown error`);
     }
     setIsBusy(false);
   };

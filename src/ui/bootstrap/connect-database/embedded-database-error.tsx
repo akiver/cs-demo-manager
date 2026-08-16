@@ -7,6 +7,8 @@ import { ResetEmbeddedDatabaseButton } from 'csdm/ui/settings/database/reset-emb
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import type { EmbeddedDatabaseInfo } from 'csdm/server/handlers/renderer-process/database/get-embedded-database-info-handler';
+import { useDispatch } from 'csdm/ui/store/use-dispatch';
+import { connectDatabaseError } from '../bootstrap-actions';
 import { useConnectDatabase } from './use-connect-database';
 
 type Props = {
@@ -18,6 +20,7 @@ export function EmbeddedDatabaseError({ children }: Props) {
   const databaseSettings = useDatabaseSettings();
   const connect = useConnectDatabase();
   const updateSettings = useUpdateSettings();
+  const dispatch = useDispatch();
   const [isConnecting, setIsConnecting] = useState(false);
   const [info, setInfo] = useState<EmbeddedDatabaseInfo | undefined>(undefined);
 
@@ -49,6 +52,7 @@ export function EmbeddedDatabaseError({ children }: Props) {
     // ! Switching the mode instead of connecting right away: the settings hold the built-in
     // credentials, connecting with them would fail against any real server and there would be no
     // form to correct them, this screen is the only one shown before a connection succeeds.
+    setIsConnecting(true);
     try {
       await updateSettings({
         database: {
@@ -56,8 +60,11 @@ export function EmbeddedDatabaseError({ children }: Props) {
           mode: 'external',
         },
       });
+      // The form that replaces this screen must not keep showing why the built-in database failed.
+      dispatch(connectDatabaseError({ error: undefined }));
     } catch (error) {
       logger.error(error);
+      setIsConnecting(false);
     }
   };
 

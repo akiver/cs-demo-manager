@@ -8,6 +8,11 @@ function tryToListen(port: number) {
     server.once('error', (error: NodeJS.ErrnoException) => {
       resolve(error.code ?? 'UNKNOWN');
     });
+    // ! close() waits for the accepted connections to end before calling back, and this listens on a
+    // port something may well try to reach. Without this the probe could stay pending forever.
+    server.on('connection', (socket) => {
+      socket.destroy();
+    });
     server.listen({ port, host: '127.0.0.1' }, () => {
       server.close(() => {
         resolve(undefined);
