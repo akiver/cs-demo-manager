@@ -17,7 +17,7 @@ function tryToListen(port: number) {
 }
 
 // Whatever the reason the bind failed, the port can't be used for the cluster.
-export async function isPortFree(port: number) {
+async function isPortFree(port: number) {
   return (await tryToListen(port)) === undefined;
 }
 
