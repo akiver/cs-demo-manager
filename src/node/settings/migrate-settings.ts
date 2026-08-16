@@ -15,14 +15,19 @@ function getMigrationsForUpgrade(migrations: Migration[], currentSchemaVersion: 
 }
 
 export async function migrateSettings(): Promise<Settings> {
-  let schemaVersion = 0;
-  let settings = defaultSettings;
   const settingsFilePath = getSettingsFilePath();
   const settingsFileExists = await fs.pathExists(settingsFilePath);
-  if (settingsFileExists) {
-    settings = await getSettings();
-    schemaVersion = settings.schemaVersion;
+  if (!settingsFileExists) {
+    // ! Fresh installation: the default settings already are at the current schema version.
+    // Running the migrations on them would apply upgrade paths meant for existing installations,
+    // for example the one that keeps them on an external PostgreSQL server.
+    await writeSettings(defaultSettings);
+
+    return defaultSettings;
   }
+
+  const settings = await getSettings();
+  const schemaVersion = settings.schemaVersion;
 
   const isDowngrade = schemaVersion > CURRENT_SCHEMA_VERSION;
   if (isDowngrade) {

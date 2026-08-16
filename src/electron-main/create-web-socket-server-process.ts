@@ -3,6 +3,16 @@ import type { ChildProcess } from 'node:child_process';
 import { fork } from 'node:child_process';
 import { app } from 'electron';
 
+let currentServerProcess: ChildProcess | null = null;
+
+// ! On Windows kill() is a TerminateProcess call, the server process doesn't get the chance to run
+// any signal handler. Anything that must be released before quitting has to be done through the
+// PrepareToQuit message, see main.ts.
+export function killWebSocketServerProcess() {
+  currentServerProcess?.kill();
+  currentServerProcess = null;
+}
+
 export function createWebSocketServerProcess() {
   const serverFilePath = path.join(app.getAppPath(), 'server.js');
   const serverProcess: ChildProcess = fork(serverFilePath, {
@@ -39,9 +49,7 @@ export function createWebSocketServerProcess() {
     logger.log(`server process closed with code ${code} and signal ${signal}`);
   });
 
-  app.on('quit', () => {
-    serverProcess.kill();
-  });
+  currentServerProcess = serverProcess;
 
   // Used to check if the fork() call succeed and so the server process is alive.
   serverProcess.send('ping');

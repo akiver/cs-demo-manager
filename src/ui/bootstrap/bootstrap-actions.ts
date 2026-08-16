@@ -5,6 +5,7 @@ import type { ConnectDatabaseError } from 'csdm/server/handlers/renderer-process
 export const initializeAppSuccess = createAction<InitializeApplicationSuccessPayload>(
   'bootstrap/initializationSuccess',
 );
+export const connectDatabaseStarted = createAction('bootstrap/connectDatabaseStarted');
 export const connectDatabaseSuccess = createAction('bootstrap/connectDatabaseSuccess');
 export const connectDatabaseError = createAction<{ error: ConnectDatabaseError | undefined }>(
   'bootstrap/connectDatabaseError',

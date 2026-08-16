@@ -95,7 +95,19 @@ const config = {
       {
         from: './static',
         to: 'static',
-        filter: ['!**/*.dll', '!**/*.exe', '!**/*.so'],
+        // ! Do not exclude ".so" files globally: the embedded PostgreSQL ships its loadable modules
+        // (plpgsql, text search dictionaries, encoding conversions) as ".so" files on macOS too.
+        filter: [
+          '!cs2/*.dll',
+          '!cs2/*.so',
+          '!csgove/*.dll',
+          '!csgove/*.exe',
+          '!boiler-writter/*.dll',
+          '!boiler-writter/*.exe',
+          '!csda.exe',
+          '!csdm.dll',
+          '!csdm_client.so',
+        ],
       },
     ],
   },
@@ -133,7 +145,7 @@ const config = {
     },
   ],
   beforePack: async (context) => {
-    const { installBoilerWritter, installCounterStrikeVoiceExtractor, installDemoAnalyzer } =
+    const { installBoilerWritter, installCounterStrikeVoiceExtractor, installDemoAnalyzer, installPostgres } =
       await import('./scripts/install-deps.mjs');
     const arch = Arch[context.arch];
     const platform = context.packager.platform.nodeName;
@@ -141,6 +153,7 @@ const config = {
       installDemoAnalyzer(platform, arch),
       installBoilerWritter(platform, arch),
       installCounterStrikeVoiceExtractor(platform),
+      installPostgres(platform, arch),
     ]);
   },
 };
