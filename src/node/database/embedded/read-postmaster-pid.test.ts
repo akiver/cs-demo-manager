@@ -1,4 +1,5 @@
 import os from 'node:os';
+import net from 'node:net';
 import path from 'node:path';
 import fs from 'fs-extra';
 import { afterAll, describe, expect, it } from 'vite-plus/test';
@@ -78,10 +79,31 @@ describe('isProcessAlive', () => {
 describe('findRunningCluster', () => {
   // The operating system reuses PIDs: an unrelated process holding the PID of a crashed postmaster
   // would make the app reuse a cluster that is not running, on every attempt.
+  // Port 1 is not listening anywhere. On Linux binding it also fails with EACCES for a non-root
+  // user, which must not be read as a running cluster either.
   it('should return undefined when nothing listens on the port of a live PID', async () => {
     await writePostmasterPid(`${process.pid}\n${dataFolderPath}\n1751490000\n1\n`);
 
     await expect(findRunningCluster(dataFolderPath)).resolves.toBeUndefined();
+  });
+
+  it('should return the cluster when its port is listening', async () => {
+    const server = net.createServer();
+    const port = await new Promise<number>((resolve) => {
+      server.listen({ port: 0, host: '127.0.0.1' }, () => {
+        const address = server.address();
+        resolve(typeof address === 'object' && address !== null ? address.port : 0);
+      });
+    });
+    await writePostmasterPid(`${process.pid}\n${dataFolderPath}\n1751490000\n${port}\n`);
+
+    await expect(findRunningCluster(dataFolderPath)).resolves.toEqual({
+      pid: process.pid,
+      dataFolderPath,
+      port,
+    });
+
+    await new Promise((resolve) => server.close(resolve));
   });
 
   it('should return undefined when the data folder does not match', async () => {

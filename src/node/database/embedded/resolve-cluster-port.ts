@@ -1,20 +1,35 @@
 import net from 'node:net';
 
-// Binding succeeds only when nothing is listening, which is also how a running cluster is told apart
-// from a stale postmaster.pid.
-export function isPortFree(port: number) {
-  return new Promise<boolean>((resolve) => {
+// Resolves with the error code of the failed bind, or undefined when it succeeded.
+function tryToListen(port: number) {
+  return new Promise<string | undefined>((resolve) => {
     const server = net.createServer();
     server.unref();
-    server.once('error', () => {
-      resolve(false);
+    server.once('error', (error: NodeJS.ErrnoException) => {
+      resolve(error.code ?? 'UNKNOWN');
     });
     server.listen({ port, host: '127.0.0.1' }, () => {
       server.close(() => {
-        resolve(true);
+        resolve(undefined);
       });
     });
   });
+}
+
+// Whatever the reason the bind failed, the port can't be used for the cluster.
+export async function isPortFree(port: number) {
+  return (await tryToListen(port)) === undefined;
+}
+
+/**
+ * Whether something is listening on the port, which is how a running cluster is told apart from a
+ * stale postmaster.pid.
+ *
+ * ! Only EADDRINUSE proves it. Any other failure, EACCES on a port the user is not allowed to bind
+ * for example, says nothing about the cluster and must not be read as "it's running".
+ */
+export async function isPortInUse(port: number) {
+  return (await tryToListen(port)) === 'EADDRINUSE';
 }
 
 function resolveFreePort() {

@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'fs-extra';
-import { isPortFree } from './resolve-cluster-port';
+import { isPortInUse } from './resolve-cluster-port';
 
 export type PostmasterPid = {
   pid: number;
@@ -90,5 +90,5 @@ export async function findRunningCluster(dataFolderPath: string): Promise<Postma
   // ! Being alive is not enough: the operating system reuses PIDs, and an unrelated process holding
   // the PID of a crashed postmaster would make the app reuse a cluster that is not running. It would
   // then fail to connect on every attempt, including the retries, since nothing invalidates the file.
-  return (await isPortFree(postmasterPid.port)) ? undefined : postmasterPid;
+  return (await isPortInUse(postmasterPid.port)) ? postmasterPid : undefined;
 }
