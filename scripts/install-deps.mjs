@@ -150,13 +150,27 @@ async function extractPostgresArchive(archivePath, destinationFolderPath) {
     throw new Error(`No .txz entry found in ${archivePath}`);
   }
 
-  const tarballPath = `${archivePath}.txz`;
-  await pipeline(entry.stream(), fs.createWriteStream(tarballPath));
+  // ! Extracted aside and swapped in at the end: emptying the destination first would leave the app
+  // without any binaries when the extraction fails.
+  const stagingFolderPath = path.join(path.dirname(archivePath), 'extract');
+  const tarballFileName = 'postgres.txz';
 
-  await fs.emptyDir(destinationFolderPath);
-  // bsdtar (macOS, Windows 10+) and GNU tar (Linux) both handle xz through -xf.
-  await execFileAsync('tar', ['-xf', tarballPath, '-C', destinationFolderPath]);
-  await fs.remove(tarballPath);
+  try {
+    await fs.emptyDir(stagingFolderPath);
+    await pipeline(entry.stream(), fs.createWriteStream(path.join(stagingFolderPath, tarballFileName)));
+
+    // ! The tarball is passed by name, relative to cwd, never as an absolute path: GNU tar, the one
+    // Git for Windows ships and puts first in the PATH of its shell, reads "C:\..." as the
+    // "host:path" syntax of a remote archive and fails with "Cannot connect to C".
+    // bsdtar (Windows 10+, macOS) and GNU tar (Linux) both handle xz through -xf.
+    await execFileAsync('tar', ['-xf', tarballFileName], { cwd: stagingFolderPath });
+    await fs.remove(path.join(stagingFolderPath, tarballFileName));
+
+    await fs.remove(destinationFolderPath);
+    await fs.move(stagingFolderPath, destinationFolderPath);
+  } finally {
+    await fs.remove(stagingFolderPath);
+  }
 }
 
 async function prunePostgresFolder(folderPath, platform) {
