@@ -30,7 +30,8 @@ export abstract class Command {
   }
 
   protected async initDatabaseConnection() {
-    // ! The CLI never stops the embedded cluster, the app may be running and using it.
+    // ! releaseEmbeddedCluster is left to its default: the CLI must never stop the bundled cluster,
+    // the app may be running and in the middle of a demo analysis.
     await openDatabase();
   }
 

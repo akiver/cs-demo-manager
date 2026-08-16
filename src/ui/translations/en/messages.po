@@ -338,8 +338,12 @@ msgid "You can either update CS Demo Manager to the latest version or reset the 
 msgstr "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
-msgid "The built-in database was created by another version of CS Demo Manager. Update the app to the latest version or reset the database to start from scratch."
-msgstr "The built-in database was created by another version of CS Demo Manager. Update the app to the latest version or reset the database to start from scratch."
+msgid "The built-in database was created by another version of CS Demo Manager. Update the app to the latest version, or reset the built-in database to start from an empty one."
+msgstr "The built-in database was created by another version of CS Demo Manager. Update the app to the latest version, or reset the built-in database to start from an empty one."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The password of the built-in database is stored next to it and is the only one it accepts. Without it the database can't be opened anymore, resetting it creates an empty one."
+msgstr "The password of the built-in database is stored next to it and is the only one it accepts. Without it the database can't be opened anymore, resetting it creates an empty one."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "The PostgreSQL files shipped with the app are missing. Reinstalling CS Demo Manager usually fixes it."
@@ -394,6 +398,10 @@ msgstr "Use the built-in database"
 msgid "Please read the <0>documentation</0> for help."
 msgstr "Please read the <0>documentation</0> for help."
 
+#: src/ui/bootstrap/connect-database/use-connect-database.ts
+msgid "The connection succeeded but the settings could not be saved."
+msgstr "The connection succeeded but the settings could not be saved."
+
 #: src/ui/bootstrap/settings-provider.tsx
 msgid "An error occurred while loading settings."
 msgstr "An error occurred while loading settings."
@@ -403,8 +411,8 @@ msgid "Starting the built-in database…"
 msgstr "Starting the built-in database…"
 
 #: src/ui/bootstrap/starting-database.tsx
-msgid "The first launch takes a few seconds while the database is created."
-msgstr "The first launch takes a few seconds while the database is created."
+msgid "It takes a few seconds on the first launch, while the database is created."
+msgstr "It takes a few seconds on the first launch, while the database is created."
 
 #: src/ui/bootstrap/starting-database.tsx
 msgid "Connecting to the database…"
@@ -7280,6 +7288,10 @@ msgid "Disconnect"
 msgstr "Disconnect"
 
 #: src/ui/settings/database/embedded-database.tsx
+msgid "Unable to read the built-in database information."
+msgstr "Unable to read the built-in database information."
+
+#: src/ui/settings/database/embedded-database.tsx
 msgid "PostgreSQL version: {version}"
 msgstr "PostgreSQL version: {version}"
 
@@ -7407,6 +7419,20 @@ msgstr "It will delete all data in the database!"
 msgctxt "Button"
 msgid "Reset database"
 msgstr "Reset database"
+
+#: src/ui/settings/database/reset-embedded-database-button.tsx
+msgctxt "Dialog title"
+msgid "Reset the built-in database"
+msgstr "Reset the built-in database"
+
+#: src/ui/settings/database/reset-embedded-database-button.tsx
+msgid "It will delete the built-in database and create a new empty one. All analyzed demos will have to be analyzed again!"
+msgstr "It will delete the built-in database and create a new empty one. All analyzed demos will have to be analyzed again!"
+
+#: src/ui/settings/database/reset-embedded-database-button.tsx
+msgctxt "Button"
+msgid "Reset the built-in database"
+msgstr "Reset the built-in database"
 
 #: src/ui/settings/downloads/5eplay-settings.tsx
 msgid "Add 5EPlay account"

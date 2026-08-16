@@ -4,8 +4,16 @@ import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 export function getClusterFolderPath() {
   // @platform win32 The home folder may be redirected to OneDrive (Known Folder Move) and syncing a
   // PostgreSQL data folder corrupts it, so the cluster is stored in the non-synced local app data.
-  if (process.platform === 'win32' && typeof process.env.LOCALAPPDATA === 'string') {
-    return path.join(process.env.LOCALAPPDATA, IS_DEV ? 'csdm-dev' : 'csdm', 'postgres');
+  // ! The variable must hold an absolute path: an empty or relative one would put the cluster
+  // somewhere relative to the current working directory, which the app also deletes on a failed
+  // initialization.
+  const localAppDataFolderPath = process.env.LOCALAPPDATA;
+  if (
+    process.platform === 'win32' &&
+    typeof localAppDataFolderPath === 'string' &&
+    path.isAbsolute(localAppDataFolderPath)
+  ) {
+    return path.join(localAppDataFolderPath, IS_DEV ? 'csdm-dev' : 'csdm', 'postgres');
   }
 
   return path.join(getAppFolderPath(), 'postgres');

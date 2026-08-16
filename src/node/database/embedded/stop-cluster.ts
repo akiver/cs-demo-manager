@@ -23,16 +23,12 @@ export async function stopEmbeddedCluster() {
   }
 
   try {
-    await runPostgresCommand(getPostgresBinaryPath('pg_ctl'), [
-      '--pgdata',
-      dataFolderPath,
-      '--mode',
-      'fast',
-      '--wait',
-      '--timeout',
-      String(STOP_TIMEOUT_IN_SECONDS),
-      'stop',
-    ]);
+    await runPostgresCommand(
+      getPostgresBinaryPath('pg_ctl'),
+      ['--pgdata', dataFolderPath, '--mode', 'fast', '--wait', '--timeout', String(STOP_TIMEOUT_IN_SECONDS), 'stop'],
+      // Above what pg_ctl waits for on its own: it's the one that has to give up first.
+      { timeoutMs: (STOP_TIMEOUT_IN_SECONDS + 10) * 1000 },
+    );
     logger.log('Built-in database stopped');
   } catch (error) {
     logger.error('Failed to stop the built-in database');

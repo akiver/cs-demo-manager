@@ -15,7 +15,7 @@ export function StartingDatabase() {
             <Trans>Starting the built-in database…</Trans>
           </p>
           <p className="text-body-strong">
-            <Trans>The first launch takes a few seconds while the database is created.</Trans>
+            <Trans>It takes a few seconds on the first launch, while the database is created.</Trans>
           </p>
         </div>
       ) : (

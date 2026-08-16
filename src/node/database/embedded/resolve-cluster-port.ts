@@ -1,6 +1,8 @@
 import net from 'node:net';
 
-function isPortFree(port: number) {
+// Binding succeeds only when nothing is listening, which is also how a running cluster is told apart
+// from a stale postmaster.pid.
+export function isPortFree(port: number) {
   return new Promise<boolean>((resolve) => {
     const server = net.createServer();
     server.unref();

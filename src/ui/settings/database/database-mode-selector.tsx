@@ -8,24 +8,68 @@ import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { makeElementNonInert } from 'csdm/ui/shared/inert';
 import { APP_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 import { useConnectDatabase } from 'csdm/ui/bootstrap/connect-database/use-connect-database';
+import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
+import { useDispatch } from 'csdm/ui/store/use-dispatch';
+import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { disconnectDatabaseSuccess } from 'csdm/ui/bootstrap/bootstrap-actions';
+import { useUpdateSettings } from 'csdm/ui/settings/use-update-settings';
 import { useDatabaseSettings } from './use-database-settings';
 
 function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
   const databaseSettings = useDatabaseSettings();
   const connect = useConnectDatabase();
+  const client = useWebSocketClient();
+  const dispatch = useDispatch();
+  const updateSettings = useUpdateSettings();
   const { hideDialog } = useDialog();
   const [error, setError] = useState<string | undefined>(undefined);
+  const [isBusy, setIsBusy] = useState(false);
 
-  const onConfirm = async () => {
-    const connectionError = await connect({ ...databaseSettings, mode });
+  const closeDialog = () => {
+    hideDialog();
+    makeElementNonInert(APP_ELEMENT_ID);
+  };
+
+  const switchToExternalServer = async () => {
+    // ! The connection form is the only place where the server can be entered, and it's shown by the
+    // bootstrap screen. Connecting from here would use whatever the settings hold, which on an
+    // installation that never used an external server are placeholders nobody can correct.
+    await updateSettings({
+      database: {
+        ...databaseSettings,
+        mode: 'external',
+      },
+    });
+    await client.send({
+      name: RendererClientMessageName.DisconnectDatabase,
+    });
+    dispatch(disconnectDatabaseSuccess());
+    closeDialog();
+  };
+
+  const switchToEmbeddedDatabase = async () => {
+    const connectionError = await connect({ ...databaseSettings, mode: 'embedded' });
     if (connectionError) {
       setError(connectionError.message);
 
       return;
     }
 
-    hideDialog();
-    makeElementNonInert(APP_ELEMENT_ID);
+    closeDialog();
+  };
+
+  const onConfirm = async () => {
+    // ! The dialog stays busy until the switch settles: it keeps a second confirmation from starting
+    // a concurrent reconnection, and Cancel from closing while one is still in flight.
+    setIsBusy(true);
+    setError(undefined);
+    try {
+      await (mode === 'embedded' ? switchToEmbeddedDatabase() : switchToExternalServer());
+    } catch (error) {
+      logger.error(error);
+      setError(typeof error === 'string' ? error : JSON.stringify(error));
+    }
+    setIsBusy(false);
   };
 
   return (
@@ -33,6 +77,7 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
       title={<Trans context="Dialog title">Change database</Trans>}
       onConfirm={onConfirm}
       closeOnConfirm={false}
+      isBusy={isBusy}
     >
       <div className="flex flex-col gap-y-12">
         <p>

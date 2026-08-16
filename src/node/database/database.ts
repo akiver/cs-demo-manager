@@ -78,8 +78,17 @@ export function createDatabaseConnection(settings: DatabaseSettings) {
     logger.error(error);
   });
 
+  // ! Same reason, plus the previous pool keeps open connections on the server it was built from:
+  // reassigning "db" without destroying it leaks one server connection per reconnection.
+  const previousDb = db;
+
   connectedSettings = settings;
   db = new Kysely<Database>(config);
+
+  void previousDb?.destroy().catch((error: unknown) => {
+    logger.error('Failed to close the previous database connection');
+    logger.error(error);
+  });
 }
 
 // The settings the app is currently connected with.

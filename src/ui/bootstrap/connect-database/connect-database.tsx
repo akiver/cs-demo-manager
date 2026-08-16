@@ -43,7 +43,16 @@ function getHintFromError({ code, message }: ConnectDatabaseError) {
         <p>
           <Trans>
             The built-in database was created by another version of CS Demo Manager. Update the app to the latest
-            version or reset the database to start from scratch.
+            version, or reset the built-in database to start from an empty one.
+          </Trans>
+        </p>
+      );
+    case ErrorCode.EmbeddedPostgresStateMissing:
+      return (
+        <p>
+          <Trans>
+            The password of the built-in database is stored next to it and is the only one it accepts. Without it the
+            database can't be opened anymore, resetting it creates an empty one.
           </Trans>
         </p>
       );

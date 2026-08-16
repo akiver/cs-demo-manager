@@ -1,5 +1,6 @@
 import path from 'node:path';
 import fs from 'fs-extra';
+import { isPortFree } from './resolve-cluster-port';
 
 export type PostmasterPid = {
   pid: number;
@@ -7,7 +8,27 @@ export type PostmasterPid = {
   port: number;
 };
 
+const MAX_PORT = 65_535;
+
+// ! parseInt() accepts anything that starts with a digit, a corrupted file must not produce a PID or
+// a port that looks usable.
+function parsePositiveInteger(value: string, maximum: number) {
+  if (!/^\d+$/.test(value.trim())) {
+    return undefined;
+  }
+
+  const parsedValue = Number.parseInt(value, 10);
+
+  return parsedValue > 0 && parsedValue <= maximum ? parsedValue : undefined;
+}
+
 export function isProcessAlive(pid: number) {
+  // ! Signal 0 on a non-positive PID targets a process group, on POSIX the caller's own one, and
+  // would report a corrupted file holding "0" as a running cluster.
+  if (!Number.isInteger(pid) || pid <= 0) {
+    return false;
+  }
+
   try {
     // Signal 0 doesn't send anything, it only checks that the process exists.
     process.kill(pid, 0);
@@ -34,9 +55,9 @@ export async function readPostmasterPid(dataFolderPath: string): Promise<Postmas
       return undefined;
     }
 
-    const pid = Number.parseInt(lines[0], 10);
-    const port = Number.parseInt(lines[3], 10);
-    if (Number.isNaN(pid) || Number.isNaN(port)) {
+    const pid = parsePositiveInteger(lines[0], Number.MAX_SAFE_INTEGER);
+    const port = parsePositiveInteger(lines[3], MAX_PORT);
+    if (pid === undefined || port === undefined) {
       return undefined;
     }
 
@@ -62,5 +83,12 @@ export async function findRunningCluster(dataFolderPath: string): Promise<Postma
   }
 
   // A stale postmaster.pid is left behind after a crash, the postmaster removes it itself on start.
-  return isProcessAlive(postmasterPid.pid) ? postmasterPid : undefined;
+  if (!isProcessAlive(postmasterPid.pid)) {
+    return undefined;
+  }
+
+  // ! Being alive is not enough: the operating system reuses PIDs, and an unrelated process holding
+  // the PID of a crashed postmaster would make the app reuse a cluster that is not running. It would
+  // then fail to connect on every attempt, including the retries, since nothing invalidates the file.
+  return (await isPortFree(postmasterPid.port)) ? undefined : postmasterPid;
 }

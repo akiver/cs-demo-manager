@@ -63,6 +63,7 @@ import {
   getEmbeddedDatabaseInfoHandler,
   type EmbeddedDatabaseInfo,
 } from './renderer-process/database/get-embedded-database-info-handler';
+import { resetEmbeddedDatabaseHandler } from './renderer-process/database/reset-embedded-database-handler';
 import type { OptimizeDatabasePayload } from './renderer-process/database/optimize-database-handler';
 import { optimizeDatabaseHandler } from './renderer-process/database/optimize-database-handler';
 import { fetchPlayersHandler } from './renderer-process/player/fetch-players-table-handler';
@@ -238,6 +239,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.AbortCurrentTask]: Handler;
   [RendererClientMessageName.GetDatabaseSize]: Handler<void, string>;
   [RendererClientMessageName.GetEmbeddedDatabaseInfo]: Handler<void, EmbeddedDatabaseInfo>;
+  [RendererClientMessageName.ResetEmbeddedDatabase]: Handler;
   [RendererClientMessageName.ResetDatabase]: Handler;
   [RendererClientMessageName.OptimizeDatabase]: Handler<OptimizeDatabasePayload>;
   [RendererClientMessageName.FetchMatchesTable]: Handler<FetchMatchesTablePayload, MatchTable[]>;
@@ -367,6 +369,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.AbortCurrentTask]: abortCurrentTaskHandler,
   [RendererClientMessageName.GetDatabaseSize]: getDatabaseSizeHandler,
   [RendererClientMessageName.GetEmbeddedDatabaseInfo]: getEmbeddedDatabaseInfoHandler,
+  [RendererClientMessageName.ResetEmbeddedDatabase]: resetEmbeddedDatabaseHandler,
   [RendererClientMessageName.ResetDatabase]: resetDatabaseHandler,
   [RendererClientMessageName.OptimizeDatabase]: optimizeDatabaseHandler,
   [RendererClientMessageName.FetchMatchesTable]: fetchMatchesTableHandler,

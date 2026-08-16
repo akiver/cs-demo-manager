@@ -2,7 +2,7 @@ import os from 'node:os';
 import path from 'node:path';
 import fs from 'fs-extra';
 import { afterAll, describe, expect, it } from 'vite-plus/test';
-import { readPostmasterPid } from './read-postmaster-pid';
+import { findRunningCluster, isProcessAlive, readPostmasterPid } from './read-postmaster-pid';
 
 const dataFolderPath = path.join(os.tmpdir(), 'csdm-postmaster-pid-test');
 
@@ -43,5 +43,50 @@ describe('readPostmasterPid', () => {
     await writePostmasterPid(`12345\nC:\\Users\\csdm\\pgdata\n1751490000\nnot-a-port\n`);
 
     await expect(readPostmasterPid(dataFolderPath)).resolves.toBeUndefined();
+  });
+
+  it('should return undefined when a value is out of range or only starts with digits', async () => {
+    const invalidValues = [
+      `0\nC:\\Users\\csdm\\pgdata\n1751490000\n51863\n`,
+      `-1\nC:\\Users\\csdm\\pgdata\n1751490000\n51863\n`,
+      `12345\nC:\\Users\\csdm\\pgdata\n1751490000\n99999\n`,
+      `12345abc\nC:\\Users\\csdm\\pgdata\n1751490000\n51863\n`,
+    ];
+
+    for (const content of invalidValues) {
+      await writePostmasterPid(content);
+
+      await expect(readPostmasterPid(dataFolderPath)).resolves.toBeUndefined();
+    }
+  });
+});
+
+describe('isProcessAlive', () => {
+  // Signal 0 on a non-positive PID targets a process group, on POSIX the caller's own one, a
+  // corrupted file holding "0" would report a running cluster.
+  it('should return false for a non-positive PID', () => {
+    expect(isProcessAlive(0)).toBe(false);
+    expect(isProcessAlive(-1)).toBe(false);
+    expect(isProcessAlive(Number.NaN)).toBe(false);
+  });
+
+  it('should return true for the current process', () => {
+    expect(isProcessAlive(process.pid)).toBe(true);
+  });
+});
+
+describe('findRunningCluster', () => {
+  // The operating system reuses PIDs: an unrelated process holding the PID of a crashed postmaster
+  // would make the app reuse a cluster that is not running, on every attempt.
+  it('should return undefined when nothing listens on the port of a live PID', async () => {
+    await writePostmasterPid(`${process.pid}\n${dataFolderPath}\n1751490000\n1\n`);
+
+    await expect(findRunningCluster(dataFolderPath)).resolves.toBeUndefined();
+  });
+
+  it('should return undefined when the data folder does not match', async () => {
+    await writePostmasterPid(`${process.pid}\nC:\\somewhere\\else\n1751490000\n51863\n`);
+
+    await expect(findRunningCluster(dataFolderPath)).resolves.toBeUndefined();
   });
 });

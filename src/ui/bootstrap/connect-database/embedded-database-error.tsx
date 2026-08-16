@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useDatabaseSettings } from 'csdm/ui/settings/database/use-database-settings';
+import { useUpdateSettings } from 'csdm/ui/settings/use-update-settings';
+import { ResetEmbeddedDatabaseButton } from 'csdm/ui/settings/database/reset-embedded-database-button';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import type { EmbeddedDatabaseInfo } from 'csdm/server/handlers/renderer-process/database/get-embedded-database-info-handler';
@@ -15,6 +17,7 @@ export function EmbeddedDatabaseError({ children }: Props) {
   const client = useWebSocketClient();
   const databaseSettings = useDatabaseSettings();
   const connect = useConnectDatabase();
+  const updateSettings = useUpdateSettings();
   const [isConnecting, setIsConnecting] = useState(false);
   const [info, setInfo] = useState<EmbeddedDatabaseInfo | undefined>(undefined);
 
@@ -43,10 +46,18 @@ export function EmbeddedDatabaseError({ children }: Props) {
   };
 
   const useExternalDatabase = async () => {
-    setIsConnecting(true);
-    const error = await connect({ ...databaseSettings, mode: 'external' });
-    if (error) {
-      setIsConnecting(false);
+    // ! Switching the mode instead of connecting right away: the settings hold the built-in
+    // credentials, connecting with them would fail against any real server and there would be no
+    // form to correct them, this screen is the only one shown before a connection succeeds.
+    try {
+      await updateSettings({
+        database: {
+          ...databaseSettings,
+          mode: 'external',
+        },
+      });
+    } catch (error) {
+      logger.error(error);
     }
   };
 
@@ -56,7 +67,7 @@ export function EmbeddedDatabaseError({ children }: Props) {
         <Trans>CS Demo Manager couldn't start its built-in database.</Trans>
       </p>
       {children}
-      <div className="mt-12 flex gap-8">
+      <div className="mt-12 flex flex-wrap gap-8">
         <Button variant={ButtonVariant.Primary} onClick={retry} isDisabled={isConnecting}>
           <Trans>Retry</Trans>
         </Button>
@@ -72,6 +83,7 @@ export function EmbeddedDatabaseError({ children }: Props) {
         <Button onClick={useExternalDatabase} isDisabled={isConnecting}>
           <Trans>Use an external PostgreSQL server</Trans>
         </Button>
+        <ResetEmbeddedDatabaseButton />
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import {
   CLUSTER_DATABASE,
   CLUSTER_USERNAME,
   initializeClusterIfNeeded,
+  isClusterInitialized,
 } from './initialize-cluster';
 import { writeClusterConfig } from './write-cluster-config';
 import { withClusterLock } from './cluster-lock';
@@ -51,7 +52,7 @@ export async function startEmbeddedCluster(): Promise<DatabaseSettings> {
   await fs.ensureDir(getClusterFolderPath());
 
   return withClusterLock(async () => {
-    const state = await readOrCreateClusterState();
+    const state = await readOrCreateClusterState(await isClusterInitialized(dataFolderPath));
 
     const runningCluster = await findRunningCluster(dataFolderPath);
     if (runningCluster !== undefined) {
@@ -66,7 +67,16 @@ export async function startEmbeddedCluster(): Promise<DatabaseSettings> {
     const port = await resolveClusterPort(state.port);
     await writeClusterConfig(port);
 
-    const exitCode = await startPostgresServer(dataFolderPath, getClusterLogFilePath());
+    let exitCode: number;
+    try {
+      exitCode = await startPostgresServer(dataFolderPath, getClusterLogFilePath());
+    } catch (error) {
+      // pg_ctl could not be run at all: a missing execute bit or an antivirus holding the binary.
+      // Wrapping it here is what gives the UI an actionable message instead of a raw spawn error.
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      throw new EmbeddedPostgresStartFailed(`Failed to run pg_ctl: ${message}\n${await readLogFileTail()}`, error);
+    }
+
     if (exitCode !== 0) {
       const logTail = await readLogFileTail();
       throw new EmbeddedPostgresStartFailed(

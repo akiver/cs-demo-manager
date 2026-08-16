@@ -4,10 +4,13 @@ import { Button } from 'csdm/ui/components/buttons/button';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import type { EmbeddedDatabaseInfo } from 'csdm/server/handlers/renderer-process/database/get-embedded-database-info-handler';
+import { ErrorMessage } from 'csdm/ui/components/error-message';
+import { ResetEmbeddedDatabaseButton } from './reset-embedded-database-button';
 
 export function EmbeddedDatabase() {
   const client = useWebSocketClient();
   const [info, setInfo] = useState<EmbeddedDatabaseInfo | undefined>(undefined);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -19,11 +22,16 @@ export function EmbeddedDatabase() {
         );
       } catch (error) {
         logger.error(error);
+        setHasError(true);
       }
     };
 
     void fetchInfo();
   }, [client]);
+
+  if (hasError) {
+    return <ErrorMessage message={<Trans>Unable to read the built-in database information.</Trans>} />;
+  }
 
   if (info === undefined) {
     return null;
@@ -57,6 +65,7 @@ export function EmbeddedDatabase() {
         >
           <Trans context="Button">Show logs</Trans>
         </Button>
+        <ResetEmbeddedDatabaseButton />
       </div>
     </div>
   );

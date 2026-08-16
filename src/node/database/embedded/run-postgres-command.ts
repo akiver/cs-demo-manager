@@ -5,6 +5,10 @@ type Options = {
   timeoutMs?: number;
 };
 
+// ! Never 0: it would let a hung binary block its caller forever, and the callers are the app
+// startup and the quit sequence.
+const DEFAULT_TIMEOUT_MS = 120_000;
+
 export type PostgresCommandResult = {
   stdout: string;
   stderr: string;
@@ -25,7 +29,7 @@ export function runPostgresCommand(
       args,
       {
         env: buildPostgresEnv(),
-        timeout: options?.timeoutMs ?? 0,
+        timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT_MS,
         windowsHide: true,
       },
       (error, stdout, stderr) => {

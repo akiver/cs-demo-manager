@@ -85,33 +85,57 @@ async function downloadFile(url, destinationPath) {
   await pipeline(response.body, fs.createWriteStream(destinationPath));
 }
 
+async function downloadChecksum(url) {
+  const response = await fetch(url);
+  // ! Without this check the body of an error page becomes the expected checksum, and a perfectly
+  // valid archive is then reported as a checksum mismatch instead of the network failure it is.
+  if (!response.ok) {
+    throw new Error(`Failed to download ${url}: ${response.status} ${response.statusText}`);
+  }
+
+  return (await response.text()).trim().toLowerCase();
+}
+
+async function hashFile(filePath) {
+  return crypto
+    .createHash('sha1')
+    .update(await fs.readFile(filePath))
+    .digest('hex');
+}
+
 async function downloadPostgresArchive(artifact) {
   const fileName = `embedded-postgres-binaries-${artifact}-${POSTGRES_VERSION}.jar`;
   const url = `https://repo1.maven.org/maven2/io/zonky/test/postgres/embedded-postgres-binaries-${artifact}/${POSTGRES_VERSION}/${fileName}`;
   const cacheFolderPath = path.join(projectPath, 'node_modules/.cache/postgres');
   const archivePath = path.join(cacheFolderPath, fileName);
+  // The checksum of a verified download is kept next to the archive so that reusing it doesn't
+  // require Maven Central, otherwise every install would need the network to do nothing.
+  const checksumPath = `${archivePath}.sha1`;
 
-  const expectedChecksum = (await (await fetch(`${url}.sha1`)).text()).trim().toLowerCase();
-  const isArchiveValid = async () => {
-    if (!(await fs.pathExists(archivePath))) {
+  const isArchiveValid = async (expectedChecksum) => {
+    if (expectedChecksum === undefined || !(await fs.pathExists(archivePath))) {
       return false;
     }
 
-    const checksum = crypto
-      .createHash('sha1')
-      .update(await fs.readFile(archivePath))
-      .digest('hex');
-    return checksum === expectedChecksum;
+    return (await hashFile(archivePath)) === expectedChecksum;
   };
 
-  if (await isArchiveValid()) {
+  const cachedChecksum = (await fs.pathExists(checksumPath))
+    ? (await fs.readFile(checksumPath, 'utf8')).trim()
+    : undefined;
+  if (await isArchiveValid(cachedChecksum)) {
     return archivePath;
   }
 
-  await downloadFile(url, archivePath);
-  if (!(await isArchiveValid())) {
-    throw new Error(`Checksum mismatch for ${fileName}`);
+  const expectedChecksum = await downloadChecksum(`${url}.sha1`);
+  if (!(await isArchiveValid(expectedChecksum))) {
+    await downloadFile(url, archivePath);
+    if ((await hashFile(archivePath)) !== expectedChecksum) {
+      throw new Error(`Checksum mismatch for ${fileName}`);
+    }
   }
+
+  await fs.writeFile(checksumPath, expectedChecksum);
 
   return archivePath;
 }
@@ -202,14 +226,24 @@ async function thinMacOsBinaries(folderPath, arch) {
   ];
 
   for (const filePath of filePaths) {
+    let stdout;
     try {
-      const { stdout } = await execFileAsync('lipo', ['-info', filePath]);
-      if (!stdout.includes('Architectures in the fat file')) {
-        continue;
-      }
-      await execFileAsync('lipo', ['-thin', machoArch, '-output', filePath, filePath]);
+      ({ stdout } = await execFileAsync('lipo', ['-info', filePath]));
     } catch {
       // Not a Mach-O file, nothing to thin.
+      continue;
+    }
+
+    if (!stdout.includes('Architectures in the fat file')) {
+      continue;
+    }
+
+    try {
+      await execFileAsync('lipo', ['-thin', machoArch, '-output', filePath, filePath]);
+    } catch (error) {
+      // The file stays universal, which only costs size. Silence would hide a binary shipped without
+      // the architecture being packaged.
+      console.warn(`Failed to thin ${filePath} to ${machoArch}: ${error.message}`);
     }
   }
 }

@@ -33,7 +33,12 @@ export function ExternalDatabaseForm({ children }: Props) {
   const settingsRef = useRef(databaseSettings);
   settingsRef.current = databaseSettings;
 
+  const isRetrying = useRef(false);
+
   const stopRetrying = () => {
+    // ! The flag is what stops a loop currently awaiting a connection: cancelling the frame has no
+    // effect on it, it would schedule the next one as soon as the request settles.
+    isRetrying.current = false;
     if (animationId.current !== null) {
       window.cancelAnimationFrame(animationId.current);
     }
@@ -41,7 +46,6 @@ export function ExternalDatabaseForm({ children }: Props) {
   };
 
   const connectDatabase = async () => {
-    stopRetrying();
     setIsConnecting(true);
     const error = await connect(settingsRef.current);
     if (error) {
@@ -53,12 +57,25 @@ export function ExternalDatabaseForm({ children }: Props) {
   const connectDatabaseRef = useRef(connectDatabase);
   connectDatabaseRef.current = connectDatabase;
 
+  // ! Only the attempts started by the user stop the retry loop, the ones the loop makes itself
+  // obviously must not.
+  const connectDatabaseManually = async () => {
+    stopRetrying();
+    await connectDatabaseRef.current();
+  };
+  const connectDatabaseManuallyRef = useRef(connectDatabaseManually);
+  connectDatabaseManuallyRef.current = connectDatabaseManually;
+
   useEffect(() => {
     const onKeyDown = async (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        event.stopPropagation();
-        await connectDatabaseRef.current();
+      // ! Restricted to the inputs: a focused button already activates on Enter, running the
+      // shortcut too would start a second connection, with another mode for the built-in one.
+      if (event.key !== 'Enter' || !(event.target instanceof HTMLInputElement)) {
+        return;
       }
+
+      event.stopPropagation();
+      await connectDatabaseManuallyRef.current();
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -84,7 +101,7 @@ export function ExternalDatabaseForm({ children }: Props) {
       if (elapsed >= delayInMs) {
         start = null;
         const error = await connectDatabaseRef.current();
-        if (error) {
+        if (error && isRetrying.current) {
           animationId.current = window.requestAnimationFrame(loop);
         }
       } else {
@@ -94,6 +111,7 @@ export function ExternalDatabaseForm({ children }: Props) {
       }
     };
 
+    isRetrying.current = true;
     animationId.current = window.requestAnimationFrame(loop);
 
     return () => {
@@ -102,6 +120,9 @@ export function ExternalDatabaseForm({ children }: Props) {
   }, [appOpenedAtLoginArg]);
 
   const useEmbeddedDatabase = async () => {
+    // ! Without it the retry loop would keep running and a later success would persist the external
+    // mode back, undoing the switch the user just made.
+    stopRetrying();
     setIsConnecting(true);
     const error = await connect({ ...databaseSettings, mode: 'embedded' });
     if (error) {
@@ -174,7 +195,7 @@ export function ExternalDatabaseForm({ children }: Props) {
             isDisabled={isConnecting}
           />
           <div className="flex items-center justify-between">
-            <ConnectDatabaseButton isLoading={isConnecting} onClick={connectDatabase} />
+            <ConnectDatabaseButton isLoading={isConnecting} onClick={connectDatabaseManually} />
             {secondsBeforeNextTry > 0 && (
               <div className="flex items-center gap-x-8">
                 <p>
