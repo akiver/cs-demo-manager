@@ -4,6 +4,7 @@ import { spawn, type ChildProcess } from 'node:child_process';
 import fs from 'fs-extra';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
 import { acquireClusterUsageLease, tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
+import { waitForChildOutput } from './child-process-test-helpers';
 
 const testFolderPath = path.join(os.tmpdir(), 'csdm-cluster-lock-test');
 const lifecycleLockFilePath = path.join(testFolderPath, 'lifecycle.lock');
@@ -21,21 +22,34 @@ let childProcess: ChildProcess | undefined;
 afterEach(async () => {
   childProcess?.kill();
   childProcess = undefined;
+  vi.restoreAllMocks();
   await fs.remove(testFolderPath);
 });
 
-function waitForChildOutput(child: ChildProcess, expectedOutput: string) {
-  return new Promise<void>((resolve, reject) => {
-    child.once('error', reject);
-    child.stdout?.on('data', (data: Buffer) => {
-      if (data.toString().includes(expectedOutput)) {
-        resolve();
-      }
-    });
-  });
-}
-
 describe('embedded PostgreSQL native locks', () => {
+  it('can retry releasing a lease after closing its descriptor fails', async () => {
+    const closeError = new Error('simulated close failure');
+    const lease = await acquireClusterUsageLease();
+    vi.spyOn(fs, 'close').mockRejectedValueOnce(closeError);
+
+    await expect(lease.release()).rejects.toBe(closeError);
+    await expect(lease.release()).resolves.toBeUndefined();
+
+    const exclusiveLease = await tryAcquireExclusiveClusterUsage();
+    expect(exclusiveLease).toBeDefined();
+    await exclusiveLease?.release();
+  });
+
+  it('makes concurrent release calls share the same native cleanup', async () => {
+    const lease = await acquireClusterUsageLease();
+
+    await expect(Promise.all([lease.release(), lease.release()])).resolves.toEqual([undefined, undefined]);
+
+    const exclusiveLease = await tryAcquireExclusiveClusterUsage();
+    expect(exclusiveLease).toBeDefined();
+    await exclusiveLease?.release();
+  });
+
   it('should serialize lifecycle operations', async () => {
     let releaseFirstOperation: (() => void) | undefined;
     let markFirstOperationStarted: (() => void) | undefined;

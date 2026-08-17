@@ -3,7 +3,7 @@ import { tryLock, unlock } from 'fs-native-extensions';
 import { getClusterLockFilePath, getClusterUsageLockFilePath } from './embedded-postgres-paths';
 import { EmbeddedPostgresStartFailed } from './errors/embedded-postgres-start-failed';
 
-const LOCK_TIMEOUT_MS = 180_000;
+export const CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS = 180_000;
 const LOCK_RETRY_DELAY_MS = 250;
 
 function wait(delayMs: number) {
@@ -23,21 +23,56 @@ async function openLockFile(filePath: string) {
 }
 
 function createLock(fileDescriptor: number): NativeLock {
-  let isReleased = false;
+  let isUnlocked = false;
+  let isClosed = false;
+  let pendingRelease: Promise<void> | undefined;
 
-  return {
-    release: async () => {
-      if (isReleased) {
+  const release = () => {
+    if (pendingRelease !== undefined) {
+      return pendingRelease;
+    }
+
+    pendingRelease = (async () => {
+      if (isUnlocked && isClosed) {
         return;
       }
 
-      isReleased = true;
-      try {
-        unlock(fileDescriptor);
-      } finally {
-        await fs.close(fileDescriptor);
+      const errors: unknown[] = [];
+      if (!isUnlocked) {
+        try {
+          unlock(fileDescriptor);
+          isUnlocked = true;
+        } catch (error) {
+          errors.push(error);
+        }
       }
-    },
+
+      if (!isClosed) {
+        try {
+          await fs.close(fileDescriptor);
+          isClosed = true;
+          // Closing a descriptor also releases every OS lock held through it.
+          isUnlocked = true;
+        } catch (error) {
+          errors.push(error);
+        }
+      }
+
+      if (errors.length === 1) {
+        throw errors[0];
+      }
+      if (errors.length > 1) {
+        throw new AggregateError(errors, 'Failed to release the embedded PostgreSQL file lock');
+      }
+    })().finally(() => {
+      pendingRelease = undefined;
+    });
+
+    return pendingRelease;
+  };
+
+  return {
+    release,
   };
 }
 
@@ -87,7 +122,7 @@ export type EmbeddedClusterUsageLease = NativeLock;
  * data folder. It doesn't protect the cluster usage, only its creation and startup.
  */
 export async function withClusterLock<T>(fn: () => Promise<T>): Promise<T> {
-  const lock = await acquireLock(getClusterLockFilePath(), false, LOCK_TIMEOUT_MS);
+  const lock = await acquireLock(getClusterLockFilePath(), false, CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS);
 
   try {
     return await fn();
@@ -98,7 +133,7 @@ export async function withClusterLock<T>(fn: () => Promise<T>): Promise<T> {
 
 /** Must be acquired while the lifecycle lock is held, before a reset or stop can begin. */
 export function acquireClusterUsageLease() {
-  return acquireLock(getClusterUsageLockFilePath(), true, LOCK_TIMEOUT_MS);
+  return acquireLock(getClusterUsageLockFilePath(), true, CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS);
 }
 
 /** Must be called while the lifecycle lock is held. It never waits for another app/CLI user. */

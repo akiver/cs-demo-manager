@@ -50,7 +50,7 @@ export function EmbeddedDatabase() {
         </p>
       )}
       <p className="select-text">{info.dataFolderPath}</p>
-      <div className="flex gap-8">
+      <div className="flex flex-wrap gap-8">
         <Button
           onClick={() => {
             window.csdm.browseToFolder(info.dataFolderPath);

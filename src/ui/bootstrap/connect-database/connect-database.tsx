@@ -64,12 +64,22 @@ function getHintFromError({ code, message }: ConnectDatabaseError) {
           </Trans>
         </p>
       );
+    case ErrorCode.EmbeddedPostgresInitFailed:
     case ErrorCode.EmbeddedPostgresStartFailed:
       return (
         <p>
           <Trans>
             It usually means that an antivirus is blocking the database process or that the database folder is not
             writable.
+          </Trans>
+        </p>
+      );
+    case ErrorCode.EmbeddedPostgresIdentityUnverifiable:
+      return (
+        <p>
+          <Trans>
+            Close every CS Demo Manager app and CLI process, make sure the built-in PostgreSQL server has stopped, then
+            try the reset again.
           </Trans>
         </p>
       );

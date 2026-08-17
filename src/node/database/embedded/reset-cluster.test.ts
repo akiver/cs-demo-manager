@@ -5,6 +5,7 @@ import fs from 'fs-extra';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
 import { acquireClusterUsageLease } from './cluster-lock';
 import { resetEmbeddedCluster } from './reset-cluster';
+import { waitForChildOutput } from './child-process-test-helpers';
 
 const { findRunningClusterMock, stopClusterMock } = vi.hoisted(() => {
   return {
@@ -40,17 +41,6 @@ afterEach(async () => {
   await fs.remove(rootFolderPath);
 });
 
-function waitForChildOutput(child: ChildProcess, expectedOutput: string) {
-  return new Promise<void>((resolve, reject) => {
-    child.once('error', reject);
-    child.stdout?.on('data', (data: Buffer) => {
-      if (data.toString().includes(expectedOutput)) {
-        resolve();
-      }
-    });
-  });
-}
-
 describe('resetEmbeddedCluster', () => {
   it('should refuse to stop or delete the cluster while another process lease is active', async () => {
     await fs.outputFile(path.join(clusterFolderPath, 'sentinel'), 'data');
@@ -65,7 +55,7 @@ describe('resetEmbeddedCluster', () => {
 
   it('should keep lifecycle exclusivity until the stopped cluster is deleted', async () => {
     await fs.outputFile(path.join(clusterFolderPath, 'sentinel'), 'data');
-    stopClusterMock.mockResolvedValue(true);
+    stopClusterMock.mockResolvedValue({ status: 'stopped' });
     findRunningClusterMock.mockResolvedValue(undefined);
 
     await resetEmbeddedCluster();
@@ -86,6 +76,8 @@ describe('resetEmbeddedCluster', () => {
     });
     await waitForChildOutput(childProcess, 'locked');
 
+    stopClusterMock.mockResolvedValue({ status: 'not-running' });
+
     const pendingReset = resetEmbeddedCluster();
     await new Promise((resolve) => {
       setTimeout(resolve, 50);
@@ -102,5 +94,22 @@ describe('resetEmbeddedCluster', () => {
 
     expect(stopClusterMock).toHaveBeenCalledOnce();
     await expect(fs.pathExists(clusterFolderPath)).resolves.toBe(false);
+  });
+
+  it('should preserve the cluster when pg_ctl failed even if no listener remains', async () => {
+    await fs.outputFile(path.join(clusterFolderPath, 'sentinel'), 'data');
+    stopClusterMock.mockResolvedValue({ status: 'failed', cause: new Error('timeout') });
+    findRunningClusterMock.mockResolvedValue(undefined);
+
+    await expect(resetEmbeddedCluster()).rejects.toThrow('reset was aborted');
+    await expect(fs.pathExists(path.join(clusterFolderPath, 'sentinel'))).resolves.toBe(true);
+  });
+
+  it('should preserve the cluster when its identity cannot be verified', async () => {
+    await fs.outputFile(path.join(clusterFolderPath, 'sentinel'), 'data');
+    stopClusterMock.mockResolvedValue({ status: 'identity-unverifiable' });
+
+    await expect(resetEmbeddedCluster()).rejects.toThrow('identity cannot be verified');
+    await expect(fs.pathExists(path.join(clusterFolderPath, 'sentinel'))).resolves.toBe(true);
   });
 });

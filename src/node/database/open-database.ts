@@ -60,9 +60,9 @@ export async function prepareDatabaseConnection(
   } catch (error) {
     try {
       if (connection !== undefined) {
-        await discardPreparedDatabaseConnection(connection);
+        await discardPreparedDatabaseConnection(connection, { stopEmbeddedIfUnused: true });
       } else if (embeddedSession !== undefined) {
-        await releaseEmbeddedClusterSession(embeddedSession, { stopIfUnused: false });
+        await releaseEmbeddedClusterSession(embeddedSession, { stopIfUnused: true });
       }
     } catch (cleanupError) {
       logger.error('Failed to discard a database candidate after preparation failed');

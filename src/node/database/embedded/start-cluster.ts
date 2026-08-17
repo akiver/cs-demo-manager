@@ -17,6 +17,7 @@ import { writeClusterConfig } from './write-cluster-config';
 import { acquireClusterUsageLease, type EmbeddedClusterUsageLease, withClusterLock } from './cluster-lock';
 import { EmbeddedPostgresStartFailed } from './errors/embedded-postgres-start-failed';
 import { isExpectedRunningCluster } from './validate-running-cluster';
+import { BaseError } from 'csdm/node/errors/base-error';
 
 export type EmbeddedClusterSession = {
   settings: DatabaseSettings;
@@ -53,7 +54,7 @@ const MAX_START_ATTEMPTS = 3;
  * happens when the CLI runs while the app is open, and when a previous run was killed without
  * stopping the cluster.
  */
-export async function startEmbeddedCluster(): Promise<EmbeddedClusterSession> {
+async function startEmbeddedClusterInternal(): Promise<EmbeddedClusterSession> {
   await ensurePostgresBinariesExist();
 
   const dataFolderPath = getClusterDataFolderPath();
@@ -141,8 +142,26 @@ export async function startEmbeddedCluster(): Promise<EmbeddedClusterSession> {
 
       throw new EmbeddedPostgresStartFailed('Failed to start the built-in database after three attempts.');
     } catch (error) {
-      await usageLease.release();
+      try {
+        await usageLease.release();
+      } catch (cleanupError) {
+        logger.error('Failed to release the built-in database usage lease after startup failed');
+        logger.error(cleanupError);
+      }
       throw error;
     }
   });
+}
+
+export async function startEmbeddedCluster(): Promise<EmbeddedClusterSession> {
+  try {
+    return await startEmbeddedClusterInternal();
+  } catch (error) {
+    if (error instanceof BaseError) {
+      throw error;
+    }
+
+    const message = error instanceof Error && error.message.trim() !== '' ? error.message : 'Unknown error';
+    throw new EmbeddedPostgresStartFailed(`Failed to start the built-in database: ${message}`, error);
+  }
 }

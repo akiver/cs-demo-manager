@@ -133,10 +133,15 @@ async function downloadChecksum(url) {
 }
 
 async function hashFile(filePath) {
-  return crypto
-    .createHash('sha1')
-    .update(await fs.readFile(filePath))
-    .digest('hex');
+  const hash = crypto.createHash('sha1');
+  await new Promise((resolve, reject) => {
+    const stream = fs.createReadStream(filePath);
+    stream.on('data', (chunk) => hash.update(chunk));
+    stream.once('error', reject);
+    stream.once('end', resolve);
+  });
+
+  return hash.digest('hex');
 }
 
 async function downloadPostgresArchive(artifact) {
@@ -342,7 +347,10 @@ async function cleanupOldPostgresInstallFolders(cacheFolderPath) {
   await Promise.all(
     entries
       .filter((entry) => {
-        return entry.isDirectory() && (entry.name === 'previous' || entry.name.startsWith('previous-'));
+        return (
+          entry.isDirectory() &&
+          (entry.name === 'previous' || entry.name.startsWith('previous-') || entry.name.startsWith('extract-'))
+        );
       })
       .map(async (entry) => {
         const folderPath = path.join(cacheFolderPath, entry.name);

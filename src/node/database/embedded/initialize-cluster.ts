@@ -89,9 +89,10 @@ export async function initializeClusterIfNeeded(password: string) {
   const stagingFolderPath = `${dataFolderPath}.${process.pid}.init`;
   // ! The password must not be passed through argv, it would be visible in the process list.
   const passwordFilePath = path.join(os.tmpdir(), `csdm-pg-${crypto.randomBytes(8).toString('hex')}`);
-  await fs.writeFile(passwordFilePath, password, { mode: 0o600 });
+  let initializationError: EmbeddedPostgresInitFailed | undefined;
 
   try {
+    await fs.writeFile(passwordFilePath, password, { mode: 0o600 });
     await fs.remove(stagingFolderPath);
     await fs.ensureDir(stagingFolderPath);
     await runPostgresCommand(getPostgresBinaryPath('initdb'), [
@@ -114,12 +115,31 @@ export async function initializeClusterIfNeeded(password: string) {
     await fs.move(stagingFolderPath, dataFolderPath);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    throw new EmbeddedPostgresInitFailed(
+    initializationError = new EmbeddedPostgresInitFailed(
       `Failed to create the built-in database in ${dataFolderPath}: ${message}`,
       error,
     );
-  } finally {
-    // A half-initialized folder makes every next attempt fail, and it's ours to delete.
-    await Promise.all([fs.remove(passwordFilePath), fs.remove(stagingFolderPath)]);
+  }
+
+  // A half-initialized folder makes every next attempt fail, and it's ours to delete. Cleanup must
+  // never replace the actionable initdb failure with an unrelated filesystem error.
+  const cleanupResults = await Promise.allSettled([fs.remove(passwordFilePath), fs.remove(stagingFolderPath)]);
+  for (const result of cleanupResults) {
+    if (result.status === 'rejected') {
+      logger.error('Failed to clean up an embedded PostgreSQL initialization file');
+      logger.error(result.reason);
+    }
+  }
+
+  if (initializationError !== undefined) {
+    throw initializationError;
+  }
+
+  const passwordCleanupResult = cleanupResults[0];
+  if (passwordCleanupResult.status === 'rejected') {
+    throw new EmbeddedPostgresInitFailed(
+      'The built-in database was created, but its temporary password file could not be removed.',
+      passwordCleanupResult.reason,
+    );
   }
 }

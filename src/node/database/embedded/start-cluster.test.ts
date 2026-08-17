@@ -3,6 +3,7 @@ import path from 'node:path';
 import fs from 'fs-extra';
 import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { startEmbeddedCluster } from './start-cluster';
+import { ErrorCode } from 'csdm/common/error-code';
 
 const mocks = vi.hoisted(() => {
   return {
@@ -84,6 +85,19 @@ beforeEach(async () => {
 });
 
 describe('startEmbeddedCluster port retries', () => {
+  it('wraps configuration failures in the structured startup error', async () => {
+    const error = new Error('access denied');
+    mocks.resolvePort.mockResolvedValue(51_000);
+    mocks.writeConfig.mockRejectedValue(error);
+
+    await expect(startEmbeddedCluster()).rejects.toMatchObject({
+      code: ErrorCode.EmbeddedPostgresStartFailed,
+      message: 'Failed to start the built-in database: access denied',
+      cause: error,
+    });
+    expect(mocks.releaseUsage).toHaveBeenCalledOnce();
+  });
+
   it('should retry with another port when the selected one is taken before pg_ctl starts', async () => {
     mocks.resolvePort.mockResolvedValueOnce(51_000).mockResolvedValueOnce(51_001);
     mocks.startServer.mockResolvedValueOnce(1).mockResolvedValueOnce(0);

@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Trans } from '@lingui/react/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
+import { formatErrorMessage } from 'csdm/ui/shared/format-error';
 
 function ResetEmbeddedDatabaseDialog() {
   const client = useWebSocketClient();
   const [error, setError] = useState<string | undefined>(undefined);
   const [isBusy, setIsBusy] = useState(false);
+  const { t } = useLingui();
 
   const onConfirmClick = async () => {
     try {
@@ -20,13 +22,13 @@ function ResetEmbeddedDatabaseDialog() {
       });
       if (operationError !== undefined) {
         setError(operationError.message);
-        setIsBusy(false);
         return;
       }
 
       window.csdm.reloadWindow();
     } catch (error) {
-      setError(typeof error === 'string' ? error : JSON.stringify(error));
+      setError(formatErrorMessage(error, t`Unknown error`));
+    } finally {
       setIsBusy(false);
     }
   };

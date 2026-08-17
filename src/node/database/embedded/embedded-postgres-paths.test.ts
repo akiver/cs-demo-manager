@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
-import { getClusterFolderPath } from './embedded-postgres-paths';
+import { getClusterFolderPath, resolveClusterFolderPath } from './embedded-postgres-paths';
 
 vi.mock('csdm/node/filesystem/get-app-folder-path', () => {
   return {
@@ -28,5 +28,16 @@ describe('getClusterFolderPath', () => {
 
       expect(path.isAbsolute(getClusterFolderPath())).toBe(true);
     }
+  });
+
+  it('uses LOCALAPPDATA on Windows only when it is absolute', () => {
+    const appFolderPath = path.join(path.sep, 'home', 'csdm', '.csdm');
+
+    expect(resolveClusterFolderPath('win32', 'C:\\Users\\demo\\AppData\\Local', appFolderPath, false)).toBe(
+      'C:\\Users\\demo\\AppData\\Local\\csdm\\postgres',
+    );
+    expect(resolveClusterFolderPath('win32', 'AppData\\Local', appFolderPath, false)).toBe(
+      path.join(appFolderPath, 'postgres'),
+    );
   });
 });

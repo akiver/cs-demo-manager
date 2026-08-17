@@ -2,12 +2,19 @@ import { getClusterDataFolderPath } from './embedded-postgres-paths';
 import { getPostgresBinaryPath } from './postgres-binaries';
 import { runPostgresCommand } from './run-postgres-command';
 import { findRunningCluster } from './read-postmaster-pid';
-import { tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
+import { CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS, tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
 import type { EmbeddedClusterSession } from './start-cluster';
 import { readClusterState } from './cluster-state';
 import { isExpectedRunningCluster } from './validate-running-cluster';
 
 const STOP_TIMEOUT_IN_SECONDS = 30;
+const STOP_COMMAND_TIMEOUT_MS = (STOP_TIMEOUT_IN_SECONDS + 10) * 1000;
+export const EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS =
+  CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS + STOP_COMMAND_TIMEOUT_MS + 10_000;
+
+export type StopEmbeddedClusterResult =
+  | { status: 'not-running' | 'stopped' }
+  | { status: 'identity-unverifiable' | 'failed'; cause?: unknown };
 
 /**
  * Stops the bundled cluster if it's running, including one left behind by a previous run that was
@@ -17,20 +24,35 @@ const STOP_TIMEOUT_IN_SECONDS = 30;
  * the app may be running and in the middle of a demo analysis. A cluster left running is harmless,
  * the next start reuses it.
  *
- * Errors are logged and swallowed: PostgreSQL is crash-safe, a cluster that couldn't be stopped
- * cleanly recovers from its WAL on the next start.
+ * Errors are returned as explicit statuses: PostgreSQL is crash-safe, but reset callers must never
+ * mistake a failed stop for permission to delete the data folder.
  */
-export async function stopEmbeddedClusterWithoutLock() {
+export async function stopEmbeddedClusterWithoutLock(
+  options: { validationPassword?: string } = {},
+): Promise<StopEmbeddedClusterResult> {
   const dataFolderPath = getClusterDataFolderPath();
   const runningCluster = await findRunningCluster(dataFolderPath);
   if (runningCluster === undefined) {
-    return true;
+    return { status: 'not-running' };
   }
 
-  const state = await readClusterState();
-  if (state === undefined || !(await isExpectedRunningCluster(runningCluster, dataFolderPath, state.password))) {
+  let validationPassword = options.validationPassword;
+  if (validationPassword === undefined) {
+    try {
+      validationPassword = (await readClusterState())?.password;
+    } catch (error) {
+      logger.error('Failed to read the credentials required to verify the built-in database');
+      logger.error(error);
+      return { status: 'identity-unverifiable', cause: error };
+    }
+  }
+
+  if (
+    validationPassword === undefined ||
+    !(await isExpectedRunningCluster(runningCluster, dataFolderPath, validationPassword))
+  ) {
     logger.error('Refusing to stop a PostgreSQL process whose identity could not be verified');
-    return false;
+    return { status: 'identity-unverifiable' };
   }
 
   try {
@@ -38,14 +60,14 @@ export async function stopEmbeddedClusterWithoutLock() {
       getPostgresBinaryPath('pg_ctl'),
       ['--pgdata', dataFolderPath, '--mode', 'fast', '--wait', '--timeout', String(STOP_TIMEOUT_IN_SECONDS), 'stop'],
       // Above what pg_ctl waits for on its own: it's the one that has to give up first.
-      { timeoutMs: (STOP_TIMEOUT_IN_SECONDS + 10) * 1000 },
+      { timeoutMs: STOP_COMMAND_TIMEOUT_MS },
     );
     logger.log('Built-in database stopped');
-    return true;
+    return { status: 'stopped' };
   } catch (error) {
     logger.error('Failed to stop the built-in database');
     logger.error(error);
-    return false;
+    return { status: 'failed', cause: error };
   }
 }
 
@@ -57,12 +79,13 @@ export async function releaseEmbeddedClusterSession(
   session: EmbeddedClusterSession,
   options: { stopIfUnused: boolean },
 ) {
+  if (!options.stopIfUnused) {
+    await session.usageLease.release();
+    return;
+  }
+
   await withClusterLock(async () => {
     await session.usageLease.release();
-    if (!options.stopIfUnused) {
-      return;
-    }
-
     const exclusiveUsage = await tryAcquireExclusiveClusterUsage();
     if (exclusiveUsage === undefined) {
       logger.log('Leaving the built-in database running because another process is using it');
@@ -70,7 +93,7 @@ export async function releaseEmbeddedClusterSession(
     }
 
     try {
-      await stopEmbeddedClusterWithoutLock();
+      await stopEmbeddedClusterWithoutLock({ validationPassword: session.settings.password });
     } finally {
       await exclusiveUsage.release();
     }
@@ -86,7 +109,9 @@ export function stopEmbeddedCluster() {
     }
 
     try {
-      return await stopEmbeddedClusterWithoutLock();
+      const result = await stopEmbeddedClusterWithoutLock();
+
+      return result.status === 'not-running' || result.status === 'stopped';
     } finally {
       await exclusiveUsage.release();
     }

@@ -1,5 +1,6 @@
 import os from 'node:os';
 import path from 'node:path';
+import { promises as nodeFs } from 'node:fs';
 import fs from 'fs-extra';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
 import { initializeClusterIfNeeded, isClusterInitialized } from './initialize-cluster';
@@ -8,6 +9,7 @@ const { runPostgresCommandMock } = vi.hoisted(() => {
   return { runPostgresCommandMock: vi.fn() };
 });
 
+vi.stubGlobal('logger', { log: vi.fn(), warn: vi.fn(), error: vi.fn() });
 vi.mock('./run-postgres-command', () => {
   return { runPostgresCommand: runPostgresCommandMock };
 });
@@ -28,6 +30,7 @@ vi.mock('./embedded-postgres-paths', async () => {
 
 afterEach(async () => {
   runPostgresCommandMock.mockReset();
+  vi.restoreAllMocks();
   await fs.remove(clusterFolderPath);
 });
 
@@ -62,5 +65,63 @@ describe('initializeClusterIfNeeded', () => {
     await expect(fs.pathExists(path.join(dataFolderPath, 'base', 'user-data'))).resolves.toBe(true);
     const entries = await fs.readdir(clusterFolderPath);
     expect(entries).toEqual(['pgdata']);
+  });
+
+  it('preserves the initialization failure when staging cleanup also fails', async () => {
+    const initializationError = new Error('simulated initdb failure');
+    const cleanupError = new Error('simulated cleanup failure');
+    const originalRemove = fs.remove.bind(fs);
+    let stagingRemovalCount = 0;
+    vi.spyOn(fs, 'remove').mockImplementation(async (targetPath) => {
+      if (String(targetPath).endsWith('.init') && ++stagingRemovalCount === 2) {
+        throw cleanupError;
+      }
+      await originalRemove(targetPath);
+    });
+    runPostgresCommandMock.mockRejectedValueOnce(initializationError);
+
+    await expect(initializeClusterIfNeeded('password')).rejects.toMatchObject({
+      message: expect.stringContaining(initializationError.message),
+      cause: initializationError,
+    });
+  });
+
+  it('removes the password file when writing it fails after creation', async () => {
+    const writeError = new Error('simulated write failure');
+    let passwordFilePath = '';
+    vi.spyOn(fs, 'writeFile').mockImplementationOnce(async (targetPath) => {
+      passwordFilePath = String(targetPath);
+      await nodeFs.writeFile(passwordFilePath, 'password', { mode: 0o600 });
+      throw writeError;
+    });
+
+    await expect(initializeClusterIfNeeded('password')).rejects.toMatchObject({ cause: writeError });
+    await expect(fs.pathExists(passwordFilePath)).resolves.toBe(false);
+  });
+
+  it('reports a security error without deleting a successfully created cluster when password cleanup fails', async () => {
+    const cleanupError = new Error('simulated password cleanup failure');
+    const originalRemove = fs.remove.bind(fs);
+    let passwordFilePath = '';
+    runPostgresCommandMock.mockImplementationOnce(async (_binaryPath, args: string[]) => {
+      const stagingFolderPath = args[args.indexOf('--pgdata') + 1];
+      await fs.writeFile(path.join(stagingFolderPath, 'PG_VERSION'), '17\n');
+    });
+    const removeSpy = vi.spyOn(fs, 'remove').mockImplementation(async (targetPath) => {
+      if (path.basename(String(targetPath)).startsWith('csdm-pg-')) {
+        passwordFilePath = String(targetPath);
+        throw cleanupError;
+      }
+      await originalRemove(targetPath);
+    });
+
+    await expect(initializeClusterIfNeeded('password')).rejects.toMatchObject({
+      message: 'The built-in database was created, but its temporary password file could not be removed.',
+      cause: cleanupError,
+    });
+    await expect(fs.pathExists(path.join(dataFolderPath, 'PG_VERSION'))).resolves.toBe(true);
+
+    removeSpy.mockRestore();
+    await originalRemove(passwordFilePath);
   });
 });

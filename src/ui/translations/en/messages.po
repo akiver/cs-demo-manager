@@ -354,6 +354,10 @@ msgid "It usually means that an antivirus is blocking the database process or th
 msgstr "It usually means that an antivirus is blocking the database process or that the database folder is not writable."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "Close every CS Demo Manager app and CLI process, make sure the built-in PostgreSQL server has stopped, then try the reset again."
+msgstr "Close every CS Demo Manager app and CLI process, make sure the built-in PostgreSQL server has stopped, then try the reset again."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "This error usually means that the database is not running or that the connection settings are incorrect."
 msgstr "This error usually means that the database is not running or that the connection settings are incorrect."
 
@@ -397,6 +401,15 @@ msgstr "Use the built-in database"
 #: src/ui/bootstrap/connect-database/help-link.tsx
 msgid "Please read the <0>documentation</0> for help."
 msgstr "Please read the <0>documentation</0> for help."
+
+#: src/ui/bootstrap/connect-database/use-connect-database.ts
+#: src/ui/bootstrap/database-loader.tsx
+#: src/ui/hooks/use-add-demos-to-analyses.ts
+#: src/ui/settings/database/database-mode-selector.tsx
+#: src/ui/settings/database/reset-database-button.tsx
+#: src/ui/settings/database/reset-embedded-database-button.tsx
+msgid "Unknown error"
+msgstr "Unknown error"
 
 #: src/ui/bootstrap/connect-database/use-connect-database.ts
 msgid "The database connection returned an invalid response."
@@ -3507,6 +3520,10 @@ msgstr "CT"
 msgctxt "Team side"
 msgid "T"
 msgstr "T"
+
+#: src/ui/hooks/use-add-demos-to-analyses.ts
+msgid "Demos cannot be added while the database is being changed."
+msgstr "Demos cannot be added while the database is being changed."
 
 #. js-lingui-explicit-id
 #: src/ui/hooks/use-boolean-to-human.ts
@@ -7247,10 +7264,6 @@ msgstr "Yaw"
 #: src/ui/settings/database/database-mode-selector.tsx
 msgid "The database disconnection returned an invalid response."
 msgstr "The database disconnection returned an invalid response."
-
-#: src/ui/settings/database/database-mode-selector.tsx
-msgid "Unknown error"
-msgstr "Unknown error"
 
 #: src/ui/settings/database/database-mode-selector.tsx
 msgctxt "Dialog title"

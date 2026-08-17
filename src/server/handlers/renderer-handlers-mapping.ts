@@ -263,7 +263,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.FetchPlayersTable]: Handler<PlayersTableFilter, PlayerTable[]>;
   [RendererClientMessageName.FetchTeamsTable]: Handler<TeamsTableFilter, TeamTable[]>;
   [RendererClientMessageName.FetchTeam]: Handler<TeamFilters, TeamProfile>;
-  [RendererClientMessageName.AddDemosToAnalyses]: Handler<Demo[]>;
+  [RendererClientMessageName.AddDemosToAnalyses]: Handler<Demo[], DatabaseOperationError | undefined>;
   [RendererClientMessageName.RemoveDemosFromAnalyses]: Handler<string[]>;
   [RendererClientMessageName.GenerateMatchPositions]: Handler<GenerateMatchPositionsPayload>;
   [RendererClientMessageName.RenameDemo]: Handler<RenameDemoPayload>;

@@ -9,6 +9,7 @@ const mocks = vi.hoisted(() => {
     resetCluster: vi.fn(),
     connectDatabase: vi.fn(),
     stopBackgroundTasks: vi.fn(),
+    getSettings: vi.fn(),
   };
 });
 
@@ -29,13 +30,14 @@ vi.mock('csdm/server/start-background-tasks', () => {
   return { stopBackgroundTasks: mocks.stopBackgroundTasks };
 });
 vi.mock('csdm/node/settings/get-settings', () => {
-  return { getSettings: () => Promise.resolve({ database: { mode: 'embedded' } }) };
+  return { getSettings: mocks.getSettings };
 });
 
 beforeEach(() => {
   for (const mock of Object.values(mocks)) {
     mock.mockReset();
   }
+  mocks.getSettings.mockResolvedValue({ database: { mode: 'embedded' } });
 });
 
 describe('resetEmbeddedDatabaseHandler', () => {
@@ -59,5 +61,40 @@ describe('resetEmbeddedDatabaseHandler', () => {
     expect(mocks.destroyConnection).toHaveBeenCalledOnce();
     expect(mocks.resetCluster).toHaveBeenCalledOnce();
     expect(releaseTransition).toHaveBeenCalledOnce();
+    expect(releaseTransition.mock.invocationCallOrder[0]).toBeGreaterThan(
+      Math.max(mocks.destroyConnection.mock.invocationCallOrder[0], mocks.resetCluster.mock.invocationCallOrder[0]),
+    );
+  });
+
+  it('releases the transition gate when settings cannot be read', async () => {
+    const releaseTransition = vi.fn();
+    const error = new Error('settings unavailable');
+    mocks.tryBeginTransition.mockReturnValue(releaseTransition);
+    mocks.getSettings.mockRejectedValue(error);
+
+    await expect(resetEmbeddedDatabaseHandler()).resolves.toEqual({
+      code: ErrorCode.UnknownError,
+      message: error.message,
+    });
+
+    expect(releaseTransition).toHaveBeenCalledOnce();
+    expect(mocks.destroyConnection).not.toHaveBeenCalled();
+  });
+
+  it('reconnects to the previous database when the embedded reset fails', async () => {
+    const releaseTransition = vi.fn();
+    const error = new Error('reset failed');
+    mocks.tryBeginTransition.mockReturnValue(releaseTransition);
+    mocks.resetCluster.mockRejectedValue(error);
+
+    await expect(resetEmbeddedDatabaseHandler()).resolves.toEqual({
+      code: ErrorCode.UnknownError,
+      message: error.message,
+    });
+
+    expect(mocks.connectDatabase).toHaveBeenCalledWith({ mode: 'embedded' });
+    expect(mocks.connectDatabase.mock.invocationCallOrder[0]).toBeLessThan(
+      releaseTransition.mock.invocationCallOrder[0],
+    );
   });
 });

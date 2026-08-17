@@ -12,6 +12,8 @@ let wasRunning = false;
 let isProcessingDownload = false;
 let startedTimestamp: number = 0;
 let intervalId: NodeJS.Timeout | null = null;
+let isListening = false;
+let pendingCheck: Promise<void> | undefined;
 
 async function checkIfCounterStrikeHasBeenClosed() {
   // Make sure we don't try to start downloading new demos while we are already downloading demos
@@ -78,23 +80,51 @@ async function checkIfCounterStrikeHasBeenClosed() {
   wasRunning = isRunning;
   isProcessingDownload = false;
 
-  if (intervalId !== null) {
-    clearInterval(intervalId);
-  }
-
-  const checkIntervalMsWhileRunning = 5000;
-  const intervalMs = isRunning ? checkIntervalMsWhileRunning : checkIntervalMs;
-  intervalId = setInterval(checkIfCounterStrikeHasBeenClosed, intervalMs);
+  return isRunning;
 }
 
-export function stopListeningForCounterStrikeClosed() {
+function scheduleNextCheck(delayMs: number) {
+  if (!isListening) {
+    return;
+  }
+
+  intervalId = setTimeout(() => {
+    const check = checkIfCounterStrikeHasBeenClosed()
+      .then((isRunning) => {
+        const checkIntervalMsWhileRunning = 5000;
+        scheduleNextCheck(isRunning ? checkIntervalMsWhileRunning : checkIntervalMs);
+      })
+      .catch((error) => {
+        isProcessingDownload = false;
+        logger.error('Error while checking if Counter-Strike has been closed');
+        logger.error(error);
+        scheduleNextCheck(checkIntervalMs);
+      })
+      .finally(() => {
+        if (pendingCheck === check) {
+          pendingCheck = undefined;
+        }
+      });
+    pendingCheck = check;
+  }, delayMs);
+}
+
+export async function stopListeningForCounterStrikeClosed() {
+  isListening = false;
   if (intervalId !== null) {
-    clearInterval(intervalId);
+    clearTimeout(intervalId);
+    intervalId = null;
+  }
+
+  if (pendingCheck !== undefined) {
+    await pendingCheck;
   }
 }
 
 export function listenForCounterStrikeClosed() {
-  stopListeningForCounterStrikeClosed();
-
-  intervalId = setInterval(checkIfCounterStrikeHasBeenClosed, checkIntervalMs);
+  isListening = true;
+  if (intervalId !== null) {
+    clearTimeout(intervalId);
+  }
+  scheduleNextCheck(checkIntervalMs);
 }

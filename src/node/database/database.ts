@@ -10,6 +10,7 @@ export let db: Kysely<Database>;
 
 let connectedSettings: DatabaseSettings | undefined;
 let embeddedClusterSession: EmbeddedClusterSession | undefined;
+const embeddedSessionsPendingRelease = new Map<EmbeddedClusterSession, boolean>();
 let ingestionPool: Pool | undefined;
 const ingestionClients = new Set<PoolClient>();
 const pendingAcquisitions = new Set<(error: Error) => void>();
@@ -41,6 +42,31 @@ export type PreparedDatabaseConnection = {
   settings: DatabaseSettings;
   embeddedClusterSession?: EmbeddedClusterSession;
 };
+
+function queueEmbeddedSessionRelease(session: EmbeddedClusterSession, stopIfUnused: boolean) {
+  embeddedSessionsPendingRelease.set(session, (embeddedSessionsPendingRelease.get(session) ?? false) || stopIfUnused);
+}
+
+async function releasePendingEmbeddedSessions(stopIfUnusedOverride?: boolean) {
+  const errors: unknown[] = [];
+  for (const [session, stopIfUnused] of embeddedSessionsPendingRelease) {
+    try {
+      await releaseEmbeddedClusterSession(session, {
+        stopIfUnused: stopIfUnusedOverride ?? stopIfUnused,
+      });
+      embeddedSessionsPendingRelease.delete(session);
+    } catch (error) {
+      errors.push(error);
+    }
+  }
+
+  if (errors.length === 1) {
+    throw errors[0];
+  }
+  if (errors.length > 1) {
+    throw new AggregateError(errors, 'Failed to release embedded PostgreSQL sessions');
+  }
+}
 
 async function waitForDatabaseResourceCleanup(tasks: Array<Promise<unknown> | undefined>) {
   const pendingTasks = tasks.filter((task): task is Promise<unknown> => task !== undefined);
@@ -102,13 +128,15 @@ export function createDatabaseConnection(
   };
 }
 
-export async function discardPreparedDatabaseConnection(connection: PreparedDatabaseConnection) {
-  await waitForDatabaseResourceCleanup([
-    connection.database.destroy(),
-    connection.embeddedClusterSession === undefined
-      ? undefined
-      : releaseEmbeddedClusterSession(connection.embeddedClusterSession, { stopIfUnused: false }),
-  ]);
+export async function discardPreparedDatabaseConnection(
+  connection: PreparedDatabaseConnection,
+  options: { stopEmbeddedIfUnused?: boolean } = {},
+) {
+  if (connection.embeddedClusterSession !== undefined) {
+    queueEmbeddedSessionRelease(connection.embeddedClusterSession, options.stopEmbeddedIfUnused ?? false);
+  }
+
+  await waitForDatabaseResourceCleanup([connection.database.destroy(), releasePendingEmbeddedSessions()]);
 }
 
 export async function commitDatabaseConnection(
@@ -117,6 +145,10 @@ export async function commitDatabaseConnection(
 ) {
   const previousDb = db;
   const previousEmbeddedSession = embeddedClusterSession;
+
+  if (previousEmbeddedSession !== undefined) {
+    queueEmbeddedSessionRelease(previousEmbeddedSession, options.stopPreviousEmbeddedIfUnused);
+  }
 
   // Publish the fully connected and migrated candidate before disposing the old resources. Imports
   // of `db` are live bindings, so every following query sees the candidate immediately.
@@ -127,11 +159,7 @@ export async function commitDatabaseConnection(
   const results = await Promise.allSettled([
     previousDb?.destroy(),
     discardIngestionPool(),
-    previousEmbeddedSession === undefined
-      ? undefined
-      : releaseEmbeddedClusterSession(previousEmbeddedSession, {
-          stopIfUnused: options.stopPreviousEmbeddedIfUnused,
-        }),
+    releasePendingEmbeddedSessions(),
   ]);
 
   for (const result of results) {
@@ -256,9 +284,18 @@ export function releaseIngestionClient(client: PoolClient) {
   client.release();
 }
 
-export async function destroyDatabaseConnection(options: { stopEmbeddedIfUnused?: boolean } = {}) {
+export async function destroyDatabaseConnection(
+  options: {
+    stopEmbeddedIfUnused?: boolean;
+    releasePendingEmbeddedWithoutStopping?: boolean;
+  } = {},
+) {
   const database = db;
   const session = embeddedClusterSession;
+
+  if (session !== undefined) {
+    queueEmbeddedSessionRelease(session, options.stopEmbeddedIfUnused ?? false);
+  }
 
   connectedSettings = undefined;
   embeddedClusterSession = undefined;
@@ -266,8 +303,6 @@ export async function destroyDatabaseConnection(options: { stopEmbeddedIfUnused?
   await waitForDatabaseResourceCleanup([
     database?.destroy(),
     discardIngestionPool(),
-    session === undefined
-      ? undefined
-      : releaseEmbeddedClusterSession(session, { stopIfUnused: options.stopEmbeddedIfUnused ?? false }),
+    releasePendingEmbeddedSessions(options.releasePendingEmbeddedWithoutStopping ? false : undefined),
   ]);
 }

@@ -38,4 +38,28 @@ describe('writeSettings', () => {
     const files = await fs.readdir(testFolderPath);
     expect(files).toEqual(['settings.json']);
   });
+
+  it('removes only stale settings temporary files', async () => {
+    const staleTemporaryFilePath = path.join(testFolderPath, 'settings.json.old.tmp');
+    const currentTemporaryFilePath = path.join(testFolderPath, 'settings.json.current.tmp');
+    await fs.outputFile(staleTemporaryFilePath, 'stale');
+    await fs.outputFile(currentTemporaryFilePath, 'active');
+    const staleDate = new Date(Date.now() - 25 * 60 * 60 * 1000);
+    await fs.utimes(staleTemporaryFilePath, staleDate, staleDate);
+
+    await writeSettings({ schemaVersion: 14 } as Settings);
+
+    await expect(fs.pathExists(staleTemporaryFilePath)).resolves.toBe(false);
+    await expect(fs.readFile(currentTemporaryFilePath, 'utf8')).resolves.toBe('active');
+  });
+
+  it('preserves the write error when temporary-file cleanup also fails', async () => {
+    await fs.outputFile(settingsFilePath, '{"previous":true}');
+    const writeError = new Error('simulated rename failure');
+    vi.spyOn(fs, 'rename').mockRejectedValueOnce(writeError);
+    vi.spyOn(fs, 'remove').mockRejectedValueOnce(new Error('simulated cleanup failure'));
+
+    await expect(writeSettings({ schemaVersion: 14 } as Settings)).rejects.toBe(writeError);
+    await expect(fs.readFile(settingsFilePath, 'utf8')).resolves.toBe('{"previous":true}');
+  });
 });

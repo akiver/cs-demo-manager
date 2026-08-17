@@ -4,10 +4,14 @@ import { pathToFileURL } from 'node:url';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import fs from 'fs-extra';
-import { afterEach, describe, expect, it } from 'vite-plus/test';
+import { afterEach, beforeEach, describe, expect, it } from 'vite-plus/test';
 
 const execFileAsync = promisify(execFile);
-const testFolderPath = path.join(os.tmpdir(), 'csdm-postgres-install-script-test');
+let testFolderPath: string;
+
+beforeEach(async () => {
+  testFolderPath = await fs.mkdtemp(path.join(os.tmpdir(), 'csdm-postgres-install-script-test-'));
+});
 
 afterEach(async () => {
   await fs.remove(testFolderPath);

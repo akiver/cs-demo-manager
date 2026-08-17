@@ -4,16 +4,24 @@ import { stopBackgroundTasks } from 'csdm/server/start-background-tasks';
 
 async function prepareToQuit() {
   try {
-    stopBackgroundTasks();
-    await destroyDatabaseConnection({ stopEmbeddedIfUnused: true });
+    await stopBackgroundTasks();
+    await destroyDatabaseConnection({
+      stopEmbeddedIfUnused: false,
+      releasePendingEmbeddedWithoutStopping: true,
+    });
   } catch (error) {
     logger.error('Error while releasing the database connection');
     logger.error(error);
   }
 
-  // ! Outside the try above: it's the only step releasing something that outlives the process, it
-  // has to run even when the previous ones failed. It swallows its own errors.
-  await stopEmbeddedCluster();
+  // The lifecycle lock itself may fail before the inner PostgreSQL stop can handle its errors. The
+  // shutdown promise must still settle so the signal safety path can exit the process.
+  try {
+    await stopEmbeddedCluster();
+  } catch (error) {
+    logger.error('Failed to stop the built-in database while quitting');
+    logger.error(error);
+  }
 }
 
 let pendingShutdown: Promise<void> | undefined;

@@ -44,11 +44,17 @@ const resourcesFolderPath = path.dirname(appArchivePath);
 const executablePath = process.env.CSDM_PACKAGED_SMOKE_EXECUTABLE ?? getPackagedExecutable(resourcesFolderPath);
 const executableExtension = process.platform === 'win32' ? '.exe' : '';
 const postgresFolderPath = path.join(resourcesFolderPath, 'static', 'postgres');
+const postgresEnvironment = { ...process.env };
+if (process.platform === 'linux') {
+  postgresEnvironment.LD_LIBRARY_PATH = [path.join(postgresFolderPath, 'lib'), process.env.LD_LIBRARY_PATH]
+    .filter((value) => typeof value === 'string' && value !== '')
+    .join(path.delimiter);
+}
 
 for (const binaryName of ['postgres', 'initdb', 'pg_ctl']) {
   const binaryPath = path.join(postgresFolderPath, 'bin', `${binaryName}${executableExtension}`);
   await fs.access(binaryPath, process.platform === 'win32' ? fs.constants.F_OK : fs.constants.X_OK);
-  execFileSync(binaryPath, ['--version'], { stdio: 'inherit' });
+  execFileSync(binaryPath, ['--version'], { env: postgresEnvironment, stdio: 'inherit' });
 }
 
 const packagedNodeEnvironment = { ...process.env, ELECTRON_RUN_AS_NODE: '1' };

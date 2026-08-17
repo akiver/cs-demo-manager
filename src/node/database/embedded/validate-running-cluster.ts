@@ -1,8 +1,8 @@
-import path from 'node:path';
 import fs from 'fs-extra';
 import { Client } from 'pg';
 import type { PostmasterPid } from './read-postmaster-pid';
 import { CLUSTER_USERNAME } from './initialize-cluster';
+import { arePathsEqual } from './are-paths-equal';
 
 export async function isExpectedRunningCluster(
   runningCluster: PostmasterPid,
@@ -31,9 +31,7 @@ export async function isExpectedRunningCluster(
       fs.realpath(expectedDataFolderPath),
     ]);
 
-    return process.platform === 'win32'
-      ? actualPath.toLowerCase() === expectedPath.toLowerCase()
-      : path.resolve(actualPath) === path.resolve(expectedPath);
+    return arePathsEqual(actualPath, expectedPath);
   } catch (error) {
     logger.error('Failed to verify the identity of the PostgreSQL process from postmaster.pid');
     logger.error(error);

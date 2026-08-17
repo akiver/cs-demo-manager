@@ -27,6 +27,7 @@ import { initialize } from './auto-updater';
 import { getSettingsSync } from 'csdm/node/settings/get-settings';
 import { resolveWebSocketServerPort } from './resolve-web-socket-server-port';
 import { WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
+import { EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS } from 'csdm/node/database/embedded/stop-cluster';
 
 process.on('uncaughtException', logger.error);
 process.on('unhandledRejection', logger.error);
@@ -175,9 +176,8 @@ async function start() {
   // Gives the server process a chance to release what outlives it, the embedded PostgreSQL cluster
   // in particular, which pg_ctl starts detached from the app.
   const prepareToQuit = async () => {
-    // The server may first wait up to 180s for another process' lifecycle operation, then pg_ctl
-    // waits up to 30s for PostgreSQL. Killing it sooner leaves the detached cluster running.
-    const timeoutInMs = 230_000;
+    // Derived from the single lifecycle-lock acquisition plus the pg_ctl command timeout and margin.
+    const timeoutInMs = EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS;
     try {
       await Promise.race([
         client.send({

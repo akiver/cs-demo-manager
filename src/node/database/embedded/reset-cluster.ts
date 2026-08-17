@@ -4,6 +4,7 @@ import { findRunningCluster } from './read-postmaster-pid';
 import { stopEmbeddedClusterWithoutLock } from './stop-cluster';
 import { EmbeddedPostgresInUse } from './errors/embedded-postgres-in-use';
 import { tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
+import { EmbeddedPostgresIdentityUnverifiable } from './errors/embedded-postgres-identity-unverifiable';
 
 /**
  * Deletes the bundled cluster so that the next start creates a new one.
@@ -20,11 +21,18 @@ export async function resetEmbeddedCluster() {
     }
 
     try {
-      await stopEmbeddedClusterWithoutLock();
+      const stopResult = await stopEmbeddedClusterWithoutLock();
+      if (stopResult.status === 'identity-unverifiable') {
+        throw new EmbeddedPostgresIdentityUnverifiable(stopResult.cause);
+      }
+      if (stopResult.status === 'failed') {
+        throw new Error('The built-in database could not be stopped, so the reset was aborted.', {
+          cause: stopResult.cause,
+        });
+      }
 
-      // stopEmbeddedClusterWithoutLock() logs and swallows its errors, so it succeeding is not proof
-      // the server is gone. Deleting the folder under a running one corrupts it wherever open files
-      // can be removed.
+      // Even a successful pg_ctl --wait is verified before the destructive step. Deleting the
+      // folder under a running server corrupts it wherever open files can be removed.
       if ((await findRunningCluster(getClusterDataFolderPath())) !== undefined) {
         throw new Error('The built-in database could not be stopped, it has to be stopped before being reset.');
       }

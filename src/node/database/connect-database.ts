@@ -36,7 +36,7 @@ export function connectDatabaseAndPersist(databaseSettings: DatabaseSettings): P
       settings = await updateSettings({ database: databaseSettings });
     } catch (error) {
       try {
-        await discardPreparedDatabaseConnection(connection);
+        await discardPreparedDatabaseConnection(connection, { stopEmbeddedIfUnused: true });
       } catch (cleanupError) {
         logger.error('Failed to discard a database candidate after settings persistence failed');
         logger.error(cleanupError);

@@ -14,16 +14,7 @@ import { RendererClientMessageName } from 'csdm/server/renderer-client-message-n
 import { disconnectDatabaseSuccess } from 'csdm/ui/bootstrap/bootstrap-actions';
 import { settingsUpdated } from 'csdm/ui/settings/settings-actions';
 import { useDatabaseSettings } from './use-database-settings';
-
-// ! JSON.stringify(new Error()) is "{}", and it throws on a circular value: the message would be
-// replaced by an empty object exactly when there is something to tell the user.
-function formatError(error: unknown) {
-  if (error instanceof Error) {
-    return error.message.trim() === '' ? undefined : error.message;
-  }
-
-  return typeof error === 'string' ? error : undefined;
-}
+import { formatErrorMessage } from 'csdm/ui/shared/format-error';
 
 function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
   const databaseSettings = useDatabaseSettings();
@@ -61,7 +52,7 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
   };
 
   const switchToEmbeddedDatabase = async () => {
-    const connectionError = await connect({ ...databaseSettings, mode: 'embedded' });
+    const connectionError = await connect({ ...databaseSettings, mode: 'embedded' }, 'in-place');
     if (connectionError) {
       setError(connectionError.message);
 
@@ -80,9 +71,10 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
       await (mode === 'embedded' ? switchToEmbeddedDatabase() : switchToExternalServer());
     } catch (error) {
       logger.error(error);
-      setError(formatError(error) ?? t`Unknown error`);
+      setError(formatErrorMessage(error, t`Unknown error`));
+    } finally {
+      setIsBusy(false);
     }
-    setIsBusy(false);
   };
 
   return (

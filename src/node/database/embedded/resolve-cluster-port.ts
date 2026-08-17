@@ -42,6 +42,9 @@ function resolveFreePort() {
     const server = net.createServer();
     server.unref();
     server.once('error', reject);
+    server.on('connection', (socket) => {
+      socket.destroy();
+    });
     // Passing port 0 lets the OS assign an available port outside any reserved range.
     server.listen({ port: 0, host: '127.0.0.1' }, () => {
       const address = server.address();

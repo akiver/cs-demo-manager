@@ -1,6 +1,7 @@
 import path from 'node:path';
 import fs from 'fs-extra';
 import { isPortInUse } from './resolve-cluster-port';
+import { arePathsEqual } from './are-paths-equal';
 
 export type PostmasterPid = {
   pid: number;
@@ -78,7 +79,7 @@ export async function findRunningCluster(dataFolderPath: string): Promise<Postma
     return undefined;
   }
 
-  if (path.resolve(postmasterPid.dataFolderPath) !== path.resolve(dataFolderPath)) {
+  if (!arePathsEqual(postmasterPid.dataFolderPath, dataFolderPath)) {
     return undefined;
   }
 

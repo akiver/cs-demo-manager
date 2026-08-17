@@ -9,6 +9,7 @@ const mocks = vi.hoisted(() => {
     updateSettings: vi.fn(),
     connectDatabase: vi.fn(),
     stopBackgroundTasks: vi.fn(),
+    getSettings: vi.fn(),
   };
 });
 
@@ -31,7 +32,7 @@ vi.mock('csdm/node/database/database', () => {
   return { destroyDatabaseConnection: mocks.destroyConnection };
 });
 vi.mock('csdm/node/settings/get-settings', () => {
-  return { getSettings: () => Promise.resolve(previousSettings) };
+  return { getSettings: mocks.getSettings };
 });
 vi.mock('csdm/node/settings/update-settings', () => {
   return { updateSettings: mocks.updateSettings };
@@ -47,6 +48,7 @@ beforeEach(() => {
   for (const mock of Object.values(mocks)) {
     mock.mockReset();
   }
+  mocks.getSettings.mockResolvedValue(previousSettings);
 });
 
 describe('disconnectDatabaseConnectionHandler', () => {
@@ -77,6 +79,40 @@ describe('disconnectDatabaseConnectionHandler', () => {
     expect(mocks.destroyConnection.mock.invocationCallOrder[0]).toBeLessThan(
       mocks.updateSettings.mock.invocationCallOrder[0],
     );
+    expect(mocks.stopBackgroundTasks.mock.invocationCallOrder[0]).toBeLessThan(
+      mocks.destroyConnection.mock.invocationCallOrder[0],
+    );
     expect(releaseTransition).toHaveBeenCalledOnce();
+  });
+
+  it('releases the transition gate when settings cannot be read', async () => {
+    const releaseTransition = vi.fn();
+    const error = new Error('settings unavailable');
+    mocks.tryBeginTransition.mockReturnValue(releaseTransition);
+    mocks.getSettings.mockRejectedValue(error);
+
+    await expect(disconnectDatabaseConnectionHandler(undefined)).resolves.toEqual({
+      error: { code: ErrorCode.UnknownError, message: error.message },
+    });
+
+    expect(releaseTransition).toHaveBeenCalledOnce();
+    expect(mocks.stopBackgroundTasks).not.toHaveBeenCalled();
+    expect(mocks.destroyConnection).not.toHaveBeenCalled();
+  });
+
+  it('reconnects to the previous database when persisting the next mode fails', async () => {
+    const releaseTransition = vi.fn();
+    const error = new Error('settings write failed');
+    mocks.tryBeginTransition.mockReturnValue(releaseTransition);
+    mocks.updateSettings.mockRejectedValue(error);
+
+    await expect(disconnectDatabaseConnectionHandler({ nextMode: 'external' })).resolves.toEqual({
+      error: { code: ErrorCode.UnknownError, message: error.message },
+    });
+
+    expect(mocks.connectDatabase).toHaveBeenCalledWith(previousSettings.database);
+    expect(mocks.connectDatabase.mock.invocationCallOrder[0]).toBeLessThan(
+      releaseTransition.mock.invocationCallOrder[0],
+    );
   });
 });

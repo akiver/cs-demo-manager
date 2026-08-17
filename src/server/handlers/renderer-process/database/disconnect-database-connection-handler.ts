@@ -25,9 +25,10 @@ export async function disconnectDatabaseConnectionHandler(
     return { error: buildDatabaseOperationError(new DatabaseTransitionInProgress()) };
   }
 
-  const previousSettings = await getSettings();
+  let previousSettings: Settings | undefined;
   try {
-    stopBackgroundTasks();
+    previousSettings = await getSettings();
+    await stopBackgroundTasks();
     await destroyDatabaseConnection({ stopEmbeddedIfUnused: payload?.nextMode === 'external' });
 
     if (payload?.nextMode !== undefined) {
@@ -46,11 +47,13 @@ export async function disconnectDatabaseConnectionHandler(
     logger.error('Error while disconnecting the database connection');
     logger.error(error);
 
-    try {
-      await connectDatabase(previousSettings.database);
-    } catch (reconnectionError) {
-      logger.error('Failed to restore the database connection after a disconnection failure');
-      logger.error(reconnectionError);
+    if (previousSettings !== undefined) {
+      try {
+        await connectDatabase(previousSettings.database);
+      } catch (reconnectionError) {
+        logger.error('Failed to restore the database connection after a disconnection failure');
+        logger.error(reconnectionError);
+      }
     }
 
     return { error: buildDatabaseOperationError(error) };

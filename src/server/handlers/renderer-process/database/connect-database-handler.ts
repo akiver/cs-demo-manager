@@ -15,7 +15,7 @@ export type ConnectDatabaseError = DatabaseOperationError;
 export async function connectDatabaseHandler(
   databaseSettings: DatabaseSettings | undefined,
 ): Promise<ConnectDatabaseResult> {
-  const releaseTransition = databaseSettings === undefined ? () => {} : analysesListener.tryBeginDatabaseTransition();
+  const releaseTransition = analysesListener.tryBeginDatabaseTransition();
   if (releaseTransition === undefined) {
     return { error: buildDatabaseOperationError(new DatabaseTransitionInProgress()) };
   }

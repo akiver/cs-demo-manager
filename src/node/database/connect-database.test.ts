@@ -68,7 +68,7 @@ describe('connectDatabaseAndPersist', () => {
 
     await expect(connectDatabaseAndPersist(databaseSettings)).rejects.toBe(error);
 
-    expect(discardMock).toHaveBeenCalledWith(preparedConnection);
+    expect(discardMock).toHaveBeenCalledWith(preparedConnection, { stopEmbeddedIfUnused: true });
     expect(commitMock).not.toHaveBeenCalled();
   });
 

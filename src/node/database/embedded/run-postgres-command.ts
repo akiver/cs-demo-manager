@@ -23,6 +23,10 @@ export function runPostgresCommand(
   args: string[],
   options?: Options,
 ): Promise<PostgresCommandResult> {
+  if (options?.timeoutMs !== undefined && options.timeoutMs <= 0) {
+    return Promise.reject(new RangeError('PostgreSQL command timeout must be greater than zero'));
+  }
+
   return new Promise((resolve, reject) => {
     execFile(
       binaryPath,

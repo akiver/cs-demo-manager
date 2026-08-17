@@ -7,6 +7,8 @@ import { startEmbeddedCluster, type EmbeddedClusterSession } from './start-clust
 import { releaseEmbeddedClusterSession, stopEmbeddedCluster } from './stop-cluster';
 import { resetEmbeddedCluster } from './reset-cluster';
 import { findRunningCluster } from './read-postmaster-pid';
+import { waitForChildOutput } from './child-process-test-helpers';
+import { writeClusterState } from './cluster-state';
 
 const { rootFolderPath } = vi.hoisted(() => {
   // GitHub's Windows RUNNER_TEMP is on D:, where initdb cannot tighten the directory ACL. The app
@@ -52,17 +54,6 @@ async function connectToMaintenanceDatabase(session: EmbeddedClusterSession) {
   await client.connect();
 
   return client;
-}
-
-function waitForChildOutput(child: ChildProcess, expectedOutput: string) {
-  return new Promise<void>((resolve, reject) => {
-    child.once('error', reject);
-    child.stdout?.on('data', (data: Buffer) => {
-      if (data.toString().includes(expectedOutput)) {
-        resolve();
-      }
-    });
-  });
 }
 
 async function stopChild(child: ChildProcess | undefined) {
@@ -131,6 +122,26 @@ describe('embedded PostgreSQL real lifecycle', () => {
         await resetClient.end();
         await releaseEmbeddedClusterSession(resetSession, { stopIfUnused: true });
         await expect(findRunningCluster(path.join(rootFolderPath, 'postgres', 'pgdata'))).resolves.toBeUndefined();
+
+        const stateRecoverySession = await startEmbeddedCluster();
+        sessions.push(stateRecoverySession);
+        await fs.remove(path.join(rootFolderPath, 'postgres', 'state.json'));
+        await releaseEmbeddedClusterSession(stateRecoverySession, { stopIfUnused: true });
+        await expect(findRunningCluster(path.join(rootFolderPath, 'postgres', 'pgdata'))).resolves.toBeUndefined();
+        await resetEmbeddedCluster();
+
+        const unverifiableSession = await startEmbeddedCluster();
+        sessions.push(unverifiableSession);
+        await releaseEmbeddedClusterSession(unverifiableSession, { stopIfUnused: false });
+        await fs.remove(path.join(rootFolderPath, 'postgres', 'state.json'));
+        await expect(resetEmbeddedCluster()).rejects.toThrow('identity cannot be verified');
+        await expect(fs.pathExists(path.join(rootFolderPath, 'postgres', 'pgdata', 'PG_VERSION'))).resolves.toBe(true);
+
+        await writeClusterState({
+          password: unverifiableSession.settings.password,
+          port: unverifiableSession.settings.port,
+        });
+        await expect(stopEmbeddedCluster()).resolves.toBe(true);
       } finally {
         await stopChild(cliProcess);
         await Promise.allSettled(clients.map((client) => client.end()));
