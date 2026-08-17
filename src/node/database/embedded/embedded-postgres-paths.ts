@@ -32,5 +32,9 @@ export function getClusterStateFilePath() {
 }
 
 export function getClusterLockFilePath() {
-  return path.join(getClusterFolderPath(), 'start.lock');
+  return path.join(path.dirname(getClusterFolderPath()), 'postgres-lifecycle.lock');
+}
+
+export function getClusterUsageLockFilePath() {
+  return path.join(path.dirname(getClusterFolderPath()), 'postgres-usage.lock');
 }

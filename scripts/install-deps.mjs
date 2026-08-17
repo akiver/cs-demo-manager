@@ -6,10 +6,46 @@ import { promisify } from 'node:util';
 import { pipeline } from 'node:stream/promises';
 import fs from 'fs-extra';
 import unzipper from 'unzipper';
+import { tryLock, unlock } from 'fs-native-extensions';
 
 const execFileAsync = promisify(execFile);
 const projectPath = fileURLToPath(new URL('..', import.meta.url));
 const staticFolderPath = fileURLToPath(new URL('../static', import.meta.url));
+const POSTGRES_INSTALL_LOCK_TIMEOUT_MS = 10 * 60 * 1000;
+const STALE_POSTGRES_BACKUP_AGE_MS = 24 * 60 * 60 * 1000;
+
+function wait(delayMs) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delayMs);
+  });
+}
+
+async function withPostgresInstallLock(cacheFolderPath, install) {
+  await fs.ensureDir(cacheFolderPath);
+  const lockFileDescriptor = await fs.open(path.join(cacheFolderPath, 'install.lock'), 'a+');
+  const deadline = Date.now() + POSTGRES_INSTALL_LOCK_TIMEOUT_MS;
+  let isLocked = false;
+
+  try {
+    while (!tryLock(lockFileDescriptor)) {
+      if (Date.now() > deadline) {
+        throw new Error('Timed out waiting for another PostgreSQL binaries installation');
+      }
+      await wait(250);
+    }
+    isLocked = true;
+
+    return await install();
+  } finally {
+    try {
+      if (isLocked) {
+        unlock(lockFileDescriptor);
+      }
+    } finally {
+      await fs.close(lockFileDescriptor);
+    }
+  }
+}
 
 export async function installCounterStrikeVoiceExtractor(platform = process.platform) {
   const supportedPlatforms = ['darwin', 'win32', 'linux'];
@@ -150,52 +186,20 @@ async function extractPostgresArchive(archivePath, destinationFolderPath) {
     throw new Error(`No .txz entry found in ${archivePath}`);
   }
 
-  // ! Extracted aside and swapped in at the end: emptying the destination first would leave the app
-  // without any binaries when the extraction fails.
-  const stagingFolderPath = path.join(path.dirname(archivePath), 'extract');
   const tarballFileName = 'postgres.txz';
 
   try {
-    await fs.emptyDir(stagingFolderPath);
-    await pipeline(entry.stream(), fs.createWriteStream(path.join(stagingFolderPath, tarballFileName)));
+    await fs.emptyDir(destinationFolderPath);
+    await pipeline(entry.stream(), fs.createWriteStream(path.join(destinationFolderPath, tarballFileName)));
 
     // ! The tarball is passed by name, relative to cwd, never as an absolute path: GNU tar, the one
     // Git for Windows ships and puts first in the PATH of its shell, reads "C:\..." as the
     // "host:path" syntax of a remote archive and fails with "Cannot connect to C".
     // bsdtar (Windows 10+, macOS) and GNU tar (Linux) both handle xz through -xf.
-    await execFileAsync('tar', ['-xf', tarballFileName], { cwd: stagingFolderPath });
-    await fs.remove(path.join(stagingFolderPath, tarballFileName));
-
-    // ! The previous binaries are moved out of the way rather than deleted, and only deleted once
-    // the new ones are in place: deleting first would leave the app without any if the move failed,
-    // and a running cluster keeps its DLLs open on Windows, which makes deleting them fail while
-    // renaming their folder still works.
-    // ! Kept outside the static folder: a leftover there would be packaged into the app.
-    const previousFolderPath = path.join(path.dirname(archivePath), 'previous');
-    await fs.remove(previousFolderPath);
-    if (await fs.pathExists(destinationFolderPath)) {
-      await fs.move(destinationFolderPath, previousFolderPath);
-    }
-
-    try {
-      await fs.move(stagingFolderPath, destinationFolderPath);
-    } catch (error) {
-      if (await fs.pathExists(previousFolderPath)) {
-        await fs.move(previousFolderPath, destinationFolderPath);
-      }
-
-      throw error;
-    }
-
-    try {
-      await fs.remove(previousFolderPath);
-    } catch (error) {
-      // The new binaries are in place, this is only the cleanup of the old ones. It happens when a
-      // cluster started from them is still running, and the next run removes them anyway.
-      console.warn(`Failed to remove the previous PostgreSQL binaries in ${previousFolderPath}: ${error.message}`);
-    }
+    await execFileAsync('tar', ['-xf', tarballFileName], { cwd: destinationFolderPath });
+    await fs.remove(path.join(destinationFolderPath, tarballFileName));
   } finally {
-    await fs.remove(stagingFolderPath);
+    await fs.remove(path.join(destinationFolderPath, tarballFileName));
   }
 }
 
@@ -309,25 +313,108 @@ async function makePostgresBinariesExecutable(folderPath) {
   );
 }
 
-export async function installPostgres(platform = process.platform, arch = process.arch) {
+async function validatePostgresFolder(folderPath, platform) {
+  const extension = platform === 'win32' ? '.exe' : '';
+  const requiredFiles = [
+    path.join(folderPath, 'VERSION'),
+    path.join(folderPath, 'bin', `postgres${extension}`),
+    path.join(folderPath, 'bin', `initdb${extension}`),
+    path.join(folderPath, 'bin', `pg_ctl${extension}`),
+  ];
+
+  for (const filePath of requiredFiles) {
+    await fs.access(filePath, platform === 'win32' ? fs.constants.F_OK : fs.constants.X_OK);
+  }
+}
+
+async function removeFolderBestEffort(folderPath) {
+  try {
+    await fs.remove(folderPath);
+  } catch (error) {
+    console.warn(`Failed to remove the previous PostgreSQL binaries in ${folderPath}: ${error.message}`);
+  }
+}
+
+async function cleanupOldPostgresInstallFolders(cacheFolderPath) {
+  const entries = await fs.readdir(cacheFolderPath, { withFileTypes: true });
+  const staleBefore = Date.now() - STALE_POSTGRES_BACKUP_AGE_MS;
+  await Promise.all(
+    entries
+      .filter((entry) => {
+        return entry.isDirectory() && (entry.name === 'previous' || entry.name.startsWith('previous-'));
+      })
+      .map(async (entry) => {
+        const folderPath = path.join(cacheFolderPath, entry.name);
+        const stats = await fs.stat(folderPath);
+        if (stats.mtimeMs < staleBefore) {
+          await removeFolderBestEffort(folderPath);
+        }
+      }),
+  );
+}
+
+export async function swapPostgresFolder(stagingFolderPath, destinationFolderPath, backupFolderPath) {
+  if (await fs.pathExists(destinationFolderPath)) {
+    await fs.move(destinationFolderPath, backupFolderPath);
+  }
+
+  try {
+    await fs.move(stagingFolderPath, destinationFolderPath);
+  } catch (error) {
+    if ((await fs.pathExists(backupFolderPath)) && !(await fs.pathExists(destinationFolderPath))) {
+      await fs.move(backupFolderPath, destinationFolderPath);
+    }
+
+    throw error;
+  }
+
+  await removeFolderBestEffort(backupFolderPath);
+}
+
+async function installPostgresOnce(platform, arch) {
   const platformKey = `${platform}-${arch}`;
   const artifact = POSTGRES_MAVEN_ARTIFACTS[platformKey];
   if (artifact === undefined) {
     throw new Error(`Unsupported platform: ${platformKey}`);
   }
 
-  const archivePath = await downloadPostgresArchive(artifact);
-  const destinationPath = path.join(staticFolderPath, 'postgres');
-  await extractPostgresArchive(archivePath, destinationPath);
-  await prunePostgresFolder(destinationPath, platform);
+  const cacheFolderPath = path.join(projectPath, 'node_modules/.cache/postgres');
+  await withPostgresInstallLock(cacheFolderPath, async () => {
+    const archivePath = await downloadPostgresArchive(artifact);
+    const destinationPath = path.join(staticFolderPath, 'postgres');
+    const uniqueSuffix = `${platformKey}-${process.pid}-${crypto.randomUUID()}`;
+    const stagingFolderPath = path.join(cacheFolderPath, `extract-${uniqueSuffix}`);
+    const backupFolderPath = path.join(cacheFolderPath, `previous-${uniqueSuffix}`);
 
-  if (platform === 'darwin') {
-    await thinMacOsBinaries(destinationPath, arch);
-  }
+    try {
+      await cleanupOldPostgresInstallFolders(cacheFolderPath);
+      await extractPostgresArchive(archivePath, stagingFolderPath);
+      await prunePostgresFolder(stagingFolderPath, platform);
 
-  if (platform !== 'win32') {
-    await makePostgresBinariesExecutable(destinationPath);
-  }
+      if (platform === 'darwin') {
+        await thinMacOsBinaries(stagingFolderPath, arch);
+      }
 
-  await fs.writeFile(path.join(destinationPath, 'VERSION'), POSTGRES_VERSION);
+      if (platform !== 'win32') {
+        await makePostgresBinariesExecutable(stagingFolderPath);
+      }
+
+      await fs.writeFile(path.join(stagingFolderPath, 'VERSION'), POSTGRES_VERSION);
+      await validatePostgresFolder(stagingFolderPath, platform);
+      await swapPostgresFolder(stagingFolderPath, destinationPath, backupFolderPath);
+    } finally {
+      await removeFolderBestEffort(stagingFolderPath);
+    }
+  });
+}
+
+let pendingPostgresInstallation = Promise.resolve();
+
+export function installPostgres(platform = process.platform, arch = process.arch) {
+  const installation = pendingPostgresInstallation.then(() => {
+    return installPostgresOnce(platform, arch);
+  });
+  pendingPostgresInstallation = installation.catch(() => undefined);
+
+  return installation;
 }

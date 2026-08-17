@@ -79,10 +79,16 @@ describe('isProcessAlive', () => {
 describe('findRunningCluster', () => {
   // The operating system reuses PIDs: an unrelated process holding the PID of a crashed postmaster
   // would make the app reuse a cluster that is not running, on every attempt.
-  // Port 1 is not listening anywhere. On Linux binding it also fails with EACCES for a non-root
-  // user, which must not be read as a running cluster either.
   it('should return undefined when nothing listens on the port of a live PID', async () => {
-    await writePostmasterPid(`${process.pid}\n${dataFolderPath}\n1751490000\n1\n`);
+    const server = net.createServer();
+    const port = await new Promise<number>((resolve) => {
+      server.listen({ port: 0, host: '127.0.0.1' }, () => {
+        const address = server.address();
+        resolve(typeof address === 'object' && address !== null ? address.port : 0);
+      });
+    });
+    await new Promise((resolve) => server.close(resolve));
+    await writePostmasterPid(`${process.pid}\n${dataFolderPath}\n1751490000\n${port}\n`);
 
     await expect(findRunningCluster(dataFolderPath)).resolves.toBeUndefined();
   });

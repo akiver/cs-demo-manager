@@ -39,7 +39,7 @@ function parseClusterState(content: string): ClusterState | undefined {
   };
 }
 
-async function readClusterState(): Promise<ClusterState | undefined> {
+export async function readClusterState(): Promise<ClusterState | undefined> {
   try {
     return parseClusterState(await fs.readFile(getClusterStateFilePath(), 'utf8'));
   } catch {

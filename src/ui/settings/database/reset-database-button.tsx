@@ -15,9 +15,15 @@ function ResetDatabaseDialog() {
   const onConfirmClick = async () => {
     try {
       setIsBusy(true);
-      await client.send({
+      const operationError = await client.send({
         name: RendererClientMessageName.ResetDatabase,
       });
+      if (operationError !== undefined) {
+        setError(operationError.message);
+        setIsBusy(false);
+        return;
+      }
+
       window.csdm.reloadWindow();
     } catch (error) {
       if (typeof error === 'string') {

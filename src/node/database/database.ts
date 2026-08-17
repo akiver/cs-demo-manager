@@ -2,11 +2,14 @@ import { types, Pool, type PoolClient } from 'pg';
 import type { KyselyConfig, LogEvent, Logger } from 'kysely';
 import { Kysely, PostgresDialect } from 'kysely';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
+import type { EmbeddedClusterSession } from 'csdm/node/database/embedded/start-cluster';
+import { releaseEmbeddedClusterSession } from 'csdm/node/database/embedded/stop-cluster';
 import type { Database } from './schema';
 
 export let db: Kysely<Database>;
 
 let connectedSettings: DatabaseSettings | undefined;
+let embeddedClusterSession: EmbeddedClusterSession | undefined;
 let ingestionPool: Pool | undefined;
 const ingestionClients = new Set<PoolClient>();
 const pendingAcquisitions = new Set<(error: Error) => void>();
@@ -33,7 +36,30 @@ types.setTypeParser(types.builtins.NUMERIC, Number);
 types.setTypeParser(types.builtins.INT4, Number);
 types.setTypeParser(types.builtins.INT2, Number);
 
-export function createDatabaseConnection(settings: DatabaseSettings) {
+export type PreparedDatabaseConnection = {
+  database: Kysely<Database>;
+  settings: DatabaseSettings;
+  embeddedClusterSession?: EmbeddedClusterSession;
+};
+
+async function waitForDatabaseResourceCleanup(tasks: Array<Promise<unknown> | undefined>) {
+  const pendingTasks = tasks.filter((task): task is Promise<unknown> => task !== undefined);
+  const results = await Promise.allSettled(pendingTasks);
+  const errors = results.flatMap((result) => {
+    return result.status === 'rejected' ? [result.reason] : [];
+  });
+  if (errors.length === 1) {
+    throw errors[0];
+  }
+  if (errors.length > 1) {
+    throw new AggregateError(errors, 'Failed to release database resources');
+  }
+}
+
+export function createDatabaseConnection(
+  settings: DatabaseSettings,
+  embeddedSession?: EmbeddedClusterSession,
+): PreparedDatabaseConnection {
   const dialect = new PostgresDialect({
     pool: new Pool({
       host: settings.hostname,
@@ -69,26 +95,51 @@ export function createDatabaseConnection(settings: DatabaseSettings) {
     log: loggerFunction,
   };
 
-  // ! The ingestion pool is built from these settings, it must not survive a reconnection to another
-  // server, otherwise ingestion would keep writing to the previous one.
-  // Reconnecting is not necessarily preceded by destroyDatabaseConnection(): start-minimized-mode
-  // retries connectDatabase() on an interval without waiting for the previous attempt to settle.
-  discardIngestionPool()?.catch((error: unknown) => {
-    logger.error('Failed to close the previous ingestion pool');
-    logger.error(error);
-  });
+  return {
+    database: new Kysely<Database>(config),
+    settings,
+    embeddedClusterSession: embeddedSession,
+  };
+}
 
-  // ! Same reason, plus the previous pool keeps open connections on the server it was built from:
-  // reassigning "db" without destroying it leaks one server connection per reconnection.
+export async function discardPreparedDatabaseConnection(connection: PreparedDatabaseConnection) {
+  await waitForDatabaseResourceCleanup([
+    connection.database.destroy(),
+    connection.embeddedClusterSession === undefined
+      ? undefined
+      : releaseEmbeddedClusterSession(connection.embeddedClusterSession, { stopIfUnused: false }),
+  ]);
+}
+
+export async function commitDatabaseConnection(
+  connection: PreparedDatabaseConnection,
+  options: { stopPreviousEmbeddedIfUnused: boolean },
+) {
   const previousDb = db;
+  const previousEmbeddedSession = embeddedClusterSession;
 
-  connectedSettings = settings;
-  db = new Kysely<Database>(config);
+  // Publish the fully connected and migrated candidate before disposing the old resources. Imports
+  // of `db` are live bindings, so every following query sees the candidate immediately.
+  db = connection.database;
+  connectedSettings = connection.settings;
+  embeddedClusterSession = connection.embeddedClusterSession;
 
-  void previousDb?.destroy().catch((error: unknown) => {
-    logger.error('Failed to close the previous database connection');
-    logger.error(error);
-  });
+  const results = await Promise.allSettled([
+    previousDb?.destroy(),
+    discardIngestionPool(),
+    previousEmbeddedSession === undefined
+      ? undefined
+      : releaseEmbeddedClusterSession(previousEmbeddedSession, {
+          stopIfUnused: options.stopPreviousEmbeddedIfUnused,
+        }),
+  ]);
+
+  for (const result of results) {
+    if (result.status === 'rejected') {
+      logger.error('Failed to release a previous database resource');
+      logger.error(result.reason);
+    }
+  }
 }
 
 // The settings the app is currently connected with.
@@ -205,8 +256,18 @@ export function releaseIngestionClient(client: PoolClient) {
   client.release();
 }
 
-export async function destroyDatabaseConnection() {
-  connectedSettings = undefined;
+export async function destroyDatabaseConnection(options: { stopEmbeddedIfUnused?: boolean } = {}) {
+  const database = db;
+  const session = embeddedClusterSession;
 
-  await Promise.all([db?.destroy(), discardIngestionPool()]);
+  connectedSettings = undefined;
+  embeddedClusterSession = undefined;
+
+  await waitForDatabaseResourceCleanup([
+    database?.destroy(),
+    discardIngestionPool(),
+    session === undefined
+      ? undefined
+      : releaseEmbeddedClusterSession(session, { stopIfUnused: options.stopEmbeddedIfUnused ?? false }),
+  ]);
 }

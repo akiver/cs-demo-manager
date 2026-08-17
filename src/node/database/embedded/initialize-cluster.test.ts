@@ -4,6 +4,14 @@ import fs from 'fs-extra';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
 import { initializeClusterIfNeeded, isClusterInitialized } from './initialize-cluster';
 
+const { runPostgresCommandMock } = vi.hoisted(() => {
+  return { runPostgresCommandMock: vi.fn() };
+});
+
+vi.mock('./run-postgres-command', () => {
+  return { runPostgresCommand: runPostgresCommandMock };
+});
+
 const clusterFolderPath = path.join(os.tmpdir(), 'csdm-initialize-cluster-test');
 const dataFolderPath = path.join(clusterFolderPath, 'pgdata');
 
@@ -19,6 +27,7 @@ vi.mock('./embedded-postgres-paths', async () => {
 });
 
 afterEach(async () => {
+  runPostgresCommandMock.mockReset();
   await fs.remove(clusterFolderPath);
 });
 
@@ -47,7 +56,7 @@ describe('initializeClusterIfNeeded', () => {
     await fs.ensureDir(path.join(dataFolderPath, 'base'));
     await fs.writeFile(path.join(dataFolderPath, 'base', 'user-data'), 'demos');
 
-    // The binaries are not installed when the tests run, initdb fails to spawn.
+    runPostgresCommandMock.mockRejectedValueOnce(new Error('simulated initdb failure'));
     await expect(initializeClusterIfNeeded('password')).rejects.toThrow('Failed to create the built-in database');
 
     await expect(fs.pathExists(path.join(dataFolderPath, 'base', 'user-data'))).resolves.toBe(true);

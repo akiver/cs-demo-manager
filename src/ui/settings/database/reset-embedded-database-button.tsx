@@ -15,9 +15,15 @@ function ResetEmbeddedDatabaseDialog() {
   const onConfirmClick = async () => {
     try {
       setIsBusy(true);
-      await client.send({
+      const operationError = await client.send({
         name: RendererClientMessageName.ResetEmbeddedDatabase,
       });
+      if (operationError !== undefined) {
+        setError(operationError.message);
+        setIsBusy(false);
+        return;
+      }
+
       window.csdm.reloadWindow();
     } catch (error) {
       setError(typeof error === 'string' ? error : JSON.stringify(error));

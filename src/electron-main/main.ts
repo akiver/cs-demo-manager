@@ -175,7 +175,9 @@ async function start() {
   // Gives the server process a chance to release what outlives it, the embedded PostgreSQL cluster
   // in particular, which pg_ctl starts detached from the app.
   const prepareToQuit = async () => {
-    const timeoutInMs = 20_000;
+    // The server may first wait up to 180s for another process' lifecycle operation, then pg_ctl
+    // waits up to 30s for PostgreSQL. Killing it sooner leaves the detached cluster running.
+    const timeoutInMs = 230_000;
     try {
       await Promise.race([
         client.send({

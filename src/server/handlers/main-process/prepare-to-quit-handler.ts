@@ -5,7 +5,7 @@ import { stopBackgroundTasks } from 'csdm/server/start-background-tasks';
 async function prepareToQuit() {
   try {
     stopBackgroundTasks();
-    await destroyDatabaseConnection();
+    await destroyDatabaseConnection({ stopEmbeddedIfUnused: true });
   } catch (error) {
     logger.error('Error while releasing the database connection');
     logger.error(error);

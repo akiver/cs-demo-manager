@@ -1,10 +1,8 @@
 import fs from 'fs-extra';
-import { getClusterFolderPath, getClusterLockFilePath } from './embedded-postgres-paths';
-import { isProcessAlive } from './read-postmaster-pid';
+import { tryLock, unlock } from 'fs-native-extensions';
+import { getClusterLockFilePath, getClusterUsageLockFilePath } from './embedded-postgres-paths';
 import { EmbeddedPostgresStartFailed } from './errors/embedded-postgres-start-failed';
 
-// ! It has to exceed what the holder may legitimately spend inside the lock: initdb followed by
-// "pg_ctl start", which waits up to 60 seconds on its own.
 const LOCK_TIMEOUT_MS = 180_000;
 const LOCK_RETRY_DELAY_MS = 250;
 
@@ -14,84 +12,96 @@ function wait(delayMs: number) {
   });
 }
 
-function isAlreadyExistsError(error: unknown) {
-  return error instanceof Error && 'code' in error && error.code === 'EEXIST';
+type NativeLock = {
+  release: () => Promise<void>;
+};
+
+async function openLockFile(filePath: string) {
+  await fs.ensureFile(filePath);
+
+  return fs.open(filePath, 'r+');
 }
 
-async function isLockStale(lockFilePath: string) {
-  try {
-    const pid = Number.parseInt(await fs.readFile(lockFilePath, 'utf8'), 10);
+function createLock(fileDescriptor: number): NativeLock {
+  let isReleased = false;
 
-    return Number.isNaN(pid) || !isProcessAlive(pid);
-  } catch {
-    return true;
-  }
-}
-
-/**
- * Removes a lock left behind by a process that died while holding it.
- *
- * ! Renaming first instead of deleting: two processes recovering the same stale lock would both
- * delete it, and the one deleting last would wipe the lock the other just acquired. Only one rename
- * can succeed, so only one of them gets to clean up.
- * A lock acquired between the staleness check and the rename is still deleted, but that requires a
- * third process to acquire it within that window.
- */
-async function claimStaleLock(lockFilePath: string) {
-  const tombstoneFilePath = `${lockFilePath}.${process.pid}.stale`;
-  try {
-    await fs.rename(lockFilePath, tombstoneFilePath);
-  } catch {
-    return;
-  }
-
-  await fs.remove(tombstoneFilePath);
-}
-
-async function acquireLock(lockFilePath: string) {
-  const deadline = Date.now() + LOCK_TIMEOUT_MS;
-
-  while (true) {
-    try {
-      await fs.writeFile(lockFilePath, String(process.pid), { flag: 'wx' });
-
-      return;
-    } catch (error) {
-      // ! Only an existing lock is worth retrying. Any other failure (EACCES, EROFS, ENOSPC...)
-      // makes every attempt fail the same way, and the file the staleness check looks for is never
-      // created: retrying would spin forever without ever reaching the deadline below.
-      if (!isAlreadyExistsError(error)) {
-        throw error;
+  return {
+    release: async () => {
+      if (isReleased) {
+        return;
       }
 
-      if (await isLockStale(lockFilePath)) {
-        await claimStaleLock(lockFilePath);
+      isReleased = true;
+      try {
+        unlock(fileDescriptor);
+      } finally {
+        await fs.close(fileDescriptor);
       }
+    },
+  };
+}
 
+async function acquireLock(filePath: string, shared: boolean, timeoutMs: number): Promise<NativeLock> {
+  const fileDescriptor = await openLockFile(filePath);
+  const deadline = Date.now() + timeoutMs;
+
+  try {
+    while (!tryLock(fileDescriptor, { shared })) {
       if (Date.now() > deadline) {
         throw new EmbeddedPostgresStartFailed(
-          `Another CS Demo Manager process is still starting the built-in database, it did not release ${lockFilePath} within ${LOCK_TIMEOUT_MS / 1000} seconds`,
-          error,
+          `Another CS Demo Manager process did not release ${filePath} within ${timeoutMs / 1000} seconds`,
         );
       }
 
       await wait(LOCK_RETRY_DELAY_MS);
     }
+  } catch (error) {
+    await fs.close(fileDescriptor);
+    throw error;
   }
+
+  return createLock(fileDescriptor);
 }
+
+async function tryAcquireLock(filePath: string, shared: boolean): Promise<NativeLock | undefined> {
+  const fileDescriptor = await openLockFile(filePath);
+
+  try {
+    if (!tryLock(fileDescriptor, { shared })) {
+      await fs.close(fileDescriptor);
+
+      return undefined;
+    }
+  } catch (error) {
+    await fs.close(fileDescriptor);
+    throw error;
+  }
+
+  return createLock(fileDescriptor);
+}
+
+export type EmbeddedClusterUsageLease = NativeLock;
 
 /**
  * Serializes the initdb + start sequence, which the app and the CLI can run concurrently on the same
  * data folder. It doesn't protect the cluster usage, only its creation and startup.
  */
 export async function withClusterLock<T>(fn: () => Promise<T>): Promise<T> {
-  const lockFilePath = getClusterLockFilePath();
-  await fs.ensureDir(getClusterFolderPath());
-  await acquireLock(lockFilePath);
+  const lock = await acquireLock(getClusterLockFilePath(), false, LOCK_TIMEOUT_MS);
 
   try {
     return await fn();
   } finally {
-    await fs.remove(lockFilePath);
+    await lock.release();
   }
+}
+
+/** Must be acquired while the lifecycle lock is held, before a reset or stop can begin. */
+export function acquireClusterUsageLease() {
+  return acquireLock(getClusterUsageLockFilePath(), true, LOCK_TIMEOUT_MS);
+}
+
+/** Must be called while the lifecycle lock is held. It never waits for another app/CLI user. */
+export function tryAcquireExclusiveClusterUsage() {
+  return tryAcquireLock(getClusterUsageLockFilePath(), false);
 }

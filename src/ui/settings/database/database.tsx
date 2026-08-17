@@ -13,12 +13,12 @@ export function Database() {
   const { mode, hostname, port, username, password, database } = useDatabaseSettings();
 
   return (
-    <div className="flex max-w-[400px] flex-col gap-y-16">
+    <div className="flex database-form-max-width flex-col gap-y-16">
       <DatabaseModeSelector />
       {mode === 'embedded' ? (
         <EmbeddedDatabase />
       ) : (
-        <div className="flex max-w-[264px] flex-col gap-y-8">
+        <div className="flex database-actions-max-width flex-col gap-y-8">
           <HostnameInput hostname={hostname} />
           <DatabaseNameInput databaseName={database} />
           <UsernameInput username={username} />

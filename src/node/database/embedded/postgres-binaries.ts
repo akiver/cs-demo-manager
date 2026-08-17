@@ -23,11 +23,23 @@ export async function getBundledPostgresVersion() {
 }
 
 export async function ensurePostgresBinariesExist() {
+  const versionFilePath = path.join(getPostgresFolderPath(), 'VERSION');
+  try {
+    const version = await fs.readFile(versionFilePath, 'utf8');
+    if (version.trim() === '') {
+      throw new Error('The bundled PostgreSQL VERSION file is empty');
+    }
+  } catch (error) {
+    throw new EmbeddedPostgresBinariesMissing(versionFilePath, error);
+  }
+
   const binaryNames: PostgresBinaryName[] = ['postgres', 'initdb', 'pg_ctl'];
   for (const name of binaryNames) {
     const binaryPath = getPostgresBinaryPath(name);
-    if (!(await fs.pathExists(binaryPath))) {
-      throw new EmbeddedPostgresBinariesMissing(binaryPath);
+    try {
+      await fs.access(binaryPath, process.platform === 'win32' ? fs.constants.F_OK : fs.constants.X_OK);
+    } catch (error) {
+      throw new EmbeddedPostgresBinariesMissing(binaryPath, error);
     }
   }
 }

@@ -66,6 +66,9 @@ jobs:
         with:
           cache: true
 
+      - name: Install PostgreSQL binaries for real lifecycle tests
+        run: node --input-type=module -e "import { installPostgres } from './scripts/install-deps.mjs'; await installPostgres();"
+
       - name: Test
         run: vp run test
 
@@ -84,3 +87,37 @@ jobs:
 
       - name: Find dead code
         run: vp run deadcode
+
+  embedded-postgres-package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x64
+          - os: windows-latest
+            arch: x64
+          - os: macos-15-intel
+            arch: x64
+          - os: macos-15
+            arch: arm64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - uses: voidzero-dev/setup-vp@v1
+        with:
+          cache: true
+
+      - name: Build application
+        run: vp run build
+
+      - name: Package application
+        run: vp run package --dir --${{ matrix.arch }}
+
+      - name: Test embedded PostgreSQL lifecycle
+        run: vp test src/node/database/embedded
+
+      - name: Smoke test packaged addon, PostgreSQL and CLI
+        run: node ./scripts/smoke-packaged-embedded-postgres.mjs

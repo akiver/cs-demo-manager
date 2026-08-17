@@ -1,40 +1,120 @@
 import os from 'node:os';
 import path from 'node:path';
+import { spawn, type ChildProcess } from 'node:child_process';
 import fs from 'fs-extra';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
-import { withClusterLock } from './cluster-lock';
+import { acquireClusterUsageLease, tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
 
-const clusterFolderPath = path.join(os.tmpdir(), 'csdm-cluster-lock-test');
+const testFolderPath = path.join(os.tmpdir(), 'csdm-cluster-lock-test');
+const lifecycleLockFilePath = path.join(testFolderPath, 'lifecycle.lock');
+const usageLockFilePath = path.join(testFolderPath, 'usage.lock');
 
-vi.mock('./embedded-postgres-paths', async () => {
-  const nodeOs = await import('node:os');
-  const nodePath = await import('node:path');
-  const folderPath = nodePath.default.join(nodeOs.default.tmpdir(), 'csdm-cluster-lock-test');
-
+vi.mock('./embedded-postgres-paths', () => {
   return {
-    getClusterFolderPath: () => folderPath,
-    // The parent folder is never created: writing the lock file always fails with ENOENT.
-    getClusterLockFilePath: () => nodePath.default.join(folderPath, 'missing', 'start.lock'),
+    getClusterLockFilePath: () => lifecycleLockFilePath,
+    getClusterUsageLockFilePath: () => usageLockFilePath,
   };
 });
 
+let childProcess: ChildProcess | undefined;
+
 afterEach(async () => {
-  await fs.remove(clusterFolderPath);
+  childProcess?.kill();
+  childProcess = undefined;
+  await fs.remove(testFolderPath);
 });
 
-describe('withClusterLock', () => {
-  // A failure that is not "the lock already exists" repeats on every attempt and never creates the
-  // file the staleness check looks for: retrying it spins forever without reaching the deadline.
-  it('should not retry a write failure that is not an existing lock', async () => {
-    const removeSpy = vi.spyOn(fs, 'remove');
+function waitForChildOutput(child: ChildProcess, expectedOutput: string) {
+  return new Promise<void>((resolve, reject) => {
+    child.once('error', reject);
+    child.stdout?.on('data', (data: Buffer) => {
+      if (data.toString().includes(expectedOutput)) {
+        resolve();
+      }
+    });
+  });
+}
 
-    await expect(
-      withClusterLock(() => {
-        return Promise.resolve('acquired');
-      }),
-    ).rejects.toThrow('ENOENT');
-    expect(removeSpy).not.toHaveBeenCalled();
+describe('embedded PostgreSQL native locks', () => {
+  it('should serialize lifecycle operations', async () => {
+    let releaseFirstOperation: (() => void) | undefined;
+    let markFirstOperationStarted: (() => void) | undefined;
+    const firstOperationStarted = new Promise<void>((resolve) => {
+      markFirstOperationStarted = resolve;
+    });
+    const firstOperation = withClusterLock(async () => {
+      markFirstOperationStarted?.();
+      await new Promise<void>((resolve) => {
+        releaseFirstOperation = resolve;
+      });
+    });
+    await firstOperationStarted;
 
-    removeSpy.mockRestore();
+    let secondOperationStarted = false;
+    const secondOperation = withClusterLock(() => {
+      secondOperationStarted = true;
+      return Promise.resolve();
+    });
+
+    await new Promise((resolve) => {
+      setTimeout(resolve, 50);
+    });
+    expect(secondOperationStarted).toBe(false);
+
+    releaseFirstOperation?.();
+    await Promise.all([firstOperation, secondOperation]);
+    expect(secondOperationStarted).toBe(true);
+  });
+
+  it('should grant exclusive usage only after every shared lease is released', async () => {
+    const firstLease = await acquireClusterUsageLease();
+    await fs.ensureFile(usageLockFilePath);
+    const helperPath = path.join(import.meta.dirname, 'cluster-lock-child.mjs');
+    childProcess = spawn(process.execPath, [helperPath, usageLockFilePath, 'shared'], {
+      cwd: process.cwd(),
+      stdio: ['ignore', 'pipe', 'pipe'],
+      windowsHide: true,
+    });
+    await waitForChildOutput(childProcess, 'locked');
+
+    expect(await tryAcquireExclusiveClusterUsage()).toBeUndefined();
+    await firstLease.release();
+    expect(await tryAcquireExclusiveClusterUsage()).toBeUndefined();
+
+    const childExited = new Promise<void>((resolve) => {
+      childProcess?.once('exit', () => resolve());
+    });
+    childProcess.kill();
+    await childExited;
+    childProcess = undefined;
+
+    const exclusiveLease = await tryAcquireExclusiveClusterUsage();
+    expect(exclusiveLease).toBeDefined();
+    await exclusiveLease?.release();
+  });
+
+  it('should recover the lifecycle lock after its process is killed', async () => {
+    await fs.ensureFile(lifecycleLockFilePath);
+    const helperPath = path.join(import.meta.dirname, 'cluster-lock-child.mjs');
+    childProcess = spawn(process.execPath, [helperPath, lifecycleLockFilePath], {
+      cwd: process.cwd(),
+      stdio: ['ignore', 'pipe', 'pipe'],
+      windowsHide: true,
+    });
+    await waitForChildOutput(childProcess, 'locked');
+
+    let acquired = false;
+    const pendingAcquisition = withClusterLock(() => {
+      acquired = true;
+      return Promise.resolve();
+    });
+    await new Promise((resolve) => {
+      setTimeout(resolve, 50);
+    });
+    expect(acquired).toBe(false);
+
+    childProcess.kill();
+    await pendingAcquisition;
+    expect(acquired).toBe(true);
   });
 });

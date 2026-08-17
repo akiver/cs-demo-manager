@@ -41,6 +41,8 @@ export const ErrorCode = {
   EmbeddedPostgresStartFailed: 712,
   EmbeddedPostgresVersionMismatch: 713,
   EmbeddedPostgresStateMissing: 714,
+  EmbeddedPostgresInUse: 715,
+  DatabaseTransitionInProgress: 716,
   BoilerInvalidArgs: 800,
   BoilerCommunicationFailure: 801,
   BoilerAlreadyConnected: 802,

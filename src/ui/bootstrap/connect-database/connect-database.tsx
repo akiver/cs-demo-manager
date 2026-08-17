@@ -102,7 +102,7 @@ export function ConnectDatabase() {
     }
 
     return (
-      <div className="m-auto mt-8 flex max-w-[600px] flex-col">
+      <div className="m-auto mt-8 flex database-page-max-width flex-col">
         <ErrorMessage message={<Trans>The connection to the database failed with the following error:</Trans>} />
         <p className="my-8 text-body-strong select-text">{error.message}</p>
         {getHintFromError(error)}

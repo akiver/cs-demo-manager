@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useEffectEvent, useRef, useState } from 'react';
 import { Plural, Trans } from '@lingui/react/macro';
 import { PortInput } from 'csdm/ui/components/inputs/port-input';
 import { DatabaseNameInput } from 'csdm/ui/components/inputs/database-name-input';
@@ -30,12 +30,9 @@ export function ExternalDatabaseForm({ children }: Props) {
   const [secondsBeforeNextTry, setSecondsBeforeNextTry] = useState(-1);
   const animationId = useRef<number | null>(null);
   const appOpenedAtLoginArg = useArgument(ArgumentName.AppOpenedAtLogin);
-  const settingsRef = useRef(databaseSettings);
-  settingsRef.current = databaseSettings;
-
   const isRetrying = useRef(false);
 
-  const stopRetrying = () => {
+  const stopRetrying = useCallback(() => {
     // ! The flag is what stops a loop currently awaiting a connection: cancelling the frame has no
     // effect on it, it would schedule the next one as soon as the request settles.
     isRetrying.current = false;
@@ -43,28 +40,26 @@ export function ExternalDatabaseForm({ children }: Props) {
       window.cancelAnimationFrame(animationId.current);
     }
     setSecondsBeforeNextTry(-1);
-  };
+  }, []);
 
-  const connectDatabase = async () => {
+  const connectDatabase = useCallback(async () => {
     setIsConnecting(true);
-    const error = await connect(settingsRef.current);
+    const error = await connect(databaseSettings);
     if (error) {
       setIsConnecting(false);
     }
 
     return error;
-  };
-  const connectDatabaseRef = useRef(connectDatabase);
-  connectDatabaseRef.current = connectDatabase;
+  }, [connect, databaseSettings]);
 
   // ! Only the attempts started by the user stop the retry loop, the ones the loop makes itself
   // obviously must not.
-  const connectDatabaseManually = async () => {
+  const connectDatabaseManually = useCallback(async () => {
     stopRetrying();
-    await connectDatabaseRef.current();
-  };
-  const connectDatabaseManuallyRef = useRef(connectDatabaseManually);
-  connectDatabaseManuallyRef.current = connectDatabaseManually;
+    await connectDatabase();
+  }, [connectDatabase, stopRetrying]);
+  const connectDatabaseFromEffect = useEffectEvent(connectDatabase);
+  const connectDatabaseManuallyFromEffect = useEffectEvent(connectDatabaseManually);
 
   useEffect(() => {
     const onKeyDown = async (event: KeyboardEvent) => {
@@ -75,7 +70,7 @@ export function ExternalDatabaseForm({ children }: Props) {
       }
 
       event.stopPropagation();
-      await connectDatabaseManuallyRef.current();
+      await connectDatabaseManuallyFromEffect();
     };
 
     window.addEventListener('keydown', onKeyDown);
@@ -100,7 +95,7 @@ export function ExternalDatabaseForm({ children }: Props) {
       const elapsed = time - start;
       if (elapsed >= delayInMs) {
         start = null;
-        const error = await connectDatabaseRef.current();
+        const error = await connectDatabaseFromEffect();
         if (error && isRetrying.current) {
           animationId.current = window.requestAnimationFrame(loop);
         }
@@ -117,7 +112,7 @@ export function ExternalDatabaseForm({ children }: Props) {
     return () => {
       stopRetrying();
     };
-  }, [appOpenedAtLoginArg]);
+  }, [appOpenedAtLoginArg, stopRetrying]);
 
   const useEmbeddedDatabase = async () => {
     // ! Without it the retry loop would keep running and a later success would persist the external
@@ -132,7 +127,7 @@ export function ExternalDatabaseForm({ children }: Props) {
 
   return (
     <div className="m-auto flex flex-col">
-      <div className="m-auto flex w-[400px] flex-col">
+      <div className="m-auto flex database-form-width flex-col">
         <div>
           <p>
             <Trans>CS Demo Manager requires a PostgreSQL database.</Trans>

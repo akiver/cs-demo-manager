@@ -399,8 +399,8 @@ msgid "Please read the <0>documentation</0> for help."
 msgstr "Please read the <0>documentation</0> for help."
 
 #: src/ui/bootstrap/connect-database/use-connect-database.ts
-msgid "The connection succeeded but the settings could not be saved."
-msgstr "The connection succeeded but the settings could not be saved."
+msgid "The database connection returned an invalid response."
+msgstr "The database connection returned an invalid response."
 
 #: src/ui/bootstrap/settings-provider.tsx
 msgid "An error occurred while loading settings."
@@ -7243,6 +7243,10 @@ msgstr "Pitch"
 msgctxt "Input label"
 msgid "Yaw"
 msgstr "Yaw"
+
+#: src/ui/settings/database/database-mode-selector.tsx
+msgid "The database disconnection returned an invalid response."
+msgstr "The database disconnection returned an invalid response."
 
 #: src/ui/settings/database/database-mode-selector.tsx
 msgid "Unknown error"

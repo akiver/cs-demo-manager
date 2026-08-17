@@ -23,6 +23,22 @@
   scrollbar-gutter: stable;
 }
 
+@utility database-actions-max-width {
+  max-width: var(--database-actions-width);
+}
+
+@utility database-form-width {
+  width: var(--database-form-width);
+}
+
+@utility database-form-max-width {
+  max-width: var(--database-form-width);
+}
+
+@utility database-page-max-width {
+  max-width: var(--database-page-width);
+}
+
 @utility selectable {
   user-select: text;
   cursor: default;

@@ -137,6 +137,7 @@ const config = {
     output: 'dist',
     buildResources: 'build-assets',
   },
+  asarUnpack: ['node_modules/fs-native-extensions/**'],
   files: [
     'package.json',
     {

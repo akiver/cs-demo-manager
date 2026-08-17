@@ -69,7 +69,7 @@ export function EmbeddedDatabaseError({ children }: Props) {
   };
 
   return (
-    <div className="m-auto flex max-w-[600px] flex-col">
+    <div className="m-auto flex database-page-max-width flex-col">
       <p>
         <Trans>CS Demo Manager couldn't start its built-in database.</Trans>
       </p>

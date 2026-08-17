@@ -12,14 +12,14 @@ import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { disconnectDatabaseSuccess } from 'csdm/ui/bootstrap/bootstrap-actions';
-import { useUpdateSettings } from 'csdm/ui/settings/use-update-settings';
+import { settingsUpdated } from 'csdm/ui/settings/settings-actions';
 import { useDatabaseSettings } from './use-database-settings';
 
 // ! JSON.stringify(new Error()) is "{}", and it throws on a circular value: the message would be
 // replaced by an empty object exactly when there is something to tell the user.
 function formatError(error: unknown) {
   if (error instanceof Error) {
-    return error.message;
+    return error.message.trim() === '' ? undefined : error.message;
   }
 
   return typeof error === 'string' ? error : undefined;
@@ -30,7 +30,6 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
   const connect = useConnectDatabase();
   const client = useWebSocketClient();
   const dispatch = useDispatch();
-  const updateSettings = useUpdateSettings();
   const { hideDialog } = useDialog();
   const { t } = useLingui();
   const [error, setError] = useState<string | undefined>(undefined);
@@ -45,30 +44,18 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
     // ! The connection form is the only place where the server can be entered, and it's shown by the
     // bootstrap screen. Connecting from here would use whatever the settings hold, which on an
     // installation that never used an external server are placeholders nobody can correct.
-    await updateSettings({
-      database: {
-        ...databaseSettings,
-        mode: 'external',
-      },
+    const result = await client.send({
+      name: RendererClientMessageName.DisconnectDatabase,
+      payload: { nextMode: 'external' },
     });
-
-    try {
-      await client.send({
-        name: RendererClientMessageName.DisconnectDatabase,
-      });
-    } catch (error) {
-      // ! The mode has to go back to what it was: the app is still connected to the built-in
-      // database and the settings would claim otherwise, including on the next start.
-      await updateSettings({
-        database: {
-          ...databaseSettings,
-          mode: 'embedded',
-        },
-      });
-
-      throw error;
+    if (result.error !== undefined) {
+      throw new Error(result.error.message);
+    }
+    if (result.settings === undefined) {
+      throw new Error(t`The database disconnection returned an invalid response.`);
     }
 
+    dispatch(settingsUpdated({ settings: result.settings }));
     dispatch(disconnectDatabaseSuccess());
     closeDialog();
   };

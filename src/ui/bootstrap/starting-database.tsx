@@ -10,7 +10,7 @@ export function StartingDatabase() {
     <div className="flex h-full flex-col items-center justify-center gap-y-12">
       <Spinner size={70} />
       {mode === 'embedded' ? (
-        <div className="flex max-w-[400px] flex-col items-center gap-y-4 text-center">
+        <div className="flex database-form-max-width flex-col items-center gap-y-4 text-center">
           <p>
             <Trans>Starting the built-in database…</Trans>
           </p>

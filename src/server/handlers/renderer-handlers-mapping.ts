@@ -43,10 +43,14 @@ import { updateMapHandler } from './renderer-process/map/update-map-handler';
 import type { MapPayload } from './renderer-process/map/map-payload';
 import { deleteMapHandler } from './renderer-process/map/delete-map-handler';
 import { fetchBanStatsHandler } from './renderer-process/bans/fetch-ban-stats-handler';
-import { disconnectDatabaseConnectionHandler } from './renderer-process/database/disconnect-database-connection-handler';
+import {
+  disconnectDatabaseConnectionHandler,
+  type DisconnectDatabasePayload,
+  type DisconnectDatabaseResult,
+} from './renderer-process/database/disconnect-database-connection-handler';
 import {
   connectDatabaseHandler,
-  type ConnectDatabaseError,
+  type ConnectDatabaseResult,
 } from './renderer-process/database/connect-database-handler';
 import { addVideoToQueueHandler } from './renderer-process/video/add-video-to-queue-handler';
 import type { UpdateMatchDemoLocationPayload } from './renderer-process/match/update-match-demo-location-handler';
@@ -64,6 +68,7 @@ import {
   type EmbeddedDatabaseInfo,
 } from './renderer-process/database/get-embedded-database-info-handler';
 import { resetEmbeddedDatabaseHandler } from './renderer-process/database/reset-embedded-database-handler';
+import type { DatabaseOperationError } from 'csdm/server/database-operation-error';
 import type { OptimizeDatabasePayload } from './renderer-process/database/optimize-database-handler';
 import { optimizeDatabaseHandler } from './renderer-process/database/optimize-database-handler';
 import { fetchPlayersHandler } from './renderer-process/player/fetch-players-table-handler';
@@ -239,8 +244,8 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.AbortCurrentTask]: Handler;
   [RendererClientMessageName.GetDatabaseSize]: Handler<void, string>;
   [RendererClientMessageName.GetEmbeddedDatabaseInfo]: Handler<void, EmbeddedDatabaseInfo>;
-  [RendererClientMessageName.ResetEmbeddedDatabase]: Handler;
-  [RendererClientMessageName.ResetDatabase]: Handler;
+  [RendererClientMessageName.ResetEmbeddedDatabase]: Handler<void, DatabaseOperationError | undefined>;
+  [RendererClientMessageName.ResetDatabase]: Handler<void, DatabaseOperationError | undefined>;
   [RendererClientMessageName.OptimizeDatabase]: Handler<OptimizeDatabasePayload>;
   [RendererClientMessageName.FetchMatchesTable]: Handler<FetchMatchesTablePayload, MatchTable[]>;
   [RendererClientMessageName.FetchMatchByChecksum]: Handler<string, Match>;
@@ -291,8 +296,11 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdateCamera]: Handler<UpdateCameraPayload, Camera>;
   [RendererClientMessageName.DeleteCamera]: Handler<string>;
   [RendererClientMessageName.FetchBanStats]: Handler<void, BanStats>;
-  [RendererClientMessageName.DisconnectDatabase]: Handler;
-  [RendererClientMessageName.ConnectDatabase]: Handler<DatabaseSettings | undefined, ConnectDatabaseError | undefined>;
+  [RendererClientMessageName.DisconnectDatabase]: Handler<
+    DisconnectDatabasePayload | undefined,
+    DisconnectDatabaseResult
+  >;
+  [RendererClientMessageName.ConnectDatabase]: Handler<DatabaseSettings | undefined, ConnectDatabaseResult>;
   [RendererClientMessageName.AddVideoToQueue]: Handler<AddVideoPayload>;
   [RendererClientMessageName.ResumeVideoQueue]: Handler;
   [RendererClientMessageName.PauseVideoQueue]: Handler;

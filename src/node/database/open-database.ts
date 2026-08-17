@@ -1,10 +1,15 @@
-import { createDatabaseConnection } from 'csdm/node/database/database';
+import {
+  commitDatabaseConnection,
+  createDatabaseConnection,
+  discardPreparedDatabaseConnection,
+  type PreparedDatabaseConnection,
+} from 'csdm/node/database/database';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { migrateDatabase } from 'csdm/node/database/migrations/migrate-database';
 import { createDatabaseIfNotExists } from 'csdm/node/database/create-database-if-not-exists';
 import { startEmbeddedCluster } from 'csdm/node/database/embedded/start-cluster';
-import { stopEmbeddedCluster } from 'csdm/node/database/embedded/stop-cluster';
+import { releaseEmbeddedClusterSession } from 'csdm/node/database/embedded/stop-cluster';
 
 type Options = {
   /**
@@ -24,23 +29,46 @@ export async function openDatabase(
   databaseSettings?: DatabaseSettings,
   options: Options = { releaseEmbeddedCluster: false },
 ): Promise<DatabaseSettings> {
+  const connection = await prepareDatabaseConnection(databaseSettings);
+
+  await commitDatabaseConnection(connection, {
+    stopPreviousEmbeddedIfUnused: options.releaseEmbeddedCluster,
+  });
+
+  return connection.settings;
+}
+
+export async function prepareDatabaseConnection(
+  databaseSettings?: DatabaseSettings,
+): Promise<PreparedDatabaseConnection> {
   if (databaseSettings === undefined) {
     const settings = await getSettings();
     databaseSettings = settings.database;
   }
 
   const isEmbedded = databaseSettings.mode === 'embedded';
-  const connectionSettings = isEmbedded ? await startEmbeddedCluster() : databaseSettings;
+  const embeddedSession = isEmbedded ? await startEmbeddedCluster() : undefined;
+  const connectionSettings = embeddedSession?.settings ?? databaseSettings;
 
-  await createDatabaseIfNotExists(connectionSettings);
-  createDatabaseConnection(connectionSettings);
-  await migrateDatabase();
+  let connection: PreparedDatabaseConnection | undefined;
+  try {
+    await createDatabaseIfNotExists(connectionSettings);
+    connection = createDatabaseConnection(connectionSettings, embeddedSession);
+    await migrateDatabase(connection.database);
 
-  if (!isEmbedded && options.releaseEmbeddedCluster) {
-    // ! Only once the external server has proven to work: the bundled cluster is what the user comes
-    // back to when the connection fails, releasing it before would take that fallback down too.
-    await stopEmbeddedCluster();
+    return connection;
+  } catch (error) {
+    try {
+      if (connection !== undefined) {
+        await discardPreparedDatabaseConnection(connection);
+      } else if (embeddedSession !== undefined) {
+        await releaseEmbeddedClusterSession(embeddedSession, { stopIfUnused: false });
+      }
+    } catch (cleanupError) {
+      logger.error('Failed to discard a database candidate after preparation failed');
+      logger.error(cleanupError);
+    }
+
+    throw error;
   }
-
-  return connectionSettings;
 }

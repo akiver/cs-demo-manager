@@ -34,9 +34,10 @@ export function runPostgresCommand(
       },
       (error, stdout, stderr) => {
         if (error !== null) {
-          error.message = `${error.message}\n${stderr}`;
+          const stderrMessage = stderr.trim();
+          const message = stderrMessage === '' ? error.message : `${error.message}\n${stderrMessage}`;
 
-          return reject(error);
+          return reject(new Error(message, { cause: error }));
         }
 
         resolve({ stdout, stderr });
