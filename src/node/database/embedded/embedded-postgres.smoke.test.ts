@@ -9,7 +9,12 @@ import { resetEmbeddedCluster } from './reset-cluster';
 import { findRunningCluster } from './read-postmaster-pid';
 
 const { rootFolderPath } = vi.hoisted(() => {
-  const temporaryFolderPath = process.env.RUNNER_TEMP ?? process.env.TEMP ?? process.env.TMP ?? '/tmp';
+  // GitHub's Windows RUNNER_TEMP is on D:, where initdb cannot tighten the directory ACL. The app
+  // stores its real cluster under LOCALAPPDATA on C:, so TEMP is the representative location.
+  const temporaryFolderPath =
+    process.platform === 'win32'
+      ? (process.env.TEMP ?? process.env.TMP ?? 'C:\\Windows\\Temp')
+      : (process.env.RUNNER_TEMP ?? process.env.TMP ?? '/tmp');
   return { rootFolderPath: `${temporaryFolderPath}/csdm-embedded-postgres-smoke-${process.pid}` };
 });
 
