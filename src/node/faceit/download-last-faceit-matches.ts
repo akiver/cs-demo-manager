@@ -33,7 +33,7 @@ export async function downloadLastFaceitMatches(signal?: AbortSignal) {
     };
   });
 
-  const downloadsAdded = await downloadDemoQueue.addDownloads(downloads);
+  const downloadsAdded = await downloadDemoQueue.addDownloads(downloads, signal);
 
   return downloadsAdded;
 }

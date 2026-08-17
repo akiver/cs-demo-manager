@@ -31,7 +31,7 @@ export async function downloadLastValveMatches(signal?: AbortSignal) {
       return match.downloadStatus === DownloadStatus.NotDownloaded && !downladedMatchIds.includes(match.id);
     });
     const downloads = matchesToDownload.map(buildDownloadFromValveMatch);
-    const downloadsAdded = await downloadDemoQueue.addDownloads(downloads);
+    const downloadsAdded = await downloadDemoQueue.addDownloads(downloads, signal);
 
     server.sendMessageToRendererProcess({
       name: RendererServerMessageName.FetchLastValveMatchesSuccess,

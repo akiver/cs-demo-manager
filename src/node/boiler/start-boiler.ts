@@ -17,6 +17,7 @@ import { InvalidArgs } from './errors/invalid-args';
 import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
 import { getStaticFolderPath } from 'csdm/node/filesystem/get-static-folder-path';
 import { assertSteamIsRunning } from 'csdm/node/counter-strike/launcher/assert-steam-is-running';
+import { abortError } from 'csdm/node/errors/abort-error';
 
 type OnSteamIdDetectedCallback = (steamId: string) => void;
 type OnExitCallback = (exitCode: number) => void;
@@ -44,6 +45,7 @@ export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCC
       args.push(...options.args);
     }
     const child = execFile(executablePath, args, { signal: options?.signal });
+    let isSettled = false;
 
     const onSteamIdDetected = options?.onSteamIdDetected;
     if (onSteamIdDetected && child.stdout !== null) {
@@ -56,15 +58,33 @@ export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCC
     }
 
     child.on('error', async (error) => {
-      logger.error('boiler process error');
-      logger.error(error);
+      if (isSettled) {
+        return;
+      }
+
+      isSettled = true;
+      if (!options?.signal?.aborted) {
+        logger.error('boiler process error');
+        logger.error(error);
+      }
       reject(error);
       await killCounterStrikeProcesses();
     });
 
-    child.on('exit', async (code: number) => {
+    child.on('exit', async (code: number | null) => {
+      if (isSettled) {
+        return;
+      }
+
+      isSettled = true;
+      if (options?.signal?.aborted) {
+        reject(options.signal.reason ?? abortError);
+        await killCounterStrikeProcesses();
+        return;
+      }
+
       if (options?.onExit) {
-        options.onExit(code);
+        options.onExit(code ?? -1);
       }
       await killCounterStrikeProcesses();
 

@@ -10,6 +10,7 @@ export async function updateValvePlayersFromSteam(players: ValvePlayer[], signal
     signal?.throwIfAborted();
     const steamIds = players.map((player) => player.steamId);
     let accounts: InsertableSteamAccount[] = await fetchSteamAccounts(steamIds);
+    signal?.throwIfAborted();
     const needsToFetchPlayersFromSteam = steamIds.some((steamId) => {
       return !accounts.some((account) => account.steam_id === steamId);
     });
@@ -20,6 +21,7 @@ export async function updateValvePlayersFromSteam(players: ValvePlayer[], signal
         return;
       }
 
+      signal?.throwIfAborted();
       await insertSteamAccounts(accounts);
     }
 
@@ -35,6 +37,9 @@ export async function updateValvePlayersFromSteam(players: ValvePlayer[], signal
       }
     }
   } catch (error) {
+    if (signal?.aborted) {
+      throw error;
+    }
     logger.error('Error while updating match info players from Steam');
     logger.error(error);
     if (!(error instanceof SteamApiError)) {

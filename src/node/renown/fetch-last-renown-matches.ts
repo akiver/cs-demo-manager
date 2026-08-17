@@ -146,6 +146,7 @@ export async function fetchLastRenownMatches(steamId: string, signal?: AbortSign
         signal?.throwIfAborted();
         return await fetchMatchDetails(matchId, downloadFolderPath, signal);
       } catch (error) {
+        signal?.throwIfAborted();
         if (!(error instanceof RenownResourceNotFound)) {
           logger.log(`Renown match with ID ${matchId} not found`);
           throw error;

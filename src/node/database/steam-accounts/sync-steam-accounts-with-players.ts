@@ -6,7 +6,8 @@ import { insertSteamAccounts } from './insert-steam-accounts';
  * Sync the "players" table (data from demos analyses) with the "steam_accounts" table (data from the Steam API).
  * Steam accounts are inserted after a demo analysis but it may silently fail if the Steam API returns an error or the user is offline.
  */
-export async function syncSteamAccountsWithPlayers(): Promise<string[]> {
+export async function syncSteamAccountsWithPlayers(signal?: AbortSignal): Promise<string[]> {
+  signal?.throwIfAborted();
   const missingPlayerRows = await db
     .selectFrom('players')
     .select('steam_id')
@@ -21,17 +22,19 @@ export async function syncSteamAccountsWithPlayers(): Promise<string[]> {
       );
     })
     .execute();
+  signal?.throwIfAborted();
 
   const missingSteamIds = missingPlayerRows.map((row) => row.steam_id);
   if (missingSteamIds.length === 0) {
     return [];
   }
 
-  const steamAccounts = await buildSteamAccountsFromSteamIds(missingSteamIds);
+  const steamAccounts = await buildSteamAccountsFromSteamIds(missingSteamIds, signal);
   if (steamAccounts.length === 0) {
     return [];
   }
 
+  signal?.throwIfAborted();
   await insertSteamAccounts(steamAccounts);
   const insertedSteamIds = steamAccounts.map((account) => account.steam_id);
 

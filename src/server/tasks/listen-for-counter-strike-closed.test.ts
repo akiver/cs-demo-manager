@@ -79,4 +79,35 @@ describe('Counter-Strike closed listener lifecycle', () => {
     expect(mocks.isCounterStrikeRunning).toHaveBeenCalledTimes(2);
     expect(vi.getTimerCount()).toBe(1);
   });
+
+  it('does not let an old check trigger downloads after restart', async () => {
+    const closingCheck = deferred<boolean>();
+    mocks.isCounterStrikeRunning.mockResolvedValueOnce(true).mockReturnValueOnce(closingCheck.promise);
+    mocks.getSettings.mockResolvedValue({
+      download: {
+        downloadValveDemosInBackground: true,
+        downloadFaceitDemosInBackground: true,
+        download5EPlayDemosInBackground: true,
+        downloadRenownDemosInBackground: true,
+      },
+    });
+
+    listenForCounterStrikeClosed();
+    await vi.advanceTimersByTimeAsync(30_000);
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(mocks.isCounterStrikeRunning).toHaveBeenCalledTimes(2);
+
+    vi.setSystemTime(Date.now() + 1_200_001);
+    const pendingStop = stopListeningForCounterStrikeClosed();
+    listenForCounterStrikeClosed();
+    closingCheck.resolve(false);
+    await pendingStop;
+
+    expect(mocks.getSettings).not.toHaveBeenCalled();
+    expect(mocks.downloadLastValveMatches).not.toHaveBeenCalled();
+    expect(mocks.downloadLastFaceitMatches).not.toHaveBeenCalled();
+    expect(mocks.downloadLast5EPlayMatches).not.toHaveBeenCalled();
+    expect(mocks.downloadLastRenownMatches).not.toHaveBeenCalled();
+    expect(vi.getTimerCount()).toBe(1);
+  });
 });

@@ -163,4 +163,24 @@ describe('background task lifecycle', () => {
     await expect(startBackgroundTasks()).rejects.toBe(startupError);
     await expect(startBackgroundTasks()).resolves.toBeUndefined();
   });
+
+  it('aborts a failed startup session before waiting for listener cleanup', async () => {
+    const cleanup = deferred<void>();
+    const startupError = new Error('download failed');
+    let startupSignal: AbortSignal | undefined;
+    mocks.downloadLastMatchesIfNecessary.mockImplementationOnce((signal: AbortSignal) => {
+      startupSignal = signal;
+      return Promise.reject(startupError);
+    });
+    mocks.stopListeningForCounterStrikeClosed.mockReturnValueOnce(cleanup.promise);
+
+    const start = startBackgroundTasks();
+    const rejectedStart = expect(start).rejects.toBe(startupError);
+    await vi.waitFor(() => expect(startupSignal?.aborted).toBe(true));
+
+    const shutdown = stopBackgroundTasks({ abortAfterMs: 30_000, abortSettleTimeoutMs: 5_000 });
+    await expect(shutdown).resolves.toBe('drained');
+    cleanup.resolve();
+    await rejectedStart;
+  });
 });

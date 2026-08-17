@@ -4,7 +4,7 @@ import type { EmbeddedClusterSession } from './embedded/start-cluster';
 let databaseModule: typeof import('./database');
 
 const mocks = vi.hoisted(() => {
-  return { releaseEmbeddedClusterSession: vi.fn() };
+  return { destroyDatabase: vi.fn(), releaseEmbeddedClusterSession: vi.fn() };
 });
 
 vi.stubGlobal('logger', { log: vi.fn(), warn: vi.fn(), error: vi.fn() });
@@ -25,7 +25,7 @@ vi.mock('kysely', () => {
   return {
     PostgresDialect: class PostgresDialect {},
     Kysely: class Kysely {
-      public destroy = vi.fn().mockResolvedValue(undefined);
+      public destroy = mocks.destroyDatabase;
     },
   };
 });
@@ -35,6 +35,7 @@ vi.mock('csdm/node/database/embedded/stop-cluster', () => {
 
 beforeEach(async () => {
   vi.resetModules();
+  mocks.destroyDatabase.mockReset().mockResolvedValue(undefined);
   mocks.releaseEmbeddedClusterSession.mockReset();
   databaseModule = await import('./database');
 });
@@ -89,5 +90,25 @@ describe('embedded session cleanup', () => {
     ).resolves.toBeUndefined();
 
     expect(mocks.releaseEmbeddedClusterSession).toHaveBeenLastCalledWith(session, { stopIfUnused: false });
+  });
+
+  it('preserves a resource cleanup rejection until the deferred shutdown phase observes it', async () => {
+    const destroyError = new Error('pool destroy failed');
+    const settings = {
+      mode: 'external' as const,
+      hostname: '127.0.0.1',
+      port: 54_321,
+      username: 'csdm',
+      password: 'secret',
+      database: 'csdm',
+    };
+    const connection = databaseModule.createDatabaseConnection(settings);
+    await databaseModule.commitDatabaseConnection(connection, { stopPreviousEmbeddedIfUnused: false });
+    mocks.destroyDatabase.mockRejectedValueOnce(destroyError);
+
+    const cleanup = databaseModule.beginDatabaseConnectionCleanup();
+    await Promise.resolve();
+
+    await expect(cleanup.resourcesDestroyed).rejects.toBe(destroyError);
   });
 });

@@ -82,6 +82,7 @@ async function startBackgroundTasksAfterPendingStop() {
     }, intervalInMs);
   } catch (error) {
     if (activeSession === session) {
+      session.abortController.abort();
       activeSession = undefined;
       try {
         await stopListeningForCounterStrikeClosed();

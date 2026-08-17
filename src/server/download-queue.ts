@@ -71,26 +71,31 @@ class DownloadDemoQueue {
     void this.loopUntilDownloadsDone();
   };
 
-  public addDownloads = async (downloads: Download[]) => {
+  public addDownloads = async (downloads: Download[], signal?: AbortSignal) => {
+    signal?.throwIfAborted();
     if (downloads.length === 0) {
       return [];
     }
 
     const downloadFolderPath = await this.getDownloadFolderPath();
+    signal?.throwIfAborted();
 
     const validDownloads: Download[] = [];
     for (const download of downloads) {
+      signal?.throwIfAborted();
       const isAlreadyInQueue = this.isMatchAlreadyInQueue(download.matchId);
       if (isAlreadyInQueue) {
         continue;
       }
 
       const isAlreadyDownloaded = await this.isMatchAlreadyDownloaded(downloadFolderPath, download);
+      signal?.throwIfAborted();
       if (isAlreadyDownloaded) {
         continue;
       }
 
-      const downloadLinkExpired = await isDownloadLinkExpired(download.demoUrl);
+      const downloadLinkExpired = await isDownloadLinkExpired(download.demoUrl, signal);
+      signal?.throwIfAborted();
       if (downloadLinkExpired) {
         continue;
       }
@@ -102,6 +107,7 @@ class DownloadDemoQueue {
       return [];
     }
 
+    signal?.throwIfAborted();
     this.downloads.push(...validDownloads);
 
     server.sendMessageToRendererProcess({

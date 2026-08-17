@@ -18,7 +18,7 @@ export async function checkForNewBannedSteamAccounts(signal?: AbortSignal) {
       return;
     }
 
-    const syncedSteamIds = await syncSteamAccountsWithPlayers();
+    const syncedSteamIds = await syncSteamAccountsWithPlayers(signal);
     const newBannedSteamIds = await updateSteamAccountsFromSteam(syncedSteamIds, signal);
 
     if (newBannedSteamIds.length > 0) {

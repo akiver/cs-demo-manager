@@ -306,12 +306,17 @@ export function beginDatabaseConnectionCleanup(
   connectedSettings = undefined;
   embeddedClusterSession = undefined;
 
+  const resourcesDestroyed = waitForDatabaseResourceCleanup([database?.destroy(), discardIngestionPool()]);
+  // Shutdown may have to wait for a native usage lease before it can observe this promise. Attach a
+  // handler immediately so an early pool failure is not reported as an unhandled rejection.
+  void resourcesDestroyed.catch(() => undefined);
+
   return {
     embeddedValidationPassword: session?.settings.password,
     embeddedSessionsReleased: releasePendingEmbeddedSessions(
       options.releasePendingEmbeddedWithoutStopping ? false : undefined,
     ),
-    resourcesDestroyed: waitForDatabaseResourceCleanup([database?.destroy(), discardIngestionPool()]),
+    resourcesDestroyed,
   };
 }
 
