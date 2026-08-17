@@ -315,14 +315,15 @@ async function makePostgresBinariesExecutable(folderPath) {
 
 async function validatePostgresFolder(folderPath, platform) {
   const extension = platform === 'win32' ? '.exe' : '';
-  const requiredFiles = [
-    path.join(folderPath, 'VERSION'),
+  await fs.access(path.join(folderPath, 'VERSION'), fs.constants.F_OK);
+
+  const requiredBinaries = [
     path.join(folderPath, 'bin', `postgres${extension}`),
     path.join(folderPath, 'bin', `initdb${extension}`),
     path.join(folderPath, 'bin', `pg_ctl${extension}`),
   ];
 
-  for (const filePath of requiredFiles) {
+  for (const filePath of requiredBinaries) {
     await fs.access(filePath, platform === 'win32' ? fs.constants.F_OK : fs.constants.X_OK);
   }
 }
