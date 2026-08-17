@@ -42,6 +42,8 @@ describe('startBoiler', () => {
     mocks.killCounterStrikeProcesses.mockResolvedValue(undefined);
     const abortReason = new Error('shutdown');
     abortReason.name = 'AbortError';
+    const processAbortError = new Error('The operation was aborted');
+    processAbortError.name = 'AbortError';
     const signal = AbortSignal.abort(abortReason);
     const onExit = vi.fn();
 
@@ -52,7 +54,7 @@ describe('startBoiler', () => {
       (error: unknown) => error,
     );
     const emitExit = () => child.listeners('exit')[0](1);
-    const emitError = () => child.listeners('error')[0](abortReason);
+    const emitError = () => child.listeners('error')[0](processAbortError);
     if (eventOrder === 'exit-first') {
       emitExit();
       emitError();

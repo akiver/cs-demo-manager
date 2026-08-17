@@ -63,11 +63,13 @@ export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCC
       }
 
       isSettled = true;
-      if (!options?.signal?.aborted) {
+      if (options?.signal?.aborted) {
+        reject(options.signal.reason ?? abortError);
+      } else {
         logger.error('boiler process error');
         logger.error(error);
+        reject(error);
       }
-      reject(error);
       await killCounterStrikeProcesses();
     });
 
