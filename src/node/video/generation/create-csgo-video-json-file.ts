@@ -9,6 +9,7 @@ import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import { lastArrayItem } from 'csdm/common/array/last-array-item';
+import { getCompatibleConstantRateFactor } from 'csdm/common/video/get-compatible-constant-rate-factor';
 
 type Options = {
   type: 'record' | 'watch';
@@ -105,7 +106,7 @@ export async function createCsgoVideoJsonFile({
     if (presetName !== 'afxClassic') {
       let presetParameters = `-c:v ${ffmpegSettings.videoCodec}`;
       if (ffmpegSettings.outputParameters === '') {
-        presetParameters += ` -crf ${ffmpegSettings.constantRateFactor}`;
+        presetParameters += ` -crf ${getCompatibleConstantRateFactor(ffmpegSettings.constantRateFactor, ffmpegSettings.videoCodec)}`;
       } else {
         presetParameters += ` ${ffmpegSettings.outputParameters}`;
       }

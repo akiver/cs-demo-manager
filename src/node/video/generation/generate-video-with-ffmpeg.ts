@@ -10,6 +10,7 @@ import { executeFfmpeg } from 'csdm/node/video/ffmpeg/execute-ffmpeg';
 import type { VideoContainer } from 'csdm/common/types/video-container';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
+import { getCompatibleConstantRateFactor } from 'csdm/common/video/get-compatible-constant-rate-factor';
 import { RawFilesNotFoundError } from '../errors/raw-files-not-found';
 
 async function convertGameAudioFile(
@@ -181,7 +182,7 @@ export async function generateVideoWithFFmpeg(settings: GenerateVideoWithFFmpegS
   if (outputParameters !== '') {
     args.push(outputParameters);
   } else {
-    args.push(`-pix_fmt yuv420p`, `-crf ${constantRateFactor}`);
+    args.push(`-pix_fmt yuv420p`, `-crf ${getCompatibleConstantRateFactor(constantRateFactor, videoCodec)}`);
   }
 
   args.push(`"${outputPath}"`);
