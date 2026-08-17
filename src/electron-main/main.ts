@@ -176,7 +176,7 @@ async function start() {
   // Gives the server process a chance to release what outlives it, the embedded PostgreSQL cluster
   // in particular, which pg_ctl starts detached from the app.
   const prepareToQuit = async () => {
-    // Derived from the single lifecycle-lock acquisition plus the pg_ctl command timeout and margin.
+    // Derived from background-task grace/cancellation, one lifecycle-lock acquisition, pg_ctl and margin.
     const timeoutInMs = EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS;
     try {
       await Promise.race([

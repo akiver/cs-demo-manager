@@ -36,6 +36,7 @@ async function buildFaceitMatchFromFaceitDTOs(
   matchDTO: FaceitMatchDTO,
   teamsStatsDTO: FaceitMatchStatsDTO,
   downloadFolderPath: string | undefined,
+  signal?: AbortSignal,
 ) {
   if (teamsStatsDTO.rounds.length === 0) {
     throw new Error('No rounds found');
@@ -93,7 +94,12 @@ async function buildFaceitMatchFromFaceitDTOs(
   if (demoUrls !== undefined && demoUrls.length > 0) {
     demoUrl = demoUrls[0];
   }
-  const downloadStatus: DownloadStatus = await getDownloadStatus(downloadFolderPath, matchDTO.match_id, demoUrl);
+  const downloadStatus: DownloadStatus = await getDownloadStatus(
+    downloadFolderPath,
+    matchDTO.match_id,
+    demoUrl,
+    signal,
+  );
 
   // Remove potential workshop identifier prefix from map's name (i.e workshop/id/map_name).
   const workshopRegex = /workshop\/(\d+\/)(?<mapName>.*)/;
@@ -118,12 +124,17 @@ async function buildFaceitMatchFromFaceitDTOs(
   return match;
 }
 
-export async function fetchFaceitMatch(matchId: string, apiKey: string, downloadFolderPath: string | undefined) {
+export async function fetchFaceitMatch(
+  matchId: string,
+  apiKey: string,
+  downloadFolderPath: string | undefined,
+  signal?: AbortSignal,
+) {
   const [matchDTO, statsDTO]: [FaceitMatchDTO, FaceitMatchStatsDTO] = await Promise.all([
-    fetchMatch(matchId, apiKey),
-    fetchFaceitMatchStats(matchId, apiKey),
+    fetchMatch(matchId, apiKey, signal),
+    fetchFaceitMatchStats(matchId, apiKey, signal),
   ]);
-  const match = await buildFaceitMatchFromFaceitDTOs(matchDTO, statsDTO, downloadFolderPath);
+  const match = await buildFaceitMatchFromFaceitDTOs(matchDTO, statsDTO, downloadFolderPath, signal);
 
   return match;
 }

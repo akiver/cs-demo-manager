@@ -4,6 +4,7 @@ import { SteamApiForbiddenError } from './steam-api-forbidden-error';
 import { SteamApiError } from './steamapi-error';
 import { SteamTooMayRequests } from './steam-too-many-requests';
 import { sleep } from 'csdm/common/sleep';
+import { setTimeout as sleepWithSignal } from 'node:timers/promises';
 
 type PlayerSummary = {
   steamid: string;
@@ -31,7 +32,7 @@ type SteamPlayerSummaryResponse = {
 };
 
 // https://developer.valvesoftware.com/wiki/Steam_Web_API#GetPlayerSummaries_.28v0002.29
-export async function getUsersSummary(steamIds: string[]): Promise<PlayerSummary[]> {
+export async function getUsersSummary(steamIds: string[], signal?: AbortSignal): Promise<PlayerSummary[]> {
   const players: PlayerSummary[] = [];
   let promises: Promise<void>[] = [];
   const steamApiKey = await getSteamApiKey();
@@ -48,6 +49,7 @@ export async function getUsersSummary(steamIds: string[]): Promise<PlayerSummary
       (async () => {
         const response = await fetch(
           `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${steamApiKey}&steamids=${ids}`,
+          { signal },
         );
         if (response.status === 403) {
           throw new SteamApiForbiddenError();
@@ -72,7 +74,7 @@ export async function getUsersSummary(steamIds: string[]): Promise<PlayerSummary
       promises = [];
       const shouldSleep = requestCount !== requestToMakeCount;
       if (shouldSleep) {
-        await sleep(2000);
+        await (signal === undefined ? sleep(2000) : sleepWithSignal(2000, undefined, { signal }));
       }
     }
   }

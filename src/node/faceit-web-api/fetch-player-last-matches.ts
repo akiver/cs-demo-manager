@@ -49,7 +49,13 @@ type FaceitHistoryDTO = {
   items: FaceitMatchHistoryDTO[];
 };
 
-async function fetchPlayerLastMatchesForGame(playerId: string, apiKey: string, game: FaceitGameId, limit: number) {
+async function fetchPlayerLastMatchesForGame(
+  playerId: string,
+  apiKey: string,
+  game: FaceitGameId,
+  limit: number,
+  signal?: AbortSignal,
+) {
   const response = await fetch(
     `https://open.faceit.com/data/v4/players/${playerId}/history?limit=${limit}&game=${game}`,
     {
@@ -57,6 +63,7 @@ async function fetchPlayerLastMatchesForGame(playerId: string, apiKey: string, g
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
+      signal,
     },
   );
   const { items: matches }: FaceitHistoryDTO = await response.json();
@@ -84,10 +91,10 @@ async function fetchPlayerLastMatchesForGame(playerId: string, apiKey: string, g
   return matches;
 }
 
-export async function fetchPlayerLastMatches(playerId: string, apiKey: string) {
+export async function fetchPlayerLastMatches(playerId: string, apiKey: string, signal?: AbortSignal) {
   const maxMatchCount = 20;
   const matches: FaceitMatchHistoryDTO[] = [];
-  const cs2Matches = await fetchPlayerLastMatchesForGame(playerId, apiKey, 'cs2', maxMatchCount);
+  const cs2Matches = await fetchPlayerLastMatchesForGame(playerId, apiKey, 'cs2', maxMatchCount, signal);
   if (cs2Matches.length > 0) {
     matches.push(...cs2Matches);
   }
@@ -95,7 +102,7 @@ export async function fetchPlayerLastMatches(playerId: string, apiKey: string) {
   // We didn't find enough CS2 matches, find CS:GO matches
   if (matches.length < maxMatchCount) {
     const limit = maxMatchCount - matches.length;
-    const csgoMatches = await fetchPlayerLastMatchesForGame(playerId, apiKey, 'csgo', limit);
+    const csgoMatches = await fetchPlayerLastMatchesForGame(playerId, apiKey, 'csgo', limit, signal);
     if (csgoMatches.length > 0) {
       matches.push(...csgoMatches);
     }

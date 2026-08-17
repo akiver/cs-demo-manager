@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import type { EmbeddedClusterSession } from './embedded/start-cluster';
-import { commitDatabaseConnection, createDatabaseConnection, destroyDatabaseConnection } from './database';
+
+let databaseModule: typeof import('./database');
 
 const mocks = vi.hoisted(() => {
   return { releaseEmbeddedClusterSession: vi.fn() };
@@ -32,8 +33,10 @@ vi.mock('csdm/node/database/embedded/stop-cluster', () => {
   return { releaseEmbeddedClusterSession: mocks.releaseEmbeddedClusterSession };
 });
 
-beforeEach(() => {
+beforeEach(async () => {
+  vi.resetModules();
   mocks.releaseEmbeddedClusterSession.mockReset();
+  databaseModule = await import('./database');
 });
 
 describe('embedded session cleanup', () => {
@@ -52,11 +55,11 @@ describe('embedded session cleanup', () => {
       settings,
       usageLease: { release: vi.fn() },
     } as EmbeddedClusterSession;
-    const connection = createDatabaseConnection(settings, session);
-    await commitDatabaseConnection(connection, { stopPreviousEmbeddedIfUnused: false });
+    const connection = databaseModule.createDatabaseConnection(settings, session);
+    await databaseModule.commitDatabaseConnection(connection, { stopPreviousEmbeddedIfUnused: false });
 
-    await expect(destroyDatabaseConnection({ stopEmbeddedIfUnused: true })).rejects.toBe(releaseError);
-    await expect(destroyDatabaseConnection()).resolves.toBeUndefined();
+    await expect(databaseModule.destroyDatabaseConnection({ stopEmbeddedIfUnused: true })).rejects.toBe(releaseError);
+    await expect(databaseModule.destroyDatabaseConnection()).resolves.toBeUndefined();
 
     expect(mocks.releaseEmbeddedClusterSession).toHaveBeenCalledTimes(2);
     expect(mocks.releaseEmbeddedClusterSession).toHaveBeenLastCalledWith(session, { stopIfUnused: true });
@@ -77,11 +80,13 @@ describe('embedded session cleanup', () => {
       settings,
       usageLease: { release: vi.fn() },
     } as EmbeddedClusterSession;
-    const connection = createDatabaseConnection(settings, session);
-    await commitDatabaseConnection(connection, { stopPreviousEmbeddedIfUnused: false });
+    const connection = databaseModule.createDatabaseConnection(settings, session);
+    await databaseModule.commitDatabaseConnection(connection, { stopPreviousEmbeddedIfUnused: false });
 
-    await expect(destroyDatabaseConnection({ stopEmbeddedIfUnused: true })).rejects.toBe(releaseError);
-    await expect(destroyDatabaseConnection({ releasePendingEmbeddedWithoutStopping: true })).resolves.toBeUndefined();
+    await expect(databaseModule.destroyDatabaseConnection({ stopEmbeddedIfUnused: true })).rejects.toBe(releaseError);
+    await expect(
+      databaseModule.destroyDatabaseConnection({ releasePendingEmbeddedWithoutStopping: true }),
+    ).resolves.toBeUndefined();
 
     expect(mocks.releaseEmbeddedClusterSession).toHaveBeenLastCalledWith(session, { stopIfUnused: false });
   });

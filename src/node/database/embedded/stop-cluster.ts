@@ -6,11 +6,20 @@ import { CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS, tryAcquireExclusiveClusterUsage, wit
 import type { EmbeddedClusterSession } from './start-cluster';
 import { readClusterState } from './cluster-state';
 import { isExpectedRunningCluster } from './validate-running-cluster';
+import {
+  BACKGROUND_TASK_ABORT_SETTLE_TIMEOUT_MS,
+  BACKGROUND_TASK_SHUTDOWN_GRACE_MS,
+  SHUTDOWN_MARGIN_MS,
+} from 'csdm/common/shutdown-timeouts';
 
 const STOP_TIMEOUT_IN_SECONDS = 30;
 const STOP_COMMAND_TIMEOUT_MS = (STOP_TIMEOUT_IN_SECONDS + 10) * 1000;
 export const EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS =
-  CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS + STOP_COMMAND_TIMEOUT_MS + 10_000;
+  BACKGROUND_TASK_SHUTDOWN_GRACE_MS +
+  BACKGROUND_TASK_ABORT_SETTLE_TIMEOUT_MS +
+  CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS +
+  STOP_COMMAND_TIMEOUT_MS +
+  SHUTDOWN_MARGIN_MS;
 
 export type StopEmbeddedClusterResult =
   | { status: 'not-running' | 'stopped' }
@@ -101,7 +110,7 @@ export async function releaseEmbeddedClusterSession(
 }
 
 /** Stops the cluster only when no process holds a usage lease. */
-export function stopEmbeddedCluster() {
+export function stopEmbeddedCluster(options: { validationPassword?: string } = {}) {
   return withClusterLock(async () => {
     const exclusiveUsage = await tryAcquireExclusiveClusterUsage();
     if (exclusiveUsage === undefined) {
@@ -109,7 +118,7 @@ export function stopEmbeddedCluster() {
     }
 
     try {
-      const result = await stopEmbeddedClusterWithoutLock();
+      const result = await stopEmbeddedClusterWithoutLock(options);
 
       return result.status === 'not-running' || result.status === 'stopped';
     } finally {

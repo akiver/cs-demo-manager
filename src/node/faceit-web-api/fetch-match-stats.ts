@@ -54,12 +54,13 @@ export type FaceitMatchStatsDTO = {
   rounds: FaceitRoundStatsDTO[];
 };
 
-export async function fetchFaceitMatchStats(matchId: string, apiKey?: string) {
+export async function fetchFaceitMatchStats(matchId: string, apiKey?: string, signal?: AbortSignal) {
   const response = await fetch(`https://open.faceit.com/data/v4/matches/${matchId}/stats`, {
     headers: {
       Authorization: `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
+    signal,
   });
 
   if (response.status === 401) {

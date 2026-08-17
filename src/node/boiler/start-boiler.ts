@@ -24,6 +24,7 @@ type StartBoilerOptions = {
   args?: string[];
   onSteamIdDetected?: OnSteamIdDetectedCallback;
   onExit?: OnExitCallback;
+  signal?: AbortSignal;
 };
 
 export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCCStrike15_v2_MatchList> {
@@ -42,7 +43,7 @@ export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCC
     if (options?.args) {
       args.push(...options.args);
     }
-    const child = execFile(executablePath, args);
+    const child = execFile(executablePath, args, { signal: options?.signal });
 
     const onSteamIdDetected = options?.onSteamIdDetected;
     if (onSteamIdDetected && child.stdout !== null) {
@@ -57,6 +58,7 @@ export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCC
     child.on('error', async (error) => {
       logger.error('boiler process error');
       logger.error(error);
+      reject(error);
       await killCounterStrikeProcesses();
     });
 

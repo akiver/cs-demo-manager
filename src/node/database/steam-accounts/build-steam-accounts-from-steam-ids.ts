@@ -5,10 +5,13 @@ import { getUsersSummary } from 'csdm/node/steam-web-api/get-users-summary';
 import { EconomyBan } from 'csdm/node/steam-web-api/steam-constants';
 import type { InsertableSteamAccount } from './steam-account-table';
 
-export async function buildSteamAccountsFromSteamIds(steamIds: string[]): Promise<InsertableSteamAccount[]> {
+export async function buildSteamAccountsFromSteamIds(
+  steamIds: string[],
+  signal?: AbortSignal,
+): Promise<InsertableSteamAccount[]> {
   // ! Do not run it in parallel to avoid a potential rate limit HTTP error.
-  const users = await getUsersSummary(steamIds);
-  const bans = await getUsersBan(steamIds);
+  const users = await getUsersSummary(steamIds, signal);
+  const bans = await getUsersBan(steamIds, signal);
 
   const rows: InsertableSteamAccount[] = [];
   for (const steamId of steamIds) {

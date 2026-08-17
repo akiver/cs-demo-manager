@@ -5,16 +5,18 @@ import { fetchDownloadHistories } from 'csdm/node/database/download-history/fetc
 import { fetchCurrentRenownAccount } from '../database/renown-account/fetch-current-renown-account';
 import { fetchLastRenownMatches } from './fetch-last-renown-matches';
 
-export async function downloadLastRenownMatches() {
+export async function downloadLastRenownMatches(signal?: AbortSignal) {
+  signal?.throwIfAborted();
   const currentAccount = await fetchCurrentRenownAccount();
   if (!currentAccount) {
     return [];
   }
 
   const [matches, downloadHistories] = await Promise.all([
-    fetchLastRenownMatches(currentAccount.id),
+    fetchLastRenownMatches(currentAccount.id, signal),
     fetchDownloadHistories(),
   ]);
+  signal?.throwIfAborted();
 
   const downloadedMatchIds = downloadHistories.map((history) => history.match_id);
   const matchesToDownload = matches.filter((match) => {

@@ -3,11 +3,12 @@ import type { DatabaseSettings, Settings } from 'csdm/node/settings/settings';
 import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 import { connectDatabaseAndPersist } from './connect-database';
 
-const { commitMock, discardMock, prepareMock, updateSettingsMock } = vi.hoisted(() => {
+const { commitMock, discardMock, prepareMock, startBackgroundTasksMock, updateSettingsMock } = vi.hoisted(() => {
   return {
     commitMock: vi.fn(),
     discardMock: vi.fn(),
     prepareMock: vi.fn(),
+    startBackgroundTasksMock: vi.fn(),
     updateSettingsMock: vi.fn(),
   };
 });
@@ -29,7 +30,7 @@ vi.mock('csdm/node/settings/update-settings', () => {
   return { updateSettings: updateSettingsMock };
 });
 vi.mock('csdm/server/start-background-tasks', () => {
-  return { startBackgroundTasks: vi.fn() };
+  return { startBackgroundTasks: startBackgroundTasksMock };
 });
 
 const databaseSettings: DatabaseSettings = {
@@ -47,9 +48,11 @@ beforeEach(() => {
   commitMock.mockReset();
   discardMock.mockReset();
   prepareMock.mockReset();
+  startBackgroundTasksMock.mockReset();
   updateSettingsMock.mockReset();
   prepareMock.mockResolvedValue(preparedConnection);
   updateSettingsMock.mockResolvedValue(settings);
+  startBackgroundTasksMock.mockResolvedValue(undefined);
 });
 
 describe('connectDatabaseAndPersist', () => {

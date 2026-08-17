@@ -5,16 +5,18 @@ import { fetchCurrentFaceitAccount } from 'csdm/node/database/faceit-account/fet
 import { fetchLastFaceitMatches } from 'csdm/node/faceit/fetch-last-faceit-matches';
 import { fetchDownloadHistories } from 'csdm/node/database/download-history/fetch-download-histories';
 
-export async function downloadLastFaceitMatches() {
+export async function downloadLastFaceitMatches(signal?: AbortSignal) {
+  signal?.throwIfAborted();
   const currentAccount = await fetchCurrentFaceitAccount();
   if (!currentAccount) {
     return [];
   }
 
   const [matches, downloadHistories] = await Promise.all([
-    fetchLastFaceitMatches(currentAccount.id),
+    fetchLastFaceitMatches(currentAccount.id, signal),
     fetchDownloadHistories(),
   ]);
+  signal?.throwIfAborted();
 
   const downloadedMatchIds = downloadHistories.map((history) => history.match_id);
   const matchesToDownload = matches.filter((match) => {

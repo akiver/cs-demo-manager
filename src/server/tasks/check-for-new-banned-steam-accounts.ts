@@ -10,15 +10,16 @@ import { SharedServerMessageName } from '../shared-server-message-name';
 
 let errorHasBeenNotified = false;
 
-export async function checkForNewBannedSteamAccounts() {
+export async function checkForNewBannedSteamAccounts(signal?: AbortSignal) {
   try {
+    signal?.throwIfAborted();
     const shouldCheck = await isTimestampExpired(TimestampName.SyncWithSteam);
     if (!shouldCheck) {
       return;
     }
 
     const syncedSteamIds = await syncSteamAccountsWithPlayers();
-    const newBannedSteamIds = await updateSteamAccountsFromSteam(syncedSteamIds);
+    const newBannedSteamIds = await updateSteamAccountsFromSteam(syncedSteamIds, signal);
 
     if (newBannedSteamIds.length > 0) {
       server.broadcast({
@@ -28,6 +29,9 @@ export async function checkForNewBannedSteamAccounts() {
     }
     errorHasBeenNotified = false;
   } catch (error) {
+    if (signal?.aborted) {
+      return;
+    }
     logger.error('Error while checking for new banned Steam accounts');
     logger.error(error);
     if (errorHasBeenNotified) {
@@ -43,6 +47,8 @@ export async function checkForNewBannedSteamAccounts() {
       errorHasBeenNotified = true;
     }
   } finally {
-    await updateTimestamp(TimestampName.SyncWithSteam);
+    if (!signal?.aborted) {
+      await updateTimestamp(TimestampName.SyncWithSteam);
+    }
   }
 }

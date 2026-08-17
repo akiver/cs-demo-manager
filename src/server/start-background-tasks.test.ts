@@ -72,6 +72,79 @@ describe('background task lifecycle', () => {
     expect(intervalSpy).not.toHaveBeenCalled();
   });
 
+  it('does not start a new session until the pending stop has drained', async () => {
+    const pendingCheck = deferred<void>();
+    mocks.checkForNewBannedSteamAccounts.mockReturnValueOnce(pendingCheck.promise);
+
+    const initialStart = startBackgroundTasks();
+    await vi.waitFor(() => expect(mocks.checkForNewBannedSteamAccounts).toHaveBeenCalledOnce());
+
+    const pendingStop = stopBackgroundTasks();
+    const restart = startBackgroundTasks();
+    await Promise.resolve();
+    expect(mocks.listenForCounterStrikeClosed).toHaveBeenCalledOnce();
+
+    pendingCheck.resolve();
+    await Promise.all([initialStart, pendingStop, restart]);
+
+    expect(mocks.listenForCounterStrikeClosed).toHaveBeenCalledTimes(2);
+  });
+
+  it('shares a pending stop between concurrent callers', async () => {
+    const pendingListenerStop = deferred<void>();
+    await startBackgroundTasks();
+    mocks.stopListeningForCounterStrikeClosed.mockReturnValueOnce(pendingListenerStop.promise);
+
+    const firstStop = stopBackgroundTasks();
+    const secondStop = stopBackgroundTasks();
+
+    expect(secondStop).toBe(firstStop);
+    pendingListenerStop.resolve();
+    await expect(firstStop).resolves.toBe('drained');
+    expect(mocks.stopListeningForCounterStrikeClosed).toHaveBeenCalledOnce();
+  });
+
+  it('aborts a pending task after the shutdown grace period', async () => {
+    vi.useFakeTimers();
+    let receivedSignal: AbortSignal | undefined;
+    mocks.downloadLastMatchesIfNecessary.mockImplementationOnce((signal: AbortSignal) => {
+      receivedSignal = signal;
+      return new Promise((_resolve, reject) => {
+        signal.addEventListener('abort', () => reject(signal.reason), { once: true });
+      });
+    });
+
+    const pendingStart = startBackgroundTasks();
+    const rejectedStart = expect(pendingStart).rejects.toBeDefined();
+    await Promise.resolve();
+    const pendingStop = stopBackgroundTasks();
+    const shutdownStop = stopBackgroundTasks({ abortAfterMs: 30_000, abortSettleTimeoutMs: 5_000 });
+    expect(shutdownStop).toBe(pendingStop);
+
+    await vi.advanceTimersByTimeAsync(29_999);
+    expect(receivedSignal?.aborted).toBe(false);
+    await vi.advanceTimersByTimeAsync(1);
+
+    await expect(shutdownStop).resolves.toBe('aborted');
+    await rejectedStart;
+    expect(receivedSignal?.aborted).toBe(true);
+    vi.useRealTimers();
+  });
+
+  it('does not let a task that ignores cancellation block shutdown', async () => {
+    vi.useFakeTimers();
+    mocks.downloadLastMatchesIfNecessary.mockReturnValueOnce(new Promise(() => undefined));
+
+    void startBackgroundTasks();
+    await Promise.resolve();
+    const pendingStop = stopBackgroundTasks({ abortAfterMs: 30_000, abortSettleTimeoutMs: 5_000 });
+    await vi.advanceTimersByTimeAsync(35_000);
+
+    await expect(pendingStop).resolves.toBe('timed-out');
+    expect(logger.error).toHaveBeenCalledWith('Background tasks did not settle after being cancelled during shutdown');
+    vi.useRealTimers();
+  });
+
   it('can start again after an initial task rejects', async () => {
     const error = new Error('download failed');
     mocks.downloadLastMatchesIfNecessary.mockRejectedValueOnce(error);

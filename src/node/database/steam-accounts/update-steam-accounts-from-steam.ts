@@ -30,7 +30,8 @@ function hasAccountBeenBanned({
   return banDate > updatedAt;
 }
 
-export async function updateSteamAccountsFromSteam(steamIdsToIgnore: string[]) {
+export async function updateSteamAccountsFromSteam(steamIdsToIgnore: string[], signal?: AbortSignal) {
+  signal?.throwIfAborted();
   let query = db.selectFrom('steam_accounts').selectAll();
   if (steamIdsToIgnore.length > 0) {
     query = query.where('steam_id', 'not in', steamIdsToIgnore);
@@ -40,11 +41,12 @@ export async function updateSteamAccountsFromSteam(steamIdsToIgnore: string[]) {
 
   const steamIds = rows.map((row) => row.steam_id);
   // ! Do not run it in parallel to avoid a potential rate limit HTTP error.
-  const users = await getUsersSummary(steamIds);
-  const bans = await getUsersBan(steamIds);
+  const users = await getUsersSummary(steamIds, signal);
+  const bans = await getUsersBan(steamIds, signal);
 
   const newBannedSteamIds: string[] = [];
   for (const steamId of steamIds) {
+    signal?.throwIfAborted();
     const user = users.find((user) => user.steamid === steamId);
     if (user === undefined) {
       continue;

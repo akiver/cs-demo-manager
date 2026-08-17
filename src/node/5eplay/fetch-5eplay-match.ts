@@ -77,8 +77,9 @@ type ResponsePayload =
 export async function fetch5EPlayMatch(
   matchId: string,
   downloadFolderPath: string | undefined,
+  signal?: AbortSignal,
 ): Promise<FiveEPlayMatch> {
-  const response = await fetch(`https://gate.5eplay.com/crane/http/api/data/match/${matchId}`);
+  const response = await fetch(`https://gate.5eplay.com/crane/http/api/data/match/${matchId}`, { signal });
   const data: ResponsePayload = await response.json();
 
   if (data.data === null) {
@@ -89,7 +90,7 @@ export async function fetch5EPlayMatch(
 
   return {
     id: matchId,
-    downloadStatus: await getDownloadStatus(downloadFolderPath, matchId, match.demo_url),
+    downloadStatus: await getDownloadStatus(downloadFolderPath, matchId, match.demo_url, signal),
     date: unixTimestampToDate(match.start_time).toISOString(),
     demoUrl: match.demo_url,
     durationInSeconds: match.end_time - match.start_time,

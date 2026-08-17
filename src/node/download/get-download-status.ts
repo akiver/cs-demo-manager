@@ -7,6 +7,7 @@ export async function getDownloadStatus(
   downloadFolderPath: string | undefined,
   matchId: string | number,
   demoUrl: string,
+  signal?: AbortSignal,
 ) {
   if (downloadFolderPath !== undefined) {
     const demoPath = path.join(downloadFolderPath, `${matchId}.dem`);
@@ -16,7 +17,7 @@ export async function getDownloadStatus(
     }
   }
 
-  const downloadLinkExpired = await isDownloadLinkExpired(demoUrl);
+  const downloadLinkExpired = await isDownloadLinkExpired(demoUrl, signal);
   if (downloadLinkExpired) {
     return DownloadStatus.Expired;
   }

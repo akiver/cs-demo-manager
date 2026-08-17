@@ -6,9 +6,9 @@ import { insertFaceitMatch } from 'csdm/node/database/faceit-matches/insert-face
 import { fetchFaceitMatch } from './fetch-faceit-match';
 import { FaceitResourceNotFound } from 'csdm/node/faceit-web-api/errors/faceit-resource-not-found';
 
-export async function fetchLastFaceitMatches(accountId: string) {
+export async function fetchLastFaceitMatches(accountId: string, signal?: AbortSignal) {
   const apiKey = await getFaceitApiKey();
-  const lastMatchesDTO = await fetchPlayerLastMatches(accountId, apiKey);
+  const lastMatchesDTO = await fetchPlayerLastMatches(accountId, apiKey, signal);
   const matchIds = lastMatchesDTO.map((matchDTO) => matchDTO.match_id);
   const matches = await fetchFaceitMatches(matchIds);
   const matchesNotInDatabaseDTO = lastMatchesDTO.filter((matchDTO) => {
@@ -18,9 +18,11 @@ export async function fetchLastFaceitMatches(accountId: string) {
   const downloadFolderPath = settings.download.folderPath;
 
   for (const matchNotInDatabaseDTO of matchesNotInDatabaseDTO) {
+    signal?.throwIfAborted();
     const matchId = matchNotInDatabaseDTO.match_id;
     try {
-      const match = await fetchFaceitMatch(matchId, apiKey, downloadFolderPath);
+      const match = await fetchFaceitMatch(matchId, apiKey, downloadFolderPath, signal);
+      signal?.throwIfAborted();
       await insertFaceitMatch(match);
       matches.push(match);
     } catch (error) {

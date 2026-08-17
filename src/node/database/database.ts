@@ -43,6 +43,12 @@ export type PreparedDatabaseConnection = {
   embeddedClusterSession?: EmbeddedClusterSession;
 };
 
+export type DatabaseConnectionCleanup = {
+  embeddedValidationPassword?: string;
+  embeddedSessionsReleased: Promise<void>;
+  resourcesDestroyed: Promise<void>;
+};
+
 function queueEmbeddedSessionRelease(session: EmbeddedClusterSession, stopIfUnused: boolean) {
   embeddedSessionsPendingRelease.set(session, (embeddedSessionsPendingRelease.get(session) ?? false) || stopIfUnused);
 }
@@ -284,12 +290,12 @@ export function releaseIngestionClient(client: PoolClient) {
   client.release();
 }
 
-export async function destroyDatabaseConnection(
+export function beginDatabaseConnectionCleanup(
   options: {
     stopEmbeddedIfUnused?: boolean;
     releasePendingEmbeddedWithoutStopping?: boolean;
   } = {},
-) {
+): DatabaseConnectionCleanup {
   const database = db;
   const session = embeddedClusterSession;
 
@@ -300,9 +306,21 @@ export async function destroyDatabaseConnection(
   connectedSettings = undefined;
   embeddedClusterSession = undefined;
 
-  await waitForDatabaseResourceCleanup([
-    database?.destroy(),
-    discardIngestionPool(),
-    releasePendingEmbeddedSessions(options.releasePendingEmbeddedWithoutStopping ? false : undefined),
-  ]);
+  return {
+    embeddedValidationPassword: session?.settings.password,
+    embeddedSessionsReleased: releasePendingEmbeddedSessions(
+      options.releasePendingEmbeddedWithoutStopping ? false : undefined,
+    ),
+    resourcesDestroyed: waitForDatabaseResourceCleanup([database?.destroy(), discardIngestionPool()]),
+  };
+}
+
+export async function destroyDatabaseConnection(
+  options: {
+    stopEmbeddedIfUnused?: boolean;
+    releasePendingEmbeddedWithoutStopping?: boolean;
+  } = {},
+) {
+  const cleanup = beginDatabaseConnectionCleanup(options);
+  await waitForDatabaseResourceCleanup([cleanup.resourcesDestroyed, cleanup.embeddedSessionsReleased]);
 }

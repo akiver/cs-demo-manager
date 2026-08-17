@@ -13,15 +13,18 @@ let isProcessingDownload = false;
 let startedTimestamp: number = 0;
 let intervalId: NodeJS.Timeout | null = null;
 let isListening = false;
-let pendingCheck: Promise<void> | undefined;
+let listenerGeneration = 0;
+const pendingChecks = new Set<Promise<void>>();
 
-async function checkIfCounterStrikeHasBeenClosed() {
+async function checkIfCounterStrikeHasBeenClosed(signal?: AbortSignal) {
+  signal?.throwIfAborted();
   // Make sure we don't try to start downloading new demos while we are already downloading demos
   if (isProcessingDownload) {
     return;
   }
 
   const isRunning = await isCounterStrikeRunning();
+  signal?.throwIfAborted();
   const hasBeenClosed = !isRunning && wasRunning;
   if (hasBeenClosed) {
     const minimalRunningTimeMs = 1_200_000; // 20 minutes
@@ -29,9 +32,10 @@ async function checkIfCounterStrikeHasBeenClosed() {
     if (hasBeenRunningLongEnough) {
       isProcessingDownload = true;
       const settings = await getSettings();
+      signal?.throwIfAborted();
 
       if (settings.download.downloadValveDemosInBackground) {
-        const downloadsAdded = await downloadLastValveMatches();
+        const downloadsAdded = await downloadLastValveMatches(signal);
         if (downloadsAdded.length > 0) {
           server.sendMessageToMainProcess({
             name: MainServerMessageName.DownloadValveDemoStarted,
@@ -41,7 +45,7 @@ async function checkIfCounterStrikeHasBeenClosed() {
       }
 
       if (settings.download.downloadFaceitDemosInBackground) {
-        const downloadsAdded = await downloadLastFaceitMatches();
+        const downloadsAdded = await downloadLastFaceitMatches(signal);
         if (downloadsAdded.length > 0) {
           server.sendMessageToMainProcess({
             name: MainServerMessageName.DownloadFaceitDemoStarted,
@@ -51,7 +55,7 @@ async function checkIfCounterStrikeHasBeenClosed() {
       }
 
       if (settings.download.download5EPlayDemosInBackground) {
-        const downloadsAdded = await downloadLast5EPlayMatches();
+        const downloadsAdded = await downloadLast5EPlayMatches(signal);
         if (downloadsAdded.length > 0) {
           server.sendMessageToMainProcess({
             name: MainServerMessageName.Download5EPlayDemoStarted,
@@ -61,7 +65,7 @@ async function checkIfCounterStrikeHasBeenClosed() {
       }
 
       if (settings.download.downloadRenownDemosInBackground) {
-        const downloadsAdded = await downloadLastRenownMatches();
+        const downloadsAdded = await downloadLastRenownMatches(signal);
         if (downloadsAdded.length > 0) {
           server.sendMessageToMainProcess({
             name: MainServerMessageName.DownloadRenownDemosStarted,
@@ -83,48 +87,57 @@ async function checkIfCounterStrikeHasBeenClosed() {
   return isRunning;
 }
 
-function scheduleNextCheck(delayMs: number) {
-  if (!isListening) {
+function scheduleNextCheck(delayMs: number, generation: number, signal?: AbortSignal) {
+  if (!isListening || generation !== listenerGeneration || signal?.aborted) {
     return;
   }
 
-  intervalId = setTimeout(() => {
-    const check = checkIfCounterStrikeHasBeenClosed()
+  const timeout = setTimeout(() => {
+    if (intervalId === timeout) {
+      intervalId = null;
+    }
+    if (!isListening || generation !== listenerGeneration || signal?.aborted) {
+      return;
+    }
+
+    const check = checkIfCounterStrikeHasBeenClosed(signal)
       .then((isRunning) => {
         const checkIntervalMsWhileRunning = 5000;
-        scheduleNextCheck(isRunning ? checkIntervalMsWhileRunning : checkIntervalMs);
+        scheduleNextCheck(isRunning ? checkIntervalMsWhileRunning : checkIntervalMs, generation, signal);
       })
       .catch((error) => {
         isProcessingDownload = false;
+        if (signal?.aborted || generation !== listenerGeneration) {
+          return;
+        }
         logger.error('Error while checking if Counter-Strike has been closed');
         logger.error(error);
-        scheduleNextCheck(checkIntervalMs);
+        scheduleNextCheck(checkIntervalMs, generation, signal);
       })
       .finally(() => {
-        if (pendingCheck === check) {
-          pendingCheck = undefined;
-        }
+        pendingChecks.delete(check);
       });
-    pendingCheck = check;
+    pendingChecks.add(check);
   }, delayMs);
+  intervalId = timeout;
 }
 
 export async function stopListeningForCounterStrikeClosed() {
   isListening = false;
+  listenerGeneration++;
   if (intervalId !== null) {
     clearTimeout(intervalId);
     intervalId = null;
   }
 
-  if (pendingCheck !== undefined) {
-    await pendingCheck;
-  }
+  await Promise.allSettled(pendingChecks);
 }
 
-export function listenForCounterStrikeClosed() {
+export function listenForCounterStrikeClosed(signal?: AbortSignal) {
   isListening = true;
+  const generation = ++listenerGeneration;
   if (intervalId !== null) {
     clearTimeout(intervalId);
   }
-  scheduleNextCheck(checkIntervalMs);
+  scheduleNextCheck(checkIntervalMs, generation, signal);
 }

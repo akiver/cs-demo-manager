@@ -1,5 +1,6 @@
 import { ErrorCode, type ErrorCode as ErrorCodeType } from 'csdm/common/error-code';
 import type { DatabaseOperationError } from 'csdm/server/database-operation-error';
+import { isErrorCode } from 'csdm/common/is-error-code';
 
 export function formatErrorMessage(error: unknown, fallback: string) {
   if (error instanceof Error && error.message.trim() !== '') {
@@ -23,10 +24,10 @@ export function formatErrorMessage(error: unknown, fallback: string) {
 
 export function buildUiDatabaseOperationError(error: unknown, fallback: string): DatabaseOperationError {
   let code: ErrorCodeType = ErrorCode.UnknownError;
-  if (typeof error === 'number') {
-    code = error as ErrorCodeType;
-  } else if (typeof error === 'object' && error !== null && 'code' in error && typeof error.code === 'number') {
-    code = error.code as ErrorCodeType;
+  if (isErrorCode(error)) {
+    code = error;
+  } else if (typeof error === 'object' && error !== null && 'code' in error && isErrorCode(error.code)) {
+    code = error.code;
   }
 
   return { code, message: formatErrorMessage(error, fallback) };

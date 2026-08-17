@@ -11,7 +11,7 @@ import { getSettings } from 'csdm/node/settings/get-settings';
 import { InvalidDemoHeader } from 'csdm/node/demo/errors/invalid-demo-header';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 
-async function getDownloadStatus(downloadFolderPath: string | undefined, match: ValveMatch) {
+async function getDownloadStatus(downloadFolderPath: string | undefined, match: ValveMatch, signal?: AbortSignal) {
   if (downloadFolderPath !== undefined) {
     const demoPath = getMatchDemoPath(downloadFolderPath, match);
     const infoPath = `${demoPath}.info`;
@@ -21,7 +21,7 @@ async function getDownloadStatus(downloadFolderPath: string | undefined, match: 
     }
   }
 
-  const downloadLinkExpired = await isDownloadLinkExpired(match.demoUrl);
+  const downloadLinkExpired = await isDownloadLinkExpired(match.demoUrl, signal);
 
   return downloadLinkExpired ? DownloadStatus.Expired : DownloadStatus.NotDownloaded;
 }
@@ -29,11 +29,12 @@ async function getDownloadStatus(downloadFolderPath: string | undefined, match: 
 async function buildValveMatchFromProtobufMessage(
   matchMessage: CDataGCCStrike15_v2_MatchInfo,
   downloadFolderPath: string | undefined,
+  signal?: AbortSignal,
 ) {
   const match = getValveMatchFromMatchInfoProtobufMesssage(matchMessage);
-  await updateValvePlayersFromSteam(match.players);
+  await updateValvePlayersFromSteam(match.players, signal);
 
-  match.downloadStatus = await getDownloadStatus(downloadFolderPath, match);
+  match.downloadStatus = await getDownloadStatus(downloadFolderPath, match, signal);
   if (downloadFolderPath !== undefined) {
     const demoPath = getMatchDemoPath(downloadFolderPath, match);
     const demoExists = await fs.pathExists(demoPath);
@@ -51,19 +52,20 @@ async function buildValveMatchFromProtobufMessage(
   return match;
 }
 
-export async function fetchLastValveMatches(onSteamIdDetected: (steamId: string) => void) {
+export async function fetchLastValveMatches(onSteamIdDetected: (steamId: string) => void, signal?: AbortSignal) {
   const matchListMessage: CMsgGCCStrike15_v2_MatchList = await startBoiler({
     onSteamIdDetected,
     onExit: (code) => {
       logger.log('boiler exit with code', code);
     },
+    signal,
   });
 
   const settings = await getSettings();
   const downloadFolderPath = settings.download.folderPath;
   const matches: ValveMatch[] = await Promise.all(
     matchListMessage.matches.map(async (match) => {
-      return await buildValveMatchFromProtobufMessage(match, downloadFolderPath);
+      return await buildValveMatchFromProtobufMessage(match, downloadFolderPath, signal);
     }),
   );
 

@@ -26,15 +26,10 @@ describe('runPostgresCommand', () => {
       callback(commandError, '', 'postgres details');
     });
 
-    try {
-      await runPostgresCommand('postgres', []);
-      expect.unreachable('the command should reject');
-    } catch (error) {
-      expect(error).toMatchObject({
-        message: 'spawn failed\npostgres details',
-        cause: commandError,
-      });
-      expect(commandError.message).toBe('spawn failed');
-    }
+    await expect(runPostgresCommand('postgres', [])).rejects.toMatchObject({
+      message: 'spawn failed\npostgres details',
+      cause: commandError,
+    });
+    expect(commandError.message).toBe('spawn failed');
   });
 });

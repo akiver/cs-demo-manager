@@ -5,16 +5,18 @@ import { fetchDownloadHistories } from 'csdm/node/database/download-history/fetc
 import { fetchCurrent5EPlayAccount } from '../database/5play-account/fetch-current-5eplay-account';
 import { fetchLast5EPlayMatches } from './fetch-last-5eplay-matches';
 
-export async function downloadLast5EPlayMatches() {
+export async function downloadLast5EPlayMatches(signal?: AbortSignal) {
+  signal?.throwIfAborted();
   const currentAccount = await fetchCurrent5EPlayAccount();
   if (!currentAccount) {
     return [];
   }
 
   const [matches, downloadHistories] = await Promise.all([
-    fetchLast5EPlayMatches(currentAccount.id),
+    fetchLast5EPlayMatches(currentAccount.id, signal),
     fetchDownloadHistories(),
   ]);
+  signal?.throwIfAborted();
 
   const downloadedMatchIds = downloadHistories.map((history) => history.match_id);
   const matchesToDownload = matches.filter((match) => {

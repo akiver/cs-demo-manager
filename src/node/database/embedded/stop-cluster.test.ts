@@ -1,5 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vite-plus/test';
-import { releaseEmbeddedClusterSession, stopEmbeddedClusterWithoutLock } from './stop-cluster';
+import {
+  EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS,
+  releaseEmbeddedClusterSession,
+  stopEmbeddedClusterWithoutLock,
+} from './stop-cluster';
 
 const mocks = vi.hoisted(() => {
   return {
@@ -56,6 +60,10 @@ beforeEach(() => {
 });
 
 describe('embedded cluster stop', () => {
+  it('includes background cancellation in the application shutdown budget', () => {
+    expect(EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS).toBe(265_000);
+  });
+
   it('refuses to signal a running cluster when no credential can verify its identity', async () => {
     mocks.readClusterState.mockResolvedValue(undefined);
 

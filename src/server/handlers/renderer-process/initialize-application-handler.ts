@@ -10,7 +10,6 @@ import { analysesListener } from 'csdm/server/analyses-listener';
 import { fetchTags } from 'csdm/node/database/tags/fetch-tags';
 import { fetchFaceitAccounts } from 'csdm/node/database/faceit-account/fetch-faceit-accounts';
 import type { Download } from 'csdm/common/download/download-types';
-import { startBackgroundTasks } from 'csdm/server/start-background-tasks';
 import { fetchIgnoredSteamAccounts } from 'csdm/node/database/steam-accounts/fetch-ignored-steam-accounts';
 import type { IgnoredSteamAccount } from 'csdm/common/types/ignored-steam-account';
 import { initializeSettings } from 'csdm/node/settings/initialize-settings';
@@ -75,8 +74,6 @@ export async function initializeApplicationHandler() {
       downloads: downloadDemoQueue.getDownloads(),
       videos: videoQueue.getVideos(),
     };
-
-    void startBackgroundTasks();
 
     return payload;
   } catch (error) {

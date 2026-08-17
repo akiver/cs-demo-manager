@@ -5,8 +5,9 @@ import { insertSteamAccounts } from 'csdm/node/database/steam-accounts/insert-st
 import type { InsertableSteamAccount } from 'csdm/node/database/steam-accounts/steam-account-table';
 import { fetchSteamAccounts } from 'csdm/node/database/steam-accounts/fetch-steam-accounts';
 
-export async function updateValvePlayersFromSteam(players: ValvePlayer[]) {
+export async function updateValvePlayersFromSteam(players: ValvePlayer[], signal?: AbortSignal) {
   try {
+    signal?.throwIfAborted();
     const steamIds = players.map((player) => player.steamId);
     let accounts: InsertableSteamAccount[] = await fetchSteamAccounts(steamIds);
     const needsToFetchPlayersFromSteam = steamIds.some((steamId) => {
@@ -14,7 +15,7 @@ export async function updateValvePlayersFromSteam(players: ValvePlayer[]) {
     });
 
     if (needsToFetchPlayersFromSteam) {
-      accounts = await buildSteamAccountsFromSteamIds(steamIds);
+      accounts = await buildSteamAccountsFromSteamIds(steamIds, signal);
       if (accounts.length === 0) {
         return;
       }
@@ -23,6 +24,7 @@ export async function updateValvePlayersFromSteam(players: ValvePlayer[]) {
     }
 
     for (const player of players) {
+      signal?.throwIfAborted();
       const account = accounts.find((account) => account.steam_id === player.steamId);
       // ! When a Steam account has been deleted the API returns an empty object, make sure it really exists.
       if (account) {

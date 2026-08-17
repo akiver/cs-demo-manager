@@ -28,4 +28,29 @@ describe('buildUiDatabaseOperationError', () => {
       ),
     ).toEqual({ code: ErrorCode.DatabaseTransitionInProgress, message: 'transition active' });
   });
+
+  it('preserves known numeric errors', () => {
+    expect(buildUiDatabaseOperationError(ErrorCode.NetworkError, 'Unknown error')).toEqual({
+      code: ErrorCode.NetworkError,
+      message: 'Unknown error',
+    });
+  });
+
+  it('replaces unknown numeric error codes with UnknownError', () => {
+    expect(buildUiDatabaseOperationError(999_999, 'Unknown error')).toEqual({
+      code: ErrorCode.UnknownError,
+      message: 'Unknown error',
+    });
+    expect(buildUiDatabaseOperationError({ code: 999_999, message: 'failure' }, 'Unknown error')).toEqual({
+      code: ErrorCode.UnknownError,
+      message: 'failure',
+    });
+  });
+
+  it('uses safe fallbacks for malformed structured errors', () => {
+    expect(buildUiDatabaseOperationError({ code: 'invalid', message: '' }, 'Unknown error')).toEqual({
+      code: ErrorCode.UnknownError,
+      message: 'Unknown error',
+    });
+  });
 });

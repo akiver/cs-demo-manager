@@ -17,10 +17,11 @@ type ListMatchResponsePayload =
       data: null;
     };
 
-async function fetchLastMatchIdsForGame(accountId: string, game: Game, limit: number) {
+async function fetchLastMatchIdsForGame(accountId: string, game: Game, limit: number, signal?: AbortSignal) {
   const type = game === Game.CSGO ? 1 : 0;
   const response = await fetch(
     `https://gate.5eplay.com/crane/http/api/data/match/list?uuid=${accountId}&limit=${limit}&cs_type=${type}`,
+    { signal },
   );
   const matches: ListMatchResponsePayload = await response.json();
 
@@ -31,15 +32,15 @@ async function fetchLastMatchIdsForGame(accountId: string, game: Game, limit: nu
   return matches.data.map((matchDTO) => matchDTO.match_id);
 }
 
-export async function fetchLast5EPlayMatches(accountId: string) {
+export async function fetchLast5EPlayMatches(accountId: string, signal?: AbortSignal) {
   const matches: FiveEPlayMatch[] = [];
   const maxMatchCount = 20;
-  const matchIds = await fetchLastMatchIdsForGame(accountId, Game.CS2, maxMatchCount);
+  const matchIds = await fetchLastMatchIdsForGame(accountId, Game.CS2, maxMatchCount, signal);
 
   // We didn't find enough CS2 matches, find CS:GO matches
   if (matchIds.length < maxMatchCount) {
     const limit = maxMatchCount - matchIds.length;
-    const csgoMatchIds = await fetchLastMatchIdsForGame(accountId, Game.CSGO, limit);
+    const csgoMatchIds = await fetchLastMatchIdsForGame(accountId, Game.CSGO, limit, signal);
     if (csgoMatchIds.length > 0) {
       matchIds.push(...csgoMatchIds);
     }
@@ -53,8 +54,9 @@ export async function fetchLast5EPlayMatches(accountId: string) {
   const downloadFolderPath = settings.download.folderPath;
 
   for (const matchId of matchIds) {
+    signal?.throwIfAborted();
     try {
-      const match = await fetch5EPlayMatch(matchId, downloadFolderPath);
+      const match = await fetch5EPlayMatch(matchId, downloadFolderPath, signal);
       matches.push(match);
     } catch (error) {
       if (!(error instanceof FiveEPlayResourceNotFound)) {

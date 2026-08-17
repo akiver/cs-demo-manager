@@ -58,12 +58,13 @@ export type FaceitMatchDTO = {
   };
 };
 
-export async function fetchMatch(matchId: string, apiKey?: string) {
+export async function fetchMatch(matchId: string, apiKey?: string, signal?: AbortSignal) {
   const response = await fetch(`https://open.faceit.com/data/v4/matches/${matchId}`, {
     headers: {
       Authorization: `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
+    signal,
   });
 
   if (response.status === 401) {

@@ -8,8 +8,9 @@ import { buildDownloadFromValveMatch } from 'csdm/common/download/build-download
 import { fetchDownloadHistories } from 'csdm/node/database/download-history/fetch-download-histories';
 import { ErrorCode } from 'csdm/common/error-code';
 
-export async function downloadLastValveMatches() {
+export async function downloadLastValveMatches(signal?: AbortSignal) {
   try {
+    signal?.throwIfAborted();
     server.sendMessageToRendererProcess({
       name: RendererServerMessageName.FetchLastValveMatchesStart,
     });
@@ -21,9 +22,10 @@ export async function downloadLastValveMatches() {
       });
     };
     const [lastMatches, downloadHistories] = await Promise.all([
-      fetchLastValveMatches(onSteamIdDetected),
+      fetchLastValveMatches(onSteamIdDetected, signal),
       fetchDownloadHistories(),
     ]);
+    signal?.throwIfAborted();
     const downladedMatchIds = downloadHistories.map((history) => history.match_id);
     const matchesToDownload = lastMatches.filter((match) => {
       return match.downloadStatus === DownloadStatus.NotDownloaded && !downladedMatchIds.includes(match.id);
@@ -38,6 +40,7 @@ export async function downloadLastValveMatches() {
 
     return downloadsAdded;
   } catch (error) {
+    signal?.throwIfAborted();
     const errorCode = getErrorCodeFromError(error);
     if (errorCode === ErrorCode.UnknownError) {
       logger.error('Error while adding last Valve matches to download queue');

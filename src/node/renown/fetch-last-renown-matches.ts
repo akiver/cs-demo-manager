@@ -60,11 +60,12 @@ type ListMatchDTO = {
   match_id: number;
 };
 
-async function fetchLastMatchesIds(steamId: string) {
+async function fetchLastMatchesIds(steamId: string, signal?: AbortSignal) {
   const maxMatchCount = 20;
   // https://renown.gg/api-docs#tag/players/get/v1/player/{steam_id}
   const response = await fetch(
     `https://api.renown.gg/v1/player/${steamId}/matches?page=1&limit=${maxMatchCount}&status=FINISHED`,
+    { signal },
   );
 
   assertValidRenownResponse(response);
@@ -75,9 +76,13 @@ async function fetchLastMatchesIds(steamId: string) {
   return matchIds;
 }
 
-async function fetchMatchDetails(matchId: number, downloadFolderPath: string | undefined): Promise<RenownMatch> {
+async function fetchMatchDetails(
+  matchId: number,
+  downloadFolderPath: string | undefined,
+  signal?: AbortSignal,
+): Promise<RenownMatch> {
   // https://renown.gg/api-docs#tag/matches/get/v1/match/{match_id}
-  const response = await fetch(`https://api.renown.gg/v1/match/${matchId}`);
+  const response = await fetch(`https://api.renown.gg/v1/match/${matchId}`, { signal });
 
   assertValidRenownResponse(response);
 
@@ -87,7 +92,7 @@ async function fetchMatchDetails(matchId: number, downloadFolderPath: string | u
   return {
     game: Game.CS2,
     id: matchId.toString(),
-    downloadStatus: await getDownloadStatus(downloadFolderPath, matchId, demoUrl),
+    downloadStatus: await getDownloadStatus(downloadFolderPath, matchId, demoUrl, signal),
     date: new Date(match.finished_at).toISOString(),
     demoUrl: demoUrl,
     durationInSeconds: (new Date(match.finished_at).getTime() - new Date(match.started_at).getTime()) / 1000,
@@ -124,9 +129,9 @@ async function fetchMatchDetails(matchId: number, downloadFolderPath: string | u
   };
 }
 
-export async function fetchLastRenownMatches(steamId: string) {
+export async function fetchLastRenownMatches(steamId: string, signal?: AbortSignal) {
   const matches: RenownMatch[] = [];
-  const matchIds = await fetchLastMatchesIds(steamId);
+  const matchIds = await fetchLastMatchesIds(steamId, signal);
 
   if (matchIds.length === 0) {
     return matches;
@@ -138,7 +143,8 @@ export async function fetchLastRenownMatches(steamId: string) {
   const results = await Promise.all(
     matchIds.map(async (matchId) => {
       try {
-        return await fetchMatchDetails(matchId, downloadFolderPath);
+        signal?.throwIfAborted();
+        return await fetchMatchDetails(matchId, downloadFolderPath, signal);
       } catch (error) {
         if (!(error instanceof RenownResourceNotFound)) {
           logger.log(`Renown match with ID ${matchId} not found`);

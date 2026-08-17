@@ -22,7 +22,10 @@ export function connectDatabase(databaseSettings?: DatabaseSettings) {
     // The app owns the cluster lifecycle: connecting it to an external server may release the
     // bundled one, while the CLI calls openDatabase() directly and never stops it.
     await openDatabase(databaseSettings, { releaseEmbeddedCluster: true });
-    void startBackgroundTasks();
+    void startBackgroundTasks().catch((error) => {
+      logger.error('Failed to start background tasks after connecting to the database');
+      logger.error(error);
+    });
   });
 }
 
@@ -45,7 +48,10 @@ export function connectDatabaseAndPersist(databaseSettings: DatabaseSettings): P
     }
 
     await commitDatabaseConnection(connection, { stopPreviousEmbeddedIfUnused: true });
-    void startBackgroundTasks();
+    void startBackgroundTasks().catch((error) => {
+      logger.error('Failed to start background tasks after connecting to the database');
+      logger.error(error);
+    });
 
     return settings;
   });

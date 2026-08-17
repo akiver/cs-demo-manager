@@ -5,6 +5,7 @@ import { SteamApiForbiddenError } from './steam-api-forbidden-error';
 import { SteamApiError } from './steamapi-error';
 import { SteamTooMayRequests } from './steam-too-many-requests';
 import { sleep } from 'csdm/common/sleep';
+import { setTimeout as sleepWithSignal } from 'node:timers/promises';
 
 type PlayerBan = {
   CommunityBanned: boolean;
@@ -20,7 +21,7 @@ type PlayerBansResponse = {
   players: Array<PlayerBan | null>;
 };
 
-export async function getUsersBan(steamIds: string[]): Promise<PlayerBan[]> {
+export async function getUsersBan(steamIds: string[], signal?: AbortSignal): Promise<PlayerBan[]> {
   const bans: PlayerBan[] = [];
   let promises: Promise<void>[] = [];
   const steamApiKey = await getSteamApiKey();
@@ -37,6 +38,7 @@ export async function getUsersBan(steamIds: string[]): Promise<PlayerBan[]> {
       (async () => {
         const response = await fetch(
           `https://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key=${steamApiKey}&steamids=${ids}`,
+          { signal },
         );
         if (response.status === 403) {
           throw new SteamApiForbiddenError();
@@ -61,7 +63,7 @@ export async function getUsersBan(steamIds: string[]): Promise<PlayerBan[]> {
       promises = [];
       const shouldSleep = requestCount !== requestToMakeCount;
       if (shouldSleep) {
-        await sleep(2000);
+        await (signal === undefined ? sleep(2000) : sleepWithSignal(2000, undefined, { signal }));
       }
     }
   }

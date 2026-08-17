@@ -7,27 +7,29 @@ import { downloadLast5EPlayMatches } from 'csdm/node/5eplay/download-last-5eplay
 import type { Download } from 'csdm/common/download/download-types';
 import { downloadLastRenownMatches } from 'csdm/node/renown/download-last-renown-matches';
 
-export async function downloadLastMatchesIfNecessary() {
+export async function downloadLastMatchesIfNecessary(signal?: AbortSignal) {
+  signal?.throwIfAborted();
   const [settings] = await Promise.all([getSettings(), deleteOldDownloadHistories()]);
+  signal?.throwIfAborted();
 
   if (settings.download.downloadValveDemosAtStartup) {
     const isCsRunning = await isCounterStrikeRunning();
     if (!isCsRunning) {
-      await downloadLastValveMatches();
+      await downloadLastValveMatches(signal);
     }
   }
 
   const promises: Promise<Download[]>[] = [];
   if (settings.download.downloadFaceitDemosAtStartup) {
-    promises.push(downloadLastFaceitMatches());
+    promises.push(downloadLastFaceitMatches(signal));
   }
 
   if (settings.download.downloadRenownDemosAtStartup) {
-    promises.push(downloadLastRenownMatches());
+    promises.push(downloadLastRenownMatches(signal));
   }
 
   if (settings.download.download5EPlayDemosAtStartup) {
-    promises.push(downloadLast5EPlayMatches());
+    promises.push(downloadLast5EPlayMatches(signal));
   }
 
   await Promise.all(promises);
