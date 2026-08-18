@@ -1,4 +1,4 @@
-import { db, destroyDatabaseConnection, discardPreparedDatabaseConnection } from 'csdm/node/database/database';
+import { destroyDatabaseConnection, discardPreparedDatabaseConnection } from 'csdm/node/database/database';
 import { resetDatabase } from 'csdm/node/database/reset-database';
 import { analysesListener } from 'csdm/server/analyses-listener';
 import { DatabaseTransitionInProgress } from 'csdm/node/database/errors/database-transition-in-progress';
@@ -7,9 +7,15 @@ import { stopBackgroundTasks } from 'csdm/server/start-background-tasks';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { connectDatabase } from 'csdm/node/database/connect-database';
 import { prepareUnmigratedDatabaseConnection } from 'csdm/node/database/open-database';
-import type { PreparedDatabaseConnection } from 'csdm/node/database/database';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 
+/**
+ * Empties the database and leaves the app disconnected.
+ *
+ * ! It always resets through a connection of its own rather than the published one. The reset is
+ * also the recovery offered when the schema migration failed at startup, where no connection was
+ * ever published, and after a disconnect, where the published one is already destroyed.
+ */
 export async function resetDatabaseHandler() {
   const releaseTransition = analysesListener.tryBeginDatabaseTransition();
   if (releaseTransition === undefined) {
@@ -17,25 +23,18 @@ export async function resetDatabaseHandler() {
   }
 
   let previousDatabaseSettings: DatabaseSettings | undefined;
-  // ! The reset is the recovery offered when the startup migration failed, and in that case no
-  // connection was ever published. Without a connection of its own the reset would throw on an
-  // undefined `db` and leave the user with no way out of a schema mismatch.
-  let temporaryConnection: PreparedDatabaseConnection | undefined;
   try {
     previousDatabaseSettings = (await getSettings()).database;
     await stopBackgroundTasks();
+    await destroyDatabaseConnection();
 
-    if (db === undefined) {
-      temporaryConnection = await prepareUnmigratedDatabaseConnection();
-    }
-
-    const database = temporaryConnection?.database ?? db;
-    await database.transaction().execute(async (transaction) => {
-      await resetDatabase(transaction);
-    });
-
-    if (temporaryConnection === undefined) {
-      await destroyDatabaseConnection();
+    const connection = await prepareUnmigratedDatabaseConnection();
+    try {
+      await connection.database.transaction().execute(async (transaction) => {
+        await resetDatabase(transaction);
+      });
+    } finally {
+      await discardPreparedDatabaseConnection(connection, { stopEmbeddedIfUnused: true });
     }
   } catch (error) {
     logger.error('Error while resetting database');
@@ -52,14 +51,6 @@ export async function resetDatabaseHandler() {
 
     return buildDatabaseOperationError(error);
   } finally {
-    if (temporaryConnection !== undefined) {
-      try {
-        await discardPreparedDatabaseConnection(temporaryConnection, { stopEmbeddedIfUnused: true });
-      } catch (error) {
-        logger.error('Failed to discard the temporary connection used to reset the database');
-        logger.error(error);
-      }
-    }
     releaseTransition();
   }
 }

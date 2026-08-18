@@ -2,7 +2,7 @@ import { getClusterDataFolderPath } from './embedded-postgres-paths';
 import { getPostgresBinaryPath } from './postgres-binaries';
 import { runPostgresCommand } from './run-postgres-command';
 import { findRunningCluster } from './read-postmaster-pid';
-import { CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS, tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
+import { CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS, tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
 import type { EmbeddedClusterSession } from './start-cluster';
 import { readClusterState } from './cluster-state';
 import { isExpectedRunningCluster } from './validate-running-cluster';
@@ -16,7 +16,7 @@ const STOP_COMMAND_TIMEOUT_MS = (STOP_TIMEOUT_IN_SECONDS + 10) * 1000;
  * detached postmaster behind, which is exactly what this shutdown exists to prevent.
  */
 export const EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS =
-  BACKGROUND_TASK_SHUTDOWN_GRACE_MS + CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS + STOP_COMMAND_TIMEOUT_MS + SHUTDOWN_MARGIN_MS;
+  BACKGROUND_TASK_SHUTDOWN_GRACE_MS + CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS + STOP_COMMAND_TIMEOUT_MS + SHUTDOWN_MARGIN_MS;
 
 export type StopEmbeddedClusterResult =
   | { status: 'not-running' | 'stopped' }
@@ -106,7 +106,7 @@ export async function releaseEmbeddedClusterSession(
     } finally {
       await exclusiveUsage.release();
     }
-  });
+  }, CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS);
 }
 
 /** Stops the cluster only when no process holds a usage lease. */
@@ -124,5 +124,5 @@ export function stopEmbeddedCluster(options: { validationPassword?: string } = {
     } finally {
       await exclusiveUsage.release();
     }
-  });
+  }, CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS);
 }

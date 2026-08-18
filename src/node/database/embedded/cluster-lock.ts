@@ -1,9 +1,16 @@
 import fs from 'fs-extra';
 import { tryLock, unlock } from 'fs-native-extensions';
 import { getClusterLockFilePath, getClusterUsageLockFilePath } from './embedded-postgres-paths';
-import { EmbeddedPostgresStartFailed } from './errors/embedded-postgres-start-failed';
+import { EmbeddedPostgresInUse } from './errors/embedded-postgres-in-use';
 
-export const CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS = 180_000;
+const CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS = 180_000;
+/**
+ * Stopping does not wait as long as starting: the long timeout covers initdb plus a start, while a
+ * process still holding the lock at shutdown is one that is using the cluster, and a cluster left
+ * running is harmless. Waiting the full lifecycle timeout would only keep the app alive for minutes
+ * after its window closed.
+ */
+export const CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS = 15_000;
 const LOCK_RETRY_DELAY_MS = 250;
 
 function wait(delayMs: number) {
@@ -83,7 +90,9 @@ async function acquireLock(filePath: string, shared: boolean, timeoutMs: number)
   try {
     while (!tryLock(fileDescriptor, { shared })) {
       if (Date.now() > deadline) {
-        throw new EmbeddedPostgresStartFailed(
+        // ! Not a start failure: start, stop and reset all take this lock, and reporting "the
+        // database could not be started" for a reset that timed out is plainly wrong.
+        throw new EmbeddedPostgresInUse(
           `Another CS Demo Manager process did not release ${filePath} within ${timeoutMs / 1000} seconds`,
         );
       }
@@ -121,8 +130,11 @@ export type EmbeddedClusterUsageLease = NativeLock;
  * Serializes the initdb + start sequence, which the app and the CLI can run concurrently on the same
  * data folder. It doesn't protect the cluster usage, only its creation and startup.
  */
-export async function withClusterLock<T>(fn: () => Promise<T>): Promise<T> {
-  const lock = await acquireLock(getClusterLockFilePath(), false, CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS);
+export async function withClusterLock<T>(
+  fn: () => Promise<T>,
+  timeoutMs: number = CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS,
+): Promise<T> {
+  const lock = await acquireLock(getClusterLockFilePath(), false, timeoutMs);
 
   try {
     return await fn();

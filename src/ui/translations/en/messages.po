@@ -350,6 +350,10 @@ msgid "The PostgreSQL files shipped with the app are missing. Reinstalling CS De
 msgstr "The PostgreSQL files shipped with the app are missing. Reinstalling CS Demo Manager usually fixes it."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "Another CS Demo Manager process is using the built-in database. Close every app and CLI process, then try again."
+msgstr "Another CS Demo Manager process is using the built-in database. Close every app and CLI process, then try again."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that an antivirus is blocking the database process or that the database folder is not writable."
 msgstr "It usually means that an antivirus is blocking the database process or that the database folder is not writable."
 

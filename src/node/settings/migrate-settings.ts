@@ -48,8 +48,15 @@ async function buildSettingsForMissingOrCorruptedFile() {
 
 async function backupCorruptedSettingsFile(settingsFilePath: string) {
   const backupFilePath = `${settingsFilePath}.corrupted-${Date.now()}`;
-  await fs.copy(settingsFilePath, backupFilePath);
-  logger.error(`The corrupted settings file was preserved at ${backupFilePath}`);
+  try {
+    await fs.copy(settingsFilePath, backupFilePath);
+    logger.error(`The corrupted settings file was preserved at ${backupFilePath}`);
+  } catch (error) {
+    // Best effort: this runs while recovering from an unusable settings file, failing to keep a copy
+    // of it must not turn a recoverable startup into a failed one.
+    logger.error(`Failed to preserve the corrupted settings file at ${backupFilePath}`);
+    logger.error(error);
+  }
 }
 
 function parseSettingsForMigration(content: string): Settings {
@@ -59,7 +66,11 @@ function parseSettingsForMigration(content: string): Settings {
   }
 
   const settings = parsed as Partial<Settings>;
-  if (!Number.isInteger(settings.schemaVersion) || settings.database === undefined) {
+  if (
+    !Number.isInteger(settings.schemaVersion) ||
+    typeof settings.database !== 'object' ||
+    settings.database === null
+  ) {
     throw new Error('The settings file is missing its schema version or database settings');
   }
 
@@ -86,10 +97,9 @@ export async function migrateSettings(): Promise<Settings> {
       logger.error('Failed to parse settings while migrating them');
       logger.error(error);
       await backupCorruptedSettingsFile(settingsFilePath);
+      // Left at schema version 0 on purpose, like a missing file: the recovered settings still need
+      // the migrations that derive the locale and the recording system.
       settings = await buildSettingsForMissingOrCorruptedFile();
-      await writeSettings(settings);
-
-      return settings;
     }
   } else {
     // ! A fresh installation still goes through every migration, they are what sets the locale from

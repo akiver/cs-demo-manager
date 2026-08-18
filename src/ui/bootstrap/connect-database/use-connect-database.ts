@@ -11,6 +11,15 @@ import { settingsUpdated } from 'csdm/ui/settings/settings-actions';
 import { connectDatabaseError, connectDatabaseSuccess } from '../bootstrap-actions';
 import { buildUiDatabaseOperationError } from 'csdm/ui/shared/format-error';
 
+type ConnectOptions = {
+  /**
+   * Whether a failure must be reported to the whole app. The settings dialog switches modes while a
+   * working connection is live: reporting there would replace the app with the connection screen and
+   * make the user reconnect to a database that never stopped working.
+   */
+  reportFailure?: boolean;
+};
+
 /**
  * Connects with the given settings and persists them only when the connection succeeded.
  *
@@ -18,13 +27,17 @@ import { buildUiDatabaseOperationError } from 'csdm/ui/shared/format-error';
  * screen and unmount the connection form, throwing away the credentials the user just typed.
  * Callers show their own busy state instead.
  */
+
 export function useConnectDatabase() {
   const client = useWebSocketClient();
   const dispatch = useDispatch();
   const { t } = useLingui();
 
   return useCallback(
-    async (databaseSettings: DatabaseSettings): Promise<DatabaseOperationError | undefined> => {
+    async (
+      databaseSettings: DatabaseSettings,
+      { reportFailure = true }: ConnectOptions = {},
+    ): Promise<DatabaseOperationError | undefined> => {
       let result: ConnectDatabaseResult;
       try {
         result = await client.send({
@@ -33,13 +46,17 @@ export function useConnectDatabase() {
         });
       } catch (error) {
         const failure = buildUiDatabaseOperationError(error, t`Unknown error`);
-        dispatch(connectDatabaseError({ error: failure }));
+        if (reportFailure) {
+          dispatch(connectDatabaseError({ error: failure }));
+        }
 
         return failure;
       }
 
       if (result.error) {
-        dispatch(connectDatabaseError({ error: result.error }));
+        if (reportFailure) {
+          dispatch(connectDatabaseError({ error: result.error }));
+        }
 
         return result.error;
       }
@@ -49,7 +66,9 @@ export function useConnectDatabase() {
           code: ErrorCode.UnknownError,
           message: t`The database connection returned an invalid response.`,
         };
-        dispatch(connectDatabaseError({ error: failure }));
+        if (reportFailure) {
+          dispatch(connectDatabaseError({ error: failure }));
+        }
 
         return failure;
       }

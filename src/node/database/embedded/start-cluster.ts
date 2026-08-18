@@ -85,7 +85,9 @@ async function startEmbeddedClusterInternal(): Promise<EmbeddedClusterSession> {
       await assertClusterVersionMatchesBinaries(dataFolderPath);
       await initializeClusterIfNeeded(state.password);
 
-      for (let attempt = 1; attempt <= MAX_START_ATTEMPTS; attempt++) {
+      // ! Not bounded by the loop header: every path below returns or throws, only the port-retry
+      // continues, and it is what checks the attempt count.
+      for (let attempt = 1; ; attempt++) {
         const port = await resolveClusterPort(attempt === 1 ? state.port : undefined);
         await writeClusterConfig(port);
 
@@ -139,8 +141,6 @@ async function startEmbeddedClusterInternal(): Promise<EmbeddedClusterSession> {
           `Failed to start the built-in database, pg_ctl exited with code ${exitCode}\n${logTail}`,
         );
       }
-
-      throw new EmbeddedPostgresStartFailed('Failed to start the built-in database after three attempts.');
     } catch (error) {
       try {
         await usageLease.release();

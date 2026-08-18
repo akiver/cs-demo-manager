@@ -479,8 +479,16 @@ async function shutdownAndExit() {
   }
   isShuttingDown = true;
 
-  const { prepareToQuitHandler } = await import('./handlers/main-process/prepare-to-quit-handler');
-  await prepareToQuitHandler();
+  try {
+    const { prepareToQuitHandler } = await import('./handlers/main-process/prepare-to-quit-handler');
+    await prepareToQuitHandler();
+  } catch (error) {
+    // ! Exiting is the point of this path: these listeners replaced the default terminate action, so
+    // a failure here would leave the process alive instead of merely skipping the cleanup.
+    logger.error('Failed to release the database while shutting down');
+    logger.error(error);
+  }
+
   process.exit(0);
 }
 

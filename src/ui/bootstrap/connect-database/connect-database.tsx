@@ -64,6 +64,15 @@ function getHintFromError({ code, message }: ConnectDatabaseError) {
           </Trans>
         </p>
       );
+    case ErrorCode.EmbeddedPostgresInUse:
+      return (
+        <p>
+          <Trans>
+            Another CS Demo Manager process is using the built-in database. Close every app and CLI process, then try
+            again.
+          </Trans>
+        </p>
+      );
     case ErrorCode.EmbeddedPostgresInitFailed:
     case ErrorCode.EmbeddedPostgresStartFailed:
       return (

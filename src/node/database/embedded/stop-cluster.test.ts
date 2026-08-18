@@ -33,7 +33,7 @@ vi.mock('./validate-running-cluster', () => {
 });
 vi.mock('./cluster-lock', () => {
   return {
-    CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS: 180_000,
+    CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS: 15_000,
     tryAcquireExclusiveClusterUsage: () => {
       return Promise.resolve({ release: mocks.releaseExclusiveUsage });
     },

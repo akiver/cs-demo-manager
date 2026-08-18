@@ -52,7 +52,7 @@ function SwitchDatabaseModeDialog({ mode }: { mode: DatabaseMode }) {
   };
 
   const switchToEmbeddedDatabase = async () => {
-    const connectionError = await connect({ ...databaseSettings, mode: 'embedded' });
+    const connectionError = await connect({ ...databaseSettings, mode: 'embedded' }, { reportFailure: false });
     if (connectionError) {
       setError(connectionError.message);
 

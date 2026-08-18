@@ -42,8 +42,15 @@ function parseClusterState(content: string): ClusterState | undefined {
 export async function readClusterState(): Promise<ClusterState | undefined> {
   try {
     return parseClusterState(await fs.readFile(getClusterStateFilePath(), 'utf8'));
-  } catch {
-    return undefined;
+  } catch (error) {
+    // ! Only a missing file means "no state yet". Reporting an unreadable one as absent tells the
+    // user their password is gone and offers a destructive reset, for what may be a transient
+    // failure on a file that is perfectly valid.
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+      return undefined;
+    }
+
+    throw error;
   }
 }
 

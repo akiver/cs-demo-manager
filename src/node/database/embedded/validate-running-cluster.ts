@@ -15,7 +15,12 @@ export async function isExpectedRunningCluster(
     user: CLUSTER_USERNAME,
     password,
     database: 'postgres',
+    // ! connectionTimeoutMillis only bounds the connect. A postmaster that accepts a connection and
+    // then stops answering would hold this query forever, and it runs while the lifecycle lock is
+    // held during shutdown, which is exactly how the detached server ends up orphaned.
     connectionTimeoutMillis: 5_000,
+    query_timeout: 5_000,
+    statement_timeout: 5_000,
   });
 
   try {

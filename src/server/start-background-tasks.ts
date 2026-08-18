@@ -137,7 +137,12 @@ export function stopBackgroundTasks({
   drainTimeoutMs = BACKGROUND_TASK_DRAIN_TIMEOUT_MS,
 }: StopBackgroundTasksOptions = {}): Promise<StopBackgroundTasksResult> {
   if (pendingStop !== undefined) {
-    return pendingStop.promise;
+    // ! The stop already running was bounded by whoever started it. Returning its promise as-is
+    // would serve the quit sequence the 5s deadline of a UI handler and release the database while
+    // the tasks the longer grace exists for are still running.
+    const inFlight = pendingStop.promise;
+
+    return waitForPromise(inFlight, drainTimeoutMs).then((settled) => (settled ? inFlight : 'timed-out'));
   }
 
   const stop = stopActiveBackgroundTasks(drainTimeoutMs);
