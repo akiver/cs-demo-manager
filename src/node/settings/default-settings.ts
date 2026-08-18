@@ -13,6 +13,7 @@ export const defaultSettings: Settings = {
   schemaVersion: CURRENT_SCHEMA_VERSION,
   autoDownloadUpdates: true,
   database: {
+    mode: 'embedded',
     hostname: '127.0.0.1',
     port: 5432,
     username: 'postgres',
