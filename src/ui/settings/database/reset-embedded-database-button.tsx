@@ -8,7 +8,7 @@ import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { formatErrorMessage } from 'csdm/ui/shared/format-error';
 
-function ResetDatabaseDialog() {
+function ResetEmbeddedDatabaseDialog() {
   const client = useWebSocketClient();
   const [error, setError] = useState<string | undefined>(undefined);
   const [isBusy, setIsBusy] = useState(false);
@@ -18,7 +18,7 @@ function ResetDatabaseDialog() {
     try {
       setIsBusy(true);
       const operationError = await client.send({
-        name: RendererClientMessageName.ResetDatabase,
+        name: RendererClientMessageName.ResetEmbeddedDatabase,
       });
       if (operationError !== undefined) {
         setError(operationError.message);
@@ -35,38 +35,35 @@ function ResetDatabaseDialog() {
 
   return (
     <ConfirmDialog
-      title={<Trans context="Dialog title">Reset database</Trans>}
+      title={<Trans context="Dialog title">Reset the built-in database</Trans>}
       onConfirm={onConfirmClick}
       closeOnConfirm={false}
       isBusy={isBusy}
       confirmButtonVariant={ButtonVariant.Danger}
     >
-      <p>
-        <Trans>It will delete all data in the database!</Trans>
-      </p>
-      {error !== undefined && (
-        <div className="mt-8">
-          <ErrorMessage message={error} />
-        </div>
-      )}
+      <div className="flex flex-col gap-y-12">
+        <p>
+          <Trans>
+            It will delete the built-in database and create a new empty one. All analyzed demos will have to be analyzed
+            again!
+          </Trans>
+        </p>
+        {error !== undefined && <ErrorMessage message={error} />}
+      </div>
     </ConfirmDialog>
   );
 }
 
-type Props = {
-  variant?: ButtonVariant;
-};
-
-export function ResetDatabaseButton({ variant }: Props) {
+export function ResetEmbeddedDatabaseButton() {
   const { showDialog } = useDialog();
 
   const onClick = () => {
-    showDialog(<ResetDatabaseDialog />);
+    showDialog(<ResetEmbeddedDatabaseDialog />);
   };
 
   return (
-    <Button variant={variant} onClick={onClick}>
-      <Trans context="Button">Reset database</Trans>
+    <Button variant={ButtonVariant.Danger} onClick={onClick}>
+      <Trans context="Button">Reset the built-in database</Trans>
     </Button>
   );
 }

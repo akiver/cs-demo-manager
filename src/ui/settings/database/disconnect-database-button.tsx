@@ -19,9 +19,15 @@ function DisconnectDatabaseDialog() {
 
   const onConfirm = async () => {
     try {
-      await client.send({
+      const result = await client.send({
         name: RendererClientMessageName.DisconnectDatabase,
+        payload: undefined,
       });
+      if (result.error !== undefined) {
+        setError(result.error.message);
+        return;
+      }
+
       dispatch(disconnectDatabaseSuccess());
       hideDialog();
       makeElementNonInert(APP_ELEMENT_ID);

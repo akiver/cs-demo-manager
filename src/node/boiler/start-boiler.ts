@@ -43,6 +43,7 @@ export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCC
       args.push(...options.args);
     }
     const child = execFile(executablePath, args);
+    let isSettled = false;
 
     const onSteamIdDetected = options?.onSteamIdDetected;
     if (onSteamIdDetected && child.stdout !== null) {
@@ -55,14 +56,27 @@ export async function startBoiler(options?: StartBoilerOptions): Promise<CMsgGCC
     }
 
     child.on('error', async (error) => {
+      if (isSettled) {
+        return;
+      }
+
+      isSettled = true;
+      // ! The promise must be rejected here: without it a boiler that fails to spawn never settles
+      // and every caller waiting on it hangs forever.
       logger.error('boiler process error');
       logger.error(error);
+      reject(error);
       await killCounterStrikeProcesses();
     });
 
-    child.on('exit', async (code: number) => {
+    child.on('exit', async (code: number | null) => {
+      if (isSettled) {
+        return;
+      }
+
+      isSettled = true;
       if (options?.onExit) {
-        options.onExit(code);
+        options.onExit(code ?? -1);
       }
       await killCounterStrikeProcesses();
 

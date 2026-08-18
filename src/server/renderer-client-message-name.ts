@@ -4,6 +4,8 @@ export const RendererClientMessageName = {
   IsCs2ConnectedToServer: 'is-cs2-connected-to-server',
   AbortCurrentTask: 'abort-current-task',
   GetDatabaseSize: 'get-database-size',
+  GetEmbeddedDatabaseInfo: 'get-embedded-database-info',
+  ResetEmbeddedDatabase: 'reset-embedded-database',
   ResetDatabase: 'reset-database',
   OptimizeDatabase: 'optimize-database',
   FetchMatchesTable: 'fetch-matches-table',

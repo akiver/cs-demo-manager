@@ -4,12 +4,14 @@ import { hasPendingAnalysesHandler } from './main-process/has-pending-analyses-h
 import { startMinimizedModeHandler } from './main-process/start-minimized-mode-handler';
 import type { Game } from 'csdm/common/types/counter-strike';
 import { startCounterStrikeHandler } from './main-process/start-counter-strike-handler';
+import { prepareToQuitHandler } from './main-process/prepare-to-quit-handler';
 import type { CounterStrikeErrorPayload } from '../counter-strike';
 
 export interface MainMessageHandlers {
   [MainClientMessageName.HasPendingAnalyses]: Handler<void, boolean>;
   [MainClientMessageName.StartMinimizedMode]: Handler;
   [MainClientMessageName.StartCounterStrike]: Handler<Game, CounterStrikeErrorPayload | undefined>;
+  [MainClientMessageName.PrepareToQuit]: Handler;
 }
 
 // Mapping between message names and server handlers sent from the Electron main process to the WebSocket server.
@@ -17,4 +19,5 @@ export const mainHandlers: MainMessageHandlers = {
   [MainClientMessageName.HasPendingAnalyses]: hasPendingAnalysesHandler,
   [MainClientMessageName.StartMinimizedMode]: startMinimizedModeHandler,
   [MainClientMessageName.StartCounterStrike]: startCounterStrikeHandler,
+  [MainClientMessageName.PrepareToQuit]: prepareToQuitHandler,
 };

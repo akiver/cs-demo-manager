@@ -468,3 +468,28 @@ process.on('message', function (message) {
     process.send?.('pong');
   }
 });
+
+// Safety net when the main process doesn't get the chance to send a PrepareToQuit message (crash,
+// Task Manager...). Without it the embedded PostgreSQL cluster, which pg_ctl starts detached, would
+// be left running.
+let isShuttingDown = false;
+async function shutdownAndExit() {
+  if (isShuttingDown) {
+    return;
+  }
+  isShuttingDown = true;
+
+  const { prepareToQuitHandler } = await import('./handlers/main-process/prepare-to-quit-handler');
+  await prepareToQuitHandler();
+  process.exit(0);
+}
+
+process.on('disconnect', () => {
+  void shutdownAndExit();
+});
+process.on('SIGTERM', () => {
+  void shutdownAndExit();
+});
+process.on('SIGINT', () => {
+  void shutdownAndExit();
+});

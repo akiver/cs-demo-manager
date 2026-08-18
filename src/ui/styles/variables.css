@@ -82,7 +82,6 @@
   --spacing-40: 40px;
   --spacing-48: 48px;
   --spacing-px: 1px;
-
   --container-*: initial;
 
   --radius-*: initial;
@@ -132,6 +131,10 @@
 }
 
 :root {
+  --database-actions-width: 264px;
+  --database-form-width: 400px;
+  --database-page-width: 600px;
+
   --dark-gray-50: #000000;
   --dark-gray-75: #0f0f0f;
   --dark-gray-100: #141414;

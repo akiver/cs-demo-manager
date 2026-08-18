@@ -12,10 +12,12 @@ import { getSettings } from 'csdm/node/settings/get-settings';
 import { getErrorCodeFromError } from './get-error-code-from-error';
 import type { ErrorCode } from 'csdm/common/error-code';
 import { MAX_CONCURRENT_ANALYSES } from 'csdm/common/analyses';
+import { DatabaseTransitionInProgress } from 'csdm/node/database/errors/database-transition-in-progress';
 
 class AnalysesListener {
   private analyses: Analysis[] = [];
   private currentAnalyses: Analysis[] = [];
+  private isDatabaseTransitionInProgress = false;
   private outputFolderPath: string; // Folder path where CSV files will be write on the host
 
   public constructor() {
@@ -30,6 +32,10 @@ class AnalysesListener {
   }
 
   public async addDemosToAnalyses(demos: Demo[]) {
+    if (this.isDatabaseTransitionInProgress) {
+      throw new DatabaseTransitionInProgress();
+    }
+
     const demosNotInPendingAnalyses = demos.filter((demo) => {
       return !this.analyses.some((analysis) => analysis.demoChecksum === demo.checksum);
     });
@@ -68,9 +74,24 @@ class AnalysesListener {
     return this.hasPendingAnalyses() || this.currentAnalyses.length > 0;
   };
 
-  public clear() {
-    this.analyses = [];
-    this.currentAnalyses = [];
+  /**
+   * Atomically rejects a destructive database transition when an analysis is queued/running and
+   * prevents a new analysis from being added until the transition is released.
+   */
+  public tryBeginDatabaseTransition() {
+    if (this.isDatabaseTransitionInProgress || this.hasAnalysesInProgress()) {
+      return undefined;
+    }
+
+    this.isDatabaseTransitionInProgress = true;
+    let isReleased = false;
+
+    return () => {
+      if (!isReleased) {
+        isReleased = true;
+        this.isDatabaseTransitionInProgress = false;
+      }
+    };
   }
 
   private hasPendingAnalyses = () => {
