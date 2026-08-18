@@ -1,13 +1,10 @@
 import { beginDatabaseConnectionCleanup } from 'csdm/node/database/database';
 import { stopEmbeddedCluster } from 'csdm/node/database/embedded/stop-cluster';
 import { stopBackgroundTasks } from 'csdm/server/start-background-tasks';
-import { BACKGROUND_TASK_SHUTDOWN_GRACE_MS } from 'csdm/common/shutdown-timeouts';
 
 async function prepareToQuit() {
   try {
-    // Quitting can afford a longer wait than the UI handlers: it is the last chance for a task to
-    // finish what it started before the connection pool and the cluster go away.
-    const backgroundTaskResult = await stopBackgroundTasks({ drainTimeoutMs: BACKGROUND_TASK_SHUTDOWN_GRACE_MS });
+    const backgroundTaskResult = await stopBackgroundTasks();
     if (backgroundTaskResult === 'timed-out') {
       logger.error('Continuing shutdown while background tasks are still running');
     }

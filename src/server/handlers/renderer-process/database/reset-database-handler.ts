@@ -34,7 +34,14 @@ export async function resetDatabaseHandler() {
         await resetDatabase(transaction);
       });
     } finally {
-      await discardPreparedDatabaseConnection(connection, { stopEmbeddedIfUnused: true });
+      // ! Never lets a cleanup failure replace the outcome: the schema is already emptied at this
+      // point, reporting a failed reset would send the caller down a recovery it does not need.
+      try {
+        await discardPreparedDatabaseConnection(connection, { stopEmbeddedIfUnused: true });
+      } catch (error) {
+        logger.error('Failed to discard the connection used to reset the database');
+        logger.error(error);
+      }
     }
   } catch (error) {
     logger.error('Error while resetting database');

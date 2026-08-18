@@ -16,10 +16,6 @@ let pendingStop: { promise: Promise<StopBackgroundTasksResult> } | undefined;
 
 export type StopBackgroundTasksResult = 'drained' | 'timed-out';
 
-type StopBackgroundTasksOptions = {
-  drainTimeoutMs?: number;
-};
-
 function trackTask<T>(session: BackgroundTaskSession, task: Promise<T>) {
   session.pendingTasks.add(task);
   void task.then(
@@ -111,7 +107,7 @@ function logTaskResults(results: PromiseSettledResult<unknown>[]) {
  * disconnect or reset the database, and a task waiting on a network response it will never get
  * would otherwise keep them hanging forever.
  */
-async function stopActiveBackgroundTasks(drainTimeoutMs: number): Promise<StopBackgroundTasksResult> {
+async function stopActiveBackgroundTasks(): Promise<StopBackgroundTasksResult> {
   const session = activeSession;
   activeSession = undefined;
 
@@ -121,7 +117,7 @@ async function stopActiveBackgroundTasks(drainTimeoutMs: number): Promise<StopBa
   }
 
   const drain = Promise.allSettled([stopListeningForCounterStrikeClosed(), ...(session?.pendingTasks ?? [])]);
-  if (await waitForPromise(drain, drainTimeoutMs)) {
+  if (await waitForPromise(drain, BACKGROUND_TASK_DRAIN_TIMEOUT_MS)) {
     logTaskResults(await drain);
 
     return 'drained';
@@ -133,19 +129,14 @@ async function stopActiveBackgroundTasks(drainTimeoutMs: number): Promise<StopBa
   return 'timed-out';
 }
 
-export function stopBackgroundTasks({
-  drainTimeoutMs = BACKGROUND_TASK_DRAIN_TIMEOUT_MS,
-}: StopBackgroundTasksOptions = {}): Promise<StopBackgroundTasksResult> {
+export function stopBackgroundTasks(): Promise<StopBackgroundTasksResult> {
+  // Every caller shares the same deadline, so joining a stop already in flight is simply waiting
+  // for it: there is no shorter answer for it to inherit.
   if (pendingStop !== undefined) {
-    // ! The stop already running was bounded by whoever started it. Returning its promise as-is
-    // would serve the quit sequence the 5s deadline of a UI handler and release the database while
-    // the tasks the longer grace exists for are still running.
-    const inFlight = pendingStop.promise;
-
-    return waitForPromise(inFlight, drainTimeoutMs).then((settled) => (settled ? inFlight : 'timed-out'));
+    return pendingStop.promise;
   }
 
-  const stop = stopActiveBackgroundTasks(drainTimeoutMs);
+  const stop = stopActiveBackgroundTasks();
   const state = { promise: stop };
   pendingStop = state;
   const clearPendingStop = () => {

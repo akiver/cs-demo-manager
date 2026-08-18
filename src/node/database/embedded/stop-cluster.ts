@@ -6,7 +6,7 @@ import { CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS, tryAcquireExclusiveClusterUsage, with
 import type { EmbeddedClusterSession } from './start-cluster';
 import { readClusterState } from './cluster-state';
 import { isExpectedRunningCluster } from './validate-running-cluster';
-import { BACKGROUND_TASK_SHUTDOWN_GRACE_MS, SHUTDOWN_MARGIN_MS } from 'csdm/common/shutdown-timeouts';
+import { BACKGROUND_TASK_DRAIN_TIMEOUT_MS, SHUTDOWN_MARGIN_MS } from 'csdm/common/shutdown-timeouts';
 
 const STOP_TIMEOUT_IN_SECONDS = 30;
 const STOP_COMMAND_TIMEOUT_MS = (STOP_TIMEOUT_IN_SECONDS + 10) * 1000;
@@ -16,7 +16,7 @@ const STOP_COMMAND_TIMEOUT_MS = (STOP_TIMEOUT_IN_SECONDS + 10) * 1000;
  * detached postmaster behind, which is exactly what this shutdown exists to prevent.
  */
 export const EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS =
-  BACKGROUND_TASK_SHUTDOWN_GRACE_MS + CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS + STOP_COMMAND_TIMEOUT_MS + SHUTDOWN_MARGIN_MS;
+  BACKGROUND_TASK_DRAIN_TIMEOUT_MS + CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS + STOP_COMMAND_TIMEOUT_MS + SHUTDOWN_MARGIN_MS;
 
 export type StopEmbeddedClusterResult =
   | { status: 'not-running' | 'stopped' }

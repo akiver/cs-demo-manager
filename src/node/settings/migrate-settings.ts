@@ -66,10 +66,14 @@ function parseSettingsForMigration(content: string): Settings {
   }
 
   const settings = parsed as Partial<Settings>;
+  const database: unknown = settings.database;
+  // ! Arrays are objects too, and one reaching the migrations would be spread into a settings object
+  // holding no hostname, port or credentials instead of going through the recovery below.
   if (
     !Number.isInteger(settings.schemaVersion) ||
-    typeof settings.database !== 'object' ||
-    settings.database === null
+    typeof database !== 'object' ||
+    database === null ||
+    Array.isArray(database)
   ) {
     throw new Error('The settings file is missing its schema version or database settings');
   }

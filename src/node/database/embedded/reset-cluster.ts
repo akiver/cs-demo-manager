@@ -3,7 +3,7 @@ import { getClusterDataFolderPath, getClusterFolderPath } from './embedded-postg
 import { findRunningCluster } from './read-postmaster-pid';
 import { stopEmbeddedClusterWithoutLock } from './stop-cluster';
 import { EmbeddedPostgresInUse } from './errors/embedded-postgres-in-use';
-import { CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS, tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
+import { tryAcquireExclusiveClusterUsage, withClusterLock } from './cluster-lock';
 import { EmbeddedPostgresIdentityUnverifiable } from './errors/embedded-postgres-identity-unverifiable';
 
 /**
@@ -41,5 +41,5 @@ export async function resetEmbeddedCluster() {
     } finally {
       await exclusiveUsage.release();
     }
-  }, CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS);
+  });
 }
