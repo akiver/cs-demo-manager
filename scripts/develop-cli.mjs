@@ -25,6 +25,7 @@ const context = await esbuild.context({
   },
   external: [
     'pg-native',
+    'fs-native-extensions',
     '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
   ],
   alias: {
