@@ -4,7 +4,9 @@ import { deleteDemosSuccess, demoRenamed, demosSourceUpdated, demosTypeUpdated }
 import { checksumsTagsUpdated } from 'csdm/ui/tags/tags-actions';
 import type { Demo } from 'csdm/common/types/demo';
 import type { ValvePlayer } from 'csdm/common/types/valve-match';
-import { loadDemoSuccess, selectPlayer } from './demo-actions';
+import { Status } from 'csdm/common/types/status';
+import type { ErrorCode } from 'csdm/common/error-code';
+import { loadDemoError, loadDemoStart, loadDemoSuccess, selectPlayer } from './demo-actions';
 import { insertMatchSuccess } from '../analyses/analyses-actions';
 
 function getPlayerWithBestScore(players: ValvePlayer[]) {
@@ -23,12 +25,21 @@ function getPlayerWithBestScore(players: ValvePlayer[]) {
 export type DemoState = {
   demo?: Demo;
   selectedPlayer?: ValvePlayer;
+  status: Status;
+  errorCode: ErrorCode | null;
 };
 
-const initialState: DemoState = {};
+const initialState: DemoState = {
+  status: Status.Loading,
+  errorCode: null,
+};
 
 export const demoReducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(loadDemoStart, (state) => {
+      state.status = Status.Loading;
+      state.errorCode = null;
+    })
     .addCase(loadDemoSuccess, (state, action) => {
       const { valveMatch } = action.payload;
       let selectedPlayer: ValvePlayer | undefined;
@@ -39,7 +50,13 @@ export const demoReducer = createReducer(initialState, (builder) => {
       return {
         demo: action.payload,
         selectedPlayer,
+        status: Status.Success,
+        errorCode: null,
       };
+    })
+    .addCase(loadDemoError, (state, action) => {
+      state.status = Status.Error;
+      state.errorCode = action.payload.errorCode;
     })
     .addCase(selectPlayer, (state, action) => {
       state.selectedPlayer = action.payload;
@@ -63,6 +80,7 @@ export const demoReducer = createReducer(initialState, (builder) => {
       const deletedDemos = action.payload;
       if (state.demo && deletedDemos.includes(state.demo.filePath)) {
         state.demo = undefined;
+        state.status = Status.Loading;
       }
       state.selectedPlayer = undefined;
     })
