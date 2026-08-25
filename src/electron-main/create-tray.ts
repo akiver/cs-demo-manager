@@ -13,11 +13,6 @@ export function createTray() {
 
   // ! 'double-click' event doesn't work on macOS when using setContextMenu()
   tray.on('double-click', async () => {
-    const devWindow = windowManager.getDevWindow();
-    if (devWindow !== null) {
-      devWindow.show();
-    }
-
     const mainWindow = await windowManager.getOrCreateMainWindow();
     mainWindow.show();
   });

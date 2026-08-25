@@ -24,7 +24,7 @@ import { updateSystemStartupBehavior } from 'csdm/electron-main/system-startup-b
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import { initialize } from './auto-updater';
 import { getSettingsSync } from 'csdm/node/settings/get-settings';
-import { attachOrSpawnDaemon, waitForDaemonReady } from 'csdm/node/daemon/attach-or-spawn-daemon';
+import { attachOrSpawnDaemon } from 'csdm/node/daemon/attach-or-spawn-daemon';
 import { WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
 
 process.on('uncaughtException', logger.error);
@@ -98,21 +98,14 @@ async function start() {
 
   await injectPathVariableIntoProcess();
 
-  let webSocketServerPort: number;
-  if (IS_PRODUCTION) {
-    // Attach to the WebSocket server daemon, spawning it first if it's not already running (e.g. started by the CLI).
-    // The daemon outlives the app so in-progress work (analyses, videos…) continues after the app quits.
-    webSocketServerPort = await attachOrSpawnDaemon({
-      serverBundlePath: path.join(app.getAppPath(), 'server.js'),
-      execPath: process.execPath,
-      runAsNode: true,
-    });
-  } else {
-    // In dev mode the WebSocket server runs in a BrowserWindow to have access to the DevTools.
-    // Wait for it to write the daemon info file to know the port it's listening on.
-    await windowManager.createDevWindow();
-    webSocketServerPort = await waitForDaemonReady();
-  }
+  // Attach to the WebSocket server daemon, spawning it first if it's not already running (e.g. started by the CLI).
+  // The daemon outlives the app so in-progress work (analyses, videos…) continues after the app quits.
+  const webSocketServerPort = await attachOrSpawnDaemon({
+    serverBundlePath: path.join(app.getAppPath(), 'server.js'),
+    execPath: process.execPath,
+    runAsNode: true,
+    enableInspector: IS_DEV,
+  });
   // Expose the port through an environment variable inherited by the renderer process.
   process.env[WEB_SOCKET_SERVER_PORT_ENV_NAME] = String(webSocketServerPort);
   logger.log(`WebSocket server daemon listening on port ${webSocketServerPort}`);

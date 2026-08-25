@@ -1,11 +1,16 @@
 import { NetworkError } from 'csdm/node/errors/network-error';
 
-// In dev mode (when the WS server is started from the dev window), the DOM fetch API overrides the NodeJS fetch API.
-// It allows to see requests in the DevTools only during development.
-// ! Sometimes you may have to use explicitly undici (NodeJS fetch) because of differences between DOM/NodeJS APIs.
-// ! In this case, you will not see requests from the DevTools.
+// Wrap the fetch API to translate network failures into a NetworkError.
 const originalFetch = globalThis.fetch;
 globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestInit) => {
+  if (IS_DEV) {
+    // Ask for uncompressed responses to make their body readable from the DevTools Network tab: the Node.js network
+    // inspection reports the bytes received on the wire without decoding the Content-Encoding header.
+    const headers = new Headers(init?.headers);
+    headers.set('accept-encoding', 'identity');
+    init = { ...init, headers };
+  }
+
   try {
     return await originalFetch(input, init);
   } catch (error) {
@@ -21,48 +26,3 @@ globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestIni
     throw error;
   }
 };
-
-if (typeof window !== 'undefined') {
-  function createNodeTimeout(
-    id: ReturnType<typeof globalThis.setTimeout>,
-    clearFn: (id: ReturnType<typeof globalThis.setTimeout>) => void,
-  ): NodeJS.Timeout {
-    const timeout: NodeJS.Timeout = {
-      hasRef: () => true,
-      ref: () => timeout,
-      refresh: () => timeout,
-      unref: () => timeout,
-      [Symbol.toPrimitive]: () => Number(id),
-      [Symbol.dispose]: () => {
-        clearFn(id);
-        return id;
-      },
-      close: () => {
-        clearFn(id);
-        return timeout;
-      },
-      _onTimeout() {},
-    };
-    return timeout;
-  }
-
-  const originalSetTimeout = globalThis.setTimeout;
-  // @ts-ignore Undici uses Node Timeout since v6.20.0, we mimic it in dev mode as the server process runs in a
-  // BrowserWindow, not in a Node process.
-  globalThis.setTimeout = (callback: (...args: unknown[]) => void, ms: number, ...args: unknown[]): NodeJS.Timeout => {
-    const id = originalSetTimeout.call(window, () => callback.apply(this, args), ms ?? 0);
-    return createNodeTimeout(id, clearTimeout);
-  };
-
-  const originalSetInterval = globalThis.setInterval;
-  // @ts-ignore Undici uses Node SetInterval since v8.0.0, we mimic it in dev mode as the server process runs in a
-  // BrowserWindow, not in a Node process.
-  globalThis.setInterval = <TArgs extends unknown[]>(
-    callback: (...args: TArgs) => void,
-    ms?: number,
-    ...args: TArgs
-  ): NodeJS.Timeout => {
-    const id = originalSetInterval.call(window, () => callback.apply(this, args), ms ?? 0);
-    return createNodeTimeout(id, clearInterval);
-  };
-}

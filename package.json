@@ -26,7 +26,7 @@
     "build": "node ./scripts/build.mjs",
     "compile": "tsc --noEmit",
     "deadcode": "knip",
-    "dev": "node ./scripts/develop.mjs",
+    "dev": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON ./scripts/develop.mjs",
     "dev:cli": "node ./scripts/develop-cli.mjs",
     "electron": "electron ./out/main.js",
     "format": "vp fmt",

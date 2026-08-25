@@ -4,6 +4,32 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Debug app",
+      "program": "${workspaceFolder}/scripts/develop.mjs",
+      "cwd": "${workspaceFolder}",
+      "autoAttachChildProcesses": true,
+      "outFiles": ["${workspaceFolder}/out/*.js"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "chrome",
+      "request": "attach",
+      "name": "Attach to renderer",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}/src/ui",
+      "timeout": 60000
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to daemon",
+      "port": 9229,
+      "restart": true,
+      "outFiles": ["${workspaceFolder}/out/*.js"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch CLI",
       "osx": {
         "runtimeExecutable": "${workspaceFolder}/scripts/cli_darwin.sh"
@@ -28,6 +54,12 @@
       "args": ["run", "${relativeFile}"],
       "smartStep": true,
       "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug app + renderer",
+      "configurations": ["Debug app", "Attach to renderer"]
     }
   ]
 }

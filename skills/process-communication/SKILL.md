@@ -6,25 +6,25 @@ user-invocable: false
 
 ## Overview
 
-The app runs three OS processes. All heavy logic lives in the **WebSocket server** process. The **renderer** (React UI) and the **Electron main** process both connect to it as WebSocket clients. The Counter-Strike plugin connects as a fourth client when the game is running.
+The app runs three OS processes. All heavy logic lives in the **WebSocket server** process — a **detached daemon** shared by the GUI and the CLI (attach-or-spawn via the `daemon.json` discovery file in the app folder; it idle-exits when no clients are connected and no background work is running). The **renderer** (React UI), the **Electron main** process and the **CLI** connect to it as WebSocket clients. The Counter-Strike plugin connects as another client when the game is running.
 
 ```
-Electron main process  ←IPC→  Renderer process (UI)    Counter-Strike
-         ↕                            ↕                       ↕
-         └──────────→  WebSocket server process  ←────────────┘
+Electron main process  ←IPC→  Renderer process (UI)    Counter-Strike    CLI
+         ↕                            ↕                       ↕           ↕
+         └──────────→  WebSocket server process (daemon)  ←───┴───────────┘
 ```
 
 ### Process responsibilities
 
-| Process         | Entry                       | Purpose                                                                                                        |
-| --------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `electron-main` | `src/electron-main/main.ts` | Window management, tray, auto-updater, IPC registration                                                        |
-| `server`        | `src/server/server.ts`      | WebSocket hub; dispatches messages to typed handlers; runs background tasks (analyses, downloads, video queue) |
-| `renderer`      | `src/ui/renderer.tsx`       | React UI; communicates exclusively via WebSocket client (`src/ui/web-socket-client.ts`)                        |
-| `preload`       | `src/preload/preload.ts`    | Bridges Node.js APIs to renderer via `contextBridge` (file I/O, settings, IPC for OS-level dialogs)            |
-| `cli`           | `src/cli/cli.ts`            | Standalone CLI; connects to the running WS server or starts its own                                            |
+| Process         | Entry                        | Purpose                                                                                                               |
+| --------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `electron-main` | `src/electron-main/main.ts`  | Window management, tray, auto-updater, IPC registration                                                               |
+| `server`        | `src/server/start-server.ts` | WebSocket hub daemon; dispatches messages to typed handlers; runs background tasks (analyses, downloads, video queue) |
+| `renderer`      | `src/ui/renderer.tsx`        | React UI; communicates exclusively via WebSocket client (`src/ui/web-socket-client.ts`)                               |
+| `preload`       | `src/preload/preload.ts`     | Bridges Node.js APIs to renderer via `contextBridge` (file I/O, settings, IPC for OS-level dialogs)                   |
+| `cli`           | `src/cli/cli.ts`             | Standalone CLI; attaches to the running daemon or spawns one (`src/node/daemon/attach-or-spawn-daemon.ts`)            |
 
-Every WebSocket message is a JSON object `{ name, payload?, uuid? }`. The server dispatches incoming messages to typed handler functions and replies with `SharedServerMessageName.Reply` or `SharedServerMessageName.ReplyError`.
+Every WebSocket message is a JSON object `{ name, payload?, uuid? }`. The server dispatches incoming messages to typed handler functions and replies with `SharedServerMessageName.Reply` or `SharedServerMessageName.ReplyError`. All message-name enums and shared message types live in `src/server/messages/`.
 
 ---
 
@@ -36,8 +36,8 @@ This is the most common pattern: the UI asks the server to do something and wait
 
 | File                                                               | What to add                                                          |
 | ------------------------------------------------------------------ | -------------------------------------------------------------------- |
-| `src/server/renderer-client-message-name.ts`                       | New enum entry for the outgoing message name                         |
-| `src/server/renderer-server-message-name.ts`                       | Payload/response types if the server also pushes back asynchronously |
+| `src/server/messages/renderer-client-message-name.ts`              | New enum entry for the outgoing message name                         |
+| `src/server/messages/server-push-message-name.ts`                  | Payload/response types if the server also pushes back asynchronously |
 | `src/server/handlers/renderer-process/<feature>/<name>-handler.ts` | Handler function                                                     |
 | `src/server/handlers/renderer-handlers-mapping.ts`                 | Register the handler                                                 |
 
@@ -46,7 +46,7 @@ This is the most common pattern: the UI asks the server to do something and wait
 **1. Add the message name**
 
 ```ts
-// src/server/renderer-client-message-name.ts
+// src/server/messages/renderer-client-message-name.ts
 export const RendererClientMessageName = {
   // …existing entries…
   MyNewAction: 'my-new-action',
@@ -79,17 +79,17 @@ For **long-running handlers that communicate entirely via push events** (no retu
 export async function longTaskHandler(payload: LongTaskPayload) {
   try {
     for (const [i, item] of payload.items.entries()) {
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.LongTaskProgress,
+      server.sendPushMessage({
+        name: ServerPushMessageName.LongTaskProgress,
         payload: { count: i + 1, totalCount: payload.items.length },
       });
       await processItem(item);
     }
-    server.sendMessageToRendererProcess({ name: RendererServerMessageName.LongTaskSuccess });
+    server.sendPushMessage({ name: ServerPushMessageName.LongTaskSuccess });
   } catch (error) {
     logger.error('Error during long task');
     logger.error(error);
-    server.sendMessageToRendererProcess({ name: RendererServerMessageName.LongTaskError });
+    server.sendPushMessage({ name: ServerPushMessageName.LongTaskError });
   }
 }
 ```
@@ -111,7 +111,7 @@ export const rendererHandlers: RendererMessageHandlers = {
 ```ts
 // anywhere inside src/ui/
 import { useWebSocketClient } from 'csdm/ui/web-socket/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 
 const client = useWebSocketClient();
 const result = await client.send({
@@ -122,43 +122,43 @@ const result = await client.send({
 
 ---
 
-## 2. Server → Renderer (server push / event)
+## 2. Server → Renderer/CLI (server push / event)
 
-Use this when the server needs to push an update to the UI without a prior request (e.g. progress events, background task completion).
+Use this when the server needs to push an update without a prior request (e.g. progress events, background task completion). Push messages fan out to the renderer **and** all connected CLI clients — this is how CLI-initiated work shows up live in the UI and vice versa.
 
 ### Files to touch
 
-| File                                         | What to add                                   |
-| -------------------------------------------- | --------------------------------------------- |
-| `src/server/renderer-server-message-name.ts` | New enum entry + payload type                 |
-| handler or background task                   | Call `server.sendMessageToRendererProcess(…)` |
-| UI component / hook                          | Subscribe with `client.on(name, listener)`    |
+| File                                              | What to add                                |
+| ------------------------------------------------- | ------------------------------------------ |
+| `src/server/messages/server-push-message-name.ts` | New enum entry + payload type              |
+| handler or background task                        | Call `server.sendPushMessage(…)`           |
+| UI component / hook                               | Subscribe with `client.on(name, listener)` |
 
 ### Steps
 
 **1. Declare the push message**
 
 ```ts
-// src/server/renderer-server-message-name.ts
-export const RendererServerMessageName = {
+// src/server/messages/server-push-message-name.ts
+export const ServerPushMessageName = {
   // …existing entries…
   MyProgressUpdate: 'my-progress-update',
 } as const;
 
-export type RendererServerMessagePayload = {
+export interface ServerPushMessagePayload extends SharedServerMessagePayload {
   // …existing entries…
-  [RendererServerMessageName.MyProgressUpdate]: { percent: number };
-};
+  [ServerPushMessageName.MyProgressUpdate]: { percent: number };
+}
 ```
 
 **2. Push from the server**
 
 ```ts
 import { server } from 'csdm/server/server';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 
-server.sendMessageToRendererProcess({
-  name: RendererServerMessageName.MyProgressUpdate,
+server.sendPushMessage({
+  name: ServerPushMessageName.MyProgressUpdate,
   payload: { percent: 50 },
 });
 ```
@@ -167,7 +167,7 @@ server.sendMessageToRendererProcess({
 
 ```ts
 import { useWebSocketClient } from 'csdm/ui/web-socket/use-web-socket-client';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { useEffect } from 'react';
 
 function MyComponent() {
@@ -177,13 +177,15 @@ function MyComponent() {
     const onProgress = ({ percent }: { percent: number }) => {
       console.log(percent);
     };
-    client.on(RendererServerMessageName.MyProgressUpdate, onProgress);
+    client.on(ServerPushMessageName.MyProgressUpdate, onProgress);
     return () => {
-      client.off(RendererServerMessageName.MyProgressUpdate, onProgress);
+      client.off(ServerPushMessageName.MyProgressUpdate, onProgress);
     };
   }, [client]);
 }
 ```
+
+The CLI subscribes the same way through its own client (`src/cli/web-socket/cli-web-socket-client.ts`).
 
 ---
 
@@ -195,8 +197,8 @@ The Electron main process uses the same WebSocket pattern but through a differen
 
 | File                                                 | What to add                      |
 | ---------------------------------------------------- | -------------------------------- |
-| `src/server/main-client-message-name.ts`             | New enum entry                   |
-| `src/server/main-server-message-name.ts`             | Payload/response types if needed |
+| `src/server/messages/main-client-message-name.ts`    | New enum entry                   |
+| `src/server/messages/main-server-message-name.ts`    | Payload/response types if needed |
 | `src/server/handlers/main-process/<name>-handler.ts` | Handler function                 |
 | `src/server/handlers/main-handlers-mapping.ts`       | Register the handler             |
 
@@ -206,7 +208,7 @@ The pattern mirrors section 1. The main process sends messages via its WebSocket
 
 ```ts
 // src/electron-main/some-file.ts
-import { MainClientMessageName } from 'csdm/server/main-client-message-name';
+import { MainClientMessageName } from 'csdm/server/messages/main-client-message-name';
 
 // fire-and-forget
 await client.send({ name: MainClientMessageName.MyAction });
@@ -221,11 +223,11 @@ const result: boolean = await client.send({ name: MainClientMessageName.MyAction
 
 ### Files to touch
 
-| File                                     | What to add                               |
-| ---------------------------------------- | ----------------------------------------- |
-| `src/server/main-server-message-name.ts` | New enum entry + payload type             |
-| handler or background task               | Call `server.sendMessageToMainProcess(…)` |
-| `src/electron-main/web-socket/…`         | Listen via `client.on(name, listener)`    |
+| File                                              | What to add                               |
+| ------------------------------------------------- | ----------------------------------------- |
+| `src/server/messages/main-server-message-name.ts` | New enum entry + payload type             |
+| handler or background task                        | Call `server.sendMessageToMainProcess(…)` |
+| `src/electron-main/web-socket/…`                  | Listen via `client.on(name, listener)`    |
 
 ### Steps
 
@@ -235,7 +237,7 @@ const result: boolean = await client.send({ name: MainClientMessageName.MyAction
 
 ```ts
 import { server } from 'csdm/server/server';
-import { MainServerMessageName } from 'csdm/server/main-server-message-name';
+import { MainServerMessageName } from 'csdm/server/messages/main-server-message-name';
 
 server.sendMessageToMainProcess({
   name: MainServerMessageName.MyEvent,
@@ -310,17 +312,46 @@ const result = await window.csdm.myAction('hello');
 
 ---
 
-## 6. WS server ↔ Counter-Strike
+## 6. CLI → Server (request/response)
+
+The CLI has its own small handler mapping — do **not** expose renderer handlers to the CLI.
+
+### Files to touch
+
+| File                                                | What to add          |
+| --------------------------------------------------- | -------------------- |
+| `src/server/messages/cli-client-message-name.ts`    | New enum entry       |
+| `src/server/handlers/cli-process/<name>-handler.ts` | Handler function     |
+| `src/server/handlers/cli-handlers-mapping.ts`       | Register the handler |
+
+### Steps
+
+The pattern mirrors section 1. In a command (subclass of `src/cli/commands/command.ts`), get a connected client with `this.connectToDaemon()` — it attaches to the running daemon or spawns one:
+
+```ts
+// src/cli/commands/my-command.ts
+import { CliClientMessageName } from 'csdm/server/messages/cli-client-message-name';
+
+const client = await this.connectToDaemon();
+const result = await client.send({ name: CliClientMessageName.MyAction, payload: { id: 42 } });
+// client.send() has a timeout (default 30s, per-call override as second argument)
+client.on(ServerPushMessageName.MyProgressUpdate, onProgress); // push events also reach the CLI (section 2)
+client.close(); // the daemon idle-exits once no clients remain and no work is running
+```
+
+---
+
+## 7. WS server ↔ Counter-Strike
 
 The game connects to the WS server when it starts through a C++ "plugin" (`cs2-server-plugin/` and `csgo-server-plugin/`). Communication is bidirectional: the plugin sends events to the server, and the server can send commands back to the game.
 
 ### Listen for Counter-Strike events (WS server side)
 
-New event names go in `src/server/game-client-message-name.ts`.
+New event names go in `src/server/messages/game-client-message-name.ts`.
 
 ```ts
 import { server } from 'csdm/server/server';
-import { GameClientMessageName } from 'csdm/server/game-client-message-name';
+import { GameClientMessageName } from 'csdm/server/messages/game-client-message-name';
 
 server.addGameMessageListener(GameClientMessageName.SomeEvent, (payload) => {
   // handle event
@@ -332,14 +363,14 @@ server.removeGameEventListeners(GameClientMessageName.SomeEvent);
 
 ### Send a message to Counter-Strike and wait for a response
 
-New command names go in `src/server/game-server-message-name.ts`.
+New command names go in `src/server/messages/game-server-message-name.ts`.
 
 Use the `sendMessageToGame` helper from `src/server/counter-strike.ts`. It checks that the game is connected, registers the response listener, sends the message, waits a few seconds for a reply, cleans up the listener, and throws `CounterStrikeNotConnected` or `CounterStrikeNoResponse` on failure.
 
 ```ts
 import { sendMessageToGame } from 'csdm/server/counter-strike';
-import { GameServerMessageName } from 'csdm/server/game-server-message-name';
-import { GameClientMessageName } from 'csdm/server/game-client-message-name';
+import { GameServerMessageName } from 'csdm/server/messages/game-server-message-name';
+import { GameClientMessageName } from 'csdm/server/messages/game-client-message-name';
 
 await sendMessageToGame({
   message: { name: GameServerMessageName.SomeCommand, payload: { value: 1 } },
