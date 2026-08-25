@@ -427,13 +427,6 @@ class WebSocketServer {
     if (status !== null) {
       // Another daemon is already listening on this port, typically because two processes spawned a daemon at the
       // same time. The process that spawned this daemon will discover the other one through the daemon info file.
-      if (typeof window !== 'undefined') {
-        // In dev mode the server runs in a BrowserWindow, exiting here would be invisible; the developer has to kill
-        // the other daemon and restart the app.
-        logger.error(`WS:: a daemon is already listening on port ${port}, kill it and restart the app`);
-        return;
-      }
-
       logger.log(`WS:: a daemon is already listening on port ${port}, exiting`);
       process.exit(0);
     }

@@ -13,6 +13,7 @@ export async function createDaemonConnection(): Promise<CliWebSocketClient> {
     serverBundlePath: path.join(path.dirname(process.argv[1]), 'server.js'),
     execPath: process.execPath,
     runAsNode: true,
+    enableInspector: IS_DEV,
   });
 
   return CliWebSocketClient.connect(port);

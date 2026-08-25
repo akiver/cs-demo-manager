@@ -12,6 +12,9 @@ export type SpawnDaemonOptions = {
   execPath: string;
   // Run the Electron binary as a plain Node.js process, it's a no-op with a real Node.js binary.
   runAsNode: boolean;
+  // Expose the Node.js inspector (dev mode only) so the daemon can be debugged from chrome://inspect: console,
+  // breakpoints and network requests thanks to the --experimental-network-inspection flag.
+  enableInspector?: boolean;
 };
 
 async function tryAttachToRunningDaemon(): Promise<number | null> {
@@ -53,9 +56,21 @@ async function tryAttachToRunningDaemon(): Promise<number | null> {
   return info.port;
 }
 
-function spawnDetachedDaemon({ serverBundlePath, execPath, runAsNode }: SpawnDaemonOptions) {
+function spawnDetachedDaemon({ serverBundlePath, execPath, runAsNode, enableInspector }: SpawnDaemonOptions) {
   logger.log(`Spawning daemon from ${serverBundlePath}`);
-  const child = spawn(execPath, [serverBundlePath], {
+  const args = [serverBundlePath];
+  if (enableInspector) {
+    // --inspect-wait pauses the daemon until a debugger attaches, it guarantees that the DevTools network tab captures
+    // requests from the very first one.
+    const inspectFlag = process.env.CSDM_DAEMON_INSPECT_WAIT ? '--inspect-wait=9229' : '--inspect=9229';
+    args.unshift(inspectFlag, '--experimental-network-inspection');
+    if (process.env.CSDM_DAEMON_INSPECT_WAIT) {
+      logger.log(
+        'The daemon is paused until a debugger attaches to port 9229: open chrome://inspect in Chrome and click "Open dedicated DevTools for Node", or attach the VS Code debugger',
+      );
+    }
+  }
+  const child = spawn(execPath, args, {
     detached: true,
     stdio: 'ignore',
     windowsHide: true,
@@ -69,11 +84,11 @@ function spawnDetachedDaemon({ serverBundlePath, execPath, runAsNode }: SpawnDae
 
 /**
  * Waits for a daemon to be discoverable and healthy, returns the port it's listening on.
- * Also used in dev mode where the daemon runs in a BrowserWindow instead of being spawned.
  */
-export async function waitForDaemonReady(): Promise<number> {
+async function waitForDaemonReady(): Promise<number> {
   const startTime = Date.now();
-  const spawnTimeoutMs = 10_000;
+  // A daemon spawned with --inspect-wait doesn't run until a debugger attaches, leave time to open the DevTools.
+  const spawnTimeoutMs = process.env.CSDM_DAEMON_INSPECT_WAIT ? 60_000 : 10_000;
   const pollIntervalMs = 250;
   while (Date.now() - startTime < spawnTimeoutMs) {
     // Re-read the daemon info file on every iteration: if several processes spawned a daemon at the same time, only

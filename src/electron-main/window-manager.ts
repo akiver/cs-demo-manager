@@ -9,7 +9,6 @@ import { listenForContextMenu } from 'csdm/electron-main/listen-for-context-menu
 
 class WindowManager {
   private mainWindow: BrowserWindow | null = null;
-  private devWindow: BrowserWindow | null = null;
   private startupArguments: Argument[] = [];
 
   public constructor() {
@@ -54,42 +53,6 @@ class WindowManager {
 
   public getMainWindow() {
     return this.mainWindow;
-  }
-
-  public getDevWindow() {
-    return this.devWindow;
-  }
-
-  public async createDevWindow(): Promise<BrowserWindow> {
-    const windowState = windowStateKeeper({
-      defaultWidth: 1024,
-      defaultHeight: 768,
-      file: `window-state-dev.json`,
-    });
-
-    const devWindow = new BrowserWindow({
-      x: windowState.x,
-      y: windowState.y,
-      width: windowState.width,
-      height: windowState.height,
-      webPreferences: {
-        nodeIntegration: true,
-        preload: path.join(app.getAppPath(), 'dev-preload.js'),
-        contextIsolation: false,
-      },
-      backgroundColor: '#080808',
-    });
-
-    windowState.manage(devWindow);
-
-    devWindow.on('close', () => {
-      app.exit();
-    });
-
-    devWindow.webContents.openDevTools();
-    await devWindow.loadFile('dev.html');
-
-    return devWindow;
   }
 
   private async createMainWindow() {

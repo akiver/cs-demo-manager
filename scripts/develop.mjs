@@ -10,20 +10,24 @@ import esbuild from 'esbuild';
 import chokidar from 'chokidar';
 import nativeNodeModulesPlugin from './esbuild-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
+import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.ts';
 
 const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
 const outFolderPath = path.resolve(rootFolderPath, 'out');
 const srcFolderPath = path.resolve(rootFolderPath, 'src');
 
-/** @type {import('child_process').ChildProcessWithoutNullStreams | null} */
+const appFolderPath = resolveAppFolderPath(true);
+
+// When running under the VS Code debugger ("Debug app" configuration), the debugger attaches to the Electron and
+// daemon processes and already forwards their console output to the Debug Console: piping/tailing their output here
+// as well would print every log twice.
+const isRunningUnderVsCodeDebugger = process.env.VSCODE_INSPECTOR_OPTIONS !== undefined;
+
+/** @type {import('child_process').ChildProcess | null} */
 let electronProcess = null;
 
 const devLogger = createLogger('info', {
   prefix: '[dev]',
-});
-
-const mainProcessLogger = createLogger('info', {
-  prefix: '[main]',
 });
 
 const commonDefine = {
@@ -38,12 +42,15 @@ const stderrIgnorePatterns = [
 function startElectron() {
   devLogger.info('Starting Electron...', { timestamp: true });
   // You can add app startup arguments in the following array for debugging, example: '--start-path=downloads'
-  const args = [path.join(outFolderPath, 'main.js')];
-  electronProcess = spawn(String(electronPath), args);
-  electronProcess.stdout.on('data', (data) => {
-    mainProcessLogger.info(data.toString(), { timestamp: true });
+  // The remote debugging port allows to attach a debugger (VS Code, chrome://inspect) to the renderer process.
+  const args = [path.join(outFolderPath, 'main.js'), '--remote-debugging-port=9222'];
+  electronProcess = spawn(String(electronPath), args, {
+    stdio: isRunningUnderVsCodeDebugger ? 'ignore' : ['ignore', 'pipe', 'pipe'],
   });
-  electronProcess.stderr.on('data', (data) => {
+  electronProcess.stdout?.on('data', (data) => {
+    process.stdout.write(data);
+  });
+  electronProcess.stderr?.on('data', (data) => {
     const string = data.toString().trim();
     const shouldIgnore = stderrIgnorePatterns.some((pattern) => {
       return pattern.test(string);
@@ -51,7 +58,7 @@ function startElectron() {
     if (shouldIgnore) {
       return;
     }
-    mainProcessLogger.error(string, { timestamp: true });
+    process.stderr.write(data);
   });
   electronProcess.on('exit', (code) => {
     devLogger.info(`Electron process exited with code : ${code}`, { timestamp: true });
@@ -75,6 +82,40 @@ function killElectronProcess() {
 function restartElectron() {
   killElectronProcess();
   startElectron();
+}
+
+/**
+ * The WebSocket server runs as a detached daemon that outlives Electron, kill it on rebuild so the restarted Electron
+ * process spawns a daemon running the latest code (it also releases .node files lock on Windows).
+ */
+function killDaemonProcess() {
+  const daemonInfoFilePath = path.join(appFolderPath, 'daemon.json');
+  try {
+    const { pid } = fs.readJsonSync(daemonInfoFilePath);
+    process.kill(pid, 'SIGTERM');
+    devLogger.info(`Killed daemon process ${pid}`, { timestamp: true });
+  } catch (error) {
+    // There is no daemon info file or the daemon is already dead.
+  }
+}
+
+function logServerLogsWarning() {
+  const lines = [
+    '⚠ Server logs are not visible in this terminal!',
+    '',
+    `The server process inspector listens on port ${SERVER_INSPECTOR_PORT}: open chrome://inspect in Chrome and click`,
+    '"Open dedicated DevTools for Node" to see them.',
+    `They are also written to ${path.join(appFolderPath, 'logs', 'csdm.log')}`,
+  ];
+  const width = Math.max(...lines.map((line) => line.length));
+  const yellow = '\x1b[33m';
+  const reset = '\x1b[0m';
+  const box = [
+    `┌─${'─'.repeat(width)}─┐`,
+    ...lines.map((line) => `│ ${line.padEnd(width)} │`),
+    `└─${'─'.repeat(width)}─┘`,
+  ];
+  process.stdout.write(`${yellow}${box.join('\n')}${reset}\n`);
 }
 
 async function buildAndWatchRendererProcessBundle() {
@@ -128,6 +169,7 @@ async function buildWebSocketProcessBundle() {
           build.onStart(() => {
             // Kill Electron process on build starts to make sure the process releases .node files lock.
             killElectronProcess();
+            killDaemonProcess();
           });
         },
       },
@@ -184,33 +226,11 @@ async function buildPreloadBundle() {
   return files;
 }
 
-async function buildDevPreloadBundle() {
-  const result = await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'server/dev-preload.ts')],
-    outfile: path.join(outFolderPath, 'dev-preload.js'),
-    bundle: true,
-    platform: 'node',
-    target: `node${node}`,
-    external: ['electron'],
-    metafile: true,
-  });
-
-  const files = Object.keys(result.metafile.inputs);
-  return files;
-}
-
-async function copyDevRendererHtml() {
-  const htmlFilePath = path.resolve(srcFolderPath, 'server', 'dev.html');
-  const outHtmlFilePath = path.resolve(outFolderPath, 'dev.html');
-  await fs.copyFile(htmlFilePath, outHtmlFilePath);
-}
-
 async function buildMainProcessBundles() {
   const webSocketFiles = await buildWebSocketProcessBundle();
   const mainFiles = await buildMainProcessBundle();
   const preloadFiles = await buildPreloadBundle();
-  const devPreloadFiles = await buildDevPreloadBundle();
-  const files = [...new Set([...webSocketFiles, ...mainFiles, ...preloadFiles, ...devPreloadFiles])];
+  const files = [...new Set([...webSocketFiles, ...mainFiles, ...preloadFiles])];
 
   return files;
 }
@@ -237,7 +257,10 @@ async function buildAndWatchMainProcessBundles() {
 try {
   await fs.ensureDir(outFolderPath);
 
-  await Promise.all([buildAndWatchRendererProcessBundle(), buildAndWatchMainProcessBundles(), copyDevRendererHtml()]);
+  await Promise.all([buildAndWatchRendererProcessBundle(), buildAndWatchMainProcessBundles()]);
+  if (!isRunningUnderVsCodeDebugger) {
+    logServerLogsWarning();
+  }
   startElectron();
 } catch (error) {
   devLogger.error(error, { timestamp: true });

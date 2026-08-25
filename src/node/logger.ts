@@ -89,8 +89,16 @@ class Logger implements ILogger {
   };
 
   private logToConsole = (data: any[], level: Level) => {
-    if (this.shouldLogToGlobalConsole) {
+    if (!this.shouldLogToGlobalConsole) {
+      return;
+    }
+
+    // The renderer process logs go to its own DevTools console, a prefix identifying the process would be noise there
+    // (it would also be wrong in the preload script where PROCESS_NAME is inherited from the main process).
+    if (process.type === 'renderer') {
       console[level](...data);
+    } else {
+      console[level](`[${process.env.PROCESS_NAME}]`, ...data);
     }
   };
 

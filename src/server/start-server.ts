@@ -18,13 +18,6 @@ async function startServer() {
     version: pkg.version,
   });
 
-  // In dev mode the server runs in a BrowserWindow whose lifetime is tied to the app, the daemon behavior (idle exit,
-  // signals handling) only applies when it runs as a standalone Node.js process.
-  const isRunningInDevWindow = typeof window !== 'undefined';
-  if (isRunningInDevWindow) {
-    return;
-  }
-
   startIdleMonitor();
 
   const shutdown = async () => {
