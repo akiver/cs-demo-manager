@@ -11,6 +11,7 @@ import chokidar from 'chokidar';
 import nativeNodeModulesPlugin from './esbuild-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
 import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.ts';
+import { SERVER_INSPECTOR_PORT, RENDERER_REMOTE_DEBUGGING_PORT } from '../src/node/debug-ports.ts';
 
 const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
 const outFolderPath = path.resolve(rootFolderPath, 'out');
@@ -43,7 +44,7 @@ function startElectron() {
   devLogger.info('Starting Electron...', { timestamp: true });
   // You can add app startup arguments in the following array for debugging, example: '--start-path=downloads'
   // The remote debugging port allows to attach a debugger (VS Code, chrome://inspect) to the renderer process.
-  const args = [path.join(outFolderPath, 'main.js'), '--remote-debugging-port=9222'];
+  const args = [path.join(outFolderPath, 'main.js'), `--remote-debugging-port=${RENDERER_REMOTE_DEBUGGING_PORT}`];
   electronProcess = spawn(String(electronPath), args, {
     stdio: isRunningUnderVsCodeDebugger ? 'ignore' : ['ignore', 'pipe', 'pipe'],
   });

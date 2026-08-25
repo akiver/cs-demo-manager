@@ -4,6 +4,7 @@ import { readDaemonInfoFile, deleteDaemonInfoFile, getDaemonInfoFilePath } from 
 import { probeDaemon, askDaemonToShutdown } from './probe-daemon';
 import pkg from '../../../package.json';
 import { isProcessAlive } from '../os/is-process-alive';
+import { SERVER_INSPECTOR_PORT } from 'csdm/node/debug-ports';
 
 export type SpawnDaemonOptions = {
   // Path to the server.js bundle, it lives next to the file being executed (cli.js or main.js).
@@ -62,11 +63,13 @@ function spawnDetachedDaemon({ serverBundlePath, execPath, runAsNode, enableInsp
   if (enableInspector) {
     // --inspect-wait pauses the daemon until a debugger attaches, it guarantees that the DevTools network tab captures
     // requests from the very first one.
-    const inspectFlag = process.env.CSDM_DAEMON_INSPECT_WAIT ? '--inspect-wait=9229' : '--inspect=9229';
+    const inspectFlag = process.env.CSDM_DAEMON_INSPECT_WAIT
+      ? `--inspect-wait=${SERVER_INSPECTOR_PORT}`
+      : `--inspect=${SERVER_INSPECTOR_PORT}`;
     args.unshift(inspectFlag, '--experimental-network-inspection');
     if (process.env.CSDM_DAEMON_INSPECT_WAIT) {
       logger.log(
-        'The daemon is paused until a debugger attaches to port 9229: open chrome://inspect in Chrome and click "Open dedicated DevTools for Node", or attach the VS Code debugger',
+        `The daemon is paused until a debugger attaches to port ${SERVER_INSPECTOR_PORT}: open chrome://inspect in Chrome and click "Open dedicated DevTools for Node", or attach the VS Code debugger`,
       );
     }
   }

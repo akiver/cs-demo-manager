@@ -6,6 +6,7 @@
       "request": "launch",
       "name": "Debug app",
       "program": "${workspaceFolder}/scripts/develop.mjs",
+      "runtimeArgs": ["--disable-warning=MODULE_TYPELESS_PACKAGE_JSON"],
       "cwd": "${workspaceFolder}",
       "autoAttachChildProcesses": true,
       "outFiles": ["${workspaceFolder}/out/*.js"],
@@ -15,6 +16,7 @@
       "type": "chrome",
       "request": "attach",
       "name": "Attach to renderer",
+      // Must match RENDERER_REMOTE_DEBUGGING_PORT in src/node/debug-ports.ts
       "port": 9222,
       "webRoot": "${workspaceFolder}/src/ui",
       "timeout": 60000
@@ -23,6 +25,7 @@
       "type": "node",
       "request": "attach",
       "name": "Attach to daemon",
+      // Must match SERVER_INSPECTOR_PORT in src/node/debug-ports.ts
       "port": 9229,
       "restart": true,
       "outFiles": ["${workspaceFolder}/out/*.js"]
