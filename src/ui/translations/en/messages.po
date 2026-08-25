@@ -4197,6 +4197,11 @@ msgid "Thrown"
 msgstr "Thrown"
 
 #: src/ui/match/match-loader.tsx
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Analyzing demo…"
+msgstr "Analyzing demo…"
+
+#: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
 msgstr "Fetching match…"
 
@@ -5969,10 +5974,6 @@ msgstr "It will analyze the demo and generate positions required for the 2D view
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Inserting positions into the database…"
 msgstr "Inserting positions into the database…"
-
-#: src/ui/match/viewer-2d/no-positions-found.tsx
-msgid "Analyzing demo…"
-msgstr "Analyzing demo…"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Positions"

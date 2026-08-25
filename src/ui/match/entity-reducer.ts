@@ -1,6 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { fetchMatchSuccess, updateMatchDemoLocationSuccess } from './match-actions';
+import { fetchMatchError, fetchMatchStart, fetchMatchSuccess, updateMatchDemoLocationSuccess } from './match-actions';
 import type { Match } from 'csdm/common/types/match';
+import { Status } from 'csdm/common/types/status';
+import type { ErrorCode } from 'csdm/common/error-code';
 import { commentUpdated } from 'csdm/ui/comment/comment-actions';
 import { checksumsTagsUpdated, playersTagsUpdated, roundTagsUpdated } from 'csdm/ui/tags/tags-actions';
 import { demoRenamed } from 'csdm/ui/demos/demos-actions';
@@ -10,101 +12,130 @@ import { matchesTypeUpdated } from '../matches/matches-actions';
 import { steamAccountNameUpdated } from '../player/player-actions';
 import { roundCommentUpdated } from './rounds/round/round-actions';
 
-const initialState = null as Match | null;
+type EntityState = {
+  match: Match | null;
+  status: Status;
+  errorCode: ErrorCode | null;
+};
+
+const initialState: EntityState = {
+  match: null,
+  status: Status.Loading,
+  errorCode: null,
+};
 
 export const entityReducer = createReducer(initialState, (builder) => {
   return builder
+    .addCase(fetchMatchStart, (state) => {
+      state.status = Status.Loading;
+      state.errorCode = null;
+    })
     .addCase(fetchMatchSuccess, (state, action) => {
-      return action.payload.match;
+      state.match = action.payload.match;
+      state.status = Status.Success;
+      state.errorCode = null;
+    })
+    .addCase(fetchMatchError, (state, action) => {
+      state.status = Status.Error;
+      state.errorCode = action.payload.errorCode;
     })
     .addCase(commentUpdated, (state, action) => {
-      if (state?.checksum === action.payload.checksum) {
-        state.comment = action.payload.comment;
+      const match = state.match;
+      if (match?.checksum === action.payload.checksum) {
+        match.comment = action.payload.comment;
       }
     })
     .addCase(roundCommentUpdated, (state, action) => {
-      if (!state || action.payload.checksum !== state.checksum) {
+      const match = state.match;
+      if (match === null || action.payload.checksum !== match.checksum) {
         return;
       }
-      const round = state.rounds.find((round) => round.number === action.payload.number);
+      const round = match.rounds.find((round) => round.number === action.payload.number);
       if (round) {
         round.comment = action.payload.comment;
       }
     })
     .addCase(demoRenamed, (state, action) => {
-      if (state?.checksum === action.payload.checksum) {
-        state.name = action.payload.name;
+      const match = state.match;
+      if (match?.checksum === action.payload.checksum) {
+        match.name = action.payload.name;
       }
     })
     .addCase(checksumsTagsUpdated, (state, action) => {
-      if (state !== null && action.payload.checksums.includes(state.checksum)) {
-        state.tagIds = action.payload.tagIds;
+      const match = state.match;
+      if (match !== null && action.payload.checksums.includes(match.checksum)) {
+        match.tagIds = action.payload.tagIds;
       }
     })
     .addCase(playersTagsUpdated, (state, action) => {
-      if (!state) {
+      const match = state.match;
+      if (match === null) {
         return;
       }
 
-      for (const player of state.players) {
+      for (const player of match.players) {
         if (action.payload.steamIds.includes(player.steamId)) {
           player.tagIds = action.payload.tagIds;
         }
       }
     })
     .addCase(roundTagsUpdated, (state, action) => {
-      if (state?.checksum !== action.payload.checksum) {
+      const match = state.match;
+      if (match?.checksum !== action.payload.checksum) {
         return;
       }
 
-      const round = state.rounds.find((round) => round.number === action.payload.roundNumber);
+      const round = match.rounds.find((round) => round.number === action.payload.roundNumber);
       if (round) {
         round.tagIds = action.payload.tagIds;
       }
     })
     .addCase(matchesTypeUpdated, (state, action) => {
-      if (state !== null && action.payload.checksums.includes(state.checksum)) {
-        state.type = action.payload.type;
+      const match = state.match;
+      if (match !== null && action.payload.checksums.includes(match.checksum)) {
+        match.type = action.payload.type;
       }
     })
     .addCase(updateMatchDemoLocationSuccess, (state, action) => {
-      if (state !== null) {
-        state.demoFilePath = action.payload.demoFilePath;
+      if (state.match !== null) {
+        state.match.demoFilePath = action.payload.demoFilePath;
       }
     })
     .addCase(addIgnoredSteamAccountSuccess, (state, action) => {
-      for (const player of state?.players ?? []) {
+      for (const player of state.match?.players ?? []) {
         if (action.payload.account.steamId === player.steamId) {
           player.lastBanDate = null;
         }
       }
     })
     .addCase(deleteIgnoredSteamAccountSuccess, (state, action) => {
-      for (const player of state?.players ?? []) {
+      for (const player of state.match?.players ?? []) {
         if (action.payload.account.steamId === player.steamId) {
           player.lastBanDate = action.payload.account.lastBanDate;
         }
       }
     })
     .addCase(insertMatchSuccess, (state, action) => {
-      if (state?.checksum === action.payload.checksum) {
-        return initialState;
+      if (state.match?.checksum === action.payload.checksum) {
+        state.match = null;
+        state.status = Status.Loading;
       }
     })
     .addCase(steamAccountNameUpdated, (state, action) => {
-      if (!state) {
+      const match = state.match;
+      if (match === null) {
         return;
       }
 
       const { name } = action.payload;
 
-      for (const player of state.players) {
+      for (const player of match.players) {
         if (player.steamId === action.payload.steamId) {
           player.name = name;
         }
       }
 
-      for (const kill of state.kills) {
+      for (const kill of match.kills) {
         if (kill.killerSteamId === action.payload.steamId) {
           kill.killerName = name;
         }
@@ -116,7 +147,7 @@ export const entityReducer = createReducer(initialState, (builder) => {
         }
       }
 
-      for (const chat of state.chatMessages) {
+      for (const chat of match.chatMessages) {
         if (chat.senderSteamId === action.payload.steamId) {
           chat.senderName = name;
         }
