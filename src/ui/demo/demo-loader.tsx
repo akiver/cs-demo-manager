@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { Trans } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
@@ -9,7 +9,8 @@ import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-
 import { ErrorCode } from 'csdm/common/error-code';
 import { UpdateDemoLocation } from 'csdm/ui/match/video/update-demo-location';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { loadDemoSuccess } from './demo-actions';
+import { loadDemoError, loadDemoStart, loadDemoSuccess } from './demo-actions';
+import { useDemoState } from './use-demo-state';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { useNavigateToDemo } from 'csdm/ui/hooks/use-navigate-to-demo';
 
@@ -25,30 +26,31 @@ export function DemoLoader() {
   const params = useParams<'path'>();
   const demoPath = decodeURIComponent(params.path as string);
   const location = useLocation() as LocationState;
-  const [status, setStatus] = useState<Status>(Status.Loading);
-  const [errorCode, setErrorCode] = useState<ErrorCode>(ErrorCode.UnknownError);
+  const { demo, status, errorCode } = useDemoState();
+  const isCurrentDemo = demo?.filePath === demoPath;
   const navigateToDemo = useNavigateToDemo();
 
   useEffect(() => {
+    if (isCurrentDemo) {
+      return;
+    }
+
     const loadDemo = async () => {
+      dispatch(loadDemoStart());
       try {
-        setStatus(Status.Loading);
         const demo = await client.send({
           name: RendererClientMessageName.LoadDemoByPath,
           payload: demoPath,
         });
 
         dispatch(loadDemoSuccess(demo));
-        setStatus(Status.Success);
       } catch (error) {
-        const errorCode = isErrorCode(error) ? error : ErrorCode.UnknownError;
-        setErrorCode(errorCode);
-        setStatus(Status.Error);
+        dispatch(loadDemoError({ errorCode: isErrorCode(error) ? error : ErrorCode.UnknownError }));
       }
     };
 
     void loadDemo();
-  }, [client, dispatch, demoPath]);
+  }, [client, dispatch, demoPath, isCurrentDemo]);
 
   if (status === Status.Loading) {
     return <Message message={<Trans>Loading demo…</Trans>} />;
