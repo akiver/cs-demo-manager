@@ -1,12 +1,13 @@
 #!/usr/bin/node
+// @ts-check
 import './load-dot-env-variables.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import fs from 'fs-extra';
 import { build } from 'vite-plus';
-import esbuild from 'esbuild';
-import nativeNodeModulesPlugin from './esbuild-native-node-modules-plugin.mjs';
+import { build as rolldownBuild } from 'vite/rolldown';
+import nativeNodeModulesPlugin from './rolldown-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
 
 const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
@@ -71,47 +72,70 @@ async function buildRendererProcessBundle() {
   });
 }
 
-async function buildWebSocketServerBundle() {
-  await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'server/start-server.ts')],
-    outfile: path.join(outFolderPath, 'server.js'),
-    bundle: true,
-    sourcemap: 'linked',
-    minify: true,
+/**
+ * @param {object} options
+ * @param {string} options.entryPoint Entry file path relative to the src folder.
+ * @param {string} options.outputFileName Output file name written in the out folder.
+ * @param {Record<string, string>} [options.define] Additional constants replaced at build time.
+ * @param {import('vite/rolldown').ExternalOption} [options.external] Modules to keep external to the bundle.
+ * @param {import('vite/rolldown').OutputOptions['sourcemap']} [options.sourcemap]
+ * @returns {import('vite/rolldown').BuildOptions}
+ */
+function createNodeBundleOptions({ entryPoint, outputFileName, define = {}, external = [], sourcemap = true }) {
+  return {
+    input: path.join(srcFolderPath, entryPoint),
     platform: 'node',
-    target: `node${node}`,
-    mainFields: ['module', 'main'],
-    external: [
-      'pg-native',
-      '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
-    ],
-    define: {
-      ...commonDefine,
-      'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
-      'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
+    resolve: {
+      mainFields: ['module', 'main'],
+      alias: {
+        // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
+        fdir: path.join(rootFolderPath, 'node_modules/fdir/dist/index.cjs'),
+      },
     },
-    alias: {
-      // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
-      fdir: './node_modules/fdir/dist/index.cjs',
+    external,
+    transform: {
+      target: `node${node}`,
+      define: {
+        ...commonDefine,
+        ...define,
+      },
     },
     plugins: [nativeNodeModulesPlugin],
-  });
+    output: {
+      file: path.join(outFolderPath, outputFileName),
+      format: 'cjs',
+      sourcemap,
+      minify: true,
+      codeSplitting: false,
+    },
+  };
+}
+
+async function buildWebSocketServerBundle() {
+  await rolldownBuild(
+    createNodeBundleOptions({
+      entryPoint: 'server/start-server.ts',
+      outputFileName: 'server.js',
+      external: [
+        'pg-native',
+        '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
+      ],
+      define: {
+        'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
+        'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
+      },
+    }),
+  );
 }
 
 async function buildMainProcessBundle() {
-  await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'electron-main/main.ts')],
-    outfile: path.join(outFolderPath, 'main.js'),
-    bundle: true,
-    sourcemap: 'linked',
-    minify: true,
-    platform: 'node',
-    target: `node${node}`,
-    mainFields: ['module', 'main'],
-    external: ['electron'],
-    define: commonDefine,
-    plugins: [nativeNodeModulesPlugin],
-  });
+  await rolldownBuild(
+    createNodeBundleOptions({
+      entryPoint: 'electron-main/main.ts',
+      outputFileName: 'main.js',
+      external: ['electron', 'electron/main'],
+    }),
+  );
 
   async function copyTranslations() {
     const translationsFolder = path.resolve(srcFolderPath, 'electron-main', 'translations');
@@ -123,45 +147,28 @@ async function buildMainProcessBundle() {
 }
 
 async function buildPreloadBundle() {
-  await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'preload/preload.ts')],
-    outfile: path.join(outFolderPath, 'preload.js'),
-    bundle: true,
-    sourcemap: 'inline',
-    minify: true,
-    platform: 'node',
-    target: `node${node}`,
-    mainFields: ['module', 'main'],
-    external: ['electron'],
-    define: {
-      ...commonDefine,
-    },
-    plugins: [nativeNodeModulesPlugin],
-  });
+  await rolldownBuild(
+    createNodeBundleOptions({
+      entryPoint: 'preload/preload.ts',
+      outputFileName: 'preload.js',
+      external: ['electron'],
+      sourcemap: 'inline',
+    }),
+  );
 }
 
 async function buildCliBundle() {
-  await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'cli/cli.ts')],
-    outfile: path.join(outFolderPath, 'cli.js'),
-    bundle: true,
-    sourcemap: true,
-    minify: true,
-    platform: 'node',
-    target: `node${node}`,
-    mainFields: ['module', 'main'],
-    define: {
-      ...commonDefine,
-      'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
-      'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
-    },
-    external: ['pg-native', '@aws-sdk/client-s3'],
-    alias: {
-      // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
-      fdir: './node_modules/fdir/dist/index.cjs',
-    },
-    plugins: [nativeNodeModulesPlugin],
-  });
+  await rolldownBuild(
+    createNodeBundleOptions({
+      entryPoint: 'cli/cli.ts',
+      outputFileName: 'cli.js',
+      external: ['pg-native', '@aws-sdk/client-s3'],
+      define: {
+        'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
+        'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
+      },
+    }),
+  );
 }
 
 try {

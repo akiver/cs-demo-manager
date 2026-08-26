@@ -1,4 +1,5 @@
 #!/usr/bin/node
+// @ts-check
 import './load-dot-env-variables.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6,9 +7,8 @@ import { spawn } from 'node:child_process';
 import fs from 'fs-extra';
 import { createServer, createLogger } from 'vite-plus';
 import electronPath from 'electron';
-import esbuild from 'esbuild';
-import chokidar from 'chokidar';
-import nativeNodeModulesPlugin from './esbuild-native-node-modules-plugin.mjs';
+import { watch } from 'vite/rolldown';
+import nativeNodeModulesPlugin from './rolldown-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
 import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.ts';
 import { SERVER_INSPECTOR_PORT, RENDERER_REMOTE_DEBUGGING_PORT } from '../src/node/debug-ports.ts';
@@ -69,7 +69,7 @@ function startElectron() {
   });
   electronProcess.on('error', (error) => {
     devLogger.error('Electron process error', { timestamp: true });
-    devLogger.error(error, { timestamp: true });
+    devLogger.error(String(error), { timestamp: true });
   });
 }
 
@@ -141,118 +141,120 @@ async function buildAndWatchRendererProcessBundle() {
   process.env.VITE_DEV_SERVER_URL = `http://localhost:${port}/`;
 }
 
-async function buildWebSocketProcessBundle() {
-  const result = await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'server/start-server.ts')],
-    outfile: path.join(outFolderPath, 'server.js'),
-    bundle: true,
-    sourcemap: 'linked',
+async function buildAndWatchMainProcessBundles() {
+  /** @type {import('vite/rolldown').WatchOptions} */
+  const commonOptions = {
     platform: 'node',
-    target: `node${node}`,
-    metafile: true,
+    plugins: [nativeNodeModulesPlugin],
+  };
+  /** @type {import('vite/rolldown').OutputOptions} */
+  const commonOutputOptions = {
+    format: 'cjs',
+    sourcemap: true,
+    codeSplitting: false,
+  };
+
+  /** @type {import('vite/rolldown').WatchOptions} */
+  const webSocketServerOptions = {
+    ...commonOptions,
+    input: path.join(srcFolderPath, 'server/start-server.ts'),
     external: [
       'pg-native',
       '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
     ],
-    define: {
-      ...commonDefine,
-      'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
+    transform: {
+      target: `node${node}`,
+      define: {
+        ...commonDefine,
+        'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
+      },
     },
-    alias: {
-      // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
-      fdir: './node_modules/fdir/dist/index.cjs',
+    resolve: {
+      alias: {
+        // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
+        fdir: path.join(rootFolderPath, 'node_modules/fdir/dist/index.cjs'),
+      },
+    },
+    output: {
+      ...commonOutputOptions,
+      file: path.join(outFolderPath, 'server.js'),
+    },
+  };
+
+  /** @type {import('vite/rolldown').WatchOptions} */
+  const mainProcessOptions = {
+    ...commonOptions,
+    input: path.join(srcFolderPath, 'electron-main/main.ts'),
+    external: ['electron', 'electron/main'],
+    transform: {
+      target: `node${node}`,
+      define: commonDefine,
     },
     plugins: [
       nativeNodeModulesPlugin,
       {
-        name: 'restart-electron-on-build-start',
-        setup(build) {
-          build.onStart(() => {
-            // Kill Electron process on build starts to make sure the process releases .node files lock.
-            killElectronProcess();
-            killDaemonProcess();
-          });
+        name: 'copy-translations',
+        async writeBundle() {
+          const translationsFolder = path.resolve(srcFolderPath, 'electron-main', 'translations');
+          const outputFolder = path.resolve(outFolderPath, 'translations');
+          await fs.copy(translationsFolder, outputFolder);
         },
       },
     ],
-  });
-
-  const files = Object.keys(result.metafile.inputs);
-  return files;
-}
-
-async function buildMainProcessBundle() {
-  const result = await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'electron-main/main.ts')],
-    outfile: path.join(outFolderPath, 'main.js'),
-    bundle: true,
-    sourcemap: 'linked',
-    platform: 'node',
-    target: `node${node}`,
-    external: ['electron'],
-    define: commonDefine,
-    metafile: true,
-    plugins: [nativeNodeModulesPlugin],
-  });
-
-  async function copyTranslations() {
-    const translationsFolder = path.resolve(srcFolderPath, 'electron-main', 'translations');
-    const outputFolder = path.resolve(outFolderPath, 'translations');
-    await fs.copy(translationsFolder, outputFolder);
-  }
-
-  await copyTranslations();
-
-  const files = Object.keys(result.metafile.inputs);
-  return files;
-}
-
-async function buildPreloadBundle() {
-  const result = await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'preload/preload.ts')],
-    outfile: path.join(outFolderPath, 'preload.js'),
-    bundle: true,
-    sourcemap: 'inline',
-    platform: 'node',
-    target: `node${node}`,
-    external: ['electron'],
-    define: {
-      ...commonDefine,
+    output: {
+      ...commonOutputOptions,
+      file: path.join(outFolderPath, 'main.js'),
     },
-    metafile: true,
-    plugins: [nativeNodeModulesPlugin],
+  };
+
+  /** @type {import('vite/rolldown').WatchOptions} */
+  const preloadOptions = {
+    ...commonOptions,
+    input: path.join(srcFolderPath, 'preload/preload.ts'),
+    external: ['electron'],
+    transform: {
+      target: `node${node}`,
+      define: commonDefine,
+    },
+    output: {
+      ...commonOutputOptions,
+      file: path.join(outFolderPath, 'preload.js'),
+      sourcemap: 'inline',
+    },
+  };
+
+  const watcher = watch([webSocketServerOptions, mainProcessOptions, preloadOptions]);
+
+  /** @type {Promise<void>} */
+  const initialBuild = new Promise((resolve, reject) => {
+    let isInitialBuild = true;
+    watcher.on('event', (event) => {
+      switch (event.code) {
+        case 'START':
+          // Kill the Electron and daemon processes on build start to make sure they release .node files lock.
+          killElectronProcess();
+          killDaemonProcess();
+          break;
+        case 'ERROR':
+          devLogger.error(String(event.error), { timestamp: true });
+          if (isInitialBuild) {
+            isInitialBuild = false;
+            reject(event.error);
+          }
+          break;
+        case 'END':
+          if (isInitialBuild) {
+            isInitialBuild = false;
+            resolve();
+          } else {
+            restartElectron();
+          }
+          break;
+      }
+    });
   });
 
-  const files = Object.keys(result.metafile.inputs);
-  return files;
-}
-
-async function buildMainProcessBundles() {
-  const webSocketFiles = await buildWebSocketProcessBundle();
-  const mainFiles = await buildMainProcessBundle();
-  const preloadFiles = await buildPreloadBundle();
-  const files = [...new Set([...webSocketFiles, ...mainFiles, ...preloadFiles])];
-
-  return files;
-}
-
-/**
- * We don't use the esbuild watch feature because (as of version 0.12.9) it watches for the whole folder tree,
- * even parent folders. It makes restarting Electron when it's not necessary.
- * Related issue https://github.com/evanw/esbuild/issues/1113
- * Instead we use chokidar to rebuild bundles and restart Electron when a file that requires a full Electron restart changed.
- */
-async function buildAndWatchMainProcessBundles() {
-  const files = await buildMainProcessBundles();
-  const watcher = chokidar.watch(files);
-  watcher.on('change', async () => {
-    try {
-      await buildMainProcessBundles();
-    } catch (error) {
-    } finally {
-      restartElectron();
-    }
-  });
+  await initialBuild;
 }
 
 try {
@@ -264,7 +266,7 @@ try {
   }
   startElectron();
 } catch (error) {
-  devLogger.error(error, { timestamp: true });
+  devLogger.error(String(error), { timestamp: true });
   process.exit(1);
 }
 
