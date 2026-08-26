@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import fs from 'fs/promises';
 import path from 'path';
-import esbuild from 'esbuild';
+import { build, watch } from 'vite/rolldown';
 
 async function main() {
   const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
@@ -13,23 +13,35 @@ async function main() {
     .filter((file) => file.isFile() && file.name.endsWith('.ts'))
     .map((file) => `${rulesFolderPath}/${file.name}`);
 
-  const shouldWatch = process.argv.includes('--watch');
   const options = {
-    entryPoints: tsFiles,
-    bundle: false,
-    outdir: rulesFolderPath,
+    input: tsFiles,
     platform: 'node',
-    format: 'esm',
+    // Only transpile the rule files, keep all their imports external.
+    external: () => true,
+    output: {
+      dir: rulesFolderPath,
+      format: 'esm',
+      entryFileNames: '[name].js',
+    },
   };
+
+  const shouldWatch = process.argv.includes('--watch');
   if (shouldWatch) {
-    const ctx = await esbuild.context(options);
-    await ctx.watch();
+    const watcher = watch(options);
+    watcher.on('event', (event) => {
+      if (event.code === 'ERROR') {
+        console.error(event.error);
+      } else if (event.code === 'END') {
+        console.log('Local linter rules built successfully.');
+      }
+    });
     console.log('Watching for changes');
   } else {
-    const result = await esbuild.build(options);
-    if (result.errors.length > 0) {
+    try {
+      await build(options);
+    } catch (error) {
       console.error('Failed to build local linter rules.');
-      console.error(result.errors);
+      console.error(error);
       process.exit(1);
     }
     console.log('Local linter rules built successfully.');

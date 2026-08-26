@@ -11,13 +11,11 @@ allowBuilds:
   '@akiver/cs-demo-analyzer': true
 
 catalog:
-  esbuild: 0.28.1
   node-gyp: 13.0.1
   vite: npm:@voidzero-dev/vite-plus-core@0.2.5
   vitest: 4.1.10
 
 overrides:
-  esbuild: 'catalog:'
   node-gyp: 'catalog:'
   vite: 'catalog:'
   vitest: 'catalog:'

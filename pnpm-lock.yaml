@@ -5,7 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  esbuild: 0.28.1
   node-gyp: 13.0.1
   vite: npm:@voidzero-dev/vite-plus-core@0.2.5
   vitest: 4.1.10
@@ -125,9 +124,6 @@ importers:
       babel-plugin-react-compiler:
         specifier: 1.0.0
         version: 1.0.0
-      chokidar:
-        specifier: 5.0.0
-        version: 5.0.0
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -170,9 +166,6 @@ importers:
       electron-window-state:
         specifier: 5.0.3
         version: 5.0.3
-      esbuild:
-        specifier: 0.28.1
-        version: 0.28.1
       eslint:
         specifier: 10.7.0
         version: 10.7.0(jiti@2.7.0)(supports-color@7.2.0)
@@ -957,7 +950,7 @@ packages:
     engines: {node: '>=22.19.0'}
     hasBin: true
     peerDependencies:
-      esbuild: 0.28.1
+      esbuild: ^0.28.1
       rolldown: ^1.0.0
     peerDependenciesMeta:
       esbuild:
@@ -2288,7 +2281,7 @@ packages:
       '@arethetypeswrong/core': ^0.18.1
       '@types/node': ^20.19.0 || >=22.12.0
       '@vitejs/devtools': ^0.3.0
-      esbuild: 0.28.1
+      esbuild: ^0.27.0 || ^0.28.0
       jiti: '>=1.21.0'
       less: ^4.0.0
       publint: ^0.3.8
@@ -8898,6 +8891,7 @@ snapshots:
       '@esbuild/win32-arm64': 0.28.1
       '@esbuild/win32-ia32': 0.28.1
       '@esbuild/win32-x64': 0.28.1
+    optional: true
 
   escalade@3.2.0: {}
 
