@@ -9,6 +9,7 @@ import { listenForContextMenu } from 'csdm/electron-main/listen-for-context-menu
 
 class WindowManager {
   private mainWindow: BrowserWindow | null = null;
+  private createMainWindowPromise: Promise<BrowserWindow> | null = null;
   private startupArguments: Argument[] = [];
 
   public constructor() {
@@ -44,12 +45,28 @@ class WindowManager {
   };
 
   public getOrCreateMainWindow = async () => {
-    if (this.mainWindow === null || this.mainWindow.isDestroyed()) {
-      this.mainWindow = await this.createMainWindow();
+    if (this.mainWindow !== null && !this.mainWindow.isDestroyed()) {
+      return this.mainWindow;
     }
 
-    return this.mainWindow;
+    // The window creation is asynchronous and events such as a macOS dock click may be triggered during the creation.
+    // We store the promise to avoid creating multiple windows.
+    if (this.createMainWindowPromise === null) {
+      this.createMainWindowPromise = this.createAndTrackMainWindow();
+    }
+
+    return this.createMainWindowPromise;
   };
+
+  private async createAndTrackMainWindow() {
+    try {
+      this.mainWindow = await this.createMainWindow();
+
+      return this.mainWindow;
+    } finally {
+      this.createMainWindowPromise = null;
+    }
+  }
 
   public getMainWindow() {
     return this.mainWindow;
