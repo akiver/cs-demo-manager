@@ -33,7 +33,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch CLI",
+      "name": "Debug CLI",
       "osx": {
         "runtimeExecutable": "${workspaceFolder}/scripts/cli_darwin.sh"
       },
@@ -45,15 +45,16 @@
       },
       "autoAttachChildProcesses": true,
       "outFiles": ["${workspaceFolder}/out/*.js"],
-      "args": ["analyze"]
+      "console": "integratedTerminal",
+      "args": "${input:cliArgs}"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug Current Test File",
+      "name": "Debug current test file",
       "autoAttachChildProcesses": true,
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
-      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "program": "${workspaceFolder}/node_modules/vitest/vitest.mjs",
       "args": ["run", "${relativeFile}"],
       "smartStep": true,
       "console": "integratedTerminal"
@@ -62,7 +63,16 @@
   "compounds": [
     {
       "name": "Debug app + renderer",
-      "configurations": ["Debug app", "Attach to renderer"]
+      "configurations": ["Debug app", "Attach to renderer"],
+      "stopAll": true
+    }
+  ],
+  "inputs": [
+    {
+      "id": "cliArgs",
+      "type": "promptString",
+      "description": "CLI arguments",
+      "default": "analyze"
     }
   ]
 }
