@@ -76,7 +76,7 @@ export function ConstantRateFactorInput() {
       />
       {displaysLosslessCompatibilityWarning && (
         <div className="flex items-center gap-x-4">
-          <ExclamationTriangleIcon className="size-12 shrink-0 text-orange-700" />
+          <ExclamationTriangleIcon aria-hidden="true" className="size-12 shrink-0 text-orange-700" />
           <p className="text-caption">
             <Trans>Quality 0 with libx264 creates a lossless video that some players can't decode.</Trans>
           </p>
