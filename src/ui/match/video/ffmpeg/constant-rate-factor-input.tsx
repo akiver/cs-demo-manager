@@ -5,6 +5,7 @@ import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { defaultSettings } from 'csdm/node/settings/default-settings';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
+import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 
 export function ConstantRateFactorInput() {
   const id = useId();
@@ -15,6 +16,8 @@ export function ConstantRateFactorInput() {
   // The -crf option is not passed to FFmpeg when custom output parameters are defined (users have full control)
   const isDisabled =
     settings.encoderSoftware === EncoderSoftware.FFmpeg && settings.ffmpegSettings.outputParameters !== '';
+  const displaysLosslessCompatibilityWarning =
+    !isDisabled && settings.ffmpegSettings.constantRateFactor === 0 && settings.ffmpegSettings.videoCodec === 'libx264';
 
   const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     const value = event.target.value.trim();
@@ -71,6 +74,14 @@ export function ConstantRateFactorInput() {
         placeholder={String(defaultValue)}
         isDisabled={isDisabled}
       />
+      {displaysLosslessCompatibilityWarning && (
+        <div className="flex items-center gap-x-4">
+          <ExclamationTriangleIcon className="size-12 shrink-0 text-orange-700" />
+          <p className="text-caption">
+            <Trans>Quality 0 with libx264 creates a lossless video that some players can't decode.</Trans>
+          </p>
+        </div>
+      )}
     </div>
   );
 }
