@@ -109,7 +109,7 @@ async function buildMainProcessBundle() {
     platform: 'node',
     target: `node${node}`,
     mainFields: ['module', 'main'],
-    external: ['electron'],
+    external: ['electron', 'fs-native-extensions'],
     define: commonDefine,
     plugins: [nativeNodeModulesPlugin],
   });

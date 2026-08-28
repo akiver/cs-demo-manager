@@ -147,7 +147,7 @@ async function buildMainProcessBundle() {
     sourcemap: 'linked',
     platform: 'node',
     target: `node${node}`,
-    external: ['electron'],
+    external: ['electron', 'fs-native-extensions'],
     define: commonDefine,
     metafile: true,
     plugins: [nativeNodeModulesPlugin],
