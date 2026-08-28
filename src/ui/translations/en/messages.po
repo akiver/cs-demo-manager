@@ -5132,6 +5132,10 @@ msgctxt "Input label"
 msgid "Quality"
 msgstr "Quality"
 
+#: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
+msgid "Quality 0 with libx264 creates a lossless video that some players can't decode."
+msgstr "Quality 0 with libx264 creates a lossless video that some players can't decode."
+
 #: src/ui/match/video/ffmpeg/ffmpeg-audio-bitrate-select.tsx
 msgctxt "Input label"
 msgid "Audio bitrate"
