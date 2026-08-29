@@ -5730,9 +5730,10 @@ msgid "H"
 msgstr "H"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
+#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
 msgctxt "Table header tooltip"
-msgid "Highlight kills kills"
-msgstr "Highlight kills kills"
+msgid "Highlight kills"
+msgstr "Highlight kills"
 
 #: src/ui/match/video/sequence/sequence-players.tsx
 #: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
@@ -5803,11 +5804,6 @@ msgstr "Override CFG"
 #: src/ui/match/video/sequences/edit-sequences/edit-sequences-settings-dialog.tsx
 msgid "Override player options"
 msgstr "Override player options"
-
-#: src/ui/match/video/sequences/edit-sequences/player-options/sequence-players-options.tsx
-msgctxt "Table header tooltip"
-msgid "Highlight kills"
-msgstr "Highlight kills"
 
 #: src/ui/match/video/sequences/required-disk-space.tsx
 msgctxt "Disk usage in megabyte"
