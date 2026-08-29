@@ -71,7 +71,7 @@ export function SequencePlayers() {
         }),
         headerTooltip: t({
           context: 'Table header tooltip',
-          message: 'Highlight kills kills',
+          message: 'Highlight kills',
         }),
         width: 40,
         Cell: HighlightPlayerKillsCheckbox,
