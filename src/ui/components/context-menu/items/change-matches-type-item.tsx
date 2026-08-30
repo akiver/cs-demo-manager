@@ -4,7 +4,7 @@ import { DemoType } from 'csdm/common/types/counter-strike';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { SubContextMenu } from 'csdm/ui/components/context-menu/sub-context-menu';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { matchesTypeUpdated } from 'csdm/ui/matches/matches-actions';

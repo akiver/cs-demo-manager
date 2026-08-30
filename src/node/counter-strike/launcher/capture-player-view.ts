@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
-import { GameClientMessageName } from 'csdm/server/game-client-message-name';
-import { GameServerMessageName } from 'csdm/server/game-server-message-name';
+import { GameClientMessageName } from 'csdm/server/messages/game-client-message-name';
+import { GameServerMessageName } from 'csdm/server/messages/game-server-message-name';
 import { sendMessageToGame } from 'csdm/server/counter-strike';
 import { assertCounterStrikeIsRunning } from '../assert-counter-strike-is-running';
 import { getRecordingFolderPath } from '../get-recording-folder-path';

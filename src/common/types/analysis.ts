@@ -11,4 +11,5 @@ export type Analysis = {
   status: AnalysisStatus;
   output: string;
   errorCode?: ErrorCode;
+  analyzePositions?: boolean;
 };

@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { useAnalyses } from 'csdm/ui/analyses/use-analyses';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 
 export function RemoveAllAnalysesButton() {
   const analyses = useAnalyses();

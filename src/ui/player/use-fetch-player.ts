@@ -1,6 +1,6 @@
 import type { ErrorCode } from 'csdm/common/error-code';
 import type { MatchFilters } from 'csdm/node/database/match/apply-match-filters';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
 import { usePlayerProfileSettings } from '../settings/use-player-profile-settings';
 import { useDispatch } from '../store/use-dispatch';

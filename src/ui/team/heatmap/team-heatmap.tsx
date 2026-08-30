@@ -8,7 +8,7 @@ import { useHeatmapState } from './use-heatmap-state';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useCurrentTeamName } from '../use-current-team-name';
 import type { TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { Point } from 'csdm/common/types/point';
 import { TeamHeatmapFilters } from './team-heatmap-filters';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';

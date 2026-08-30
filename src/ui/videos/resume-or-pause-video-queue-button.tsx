@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useVideoQueuePaused } from './use-is-video-queue-paused';
 import { ExclamationTriangleIcon } from '../icons/exclamation-triangle-icon';
 

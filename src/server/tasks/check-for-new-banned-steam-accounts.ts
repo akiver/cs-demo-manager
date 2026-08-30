@@ -6,7 +6,7 @@ import { updateTimestamp } from 'csdm/node/database/timestamps/update-timestamp'
 import { NetworkError } from 'csdm/node/errors/network-error';
 import { getErrorCodeFromError } from '../get-error-code-from-error';
 import { server } from '../server';
-import { SharedServerMessageName } from '../shared-server-message-name';
+import { SharedServerMessageName } from 'csdm/server/messages/shared-server-message-name';
 
 let errorHasBeenNotified = false;
 

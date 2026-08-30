@@ -10,7 +10,7 @@ import { Tooltip } from 'csdm/ui/components/tooltip';
 import { TagsDialog } from 'csdm/ui/dialogs/tags-dialog';
 import type { UpdateRoundTagsPayload } from 'csdm/server/handlers/renderer-process/tags/update-round-tags-handler';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { roundTagsUpdated } from 'csdm/ui/tags/tags-actions';

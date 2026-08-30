@@ -3,7 +3,7 @@ import { ThirdPartySettings } from './third-party-settings';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import type { FaceitAccount } from 'csdm/common/types/faceit-account';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { accountsUpdated } from 'csdm/ui/downloads/faceit/faceit-actions';
 import { useFaceitAccounts } from 'csdm/ui/downloads/faceit/use-faceit-accounts';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';

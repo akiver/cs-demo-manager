@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { plural } from '@lingui/core/macro';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { Status } from 'csdm/common/types/status';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';

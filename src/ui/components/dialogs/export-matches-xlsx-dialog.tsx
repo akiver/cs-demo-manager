@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLingui } from '@lingui/react/macro';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import type { ExportMatchesToXlsxPayload } from 'csdm/server/handlers/renderer-process/match/export-matches-to-xlsx-handler';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';

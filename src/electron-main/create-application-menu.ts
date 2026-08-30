@@ -6,7 +6,7 @@ import { isMac } from 'csdm/node/os/is-mac';
 import { windowManager } from 'csdm/electron-main/window-manager';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { WebSocketClient } from './web-socket/web-socket-client';
-import { MainClientMessageName } from 'csdm/server/main-client-message-name';
+import { MainClientMessageName } from 'csdm/server/messages/main-client-message-name';
 
 export function createApplicationMenu(client: WebSocketClient) {
   const template: MenuItemConstructorOptions[] = [];

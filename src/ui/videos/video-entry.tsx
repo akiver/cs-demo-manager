@@ -21,7 +21,7 @@ import { Card } from 'csdm/ui/components/card';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { useRemoveVideos } from './use-remove-videos';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { ErrorCode } from 'csdm/common/error-code';
 import { AddVideoToQueueErrorDialog } from '../match/video/add-video-to-queue-error-dialog';

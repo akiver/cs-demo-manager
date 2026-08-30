@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLingui } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { Map } from 'csdm/common/types/map';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { updateMapSuccess } from 'csdm/ui/maps/maps-actions';

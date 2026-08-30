@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Viewer2D } from './viewer-2d';
 import { UnsupportedMap } from '../../components/unsupported-map';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { Message } from 'csdm/ui/components/message';
 import type { Kill } from 'csdm/common/types/kill';
 import type { PlayerPosition } from 'csdm/common/types/player-position';

@@ -1,5 +1,5 @@
 import { MatchesXlsxExport } from 'csdm/node/xlsx/matches-xlsx-export';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { server } from 'csdm/server/server';
 import { MatchXlsxExport } from 'csdm/node/xlsx/match-xlsx-export';
 import type { SheetName } from 'csdm/node/xlsx/sheet-name';
@@ -36,8 +36,8 @@ export async function exportMatchesToXlsxHandler(payload: ExportMatchesToXlsxPay
   try {
     if (payload.exportEachMatchToSingleFile) {
       for (const [index, match] of payload.matches.entries()) {
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.ExportToXlsxProgress,
+        server.sendPushMessage({
+          name: ServerPushMessageName.ExportToXlsxProgress,
           payload: {
             count: index + 1,
             totalCount: payload.matches.length,
@@ -58,8 +58,8 @@ export async function exportMatchesToXlsxHandler(payload: ExportMatchesToXlsxPay
         outputFilePath: payload.outputFilePath,
         sheets: payload.sheets,
         onSheetGenerationStart(sheetName) {
-          server.sendMessageToRendererProcess({
-            name: RendererServerMessageName.ExportToXlsxSheetProgress,
+          server.sendPushMessage({
+            name: ServerPushMessageName.ExportToXlsxSheetProgress,
             payload: sheetName,
           });
         },
@@ -77,15 +77,15 @@ export async function exportMatchesToXlsxHandler(payload: ExportMatchesToXlsxPay
           outputPath: payload.outputFilePath,
         };
 
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.ExportToXlsxSuccess,
+    server.sendPushMessage({
+      name: ServerPushMessageName.ExportToXlsxSuccess,
       payload: successPayload,
     });
   } catch (error) {
     logger.error('Error while exporting matches to XLSX');
     logger.error(error);
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.ExportToXlsxError,
+    server.sendPushMessage({
+      name: ServerPushMessageName.ExportToXlsxError,
     });
   }
 }

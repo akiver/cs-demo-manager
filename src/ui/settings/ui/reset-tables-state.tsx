@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 
 export function ResetTablesState() {

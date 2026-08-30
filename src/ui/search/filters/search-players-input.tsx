@@ -1,7 +1,7 @@
 import React, { type ReactNode } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { useWebSocketClient } from '../../hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useShowToast } from '../../components/toasts/use-show-toast';
 import { SearchInput } from '../../components/inputs/search-input';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';

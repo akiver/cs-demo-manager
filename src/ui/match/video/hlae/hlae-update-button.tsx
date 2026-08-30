@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useIsHlaeUpdateAvailable } from 'csdm/ui/match/video/hlae/use-is-hlae-update-available';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { UpdateButton } from 'csdm/ui/components/buttons/update-button';

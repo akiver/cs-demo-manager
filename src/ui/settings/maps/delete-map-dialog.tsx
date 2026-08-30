@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { deleteMapSuccess } from 'csdm/ui/maps/maps-actions';
 import { Status } from 'csdm/common/types/status';

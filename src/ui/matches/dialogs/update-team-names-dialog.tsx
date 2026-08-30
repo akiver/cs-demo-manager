@@ -1,7 +1,7 @@
 import React, { useState, type ReactNode } from 'react';
 import { Plural, Trans } from '@lingui/react/macro';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import type { MatchTable } from 'csdm/common/types/match-table';
@@ -14,7 +14,7 @@ import { uniqueArray } from 'csdm/common/array/unique-array';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { ErrorCode } from 'csdm/common/error-code';
 import { teamNamesUpdated } from '../matches-actions';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { Status } from 'csdm/common/types/status';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { Spinner } from 'csdm/ui/components/spinner';
@@ -49,7 +49,7 @@ export function UpdateTeamNamesDialog({ matches }: Props) {
 
     try {
       setStatus(Status.Loading);
-      client.on(RendererServerMessageName.TeamNamesUpdated, setUpdatedCount);
+      client.on(ServerPushMessageName.TeamNamesUpdated, setUpdatedCount);
 
       const updates = await client.send({
         name: RendererClientMessageName.UpdateMatchesTeamNames,
@@ -87,7 +87,7 @@ export function UpdateTeamNamesDialog({ matches }: Props) {
       setError(errorMessage);
       setStatus(Status.Error);
     }
-    client.off(RendererServerMessageName.TeamNamesUpdated, setUpdatedCount);
+    client.off(ServerPushMessageName.TeamNamesUpdated, setUpdatedCount);
   };
 
   const renderMessage = () => {

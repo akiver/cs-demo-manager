@@ -5,7 +5,7 @@ import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { ExportDemoPlayersVoiceErrorPayload } from 'csdm/server/handlers/renderer-process/demo/export-demo-players-voice-handler';
 import { ErrorCode } from 'csdm/common/error-code';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
@@ -13,7 +13,7 @@ import { CloseButton } from 'csdm/ui/components/buttons/close-button';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useCurrentMatch } from '../../use-current-match';
 import { ExternalLink } from 'csdm/ui/components/external-link';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { ExportVoiceMode } from 'csdm/node/csgo-voice-extractor/export-voice-mode';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { DemoSource } from 'csdm/common/types/counter-strike';
@@ -108,12 +108,12 @@ function AudioSelectorDialog({ loadAudioFile }: Props) {
       }
     };
 
-    client.on(RendererServerMessageName.ExportDemoPlayersVoiceDone, onDone);
-    client.on(RendererServerMessageName.ExportDemoPlayersVoiceError, onError);
+    client.on(ServerPushMessageName.ExportDemoPlayersVoiceDone, onDone);
+    client.on(ServerPushMessageName.ExportDemoPlayersVoiceError, onError);
 
     return () => {
-      client.off(RendererServerMessageName.ExportDemoPlayersVoiceDone, onDone);
-      client.off(RendererServerMessageName.ExportDemoPlayersVoiceError, onError);
+      client.off(ServerPushMessageName.ExportDemoPlayersVoiceDone, onDone);
+      client.off(ServerPushMessageName.ExportDemoPlayersVoiceError, onError);
     };
   }, [client, dispatch, hideDialog, demoFilePath, loadAudioFile]);
 

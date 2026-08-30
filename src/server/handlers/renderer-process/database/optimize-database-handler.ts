@@ -1,6 +1,6 @@
 import { sql } from 'kysely';
 import { server } from 'csdm/server/server';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { deletePositions } from 'csdm/node/database/delete-positions';
 import { deleteOrphanDemoPaths } from 'csdm/node/database/demos/delete-orphan-demo-paths';
 import { deleteDemos } from 'csdm/node/database/demos/delete-demos';
@@ -29,8 +29,8 @@ export async function optimizeDatabaseHandler({
       await sql`VACUUM FULL`.execute(db);
     }
 
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.OptimizeDatabaseSuccess,
+    server.sendPushMessage({
+      name: ServerPushMessageName.OptimizeDatabaseSuccess,
     });
   } catch (error) {
     logger.error('Error while optimizing database');

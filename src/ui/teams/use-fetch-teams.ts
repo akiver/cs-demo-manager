@@ -1,4 +1,4 @@
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { useTeamsSettings } from 'csdm/ui/settings/use-teams-settings';

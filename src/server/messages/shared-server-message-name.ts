@@ -1,6 +1,7 @@
-import type { ErrorCode } from '../common/error-code';
+import type { ErrorCode } from 'csdm/common/error-code';
 
-// Message names sent from the WebSocket server to both renderer and main Electron processes.
+// Message names sent from the WebSocket server to several kinds of client: replies go to whichever client made the
+// request (renderer, main, CLI or probe process).
 export const SharedServerMessageName = {
   Reply: 'reply',
   ReplyError: 'reply-error',

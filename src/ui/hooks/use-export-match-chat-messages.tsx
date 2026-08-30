@@ -5,7 +5,7 @@ import { useWebSocketClient } from './use-web-socket-client';
 import type { SaveDialogOptions, SaveDialogReturnValue } from 'electron';
 import type { ExportChatMessagesPayload } from 'csdm/server/handlers/renderer-process/match/export-match-chat-messages-handler';
 import type { ChatMessage } from 'csdm/common/types/chat-message';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 
 export function useExportMatchChatMessages() {
   const client = useWebSocketClient();

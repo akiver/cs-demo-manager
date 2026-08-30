@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Plural, Trans } from '@lingui/react/macro';
 import { Message } from 'csdm/ui/components/message';
 import { Status } from 'csdm/common/types/status';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { BanPerCompetitiveRankChart } from './ban-per-competitive-rank-chart';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { NoStats } from 'csdm/ui/ban/stats/no-stats';
 import { BanPerDateChart } from './ban-per-date-chart';
 import { Panel, PanelTitle, PanelValue, PanelValueVariant } from 'csdm/ui/components/panel';
 import { Content } from 'csdm/ui/components/content';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { LastBans } from './last-bans';
 import { BanPerPremierRankChart } from './ban-per-premier-rank-chart';
 import type { BannedSteamAccount } from 'csdm/common/types/banned-steam-account';
@@ -73,10 +73,10 @@ export function BanStats() {
 
     void fetchStats();
 
-    client.on(RendererServerMessageName.IgnoredSteamAccountsChanged, fetchStats);
+    client.on(ServerPushMessageName.IgnoredSteamAccountsChanged, fetchStats);
 
     return () => {
-      client.off(RendererServerMessageName.IgnoredSteamAccountsChanged, fetchStats);
+      client.off(ServerPushMessageName.IgnoredSteamAccountsChanged, fetchStats);
     };
   }, [client, ignoreBanBeforeFirstSeen]);
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import type { ValveMatch } from 'csdm/common/types/valve-match';
 import type { Demo } from 'csdm/common/types/demo';
 import {
@@ -42,16 +42,16 @@ function useRegisterFetchLastValveMatchesListeners(client: WebSocketClient) {
       dispatch(currentSteamIdDetected({ steamId }));
     };
 
-    client.on(RendererServerMessageName.FetchLastValveMatchesStart, onStart);
-    client.on(RendererServerMessageName.FetchLastValveMatchesSuccess, onSuccess);
-    client.on(RendererServerMessageName.FetchLastValveMatchesError, onError);
-    client.on(RendererServerMessageName.FetchLastValveMatchesSteamIdDetected, onSteamIdDetected);
+    client.on(ServerPushMessageName.FetchLastValveMatchesStart, onStart);
+    client.on(ServerPushMessageName.FetchLastValveMatchesSuccess, onSuccess);
+    client.on(ServerPushMessageName.FetchLastValveMatchesError, onError);
+    client.on(ServerPushMessageName.FetchLastValveMatchesSteamIdDetected, onSteamIdDetected);
 
     return () => {
-      client.off(RendererServerMessageName.FetchLastValveMatchesStart, onStart);
-      client.off(RendererServerMessageName.FetchLastValveMatchesSuccess, onSuccess);
-      client.off(RendererServerMessageName.FetchLastValveMatchesError, onError);
-      client.off(RendererServerMessageName.FetchLastValveMatchesSteamIdDetected, onSteamIdDetected);
+      client.off(ServerPushMessageName.FetchLastValveMatchesStart, onStart);
+      client.off(ServerPushMessageName.FetchLastValveMatchesSuccess, onSuccess);
+      client.off(ServerPushMessageName.FetchLastValveMatchesError, onError);
+      client.off(ServerPushMessageName.FetchLastValveMatchesSteamIdDetected, onSteamIdDetected);
     };
   });
 }
@@ -63,46 +63,46 @@ export function useRegisterDownloadsListeners(client: WebSocketClient) {
     const onDownloadsAdded = (downloads: Download[]) => {
       dispatch(downloadsAdded({ downloads }));
     };
-    client.on(RendererServerMessageName.DownloadsAdded, onDownloadsAdded);
+    client.on(ServerPushMessageName.DownloadsAdded, onDownloadsAdded);
 
     const onDownloadProgress = ({ matchId, progress }: DownloadDemoProgressPayload) => {
       dispatch(downloadDemoProgressChanged({ matchId, progress }));
     };
-    client.on(RendererServerMessageName.DownloadDemoProgress, onDownloadProgress);
+    client.on(ServerPushMessageName.DownloadDemoProgress, onDownloadProgress);
 
     const onDemoExpired = (matchId: string) => {
       dispatch(downloadDemoExpired({ matchId }));
     };
-    client.on(RendererServerMessageName.DownloadDemoExpired, onDemoExpired);
+    client.on(ServerPushMessageName.DownloadDemoExpired, onDemoExpired);
 
     const onDownloadDemoSuccess = (payload: DownloadDemoSuccess) => {
       dispatch(downloadDemoSuccess(payload));
     };
-    client.on(RendererServerMessageName.DownloadDemoSuccess, onDownloadDemoSuccess);
+    client.on(ServerPushMessageName.DownloadDemoSuccess, onDownloadDemoSuccess);
 
     const onDownloadDemoCorrupted = (matchId: string) => {
       dispatch(downloadDemoCorrupted({ matchId }));
     };
-    client.on(RendererServerMessageName.DownloadDemoCorrupted, onDownloadDemoCorrupted);
+    client.on(ServerPushMessageName.DownloadDemoCorrupted, onDownloadDemoCorrupted);
 
     const onDownloadDemoError = (matchId: string) => {
       dispatch(downloadDemoError({ matchId }));
     };
-    client.on(RendererServerMessageName.DownloadDemoError, onDownloadDemoError);
+    client.on(ServerPushMessageName.DownloadDemoError, onDownloadDemoError);
 
     const onDownloadedDemoInCurrentFolderLoaded = (demo: Demo) => {
       dispatch(demoDownloadedInCurrentFolderLoaded(demo));
     };
-    client.on(RendererServerMessageName.DownloadDemoInCurrentFolderLoaded, onDownloadedDemoInCurrentFolderLoaded);
+    client.on(ServerPushMessageName.DownloadDemoInCurrentFolderLoaded, onDownloadedDemoInCurrentFolderLoaded);
 
     return () => {
-      client.off(RendererServerMessageName.DownloadsAdded, onDownloadsAdded);
-      client.off(RendererServerMessageName.DownloadDemoProgress, onDownloadProgress);
-      client.off(RendererServerMessageName.DownloadDemoExpired, onDemoExpired);
-      client.off(RendererServerMessageName.DownloadDemoSuccess, onDownloadDemoSuccess);
-      client.off(RendererServerMessageName.DownloadDemoCorrupted, onDownloadDemoCorrupted);
-      client.off(RendererServerMessageName.DownloadDemoError, onDownloadDemoError);
-      client.off(RendererServerMessageName.DownloadDemoInCurrentFolderLoaded, onDownloadedDemoInCurrentFolderLoaded);
+      client.off(ServerPushMessageName.DownloadsAdded, onDownloadsAdded);
+      client.off(ServerPushMessageName.DownloadDemoProgress, onDownloadProgress);
+      client.off(ServerPushMessageName.DownloadDemoExpired, onDemoExpired);
+      client.off(ServerPushMessageName.DownloadDemoSuccess, onDownloadDemoSuccess);
+      client.off(ServerPushMessageName.DownloadDemoCorrupted, onDownloadDemoCorrupted);
+      client.off(ServerPushMessageName.DownloadDemoError, onDownloadDemoError);
+      client.off(ServerPushMessageName.DownloadDemoInCurrentFolderLoaded, onDownloadedDemoInCurrentFolderLoaded);
     };
   });
 

@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 import { server } from './server';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { getErrorCodeFromError } from './get-error-code-from-error';
 import { ErrorCode } from 'csdm/common/error-code';
 import { VideoStatus } from 'csdm/common/types/video-status';
@@ -22,16 +22,16 @@ class VideoQueue {
     }
 
     this.isPaused = false;
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.VideoQueueResumed,
+    server.sendPushMessage({
+      name: ServerPushMessageName.VideoQueueResumed,
     });
     void this.loopUntilRecodingDone();
   }
 
   public pause() {
     this.isPaused = true;
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.VideoQueuePaused,
+    server.sendPushMessage({
+      name: ServerPushMessageName.VideoQueuePaused,
     });
   }
 
@@ -39,10 +39,18 @@ class VideoQueue {
     for (const id of ids) {
       this.abortVideo(id);
     }
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.VideosRemovedFromQueue,
+    server.sendPushMessage({
+      name: ServerPushMessageName.VideosRemovedFromQueue,
       payload: ids,
     });
+  }
+
+  public isBusy() {
+    return this.currentVideo !== undefined || (!this.isPaused && this.videos.length > 0);
+  }
+
+  public getIsPaused() {
+    return this.isPaused;
   }
 
   public addVideo(partialVideo: AddVideoPayload) {
@@ -62,14 +70,16 @@ class VideoQueue {
     this.videos.push(video);
     this.abortControllers[id] = new AbortController();
 
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.VideoAddedToQueue,
+    server.sendPushMessage({
+      name: ServerPushMessageName.VideoAddedToQueue,
       payload: video,
     });
 
     if (!this.isPaused) {
       void this.loopUntilRecodingDone();
     }
+
+    return video;
   }
 
   private abortVideo(id: string) {
@@ -176,8 +186,8 @@ class VideoQueue {
       ...this.currentVideo,
       ...video,
     };
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.VideoUpdated,
+    server.sendPushMessage({
+      name: ServerPushMessageName.VideoUpdated,
       payload: this.currentVideo,
     });
   };

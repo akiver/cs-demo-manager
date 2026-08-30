@@ -2,6 +2,8 @@ import { type ParseArgsOptionsConfig } from 'node:util';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { createDatabaseConnection } from 'csdm/node/database/database';
 import { migrateDatabase } from 'csdm/node/database/migrations/migrate-database';
+import { createDaemonConnection } from 'csdm/cli/create-daemon-connection';
+import type { CliWebSocketClient } from 'csdm/cli/web-socket/cli-web-socket-client';
 
 export abstract class Command {
   public abstract getDescription(): string;
@@ -35,6 +37,16 @@ export abstract class Command {
     const settings = await getSettings();
     createDatabaseConnection(settings.database);
     await migrateDatabase();
+  }
+
+  protected async connectToDaemon(): Promise<CliWebSocketClient> {
+    try {
+      return await createDaemonConnection();
+    } catch (error) {
+      console.error('Failed to connect to the CS Demo Manager daemon');
+      console.error(error instanceof Error ? error.message : error);
+      return this.exitWithFailure();
+    }
   }
 
   protected isFlagArgument(arg: string) {

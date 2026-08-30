@@ -5,7 +5,7 @@ import { RoutePath } from 'csdm/ui/routes-paths';
 import { ShieldIcon } from '../icons/shield-icon';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
 import { useLocation } from 'react-router';
-import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';
+import { SharedServerMessageName } from 'csdm/server/messages/shared-server-message-name';
 import { LeftBarBadge } from './left-bar-badge';
 import { NumberBadge } from '../components/number-badge';
 

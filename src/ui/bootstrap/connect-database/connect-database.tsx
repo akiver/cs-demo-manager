@@ -15,7 +15,7 @@ import { AppWrapper } from '../app-wrapper';
 import { AppContent } from '../app-content';
 import { connectDatabaseError, connectDatabaseSuccess } from '../bootstrap-actions';
 import { HostnameInput } from 'csdm/ui/components/inputs/hostname-input';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useBootstrapState } from '../use-bootstrap-state';
 import type { ConnectDatabaseError } from 'csdm/server/handlers/renderer-process/database/connect-database-handler';
 import { ErrorCode } from 'csdm/common/error-code';

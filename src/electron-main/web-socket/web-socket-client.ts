@@ -4,12 +4,13 @@ import type {
   MainServerMessageName,
   MainServerMessagePayload,
   MainServerMessageResponse,
-} from 'csdm/server/main-server-message-name';
-import type { MainClientMessageName } from 'csdm/server/main-client-message-name';
+} from 'csdm/server/messages/main-server-message-name';
+import type { MainClientMessageName } from 'csdm/server/messages/main-client-message-name';
 import { getWebSocketServerPort } from 'csdm/server/port';
-import type { IdentifiableClientMessage } from 'csdm/server/identifiable-client-message';
-import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';
+import type { IdentifiableClientMessage } from 'csdm/server/messages/identifiable-client-message';
+import { SharedServerMessageName } from 'csdm/server/messages/shared-server-message-name';
 import type { MainMessageHandlers } from 'csdm/server/handlers/main-handlers-mapping';
+import type { SendableMessage } from 'csdm/server/messages/message';
 import { ErrorCode } from 'csdm/common/error-code';
 
 type Listener<MessageName extends MainServerMessageName = MainServerMessageName> = (
@@ -18,27 +19,14 @@ type Listener<MessageName extends MainServerMessageName = MainServerMessageName>
   | (MessageName extends keyof MainServerMessageResponse ? MainServerMessageResponse[MessageName] : void)
   | Promise<MessageName extends keyof MainServerMessageResponse ? MainServerMessageResponse[MessageName] : void>
   | void;
-type Resolver<MessageName extends MainServerMessageName = MainServerMessageName> = (
-  payload: MainServerMessagePayload[MessageName],
-) => void;
-type ReplyHandler<MessageName extends MainServerMessageName = MainServerMessageName> = {
-  resolve: Resolver<MessageName>;
+
+type ReplyHandler = {
+  resolve: (payload: unknown) => void;
   reject: (error: unknown) => void;
 };
 
-type SendableMessagePayload<MessageName extends MainClientMessageName> = Parameters<
-  MainMessageHandlers[MessageName]
->[0];
-type SendableMessage<MessageName extends MainClientMessageName = MainClientMessageName> = {
-  name: MessageName;
-} & (SendableMessagePayload<MessageName> extends void
-  ? object
-  : {
-      payload: SendableMessagePayload<MessageName>;
-    });
-
 export class WebSocketClient {
-  private messageQueue: SendableMessage[] = [];
+  private messageQueue: SendableMessage<MainMessageHandlers>[] = [];
   private listeners: Map<MainServerMessageName, Listener[]> = new Map();
   private replyHandlers: Map<string, ReplyHandler> = new Map();
   private socket!: WebSocket;
@@ -88,15 +76,15 @@ export class WebSocketClient {
    *   client.on('message-name', onMessage);
    *   client.send({ name: 'message-name' });
    */
-  public send<MessageName extends MainClientMessageName>(message: SendableMessage<MessageName>) {
-    return new Promise((resolve: Resolver, reject) => {
+  public send<MessageName extends MainClientMessageName>(message: SendableMessage<MainMessageHandlers, MessageName>) {
+    return new Promise((resolve: (payload: unknown) => void, reject) => {
       const uuid = randomUUID();
       (message as IdentifiableClientMessage<MessageName>).uuid = uuid;
       this.replyHandlers.set(uuid, { resolve, reject });
       if (this.isConnected) {
         this.socket.send(JSON.stringify(message));
       } else {
-        this.messageQueue.push(message as SendableMessage);
+        this.messageQueue.push(message as SendableMessage<MainMessageHandlers>);
       }
     }) as ReturnType<MainMessageHandlers[MessageName]>;
   }

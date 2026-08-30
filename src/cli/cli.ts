@@ -3,6 +3,8 @@ import '../common/install-source-map-support';
 import 'csdm/node/logger';
 import { commands } from './commands';
 import { HelpCommand } from './commands/help-command';
+import { isErrorCode } from 'csdm/common/is-error-code';
+import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
 
 async function main() {
   try {
@@ -20,7 +22,11 @@ async function main() {
     await command.run();
     process.exit(0);
   } catch (error) {
-    console.error(error);
+    if (isErrorCode(error)) {
+      console.error(getErrorCodeMessage(error));
+    } else {
+      console.error(error);
+    }
     process.exit(1);
   }
 }

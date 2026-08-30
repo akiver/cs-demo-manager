@@ -3,7 +3,7 @@ import { Plural, Trans } from '@lingui/react/macro';
 import type { DemoSource } from 'csdm/common/types/counter-strike';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { SelectOption } from '../inputs/select';
 import { Select } from '../inputs/select';
 import { Status } from 'csdm/common/types/status';

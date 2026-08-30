@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { resetMaps } from 'csdm/ui/maps/maps-actions';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';

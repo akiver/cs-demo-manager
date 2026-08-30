@@ -1,5 +1,5 @@
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { fetchDemosError, fetchDemosProgress, fetchDemosStart, fetchDemosSuccess } from 'csdm/ui/demos/demos-actions';
@@ -13,7 +13,7 @@ export function useFetchDemos() {
 
   return async (options?: Partial<DemosTableFilter>) => {
     try {
-      client.on(RendererServerMessageName.FetchDemosProgress, (payload) => {
+      client.on(ServerPushMessageName.FetchDemosProgress, (payload) => {
         dispatch(fetchDemosProgress(payload));
       });
 
@@ -27,7 +27,7 @@ export function useFetchDemos() {
         analysisStatus: options?.analysisStatus ?? analysisStatus,
       };
       dispatch(fetchDemosStart());
-      const demos = await client.send({
+      const result = await client.send({
         name: RendererClientMessageName.FetchDemosTable,
         payload: filter,
       });
@@ -39,11 +39,11 @@ export function useFetchDemos() {
         startDate: options && 'startDate' in options ? options.startDate : startDate,
         endDate: options && 'endDate' in options ? options.endDate : endDate,
       });
-      dispatch(fetchDemosSuccess(demos));
+      dispatch(fetchDemosSuccess(result));
     } catch (error) {
       dispatch(fetchDemosError());
     } finally {
-      client.removeAllEventListeners(RendererServerMessageName.FetchDemosProgress);
+      client.removeAllEventListeners(ServerPushMessageName.FetchDemosProgress);
     }
   };
 }

@@ -10,9 +10,7 @@ const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
 const outFolderPath = path.resolve(rootFolderPath, 'out');
 const srcFolderPath = path.resolve(rootFolderPath, 'src');
 
-const context = await esbuild.context({
-  entryPoints: [path.join(srcFolderPath, 'cli/cli.ts')],
-  outfile: path.join(outFolderPath, 'cli.js'),
+const commonOptions = {
   bundle: true,
   sourcemap: true,
   platform: 'node',
@@ -32,6 +30,19 @@ const context = await esbuild.context({
     fdir: './node_modules/fdir/dist/index.cjs',
   },
   plugins: [nativeNodeModulesPlugin],
+};
+
+const cliContext = await esbuild.context({
+  ...commonOptions,
+  entryPoints: [path.join(srcFolderPath, 'cli/cli.ts')],
+  outfile: path.join(outFolderPath, 'cli.js'),
 });
 
-await context.watch();
+// The CLI spawns the WebSocket server daemon, build it as well.
+const serverContext = await esbuild.context({
+  ...commonOptions,
+  entryPoints: [path.join(srcFolderPath, 'server/start-server.ts')],
+  outfile: path.join(outFolderPath, 'server.js'),
+});
+
+await Promise.all([cliContext.watch(), serverContext.watch()]);

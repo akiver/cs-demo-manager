@@ -1,6 +1,6 @@
 import React, { useState, type ReactNode } from 'react';
 import { Plural, Trans, useLingui } from '@lingui/react/macro';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';

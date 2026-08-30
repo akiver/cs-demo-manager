@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { RenameDemoPayload } from 'csdm/server/handlers/renderer-process/demo/rename-demo-handler';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';

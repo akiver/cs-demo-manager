@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { Status } from 'csdm/common/types/status';
 import { ErrorCode } from 'csdm/common/error-code';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { Download } from 'csdm/common/download/download-types';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';

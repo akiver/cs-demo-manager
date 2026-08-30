@@ -1,4 +1,4 @@
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useIsCsRunning } from './use-is-cs-running';
 import type { WatchDemoPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-demo-handler';

@@ -9,7 +9,7 @@ import type { Point } from 'csdm/common/types/point';
 import type { MatchHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { fetchPointsSuccess } from './match-heatmap-actions';
 import { HeatmapProvider } from 'csdm/ui/components/heatmap/heatmap-provider';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';

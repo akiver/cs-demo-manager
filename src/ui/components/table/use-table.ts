@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import type { ColumnState } from 'csdm/node/settings/table/column-state';
 import type { TableName } from 'csdm/node/settings/table/table-name';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { isCtrlOrCmdEvent, isSelectAllKeyboardEvent } from 'csdm/ui/keyboard/keyboard';
 import { getTableRowHeight } from './get-table-row-height';
@@ -169,10 +169,10 @@ export function useTable<DataType extends Data>({
       render();
     };
 
-    client.on(RendererServerMessageName.ResetTablesStateSuccess, onResetTables);
+    client.on(ServerPushMessageName.ResetTablesStateSuccess, onResetTables);
 
     return () => {
-      client.off(RendererServerMessageName.ResetTablesStateSuccess, onResetTables);
+      client.off(ServerPushMessageName.ResetTablesStateSuccess, onResetTables);
     };
   }, [client, render, sortedColumn, columns]);
 

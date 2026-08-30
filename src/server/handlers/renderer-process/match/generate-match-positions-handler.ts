@@ -1,7 +1,7 @@
 import { handleError } from '../../handle-error';
 import type { DemoSource } from 'csdm/common/types/counter-strike';
 import { generateMatchPositions } from 'csdm/node/database/matches/generate-match-positions';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { server } from 'csdm/server/server';
 
 export type GenerateMatchPositionsPayload = {
@@ -17,8 +17,8 @@ export async function generateMatchPositionsHandler({ checksum, demoPath, source
       checksum,
       source,
       onInsertionStart: () => {
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.InsertingMatchPositions,
+        server.sendPushMessage({
+          name: ServerPushMessageName.InsertingMatchPositions,
         });
       },
     });
