@@ -5,7 +5,7 @@ import unzipper from 'unzipper';
 import path from 'node:path';
 import util from 'node:util';
 import { assertDownloadFolderIsValid } from 'csdm/node/download/assert-download-folder-is-valid';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { server } from 'csdm/server/server';
 import { loadDemoByPath } from 'csdm/node/demo/load-demo-by-path';
 import { getSettings } from 'csdm/node/settings/get-settings';
@@ -63,8 +63,8 @@ class DownloadDemoQueue {
 
     this.downloads.push(download);
 
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.DownloadsAdded,
+    server.sendPushMessage({
+      name: ServerPushMessageName.DownloadsAdded,
       payload: [download],
     });
 
@@ -104,14 +104,18 @@ class DownloadDemoQueue {
 
     this.downloads.push(...validDownloads);
 
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.DownloadsAdded,
+    server.sendPushMessage({
+      name: ServerPushMessageName.DownloadsAdded,
       payload: validDownloads,
     });
 
     void this.loopUntilDownloadsDone();
 
     return validDownloads;
+  };
+
+  public hasDownloads = () => {
+    return this.currentDownload !== undefined || this.downloads.length > 0;
   };
 
   public getDownloads = () => {
@@ -188,8 +192,8 @@ class DownloadDemoQueue {
         method: 'GET',
       });
       if (response.statusCode === 404) {
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.DownloadDemoExpired,
+        server.sendPushMessage({
+          name: ServerPushMessageName.DownloadDemoExpired,
           payload: currentDownload.matchId,
         });
         return;
@@ -217,8 +221,8 @@ class DownloadDemoQueue {
             matchId: currentDownload.matchId,
             progress,
           };
-          server.sendMessageToRendererProcess({
-            name: RendererServerMessageName.DownloadDemoProgress,
+          server.sendPushMessage({
+            name: ServerPushMessageName.DownloadDemoProgress,
             payload,
           });
           currentProgress = progress;
@@ -247,8 +251,8 @@ class DownloadDemoQueue {
       }
       await insertDownloadHistory(currentDownload.matchId);
 
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.DownloadDemoSuccess,
+      server.sendPushMessage({
+        name: ServerPushMessageName.DownloadDemoSuccess,
         payload: {
           demoChecksum: demo.checksum,
           download: currentDownload,
@@ -263,16 +267,16 @@ class DownloadDemoQueue {
     } catch (error) {
       if (error instanceof Error && error.name !== 'AbortError') {
         logger.error(error);
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.DownloadDemoError,
+        server.sendPushMessage({
+          name: ServerPushMessageName.DownloadDemoError,
           payload: currentDownload.matchId,
         });
       }
       if (error instanceof InvalidDemoHeader) {
         logger.error('Invalid demo header from downloaded demo');
         logger.error(error);
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.DownloadDemoCorrupted,
+        server.sendPushMessage({
+          name: ServerPushMessageName.DownloadDemoCorrupted,
           payload: currentDownload.matchId,
         });
       }
@@ -343,8 +347,8 @@ class DownloadDemoQueue {
   private loadDownloadedDemo = async (demoPath: string) => {
     try {
       const demo = await loadDemoByPath(demoPath);
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.DownloadDemoInCurrentFolderLoaded,
+      server.sendPushMessage({
+        name: ServerPushMessageName.DownloadDemoInCurrentFolderLoaded,
         payload: demo,
       });
     } catch (error) {

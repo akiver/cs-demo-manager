@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import {
   demosAddedToAnalyses,
   demoRemovedFromAnalyses,
@@ -18,28 +18,28 @@ export function useRegisterAnalysesListeners(client: WebSocketClient) {
     const onDemoAddedToAnalyses = (analyses: Analysis[]) => {
       dispatch(demosAddedToAnalyses(analyses));
     };
-    client.on(RendererServerMessageName.DemosAddedToAnalyses, onDemoAddedToAnalyses);
+    client.on(ServerPushMessageName.DemosAddedToAnalyses, onDemoAddedToAnalyses);
 
     const onDemosRemovedFromAnalyses = (demoIds: string[]) => {
       dispatch(demoRemovedFromAnalyses(demoIds));
     };
-    client.on(RendererServerMessageName.DemosRemovedFromAnalyses, onDemosRemovedFromAnalyses);
+    client.on(ServerPushMessageName.DemosRemovedFromAnalyses, onDemosRemovedFromAnalyses);
 
     const onAnalysisUpdated = (analysis: Analysis) => {
       dispatch(analysisUpdated(analysis));
     };
-    client.on(RendererServerMessageName.AnalysisUpdated, onAnalysisUpdated);
+    client.on(ServerPushMessageName.AnalysisUpdated, onAnalysisUpdated);
 
     const onMatchInserted = (match: MatchTable) => {
       dispatch(insertMatchSuccess(match));
     };
-    client.on(RendererServerMessageName.MatchInserted, onMatchInserted);
+    client.on(ServerPushMessageName.MatchInserted, onMatchInserted);
 
     return () => {
-      client.off(RendererServerMessageName.DemosAddedToAnalyses, onDemoAddedToAnalyses);
-      client.off(RendererServerMessageName.DemosRemovedFromAnalyses, onDemosRemovedFromAnalyses);
-      client.off(RendererServerMessageName.AnalysisUpdated, onAnalysisUpdated);
-      client.off(RendererServerMessageName.MatchInserted, onMatchInserted);
+      client.off(ServerPushMessageName.DemosAddedToAnalyses, onDemoAddedToAnalyses);
+      client.off(ServerPushMessageName.DemosRemovedFromAnalyses, onDemosRemovedFromAnalyses);
+      client.off(ServerPushMessageName.AnalysisUpdated, onAnalysisUpdated);
+      client.off(ServerPushMessageName.MatchInserted, onMatchInserted);
     };
   });
 }

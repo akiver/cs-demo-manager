@@ -4,7 +4,7 @@ import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { Status } from 'csdm/common/types/status';
 import type { Demo } from 'csdm/common/types/demo';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { deleteDemosSuccess } from 'csdm/ui/demos/demos-actions';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';

@@ -4,7 +4,7 @@ import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
 import { Status } from 'csdm/common/types/status';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { demoRenamed } from 'csdm/ui/demos/demos-actions';
 import { ErrorCode } from 'csdm/common/error-code';

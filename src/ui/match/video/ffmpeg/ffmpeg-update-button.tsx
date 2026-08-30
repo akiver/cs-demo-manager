@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useIsFfmpegUpdateAvailable } from './use-is-ffmpeg-update-available';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useFfmpegSettings } from 'csdm/ui/settings/video/ffmpeg/use-ffmpeg-settings';

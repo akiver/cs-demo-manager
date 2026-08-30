@@ -1,14 +1,15 @@
 import fs from 'fs-extra';
-import path from 'node:path';
-import os from 'node:os';
 import { glob } from 'csdm/node/filesystem/glob';
 import { Command } from './command';
 import { type DemoSource, SupportedDemoSources } from 'csdm/common/types/counter-strike';
-import { runDemoAnalyzer } from 'csdm/node/demo-analyzer/run-demo-analyzer';
-import { fetchMatchChecksums } from 'csdm/node/database/matches/fetch-match-checksums';
-import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
-import { processMatchInsertion } from 'csdm/node/database/matches/process-match-insertion';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
+import { CliClientMessageName } from 'csdm/server/messages/cli-client-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
+import { AnalysisStatus } from 'csdm/common/types/analysis-status';
+import type { Analysis } from 'csdm/common/types/analysis';
+import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
+import { isErrorCode } from 'csdm/common/is-error-code';
+import { SIGINT_EXIT_CODE } from 'csdm/cli/exit-code';
 
 export class AnalyzeCommand extends Command {
   public static Name = 'analyze';
@@ -16,7 +17,6 @@ export class AnalyzeCommand extends Command {
   private analyzePositions = false;
   private forceAnalyze = false;
   private source: DemoSource | undefined = undefined;
-  private temporaryFolderPath = path.resolve(os.tmpdir(), 'cs-demo-manager-cli');
   private sourceFlag = '--source';
   private forceFlag = '--force';
   private analyzePositionsFlag = '--analyze-positions';
@@ -70,31 +70,129 @@ export class AnalyzeCommand extends Command {
     }
 
     await migrateSettings();
-    await this.initDatabaseConnection();
-    const checksums = await fetchMatchChecksums();
+    const client = await this.connectToDaemon();
+
     console.log(`${this.demoPaths.length} demos to process`);
-    for (const demoPath of this.demoPaths) {
-      try {
-        const checksum = await getDemoChecksumFromDemoPath(demoPath);
-        const isDemoAlreadyInDatabase = checksums.includes(checksum);
-        if (!isDemoAlreadyInDatabase || this.forceAnalyze) {
-          await this.analyzeDemo(demoPath);
-          console.log(`Inserting match into database ${demoPath}...`);
-          await processMatchInsertion({
-            checksum,
-            demoPath,
-            outputFolderPath: this.temporaryFolderPath,
-          });
-        } else {
-          console.log(`Demo ${demoPath} already in database, skipping this demo.`);
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error(error.message);
-        } else {
-          console.error(error);
-        }
+
+    const pendingChecksums = new Set<string>();
+    const lastStatusPerChecksum = new Map<string, AnalysisStatus>();
+    let hasError = false;
+    let resolveCompletion: () => void;
+    const completion = new Promise<void>((resolve) => {
+      resolveCompletion = resolve;
+    });
+
+    const markAnalysisAsDone = (checksum: string) => {
+      pendingChecksums.delete(checksum);
+      if (pendingChecksums.size === 0) {
+        resolveCompletion();
       }
+    };
+
+    const onAnalysisUpdated = (analysis: Analysis) => {
+      const { demoChecksum: checksum, demoPath, status } = analysis;
+      if (!pendingChecksums.has(checksum) || lastStatusPerChecksum.get(checksum) === status) {
+        return;
+      }
+      lastStatusPerChecksum.set(checksum, status);
+
+      switch (status) {
+        case AnalysisStatus.Analyzing:
+          console.log(`Analyzing demo ${demoPath}...`);
+          break;
+        case AnalysisStatus.Inserting:
+          console.log(`Inserting match into database ${demoPath}...`);
+          break;
+        case AnalysisStatus.InsertSuccess:
+          console.log(`Demo ${demoPath} inserted into the database`);
+          markAnalysisAsDone(checksum);
+          break;
+        case AnalysisStatus.AnalyzeError:
+        case AnalysisStatus.InsertError:
+          hasError = true;
+          console.error(
+            status === AnalysisStatus.AnalyzeError
+              ? `Error analyzing demo ${demoPath}`
+              : `Error inserting match into database ${demoPath}`,
+          );
+          if (analysis.output !== '') {
+            console.error(analysis.output);
+          }
+          markAnalysisAsDone(checksum);
+          break;
+      }
+    };
+
+    client.on(ServerPushMessageName.AnalysisUpdated, onAnalysisUpdated);
+
+    const { addedDemos, skippedDemoPaths } = await client.send(
+      {
+        name: CliClientMessageName.AddDemoPathsToAnalyses,
+        payload: {
+          demoPaths: this.demoPaths,
+          force: this.forceAnalyze,
+          analyzePositions: this.analyzePositions,
+          source: this.source,
+        },
+      },
+      { timeoutMs: 20_000 },
+    );
+
+    for (const demoPath of skippedDemoPaths) {
+      console.log(`Demo ${demoPath} already in database, skipping this demo.`);
+    }
+    for (const { checksum } of addedDemos) {
+      pendingChecksums.add(checksum);
+    }
+
+    if (pendingChecksums.size > 0) {
+      // Removing the demos from the daemon's queue cancels the analyses. Demos whose analysis has already started
+      // cannot be interrupted and finish in the background.
+      process.on('SIGINT', async () => {
+        console.log('Canceling analyses...');
+        try {
+          await client.send({
+            name: CliClientMessageName.RemoveDemosFromAnalyses,
+            payload: [...pendingChecksums],
+          });
+        } finally {
+          process.exit(SIGINT_EXIT_CODE);
+        }
+      });
+
+      const daemonStatusPollIntervalMs = 30_000;
+      // Safety net in case a terminal push message never arrives (e.g. the analysis has been removed from the queue
+      // through the GUI). Push messages and the status reply arrive on the same socket, so a non-busy status with
+      // pending analyses means they will never complete.
+      const pollIntervalId = setInterval(async () => {
+        try {
+          const daemon = await client.send({ name: CliClientMessageName.GetDaemonStatus });
+          if (!daemon.busy && pendingChecksums.size > 0) {
+            hasError = true;
+            console.error('Some analyses did not complete, check the demos in the GUI or re-run the command.');
+            resolveCompletion();
+          }
+        } catch (error) {
+          hasError = true;
+          let errorMessage: string;
+          if (isErrorCode(error)) {
+            errorMessage = getErrorCodeMessage(error);
+          } else {
+            errorMessage = error instanceof Error ? error.message : 'The daemon is not responding.';
+          }
+          console.error(errorMessage);
+          resolveCompletion();
+        }
+      }, daemonStatusPollIntervalMs);
+
+      await completion;
+      clearInterval(pollIntervalId);
+    }
+
+    client.close();
+
+    if (hasError) {
+      this.exitWithFailure();
     }
   }
 
@@ -157,21 +255,5 @@ export class AnalyzeCommand extends Command {
         }
       }
     }
-  }
-
-  private async analyzeDemo(demoPath: string) {
-    await runDemoAnalyzer({
-      demoPath,
-      outputFolderPath: this.temporaryFolderPath,
-      analyzePositions: this.analyzePositions,
-      onStart: () => {
-        console.log(`Analyzing demo ${demoPath}...`);
-      },
-      onStderr: (output) => {
-        console.error(`Error analyzing demo: ${demoPath}:`);
-        console.error(output);
-      },
-      source: this.source,
-    });
   }
 }

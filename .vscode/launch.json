@@ -14,7 +14,8 @@
       "linux": {
         "runtimeExecutable": "${workspaceFolder}/scripts/cli.sh"
       },
-      "outFiles": ["${workspaceFolder}/out/cli.js"],
+      "autoAttachChildProcesses": true,
+      "outFiles": ["${workspaceFolder}/out/*.js"],
       "args": ["analyze"]
     },
     {

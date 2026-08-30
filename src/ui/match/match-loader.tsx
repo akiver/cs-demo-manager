@@ -5,7 +5,7 @@ import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';
 import { fetchMatchSuccess } from 'csdm/ui/match/match-actions';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useUnsafeCurrentMatch } from './use-unsafe-current-match';
 import { ErrorCode } from 'csdm/common/error-code';

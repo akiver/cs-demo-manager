@@ -7,7 +7,7 @@ import { Tooltip } from 'csdm/ui/components/tooltip';
 import { getColorAtPercentage, hexToRgb } from 'csdm/ui/shared/colors';
 import { ExportHtmlElementAsImageButton } from 'csdm/ui/components/buttons/export-html-element-as-image-button';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { Status } from 'csdm/common/types/status';
 import { Spinner } from 'csdm/ui/components/spinner';
 import { ErrorMessage } from 'csdm/ui/components/error-message';

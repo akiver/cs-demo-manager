@@ -73,7 +73,7 @@ async function buildRendererProcessBundle() {
 
 async function buildWebSocketServerBundle() {
   await esbuild.build({
-    entryPoints: [path.join(srcFolderPath, 'server/server.ts')],
+    entryPoints: [path.join(srcFolderPath, 'server/start-server.ts')],
     outfile: path.join(outFolderPath, 'server.js'),
     bundle: true,
     sourcemap: 'linked',

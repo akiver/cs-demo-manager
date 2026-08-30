@@ -3,7 +3,7 @@ import { type ReactElement } from 'react';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { Loading } from './loading';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDatabaseStatus } from './use-database-status';
 import { ConnectDatabase } from './connect-database/connect-database';
 import { DatabaseStatus } from './database-status';

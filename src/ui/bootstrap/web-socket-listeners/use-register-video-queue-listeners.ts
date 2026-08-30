@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import type { WebSocketClient } from 'csdm/ui/web-socket-client';
 import {
@@ -18,34 +18,34 @@ export function useRegisterVideoQueueListeners(client: WebSocketClient) {
     const onVideoAddedToQueue = (video: Video) => {
       dispatch(videoAddedToQueue(video));
     };
-    client.on(RendererServerMessageName.VideoAddedToQueue, onVideoAddedToQueue);
+    client.on(ServerPushMessageName.VideoAddedToQueue, onVideoAddedToQueue);
 
     const onVideosRemovedFromQueue = (videoIds: string[]) => {
       dispatch(videosRemovedFromQueue(videoIds));
     };
-    client.on(RendererServerMessageName.VideosRemovedFromQueue, onVideosRemovedFromQueue);
+    client.on(ServerPushMessageName.VideosRemovedFromQueue, onVideosRemovedFromQueue);
 
     const onVideoUpdated = (video: Video) => {
       dispatch(videoUpdated(video));
     };
-    client.on(RendererServerMessageName.VideoUpdated, onVideoUpdated);
+    client.on(ServerPushMessageName.VideoUpdated, onVideoUpdated);
 
     const onResume = () => {
       dispatch(resumeQueue());
     };
-    client.on(RendererServerMessageName.VideoQueueResumed, onResume);
+    client.on(ServerPushMessageName.VideoQueueResumed, onResume);
 
     const onPause = () => {
       dispatch(pauseQueue());
     };
-    client.on(RendererServerMessageName.VideoQueuePaused, onPause);
+    client.on(ServerPushMessageName.VideoQueuePaused, onPause);
 
     return () => {
-      client.off(RendererServerMessageName.VideoAddedToQueue, onVideoAddedToQueue);
-      client.off(RendererServerMessageName.VideosRemovedFromQueue, onVideosRemovedFromQueue);
-      client.off(RendererServerMessageName.VideoUpdated, onVideoUpdated);
-      client.off(RendererServerMessageName.VideoQueueResumed, onResume);
-      client.off(RendererServerMessageName.VideoQueuePaused, onPause);
+      client.off(ServerPushMessageName.VideoAddedToQueue, onVideoAddedToQueue);
+      client.off(ServerPushMessageName.VideosRemovedFromQueue, onVideosRemovedFromQueue);
+      client.off(ServerPushMessageName.VideoUpdated, onVideoUpdated);
+      client.off(ServerPushMessageName.VideoQueueResumed, onResume);
+      client.off(ServerPushMessageName.VideoQueuePaused, onPause);
     };
   });
 }

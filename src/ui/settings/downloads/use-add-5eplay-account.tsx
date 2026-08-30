@@ -2,7 +2,7 @@ import React, { useState, type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { ErrorCode } from 'csdm/common/error-code';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { accountAdded } from 'csdm/ui/downloads/five-eplay/5eplay-actions';
 

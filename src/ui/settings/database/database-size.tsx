@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 
 export function DatabaseSize() {
   const client = useWebSocketClient();
@@ -21,12 +21,12 @@ export function DatabaseSize() {
       }
     };
 
-    client.on(RendererServerMessageName.OptimizeDatabaseSuccess, getDatabaseSize);
+    client.on(ServerPushMessageName.OptimizeDatabaseSuccess, getDatabaseSize);
 
     void getDatabaseSize();
 
     return () => {
-      client.off(RendererServerMessageName.OptimizeDatabaseSuccess, getDatabaseSize);
+      client.off(ServerPushMessageName.OptimizeDatabaseSuccess, getDatabaseSize);
     };
   }, [client]);
 

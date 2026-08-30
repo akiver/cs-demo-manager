@@ -1,5 +1,5 @@
 import type { Download } from 'csdm/common/download/download-types';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { FaceitAccount } from 'csdm/common/types/faceit-account';
 import { addDownloadHandler } from './renderer-process/download/add-download-handler';
 import { addFaceitAccountHandler } from './renderer-process/faceit/add-faceit-account-handler';
@@ -24,6 +24,7 @@ import type {
 } from './renderer-process/video/initialize-video-handler';
 import { initializeVideoHandler } from './renderer-process/video/initialize-video-handler';
 import { fetchDemosTableHandler } from './renderer-process/demo/fetch-demos-table-handler';
+import type { FetchDemosTableResponse } from './renderer-process/demo/fetch-demos-table-handler';
 import { loadDemoHandler } from './renderer-process/demo/load-demo-handler';
 import { navigateToDemoOrMatch } from './renderer-process/navigate-to-demo-or-match-handler';
 import { addDemosToAnalysesHandler } from './renderer-process/demo/add-demos-to-analyses-handler';
@@ -91,7 +92,7 @@ import type { Demo } from 'csdm/common/types/demo';
 import type { Map } from 'csdm/common/types/map';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import type { Tag } from 'csdm/common/types/tag';
-import type { Handler } from 'csdm/server/handler';
+import type { Handler } from 'csdm/server/messages/handler';
 import { resetMapsHandler } from './renderer-process/map/reset-maps-handler';
 import { resetTablesStateHandler } from './renderer-process/settings/reset-tables-state-handler';
 import { enableFfmpegCustomLocationHandler } from './renderer-process/settings/enable-ffmpeg-custom-location-handler';
@@ -245,7 +246,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdatePlayerComment]: Handler<UpdatePlayerCommentPayload>;
   [RendererClientMessageName.UpdateRoundComment]: Handler<UpdateRoundCommentPayload>;
   [RendererClientMessageName.InitializeVideo]: Handler<InitializeVideoPayload, InitializeVideoSuccessPayload>;
-  [RendererClientMessageName.FetchDemosTable]: Handler<DemosTableFilter, Demo[]>;
+  [RendererClientMessageName.FetchDemosTable]: Handler<DemosTableFilter, FetchDemosTableResponse>;
   [RendererClientMessageName.LoadDemoByPath]: Handler<string, Demo>;
   [RendererClientMessageName.NavigateToDemoOrMatch]: Handler<string>;
   [RendererClientMessageName.FetchPlayersTable]: Handler<PlayersTableFilter, PlayerTable[]>;

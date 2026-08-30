@@ -2,7 +2,7 @@ import React, { useEffect, type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
 import type { WebSocketClient } from 'csdm/ui/web-socket-client';
 import { ErrorCode } from 'csdm/common/error-code';
-import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';
+import { SharedServerMessageName } from 'csdm/server/messages/shared-server-message-name';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 
 export function useRegisterBanListeners(client: WebSocketClient) {

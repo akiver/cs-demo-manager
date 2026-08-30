@@ -6,7 +6,7 @@ import { useCurrentMatchSequences } from './sequences/use-current-match-sequence
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { useCurrentMatch } from '../use-current-match';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { useSequencesRequiredDiskSpace } from './sequences/use-sequences-required-disk-space';
 import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';

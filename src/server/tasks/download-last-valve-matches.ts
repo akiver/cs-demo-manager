@@ -1,6 +1,6 @@
 import { DownloadStatus } from 'csdm/common/types/download-status';
 import { downloadDemoQueue } from 'csdm/server/download-queue';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { server } from 'csdm/server/server';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { fetchLastValveMatches } from 'csdm/node/valve-match/fetch-last-valve-matches';
@@ -10,13 +10,13 @@ import { ErrorCode } from 'csdm/common/error-code';
 
 export async function downloadLastValveMatches() {
   try {
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.FetchLastValveMatchesStart,
+    server.sendPushMessage({
+      name: ServerPushMessageName.FetchLastValveMatchesStart,
     });
 
     const onSteamIdDetected = (steamId: string) => {
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.FetchLastValveMatchesSteamIdDetected,
+      server.sendPushMessage({
+        name: ServerPushMessageName.FetchLastValveMatchesSteamIdDetected,
         payload: steamId,
       });
     };
@@ -31,8 +31,8 @@ export async function downloadLastValveMatches() {
     const downloads = matchesToDownload.map(buildDownloadFromValveMatch);
     const downloadsAdded = await downloadDemoQueue.addDownloads(downloads);
 
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.FetchLastValveMatchesSuccess,
+    server.sendPushMessage({
+      name: ServerPushMessageName.FetchLastValveMatchesSuccess,
       payload: lastMatches,
     });
 
@@ -43,8 +43,8 @@ export async function downloadLastValveMatches() {
       logger.error('Error while adding last Valve matches to download queue');
       logger.error(error);
     }
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.FetchLastValveMatchesError,
+    server.sendPushMessage({
+      name: ServerPushMessageName.FetchLastValveMatchesError,
       payload: errorCode,
     });
 

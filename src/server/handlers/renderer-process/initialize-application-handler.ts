@@ -36,6 +36,7 @@ export type InitializeApplicationSuccessPayload = {
   downloads: Download[];
   ignoredSteamAccounts: IgnoredSteamAccount[];
   videos: Video[];
+  isVideoQueuePaused: boolean;
 };
 
 export async function initializeApplicationHandler() {
@@ -74,6 +75,7 @@ export async function initializeApplicationHandler() {
       analyses: analysesListener.getAnalyses(),
       downloads: downloadDemoQueue.getDownloads(),
       videos: videoQueue.getVideos(),
+      isVideoQueuePaused: videoQueue.getIsPaused(),
     };
 
     void startBackgroundTasks();

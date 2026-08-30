@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import type { UpdatePlayerCommentPayload } from 'csdm/server/handlers/renderer-process/player/update-player-comment-handler';

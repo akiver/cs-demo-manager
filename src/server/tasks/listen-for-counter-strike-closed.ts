@@ -1,6 +1,6 @@
 import { server } from 'csdm/server/server';
 import { isCounterStrikeRunning } from 'csdm/node/counter-strike/is-counter-strike-running';
-import { MainServerMessageName } from 'csdm/server/main-server-message-name';
+import { MainServerMessageName } from 'csdm/server/messages/main-server-message-name';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { downloadLastValveMatches } from './download-last-valve-matches';
 import { downloadLastFaceitMatches } from 'csdm/node/faceit/download-last-faceit-matches';

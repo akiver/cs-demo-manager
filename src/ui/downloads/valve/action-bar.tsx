@@ -4,7 +4,7 @@ import { ActionBar as CommonActionBar } from 'csdm/ui/components/action-bar';
 import { RefreshButton } from 'csdm/ui/components/buttons/refresh-button';
 import { CounterStrikeRunningDialog } from 'csdm/ui/components/dialogs/counter-strike-running-dialog';
 import { Status } from 'csdm/common/types/status';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { RevealDownloadFolderInExplorerButton } from '../reveal-download-folder-in-explorer-button';
 import { DownloadDemoFromShareCodeButton } from '../download-demo-from-share-code-button';
 import { useMatches } from './use-matches';

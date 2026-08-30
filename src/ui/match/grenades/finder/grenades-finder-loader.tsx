@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Spinner } from 'csdm/ui/components/spinner';
 import { Content, CenteredContent } from 'csdm/ui/components/content';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { GrenadesFinder } from './grenades-finder';
 import { useCurrentMatchChecksum } from 'csdm/ui/match/use-current-match-checksum';
 import { UnsupportedMap } from 'csdm/ui/components/unsupported-map';

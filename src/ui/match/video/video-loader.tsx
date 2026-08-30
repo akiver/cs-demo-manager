@@ -4,7 +4,7 @@ import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { usePathExists } from '../../hooks/use-path-exists';
 import { MatchVideo } from './video';
 import { UpdateDemoLocation } from './update-demo-location';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { Message } from 'csdm/ui/components/message';
 import { initializeVideoSuccess } from './video-actions';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';

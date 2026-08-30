@@ -2,13 +2,13 @@ import React, { useEffect, useState, type ReactNode } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { RevealFolderInExplorerButton } from 'csdm/ui/components/buttons/reveal-folder-in-explorer-button';
 import { ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { CloseButton } from 'csdm/ui/components/buttons/close-button';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import type {
   ExportDemoPlayersVoiceErrorPayload,
   ExportDemoPlayersVoiceProgressPayload,
@@ -102,14 +102,14 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
       }
     };
 
-    client.on(RendererServerMessageName.ExportDemoPlayersVoiceProgress, onProgress);
-    client.on(RendererServerMessageName.ExportDemoPlayersVoiceDone, onDone);
-    client.on(RendererServerMessageName.ExportDemoPlayersVoiceError, onError);
+    client.on(ServerPushMessageName.ExportDemoPlayersVoiceProgress, onProgress);
+    client.on(ServerPushMessageName.ExportDemoPlayersVoiceDone, onDone);
+    client.on(ServerPushMessageName.ExportDemoPlayersVoiceError, onError);
 
     return () => {
-      client.off(RendererServerMessageName.ExportDemoPlayersVoiceProgress, onProgress);
-      client.off(RendererServerMessageName.ExportDemoPlayersVoiceDone, onDone);
-      client.off(RendererServerMessageName.ExportDemoPlayersVoiceError, onError);
+      client.off(ServerPushMessageName.ExportDemoPlayersVoiceProgress, onProgress);
+      client.off(ServerPushMessageName.ExportDemoPlayersVoiceDone, onDone);
+      client.off(ServerPushMessageName.ExportDemoPlayersVoiceError, onError);
     };
   }, [client]);
 

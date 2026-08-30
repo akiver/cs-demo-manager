@@ -3,7 +3,7 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-item';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useShowToast } from '../../toasts/use-show-toast';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { ExportMatchesChatMessagesPayload } from 'csdm/server/handlers/renderer-process/match/export-matches-chat-messages-handler';
 import { useExportMatchChatMessages } from 'csdm/ui/hooks/use-export-match-chat-messages';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';

@@ -1,4 +1,4 @@
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { server } from 'csdm/server/server';
 import type { PlayerSheetName } from 'csdm/node/xlsx/player-sheet-name';
 import type { MatchFilters } from 'csdm/node/database/match/apply-match-filters';
@@ -35,8 +35,8 @@ export async function exportPlayersToXlsxHandler(payload: ExportPlayersToXlsxPay
   try {
     if (payload.exportEachPlayerToSingleFile) {
       for (const [index, steamId] of payload.steamIds.entries()) {
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.ExportToXlsxProgress,
+        server.sendPushMessage({
+          name: ServerPushMessageName.ExportToXlsxProgress,
           payload: {
             count: index + 1,
             totalCount: payload.steamIds.length,
@@ -58,8 +58,8 @@ export async function exportPlayersToXlsxHandler(payload: ExportPlayersToXlsxPay
         outputFilePath: payload.outputFilePath,
         sheets: payload.sheets,
         onSheetGenerationStart(sheetName) {
-          server.sendMessageToRendererProcess({
-            name: RendererServerMessageName.ExportToXlsxSheetProgress,
+          server.sendPushMessage({
+            name: ServerPushMessageName.ExportToXlsxSheetProgress,
             payload: sheetName,
           });
         },
@@ -77,15 +77,15 @@ export async function exportPlayersToXlsxHandler(payload: ExportPlayersToXlsxPay
           outputPath: payload.outputFilePath,
         };
 
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.ExportToXlsxSuccess,
+    server.sendPushMessage({
+      name: ServerPushMessageName.ExportToXlsxSuccess,
       payload: successPayload,
     });
   } catch (error) {
     logger.error('Error while exporting players to XLSX');
     logger.error(error);
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.ExportToXlsxError,
+    server.sendPushMessage({
+      name: ServerPushMessageName.ExportToXlsxError,
     });
   }
 }

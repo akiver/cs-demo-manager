@@ -6,7 +6,6 @@ import type { Database } from './schema';
 
 export let db: Kysely<Database>;
 
-let connectedSettings: DatabaseSettings | undefined;
 let ingestionPool: Pool | undefined;
 const ingestionClients = new Set<PoolClient>();
 const pendingAcquisitions = new Set<(error: Error) => void>();
@@ -78,44 +77,38 @@ export function createDatabaseConnection(settings: DatabaseSettings) {
     logger.error(error);
   });
 
-  connectedSettings = settings;
+  // Dedicated pool for data ingestion.
+  // It's separated from the Kysely pool because an ingestion may send dozens of concurrent COPY
+  // commands and each of them holds its connection until the whole CSV file has been streamed.
+  // Sharing the Kysely pool would starve the app queries and, worse, the queued acquisitions would
+  // be rejected by its connectionTimeoutMillis, which also applies to the time spent waiting in the
+  // pool queue.
+  // Created eagerly (it opens connections only on first use) so its existence tracks the connection
+  // state.
+  ingestionPool = new Pool({
+    host: settings.hostname,
+    port: settings.port,
+    user: settings.username,
+    password: settings.password,
+    database: settings.database,
+    max: 8,
+    // COPY commands may take minutes, waiting for a free connection must not time out.
+    connectionTimeoutMillis: 0,
+    // Ingestion may write hundreds of thousands of rows that can be re-generated from their
+    // source, waiting for the WAL to be flushed on each commit is not worth the cost.
+    // Set on the pool rather than per COPY: it's a session setting, it would be redundant.
+    options: '-c synchronous_commit=off',
+  });
   db = new Kysely<Database>(config);
 }
 
-// The settings the app is currently connected with.
-// They are not necessarily the ones stored in the settings file: connectDatabase() also accepts the
-// settings coming from the connection form, which are persisted only once the connection succeeded.
-function getConnectedDatabaseSettings(): DatabaseSettings {
-  if (connectedSettings === undefined) {
-    throw new Error('The database is not connected');
-  }
-
-  return connectedSettings;
+export function isDatabaseConnected() {
+  return ingestionPool !== undefined;
 }
 
-// Dedicated pool for data ingestion.
-// It's separated from the Kysely pool because an ingestion may send dozens of concurrent COPY
-// commands and each of them holds its connection until the whole CSV file has been streamed.
-// Sharing the Kysely pool would starve the app queries and, worse, the queued acquisitions would
-// be rejected by its connectionTimeoutMillis, which also applies to the time spent waiting in the
-// pool queue.
 function getIngestionPool(): Pool {
   if (ingestionPool === undefined) {
-    const settings = getConnectedDatabaseSettings();
-    ingestionPool = new Pool({
-      host: settings.hostname,
-      port: settings.port,
-      user: settings.username,
-      password: settings.password,
-      database: settings.database,
-      max: 8,
-      // COPY commands may take minutes, waiting for a free connection must not time out.
-      connectionTimeoutMillis: 0,
-      // Ingestion may write hundreds of thousands of rows that can be re-generated from their
-      // source, waiting for the WAL to be flushed on each commit is not worth the cost.
-      // Set on the pool rather than per COPY: it's a session setting, it would be redundant.
-      options: '-c synchronous_commit=off',
-    });
+    throw new Error('The database is not connected');
   }
 
   return ingestionPool;
@@ -197,7 +190,5 @@ export function releaseIngestionClient(client: PoolClient) {
 }
 
 export async function destroyDatabaseConnection() {
-  connectedSettings = undefined;
-
   await Promise.all([db?.destroy(), discardIngestionPool()]);
 }

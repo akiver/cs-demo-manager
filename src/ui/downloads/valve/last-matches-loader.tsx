@@ -5,7 +5,7 @@ import { Message } from 'csdm/ui/components/message';
 import { FetchMatchesConfirmation } from 'csdm/ui/downloads/valve/fetch-matches-confirmation';
 import { useMatches } from './use-matches';
 import { useStatus } from './use-status';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { LastMatches } from './last-matches';
 import { FetchMatchesInfoError } from './fetch-matches-error';
 import { NoMatchesFound } from './no-matches-found';

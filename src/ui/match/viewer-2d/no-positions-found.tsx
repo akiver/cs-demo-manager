@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { CenteredContent } from 'csdm/ui/components/content';
@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { Spinner } from 'csdm/ui/components/spinner';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { useCurrentMatch } from '../use-current-match';
 import { ErrorCode } from 'csdm/common/error-code';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
@@ -37,7 +37,7 @@ function GeneratingDialog({ onPositionsAvailable }: Props) {
       setMessage(<Trans>Analyzing demo…</Trans>);
       setStatus(Status.Loading);
 
-      client.on(RendererServerMessageName.InsertingMatchPositions, onInsertingPositions);
+      client.on(ServerPushMessageName.InsertingMatchPositions, onInsertingPositions);
       await client.send({
         name: RendererClientMessageName.GenerateMatchPositions,
         payload: {
@@ -56,7 +56,7 @@ function GeneratingDialog({ onPositionsAvailable }: Props) {
       }
       setStatus(Status.Error);
     }
-    client.off(RendererServerMessageName.InsertingMatchPositions, onInsertingPositions);
+    client.off(ServerPushMessageName.InsertingMatchPositions, onInsertingPositions);
   };
 
   return (

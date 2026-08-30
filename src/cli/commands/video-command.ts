@@ -1,4 +1,3 @@
-import { randomUUID } from 'node:crypto';
 import { parseArgs } from 'node:util';
 import path from 'node:path';
 import fs from 'fs-extra';
@@ -6,8 +5,8 @@ import { Command } from './command';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
-import { generateVideo } from 'csdm/node/video/generation/generate-video';
-import type { Parameters } from 'csdm/node/video/generation/generate-video';
+import type { AddVideoPayload, Video } from 'csdm/common/types/video';
+import { VideoStatus } from 'csdm/common/types/video-status';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import { isValidEncoderSoftware } from 'csdm/common/types/encoder-software';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
@@ -18,12 +17,12 @@ import type { VideoContainer } from 'csdm/common/types/video-container';
 import { isValidVideoContainer } from 'csdm/common/types/video-container';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { isHlaeInstalled } from 'csdm/node/video/hlae/is-hlae-installed';
-import { installHlae } from 'csdm/node/video/hlae/install-hlae';
 import { isVirtualDubInstalled } from 'csdm/node/video/virtual-dub/is-virtual-dub-installed';
-import { downloadAndExtractVirtualDub } from 'csdm/node/video/virtual-dub/download-and-extract-virtual-dub';
 import { isFfmpegInstalled } from 'csdm/node/video/ffmpeg/is-ffmpeg-installed';
-import { installFfmpeg } from 'csdm/node/video/ffmpeg/install-ffmpeg';
 import { fetchPlayer } from 'csdm/node/database/player/fetch-player';
+import { CliClientMessageName } from 'csdm/server/messages/cli-client-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
+import type { CliWebSocketClient } from 'csdm/cli/web-socket/cli-web-socket-client';
 import type { FfmpegSettings } from 'csdm/node/settings/settings';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { fetchMatchesByChecksums } from 'csdm/node/database/matches/fetch-matches-by-checksums';
@@ -33,6 +32,9 @@ import { isValidPerspective, Perspective } from 'csdm/common/types/perspective';
 import { Perspective as PerspectiveType } from 'csdm/common/types/perspective';
 import { buildPlayersEventSequences } from 'csdm/common/video/sequences/build-players-event-sequences';
 import { buildPlayersRoundsSequences } from 'csdm/common/video/sequences/build-players-rounds-sequences';
+import { isErrorCode } from 'csdm/common/is-error-code';
+import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
+import { SIGINT_EXIT_CODE } from 'csdm/cli/exit-code';
 
 export type VideoCommandConfig = {
   demoPath: string;
@@ -60,6 +62,17 @@ const Mode = {
   Player: 'player',
 } as const;
 type Mode = (typeof Mode)[keyof typeof Mode];
+
+const QueueSubCommand = {
+  List: 'list',
+  Pause: 'pause',
+  Resume: 'resume',
+} as const;
+type QueueSubCommand = (typeof QueueSubCommand)[keyof typeof QueueSubCommand];
+
+function isQueueSubCommand(arg: string | undefined): arg is QueueSubCommand {
+  return Object.values(QueueSubCommand).includes(arg as QueueSubCommand);
+}
 
 export class VideoCommand extends Command {
   public static Name = 'video';
@@ -146,7 +159,7 @@ export class VideoCommand extends Command {
   private endSecondsAfter = 2;
 
   public getDescription() {
-    return 'Generate videos from demos.';
+    return 'Generate videos from demos and control the video generation queue.';
   }
 
   public printHelp() {
@@ -156,8 +169,17 @@ export class VideoCommand extends Command {
     console.log(
       `       csdm ${VideoCommand.Name} <demoPath> --mode ${Mode.Player} --steamids <id1,id2> --event <event> [options]`,
     );
+    console.log(`       csdm ${VideoCommand.Name} <${Object.values(QueueSubCommand).join('|')}>`);
     console.log('');
     console.log('The demo must have been analyzed and be present in the database.');
+    console.log('');
+    console.log('Videos are added to the generation queue shared with the GUI, the command waits for its video to');
+    console.log('complete and pressing Ctrl+C aborts it. The queue itself can be controlled with the sub commands:');
+    console.log(`  ${QueueSubCommand.List}: print the videos in the queue and whether the queue is paused.`);
+    console.log(
+      `  ${QueueSubCommand.Pause}: pause the queue, the video currently being generated completes before the queue stops.`,
+    );
+    console.log(`  ${QueueSubCommand.Resume}: resume the queue.`);
     console.log('');
     console.log('Options:');
     console.log(`  --${this.framerateFlag} <number>`);
@@ -214,6 +236,11 @@ export class VideoCommand extends Command {
   }
 
   public async run() {
+    const [firstArg] = this.args;
+    if (isQueueSubCommand(firstArg)) {
+      return this.runQueueSubCommand(firstArg);
+    }
+
     try {
       await this.parseArgs();
       await this.initDatabaseConnection();
@@ -221,13 +248,11 @@ export class VideoCommand extends Command {
 
       const settings = await getSettings();
       const demo = await getDemoFromFilePath(this.demoPath);
-      const controller = new AbortController();
 
-      let parameters: Parameters = {
-        videoId: randomUUID(),
+      let parameters: AddVideoPayload = {
         demoPath: this.demoPath,
+        // The queue nests the video output in a folder named after the video id.
         outputFolderPath: this.outputFolderPath ?? path.dirname(this.demoPath),
-        signal: controller.signal,
         checksum: demo.checksum,
         game: demo.game,
         mapName: demo.mapName,
@@ -244,6 +269,8 @@ export class VideoCommand extends Command {
         trueView: this.trueView ?? settings.video.trueView,
         sequences: [],
         ffmpegSettings: {
+          customLocationEnabled:
+            this.ffmpegExecutablePath !== undefined ? true : settings.video.ffmpegSettings.customLocationEnabled,
           customExecutableLocation: this.ffmpegExecutablePath ?? settings.video.ffmpegSettings.customExecutableLocation,
           audioBitrate: this.ffmpegAudioBitrate ?? settings.video.ffmpegSettings.audioBitrate,
           constantRateFactor: this.ffmpegCrf ?? settings.video.ffmpegSettings.constantRateFactor,
@@ -252,18 +279,6 @@ export class VideoCommand extends Command {
           videoContainer: this.ffmpegVideoContainer ?? settings.video.ffmpegSettings.videoContainer,
           inputParameters: this.ffmpegInputParameters ?? settings.video.ffmpegSettings.inputParameters,
           outputParameters: this.ffmpegOutputParameters ?? settings.video.ffmpegSettings.outputParameters,
-        },
-        onGameStart: () => {
-          console.log('Recording in progress...');
-        },
-        onMoveFilesStart: () => {
-          console.log('Moving files...');
-        },
-        onSequenceStart: (number, position) => {
-          console.log(`Converting sequence #${number} (${position}/${parameters.sequences.length})...`);
-        },
-        onConcatenateSequencesStart: () => {
-          console.log('Concatenating sequences...');
         },
       };
 
@@ -372,40 +387,172 @@ export class VideoCommand extends Command {
         ];
       }
 
-      if (parameters.recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
-        console.log('Installing HLAE...');
-        await installHlae();
-      }
+      const client = await this.connectToDaemon();
+      await this.installDependenciesIfNecessary(client, parameters);
 
-      const shouldGenerateVideo = parameters.recordingOutput !== RecordingOutput.Images;
-      const { encoderSoftware } = parameters;
-      if (shouldGenerateVideo && encoderSoftware === EncoderSoftware.VirtualDub && !(await isVirtualDubInstalled())) {
-        console.log('Installing VirtualDub...');
-        await downloadAndExtractVirtualDub();
-      }
+      const video = await client.send(
+        {
+          name: CliClientMessageName.AddVideoToQueue,
+          payload: parameters,
+        },
+        { timeoutMs: 30_000 },
+      );
 
-      if (
-        shouldGenerateVideo &&
-        (encoderSoftware === EncoderSoftware.FFmpeg || this.concatenateSequences) &&
-        typeof this.ffmpegExecutablePath !== 'string' &&
-        !(await isFfmpegInstalled())
-      ) {
-        console.log('Installing FFmpeg...');
-        await installFfmpeg();
-      }
-
-      console.log('Starting Counter-Strike...');
-      await generateVideo(parameters);
-      console.log(`Video generated in ${parameters.outputFolderPath}`);
+      await this.waitForVideoGeneration(client, video);
+      client.close();
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
         if (error instanceof InvalidArgument) {
           this.printHelp();
         }
+      } else if (isErrorCode(error)) {
+        console.error(getErrorCodeMessage(error));
       } else {
         console.error(error);
       }
+      this.exitWithFailure();
+    }
+  }
+
+  private async runQueueSubCommand(subCommand: QueueSubCommand) {
+    const client = await this.connectToDaemon();
+
+    switch (subCommand) {
+      case QueueSubCommand.Pause:
+        await client.send({ name: CliClientMessageName.PauseVideoQueue });
+        console.log('Video queue paused, the video currently being generated will complete before the queue stops.');
+        break;
+      case QueueSubCommand.Resume:
+        await client.send({ name: CliClientMessageName.ResumeVideoQueue });
+        console.log('Video queue resumed');
+        break;
+      case QueueSubCommand.List: {
+        const { videos, isPaused } = await client.send({ name: CliClientMessageName.GetVideoQueue });
+        console.log(`The queue is ${isPaused ? 'paused' : 'running'}`);
+        if (videos.length === 0) {
+          console.log('No videos in the queue');
+        } else {
+          for (const video of videos) {
+            console.log(
+              `${video.id} ${video.status} ${path.basename(video.demoPath)} (${video.sequences.length} sequences)`,
+            );
+          }
+        }
+        break;
+      }
+    }
+
+    client.close();
+  }
+
+  private async installDependenciesIfNecessary(client: CliWebSocketClient, parameters: AddVideoPayload) {
+    const installTimeout = { timeoutMs: 300_000 };
+    if (parameters.recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
+      console.log('Installing HLAE...');
+      await client.send({ name: CliClientMessageName.InstallHlae }, installTimeout);
+    }
+
+    const shouldGenerateVideo = parameters.recordingOutput !== RecordingOutput.Images;
+    if (!shouldGenerateVideo) {
+      return;
+    }
+
+    const { encoderSoftware } = parameters;
+    if (encoderSoftware === EncoderSoftware.VirtualDub && !(await isVirtualDubInstalled())) {
+      console.log('Installing VirtualDub...');
+      await client.send({ name: CliClientMessageName.InstallVirtualDub }, installTimeout);
+    }
+
+    if (
+      (encoderSoftware === EncoderSoftware.FFmpeg || parameters.concatenateSequences) &&
+      typeof this.ffmpegExecutablePath !== 'string' &&
+      !(await isFfmpegInstalled())
+    ) {
+      console.log('Installing FFmpeg...');
+      await client.send({ name: CliClientMessageName.InstallFfmpeg }, installTimeout);
+    }
+  }
+
+  private async waitForVideoGeneration(client: CliWebSocketClient, video: Video) {
+    let resolveCompletion: () => void;
+    const completion = new Promise<void>((resolve) => {
+      resolveCompletion = resolve;
+    });
+    let hasError = false;
+    let lastPrintedProgress = '';
+
+    const onVideoUpdated = (updatedVideo: Video) => {
+      if (updatedVideo.id !== video.id) {
+        return;
+      }
+
+      const progress = `${updatedVideo.status}:${updatedVideo.currentSequence ?? ''}`;
+      if (progress === lastPrintedProgress) {
+        return;
+      }
+      lastPrintedProgress = progress;
+
+      switch (updatedVideo.status) {
+        case VideoStatus.Recording:
+          console.log('Recording in progress...');
+          break;
+        case VideoStatus.MovingFiles:
+          console.log('Moving files...');
+          break;
+        case VideoStatus.Converting:
+          console.log(
+            `Converting sequence #${updatedVideo.currentSequence} (${updatedVideo.currentSequencePosition}/${updatedVideo.sequences.length})...`,
+          );
+          break;
+        case VideoStatus.Concatenating:
+          console.log('Concatenating sequences...');
+          break;
+        case VideoStatus.Success:
+          console.log(`Video generated in ${updatedVideo.outputFolderPath}`);
+          resolveCompletion();
+          break;
+        case VideoStatus.Error:
+          hasError = true;
+          console.error('Error while generating the video');
+          if (updatedVideo.errorCode !== undefined) {
+            console.error(getErrorCodeMessage(updatedVideo.errorCode));
+          }
+          if (updatedVideo.output !== '') {
+            console.error(updatedVideo.output);
+          }
+          resolveCompletion();
+          break;
+      }
+    };
+
+    const onVideosRemovedFromQueue = (removedVideoIds: string[]) => {
+      if (removedVideoIds.includes(video.id)) {
+        hasError = true;
+        console.error('The video has been removed from the queue');
+        resolveCompletion();
+      }
+    };
+
+    client.on(ServerPushMessageName.VideoUpdated, onVideoUpdated);
+    client.on(ServerPushMessageName.VideosRemovedFromQueue, onVideosRemovedFromQueue);
+
+    process.on('SIGINT', async () => {
+      console.log('Aborting video generation...');
+      try {
+        await client.send({ name: CliClientMessageName.RemoveVideosFromQueue, payload: [video.id] });
+      } finally {
+        process.exit(SIGINT_EXIT_CODE);
+      }
+    });
+
+    // The queue starts paused: resuming it starts the generation, processing any video queued before this one first.
+    await client.send({ name: CliClientMessageName.ResumeVideoQueue });
+    console.log('Waiting for the video generation...');
+
+    await completion;
+
+    if (hasError) {
       this.exitWithFailure();
     }
   }

@@ -1,5 +1,5 @@
 import { updateMatchesTeamNames } from 'csdm/node/database/matches/update-matches-teams-names';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { server } from 'csdm/server/server';
 import type { TeamNamesPerChecksum } from 'csdm/node/database/matches/fetch-team-names-per-checksum';
 import { abortRendererController, createRendererAbortController } from 'csdm/server/abort-controller';
@@ -21,8 +21,8 @@ export async function updateMatchesTeamNamesHandler({
   try {
     const abortController = createRendererAbortController();
     const onProgress = (updatedCount: number) => {
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.TeamNamesUpdated,
+      server.sendPushMessage({
+        name: ServerPushMessageName.TeamNamesUpdated,
         payload: updatedCount,
       });
     };

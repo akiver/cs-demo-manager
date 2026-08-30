@@ -20,7 +20,7 @@ import {
 import { useSearchState } from './use-search-state';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { ErrorCode } from 'csdm/common/error-code';
 import { SearchPlayersInput } from './filters/search-players-input';
 import { SearchResults } from './search-results';

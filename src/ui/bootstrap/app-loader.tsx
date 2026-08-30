@@ -4,7 +4,7 @@ import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { Loading } from './loading';
 import { App } from './app';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { initializeAppSuccess } from './bootstrap-actions';
 import { Status } from 'csdm/common/types/status';
 import { LoadingError } from './loading-error';

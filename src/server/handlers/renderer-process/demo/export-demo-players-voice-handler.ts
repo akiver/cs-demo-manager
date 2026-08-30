@@ -6,7 +6,7 @@ import { LoadCsgoLibError } from 'csdm/node/csgo-voice-extractor/errors/load-csg
 import type { ExportVoiceMode } from 'csdm/node/csgo-voice-extractor/export-voice-mode';
 import { startCsgoVoiceExtractor } from 'csdm/node/csgo-voice-extractor/start-csgo-voice-extractor';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { server } from 'csdm/server/server';
 
 export type ExportDemoPlayersVoiceProgressPayload = {
@@ -29,8 +29,8 @@ export type ExportDemoPlayersVoicePayload = {
 export async function exportDemoPlayersVoiceHandler(payload: ExportDemoPlayersVoicePayload) {
   for (const [demoIndex, demoPath] of payload.demoPaths.entries()) {
     try {
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.ExportDemoPlayersVoiceProgress,
+      server.sendPushMessage({
+        name: ServerPushMessageName.ExportDemoPlayersVoiceProgress,
         payload: {
           demoNumber: demoIndex + 1,
           totalDemoCount: payload.demoPaths.length,
@@ -50,8 +50,8 @@ export async function exportDemoPlayersVoiceHandler(payload: ExportDemoPlayersVo
         demoPath,
         errorCode,
       };
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.ExportDemoPlayersVoiceError,
+      server.sendPushMessage({
+        name: ServerPushMessageName.ExportDemoPlayersVoiceError,
         payload,
       });
 
@@ -63,15 +63,15 @@ export async function exportDemoPlayersVoiceHandler(payload: ExportDemoPlayersVo
       ];
       const shouldStopExport = errorsThatShouldStopTheExport.some((err) => error instanceof err);
       if (shouldStopExport) {
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.ExportDemoPlayersVoiceDone,
+        server.sendPushMessage({
+          name: ServerPushMessageName.ExportDemoPlayersVoiceDone,
         });
         break;
       }
     } finally {
       if (demoIndex === payload.demoPaths.length - 1) {
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.ExportDemoPlayersVoiceDone,
+        server.sendPushMessage({
+          name: ServerPushMessageName.ExportDemoPlayersVoiceDone,
         });
       }
     }

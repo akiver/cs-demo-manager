@@ -6,7 +6,7 @@ import { RevealFileInExplorerButton } from 'csdm/ui/components/buttons/reveal-fi
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { ErrorCode } from 'csdm/common/error-code';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { hlaeVersionChanged } from '../../settings-actions';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';

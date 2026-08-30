@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { accountsUpdated } from './faceit-actions';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 

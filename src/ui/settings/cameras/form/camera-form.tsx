@@ -18,7 +18,7 @@ import { CameraPreviewInput } from './camera-preview-input';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useCounterStrike } from 'csdm/ui/hooks/use-counter-strike';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { Game } from 'csdm/common/types/counter-strike';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { ErrorCode } from 'csdm/common/error-code';

@@ -1,7 +1,7 @@
 import path from 'node:path';
 import os from 'node:os';
 import { server } from './server';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import type { Demo } from 'csdm/common/types/demo';
 import type { Analysis } from 'csdm/common/types/analysis';
 import { AnalysisStatus } from 'csdm/common/types/analysis-status';
@@ -29,7 +29,7 @@ class AnalysesListener {
     logger.log(`checksums removed from analyses`, checksums);
   }
 
-  public async addDemosToAnalyses(demos: Demo[]) {
+  public async addDemosToAnalyses(demos: Demo[], options?: { analyzePositions?: boolean }) {
     const demosNotInPendingAnalyses = demos.filter((demo) => {
       return !this.analyses.some((analysis) => analysis.demoChecksum === demo.checksum);
     });
@@ -46,14 +46,15 @@ class AnalysesListener {
         mapName: demo.mapName,
         source: demo.source,
         output: '',
+        analyzePositions: options?.analyzePositions,
       };
 
       return analysis;
     });
     this.analyses.push(...analyses);
 
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.DemosAddedToAnalyses,
+    server.sendPushMessage({
+      name: ServerPushMessageName.DemosAddedToAnalyses,
       payload: analyses,
     });
 
@@ -120,20 +121,20 @@ class AnalysesListener {
         demoPath,
         outputFolderPath: this.getAnalysisOutputFolderPath(analysis),
         source,
-        analyzePositions,
+        analyzePositions: analysis.analyzePositions ?? analyzePositions,
         onStdout: (data) => {
           logger.log(data);
           analysis.output += data;
-          server.sendMessageToRendererProcess({
-            name: RendererServerMessageName.AnalysisUpdated,
+          server.sendPushMessage({
+            name: ServerPushMessageName.AnalysisUpdated,
             payload: analysis,
           });
         },
         onStderr(data) {
           logger.error(data);
           analysis.output += data;
-          server.sendMessageToRendererProcess({
-            name: RendererServerMessageName.AnalysisUpdated,
+          server.sendPushMessage({
+            name: ServerPushMessageName.AnalysisUpdated,
             payload: analysis,
           });
         },
@@ -167,8 +168,8 @@ class AnalysesListener {
         outputFolderPath: this.getAnalysisOutputFolderPath(analysis),
       });
       this.updateAnalysisStatus(analysis, AnalysisStatus.InsertSuccess);
-      server.sendMessageToRendererProcess({
-        name: RendererServerMessageName.MatchInserted,
+      server.sendPushMessage({
+        name: ServerPushMessageName.MatchInserted,
         payload: match,
       });
     } catch (error) {
@@ -197,8 +198,8 @@ class AnalysesListener {
   private updateAnalysisStatus = (analysis: Analysis, status: AnalysisStatus, errorCode?: ErrorCode) => {
     analysis.status = status;
     analysis.errorCode = errorCode;
-    server.sendMessageToRendererProcess({
-      name: RendererServerMessageName.AnalysisUpdated,
+    server.sendPushMessage({
+      name: ServerPushMessageName.AnalysisUpdated,
       payload: analysis,
     });
   };

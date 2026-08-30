@@ -5,7 +5,7 @@ import { Content } from 'csdm/ui/components/content';
 import { Game } from 'csdm/common/types/counter-strike';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { PlayerHeatmapFilter } from 'csdm/common/types/heatmap-filters';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { Point } from 'csdm/common/types/point';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { HeatmapProvider } from 'csdm/ui/components/heatmap/heatmap-provider';

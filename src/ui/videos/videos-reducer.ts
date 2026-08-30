@@ -54,6 +54,7 @@ export const videosReducer = createReducer(initialState, (builder) => {
     })
     .addCase(initializeAppSuccess, (state, action) => {
       state.videos = action.payload.videos;
+      state.isPaused = action.payload.isVideoQueuePaused;
     })
     .addCase(resumeQueue, (state) => {
       state.isPaused = false;

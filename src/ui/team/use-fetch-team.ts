@@ -1,6 +1,6 @@
 import type { ErrorCode } from 'csdm/common/error-code';
 import type { TeamFilters } from 'csdm/node/database/team/team-filters';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
 import { useTeamProfileSettings } from '../settings/use-team-profile-settings';
 import { useDispatch } from '../store/use-dispatch';

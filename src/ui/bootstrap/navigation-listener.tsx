@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import type { IpcRendererEvent } from 'electron';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { RoutePath, buildPendingDownloadPath } from '../routes-paths';
 import { useArgument } from './use-argument';
 import { ArgumentName } from 'csdm/common/argument/argument-name';
@@ -47,18 +47,18 @@ export function NavigationListener({ children }: Props) {
   }, [navigate]);
 
   useEffect(() => {
-    client.on(RendererServerMessageName.NavigateToDemo, navigateToDemo);
+    client.on(ServerPushMessageName.NavigateToDemo, navigateToDemo);
 
     return () => {
-      client.off(RendererServerMessageName.NavigateToDemo, navigateToDemo);
+      client.off(ServerPushMessageName.NavigateToDemo, navigateToDemo);
     };
   }, [client, navigateToDemo]);
 
   useEffect(() => {
-    client.on(RendererServerMessageName.NavigateToMatch, navigateToMatch);
+    client.on(ServerPushMessageName.NavigateToMatch, navigateToMatch);
 
     return () => {
-      client.off(RendererServerMessageName.NavigateToMatch, navigateToMatch);
+      client.off(ServerPushMessageName.NavigateToMatch, navigateToMatch);
     };
   }, [client, navigateToMatch]);
 

@@ -3,16 +3,16 @@ import type { Game } from 'csdm/common/types/counter-strike';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
 import { isValidGame } from 'csdm/common/types/is-valid-game';
 import { server, type GameListener, type SendableGameMessage } from 'csdm/server/server';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
-import type { GameClientMessageName, GameClientMessagePayload } from 'csdm/server/game-client-message-name';
-import type { GameServerMessageName } from 'csdm/server/game-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
+import type { GameClientMessageName, GameClientMessagePayload } from 'csdm/server/messages/game-client-message-name';
+import type { GameServerMessageName } from 'csdm/server/messages/game-server-message-name';
 import { sleep } from 'csdm/common/sleep';
 import { CounterStrikeNotConnected } from 'csdm/node/counter-strike/launcher/errors/counter-strike-not-connected';
 import { CounterStrikeNoResponse } from 'csdm/node/counter-strike/launcher/errors/counter-strike-no-response';
 
 export function onGameStart() {
-  server.sendMessageToRendererProcess({
-    name: RendererServerMessageName.StartingCounterStrike,
+  server.sendPushMessage({
+    name: ServerPushMessageName.StartingCounterStrike,
   });
 }
 
@@ -45,8 +45,8 @@ function buildCounterStrikeErrorPayload(error: unknown, message: string): Counte
 
 export function handleCounterStrikeError(error: unknown) {
   const payload = buildCounterStrikeErrorPayload(error, 'Error starting Counter-Strike');
-  server.sendMessageToRendererProcess({
-    name: RendererServerMessageName.CounterStrikeError,
+  server.sendPushMessage({
+    name: ServerPushMessageName.CounterStrikeError,
     payload,
   });
 
@@ -58,8 +58,8 @@ export function handleWatchDemoError(error: unknown, demoPath: string, message: 
     ...buildCounterStrikeErrorPayload(error, message),
     demoPath,
   };
-  server.sendMessageToRendererProcess({
-    name: RendererServerMessageName.CounterStrikeError,
+  server.sendPushMessage({
+    name: ServerPushMessageName.CounterStrikeError,
     payload,
   });
 

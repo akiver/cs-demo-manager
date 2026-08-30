@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { useIsVirtualDubInstalled } from 'csdm/ui/match/video/virtualdub/use-is-virtual-dub-installed';
 import { InstallButton } from 'csdm/ui/components/buttons/install-button';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';

@@ -1,7 +1,7 @@
 import type { UpdateMatchDemoLocationPayload } from 'csdm/server/handlers/renderer-process/match/update-match-demo-location-handler';
 import type { OpenDialogOptions, OpenDialogReturnValue } from 'electron';
 import { useWebSocketClient } from './use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { updateMatchDemoLocationSuccess } from 'csdm/ui/match/match-actions';
 import { useLingui } from '@lingui/react/macro';

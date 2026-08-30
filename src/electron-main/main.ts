@@ -1,12 +1,11 @@
 process.env.PROCESS_NAME = 'main';
 import '../common/install-source-map-support';
 import 'csdm/node/logger';
-import { type BrowserWindow, type Tray, type Event } from 'electron';
-import { app, ipcMain, dialog } from 'electron';
+import { type BrowserWindow, type Tray } from 'electron';
+import { app, ipcMain } from 'electron';
+import path from 'node:path';
 import fs from 'fs-extra';
-import { i18n } from '@lingui/core';
 import { IPCChannel } from 'csdm/common/ipc-channel';
-import { createWebSocketServerProcess } from './create-web-socket-server-process';
 import { listenForContextMenu } from './listen-for-context-menu';
 import { createTray } from './create-tray';
 import { loadI18n } from './load-i18n';
@@ -19,20 +18,19 @@ import { createWebSocketClient } from './web-socket/create-web-socket-client';
 import { windowManager } from './window-manager';
 import { isMac } from 'csdm/node/os/is-mac';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
-import { MainClientMessageName } from 'csdm/server/main-client-message-name';
+import { MainClientMessageName } from 'csdm/server/messages/main-client-message-name';
 import { getSettingsFilePath } from 'csdm/node/settings/get-settings-file-path';
 import { updateSystemStartupBehavior } from 'csdm/electron-main/system-startup-behavior';
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import { initialize } from './auto-updater';
 import { getSettingsSync } from 'csdm/node/settings/get-settings';
-import { resolveWebSocketServerPort } from './resolve-web-socket-server-port';
+import { attachOrSpawnDaemon, waitForDaemonReady } from 'csdm/node/daemon/attach-or-spawn-daemon';
 import { WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
 
 process.on('uncaughtException', logger.error);
 process.on('unhandledRejection', logger.error);
 
 let tray: Tray | undefined;
-let isQuitting = false;
 
 // To show the correct app name/icon in notifications on Windows.
 app.setAppUserModelId('com.akiver.csdm');
@@ -100,17 +98,24 @@ async function start() {
 
   await injectPathVariableIntoProcess();
 
-  // Resolve the WebSocket server port before starting any process so they all connect to the same port.
-  // It's exposed through an environment variable inherited by the server, renderer and main processes.
-  const webSocketServerPort = await resolveWebSocketServerPort();
-  process.env[WEB_SOCKET_SERVER_PORT_ENV_NAME] = String(webSocketServerPort);
-  logger.log(`WebSocket server port resolved to ${webSocketServerPort}`);
-
+  let webSocketServerPort: number;
   if (IS_PRODUCTION) {
-    createWebSocketServerProcess();
+    // Attach to the WebSocket server daemon, spawning it first if it's not already running (e.g. started by the CLI).
+    // The daemon outlives the app so in-progress work (analyses, videos…) continues after the app quits.
+    webSocketServerPort = await attachOrSpawnDaemon({
+      serverBundlePath: path.join(app.getAppPath(), 'server.js'),
+      execPath: process.execPath,
+      runAsNode: true,
+    });
   } else {
+    // In dev mode the WebSocket server runs in a BrowserWindow to have access to the DevTools.
+    // Wait for it to write the daemon info file to know the port it's listening on.
     await windowManager.createDevWindow();
+    webSocketServerPort = await waitForDaemonReady();
   }
+  // Expose the port through an environment variable inherited by the renderer process.
+  process.env[WEB_SOCKET_SERVER_PORT_ENV_NAME] = String(webSocketServerPort);
+  logger.log(`WebSocket server daemon listening on port ${webSocketServerPort}`);
 
   const demoPath = getDemoPathFromArguments(process.argv);
   if (typeof demoPath === 'string') {
@@ -172,53 +177,8 @@ async function start() {
     await installDevTools();
   }
 
-  const quitApp = () => {
-    // ! Do not use app.quit() because if the navigation is blocked in the renderer process, it will not work.
-    // Using app.exit() bypass event listeners.
-    app.exit();
-  };
-
-  const onBeforeQuit = async (event: Event) => {
-    if (isQuitting || !client.isConnected) {
-      return;
-    }
-    isQuitting = true;
-    event.preventDefault();
-
-    const hasPendingAnalyses: boolean = await client.send({
-      name: MainClientMessageName.HasPendingAnalyses,
-    });
-
-    if (hasPendingAnalyses) {
-      const mainWindow = await windowManager.getOrCreateMainWindow();
-      const { response } = await dialog.showMessageBox(mainWindow, {
-        message: i18n.t({
-          id: 'dialog.quitApp.confirmation',
-          message: 'Demo analyses in progress, do you want to quit?',
-        }),
-        type: 'warning',
-        buttons: [
-          i18n.t({
-            id: 'yes',
-            message: 'Yes',
-          }),
-          i18n.t({
-            id: 'no',
-            message: 'No',
-          }),
-        ],
-      });
-      if (response === 0) {
-        quitApp();
-      } else {
-        isQuitting = false;
-      }
-    } else {
-      quitApp();
-    }
-  };
-
-  app.on('before-quit', onBeforeQuit);
+  // Note: in-progress analyses and videos are not a reason to prevent quitting anymore, the daemon outlives the app
+  // and completes them in the background.
 }
 
 const isFirstAppInstance = app.requestSingleInstanceLock();

@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { ErrorCode } from 'csdm/common/error-code';
 import type { IgnoredSteamAccount } from 'csdm/common/types/ignored-steam-account';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { addIgnoredSteamAccountSuccess, deleteIgnoredSteamAccountSuccess } from 'csdm/ui/ban/ban-actions';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';

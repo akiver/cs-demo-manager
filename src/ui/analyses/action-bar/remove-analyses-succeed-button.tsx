@@ -4,7 +4,7 @@ import { Button } from 'csdm/ui/components/buttons/button';
 import { useAnalyses } from 'csdm/ui/analyses/use-analyses';
 import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 
 export function RemoveAnalysesSucceedButton() {
   const analyses = useAnalyses();

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLingui } from '@lingui/react/macro';
 import type { WebSocketClient } from 'csdm/ui/web-socket-client';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import type { CounterStrikeErrorPayload, WatchDemoErrorPayload } from 'csdm/server/counter-strike';
 import { getPlaybackErrorMessageFromErrorCode } from 'csdm/ui/shared/get-playback-error-from-error-code';
 
@@ -27,12 +27,12 @@ export function useRegisterCounterStrikeListeners(client: WebSocketClient) {
       });
     };
 
-    client.on(RendererServerMessageName.StartingCounterStrike, onGameStart);
-    client.on(RendererServerMessageName.CounterStrikeError, onError);
+    client.on(ServerPushMessageName.StartingCounterStrike, onGameStart);
+    client.on(ServerPushMessageName.CounterStrikeError, onError);
 
     return () => {
-      client.off(RendererServerMessageName.StartingCounterStrike, onGameStart);
-      client.off(RendererServerMessageName.CounterStrikeError, onError);
+      client.off(ServerPushMessageName.StartingCounterStrike, onGameStart);
+      client.off(ServerPushMessageName.CounterStrikeError, onError);
     };
   });
 }

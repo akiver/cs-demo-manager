@@ -6,7 +6,7 @@ import type { LoadDemosProgress } from 'csdm/common/types/load-demos-progress';
 export const fetchDemosStart = createAction('demos/fetchStart');
 export const fetchDemosProgress = createAction<LoadDemosProgress>('demos/fetchProgress');
 export const fetchDemosError = createAction('demos/fetchError');
-export const fetchDemosSuccess = createAction<Demo[]>('demos/fetchSuccess');
+export const fetchDemosSuccess = createAction<{ demos: Demo[]; matchChecksums: string[] }>('demos/fetchSuccess');
 export const deleteDemosSuccess = createAction<string[]>('demos/deleteSuccess');
 export const demosSourceUpdated = createAction<{ checksums: string[]; source: DemoSource }>('demos/sourceUpdated');
 export const demosTypeUpdated = createAction<{ checksums: string[]; type: DemoType }>('demos/typeUpdated');

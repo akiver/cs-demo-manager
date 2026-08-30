@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import type { Tag } from 'csdm/common/types/tag';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { tagDeleted, tagUpdated } from 'csdm/ui/tags/tags-actions';
 import { useGetTagErrorMessageFromError } from './use-get-tag-error-message-from-error';

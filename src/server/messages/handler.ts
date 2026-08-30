@@ -6,10 +6,10 @@ type HandlerWithPayload<Payload, ReturnType> = (payload: Payload) => Promise<Ret
  * Example:
  *
  * async function myHandler(payload: string) {
- *   // Do something and then send the message to renderer process
+ *   // Do something and then send the message to the process
  *   const resultPayload = await doSomething();
- *   server.sendMessageToRendererProcess({
- *     name: 'message-to-renderer-process-name',
+ *   server.sendPushMessage({
+ *     name: 'message-process-name',
  *     payload: resultPayload
  *   });
  *

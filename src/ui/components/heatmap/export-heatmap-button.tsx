@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import type { SaveDialogReturnValue, SaveDialogOptions } from 'electron';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import type { WriteBase64FilePayload } from 'csdm/server/handlers/renderer-process/filesystem/write-base64-file-handler';
 import { useShowToast } from '../toasts/use-show-toast';

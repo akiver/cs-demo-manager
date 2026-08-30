@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { Button } from 'csdm/ui/components/buttons/button';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { CloseButton } from 'csdm/ui/components/buttons/close-button';

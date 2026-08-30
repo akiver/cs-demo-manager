@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { CloseButton } from 'csdm/ui/components/buttons/close-button';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { Status } from 'csdm/common/types/status';
 import { RevealFileInExplorerButton } from 'csdm/ui/components/buttons/reveal-file-in-explorer-button';
 import { RevealFolderInExplorerButton } from 'csdm/ui/components/buttons/reveal-folder-in-explorer-button';
@@ -64,17 +64,17 @@ export function ExportingToXlsxDialog({ sendStartExportMessage }: Props) {
       }
     };
 
-    client.on(RendererServerMessageName.ExportToXlsxProgress, onProgress);
-    client.on(RendererServerMessageName.ExportToXlsxSheetProgress, onSheetProgress);
-    client.on(RendererServerMessageName.ExportToXlsxSuccess, onSuccess);
-    client.on(RendererServerMessageName.ExportToXlsxError, onError);
+    client.on(ServerPushMessageName.ExportToXlsxProgress, onProgress);
+    client.on(ServerPushMessageName.ExportToXlsxSheetProgress, onSheetProgress);
+    client.on(ServerPushMessageName.ExportToXlsxSuccess, onSuccess);
+    client.on(ServerPushMessageName.ExportToXlsxError, onError);
     void sendStartExportMessage();
 
     return () => {
-      client.off(RendererServerMessageName.ExportToXlsxProgress, onProgress);
-      client.off(RendererServerMessageName.ExportToXlsxSheetProgress, onSheetProgress);
-      client.off(RendererServerMessageName.ExportToXlsxSuccess, onSuccess);
-      client.off(RendererServerMessageName.ExportToXlsxError, onError);
+      client.off(ServerPushMessageName.ExportToXlsxProgress, onProgress);
+      client.off(ServerPushMessageName.ExportToXlsxSheetProgress, onSheetProgress);
+      client.off(ServerPushMessageName.ExportToXlsxSuccess, onSuccess);
+      client.off(ServerPushMessageName.ExportToXlsxError, onError);
     };
   }, [client, sendStartExportMessage]);
 

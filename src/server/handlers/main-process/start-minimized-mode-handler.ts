@@ -1,4 +1,4 @@
-import { connectDatabase } from 'csdm/node/database/connect-database';
+import { ensureDatabaseConnection } from 'csdm/server/ensure-database-connection';
 
 export async function startMinimizedModeHandler(): Promise<void> {
   return new Promise((resolve) => {
@@ -6,7 +6,8 @@ export async function startMinimizedModeHandler(): Promise<void> {
 
     const startMinimizedMode = async () => {
       try {
-        await connectDatabase();
+        // A CLI command may have already connected the daemon to the database.
+        await ensureDatabaseConnection();
         if (timer !== null) {
           globalThis.clearInterval(timer);
         }

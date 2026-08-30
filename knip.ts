@@ -2,7 +2,7 @@ import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
   entry: [
-    'src/server/server.ts',
+    'src/server/start-server.ts',
     'src/cli/cli.ts',
     'src/electron-main/main.ts',
     'src/preload/preload.ts',

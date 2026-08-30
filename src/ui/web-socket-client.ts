@@ -1,33 +1,18 @@
 import type { RendererMessageHandlers } from 'csdm/server/handlers/renderer-handlers-mapping';
-import type { IdentifiableClientMessage } from 'csdm/server/identifiable-client-message';
-import type { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
-import type { RendererServerMessagePayload, RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
-import { SharedServerMessageName } from 'csdm/server/shared-server-message-name';
-
-type Listener<MessageName extends RendererServerMessageName = RendererServerMessageName> = (
-  payload: RendererServerMessagePayload[MessageName],
-) => void;
+import type { IdentifiableClientMessage } from 'csdm/server/messages/identifiable-client-message';
+import type { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
+import type { ServerPushListener, ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
+import type { SendableMessage } from 'csdm/server/messages/message';
+import { SharedServerMessageName } from 'csdm/server/messages/shared-server-message-name';
 
 type ReplyHandler = {
-  resolve: Listener;
+  resolve: (payload: unknown) => void;
   reject: (error: unknown) => void;
 };
 
-type SendableMessagePayload<MessageName extends RendererClientMessageName> = Parameters<
-  RendererMessageHandlers[MessageName]
->[0];
-
-type SendableMessage<MessageName extends RendererClientMessageName = RendererClientMessageName> = {
-  name: MessageName;
-} & (SendableMessagePayload<MessageName> extends void
-  ? object
-  : {
-      payload: SendableMessagePayload<MessageName>;
-    });
-
 export class WebSocketClient {
-  private messageQueue: SendableMessage[] = [];
-  private listeners = new Map<RendererServerMessageName, Listener[]>();
+  private messageQueue: SendableMessage<RendererMessageHandlers>[] = [];
+  private listeners = new Map<ServerPushMessageName, ServerPushListener[]>();
   private replyHandlers: Map<string, ReplyHandler> = new Map();
   private socket!: WebSocket;
   private isConnected: boolean = false;
@@ -40,16 +25,22 @@ export class WebSocketClient {
     this.connect();
   }
 
-  public on = <MessageName extends RendererServerMessageName>(name: MessageName, listener: Listener<MessageName>) => {
+  public on = <MessageName extends ServerPushMessageName>(
+    name: MessageName,
+    listener: ServerPushListener<MessageName>,
+  ) => {
     const listeners = this.listeners.get(name);
     if (listeners === undefined) {
-      this.listeners.set(name, [listener as Listener]);
+      this.listeners.set(name, [listener as ServerPushListener]);
     } else {
-      listeners.push(listener as Listener);
+      listeners.push(listener as ServerPushListener);
     }
   };
 
-  public off = <MessageName extends RendererServerMessageName>(name: MessageName, listener: Listener<MessageName>) => {
+  public off = <MessageName extends ServerPushMessageName>(
+    name: MessageName,
+    listener: ServerPushListener<MessageName>,
+  ) => {
     const listeners = this.listeners.get(name);
     if (listeners === undefined) {
       return;
@@ -57,11 +48,11 @@ export class WebSocketClient {
 
     this.listeners.set(
       name,
-      listeners.filter((cb: Listener) => cb !== listener),
+      listeners.filter((cb) => cb !== listener),
     );
   };
 
-  public removeAllEventListeners = (name: RendererServerMessageName): void => {
+  public removeAllEventListeners = (name: ServerPushMessageName): void => {
     this.listeners.set(name, []);
   };
 
@@ -80,15 +71,17 @@ export class WebSocketClient {
    *   client.on('message-name', onMessage);
    *   client.send({ name: 'message-name' });
    */
-  public send = <MessageName extends RendererClientMessageName>(message: SendableMessage<MessageName>) => {
-    return new Promise((resolve: Listener, reject) => {
+  public send = <MessageName extends RendererClientMessageName>(
+    message: SendableMessage<RendererMessageHandlers, MessageName>,
+  ) => {
+    return new Promise((resolve: (payload: unknown) => void, reject) => {
       const uuid = window.crypto.randomUUID();
       (message as IdentifiableClientMessage<MessageName>).uuid = uuid;
       this.replyHandlers.set(uuid, { resolve, reject });
       if (this.isConnected) {
         this.socket.send(JSON.stringify(message));
       } else {
-        this.messageQueue.push(message as SendableMessage);
+        this.messageQueue.push(message as SendableMessage<RendererMessageHandlers>);
       }
     }) as ReturnType<RendererMessageHandlers[MessageName]>;
   };
@@ -129,7 +122,7 @@ export class WebSocketClient {
 
   private onMessage = (messageEvent: MessageEvent): void => {
     try {
-      const message: IdentifiableClientMessage<RendererServerMessageName> = JSON.parse(messageEvent.data as string);
+      const message: IdentifiableClientMessage<ServerPushMessageName> = JSON.parse(messageEvent.data as string);
       const { name, payload, uuid } = message;
 
       switch (name) {

@@ -1,6 +1,3 @@
-process.env.PROCESS_NAME = 'server';
-import '../common/install-source-map-support';
-import 'csdm/node/logger';
 import type { RawData } from 'ws';
 import type WebSocket from 'ws';
 import { WebSocketServer as WSServer } from 'ws';
@@ -9,63 +6,44 @@ import { URL } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { rendererHandlers } from 'csdm/server/handlers/renderer-handlers-mapping';
 import { mainHandlers } from 'csdm/server/handlers/main-handlers-mapping';
-import type { MainClientMessageName } from './main-client-message-name';
-import type { RendererClientMessageName } from './renderer-client-message-name';
-import { getWebSocketServerPort } from './port';
-import type { SharedServerMessagePayload } from './shared-server-message-name';
-import { SharedServerMessageName } from './shared-server-message-name';
-import type { IdentifiableClientMessage } from './identifiable-client-message';
+import { cliHandlers, probeHandlers } from 'csdm/server/handlers/cli-handlers-mapping';
+import type { MainClientMessageName } from 'csdm/server/messages/main-client-message-name';
+import { getWebSocketServerPort, WEB_SOCKET_SERVER_PORT_ENV_NAME } from './port';
+import type { SharedServerMessagePayload } from 'csdm/server/messages/shared-server-message-name';
+import { SharedServerMessageName } from 'csdm/server/messages/shared-server-message-name';
+import type { IdentifiableClientMessage } from 'csdm/server/messages/identifiable-client-message';
 import type {
   MainServerMessagePayload,
   MainServerMessageName,
   MainServerMessageResponse,
-} from './main-server-message-name';
+} from 'csdm/server/messages/main-server-message-name';
 import { ErrorCode } from '../common/error-code';
-import { NetworkError } from '../node/errors/network-error';
-import type { RendererServerMessagePayload, RendererServerMessageName } from './renderer-server-message-name';
-import type { Handler } from './handler';
-import type { GameServerMessageName, GameServerMessagePayload } from './game-server-message-name';
-import type { GameClientMessageName, GameClientMessagePayload } from './game-client-message-name';
+import { probeDaemon } from 'csdm/node/daemon/probe-daemon';
+import type { ServerPushMessagePayload, ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
+import type { Handler } from 'csdm/server/messages/handler';
+import type { GameServerMessageName, GameServerMessagePayload } from 'csdm/server/messages/game-server-message-name';
+import type { GameClientMessageName, GameClientMessagePayload } from 'csdm/server/messages/game-client-message-name';
+import type { Message } from 'csdm/server/messages/message';
 
-process.on('uncaughtException', logger.error);
-process.on('unhandledRejection', logger.error);
+type SendablePushMessage<MessageName extends ServerPushMessageName = ServerPushMessageName> = Message<
+  MessageName,
+  ServerPushMessagePayload[MessageName]
+>;
 
-type SendableRendererMessagePayload<MessageName extends RendererServerMessageName> =
-  RendererServerMessagePayload[MessageName];
-type SendableRendererMessage<MessageName extends RendererServerMessageName = RendererServerMessageName> = {
-  name: MessageName;
-} & (SendableRendererMessagePayload<MessageName> extends void
-  ? object
-  : {
-      payload: SendableRendererMessagePayload<MessageName>;
-    });
+type SendableMainMessage<MessageName extends MainServerMessageName = MainServerMessageName> = Message<
+  MessageName,
+  MainServerMessagePayload[MessageName]
+>;
 
-type SendableMainMessagePayload<MessageName extends MainServerMessageName> = MainServerMessagePayload[MessageName];
-type SendableMainMessage<MessageName extends MainServerMessageName = MainServerMessageName> = {
-  name: MessageName;
-} & (SendableMainMessagePayload<MessageName> extends void
-  ? object
-  : {
-      payload: SendableMainMessagePayload<MessageName>;
-    });
+export type SendableGameMessage<MessageName extends GameServerMessageName = GameServerMessageName> = Message<
+  MessageName,
+  GameServerMessagePayload[MessageName]
+>;
 
-type SendableGameMessagePayload<MessageName extends GameServerMessageName> = GameServerMessagePayload[MessageName];
-export type SendableGameMessage<MessageName extends GameServerMessageName = GameServerMessageName> = {
-  name: MessageName;
-} & (SendableGameMessagePayload<MessageName> extends void
-  ? object
-  : {
-      payload: SendableGameMessagePayload<MessageName>;
-    });
-
-type SharedMessagePayload<MessageName extends SharedServerMessageName> = SharedServerMessagePayload[MessageName];
-type SharedMessage<MessageName extends SharedServerMessageName = SharedServerMessageName> = {
-  name: MessageName;
-} & (SharedMessagePayload<MessageName> extends void
-  ? object
-  : {
-      payload: SharedMessagePayload<MessageName>;
-    });
+type SharedMessage<MessageName extends SharedServerMessageName = SharedServerMessageName> = Message<
+  MessageName,
+  SharedServerMessagePayload[MessageName]
+>;
 
 export type GameListener<MessageName extends GameClientMessageName = GameClientMessageName> = (
   payload: GameClientMessagePayload[MessageName],
@@ -77,31 +55,74 @@ type MainReplyHandler<T = unknown> = {
 };
 
 class WebSocketServer {
-  private server: WSServer;
+  private server: WSServer | null = null;
   private rendererProcessSocket: WebSocket | null = null;
   private mainProcessSocket: WebSocket | null = null;
   private gameProcessSocket: WebSocket | null = null;
+  private cliSockets = new Set<WebSocket>();
   private gameListeners = new Map<GameClientMessageName, GameListener[]>();
   private mainReplyHandlers = new Map<string, MainReplyHandler>();
 
-  constructor() {
+  // ! The server doesn't bind its port at construction on purpose: many modules import the singleton below only to
+  // send messages, importing this file must not have side effects. Only the daemon entry point calls listen().
+  public listen = (): Promise<number> => {
+    return new Promise((resolve) => {
+      this.createServer(getWebSocketServerPort(), resolve);
+    });
+  };
+
+  private createServer(port: number, onListening: (port: number) => void) {
     this.server = new WSServer({
-      port: getWebSocketServerPort(),
+      port,
     });
 
-    this.server.on('listening', this.onServerCreated);
+    this.server.on('listening', () => {
+      const boundPort = this.getBoundPort();
+      // Expose the actual port through the environment variable so getWebSocketServerPort() is correct everywhere in
+      // the daemon process, notably when injecting CSDM_WS_PORT into the game process environment.
+      process.env[WEB_SOCKET_SERVER_PORT_ENV_NAME] = String(boundPort);
+      logger.debug(`WS:: server listening on port ${boundPort}`);
+      onListening(boundPort);
+    });
     this.server.on('connection', this.onConnection);
-    this.server.on('error', this.onError);
+    this.server.on('error', (error: Error) => {
+      this.onError(error, port, onListening);
+    });
     this.server.on('close', this.onClose);
   }
 
-  public sendMessageToRendererProcess = <MessageName extends RendererServerMessageName>(
-    message: SendableRendererMessage<MessageName>,
+  public getBoundPort(): number {
+    const address = this.server?.address();
+    if (address === null || address === undefined || typeof address === 'string') {
+      throw new Error('The WebSocket server is not listening');
+    }
+
+    return address.port;
+  }
+
+  public getClientCount(): number {
+    let count = this.cliSockets.size;
+    for (const socket of [this.rendererProcessSocket, this.mainProcessSocket, this.gameProcessSocket]) {
+      if (socket !== null) {
+        count++;
+      }
+    }
+
+    return count;
+  }
+
+  public sendPushMessage = <MessageName extends ServerPushMessageName>(
+    message: SendablePushMessage<MessageName>,
   ): void => {
+    const json = JSON.stringify(message);
+    for (const socket of this.cliSockets) {
+      socket.send(json);
+    }
+
     if (this.rendererProcessSocket) {
-      this.rendererProcessSocket.send(JSON.stringify(message));
-    } else {
-      logger.warn(`WS:: rendererProcessSocket is null, can't send message to renderer process`);
+      this.rendererProcessSocket.send(json);
+    } else if (this.cliSockets.size === 0) {
+      logger.warn(`WS:: no renderer or CLI client connected, the push message ${message.name} has been dropped`);
     }
   };
 
@@ -144,13 +165,13 @@ class WebSocketServer {
   };
 
   public broadcast = <MessageName extends SharedServerMessageName>(message: SharedMessage<MessageName>): void => {
+    if (this.server === null) {
+      return;
+    }
+
     for (const client of this.server.clients) {
       client.send(JSON.stringify(message));
     }
-  };
-
-  private onServerCreated = () => {
-    logger.debug(`WS:: server listening on port ${getWebSocketServerPort()}`);
   };
 
   private onConnection = (webSocket: WebSocket, request: IncomingMessage): void => {
@@ -175,6 +196,28 @@ class WebSocketServer {
       this.rendererProcessSocket.on('close', this.onRendererProcessSocketDisconnect);
       this.rendererProcessSocket.on('error', this.onRendererProcessSocketError);
       this.rendererProcessSocket.on('message', this.onRendererProcessSocketMessage);
+    } else if (processName === 'cli') {
+      logger.debug(`WS:: CLI process socket connected`);
+      this.cliSockets.add(webSocket);
+      webSocket.on('close', (code: number, reason: Buffer) => {
+        logger.debug('WS:: CLI process socket disconnected', code, reason.toString());
+        this.cliSockets.delete(webSocket);
+      });
+      webSocket.on('error', (error: unknown) => {
+        logger.error('WS:: CLI process socket error', error);
+      });
+      webSocket.on('message', async (data: RawData) => {
+        await this.onClientProcessSocketMessage(webSocket, cliHandlers, data, 'CLI');
+      });
+    } else if (processName === 'probe') {
+      // Probe sockets are short-lived connections used to detect if a healthy daemon is listening on a port.
+      // They are not counted as clients and can only ask for the daemon status.
+      webSocket.on('error', (error: unknown) => {
+        logger.debug('WS:: probe socket error', error);
+      });
+      webSocket.on('message', async (data: RawData) => {
+        await this.onClientProcessSocketMessage(webSocket, probeHandlers, data, 'probe');
+      });
     } else {
       logger.debug(`WS:: game process socket connected`);
       this.gameProcessSocket = webSocket;
@@ -184,54 +227,74 @@ class WebSocketServer {
     }
   };
 
+  private onClientProcessSocketMessage = async (
+    socket: WebSocket,
+    handlers: object,
+    data: RawData,
+    clientName: string,
+  ): Promise<void> => {
+    try {
+      // oxlint-disable-next-line typescript/no-base-to-string
+      const message: IdentifiableClientMessage<string> = JSON.parse(data.toString());
+      logger.log(`WS:: message with name ${message.name} and uuid ${message.uuid} received from ${clientName} process`);
+      await this.dispatchMessageToHandlers(socket, handlers, message);
+    } catch (error) {
+      logger.error(`WS:: ${clientName} process request error`);
+      logger.error(error);
+    }
+  };
+
+  private dispatchMessageToHandlers = async (
+    socket: WebSocket,
+    handlers: object,
+    { name, payload, uuid }: IdentifiableClientMessage<string>,
+  ): Promise<void> => {
+    // oxlint-disable-next-line typescript/no-explicit-any
+    const handler = (handlers as Record<string, Handler<any, any> | undefined>)[name];
+    if (typeof handler !== 'function') {
+      logger.warn(`WS:: unknown message name: ${name}`);
+      return;
+    }
+
+    try {
+      const result = await handler(payload);
+      socket.send(
+        JSON.stringify({
+          name: SharedServerMessageName.Reply,
+          payload: result,
+          uuid,
+        }),
+      );
+    } catch (error) {
+      let errorPayload: ErrorCode | string = ErrorCode.UnknownError;
+      if (typeof error === 'string') {
+        errorPayload = error;
+      } else if (typeof error === 'number') {
+        errorPayload = error as ErrorCode;
+      }
+
+      if (typeof errorPayload === 'string' || errorPayload === ErrorCode.UnknownError) {
+        logger.error(`WS:: error handling message with name ${name}`);
+        logger.error(error);
+      }
+
+      socket.send(
+        JSON.stringify({
+          name: SharedServerMessageName.ReplyError,
+          payload: errorPayload,
+          uuid,
+        }),
+      );
+    }
+  };
+
   private onRendererProcessSocketMessage = async (data: RawData): Promise<void> => {
     if (this.rendererProcessSocket === null) {
       logger.warn('WS:: renderer process socket not defined');
       return;
     }
 
-    try {
-      // oxlint-disable-next-line typescript/no-base-to-string
-      const message: IdentifiableClientMessage<RendererClientMessageName> = JSON.parse(data.toString());
-      const { name, payload, uuid } = message;
-      logger.log(`WS:: message with name ${name} and uuid ${uuid} received from renderer process`);
-
-      // oxlint-disable-next-line typescript/no-explicit-any
-      const handler: Handler<any, any> = rendererHandlers[name];
-      if (typeof handler === 'function') {
-        try {
-          const result = await handler(payload);
-          this.sendMessageToRendererProcess({
-            name: SharedServerMessageName.Reply,
-            payload: result,
-            uuid,
-          } as SendableRendererMessage);
-        } catch (error) {
-          let payload: ErrorCode | string = ErrorCode.UnknownError;
-          if (typeof error === 'string') {
-            payload = error;
-          } else if (typeof error === 'number') {
-            payload = error as ErrorCode;
-          }
-
-          if (typeof payload === 'string' || payload === ErrorCode.UnknownError) {
-            logger.error(`WS:: error handling message with ${name} from renderer process`);
-            logger.error(error);
-          }
-
-          this.sendMessageToRendererProcess({
-            name: SharedServerMessageName.ReplyError,
-            payload,
-            uuid,
-          } as SendableRendererMessage);
-        }
-      } else {
-        logger.warn(`WS:: unknown message name: ${name}`);
-      }
-    } catch (error) {
-      logger.error('WS:: renderer process request error');
-      logger.error(error);
-    }
+    await this.onClientProcessSocketMessage(this.rendererProcessSocket, rendererHandlers, data, 'renderer');
   };
 
   private onMainProcessSocketMessage = async (data: RawData): Promise<void> => {
@@ -270,38 +333,7 @@ class WebSocketServer {
           break;
         }
         default: {
-          // oxlint-disable-next-line typescript/no-explicit-any
-          const handler: Handler<any, unknown> = mainHandlers[name as MainClientMessageName];
-          if (typeof handler === 'function') {
-            try {
-              const result = await handler(payload);
-              this.sendMessageToMainProcess({
-                name: SharedServerMessageName.Reply,
-                payload: result,
-                uuid,
-              } as SendableMainMessage);
-            } catch (error) {
-              let payload: ErrorCode | string = ErrorCode.UnknownError;
-              if (typeof error === 'string') {
-                payload = error;
-              } else if (typeof error === 'number') {
-                payload = error as ErrorCode;
-              }
-
-              if (typeof payload === 'string' || payload === ErrorCode.UnknownError) {
-                logger.error(`WS:: error handling message with ${name} from main process`);
-                logger.error(error);
-              }
-
-              this.sendMessageToMainProcess({
-                name: SharedServerMessageName.ReplyError,
-                payload,
-                uuid,
-              } as SendableMainMessage);
-            }
-          } else {
-            logger.warn(`WS:: unknown message with name: ${name}`);
-          }
+          await this.dispatchMessageToHandlers(this.mainProcessSocket, mainHandlers, message);
         }
       }
     } catch (error) {
@@ -378,9 +410,9 @@ class WebSocketServer {
     logger.error('WS:: game process socket error', error);
   };
 
-  private onError = (error: Error) => {
-    // Ignore port already in use errors in CLI, it means the GUI is running and so the WS server too.
+  private onError = (error: Error, port: number, onListening: (port: number) => void) => {
     if ('code' in error && error.code === 'EADDRINUSE') {
+      void this.handlePortAlreadyInUse(port, onListening);
       return;
     }
 
@@ -388,83 +420,33 @@ class WebSocketServer {
     logger.error(error);
   };
 
+  private async handlePortAlreadyInUse(port: number, onListening: (port: number) => void) {
+    this.server?.close();
+
+    const status = await probeDaemon(port);
+    if (status !== null) {
+      // Another daemon is already listening on this port, typically because two processes spawned a daemon at the
+      // same time. The process that spawned this daemon will discover the other one through the daemon info file.
+      if (typeof window !== 'undefined') {
+        // In dev mode the server runs in a BrowserWindow, exiting here would be invisible; the developer has to kill
+        // the other daemon and restart the app.
+        logger.error(`WS:: a daemon is already listening on port ${port}, kill it and restart the app`);
+        return;
+      }
+
+      logger.log(`WS:: a daemon is already listening on port ${port}, exiting`);
+      process.exit(0);
+    }
+
+    // The port is used by an unrelated application, let the OS pick a free port.
+    // Clients discover the actual port through the daemon info file.
+    logger.warn(`WS:: port ${port} is used by another application, falling back to a random port`);
+    this.createServer(0, onListening);
+  }
+
   private onClose = () => {
     logger.error('WS:: server closed');
   };
 }
 
-// In dev mode (when the WS server is started from the dev window), the DOM fetch API overrides the NodeJS fetch API.
-// It allows to see requests in the DevTools only during development.
-// ! Sometimes you may have to use explicitly undici (NodeJS fetch) because of differences between DOM/NodeJS APIs.
-// ! In this case, you will not see requests from the DevTools.
-const originalFetch = globalThis.fetch;
-globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestInit) => {
-  try {
-    return await originalFetch(input, init);
-  } catch (error) {
-    // When a network issue occurred when calling fetch(), the error is a TypeError.
-    // See fetch API spec: https://fetch.spec.whatwg.org/#fetch-api
-    // > If response is a network error, then reject p with a TypeError and terminate these substeps.
-    if (error instanceof TypeError) {
-      logger.error('Network error while calling:');
-      logger.error(input);
-      logger.error(error);
-      throw new NetworkError();
-    }
-    throw error;
-  }
-};
-
-if (typeof window !== 'undefined') {
-  function createNodeTimeout(
-    id: ReturnType<typeof globalThis.setTimeout>,
-    clearFn: (id: ReturnType<typeof globalThis.setTimeout>) => void,
-  ): NodeJS.Timeout {
-    const timeout: NodeJS.Timeout = {
-      hasRef: () => true,
-      ref: () => timeout,
-      refresh: () => timeout,
-      unref: () => timeout,
-      [Symbol.toPrimitive]: () => Number(id),
-      [Symbol.dispose]: () => {
-        clearFn(id);
-        return id;
-      },
-      close: () => {
-        clearFn(id);
-        return timeout;
-      },
-      _onTimeout() {},
-    };
-    return timeout;
-  }
-
-  const originalSetTimeout = globalThis.setTimeout;
-  // @ts-ignore Undici uses Node Timeout since v6.20.0, we mimic it in dev mode as the server process runs in a
-  // BrowserWindow, not in a Node process.
-  globalThis.setTimeout = (callback: (...args: unknown[]) => void, ms: number, ...args: unknown[]): NodeJS.Timeout => {
-    const id = originalSetTimeout.call(window, () => callback.apply(this, args), ms ?? 0);
-    return createNodeTimeout(id, clearTimeout);
-  };
-
-  const originalSetInterval = globalThis.setInterval;
-  // @ts-ignore Undici uses Node SetInterval since v8.0.0, we mimic it in dev mode as the server process runs in a
-  // BrowserWindow, not in a Node process.
-  globalThis.setInterval = <TArgs extends unknown[]>(
-    callback: (...args: TArgs) => void,
-    ms?: number,
-    ...args: TArgs
-  ): NodeJS.Timeout => {
-    const id = originalSetInterval.call(window, () => callback.apply(this, args), ms ?? 0);
-    return createNodeTimeout(id, clearInterval);
-  };
-}
-
 export const server = new WebSocketServer();
-
-process.on('message', function (message) {
-  logger.debug('WS:: message from main process', message);
-  if (message === 'ping') {
-    process.send?.('pong');
-  }
-});

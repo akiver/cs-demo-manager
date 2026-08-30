@@ -4,7 +4,7 @@ import { Button } from 'csdm/ui/components/buttons/button';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { Status } from 'csdm/common/types/status';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { SpinnableButton } from 'csdm/ui/components/buttons/spinnable-button';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { CounterStrikeRunningDialog } from 'csdm/ui/components/dialogs/counter-strike-running-dialog';

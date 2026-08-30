@@ -5,7 +5,7 @@ import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { Demo } from 'csdm/ui/demo/demo';
 import { Status } from 'csdm/common/types/status';
 import { Message } from 'csdm/ui/components/message';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { ErrorCode } from 'csdm/common/error-code';
 import { UpdateDemoLocation } from 'csdm/ui/match/video/update-demo-location';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';

@@ -5,7 +5,7 @@ import { useCurrentMatchSequences } from './sequences/use-current-match-sequence
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { useCurrentMatch } from '../use-current-match';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { WatchVideoSequencesPayload } from 'csdm/common/types/video';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { ErrorCode } from 'csdm/common/error-code';

@@ -1,22 +1,32 @@
+import type { Demo } from 'csdm/common/types/demo';
 import type { DemosTableFilter } from 'csdm/node/database/demos/demos-table-filter';
 import { fetchDemosTable } from 'csdm/node/database/demos/fetch-demos-table';
+import { fetchMatchChecksums } from 'csdm/node/database/matches/fetch-match-checksums';
 import { server } from 'csdm/server/server';
-import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
+import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { handleError } from '../../handle-error';
 
-export async function fetchDemosTableHandler(filter: DemosTableFilter) {
+export type FetchDemosTableResponse = {
+  demos: Demo[];
+  // The match checksums are included so the renderer process can refresh its cache: the database may have been
+  // modified by another process (e.g. a CLI analysis) since the application started.
+  matchChecksums: string[];
+};
+
+export async function fetchDemosTableHandler(filter: DemosTableFilter): Promise<FetchDemosTableResponse> {
   try {
-    const demos = fetchDemosTable(filter, {
+    const demos = await fetchDemosTable(filter, {
       onProgress: (progress) => {
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.FetchDemosProgress,
+        server.sendPushMessage({
+          name: ServerPushMessageName.FetchDemosProgress,
           payload: progress,
         });
       },
     });
+    const matchChecksums = await fetchMatchChecksums();
 
-    return demos;
+    return { demos, matchChecksums };
   } catch (error) {
-    handleError(error, 'Error while fetching demos table');
+    return handleError(error, 'Error while fetching demos table');
   }
 }

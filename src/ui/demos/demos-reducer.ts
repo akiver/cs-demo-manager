@@ -51,7 +51,7 @@ export const demosReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchDemosSuccess, (state, action) => {
       state.status = Status.Success;
-      state.entities = action.payload;
+      state.entities = action.payload.demos;
     })
     .addCase(fetchDemosError, (state) => {
       state.status = Status.Error;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import type { Migration } from 'csdm/node/database/migrations/fetch-migrations';
 import { CopyButton } from 'csdm/ui/components/buttons/copy-button';
 import { ExternalLink } from 'csdm/ui/components/external-link';
