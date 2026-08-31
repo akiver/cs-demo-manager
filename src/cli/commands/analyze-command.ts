@@ -9,7 +9,6 @@ import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 import type { Analysis } from 'csdm/common/types/analysis';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
 import { isErrorCode } from 'csdm/common/is-error-code';
-import { SIGINT_EXIT_CODE } from 'csdm/cli/exit-code';
 
 export class AnalyzeCommand extends Command {
   public static Name = 'analyze';
@@ -146,20 +145,6 @@ export class AnalyzeCommand extends Command {
     }
 
     if (pendingChecksums.size > 0) {
-      // Removing the demos from the daemon's queue cancels the analyses. Demos whose analysis has already started
-      // cannot be interrupted and finish in the background.
-      process.on('SIGINT', async () => {
-        console.log('Canceling analyses...');
-        try {
-          await client.send({
-            name: CliClientMessageName.RemoveDemosFromAnalyses,
-            payload: [...pendingChecksums],
-          });
-        } finally {
-          process.exit(SIGINT_EXIT_CODE);
-        }
-      });
-
       const daemonStatusPollIntervalMs = 30_000;
       // Safety net in case a terminal push message never arrives (e.g. the analysis has been removed from the queue
       // through the GUI). Push messages and the status reply arrive on the same socket, so a non-busy status with

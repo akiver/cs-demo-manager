@@ -20,7 +20,9 @@ import type {
 import { ErrorCode } from '../common/error-code';
 import { probeDaemon } from 'csdm/node/daemon/probe-daemon';
 import type { ServerPushMessagePayload, ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
-import type { Handler } from 'csdm/server/messages/handler';
+import type { Handler, HandlerContext } from 'csdm/server/messages/handler';
+import { videoQueue } from 'csdm/server/video-queue';
+import { analysesListener } from 'csdm/server/analyses-listener';
 import type { GameServerMessageName, GameServerMessagePayload } from 'csdm/server/messages/game-server-message-name';
 import type { GameClientMessageName, GameClientMessagePayload } from 'csdm/server/messages/game-client-message-name';
 import type { Message } from 'csdm/server/messages/message';
@@ -197,17 +199,22 @@ class WebSocketServer {
       this.rendererProcessSocket.on('error', this.onRendererProcessSocketError);
       this.rendererProcessSocket.on('message', this.onRendererProcessSocketMessage);
     } else if (processName === 'cli') {
+      const clientId = randomUUID();
       logger.debug(`WS:: CLI process socket connected`);
       this.cliSockets.add(webSocket);
       webSocket.on('close', (code: number, reason: Buffer) => {
         logger.debug('WS:: CLI process socket disconnected', code, reason.toString());
         this.cliSockets.delete(webSocket);
+        // The CLI process may die without a chance to clean up after itself, cancel the videos or analyses
+        // it queued.
+        videoQueue.removeVideosAddedByClient(clientId);
+        analysesListener.removeDemosAddedByClient(clientId);
       });
       webSocket.on('error', (error: unknown) => {
         logger.error('WS:: CLI process socket error', error);
       });
       webSocket.on('message', async (data: RawData) => {
-        await this.onClientProcessSocketMessage(webSocket, cliHandlers, data, 'CLI');
+        await this.onClientProcessSocketMessage(webSocket, cliHandlers, data, 'CLI', { clientId });
       });
     } else if (processName === 'probe') {
       // Probe sockets are short-lived connections used to detect if a healthy daemon is listening on a port.
@@ -232,12 +239,13 @@ class WebSocketServer {
     handlers: object,
     data: RawData,
     clientName: string,
+    context?: HandlerContext,
   ): Promise<void> => {
     try {
       // oxlint-disable-next-line typescript/no-base-to-string
       const message: IdentifiableClientMessage<string> = JSON.parse(data.toString());
       logger.log(`WS:: message with name ${message.name} and uuid ${message.uuid} received from ${clientName} process`);
-      await this.dispatchMessageToHandlers(socket, handlers, message);
+      await this.dispatchMessageToHandlers(socket, handlers, message, context);
     } catch (error) {
       logger.error(`WS:: ${clientName} process request error`);
       logger.error(error);
@@ -248,6 +256,7 @@ class WebSocketServer {
     socket: WebSocket,
     handlers: object,
     { name, payload, uuid }: IdentifiableClientMessage<string>,
+    context?: HandlerContext,
   ): Promise<void> => {
     // oxlint-disable-next-line typescript/no-explicit-any
     const handler = (handlers as Record<string, Handler<any, any> | undefined>)[name];
@@ -257,7 +266,7 @@ class WebSocketServer {
     }
 
     try {
-      const result = await handler(payload);
+      const result = await handler(payload, context);
       socket.send(
         JSON.stringify({
           name: SharedServerMessageName.Reply,

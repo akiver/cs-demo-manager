@@ -1,5 +1,10 @@
-type HandlerWithoutPayload<ReturnType> = () => Promise<ReturnType>;
-type HandlerWithPayload<Payload, ReturnType> = (payload: Payload) => Promise<ReturnType>;
+export type HandlerContext = {
+  // Unique id of the client socket connection that sent the message. It allows tracking resources owned by a
+  // connection so they can be released when it disconnects. Only CLI connections provide it today.
+  clientId?: string;
+};
+type HandlerWithoutPayload<ReturnType> = (payload?: undefined, context?: HandlerContext) => Promise<ReturnType>;
+type HandlerWithPayload<Payload, ReturnType> = (payload: Payload, context?: HandlerContext) => Promise<ReturnType>;
 /**
  * An handler must be a promise that accepts a payload as first parameter and possibly return something.
  *

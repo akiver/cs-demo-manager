@@ -1,5 +1,6 @@
 import type { DemoSource } from 'csdm/common/types/counter-strike';
 import type { Demo } from 'csdm/common/types/demo';
+import type { HandlerContext } from 'csdm/server/messages/handler';
 import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
 import { fetchMatchChecksums } from 'csdm/node/database/matches/fetch-match-checksums';
 import { analysesListener } from 'csdm/server/analyses-listener';
@@ -20,6 +21,7 @@ export type AddDemoPathsToAnalysesResult = {
 
 export async function addDemoPathsToAnalysesHandler(
   payload: AddDemoPathsToAnalysesPayload,
+  context?: HandlerContext,
 ): Promise<AddDemoPathsToAnalysesResult> {
   try {
     await ensureDatabaseConnection();
@@ -44,7 +46,10 @@ export async function addDemoPathsToAnalysesHandler(
 
     // ! Not awaited: it would resolve only once the whole analyses queue completed and the CLI request would
     // time out. The CLI tracks completion through the AnalysisUpdated push messages.
-    void analysesListener.addDemosToAnalyses(demos, { analyzePositions: payload.analyzePositions });
+    void analysesListener.addDemosToAnalyses(demos, {
+      analyzePositions: payload.analyzePositions,
+      clientId: context?.clientId,
+    });
 
     return { addedDemos, skippedDemoPaths };
   } catch (error) {

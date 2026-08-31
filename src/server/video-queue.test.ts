@@ -99,4 +99,28 @@ describe('videoQueue', () => {
     expect(videoQueue.getIsPaused()).toBe(false);
     expect(videoQueue.isBusy()).toBe(true);
   });
+
+  it('should remove only the pending videos queued by the given client', () => {
+    const cliVideo = videoQueue.addVideo(buildPayload(), 'cli-client-1');
+    const otherCliVideo = videoQueue.addVideo(buildPayload(), 'cli-client-2');
+    const rendererVideo = videoQueue.addVideo(buildPayload());
+
+    videoQueue.removeVideosAddedByClient('cli-client-1');
+
+    const remainingVideoIds = videoQueue.getVideos().map(({ id }) => id);
+    expect(remainingVideoIds).not.toContain(cliVideo.id);
+    expect(remainingVideoIds).toContain(otherCliVideo.id);
+    expect(remainingVideoIds).toContain(rendererVideo.id);
+  });
+
+  it('should abort the video being processed when its client is removed', () => {
+    videoQueue.addVideo(buildPayload(), 'cli-client-1');
+    videoQueue.resume();
+    expect(videoQueue.isBusy()).toBe(true);
+
+    videoQueue.removeVideosAddedByClient('cli-client-1');
+
+    expect(videoQueue.getVideos()).toHaveLength(0);
+    expect(videoQueue.isBusy()).toBe(false);
+  });
 });
