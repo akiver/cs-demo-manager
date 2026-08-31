@@ -10,5 +10,8 @@ export async function getHlaeVersionFromExecutable(executablePath: string): Prom
     throw new InvalidHlaeExecutable();
   }
 
-  return await getWindowsExeVersion(executablePath);
+  const version = await getWindowsExeVersion(executablePath);
+
+  // The executable version may contain a build number (x.x.x.x), keep only x.x.x to reflect GitHub releases.
+  return version?.split('.').slice(0, 3).join('.');
 }
