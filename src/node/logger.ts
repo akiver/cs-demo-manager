@@ -5,6 +5,7 @@ import fs from 'fs-extra';
 import type { FSWatcher } from 'chokidar';
 import { watch } from 'chokidar';
 import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
+import 'csdm/node/settings/installation-state';
 
 export interface ILogger {
   debug: (...data: any[]) => void;

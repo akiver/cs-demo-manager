@@ -83,6 +83,7 @@ async function buildWebSocketServerBundle() {
     mainFields: ['module', 'main'],
     external: [
       'pg-native',
+      'fs-native-extensions',
       '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
     ],
     define: {
@@ -108,7 +109,7 @@ async function buildMainProcessBundle() {
     platform: 'node',
     target: `node${node}`,
     mainFields: ['module', 'main'],
-    external: ['electron'],
+    external: ['electron', 'fs-native-extensions'],
     define: commonDefine,
     plugins: [nativeNodeModulesPlugin],
   });
@@ -155,7 +156,7 @@ async function buildCliBundle() {
       'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
       'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
     },
-    external: ['pg-native', '@aws-sdk/client-s3'],
+    external: ['pg-native', 'fs-native-extensions', '@aws-sdk/client-s3'],
     alias: {
       // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
       fdir: './node_modules/fdir/dist/index.cjs',

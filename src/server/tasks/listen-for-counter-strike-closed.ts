@@ -11,61 +11,81 @@ const checkIntervalMs = 30_000;
 let wasRunning = false;
 let isProcessingDownload = false;
 let startedTimestamp: number = 0;
-let intervalId: NodeJS.Timeout | null = null;
+let timeoutId: NodeJS.Timeout | null = null;
+// ! A check reschedules itself when it ends. Stopping has to invalidate the checks that are already
+// running, otherwise one of them revives the timer right after it was cleared and the listener
+// keeps polling and downloading while the database it writes to is being released.
+let listenerGeneration = 0;
+const pendingChecks = new Set<Promise<unknown>>();
 
-async function checkIfCounterStrikeHasBeenClosed() {
+function isCurrentListener(generation: number) {
+  return generation === listenerGeneration;
+}
+
+async function checkIfCounterStrikeHasBeenClosed(generation: number) {
   // Make sure we don't try to start downloading new demos while we are already downloading demos
   if (isProcessingDownload) {
-    return;
+    return false;
   }
 
   const isRunning = await isCounterStrikeRunning();
+  if (!isCurrentListener(generation)) {
+    return isRunning;
+  }
+
   const hasBeenClosed = !isRunning && wasRunning;
   if (hasBeenClosed) {
     const minimalRunningTimeMs = 1_200_000; // 20 minutes
     const hasBeenRunningLongEnough = Date.now() - startedTimestamp > minimalRunningTimeMs;
     if (hasBeenRunningLongEnough) {
       isProcessingDownload = true;
-      const settings = await getSettings();
-
-      if (settings.download.downloadValveDemosInBackground) {
-        const downloadsAdded = await downloadLastValveMatches();
-        if (downloadsAdded.length > 0) {
-          server.sendMessageToMainProcess({
-            name: MainServerMessageName.DownloadValveDemoStarted,
-            payload: downloadsAdded.length,
-          });
+      try {
+        const settings = await getSettings();
+        if (!isCurrentListener(generation)) {
+          return isRunning;
         }
-      }
 
-      if (settings.download.downloadFaceitDemosInBackground) {
-        const downloadsAdded = await downloadLastFaceitMatches();
-        if (downloadsAdded.length > 0) {
-          server.sendMessageToMainProcess({
-            name: MainServerMessageName.DownloadFaceitDemoStarted,
-            payload: downloadsAdded.length,
-          });
+        if (settings.download.downloadValveDemosInBackground) {
+          const downloadsAdded = await downloadLastValveMatches();
+          if (downloadsAdded.length > 0) {
+            server.sendMessageToMainProcess({
+              name: MainServerMessageName.DownloadValveDemoStarted,
+              payload: downloadsAdded.length,
+            });
+          }
         }
-      }
 
-      if (settings.download.download5EPlayDemosInBackground) {
-        const downloadsAdded = await downloadLast5EPlayMatches();
-        if (downloadsAdded.length > 0) {
-          server.sendMessageToMainProcess({
-            name: MainServerMessageName.Download5EPlayDemoStarted,
-            payload: downloadsAdded.length,
-          });
+        if (settings.download.downloadFaceitDemosInBackground) {
+          const downloadsAdded = await downloadLastFaceitMatches();
+          if (downloadsAdded.length > 0) {
+            server.sendMessageToMainProcess({
+              name: MainServerMessageName.DownloadFaceitDemoStarted,
+              payload: downloadsAdded.length,
+            });
+          }
         }
-      }
 
-      if (settings.download.downloadRenownDemosInBackground) {
-        const downloadsAdded = await downloadLastRenownMatches();
-        if (downloadsAdded.length > 0) {
-          server.sendMessageToMainProcess({
-            name: MainServerMessageName.DownloadRenownDemosStarted,
-            payload: downloadsAdded.length,
-          });
+        if (settings.download.download5EPlayDemosInBackground) {
+          const downloadsAdded = await downloadLast5EPlayMatches();
+          if (downloadsAdded.length > 0) {
+            server.sendMessageToMainProcess({
+              name: MainServerMessageName.Download5EPlayDemoStarted,
+              payload: downloadsAdded.length,
+            });
+          }
         }
+
+        if (settings.download.downloadRenownDemosInBackground) {
+          const downloadsAdded = await downloadLastRenownMatches();
+          if (downloadsAdded.length > 0) {
+            server.sendMessageToMainProcess({
+              name: MainServerMessageName.DownloadRenownDemosStarted,
+              payload: downloadsAdded.length,
+            });
+          }
+        }
+      } finally {
+        isProcessingDownload = false;
       }
     }
     startedTimestamp = 0;
@@ -76,25 +96,54 @@ async function checkIfCounterStrikeHasBeenClosed() {
   }
 
   wasRunning = isRunning;
-  isProcessingDownload = false;
 
-  if (intervalId !== null) {
-    clearInterval(intervalId);
-  }
-
-  const checkIntervalMsWhileRunning = 5000;
-  const intervalMs = isRunning ? checkIntervalMsWhileRunning : checkIntervalMs;
-  intervalId = setInterval(checkIfCounterStrikeHasBeenClosed, intervalMs);
+  return isRunning;
 }
 
-export function stopListeningForCounterStrikeClosed() {
-  if (intervalId !== null) {
-    clearInterval(intervalId);
+function scheduleNextCheck(delayMs: number, generation: number) {
+  if (!isCurrentListener(generation)) {
+    return;
   }
+
+  timeoutId = setTimeout(() => {
+    if (!isCurrentListener(generation)) {
+      return;
+    }
+
+    const check = checkIfCounterStrikeHasBeenClosed(generation)
+      .then((isRunning) => {
+        const checkIntervalMsWhileRunning = 5000;
+        scheduleNextCheck(isRunning ? checkIntervalMsWhileRunning : checkIntervalMs, generation);
+      })
+      .catch((error) => {
+        logger.error('Error while checking if Counter-Strike has been closed');
+        logger.error(error);
+        scheduleNextCheck(checkIntervalMs, generation);
+      })
+      .finally(() => {
+        pendingChecks.delete(check);
+      });
+    pendingChecks.add(check);
+  }, delayMs);
+}
+
+export async function stopListeningForCounterStrikeClosed() {
+  listenerGeneration++;
+  if (timeoutId !== null) {
+    clearTimeout(timeoutId);
+    timeoutId = null;
+  }
+
+  await Promise.allSettled(pendingChecks);
 }
 
 export function listenForCounterStrikeClosed() {
-  stopListeningForCounterStrikeClosed();
+  if (timeoutId !== null) {
+    clearTimeout(timeoutId);
+  }
 
-  intervalId = setInterval(checkIfCounterStrikeHasBeenClosed, checkIntervalMs);
+  const generation = ++listenerGeneration;
+  wasRunning = false;
+  startedTimestamp = 0;
+  scheduleNextCheck(checkIntervalMs, generation);
 }

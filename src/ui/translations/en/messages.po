@@ -338,6 +338,26 @@ msgid "You can either update CS Demo Manager to the latest version or reset the 
 msgstr "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The built-in database was created by another version of CS Demo Manager. Update the app to the latest version, or reset the built-in database to start from an empty one."
+msgstr "The built-in database was created by another version of CS Demo Manager. Update the app to the latest version, or reset the built-in database to start from an empty one."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The password of the built-in database is stored next to it and is the only one it accepts. Without it the database can't be opened anymore, resetting it creates an empty one."
+msgstr "The password of the built-in database is stored next to it and is the only one it accepts. Without it the database can't be opened anymore, resetting it creates an empty one."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The PostgreSQL files shipped with the app are missing. Reinstalling CS Demo Manager usually fixes it."
+msgstr "The PostgreSQL files shipped with the app are missing. Reinstalling CS Demo Manager usually fixes it."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "Another CS Demo Manager process is using the built-in database. Close every app and CLI process, then try again."
+msgstr "Another CS Demo Manager process is using the built-in database. Close every app and CLI process, then try again."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "It usually means that an antivirus is blocking the database process or that the database folder is not writable."
+msgstr "It usually means that an antivirus is blocking the database process or that the database folder is not writable."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "This error usually means that the database is not running or that the connection settings are incorrect."
 msgstr "This error usually means that the database is not running or that the connection settings are incorrect."
 
@@ -346,24 +366,74 @@ msgid "Make sure PostgreSQL is running and your settings are correct."
 msgstr "Make sure PostgreSQL is running and your settings are correct."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
+#: src/ui/settings/database/database-mode-selector.tsx
 msgid "The connection to the database failed with the following error:"
 msgstr "The connection to the database failed with the following error:"
 
-#: src/ui/bootstrap/connect-database/connect-database.tsx
+#: src/ui/bootstrap/connect-database/embedded-database-error.tsx
+msgid "CS Demo Manager couldn't start its built-in database."
+msgstr "CS Demo Manager couldn't start its built-in database."
+
+#: src/ui/bootstrap/connect-database/embedded-database-error.tsx
+msgid "CS Demo Manager is not connected to its built-in database."
+msgstr "CS Demo Manager is not connected to its built-in database."
+
+#: src/ui/bootstrap/connect-database/embedded-database-error.tsx
+msgid "Retry"
+msgstr "Retry"
+
+#: src/ui/bootstrap/connect-database/embedded-database-error.tsx
+msgid "Show logs"
+msgstr "Show logs"
+
+#: src/ui/bootstrap/connect-database/embedded-database-error.tsx
+msgid "Use an external PostgreSQL server"
+msgstr "Use an external PostgreSQL server"
+
+#: src/ui/bootstrap/connect-database/external-database-form.tsx
 msgid "CS Demo Manager requires a PostgreSQL database."
 msgstr "CS Demo Manager requires a PostgreSQL database."
 
-#: src/ui/bootstrap/connect-database/connect-database.tsx
+#: src/ui/bootstrap/connect-database/external-database-form.tsx
 msgid "{secondsBeforeNextTry, plural, one {Retrying in # second…} other {Retrying in # seconds…}}"
 msgstr "{secondsBeforeNextTry, plural, one {Retrying in # second…} other {Retrying in # seconds…}}"
+
+#: src/ui/bootstrap/connect-database/external-database-form.tsx
+msgid "Use the built-in database"
+msgstr "Use the built-in database"
 
 #: src/ui/bootstrap/connect-database/help-link.tsx
 msgid "Please read the <0>documentation</0> for help."
 msgstr "Please read the <0>documentation</0> for help."
 
+#: src/ui/bootstrap/connect-database/use-connect-database.ts
+#: src/ui/bootstrap/database-loader.tsx
+#: src/ui/hooks/use-add-demos-to-analyses.ts
+#: src/ui/settings/database/database-mode-selector.tsx
+#: src/ui/settings/database/reset-database-button.tsx
+#: src/ui/settings/database/reset-embedded-database-button.tsx
+msgid "Unknown error"
+msgstr "Unknown error"
+
+#: src/ui/bootstrap/connect-database/use-connect-database.ts
+msgid "The database connection returned an invalid response."
+msgstr "The database connection returned an invalid response."
+
 #: src/ui/bootstrap/settings-provider.tsx
 msgid "An error occurred while loading settings."
 msgstr "An error occurred while loading settings."
+
+#: src/ui/bootstrap/starting-database.tsx
+msgid "Starting the built-in database…"
+msgstr "Starting the built-in database…"
+
+#: src/ui/bootstrap/starting-database.tsx
+msgid "It takes a few seconds on the first launch, while the database is created."
+msgstr "It takes a few seconds on the first launch, while the database is created."
+
+#: src/ui/bootstrap/starting-database.tsx
+msgid "Connecting to the database…"
+msgstr "Connecting to the database…"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "The Steam API returned a forbidden error"
@@ -3454,6 +3524,10 @@ msgstr "CT"
 msgctxt "Team side"
 msgid "T"
 msgstr "T"
+
+#: src/ui/hooks/use-add-demos-to-analyses.ts
+msgid "Demos cannot be added while the database is being changed."
+msgstr "Demos cannot be added while the database is being changed."
 
 #. js-lingui-explicit-id
 #: src/ui/hooks/use-boolean-to-human.ts
@@ -7191,6 +7265,31 @@ msgctxt "Input label"
 msgid "Yaw"
 msgstr "Yaw"
 
+#: src/ui/settings/database/database-mode-selector.tsx
+msgid "The database disconnection returned an invalid response."
+msgstr "The database disconnection returned an invalid response."
+
+#: src/ui/settings/database/database-mode-selector.tsx
+msgctxt "Dialog title"
+msgid "Change database"
+msgstr "Change database"
+
+#: src/ui/settings/database/database-mode-selector.tsx
+msgid "CS Demo Manager will reconnect to the selected database."
+msgstr "CS Demo Manager will reconnect to the selected database."
+
+#: src/ui/settings/database/database-mode-selector.tsx
+msgid "Your demos are not transferred: each database has its own data and demos have to be analyzed again."
+msgstr "Your demos are not transferred: each database has its own data and demos have to be analyzed again."
+
+#: src/ui/settings/database/database-mode-selector.tsx
+msgid "Built-in database (recommended)"
+msgstr "Built-in database (recommended)"
+
+#: src/ui/settings/database/database-mode-selector.tsx
+msgid "External PostgreSQL server"
+msgstr "External PostgreSQL server"
+
 #: src/ui/settings/database/database-size.tsx
 msgid "Database size: <0>{size}</0>."
 msgstr "Database size: <0>{size}</0>."
@@ -7212,6 +7311,28 @@ msgstr "Database disconnection failed with the following error:"
 msgctxt "Button"
 msgid "Disconnect"
 msgstr "Disconnect"
+
+#: src/ui/settings/database/embedded-database.tsx
+msgid "Unable to read the built-in database information."
+msgstr "Unable to read the built-in database information."
+
+#: src/ui/settings/database/embedded-database.tsx
+msgid "PostgreSQL version: {version}"
+msgstr "PostgreSQL version: {version}"
+
+#: src/ui/settings/database/embedded-database.tsx
+msgid "Port: {port}"
+msgstr "Port: {port}"
+
+#: src/ui/settings/database/embedded-database.tsx
+msgctxt "Button"
+msgid "Show database folder"
+msgstr "Show database folder"
+
+#: src/ui/settings/database/embedded-database.tsx
+msgctxt "Button"
+msgid "Show logs"
+msgstr "Show logs"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "JSON file"
@@ -7323,6 +7444,20 @@ msgstr "It will delete all data in the database!"
 msgctxt "Button"
 msgid "Reset database"
 msgstr "Reset database"
+
+#: src/ui/settings/database/reset-embedded-database-button.tsx
+msgctxt "Dialog title"
+msgid "Reset the built-in database"
+msgstr "Reset the built-in database"
+
+#: src/ui/settings/database/reset-embedded-database-button.tsx
+msgid "It will delete the built-in database and create a new empty one. All analyzed demos will have to be analyzed again!"
+msgstr "It will delete the built-in database and create a new empty one. All analyzed demos will have to be analyzed again!"
+
+#: src/ui/settings/database/reset-embedded-database-button.tsx
+msgctxt "Button"
+msgid "Reset the built-in database"
+msgstr "Reset the built-in database"
 
 #: src/ui/settings/downloads/5eplay-settings.tsx
 msgid "Add 5EPlay account"

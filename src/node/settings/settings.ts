@@ -18,7 +18,14 @@ export type Folder = {
   includeSubFolders: boolean;
 };
 
+export type DatabaseMode = 'embedded' | 'external';
+
+/**
+ * The hostname/port/username/password/database fields are the parameters of the "external" mode.
+ * They are ignored when the mode is "embedded": the bundled cluster owns its port and password.
+ */
 export type DatabaseSettings = {
+  readonly mode: DatabaseMode;
   readonly hostname: string;
   readonly port: number;
   readonly username: string;

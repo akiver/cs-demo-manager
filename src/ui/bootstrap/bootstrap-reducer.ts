@@ -1,5 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { connectDatabaseError, connectDatabaseSuccess, disconnectDatabaseSuccess } from './bootstrap-actions';
+import {
+  connectDatabaseError,
+  connectDatabaseStarted,
+  connectDatabaseSuccess,
+  disconnectDatabaseSuccess,
+} from './bootstrap-actions';
 import { DatabaseStatus } from './database-status';
 import type { ConnectDatabaseError } from 'csdm/server/handlers/renderer-process/database/connect-database-handler';
 
@@ -15,6 +20,10 @@ const initialState: BootstrapState = {
 
 export const bootstrapReducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(connectDatabaseStarted, (state) => {
+      state.databaseStatus = DatabaseStatus.Connecting;
+      state.error = undefined;
+    })
     .addCase(connectDatabaseSuccess, (state) => {
       state.databaseStatus = DatabaseStatus.Connected;
       state.error = undefined;

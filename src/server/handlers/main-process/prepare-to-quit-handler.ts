@@ -1,0 +1,60 @@
+import { beginDatabaseConnectionCleanup } from 'csdm/node/database/database';
+import { stopEmbeddedCluster } from 'csdm/node/database/embedded/stop-cluster';
+import { stopBackgroundTasks } from 'csdm/server/start-background-tasks';
+
+async function prepareToQuit() {
+  try {
+    const backgroundTaskResult = await stopBackgroundTasks();
+    if (backgroundTaskResult === 'timed-out') {
+      logger.error('Continuing shutdown while background tasks are still running');
+    }
+  } catch (error) {
+    logger.error('Failed to stop background tasks while quitting');
+    logger.error(error);
+  }
+
+  // The lease is only released here: stopping the cluster is the explicit step below, which needs
+  // the validation password this cleanup hands back.
+  const cleanup = beginDatabaseConnectionCleanup({ stopEmbeddedIfUnused: false });
+  try {
+    await cleanup.embeddedSessionReleased;
+  } catch (error) {
+    logger.error('Error while releasing the built-in database session');
+    logger.error(error);
+  }
+
+  // The lifecycle lock itself may fail before the inner PostgreSQL stop can handle its errors. The
+  // shutdown promise must still settle so the signal safety path can exit the process.
+  try {
+    const stopped = await stopEmbeddedCluster({ validationPassword: cleanup.embeddedValidationPassword });
+    if (!stopped) {
+      logger.log('The built-in database remains running after application shutdown');
+    }
+  } catch (error) {
+    logger.error('Failed to stop the built-in database while quitting');
+    logger.error(error);
+  }
+
+  // PostgreSQL is no longer left behind by this process. Pool cleanup can finish in the background;
+  // the main process will terminate this server immediately after the PrepareToQuit response.
+  void cleanup.resourcesDestroyed.catch((error) => {
+    logger.error('Failed to finish database resource cleanup while quitting');
+    logger.error(error);
+  });
+}
+
+let pendingShutdown: Promise<void> | undefined;
+
+/**
+ * Releases the resources that outlive the process before the app quits.
+ * It exists because the embedded PostgreSQL cluster is started detached by pg_ctl: killing the
+ * server process is not enough to stop it.
+ *
+ * ! The shutdown is started only once: on POSIX the main process sends a SIGTERM right after the
+ * PrepareToQuit reply, and the signal handler goes through here again.
+ */
+export function prepareToQuitHandler(): Promise<void> {
+  pendingShutdown ??= prepareToQuit();
+
+  return pendingShutdown;
+}

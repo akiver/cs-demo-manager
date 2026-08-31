@@ -216,8 +216,10 @@ export class VideoCommand extends Command {
   public async run() {
     try {
       await this.parseArgs();
-      await this.initDatabaseConnection();
+      // ! Settings must be migrated first, the database connection depends on the database mode
+      // introduced by the schema version 14.
       await migrateSettings();
+      await this.initDatabaseConnection();
 
       const settings = await getSettings();
       const demo = await getDemoFromFilePath(this.demoPath);

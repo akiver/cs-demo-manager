@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { type ReactElement } from 'react';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { Loading } from './loading';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { useDatabaseStatus } from './use-database-status';
 import { ConnectDatabase } from './connect-database/connect-database';
+import { StartingDatabase } from './starting-database';
 import { DatabaseStatus } from './database-status';
-import { connectDatabaseSuccess, connectDatabaseError } from './bootstrap-actions';
+import { connectDatabaseStarted, connectDatabaseSuccess, connectDatabaseError } from './bootstrap-actions';
+import { useLingui } from '@lingui/react/macro';
+import { buildUiDatabaseOperationError } from 'csdm/ui/shared/format-error';
 
 type Props = {
   children: ReactElement;
@@ -17,6 +19,7 @@ export function DatabaseLoader({ children }: Props) {
   const client = useWebSocketClient();
   const dispatch = useDispatch();
   const databaseStatus = useDatabaseStatus();
+  const { t } = useLingui();
 
   useEffect(() => {
     if (databaseStatus !== DatabaseStatus.Idle) {
@@ -24,22 +27,27 @@ export function DatabaseLoader({ children }: Props) {
     }
 
     const connectDatabase = async () => {
-      const error = await client.send({
-        name: RendererClientMessageName.ConnectDatabase,
-        payload: undefined,
-      });
-      if (error) {
-        dispatch(connectDatabaseError({ error }));
-      } else {
-        dispatch(connectDatabaseSuccess());
+      dispatch(connectDatabaseStarted());
+      try {
+        const result = await client.send({
+          name: RendererClientMessageName.ConnectDatabase,
+          payload: undefined,
+        });
+        if (result.error) {
+          dispatch(connectDatabaseError({ error: result.error }));
+        } else {
+          dispatch(connectDatabaseSuccess());
+        }
+      } catch (error) {
+        dispatch(connectDatabaseError({ error: buildUiDatabaseOperationError(error, t`Unknown error`) }));
       }
     };
 
     void connectDatabase();
-  }, [databaseStatus, client, dispatch]);
+  }, [databaseStatus, client, dispatch, t]);
 
-  if (databaseStatus === DatabaseStatus.Idle) {
-    return <Loading />;
+  if (databaseStatus === DatabaseStatus.Idle || databaseStatus === DatabaseStatus.Connecting) {
+    return <StartingDatabase />;
   }
 
   if (databaseStatus === DatabaseStatus.Error || databaseStatus === DatabaseStatus.Disconnected) {

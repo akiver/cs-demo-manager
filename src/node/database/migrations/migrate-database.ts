@@ -1,6 +1,7 @@
 import { DatabaseError } from 'pg';
 import { sql } from 'kysely';
-import { db } from 'csdm/node/database/database';
+import type { Kysely } from 'kysely';
+import type { Database } from 'csdm/node/database/schema';
 import { ensureMigrationsTableExists } from 'csdm/node/database/migrations/ensure-migrations-table-exists';
 import { resetDatabase } from '../reset-database';
 import { PostgresqlErrorCode } from '../postgresql-error-code';
@@ -20,9 +21,9 @@ function getMigrationsForUpgrade(migrations: Migration[], currentSchemaVersion: 
   });
 }
 
-async function getCurrentSchemaVersion() {
+async function getCurrentSchemaVersion(database: Kysely<Database>) {
   try {
-    const migrationRow = await db
+    const migrationRow = await database
       .selectFrom('migrations')
       .select('schema_version as schemaVersion')
       .orderBy('schema_version', 'desc')
@@ -38,15 +39,15 @@ async function getCurrentSchemaVersion() {
   }
 }
 
-export async function migrateDatabase() {
+export async function migrateDatabase(database: Kysely<Database>) {
   try {
-    let currentSchemaVersion = await getCurrentSchemaVersion();
+    let currentSchemaVersion = await getCurrentSchemaVersion(database);
     const isDowngrade = currentSchemaVersion > CURRENT_SCHEMA_VERSION;
     if (isDowngrade) {
       throw new DatabaseSchemaVersionMismatch(currentSchemaVersion, CURRENT_SCHEMA_VERSION);
     }
 
-    await db.transaction().execute(async (transaction) => {
+    await database.transaction().execute(async (transaction) => {
       let shouldResetDatabase = false;
       if (currentSchemaVersion === 0) {
         const tables = await transaction.introspection.getTables();

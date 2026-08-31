@@ -110,6 +110,7 @@ async function buildWebSocketProcessBundle() {
     metafile: true,
     external: [
       'pg-native',
+      'fs-native-extensions',
       '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
     ],
     define: {
@@ -146,7 +147,7 @@ async function buildMainProcessBundle() {
     sourcemap: 'linked',
     platform: 'node',
     target: `node${node}`,
-    external: ['electron'],
+    external: ['electron', 'fs-native-extensions'],
     define: commonDefine,
     metafile: true,
     plugins: [nativeNodeModulesPlugin],

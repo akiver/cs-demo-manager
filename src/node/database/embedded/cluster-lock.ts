@@ -1,0 +1,154 @@
+import fs from 'fs-extra';
+import { tryLock, unlock } from 'fs-native-extensions';
+import { getClusterLockFilePath, getClusterUsageLockFilePath } from './embedded-postgres-paths';
+import { EmbeddedPostgresInUse } from './errors/embedded-postgres-in-use';
+
+const CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS = 180_000;
+/**
+ * Stopping does not wait as long as starting: the long timeout covers initdb plus a start, while a
+ * process still holding the lock at shutdown is one that is using the cluster, and a cluster left
+ * running is harmless. Waiting the full lifecycle timeout would only keep the app alive for minutes
+ * after its window closed.
+ */
+export const CLUSTER_SHUTDOWN_LOCK_TIMEOUT_MS = 15_000;
+const LOCK_RETRY_DELAY_MS = 250;
+
+function wait(delayMs: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delayMs);
+  });
+}
+
+type NativeLock = {
+  release: () => Promise<void>;
+};
+
+async function openLockFile(filePath: string) {
+  await fs.ensureFile(filePath);
+
+  return fs.open(filePath, 'r+');
+}
+
+function createLock(fileDescriptor: number): NativeLock {
+  let isUnlocked = false;
+  let isClosed = false;
+  let pendingRelease: Promise<void> | undefined;
+
+  const release = () => {
+    if (pendingRelease !== undefined) {
+      return pendingRelease;
+    }
+
+    pendingRelease = (async () => {
+      if (isUnlocked && isClosed) {
+        return;
+      }
+
+      const errors: unknown[] = [];
+      if (!isUnlocked) {
+        try {
+          unlock(fileDescriptor);
+          isUnlocked = true;
+        } catch (error) {
+          errors.push(error);
+        }
+      }
+
+      if (!isClosed) {
+        try {
+          await fs.close(fileDescriptor);
+          isClosed = true;
+          // Closing a descriptor also releases every OS lock held through it.
+          isUnlocked = true;
+        } catch (error) {
+          errors.push(error);
+        }
+      }
+
+      if (errors.length === 1) {
+        throw errors[0];
+      }
+      if (errors.length > 1) {
+        throw new AggregateError(errors, 'Failed to release the embedded PostgreSQL file lock');
+      }
+    })().finally(() => {
+      pendingRelease = undefined;
+    });
+
+    return pendingRelease;
+  };
+
+  return {
+    release,
+  };
+}
+
+async function acquireLock(filePath: string, shared: boolean, timeoutMs: number): Promise<NativeLock> {
+  const fileDescriptor = await openLockFile(filePath);
+  const deadline = Date.now() + timeoutMs;
+
+  try {
+    while (!tryLock(fileDescriptor, { shared })) {
+      if (Date.now() > deadline) {
+        // ! Not a start failure: start, stop and reset all take this lock, and reporting "the
+        // database could not be started" for a reset that timed out is plainly wrong.
+        throw new EmbeddedPostgresInUse(
+          `Another CS Demo Manager process did not release ${filePath} within ${timeoutMs / 1000} seconds`,
+        );
+      }
+
+      await wait(LOCK_RETRY_DELAY_MS);
+    }
+  } catch (error) {
+    await fs.close(fileDescriptor);
+    throw error;
+  }
+
+  return createLock(fileDescriptor);
+}
+
+async function tryAcquireLock(filePath: string, shared: boolean): Promise<NativeLock | undefined> {
+  const fileDescriptor = await openLockFile(filePath);
+
+  try {
+    if (!tryLock(fileDescriptor, { shared })) {
+      await fs.close(fileDescriptor);
+
+      return undefined;
+    }
+  } catch (error) {
+    await fs.close(fileDescriptor);
+    throw error;
+  }
+
+  return createLock(fileDescriptor);
+}
+
+export type EmbeddedClusterUsageLease = NativeLock;
+
+/**
+ * Serializes the initdb + start sequence, which the app and the CLI can run concurrently on the same
+ * data folder. It doesn't protect the cluster usage, only its creation and startup.
+ */
+export async function withClusterLock<T>(
+  fn: () => Promise<T>,
+  timeoutMs: number = CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS,
+): Promise<T> {
+  const lock = await acquireLock(getClusterLockFilePath(), false, timeoutMs);
+
+  try {
+    return await fn();
+  } finally {
+    await lock.release();
+  }
+}
+
+/** Must be acquired while the lifecycle lock is held, before a reset or stop can begin. */
+export function acquireClusterUsageLease() {
+  return acquireLock(getClusterUsageLockFilePath(), true, CLUSTER_LIFECYCLE_LOCK_TIMEOUT_MS);
+}
+
+/** Must be called while the lifecycle lock is held. It never waits for another app/CLI user. */
+export function tryAcquireExclusiveClusterUsage() {
+  return tryAcquireLock(getClusterUsageLockFilePath(), false);
+}

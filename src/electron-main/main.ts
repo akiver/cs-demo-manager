@@ -6,7 +6,7 @@ import { app, ipcMain, dialog } from 'electron';
 import fs from 'fs-extra';
 import { i18n } from '@lingui/core';
 import { IPCChannel } from 'csdm/common/ipc-channel';
-import { createWebSocketServerProcess } from './create-web-socket-server-process';
+import { createWebSocketServerProcess, killWebSocketServerProcess } from './create-web-socket-server-process';
 import { listenForContextMenu } from './listen-for-context-menu';
 import { createTray } from './create-tray';
 import { loadI18n } from './load-i18n';
@@ -27,6 +27,7 @@ import { initialize } from './auto-updater';
 import { getSettingsSync } from 'csdm/node/settings/get-settings';
 import { resolveWebSocketServerPort } from './resolve-web-socket-server-port';
 import { WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
+import { EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS } from 'csdm/node/database/embedded/stop-cluster';
 
 process.on('uncaughtException', logger.error);
 process.on('unhandledRejection', logger.error);
@@ -172,7 +173,30 @@ async function start() {
     await installDevTools();
   }
 
-  const quitApp = () => {
+  // Gives the server process a chance to release what outlives it, the embedded PostgreSQL cluster
+  // in particular, which pg_ctl starts detached from the app.
+  const prepareToQuit = async () => {
+    // Derived from background-task grace/cancellation, one lifecycle-lock acquisition, pg_ctl and margin.
+    const timeoutInMs = EMBEDDED_POSTGRES_SHUTDOWN_TIMEOUT_MS;
+    try {
+      await Promise.race([
+        client.send({
+          name: MainClientMessageName.PrepareToQuit,
+        }),
+        new Promise((resolve) => {
+          return setTimeout(resolve, timeoutInMs);
+        }),
+      ]);
+    } catch (error) {
+      logger.error('Error while preparing to quit');
+      logger.error(error);
+    }
+
+    killWebSocketServerProcess();
+  };
+
+  const quitApp = async () => {
+    await prepareToQuit();
     // ! Do not use app.quit() because if the navigation is blocked in the renderer process, it will not work.
     // Using app.exit() bypass event listeners.
     app.exit();
@@ -209,12 +233,12 @@ async function start() {
         ],
       });
       if (response === 0) {
-        quitApp();
+        await quitApp();
       } else {
         isQuitting = false;
       }
     } else {
-      quitApp();
+      await quitApp();
     }
   };
 
