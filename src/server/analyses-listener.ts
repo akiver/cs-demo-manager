@@ -16,6 +16,8 @@ import { MAX_CONCURRENT_ANALYSES } from 'csdm/common/analyses';
 class AnalysesListener {
   private analyses: Analysis[] = [];
   private currentAnalyses: Analysis[] = [];
+  // Tracks which client connection queued a demo so its pending analyses can be canceled when it disconnects.
+  private clientIdPerChecksum = new Map<string, string>();
   private outputFolderPath: string; // Folder path where CSV files will be write on the host
 
   public constructor() {
@@ -26,10 +28,31 @@ class AnalysesListener {
     this.analyses = this.analyses.filter((analysis) => {
       return !checksums.includes(analysis.demoChecksum);
     });
+    for (const checksum of checksums) {
+      this.clientIdPerChecksum.delete(checksum);
+    }
     logger.log(`checksums removed from analyses`, checksums);
   }
 
-  public async addDemosToAnalyses(demos: Demo[], options?: { analyzePositions?: boolean }) {
+  public removeDemosAddedByClient(clientId: string) {
+    const checksums: string[] = [];
+    for (const [checksum, id] of this.clientIdPerChecksum) {
+      if (id === clientId) {
+        checksums.push(checksum);
+      }
+    }
+
+    if (checksums.length > 0) {
+      logger.log(`Removing ${checksums.length} pending analysis(es) added by the client ${clientId}`);
+      this.removeDemosByChecksums(checksums);
+      server.sendPushMessage({
+        name: ServerPushMessageName.DemosRemovedFromAnalyses,
+        payload: checksums,
+      });
+    }
+  }
+
+  public async addDemosToAnalyses(demos: Demo[], options?: { analyzePositions?: boolean; clientId?: string }) {
     const demosNotInPendingAnalyses = demos.filter((demo) => {
       return !this.analyses.some((analysis) => analysis.demoChecksum === demo.checksum);
     });
@@ -52,6 +75,11 @@ class AnalysesListener {
       return analysis;
     });
     this.analyses.push(...analyses);
+    if (typeof options?.clientId === 'string') {
+      for (const analysis of analyses) {
+        this.clientIdPerChecksum.set(analysis.demoChecksum, options.clientId);
+      }
+    }
 
     server.sendPushMessage({
       name: ServerPushMessageName.DemosAddedToAnalyses,
@@ -72,6 +100,7 @@ class AnalysesListener {
   public clear() {
     this.analyses = [];
     this.currentAnalyses = [];
+    this.clientIdPerChecksum.clear();
   }
 
   private hasPendingAnalyses = () => {
@@ -89,6 +118,8 @@ class AnalysesListener {
     while (this.analyses.length > 0 && this.currentAnalyses.length < maxConcurrentAnalyses) {
       const analysis = this.analyses.shift();
       if (analysis) {
+        // The analysis is starting: it cannot be interrupted anymore, stop tracking its owner.
+        this.clientIdPerChecksum.delete(analysis.demoChecksum);
         this.currentAnalyses.push(analysis);
         const analysisPromise = this.processAnalysis(analysis, settings.analyze.analyzePositions)
           .catch((error) => {

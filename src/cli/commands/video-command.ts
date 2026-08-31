@@ -34,7 +34,6 @@ import { buildPlayersEventSequences } from 'csdm/common/video/sequences/build-pl
 import { buildPlayersRoundsSequences } from 'csdm/common/video/sequences/build-players-rounds-sequences';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
-import { SIGINT_EXIT_CODE } from 'csdm/cli/exit-code';
 
 export type VideoCommandConfig = {
   demoPath: string;
@@ -536,15 +535,6 @@ export class VideoCommand extends Command {
 
     client.on(ServerPushMessageName.VideoUpdated, onVideoUpdated);
     client.on(ServerPushMessageName.VideosRemovedFromQueue, onVideosRemovedFromQueue);
-
-    process.on('SIGINT', async () => {
-      console.log('Aborting video generation...');
-      try {
-        await client.send({ name: CliClientMessageName.RemoveVideosFromQueue, payload: [video.id] });
-      } finally {
-        process.exit(SIGINT_EXIT_CODE);
-      }
-    });
 
     // The queue starts paused: resuming it starts the generation, processing any video queued before this one first.
     await client.send({ name: CliClientMessageName.ResumeVideoQueue });
