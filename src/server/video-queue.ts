@@ -142,7 +142,7 @@ class VideoQueue {
 
   private readonly processVideo = async (video: Video) => {
     try {
-      this.updateCurrentVideoAnNotifyRendererProcess({ status: VideoStatus.Recording });
+      this.updateCurrentVideoAndNotifyRendererProcess({ status: VideoStatus.Recording });
       const ctrl = new AbortController();
       this.abortControllers[video.id] = ctrl;
 
@@ -151,23 +151,23 @@ class VideoQueue {
         videoId: video.id,
         signal: ctrl.signal,
         onGameStart: () => {
-          this.updateCurrentVideoAnNotifyRendererProcess({ status: VideoStatus.Recording });
+          this.updateCurrentVideoAndNotifyRendererProcess({ status: VideoStatus.Recording });
         },
         onMoveFilesStart: () => {
-          this.updateCurrentVideoAnNotifyRendererProcess({ status: VideoStatus.MovingFiles });
+          this.updateCurrentVideoAndNotifyRendererProcess({ status: VideoStatus.MovingFiles });
         },
         onSequenceStart: (sequenceNumber, sequencePosition) => {
-          this.updateCurrentVideoAnNotifyRendererProcess({
+          this.updateCurrentVideoAndNotifyRendererProcess({
             status: VideoStatus.Converting,
             currentSequence: sequenceNumber,
             currentSequencePosition: sequencePosition,
           });
         },
         onConcatenateSequencesStart: () => {
-          this.updateCurrentVideoAnNotifyRendererProcess({ status: VideoStatus.Concatenating });
+          this.updateCurrentVideoAndNotifyRendererProcess({ status: VideoStatus.Concatenating });
         },
       });
-      this.updateCurrentVideoAnNotifyRendererProcess({ status: VideoStatus.Success });
+      this.updateCurrentVideoAndNotifyRendererProcess({ status: VideoStatus.Success });
       delete this.abortControllers[video.id];
     } catch (error) {
       if (error instanceof AbortError) {
@@ -186,7 +186,7 @@ class VideoQueue {
           output = error.message;
         }
 
-        this.updateCurrentVideoAnNotifyRendererProcess({
+        this.updateCurrentVideoAndNotifyRendererProcess({
           status: VideoStatus.Error,
           output,
           errorCode,
@@ -198,7 +198,7 @@ class VideoQueue {
     }
   };
 
-  private updateCurrentVideoAnNotifyRendererProcess = (video: Partial<Video>) => {
+  private updateCurrentVideoAndNotifyRendererProcess = (video: Partial<Video>) => {
     if (!this.currentVideo) {
       return;
     }
