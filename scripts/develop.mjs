@@ -10,6 +10,7 @@ import electronPath from 'electron';
 import { watch } from 'vite/rolldown';
 import nativeNodeModulesPlugin from './rolldown-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
+import { killDaemonProcess } from './kill-daemon-process.mjs';
 import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.ts';
 import { SERVER_INSPECTOR_PORT, RENDERER_REMOTE_DEBUGGING_PORT } from '../src/node/debug-ports.ts';
 
@@ -83,21 +84,6 @@ function killElectronProcess() {
 function restartElectron() {
   killElectronProcess();
   startElectron();
-}
-
-/**
- * The WebSocket server runs as a detached daemon that outlives Electron, kill it on rebuild so the restarted Electron
- * process spawns a daemon running the latest code (it also releases .node files lock on Windows).
- */
-function killDaemonProcess() {
-  const daemonInfoFilePath = path.join(appFolderPath, 'daemon.json');
-  try {
-    const { pid } = fs.readJsonSync(daemonInfoFilePath);
-    process.kill(pid, 'SIGTERM');
-    devLogger.info(`Killed daemon process ${pid}`, { timestamp: true });
-  } catch (error) {
-    // There is no daemon info file or the daemon is already dead.
-  }
 }
 
 function logServerLogsWarning() {
@@ -227,7 +213,7 @@ async function buildAndWatchMainProcessBundles() {
         case 'START':
           // Kill the Electron and daemon processes on build start to make sure they release .node files lock.
           killElectronProcess();
-          killDaemonProcess();
+          killDaemonProcess((message) => devLogger.info(message, { timestamp: true }));
           break;
         case 'ERROR':
           devLogger.error(String(event.error), { timestamp: true });

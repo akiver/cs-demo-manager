@@ -3,32 +3,14 @@
 import './load-dot-env-variables.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import fs from 'fs-extra';
 import { watch } from 'vite/rolldown';
 import nativeNodeModulesPlugin from './rolldown-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
-import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.ts';
+import { killDaemonProcess } from './kill-daemon-process.mjs';
 
 const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
 const outFolderPath = path.resolve(rootFolderPath, 'out');
 const srcFolderPath = path.resolve(rootFolderPath, 'src');
-
-const appFolderPath = resolveAppFolderPath(true);
-
-/**
- * The WebSocket server runs as a detached daemon that outlives CLI invocations, kill it on rebuild so the next CLI
- * command spawns a daemon running the latest server code (it also releases .node files lock on Windows).
- */
-function killDaemonProcess() {
-  const daemonInfoFilePath = path.join(appFolderPath, 'daemon.json');
-  try {
-    const { pid } = fs.readJsonSync(daemonInfoFilePath);
-    process.kill(pid, 'SIGTERM');
-    console.log(`Killed daemon process ${pid}`);
-  } catch {
-    // There is no daemon info file or the daemon is already dead.
-  }
-}
 
 /**
  * @type {import('vite/rolldown').WatchOptions}
