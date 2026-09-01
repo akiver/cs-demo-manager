@@ -87,10 +87,6 @@ function createNodeBundleOptions({ entryPoint, outputFileName, define = {}, exte
     platform: 'node',
     resolve: {
       mainFields: ['module', 'main'],
-      alias: {
-        // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
-        fdir: path.join(rootFolderPath, 'node_modules/fdir/dist/index.cjs'),
-      },
     },
     external,
     transform: {

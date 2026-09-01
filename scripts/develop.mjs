@@ -169,12 +169,6 @@ async function buildAndWatchMainProcessBundles() {
         'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
       },
     },
-    resolve: {
-      alias: {
-        // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
-        fdir: path.join(rootFolderPath, 'node_modules/fdir/dist/index.cjs'),
-      },
-    },
     output: {
       ...commonOutputOptions,
       file: path.join(outFolderPath, 'server.js'),
