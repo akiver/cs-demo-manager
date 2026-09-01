@@ -47,7 +47,7 @@ const options = {
 };
 
 const daemonInfo = { port: 4574, pid: 1234, version: pkg.version };
-const healthyStatus = { version: pkg.version, busy: false, isDev: false };
+const healthyStatus = { version: pkg.version, busy: false, clientCount: 0, isDev: false };
 
 describe('attachOrSpawnDaemon', () => {
   beforeEach(() => {
@@ -116,7 +116,7 @@ describe('attachOrSpawnDaemon', () => {
   });
 
   it('should replace an idle daemon running an outdated version', async () => {
-    const outdatedStatus = { version: '0.0.1', busy: false, isDev: false };
+    const outdatedStatus = { version: '0.0.1', busy: false, clientCount: 0, isDev: false };
     const newDaemonInfo = { port: 4578, pid: 5678, version: pkg.version };
     vi.mocked(readDaemonInfoFile).mockResolvedValueOnce(daemonInfo).mockResolvedValue(newDaemonInfo);
     // Alive during the attach check, dead after the shutdown request.
@@ -133,7 +133,19 @@ describe('attachOrSpawnDaemon', () => {
   it('should attach to a busy daemon running an outdated version', async () => {
     vi.mocked(readDaemonInfoFile).mockResolvedValue(daemonInfo);
     vi.mocked(isProcessAlive).mockReturnValue(true);
-    vi.mocked(probeDaemon).mockResolvedValue({ version: '0.0.1', busy: true, isDev: false });
+    vi.mocked(probeDaemon).mockResolvedValue({ version: '0.0.1', busy: true, clientCount: 0, isDev: false });
+
+    const port = await attachOrSpawnDaemon(options);
+
+    expect(askDaemonToShutdown).not.toHaveBeenCalled();
+    expect(spawn).not.toHaveBeenCalled();
+    expect(port).toBe(4574);
+  });
+
+  it('should attach to an idle daemon running an outdated version when clients are connected', async () => {
+    vi.mocked(readDaemonInfoFile).mockResolvedValue(daemonInfo);
+    vi.mocked(isProcessAlive).mockReturnValue(true);
+    vi.mocked(probeDaemon).mockResolvedValue({ version: '0.0.1', busy: false, clientCount: 1, isDev: false });
 
     const port = await attachOrSpawnDaemon(options);
 
