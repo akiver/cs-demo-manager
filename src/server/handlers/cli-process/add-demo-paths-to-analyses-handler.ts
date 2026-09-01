@@ -38,6 +38,12 @@ export async function addDemoPathsToAnalysesHandler(
         skippedDemoPaths.push(demoPath);
         continue;
       }
+      // The same demo may be given several times (duplicated path argument or identical copies in different folders),
+      // queue it only once.
+      const isDuplicate = addedDemos.some((addedDemo) => addedDemo.checksum === demo.checksum);
+      if (isDuplicate) {
+        continue;
+      }
       demos.push(demo);
       // Demos already in the pending analyses are reported as added: the CLI tracks their completion through the
       // AnalysisUpdated push messages, whether they were queued by the CLI or the GUI.
