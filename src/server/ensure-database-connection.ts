@@ -1,4 +1,4 @@
-import { isDatabaseConnected } from 'csdm/node/database/database';
+import { destroyDatabaseConnection, isDatabaseConnected } from 'csdm/node/database/database';
 import { connectDatabase } from 'csdm/node/database/connect-database';
 
 let connectionPromise: Promise<void> | null = null;
@@ -14,9 +14,21 @@ export async function ensureDatabaseConnection() {
   }
 
   if (connectionPromise === null) {
-    connectionPromise = connectDatabase().finally(() => {
-      connectionPromise = null;
-    });
+    connectionPromise = connectDatabase()
+      .catch(async (error) => {
+        // The pool is created before the migrations run: discard it on failure so the next call retries from scratch
+        // instead of returning early and running queries on a possibly outdated schema.
+        try {
+          await destroyDatabaseConnection();
+        } catch (destroyError) {
+          logger.error('Error while destroying the database connection after a failed startup');
+          logger.error(destroyError);
+        }
+        throw error;
+      })
+      .finally(() => {
+        connectionPromise = null;
+      });
   }
 
   return connectionPromise;
