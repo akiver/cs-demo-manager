@@ -433,14 +433,15 @@ class WebSocketServer {
     this.server?.close();
 
     const status = await probeDaemon(port);
-    if (status !== null) {
-      // Another daemon is already listening on this port, typically because two processes spawned a daemon at the
-      // same time. The process that spawned this daemon will discover the other one through the daemon info file.
+    if (status !== null && status.isDev === IS_DEV) {
+      // Another daemon is already listening on this port, typically because two processes spawned a daemon at the same
+      // time. The process that spawned this daemon will discover the other one through the daemon info file.
       logger.log(`WS:: a daemon is already listening on port ${port}, exiting`);
       process.exit(0);
     }
 
-    // The port is used by an unrelated application, let the OS pick a free port.
+    // The port is used by a daemon of the other flavor (dev/production daemons use separate discovery files, so the
+    // spawner would never find it) or by an unrelated application, let the OS pick a free port.
     // Clients discover the actual port through the daemon info file.
     logger.warn(`WS:: port ${port} is used by another application, falling back to a random port`);
     this.createServer(0, onListening);

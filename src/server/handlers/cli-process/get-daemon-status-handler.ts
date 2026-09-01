@@ -6,5 +6,6 @@ export async function getDaemonStatusHandler(): Promise<Daemon> {
   return Promise.resolve({
     version: pkg.version,
     busy: hasWorkInProgress(),
+    isDev: IS_DEV,
   });
 }
