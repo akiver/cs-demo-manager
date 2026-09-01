@@ -14,7 +14,11 @@ export function getDaemonInfoFilePath() {
 
 export async function writeDaemonInfoFile(info: DaemonInfo) {
   await fs.ensureDir(getAppFolderPath());
-  await fs.writeFile(getDaemonInfoFilePath(), JSON.stringify(info));
+  // Write to a temporary file then rename it so concurrent readers polling the file never observe a partial write.
+  const filePath = getDaemonInfoFilePath();
+  const temporaryFilePath = `${filePath}.${process.pid}.tmp`;
+  await fs.writeFile(temporaryFilePath, JSON.stringify(info));
+  await fs.rename(temporaryFilePath, filePath);
 }
 
 export function parseDaemonInfo(content: string): DaemonInfo | null {
