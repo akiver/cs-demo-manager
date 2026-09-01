@@ -6,7 +6,13 @@ globalThis.fetch = async (input: RequestInfo | globalThis.URL, init?: RequestIni
   if (IS_DEV) {
     // Ask for uncompressed responses to make their body readable from the DevTools Network tab: the Node.js network
     // inspection reports the bytes received on the wire without decoding the Content-Encoding header.
-    const headers = new Headers(init?.headers);
+    // Start from the Request headers when one is given, replacing them with only the init headers would drop them.
+    const headers = new Headers(input instanceof Request ? input.headers : undefined);
+    if (init?.headers) {
+      new Headers(init.headers).forEach((value, name) => {
+        headers.set(name, value);
+      });
+    }
     headers.set('accept-encoding', 'identity');
     init = { ...init, headers };
   }
