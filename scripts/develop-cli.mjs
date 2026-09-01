@@ -29,12 +29,6 @@ const commonOptions = {
     'pg-native',
     '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
   ],
-  resolve: {
-    alias: {
-      // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
-      fdir: path.join(rootFolderPath, 'node_modules/fdir/dist/index.cjs'),
-    },
-  },
   plugins: [nativeNodeModulesPlugin],
 };
 
