@@ -27,7 +27,7 @@ vi.mock('./probe-daemon', () => {
 vi.mock('node:child_process', () => {
   return {
     spawn: vi.fn(() => {
-      return { unref: vi.fn() };
+      return { on: vi.fn(), unref: vi.fn() };
     }),
   };
 });

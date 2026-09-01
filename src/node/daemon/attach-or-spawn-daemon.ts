@@ -84,6 +84,12 @@ function spawnDetachedDaemon({ serverBundlePath, execPath, runAsNode, enableInsp
       ...(runAsNode ? { ELECTRON_RUN_AS_NODE: '1' } : {}),
     },
   });
+  // Without a listener a spawn failure would crash the process with an uncaught error event, log it instead and let
+  // waitForDaemonReady() time out with a message pointing to the log file.
+  child.on('error', (error) => {
+    logger.error('Error while spawning the daemon process');
+    logger.error(error);
+  });
   child.unref();
 }
 
