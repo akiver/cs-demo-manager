@@ -334,7 +334,7 @@ import { CliClientMessageName } from 'csdm/server/messages/cli-client-message-na
 
 const client = await this.connectToDaemon();
 const result = await client.send({ name: CliClientMessageName.MyAction, payload: { id: 42 } });
-// client.send() has a timeout (default 30s, per-call override as second argument)
+// client.send() has a timeout (default 3s, per-call override via { timeoutMs } as second argument)
 client.on(ServerPushMessageName.MyProgressUpdate, onProgress); // push events also reach the CLI (section 2)
 client.close(); // the daemon idle-exits once no clients remain and no work is running
 ```
