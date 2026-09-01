@@ -36,8 +36,10 @@ async function tryAttachToRunningDaemon(): Promise<number | null> {
   }
 
   if (status.version !== pkg.version) {
-    if (!status.busy) {
-      // The daemon runs an outdated version (typically after an app update) and has no work in progress: replace it.
+    if (!status.busy && status.clientCount === 0) {
+      // The daemon runs an outdated version (typically after an app update), has no work in progress and no connected
+      // clients: replace it. When clients are attached (e.g. the GUI that spawned it is still running), shutting it
+      // down would break them, attach to it instead.
       logger.log(`Asking the daemon running version ${status.version} to exit`);
       await askDaemonToShutdown(info.port);
       const startTime = Date.now();
