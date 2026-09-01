@@ -204,22 +204,21 @@ class AnalysesListener {
         payload: match,
       });
     } catch (error) {
-      logger.error('Error while inserting match');
-      logger.error(error);
-      logger.error(JSON.stringify(error));
       let errorOutput: string;
       if (error instanceof Error) {
-        errorOutput = error.message;
-        if (error.stack) {
-          errorOutput += `\n${error.stack}`;
-        }
+        errorOutput = error.stack ?? error.message;
         if (error.cause) {
           errorOutput += `\n${error.cause as string}`;
         }
-        errorOutput += `\n${JSON.stringify(error)}`;
+        const jsonError = JSON.stringify(error);
+        if (jsonError !== '{}') {
+          errorOutput += `\n${jsonError}`;
+        }
       } else {
         errorOutput = String(error);
       }
+      logger.error('Error while inserting match');
+      logger.error(errorOutput);
       analysis.output += errorOutput;
 
       this.updateAnalysisStatus(analysis, AnalysisStatus.InsertError, getErrorCodeFromError(error));
