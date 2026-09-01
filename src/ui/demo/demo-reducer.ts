@@ -39,6 +39,8 @@ export const demoReducer = createReducer(initialState, (builder) => {
     .addCase(loadDemoStart, (state) => {
       state.status = Status.Loading;
       state.errorCode = null;
+      state.demo = undefined;
+      state.selectedPlayer = undefined;
     })
     .addCase(loadDemoSuccess, (state, action) => {
       const { valveMatch } = action.payload;
