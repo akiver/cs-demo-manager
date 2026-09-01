@@ -87,6 +87,28 @@ describe('addDemoPathsToAnalysesHandler', () => {
     expect(result.addedDemos).toEqual([{ checksum: 'checksum-1', demoPath: '/demos/demo1.dem' }]);
   });
 
+  it('should queue a demo only once when several paths resolve to the same checksum', async () => {
+    vi.mocked(fetchMatchChecksums).mockResolvedValue([]);
+    vi.mocked(getDemoFromFilePath).mockImplementation((filePath: string) => {
+      return Promise.resolve(buildDemo('checksum-1', filePath));
+    });
+
+    const result = await addDemoPathsToAnalysesHandler({
+      demoPaths: ['/demos/demo1.dem', '/demos/copy-of-demo1.dem'],
+      force: false,
+      analyzePositions: false,
+    });
+
+    expect(result.addedDemos).toEqual([{ checksum: 'checksum-1', demoPath: '/demos/demo1.dem' }]);
+    expect(result.skippedDemoPaths).toEqual([]);
+    expect(analysesListener.addDemosToAnalyses).toHaveBeenCalledWith(
+      [expect.objectContaining({ checksum: 'checksum-1' })],
+      {
+        analyzePositions: false,
+      },
+    );
+  });
+
   it('should override the demo source when provided', async () => {
     vi.mocked(fetchMatchChecksums).mockResolvedValue([]);
     vi.mocked(getDemoFromFilePath).mockResolvedValue(buildDemo('checksum-1', '/demos/demo1.dem'));
