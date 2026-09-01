@@ -1,4 +1,5 @@
 import path from 'node:path';
+import type { SpawnDaemonOptions } from 'csdm/node/daemon/attach-or-spawn-daemon';
 import { attachOrSpawnDaemon } from 'csdm/node/daemon/attach-or-spawn-daemon';
 import { CliWebSocketClient } from './web-socket/cli-web-socket-client';
 
@@ -9,12 +10,22 @@ import { CliWebSocketClient } from './web-socket/cli-web-socket-client';
  * ELECTRON_RUN_AS_NODE, in CLI development mode it's the Node.js binary.
  */
 export async function createDaemonConnection(): Promise<CliWebSocketClient> {
-  const port = await attachOrSpawnDaemon({
+  const options: SpawnDaemonOptions = {
     serverBundlePath: path.join(path.dirname(process.argv[1]), 'server.js'),
     execPath: process.execPath,
     runAsNode: true,
     enableInspector: IS_DEV,
-  });
+  };
 
-  return CliWebSocketClient.connect(port);
+  const port = await attachOrSpawnDaemon(options);
+
+  try {
+    return await CliWebSocketClient.connect(port);
+  } catch {
+    // The daemon may exit between the discovery probe and this connection, typically when its idle exit fires in that
+    // window (probe sockets don't count as clients). Retry once: the dead daemon is detected as stale and a fresh one
+    // is spawned.
+    const newPort = await attachOrSpawnDaemon(options);
+    return CliWebSocketClient.connect(newPort);
+  }
 }
