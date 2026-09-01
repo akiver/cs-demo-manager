@@ -430,6 +430,9 @@ class WebSocketServer {
   };
 
   private async handlePortAlreadyInUse(port: number, onListening: (port: number) => void) {
+    // The server never started listening, detach its listeners before closing it so the close event doesn't trigger a
+    // misleading "server closed" error log.
+    this.server?.removeAllListeners();
     this.server?.close();
 
     const status = await probeDaemon(port);
