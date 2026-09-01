@@ -169,9 +169,6 @@ async function start() {
     const { installDevTools } = await import('./install-dev-tools');
     await installDevTools();
   }
-
-  // Note: in-progress analyses and videos are not a reason to prevent quitting anymore, the daemon outlives the app
-  // and completes them in the background.
 }
 
 const isFirstAppInstance = app.requestSingleInstanceLock();

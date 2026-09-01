@@ -80,6 +80,7 @@
     "@vitejs/plugin-react": "6.0.3",
     "archiver": "8.0.0",
     "babel-plugin-react-compiler": "1.0.0",
+    "chokidar": "5.0.0",
     "clsx": "2.1.1",
     "crc64-ecma": "3.0.1",
     "csgo-protobuf": "4.1.9",
