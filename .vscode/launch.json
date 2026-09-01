@@ -10,7 +10,7 @@
       "cwd": "${workspaceFolder}",
       "autoAttachChildProcesses": true,
       "outFiles": ["${workspaceFolder}/out/*.js"],
-      "console": "integratedTerminal"
+      "console": "internalConsole"
     },
     {
       "type": "chrome",
@@ -45,7 +45,7 @@
       },
       "autoAttachChildProcesses": true,
       "outFiles": ["${workspaceFolder}/out/*.js"],
-      "console": "integratedTerminal",
+      "console": "internalConsole",
       "args": "${input:cliArgs}"
     },
     {
@@ -57,7 +57,7 @@
       "program": "${workspaceFolder}/node_modules/vitest/vitest.mjs",
       "args": ["run", "${relativeFile}"],
       "smartStep": true,
-      "console": "integratedTerminal"
+      "console": "internalConsole"
     }
   ],
   "compounds": [
