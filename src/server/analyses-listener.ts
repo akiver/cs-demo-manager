@@ -16,8 +16,9 @@ import { MAX_CONCURRENT_ANALYSES } from 'csdm/common/analyses';
 class AnalysesListener {
   private analyses: Analysis[] = [];
   private currentAnalyses: Analysis[] = [];
-  // Tracks which client connection queued a demo so its pending analyses can be canceled when it disconnects.
-  private clientIdPerChecksum = new Map<string, string>();
+  // Tracks which client connections queued or wait for a demo so its pending analysis can be canceled when the last
+  // of them disconnects. Demos queued by the GUI are not tracked and never canceled on disconnect.
+  private clientIdsPerChecksum = new Map<string, Set<string>>();
   private outputFolderPath: string; // Folder path where CSV files will be write on the host
 
   public constructor() {
@@ -29,15 +30,16 @@ class AnalysesListener {
       return !checksums.includes(analysis.demoChecksum);
     });
     for (const checksum of checksums) {
-      this.clientIdPerChecksum.delete(checksum);
+      this.clientIdsPerChecksum.delete(checksum);
     }
     logger.log(`checksums removed from analyses`, checksums);
   }
 
   public removeDemosAddedByClient(clientId: string) {
     const checksums: string[] = [];
-    for (const [checksum, id] of this.clientIdPerChecksum) {
-      if (id === clientId) {
+    for (const [checksum, clientIds] of this.clientIdsPerChecksum) {
+      // Cancel the analysis only when no other client is waiting for it.
+      if (clientIds.delete(clientId) && clientIds.size === 0) {
         checksums.push(checksum);
       }
     }
@@ -53,9 +55,20 @@ class AnalysesListener {
   }
 
   public async addDemosToAnalyses(demos: Demo[], options?: { analyzePositions?: boolean; clientId?: string }) {
+    const clientId = options?.clientId;
     const demosNotInPendingAnalyses = demos.filter((demo) => {
       return !this.analyses.some((analysis) => analysis.demoChecksum === demo.checksum);
     });
+
+    if (typeof clientId === 'string') {
+      // A demo may already be pending, queued by another client: record this client as an extra owner so the analysis
+      // survives the other client's disconnection. Untracked pending demos were queued by the GUI, they are never
+      // canceled on disconnect so there is nothing to record.
+      for (const demo of demos) {
+        this.clientIdsPerChecksum.get(demo.checksum)?.add(clientId);
+      }
+    }
+
     if (demosNotInPendingAnalyses.length === 0) {
       return;
     }
@@ -75,9 +88,9 @@ class AnalysesListener {
       return analysis;
     });
     this.analyses.push(...analyses);
-    if (typeof options?.clientId === 'string') {
+    if (typeof clientId === 'string') {
       for (const analysis of analyses) {
-        this.clientIdPerChecksum.set(analysis.demoChecksum, options.clientId);
+        this.clientIdsPerChecksum.set(analysis.demoChecksum, new Set([clientId]));
       }
     }
 
@@ -100,7 +113,7 @@ class AnalysesListener {
   public clear() {
     this.analyses = [];
     this.currentAnalyses = [];
-    this.clientIdPerChecksum.clear();
+    this.clientIdsPerChecksum.clear();
   }
 
   private hasPendingAnalyses = () => {
@@ -118,8 +131,8 @@ class AnalysesListener {
     while (this.analyses.length > 0 && this.currentAnalyses.length < maxConcurrentAnalyses) {
       const analysis = this.analyses.shift();
       if (analysis) {
-        // The analysis is starting: it cannot be interrupted anymore, stop tracking its owner.
-        this.clientIdPerChecksum.delete(analysis.demoChecksum);
+        // The analysis is starting: it cannot be interrupted anymore, stop tracking its owners.
+        this.clientIdsPerChecksum.delete(analysis.demoChecksum);
         this.currentAnalyses.push(analysis);
         const analysisPromise = this.processAnalysis(analysis, settings.analyze.analyzePositions)
           .catch((error) => {
