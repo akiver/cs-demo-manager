@@ -52,10 +52,15 @@ export async function addDemoPathsToAnalysesHandler(
 
     // ! Not awaited: it would resolve only once the whole analyses queue completed and the CLI request would
     // time out. The CLI tracks completion through the AnalysisUpdated push messages.
-    void analysesListener.addDemosToAnalyses(demos, {
-      analyzePositions: payload.analyzePositions,
-      clientId: context?.clientId,
-    });
+    analysesListener
+      .addDemosToAnalyses(demos, {
+        analyzePositions: payload.analyzePositions,
+        clientId: context?.clientId,
+      })
+      .catch((error: unknown) => {
+        logger.error('Error while processing the analyses queue');
+        logger.error(error);
+      });
 
     return { addedDemos, skippedDemoPaths };
   } catch (error) {
