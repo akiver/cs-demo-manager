@@ -115,6 +115,7 @@ async function buildWebSocketServerBundle() {
       external: [
         'pg-native',
         '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
+        '@electric-sql/pglite', // loads its WASM/data files from the package folder, shipped as a real node_modules package
       ],
       define: {
         'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
@@ -122,6 +123,36 @@ async function buildWebSocketServerBundle() {
       },
     }),
   );
+}
+
+// PGlite is not bundled by rolldown because at runtime it loads its WASM/data files from the package folder.
+// The package is copied into the out folder so the server and CLI bundles can resolve it in production.
+async function copyPgliteAssets() {
+  const packageFolderPath = path.join(rootFolderPath, 'node_modules', '@electric-sql', 'pglite');
+  const outputFolderPath = path.join(outFolderPath, 'node_modules', '@electric-sql', 'pglite');
+  // Source maps, TypeScript declarations and Postgres extension tarballs (extensions are not used) are not needed
+  // at runtime.
+  const excludedExtensions = ['.map', '.d.ts', '.d.cts', '.tar.gz'];
+  await fs.copy(packageFolderPath, outputFolderPath, {
+    filter: (src) => {
+      return !excludedExtensions.some((extension) => src.endsWith(extension));
+    },
+  });
+}
+
+// PGlite is not bundled because at runtime it loads its WASM/data files from the package folder.
+// The package is copied into the out folder so the server and CLI bundles can resolve it in production.
+async function copyPgliteAssets() {
+  const packageFolderPath = path.join(rootFolderPath, 'node_modules', '@electric-sql', 'pglite');
+  const outputFolderPath = path.join(outFolderPath, 'node_modules', '@electric-sql', 'pglite');
+  // Source maps, TypeScript declarations and Postgres extension tarballs (extensions are not used) are not needed
+  // at runtime.
+  const excludedExtensions = ['.map', '.d.ts', '.d.cts', '.tar.gz'];
+  await fs.copy(packageFolderPath, outputFolderPath, {
+    filter: (src) => {
+      return !excludedExtensions.some((extension) => src.endsWith(extension));
+    },
+  });
 }
 
 async function buildMainProcessBundle() {
@@ -158,7 +189,7 @@ async function buildCliBundle() {
     createNodeBundleOptions({
       entryPoint: 'cli/cli.ts',
       outputFileName: 'cli.js',
-      external: ['pg-native', '@aws-sdk/client-s3'],
+      external: ['pg-native', '@aws-sdk/client-s3', '@electric-sql/pglite'],
       define: {
         'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
         'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
@@ -170,7 +201,13 @@ async function buildCliBundle() {
 try {
   downloadTranslations();
   await buildRendererProcessBundle();
-  await Promise.all([buildWebSocketServerBundle(), buildMainProcessBundle(), buildPreloadBundle(), buildCliBundle()]);
+  await Promise.all([
+    buildWebSocketServerBundle(),
+    buildMainProcessBundle(),
+    buildPreloadBundle(),
+    buildCliBundle(),
+    copyPgliteAssets(),
+  ]);
 } catch (error) {
   console.error(error);
   process.exit(1);

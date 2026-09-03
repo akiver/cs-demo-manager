@@ -1,6 +1,6 @@
-import { DatabaseError } from 'pg';
 import type { FaceitMatch } from 'csdm/common/types/faceit-match';
 import { db } from 'csdm/node/database/database';
+import { getDatabaseErrorCode } from 'csdm/node/database/get-database-error-code';
 import { PostgresqlErrorCode } from '../postgresql-error-code';
 import type { InsertableFaceitMatchPlayer } from './faceit-match-player-table';
 import type { InsertableFaceitMatchTeam } from './faceit-match-team-table';
@@ -66,11 +66,8 @@ export async function insertFaceitMatch(match: FaceitMatch) {
       await transaction.insertInto('faceit_match_teams').values(buildTeamRows(match)).execute();
       await transaction.insertInto('faceit_match_players').values(buildPlayerRows(match)).execute();
     } catch (error) {
-      if (error instanceof DatabaseError) {
-        switch (error.code) {
-          case PostgresqlErrorCode.UniqueViolation:
-            return;
-        }
+      if (getDatabaseErrorCode(error) === PostgresqlErrorCode.UniqueViolation) {
+        return;
       }
       throw error;
     }

@@ -29,6 +29,7 @@ const commonOptions = {
   external: [
     'pg-native',
     '@aws-sdk/client-s3', // the unzipper module has it as a dev dependency
+    '@electric-sql/pglite', // loads its WASM/data files from the package folder, resolved from node_modules in dev
   ],
   plugins: [nativeNodeModulesPlugin],
 };

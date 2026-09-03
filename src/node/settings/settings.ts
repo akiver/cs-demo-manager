@@ -12,6 +12,7 @@ import type { RecordingSystem } from 'csdm/common/types/recording-system';
 import type { RecordingOutput } from 'csdm/common/types/recording-output';
 import type { DisplayMode } from 'csdm/common/types/display-mode';
 import type { ArchiveFormat } from 'csdm/common/types/archive-format';
+import type { DatabaseMode } from 'csdm/common/types/database-mode';
 
 export type Folder = {
   path: string;
@@ -19,6 +20,9 @@ export type Folder = {
 };
 
 export type DatabaseSettings = {
+  // The embedded mode uses PGlite, a bundled Postgres that doesn't require a PostgreSQL installation.
+  // The connection fields below are used only in "postgresql" mode.
+  readonly mode: DatabaseMode;
   readonly hostname: string;
   readonly port: number;
   readonly username: string;

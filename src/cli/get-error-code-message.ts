@@ -27,6 +27,8 @@ export function getErrorCodeMessage(errorCode: ErrorCode): string {
       return 'Error while inserting the match rounds into the database.';
     case ErrorCode.DatabaseSchemaVersionMismatch:
       return 'The database schema is outdated, start the GUI to run the migrations.';
+    case ErrorCode.EmbeddedDatabaseLocked:
+      return 'The embedded database is already in use, probably by the CS Demo Manager app. Close it and try again.';
     case ErrorCode.StartCounterStrikeError:
       return 'Failed to start the game, make sure Steam is running and you are connected.';
     case ErrorCode.CounterStrikeExecutableNotFound:
