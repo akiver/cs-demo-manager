@@ -70,6 +70,7 @@ export class AnalyzeCommand extends Command {
 
     await migrateSettings();
     const client = await this.connectToDaemon();
+    await this.ensureDaemonDatabaseConnection(client);
 
     console.log(`${this.demoPaths.length} demos to process`);
 

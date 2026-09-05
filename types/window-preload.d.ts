@@ -36,6 +36,9 @@ declare global {
     isLinux: boolean;
     unknownImageFilePath: string;
     IMAGES_FOLDER_PATH: string;
+    // Folder where the embedded PostgreSQL server stores its data.
+    embeddedDatabaseFolderPath: string;
+    embeddedDatabaseLogFilePath: string;
     ADDITIONAL_ARGUMENTS: string[];
     WEB_SOCKET_SERVER_PORT: number;
     getStartupArguments: () => Promise<Argument[]>;

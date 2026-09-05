@@ -44,8 +44,14 @@ export async function readDaemonInfoFile(): Promise<DaemonInfo | null> {
   }
 }
 
-export async function deleteDaemonInfoFile() {
+export async function deleteDaemonInfoFile(ownerPid: number) {
   try {
+    const info = await readDaemonInfoFile();
+    if (info !== null && info.pid !== ownerPid) {
+      logger.log(`Daemon info file now belongs to pid ${info.pid}, not deleting it on behalf of pid ${ownerPid}`);
+      return;
+    }
+
     await fs.remove(getDaemonInfoFilePath());
   } catch (error) {
     logger.error('Error while deleting the daemon info file');

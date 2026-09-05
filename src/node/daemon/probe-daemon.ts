@@ -63,7 +63,10 @@ export function probeDaemon(port: number): Promise<Daemon | null> {
 
 /**
  * Asks the daemon listening on the given port to exit, used to replace an idle daemon running an outdated version.
+ * Returns whether the daemon accepted: it refuses when a client connected or work started since it was probed.
  */
-export async function askDaemonToShutdown(port: number) {
-  await sendProbeRequest(port, CliClientMessageName.ShutdownDaemon);
+export async function askDaemonToShutdown(port: number): Promise<boolean> {
+  const accepted = await sendProbeRequest<boolean>(port, CliClientMessageName.ShutdownDaemon);
+
+  return accepted === true;
 }

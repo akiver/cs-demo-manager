@@ -1,7 +1,10 @@
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import type { ErrorCode } from 'csdm/common/error-code';
 import { getErrorCodeFromError } from 'csdm/server/get-error-code-from-error';
-import { connectDatabase } from 'csdm/node/database/connect-database';
+import { startDatabaseConnection } from 'csdm/server/ensure-database-connection';
+import { getSettings } from 'csdm/node/settings/get-settings';
+import { DatabaseMode } from 'csdm/common/types/database-mode';
+import { stopEmbeddedPostgreSqlIfUnused } from 'csdm/server/stop-embedded-postgresql-if-unused';
 
 export type ConnectDatabaseError = {
   code: ErrorCode;
@@ -10,7 +13,14 @@ export type ConnectDatabaseError = {
 
 export async function connectDatabaseHandler(databaseSettings: DatabaseSettings | undefined) {
   try {
-    await connectDatabase(databaseSettings);
+    if (databaseSettings === undefined) {
+      const settings = await getSettings();
+      databaseSettings = settings.database;
+    }
+    if (databaseSettings.mode !== DatabaseMode.Embedded) {
+      await stopEmbeddedPostgreSqlIfUnused();
+    }
+    await startDatabaseConnection(databaseSettings);
   } catch (error) {
     logger.error('Error while connecting to the database');
     logger.error(error);

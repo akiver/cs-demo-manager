@@ -1,4 +1,5 @@
 import { sql } from 'kysely';
+import { throwErrorMessage } from 'csdm/server/handlers/throw-error-message';
 import { server } from 'csdm/server/server';
 import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { deletePositions } from 'csdm/node/database/delete-positions';
@@ -33,12 +34,6 @@ export async function optimizeDatabaseHandler({
       name: ServerPushMessageName.OptimizeDatabaseSuccess,
     });
   } catch (error) {
-    logger.error('Error while optimizing database');
-    logger.error(error);
-    let errorMessage = 'Unknown error';
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-    throw errorMessage;
+    throwErrorMessage(error, 'Error while optimizing database');
   }
 }

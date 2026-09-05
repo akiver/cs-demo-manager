@@ -22,27 +22,40 @@ export function Radio({ value, children }: RadioProps) {
 }
 
 type Props<DataType = string> = {
-  label: ReactNode;
+  label?: ReactNode;
   children: ReactNode;
   value: DataType;
   onChange: (value: DataType) => void;
+  isDisabled?: boolean;
+  /**
+   * Id of an element that labels the group when no visible `label` is rendered.
+   */
+  ariaLabelledBy?: string;
 };
 
-export function RadioGroup<DataType = string>({ label, children, value, onChange }: Props<DataType>) {
+export function RadioGroup<DataType = string>({
+  label,
+  children,
+  value,
+  onChange,
+  isDisabled = false,
+  ariaLabelledBy,
+}: Props<DataType>) {
   const id = useId();
 
   return (
     <BaseRadioGroup
-      aria-labelledby={id}
+      aria-labelledby={label === undefined ? ariaLabelledBy : id}
       className="flex flex-col gap-y-8"
       value={value}
+      disabled={isDisabled}
       onValueChange={(value) => {
         if (typeof value === 'string') {
           onChange(value as DataType);
         }
       }}
     >
-      <div id={id}>{label}</div>
+      {label !== undefined && <div id={id}>{label}</div>}
       <div className="flex gap-16">{children}</div>
     </BaseRadioGroup>
   );

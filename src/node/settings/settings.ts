@@ -12,18 +12,23 @@ import type { RecordingSystem } from 'csdm/common/types/recording-system';
 import type { RecordingOutput } from 'csdm/common/types/recording-output';
 import type { DisplayMode } from 'csdm/common/types/display-mode';
 import type { ArchiveFormat } from 'csdm/common/types/archive-format';
+import type { DatabaseMode } from 'csdm/common/types/database-mode';
 
 export type Folder = {
   path: string;
   includeSubFolders: boolean;
 };
 
-export type DatabaseSettings = {
+export type DatabaseConnectionSettings = {
   readonly hostname: string;
   readonly port: number;
   readonly username: string;
   readonly password: string;
   readonly database: string;
+};
+
+export type DatabaseSettings = DatabaseConnectionSettings & {
+  readonly mode: DatabaseMode;
 };
 
 type DemosSettings = DemosTableFilter & {

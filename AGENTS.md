@@ -14,7 +14,7 @@ ban tracking, voice audio extraction and more.
 - **Desktop framework**: Electron.
 - **Languages**: TypeScript (app/CLI), C++ (CS2/CS:GO plugins and Node.js native addons).
 - **UI**: React, Redux Toolkit, React Router, Tailwind CSS, ECharts, Motion, etc.
-- **Backend**: PostgreSQL database (`pg` + `kysely`), WebSocket server (`ws`).
+- **Backend**: PostgreSQL database (`pg` + `kysely`), WebSocket server (`ws`). PostgreSQL is bundled with the app and started by the server daemon, an external mode also allows connecting to an existing PostgreSQL database.
 - **i18n**: LinguiJS + Crowdin.
 - **Linting**: oxlint with custom rules in `linter/`.
 - **Testing**: Vitest via `vite-plus/test`.
@@ -71,6 +71,7 @@ src/
   electron-main/ # Electron main process only
   node/          # Pure Node.js code usable in any non-renderer process
     database/    # Kysely queries organized by entity (matches/, players/, demos/ …)
+      embedded/  # Lifecycle of the bundled PostgreSQL server
     settings/    # App settings related code
     counter-strike/  # CS process detection, game interaction, etc.
     video/       # Video processing and FFmpeg, HLAE, VirtualDub integration

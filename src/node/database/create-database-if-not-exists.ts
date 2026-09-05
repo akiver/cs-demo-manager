@@ -1,10 +1,10 @@
 import { Client, escapeIdentifier } from 'pg';
-import type { DatabaseSettings } from 'csdm/node/settings/settings';
+import type { DatabaseConnectionSettings } from 'csdm/node/settings/settings';
 import { PostgresqlErrorCode } from './postgresql-error-code';
 
 const TIMEOUT_IN_MS = 10000;
 
-async function createDatabase(settings: DatabaseSettings) {
+async function createDatabase(settings: DatabaseConnectionSettings) {
   // Connecting to the "postgres" maintenance database because the app's one may not exist yet.
   const client = new Client({
     host: settings.hostname,
@@ -53,7 +53,7 @@ async function createDatabase(settings: DatabaseSettings) {
  * provisioned by someone else. Whether the app can run is decided by the connection to its own
  * database that follows, not by this function.
  */
-export async function createDatabaseIfNotExists(settings: DatabaseSettings) {
+export async function createDatabaseIfNotExists(settings: DatabaseConnectionSettings) {
   try {
     await createDatabase(settings);
   } catch (error) {

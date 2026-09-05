@@ -1,4 +1,5 @@
 import { db, destroyDatabaseConnection } from 'csdm/node/database/database';
+import { throwErrorMessage } from 'csdm/server/handlers/throw-error-message';
 import { resetDatabase } from 'csdm/node/database/reset-database';
 import { analysesListener } from 'csdm/server/analyses-listener';
 
@@ -10,13 +11,6 @@ export async function resetDatabaseHandler() {
     });
     await destroyDatabaseConnection();
   } catch (error) {
-    logger.error('Error while resetting database');
-    logger.error(error);
-    let errorMessage = 'Unknown error';
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-
-    throw errorMessage;
+    throwErrorMessage(error, 'Error while resetting database');
   }
 }

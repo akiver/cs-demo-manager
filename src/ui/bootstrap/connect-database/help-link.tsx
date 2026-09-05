@@ -10,7 +10,7 @@ function getDocumentationLink() {
     platform = 'linux';
   }
 
-  return `https://cs-demo-manager.com/docs/installation#${platform}`;
+  return `https://cs-demo-manager.com/docs/installation?os=${platform}#using-an-external-postgresql-server`;
 }
 
 export function HelpLink() {

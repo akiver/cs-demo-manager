@@ -25,13 +25,13 @@ async function tryAttachToRunningDaemon(): Promise<number | null> {
   }
 
   if (!isProcessAlive(info.pid)) {
-    await deleteDaemonInfoFile();
+    await deleteDaemonInfoFile(info.pid);
     return null;
   }
 
   const status = await probeDaemon(info.port);
   if (status === null) {
-    await deleteDaemonInfoFile();
+    await deleteDaemonInfoFile(info.pid);
     return null;
   }
 
@@ -41,15 +41,29 @@ async function tryAttachToRunningDaemon(): Promise<number | null> {
       // clients: replace it. When clients are attached (e.g. the GUI that spawned it is still running), shutting it
       // down would break them, attach to it instead.
       logger.log(`Asking the daemon running version ${status.version} to exit`);
-      await askDaemonToShutdown(info.port);
-      const startTime = Date.now();
-      const shutdownTimeoutMs = 2_000;
-      const pollIntervalMs = 250;
-      while (isProcessAlive(info.pid) && Date.now() - startTime < shutdownTimeoutMs) {
-        await sleep(pollIntervalMs);
-      }
-      if (!isProcessAlive(info.pid)) {
-        return null;
+      const isExiting = await askDaemonToShutdown(info.port);
+      if (isExiting) {
+        // The daemon release can take a few seconds and up to the pg_ctl stop timeout (30s) when a checkpoint is slow.
+        // It releases its port right away but keeps stopping the embedded database server in the meantime: a daemon
+        // spawned now would race it on the data folder, so wait for it to be gone.
+        const startTime = Date.now();
+        const shutdownTimeoutMs = 40_000;
+        const pollIntervalMs = 250;
+        while (isProcessAlive(info.pid) && Date.now() - startTime < shutdownTimeoutMs) {
+          await sleep(pollIntervalMs);
+        }
+        if (!isProcessAlive(info.pid)) {
+          logger.log(`The daemon running version ${status.version} exited in ${Date.now() - startTime}ms`);
+          return null;
+        }
+
+        // The daemon already released its port and deleted its discovery file: attaching is impossible and spawning a
+        // daemon would race it on the data folder.
+        throw new Error(
+          `The daemon running version ${status.version} (pid ${info.pid}) is still alive ${shutdownTimeoutMs / 1000}s after accepting to exit, see the log file ${logger.getLogFilePath()} for details`,
+        );
+      } else {
+        logger.log(`The daemon running version ${status.version} refused to exit`);
       }
     }
 
@@ -60,7 +74,7 @@ async function tryAttachToRunningDaemon(): Promise<number | null> {
 }
 
 function spawnDetachedDaemon({ serverBundlePath, execPath, runAsNode, enableInspector }: SpawnDaemonOptions) {
-  logger.log(`Spawning daemon from ${serverBundlePath}`);
+  logger.debug(`Spawning daemon from ${serverBundlePath}`);
   const args = [serverBundlePath];
   if (enableInspector) {
     // --inspect-wait pauses the daemon until a debugger attaches, it guarantees that the DevTools network tab captures

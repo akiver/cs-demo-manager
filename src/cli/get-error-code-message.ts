@@ -27,6 +27,14 @@ export function getErrorCodeMessage(errorCode: ErrorCode): string {
       return 'Error while inserting the match rounds into the database.';
     case ErrorCode.DatabaseSchemaVersionMismatch:
       return 'The database schema is outdated, start the GUI to run the migrations.';
+    case ErrorCode.EmbeddedDatabaseBinariesNotFound:
+      return 'The PostgreSQL binaries bundled with the app are missing, reinstall CS Demo Manager or use an external PostgreSQL server.';
+    case ErrorCode.EmbeddedDatabaseInitializationFailed:
+      return 'Failed to initialize the embedded database, see the log file for details.';
+    case ErrorCode.EmbeddedDatabaseStartFailed:
+      return 'Failed to start the embedded database, see the log file for details.';
+    case ErrorCode.EmbeddedDatabaseVersionMismatch:
+      return 'The embedded database files were created by a different PostgreSQL version.';
     case ErrorCode.StartCounterStrikeError:
       return 'Failed to start the game, make sure Steam is running and you are connected.';
     case ErrorCode.CounterStrikeExecutableNotFound:

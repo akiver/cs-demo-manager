@@ -211,7 +211,12 @@ async function buildAndWatchMainProcessBundles() {
     watcher.on('event', (event) => {
       switch (event.code) {
         case 'START':
-          // Kill the Electron and daemon processes on build start to make sure they release .node files lock.
+          // The daemon is shared with the CLI and a possible previous app instance, it must survive the initial build,
+          // killing it would drop their connection.
+          if (isInitialBuild) {
+            break;
+          }
+          // Kill the Electron and daemon processes on rebuild to make sure they release .node files lock.
           killElectronProcess();
           killDaemonProcess((message) => devLogger.info(message, { timestamp: true }));
           break;

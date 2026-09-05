@@ -1,9 +1,12 @@
 import { CliClientMessageName } from 'csdm/server/messages/cli-client-message-name';
 import type { Handler } from 'csdm/server/messages/handler';
 import type { Daemon } from 'csdm/common/types/daemon';
+import type { DatabaseConnectionSettings } from 'csdm/node/settings/settings';
 import type { AddVideoPayload, Video } from 'csdm/common/types/video';
 import { getDaemonStatusHandler } from './cli-process/get-daemon-status-handler';
 import { shutdownDaemonHandler } from './cli-process/shutdown-daemon-handler';
+import { getDatabaseConnectionSettingsHandler } from './cli-process/get-database-connection-settings-handler';
+import { ensureDatabaseConnectionHandler } from './cli-process/ensure-database-connection-handler';
 import type {
   AddDemoPathsToAnalysesPayload,
   AddDemoPathsToAnalysesResult,
@@ -20,7 +23,9 @@ import { installFfmpegHandler } from './renderer-process/video/install-ffmpeg-ha
 
 export interface CliMessageHandlers {
   [CliClientMessageName.GetDaemonStatus]: Handler<void, Daemon>;
-  [CliClientMessageName.ShutdownDaemon]: Handler;
+  [CliClientMessageName.ShutdownDaemon]: Handler<void, boolean>;
+  [CliClientMessageName.GetDatabaseConnectionSettings]: Handler<void, DatabaseConnectionSettings>;
+  [CliClientMessageName.EnsureDatabaseConnection]: Handler;
   [CliClientMessageName.AddDemoPathsToAnalyses]: Handler<AddDemoPathsToAnalysesPayload, AddDemoPathsToAnalysesResult>;
   [CliClientMessageName.AddVideoToQueue]: Handler<AddVideoPayload, Video>;
   [CliClientMessageName.PauseVideoQueue]: Handler;
@@ -35,6 +40,8 @@ export interface CliMessageHandlers {
 export const cliHandlers: CliMessageHandlers = {
   [CliClientMessageName.GetDaemonStatus]: getDaemonStatusHandler,
   [CliClientMessageName.ShutdownDaemon]: shutdownDaemonHandler,
+  [CliClientMessageName.GetDatabaseConnectionSettings]: getDatabaseConnectionSettingsHandler,
+  [CliClientMessageName.EnsureDatabaseConnection]: ensureDatabaseConnectionHandler,
   [CliClientMessageName.AddDemoPathsToAnalyses]: addDemoPathsToAnalysesHandler,
   [CliClientMessageName.AddVideoToQueue]: addVideoToQueueFromCliHandler,
   [CliClientMessageName.PauseVideoQueue]: pauseVideoQueueHandler,
