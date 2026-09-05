@@ -15,8 +15,12 @@ function getMigrationsForUpgrade(migrations: Migration[], currentSchemaVersion: 
 }
 
 export async function migrateSettings(): Promise<Settings> {
+  // Fresh installation: the default settings go through every migration, some of them initialize values that depend
+  // on the machine (locale, recording system...).
+  // ! Always work on a copy, the default settings are a module-level object shared by the whole process and
+  // migrations mutate the settings they receive.
+  let settings = structuredClone(defaultSettings);
   let schemaVersion = 0;
-  let settings = defaultSettings;
   const settingsFilePath = getSettingsFilePath();
   const settingsFileExists = await fs.pathExists(settingsFilePath);
   if (settingsFileExists) {
@@ -26,8 +30,10 @@ export async function migrateSettings(): Promise<Settings> {
 
   const isDowngrade = schemaVersion > CURRENT_SCHEMA_VERSION;
   if (isDowngrade) {
-    await writeSettings(defaultSettings);
-    return defaultSettings;
+    const newSettings = structuredClone(defaultSettings);
+    await writeSettings(newSettings);
+
+    return newSettings;
   }
 
   const isUpgrade = schemaVersion < CURRENT_SCHEMA_VERSION;

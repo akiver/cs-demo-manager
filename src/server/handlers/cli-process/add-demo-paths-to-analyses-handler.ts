@@ -5,6 +5,7 @@ import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
 import { fetchMatchChecksums } from 'csdm/node/database/matches/fetch-match-checksums';
 import { analysesListener } from 'csdm/server/analyses-listener';
 import { ensureDatabaseConnection } from 'csdm/server/ensure-database-connection';
+import { server } from 'csdm/server/server';
 import { handleError } from '../handle-error';
 
 export type AddDemoPathsToAnalysesPayload = {
@@ -48,6 +49,13 @@ export async function addDemoPathsToAnalysesHandler(
       // Demos already in the pending analyses are reported as added: the CLI tracks their completion through the
       // AnalysisUpdated push messages, whether they were queued by the CLI or the GUI.
       addedDemos.push({ checksum: demo.checksum, demoPath });
+    }
+
+    // The CLI gives up on the request after a timeout and disconnects, which released the demos it queued.
+    // Queueing them now would analyze demos no client waits for.
+    if (context?.clientId !== undefined && !server.isCliClientConnected(context.clientId)) {
+      logger.warn('The CLI client disconnected before its demos were queued for analysis, ignoring them');
+      return { addedDemos: [], skippedDemoPaths };
     }
 
     // ! Not awaited: it would resolve only once the whole analyses queue completed and the CLI request would

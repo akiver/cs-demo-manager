@@ -8,11 +8,13 @@ import { VideoContainer } from 'csdm/common/types/video-container';
 import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { DisplayMode } from 'csdm/common/types/display-mode';
+import { DatabaseMode } from 'csdm/common/types/database-mode';
 
 export const defaultSettings: Settings = {
   schemaVersion: CURRENT_SCHEMA_VERSION,
   autoDownloadUpdates: true,
   database: {
+    mode: DatabaseMode.Embedded,
     hostname: '127.0.0.1',
     port: 5432,
     username: 'postgres',

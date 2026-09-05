@@ -38,6 +38,13 @@ async function getCurrentSchemaVersion() {
   }
 }
 
+export async function assertDatabaseSchemaVersionMatches() {
+  const databaseSchemaVersion = await getCurrentSchemaVersion();
+  if (databaseSchemaVersion !== CURRENT_SCHEMA_VERSION) {
+    throw new DatabaseSchemaVersionMismatch(databaseSchemaVersion, CURRENT_SCHEMA_VERSION);
+  }
+}
+
 export async function migrateDatabase() {
   try {
     let currentSchemaVersion = await getCurrentSchemaVersion();

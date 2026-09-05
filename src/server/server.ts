@@ -61,7 +61,7 @@ class WebSocketServer {
   private rendererProcessSocket: WebSocket | null = null;
   private mainProcessSocket: WebSocket | null = null;
   private gameProcessSocket: WebSocket | null = null;
-  private cliSockets = new Set<WebSocket>();
+  private cliSockets = new Map<string, WebSocket>();
   private gameListeners = new Map<GameClientMessageName, GameListener[]>();
   private mainReplyHandlers = new Map<string, MainReplyHandler>();
 
@@ -102,6 +102,41 @@ class WebSocketServer {
     return address.port;
   }
 
+  /**
+   * Stops accepting connections, terminates the connected clients and releases the port.
+   * Resolves once the port is released, so a daemon started in the meantime can bind it.
+   */
+  public close = (): Promise<void> => {
+    return new Promise((resolve) => {
+      const server = this.server;
+      if (server === null) {
+        resolve();
+        return;
+      }
+
+      this.server = null;
+      // Detached first: the close event is only an error when the server closes on its own.
+      server.removeAllListeners();
+      // ws leaves the connected sockets open and the underlying HTTP server waits for them to end before releasing the
+      // port. The clients reconnect on their own (GUI) or handle the closed connection (CLI).
+      for (const client of server.clients) {
+        client.terminate();
+      }
+      server.close(() => {
+        logger.debug('WS:: server closed, port released');
+        resolve();
+      });
+    });
+  };
+
+  public getCliClientCount(): number {
+    return this.cliSockets.size;
+  }
+
+  public isCliClientConnected(clientId: string): boolean {
+    return this.cliSockets.has(clientId);
+  }
+
   public getClientCount(): number {
     let count = this.cliSockets.size;
     for (const socket of [this.rendererProcessSocket, this.mainProcessSocket, this.gameProcessSocket]) {
@@ -117,7 +152,7 @@ class WebSocketServer {
     message: SendablePushMessage<MessageName>,
   ): void => {
     const json = JSON.stringify(message);
-    for (const socket of this.cliSockets) {
+    for (const socket of this.cliSockets.values()) {
       socket.send(json);
     }
 
@@ -201,10 +236,10 @@ class WebSocketServer {
     } else if (processName === 'cli') {
       const clientId = randomUUID();
       logger.debug(`WS:: CLI process socket connected`);
-      this.cliSockets.add(webSocket);
+      this.cliSockets.set(clientId, webSocket);
       webSocket.on('close', (code: number, reason: Buffer) => {
         logger.debug('WS:: CLI process socket disconnected', code, reason.toString());
-        this.cliSockets.delete(webSocket);
+        this.cliSockets.delete(clientId);
         // The CLI process may die without a chance to clean up after itself, cancel the videos or analyses
         // it queued.
         videoQueue.removeVideosAddedByClient(clientId);

@@ -2,6 +2,8 @@
 export const CliClientMessageName = {
   GetDaemonStatus: 'get-daemon-status',
   ShutdownDaemon: 'shutdown-daemon',
+  GetDatabaseConnectionSettings: 'cli-get-database-connection-settings',
+  EnsureDatabaseConnection: 'cli-ensure-database-connection',
   AddDemoPathsToAnalyses: 'cli-add-demo-paths-to-analyses',
   AddVideoToQueue: 'cli-add-video-to-queue',
   PauseVideoQueue: 'cli-pause-video-queue',

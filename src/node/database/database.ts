@@ -1,12 +1,15 @@
 import { types, Pool, type PoolClient } from 'pg';
 import type { KyselyConfig, LogEvent, Logger } from 'kysely';
 import { Kysely, PostgresDialect } from 'kysely';
-import type { DatabaseSettings } from 'csdm/node/settings/settings';
+import type { DatabaseConnectionSettings } from 'csdm/node/settings/settings';
 import type { Database } from './schema';
 
 export let db: Kysely<Database>;
 
 let ingestionPool: Pool | undefined;
+// Settings of the current connection, they are exposed to processes that open their own connection (e.g. the CLI)
+// because the embedded server's ones exist only in this process.
+let connectionSettings: DatabaseConnectionSettings | undefined;
 const ingestionClients = new Set<PoolClient>();
 const pendingAcquisitions = new Set<(error: Error) => void>();
 const databaseClosedError = new Error('The database connection has been closed');
@@ -32,7 +35,8 @@ types.setTypeParser(types.builtins.NUMERIC, Number);
 types.setTypeParser(types.builtins.INT4, Number);
 types.setTypeParser(types.builtins.INT2, Number);
 
-export function createDatabaseConnection(settings: DatabaseSettings) {
+export function createDatabaseConnection(settings: DatabaseConnectionSettings) {
+  connectionSettings = settings;
   const dialect = new PostgresDialect({
     pool: new Pool({
       host: settings.hostname,
@@ -104,6 +108,14 @@ export function createDatabaseConnection(settings: DatabaseSettings) {
 
 export function isDatabaseConnected() {
   return ingestionPool !== undefined;
+}
+
+export function getDatabaseConnectionSettings(): DatabaseConnectionSettings {
+  if (connectionSettings === undefined) {
+    throw new Error('The database is not connected');
+  }
+
+  return connectionSettings;
 }
 
 function getIngestionPool(): Pool {
@@ -190,5 +202,6 @@ export function releaseIngestionClient(client: PoolClient) {
 }
 
 export async function destroyDatabaseConnection() {
+  connectionSettings = undefined;
   await Promise.all([db?.destroy(), discardIngestionPool()]);
 }

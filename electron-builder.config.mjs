@@ -133,7 +133,7 @@ const config = {
     },
   ],
   beforePack: async (context) => {
-    const { installBoilerWritter, installCounterStrikeVoiceExtractor, installDemoAnalyzer } =
+    const { installBoilerWritter, installCounterStrikeVoiceExtractor, installDemoAnalyzer, installEmbeddedPostgreSql } =
       await import('./scripts/install-deps.mjs');
     const arch = Arch[context.arch];
     const platform = context.packager.platform.nodeName;
@@ -141,6 +141,7 @@ const config = {
       installDemoAnalyzer(platform, arch),
       installBoilerWritter(platform, arch),
       installCounterStrikeVoiceExtractor(platform),
+      installEmbeddedPostgreSql(platform, arch),
     ]);
   },
 };

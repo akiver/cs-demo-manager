@@ -62,8 +62,19 @@ const watcher = watch([
   },
 ]);
 
+// The daemon is shared with the GUI so when the app is already running, its daemon must survive the initial build,
+// killing it would drop the app connection.
+let isInitialBuild = true;
 watcher.on('event', (event) => {
-  if (event.code === 'START') {
-    killDaemonProcess();
+  switch (event.code) {
+    case 'START':
+      if (!isInitialBuild) {
+        killDaemonProcess();
+      }
+      break;
+    case 'END':
+    case 'ERROR':
+      isInitialBuild = false;
+      break;
   }
 });

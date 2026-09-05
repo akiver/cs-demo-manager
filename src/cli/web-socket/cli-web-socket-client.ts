@@ -10,7 +10,7 @@ import { SharedServerMessageName } from 'csdm/server/messages/shared-server-mess
 type ReplyHandler = {
   resolve: (payload: unknown) => void;
   reject: (error: unknown) => void;
-  timeoutId: NodeJS.Timeout;
+  timeoutId: NodeJS.Timeout | null;
 };
 
 export class CliWebSocketClient {
@@ -70,10 +70,12 @@ export class CliWebSocketClient {
   /**
    * Send a message to the daemon and resolve with its response.
    * The promise is rejected if the daemon didn't answer within the timeout or if the connection has been closed.
+   * A null timeout waits until the daemon answers or the connection closes, for requests that may legitimately take
+   * minutes (e.g. database migrations).
    */
   public send<MessageName extends CliClientMessageName>(
     message: SendableMessage<CliMessageHandlers, MessageName>,
-    { timeoutMs = 3_000 }: { timeoutMs?: number } = {},
+    { timeoutMs = 3_000 }: { timeoutMs?: number | null } = {},
   ) {
     return new Promise((resolve: (payload: unknown) => void, reject) => {
       if (!this.isConnected) {
@@ -82,10 +84,13 @@ export class CliWebSocketClient {
 
       const uuid = randomUUID();
       (message as IdentifiableClientMessage<MessageName>).uuid = uuid;
-      const timeoutId = setTimeout(() => {
-        this.replyHandlers.delete(uuid);
-        reject(new Error(`The daemon didn't answer to the message ${message.name} within ${timeoutMs / 1000}s`));
-      }, timeoutMs);
+      const timeoutId =
+        timeoutMs === null
+          ? null
+          : setTimeout(() => {
+              this.replyHandlers.delete(uuid);
+              reject(new Error(`The daemon didn't answer to the message ${message.name} within ${timeoutMs / 1000}s`));
+            }, timeoutMs);
       this.replyHandlers.set(uuid, { resolve, reject, timeoutId });
       this.socket.send(JSON.stringify(message));
     }) as ReturnType<CliMessageHandlers[MessageName]>;
@@ -101,7 +106,9 @@ export class CliWebSocketClient {
     this.isConnected = false;
     const error = new Error('The connection to the daemon has been closed');
     for (const { reject, timeoutId } of this.replyHandlers.values()) {
-      clearTimeout(timeoutId);
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
       reject(error);
     }
     this.replyHandlers.clear();
@@ -127,7 +134,9 @@ export class CliWebSocketClient {
             return;
           }
 
-          clearTimeout(replyHandler.timeoutId);
+          if (replyHandler.timeoutId !== null) {
+            clearTimeout(replyHandler.timeoutId);
+          }
           this.replyHandlers.delete(uuid);
           if (name === SharedServerMessageName.Reply) {
             replyHandler.resolve(payload);

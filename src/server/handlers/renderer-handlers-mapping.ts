@@ -45,6 +45,7 @@ import type { MapPayload } from './renderer-process/map/map-payload';
 import { deleteMapHandler } from './renderer-process/map/delete-map-handler';
 import { fetchBanStatsHandler } from './renderer-process/bans/fetch-ban-stats-handler';
 import { disconnectDatabaseConnectionHandler } from './renderer-process/database/disconnect-database-connection-handler';
+import { deleteEmbeddedDatabaseDataHandler } from './renderer-process/database/delete-embedded-database-data-handler';
 import {
   connectDatabaseHandler,
   type ConnectDatabaseError,
@@ -235,6 +236,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.AbortCurrentTask]: Handler;
   [RendererClientMessageName.GetDatabaseSize]: Handler<void, string>;
   [RendererClientMessageName.ResetDatabase]: Handler;
+  [RendererClientMessageName.DeleteEmbeddedDatabaseData]: Handler;
   [RendererClientMessageName.OptimizeDatabase]: Handler<OptimizeDatabasePayload>;
   [RendererClientMessageName.FetchMatchesTable]: Handler<FetchMatchesTablePayload, MatchTable[]>;
   [RendererClientMessageName.FetchMatchByChecksum]: Handler<string, Match>;
@@ -363,6 +365,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.AbortCurrentTask]: abortCurrentTaskHandler,
   [RendererClientMessageName.GetDatabaseSize]: getDatabaseSizeHandler,
   [RendererClientMessageName.ResetDatabase]: resetDatabaseHandler,
+  [RendererClientMessageName.DeleteEmbeddedDatabaseData]: deleteEmbeddedDatabaseDataHandler,
   [RendererClientMessageName.OptimizeDatabase]: optimizeDatabaseHandler,
   [RendererClientMessageName.FetchMatchesTable]: fetchMatchesTableHandler,
   [RendererClientMessageName.FetchMatchByChecksum]: fetchMatchByChecksumHandler,

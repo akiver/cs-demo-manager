@@ -49,6 +49,26 @@ module.exports = nativeModule;`,
       };
     },
   },
+  generateBundle(outputOptions, bundle) {
+    // A running app or daemon has the .node files loaded, on Windows it locks them and overwriting them fails the build.
+    // Their content only changes when a dependency is updated: skip writing the ones that are already up to date so a
+    // build can run next to a running app.
+    const outputFolderPath = outputOptions.dir ?? path.dirname(outputOptions.file ?? '');
+    for (const [fileName, output] of Object.entries(bundle)) {
+      if (output.type !== 'asset' || !fileName.endsWith('.node')) {
+        continue;
+      }
+
+      const outputFilePath = path.join(outputFolderPath, fileName);
+      try {
+        if (fs.existsSync(outputFilePath) && fs.readFileSync(outputFilePath).equals(Buffer.from(output.source))) {
+          delete bundle[fileName];
+        }
+      } catch {
+        // Let rolldown write the file.
+      }
+    }
+  },
 };
 
 export default nativeNodeModulesPlugin;

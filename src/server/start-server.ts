@@ -3,7 +3,8 @@ import '../common/install-source-map-support';
 import 'csdm/node/logger';
 import 'csdm/server/install-global-overrides';
 import { server } from 'csdm/server/server';
-import { writeDaemonInfoFile, deleteDaemonInfoFile } from 'csdm/node/daemon/daemon-info-file';
+import { writeDaemonInfoFile } from 'csdm/node/daemon/daemon-info-file';
+import { exitDaemon, isDaemonExiting } from 'csdm/server/exit-daemon';
 import { startIdleMonitor } from 'csdm/server/idle-monitor/idle-monitor';
 import pkg from '../../package.json' with { type: 'json' };
 
@@ -28,12 +29,17 @@ async function startServer() {
     process.exit(1);
   }
 
-  const shutdown = async () => {
-    try {
-      await deleteDaemonInfoFile();
-    } finally {
-      process.exit(0);
+  const shutdown = (signal: NodeJS.Signals) => {
+    // A second signal while the graceful exit is in progress (possibly started by the idle monitor) means the user
+    // doesn't want to wait for it.
+    // ! Works only on Unix or on Windows when it runs in a console
+    if (isDaemonExiting()) {
+      logger.warn(`${signal} received while the daemon is already exiting, exiting immediately`);
+      process.exit(1);
     }
+
+    logger.log(`${signal} received, exiting`);
+    void exitDaemon();
   };
   process.on('SIGINT', shutdown);
   process.on('SIGTERM', shutdown);

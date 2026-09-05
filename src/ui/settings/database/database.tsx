@@ -1,25 +1,59 @@
-import React from 'react';
-import { PortInput } from '../../components/inputs/port-input';
-import { DatabaseNameInput } from '../../components/inputs/database-name-input';
-import { UsernameInput } from '../../components/inputs/username-input';
-import { PasswordInput } from '../../components/inputs/password-input';
+import React, { type ReactNode } from 'react';
+import { Trans } from '@lingui/react/macro';
+import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
 import { DisconnectDatabaseButton } from './disconnect-database-button';
 import { useDatabaseSettings } from './use-database-settings';
-import { HostnameInput } from 'csdm/ui/components/inputs/hostname-input';
+import { DatabaseMode } from 'csdm/common/types/database-mode';
 
-export function Database() {
-  const { hostname, port, username, password, database } = useDatabaseSettings();
+type DetailProps = {
+  label: ReactNode;
+  value: ReactNode;
+};
+
+function Detail({ label, value }: DetailProps) {
+  return (
+    <p>
+      <span className="text-gray-700">{label}</span> <span className="text-body-strong select-text">{value}</span>
+    </p>
+  );
+}
+
+function ExternalServerDetails() {
+  const { hostname, port, database, username } = useDatabaseSettings();
 
   return (
-    <div className="flex max-w-[264px] flex-col gap-y-8">
-      <HostnameInput hostname={hostname} />
-      <DatabaseNameInput databaseName={database} />
-      <UsernameInput username={username} />
-      <PasswordInput password={password} />
-      <PortInput port={port} />
-      <div className="mt-12">
-        <DisconnectDatabaseButton />
-      </div>
+    <div className="flex flex-col">
+      <Detail label={<Trans>Host</Trans>} value={hostname} />
+      <Detail label={<Trans>Port</Trans>} value={port} />
+      <Detail label={<Trans>Database</Trans>} value={database} />
+      <Detail label={<Trans>User</Trans>} value={username} />
     </div>
+  );
+}
+
+export function Database() {
+  const { mode } = useDatabaseSettings();
+  const isEmbedded = mode === DatabaseMode.Embedded;
+
+  return (
+    <SettingsEntry
+      title={<Trans>Connection</Trans>}
+      description={
+        <div className="flex flex-col gap-y-4">
+          <p>
+            {isEmbedded ? (
+              <Trans>Connected to the embedded PostgreSQL server.</Trans>
+            ) : (
+              <Trans>Connected to an external PostgreSQL server.</Trans>
+            )}
+          </p>
+          {!isEmbedded && <ExternalServerDetails />}
+          <p>
+            <Trans>Disconnect to connect to another server.</Trans>
+          </p>
+        </div>
+      }
+      interactiveComponent={<DisconnectDatabaseButton />}
+    />
   );
 }

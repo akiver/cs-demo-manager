@@ -29,6 +29,10 @@ import { readTableState } from 'csdm/node/settings/table/read-table-state';
 import { getHlaeExecutablePath } from 'csdm/node/video/hlae/hlae-location';
 import { getVirtualDubExecutablePath } from 'csdm/node/video/virtual-dub/get-virtual-dub-executable-path';
 import { getStaticFolderPath } from 'csdm/node/filesystem/get-static-folder-path';
+import {
+  getEmbeddedDatabaseFolderPath,
+  getEmbeddedDatabaseLogFilePath,
+} from 'csdm/node/database/embedded/embedded-postgresql-paths';
 import { getImagesFolderPath } from 'csdm/node/filesystem/get-images-folder-path';
 import { onWindowError } from 'csdm/common/on-window-error';
 import { elementToImage } from 'csdm/preload/element-to-image';
@@ -64,6 +68,8 @@ const api: PreloadApi = {
   ADDITIONAL_ARGUMENTS: process.argv,
   WEB_SOCKET_SERVER_PORT: getWebSocketServerPort(),
   IMAGES_FOLDER_PATH: path.join(getStaticFolderPath(), 'images'),
+  embeddedDatabaseFolderPath: getEmbeddedDatabaseFolderPath(),
+  embeddedDatabaseLogFilePath: getEmbeddedDatabaseLogFilePath(),
   getAppInformation,
   getStartupArguments: () => {
     return ipcRenderer.invoke(IPCChannel.GetStartupArguments);

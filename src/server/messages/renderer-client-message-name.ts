@@ -5,6 +5,7 @@ export const RendererClientMessageName = {
   AbortCurrentTask: 'abort-current-task',
   GetDatabaseSize: 'get-database-size',
   ResetDatabase: 'reset-database',
+  DeleteEmbeddedDatabaseData: 'delete-embedded-database-data',
   OptimizeDatabase: 'optimize-database',
   FetchMatchesTable: 'fetch-matches-table',
   FetchMatchByChecksum: 'fetch-match-by-checksum',

@@ -1,4 +1,5 @@
 import type { Settings } from 'csdm/node/settings/settings';
+import { throwErrorMessage } from 'csdm/server/handlers/throw-error-message';
 import type { Analysis } from 'csdm/common/types/analysis';
 import type { FaceitAccount } from 'csdm/common/types/faceit-account';
 import { fetchMaps } from 'csdm/node/database/maps/fetch-maps';
@@ -82,13 +83,6 @@ export async function initializeApplicationHandler() {
 
     return payload;
   } catch (error) {
-    logger.error('App initialization error');
-    logger.error(error);
-    let errorMessage = 'Unknown error';
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-
-    throw errorMessage;
+    throwErrorMessage(error, 'App initialization error');
   }
 }

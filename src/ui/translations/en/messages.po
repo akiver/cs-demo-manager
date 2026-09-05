@@ -324,11 +324,6 @@ msgstr "No VAC ban stats to show, you must analyze demos to generate stats."
 msgid "An error occurred while loading the application."
 msgstr "An error occurred while loading the application."
 
-#: src/ui/bootstrap/connect-database/connect-database-button.tsx
-msgctxt "Button"
-msgid "Connect"
-msgstr "Connect"
-
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It looks like you installed an older version of CS Demo Manager and the current database schema is not compatible with it."
 msgstr "It looks like you installed an older version of CS Demo Manager and the current database schema is not compatible with it."
@@ -336,6 +331,22 @@ msgstr "It looks like you installed an older version of CS Demo Manager and the 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
 msgstr "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The embedded PostgreSQL server could not be started, see the application log file and the PostgreSQL log file in <0>{folderPath}</0> for details."
+msgstr "The embedded PostgreSQL server could not be started, see the application log file and the PostgreSQL log file in <0>{folderPath}</0> for details."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The existing data was created by a different PostgreSQL version than the one bundled with this version of CS Demo Manager, it cannot be read."
+msgstr "The existing data was created by a different PostgreSQL version than the one bundled with this version of CS Demo Manager, it cannot be read."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "To keep your data, follow the <0>migration guide</0> before connecting. Otherwise you can delete the data and start from scratch."
+msgstr "To keep your data, follow the <0>migration guide</0> before connecting. Otherwise you can delete the data and start from scratch."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "The PostgreSQL binaries bundled with CS Demo Manager are missing, reinstall the application or use an external server."
+msgstr "The PostgreSQL binaries bundled with CS Demo Manager are missing, reinstall the application or use an external server."
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "This error usually means that the database is not running or that the connection settings are incorrect."
@@ -350,8 +361,24 @@ msgid "The connection to the database failed with the following error:"
 msgstr "The connection to the database failed with the following error:"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
-msgid "CS Demo Manager requires a PostgreSQL database."
-msgstr "CS Demo Manager requires a PostgreSQL database."
+#: src/ui/settings/database/database.tsx
+#: src/ui/settings/settings-tabs.tsx
+msgid "Database"
+msgstr "Database"
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "Choose where CS Demo Manager stores its data."
+msgstr "Choose where CS Demo Manager stores its data."
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgctxt "Button"
+msgid "Continue"
+msgstr "Continue"
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgctxt "Button"
+msgid "Connect"
+msgstr "Connect"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "{secondsBeforeNextTry, plural, one {Retrying in # second…} other {Retrying in # seconds…}}"
@@ -525,10 +552,6 @@ msgstr "Folder not found"
 #: src/ui/settings/about/reveal-counter-strike-log-file-button.tsx
 msgid "The log file does not exist"
 msgstr "The log file does not exist"
-
-#: src/ui/components/buttons/reveal-log-file-button.tsx
-msgid "Reveal log file"
-msgstr "Reveal log file"
 
 #: src/ui/components/buttons/save-button.tsx
 msgctxt "Button"
@@ -6905,6 +6928,14 @@ msgid "Logs"
 msgstr "Logs"
 
 #: src/ui/settings/about/about.tsx
+msgid "Reveal log file"
+msgstr "Reveal log file"
+
+#: src/ui/settings/about/about.tsx
+msgid "Reveal PostgreSQL log file"
+msgstr "Reveal PostgreSQL log file"
+
+#: src/ui/settings/about/about.tsx
 msgid "Credits"
 msgstr "Credits"
 
@@ -7192,9 +7223,71 @@ msgctxt "Input label"
 msgid "Yaw"
 msgstr "Yaw"
 
+#: src/ui/settings/database/database-mode-option-cards.tsx
+msgid "Embedded (recommended)"
+msgstr "Embedded (recommended)"
+
+#: src/ui/settings/database/database-mode-option-cards.tsx
+msgid "Managed by CS Demo Manager, nothing to install."
+msgstr "Managed by CS Demo Manager, nothing to install."
+
+#: src/ui/settings/database/database-mode-option-cards.tsx
+msgid "External server"
+msgstr "External server"
+
+#: src/ui/settings/database/database-mode-option-cards.tsx
+msgid "Use your own PostgreSQL server, local or remote."
+msgstr "Use your own PostgreSQL server, local or remote."
+
 #: src/ui/settings/database/database-size.tsx
 msgid "Database size: <0>{size}</0>."
 msgstr "Database size: <0>{size}</0>."
+
+#: src/ui/settings/database/database.tsx
+msgid "Host"
+msgstr "Host"
+
+#: src/ui/settings/database/database.tsx
+msgid "Port"
+msgstr "Port"
+
+#: src/ui/settings/database/database.tsx
+msgid "User"
+msgstr "User"
+
+#: src/ui/settings/database/database.tsx
+msgid "Connection"
+msgstr "Connection"
+
+#: src/ui/settings/database/database.tsx
+msgid "Connected to the embedded PostgreSQL server."
+msgstr "Connected to the embedded PostgreSQL server."
+
+#: src/ui/settings/database/database.tsx
+msgid "Connected to an external PostgreSQL server."
+msgstr "Connected to an external PostgreSQL server."
+
+#: src/ui/settings/database/database.tsx
+msgid "Disconnect to connect to another server."
+msgstr "Disconnect to connect to another server."
+
+#: src/ui/settings/database/delete-embedded-database-data-button.tsx
+msgctxt "Dialog title"
+msgid "Delete database data"
+msgstr "Delete database data"
+
+#: src/ui/settings/database/delete-embedded-database-data-button.tsx
+msgid "It will delete all data of the embedded database: matches, comments, tags, maps, cameras…"
+msgstr "It will delete all data of the embedded database: matches, comments, tags, maps, cameras…"
+
+#: src/ui/settings/database/delete-embedded-database-data-button.tsx
+msgid "Match statistics can be restored by analyzing the demos again, the rest will be lost."
+msgstr "Match statistics can be restored by analyzing the demos again, the rest will be lost."
+
+#: src/ui/settings/database/delete-embedded-database-data-button.tsx
+msgctxt "Button"
+msgid "Delete data and start from scratch"
+msgstr "Delete data and start from scratch"
 
 #: src/ui/settings/database/disconnect-database-button.tsx
 msgctxt "Dialog title"
@@ -7897,10 +7990,6 @@ msgstr "Ban"
 #: src/ui/settings/settings-tabs.tsx
 msgid "Integrations"
 msgstr "Integrations"
-
-#: src/ui/settings/settings-tabs.tsx
-msgid "Database"
-msgstr "Database"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "About"

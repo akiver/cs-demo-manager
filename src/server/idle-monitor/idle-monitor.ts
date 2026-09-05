@@ -2,13 +2,20 @@ import { server } from 'csdm/server/server';
 import { analysesListener } from 'csdm/server/analyses-listener';
 import { videoQueue } from 'csdm/server/video-queue';
 import { downloadDemoQueue } from 'csdm/server/download-queue';
-import { stopBackgroundTasks } from 'csdm/server/start-background-tasks';
-import { deleteDaemonInfoFile } from 'csdm/node/daemon/daemon-info-file';
+import { exitDaemon } from 'csdm/server/exit-daemon';
 import { createIdleMonitor } from './create-idle-monitor';
+import { isDatabaseConnectionPending } from 'csdm/server/ensure-database-connection';
 
 // The daemon has work in progress, regardless of connected clients.
+// A pending database connection counts: it may be starting the embedded server or running migrations, exiting in
+// the middle would waste that work and the next daemon would start over.
 export function hasWorkInProgress() {
-  return analysesListener.hasAnalysesInProgress() || videoQueue.isBusy() || downloadDemoQueue.hasDownloads();
+  return (
+    analysesListener.hasAnalysesInProgress() ||
+    videoQueue.isBusy() ||
+    downloadDemoQueue.hasDownloads() ||
+    isDatabaseConnectionPending()
+  );
 }
 
 export function startIdleMonitor() {
@@ -19,12 +26,7 @@ export function startIdleMonitor() {
     async () => {
       monitor.stop();
       logger.log('Daemon is idle, exiting');
-      stopBackgroundTasks();
-      try {
-        await deleteDaemonInfoFile();
-      } finally {
-        process.exit(0);
-      }
+      await exitDaemon();
     },
   );
 
