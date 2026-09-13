@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { enUS, fr, zhCN, ptBR, de, ru } from '@daypicker/react/locale';
+import { enUS, fr, zhCN, ptBR, de, ru, sl } from '@daypicker/react/locale';
 import { type DateRange, DayPicker } from '@daypicker/react';
 import { useReducedMotion } from 'motion/react';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
@@ -16,6 +16,8 @@ function getLocaleObject(locale: string) {
       return de;
     case 'ru':
       return ru;
+    case 'sl':
+      return sl;
     default:
       return enUS;
   }
