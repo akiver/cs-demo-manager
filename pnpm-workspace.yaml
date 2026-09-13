@@ -12,8 +12,8 @@ allowBuilds:
 
 catalog:
   node-gyp: 13.0.1
-  vite: npm:@voidzero-dev/vite-plus-core@0.2.5
-  vitest: 4.1.10
+  vite: npm:@voidzero-dev/vite-plus-core@0.3.1
+  vitest: 4.1.11
 
 overrides:
   node-gyp: 'catalog:'
@@ -30,3 +30,4 @@ peerDependencyRules:
 
 minimumReleaseAgeExclude:
   - '@akiver/cs-demo-analyzer'
+  - 'csgo-protobuf'
