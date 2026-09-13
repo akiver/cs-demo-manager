@@ -27,7 +27,7 @@ export function BombPlantedIndicator({ tick, leftX, planterName, site }: Props) 
       content={
         <p className="w-max">
           <Trans>
-            {time} Bomb planted by {planterName} at bomb site {site}
+            {time} Bomb planted by {planterName} at site {site}
           </Trans>
         </p>
       }

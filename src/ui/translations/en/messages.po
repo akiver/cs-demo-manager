@@ -6116,8 +6116,8 @@ msgid "{time} Bomb planted by {planterName} exploded at site {site}"
 msgstr "{time} Bomb planted by {planterName} exploded at site {site}"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-planted-indicator.tsx
-msgid "{time} Bomb planted by {planterName} at bomb site {site}"
-msgstr "{time} Bomb planted by {planterName} at bomb site {site}"
+msgid "{time} Bomb planted by {planterName} at site {site}"
+msgstr "{time} Bomb planted by {planterName} at site {site}"
 
 #: src/ui/match/viewer-2d/playback-bar/drawing-button.tsx
 msgid "Tool"
