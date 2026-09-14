@@ -5,18 +5,7 @@ import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 
 export function SystemStartupBehavior() {
-  // Apple removed the option to hide apps on startup in macOS 13 Ventura
-  let isAtLeastMacOs13 = false;
-  if (window.csdm.isMac) {
-    const osVersion = window.csdm.getAppInformation().osVersion;
-    const majorVersionString = osVersion.split('.')[0];
-    const majorVersion = parseInt(majorVersionString, 10);
-    isAtLeastMacOs13 = majorVersion >= 22;
-  }
-
-  const [behavior, setBehavior] = useState<StartupBehavior>(
-    isAtLeastMacOs13 ? StartupBehavior.On : StartupBehavior.Minimized,
-  );
+  const [behavior, setBehavior] = useState<StartupBehavior>(StartupBehavior.Minimized);
 
   useEffect(() => {
     void (async () => {
@@ -29,16 +18,11 @@ export function SystemStartupBehavior() {
     setBehavior(behavior);
   };
 
-  const options: SelectOption<StartupBehavior>[] = isAtLeastMacOs13
-    ? []
-    : [
-        {
-          value: StartupBehavior.Minimized,
-          label: <Trans>Minimized</Trans>,
-        },
-      ];
-
-  options.push(
+  const options: SelectOption<StartupBehavior>[] = [
+    {
+      value: StartupBehavior.Minimized,
+      label: <Trans>Minimized</Trans>,
+    },
     {
       value: StartupBehavior.Off,
       label: <Trans>No</Trans>,
@@ -47,7 +31,7 @@ export function SystemStartupBehavior() {
       value: StartupBehavior.On,
       label: <Trans>Yes</Trans>,
     },
-  );
+  ];
 
   return (
     <SettingsEntry

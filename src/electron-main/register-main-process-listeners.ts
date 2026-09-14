@@ -1,4 +1,4 @@
-import { ipcMain, shell, dialog, app } from 'electron';
+import { ipcMain, shell, dialog, app, clipboard } from 'electron';
 import type { SaveDialogOptions, OpenDialogOptions } from 'electron';
 import { IPCChannel } from 'csdm/common/ipc-channel';
 import { isWindows } from 'csdm/node/os/is-windows';
@@ -141,5 +141,13 @@ export function registerMainProcessListeners() {
 
   ipcMain.handle(IPCChannel.UpdateSystemStartupBehavior, async (event, behavior: StartupBehavior) => {
     await updateSystemStartupBehavior(behavior);
+  });
+
+  ipcMain.handle(IPCChannel.ClearClipboard, () => {
+    clipboard.clear();
+  });
+
+  ipcMain.handle(IPCChannel.GetClipboardText, async () => {
+    return await clipboard.readText();
   });
 }

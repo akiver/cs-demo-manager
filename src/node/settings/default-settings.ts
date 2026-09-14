@@ -13,6 +13,7 @@ import { DatabaseMode } from 'csdm/common/types/database-mode';
 export const defaultSettings: Settings = {
   schemaVersion: CURRENT_SCHEMA_VERSION,
   autoDownloadUpdates: true,
+  startMinimizedAtLogin: false,
   database: {
     mode: DatabaseMode.Embedded,
     hostname: '127.0.0.1',

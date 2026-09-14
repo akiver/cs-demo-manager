@@ -1,6 +1,5 @@
 import path from 'node:path';
 import { BrowserWindow, app, shell } from 'electron';
-import windowStateKeeper from 'electron-window-state';
 import { IPCChannel } from 'csdm/common/ipc-channel';
 import { ArgumentName } from 'csdm/common/argument/argument-name';
 import type { Argument } from 'csdm/common/types/argument';
@@ -73,16 +72,12 @@ class WindowManager {
   }
 
   private async createMainWindow() {
-    const windowState = windowStateKeeper({
-      defaultWidth: 1024,
-      defaultHeight: 768,
-      file: `window-state-main.json`,
-    });
     const mainWindow = new BrowserWindow({
-      x: windowState.x,
-      y: windowState.y,
-      width: windowState.width,
-      height: windowState.height,
+      // Persist bounds and display mode (maximized, fullscreen...) across restarts, requires a unique window name.
+      name: 'main',
+      windowStatePersistence: true,
+      width: 1024,
+      height: 768,
       minWidth: 500,
       minHeight: 400,
       webPreferences: {
@@ -97,8 +92,6 @@ class WindowManager {
       show: IS_DEV,
       backgroundColor: '#000',
     });
-
-    windowState.manage(mainWindow);
 
     mainWindow.on('unmaximize', () => {
       mainWindow.webContents.send(IPCChannel.WindowUnMaximized);

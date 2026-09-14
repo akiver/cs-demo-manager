@@ -23,7 +23,7 @@ import { getSettingsFilePath } from 'csdm/node/settings/get-settings-file-path';
 import { updateSystemStartupBehavior } from 'csdm/electron-main/system-startup-behavior';
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import { initialize } from './auto-updater';
-import { getSettingsSync } from 'csdm/node/settings/get-settings';
+import { getSettings, getSettingsSync } from 'csdm/node/settings/get-settings';
 import { attachOrSpawnDaemon } from 'csdm/node/daemon/attach-or-spawn-daemon';
 import { WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
 
@@ -117,10 +117,13 @@ async function start() {
 
   const settingsFilePath = getSettingsFilePath();
   const settingsFileExists = await fs.pathExists(settingsFilePath);
+  let settings = await migrateSettings();
   if (!settingsFileExists) {
+    // Must run after the settings migration as it writes to the settings file on macOS. Writing it earlier would
+    // create the file with the current schema version and skip the migrations required by a fresh installation.
     await updateSystemStartupBehavior(StartupBehavior.Minimized);
+    settings = await getSettings();
   }
-  const settings = await migrateSettings();
   await loadI18n(settings.ui.locale);
 
   initialize(settings.autoDownloadUpdates);
@@ -133,10 +136,8 @@ async function start() {
   let isOpenedAtLogin = false;
   let shouldStartMinimized = false;
   if (isMac) {
-    // oxlint-disable-next-line typescript/no-deprecated
-    const { wasOpenedAtLogin, wasOpenedAsHidden } = app.getLoginItemSettings();
-    isOpenedAtLogin = wasOpenedAtLogin;
-    shouldStartMinimized = isOpenedAtLogin && wasOpenedAsHidden;
+    isOpenedAtLogin = app.getLoginItemSettings().wasOpenedAtLogin;
+    shouldStartMinimized = isOpenedAtLogin && settings.startMinimizedAtLogin;
   } else {
     isOpenedAtLogin = process.argv.includes('--login');
     shouldStartMinimized = process.argv.includes('--minimized');

@@ -1,5 +1,5 @@
 import type { BrowserWindow, MenuItemConstructorOptions, ContextMenuParams } from 'electron';
-import { clipboard, Menu } from 'electron';
+import { clipboard, ClipboardItem, Menu } from 'electron';
 import { type Event } from 'electron';
 import { i18n } from '@lingui/core';
 
@@ -14,11 +14,13 @@ export function listenForContextMenu(mainWindow: BrowserWindow) {
           id: 'contextMenu.copyLink',
           message: 'Copy link',
         }),
-        click: () => {
-          clipboard.write({
-            bookmark: linkText,
-            text: linkURL,
-          });
+        click: async () => {
+          await clipboard.write([
+            new ClipboardItem({
+              'text/plain': linkURL,
+              'electron application/bookmark': { title: linkText, url: linkURL },
+            }),
+          ]);
         },
       });
     }

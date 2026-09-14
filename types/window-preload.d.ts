@@ -101,8 +101,8 @@ declare global {
     getDemoAudioFilePath: typeof getDemoAudioFilePath;
     getDemoAudioData: typeof getDemoAudioData;
     getCounterStrikeLogFilePath: (game: Game) => Promise<PreloadResult<string>>;
-    clearClipboard: () => void;
-    getClipboardText: () => string;
+    clearClipboard: () => Promise<void>;
+    getClipboardText: () => Promise<string>;
     readImageFile: (imagePath: string) => Promise<Buffer<ArrayBuffer>>;
   }
 

@@ -36,6 +36,8 @@ export const IPCChannel = {
   UpdateDownloaded: 'update-downloaded',
   InstallUpdate: 'install-update',
   ToggleAutoUpdate: 'toggle-auto-update',
+  ClearClipboard: 'clear-clipboard',
+  GetClipboardText: 'get-clipboard-text',
 } as const;
 
 export type IPCChannel = (typeof IPCChannel)[keyof typeof IPCChannel];

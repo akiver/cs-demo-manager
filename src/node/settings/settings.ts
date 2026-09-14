@@ -180,6 +180,9 @@ type BanSettings = {
 export type Settings = {
   schemaVersion: number;
   autoDownloadUpdates: boolean;
+  // @platform darwin The OS can't start the app hidden at login (Apple removed this option in macOS 13), so the app
+  // stores the preference itself and decides at launch whether to show the main window.
+  startMinimizedAtLogin: boolean;
   database: DatabaseSettings;
   folders: Folder[];
   autoExtractDemosFromArchives: ArchiveFormat[];

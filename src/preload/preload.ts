@@ -8,7 +8,7 @@ import type {
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from 'electron';
-import { ipcRenderer, contextBridge, webUtils, clipboard } from 'electron';
+import { ipcRenderer, contextBridge, webUtils } from 'electron';
 import fs from 'fs-extra';
 import type { PreloadResult } from './preload-result';
 import { getRankImageSrc } from 'csdm/node/filesystem/get-rank-image-src';
@@ -318,12 +318,12 @@ const api: PreloadApi = {
     }
   },
 
-  clearClipboard: () => {
-    return clipboard.clear();
+  clearClipboard: async () => {
+    await ipcRenderer.invoke(IPCChannel.ClearClipboard);
   },
 
-  getClipboardText: () => {
-    return clipboard.readText();
+  getClipboardText: (): Promise<string> => {
+    return ipcRenderer.invoke(IPCChannel.GetClipboardText);
   },
 };
 

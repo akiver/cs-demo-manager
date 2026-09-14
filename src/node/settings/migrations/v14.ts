@@ -13,6 +13,10 @@ const v14: Migration = {
       mode: mode ?? DatabaseMode.External,
     };
 
+    // Preserve the current macOS behavior of existing installations: the app opened at login was never minimized.
+    // Fresh installations enable it during the first launch.
+    settings.startMinimizedAtLogin = false;
+
     return Promise.resolve(settings);
   },
 };
