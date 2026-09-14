@@ -5,7 +5,7 @@ import { CloseControl } from './close-control';
 
 export function WindowControls() {
   return (
-    <div className="z-10 flex h-full items-center no-drag">
+    <div className="flex h-full items-center no-drag">
       <MinimizeControl />
       <MaximizeControl />
       <CloseControl />

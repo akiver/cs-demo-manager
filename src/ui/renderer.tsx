@@ -7,7 +7,7 @@ import { onWindowError } from 'csdm/common/on-window-error';
 import { router } from 'csdm/ui/router';
 import { ThemeName } from 'csdm/common/types/theme-name';
 import { isSelectAllKeyboardEvent } from 'csdm/ui/keyboard/keyboard';
-import { APP_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
+import { ROOT_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 import './index.css';
 
 window.addEventListener('error', onWindowError);
@@ -44,7 +44,7 @@ function onError(error: unknown, errorInfo: ErrorInfo) {
   logger.error(errorInfo.componentStack);
 }
 
-const container = document.getElementById(APP_ELEMENT_ID) as HTMLDivElement;
+const container = document.getElementById(ROOT_ELEMENT_ID) as HTMLDivElement;
 const root = ReactDOM.createRoot(container, {
   onCaughtError: onError,
   onUncaughtError: onError,

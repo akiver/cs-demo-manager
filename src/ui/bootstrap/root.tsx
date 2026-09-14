@@ -20,21 +20,24 @@ function App() {
       <MotionConfig reducedMotion="user">
         <LocaleProvider>
           <TitleBar />
-          <ArgumentsProvider>
-            <ToastsProvider>
-              <SettingsProvider>
-                <WebSocketProvider>
-                  <DialogProvider inertElementId={APP_ELEMENT_ID}>
-                    <DatabaseLoader>
-                      <SettingsOverlayProvider>
-                        <AppLoader />
-                      </SettingsOverlayProvider>
-                    </DatabaseLoader>
-                  </DialogProvider>
-                </WebSocketProvider>
-              </SettingsProvider>
-            </ToastsProvider>
-          </ArgumentsProvider>
+          {/* Overlays (settings, dialogs) make this element inert, the title bar must stay outside of it. */}
+          <div id={APP_ELEMENT_ID} className="h-[calc(100vh-var(--title-bar-height))]">
+            <ArgumentsProvider>
+              <ToastsProvider>
+                <SettingsProvider>
+                  <WebSocketProvider>
+                    <DialogProvider inertElementId={APP_ELEMENT_ID}>
+                      <DatabaseLoader>
+                        <SettingsOverlayProvider>
+                          <AppLoader />
+                        </SettingsOverlayProvider>
+                      </DatabaseLoader>
+                    </DialogProvider>
+                  </WebSocketProvider>
+                </SettingsProvider>
+              </ToastsProvider>
+            </ArgumentsProvider>
+          </div>
         </LocaleProvider>
       </MotionConfig>
     </ReduxProvider>
