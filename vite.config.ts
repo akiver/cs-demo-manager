@@ -340,7 +340,6 @@ export default defineConfig({
       '*.woff2',
       '*.cpp',
       '*.gyp',
-      '.node-version',
       'cs2-server-plugin',
       'csgo-server-plugin',
     ],

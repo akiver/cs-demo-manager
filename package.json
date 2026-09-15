@@ -137,8 +137,12 @@
     "wavesurfer.js": "7.12.12",
     "ws": "8.21.3"
   },
-  "engines": {
-    "node": "24"
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.21.0",
+      "onFail": "download"
+    }
   },
   "packageManager": "pnpm@12.4.1",
   "download": {
