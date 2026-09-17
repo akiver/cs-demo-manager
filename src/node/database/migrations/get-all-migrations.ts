@@ -65,6 +65,7 @@ export async function getAllMigrations(): Promise<Migration[]> {
     import('./v12'),
     import('./v13'),
     import('./v14'),
+    import('./v15'),
   ]);
 
   const migrations = modules.map((module) => module.default);
