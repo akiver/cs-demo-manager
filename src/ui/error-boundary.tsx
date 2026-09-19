@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { useRouteError } from 'react-router';
 import { Button, ButtonVariant } from './components/buttons/button';
-import { makeElementNonInert } from './shared/inert';
+import { resetElementInert } from './shared/inert';
 import { APP_ELEMENT_ID } from './shared/element-ids';
 
 export function ErrorBoundary() {
@@ -11,7 +11,7 @@ export function ErrorBoundary() {
   const errorData = error instanceof Error ? (error.stack ?? error.message) : JSON.stringify(error);
 
   useEffect(() => {
-    makeElementNonInert(APP_ELEMENT_ID);
+    resetElementInert(APP_ELEMENT_ID);
   }, []);
 
   const buildIssueUrl = () => {

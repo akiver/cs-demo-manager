@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useId, useState } from 'react';
 import type { ReactNode } from 'react';
 import { SettingsOverlay } from './settings-overlay';
 import { SettingsCategory } from './settings-category';
@@ -39,6 +39,7 @@ type Props = {
 
 export function SettingsOverlayProvider({ children }: Props) {
   const { focusElement, updateElement } = useFocusLastActiveElement();
+  const inertOwnerId = useId();
   const [areSettingsVisible, setAreSettingsVisible] = useState(false);
   const [category, setCategory] = useState<SettingsCategory>(SettingsCategory.UI);
 
@@ -51,12 +52,12 @@ export function SettingsOverlayProvider({ children }: Props) {
       showCategory(category);
     }
     updateElement();
-    makeElementInert(APP_ELEMENT_ID);
+    makeElementInert(APP_ELEMENT_ID, inertOwnerId);
     setAreSettingsVisible(true);
   };
 
   const closeSettings = () => {
-    makeElementNonInert(APP_ELEMENT_ID);
+    makeElementNonInert(APP_ELEMENT_ID, inertOwnerId);
     focusElement();
     setAreSettingsVisible(false);
   };

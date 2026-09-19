@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useId, useRef } from 'react';
 import { motion } from 'motion/react';
 import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
 import { makeElementInert, makeElementNonInert } from 'csdm/ui/shared/inert';
@@ -17,16 +17,17 @@ type DialogProps = {
 function Dialog({ children }: DialogProps) {
   const container = useRef<HTMLDivElement>(null);
   const { updateElement, focusElement } = useFocusLastActiveElement();
+  const inertOwnerId = useId();
 
   useEffect(() => {
     updateElement();
-    makeElementInert(APP_ELEMENT_ID);
+    makeElementInert(APP_ELEMENT_ID, inertOwnerId);
 
     return () => {
-      makeElementNonInert(APP_ELEMENT_ID);
+      makeElementNonInert(APP_ELEMENT_ID, inertOwnerId);
       focusElement();
     };
-  }, [updateElement, focusElement]);
+  }, [updateElement, focusElement, inertOwnerId]);
 
   useEffect(() => {
     container.current?.focus();
