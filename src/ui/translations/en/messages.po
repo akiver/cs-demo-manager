@@ -8237,6 +8237,10 @@ msgid "Show X-Ray"
 msgstr "Show X-Ray"
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Please make sure that <0>CS:GO</0> is installed from Steam."
+msgstr "Please make sure that <0>CS:GO</0> is installed from Steam."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Match not found"
 msgstr "Match not found"
 
@@ -8253,16 +8257,8 @@ msgid "Failed to start the game, make sure Steam is running and you are connecte
 msgstr "Failed to start the game, make sure Steam is running and you are connected."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
-msgstr "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
-
-#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
 msgstr "Make sure Steam is not installed through Flatpak as it's not supported!"
-
-#: src/ui/shared/get-playback-error-from-error-code.tsx
-msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-msgstr "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "Read the <0>documentation</0> for more information."

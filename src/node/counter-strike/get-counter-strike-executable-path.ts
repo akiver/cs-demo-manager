@@ -54,8 +54,8 @@ export async function getCounterStrikeExecutablePath(game: Game): Promise<string
     return customExecutablePath;
   }
 
-  const csgoFolderPath = await getCsgoFolderPath();
-  logger.debug('CSGO folder path:', csgoFolderPath);
+  const csgoFolderPath = await getCsgoFolderPath(game);
+  logger.debug(`${game} folder path:`, csgoFolderPath);
   if (!csgoFolderPath) {
     throw new CounterStrikeExecutableNotFound(game);
   }

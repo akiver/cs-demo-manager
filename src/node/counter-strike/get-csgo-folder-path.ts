@@ -11,12 +11,23 @@ type LibraryFolders = {
   libraryfolders: Record<string, { path: string; apps: Record<string, string> }>;
 };
 
+// CS:GO is a standalone Steam app since Valve released it on the Steam store, other games are played from the CS2 app.
+// https://store.steampowered.com/app/4465480/CounterStrikeGlobal_Offensive/
+function getGameSteamApp(game: Game) {
+  if (game === Game.CSGO) {
+    return { appId: '4465480', folderName: 'csgo legacy' };
+  }
+
+  return { appId: '730', folderName: 'Counter-Strike Global Offensive' };
+}
+
 /**
- * Return the path to the "Counter-Strike Global Offensive" folder.
+ * Return the path to the folder where the given game is installed through Steam.
+ * CS2: "Counter-Strike Global Offensive"
+ * CS:GO: "csgo legacy"
  * https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory
- *
  */
-export async function getCsgoFolderPath() {
+export async function getCsgoFolderPath(game: Game) {
   const steamFolderPath = await getSteamFolderPath();
   if (steamFolderPath === undefined) {
     return;
@@ -30,22 +41,23 @@ export async function getCsgoFolderPath() {
 
   const vdfContent = await fs.readFile(vdfPath, 'utf-8');
   const data = VDF.parse<LibraryFolders>(vdfContent);
+  const { appId, folderName } = getGameSteamApp(game);
 
   for (const index in data.libraryfolders) {
     const entry = data.libraryfolders[index];
-    const hasCsApp = Object.keys(entry.apps).includes('730');
-    if (!hasCsApp) {
+    const hasApp = Object.keys(entry.apps).includes(appId);
+    if (!hasApp) {
       continue;
     }
 
-    const csgoFolderPath = path.join(entry.path, 'steamapps', 'common', 'Counter-Strike Global Offensive');
-    const csgoFolderExists = await fs.pathExists(csgoFolderPath);
-    if (csgoFolderExists) {
-      return csgoFolderPath;
+    const gameFolderPath = path.join(entry.path, 'steamapps', 'common', folderName);
+    const gameFolderExists = await fs.pathExists(gameFolderPath);
+    if (gameFolderExists) {
+      return gameFolderPath;
     }
   }
 
-  logger.log('CSGO folder not found in libraryfolders.vdf');
+  logger.log(`${game} folder not found in libraryfolders.vdf`);
   logger.log(vdfContent);
 }
 
@@ -68,7 +80,7 @@ function buildFolderPathFromCustomExecutablePath(customExecutablePath: string, g
   return path.join(executableFolderPath, '..');
 }
 
-// Returns the default "Counter-Strike Global Offensive" folder where CS is installed through Steam or the equivalent
+// Returns the default folder where the game is installed through Steam or the equivalent
 // path when using a custom executable path.
 export async function getCsgoFolderPathOrThrow(game: Game) {
   let folderPath: string | undefined;
@@ -76,7 +88,7 @@ export async function getCsgoFolderPathOrThrow(game: Game) {
   if (customExecutablePath) {
     folderPath = buildFolderPathFromCustomExecutablePath(customExecutablePath, game);
   } else {
-    folderPath = await getCsgoFolderPath();
+    folderPath = await getCsgoFolderPath(game);
   }
 
   if (!folderPath) {

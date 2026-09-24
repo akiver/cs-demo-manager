@@ -203,7 +203,7 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   }
 
   if (mode === 'spectate') {
-    const csgoFolderPath = await getCsgoFolderPath();
+    const csgoFolderPath = await getCsgoFolderPath(game);
     if (!csgoFolderPath) {
       throw new CounterStrikeExecutableNotFound(game);
     }

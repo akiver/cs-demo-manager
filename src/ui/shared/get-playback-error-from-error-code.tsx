@@ -5,6 +5,16 @@ import { ExternalLink } from 'csdm/ui/components/external-link';
 import { Game } from 'csdm/common/types/counter-strike';
 import { HlaeError } from 'csdm/ui/components/messages/hlae-error';
 
+function CsgoNotInstalledMessage() {
+  return (
+    <Trans>
+      Please make sure that{' '}
+      <ExternalLink href="https://store.steampowered.com/app/4465480/CounterStrikeGlobal_Offensive">CS:GO</ExternalLink>{' '}
+      is installed from Steam.
+    </Trans>
+  );
+}
+
 export function getPlaybackErrorMessageFromErrorCode(errorCode: ErrorCode, game?: Game) {
   switch (errorCode) {
     case ErrorCode.DemoNotFound:
@@ -46,10 +56,7 @@ export function getPlaybackErrorMessageFromErrorCode(errorCode: ErrorCode, game?
           </p>
           {game === Game.CSGO && (
             <p>
-              <Trans>
-                Please make sure that CS:GO is installed by selecting the <strong>csgo_legacy</strong> branch from the
-                CS2 "Betas" property tab on Steam.
-              </Trans>
+              <CsgoNotInstalledMessage />
             </p>
           )}
         </div>
@@ -67,10 +74,7 @@ export function getPlaybackErrorMessageFromErrorCode(errorCode: ErrorCode, game?
           )}
           {game === Game.CSGO && (
             <p>
-              <Trans>
-                Please make sure that CS:GO is installed by selecting the "csgo_legacy" branch from the CS2 "Betas"
-                property tab on Steam.
-              </Trans>
+              <CsgoNotInstalledMessage />
             </p>
           )}
           <p>
