@@ -6,6 +6,6 @@
     "build": "node-gyp build"
   },
   "devDependencies": {
-    "node-gyp": "13.0.0"
+    "node-gyp": "13.0.2"
   }
 }

@@ -27,6 +27,7 @@ export function ToastsProvider({ children }: Props) {
       id: window.setTimeout(() => {
         removeToast(toastId);
       }, durationInMs),
+      // oxlint-disable-next-line react/purity -- showToast is only called from event handlers, not during render
       startedAt: Date.now(),
       msRemaining: durationInMs,
     });

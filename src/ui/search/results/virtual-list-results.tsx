@@ -13,6 +13,7 @@ type Props<ItemType> = {
 
 export function VirtualListResults<ItemType>({ items, renderItem }: Props<ItemType>) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  // oxlint-disable-next-line react/incompatible-library -- TanStack Virtual is not compatible with the React Compiler
   const { getVirtualItems, getTotalSize } = useVirtualizer({
     count: items.length,
     getScrollElement: () => {

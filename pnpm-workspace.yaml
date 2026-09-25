@@ -1,5 +1,7 @@
 nodeLinker: hoisted
 minimumReleaseAge: 1440
+autoDedupe: true
+saveTypes: true
 
 packages:
   - src/node/os/get-running-process-exit-code
@@ -11,8 +13,8 @@ allowBuilds:
   '@akiver/cs-demo-analyzer': true
 
 catalog:
-  node-gyp: 13.0.1
-  vite: npm:@voidzero-dev/vite-plus-core@0.3.1
+  node-gyp: 13.0.2
+  vite: npm:@voidzero-dev/vite-plus-core@0.3.3
   vitest: 4.1.11
 
 overrides:
@@ -31,3 +33,7 @@ peerDependencyRules:
 minimumReleaseAgeExclude:
   - '@akiver/cs-demo-analyzer'
   - 'csgo-protobuf'
+  - csgo-sharecode
+  - framer-motion@13.4.3
+  - motion@13.4.3
+  - undici@8.11.1

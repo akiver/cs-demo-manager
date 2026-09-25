@@ -180,7 +180,7 @@ export default defineConfig({
       'e18e/prefer-object-has-own': 'error',
       'e18e/prefer-spread-syntax': 'error',
       'e18e/prefer-url-canparse': 'error',
-      'e18e/ban-dependencies': ['error', { allowed: ['fs-extra'] }],
+      'e18e/ban-dependencies': ['error', { allowed: ['fs-extra', 'deepmerge'] }],
 
       // File naming rules
       'check-file/filename-naming-convention': [
@@ -303,6 +303,15 @@ export default defineConfig({
         files: ['src/node/settings/migrations/**/*.ts', 'src/node/database/migrations/**/*.ts'],
         rules: {
           'import/no-default-export': 'off',
+        },
+      },
+      {
+        // Redeclarations are already checked by the TypeScript compiler and the rule reports legit declaration merging
+        // such as `export const Foo = {...} as const; export type Foo = ...`.
+        // See https://github.com/oxc-project/oxc/issues/25936
+        files: ['**/*.{ts,tsx,mts,cts}'],
+        rules: {
+          'no-redeclare': 'off',
         },
       },
     ],

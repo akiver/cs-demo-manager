@@ -137,18 +137,17 @@ export function PopoverTrigger({
   ...props
 }: PopoverTriggerProps & { ref?: Ref<HTMLElement> }) {
   const context = usePopoverContext();
-  const childrenRef = children.props.ref;
+  const { ref: childrenRef, ...childrenProps } = children.props;
   const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(
-      children,
-      context.getReferenceProps({
-        ref,
+    return React.cloneElement(children, {
+      ...context.getReferenceProps({
         ...props,
-        ...children.props,
+        ...childrenProps,
       }),
-    );
+      ref,
+    });
   }
 
   return (

@@ -84,6 +84,7 @@ export function useTable<DataType extends Data>({
     locale,
   });
 
+  // oxlint-disable-next-line react/incompatible-library -- TanStack Virtual is not compatible with the React Compiler
   const { getVirtualItems, getTotalSize, scrollToIndex, scrollToOffset, scrollOffset } = useVirtualizer({
     count: rows.length,
     overscan: 10,

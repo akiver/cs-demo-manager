@@ -199,6 +199,7 @@ export function ViewerProvider({
       setCurrentTick(tick);
     }
     if (audio) {
+      // oxlint-disable-next-line react/immutability -- imperative HTMLAudioElement API
       audio.currentTime = clampAudioTime((tick ?? currentTick) / tickrate + audioOffsetSeconds);
       try {
         await audio.play();
@@ -244,6 +245,7 @@ export function ViewerProvider({
           if (!audio) {
             return;
           }
+          // oxlint-disable-next-line react/immutability -- imperative HTMLAudioElement API
           audio.volume = volume;
           dispatch(volumeChanged({ volume }));
         },
@@ -252,6 +254,7 @@ export function ViewerProvider({
             return;
           }
 
+          // oxlint-disable-next-line react/immutability -- imperative HTMLAudioElement API
           audio.currentTime = clampAudioTime(currentTick / tickrate + seconds);
           dispatch(audioOffsetChanged({ seconds }));
           persistDemoAudioOffset(match.checksum, seconds);
@@ -297,6 +300,7 @@ export function ViewerProvider({
         setSpeed: (speed: number) => {
           dispatch(speedChanged({ speed }));
           if (audio) {
+            // oxlint-disable-next-line react/immutability -- imperative HTMLAudioElement API
             audio.playbackRate = speed;
           }
         },

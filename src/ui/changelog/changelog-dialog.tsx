@@ -24,13 +24,13 @@ function directiveStylingPlugin() {
         data.hName = 'div';
         switch (node.name) {
           case 'warning':
-            data.hProperties = { className: 'directive warning' };
+            data.hProperties = { className: ['directive', 'warning'] };
             break;
           case 'info':
-            data.hProperties = { className: 'directive info' };
+            data.hProperties = { className: ['directive', 'info'] };
             break;
           case 'danger':
-            data.hProperties = { className: 'directive danger' };
+            data.hProperties = { className: ['directive', 'danger'] };
             break;
         }
       }
