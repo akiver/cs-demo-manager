@@ -191,6 +191,7 @@ function AudioSelectorDialog({ loadAudioFile }: Props) {
             isLoading={isExporting}
             variant={ButtonVariant.Primary}
             onClick={async () => {
+              setIsExporting(true);
               await client.send({
                 name: RendererClientMessageName.ExportDemoPlayersVoice,
                 payload: {
@@ -200,7 +201,6 @@ function AudioSelectorDialog({ loadAudioFile }: Props) {
                   steamIds: [],
                 },
               });
-              setIsExporting(true);
               setWarnings([]);
               shouldAutoCloseDialog.current = true;
             }}
