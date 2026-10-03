@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite-plus';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
-import { lingui, linguiTransformerBabelPreset } from '@lingui/vite-plugin';
+import { lingui } from '@lingui/vite-plugin';
 import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import { chrome } from './scripts/electron-vendors.mjs';
@@ -34,8 +34,8 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    lingui(),
-    babel({ presets: [reactCompilerPreset(), linguiTransformerBabelPreset()] }),
+    lingui({ macroTransform: true }),
+    babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
     {
       name: 'write-changelog-file',

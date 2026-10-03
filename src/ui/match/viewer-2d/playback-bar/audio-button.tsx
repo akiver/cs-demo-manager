@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, type RefObject } from 'react';
 import { Trans } from '@lingui/react/macro';
 import WaveSurfer from 'wavesurfer.js';
-import ZoomPlugin from 'wavesurfer.js/dist/plugins/zoom';
+import ZoomPlugin from 'wavesurfer.js/dist/plugins/zoom.esm.js';
 import { Popover, PopoverContent, PopoverTrigger } from 'csdm/ui/components/popover/popover';
 import { useViewerContext } from '../use-viewer-context';
 import { PlaybackBarButton } from './playback-bar-button';
