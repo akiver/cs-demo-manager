@@ -24,7 +24,7 @@ export function WatchPlayerRoundsItem({ demoPath, steamId }: Props) {
   const onClick = async () => {
     const shouldKillCs = await isKillCsRequired();
     if (shouldKillCs) {
-      showDialog(<CounterStrikeRunningDialog closeOnConfirm={false} onConfirmClick={startPlayback} />);
+      showDialog(<CounterStrikeRunningDialog onConfirmClick={startPlayback} />);
     } else {
       await startPlayback();
     }

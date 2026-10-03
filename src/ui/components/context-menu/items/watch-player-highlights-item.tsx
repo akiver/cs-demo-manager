@@ -17,7 +17,7 @@ type Props = {
 };
 
 export function WatchPlayerHighlightsItem({ demoPath, steamId, game }: Props) {
-  const { showDialog } = useDialog();
+  const { showDialog, hideDialog } = useDialog();
   const { isKillCsRequired, watchPlayerHighlights } = useCounterStrike();
   const { useCustomHighlights } = usePlaybackSettings();
 
@@ -25,6 +25,7 @@ export function WatchPlayerHighlightsItem({ demoPath, steamId, game }: Props) {
     if (useCustomHighlights || game !== Game.CSGO) {
       showDialog(<SelectActionsPovDialog demoPath={demoPath} playerSteamId={steamId} type={WatchType.Highlights} />);
     } else {
+      hideDialog();
       await watchPlayerHighlights({
         demoPath,
         steamId,

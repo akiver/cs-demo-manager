@@ -17,7 +17,7 @@ type Props = {
 };
 
 export function WatchPlayerLowlightsItem({ demoPath, steamId, game }: Props) {
-  const { showDialog } = useDialog();
+  const { showDialog, hideDialog } = useDialog();
   const { isKillCsRequired, watchPlayerLowlights } = useCounterStrike();
   const { useCustomLowlights } = usePlaybackSettings();
 
@@ -25,6 +25,7 @@ export function WatchPlayerLowlightsItem({ demoPath, steamId, game }: Props) {
     if (useCustomLowlights || game !== Game.CSGO) {
       showDialog(<SelectActionsPovDialog demoPath={demoPath} playerSteamId={steamId} type={WatchType.Lowlights} />);
     } else {
+      hideDialog();
       await watchPlayerLowlights({
         demoPath,
         steamId,
