@@ -29,4 +29,5 @@ jobs:
           plugins: 'code-review@claude-code-plugins'
           prompt: '/code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
           track_progress: true
-          claude_args: '--model claude-opus-4-8'
+          claude_args: |
+            --model claude-opus-4-8 --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"

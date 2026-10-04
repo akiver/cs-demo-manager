@@ -16,8 +16,10 @@ static/boiler-writter
 static/csgove
 static/postgres
 static/changelog
-build
-!build/Release/*.node
+**/build/*
+!**/build/Release/
+**/build/Release/*
+!**/build/Release/*.node
 *.local.json
 
 # Only the English source catalogs are committed. The other locales are managed on

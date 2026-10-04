@@ -4,6 +4,12 @@
   },
   "oxc.typeAware": true,
   "editor.defaultFormatter": "oxc.oxc-vscode",
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   "editor.formatOnSaveMode": "file",
   "editor.formatOnSave": true,
   "files.associations": {
