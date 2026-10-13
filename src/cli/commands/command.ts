@@ -29,7 +29,7 @@ export abstract class Command {
   }
 
   protected parseArgs(args: string[]) {
-    if (args.includes('--help')) {
+    if (args.includes('--help') || args.includes('-h')) {
       this.printHelp();
       this.exit();
     }
