@@ -5,11 +5,30 @@ import { commands } from './commands';
 import { HelpCommand } from './commands/help-command';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
+import pkg from '../../package.json' with { type: 'json' };
+
+function getCommandName(args: string[]) {
+  if (args.length === 0) {
+    return HelpCommand.Name;
+  }
+
+  const [firstArg] = args;
+  if (firstArg === '--help' || firstArg === '-h') {
+    return HelpCommand.Name;
+  }
+
+  return firstArg;
+}
 
 async function main() {
   try {
     const args = process.argv.slice(2);
-    const commandName = args.length > 0 ? args[0] : HelpCommand.Name;
+    if (args[0] === '--version') {
+      console.log(pkg.version);
+      process.exit(0);
+    }
+
+    const commandName = getCommandName(args);
     const CommandToRun = commands[commandName];
     if (CommandToRun === undefined) {
       console.log(`${commandName}: unknown command`);
