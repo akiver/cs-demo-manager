@@ -42,13 +42,9 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
     console.log(`    csdm ${Download5EPlayCommand.Name} ${this.outputFlag} "C:\\Users\\username\\Downloads"`);
   }
 
-  public constructor(args: string[]) {
-    super(args);
-    process.on('SIGINT', this.onInterruptSignal);
-  }
-
   public async run() {
     this.parseArgs();
+    process.on('SIGINT', this.onInterruptSignal);
 
     this.outputFolderPath = await this.getOutputFolder();
     await this.assertOutputFolderIsValid(this.outputFolderPath);
