@@ -14,16 +14,13 @@ const streamPipeline = util.promisify(pipeline);
 
 export class Download5EPlayCommand extends DownloadBaseCommand {
   public static Name = 'dl-5eplay';
+  public static Description = 'Download the last demos of a 5EPlay account.';
   private id: string | undefined;
   private demoPathBeingDownloaded: string | undefined;
   private idFlag = '--id';
 
-  public getDescription() {
-    return 'Download the last demos of a 5EPlay account.';
-  }
-
   public printHelp() {
-    console.log(this.getDescription());
+    console.log(Download5EPlayCommand.Description);
     console.log('');
     console.log(`Usage: csdm ${Download5EPlayCommand.Name} ${this.formatFlagsForHelp([this.outputFlag, this.idFlag])}`);
     console.log('');

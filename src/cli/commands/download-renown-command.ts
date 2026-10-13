@@ -14,16 +14,13 @@ const streamPipeline = util.promisify(pipeline);
 
 export class DownloadRenownCommand extends DownloadBaseCommand {
   public static Name = 'dl-renown';
+  public static Description = 'Download the last demos of a Renown account.';
   private steamId: string | undefined;
   private demoPathBeingDownloaded: string | undefined;
   private steamIdFlag = '--steamid';
 
-  public getDescription() {
-    return 'Download the last demos of a Renown account.';
-  }
-
   public printHelp() {
-    console.log(this.getDescription());
+    console.log(DownloadRenownCommand.Description);
     console.log('');
     console.log(
       `Usage: csdm ${DownloadRenownCommand.Name} ${this.formatFlagsForHelp([this.outputFlag, this.steamIdFlag])}`,

@@ -7,6 +7,7 @@ import { ExportCommand } from './export-command';
 
 export class XlsxCommand extends ExportCommand {
   public static Name = 'xlsx';
+  public static Description = 'Export demos into XLSX files.';
   private generateSingleFile = false;
   private sheets: Record<SheetName, boolean> = {
     [SheetName.General]: true,
@@ -21,13 +22,9 @@ export class XlsxCommand extends ExportCommand {
   private singleFlag = '--single';
   private sheetsFlag = '--sheets';
 
-  public getDescription() {
-    return 'Export demos into XLSX files.';
-  }
-
   public printHelp() {
     const sourceValues = SupportedDemoSources.join(',');
-    console.log(this.getDescription());
+    console.log(XlsxCommand.Description);
     console.log('');
     console.log(
       `Usage: csdm ${XlsxCommand.Name} demoPaths... ${this.commonFlags.map((flag) => `[${flag}]`).join(' ')} [${this.singleFlag}] [${this.sheetsFlag}]`,

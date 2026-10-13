@@ -14,16 +14,13 @@ const streamPipeline = util.promisify(pipeline);
 
 export class DownloadFaceitCommand extends DownloadBaseCommand {
   public static Name = 'dl-faceit';
+  public static Description = 'Download the last demos of a FACEIT account.';
   private playerNickname: string | undefined;
   private demoPathBeingDownloaded: string | undefined;
   private nicknameFlag = '--nickname';
 
-  public getDescription() {
-    return 'Download the last demos of a FACEIT account.';
-  }
-
   public printHelp() {
-    console.log(this.getDescription());
+    console.log(DownloadFaceitCommand.Description);
     console.log('');
     console.log(
       `Usage: csdm ${DownloadFaceitCommand.Name} ${this.formatFlagsForHelp([this.outputFlag, this.nicknameFlag])}`,

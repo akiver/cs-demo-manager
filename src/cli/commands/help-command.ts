@@ -4,10 +4,7 @@ import pkg from '../../../package.json';
 
 export class HelpCommand extends Command {
   public static Name = 'help';
-
-  public getDescription() {
-    return 'Show CLI help usage';
-  }
+  public static Description = 'Show CLI help usage';
 
   public printHelp() {
     console.log(`CS Demo Manager ${pkg.version}`);
@@ -17,8 +14,7 @@ export class HelpCommand extends Command {
     console.log('The commands are:');
     console.log('');
     for (const [commandName, CommandToRun] of Object.entries(commands)) {
-      const command = new CommandToRun([]);
-      console.log(`\t${commandName.padEnd(10)} \t${command.getDescription()}`);
+      console.log(`\t${commandName.padEnd(10)} \t${CommandToRun.Description}`);
     }
   }
 

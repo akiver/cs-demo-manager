@@ -4,16 +4,13 @@ import { ExportCommand } from './export-command';
 
 export class JsonCommand extends ExportCommand {
   public static Name = 'json';
+  public static Description = 'Export demos into JSON files.';
   private minify = false;
   private minifyFlag = '--minify';
 
-  public getDescription() {
-    return 'Export demos into JSON files.';
-  }
-
   public printHelp() {
     const sourceValues = SupportedDemoSources.join(',');
-    console.log(this.getDescription());
+    console.log(JsonCommand.Description);
     console.log('');
     console.log(
       `Usage: csdm ${JsonCommand.Name} demoPaths... ${this.formatFlagsForHelp(this.commonFlags)} ${this.formatFlagForHelp(this.minifyFlag)}`,
