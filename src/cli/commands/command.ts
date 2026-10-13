@@ -9,7 +9,6 @@ import { assertDatabaseSchemaVersionMatches } from 'csdm/node/database/migration
 import { DatabaseSchemaVersionMismatch } from 'csdm/node/database/database-schema-version-mismatch-error';
 
 export abstract class Command {
-  public abstract getDescription(): string;
   public abstract printHelp(): void;
   public abstract run(): Promise<void>;
   protected args: string[];

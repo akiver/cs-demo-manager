@@ -12,6 +12,7 @@ import { isErrorCode } from 'csdm/common/is-error-code';
 
 export class AnalyzeCommand extends Command {
   public static Name = 'analyze';
+  public static Description = 'Analyze and persist demos into the database.';
   private readonly demoPaths: string[] = [];
   private analyzePositions = false;
   private forceAnalyze = false;
@@ -20,13 +21,9 @@ export class AnalyzeCommand extends Command {
   private forceFlag = '--force';
   private analyzePositionsFlag = '--analyze-positions';
 
-  public getDescription() {
-    return 'Analyze and persist demos into the database.';
-  }
-
   public printHelp() {
     const sourceValues = SupportedDemoSources.join(',');
-    console.log(this.getDescription());
+    console.log(AnalyzeCommand.Description);
     console.log('');
     console.log(
       `Usage: csdm ${AnalyzeCommand.Name} demoPaths... ${this.formatFlagsForHelp([this.sourceFlag, this.forceFlag, this.analyzePositionsFlag])}`,

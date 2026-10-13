@@ -32,15 +32,12 @@ const streamPipeline = util.promisify(pipeline);
 
 export class DownloadValveCommand extends DownloadBaseCommand {
   public static Name = 'dl-valve';
+  public static Description = 'Download the last MM demos of the current Steam account or from share codes.';
   private readonly shareCodes: string[] = [];
   private demoPathBeingDownloaded: string | undefined;
 
-  public getDescription() {
-    return 'Download the last MM demos of the current Steam account or from share codes';
-  }
-
   public printHelp() {
-    console.log(this.getDescription());
+    console.log(DownloadValveCommand.Description);
     console.log('');
     console.log(`Usage: csdm ${DownloadValveCommand.Name} [shareCodes...] ${this.formatFlagForHelp(this.outputFlag)}`);
     console.log('');

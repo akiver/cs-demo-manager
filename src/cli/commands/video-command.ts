@@ -75,6 +75,7 @@ function isQueueSubCommand(arg: string | undefined): arg is QueueSubCommand {
 
 export class VideoCommand extends Command {
   public static Name = 'video';
+  public static Description = 'Generate videos from demos and control the video generation queue.';
   private readonly outputFlag = 'output';
   private readonly framerateFlag = 'framerate';
   private readonly widthFlag = 'width';
@@ -157,12 +158,8 @@ export class VideoCommand extends Command {
   private startSecondsBefore = 2;
   private endSecondsAfter = 2;
 
-  public getDescription() {
-    return 'Generate videos from demos and control the video generation queue.';
-  }
-
   public printHelp() {
-    console.log(this.getDescription());
+    console.log(VideoCommand.Description);
     console.log('');
     console.log(`Usage: csdm ${VideoCommand.Name} <demoPath> <startTick> <endTick> [options]`);
     console.log(
