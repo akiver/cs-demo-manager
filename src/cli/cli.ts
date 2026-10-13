@@ -5,6 +5,7 @@ import { commands } from './commands';
 import { HelpCommand } from './commands/help-command';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
+import { printUnknownCommand } from 'csdm/cli/print-unknown-command';
 import pkg from '../../package.json' with { type: 'json' };
 
 function getCommandName(args: string[]) {
@@ -31,8 +32,7 @@ async function main() {
     const commandName = getCommandName(args);
     const CommandToRun = commands[commandName];
     if (CommandToRun === undefined) {
-      console.log(`${commandName}: unknown command`);
-      console.log('Run csdm for usage.');
+      printUnknownCommand(commandName);
       process.exit(1);
     }
 
