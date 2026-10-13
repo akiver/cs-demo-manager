@@ -44,11 +44,6 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     console.log(`    csdm ${DownloadFaceitCommand.Name} ${this.outputFlag} "C:\\Users\\username\\Downloads"`);
   }
 
-  public constructor(args: string[]) {
-    super(args);
-    process.on('SIGINT', this.onInterruptSignal);
-  }
-
   public async run() {
     console.warn(
       `This command is currently disabled, see https://cs-demo-manager.com/docs/guides/downloads#why-faceit-downloads-are-disabled.`,
@@ -56,6 +51,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     return;
     // oxlint-disable no-unreachable
     this.parseArgs();
+    process.on('SIGINT', this.onInterruptSignal);
 
     this.outputFolderPath = await this.getOutputFolder();
     await this.assertOutputFolderIsValid(this.outputFolderPath);
