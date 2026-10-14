@@ -13,17 +13,17 @@ function getLevenshteinDistance(a: string, b: string) {
 }
 
 /**
- * Returns the command name closest to the given input, used to suggest a command when the user makes a typo.
- * Returns undefined when no command is close enough to be a likely typo.
+ * Returns the name closest to the given input, used to suggest a command or an option when the user makes a typo.
+ * Returns undefined when no name is close enough to be a likely typo.
  */
-export function findSimilarCommandName(input: string, commandNames: string[]) {
+export function findSimilarName(input: string, names: string[]) {
   const maxDistance = 2;
   let closestName: string | undefined;
   let closestDistance = Infinity;
-  for (const commandName of commandNames) {
-    const distance = getLevenshteinDistance(input.toLowerCase(), commandName);
+  for (const name of names) {
+    const distance = getLevenshteinDistance(input.toLowerCase(), name);
     if (distance < closestDistance) {
-      closestName = commandName;
+      closestName = name;
       closestDistance = distance;
     }
   }
