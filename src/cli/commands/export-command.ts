@@ -11,6 +11,9 @@ import { processMatchInsertion } from 'csdm/node/database/matches/process-match-
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
+import { CommandError } from 'csdm/cli/errors/command-error';
+import { getErrorMessage } from 'csdm/cli/get-error-message';
+import { ExitCode } from 'csdm/cli/exit-code';
 import { resolveDemoPaths } from 'csdm/cli/resolve-demo-paths';
 
 type ExportValues = {
@@ -48,10 +51,11 @@ export abstract class ExportCommand extends Command {
     },
   } satisfies CommandOptions;
 
+  protected abstract exportMatches(): Promise<void>;
+
   public async run() {
     if (this.demoPaths.length === 0) {
-      console.log('No demos found');
-      this.exitWithFailure();
+      throw new CommandError('No demos found');
     }
 
     await this.assertOutputFolderIsValid();
@@ -61,6 +65,7 @@ export abstract class ExportCommand extends Command {
     const checksumsInDatabase = await fetchMatchChecksums();
 
     console.log(`${this.demoPaths.length} demos to process`);
+    let hasError = false;
     for (const demoPath of this.demoPaths) {
       try {
         const checksum = await getDemoChecksumFromDemoPath(demoPath);
@@ -75,24 +80,27 @@ export abstract class ExportCommand extends Command {
           demoName: path.basename(demoPath),
         });
       } catch (error) {
-        if (error instanceof Error) {
-          console.error(error.message);
-        } else {
-          console.error(error);
-        }
+        hasError = true;
+        console.error(`Failed to process demo ${demoPath}`);
+        console.error(getErrorMessage(error));
       }
     }
 
     if (this.demosToExport.length === 0) {
-      console.log('No demos to export');
-      this.exit();
+      throw new CommandError('No demos to export');
+    }
+
+    await this.exportMatches();
+
+    if (hasError) {
+      this.exit(ExitCode.Failure);
     }
   }
 
   protected async parseExportArgs(values: ExportValues, positionals: string[]) {
     if (this.args.length === 0) {
       this.printHelp();
-      this.exitWithFailure();
+      this.exit(ExitCode.InvalidUsage);
     }
     if (positionals.length === 0) {
       throw new InvalidArgument('Missing demo paths');
@@ -107,14 +115,12 @@ export abstract class ExportCommand extends Command {
   private async assertOutputFolderIsValid() {
     const isOutputFolderExits = await fs.pathExists(this.outputFolderPath);
     if (!isOutputFolderExits) {
-      console.log(`The output folder does not exist: ${this.outputFolderPath}`);
-      this.exitWithFailure();
+      throw new CommandError(`The output folder does not exist: ${this.outputFolderPath}`);
     }
 
     const isOutputFolderWritable = await isPathWritable(this.outputFolderPath);
     if (!isOutputFolderWritable) {
-      console.log(`The output folder is not writable: ${this.outputFolderPath}`);
-      this.exitWithFailure();
+      throw new CommandError(`The output folder is not writable: ${this.outputFolderPath}`);
     }
   }
 

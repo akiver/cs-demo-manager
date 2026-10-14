@@ -1,6 +1,7 @@
 import { exportMatchesToJson } from 'csdm/node/json/export-matches-to-json';
 import { ExportCommand } from './export-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
+import { CommandError } from 'csdm/cli/errors/command-error';
 
 export class JsonCommand extends ExportCommand {
   public static Name = 'json';
@@ -42,7 +43,9 @@ export class JsonCommand extends ExportCommand {
   public async run() {
     await this.parseArgs();
     await super.run();
+  }
 
+  protected async exportMatches() {
     const checksums = this.demosToExport.map((demo) => demo.checksum);
     const options = {
       outputFolderPath: this.outputFolderPath,
@@ -53,7 +56,7 @@ export class JsonCommand extends ExportCommand {
       await exportMatchesToJson(options);
       console.log(`Exported ${this.demosToExport.length} matches in folder ${this.outputFolderPath}`);
     } catch (error) {
-      console.log('Error while exporting matches to JSON');
+      throw new CommandError('Failed to export the matches to JSON', { cause: error });
     }
   }
 

@@ -66,7 +66,9 @@ export class XlsxCommand extends ExportCommand {
   public async run() {
     await this.parseArgs();
     await super.run();
+  }
 
+  protected async exportMatches() {
     if (this.generateSingleFile) {
       const checksums = this.demosToExport.map((demo) => demo.checksum);
       const outputFilePath = path.join(this.outputFolderPath, `export-${checksums.length}-matches.xlsx`);
