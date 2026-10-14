@@ -8,6 +8,7 @@ import { type CommandOptions, parseCommandArgs } from 'csdm/cli/parse-command-ar
 import { type CommandHelp, HelpFormatter } from 'csdm/cli/help-formatter';
 import { CommandError } from 'csdm/cli/errors/command-error';
 import { ExitCode } from 'csdm/cli/exit-code';
+import { output } from 'csdm/cli/output';
 
 export abstract class Command {
   public abstract printHelp(): void;
@@ -75,7 +76,7 @@ export abstract class Command {
    */
   protected async ensureDaemonDatabaseConnection(client: CliWebSocketClient) {
     const hintTimeoutId = setTimeout(() => {
-      console.log('Connecting to the database, it may take a while on first start or after an update...');
+      output.progress('Connecting to the database, it may take a while on first start or after an update...');
     }, 3_000);
     try {
       await client.send({ name: CliClientMessageName.EnsureDatabaseConnection }, { timeoutMs: null });
@@ -83,6 +84,7 @@ export abstract class Command {
       throw new CommandError('Failed to connect to the database', { cause: error });
     } finally {
       clearTimeout(hintTimeoutId);
+      output.clearProgress();
     }
   }
 
