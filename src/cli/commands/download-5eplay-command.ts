@@ -6,6 +6,7 @@ import path from 'node:path';
 import util from 'node:util';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
+import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { fetchCurrent5EPlayAccount } from 'csdm/node/database/5play-account/fetch-current-5eplay-account';
 import { fetch5EPlayAccount } from 'csdm/node/5eplay/fetch-5eplay-player-account-from-domain';
 import { fetchLast5EPlayMatches } from 'csdm/node/5eplay/fetch-last-5eplay-matches';
@@ -17,29 +18,30 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
   public static Description = 'Download the last demos of a 5EPlay account.';
   private id: string | undefined;
   private demoPathBeingDownloaded: string | undefined;
-  private idFlag = '--id';
+  private readonly options = {
+    ...this.outputOption,
+    id: {
+      type: 'string',
+      valueName: 'id',
+      description: 'ID of the 5EPlay account to download demos from, the current 5EPlay account by default.',
+    },
+  } satisfies CommandOptions;
 
   public printHelp() {
-    console.log(Download5EPlayCommand.Description);
-    console.log('');
-    console.log(`Usage: csdm ${Download5EPlayCommand.Name} ${this.formatFlagsForHelp([this.outputFlag, this.idFlag])}`);
-    console.log('');
-    console.log(`The ${this.outputFlag} flag specify the directory where demos will be downloaded.`);
-    console.log(`Default value in order of preference:`);
-    console.log('\t1. Download folder specified in the application settings.');
-    console.log('\t2. The Counter-Strike folder "replays".');
-    console.log('\t3. The current directory.');
-    console.log('');
-    console.log('Examples:');
-    console.log('');
-    console.log('To download the last 5EPlay demos of the current 5EPlay account:');
-    console.log(`    csdm ${Download5EPlayCommand.Name}`);
-    console.log('');
-    console.log('To download demos of a specific account identified by its ID:');
-    console.log(`    csdm ${Download5EPlayCommand.Name} ${this.idFlag} "myid"`);
-    console.log('');
-    console.log('To change the directory where demos will be downloaded:');
-    console.log(`    csdm ${Download5EPlayCommand.Name} ${this.outputFlag} "C:\\Users\\username\\Downloads"`);
+    this.printCommandHelp({
+      name: Download5EPlayCommand.Name,
+      description: Download5EPlayCommand.Description,
+      usages: ['[options]'],
+      options: this.options,
+      examples: [
+        { description: 'Download the last demos of the current 5EPlay account', args: '' },
+        { description: 'Download the demos of a specific account identified by its ID', args: '--id "myid"' },
+        {
+          description: 'Download demos in a specific folder',
+          args: `--output ${this.helpFormatter.formatExamplePath('Downloads')}`,
+        },
+      ],
+    });
   }
 
   public async run() {
@@ -60,39 +62,9 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
   }
 
   protected parseArgs() {
-    super.parseArgs(this.args);
-
-    for (let index = 0; index < this.args.length; index++) {
-      const arg = this.args[index];
-      if (this.isFlagArgument(arg)) {
-        switch (arg) {
-          case this.outputFlag:
-            if (this.args.length > index + 1) {
-              index += 1;
-              this.outputFolderPath = this.args[index];
-            } else {
-              console.log(`Missing ${this.outputFlag} value`);
-              this.exitWithFailure();
-            }
-            break;
-          case this.idFlag:
-            if (this.args.length > index + 1) {
-              index += 1;
-              this.id = this.args[index];
-            } else {
-              console.log(`Missing ${this.idFlag} value`);
-              this.exitWithFailure();
-            }
-            break;
-          default:
-            console.log(`Unknown flag: ${arg}`);
-            this.exitWithFailure();
-        }
-      } else {
-        console.log(`Unknown argument: ${arg}`);
-        this.exitWithFailure();
-      }
-    }
+    const { values } = this.parseOptions(this.options);
+    this.outputFolderPath = values.output ?? '';
+    this.id = values.id;
   }
 
   private async processMatch(match: FiveEPlayMatch) {

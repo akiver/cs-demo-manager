@@ -27,6 +27,7 @@ import {
 } from 'csdm/node/valve-match/get-valve-match-from-match-info-protobuf-message';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
+import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { SteamNotRunning } from 'csdm/node/counter-strike/launcher/errors/steam-not-running';
 const streamPipeline = util.promisify(pipeline);
 
@@ -37,28 +38,30 @@ export class DownloadValveCommand extends DownloadBaseCommand {
   private demoPathBeingDownloaded: string | undefined;
 
   public printHelp() {
-    console.log(DownloadValveCommand.Description);
-    console.log('');
-    console.log(`Usage: csdm ${DownloadValveCommand.Name} [shareCodes...] ${this.formatFlagForHelp(this.outputFlag)}`);
-    console.log('');
-    console.log(`The ${this.outputFlag} flag specify the directory where demos will be downloaded.`);
-    console.log(`Default value in order of preference:`);
-    console.log('\t1. Download folder specified in the application settings.');
-    console.log('\t2. The Counter-Strike folder "replays".');
-    console.log('\t3. The current directory.');
-    console.log('');
-    console.log('Examples:');
-    console.log('');
-    console.log('To download last MM demos of the current Steam account:');
-    console.log(`    csdm ${DownloadValveCommand.Name}`);
-    console.log('');
-    console.log('To download demos from share codes:');
-    console.log(
-      `    csdm ${DownloadValveCommand.Name} CSGO-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX CSGO-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX`,
-    );
-    console.log('');
-    console.log('To change the directory where demos will be downloaded:');
-    console.log(`    csdm ${DownloadValveCommand.Name} ${this.outputFlag} "C:\\Users\\username\\Downloads"`);
+    this.printCommandHelp({
+      name: DownloadValveCommand.Name,
+      description: DownloadValveCommand.Description,
+      usages: ['[share-codes...] [options]'],
+      arguments: [
+        {
+          label: '[share-codes...]',
+          description:
+            'Share codes of the matches to download, the last MM matches of the current Steam account by default.',
+        },
+      ],
+      options: this.outputOption,
+      examples: [
+        { description: 'Download the last MM demos of the current Steam account', args: '' },
+        {
+          description: 'Download demos from share codes',
+          args: 'CSGO-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX CSGO-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
+        },
+        {
+          description: 'Download demos in a specific folder',
+          args: `--output ${this.helpFormatter.formatExamplePath('Downloads')}`,
+        },
+      ],
+    });
   }
 
   public async run() {
@@ -95,37 +98,17 @@ export class DownloadValveCommand extends DownloadBaseCommand {
   }
 
   protected parseArgs() {
-    super.parseArgs(this.args);
-
-    for (let index = 0; index < this.args.length; index++) {
-      const arg = this.args[index];
-      if (this.isFlagArgument(arg)) {
-        switch (arg) {
-          case this.outputFlag:
-            if (this.args.length > index + 1) {
-              index += 1;
-              this.outputFolderPath = this.args[index];
-            } else {
-              console.log(`Missing ${this.outputFlag} value`);
-              this.exitWithFailure();
-            }
-            break;
-          default:
-            console.log(`Unknown flag: ${arg}`);
-            this.exitWithFailure();
+    const { values, positionals } = this.parseOptions(this.outputOption, { allowPositionals: true });
+    this.outputFolderPath = values.output ?? '';
+    for (const shareCode of positionals) {
+      try {
+        decodeMatchShareCode(shareCode);
+        this.shareCodes.push(shareCode);
+      } catch (error) {
+        if (error instanceof InvalidShareCode) {
+          throw new InvalidArgument(`Invalid share code: ${shareCode}`);
         }
-      } else {
-        try {
-          decodeMatchShareCode(arg);
-          this.shareCodes.push(arg);
-        } catch (error) {
-          if (error instanceof InvalidShareCode) {
-            console.log(`Invalid share code: ${arg}`);
-          } else {
-            console.error(error);
-          }
-          this.exitWithFailure();
-        }
+        throw error;
       }
     }
   }

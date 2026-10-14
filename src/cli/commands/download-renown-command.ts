@@ -6,6 +6,7 @@ import zlib from 'node:zlib';
 import util from 'node:util';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
+import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { fetchLastRenownMatches } from 'csdm/node/renown/fetch-last-renown-matches';
 import { fetchCurrentRenownAccount } from 'csdm/node/database/renown-account/fetch-current-renown-account';
 import { fetchRenownAccount } from 'csdm/node/renown/fetch-renown-account-from-steamid';
@@ -17,31 +18,33 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
   public static Description = 'Download the last demos of a Renown account.';
   private steamId: string | undefined;
   private demoPathBeingDownloaded: string | undefined;
-  private steamIdFlag = '--steamid';
+  private readonly options = {
+    ...this.outputOption,
+    steamid: {
+      type: 'string',
+      valueName: 'steamId',
+      description: 'Steam ID of the Renown account to download demos from, the current Renown account by default.',
+    },
+  } satisfies CommandOptions;
 
   public printHelp() {
-    console.log(DownloadRenownCommand.Description);
-    console.log('');
-    console.log(
-      `Usage: csdm ${DownloadRenownCommand.Name} ${this.formatFlagsForHelp([this.outputFlag, this.steamIdFlag])}`,
-    );
-    console.log('');
-    console.log(`The ${this.outputFlag} flag specify the directory where demos will be downloaded.`);
-    console.log(`Default value in order of preference:`);
-    console.log('\t1. Download folder specified in the application settings.');
-    console.log('\t2. The Counter-Strike folder "replays".');
-    console.log('\t3. The current directory.');
-    console.log('');
-    console.log('Examples:');
-    console.log('');
-    console.log('To download the last Renown demos of the current Renown account:');
-    console.log(`    csdm ${DownloadRenownCommand.Name}`);
-    console.log('');
-    console.log('To download demos of a specific account identified by its Steam ID:');
-    console.log(`    csdm ${DownloadRenownCommand.Name} ${this.steamIdFlag} 76561198000000000`);
-    console.log('');
-    console.log('To change the directory where demos will be downloaded:');
-    console.log(`    csdm ${DownloadRenownCommand.Name} ${this.outputFlag} "C:\\Users\\username\\Downloads"`);
+    this.printCommandHelp({
+      name: DownloadRenownCommand.Name,
+      description: DownloadRenownCommand.Description,
+      usages: ['[options]'],
+      options: this.options,
+      examples: [
+        { description: 'Download the last demos of the current Renown account', args: '' },
+        {
+          description: 'Download the demos of a specific account identified by its Steam ID',
+          args: '--steamid 76561198000000000',
+        },
+        {
+          description: 'Download demos in a specific folder',
+          args: `--output ${this.helpFormatter.formatExamplePath('Downloads')}`,
+        },
+      ],
+    });
   }
 
   public async run() {
@@ -62,39 +65,9 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
   }
 
   protected parseArgs() {
-    super.parseArgs(this.args);
-
-    for (let index = 0; index < this.args.length; index++) {
-      const arg = this.args[index];
-      if (this.isFlagArgument(arg)) {
-        switch (arg) {
-          case this.outputFlag:
-            if (this.args.length > index + 1) {
-              index += 1;
-              this.outputFolderPath = this.args[index];
-            } else {
-              console.log(`Missing ${this.outputFlag} value`);
-              this.exitWithFailure();
-            }
-            break;
-          case this.steamIdFlag:
-            if (this.args.length > index + 1) {
-              index += 1;
-              this.steamId = this.args[index];
-            } else {
-              console.log(`Missing ${this.steamIdFlag} value`);
-              this.exitWithFailure();
-            }
-            break;
-          default:
-            console.log(`Unknown flag: ${arg}`);
-            this.exitWithFailure();
-        }
-      } else {
-        console.log(`Unknown argument: ${arg}`);
-        this.exitWithFailure();
-      }
-    }
+    const { values } = this.parseOptions(this.options);
+    this.outputFolderPath = values.output ?? '';
+    this.steamId = values.steamid;
   }
 
   private async processMatch(match: RenownMatch) {

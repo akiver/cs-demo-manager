@@ -6,10 +6,18 @@ import {
   getDefaultCsgoFolders,
 } from 'csdm/node/counter-strike/get-default-counter-strike-folders';
 import { isPathWritable } from 'csdm/node/filesystem/is-path-writable';
+import type { CommandOptions } from 'csdm/cli/parse-command-args';
 
 export abstract class DownloadBaseCommand extends Command {
   protected outputFolderPath = '';
-  protected outputFlag = '--output';
+  protected readonly outputOption = {
+    output: {
+      type: 'string',
+      valueName: 'folder',
+      description:
+        'Folder where demos are downloaded. Defaults to the download folder from the app settings, then the Counter-Strike "replays" folder, then the current folder.',
+    },
+  } satisfies CommandOptions;
 
   protected async getOutputFolder() {
     if (this.outputFolderPath !== '') {
