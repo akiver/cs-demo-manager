@@ -7,11 +7,14 @@ import { isErrorCode } from 'csdm/common/is-error-code';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
 import { assertDatabaseSchemaVersionMatches } from 'csdm/node/database/migrations/migrate-database';
 import { DatabaseSchemaVersionMismatch } from 'csdm/node/database/database-schema-version-mismatch-error';
+import { type CommandOptions, parseCommandArgs } from 'csdm/cli/parse-command-args';
+import { type CommandHelp, HelpFormatter } from 'csdm/cli/help-formatter';
 
 export abstract class Command {
   public abstract printHelp(): void;
   public abstract run(): Promise<void>;
   protected args: string[];
+  protected readonly helpFormatter = new HelpFormatter();
   protected readonly commonArgs: ParseArgsOptionsConfig = {
     verbose: { type: 'boolean', short: 'v', default: false },
   };
@@ -33,6 +36,23 @@ export abstract class Command {
       this.printHelp();
       this.exit();
     }
+  }
+
+  /**
+   * Prints the command help and exits when the help is requested, otherwise parses the command args.
+   * Invalid args throw an InvalidArgument error.
+   */
+  protected parseOptions<Options extends CommandOptions>(options: Options, { allowPositionals = false } = {}) {
+    if (this.args.includes('--help') || this.args.includes('-h')) {
+      this.printHelp();
+      this.exit();
+    }
+
+    return parseCommandArgs(this.args, options, allowPositionals);
+  }
+
+  protected printCommandHelp(help: CommandHelp) {
+    console.log(this.helpFormatter.formatCommandHelp(help));
   }
 
   /**

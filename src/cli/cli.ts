@@ -6,6 +6,7 @@ import { HelpCommand } from './commands/help-command';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
 import { printUnknownCommand } from 'csdm/cli/print-unknown-command';
+import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import pkg from '../../package.json' with { type: 'json' };
 
 function getCommandName(args: string[]) {
@@ -22,14 +23,14 @@ function getCommandName(args: string[]) {
 }
 
 async function main() {
-  try {
-    const args = process.argv.slice(2);
-    if (args[0] === '--version') {
-      console.log(pkg.version);
-      process.exit(0);
-    }
+  const args = process.argv.slice(2);
+  if (args[0] === '--version') {
+    console.log(pkg.version);
+    process.exit(0);
+  }
 
-    const commandName = getCommandName(args);
+  const commandName = getCommandName(args);
+  try {
     const CommandToRun = commands[commandName];
     if (CommandToRun === undefined) {
       printUnknownCommand(commandName);
@@ -41,7 +42,10 @@ async function main() {
     await command.run();
     process.exit(0);
   } catch (error) {
-    if (isErrorCode(error)) {
+    if (error instanceof InvalidArgument) {
+      console.error(error.message);
+      console.error(`Run "csdm ${commandName} --help" for usage.`);
+    } else if (isErrorCode(error)) {
       console.error(getErrorCodeMessage(error));
     } else {
       console.error(error);

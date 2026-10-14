@@ -8,15 +8,16 @@ export class HelpCommand extends Command {
   public static Description = 'Show CLI help usage, or the help of a command.';
 
   public printHelp() {
+    const commandRows = Object.entries(commands).map(([commandName, CommandToRun]) => {
+      return { label: commandName, description: CommandToRun.Description };
+    });
+
     console.log(`CS Demo Manager ${pkg.version}`);
     console.log('');
-    console.log('\tUsage: csdm <command> [arguments]');
+    console.log('Usage:');
+    console.log('  csdm <command> [arguments] [options]');
     console.log('');
-    console.log('The commands are:');
-    console.log('');
-    for (const [commandName, CommandToRun] of Object.entries(commands)) {
-      console.log(`\t${commandName.padEnd(10)} \t${CommandToRun.Description}`);
-    }
+    console.log(this.helpFormatter.formatRowsSection('Commands', commandRows));
     console.log('');
     console.log('Run "csdm help <command>" or "csdm <command> --help" for more information about a command.');
     console.log('Run "csdm --version" to print the version.');
