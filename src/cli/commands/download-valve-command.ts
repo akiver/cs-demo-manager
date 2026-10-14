@@ -1,9 +1,6 @@
 import fs from 'fs-extra';
-import { request } from 'undici';
-import { pipeline } from 'node:stream';
 import path from 'node:path';
 import b2 from 'unbzip2-stream';
-import util from 'node:util';
 import { decodeMatchShareCode, InvalidShareCode } from 'csgo-sharecode';
 import { startBoiler } from 'csdm/node/boiler/start-boiler';
 import {
@@ -21,7 +18,6 @@ import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expir
 import { DownloadBaseCommand } from './download-base-command';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { CommandError } from 'csdm/cli/errors/command-error';
-const streamPipeline = util.promisify(pipeline);
 
 export class DownloadValveCommand extends DownloadBaseCommand {
   public static Name = 'dl-valve';
@@ -133,16 +129,11 @@ export class DownloadValveCommand extends DownloadBaseCommand {
       return;
     }
 
-    const response = await request(demoUrl, { method: 'GET' });
-    if (!response.body) {
-      this.printDownloadError(`Request error: ${demoUrl}`);
-      return;
-    }
-
     this.demoPathBeingDownloaded = demoPath;
-    const out = fs.createWriteStream(demoPath);
-    await streamPipeline(response.body, b2(), out);
-    await fs.writeFile(`${demoPath}.info`, toBinary(CDataGCCStrike15_v2_MatchInfoSchema, matchInfo));
+    const isDownloaded = await this.downloadDemo(demoUrl, demoPath, b2());
+    if (isDownloaded) {
+      await fs.writeFile(`${demoPath}.info`, toBinary(CDataGCCStrike15_v2_MatchInfoSchema, matchInfo));
+    }
     this.demoPathBeingDownloaded = undefined;
   }
 

@@ -1,9 +1,6 @@
 import fs from 'fs-extra';
-import { request } from 'undici';
-import { pipeline } from 'node:stream';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import util from 'node:util';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
@@ -12,7 +9,6 @@ import { fetchLastRenownMatches } from 'csdm/node/renown/fetch-last-renown-match
 import { fetchCurrentRenownAccount } from 'csdm/node/database/renown-account/fetch-current-renown-account';
 import { fetchRenownAccount } from 'csdm/node/renown/fetch-renown-account-from-steamid';
 import type { RenownMatch } from 'csdm/common/types/renown-match';
-const streamPipeline = util.promisify(pipeline);
 
 export class DownloadRenownCommand extends DownloadBaseCommand {
   public static Name = 'dl-renown';
@@ -88,15 +84,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
 
     console.log(`Downloading ${match.demoUrl}...`);
     this.demoPathBeingDownloaded = demoPath;
-    const response = await request(match.demoUrl, { method: 'GET' });
-    if (!response.body) {
-      this.printDownloadError(`Request error for match: ${match.id}`);
-      return;
-    }
-
-    const out = fs.createWriteStream(demoPath);
-    const transformStream = zlib.createGunzip();
-    await streamPipeline(response.body, transformStream, out);
+    await this.downloadDemo(match.demoUrl, demoPath, zlib.createGunzip());
     this.demoPathBeingDownloaded = undefined;
   }
 

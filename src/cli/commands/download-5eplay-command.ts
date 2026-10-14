@@ -1,9 +1,6 @@
 import fs from 'fs-extra';
-import { request } from 'undici';
 import unzipper from 'unzipper';
-import { pipeline } from 'node:stream';
 import path from 'node:path';
-import util from 'node:util';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
@@ -12,7 +9,6 @@ import { fetchCurrent5EPlayAccount } from 'csdm/node/database/5play-account/fetc
 import { fetch5EPlayAccount } from 'csdm/node/5eplay/fetch-5eplay-player-account-from-domain';
 import { fetchLast5EPlayMatches } from 'csdm/node/5eplay/fetch-last-5eplay-matches';
 import type { FiveEPlayMatch } from 'csdm/common/types/5eplay-match';
-const streamPipeline = util.promisify(pipeline);
 
 export class Download5EPlayCommand extends DownloadBaseCommand {
   public static Name = 'dl-5eplay';
@@ -85,15 +81,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
 
     console.log(`Downloading ${match.demoUrl}...`);
     this.demoPathBeingDownloaded = demoPath;
-    const response = await request(match.demoUrl, { method: 'GET' });
-    if (!response.body) {
-      this.printDownloadError(`Request error for match: ${match.id}`);
-      return;
-    }
-
-    const out = fs.createWriteStream(demoPath);
-    const transformStream = unzipper.ParseOne();
-    await streamPipeline(response.body, transformStream, out);
+    await this.downloadDemo(match.demoUrl, demoPath, unzipper.ParseOne());
     this.demoPathBeingDownloaded = undefined;
   }
 
