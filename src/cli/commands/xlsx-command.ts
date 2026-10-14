@@ -1,9 +1,14 @@
 import path from 'node:path';
-import { SupportedDemoSources } from 'csdm/common/types/counter-strike';
 import { MatchXlsxExport } from 'csdm/node/xlsx/match-xlsx-export';
 import { MatchesXlsxExport } from 'csdm/node/xlsx/matches-xlsx-export';
 import { SheetName } from 'csdm/node/xlsx/sheet-name';
 import { ExportCommand } from './export-command';
+import type { CommandOptions } from 'csdm/cli/parse-command-args';
+import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
+
+function isValidSheetName(value: string): value is SheetName {
+  return Object.values(SheetName).includes(value as SheetName);
+}
 
 export class XlsxCommand extends ExportCommand {
   public static Name = 'xlsx';
@@ -19,44 +24,43 @@ export class XlsxCommand extends ExportCommand {
     [SheetName.Utility]: true,
     [SheetName.PlayersFlashbangMatrix]: true,
   };
-  private singleFlag = '--single';
-  private sheetsFlag = '--sheets';
+  private readonly options = {
+    ...this.exportOptions,
+    single: {
+      type: 'boolean',
+      description: 'Generate a single XLSX file instead of one per demo.',
+    },
+    sheets: {
+      type: 'string',
+      valueName: 'sheets',
+      description: `Comma-separated list of the sheets to include, all sheets by default.\nAllowed values: ${Object.values(SheetName).join(', ')}`,
+    },
+  } satisfies CommandOptions;
 
   public printHelp() {
-    const sourceValues = SupportedDemoSources.join(',');
-    console.log(XlsxCommand.Description);
-    console.log('');
-    console.log(
-      `Usage: csdm ${XlsxCommand.Name} demoPaths... ${this.commonFlags.map((flag) => `[${flag}]`).join(' ')} [${this.singleFlag}] [${this.sheetsFlag}]`,
-    );
-    console.log('');
-    console.log('Demos path can be either a .dem files path or a directory. It can be relative or absolute.');
-    console.log(`The ${this.outputFolderFlag} flag specify the directory where output files will be saved.`);
-    console.log(
-      `The ${this.sourceFlag} flag forces the analysis logic of the demo analyzer. Available values: [${sourceValues}]`,
-    );
-    console.log(`The ${this.singleFlag} flag generates a single XLSX file instead of one per demo.`);
-    console.log(
-      `The ${this.sheetsFlag} flag includes only sheets identified by its name. Available values: [${Object.values(
-        SheetName,
-      ).join(',')}]`,
-    );
-    console.log(`The ${this.forceAnalyzeFlag} flag forces demos analyzes even if they are already in the database.`);
-    console.log('');
-    console.log('Examples:');
-    console.log('');
-    console.log('Export 1 demo:');
-    console.log(`    csdm ${XlsxCommand.Name} "C:\\Users\\username\\Desktop\\demo.dem"`);
-    console.log('');
-    console.log('Export multiple demos with only the "Rounds" and "Kills" sheets:');
-    console.log(
-      `    csdm ${XlsxCommand.Name} "C:\\Users\\username\\Desktop\\demo.dem" "C:\\Users\\username\\Desktop\\demo2.dem" ${this.sheetsFlag} rounds,kills`,
-    );
-    console.log('');
-    console.log('Export all demos in a directory using the ESL analyzer and save it in a custom directory:');
-    console.log(
-      `    csdm ${XlsxCommand.Name} "C:\\Users\\username\\Desktop\\MyFolder" ${this.outputFolderFlag} "C:\\Users\\username\\Documents" ${this.sourceFlag} esl`,
-    );
+    this.printCommandHelp({
+      name: XlsxCommand.Name,
+      description: XlsxCommand.Description,
+      usages: ['<demo-paths...> [options]'],
+      arguments: [
+        {
+          label: '<demo-paths...>',
+          description: '.dem files or folders containing .dem files, relative or absolute.',
+        },
+      ],
+      options: this.options,
+      examples: [
+        { description: 'Export 1 demo', args: this.helpFormatter.formatExamplePath('Desktop', 'demo.dem') },
+        {
+          description: 'Export multiple demos with only the "rounds" and "kills" sheets',
+          args: `${this.helpFormatter.formatExamplePath('Desktop', 'demo.dem')} ${this.helpFormatter.formatExamplePath('Desktop', 'demo2.dem')} --sheets rounds,kills`,
+        },
+        {
+          description: 'Export all demos in a folder with the ESL analyzer and save the files in a specific folder',
+          args: `${this.helpFormatter.formatExamplePath('Desktop', 'MyFolder')} --output-folder ${this.helpFormatter.formatExamplePath('Documents')} --source esl`,
+        },
+      ],
+    });
   }
 
   public async run() {
@@ -88,45 +92,21 @@ export class XlsxCommand extends ExportCommand {
   }
 
   protected async parseArgs() {
-    await super.parseArgs();
+    const { values, positionals } = this.parseOptions(this.options, { allowPositionals: true });
+    await this.parseExportArgs(values, positionals);
+    this.generateSingleFile = values.single ?? false;
 
-    for (let index = 0; index < this.args.length; index++) {
-      const arg = this.args[index];
-      if (!this.isFlagArgument(arg)) {
-        continue;
+    if (values.sheets !== undefined) {
+      const sheetNames = values.sheets.split(',').map((sheetName) => sheetName.trim());
+      for (const sheetName of sheetNames) {
+        if (!isValidSheetName(sheetName)) {
+          throw new InvalidArgument(
+            `Invalid sheet name "${sheetName}", allowed values: ${Object.values(SheetName).join(', ')}`,
+          );
+        }
       }
-
-      switch (arg) {
-        case this.singleFlag:
-          this.generateSingleFile = true;
-          break;
-        case this.sheetsFlag:
-          if (this.args.length > index + 1) {
-            index += 1;
-            for (const sheetName in this.sheets) {
-              this.sheets[sheetName as SheetName] = false;
-            }
-
-            const sheetNames = this.args[index].split(',');
-            for (const sheetName of sheetNames) {
-              if (!Object.values(SheetName).includes(sheetName as SheetName)) {
-                console.log(`Invalid sheet name "${sheetName}"`);
-                console.log(`Available values: ${Object.values(SheetName).join(',')}`);
-                this.exitWithFailure();
-              }
-
-              this.sheets[sheetName as SheetName] = true;
-            }
-          } else {
-            console.log(`Missing ${this.sheetsFlag} value`);
-            this.exitWithFailure();
-          }
-          break;
-        default:
-          if (!super.isCommonFlag(arg)) {
-            console.log(`Unknown flag: ${arg}`);
-            this.exitWithFailure();
-          }
+      for (const sheetName of Object.values(SheetName)) {
+        this.sheets[sheetName] = sheetNames.includes(sheetName);
       }
     }
   }

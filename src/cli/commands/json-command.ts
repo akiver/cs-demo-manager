@@ -1,37 +1,42 @@
-import { SupportedDemoSources } from 'csdm/common/types/counter-strike';
 import { exportMatchesToJson } from 'csdm/node/json/export-matches-to-json';
 import { ExportCommand } from './export-command';
+import type { CommandOptions } from 'csdm/cli/parse-command-args';
 
 export class JsonCommand extends ExportCommand {
   public static Name = 'json';
   public static Description = 'Export demos into JSON files.';
   private minify = false;
-  private minifyFlag = '--minify';
+  private readonly options = {
+    ...this.exportOptions,
+    minify: {
+      type: 'boolean',
+      description: 'Minify the JSON files.',
+    },
+  } satisfies CommandOptions;
 
   public printHelp() {
-    const sourceValues = SupportedDemoSources.join(',');
-    console.log(JsonCommand.Description);
-    console.log('');
-    console.log(
-      `Usage: csdm ${JsonCommand.Name} demoPaths... ${this.formatFlagsForHelp(this.commonFlags)} ${this.formatFlagForHelp(this.minifyFlag)}`,
-    );
-    console.log('');
-    console.log('Demos path can be either a .dem files path or a directory. It can be relative or absolute.');
-    console.log(`The ${this.outputFolderFlag} flag specify the directory where output files will be saved.`);
-    console.log(
-      `The ${this.sourceFlag} flag forces the analysis logic of the demo analyzer. Available values: [${sourceValues}]`,
-    );
-    console.log(`The ${this.forceAnalyzeFlag} flag force demos analyzes even if they are already in the database.`);
-    console.log('');
-    console.log('Examples:');
-    console.log('');
-    console.log('Export 1 demo into a minified JSON file:');
-    console.log(`    csdm ${JsonCommand.Name} "C:\\Users\\username\\Desktop\\demo.dem" ${this.minifyFlag}`);
-    console.log('');
-    console.log('Export all demos in a directory using the ESL analyzer and save it in a custom directory:');
-    console.log(
-      `    csdm ${JsonCommand.Name} "C:\\Users\\username\\Desktop\\MyFolder" ${this.outputFolderFlag} "C:\\Users\\username\\Documents" ${this.sourceFlag} esl`,
-    );
+    this.printCommandHelp({
+      name: JsonCommand.Name,
+      description: JsonCommand.Description,
+      usages: ['<demo-paths...> [options]'],
+      arguments: [
+        {
+          label: '<demo-paths...>',
+          description: '.dem files or folders containing .dem files, relative or absolute.',
+        },
+      ],
+      options: this.options,
+      examples: [
+        {
+          description: 'Export 1 demo into a minified JSON file',
+          args: `${this.helpFormatter.formatExamplePath('Desktop', 'demo.dem')} --minify`,
+        },
+        {
+          description: 'Export all demos in a folder with the ESL analyzer and save the files in a specific folder',
+          args: `${this.helpFormatter.formatExamplePath('Desktop', 'MyFolder')} --output-folder ${this.helpFormatter.formatExamplePath('Documents')} --source esl`,
+        },
+      ],
+    });
   }
 
   public async run() {
@@ -53,24 +58,8 @@ export class JsonCommand extends ExportCommand {
   }
 
   protected async parseArgs() {
-    await super.parseArgs();
-
-    for (let index = 0; index < this.args.length; index++) {
-      const arg = this.args[index];
-      if (!this.isFlagArgument(arg)) {
-        continue;
-      }
-
-      switch (arg) {
-        case this.minifyFlag:
-          this.minify = true;
-          break;
-        default:
-          if (!super.isCommonFlag(arg)) {
-            console.log(`Unknown flag: ${arg}`);
-            this.exitWithFailure();
-          }
-      }
-    }
+    const { values, positionals } = this.parseOptions(this.options, { allowPositionals: true });
+    await this.parseExportArgs(values, positionals);
+    this.minify = values.minify ?? false;
   }
 }
