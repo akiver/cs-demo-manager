@@ -7,6 +7,7 @@ import util from 'node:util';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
+import { CommandError } from 'csdm/cli/errors/command-error';
 import { fetchLastRenownMatches } from 'csdm/node/renown/fetch-last-renown-matches';
 import { fetchCurrentRenownAccount } from 'csdm/node/database/renown-account/fetch-current-renown-account';
 import { fetchRenownAccount } from 'csdm/node/renown/fetch-renown-account-from-steamid';
@@ -62,6 +63,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     for (const match of matches) {
       await this.processMatch(match);
     }
+    this.exitIfDownloadFailed();
   }
 
   protected parseArgs() {
@@ -80,7 +82,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
 
     const isLinkExpired = await isDownloadLinkExpired(match.demoUrl);
     if (isLinkExpired) {
-      console.log(`Demo link expired for match: ${match.id}`);
+      this.printDownloadError(`Demo link expired for match: ${match.id}`);
       return;
     }
 
@@ -88,7 +90,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     this.demoPathBeingDownloaded = demoPath;
     const response = await request(match.demoUrl, { method: 'GET' });
     if (!response.body) {
-      console.log('Request error.');
+      this.printDownloadError(`Request error for match: ${match.id}`);
       return;
     }
 
@@ -102,8 +104,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     if (!this.steamId) {
       const currentAccount = await fetchCurrentRenownAccount();
       if (!currentAccount) {
-        console.log('No current Renown account found.');
-        return this.exitWithFailure();
+        throw new CommandError('No current Renown account found.');
       }
 
       return currentAccount.id;
@@ -113,8 +114,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
       const account = await fetchRenownAccount(this.steamId);
       return account.steam_id;
     } catch (error) {
-      console.error(`Failed to retrieve account with Steam ID: ${this.steamId}`);
-      return this.exitWithFailure();
+      throw new CommandError(`Failed to retrieve account with Steam ID: ${this.steamId}`, { cause: error });
     }
   }
 

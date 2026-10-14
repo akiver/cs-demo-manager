@@ -12,15 +12,7 @@ import {
   CDataGCCStrike15_v2_MatchInfoSchema,
   toBinary,
 } from 'csgo-protobuf';
-import { SteamCommunicationError } from 'csdm/node/boiler/errors/steam-communication-error';
-import { AlreadyConnected } from 'csdm/node/boiler/errors/already-connected';
-import { SteamRestartRequired } from 'csdm/node/boiler/errors/steam-restart-required';
-import { BoilerSteamNotRunning } from 'csdm/node/boiler/errors/boiler-steam-not-running';
-import { UserNotConnected } from 'csdm/node/boiler/errors/user-not-connected';
 import { NoMatchesFound } from 'csdm/node/boiler/errors/no-matches-found';
-import { WriteFileError } from 'csdm/node/boiler/errors/write-file-error';
-import { InvalidArgs } from 'csdm/node/boiler/errors/invalid-args';
-import { MatchesInfoFileNotFound } from 'csdm/node/boiler/errors/matches-info-file-not-found';
 import {
   buildMatchName,
   getLastRoundStatsMessage,
@@ -28,7 +20,7 @@ import {
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
-import { SteamNotRunning } from 'csdm/node/counter-strike/launcher/errors/steam-not-running';
+import { CommandError } from 'csdm/cli/errors/command-error';
 const streamPipeline = util.promisify(pipeline);
 
 export class DownloadValveCommand extends DownloadBaseCommand {
@@ -77,7 +69,7 @@ export class DownloadValveCommand extends DownloadBaseCommand {
         const { matchId, reservationId, tvPort } = decodeMatchShareCode(shareCode);
         const matches = await this.fetchMatches([matchId.toString(), reservationId.toString(), tvPort.toString()]);
         if (matches.length === 0) {
-          console.log('Demo link expired.');
+          this.printDownloadError(`Demo link expired for share code: ${shareCode}`);
           continue;
         }
         await this.processMatchInfo(matches[0]);
@@ -95,6 +87,7 @@ export class DownloadValveCommand extends DownloadBaseCommand {
         await this.processMatchInfo(match);
       }
     }
+    this.exitIfDownloadFailed();
   }
 
   protected parseArgs() {
@@ -130,19 +123,19 @@ export class DownloadValveCommand extends DownloadBaseCommand {
 
     const demoUrl = lastRoundMessage.map;
     if (demoUrl === undefined) {
-      console.log('Demo URL not found');
+      this.printDownloadError(`Demo URL not found for match: ${demoName}`);
       return;
     }
 
     const isDemoLinkExpired = await isDownloadLinkExpired(demoUrl);
     if (isDemoLinkExpired) {
-      console.log(`Demo link expired ${demoUrl}`);
+      this.printDownloadError(`Demo link expired: ${demoUrl}`);
       return;
     }
 
     const response = await request(demoUrl, { method: 'GET' });
     if (!response.body) {
-      console.log('Request error');
+      this.printDownloadError(`Request error: ${demoUrl}`);
       return;
     }
 
@@ -161,41 +154,11 @@ export class DownloadValveCommand extends DownloadBaseCommand {
 
       return matches;
     } catch (error) {
-      let message = 'An error occurred retrieving matches.';
-      switch (true) {
-        case error instanceof InvalidArgs:
-          message = 'Invalid arguments provided to boiler.';
-          break;
-        case error instanceof MatchesInfoFileNotFound:
-          message = 'Matches info file not found.';
-          break;
-        case error instanceof SteamCommunicationError:
-          message =
-            'Error while contacting Steam, make sure your Steam account is not currently in-game on another device, otherwise please retry later.';
-          break;
-        case error instanceof AlreadyConnected:
-          message = 'You are already connected to the CS game coordinator, make sure to close CS and retry.';
-          break;
-        case error instanceof SteamRestartRequired:
-          message = 'Steam needs to be restarted.';
-          break;
-        case error instanceof SteamNotRunning:
-        case error instanceof BoilerSteamNotRunning:
-          message = 'Steam is not running or the current account is not logged in.';
-          break;
-        case error instanceof UserNotConnected:
-          message = 'Steam account not connected.';
-          break;
-        case error instanceof NoMatchesFound:
-          return [];
-        case error instanceof WriteFileError:
-          message = 'An error occurred while writing matches file.';
-          break;
+      if (error instanceof NoMatchesFound) {
+        return [];
       }
 
-      console.error(message);
-
-      return [];
+      throw new CommandError('Failed to retrieve the matches', { cause: error });
     }
   }
 
