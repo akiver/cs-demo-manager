@@ -2,7 +2,7 @@ import React from 'react';
 import { useIsDemoAnalysisInProgress } from 'csdm/ui/analyses/use-is-demo-analysis-in-progress';
 import { useMatchChecksums } from 'csdm/ui/cache/use-match-checksums';
 import { useAddDemosToAnalyses } from 'csdm/ui/hooks/use-add-demos-to-analyses';
-import { SupportedDemoSourcesPerGame } from 'csdm/ui/shared/supported-demo-sources';
+import { SupportedDemoSourcesPerGame } from 'csdm/common/counter-strike/supported-demo-sources';
 import type { Demo } from 'csdm/common/types/demo';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { AnalyzeConfirmationDialog } from 'csdm/ui/components/dialogs/analyze-demos-dialog';
