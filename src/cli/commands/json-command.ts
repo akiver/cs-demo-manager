@@ -57,7 +57,7 @@ export class JsonCommand extends ExportCommand {
     }
   }
 
-  protected async parseArgs() {
+  private async parseArgs() {
     const { values, positionals } = this.parseOptions(this.options, { allowPositionals: true });
     await this.parseExportArgs(values, positionals);
     this.minify = values.minify ?? false;

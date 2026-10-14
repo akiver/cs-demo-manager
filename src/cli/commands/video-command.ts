@@ -629,7 +629,7 @@ export class VideoCommand extends Command {
     }
   }
 
-  protected async parseArgs() {
+  private async parseArgs() {
     const { values, positionals } = this.parseOptions(this.options, { allowPositionals: true });
 
     const configFilePath = values['config-file'];
