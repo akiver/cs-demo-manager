@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'node:path';
+import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { Agent, interceptors, request } from 'undici';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
@@ -119,23 +120,20 @@ export abstract class DownloadBaseCommand extends Command {
 
       const contentLength = Number(response.headers['content-length']);
       const totalBytes = Number.isFinite(contentLength) && contentLength > 0 ? contentLength : undefined;
-      const printLiveProgress = (downloadedBytes: number) => {
-        this.printLiveDownloadProgress(demoName, downloadedBytes, totalBytes);
-      };
-      async function* trackProgress(source: AsyncIterable<Buffer>) {
-        let downloadedBytes = 0;
-        let lastRenderTime = 0;
-        for await (const chunk of source) {
+      let downloadedBytes = 0;
+      let lastRenderTime = 0;
+      const trackProgress = new Transform({
+        transform: (chunk: Buffer, encoding, callback) => {
           downloadedBytes += chunk.length;
           // Throttled, chunks arrive much more often than the terminal needs to be refreshed.
           const now = Date.now();
           if (now - lastRenderTime >= 100) {
             lastRenderTime = now;
-            printLiveProgress(downloadedBytes);
+            this.printLiveDownloadProgress(demoName, downloadedBytes, totalBytes);
           }
-          yield chunk;
-        }
-      }
+          callback(null, chunk);
+        },
+      });
       await pipeline(response.body, trackProgress, decompressStream, fs.createWriteStream(demoPath));
       this.downloadedDemoCount++;
       this.printProgress(`${demoName} downloaded`);
