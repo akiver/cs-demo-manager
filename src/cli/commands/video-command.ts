@@ -1,4 +1,3 @@
-import { parseArgs } from 'node:util';
 import path from 'node:path';
 import fs from 'fs-extra';
 import { Command } from './command';
@@ -13,7 +12,7 @@ import { RecordingSystem } from 'csdm/common/types/recording-system';
 import { isValidRecordingSystem } from 'csdm/common/types/recording-system';
 import { RecordingOutput } from 'csdm/common/types/recording-output';
 import { isValidRecordingOutput } from 'csdm/common/types/recording-output';
-import type { VideoContainer } from 'csdm/common/types/video-container';
+import { VideoContainer } from 'csdm/common/types/video-container';
 import { isValidVideoContainer } from 'csdm/common/types/video-container';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { isHlaeInstalled } from 'csdm/node/video/hlae/is-hlae-installed';
@@ -34,6 +33,7 @@ import { buildPlayersEventSequences } from 'csdm/common/video/sequences/build-pl
 import { buildPlayersRoundsSequences } from 'csdm/common/video/sequences/build-players-rounds-sequences';
 import { isErrorCode } from 'csdm/common/is-error-code';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
+import type { CommandOptions } from 'csdm/cli/parse-command-args';
 
 export type VideoCommandConfig = {
   demoPath: string;
@@ -76,49 +76,165 @@ function isQueueSubCommand(arg: string | undefined): arg is QueueSubCommand {
 export class VideoCommand extends Command {
   public static Name = 'video';
   public static Description = 'Generate videos from demos and control the video generation queue.';
-  private readonly outputFlag = 'output';
-  private readonly framerateFlag = 'framerate';
-  private readonly widthFlag = 'width';
-  private readonly heightFlag = 'height';
-  private readonly closeGameAfterRecordingFlag = 'close-game-after-recording';
-  private readonly noCloseGameAfterRecordingFlag = 'no-close-game-after-recording';
-  private readonly concatenateSequencesFlag = 'concatenate-sequences';
-  private readonly noConcatenateSequencesFlag = 'no-concatenate-sequences';
-  private readonly outputFileNameFlag = 'output-file-name';
-  private readonly trueViewFlag = 'true-view';
-  private readonly noTrueViewFlag = 'no-true-view';
-  private readonly encoderSoftwareFlag = 'encoder-software';
-  private readonly recordingSystemFlag = 'recording-system';
-  private readonly recordingOutputFlag = 'recording-output';
-  private readonly ffmpegExecutablePathFlag = 'ffmpeg-executable-path';
-  private readonly ffmpegCrfFlag = 'ffmpeg-crf';
-  private readonly ffmpegAudioBitrateFlag = 'ffmpeg-audio-bitrate';
-  private readonly ffmpegVideoCodecFlag = 'ffmpeg-video-codec';
-  private readonly ffmpegAudioCodecFlag = 'ffmpeg-audio-codec';
-  private readonly ffmpegVideoContainerFlag = 'ffmpeg-video-container';
-  private readonly ffmpegInputParametersFlag = 'ffmpeg-input-parameters';
-  private readonly ffmpegOutputParametersFlag = 'ffmpeg-output-parameters';
-  private readonly showXRayFlag = 'show-x-ray';
-  private readonly noShowXRayFlag = 'no-show-x-ray';
-  private readonly showAssistsFlag = 'show-assists';
-  private readonly noShowAssistsFlag = 'no-show-assists';
-  private readonly showOnlyDeathNoticesFlag = 'show-only-death-notices';
-  private readonly noShowOnlyDeathNoticesFlag = 'no-show-only-death-notices';
-  private readonly recordAudioFlag = 'record-audio';
-  private readonly noRecordAudioFlag = 'no-record-audio';
-  private readonly playerVoicesFlag = 'player-voices';
-  private readonly noPlayerVoicesFlag = 'no-player-voices';
-  private readonly deathNoticesDurationFlag = 'death-notices-duration';
-  private readonly cfgFlag = 'cfg';
-  private readonly focusPlayerFlag = 'focus-player';
-  private readonly configFileFlag = 'config-file';
-  private readonly modeFlag = 'mode';
-  private readonly eventFlag = 'event';
-  private readonly steamIdsFlag = 'steamids';
-  private readonly perspectiveFlag = 'perspective';
-  private readonly roundsFlag = 'rounds';
-  private readonly startSecondsBeforeFlag = 'start-seconds-before';
-  private readonly endSecondsAfterFlag = 'end-seconds-after';
+  private readonly options = {
+    output: {
+      type: 'string',
+      short: 'o',
+      valueName: 'folder',
+      description: 'Folder where the video is generated.',
+      defaultValue: 'demo folder',
+    },
+    'config-file': {
+      type: 'string',
+      short: 'c',
+      valueName: 'path',
+      description: 'Path to a JSON config file describing the video, the other options are ignored when provided.',
+    },
+    framerate: { type: 'string', valueName: 'number', description: 'Video framerate.' },
+    width: { type: 'string', valueName: 'number', description: 'Video width, at least 800.' },
+    height: { type: 'string', valueName: 'number', description: 'Video height, at least 600.' },
+    'recording-system': {
+      type: 'string',
+      valueName: 'system',
+      choices: Object.values(RecordingSystem),
+      description: 'Software used to record the game.',
+    },
+    'recording-output': {
+      type: 'string',
+      valueName: 'output',
+      choices: Object.values(RecordingOutput),
+      description: 'Generate a video, the raw images or both.',
+    },
+    'encoder-software': {
+      type: 'string',
+      valueName: 'software',
+      choices: Object.values(EncoderSoftware),
+      description: 'Software used to encode the video.',
+    },
+    'output-file-name': { type: 'string', valueName: 'name', description: 'Name of the video file.' },
+    'close-game-after-recording': {
+      type: 'boolean',
+      negatable: true,
+      description: 'Close the game once the recording is done.',
+    },
+    'concatenate-sequences': {
+      type: 'boolean',
+      negatable: true,
+      description: 'Concatenate the sequences into a single video.',
+    },
+    'true-view': { type: 'boolean', negatable: true, description: 'Record what the player actually saw.' },
+    'show-x-ray': { type: 'boolean', negatable: true, description: 'Show the X-Ray.' },
+    'show-assists': { type: 'boolean', negatable: true, description: 'Show the assists in the death notices.' },
+    'show-only-death-notices': {
+      type: 'boolean',
+      negatable: true,
+      description: 'Hide the HUD except the death notices.',
+    },
+    'record-audio': { type: 'boolean', negatable: true, description: 'Record the game audio.' },
+    'player-voices': { type: 'boolean', negatable: true, description: 'Include the players voices.' },
+    'death-notices-duration': {
+      type: 'string',
+      valueName: 'seconds',
+      description: 'Duration of the death notices in seconds.',
+    },
+    cfg: {
+      type: 'string',
+      valueName: 'commands',
+      description: 'Game commands executed before the sequence, one per line.',
+    },
+    'focus-player': {
+      type: 'string',
+      valueName: 'steamId',
+      description: 'Steam ID of the player to focus the camera on.',
+    },
+    'ffmpeg-executable-path': {
+      type: 'string',
+      valueName: 'path',
+      description: 'Path to a custom FFmpeg executable.',
+      group: 'FFmpeg options',
+    },
+    'ffmpeg-crf': {
+      type: 'string',
+      valueName: 'number',
+      description: 'Constant Rate Factor, between 0 and 51.',
+      group: 'FFmpeg options',
+    },
+    'ffmpeg-audio-bitrate': {
+      type: 'string',
+      valueName: 'kbps',
+      description: 'Audio bitrate, at least 8.',
+      group: 'FFmpeg options',
+    },
+    'ffmpeg-video-codec': { type: 'string', valueName: 'codec', description: 'Video codec.', group: 'FFmpeg options' },
+    'ffmpeg-audio-codec': { type: 'string', valueName: 'codec', description: 'Audio codec.', group: 'FFmpeg options' },
+    'ffmpeg-video-container': {
+      type: 'string',
+      valueName: 'container',
+      choices: Object.values(VideoContainer),
+      description: 'Video container.',
+      group: 'FFmpeg options',
+    },
+    'ffmpeg-input-parameters': {
+      type: 'string',
+      valueName: 'parameters',
+      description: 'Additional FFmpeg input parameters.',
+      group: 'FFmpeg options',
+    },
+    'ffmpeg-output-parameters': {
+      type: 'string',
+      valueName: 'parameters',
+      description: 'Additional FFmpeg output parameters.',
+      group: 'FFmpeg options',
+    },
+    mode: {
+      type: 'string',
+      valueName: 'mode',
+      choices: Object.values(Mode),
+      description: 'Generate the sequences from players events instead of a tick range.',
+      group: `Player mode options (--mode ${Mode.Player})`,
+    },
+    steamids: {
+      type: 'string',
+      valueName: 'steamIds',
+      description: 'Comma-separated list of the players Steam IDs, required.',
+      group: `Player mode options (--mode ${Mode.Player})`,
+    },
+    event: {
+      type: 'string',
+      valueName: 'event',
+      choices: Object.values(PlayerSequenceEvent),
+      description: 'Events to record, required.',
+      group: `Player mode options (--mode ${Mode.Player})`,
+    },
+    perspective: {
+      type: 'string',
+      valueName: 'perspective',
+      choices: Object.values(Perspective),
+      description: 'Record the events from the players or their enemies point of view.',
+      defaultValue: Perspective.Player,
+      group: `Player mode options (--mode ${Mode.Player})`,
+    },
+    rounds: {
+      type: 'string',
+      valueName: 'rounds',
+      description: 'Comma-separated list of round numbers to include, all rounds by default.',
+      group: `Player mode options (--mode ${Mode.Player})`,
+    },
+    'start-seconds-before': {
+      type: 'string',
+      valueName: 'seconds',
+      description: 'Seconds before the event to start the sequence.',
+      defaultValue: '2',
+      group: `Player mode options (--mode ${Mode.Player})`,
+    },
+    'end-seconds-after': {
+      type: 'string',
+      valueName: 'seconds',
+      description: 'Seconds after the event to end the sequence.',
+      defaultValue: '2',
+      group: `Player mode options (--mode ${Mode.Player})`,
+    },
+  } satisfies CommandOptions;
   private outputFolderPath: string | undefined;
   private demoPath: string = '';
   private startTick: number = 0;
@@ -159,76 +275,44 @@ export class VideoCommand extends Command {
   private endSecondsAfter = 2;
 
   public printHelp() {
-    console.log(VideoCommand.Description);
-    console.log('');
-    console.log(`Usage: csdm ${VideoCommand.Name} <demoPath> <startTick> <endTick> [options]`);
-    console.log(
-      `       csdm ${VideoCommand.Name} <demoPath> --mode ${Mode.Player} --steamids <id1,id2> --event <event> [options]`,
-    );
-    console.log(`       csdm ${VideoCommand.Name} <${Object.values(QueueSubCommand).join('|')}>`);
-    console.log('');
-    console.log('The demo must have been analyzed and be present in the database.');
-    console.log('');
-    console.log('Videos are added to the generation queue shared with the GUI, the command waits for its video to');
-    console.log('complete and pressing Ctrl+C aborts it. The queue itself can be controlled with the sub commands:');
-    console.log(`  ${QueueSubCommand.List}: print the videos in the queue and whether the queue is paused.`);
-    console.log(
-      `  ${QueueSubCommand.Pause}: pause the queue, the video currently being generated completes before the queue stops.`,
-    );
-    console.log(`  ${QueueSubCommand.Resume}: resume the queue.`);
-    console.log('');
-    console.log('Options:');
-    console.log(`  --${this.framerateFlag} <number>`);
-    console.log(`  --${this.widthFlag} <number>`);
-    console.log(`  --${this.heightFlag} <number>`);
-    console.log(`  --${this.closeGameAfterRecordingFlag}`);
-    console.log(`  --${this.noCloseGameAfterRecordingFlag}`);
-    console.log(`  --${this.concatenateSequencesFlag}`);
-    console.log(`  --${this.noConcatenateSequencesFlag}`);
-    console.log(`  --${this.outputFileNameFlag} <string>`);
-    console.log(`  --${this.encoderSoftwareFlag} <string> (FFmpeg or VirtualDub)`);
-    console.log(`  --${this.recordingSystemFlag} <string> (HLAE or CS)`);
-    console.log(`  --${this.recordingOutputFlag} <string> (video, images, or images-and-video)`);
-    console.log(`  --${this.ffmpegExecutablePathFlag} <string> (path to FFmpeg executable)`);
-    console.log(`  --${this.ffmpegCrfFlag} <number>`);
-    console.log(`  --${this.ffmpegAudioBitrateFlag} <number>`);
-    console.log(`  --${this.ffmpegVideoCodecFlag} <string>`);
-    console.log(`  --${this.ffmpegAudioCodecFlag} <string>`);
-    console.log(`  --${this.ffmpegVideoContainerFlag} <string> (mp4, avi or mkv)`);
-    console.log(`  --${this.ffmpegInputParametersFlag} <string>`);
-    console.log(`  --${this.ffmpegOutputParametersFlag} <string>`);
-    console.log(`  --${this.showXRayFlag}`);
-    console.log(`  --${this.noShowXRayFlag}`);
-    console.log(`  --${this.showAssistsFlag}`);
-    console.log(`  --${this.noShowAssistsFlag}`);
-    console.log(`  --${this.showOnlyDeathNoticesFlag}`);
-    console.log(`  --${this.noShowOnlyDeathNoticesFlag}`);
-    console.log(`  --${this.playerVoicesFlag}`);
-    console.log(`  --${this.noPlayerVoicesFlag}`);
-    console.log(`  --${this.recordAudioFlag}`);
-    console.log(`  --${this.noRecordAudioFlag}`);
-    console.log(`  --${this.deathNoticesDurationFlag} <number>`);
-    console.log(`  --${this.trueViewFlag}`);
-    console.log(`  --${this.noTrueViewFlag}`);
-    console.log(`  --${this.cfgFlag} <string>`);
-    console.log(`  --${this.focusPlayerFlag} <steamId>`);
-    console.log(`  --${this.configFileFlag} <path> (path to config JSON file)`);
-    console.log(`  --${this.outputFlag} <path> (output folder for generated videos)`);
-    console.log(`  --verbose`);
-    console.log('');
-    console.log(`Player mode options (when --mode ${Mode.Player}):`);
-    console.log(`  --${this.eventFlag} <string> (${Object.values(PlayerSequenceEvent).join('|')})`);
-    console.log(`  --${this.steamIdsFlag} <steamId1,steamId2,...> (comma-separated list of Steam IDs)`);
-    console.log(
-      `  --${this.perspectiveFlag} <string> (${Object.values(PerspectiveType).join('|')}, default: ${PerspectiveType.Player})`,
-    );
-    console.log(`  --${this.roundsFlag} <number,number,...> (comma-separated list of round numbers to filter)`);
-    console.log(
-      `  --${this.startSecondsBeforeFlag} <number> (seconds before event to start sequence, default: ${this.startSecondsBefore})`,
-    );
-    console.log(
-      `  --${this.endSecondsAfterFlag} <number> (seconds after event to end sequence, default: ${this.endSecondsAfter})`,
-    );
+    this.printCommandHelp({
+      name: VideoCommand.Name,
+      description: VideoCommand.Description,
+      usages: [
+        '<demo-path> <start-tick> <end-tick> [options]',
+        `<demo-path> --mode ${Mode.Player} --steamids <steamIds> --event <event> [options]`,
+        '--config-file <path>',
+        `<${Object.values(QueueSubCommand).join('|')}>`,
+      ],
+      notes: [
+        'The demo must have been analyzed and be present in the database.',
+        'Videos are added to the generation queue shared with the app, the command waits for its video to complete and pressing Ctrl+C aborts it. Options not provided default to the app video settings.',
+      ],
+      arguments: [
+        { label: '<demo-path>', description: 'Path of the .dem file.' },
+        { label: '<start-tick>', description: 'Tick where the recording starts.' },
+        { label: '<end-tick>', description: 'Tick where the recording ends.' },
+      ],
+      subCommands: [
+        { label: QueueSubCommand.List, description: 'Print the videos in the queue and whether the queue is paused.' },
+        {
+          label: QueueSubCommand.Pause,
+          description: 'Pause the queue, the video currently being generated completes before the queue stops.',
+        },
+        { label: QueueSubCommand.Resume, description: 'Resume the queue.' },
+      ],
+      options: this.options,
+      examples: [
+        {
+          description: 'Record a tick range',
+          args: `${this.helpFormatter.formatExamplePath('Desktop', 'demo.dem')} 1000 5000`,
+        },
+        {
+          description: 'Record the kills of a player',
+          args: `${this.helpFormatter.formatExamplePath('Desktop', 'demo.dem')} --mode ${Mode.Player} --steamids 76561198000000000 --event ${PlayerSequenceEvent.Kills}`,
+        },
+      ],
+    });
   }
 
   public async run() {
@@ -298,10 +382,10 @@ export class VideoCommand extends Command {
         };
       } else if (this.mode === 'player') {
         if (this.steamIds.length === 0) {
-          throw new InvalidArgument(`--${this.steamIdsFlag} is required for player mode`);
+          throw new InvalidArgument(`--steamids is required for player mode`);
         }
         if (!this.event) {
-          throw new InvalidArgument(`--${this.eventFlag} is required for player mode`);
+          throw new InvalidArgument(`--event is required for player mode`);
         }
 
         const [match] = await fetchMatchesByChecksums([demo.checksum]);
@@ -397,11 +481,12 @@ export class VideoCommand extends Command {
       await this.waitForVideoGeneration(client, video);
       client.close();
     } catch (error) {
+      if (error instanceof InvalidArgument) {
+        throw error;
+      }
+
       if (error instanceof Error) {
         console.error(error.message);
-        if (error instanceof InvalidArgument) {
-          this.printHelp();
-        }
       } else if (isErrorCode(error)) {
         console.error(getErrorCodeMessage(error));
       } else {
@@ -545,59 +630,9 @@ export class VideoCommand extends Command {
   }
 
   protected async parseArgs() {
-    super.parseArgs(this.args);
-    const { values, positionals } = parseArgs({
-      options: {
-        ...this.commonArgs,
-        [this.outputFlag]: { type: 'string', short: 'o' },
-        [this.framerateFlag]: { type: 'string' },
-        [this.widthFlag]: { type: 'string' },
-        [this.heightFlag]: { type: 'string' },
-        [this.closeGameAfterRecordingFlag]: { type: 'boolean' },
-        [this.noCloseGameAfterRecordingFlag]: { type: 'boolean' },
-        [this.concatenateSequencesFlag]: { type: 'boolean' },
-        [this.noConcatenateSequencesFlag]: { type: 'boolean' },
-        [this.outputFileNameFlag]: { type: 'string' },
-        [this.encoderSoftwareFlag]: { type: 'string' },
-        [this.recordingSystemFlag]: { type: 'string' },
-        [this.recordingOutputFlag]: { type: 'string' },
-        [this.ffmpegExecutablePathFlag]: { type: 'string' },
-        [this.ffmpegCrfFlag]: { type: 'string' },
-        [this.ffmpegAudioBitrateFlag]: { type: 'string' },
-        [this.ffmpegVideoCodecFlag]: { type: 'string' },
-        [this.ffmpegAudioCodecFlag]: { type: 'string' },
-        [this.ffmpegVideoContainerFlag]: { type: 'string' },
-        [this.ffmpegInputParametersFlag]: { type: 'string' },
-        [this.ffmpegOutputParametersFlag]: { type: 'string' },
-        [this.trueViewFlag]: { type: 'boolean' },
-        [this.noTrueViewFlag]: { type: 'boolean' },
-        [this.showXRayFlag]: { type: 'boolean' },
-        [this.noShowXRayFlag]: { type: 'boolean' },
-        [this.showAssistsFlag]: { type: 'boolean' },
-        [this.noShowAssistsFlag]: { type: 'boolean' },
-        [this.showOnlyDeathNoticesFlag]: { type: 'boolean' },
-        [this.noShowOnlyDeathNoticesFlag]: { type: 'boolean' },
-        [this.recordAudioFlag]: { type: 'boolean' },
-        [this.noRecordAudioFlag]: { type: 'boolean' },
-        [this.playerVoicesFlag]: { type: 'boolean' },
-        [this.noPlayerVoicesFlag]: { type: 'boolean' },
-        [this.deathNoticesDurationFlag]: { type: 'string' },
-        [this.cfgFlag]: { type: 'string' },
-        [this.focusPlayerFlag]: { type: 'string' },
-        [this.configFileFlag]: { type: 'string', short: 'c' },
-        [this.modeFlag]: { type: 'string' },
-        [this.steamIdsFlag]: { type: 'string' },
-        [this.eventFlag]: { type: 'string' },
-        [this.perspectiveFlag]: { type: 'string' },
-        [this.roundsFlag]: { type: 'string' },
-        [this.startSecondsBeforeFlag]: { type: 'string' },
-        [this.endSecondsAfterFlag]: { type: 'string' },
-      },
-      allowPositionals: true,
-      args: this.args,
-    });
+    const { values, positionals } = this.parseOptions(this.options, { allowPositionals: true });
 
-    const configFilePath = values[this.configFileFlag];
+    const configFilePath = values['config-file'];
     if (configFilePath) {
       try {
         const json = await fs.readFile(configFilePath, { encoding: 'utf8' });
@@ -633,32 +668,32 @@ export class VideoCommand extends Command {
     }
     this.demoPath = path.resolve(demoPath);
 
-    const mode = values[this.modeFlag];
+    const mode = values.mode;
     if (typeof mode === 'string') {
       if (mode !== 'player') {
         throw new InvalidArgument('Invalid mode. Supported values: player');
       }
       this.mode = mode;
 
-      const steamIdsValue = values[this.steamIdsFlag];
+      const steamIdsValue = values.steamids;
       if (typeof steamIdsValue !== 'string') {
-        throw new InvalidArgument(`The --${this.steamIdsFlag} option is required for player mode`);
+        throw new InvalidArgument(`The --steamids option is required for player mode`);
       }
       this.steamIds = steamIdsValue.split(',').map((id) => id.trim());
       if (this.steamIds.length === 0) {
         throw new InvalidArgument('At least one Steam ID must be provided');
       }
 
-      const eventValue = values[this.eventFlag];
+      const eventValue = values.event;
       if (typeof eventValue !== 'string') {
-        throw new InvalidArgument(`The --${this.eventFlag} option is required for player mode`);
+        throw new InvalidArgument(`The --event option is required for player mode`);
       }
       if (!isValidPlayerSequenceEvent(eventValue)) {
         throw new InvalidArgument(`Invalid event. Supported values: ${Object.values(PlayerSequenceEvent).join(', ')}`);
       }
       this.event = eventValue;
 
-      const perspectiveValue = values[this.perspectiveFlag];
+      const perspectiveValue = values.perspective;
       if (typeof perspectiveValue === 'string') {
         if (!isValidPerspective(perspectiveValue)) {
           throw new InvalidArgument(`Invalid perspective. Supported values: ${Object.values(Perspective).join(', ')}`);
@@ -666,7 +701,7 @@ export class VideoCommand extends Command {
         this.perspective = perspectiveValue;
       }
 
-      const roundsValue = values[this.roundsFlag];
+      const roundsValue = values.rounds;
       if (typeof roundsValue === 'string') {
         const rounds = roundsValue.split(',').map((value) => {
           const number = Number(value.trim());
@@ -678,7 +713,7 @@ export class VideoCommand extends Command {
         this.rounds = rounds;
       }
 
-      const startSecondsBeforeValue = values[this.startSecondsBeforeFlag];
+      const startSecondsBeforeValue = values['start-seconds-before'];
       if (typeof startSecondsBeforeValue === 'string') {
         const seconds = Number(startSecondsBeforeValue);
         if (Number.isNaN(seconds) || seconds < 0) {
@@ -687,7 +722,7 @@ export class VideoCommand extends Command {
         this.startSecondsBefore = seconds;
       }
 
-      const endSecondsAfterValue = values[this.endSecondsAfterFlag];
+      const endSecondsAfterValue = values['end-seconds-after'];
       if (typeof endSecondsAfterValue === 'string') {
         const seconds = Number(endSecondsAfterValue);
         if (Number.isNaN(seconds) || seconds < 0) {
@@ -722,7 +757,7 @@ export class VideoCommand extends Command {
       this.endTick = endTick;
     }
 
-    const outputFolderPath = values[this.outputFlag];
+    const outputFolderPath = values.output;
     if (outputFolderPath) {
       try {
         const stats = await fs.stat(outputFolderPath);
@@ -737,8 +772,8 @@ export class VideoCommand extends Command {
         throw new InvalidArgument('Output folder does not exist');
       }
     }
-    if (values[this.framerateFlag]) {
-      const framerate = Number(values[this.framerateFlag]);
+    if (values.framerate) {
+      const framerate = Number(values.framerate);
       if (Number.isNaN(framerate)) {
         throw new InvalidArgument('Framerate is not a number');
       }
@@ -747,8 +782,8 @@ export class VideoCommand extends Command {
       }
       this.framerate = framerate;
     }
-    if (values[this.widthFlag]) {
-      const width = Number(values[this.widthFlag]);
+    if (values.width) {
+      const width = Number(values.width);
       if (Number.isNaN(width)) {
         throw new InvalidArgument('Width is not a number');
       }
@@ -757,8 +792,8 @@ export class VideoCommand extends Command {
       }
       this.width = width;
     }
-    if (values[this.heightFlag]) {
-      const height = Number(values[this.heightFlag]);
+    if (values.height) {
+      const height = Number(values.height);
       if (Number.isNaN(height)) {
         throw new InvalidArgument('Height is not a number');
       }
@@ -767,48 +802,34 @@ export class VideoCommand extends Command {
       }
       this.height = height;
     }
-    const closeGameAfterRecording = values[this.closeGameAfterRecordingFlag];
-    if (closeGameAfterRecording !== undefined) {
-      this.closeGameAfterRecording = true;
-    }
-    const noCloseGameAfterRecording = values[this.noCloseGameAfterRecordingFlag];
-    if (noCloseGameAfterRecording !== undefined) {
-      this.closeGameAfterRecording = false;
-    }
-    const concatenateSequences = values[this.concatenateSequencesFlag];
-    if (concatenateSequences !== undefined) {
-      this.concatenateSequences = true;
-    }
-    const noConcatenateSequences = values[this.noConcatenateSequencesFlag];
-    if (noConcatenateSequences !== undefined) {
-      this.concatenateSequences = false;
-    }
-    const outputFileName = values[this.outputFileNameFlag];
+    this.closeGameAfterRecording = values['close-game-after-recording'];
+    this.concatenateSequences = values['concatenate-sequences'];
+    const outputFileName = values['output-file-name'];
     if (typeof outputFileName === 'string') {
       this.outputFileName = outputFileName;
     }
-    const encoderSoftware = values[this.encoderSoftwareFlag];
+    const encoderSoftware = values['encoder-software'];
     if (encoderSoftware !== undefined) {
       if (!isValidEncoderSoftware(encoderSoftware)) {
         throw new InvalidArgument('Invalid encoder software');
       }
       this.encoderSoftware = encoderSoftware;
     }
-    const recordingSystem = values[this.recordingSystemFlag];
+    const recordingSystem = values['recording-system'];
     if (recordingSystem !== undefined) {
       if (!isValidRecordingSystem(recordingSystem)) {
         throw new InvalidArgument('Invalid recording system');
       }
       this.recordingSystem = recordingSystem;
     }
-    const recordingOutput = values[this.recordingOutputFlag];
+    const recordingOutput = values['recording-output'];
     if (recordingOutput !== undefined) {
       if (!isValidRecordingOutput(recordingOutput)) {
         throw new InvalidArgument('Invalid recording output');
       }
       this.recordingOutput = recordingOutput;
     }
-    const ffmpegExecutablePath = values[this.ffmpegExecutablePathFlag];
+    const ffmpegExecutablePath = values['ffmpeg-executable-path'];
     if (typeof ffmpegExecutablePath === 'string') {
       const ffmpegExecutableExists = await fs.pathExists(ffmpegExecutablePath);
       if (!ffmpegExecutableExists) {
@@ -816,8 +837,8 @@ export class VideoCommand extends Command {
       }
       this.ffmpegExecutablePath = ffmpegExecutablePath;
     }
-    if (values[this.ffmpegCrfFlag] !== undefined) {
-      const ffmpegCrf = Number(values[this.ffmpegCrfFlag]);
+    if (values['ffmpeg-crf'] !== undefined) {
+      const ffmpegCrf = Number(values['ffmpeg-crf']);
       if (Number.isNaN(ffmpegCrf)) {
         throw new InvalidArgument('FFmpeg CRF is not a number');
       }
@@ -826,8 +847,8 @@ export class VideoCommand extends Command {
       }
       this.ffmpegCrf = ffmpegCrf;
     }
-    if (values[this.ffmpegAudioBitrateFlag] !== undefined) {
-      const ffmpegAudioBitrate = Number(values[this.ffmpegAudioBitrateFlag]);
+    if (values['ffmpeg-audio-bitrate'] !== undefined) {
+      const ffmpegAudioBitrate = Number(values['ffmpeg-audio-bitrate']);
       if (Number.isNaN(ffmpegAudioBitrate)) {
         throw new InvalidArgument('FFmpeg audio bitrate is not a number');
       }
@@ -836,75 +857,33 @@ export class VideoCommand extends Command {
       }
       this.ffmpegAudioBitrate = ffmpegAudioBitrate;
     }
-    if (values[this.ffmpegVideoCodecFlag] !== undefined) {
-      this.ffmpegVideoCodec = values[this.ffmpegVideoCodecFlag];
+    if (values['ffmpeg-video-codec'] !== undefined) {
+      this.ffmpegVideoCodec = values['ffmpeg-video-codec'];
     }
-    if (values[this.ffmpegAudioCodecFlag]) {
-      this.ffmpegAudioCodec = values[this.ffmpegAudioCodecFlag];
+    if (values['ffmpeg-audio-codec']) {
+      this.ffmpegAudioCodec = values['ffmpeg-audio-codec'];
     }
-    const videoContainer = values[this.ffmpegVideoContainerFlag];
+    const videoContainer = values['ffmpeg-video-container'];
     if (videoContainer !== undefined) {
       if (!isValidVideoContainer(videoContainer)) {
         throw new InvalidArgument('Invalid video container');
       }
       this.ffmpegVideoContainer = videoContainer;
     }
-    if (values[this.ffmpegInputParametersFlag] !== undefined) {
-      this.ffmpegInputParameters = values[this.ffmpegInputParametersFlag];
+    if (values['ffmpeg-input-parameters'] !== undefined) {
+      this.ffmpegInputParameters = values['ffmpeg-input-parameters'];
     }
-    if (values[this.ffmpegOutputParametersFlag]) {
-      this.ffmpegOutputParameters = values[this.ffmpegOutputParametersFlag];
+    if (values['ffmpeg-output-parameters']) {
+      this.ffmpegOutputParameters = values['ffmpeg-output-parameters'];
     }
-    const showXRay = values[this.showXRayFlag];
-    if (showXRay !== undefined) {
-      this.showXRay = true;
-    }
-    const noShowXRay = values[this.noShowXRayFlag];
-    if (noShowXRay !== undefined) {
-      this.showXRay = false;
-    }
-    const showAssists = values[this.showAssistsFlag];
-    if (showAssists !== undefined) {
-      this.showAssists = true;
-    }
-    const noShowAssists = values[this.noShowAssistsFlag];
-    if (noShowAssists !== undefined) {
-      this.showAssists = false;
-    }
-    const showOnlyDeathNotices = values[this.showOnlyDeathNoticesFlag];
-    if (showOnlyDeathNotices !== undefined) {
-      this.showOnlyDeathNotices = true;
-    }
-    const noShowOnlyDeathNotices = values[this.noShowOnlyDeathNoticesFlag];
-    if (noShowOnlyDeathNotices !== undefined) {
-      this.showOnlyDeathNotices = false;
-    }
-    const trueView = values[this.trueViewFlag];
-    if (trueView !== undefined) {
-      this.trueView = true;
-    }
-    const noTrueView = values[this.noTrueViewFlag];
-    if (noTrueView !== undefined) {
-      this.trueView = false;
-    }
-    const playerVoices = values[this.playerVoicesFlag];
-    if (playerVoices !== undefined) {
-      this.playerVoices = true;
-    }
-    const noPlayerVoices = values[this.noPlayerVoicesFlag];
-    if (noPlayerVoices !== undefined) {
-      this.playerVoices = false;
-    }
-    const recordAudio = values[this.recordAudioFlag];
-    if (recordAudio !== undefined) {
-      this.recordAudio = true;
-    }
-    const noRecordAudio = values[this.noRecordAudioFlag];
-    if (noRecordAudio !== undefined) {
-      this.recordAudio = false;
-    }
-    if (values[this.deathNoticesDurationFlag]) {
-      const deathNoticesDuration = Number(values[this.deathNoticesDurationFlag]);
+    this.showXRay = values['show-x-ray'];
+    this.showAssists = values['show-assists'];
+    this.showOnlyDeathNotices = values['show-only-death-notices'];
+    this.trueView = values['true-view'];
+    this.playerVoices = values['player-voices'];
+    this.recordAudio = values['record-audio'];
+    if (values['death-notices-duration']) {
+      const deathNoticesDuration = Number(values['death-notices-duration']);
       if (Number.isNaN(deathNoticesDuration)) {
         throw new InvalidArgument('Death notices duration is not a number');
       }
@@ -913,11 +892,11 @@ export class VideoCommand extends Command {
       }
       this.deathNoticesDuration = deathNoticesDuration;
     }
-    if (values[this.cfgFlag]) {
-      this.cfg = values[this.cfgFlag];
+    if (values.cfg) {
+      this.cfg = values.cfg;
     }
-    if (values[this.focusPlayerFlag]) {
-      this.focusPlayerSteamId = values[this.focusPlayerFlag] as string;
+    if (values['focus-player']) {
+      this.focusPlayerSteamId = values['focus-player'];
     }
   }
 }
