@@ -1,9 +1,6 @@
 import fs from 'fs-extra';
-import { request } from 'undici';
-import { pipeline } from 'node:stream';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import util from 'node:util';
 import { fetchCurrentFaceitAccount } from 'csdm/node/database/faceit-account/fetch-current-faceit-account';
 import { fetchLastFaceitMatches } from 'csdm/node/faceit/fetch-last-faceit-matches';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
@@ -12,7 +9,6 @@ import type { FaceitMatch } from 'csdm/common/types/faceit-match';
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { CommandError } from 'csdm/cli/errors/command-error';
-const streamPipeline = util.promisify(pipeline);
 
 export class DownloadFaceitCommand extends DownloadBaseCommand {
   public static Name = 'dl-faceit';
@@ -91,15 +87,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
 
     console.log(`Downloading ${match.demoUrl}...`);
     this.demoPathBeingDownloaded = demoPath;
-    const response = await request(match.demoUrl, { method: 'GET' });
-    if (!response.body) {
-      this.printDownloadError(`Request error for match: ${match.id}`);
-      return;
-    }
-
-    const out = fs.createWriteStream(demoPath);
-    const transformStream = zlib.createGunzip();
-    await streamPipeline(response.body, transformStream, out);
+    await this.downloadDemo(match.demoUrl, demoPath, zlib.createGunzip());
     this.demoPathBeingDownloaded = undefined;
   }
 
