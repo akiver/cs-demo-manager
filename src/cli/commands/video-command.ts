@@ -34,6 +34,8 @@ import { Perspective as PerspectiveType } from 'csdm/common/types/perspective';
 import { buildPlayersEventSequences } from 'csdm/common/video/sequences/build-players-event-sequences';
 import { buildPlayersRoundsSequences } from 'csdm/common/video/sequences/build-players-rounds-sequences';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
+import { output } from 'csdm/cli/output';
+import { formatDuration } from 'csdm/cli/format';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 
 export type VideoCommandConfig = {
@@ -516,7 +518,7 @@ export class VideoCommand extends Command {
   private async installDependenciesIfNecessary(client: CliWebSocketClient, parameters: AddVideoPayload) {
     const installTimeout = { timeoutMs: 300_000 };
     if (parameters.recordingSystem === RecordingSystem.HLAE && !(await isHlaeInstalled())) {
-      console.log('Installing HLAE...');
+      output.progress('Installing HLAE...');
       await client.send({ name: CliClientMessageName.InstallHlae }, installTimeout);
     }
 
@@ -527,7 +529,7 @@ export class VideoCommand extends Command {
 
     const { encoderSoftware } = parameters;
     if (encoderSoftware === EncoderSoftware.VirtualDub && !(await isVirtualDubInstalled())) {
-      console.log('Installing VirtualDub...');
+      output.progress('Installing VirtualDub...');
       await client.send({ name: CliClientMessageName.InstallVirtualDub }, installTimeout);
     }
 
@@ -536,7 +538,7 @@ export class VideoCommand extends Command {
       typeof this.ffmpegExecutablePath !== 'string' &&
       !(await isFfmpegInstalled())
     ) {
-      console.log('Installing FFmpeg...');
+      output.progress('Installing FFmpeg...');
       await client.send({ name: CliClientMessageName.InstallFfmpeg }, installTimeout);
     }
   }
@@ -548,6 +550,17 @@ export class VideoCommand extends Command {
     });
     let hasError = false;
     let lastPrintedProgress = '';
+    let statusMessage = 'Waiting for the video generation...';
+    const startTime = Date.now();
+    // Recording can take minutes without status update, the elapsed time shows that the generation is still running.
+    const printElapsedTime = () => {
+      output.liveProgress(`${statusMessage} ${formatDuration(Date.now() - startTime)}`);
+    };
+    const printStatus = (message: string) => {
+      statusMessage = message;
+      output.progress(message);
+      printElapsedTime();
+    };
 
     const onVideoUpdated = (updatedVideo: Video) => {
       if (updatedVideo.id !== video.id) {
@@ -560,43 +573,51 @@ export class VideoCommand extends Command {
       }
       lastPrintedProgress = progress;
 
+      const sequenceCount = updatedVideo.sequences.length;
       switch (updatedVideo.status) {
         case VideoStatus.Recording:
-          console.log('Recording in progress...');
+          printStatus(`Recording ${sequenceCount} ${sequenceCount === 1 ? 'sequence' : 'sequences'}...`);
           break;
         case VideoStatus.MovingFiles:
-          console.log('Moving files...');
+          printStatus('Moving files...');
           break;
         case VideoStatus.Converting:
-          console.log(
-            `Converting sequence #${updatedVideo.currentSequence} (${updatedVideo.currentSequencePosition}/${updatedVideo.sequences.length})...`,
+          printStatus(
+            `Converting sequence #${updatedVideo.currentSequence} (${updatedVideo.currentSequencePosition}/${sequenceCount})...`,
           );
           break;
         case VideoStatus.Concatenating:
-          console.log('Concatenating sequences...');
+          printStatus('Concatenating sequences...');
           break;
         case VideoStatus.Success:
-          console.log(`Video generated in ${updatedVideo.outputFolderPath}`);
+          output.clearProgress();
+          output.success(
+            `Video generated in ${output.formatPath(updatedVideo.outputFolderPath)} (${formatDuration(Date.now() - startTime)})`,
+          );
           resolveCompletion();
           break;
-        case VideoStatus.Error:
+        case VideoStatus.Error: {
           hasError = true;
-          console.error('Error while generating the video');
+          const lines = ['Error while generating the video'];
           if (updatedVideo.errorCode !== undefined) {
-            console.error(getErrorCodeMessage(updatedVideo.errorCode));
+            lines.push(getErrorCodeMessage(updatedVideo.errorCode));
           }
           if (updatedVideo.output !== '') {
-            console.error(updatedVideo.output);
+            lines.push(updatedVideo.output);
           }
+          output.clearProgress();
+          output.error(lines.join('\n'));
           resolveCompletion();
           break;
+        }
       }
     };
 
     const onVideosRemovedFromQueue = (removedVideoIds: string[]) => {
       if (removedVideoIds.includes(video.id)) {
         hasError = true;
-        console.error('The video has been removed from the queue');
+        output.clearProgress();
+        output.error('The video has been removed from the queue');
         resolveCompletion();
       }
     };
@@ -605,10 +626,12 @@ export class VideoCommand extends Command {
     client.on(ServerPushMessageName.VideosRemovedFromQueue, onVideosRemovedFromQueue);
 
     // The queue starts paused: resuming it starts the generation, processing any video queued before this one first.
+    printStatus(statusMessage);
     await client.send({ name: CliClientMessageName.ResumeVideoQueue });
-    console.log('Waiting for the video generation...');
+    const elapsedTimeIntervalId = setInterval(printElapsedTime, 1000);
 
     await completion;
+    clearInterval(elapsedTimeIntervalId);
 
     if (hasError) {
       this.exit(ExitCode.Failure);
