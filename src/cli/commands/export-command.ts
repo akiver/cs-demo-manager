@@ -15,6 +15,7 @@ import { CommandError } from 'csdm/cli/errors/command-error';
 import { getErrorMessage } from 'csdm/cli/get-error-message';
 import { ExitCode } from 'csdm/cli/exit-code';
 import { resolveDemoPaths } from 'csdm/cli/resolve-demo-paths';
+import { output } from 'csdm/cli/output';
 
 type ExportValues = {
   'output-folder'?: string;
@@ -64,15 +65,16 @@ export abstract class ExportCommand extends Command {
     await this.initDatabaseConnection();
     const checksumsInDatabase = await fetchMatchChecksums();
 
-    console.log(`${this.demoPaths.length} demos to process`);
-    let hasError = false;
-    for (const demoPath of this.demoPaths) {
+    output.log(`${this.demoPaths.length} demos to process`);
+    const failedDemos: { demoPath: string; details: string }[] = [];
+    for (const [index, demoPath] of this.demoPaths.entries()) {
+      const progressPrefix = `[${index + 1}/${this.demoPaths.length}]`;
       try {
         const checksum = await getDemoChecksumFromDemoPath(demoPath);
         const isDemoAlreadyInDatabase = checksumsInDatabase.includes(checksum);
         if (!isDemoAlreadyInDatabase || this.forceAnalyze) {
-          await this.analyzeDemo(demoPath);
-          await this.insertMatchInDatabase(checksum, demoPath);
+          await this.analyzeDemo(demoPath, progressPrefix);
+          await this.insertMatchInDatabase(checksum, demoPath, progressPrefix);
         }
 
         this.demosToExport.push({
@@ -80,19 +82,20 @@ export abstract class ExportCommand extends Command {
           demoName: path.basename(demoPath),
         });
       } catch (error) {
-        hasError = true;
-        console.error(`Failed to process demo ${demoPath}`);
-        console.error(getErrorMessage(error));
+        failedDemos.push({ demoPath, details: getErrorMessage(error) });
+        output.error(`Failed to process ${path.basename(demoPath)}`);
       }
     }
 
     if (this.demosToExport.length === 0) {
+      output.failedDemos(failedDemos);
       throw new CommandError('No demos to export');
     }
 
     await this.exportMatches();
+    output.failedDemos(failedDemos);
 
-    if (hasError) {
+    if (failedDemos.length > 0) {
       this.exit(ExitCode.Failure);
     }
   }
@@ -124,24 +127,32 @@ export abstract class ExportCommand extends Command {
     }
   }
 
-  private async analyzeDemo(demoPath: string) {
-    await runDemoAnalyzer({
-      demoPath,
-      outputFolderPath: this.temporaryFolderPath,
-      analyzePositions: false,
-      onStart: () => {
-        console.log(`Analyzing ${demoPath}...`);
-      },
-      onStderr: (output) => {
-        console.error(`Error analyzing demo: ${demoPath}:`);
-        console.error(output);
-      },
-      source: this.source,
-    });
+  private async analyzeDemo(demoPath: string, progressPrefix: string) {
+    let analyzerOutput = '';
+    try {
+      await runDemoAnalyzer({
+        demoPath,
+        outputFolderPath: this.temporaryFolderPath,
+        analyzePositions: false,
+        onStart: () => {
+          output.progress(`${progressPrefix} Analyzing ${path.basename(demoPath)}...`);
+        },
+        onStderr: (data) => {
+          analyzerOutput += data;
+        },
+        source: this.source,
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        throw error;
+      }
+      // The analyzer rejects without error when it exits with a failure code, its output explains why.
+      throw new CommandError(`Failed to analyze the demo\n${analyzerOutput}`.trimEnd());
+    }
   }
 
-  private async insertMatchInDatabase(checksum: string, demoPath: string) {
-    console.log(`Inserting match into database: ${demoPath}...`);
+  private async insertMatchInDatabase(checksum: string, demoPath: string, progressPrefix: string) {
+    output.progress(`${progressPrefix} Inserting ${path.basename(demoPath)} into the database...`);
     await processMatchInsertion({
       checksum,
       demoPath,

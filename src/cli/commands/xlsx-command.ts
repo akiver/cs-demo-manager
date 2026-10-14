@@ -5,6 +5,7 @@ import { SheetName } from 'csdm/node/xlsx/sheet-name';
 import { ExportCommand } from './export-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
+import { output } from 'csdm/cli/output';
 
 function isValidSheetName(value: string): value is SheetName {
   return Object.values(SheetName).includes(value as SheetName);
@@ -77,11 +78,13 @@ export class XlsxCommand extends ExportCommand {
         outputFilePath,
         sheets: this.sheets,
       });
+      output.progress(`Exporting ${checksums.length} matches to ${path.basename(outputFilePath)}...`);
       await xlsxExport.generate();
-      console.log(`Exported ${checksums.length} matches in ${outputFilePath}`);
+      output.success(`Exported ${checksums.length} matches in ${output.formatPath(outputFilePath)}`);
     } else {
-      for (const { checksum, demoName } of this.demosToExport) {
+      for (const [index, { checksum, demoName }] of this.demosToExport.entries()) {
         const outputFilePath = path.join(this.outputFolderPath, `${demoName}.xlsx`);
+        output.progress(`[${index + 1}/${this.demosToExport.length}] Exporting ${demoName}.xlsx...`);
         const xlsxExport = new MatchXlsxExport({
           checksum,
           outputFilePath,
@@ -89,7 +92,9 @@ export class XlsxCommand extends ExportCommand {
         });
         await xlsxExport.generate();
       }
-      console.log(`Exported ${this.demosToExport.length} matches in folder ${this.outputFolderPath}`);
+      output.success(
+        `Exported ${this.demosToExport.length} matches in folder ${output.formatPath(this.outputFolderPath)}`,
+      );
     }
   }
 
