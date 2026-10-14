@@ -5,11 +5,12 @@ import { CliClientMessageName } from 'csdm/server/messages/cli-client-message-na
 import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
 import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 import type { Analysis } from 'csdm/common/types/analysis';
-import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
-import { isErrorCode } from 'csdm/common/is-error-code';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { resolveDemoPaths } from 'csdm/cli/resolve-demo-paths';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
+import { CommandError } from 'csdm/cli/errors/command-error';
+import { getErrorMessage } from 'csdm/cli/get-error-message';
+import { ExitCode } from 'csdm/cli/exit-code';
 
 export class AnalyzeCommand extends Command {
   public static Name = 'analyze';
@@ -65,8 +66,7 @@ export class AnalyzeCommand extends Command {
     await this.parseArgs();
 
     if (this.demoPaths.length === 0) {
-      console.log('No demos found');
-      this.exitWithFailure();
+      throw new CommandError('No demos found');
     }
 
     await migrateSettings();
@@ -161,13 +161,7 @@ export class AnalyzeCommand extends Command {
           }
         } catch (error) {
           hasError = true;
-          let errorMessage: string;
-          if (isErrorCode(error)) {
-            errorMessage = getErrorCodeMessage(error);
-          } else {
-            errorMessage = error instanceof Error ? error.message : 'The daemon is not responding.';
-          }
-          console.error(errorMessage);
+          console.error(getErrorMessage(error));
           resolveCompletion();
         }
       }, daemonStatusPollIntervalMs);
@@ -179,14 +173,14 @@ export class AnalyzeCommand extends Command {
     client.close();
 
     if (hasError) {
-      this.exitWithFailure();
+      this.exit(ExitCode.Failure);
     }
   }
 
   protected async parseArgs() {
     if (this.args.length === 0) {
       this.printHelp();
-      this.exitWithFailure();
+      this.exit(ExitCode.InvalidUsage);
     }
 
     const { values, positionals } = this.parseOptions(this.options, { allowPositionals: true });
