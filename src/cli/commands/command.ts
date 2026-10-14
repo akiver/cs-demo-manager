@@ -1,4 +1,3 @@
-import { type ParseArgsOptionsConfig } from 'node:util';
 import { createDatabaseConnection } from 'csdm/node/database/database';
 import { createDaemonConnection } from 'csdm/cli/create-daemon-connection';
 import type { CliWebSocketClient } from 'csdm/cli/web-socket/cli-web-socket-client';
@@ -15,9 +14,6 @@ export abstract class Command {
   public abstract run(): Promise<void>;
   protected args: string[];
   protected readonly helpFormatter = new HelpFormatter();
-  protected readonly commonArgs: ParseArgsOptionsConfig = {
-    verbose: { type: 'boolean', short: 'v', default: false },
-  };
 
   public constructor(args: string[]) {
     this.args = args;
@@ -29,13 +25,6 @@ export abstract class Command {
 
   protected exitWithFailure() {
     return process.exit(1);
-  }
-
-  protected parseArgs(args: string[]) {
-    if (args.includes('--help') || args.includes('-h')) {
-      this.printHelp();
-      this.exit();
-    }
   }
 
   /**
@@ -121,17 +110,5 @@ export abstract class Command {
       console.error(error instanceof Error ? error.message : error);
       return this.exitWithFailure();
     }
-  }
-
-  protected isFlagArgument(arg: string) {
-    return arg.startsWith('--');
-  }
-
-  protected formatFlagForHelp = (flag: string) => {
-    return `[${flag}]`;
-  };
-
-  protected formatFlagsForHelp(flags: string[]) {
-    return flags.map(this.formatFlagForHelp).join(' ');
   }
 }
