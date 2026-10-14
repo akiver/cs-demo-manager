@@ -23,10 +23,6 @@ export abstract class Command {
     return process.exit(exitCode);
   }
 
-  protected exitWithFailure() {
-    return this.exit(ExitCode.Failure);
-  }
-
   /**
    * Prints the command help and exits when the help is requested, otherwise parses the command args.
    * Invalid args throw an InvalidArgument error.
