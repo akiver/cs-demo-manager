@@ -9,6 +9,7 @@ import type { FaceitMatch } from 'csdm/common/types/faceit-match';
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { CommandError } from 'csdm/cli/errors/command-error';
+import { output } from 'csdm/cli/output';
 
 export class DownloadFaceitCommand extends DownloadBaseCommand {
   public static Name = 'dl-faceit';
@@ -57,11 +58,8 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     await this.initDatabaseConnection();
     const accountId = await this.getAccountId();
     const matches = await fetchLastFaceitMatches(accountId);
-    console.log(`Found ${matches.length} matches to download.`);
-    for (const match of matches) {
-      await this.processMatch(match);
-    }
-    this.exitIfDownloadFailed();
+    output.log(`Found ${matches.length} matches to download`);
+    await this.processMatches(matches, (match) => this.processMatch(match));
     // oxlint-enable no-unreachable
   }
 
@@ -75,7 +73,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     const demoPath = path.join(this.outputFolderPath, `${match.id}.dem`);
     const demoAlreadyExists = await fs.pathExists(demoPath);
     if (demoAlreadyExists) {
-      console.log('Demo already in the download folder.');
+      this.printSkippedDemo(`${path.basename(demoPath)} already in the download folder`);
       return;
     }
 
@@ -85,7 +83,6 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
       return;
     }
 
-    console.log(`Downloading ${match.demoUrl}...`);
     this.demoPathBeingDownloaded = demoPath;
     await this.downloadDemo(match.demoUrl, demoPath, zlib.createGunzip());
     this.demoPathBeingDownloaded = undefined;
