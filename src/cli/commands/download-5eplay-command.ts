@@ -5,6 +5,7 @@ import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expir
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { CommandError } from 'csdm/cli/errors/command-error';
+import { output } from 'csdm/cli/output';
 import { fetchCurrent5EPlayAccount } from 'csdm/node/database/5play-account/fetch-current-5eplay-account';
 import { fetch5EPlayAccount } from 'csdm/node/5eplay/fetch-5eplay-player-account-from-domain';
 import { fetchLast5EPlayMatches } from 'csdm/node/5eplay/fetch-last-5eplay-matches';
@@ -48,15 +49,12 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
     this.outputFolderPath = await this.getOutputFolder();
     await this.assertOutputFolderIsValid(this.outputFolderPath);
     await this.initDatabaseConnection();
-    console.log('Finding account to download matches from...');
+    output.progress('Finding account to download matches from...');
     const id = await this.getAccountId();
-    console.log('Finding matches to download...');
+    output.progress('Finding matches to download...');
     const matches = await fetchLast5EPlayMatches(id);
-    console.log(`Found ${matches.length} matches to download.`);
-    for (const match of matches) {
-      await this.processMatch(match);
-    }
-    this.exitIfDownloadFailed();
+    output.log(`Found ${matches.length} matches to download`);
+    await this.processMatches(matches, (match) => this.processMatch(match));
   }
 
   protected parseArgs() {
@@ -69,7 +67,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
     const demoPath = path.join(this.outputFolderPath, `${match.id}.dem`);
     const demoAlreadyExists = await fs.pathExists(demoPath);
     if (demoAlreadyExists) {
-      console.log('Demo already in the download folder.');
+      this.printSkippedDemo(`${path.basename(demoPath)} already in the download folder`);
       return;
     }
 
@@ -79,7 +77,6 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
       return;
     }
 
-    console.log(`Downloading ${match.demoUrl}...`);
     this.demoPathBeingDownloaded = demoPath;
     await this.downloadDemo(match.demoUrl, demoPath, unzipper.ParseOne());
     this.demoPathBeingDownloaded = undefined;

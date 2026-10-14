@@ -1,4 +1,5 @@
 import fs from 'fs-extra';
+import path from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Agent, interceptors, request } from 'undici';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
@@ -12,10 +13,16 @@ import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { CommandError } from 'csdm/cli/errors/command-error';
 import { ExitCode } from 'csdm/cli/exit-code';
 import { getErrorMessage } from 'csdm/cli/get-error-message';
+import { output } from 'csdm/cli/output';
+import { formatBytes } from 'csdm/cli/format';
 
 export abstract class DownloadBaseCommand extends Command {
   protected outputFolderPath = '';
-  private hasDownloadError = false;
+  private downloadedDemoCount = 0;
+  private skippedDemoCount = 0;
+  private failedDemoCount = 0;
+  // Position of the match being processed, such as "[2/10]".
+  private progressPrefix = '';
   protected readonly outputOption = {
     output: {
       type: 'string',
@@ -59,12 +66,45 @@ export abstract class DownloadBaseCommand extends Command {
     }
   }
 
+  /**
+   * Processes the matches one by one, then prints the summary and exits with a failure code if a download failed.
+   */
+  protected async processMatches<Match>(matches: Match[], processMatch: (match: Match) => Promise<void>) {
+    for (const [index, match] of matches.entries()) {
+      this.progressPrefix = `[${index + 1}/${matches.length}]`;
+      await processMatch(match);
+    }
+    this.progressPrefix = '';
+
+    output.summary({
+      succeeded: this.downloadedDemoCount,
+      label: 'downloaded',
+      skipped: this.skippedDemoCount,
+      failed: this.failedDemoCount,
+    });
+
+    if (this.failedDemoCount > 0) {
+      this.exit(ExitCode.Failure);
+    }
+  }
+
+  protected printProgress(message: string) {
+    output.progress(this.withProgressPrefix(message));
+  }
+
+  protected printSkippedDemo(message: string) {
+    this.skippedDemoCount++;
+    this.printProgress(message);
+  }
+
   protected printDownloadError(message: string) {
-    this.hasDownloadError = true;
-    console.error(message);
+    this.failedDemoCount++;
+    output.error(this.withProgressPrefix(message));
   }
 
   protected async downloadDemo(demoUrl: string, demoPath: string, decompressStream: NodeJS.ReadWriteStream) {
+    const demoName = path.basename(demoPath);
+    this.printProgress(`Downloading ${demoName}...`);
     try {
       // Download links may redirect to a CDN.
       const dispatcher = new Agent().compose(interceptors.redirect({ maxRedirections: 1 }));
@@ -77,7 +117,28 @@ export abstract class DownloadBaseCommand extends Command {
         return false;
       }
 
-      await pipeline(response.body, decompressStream, fs.createWriteStream(demoPath));
+      const contentLength = Number(response.headers['content-length']);
+      const totalBytes = Number.isFinite(contentLength) && contentLength > 0 ? contentLength : undefined;
+      const printLiveProgress = (downloadedBytes: number) => {
+        this.printLiveDownloadProgress(demoName, downloadedBytes, totalBytes);
+      };
+      async function* trackProgress(source: AsyncIterable<Buffer>) {
+        let downloadedBytes = 0;
+        let lastRenderTime = 0;
+        for await (const chunk of source) {
+          downloadedBytes += chunk.length;
+          // Throttled, chunks arrive much more often than the terminal needs to be refreshed.
+          const now = Date.now();
+          if (now - lastRenderTime >= 100) {
+            lastRenderTime = now;
+            printLiveProgress(downloadedBytes);
+          }
+          yield chunk;
+        }
+      }
+      await pipeline(response.body, trackProgress, decompressStream, fs.createWriteStream(demoPath));
+      this.downloadedDemoCount++;
+      this.printProgress(`${demoName} downloaded`);
 
       return true;
     } catch (error) {
@@ -87,9 +148,15 @@ export abstract class DownloadBaseCommand extends Command {
     }
   }
 
-  protected exitIfDownloadFailed() {
-    if (this.hasDownloadError) {
-      this.exit(ExitCode.Failure);
-    }
+  private printLiveDownloadProgress(demoName: string, downloadedBytes: number, totalBytes: number | undefined) {
+    const progress =
+      totalBytes === undefined
+        ? formatBytes(downloadedBytes)
+        : `${Math.floor((downloadedBytes / totalBytes) * 100)}% (${formatBytes(downloadedBytes)} / ${formatBytes(totalBytes)})`;
+    output.liveProgress(this.withProgressPrefix(`Downloading ${demoName} ${progress}`));
+  }
+
+  private withProgressPrefix(message: string) {
+    return this.progressPrefix === '' ? message : `${this.progressPrefix} ${message}`;
   }
 }

@@ -5,6 +5,7 @@ import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expir
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 import { CommandError } from 'csdm/cli/errors/command-error';
+import { output } from 'csdm/cli/output';
 import { fetchLastRenownMatches } from 'csdm/node/renown/fetch-last-renown-matches';
 import { fetchCurrentRenownAccount } from 'csdm/node/database/renown-account/fetch-current-renown-account';
 import { fetchRenownAccount } from 'csdm/node/renown/fetch-renown-account-from-steamid';
@@ -51,15 +52,12 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     this.outputFolderPath = await this.getOutputFolder();
     await this.assertOutputFolderIsValid(this.outputFolderPath);
     await this.initDatabaseConnection();
-    console.log('Finding account to download matches from...');
+    output.progress('Finding account to download matches from...');
     const steamId = await this.getAccountSteamId();
-    console.log('Finding matches to download...');
+    output.progress('Finding matches to download...');
     const matches = await fetchLastRenownMatches(steamId);
-    console.log(`Found ${matches.length} matches to download.`);
-    for (const match of matches) {
-      await this.processMatch(match);
-    }
-    this.exitIfDownloadFailed();
+    output.log(`Found ${matches.length} matches to download`);
+    await this.processMatches(matches, (match) => this.processMatch(match));
   }
 
   protected parseArgs() {
@@ -72,7 +70,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     const demoPath = path.join(this.outputFolderPath, `${match.id}.dem`);
     const demoAlreadyExists = await fs.pathExists(demoPath);
     if (demoAlreadyExists) {
-      console.log('Demo already in the download folder.');
+      this.printSkippedDemo(`${path.basename(demoPath)} already in the download folder`);
       return;
     }
 
@@ -82,7 +80,6 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
       return;
     }
 
-    console.log(`Downloading ${match.demoUrl}...`);
     this.demoPathBeingDownloaded = demoPath;
     await this.downloadDemo(match.demoUrl, demoPath, zlib.createGunzip());
     this.demoPathBeingDownloaded = undefined;

@@ -18,6 +18,7 @@ import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expir
 import { DownloadBaseCommand } from './download-base-command';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { CommandError } from 'csdm/cli/errors/command-error';
+import { output } from 'csdm/cli/output';
 
 export class DownloadValveCommand extends DownloadBaseCommand {
   public static Name = 'dl-valve';
@@ -60,30 +61,27 @@ export class DownloadValveCommand extends DownloadBaseCommand {
     await this.assertOutputFolderIsValid(this.outputFolderPath);
 
     if (this.shareCodes.length > 0) {
-      for (const shareCode of this.shareCodes) {
-        console.log(`Downloading match with share code ${shareCode}...`);
+      await this.processMatches(this.shareCodes, async (shareCode) => {
+        this.printProgress(`Retrieving the match with share code ${shareCode}...`);
         const { matchId, reservationId, tvPort } = decodeMatchShareCode(shareCode);
         const matches = await this.fetchMatches([matchId.toString(), reservationId.toString(), tvPort.toString()]);
         if (matches.length === 0) {
           this.printDownloadError(`Demo link expired for share code: ${shareCode}`);
-          continue;
+          return;
         }
         await this.processMatchInfo(matches[0]);
-      }
+      });
     } else {
-      console.log('Retrieving last MM matches...');
+      output.progress('Retrieving last MM matches...');
       const matches = await this.fetchMatches();
       if (matches.length === 0) {
-        console.log('No matches found.');
+        output.log('No matches found');
         return;
       }
 
-      for (const [index, match] of matches.entries()) {
-        console.log(`Downloading match ${index + 1}/${matches.length}...`);
-        await this.processMatchInfo(match);
-      }
+      output.log(`Found ${matches.length} matches to download`);
+      await this.processMatches(matches, (match) => this.processMatchInfo(match));
     }
-    this.exitIfDownloadFailed();
   }
 
   protected parseArgs() {
@@ -113,7 +111,7 @@ export class DownloadValveCommand extends DownloadBaseCommand {
     const demoPath = path.join(this.outputFolderPath, `${demoName}.dem`);
     const demoAlreadyExists = await fs.pathExists(demoPath);
     if (demoAlreadyExists) {
-      console.log(`Demo already exists at ${demoPath}`);
+      this.printSkippedDemo(`${path.basename(demoPath)} already in the download folder`);
       return;
     }
 
