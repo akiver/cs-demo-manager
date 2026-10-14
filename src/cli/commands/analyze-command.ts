@@ -1,5 +1,3 @@
-import fs from 'fs-extra';
-import { glob } from 'csdm/node/filesystem/glob';
 import { Command } from './command';
 import { type DemoSource, SupportedDemoSources } from 'csdm/common/types/counter-strike';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
@@ -9,52 +7,58 @@ import { AnalysisStatus } from 'csdm/common/types/analysis-status';
 import type { Analysis } from 'csdm/common/types/analysis';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
 import { isErrorCode } from 'csdm/common/is-error-code';
+import type { CommandOptions } from 'csdm/cli/parse-command-args';
+import { resolveDemoPaths } from 'csdm/cli/resolve-demo-paths';
+import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 
 export class AnalyzeCommand extends Command {
   public static Name = 'analyze';
   public static Description = 'Analyze and persist demos into the database.';
-  private readonly demoPaths: string[] = [];
+  private readonly options = {
+    source: {
+      type: 'string',
+      valueName: 'source',
+      choices: SupportedDemoSources,
+      description: 'Force the analysis logic of the demo analyzer, detected from the demo by default.',
+    },
+    force: {
+      type: 'boolean',
+      description: 'Analyze demos even if they are already in the database.',
+    },
+    'analyze-positions': {
+      type: 'boolean',
+      description: 'Include the players, grenades... positions in the analysis.',
+    },
+  } satisfies CommandOptions;
+  private demoPaths: string[] = [];
   private analyzePositions = false;
   private forceAnalyze = false;
   private source: DemoSource | undefined = undefined;
-  private sourceFlag = '--source';
-  private forceFlag = '--force';
-  private analyzePositionsFlag = '--analyze-positions';
 
   public printHelp() {
-    const sourceValues = SupportedDemoSources.join(',');
-    console.log(AnalyzeCommand.Description);
-    console.log('');
-    console.log(
-      `Usage: csdm ${AnalyzeCommand.Name} demoPaths... ${this.formatFlagsForHelp([this.sourceFlag, this.forceFlag, this.analyzePositionsFlag])}`,
-    );
-    console.log('');
-    console.log('Demos path can be either a .dem files path or a directory. It can be relative or absolute.');
-    console.log('');
-    console.log(
-      `The ${this.sourceFlag} flag forces the analysis logic of the demo analyzer. Available values: [${sourceValues}]`,
-    );
-    console.log(`The ${this.forceFlag} flag forces demos analyzes even if they are already in the database.`);
-    console.log(
-      `The ${this.analyzePositionsFlag} flag indicates to includes players,projectiles... positions in the analysis.`,
-    );
-    console.log('');
-    console.log('Examples:');
-    console.log('');
-    console.log('Analyze 1 demo:');
-    console.log(`    csdm ${AnalyzeCommand.Name} "C:\\Users\\username\\Desktop\\demo.dem"`);
-    console.log('');
-    console.log('Analyze multiple demos:');
-    console.log(
-      `    csdm ${AnalyzeCommand.Name} "C:\\Users\\username\\Desktop\\demo.dem" "C:\\Users\\username\\Desktop\\demo2.dem"`,
-    );
-    console.log('');
-    console.log(
-      'Analyze all demos in a directory using the ESL analyzer and re-analyze demos that have already been analyzed:',
-    );
-    console.log(
-      `    csdm ${AnalyzeCommand.Name} "C:\\Users\\username\\Desktop\\MyFolder" ${this.sourceFlag} esl ${this.forceFlag}`,
-    );
+    this.printCommandHelp({
+      name: AnalyzeCommand.Name,
+      description: AnalyzeCommand.Description,
+      usages: ['<demo-paths...> [options]'],
+      arguments: [
+        {
+          label: '<demo-paths...>',
+          description: '.dem files or folders containing .dem files, relative or absolute.',
+        },
+      ],
+      options: this.options,
+      examples: [
+        { description: 'Analyze 1 demo', args: this.helpFormatter.formatExamplePath('Desktop', 'demo.dem') },
+        {
+          description: 'Analyze multiple demos',
+          args: `${this.helpFormatter.formatExamplePath('Desktop', 'demo.dem')} ${this.helpFormatter.formatExamplePath('Desktop', 'demo2.dem')}`,
+        },
+        {
+          description: 'Analyze all demos in a folder with the ESL analyzer, including the ones already analyzed',
+          args: `${this.helpFormatter.formatExamplePath('Desktop', 'MyFolder')} --source esl --force`,
+        },
+      ],
+    });
   }
 
   public async run() {
@@ -180,63 +184,19 @@ export class AnalyzeCommand extends Command {
   }
 
   protected async parseArgs() {
-    super.parseArgs(this.args);
-
     if (this.args.length === 0) {
-      console.log('No demo path provided');
       this.printHelp();
       this.exitWithFailure();
     }
 
-    for (let index = 0; index < this.args.length; index++) {
-      const arg = this.args[index];
-      if (this.isFlagArgument(arg)) {
-        switch (arg) {
-          case this.analyzePositionsFlag:
-            this.analyzePositions = true;
-            break;
-          case this.forceFlag:
-            this.forceAnalyze = true;
-            break;
-          case this.sourceFlag:
-            if (this.args.length > index + 1) {
-              index += 1;
-              const source = this.args[index] as DemoSource;
-              const isValidSource = SupportedDemoSources.includes(source);
-              if (!isValidSource) {
-                console.log(`Invalid source ${source}`);
-                this.exitWithFailure();
-              }
-              this.source = source;
-            } else {
-              console.log(`Missing ${this.sourceFlag} value`);
-              this.exitWithFailure();
-            }
-            break;
-          default:
-            console.log(`Unknown flag: ${arg}`);
-            this.exitWithFailure();
-        }
-      } else {
-        try {
-          const stats = await fs.stat(arg);
-          if (stats.isDirectory()) {
-            const files = await glob('*.dem', {
-              cwd: arg,
-              absolute: true,
-            });
-            this.demoPaths.push(...files);
-          } else if (stats.isFile() && arg.endsWith('.dem')) {
-            this.demoPaths.push(arg);
-          } else {
-            console.log(`Invalid path: ${arg}`);
-            this.exitWithFailure();
-          }
-        } catch (error) {
-          console.log(`Invalid path: ${arg}`);
-          this.exitWithFailure();
-        }
-      }
+    const { values, positionals } = this.parseOptions(this.options, { allowPositionals: true });
+    if (positionals.length === 0) {
+      throw new InvalidArgument('Missing demo paths');
     }
+
+    this.demoPaths = await resolveDemoPaths(positionals);
+    this.analyzePositions = values['analyze-positions'] ?? false;
+    this.forceAnalyze = values.force ?? false;
+    this.source = values.source as DemoSource | undefined;
   }
 }
