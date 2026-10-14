@@ -1,7 +1,6 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 import os from 'node:os';
-import { glob } from 'csdm/node/filesystem/glob';
 import { type DemoSource, SupportedDemoSources } from 'csdm/common/types/counter-strike';
 import { Command } from './command';
 import { runDemoAnalyzer } from 'csdm/node/demo-analyzer/run-demo-analyzer';
@@ -10,6 +9,15 @@ import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-fr
 import { isPathWritable } from 'csdm/node/filesystem/is-path-writable';
 import { processMatchInsertion } from 'csdm/node/database/matches/process-match-insertion';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
+import type { CommandOptions } from 'csdm/cli/parse-command-args';
+import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
+import { resolveDemoPaths } from 'csdm/cli/resolve-demo-paths';
+
+type ExportValues = {
+  'output-folder'?: string;
+  source?: string;
+  'force-analyze'?: boolean;
+};
 
 export abstract class ExportCommand extends Command {
   protected readonly demoPaths: string[] = [];
@@ -21,10 +29,24 @@ export abstract class ExportCommand extends Command {
     checksum: string;
     demoName: string;
   }[] = [];
-  protected readonly forceAnalyzeFlag = '--force-analyze';
-  protected readonly outputFolderFlag = '--output-folder';
-  protected readonly sourceFlag = '--source';
-  protected readonly commonFlags = [this.forceAnalyzeFlag, this.outputFolderFlag, this.sourceFlag];
+  protected readonly exportOptions = {
+    'output-folder': {
+      type: 'string',
+      valueName: 'folder',
+      description: 'Folder where the files are saved.',
+      defaultValue: 'current folder',
+    },
+    source: {
+      type: 'string',
+      valueName: 'source',
+      choices: SupportedDemoSources,
+      description: 'Force the analysis logic of the demo analyzer, detected from the demo by default.',
+    },
+    'force-analyze': {
+      type: 'boolean',
+      description: 'Analyze demos even if they are already in the database.',
+    },
+  } satisfies CommandOptions;
 
   public async run() {
     if (this.demoPaths.length === 0) {
@@ -67,71 +89,19 @@ export abstract class ExportCommand extends Command {
     }
   }
 
-  protected async parseArgs() {
-    super.parseArgs(this.args);
-
+  protected async parseExportArgs(values: ExportValues, positionals: string[]) {
     if (this.args.length === 0) {
-      console.log('No demo path provided');
       this.printHelp();
       this.exitWithFailure();
     }
-
-    let hasFlag = false;
-    for (let index = 0; index < this.args.length; index++) {
-      const arg = this.args[index];
-      if (this.isFlagArgument(arg)) {
-        hasFlag = true;
-
-        switch (arg) {
-          case this.forceAnalyzeFlag:
-            this.forceAnalyze = true;
-            break;
-          case this.outputFolderFlag:
-            if (this.args.length > index + 1) {
-              index += 1;
-              this.outputFolderPath = this.args[index];
-            } else {
-              console.log(`Missing ${this.outputFolderFlag} value`);
-              this.exitWithFailure();
-            }
-            break;
-          case this.sourceFlag:
-            if (this.args.length > index + 1) {
-              index += 1;
-              const source = this.args[index] as DemoSource;
-              const isValidSource = SupportedDemoSources.includes(source);
-              if (!isValidSource) {
-                console.log(`Invalid source ${source}`);
-                this.exitWithFailure();
-              }
-              this.source = source;
-            } else {
-              console.log(`Missing ${this.sourceFlag} value`);
-              this.exitWithFailure();
-            }
-            break;
-        }
-      } else if (!hasFlag) {
-        try {
-          const stats = await fs.stat(arg);
-          if (stats.isDirectory()) {
-            const files = await glob('*.dem', {
-              cwd: arg,
-              absolute: true,
-            });
-            this.demoPaths.push(...files);
-          } else if (stats.isFile() && arg.endsWith('.dem')) {
-            this.demoPaths.push(arg);
-          } else {
-            console.log(`Invalid path: ${arg}`);
-            this.exitWithFailure();
-          }
-        } catch (error) {
-          console.log(`Invalid path: ${arg}`);
-          this.exitWithFailure();
-        }
-      }
+    if (positionals.length === 0) {
+      throw new InvalidArgument('Missing demo paths');
     }
+
+    this.demoPaths.push(...(await resolveDemoPaths(positionals)));
+    this.outputFolderPath = values['output-folder'] ?? process.cwd();
+    this.forceAnalyze = values['force-analyze'] ?? false;
+    this.source = values.source as DemoSource | undefined;
   }
 
   private async assertOutputFolderIsValid() {
@@ -171,9 +141,5 @@ export abstract class ExportCommand extends Command {
       demoPath,
       outputFolderPath: this.temporaryFolderPath,
     });
-  }
-
-  protected isCommonFlag(flag: string) {
-    return this.commonFlags.includes(flag);
   }
 }
