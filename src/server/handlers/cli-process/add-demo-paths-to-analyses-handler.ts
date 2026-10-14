@@ -1,4 +1,4 @@
-import type { DemoSource } from 'csdm/common/types/counter-strike';
+import { type DemoSource, DemoType, Game } from 'csdm/common/types/counter-strike';
 import type { Demo } from 'csdm/common/types/demo';
 import type { HandlerContext } from 'csdm/server/messages/handler';
 import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
@@ -7,6 +7,7 @@ import { analysesListener } from 'csdm/server/analyses-listener';
 import { ensureDatabaseConnection } from 'csdm/server/ensure-database-connection';
 import { server } from 'csdm/server/server';
 import { handleError } from '../handle-error';
+import { SupportedDemoSourcesPerGame } from 'csdm/common/counter-strike/supported-demo-sources';
 
 export type AddDemoPathsToAnalysesPayload = {
   demoPaths: string[];
@@ -18,6 +19,7 @@ export type AddDemoPathsToAnalysesPayload = {
 export type AddDemoPathsToAnalysesResult = {
   addedDemos: { checksum: string; demoPath: string }[];
   skippedDemoPaths: string[];
+  unsupportedDemos: { demoPath: string; source: DemoSource; reason: 'source' | 'pov' }[];
 };
 
 export async function addDemoPathsToAnalysesHandler(
@@ -30,10 +32,19 @@ export async function addDemoPathsToAnalysesHandler(
     const demos: Demo[] = [];
     const addedDemos: AddDemoPathsToAnalysesResult['addedDemos'] = [];
     const skippedDemoPaths: string[] = [];
+    const unsupportedDemos: AddDemoPathsToAnalysesResult['unsupportedDemos'] = [];
     for (const demoPath of payload.demoPaths) {
       const demo = await getDemoFromFilePath(demoPath);
       if (payload.source !== undefined) {
         demo.source = payload.source;
+      }
+      if (!SupportedDemoSourcesPerGame[demo.game].includes(demo.source)) {
+        unsupportedDemos.push({ demoPath, source: demo.source, reason: 'source' });
+        continue;
+      }
+      if (demo.type === DemoType.POV && demo.game !== Game.CSGO) {
+        unsupportedDemos.push({ demoPath, source: demo.source, reason: 'pov' });
+        continue;
       }
       if (!payload.force && checksums.includes(demo.checksum)) {
         skippedDemoPaths.push(demoPath);
@@ -55,7 +66,7 @@ export async function addDemoPathsToAnalysesHandler(
     // Queueing them now would analyze demos no client waits for.
     if (context?.clientId !== undefined && !server.isCliClientConnected(context.clientId)) {
       logger.warn('The CLI client disconnected before its demos were queued for analysis, ignoring them');
-      return { addedDemos: [], skippedDemoPaths };
+      return { addedDemos: [], skippedDemoPaths, unsupportedDemos };
     }
 
     // ! Not awaited: it would resolve only once the whole analyses queue completed and the CLI request would
@@ -70,7 +81,7 @@ export async function addDemoPathsToAnalysesHandler(
         logger.error(error);
       });
 
-    return { addedDemos, skippedDemoPaths };
+    return { addedDemos, skippedDemoPaths, unsupportedDemos };
   } catch (error) {
     return handleError(error, 'Error while adding demo paths to analyses');
   }

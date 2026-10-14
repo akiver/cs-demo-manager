@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
 import { SeeMatchButton } from './see-match-button';
-import { SupportedDemoSourcesPerGame } from 'csdm/ui/shared/supported-demo-sources';
+import { SupportedDemoSourcesPerGame } from 'csdm/common/counter-strike/supported-demo-sources';
 import { ChangeDemosSourceDialog } from 'csdm/ui/components/dialogs/change-demos-source-dialog';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { useIsDemoInDatabase } from './use-is-demo-in-database';
