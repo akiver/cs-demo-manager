@@ -1,5 +1,6 @@
+import path from 'node:path';
 import { Command } from './command';
-import { type DemoSource, SupportedDemoSources } from 'csdm/common/types/counter-strike';
+import { DemoSource, SupportedDemoSources } from 'csdm/common/types/counter-strike';
 import { migrateSettings } from 'csdm/node/settings/migrate-settings';
 import { CliClientMessageName } from 'csdm/server/messages/cli-client-message-name';
 import { ServerPushMessageName } from 'csdm/server/messages/server-push-message-name';
@@ -11,6 +12,7 @@ import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { CommandError } from 'csdm/cli/errors/command-error';
 import { getErrorMessage } from 'csdm/cli/get-error-message';
 import { ExitCode } from 'csdm/cli/exit-code';
+import { output } from 'csdm/cli/output';
 
 export class AnalyzeCommand extends Command {
   public static Name = 'analyze';
@@ -73,10 +75,13 @@ export class AnalyzeCommand extends Command {
     const client = await this.connectToDaemon();
     await this.ensureDaemonDatabaseConnection(client);
 
-    console.log(`${this.demoPaths.length} demos to process`);
+    output.log(`${this.demoPaths.length} demos to process`);
 
     const pendingChecksums = new Set<string>();
     const lastStatusPerChecksum = new Map<string, AnalysisStatus>();
+    const failedDemos: { demoPath: string; details: string }[] = [];
+    let analyzedDemoCount = 0;
+    let skippedDemoCount = 0;
     let hasError = false;
     let resolveCompletion: () => void;
     const completion = new Promise<void>((resolve) => {
@@ -90,6 +95,11 @@ export class AnalyzeCommand extends Command {
       }
     };
 
+    const printProgress = (message: string) => {
+      const processedDemoCount = analyzedDemoCount + skippedDemoCount + failedDemos.length;
+      output.progress(`[${processedDemoCount}/${this.demoPaths.length}] ${message}`);
+    };
+
     const onAnalysisUpdated = (analysis: Analysis) => {
       const { demoChecksum: checksum, demoPath, status } = analysis;
       if (!pendingChecksums.has(checksum) || lastStatusPerChecksum.get(checksum) === status) {
@@ -97,36 +107,37 @@ export class AnalyzeCommand extends Command {
       }
       lastStatusPerChecksum.set(checksum, status);
 
+      const demoName = path.basename(demoPath);
       switch (status) {
         case AnalysisStatus.Analyzing:
-          console.log(`Analyzing demo ${demoPath}...`);
+          printProgress(`Analyzing ${demoName}...`);
           break;
         case AnalysisStatus.Inserting:
-          console.log(`Inserting match into database ${demoPath}...`);
+          printProgress(`Inserting ${demoName} into the database...`);
           break;
         case AnalysisStatus.InsertSuccess:
-          console.log(`Demo ${demoPath} inserted into the database`);
+          analyzedDemoCount++;
+          printProgress(`${demoName} inserted into the database`);
           markAnalysisAsDone(checksum);
           break;
         case AnalysisStatus.AnalyzeError:
-        case AnalysisStatus.InsertError:
+        case AnalysisStatus.InsertError: {
           hasError = true;
-          console.error(
+          const message =
             status === AnalysisStatus.AnalyzeError
-              ? `Error analyzing demo ${demoPath}`
-              : `Error inserting match into database ${demoPath}`,
-          );
-          if (analysis.output !== '') {
-            console.error(analysis.output);
-          }
+              ? `Failed to analyze ${demoName}`
+              : `Failed to insert ${demoName} into the database`;
+          failedDemos.push({ demoPath, details: analysis.output === '' ? message : analysis.output });
+          output.error(message);
           markAnalysisAsDone(checksum);
           break;
+        }
       }
     };
 
     client.on(ServerPushMessageName.AnalysisUpdated, onAnalysisUpdated);
 
-    const { addedDemos, skippedDemoPaths } = await client.send(
+    const { addedDemos, skippedDemoPaths, unsupportedDemos } = await client.send(
       {
         name: CliClientMessageName.AddDemoPathsToAnalyses,
         payload: {
@@ -140,7 +151,13 @@ export class AnalyzeCommand extends Command {
     );
 
     for (const demoPath of skippedDemoPaths) {
-      console.log(`Demo ${demoPath} already in database, skipping this demo.`);
+      skippedDemoCount++;
+      printProgress(`${path.basename(demoPath)} already in the database, skipping it`);
+    }
+    for (const { demoPath, source, reason } of unsupportedDemos) {
+      hasError = true;
+      failedDemos.push({ demoPath, details: this.getUnsupportedDemoMessage(source, reason) });
+      output.error(`Failed to analyze ${path.basename(demoPath)}`);
     }
     for (const { checksum } of addedDemos) {
       pendingChecksums.add(checksum);
@@ -156,12 +173,12 @@ export class AnalyzeCommand extends Command {
           const daemon = await client.send({ name: CliClientMessageName.GetDaemonStatus });
           if (!daemon.busy && pendingChecksums.size > 0) {
             hasError = true;
-            console.error('Some analyses did not complete, check the demos in the GUI or re-run the command.');
+            output.error('Some analyses did not complete, check the demos in the GUI or re-run the command.');
             resolveCompletion();
           }
         } catch (error) {
           hasError = true;
-          console.error(getErrorMessage(error));
+          output.error(getErrorMessage(error));
           resolveCompletion();
         }
       }, daemonStatusPollIntervalMs);
@@ -172,9 +189,31 @@ export class AnalyzeCommand extends Command {
 
     client.close();
 
+    output.summary({
+      succeeded: analyzedDemoCount,
+      label: 'analyzed',
+      skipped: skippedDemoCount,
+      failed: failedDemos.length,
+    });
+    output.failedDemos(failedDemos);
+
     if (hasError) {
       this.exit(ExitCode.Failure);
     }
+  }
+
+  private getUnsupportedDemoMessage(source: DemoSource, reason: 'source' | 'pov') {
+    if (reason === 'pov') {
+      return 'POV demos are supported only for CS:GO';
+    }
+    if (this.source !== undefined) {
+      return `The source "${source}" is not supported for this game`;
+    }
+    if (source === DemoSource.Unknown) {
+      return 'The demo source could not be detected, use --source to force one';
+    }
+
+    return `The demo source "${source}" is not supported, use --source to force another one`;
   }
 
   protected async parseArgs() {
