@@ -7,9 +7,12 @@ import {
 } from 'csdm/node/counter-strike/get-default-counter-strike-folders';
 import { isPathWritable } from 'csdm/node/filesystem/is-path-writable';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
+import { CommandError } from 'csdm/cli/errors/command-error';
+import { ExitCode } from 'csdm/cli/exit-code';
 
 export abstract class DownloadBaseCommand extends Command {
   protected outputFolderPath = '';
+  private hasDownloadError = false;
   protected readonly outputOption = {
     output: {
       type: 'string',
@@ -44,14 +47,23 @@ export abstract class DownloadBaseCommand extends Command {
   protected async assertOutputFolderIsValid(outputFolderPath: string) {
     const isOutputFolderExits = await fs.pathExists(outputFolderPath);
     if (!isOutputFolderExits) {
-      console.log(`The output folder does not exist: ${outputFolderPath}`);
-      this.exitWithFailure();
+      throw new CommandError(`The output folder does not exist: ${outputFolderPath}`);
     }
 
     const isOutputFolderWritable = await isPathWritable(outputFolderPath);
     if (!isOutputFolderWritable) {
-      console.log(`The output folder is not writable: ${outputFolderPath}`);
-      this.exitWithFailure();
+      throw new CommandError(`The output folder is not writable: ${outputFolderPath}`);
+    }
+  }
+
+  protected printDownloadError(message: string) {
+    this.hasDownloadError = true;
+    console.error(message);
+  }
+
+  protected exitIfDownloadFailed() {
+    if (this.hasDownloadError) {
+      this.exit(ExitCode.Failure);
     }
   }
 }

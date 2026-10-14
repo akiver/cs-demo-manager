@@ -7,6 +7,7 @@ import util from 'node:util';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
+import { CommandError } from 'csdm/cli/errors/command-error';
 import { fetchCurrent5EPlayAccount } from 'csdm/node/database/5play-account/fetch-current-5eplay-account';
 import { fetch5EPlayAccount } from 'csdm/node/5eplay/fetch-5eplay-player-account-from-domain';
 import { fetchLast5EPlayMatches } from 'csdm/node/5eplay/fetch-last-5eplay-matches';
@@ -59,6 +60,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
     for (const match of matches) {
       await this.processMatch(match);
     }
+    this.exitIfDownloadFailed();
   }
 
   protected parseArgs() {
@@ -77,7 +79,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
 
     const isLinkExpired = await isDownloadLinkExpired(match.demoUrl);
     if (isLinkExpired) {
-      console.log(`Demo link expired for match: ${match.id}`);
+      this.printDownloadError(`Demo link expired for match: ${match.id}`);
       return;
     }
 
@@ -85,7 +87,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
     this.demoPathBeingDownloaded = demoPath;
     const response = await request(match.demoUrl, { method: 'GET' });
     if (!response.body) {
-      console.log('Request error.');
+      this.printDownloadError(`Request error for match: ${match.id}`);
       return;
     }
 
@@ -99,8 +101,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
     if (!this.id) {
       const currentAccount = await fetchCurrent5EPlayAccount();
       if (!currentAccount) {
-        console.log('No current 5EPlay account found.');
-        return this.exitWithFailure();
+        throw new CommandError('No current 5EPlay account found.');
       }
 
       return currentAccount.domainId;
@@ -110,8 +111,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
       const account = await fetch5EPlayAccount(this.id);
       return account.id;
     } catch (error) {
-      console.error(`Failed to retrieve account with ID: ${this.id}`);
-      return this.exitWithFailure();
+      throw new CommandError(`Failed to retrieve account with ID: ${this.id}`, { cause: error });
     }
   }
 

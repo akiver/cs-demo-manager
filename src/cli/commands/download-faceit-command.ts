@@ -11,6 +11,7 @@ import { fetchFaceitAccount } from 'csdm/node/faceit-web-api/fetch-faceit-accoun
 import type { FaceitMatch } from 'csdm/common/types/faceit-match';
 import { DownloadBaseCommand } from './download-base-command';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
+import { CommandError } from 'csdm/cli/errors/command-error';
 const streamPipeline = util.promisify(pipeline);
 
 export class DownloadFaceitCommand extends DownloadBaseCommand {
@@ -48,10 +49,9 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
   }
 
   public async run() {
-    console.warn(
+    throw new CommandError(
       `This command is currently disabled, see https://cs-demo-manager.com/docs/guides/downloads#why-faceit-downloads-are-disabled.`,
     );
-    return;
     // oxlint-disable no-unreachable
     this.parseArgs();
     process.on('SIGINT', this.onInterruptSignal);
@@ -65,6 +65,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     for (const match of matches) {
       await this.processMatch(match);
     }
+    this.exitIfDownloadFailed();
     // oxlint-enable no-unreachable
   }
 
@@ -84,7 +85,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
 
     const isLinkExpired = await isDownloadLinkExpired(match.demoUrl);
     if (isLinkExpired) {
-      console.log(`Demo link expired for match: ${match.id}`);
+      this.printDownloadError(`Demo link expired for match: ${match.id}`);
       return;
     }
 
@@ -92,7 +93,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     this.demoPathBeingDownloaded = demoPath;
     const response = await request(match.demoUrl, { method: 'GET' });
     if (!response.body) {
-      console.log('Request error.');
+      this.printDownloadError(`Request error for match: ${match.id}`);
       return;
     }
 
@@ -106,8 +107,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     if (this.playerNickname === undefined) {
       const currentAccount = await fetchCurrentFaceitAccount();
       if (currentAccount === undefined) {
-        console.log('No current FACEIT account found.');
-        return this.exitWithFailure();
+        throw new CommandError('No current FACEIT account found.');
       }
 
       return currentAccount.id;
@@ -117,8 +117,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
       const account = await fetchFaceitAccount(this.playerNickname);
       return account.player_id;
     } catch (error) {
-      console.error(`Failed to retrieve account with nickname: ${this.playerNickname}`);
-      return this.exitWithFailure();
+      throw new CommandError(`Failed to retrieve account with nickname: ${this.playerNickname}`, { cause: error });
     }
   }
 
