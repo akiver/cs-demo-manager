@@ -7,6 +7,7 @@ import { getErrorMessage, isExpectedError } from 'csdm/cli/get-error-message';
 import { printUnknownCommand } from 'csdm/cli/print-unknown-command';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { ExitCode } from 'csdm/cli/exit-code';
+import { output } from 'csdm/cli/output';
 import pkg from '../../package.json' with { type: 'json' };
 
 function getCommandName(args: string[]) {
@@ -43,15 +44,16 @@ async function main() {
     process.exit(ExitCode.Success);
   } catch (error) {
     if (error instanceof InvalidArgument) {
-      console.error(error.message);
-      console.error(`Run "csdm ${commandName} --help" for usage.`);
+      output.error(error.message);
+      output.hint(`Run "csdm ${commandName} --help" for usage.`);
       process.exit(ExitCode.InvalidUsage);
     }
 
     if (isExpectedError(error)) {
-      console.error(getErrorMessage(error));
+      output.error(getErrorMessage(error));
     } else {
       // Likely a bug, the stack trace helps to report it.
+      output.clearProgress();
       console.error(error);
     }
     process.exit(ExitCode.Failure);
