@@ -2,12 +2,12 @@ import { createDatabaseConnection } from 'csdm/node/database/database';
 import { createDaemonConnection } from 'csdm/cli/create-daemon-connection';
 import type { CliWebSocketClient } from 'csdm/cli/web-socket/cli-web-socket-client';
 import { CliClientMessageName } from 'csdm/server/messages/cli-client-message-name';
-import { isErrorCode } from 'csdm/common/is-error-code';
-import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
 import { assertDatabaseSchemaVersionMatches } from 'csdm/node/database/migrations/migrate-database';
 import { DatabaseSchemaVersionMismatch } from 'csdm/node/database/database-schema-version-mismatch-error';
 import { type CommandOptions, parseCommandArgs } from 'csdm/cli/parse-command-args';
 import { type CommandHelp, HelpFormatter } from 'csdm/cli/help-formatter';
+import { CommandError } from 'csdm/cli/errors/command-error';
+import { ExitCode } from 'csdm/cli/exit-code';
 
 export abstract class Command {
   public abstract printHelp(): void;
@@ -19,12 +19,12 @@ export abstract class Command {
     this.args = args;
   }
 
-  protected exit() {
-    return process.exit(0);
+  protected exit(exitCode: ExitCode = ExitCode.Success) {
+    return process.exit(exitCode);
   }
 
   protected exitWithFailure() {
-    return process.exit(1);
+    return this.exit(ExitCode.Failure);
   }
 
   /**
@@ -62,18 +62,12 @@ export abstract class Command {
       createDatabaseConnection(settings);
       await assertDatabaseSchemaVersionMatches();
     } catch (error) {
-      console.error('Failed to connect to the database');
       if (error instanceof DatabaseSchemaVersionMismatch) {
-        console.error(error.message);
-        console.error(
-          'The database is managed by a CS Demo Manager daemon running a different version than this CLI, close the running CS Demo Manager instances so the daemon can be replaced and retry.',
+        throw new CommandError(
+          `Failed to connect to the database\n${error.message}\nThe database is managed by a CS Demo Manager daemon running a different version than this CLI, close the running CS Demo Manager instances so the daemon can be replaced and retry.`,
         );
-      } else if (isErrorCode(error)) {
-        console.error(getErrorCodeMessage(error));
-      } else {
-        console.error(error instanceof Error ? error.message : error);
       }
-      return this.exitWithFailure();
+      throw new CommandError('Failed to connect to the database', { cause: error });
     }
   }
 
@@ -90,13 +84,7 @@ export abstract class Command {
     try {
       await client.send({ name: CliClientMessageName.EnsureDatabaseConnection }, { timeoutMs: null });
     } catch (error) {
-      console.error('Failed to connect to the database');
-      if (isErrorCode(error)) {
-        console.error(getErrorCodeMessage(error));
-      } else {
-        console.error(error instanceof Error ? error.message : error);
-      }
-      return this.exitWithFailure();
+      throw new CommandError('Failed to connect to the database', { cause: error });
     } finally {
       clearTimeout(hintTimeoutId);
     }
@@ -106,9 +94,7 @@ export abstract class Command {
     try {
       return await createDaemonConnection();
     } catch (error) {
-      console.error('Failed to connect to the CS Demo Manager daemon');
-      console.error(error instanceof Error ? error.message : error);
-      return this.exitWithFailure();
+      throw new CommandError('Failed to connect to the CS Demo Manager daemon', { cause: error });
     }
   }
 }

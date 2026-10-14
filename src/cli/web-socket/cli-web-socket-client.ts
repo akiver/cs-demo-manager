@@ -6,6 +6,7 @@ import type { CliMessageHandlers } from 'csdm/server/handlers/cli-handlers-mappi
 import type { IdentifiableClientMessage } from 'csdm/server/messages/identifiable-client-message';
 import type { SendableMessage } from 'csdm/server/messages/message';
 import { SharedServerMessageName } from 'csdm/server/messages/shared-server-message-name';
+import { CommandError } from 'csdm/cli/errors/command-error';
 
 type ReplyHandler = {
   resolve: (payload: unknown) => void;
@@ -79,7 +80,7 @@ export class CliWebSocketClient {
   ) {
     return new Promise((resolve: (payload: unknown) => void, reject) => {
       if (!this.isConnected) {
-        return reject(new Error('The connection to the daemon has been closed'));
+        return reject(new CommandError('The connection to the daemon has been closed'));
       }
 
       const uuid = randomUUID();
@@ -89,7 +90,9 @@ export class CliWebSocketClient {
           ? null
           : setTimeout(() => {
               this.replyHandlers.delete(uuid);
-              reject(new Error(`The daemon didn't answer to the message ${message.name} within ${timeoutMs / 1000}s`));
+              reject(
+                new CommandError(`The daemon didn't answer to the message ${message.name} within ${timeoutMs / 1000}s`),
+              );
             }, timeoutMs);
       this.replyHandlers.set(uuid, { resolve, reject, timeoutId });
       this.socket.send(JSON.stringify(message));
@@ -104,7 +107,7 @@ export class CliWebSocketClient {
 
   private onClose = () => {
     this.isConnected = false;
-    const error = new Error('The connection to the daemon has been closed');
+    const error = new CommandError('The connection to the daemon has been closed');
     for (const { reject, timeoutId } of this.replyHandlers.values()) {
       if (timeoutId !== null) {
         clearTimeout(timeoutId);

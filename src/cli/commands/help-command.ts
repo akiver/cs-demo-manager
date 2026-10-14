@@ -1,6 +1,7 @@
 import { Command } from './command';
 import { commands } from '../commands';
 import { printUnknownCommand } from '../print-unknown-command';
+import { ExitCode } from '../exit-code';
 import pkg from '../../../package.json';
 
 export class HelpCommand extends Command {
@@ -28,7 +29,7 @@ export class HelpCommand extends Command {
     const CommandToRun = commandName === undefined ? HelpCommand : commands[commandName];
     if (CommandToRun === undefined) {
       printUnknownCommand(commandName);
-      return this.exitWithFailure();
+      return this.exit(ExitCode.InvalidUsage);
     }
 
     new CommandToRun([]).printHelp();
