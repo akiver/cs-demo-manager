@@ -34,8 +34,8 @@ import { Perspective as PerspectiveType } from 'csdm/common/types/perspective';
 import { buildPlayersEventSequences } from 'csdm/common/video/sequences/build-players-event-sequences';
 import { buildPlayersRoundsSequences } from 'csdm/common/video/sequences/build-players-rounds-sequences';
 import { getErrorCodeMessage } from 'csdm/cli/get-error-code-message';
-import { output } from 'csdm/cli/output';
-import { formatDuration } from 'csdm/cli/format';
+import { output, type TableCell } from 'csdm/cli/output';
+import { formatDate, formatDuration } from 'csdm/cli/format';
 import type { CommandOptions } from 'csdm/cli/parse-command-args';
 
 export type VideoCommandConfig = {
@@ -530,21 +530,47 @@ export class VideoCommand extends Command {
           });
           break;
         }
-        console.log(`The queue is ${isPaused ? 'paused' : 'running'}`);
+        output.log(`The queue is ${isPaused ? 'paused' : 'running'}`);
         if (videos.length === 0) {
-          console.log('No videos in the queue');
-        } else {
-          for (const video of videos) {
-            console.log(
-              `${video.id} ${video.status} ${path.basename(video.demoPath)} (${video.sequences.length} sequences)`,
-            );
-          }
+          output.log('No videos in the queue');
+          break;
         }
+
+        output.log('');
+        output.table(
+          ['ID', 'STATUS', 'ADDED', 'SEQUENCES', 'DEMO'],
+          videos.map((video) => [
+            video.id,
+            this.getVideoStatusCell(video),
+            formatDate(new Date(video.date)),
+            String(video.sequences.length),
+            path.basename(video.demoPath),
+          ]),
+        );
         break;
       }
     }
 
     client.close();
+  }
+
+  private getVideoStatusCell(video: Video): TableCell {
+    switch (video.status) {
+      case VideoStatus.Pending:
+        return { text: 'Pending', style: 'dim' };
+      case VideoStatus.Recording:
+        return { text: 'Recording', style: 'cyan' };
+      case VideoStatus.MovingFiles:
+        return { text: 'Moving files', style: 'cyan' };
+      case VideoStatus.Converting:
+        return { text: `Converting ${video.currentSequencePosition}/${video.sequences.length}`, style: 'cyan' };
+      case VideoStatus.Concatenating:
+        return { text: 'Concatenating', style: 'cyan' };
+      case VideoStatus.Success:
+        return { text: 'Done', style: 'green' };
+      case VideoStatus.Error:
+        return { text: 'Failed', style: 'red' };
+    }
   }
 
   private async installDependenciesIfNecessary(client: CliWebSocketClient, parameters: AddVideoPayload) {
