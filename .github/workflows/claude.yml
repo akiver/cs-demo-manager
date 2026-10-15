@@ -41,7 +41,7 @@ jobs:
           # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
-          claude_args: '--model claude-opus-4-8'
+          claude_args: '--model claude-opus-5-5'
 
   # Comment-triggered code review. Runs in the base repo context (secrets are
   # available), so it works on PRs opened from forks where the `pull_request`
@@ -75,4 +75,4 @@ jobs:
           plugins: 'code-review@claude-code-plugins'
           prompt: '/code-review:code-review ${{ github.repository }}/pull/${{ github.event.issue.number }}'
           track_progress: true
-          claude_args: '--model claude-opus-4-8'
+          claude_args: '--model claude-opus-5-5'
