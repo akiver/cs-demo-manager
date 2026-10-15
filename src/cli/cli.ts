@@ -3,7 +3,7 @@ import '../common/install-source-map-support';
 import 'csdm/node/logger';
 import { commands } from './commands';
 import { HelpCommand } from './commands/help-command';
-import { getErrorMessage, isExpectedError } from 'csdm/cli/get-error-message';
+import { getErrorMessage, getErrorStack, isExpectedError } from 'csdm/cli/get-error-message';
 import { printUnknownCommand } from 'csdm/cli/print-unknown-command';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { ExitCode } from 'csdm/cli/exit-code';
@@ -51,6 +51,7 @@ async function main() {
 
     if (isExpectedError(error)) {
       output.error(getErrorMessage(error));
+      output.debug(getErrorStack(error));
     } else {
       // Likely a bug, the stack trace helps to report it.
       output.clearProgress();

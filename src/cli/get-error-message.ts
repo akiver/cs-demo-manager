@@ -29,3 +29,16 @@ export function getErrorMessage(error: unknown): string {
 
   return String(error);
 }
+
+export function getErrorStack(error: unknown): string {
+  if (!(error instanceof Error)) {
+    return String(error);
+  }
+
+  const stack = error.stack ?? `${error.name}: ${error.message}`;
+  if (error.cause === undefined) {
+    return stack;
+  }
+
+  return `${stack}\nCaused by: ${getErrorStack(error.cause)}`;
+}

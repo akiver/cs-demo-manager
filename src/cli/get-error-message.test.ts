@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vite-plus/test';
 import { ErrorCode } from 'csdm/common/error-code';
 import { DemoNotFound } from 'csdm/node/counter-strike/launcher/errors/demo-not-found';
-import { getErrorMessage, isExpectedError } from './get-error-message';
+import { getErrorMessage, getErrorStack, isExpectedError } from './get-error-message';
 import { CommandError } from './errors/command-error';
 import { InvalidArgument } from './errors/invalid-argument';
 
@@ -38,5 +38,20 @@ describe('isExpectedError', () => {
   it('should return false for unexpected errors', () => {
     expect(isExpectedError(new TypeError('Cannot read properties of undefined'))).toBe(false);
     expect(isExpectedError(undefined)).toBe(false);
+  });
+});
+
+describe('getErrorStack', () => {
+  it('should append the stack traces of the causes', () => {
+    const cause = new Error('Request failed');
+    const error = new CommandError('Failed to retrieve the account', { cause });
+
+    expect(getErrorStack(error)).toBe(`${error.stack}\nCaused by: ${cause.stack}`);
+  });
+
+  it('should print error codes used as causes as is', () => {
+    const error = new CommandError('Failed to retrieve the account', { cause: ErrorCode.NetworkError });
+
+    expect(getErrorStack(error)).toBe(`${error.stack}\nCaused by: ${ErrorCode.NetworkError}`);
   });
 });
