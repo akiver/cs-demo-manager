@@ -18,25 +18,45 @@ type Summary = {
 };
 
 class Output {
-  private readonly isInteractive =
-    process.stdout.isTTY === true && process.env.CI === undefined && process.env.TERM !== 'dumb';
+  // Stream of the messages and the progress, stderr in JSON mode so that stdout contains only the JSON.
+  private messageStream: NodeJS.WriteStream = process.stdout;
+  private isJsonMode = false;
   private progressMessage = '';
   private isProgressDisplayed = false;
   private readonly writeToStdout = process.stdout.write.bind(process.stdout);
+  private readonly writeToStderr = process.stderr.write.bind(process.stderr);
 
   public constructor() {
-    if (this.isInteractive) {
-      this.eraseProgressBeforeWrites(process.stdout);
-      this.eraseProgressBeforeWrites(process.stderr);
-    }
+    this.interceptWrites(process.stdout);
+    this.interceptWrites(process.stderr);
     // Otherwise the shell prompt would be displayed after the progress message when the process exits.
     process.on('exit', () => {
       this.clearProgress();
     });
   }
 
+  private get isInteractive() {
+    return this.messageStream.isTTY === true && process.env.CI === undefined && process.env.TERM !== 'dumb';
+  }
+
+  /**
+   * Prints the messages and the progress on stderr, stdout then contains only the JSON printed with json() so that it
+   * can be piped to another program.
+   */
+  public enableJsonMode() {
+    this.clearProgress();
+    this.messageStream = process.stderr;
+    this.isJsonMode = true;
+  }
+
+  public json(data: unknown) {
+    this.clearProgress();
+    // The original write function, the intercepted one redirects stdout writes to stderr in JSON mode.
+    this.writeToStdout(`${JSON.stringify(data, null, 2)}\n`);
+  }
+
   public log(message: string) {
-    console.log(message);
+    this.messageStream.write(`${message}\n`);
   }
 
   public success(message: string) {
@@ -60,7 +80,7 @@ class Output {
     if (this.isInteractive) {
       this.renderProgress(message);
     } else {
-      console.log(message);
+      this.log(message);
     }
   }
 
@@ -106,38 +126,51 @@ class Output {
     this.error(lines.join('\n'));
   }
 
-  private style(style: Style, text: string, stream: NodeJS.WriteStream = process.stdout) {
+  private style(style: Style, text: string, stream: NodeJS.WriteStream = this.messageStream) {
     return styleText(style, text, { stream });
+  }
+
+  private writeProgress(text: string) {
+    if (this.messageStream === process.stderr) {
+      this.writeToStderr(text);
+    } else {
+      this.writeToStdout(text);
+    }
   }
 
   private renderProgress(message: string) {
     // A message longer than the terminal would wrap and only its last line would be erased.
-    const maxLength = (process.stdout.columns || 80) - 1;
+    const maxLength = (this.messageStream.columns || 80) - 1;
     this.progressMessage = truncate(message, maxLength);
-    this.writeToStdout(`\r\x1b[2K${this.progressMessage}`);
+    this.writeProgress(`\r\x1b[2K${this.progressMessage}`);
     this.isProgressDisplayed = true;
   }
 
   private eraseProgressLine() {
     if (this.isProgressDisplayed) {
-      this.writeToStdout('\r\x1b[2K');
+      this.writeProgress('\r\x1b[2K');
       this.isProgressDisplayed = false;
     }
   }
 
   /**
-   * Any output, including the logger or Node.js warnings, would otherwise be appended to the progress message.
-   * The progress message is erased before the write and displayed again below the written lines.
+   * Intercepts all the writes, including the ones from the logger, dependencies or Node.js warnings:
+   * - The progress message is erased before the write and displayed again below the written lines, the output would
+   * otherwise be appended to it.
+   * - In JSON mode, stdout writes are redirected to stderr so that stdout contains only the JSON whatever writes to it.
    */
-  private eraseProgressBeforeWrites(stream: NodeJS.WriteStream) {
+  private interceptWrites(stream: NodeJS.WriteStream) {
     const write = stream.write;
     stream.write = (chunk: string | Uint8Array, ...args: unknown[]) => {
       this.eraseProgressLine();
-      const result = Reflect.apply(write, stream, [chunk, ...args]) as boolean;
+      const result =
+        this.isJsonMode && stream === process.stdout
+          ? (Reflect.apply(this.writeToStderr, process.stderr, [chunk, ...args]) as boolean)
+          : (Reflect.apply(write, stream, [chunk, ...args]) as boolean);
       // Displayed again only after a complete line, otherwise the next write would continue the progress message.
       const endsWithNewLine = typeof chunk === 'string' ? chunk.endsWith('\n') : chunk.at(-1) === 0x0a;
       if (this.progressMessage !== '' && endsWithNewLine) {
-        this.writeToStdout(this.progressMessage);
+        this.writeProgress(this.progressMessage);
         this.isProgressDisplayed = true;
       }
 

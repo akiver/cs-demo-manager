@@ -15,6 +15,12 @@ export abstract class Command {
   public abstract run(): Promise<void>;
   protected args: string[];
   protected readonly helpFormatter = new HelpFormatter();
+  protected readonly jsonOption = {
+    json: {
+      type: 'boolean',
+      description: 'Print the result as JSON on stdout, the other messages are printed on stderr.',
+    },
+  } satisfies CommandOptions;
 
   public constructor(args: string[]) {
     this.args = args;
