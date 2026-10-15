@@ -517,7 +517,7 @@ export class VideoCommand extends Command {
       case QueueSubCommand.List: {
         const { videos, isPaused } = await client.send({ name: CliClientMessageName.GetVideoQueue });
         if (isJsonOutput) {
-          output.json({
+          await output.json({
             isPaused,
             videos: videos.map((video) => ({
               id: video.id,
