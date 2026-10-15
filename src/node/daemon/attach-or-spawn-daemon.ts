@@ -4,7 +4,7 @@ import { readDaemonInfoFile, deleteDaemonInfoFile, getDaemonInfoFilePath } from 
 import { probeDaemon, askDaemonToShutdown } from './probe-daemon';
 import pkg from '../../../package.json';
 import { isProcessAlive } from '../os/is-process-alive';
-import { SERVER_INSPECTOR_PORT } from 'csdm/node/debug-ports';
+import { SERVER_INSPECTOR_PORT } from 'csdm/node/debug-ports.mjs';
 
 export type SpawnDaemonOptions = {
   // Path to the server.js bundle, it lives next to the file being executed (cli.js or main.js).

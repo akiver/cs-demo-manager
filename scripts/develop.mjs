@@ -11,8 +11,8 @@ import { watch } from 'vite/rolldown';
 import nativeNodeModulesPlugin from './rolldown-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
 import { killDaemonProcess } from './kill-daemon-process.mjs';
-import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.ts';
-import { SERVER_INSPECTOR_PORT, RENDERER_REMOTE_DEBUGGING_PORT } from '../src/node/debug-ports.ts';
+import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.mts';
+import { SERVER_INSPECTOR_PORT, RENDERER_REMOTE_DEBUGGING_PORT } from '../src/node/debug-ports.mts';
 
 const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
 const outFolderPath = path.resolve(rootFolderPath, 'out');

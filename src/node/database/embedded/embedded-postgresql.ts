@@ -18,7 +18,7 @@ import { EmbeddedDatabaseInitializationError } from './errors/embedded-database-
 import { EmbeddedDatabaseStartError } from './errors/embedded-database-start-error';
 import { EmbeddedDatabaseBinariesNotFoundError } from './errors/embedded-database-binaries-not-found-error';
 import { EmbeddedDatabaseVersionMismatchError } from './errors/embedded-database-version-mismatch-error';
-import { EMBEDDED_POSTGRESQL_MAJOR_VERSION } from './embedded-postgresql-version';
+import { EMBEDDED_POSTGRESQL_MAJOR_VERSION } from './embedded-postgresql-version.mjs';
 import { BaseError } from 'csdm/node/errors/base-error';
 
 const DATABASE_USERNAME = 'csdm';

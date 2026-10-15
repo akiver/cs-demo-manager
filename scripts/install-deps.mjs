@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import fs from 'fs-extra';
-import { EMBEDDED_POSTGRESQL_PACKAGE_VERSION } from '../src/node/database/embedded/embedded-postgresql-version.ts';
+import { EMBEDDED_POSTGRESQL_PACKAGE_VERSION } from '../src/node/database/embedded/embedded-postgresql-version.mts';
 
 const projectPath = fileURLToPath(new URL('..', import.meta.url));
 const staticFolderPath = fileURLToPath(new URL('../static', import.meta.url));

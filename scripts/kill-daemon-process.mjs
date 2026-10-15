@@ -1,7 +1,7 @@
 // @ts-check
 import path from 'node:path';
 import fs from 'fs-extra';
-import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.ts';
+import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.mts';
 
 const daemonInfoFilePath = path.join(resolveAppFolderPath(true), 'daemon.json');
 
