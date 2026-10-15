@@ -31,7 +31,7 @@ export function playerPositionRowToPlayerPosition(row: PlayerPositionRow): Playe
     hasHelmet: row.has_helmet,
     hasBomb: row.has_bomb,
     hasDefuseKit: row.has_defuse_kit,
-    isDucking: row.is_alive,
+    isDucking: row.is_ducking,
     isAirborne: row.is_airborne,
     isScoping: row.is_scoping,
     isDefusing: row.is_defusing,
