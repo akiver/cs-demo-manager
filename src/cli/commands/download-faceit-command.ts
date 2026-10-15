@@ -15,7 +15,6 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
   public static Name = 'dl-faceit';
   public static Description = 'Download the last demos of a FACEIT account.';
   private playerNickname: string | undefined;
-  private demoPathBeingDownloaded: string | undefined;
   private readonly options = {
     ...this.downloadOptions,
     nickname: {
@@ -51,7 +50,6 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     );
     // oxlint-disable no-unreachable
     this.parseArgs();
-    process.on('SIGINT', this.onInterruptSignal);
 
     this.outputFolderPath = await this.getOutputFolder();
     await this.assertOutputFolderIsValid(this.outputFolderPath);
@@ -83,9 +81,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
       return;
     }
 
-    this.demoPathBeingDownloaded = demoPath;
     await this.downloadDemo(match.demoUrl, demoPath, zlib.createGunzip());
-    this.demoPathBeingDownloaded = undefined;
   }
 
   private async getAccountId() {
@@ -105,11 +101,4 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
       throw new CommandError(`Failed to retrieve account with nickname: ${this.playerNickname}`, { cause: error });
     }
   }
-
-  private onInterruptSignal = async () => {
-    if (this.demoPathBeingDownloaded) {
-      await fs.remove(this.demoPathBeingDownloaded);
-    }
-    this.exit();
-  };
 }
