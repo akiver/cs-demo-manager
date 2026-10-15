@@ -508,11 +508,11 @@ export class VideoCommand extends Command {
     switch (subCommand) {
       case QueueSubCommand.Pause:
         await client.send({ name: CliClientMessageName.PauseVideoQueue });
-        console.log('Video queue paused, the video currently being generated will complete before the queue stops.');
+        output.log('Video queue paused, the video currently being generated will complete before the queue stops.');
         break;
       case QueueSubCommand.Resume:
         await client.send({ name: CliClientMessageName.ResumeVideoQueue });
-        console.log('Video queue resumed');
+        output.log('Video queue resumed');
         break;
       case QueueSubCommand.List: {
         const { videos, isPaused } = await client.send({ name: CliClientMessageName.GetVideoQueue });
@@ -530,13 +530,13 @@ export class VideoCommand extends Command {
           });
           break;
         }
-        output.log(`The queue is ${isPaused ? 'paused' : 'running'}`);
+        output.print(`The queue is ${isPaused ? 'paused' : 'running'}`);
         if (videos.length === 0) {
-          output.log('No videos in the queue');
+          output.print('No videos in the queue');
           break;
         }
 
-        output.log('');
+        output.print('');
         output.table(
           ['ID', 'STATUS', 'ADDED', 'SEQUENCES', 'DEMO'],
           videos.map((video) => [

@@ -77,6 +77,14 @@ export class HelpFormatter {
     return sections.join('\n\n');
   }
 
+  public formatOptionsSection(title: string, options: CommandOptions) {
+    const rows = Object.entries(options).map(([name, option]) => {
+      return { label: this.formatOptionLabel(name, option), description: this.formatOptionDescription(option) };
+    });
+
+    return this.formatRowsSection(title, rows);
+  }
+
   public formatRowsSection(title: string, rows: Row[]) {
     return this.formatSection(title, this.formatRows(rows, this.getLabelWidth(rows)));
   }

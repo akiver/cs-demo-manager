@@ -11,6 +11,13 @@ type FailedDemo = {
 
 export type TableCell = string | { text: string; style: Style };
 
+export const Verbosity = {
+  Quiet: 'quiet', // Only the errors and the data requested, such as the JSON or a table.
+  Normal: 'normal',
+  Verbose: 'verbose', // The debug messages too.
+} as const;
+type Verbosity = (typeof Verbosity)[keyof typeof Verbosity];
+
 type Summary = {
   succeeded: number;
   // Describes the succeeded items, e.g. "analyzed".
@@ -23,6 +30,7 @@ class Output {
   // Stream of the messages and the progress, stderr in JSON mode so that stdout contains only the JSON.
   private messageStream: NodeJS.WriteStream = process.stdout;
   private isJsonMode = false;
+  private verbosity: Verbosity = Verbosity.Normal;
   private progressMessage = '';
   private isProgressDisplayed = false;
   private readonly writeToStdout = process.stdout.write.bind(process.stdout);
@@ -51,6 +59,10 @@ class Output {
     this.isJsonMode = true;
   }
 
+  public setVerbosity(verbosity: Verbosity) {
+    this.verbosity = verbosity;
+  }
+
   public json(data: unknown) {
     this.clearProgress();
     // The original write function, the intercepted one redirects stdout writes to stderr in JSON mode.
@@ -58,7 +70,20 @@ class Output {
   }
 
   public log(message: string) {
+    if (this.verbosity !== Verbosity.Quiet) {
+      this.print(message);
+    }
+  }
+
+  public print(message: string) {
     this.messageStream.write(`${message}\n`);
+  }
+
+  public debug(message: string) {
+    if (this.verbosity === Verbosity.Verbose) {
+      const elapsedTime = `[${(performance.now() / 1000).toFixed(2)}s]`;
+      console.error(this.style('dim', `${elapsedTime} ${message}`, process.stderr));
+    }
   }
 
   public success(message: string) {
@@ -79,6 +104,10 @@ class Output {
   }
 
   public progress(message: string) {
+    if (this.verbosity === Verbosity.Quiet) {
+      return;
+    }
+
     if (this.isInteractive) {
       this.renderProgress(message);
     } else {
@@ -87,7 +116,7 @@ class Output {
   }
 
   public liveProgress(message: string) {
-    if (this.isInteractive) {
+    if (this.isInteractive && this.verbosity !== Verbosity.Quiet) {
       this.renderProgress(message);
     }
   }
@@ -143,7 +172,7 @@ class Output {
         const { style } = cells[rowIndex][columnIndex];
         return style === undefined ? text : this.style(style, text);
       });
-      this.log(line.join(''));
+      this.print(line.join(''));
     }
   }
 

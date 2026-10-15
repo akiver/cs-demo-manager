@@ -2,6 +2,7 @@ import { Command } from './command';
 import { commands } from '../commands';
 import { printUnknownCommand } from '../print-unknown-command';
 import { ExitCode } from '../exit-code';
+import type { CommandOptions } from '../parse-command-args';
 import pkg from '../../../package.json';
 
 export class HelpCommand extends Command {
@@ -19,6 +20,12 @@ export class HelpCommand extends Command {
     console.log('  csdm <command> [arguments] [options]');
     console.log('');
     console.log(this.helpFormatter.formatRowsSection('Commands', commandRows));
+    console.log('');
+    const options: CommandOptions = {
+      ...this.globalOptions,
+      help: { type: 'boolean', short: 'h', description: 'Show the help of a command.' },
+    };
+    console.log(this.helpFormatter.formatOptionsSection('Options available for all commands', options));
     console.log('');
     console.log('Run "csdm help <command>" or "csdm <command> --help" for more information about a command.');
     console.log('Run "csdm --version" to print the version.');

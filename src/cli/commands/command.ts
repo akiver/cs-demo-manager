@@ -7,14 +7,27 @@ import { DatabaseSchemaVersionMismatch } from 'csdm/node/database/database-schem
 import { type CommandOptions, parseCommandArgs } from 'csdm/cli/parse-command-args';
 import { type CommandHelp, HelpFormatter } from 'csdm/cli/help-formatter';
 import { CommandError } from 'csdm/cli/errors/command-error';
+import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { ExitCode } from 'csdm/cli/exit-code';
-import { output } from 'csdm/cli/output';
+import { output, Verbosity } from 'csdm/cli/output';
 
 export abstract class Command {
   public abstract printHelp(): void;
   public abstract run(): Promise<void>;
   protected args: string[];
   protected readonly helpFormatter = new HelpFormatter();
+  // Options accepted by all the commands.
+  protected readonly globalOptions = {
+    quiet: {
+      type: 'boolean',
+      short: 'q',
+      description: 'Print only the errors and the requested data such as the JSON.',
+    },
+    verbose: {
+      type: 'boolean',
+      description: 'Print the details of each step, such as the daemon and database connections.',
+    },
+  } satisfies CommandOptions;
   protected readonly jsonOption = {
     json: {
       type: 'boolean',
@@ -40,11 +53,22 @@ export abstract class Command {
       this.exit();
     }
 
-    return parseCommandArgs(this.args, options, allowPositionals);
+    const result = parseCommandArgs(this.args, { ...options, ...this.globalOptions }, allowPositionals);
+    const { quiet = false, verbose = false } = result.values as { quiet?: boolean; verbose?: boolean };
+    if (quiet && verbose) {
+      throw new InvalidArgument('The --quiet and --verbose options cannot be used together');
+    }
+    if (quiet) {
+      output.setVerbosity(Verbosity.Quiet);
+    } else if (verbose) {
+      output.setVerbosity(Verbosity.Verbose);
+    }
+
+    return result;
   }
 
   protected printCommandHelp(help: CommandHelp) {
-    console.log(this.helpFormatter.formatCommandHelp(help));
+    console.log(this.helpFormatter.formatCommandHelp({ ...help, options: { ...help.options, ...this.globalOptions } }));
   }
 
   /**
@@ -62,8 +86,12 @@ export abstract class Command {
     await this.ensureDaemonDatabaseConnection(client);
     try {
       const settings = await client.send({ name: CliClientMessageName.GetDatabaseConnectionSettings });
+      output.debug(
+        `Connecting to the database ${settings.database} on ${settings.hostname}:${settings.port} as ${settings.username}`,
+      );
       createDatabaseConnection(settings);
       await assertDatabaseSchemaVersionMatches();
+      output.debug('Connected to the database, its schema version matches this CLI');
     } catch (error) {
       if (error instanceof DatabaseSchemaVersionMismatch) {
         throw new CommandError(
@@ -84,8 +112,10 @@ export abstract class Command {
     const hintTimeoutId = setTimeout(() => {
       output.progress('Connecting to the database, it may take a while on first start or after an update...');
     }, 3_000);
+    output.debug('Asking the daemon to connect to the database');
     try {
       await client.send({ name: CliClientMessageName.EnsureDatabaseConnection }, { timeoutMs: null });
+      output.debug('The daemon is connected to the database');
     } catch (error) {
       throw new CommandError('Failed to connect to the database', { cause: error });
     } finally {
@@ -95,6 +125,7 @@ export abstract class Command {
   }
 
   protected async connectToDaemon(): Promise<CliWebSocketClient> {
+    output.debug('Connecting to the daemon');
     try {
       return await createDaemonConnection();
     } catch (error) {
