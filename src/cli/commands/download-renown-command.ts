@@ -17,7 +17,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
   private steamId: string | undefined;
   private demoPathBeingDownloaded: string | undefined;
   private readonly options = {
-    ...this.outputOption,
+    ...this.downloadOptions,
     steamid: {
       type: 'string',
       valueName: 'steamId',
@@ -62,7 +62,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
 
   protected parseArgs() {
     const { values } = this.parseOptions(this.options);
-    this.outputFolderPath = values.output ?? '';
+    this.parseDownloadOptions(values);
     this.steamId = values.steamid;
   }
 
@@ -70,13 +70,13 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
     const demoPath = path.join(this.outputFolderPath, `${match.id}.dem`);
     const demoAlreadyExists = await fs.pathExists(demoPath);
     if (demoAlreadyExists) {
-      this.printSkippedDemo(`${path.basename(demoPath)} already in the download folder`);
+      this.printDemoAlreadyDownloaded(demoPath);
       return;
     }
 
     const isLinkExpired = await isDownloadLinkExpired(match.demoUrl);
     if (isLinkExpired) {
-      this.printDownloadError(`Demo link expired for match: ${match.id}`);
+      this.printDownloadError(`Demo link expired for match: ${match.id}`, demoPath);
       return;
     }
 
