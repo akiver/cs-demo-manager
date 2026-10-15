@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vite-plus/test';
-import { formatBytes, formatDuration, truncate } from './format';
+import { alignColumns, formatBytes, formatDate, formatDuration, truncate } from './format';
 
 describe('formatBytes', () => {
   it('should format bytes with the largest unit', () => {
@@ -24,5 +24,29 @@ describe('truncate', () => {
   it('should truncate text longer than the max length with an ellipsis', () => {
     expect(truncate('demo.dem', 8)).toBe('demo.dem');
     expect(truncate('demo.dem', 5)).toBe('demo…');
+  });
+});
+
+describe('formatDate', () => {
+  it('should format the date in local time', () => {
+    expect(formatDate(new Date(2026, 0, 5, 9, 3))).toBe('2026-01-05 09:03');
+  });
+});
+
+describe('alignColumns', () => {
+  it('should pad the cells to align the columns except the last one', () => {
+    const rows = [
+      ['STATUS', 'DEMO'],
+      ['Recording', 'a.dem'],
+    ];
+    expect(alignColumns(rows)).toEqual([
+      ['STATUS     ', 'DEMO'],
+      ['Recording  ', 'a.dem'],
+    ]);
+  });
+
+  it('should truncate the last column to fit in the max width', () => {
+    const rows = [['Done', 'long-demo-name.dem']];
+    expect(alignColumns(rows, 12)).toEqual([['Done  ', 'long-…']]);
   });
 });

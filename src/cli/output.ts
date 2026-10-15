@@ -1,5 +1,5 @@
 import { styleText } from 'node:util';
-import { truncate } from './format';
+import { alignColumns, truncate } from './format';
 
 type Style = Parameters<typeof styleText>[0];
 
@@ -8,6 +8,8 @@ type FailedDemo = {
   // Details such as the analyzer output, printed at the end to not interleave long outputs with the progress.
   details: string;
 };
+
+export type TableCell = string | { text: string; style: Style };
 
 type Summary = {
   succeeded: number;
@@ -124,6 +126,25 @@ class Output {
       }
     }
     this.error(lines.join('\n'));
+  }
+
+  public table(headers: string[], rows: TableCell[][]) {
+    const cells = [
+      headers.map((text) => ({ text, style: 'bold' as const })),
+      ...rows.map((row) => row.map((cell) => (typeof cell === 'string' ? { text: cell, style: undefined } : cell))),
+    ];
+    const maxWidth = this.isInteractive ? (this.messageStream.columns || 80) - 1 : undefined;
+    const alignedRows = alignColumns(
+      cells.map((row) => row.map(({ text }) => text)),
+      maxWidth,
+    );
+    for (const [rowIndex, row] of alignedRows.entries()) {
+      const line = row.map((text, columnIndex) => {
+        const { style } = cells[rowIndex][columnIndex];
+        return style === undefined ? text : this.style(style, text);
+      });
+      this.log(line.join(''));
+    }
   }
 
   private style(style: Style, text: string, stream: NodeJS.WriteStream = this.messageStream) {

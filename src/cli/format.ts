@@ -32,3 +32,27 @@ export function truncate(text: string, maxLength: number) {
 
   return `${text.slice(0, Math.max(maxLength - 1, 0))}…`;
 }
+
+export function formatDate(date: Date) {
+  const pad = (value: number) => String(value).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
+/**
+ * Pads the cells so that the columns are aligned once the cells of a row are joined, the last column is not padded to
+ * not add trailing spaces but truncated so that the rows fit in maxWidth.
+ */
+export function alignColumns(rows: string[][], maxWidth = Number.POSITIVE_INFINITY) {
+  const gap = 2;
+  const columnCount = rows[0]?.length ?? 0;
+  const widths = Array.from({ length: columnCount - 1 }, (_, index) => {
+    return Math.max(...rows.map((row) => row[index].length)) + gap;
+  });
+  const lastColumnStart = widths.reduce((total, width) => total + width, 0);
+
+  return rows.map((row) => {
+    return row.map((cell, index) => {
+      return index < widths.length ? cell.padEnd(widths[index]) : truncate(cell, maxWidth - lastColumnStart);
+    });
+  });
+}
