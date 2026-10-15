@@ -63,10 +63,18 @@ class Output {
     this.verbosity = verbosity;
   }
 
+  /**
+   * Resolves once the JSON has been written, writes to a pipe are asynchronous on macOS and process.exit() would
+   * otherwise truncate it.
+   */
   public json(data: unknown) {
     this.clearProgress();
-    // The original write function, the intercepted one redirects stdout writes to stderr in JSON mode.
-    this.writeToStdout(`${JSON.stringify(data, null, 2)}\n`);
+    return new Promise<void>((resolve) => {
+      // The original write function, the intercepted one redirects stdout writes to stderr in JSON mode.
+      this.writeToStdout(`${JSON.stringify(data, null, 2)}\n`, () => {
+        resolve();
+      });
+    });
   }
 
   public log(message: string) {

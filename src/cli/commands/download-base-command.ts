@@ -97,7 +97,7 @@ export abstract class DownloadBaseCommand extends Command {
     });
 
     if (this.isJsonOutput) {
-      output.json({
+      await output.json({
         downloaded: this.downloadedDemos,
         skipped: this.skippedDemoPaths.map((demoPath) => ({ demoPath })),
         failed: this.failedDownloads,
