@@ -40,7 +40,8 @@ export function formatDate(date: Date) {
 
 /**
  * Pads the cells so that the columns are aligned once the cells of a row are joined, the last column is not padded to
- * not add trailing spaces but truncated so that the rows fit in maxWidth.
+ * not add trailing spaces but truncated so that the rows fit in maxWidth. It's not truncated when the space left is too
+ * small, values cut to a few characters would be unreadable, the rows wrap instead.
  */
 export function alignColumns(rows: string[][], maxWidth = Number.POSITIVE_INFINITY) {
   const gap = 2;
@@ -49,10 +50,16 @@ export function alignColumns(rows: string[][], maxWidth = Number.POSITIVE_INFINI
     return Math.max(...rows.map((row) => row[index].length)) + gap;
   });
   const lastColumnStart = widths.reduce((total, width) => total + width, 0);
+  const lastColumnWidth = maxWidth - lastColumnStart;
+  const minLastColumnWidth = 20;
 
   return rows.map((row) => {
     return row.map((cell, index) => {
-      return index < widths.length ? cell.padEnd(widths[index]) : truncate(cell, maxWidth - lastColumnStart);
+      if (index < widths.length) {
+        return cell.padEnd(widths[index]);
+      }
+
+      return lastColumnWidth < minLastColumnWidth ? cell : truncate(cell, lastColumnWidth);
     });
   });
 }

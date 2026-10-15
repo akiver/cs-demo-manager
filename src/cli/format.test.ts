@@ -46,7 +46,12 @@ describe('alignColumns', () => {
   });
 
   it('should truncate the last column to fit in the max width', () => {
-    const rows = [['Done', 'long-demo-name.dem']];
-    expect(alignColumns(rows, 12)).toEqual([['Done  ', 'long-…']]);
+    const rows = [['Done', 'a-very-long-demo-name.dem']];
+    expect(alignColumns(rows, 26)).toEqual([['Done  ', 'a-very-long-demo-na…']]);
+  });
+
+  it('should not truncate the last column when the space left is too small', () => {
+    const rows = [['Done', 'a-very-long-demo-name.dem']];
+    expect(alignColumns(rows, 25)).toEqual([['Done  ', 'a-very-long-demo-name.dem']]);
   });
 });
