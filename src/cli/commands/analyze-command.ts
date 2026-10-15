@@ -32,8 +32,10 @@ export class AnalyzeCommand extends Command {
       type: 'boolean',
       description: 'Include the players, grenades... positions in the analysis.',
     },
+    ...this.jsonOption,
   } satisfies CommandOptions;
   private demoPaths: string[] = [];
+  private isJsonOutput = false;
   private analyzePositions = false;
   private forceAnalyze = false;
   private source: DemoSource | undefined = undefined;
@@ -79,10 +81,10 @@ export class AnalyzeCommand extends Command {
 
     const pendingChecksums = new Set<string>();
     const lastStatusPerChecksum = new Map<string, AnalysisStatus>();
+    const demoPathPerChecksum = new Map<string, string>();
+    const analyzedDemos: { demoPath: string; checksum: string }[] = [];
     const failedDemos: { demoPath: string; details: string }[] = [];
-    let analyzedDemoCount = 0;
-    let skippedDemoCount = 0;
-    let hasError = false;
+    const skippedDemoPaths: string[] = [];
     let resolveCompletion: () => void;
     const completion = new Promise<void>((resolve) => {
       resolveCompletion = resolve;
@@ -96,7 +98,7 @@ export class AnalyzeCommand extends Command {
     };
 
     const printProgress = (message: string) => {
-      const processedDemoCount = analyzedDemoCount + skippedDemoCount + failedDemos.length;
+      const processedDemoCount = analyzedDemos.length + skippedDemoPaths.length + failedDemos.length;
       output.progress(`[${processedDemoCount}/${this.demoPaths.length}] ${message}`);
     };
 
@@ -116,13 +118,12 @@ export class AnalyzeCommand extends Command {
           printProgress(`Inserting ${demoName} into the database...`);
           break;
         case AnalysisStatus.InsertSuccess:
-          analyzedDemoCount++;
+          analyzedDemos.push({ demoPath, checksum });
           printProgress(`${demoName} inserted into the database`);
           markAnalysisAsDone(checksum);
           break;
         case AnalysisStatus.AnalyzeError:
         case AnalysisStatus.InsertError: {
-          hasError = true;
           const message =
             status === AnalysisStatus.AnalyzeError
               ? `Failed to analyze ${demoName}`
@@ -137,7 +138,7 @@ export class AnalyzeCommand extends Command {
 
     client.on(ServerPushMessageName.AnalysisUpdated, onAnalysisUpdated);
 
-    const { addedDemos, skippedDemoPaths, unsupportedDemos } = await client.send(
+    const result = await client.send(
       {
         name: CliClientMessageName.AddDemoPathsToAnalyses,
         payload: {
@@ -150,17 +151,17 @@ export class AnalyzeCommand extends Command {
       { timeoutMs: 20_000 },
     );
 
-    for (const demoPath of skippedDemoPaths) {
-      skippedDemoCount++;
+    for (const demoPath of result.skippedDemoPaths) {
+      skippedDemoPaths.push(demoPath);
       printProgress(`${path.basename(demoPath)} already in the database, skipping it`);
     }
-    for (const { demoPath, source, reason } of unsupportedDemos) {
-      hasError = true;
+    for (const { demoPath, source, reason } of result.unsupportedDemos) {
       failedDemos.push({ demoPath, details: this.getUnsupportedDemoMessage(source, reason) });
       output.error(`Failed to analyze ${path.basename(demoPath)}`);
     }
-    for (const { checksum } of addedDemos) {
+    for (const { checksum, demoPath } of result.addedDemos) {
       pendingChecksums.add(checksum);
+      demoPathPerChecksum.set(checksum, demoPath);
     }
 
     if (pendingChecksums.size > 0) {
@@ -172,12 +173,10 @@ export class AnalyzeCommand extends Command {
         try {
           const daemon = await client.send({ name: CliClientMessageName.GetDaemonStatus });
           if (!daemon.busy && pendingChecksums.size > 0) {
-            hasError = true;
             output.error('Some analyses did not complete, check the demos in the GUI or re-run the command.');
             resolveCompletion();
           }
         } catch (error) {
-          hasError = true;
           output.error(getErrorMessage(error));
           resolveCompletion();
         }
@@ -189,15 +188,28 @@ export class AnalyzeCommand extends Command {
 
     client.close();
 
+    for (const checksum of pendingChecksums) {
+      const demoPath = demoPathPerChecksum.get(checksum) ?? checksum;
+      failedDemos.push({ demoPath, details: 'The analysis did not complete' });
+    }
+
     output.summary({
-      succeeded: analyzedDemoCount,
+      succeeded: analyzedDemos.length,
       label: 'analyzed',
-      skipped: skippedDemoCount,
+      skipped: skippedDemoPaths.length,
       failed: failedDemos.length,
     });
     output.failedDemos(failedDemos);
 
-    if (hasError) {
+    if (this.isJsonOutput) {
+      output.json({
+        analyzed: analyzedDemos,
+        skipped: skippedDemoPaths.map((demoPath) => ({ demoPath })),
+        failed: failedDemos.map(({ demoPath, details }) => ({ demoPath, error: details })),
+      });
+    }
+
+    if (failedDemos.length > 0) {
       this.exit(ExitCode.Failure);
     }
   }
@@ -231,5 +243,9 @@ export class AnalyzeCommand extends Command {
     this.analyzePositions = values['analyze-positions'] ?? false;
     this.forceAnalyze = values.force ?? false;
     this.source = values.source as DemoSource | undefined;
+    this.isJsonOutput = values.json ?? false;
+    if (this.isJsonOutput) {
+      output.enableJsonMode();
+    }
   }
 }
