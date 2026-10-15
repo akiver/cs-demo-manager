@@ -202,7 +202,7 @@ export class AnalyzeCommand extends Command {
     output.failedDemos(failedDemos);
 
     if (this.isJsonOutput) {
-      await output.json({
+      output.json({
         analyzed: analyzedDemos,
         skipped: skippedDemoPaths.map((demoPath) => ({ demoPath })),
         failed: failedDemos.map(({ demoPath, details }) => ({ demoPath, error: details })),
@@ -210,7 +210,7 @@ export class AnalyzeCommand extends Command {
     }
 
     if (failedDemos.length > 0) {
-      this.exit(ExitCode.Failure);
+      this.markAsFailed();
     }
   }
 

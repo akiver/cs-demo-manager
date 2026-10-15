@@ -23,11 +23,17 @@ function getCommandName(args: string[]) {
   return firstArg;
 }
 
+async function exit(exitCode?: ExitCode) {
+  await output.flush();
+  // Without exit code, the one set by the command with process.exitCode is used.
+  process.exit(exitCode);
+}
+
 async function main() {
   const args = process.argv.slice(2);
   if (args[0] === '--version') {
     console.log(pkg.version);
-    process.exit(ExitCode.Success);
+    return exit(ExitCode.Success);
   }
 
   const commandName = getCommandName(args);
@@ -35,18 +41,18 @@ async function main() {
     const CommandToRun = commands[commandName];
     if (CommandToRun === undefined) {
       printUnknownCommand(commandName);
-      process.exit(ExitCode.InvalidUsage);
+      return await exit(ExitCode.InvalidUsage);
     }
 
     const commandArgs = process.argv.slice(3);
     const command = new CommandToRun(commandArgs);
     await command.run();
-    process.exit(ExitCode.Success);
+    return await exit();
   } catch (error) {
     if (error instanceof InvalidArgument) {
       output.error(error.message);
       output.hint(`Run "csdm ${commandName} --help" for usage.`);
-      process.exit(ExitCode.InvalidUsage);
+      return exit(ExitCode.InvalidUsage);
     }
 
     if (isExpectedError(error)) {
@@ -57,7 +63,8 @@ async function main() {
       output.clearProgress();
       console.error(error);
     }
-    process.exit(ExitCode.Failure);
+
+    return exit(ExitCode.Failure);
   }
 }
 

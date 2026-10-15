@@ -44,6 +44,14 @@ export abstract class Command {
   }
 
   /**
+   * The process exits with a failure code once the command completes, exiting right away would truncate the output not
+   * written yet when it's piped.
+   */
+  protected markAsFailed() {
+    process.exitCode = ExitCode.Failure;
+  }
+
+  /**
    * Prints the command help and exits when the help is requested, otherwise parses the command args.
    * Invalid args throw an InvalidArgument error.
    */
