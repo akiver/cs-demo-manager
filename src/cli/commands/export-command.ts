@@ -96,7 +96,7 @@ export abstract class ExportCommand extends Command {
     output.failedDemos(failedDemos);
 
     if (failedDemos.length > 0) {
-      this.exit(ExitCode.Failure);
+      this.markAsFailed();
     }
   }
 
