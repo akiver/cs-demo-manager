@@ -50,6 +50,11 @@ describe('alignColumns', () => {
     expect(alignColumns(rows, 26)).toEqual([['Done  ', 'a-very-long-demo-na…']]);
   });
 
+  it('should align the rows that have fewer cells than the header', () => {
+    const rows = [['STATUS', 'ADDED', 'DEMO'], ['Done']];
+    expect(alignColumns(rows)).toEqual([['STATUS  ', 'ADDED  ', 'DEMO'], ['Done    ']]);
+  });
+
   it('should not truncate the last column when the space left is too small', () => {
     const rows = [['Done', 'a-very-long-demo-name.dem']];
     expect(alignColumns(rows, 25)).toEqual([['Done  ', 'a-very-long-demo-name.dem']]);

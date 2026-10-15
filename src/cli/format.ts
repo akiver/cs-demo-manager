@@ -47,7 +47,8 @@ export function alignColumns(rows: string[][], maxWidth = Number.POSITIVE_INFINI
   const gap = 2;
   const columnCount = rows[0]?.length ?? 0;
   const widths = Array.from({ length: columnCount - 1 }, (_, index) => {
-    return Math.max(...rows.map((row) => row[index].length)) + gap;
+    // A row may have fewer cells than the header.
+    return Math.max(...rows.map((row) => (row[index] ?? '').length)) + gap;
   });
   const lastColumnStart = widths.reduce((total, width) => total + width, 0);
   const lastColumnWidth = maxWidth - lastColumnStart;
