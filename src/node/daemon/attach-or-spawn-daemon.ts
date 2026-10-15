@@ -16,24 +16,33 @@ export type SpawnDaemonOptions = {
   // Expose the Node.js inspector (dev mode only) so the daemon can be debugged from chrome://inspect: console,
   // breakpoints and network requests thanks to the --experimental-network-inspection flag.
   enableInspector?: boolean;
+  // Called with a description of each spawn step.
+  onStep?: (message: string) => void;
 };
 
-async function tryAttachToRunningDaemon(): Promise<number | null> {
+async function tryAttachToRunningDaemon(onStep: (message: string) => void): Promise<number | null> {
   const info = await readDaemonInfoFile();
   if (info === null) {
+    onStep(`No running daemon found, the discovery file ${getDaemonInfoFilePath()} does not exist`);
     return null;
   }
 
   if (!isProcessAlive(info.pid)) {
+    onStep(`The daemon process ${info.pid} from the discovery file is not running anymore`);
     await deleteDaemonInfoFile(info.pid);
     return null;
   }
 
   const status = await probeDaemon(info.port);
   if (status === null) {
+    onStep(`The daemon process ${info.pid} did not answer on port ${info.port}`);
     await deleteDaemonInfoFile(info.pid);
     return null;
   }
+
+  onStep(
+    `Found the daemon process ${info.pid} running version ${status.version} on port ${info.port} with ${status.clientCount} connected clients`,
+  );
 
   if (status.version !== pkg.version) {
     if (!status.busy && status.clientCount === 0) {
@@ -41,6 +50,7 @@ async function tryAttachToRunningDaemon(): Promise<number | null> {
       // clients: replace it. When clients are attached (e.g. the GUI that spawned it is still running), shutting it
       // down would break them, attach to it instead.
       logger.log(`Asking the daemon running version ${status.version} to exit`);
+      onStep(`Asking the daemon running version ${status.version} to exit, this CLI runs version ${pkg.version}`);
       const isExiting = await askDaemonToShutdown(info.port);
       if (isExiting) {
         // The daemon release can take a few seconds and up to the pg_ctl stop timeout (30s) when a checkpoint is slow.
@@ -74,7 +84,6 @@ async function tryAttachToRunningDaemon(): Promise<number | null> {
 }
 
 function spawnDetachedDaemon({ serverBundlePath, execPath, runAsNode, enableInspector }: SpawnDaemonOptions) {
-  logger.debug(`Spawning daemon from ${serverBundlePath}`);
   const args = [serverBundlePath];
   if (enableInspector) {
     // --inspect-wait pauses the daemon until a debugger attaches, it guarantees that the DevTools network tab captures
@@ -110,7 +119,7 @@ function spawnDetachedDaemon({ serverBundlePath, execPath, runAsNode, enableInsp
 /**
  * Waits for a daemon to be discoverable and healthy, returns the port it's listening on.
  */
-async function waitForDaemonReady(): Promise<number> {
+async function waitForDaemonReady(onStep: (message: string) => void): Promise<number> {
   const startTime = Date.now();
   // A daemon spawned with --inspect-wait doesn't run until a debugger attaches, leave time to open the DevTools.
   const spawnTimeoutMs = process.env.CSDM_DAEMON_INSPECT_WAIT ? 60_000 : 10_000;
@@ -122,6 +131,7 @@ async function waitForDaemonReady(): Promise<number> {
     if (info !== null) {
       const status = await probeDaemon(info.port);
       if (status !== null) {
+        onStep(`The daemon process ${info.pid} is ready on port ${info.port} after ${Date.now() - startTime}ms`);
         return info.port;
       }
     }
@@ -139,12 +149,17 @@ async function waitForDaemonReady(): Promise<number> {
  * through the daemon info file, spawning a detached one otherwise.
  */
 export async function attachOrSpawnDaemon(options: SpawnDaemonOptions): Promise<number> {
-  const runningDaemonPort = await tryAttachToRunningDaemon();
+  const onStep = (message: string) => {
+    logger.debug(message);
+    options.onStep?.(message);
+  };
+  const runningDaemonPort = await tryAttachToRunningDaemon(onStep);
   if (runningDaemonPort !== null) {
     return runningDaemonPort;
   }
 
+  onStep(`Spawning a daemon with ${options.execPath} ${options.serverBundlePath}`);
   spawnDetachedDaemon(options);
 
-  return waitForDaemonReady();
+  return waitForDaemonReady(onStep);
 }

@@ -2,6 +2,7 @@ import path from 'node:path';
 import type { SpawnDaemonOptions } from 'csdm/node/daemon/attach-or-spawn-daemon';
 import { attachOrSpawnDaemon } from 'csdm/node/daemon/attach-or-spawn-daemon';
 import { CliWebSocketClient } from './web-socket/cli-web-socket-client';
+import { output } from './output';
 
 /**
  * Connects to the WebSocket server daemon, spawning it first if it's not running.
@@ -15,17 +16,25 @@ export async function createDaemonConnection(): Promise<CliWebSocketClient> {
     execPath: process.execPath,
     runAsNode: true,
     enableInspector: IS_DEV,
+    onStep: (message) => {
+      output.debug(message);
+    },
   };
 
   const port = await attachOrSpawnDaemon(options);
 
   try {
-    return await CliWebSocketClient.connect(port);
+    const client = await CliWebSocketClient.connect(port);
+    output.debug(`Connected to the daemon on port ${port}`);
+    return client;
   } catch {
+    output.debug(`Failed to connect to the daemon on port ${port}, retrying`);
     // The daemon may exit between the discovery probe and this connection, typically when its idle exit fires in that
     // window (probe sockets don't count as clients). Retry once: the dead daemon is detected as stale and a fresh one
     // is spawned.
     const newPort = await attachOrSpawnDaemon(options);
-    return CliWebSocketClient.connect(newPort);
+    const client = await CliWebSocketClient.connect(newPort);
+    output.debug(`Connected to the daemon on port ${newPort}`);
+    return client;
   }
 }
