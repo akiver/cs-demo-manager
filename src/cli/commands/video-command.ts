@@ -277,6 +277,14 @@ export class VideoCommand extends Command {
   private startSecondsBefore = 2;
   private endSecondsAfter = 2;
 
+  private readonly listOptions = {
+    json: {
+      type: 'boolean',
+      description: 'Print the queue as JSON.',
+      group: `"${QueueSubCommand.List}" options`,
+    },
+  } satisfies CommandOptions;
+
   public printHelp() {
     this.printCommandHelp({
       name: VideoCommand.Name,
@@ -285,7 +293,8 @@ export class VideoCommand extends Command {
         '<demo-path> <start-tick> <end-tick> [options]',
         `<demo-path> --mode ${Mode.Player} --steamids <steamIds> --event <event> [options]`,
         '--config-file <path>',
-        `<${Object.values(QueueSubCommand).join('|')}>`,
+        `<${QueueSubCommand.Pause}|${QueueSubCommand.Resume}>`,
+        `${QueueSubCommand.List} [--json]`,
       ],
       notes: [
         'The demo must have been analyzed and be present in the database.',
@@ -304,7 +313,7 @@ export class VideoCommand extends Command {
         },
         { label: QueueSubCommand.Resume, description: 'Resume the queue.' },
       ],
-      options: this.options,
+      options: { ...this.options, ...this.listOptions },
       examples: [
         {
           description: 'Record a tick range',
@@ -485,6 +494,15 @@ export class VideoCommand extends Command {
   }
 
   private async runQueueSubCommand(subCommand: QueueSubCommand) {
+    const { values, positionals } = this.parseOptions(this.listOptions, { allowPositionals: true });
+    if (positionals.length > 1) {
+      throw new InvalidArgument(`Unexpected argument: ${positionals[1]}`);
+    }
+    const isJsonOutput = values.json ?? false;
+    if (isJsonOutput && subCommand !== QueueSubCommand.List) {
+      throw new InvalidArgument(`The --json option is available only with "${QueueSubCommand.List}"`);
+    }
+
     const client = await this.connectToDaemon();
 
     switch (subCommand) {
@@ -498,6 +516,20 @@ export class VideoCommand extends Command {
         break;
       case QueueSubCommand.List: {
         const { videos, isPaused } = await client.send({ name: CliClientMessageName.GetVideoQueue });
+        if (isJsonOutput) {
+          output.json({
+            isPaused,
+            videos: videos.map((video) => ({
+              id: video.id,
+              date: video.date,
+              status: video.status,
+              demoPath: video.demoPath,
+              outputFolderPath: video.outputFolderPath,
+              sequenceCount: video.sequences.length,
+            })),
+          });
+          break;
+        }
         console.log(`The queue is ${isPaused ? 'paused' : 'running'}`);
         if (videos.length === 0) {
           console.log('No videos in the queue');
