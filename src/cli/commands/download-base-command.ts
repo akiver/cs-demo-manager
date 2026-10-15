@@ -26,6 +26,10 @@ export abstract class DownloadBaseCommand extends Command {
   private readonly failedDownloads: { demoPath?: string; error: string }[] = [];
   // Position of the match being processed, such as "[2/10]".
   private progressPrefix = '';
+  // Removed when the command is interrupted so that no partial demo is left.
+  private demoPathBeingDownloaded: string | undefined;
+  // Shared by the downloads to reuse the connections, download links may redirect to a CDN.
+  private readonly dispatcher = new Agent().compose(interceptors.redirect({ maxRedirections: 1 }));
   protected readonly downloadOptions = {
     output: {
       type: 'string',
@@ -83,6 +87,7 @@ export abstract class DownloadBaseCommand extends Command {
    * code if a download failed.
    */
   protected async processMatches<Match>(matches: Match[], processMatch: (match: Match) => Promise<void>) {
+    process.on('SIGINT', this.onInterruptSignal);
     for (const [index, match] of matches.entries()) {
       this.progressPrefix = `[${index + 1}/${matches.length}]`;
       await processMatch(match);
@@ -97,7 +102,7 @@ export abstract class DownloadBaseCommand extends Command {
     });
 
     if (this.isJsonOutput) {
-      await output.json({
+      output.json({
         downloaded: this.downloadedDemos,
         skipped: this.skippedDemoPaths.map((demoPath) => ({ demoPath })),
         failed: this.failedDownloads,
@@ -105,7 +110,7 @@ export abstract class DownloadBaseCommand extends Command {
     }
 
     if (this.failedDownloads.length > 0) {
-      this.exit(ExitCode.Failure);
+      this.markAsFailed();
     }
   }
 
@@ -126,10 +131,9 @@ export abstract class DownloadBaseCommand extends Command {
   protected async downloadDemo(demoUrl: string, demoPath: string, decompressStream: NodeJS.ReadWriteStream) {
     const demoName = path.basename(demoPath);
     this.printProgress(`Downloading ${demoName}...`);
+    this.demoPathBeingDownloaded = demoPath;
     try {
-      // Download links may redirect to a CDN.
-      const dispatcher = new Agent().compose(interceptors.redirect({ maxRedirections: 1 }));
-      const response = await request(demoUrl, { method: 'GET', dispatcher });
+      const response = await request(demoUrl, { method: 'GET', dispatcher: this.dispatcher });
       if (response.statusCode !== 200) {
         await response.body.dump(); // Consume the body to release the connection.
         this.printDownloadError(
@@ -164,6 +168,8 @@ export abstract class DownloadBaseCommand extends Command {
       await fs.remove(demoPath);
       this.printDownloadError(`Failed to download ${demoUrl}\n${getErrorMessage(error)}`, demoPath);
       return false;
+    } finally {
+      this.demoPathBeingDownloaded = undefined;
     }
   }
 
@@ -174,6 +180,13 @@ export abstract class DownloadBaseCommand extends Command {
         : `${Math.floor((downloadedBytes / totalBytes) * 100)}% (${formatBytes(downloadedBytes)} / ${formatBytes(totalBytes)})`;
     output.liveProgress(this.withProgressPrefix(`Downloading ${demoName} ${progress}`));
   }
+
+  private onInterruptSignal = async () => {
+    if (this.demoPathBeingDownloaded !== undefined) {
+      await fs.remove(this.demoPathBeingDownloaded);
+    }
+    this.exit(ExitCode.Interrupted);
+  };
 
   private withProgressPrefix(message: string) {
     return this.progressPrefix === '' ? message : `${this.progressPrefix} ${message}`;

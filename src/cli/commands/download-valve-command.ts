@@ -24,7 +24,6 @@ export class DownloadValveCommand extends DownloadBaseCommand {
   public static Name = 'dl-valve';
   public static Description = 'Download the last MM demos of the current Steam account or from share codes.';
   private readonly shareCodes: string[] = [];
-  private demoPathBeingDownloaded: string | undefined;
 
   public printHelp() {
     this.printCommandHelp({
@@ -55,7 +54,6 @@ export class DownloadValveCommand extends DownloadBaseCommand {
 
   public async run() {
     this.parseArgs();
-    process.on('SIGINT', this.onInterruptSignal);
 
     this.outputFolderPath = await this.getOutputFolder();
     await this.assertOutputFolderIsValid(this.outputFolderPath);
@@ -122,12 +120,10 @@ export class DownloadValveCommand extends DownloadBaseCommand {
       return;
     }
 
-    this.demoPathBeingDownloaded = demoPath;
     const isDownloaded = await this.downloadDemo(demoUrl, demoPath, b2());
     if (isDownloaded) {
       await fs.writeFile(`${demoPath}.info`, toBinary(CDataGCCStrike15_v2_MatchInfoSchema, matchInfo));
     }
-    this.demoPathBeingDownloaded = undefined;
   }
 
   private async fetchMatches(args?: string[]) {
@@ -145,12 +141,4 @@ export class DownloadValveCommand extends DownloadBaseCommand {
       throw new CommandError('Failed to retrieve the matches', { cause: error });
     }
   }
-
-  private onInterruptSignal = async () => {
-    if (this.demoPathBeingDownloaded) {
-      await fs.remove(this.demoPathBeingDownloaded);
-      await fs.remove(`${this.demoPathBeingDownloaded}.info`);
-    }
-    this.exit();
-  };
 }

@@ -15,7 +15,6 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
   public static Name = 'dl-renown';
   public static Description = 'Download the last demos of a Renown account.';
   private steamId: string | undefined;
-  private demoPathBeingDownloaded: string | undefined;
   private readonly options = {
     ...this.downloadOptions,
     steamid: {
@@ -47,7 +46,6 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
 
   public async run() {
     this.parseArgs();
-    process.on('SIGINT', this.onInterruptSignal);
 
     this.outputFolderPath = await this.getOutputFolder();
     await this.assertOutputFolderIsValid(this.outputFolderPath);
@@ -80,9 +78,7 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
       return;
     }
 
-    this.demoPathBeingDownloaded = demoPath;
     await this.downloadDemo(match.demoUrl, demoPath, zlib.createGunzip());
-    this.demoPathBeingDownloaded = undefined;
   }
 
   private async getAccountSteamId() {
@@ -102,11 +98,4 @@ export class DownloadRenownCommand extends DownloadBaseCommand {
       throw new CommandError(`Failed to retrieve account with Steam ID: ${this.steamId}`, { cause: error });
     }
   }
-
-  private onInterruptSignal = async () => {
-    if (this.demoPathBeingDownloaded) {
-      await fs.remove(this.demoPathBeingDownloaded);
-    }
-    this.exit();
-  };
 }

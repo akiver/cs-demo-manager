@@ -15,7 +15,6 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
   public static Name = 'dl-5eplay';
   public static Description = 'Download the last demos of a 5EPlay account.';
   private id: string | undefined;
-  private demoPathBeingDownloaded: string | undefined;
   private readonly options = {
     ...this.downloadOptions,
     id: {
@@ -44,7 +43,6 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
 
   public async run() {
     this.parseArgs();
-    process.on('SIGINT', this.onInterruptSignal);
 
     this.outputFolderPath = await this.getOutputFolder();
     await this.assertOutputFolderIsValid(this.outputFolderPath);
@@ -77,9 +75,7 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
       return;
     }
 
-    this.demoPathBeingDownloaded = demoPath;
     await this.downloadDemo(match.demoUrl, demoPath, unzipper.ParseOne());
-    this.demoPathBeingDownloaded = undefined;
   }
 
   private async getAccountId() {
@@ -99,11 +95,4 @@ export class Download5EPlayCommand extends DownloadBaseCommand {
       throw new CommandError(`Failed to retrieve account with ID: ${this.id}`, { cause: error });
     }
   }
-
-  private onInterruptSignal = async () => {
-    if (this.demoPathBeingDownloaded) {
-      await fs.remove(this.demoPathBeingDownloaded);
-    }
-    this.exit();
-  };
 }
