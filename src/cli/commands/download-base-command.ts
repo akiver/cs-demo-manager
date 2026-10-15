@@ -19,19 +19,30 @@ import { formatBytes } from 'csdm/cli/format';
 
 export abstract class DownloadBaseCommand extends Command {
   protected outputFolderPath = '';
-  private downloadedDemoCount = 0;
-  private skippedDemoCount = 0;
-  private failedDemoCount = 0;
+  private isJsonOutput = false;
+  private readonly downloadedDemos: { demoPath: string; url: string }[] = [];
+  private readonly skippedDemoPaths: string[] = [];
+  // The demo path is unknown when the match could not be retrieved, e.g. an expired share code.
+  private readonly failedDownloads: { demoPath?: string; error: string }[] = [];
   // Position of the match being processed, such as "[2/10]".
   private progressPrefix = '';
-  protected readonly outputOption = {
+  protected readonly downloadOptions = {
     output: {
       type: 'string',
       valueName: 'folder',
       description:
         'Folder where demos are downloaded. Defaults to the download folder from the app settings, then the Counter-Strike "replays" folder, then the current folder.',
     },
+    ...this.jsonOption,
   } satisfies CommandOptions;
+
+  protected parseDownloadOptions(values: { output?: string; json?: boolean }) {
+    this.outputFolderPath = values.output ?? '';
+    this.isJsonOutput = values.json ?? false;
+    if (this.isJsonOutput) {
+      output.enableJsonMode();
+    }
+  }
 
   protected async getOutputFolder() {
     if (this.outputFolderPath !== '') {
@@ -68,7 +79,8 @@ export abstract class DownloadBaseCommand extends Command {
   }
 
   /**
-   * Processes the matches one by one, then prints the summary and exits with a failure code if a download failed.
+   * Processes the matches one by one, then prints the summary, the JSON result if requested and exits with a failure
+   * code if a download failed.
    */
   protected async processMatches<Match>(matches: Match[], processMatch: (match: Match) => Promise<void>) {
     for (const [index, match] of matches.entries()) {
@@ -78,13 +90,21 @@ export abstract class DownloadBaseCommand extends Command {
     this.progressPrefix = '';
 
     output.summary({
-      succeeded: this.downloadedDemoCount,
+      succeeded: this.downloadedDemos.length,
       label: 'downloaded',
-      skipped: this.skippedDemoCount,
-      failed: this.failedDemoCount,
+      skipped: this.skippedDemoPaths.length,
+      failed: this.failedDownloads.length,
     });
 
-    if (this.failedDemoCount > 0) {
+    if (this.isJsonOutput) {
+      output.json({
+        downloaded: this.downloadedDemos,
+        skipped: this.skippedDemoPaths.map((demoPath) => ({ demoPath })),
+        failed: this.failedDownloads,
+      });
+    }
+
+    if (this.failedDownloads.length > 0) {
       this.exit(ExitCode.Failure);
     }
   }
@@ -93,13 +113,13 @@ export abstract class DownloadBaseCommand extends Command {
     output.progress(this.withProgressPrefix(message));
   }
 
-  protected printSkippedDemo(message: string) {
-    this.skippedDemoCount++;
-    this.printProgress(message);
+  protected printDemoAlreadyDownloaded(demoPath: string) {
+    this.skippedDemoPaths.push(demoPath);
+    this.printProgress(`${path.basename(demoPath)} already in the download folder`);
   }
 
-  protected printDownloadError(message: string) {
-    this.failedDemoCount++;
+  protected printDownloadError(message: string, demoPath?: string) {
+    this.failedDownloads.push({ demoPath, error: message });
     output.error(this.withProgressPrefix(message));
   }
 
@@ -114,6 +134,7 @@ export abstract class DownloadBaseCommand extends Command {
         await response.body.dump(); // Consume the body to release the connection.
         this.printDownloadError(
           `Failed to download ${demoUrl}, the server responded with the status ${response.statusCode}`,
+          demoPath,
         );
         return false;
       }
@@ -135,13 +156,13 @@ export abstract class DownloadBaseCommand extends Command {
         },
       });
       await pipeline(response.body, trackProgress, decompressStream, fs.createWriteStream(demoPath));
-      this.downloadedDemoCount++;
+      this.downloadedDemos.push({ demoPath, url: demoUrl });
       this.printProgress(`${demoName} downloaded`);
 
       return true;
     } catch (error) {
       await fs.remove(demoPath);
-      this.printDownloadError(`Failed to download ${demoUrl}\n${getErrorMessage(error)}`);
+      this.printDownloadError(`Failed to download ${demoUrl}\n${getErrorMessage(error)}`, demoPath);
       return false;
     }
   }

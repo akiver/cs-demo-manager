@@ -17,7 +17,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
   private playerNickname: string | undefined;
   private demoPathBeingDownloaded: string | undefined;
   private readonly options = {
-    ...this.outputOption,
+    ...this.downloadOptions,
     nickname: {
       type: 'string',
       valueName: 'nickname',
@@ -65,7 +65,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
 
   protected parseArgs() {
     const { values } = this.parseOptions(this.options);
-    this.outputFolderPath = values.output ?? '';
+    this.parseDownloadOptions(values);
     this.playerNickname = values.nickname;
   }
 
@@ -73,13 +73,13 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
     const demoPath = path.join(this.outputFolderPath, `${match.id}.dem`);
     const demoAlreadyExists = await fs.pathExists(demoPath);
     if (demoAlreadyExists) {
-      this.printSkippedDemo(`${path.basename(demoPath)} already in the download folder`);
+      this.printDemoAlreadyDownloaded(demoPath);
       return;
     }
 
     const isLinkExpired = await isDownloadLinkExpired(match.demoUrl);
     if (isLinkExpired) {
-      this.printDownloadError(`Demo link expired for match: ${match.id}`);
+      this.printDownloadError(`Demo link expired for match: ${match.id}`, demoPath);
       return;
     }
 

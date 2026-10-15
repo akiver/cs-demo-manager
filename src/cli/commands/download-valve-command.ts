@@ -38,7 +38,7 @@ export class DownloadValveCommand extends DownloadBaseCommand {
             'Share codes of the matches to download, the last MM matches of the current Steam account by default.',
         },
       ],
-      options: this.outputOption,
+      options: this.downloadOptions,
       examples: [
         { description: 'Download the last MM demos of the current Steam account', args: '' },
         {
@@ -74,19 +74,14 @@ export class DownloadValveCommand extends DownloadBaseCommand {
     } else {
       output.progress('Retrieving last MM matches...');
       const matches = await this.fetchMatches();
-      if (matches.length === 0) {
-        output.log('No matches found');
-        return;
-      }
-
       output.log(`Found ${matches.length} matches to download`);
       await this.processMatches(matches, (match) => this.processMatchInfo(match));
     }
   }
 
   protected parseArgs() {
-    const { values, positionals } = this.parseOptions(this.outputOption, { allowPositionals: true });
-    this.outputFolderPath = values.output ?? '';
+    const { values, positionals } = this.parseOptions(this.downloadOptions, { allowPositionals: true });
+    this.parseDownloadOptions(values);
     for (const shareCode of positionals) {
       try {
         decodeMatchShareCode(shareCode);
@@ -111,19 +106,19 @@ export class DownloadValveCommand extends DownloadBaseCommand {
     const demoPath = path.join(this.outputFolderPath, `${demoName}.dem`);
     const demoAlreadyExists = await fs.pathExists(demoPath);
     if (demoAlreadyExists) {
-      this.printSkippedDemo(`${path.basename(demoPath)} already in the download folder`);
+      this.printDemoAlreadyDownloaded(demoPath);
       return;
     }
 
     const demoUrl = lastRoundMessage.map;
     if (demoUrl === undefined) {
-      this.printDownloadError(`Demo URL not found for match: ${demoName}`);
+      this.printDownloadError(`Demo URL not found for match: ${demoName}`, demoPath);
       return;
     }
 
     const isDemoLinkExpired = await isDownloadLinkExpired(demoUrl);
     if (isDemoLinkExpired) {
-      this.printDownloadError(`Demo link expired: ${demoUrl}`);
+      this.printDownloadError(`Demo link expired: ${demoUrl}`, demoPath);
       return;
     }
 
