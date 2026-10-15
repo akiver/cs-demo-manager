@@ -16,7 +16,6 @@ import { VideoContainer } from 'csdm/common/types/video-container';
 import { isValidVideoContainer } from 'csdm/common/types/video-container';
 import { InvalidArgument } from 'csdm/cli/errors/invalid-argument';
 import { CommandError } from 'csdm/cli/errors/command-error';
-import { ExitCode } from 'csdm/cli/exit-code';
 import { isHlaeInstalled } from 'csdm/node/video/hlae/is-hlae-installed';
 import { isVirtualDubInstalled } from 'csdm/node/video/virtual-dub/is-virtual-dub-installed';
 import { isFfmpegInstalled } from 'csdm/node/video/ffmpeg/is-ffmpeg-installed';
@@ -499,8 +498,11 @@ export class VideoCommand extends Command {
       throw new InvalidArgument(`Unexpected argument: ${positionals[1]}`);
     }
     const isJsonOutput = values.json ?? false;
-    if (isJsonOutput && subCommand !== QueueSubCommand.List) {
-      throw new InvalidArgument(`The --json option is available only with "${QueueSubCommand.List}"`);
+    if (isJsonOutput) {
+      if (subCommand !== QueueSubCommand.List) {
+        throw new InvalidArgument(`The --json option is available only with "${QueueSubCommand.List}"`);
+      }
+      output.enableJsonMode();
     }
 
     const client = await this.connectToDaemon();
@@ -517,7 +519,7 @@ export class VideoCommand extends Command {
       case QueueSubCommand.List: {
         const { videos, isPaused } = await client.send({ name: CliClientMessageName.GetVideoQueue });
         if (isJsonOutput) {
-          await output.json({
+          output.json({
             isPaused,
             videos: videos.map((video) => ({
               id: video.id,
@@ -692,7 +694,7 @@ export class VideoCommand extends Command {
     clearInterval(elapsedTimeIntervalId);
 
     if (hasError) {
-      this.exit(ExitCode.Failure);
+      this.markAsFailed();
     }
   }
 
