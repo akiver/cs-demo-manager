@@ -21,7 +21,7 @@ export function findSimilarName(input: string, names: string[]) {
   let closestName: string | undefined;
   let closestDistance = Infinity;
   for (const name of names) {
-    const distance = getLevenshteinDistance(input.toLowerCase(), name);
+    const distance = getLevenshteinDistance(input.toLowerCase(), name.toLowerCase());
     if (distance < closestDistance) {
       closestName = name;
       closestDistance = distance;
