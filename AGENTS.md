@@ -93,6 +93,7 @@ src/
 - Follow existing patterns and conventions in the codebase.
 - Follow lint rules. **Never** alter the lint config to bypass rules.
 - `csdm/*` resolves to `src/*`. Always use this alias for cross-directory imports.
+- Use `.mts` (imported as `.mjs` in `src/`) only for `src/` files imported by `scripts/*.mjs`, `.ts` otherwise. Node runs those files directly and warns about `.ts` files when `package.json` has no `"type"`.
 
 ### Styling
 
