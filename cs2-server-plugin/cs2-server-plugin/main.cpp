@@ -12,10 +12,12 @@
 #include "cdll_interfaces.h"
 #ifdef _WIN32
 #define SERVER_LIB_PATH "\\csgo\\bin\\win64\\server.dll"
+#define CLIENT_LIB_NAME "client.dll"
 #else
 #include <dlfcn.h>
 #include <sys/mman.h>
 #define SERVER_LIB_PATH "/csgo/bin/linuxsteamrt64/libserver.so"
+#define CLIENT_LIB_PATH "/csgo/bin/linuxsteamrt64/libclient.so"
 #define PAGESIZE 4096
 #endif
 
@@ -75,6 +77,11 @@ ISource2Client* client = NULL;
 FrameStageNotifyFn originalFrameStageNotify = NULL;
 ICvar* g_pCVar = NULL;
 std::thread* wsConnectionThread = NULL;
+std::thread* frameHookThread = NULL;
+std::mutex frameHookMutex;
+// How long to wait for the client to register Source2Client002 before giving up on the FrameStageNotify hook.
+const int FRAME_HOOK_TIMEOUT_SECONDS = 120;
+string gameDirectory;
 WebSocket::pointer ws;
 string gameInfoPath;
 string gameInfoBackupPath;
@@ -502,6 +509,77 @@ void ConnectToWebsocketServerLoop() {
     }
 }
 
+// Asks the client module's own CreateInterface rather than the app system factory: its interface registry is filled
+// when the module loads, so reading it from another thread doesn't race the engine registering app systems.
+ISource2Client* FindClientInterface()
+{
+#ifdef _WIN32
+    HMODULE clientModule = GetModuleHandle(CLIENT_LIB_NAME);
+#else
+    string libPath = gameDirectory + CLIENT_LIB_PATH;
+    // RTLD_NOLOAD only returns a handle if the engine already loaded the client.
+    void* clientModule = dlopen(libPath.c_str(), RTLD_NOW | RTLD_NOLOAD);
+#endif
+    if (clientModule == NULL) {
+        return NULL;
+    }
+
+    ISource2Client* found = NULL;
+    auto clientCreateInterface = (CreateInterfaceFn)GetLibAddress(clientModule, "CreateInterface");
+    if (clientCreateInterface != NULL) {
+        found = (ISource2Client*)clientCreateInterface("Source2Client002", NULL);
+    }
+
+#ifndef _WIN32
+    dlclose(clientModule);
+#endif
+
+    return found;
+}
+
+// Hook FrameStageNotify to call engine commands from the engine thread since it's not thread safe to call engine
+// commands from another thread. Returns true once the hook is installed.
+bool HookFrameStageNotify()
+{
+    std::lock_guard<std::mutex> lock(frameHookMutex);
+    if (client != NULL) {
+        return true;
+    }
+
+    ISource2Client* found = FindClientInterface();
+    if (found == NULL) {
+        return false;
+    }
+
+    Log("Hooking FrameStageNotify");
+    auto vtable = *(void***)found;
+    originalFrameStageNotify = (FrameStageNotifyFn)vtable[36];
+    PatchVTableEntry(vtable, 36, (void*)&NewFrameStageNotify);
+    client = found;
+    Log("Hooked FrameStageNotify");
+
+    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default.
+    // We have to set the demo_ui_mode convar to 0 before starting the playback prevent the UI from being displayed.
+    QueueEngineCommand("demo_ui_mode 0");
+    QueueEngineCommand("sv_cheats 1"); // required to unlock commands such as getposcopy
+
+    return true;
+}
+
+// Since the 19/08/2026 CS2 update, ClientFullyConnect is no longer called during demo playback and Source2Client002 is
+// registered a few seconds after Connect, so we poll for it instead of relying on a single callback.
+void WaitForClientInterface()
+{
+    auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(FRAME_HOOK_TIMEOUT_SECONDS);
+    while (!isQuitting && !HookFrameStageNotify()) {
+        if (std::chrono::steady_clock::now() >= deadline) {
+            Log("Source2Client002 not found after %ds, demo actions will not run", FRAME_HOOK_TIMEOUT_SECONDS);
+            return;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+}
+
 bool Connect(IAppSystem* appSystem, CreateInterfaceFn factoryFn)
 {
     factory = factoryFn;
@@ -514,6 +592,7 @@ bool Connect(IAppSystem* appSystem, CreateInterfaceFn factoryFn)
     ConVar_Register();
 
     wsConnectionThread = new std::thread(ConnectToWebsocketServerLoop);
+    frameHookThread = new std::thread(WaitForClientInterface);
 
     RestoreGameinfoFile();
 
@@ -536,6 +615,11 @@ void Shutdown()
     if (wsConnectionThread != NULL) {
         wsConnectionThread->join();
         wsConnectionThread = NULL;
+    }
+
+    if (frameHookThread != NULL) {
+        frameHookThread->join();
+        frameHookThread = NULL;
     }
 
     ConVar_Unregister();
@@ -569,27 +653,7 @@ void AssertInsecureParameterIsPresent()
 void NewClientFullyConnect(void* thisptr, int playerSlot)
 {
     Log("ClientFullyConnect: playerSlot=%d", playerSlot);
-    if (client != NULL) {
-        originalClientFullyConnect(thisptr, playerSlot);
-        return;
-    }
-
-    // Hook FrameStageNotify to call engine commands from the engine thread since it's not thread safe to call engine
-    // commands from another thread.
-    client = (ISource2Client*)factory("Source2Client002", NULL);
-    if (client != NULL) {
-        Log("Hooking FrameStageNotify");
-        auto vtable = *(void***)client;
-        originalFrameStageNotify = (FrameStageNotifyFn)vtable[36];
-        PatchVTableEntry(vtable, 36, (void*)&NewFrameStageNotify);
-        Log("Hooked FrameStageNotify");
-    }
-    
-    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default.
-    // We have to set the demo_ui_mode convar to 0 before starting the playback prevent the UI from being displayed.
-    QueueEngineCommand("demo_ui_mode 0");
-    QueueEngineCommand("sv_cheats 1"); // required to unlock commands such as getposcopy
-
+    HookFrameStageNotify();
     originalClientFullyConnect(thisptr, playerSlot);
 }
 
@@ -605,10 +669,10 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
     {
         AssertInsecureParameterIsPresent();
 
-        const char* gameDirectory = Plat_GetGameDirectory();
-        gameInfoPath = string(gameDirectory) + "/csgo/gameinfo.gi";
-        gameInfoBackupPath = string(gameDirectory) + "/csgo/gameinfo.gi.backup";
-        string libPath = string(gameDirectory) + SERVER_LIB_PATH;
+        gameDirectory = Plat_GetGameDirectory();
+        gameInfoPath = gameDirectory + "/csgo/gameinfo.gi";
+        gameInfoBackupPath = gameDirectory + "/csgo/gameinfo.gi.backup";
+        string libPath = gameDirectory + SERVER_LIB_PATH;
 
         void* serverModule = LoadLib(libPath.c_str());
         if (serverModule == NULL)
