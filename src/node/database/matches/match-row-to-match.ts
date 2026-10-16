@@ -35,7 +35,7 @@ export async function matchRowToMatch(
     winnerName: row.winner_name,
     winnerSide: row.winner_side,
     frameRate: row.framerate,
-    tickrate: row.tickrate,
+    tickrate: row.tickrate > 0 ? row.tickrate : 64, // The tickrate may be unknown (0) for some demos.
     gameMode: row.game_mode_str,
     isRanked: row.is_ranked,
     maxRounds: row.max_rounds,

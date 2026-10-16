@@ -1,9 +1,9 @@
 import { db } from 'csdm/node/database/database';
 import type { PlayerPosition } from '../../../common/types/player-position';
 import { playerPositionRowToPlayerPosition } from './player-position-row-to-player-position';
-import { fillMissingTicks } from 'csdm/common/array/fill-missing-ticks';
+import { samplePlayersPositions } from './sample-players-positions';
 
-export async function fetchPlayersPositions(checksum: string, roundNumber: number) {
+export async function fetchPlayersPositions(checksum: string, roundNumber: number, tickrate: number) {
   const rows = await db
     .selectFrom('player_positions as p')
     .leftJoin('steam_account_overrides', 'steam_account_overrides.steam_id', 'p.player_steam_id')
@@ -51,7 +51,8 @@ export async function fetchPlayersPositions(checksum: string, roundNumber: numbe
     .orderBy('p.player_steam_id')
     .execute();
 
-  const playerPositions: PlayerPosition[] = fillMissingTicks(rows.map(playerPositionRowToPlayerPosition));
+  const positions = rows.map(playerPositionRowToPlayerPosition);
+  const playerPositions: PlayerPosition[] = samplePlayersPositions(positions, tickrate);
 
   return playerPositions;
 }

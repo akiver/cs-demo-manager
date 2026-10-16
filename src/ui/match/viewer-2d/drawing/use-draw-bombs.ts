@@ -1,8 +1,7 @@
-import { useRef } from 'react';
 import type { InteractiveCanvas } from '../../../hooks/use-interactive-map-canvas';
 import { useViewerContext } from '../use-viewer-context';
 import { getBombImage } from './get-bomb-image';
-import type { PlayerPosition } from 'csdm/common/types/player-position';
+import { findLastPositionBeforeTick } from '../players-timelines';
 
 function getBombExplosionImage() {
   const image = new Image();
@@ -14,26 +13,25 @@ function getBombExplosionImage() {
 }
 
 export function useDrawBombs() {
-  const { currentTick, bombPlanted, bombDefused, bombExploded, playerPositions } = useViewerContext();
+  const { currentTick, bombPlanted, bombDefused, bombExploded, currentPlayersPositions, bombCarrierPositions } =
+    useViewerContext();
   const bombImage = getBombImage();
   const explosionImage = getBombExplosionImage();
-  const lastBombPosition = useRef<PlayerPosition | null>(null);
 
   const drawBombs = (
     context: CanvasRenderingContext2D,
     { zoomedToRadarX, zoomedToRadarY, zoomedSize }: InteractiveCanvas,
   ) => {
     if (bombPlanted === null || bombPlanted.tick > currentTick) {
-      const playerPositionsWithBomb = playerPositions.filter((position) => {
-        return position.tick === currentTick && position.hasBomb;
-      });
       // A player has the bomb, the bomb indicator will be drawn by the drawPlayers function
-      if (playerPositionsWithBomb.length > 0) {
-        lastBombPosition.current = null;
+      if (currentPlayersPositions.some((position) => position.hasBomb)) {
         return;
       }
 
-      const drawBomb = ({ x, y, z }: PlayerPosition) => {
+      // The bomb has been dropped, draw it where its last carrier was
+      const lastBombCarrierPosition = findLastPositionBeforeTick(bombCarrierPositions, currentTick);
+      if (lastBombCarrierPosition) {
+        const { x, y, z } = lastBombCarrierPosition;
         const zoomedX = zoomedToRadarX(x, z);
         const zoomedY = zoomedToRadarY(y, z);
         const bombImageSize = zoomedSize(14);
@@ -44,22 +42,6 @@ export function useDrawBombs() {
           bombImageSize,
           bombImageSize,
         );
-      };
-
-      if (lastBombPosition.current && lastBombPosition.current.tick <= currentTick) {
-        drawBomb(lastBombPosition.current);
-        return;
-      }
-
-      for (let i = currentTick - 1; i >= 0; i--) {
-        const lastPlayerPositionWithBomb = playerPositions.find((position) => {
-          return position.tick === i && position.hasBomb;
-        });
-        if (lastPlayerPositionWithBomb) {
-          drawBomb(lastPlayerPositionWithBomb);
-          lastBombPosition.current = lastPlayerPositionWithBomb;
-          return;
-        }
       }
 
       return;

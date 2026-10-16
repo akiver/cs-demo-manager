@@ -53,9 +53,8 @@ type Props = {
 };
 
 export function TeamPanel({ teamNumber, teamName, teamScore }: Props) {
-  const { playerPositions, currentTick } = useViewerContext();
-  const tickPositions = playerPositions.filter((playerPosition) => playerPosition.tick === currentTick);
-  const players: PlayerRowProps[] = buildPlayersFromPositions(tickPositions, teamNumber);
+  const { currentPlayersPositions } = useViewerContext();
+  const players = buildPlayersFromPositions(currentPlayersPositions, teamNumber);
 
   return (
     <div className="flex flex-col rounded-4 border border-gray-300 bg-gray-50">

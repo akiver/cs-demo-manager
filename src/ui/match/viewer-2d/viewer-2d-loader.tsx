@@ -141,6 +141,7 @@ export function Viewer2DLoader() {
           checksum: match.checksum,
           demoFilePath: match.demoFilePath,
           roundNumber,
+          tickrate: match.tickrate,
         };
         setState((state) => {
           return {
@@ -205,6 +206,7 @@ export function Viewer2DLoader() {
     roundNumber,
     match.checksum,
     match.demoFilePath,
+    match.tickrate,
     loadAudioFile,
   ]);
 

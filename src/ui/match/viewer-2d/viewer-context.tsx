@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import type { BombDefused } from 'csdm/common/types/bomb-defused';
 import type { BombPlanted } from 'csdm/common/types/bomb-planted';
@@ -36,6 +36,7 @@ import { useViewer2DState } from './use-viewer-state';
 import { deleteDemoAudioOffset, persistDemoAudioOffset } from './audio/audio-offset';
 import type { DrawingTool } from './drawing/use-drawable-canvas';
 import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
+import { buildPlayersTimelines, getPlayersPositionsAtTick } from './players-timelines';
 
 type ViewerMode = 'drawing' | 'playback';
 
@@ -67,7 +68,8 @@ type ViewerContext = {
   kills: Kill[];
   round: Round;
   shots: Shot[];
-  playerPositions: PlayerPosition[];
+  currentPlayersPositions: PlayerPosition[];
+  bombCarrierPositions: PlayerPosition[];
   hostagesPickUpStart: HostagePickUpStart[];
   heGrenadesExplode: HeGrenadeExplode[];
   flashbangsExplode: FlashbangExplode[];
@@ -179,8 +181,12 @@ export function ViewerProvider({
     return value ? Number.parseFloat(value) : 1;
   });
   const remainingTickCount = round.endOfficiallyTick - currentTick;
-  const tickrate = match.tickrate > 0 ? match.tickrate : 64;
+  const tickrate = match.tickrate;
   const timeRemaining = (remainingTickCount / tickrate) * 1000;
+  const playersTimelines = useMemo(() => buildPlayersTimelines(playerPositions), [playerPositions]);
+  const maxInterpolationTickCount = tickrate; // 1 second
+  const currentPlayersPositions = getPlayersPositionsAtTick(playersTimelines, currentTick, maxInterpolationTickCount);
+  const bombCarrierPositions = playerPositions.filter((position) => position.hasBomb);
   const shouldDrawBombs = isDefuseMapFromName(match.mapName);
   const navigate = useNavigate();
   const { audioOffsetSeconds, volume } = viewerState;
@@ -267,7 +273,8 @@ export function ViewerProvider({
         unloadAudioFile,
         game: match.game,
         shouldDrawBombs,
-        playerPositions,
+        currentPlayersPositions,
+        bombCarrierPositions,
         heGrenadesExplode,
         smokesStart,
         decoysStart,
