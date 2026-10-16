@@ -10,6 +10,7 @@ import type { InfernoPosition } from 'csdm/common/types/inferno-position';
 import type { Kill } from 'csdm/common/types/kill';
 import type { Map } from 'csdm/common/types/map';
 import type { PlayerPosition } from 'csdm/common/types/player-position';
+import type { PlayerTimeline } from 'csdm/common/types/player-timeline';
 import type { Round } from 'csdm/common/types/round';
 import type { Shot } from 'csdm/common/types/shot';
 import { useCurrentMatch } from '../use-current-match';
@@ -36,7 +37,7 @@ import { useViewer2DState } from './use-viewer-state';
 import { deleteDemoAudioOffset, persistDemoAudioOffset } from './audio/audio-offset';
 import type { DrawingTool } from './drawing/use-drawable-canvas';
 import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
-import { buildPlayersTimelines, getPlayersPositionsAtTick } from './players-timelines';
+import { findBombCarrierPositions, getPlayersPositionsAtTick } from './players-timelines';
 
 type ViewerMode = 'drawing' | 'playback';
 
@@ -110,7 +111,7 @@ type Props = {
   kills: Kill[];
   round: Round;
   shots: Shot[];
-  playerPositions: PlayerPosition[];
+  playerTimelines: PlayerTimeline[];
   hostagesPickUpStart: HostagePickUpStart[];
   hostagesPickedUp: HostagePickedUp[];
   hostagePositions: HostagePosition[];
@@ -138,7 +139,7 @@ export function ViewerProvider({
   round,
   kills,
   shots,
-  playerPositions,
+  playerTimelines,
   hostagesPickUpStart,
   hostagesPickedUp,
   hostagePositions,
@@ -183,11 +184,13 @@ export function ViewerProvider({
   const remainingTickCount = round.endOfficiallyTick - currentTick;
   const tickrate = match.tickrate;
   const timeRemaining = (remainingTickCount / tickrate) * 1000;
-  const playersTimelines = useMemo(() => buildPlayersTimelines(playerPositions), [playerPositions]);
   const maxInterpolationTickCount = tickrate; // 1 second
-  const currentPlayersPositions = getPlayersPositionsAtTick(playersTimelines, currentTick, maxInterpolationTickCount);
-  const bombCarrierPositions = playerPositions.filter((position) => position.hasBomb);
+  const currentPlayersPositions = getPlayersPositionsAtTick(playerTimelines, currentTick, maxInterpolationTickCount);
   const shouldDrawBombs = isDefuseMapFromName(match.mapName);
+  const bombCarrierPositions = useMemo(
+    () => (shouldDrawBombs ? findBombCarrierPositions(playerTimelines) : []),
+    [shouldDrawBombs, playerTimelines],
+  );
   const navigate = useNavigate();
   const { audioOffsetSeconds, volume } = viewerState;
 

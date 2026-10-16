@@ -6,7 +6,7 @@ import { UnsupportedMap } from '../../components/unsupported-map';
 import { RendererClientMessageName } from 'csdm/server/messages/renderer-client-message-name';
 import { Message } from 'csdm/ui/components/message';
 import type { Kill } from 'csdm/common/types/kill';
-import type { PlayerPosition } from 'csdm/common/types/player-position';
+import type { PlayerTimeline } from 'csdm/common/types/player-timeline';
 import type { Round } from 'csdm/common/types/round';
 import type { Fetch2dViewerDataPayload } from 'csdm/server/handlers/renderer-process/match/fetch-2d-viewer-data-handler';
 import { useCurrentMatchMap } from '../use-current-match-map';
@@ -39,7 +39,7 @@ import { audioLoaded, resetAudioOffset } from './viewer-actions';
 type State = {
   error: ReactNode | undefined;
   round: Round | undefined;
-  playerPositions: PlayerPosition[];
+  playerTimelines: PlayerTimeline[];
   kills: Kill[];
   shots: Shot[];
   heGrenadesExplode: HeGrenadeExplode[];
@@ -66,7 +66,7 @@ const defaultState: State = {
   error: undefined,
   kills: [],
   shots: [],
-  playerPositions: [],
+  playerTimelines: [],
   grenadePositions: [],
   infernoPositions: [],
   chickenPositions: [],
@@ -236,7 +236,7 @@ export function Viewer2DLoader() {
     return <Message message={<Trans>Round number {roundNumber} not found.</Trans>} />;
   }
 
-  if (Object.keys(state.playerPositions).length === 0) {
+  if (state.playerTimelines.length === 0) {
     return (
       <NoPositionsFound
         onPositionsAvailable={() => {
@@ -255,7 +255,7 @@ export function Viewer2DLoader() {
       shots={state.shots}
       kills={state.kills}
       round={state.round}
-      playerPositions={state.playerPositions}
+      playerTimelines={state.playerTimelines}
       hostagesPickUpStart={state.hostagesPickUpStart}
       hostagesPickedUp={state.hostagesPickedUp}
       hostagePositions={state.hostagePositions}
