@@ -43,6 +43,7 @@ export type Fetch2dViewerDataPayload = {
   checksum: string;
   roundNumber: number;
   demoFilePath: string;
+  tickrate: number;
 };
 
 export type Fetch2dViewerDataSuccessPayload = {
@@ -68,7 +69,12 @@ export type Fetch2dViewerDataSuccessPayload = {
   audioFilePath: string | null;
 };
 
-export async function fetch2DViewerDataHandler({ checksum, roundNumber, demoFilePath }: Fetch2dViewerDataPayload) {
+export async function fetch2DViewerDataHandler({
+  checksum,
+  roundNumber,
+  demoFilePath,
+  tickrate,
+}: Fetch2dViewerDataPayload) {
   try {
     const [
       playerPositions,
@@ -92,7 +98,7 @@ export async function fetch2DViewerDataHandler({ checksum, roundNumber, demoFile
       flashbangsExplode,
       audioFilePath,
     ] = await Promise.all([
-      fetchPlayersPositions(checksum, roundNumber),
+      fetchPlayersPositions(checksum, roundNumber, tickrate),
       fetchRound(checksum, roundNumber),
       fetchKills(checksum, roundNumber),
       fetchShots({

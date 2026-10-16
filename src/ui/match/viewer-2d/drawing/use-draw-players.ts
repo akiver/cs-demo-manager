@@ -9,7 +9,7 @@ import { buildPlayerId } from '../build-player-id';
 
 export function useDrawPlayers() {
   const {
-    playerPositions,
+    currentPlayersPositions,
     currentTick,
     focusedPlayerId,
     bombsDefuseStart,
@@ -24,8 +24,7 @@ export function useDrawPlayers() {
     context: CanvasRenderingContext2D,
     { zoomedToRadarX, zoomedToRadarY, zoomedSize }: InteractiveCanvas,
   ) => {
-    const positions = playerPositions.filter((position) => position.tick === currentTick);
-    const playersAlivePositions = positions.filter((position) => position.isAlive);
+    const playersAlivePositions = currentPlayersPositions.filter((position) => position.isAlive);
 
     for (const position of playersAlivePositions) {
       const x = zoomedToRadarX(position.x, position.z);
