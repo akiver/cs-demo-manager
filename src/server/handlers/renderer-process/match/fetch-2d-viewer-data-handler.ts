@@ -1,12 +1,12 @@
 import { fetchShots } from 'csdm/node/database/shots/fetch-shots';
 import { fetchGrenadePositions } from 'csdm/node/database/grenade-position/fetch-grenade-positions';
 import type { Round } from 'csdm/common/types/round';
-import type { PlayerPosition } from 'csdm/common/types/player-position';
+import type { PlayerTimeline } from 'csdm/common/types/player-timeline';
 import type { Kill } from 'csdm/common/types/kill';
 import { fetchRound } from 'csdm/node/database/rounds/fetch-round';
 import { fetchInfernoPositions } from 'csdm/node/database/inferno-position/fetch-inferno-positions';
 import type { InfernoPosition } from 'csdm/common/types/inferno-position';
-import { fetchPlayersPositions } from 'csdm/node/database/player-position/fetch-players-positions';
+import { fetchPlayersTimelines } from 'csdm/node/database/player-position/fetch-players-timelines';
 import type { HostagePosition } from 'csdm/common/types/hostage-position';
 import { fetchHostagePositions } from 'csdm/node/database/hostage-position/fetch-hostage-positions';
 import type { BombExploded } from 'csdm/common/types/bomb-exploded';
@@ -47,7 +47,7 @@ export type Fetch2dViewerDataPayload = {
 };
 
 export type Fetch2dViewerDataSuccessPayload = {
-  playerPositions: PlayerPosition[];
+  playerTimelines: PlayerTimeline[];
   kills: Kill[];
   round: Round | undefined;
   shots: Shot[];
@@ -77,7 +77,7 @@ export async function fetch2DViewerDataHandler({
 }: Fetch2dViewerDataPayload) {
   try {
     const [
-      playerPositions,
+      playerTimelines,
       round,
       kills,
       shots,
@@ -98,7 +98,7 @@ export async function fetch2DViewerDataHandler({
       flashbangsExplode,
       audioFilePath,
     ] = await Promise.all([
-      fetchPlayersPositions(checksum, roundNumber, tickrate),
+      fetchPlayersTimelines(checksum, roundNumber, tickrate),
       fetchRound(checksum, roundNumber),
       fetchKills(checksum, roundNumber),
       fetchShots({
@@ -127,7 +127,7 @@ export async function fetch2DViewerDataHandler({
       round,
       kills,
       shots,
-      playerPositions,
+      playerTimelines,
       grenadePositions,
       infernoPositions,
       chickenPositions,

@@ -1,7 +1,7 @@
 import type { InteractiveCanvas } from '../../../hooks/use-interactive-map-canvas';
 import { useViewerContext } from '../use-viewer-context';
 import { getBombImage } from './get-bomb-image';
-import { findLastPositionBeforeTick } from '../players-timelines';
+import { findLastPositionAtOrBeforeTick } from '../players-timelines';
 
 function getBombExplosionImage() {
   const image = new Image();
@@ -29,7 +29,7 @@ export function useDrawBombs() {
       }
 
       // The bomb has been dropped, draw it where its last carrier was
-      const lastBombCarrierPosition = findLastPositionBeforeTick(bombCarrierPositions, currentTick);
+      const lastBombCarrierPosition = findLastPositionAtOrBeforeTick(bombCarrierPositions, currentTick);
       if (lastBombCarrierPosition) {
         const { x, y, z } = lastBombCarrierPosition;
         const zoomedX = zoomedToRadarX(x, z);
