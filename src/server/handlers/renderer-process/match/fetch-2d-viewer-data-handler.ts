@@ -1,5 +1,5 @@
 import { fetchShots } from 'csdm/node/database/shots/fetch-shots';
-import { fetchGrenadePositions } from 'csdm/node/database/grenade-position/fetch-grenade-positions';
+import { fetchGrenadeTimelines } from 'csdm/node/database/grenade-position/fetch-grenade-timelines';
 import type { Round } from 'csdm/common/types/round';
 import type { PlayerTimeline } from 'csdm/common/types/player-timeline';
 import type { Kill } from 'csdm/common/types/kill';
@@ -11,7 +11,7 @@ import type { HostagePosition } from 'csdm/common/types/hostage-position';
 import { fetchHostagePositions } from 'csdm/node/database/hostage-position/fetch-hostage-positions';
 import type { BombExploded } from 'csdm/common/types/bomb-exploded';
 import { fetchBombExploded } from 'csdm/node/database/bomb-exploded/fetch-bomb-exploded';
-import type { GrenadePosition } from 'csdm/common/types/grenade-position';
+import type { GrenadeTimeline } from 'csdm/common/types/grenade-timeline';
 import type { BombPlanted } from 'csdm/common/types/bomb-planted';
 import { fetchBombPlanted } from 'csdm/node/database/bomb-planted/fetch-bomb-planted';
 import type { BombDefused } from 'csdm/common/types/bomb-defused';
@@ -25,8 +25,8 @@ import type { HostagePickUpStart } from 'csdm/common/types/hostage-pick-up-start
 import { fetchHostagesPickUpStart } from 'csdm/node/database/hostage-pick-up-start/fetch-hostages-pick-up-start';
 import { fetchHostagesPickedUp } from 'csdm/node/database/hostage-picked-up/fetch-hostages-picked-up';
 import type { HostagePickedUp } from 'csdm/common/types/hostage-picked-up';
-import type { ChickenPosition } from 'csdm/common/types/chicken-position';
-import { fetchChickenPositions } from 'csdm/node/database/chicken-position/fetch-chicken-positions';
+import type { ChickenTimeline } from 'csdm/common/types/chicken-timeline';
+import { fetchChickenTimelines } from 'csdm/node/database/chicken-position/fetch-chicken-timelines';
 import { fetchHeGrenadesExplode } from 'csdm/node/database/he-grenade-exploded/fetch-he-grenades-explode';
 import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
 import type { DecoyStart } from 'csdm/common/types/decoy-start';
@@ -51,7 +51,7 @@ export type Fetch2dViewerDataSuccessPayload = {
   kills: Kill[];
   round: Round | undefined;
   shots: Shot[];
-  grenadePositions: GrenadePosition[];
+  grenadeTimelines: GrenadeTimeline[];
   infernoPositions: InfernoPosition[];
   hostagesPickUpStart: HostagePickUpStart[];
   hostagesPickedUp: HostagePickedUp[];
@@ -61,7 +61,7 @@ export type Fetch2dViewerDataSuccessPayload = {
   bombDefused: BombDefused | null;
   bombsDefuseStart: BombDefuseStart[];
   bombsPlantStart: BombPlantStart[];
-  chickenPositions: ChickenPosition[];
+  chickenTimelines: ChickenTimeline[];
   heGrenadesExplode: HeGrenadeExplode[];
   flashbangsExplode: FlashbangExplode[];
   decoysStart: DecoyStart[];
@@ -81,7 +81,7 @@ export async function fetch2DViewerDataHandler({
       round,
       kills,
       shots,
-      grenadePositions,
+      grenadeTimelines,
       infernoPositions,
       hostagesPickUpStart,
       hostagesPickedUp,
@@ -91,7 +91,7 @@ export async function fetch2DViewerDataHandler({
       bombDefused,
       bombsPlantStart,
       bombsDefuseStart,
-      chickenPositions,
+      chickenTimelines,
       heGrenadesExplode,
       decoysStart,
       smokesStart,
@@ -105,7 +105,7 @@ export async function fetch2DViewerDataHandler({
         checksum,
         roundNumber,
       }),
-      fetchGrenadePositions(checksum, roundNumber),
+      fetchGrenadeTimelines(checksum, roundNumber),
       fetchInfernoPositions(checksum, roundNumber),
       fetchHostagesPickUpStart(checksum, roundNumber),
       fetchHostagesPickedUp(checksum, roundNumber),
@@ -115,7 +115,7 @@ export async function fetch2DViewerDataHandler({
       fetchBombDefused(checksum, roundNumber),
       fetchBombsPlantStart(checksum, roundNumber),
       fetchBombsDefuseStart(checksum, roundNumber),
-      fetchChickenPositions(checksum, roundNumber),
+      fetchChickenTimelines(checksum, roundNumber),
       fetchHeGrenadesExplode(checksum, roundNumber),
       fetchDecoysStart(checksum, roundNumber),
       fetchSmokesStart(checksum, roundNumber),
@@ -128,9 +128,9 @@ export async function fetch2DViewerDataHandler({
       kills,
       shots,
       playerTimelines,
-      grenadePositions,
+      grenadeTimelines,
       infernoPositions,
-      chickenPositions,
+      chickenTimelines,
       hostagesPickUpStart,
       hostagesPickedUp,
       hostagePositions,

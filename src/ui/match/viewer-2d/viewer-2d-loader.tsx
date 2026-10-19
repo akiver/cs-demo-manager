@@ -16,7 +16,7 @@ import { useCurrentMatch } from '../use-current-match';
 import type { HostagePosition } from 'csdm/common/types/hostage-position';
 import { ViewerProvider } from './viewer-context';
 import type { BombExploded } from 'csdm/common/types/bomb-exploded';
-import type { GrenadePosition } from 'csdm/common/types/grenade-position';
+import type { GrenadeTimeline } from 'csdm/common/types/grenade-timeline';
 import type { BombPlanted } from 'csdm/common/types/bomb-planted';
 import type { BombDefused } from 'csdm/common/types/bomb-defused';
 import type { Shot } from 'csdm/common/types/shot';
@@ -25,7 +25,7 @@ import type { BombPlantStart } from 'csdm/common/types/bomb-plant-start';
 import type { BombDefuseStart } from 'csdm/common/types/bomb-defuse-start';
 import type { HostagePickUpStart } from 'csdm/common/types/hostage-pick-up-start';
 import type { HostagePickedUp } from 'csdm/common/types/hostage-picked-up';
-import type { ChickenPosition } from 'csdm/common/types/chicken-position';
+import type { ChickenTimeline } from 'csdm/common/types/chicken-timeline';
 import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
 import type { SmokeStart } from 'csdm/common/types/smoke-start';
 import type { DecoyStart } from 'csdm/common/types/decoy-start';
@@ -46,9 +46,9 @@ type State = {
   flashbangsExplode: FlashbangExplode[];
   smokesStart: SmokeStart[];
   decoysStart: DecoyStart[];
-  grenadePositions: GrenadePosition[];
+  grenadeTimelines: GrenadeTimeline[];
   infernoPositions: InfernoPosition[];
-  chickenPositions: ChickenPosition[];
+  chickenTimelines: ChickenTimeline[];
   hostagesPickUpStart: HostagePickUpStart[];
   hostagesPickedUp: HostagePickedUp[];
   hostagePositions: HostagePosition[];
@@ -67,9 +67,9 @@ const defaultState: State = {
   kills: [],
   shots: [],
   playerTimelines: [],
-  grenadePositions: [],
+  grenadeTimelines: [],
   infernoPositions: [],
-  chickenPositions: [],
+  chickenTimelines: [],
   decoysStart: [],
   heGrenadesExplode: [],
   flashbangsExplode: [],
@@ -259,9 +259,9 @@ export function Viewer2DLoader() {
       hostagesPickUpStart={state.hostagesPickUpStart}
       hostagesPickedUp={state.hostagesPickedUp}
       hostagePositions={state.hostagePositions}
-      grenadePositions={state.grenadePositions}
+      grenadeTimelines={state.grenadeTimelines}
       infernoPositions={state.infernoPositions}
-      chickenPositions={state.chickenPositions}
+      chickenTimelines={state.chickenTimelines}
       decoysStart={state.decoysStart}
       heGrenadesExplode={state.heGrenadesExplode}
       flashbangsExplode={state.flashbangsExplode}

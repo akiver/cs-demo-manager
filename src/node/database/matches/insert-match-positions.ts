@@ -56,15 +56,10 @@ async function insertGrenadePositions({ outputFolderPath, demoName }: InsertOpti
     tableName: 'grenade_positions',
     csvFilePath,
     columns: [
-      'frame',
-      'tick',
       'round_number',
       'grenade_id',
       'projectile_id',
       'grenade_name',
-      'x',
-      'y',
-      'z',
       'thrower_steam_id',
       'thrower_name',
       'thrower_side',
@@ -74,6 +69,10 @@ async function insertGrenadePositions({ outputFolderPath, demoName }: InsertOpti
       'thrower_velocity_z',
       'thrower_yaw',
       'thrower_pitch',
+      'ticks',
+      'x',
+      'y',
+      'z',
       'match_checksum',
     ],
   });
@@ -117,7 +116,7 @@ async function insertChickenPositions({ outputFolderPath, demoName }: InsertOpti
   await copyCsvIntoTable<ChickenPositionTable>({
     tableName: 'chicken_positions',
     csvFilePath,
-    columns: ['frame', 'tick', 'round_number', 'x', 'y', 'z', 'match_checksum'],
+    columns: ['round_number', 'ticks', 'x', 'y', 'z', 'match_checksum'],
   });
 }
 
