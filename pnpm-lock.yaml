@@ -200,8 +200,8 @@ importers:
         specifier: 1.7.0
         version: 1.7.0
       '@akiver/cs-demo-analyzer':
-        specifier: 1.11.0
-        version: 1.11.0
+        specifier: 1.12.1
+        version: 1.12.1
       '@akiver/csgo-voice-extractor':
         specifier: 3.1.6
         version: 3.1.6
@@ -489,8 +489,8 @@ packages:
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
 
-  '@akiver/cs-demo-analyzer@1.11.0':
-    resolution: {integrity: sha512-BokZaobOQV68MdlnEtKRe5kw4V2j3t5O9SI4uIOv1Ybg01APz6dtE0VK0/fn+kGCqv8m1rm9cJK2wRVeiTfXQQ==}
+  '@akiver/cs-demo-analyzer@1.12.1':
+    resolution: {integrity: sha512-l7cX9khIiH/OCvYS8Nj/Bt0XHlI2+2BSzN4tSvWh7HDX59OFy24aA6QU7YZXiG5WWW0DXVhGHNYgxTWB0Osc9g==}
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
     hasBin: true
@@ -6167,7 +6167,7 @@ snapshots:
 
   '@akiver/boiler-writter@1.7.0': {}
 
-  '@akiver/cs-demo-analyzer@1.11.0': {}
+  '@akiver/cs-demo-analyzer@1.12.1': {}
 
   '@akiver/csgo-voice-extractor@3.1.6': {}
 
