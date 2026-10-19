@@ -2,14 +2,10 @@ import type { TeamNumber, WeaponName } from 'csdm/common/types/counter-strike';
 import type { PlayerMovement } from 'csdm/common/types/player-movement';
 import type { PlayerState } from 'csdm/common/types/player-state';
 import type { PlayerTimeline } from 'csdm/common/types/player-timeline';
+import { createDataView } from 'csdm/node/database/create-data-view';
 import type { PlayerPositionTable } from './player-position-table';
 
 type PackedPlayerPositions = Omit<PlayerPositionTable, 'match_checksum' | 'round_number'>;
-
-function createDataView(buffer: Buffer) {
-  // Buffers may not be aligned on 4 bytes, a DataView doesn't require it unlike typed arrays.
-  return new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength);
-}
 
 function decodeMovements(packed: PackedPlayerPositions): PlayerMovement[] {
   const ticks = createDataView(packed.ticks);

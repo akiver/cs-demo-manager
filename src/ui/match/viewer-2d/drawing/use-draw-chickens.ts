@@ -1,5 +1,6 @@
 import { useViewerContext } from '../use-viewer-context';
 import type { InteractiveCanvas } from '../../../hooks/use-interactive-map-canvas';
+import { findTimelinePositionIndexAtTick } from '../find-timeline-position-index-at-tick';
 
 function getChickenImage() {
   const image = new Image();
@@ -11,17 +12,22 @@ function getChickenImage() {
 }
 
 export function useDrawChickens() {
-  const { chickenPositions, currentTick } = useViewerContext();
+  const { chickenTimelines, currentTick } = useViewerContext();
   const chickenImage = getChickenImage();
 
   const drawChickens = (
     context: CanvasRenderingContext2D,
     { zoomedSize, zoomedToRadarX, zoomedToRadarY }: InteractiveCanvas,
   ) => {
-    const positions = chickenPositions.filter((position) => position.tick === currentTick);
     const imageSize = zoomedSize(20);
 
-    for (const position of positions) {
+    for (const { positions } of chickenTimelines) {
+      const index = findTimelinePositionIndexAtTick(positions, currentTick);
+      if (index === -1) {
+        continue;
+      }
+
+      const position = positions[index];
       const x = zoomedToRadarX(position.x, position.z) - imageSize / 2;
       const y = zoomedToRadarY(position.y, position.z) - imageSize / 2;
       context.drawImage(chickenImage, x, y, imageSize, imageSize);

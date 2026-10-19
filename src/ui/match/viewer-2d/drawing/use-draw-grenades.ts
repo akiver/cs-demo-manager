@@ -1,14 +1,21 @@
 import { GrenadeName } from 'csdm/common/types/counter-strike';
-import type { GrenadePosition } from 'csdm/common/types/grenade-position';
 import type { InteractiveCanvas } from 'csdm/ui/hooks/use-interactive-map-canvas';
 import { getGrenadeColor } from './get-grenade-color';
 import type { SmokeStart } from 'csdm/common/types/smoke-start';
 import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
 import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { useViewerContext } from '../use-viewer-context';
+import { findTimelinePositionIndexAtTick } from '../find-timeline-position-index-at-tick';
+import { lastArrayItem } from 'csdm/common/array/last-array-item';
+
+type Position = {
+  x: number;
+  y: number;
+  z: number;
+};
 
 export function useDrawGrenades() {
-  const { currentTick, tickrate, grenadePositions, smokesStart, decoysStart, heGrenadesExplode, flashbangsExplode } =
+  const { currentTick, tickrate, grenadeTimelines, smokesStart, decoysStart, heGrenadesExplode, flashbangsExplode } =
     useViewerContext();
 
   const drawGrenades = (
@@ -17,7 +24,7 @@ export function useDrawGrenades() {
   ) => {
     const grenadeCircleSize = zoomedSize(4);
 
-    const drawSmokeEffect = (smokeStarted: SmokeStart, smokeExpiredPosition: GrenadePosition | undefined) => {
+    const drawSmokeEffect = (smokeStarted: SmokeStart, smokeExpiredTick: number) => {
       const x = zoomedToRadarX(smokeStarted.x, smokeStarted.z);
       const y = zoomedToRadarY(smokeStarted.y, smokeStarted.z);
       context.beginPath();
@@ -33,10 +40,7 @@ export function useDrawGrenades() {
       context.lineWidth = 2;
       const elapsedTickCount = currentTick - smokeStarted.tick;
       const secondsElapsed = elapsedTickCount / tickrate;
-      let smokeDuration = 18;
-      if (smokeExpiredPosition !== undefined) {
-        smokeDuration = (smokeExpiredPosition.tick - smokeStarted.tick) / tickrate;
-      }
+      const smokeDuration = (smokeExpiredTick - smokeStarted.tick) / tickrate;
       const percentage = -(secondsElapsed / smokeDuration);
       const startAngle = -Math.PI / 2;
       const endAngle = startAngle + Math.PI * 2 * percentage;
@@ -44,12 +48,12 @@ export function useDrawGrenades() {
       context.stroke();
     };
 
-    const drawDecoyEffect = (position: GrenadePosition) => {
+    const drawDecoyEffect = (position: Position) => {
       const x = zoomedToRadarX(position.x, position.z);
       const y = zoomedToRadarY(position.y, position.z);
 
       context.beginPath();
-      context.fillStyle = getGrenadeColor(position.grenadeName);
+      context.fillStyle = getGrenadeColor(GrenadeName.Decoy);
       context.lineWidth = zoomedSize(1);
       context.arc(x, y, grenadeCircleSize, 0, 2 * Math.PI);
       context.closePath();
@@ -75,25 +79,22 @@ export function useDrawGrenades() {
       context.fill();
     };
 
-    const positions = grenadePositions.filter((position) => {
-      return position.tick === currentTick;
-    });
+    for (const { projectileId, grenadeName, positions } of grenadeTimelines) {
+      const index = findTimelinePositionIndexAtTick(positions, currentTick);
+      if (index === -1) {
+        continue;
+      }
 
-    for (const position of positions) {
-      const { projectileId, tick, grenadeName } = position;
-
+      const position = positions[index];
       switch (grenadeName) {
         case GrenadeName.Smoke: {
           const smokeStart = smokesStart.find((smokeStart) => {
             return smokeStart.projectileId === projectileId && smokeStart.tick <= currentTick;
           });
           if (smokeStart !== undefined) {
-            const smokeExpirePosition = grenadePositions
-              .filter((position) => {
-                return position.projectileId === projectileId && tick >= currentTick;
-              })
-              .at(-1);
-            drawSmokeEffect(smokeStart, smokeExpirePosition);
+            // The projectile disappears when the smoke expires
+            const smokeExpiredTick = lastArrayItem(positions).tick;
+            drawSmokeEffect(smokeStart, smokeExpiredTick);
             continue;
           }
           break;
@@ -120,24 +121,20 @@ export function useDrawGrenades() {
         }
       }
 
-      const previousPositions = grenadePositions.filter((position) => {
-        return position.projectileId === projectileId && position.tick < currentTick;
-      });
-
       context.strokeStyle = getGrenadeColor(grenadeName);
       context.fillStyle = getGrenadeColor(grenadeName);
       context.lineWidth = zoomedSize(1);
 
       // Draw grenades paths
-      for (let i = 0; i < previousPositions.length - 1; i++) {
+      for (let i = 0; i < index; i++) {
         context.beginPath();
-        const currentPosition = previousPositions[i];
+        const currentPosition = positions[i];
         context.moveTo(
           zoomedToRadarX(currentPosition.x, currentPosition.z),
           zoomedToRadarY(currentPosition.y, currentPosition.z),
         );
 
-        const nextPosition = previousPositions[i + 1];
+        const nextPosition = positions[i + 1];
         context.lineTo(zoomedToRadarX(nextPosition.x, nextPosition.z), zoomedToRadarY(nextPosition.y, nextPosition.z));
         context.closePath();
         context.stroke();

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import type { BombDefused } from 'csdm/common/types/bomb-defused';
 import type { BombPlanted } from 'csdm/common/types/bomb-planted';
 import type { BombExploded } from 'csdm/common/types/bomb-exploded';
-import type { GrenadePosition } from 'csdm/common/types/grenade-position';
+import type { GrenadeTimeline } from 'csdm/common/types/grenade-timeline';
 import type { HostagePosition } from 'csdm/common/types/hostage-position';
 import type { InfernoPosition } from 'csdm/common/types/inferno-position';
 import type { Kill } from 'csdm/common/types/kill';
@@ -19,7 +19,7 @@ import type { BombPlantStart } from 'csdm/common/types/bomb-plant-start';
 import type { BombDefuseStart } from 'csdm/common/types/bomb-defuse-start';
 import type { HostagePickUpStart } from 'csdm/common/types/hostage-pick-up-start';
 import type { HostagePickedUp } from 'csdm/common/types/hostage-picked-up';
-import type { ChickenPosition } from 'csdm/common/types/chicken-position';
+import type { ChickenTimeline } from 'csdm/common/types/chicken-timeline';
 import type { DecoyStart } from 'csdm/common/types/decoy-start';
 import type { SmokeStart } from 'csdm/common/types/smoke-start';
 import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
@@ -78,9 +78,9 @@ type ViewerContext = {
   decoysStart: DecoyStart[];
   hostagesPickedUp: HostagePickedUp[];
   hostagePositions: HostagePosition[];
-  grenadePositions: GrenadePosition[];
+  grenadeTimelines: GrenadeTimeline[];
   infernoPositions: InfernoPosition[];
-  chickenPositions: ChickenPosition[];
+  chickenTimelines: ChickenTimeline[];
   bombsPlantStart: BombPlantStart[];
   bombsDefuseStart: BombDefuseStart[];
   bombExploded: BombExploded | null;
@@ -115,9 +115,9 @@ type Props = {
   hostagesPickUpStart: HostagePickUpStart[];
   hostagesPickedUp: HostagePickedUp[];
   hostagePositions: HostagePosition[];
-  grenadePositions: GrenadePosition[];
+  grenadeTimelines: GrenadeTimeline[];
   infernoPositions: InfernoPosition[];
-  chickenPositions: ChickenPosition[];
+  chickenTimelines: ChickenTimeline[];
   heGrenadesExplode: HeGrenadeExplode[];
   flashbangsExplode: FlashbangExplode[];
   decoysStart: DecoyStart[];
@@ -143,9 +143,9 @@ export function ViewerProvider({
   hostagesPickUpStart,
   hostagesPickedUp,
   hostagePositions,
-  grenadePositions,
+  grenadeTimelines,
   infernoPositions,
-  chickenPositions,
+  chickenTimelines,
   bombsPlantStart,
   bombsDefuseStart,
   bombExploded,
@@ -285,9 +285,9 @@ export function ViewerProvider({
         hostagesPickUpStart,
         hostagesPickedUp,
         hostagePositions,
-        grenadePositions,
+        grenadeTimelines,
         infernoPositions,
-        chickenPositions,
+        chickenTimelines,
         bombsPlantStart,
         bombsDefuseStart,
         bombExploded,

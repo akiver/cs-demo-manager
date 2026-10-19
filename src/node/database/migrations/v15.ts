@@ -77,6 +77,75 @@ const v15: Migration = {
       .columns(['match_checksum', 'round_number'])
       .execute();
 
+    // Grenades positions are stored as 1 row per projectile, a position is stored only when it changes.
+    // Existing positions are deleted, users have to generate them again.
+    await transaction.schema.dropTable('grenade_positions').ifExists().execute();
+
+    await transaction.schema
+      .createTable('grenade_positions')
+      .addColumn('match_checksum', 'varchar', (col) => col.notNull())
+      .addForeignKeyConstraint(
+        'grenade_positions_match_checksum_fk',
+        ['match_checksum'],
+        'matches',
+        ['checksum'],
+        (cb) => cb.onDelete('cascade'),
+      )
+      .addColumn('round_number', 'integer', (col) => col.notNull())
+      .addColumn('grenade_id', 'varchar', (col) => col.notNull())
+      .addColumn('projectile_id', 'varchar', (col) => col.notNull())
+      .addColumn('grenade_name', 'varchar', (col) => col.notNull())
+      .addColumn('thrower_steam_id', 'varchar', (col) => col.notNull())
+      .addColumn('thrower_name', 'varchar', (col) => col.notNull())
+      .addColumn('thrower_side', 'int2', (col) => col.notNull())
+      .addColumn('thrower_team_name', 'varchar', (col) => col.notNull())
+      // Thrower values at the time of the throw
+      .addColumn('thrower_velocity_x', 'real', (col) => col.notNull())
+      .addColumn('thrower_velocity_y', 'real', (col) => col.notNull())
+      .addColumn('thrower_velocity_z', 'real', (col) => col.notNull())
+      .addColumn('thrower_yaw', 'real', (col) => col.notNull())
+      .addColumn('thrower_pitch', 'real', (col) => col.notNull())
+      // Values packed as big-endian binary.
+      .addColumn('ticks', 'bytea', (col) => col.notNull())
+      .addColumn('x', 'bytea', (col) => col.notNull())
+      .addColumn('y', 'bytea', (col) => col.notNull())
+      .addColumn('z', 'bytea', (col) => col.notNull())
+      .execute();
+
+    await transaction.schema
+      .createIndex('grenade_positions_match_checksum_round_number_idx')
+      .on('grenade_positions')
+      .columns(['match_checksum', 'round_number'])
+      .execute();
+
+    // Chickens positions are stored as 1 row per chicken and round, a position is stored only when it changes.
+    // Existing positions are deleted, users have to generate them again.
+    await transaction.schema.dropTable('chicken_positions').ifExists().execute();
+
+    await transaction.schema
+      .createTable('chicken_positions')
+      .addColumn('match_checksum', 'varchar', (col) => col.notNull())
+      .addForeignKeyConstraint(
+        'chicken_positions_match_checksum_fk',
+        ['match_checksum'],
+        'matches',
+        ['checksum'],
+        (cb) => cb.onDelete('cascade'),
+      )
+      .addColumn('round_number', 'integer', (col) => col.notNull())
+      // Values packed as big-endian binary, int32 for ticks and float32 for positions.
+      .addColumn('ticks', 'bytea', (col) => col.notNull())
+      .addColumn('x', 'bytea', (col) => col.notNull())
+      .addColumn('y', 'bytea', (col) => col.notNull())
+      .addColumn('z', 'bytea', (col) => col.notNull())
+      .execute();
+
+    await transaction.schema
+      .createIndex('chicken_positions_match_checksum_round_number_idx')
+      .on('chicken_positions')
+      .columns(['match_checksum', 'round_number'])
+      .execute();
+
     // PostgreSQL can't convert bytes to a float, this function makes the packed float32 columns table queryable in SQL.
     // Ticks (int32) can be compared with int4send() as they use the same byte order.
     await sql`
