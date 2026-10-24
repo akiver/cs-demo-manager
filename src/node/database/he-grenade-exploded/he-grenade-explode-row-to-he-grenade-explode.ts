@@ -4,7 +4,6 @@ import type { HeGrenadeExplodeRow } from './he-grenade-explode-table';
 export function heGrenadeExplodeRowToHeGrenadeExplode(row: HeGrenadeExplodeRow): HeGrenadeExplode {
   return {
     id: row.id,
-    frame: row.frame,
     tick: row.tick,
     roundNumber: row.round_number,
     grenadeId: row.grenade_id,

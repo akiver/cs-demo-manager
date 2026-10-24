@@ -4,7 +4,6 @@ import type { ColumnID } from 'csdm/common/types/column-id';
 
 export type GrenadeBounceTable = {
   id: Generated<ColumnID>;
-  frame: number;
   tick: number;
   round_number: number;
   grenade_id: string;

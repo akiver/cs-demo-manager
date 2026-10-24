@@ -6,7 +6,6 @@ export function chatMessageRowToChatMessage(row: ChatMessageRow): ChatMessage {
     id: row.id,
     matchChecksum: row.match_checksum,
     tick: row.tick,
-    frame: row.frame,
     roundNumber: row.round_number,
     message: row.message,
     senderIsAlive: row.sender_is_alive,

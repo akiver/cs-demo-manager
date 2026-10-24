@@ -4,7 +4,6 @@ import type { GrenadeBounceRow } from './grenade-bounce-table';
 export function grenadeBounceRowToGrenadeBounce(row: GrenadeBounceRow): GrenadeBounce {
   return {
     id: row.id,
-    frame: row.frame,
     tick: row.tick,
     roundNumber: row.round_number,
     grenadeId: row.grenade_id,

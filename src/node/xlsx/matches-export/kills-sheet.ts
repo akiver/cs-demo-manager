@@ -23,10 +23,6 @@ export class KillsSheet extends MultipleMatchExportSheet<KillRow> {
         cellFormatter: (row) => row.tick,
       },
       {
-        name: 'frame',
-        cellFormatter: (row) => row.frame,
-      },
-      {
         name: 'killer_steam_id',
         cellFormatter: (row) => row.killerSteamId,
       },

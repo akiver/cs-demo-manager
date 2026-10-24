@@ -48,7 +48,6 @@ async function insertShots({ outputFolderPath, demoName }: InsertOptions) {
     csvFilePath,
     tableName: 'shots',
     columns: [
-      'frame',
       'tick',
       'round_number',
       'weapon_name',
@@ -94,7 +93,6 @@ async function insertBombsPlantedFromCsv({ outputFolderPath, demoName }: InsertO
     tableName: 'bombs_planted',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'site',
@@ -116,7 +114,6 @@ async function insertBombsDefuseStartFromCsv({ outputFolderPath, demoName }: Ins
     tableName: 'bombs_defuse_start',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'defuser_steam_id',
@@ -137,7 +134,6 @@ async function insertBombsDefusedFromCsv({ outputFolderPath, demoName }: InsertO
     tableName: 'bombs_defused',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'site',
@@ -161,7 +157,6 @@ async function insertBombsExplodedFromCsv({ outputFolderPath, demoName }: Insert
     tableName: 'bombs_exploded',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'site',
@@ -183,7 +178,6 @@ async function insertBombsPlantStartFromCsv({ outputFolderPath, demoName }: Inse
     tableName: 'bombs_plant_start',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'site',
@@ -261,13 +255,9 @@ async function insertRounds({ outputFolderPath, demoName }: InsertOptions) {
       columns: [
         'number',
         'start_tick',
-        'start_frame',
         'freeze_time_end_tick',
-        'freeze_time_end_frame',
         'end_tick',
-        'end_frame',
         'end_officially_tick',
-        'end_officially_frame',
         'team_a_name',
         'team_b_name',
         'team_a_score',
@@ -302,7 +292,6 @@ async function insertDamages({ outputFolderPath, demoName }: InsertOptions) {
     tableName: 'damages',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'health_damage',
@@ -355,7 +344,6 @@ async function insertPlayersBuy({ outputFolderPath, demoName }: InsertOptions) {
     tableName: 'player_buys',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'player_steam_id',
@@ -377,7 +365,6 @@ async function insertClutchesFromCsv({ outputFolderPath, demoName }: InsertOptio
     tableName: 'clutches',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'opponent_count',
@@ -399,7 +386,6 @@ async function insertPlayersFlashedFromCsv({ outputFolderPath, demoName }: Inser
     tableName: 'player_blinds',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'duration',
@@ -423,7 +409,6 @@ async function insertKillsFromCsv({ outputFolderPath, demoName }: InsertOptions)
     tableName: 'kills',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'killer_name',
@@ -477,7 +462,6 @@ async function insertGrenadeBounces({ outputFolderPath, demoName }: InsertOption
     tableName: 'grenade_bounces',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'grenade_id',
@@ -507,7 +491,6 @@ async function insertGrenadeProjectilesDestroy({ outputFolderPath, demoName }: I
     tableName: 'grenade_projectiles_destroy',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'grenade_id',
@@ -537,7 +520,6 @@ async function insertDecoysStart({ outputFolderPath, demoName }: InsertOptions) 
     tableName: 'decoys_start',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'grenade_id',
@@ -566,7 +548,6 @@ async function insertSmokesStart({ outputFolderPath, demoName }: InsertOptions) 
     tableName: 'smokes_start',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'grenade_id',
@@ -595,7 +576,6 @@ async function insertHeGrenadesExplode({ outputFolderPath, demoName }: InsertOpt
     tableName: 'he_grenades_explode',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'grenade_id',
@@ -624,7 +604,6 @@ async function insertFlashbangsExplode({ outputFolderPath, demoName }: InsertOpt
     tableName: 'flashbangs_explode',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'grenade_id',
@@ -653,7 +632,6 @@ async function insertChatMessages({ outputFolderPath, demoName }: InsertOptions)
     tableName: 'chat_messages',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'sender_steam_id',
@@ -673,7 +651,6 @@ async function insertHostageRescued({ outputFolderPath, demoName }: InsertOption
     tableName: 'hostage_rescued',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'player_steam_id',
@@ -694,7 +671,6 @@ async function insertHostagePickUpStart({ outputFolderPath, demoName }: InsertOp
     tableName: 'hostage_pick_up_start',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'player_steam_id',
@@ -715,7 +691,6 @@ async function insertHostagePickedUp({ outputFolderPath, demoName }: InsertOptio
     tableName: 'hostage_picked_up',
     csvFilePath,
     columns: [
-      'frame',
       'tick',
       'round_number',
       'player_steam_id',
@@ -735,7 +710,7 @@ async function insertChickenDeaths({ outputFolderPath, demoName }: InsertOptions
   await copyCsvIntoTable<ChickenDeathTable>({
     tableName: 'chicken_deaths',
     csvFilePath,
-    columns: ['frame', 'tick', 'round_number', 'killer_steam_id', 'weapon_name', 'match_checksum'],
+    columns: ['tick', 'round_number', 'killer_steam_id', 'weapon_name', 'match_checksum'],
   });
 }
 

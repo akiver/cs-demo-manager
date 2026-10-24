@@ -6,7 +6,6 @@ export type BombPlantStartTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   site: string;
   planter_steam_id: string;
   planter_name: string;

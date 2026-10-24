@@ -6,7 +6,6 @@ export function grenadeProjectileDestroyRowToGrenadeProjectileDestroy(
 ): GrenadeProjectileDestroy {
   return {
     id: row.id,
-    frame: row.frame,
     tick: row.tick,
     roundNumber: row.round_number,
     grenadeId: row.grenade_id,

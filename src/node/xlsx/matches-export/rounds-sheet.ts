@@ -23,24 +23,12 @@ export class RoundsSheet extends MultipleMatchExportSheet<RoundRow> {
         cellFormatter: (row) => row.startTick,
       },
       {
-        name: 'start_frame',
-        cellFormatter: (row) => row.startFrame,
-      },
-      {
         name: 'freeze_time_end_tick',
         cellFormatter: (row) => row.freezeTimeEndTick,
       },
       {
-        name: 'freeze_time_end_frame',
-        cellFormatter: (row) => row.freezeTimeEndFrame,
-      },
-      {
         name: 'end_tick',
         cellFormatter: (row) => row.endTick,
-      },
-      {
-        name: 'end_frame',
-        cellFormatter: (row) => row.endFrame,
       },
       {
         name: 'duration',

@@ -4,7 +4,6 @@ import type { HostagePickUpStartRow } from './hostage-pick-up-start-table';
 export function hostagePickUpStartRowToHostagePickUpStart(row: HostagePickUpStartRow): HostagePickUpStart {
   return {
     id: row.id,
-    frame: row.frame,
     matchChecksum: row.match_checksum,
     roundNumber: row.round_number,
     playerSteamId: row.player_steam_id,

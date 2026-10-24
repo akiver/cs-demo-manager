@@ -4,7 +4,6 @@ import type { SmokeStartRow } from './smoke-start-table';
 export function smokeStartRowToSmokeStart(row: SmokeStartRow): SmokeStart {
   return {
     id: row.id,
-    frame: row.frame,
     tick: row.tick,
     roundNumber: row.round_number,
     grenadeId: row.grenade_id,

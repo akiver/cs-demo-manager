@@ -7,7 +7,6 @@ export type DamageTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   health_damage: number;
   armor_damage: number;
   victim_damage: number;

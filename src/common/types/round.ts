@@ -6,13 +6,9 @@ export type Round = {
   matchChecksum: string;
   number: number;
   startTick: number;
-  startFrame: number;
   freezetimeEndTick: number;
-  freezetimeEndFrame: number;
   endTick: number;
-  endFrame: number;
   endOfficiallyTick: number;
-  endOfficiallyFrame: number;
   teamAScore: number;
   teamBScore: number;
   teamASide: TeamNumber;

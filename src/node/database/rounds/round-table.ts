@@ -7,13 +7,9 @@ export type RoundTable = {
   match_checksum: string;
   number: number;
   start_tick: number;
-  start_frame: number;
   freeze_time_end_tick: number;
-  freeze_time_end_frame: number;
   end_tick: number;
-  end_frame: number;
   end_officially_tick: number;
-  end_officially_frame: number;
   team_a_name: string;
   team_b_name: string;
   team_a_score: number;

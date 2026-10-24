@@ -7,7 +7,6 @@ export type FlashbangExplodeTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   grenade_id: string;
   projectile_id: string;
   x: number;

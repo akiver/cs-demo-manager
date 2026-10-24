@@ -5,7 +5,6 @@ export type KillRow = {
   matchChecksum: string;
   roundNumber: number;
   tick: number;
-  frame: number;
   killerSteamId: string;
   killerName: string;
   killerSide: TeamNumber;
@@ -49,7 +48,6 @@ export async function fetchKillsRows(checksums: string[]) {
       'match_checksum as matchChecksum',
       'round_number as roundNumber',
       'tick',
-      'frame',
       'killer_steam_id as killerSteamId',
       'killer_name as killerName',
       'killer_side as killerSide',

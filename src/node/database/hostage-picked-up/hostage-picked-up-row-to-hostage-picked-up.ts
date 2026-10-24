@@ -4,7 +4,6 @@ import type { HostagePickedUpRow } from './hostage-picked-up-table';
 export function hostagePickedUpRowToHostagePickedUp(row: HostagePickedUpRow): HostagePickedUp {
   return {
     id: row.id,
-    frame: row.frame,
     matchChecksum: row.match_checksum,
     roundNumber: row.round_number,
     playerSteamId: row.player_steam_id,
