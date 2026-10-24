@@ -1,27 +1,7 @@
 import { describe, it, expect } from 'vite-plus/test';
+import { packInt32, packFloat32, packBool, unaligned } from 'csdm/node/database/pack-values';
+import { repeat } from 'csdm/common/array/repeat';
 import { decodePlayerPositions } from './decode-player-positions';
-
-function packInt32(values: number[]) {
-  const buffer = Buffer.alloc(values.length * 4);
-  values.forEach((value, index) => buffer.writeInt32BE(value, index * 4));
-
-  return buffer;
-}
-
-function packFloat32(values: number[]) {
-  const buffer = Buffer.alloc(values.length * 4);
-  values.forEach((value, index) => buffer.writeFloatBE(value, index * 4));
-
-  return buffer;
-}
-
-function packBool(values: boolean[]) {
-  return Buffer.from(values.map((value) => (value ? 1 : 0)));
-}
-
-function repeat<T>(value: T, count: number) {
-  return Array.from<T>({ length: count }).fill(value);
-}
 
 function buildPackedStates(count: number) {
   return {
@@ -185,10 +165,6 @@ describe('decodePlayerPositions', () => {
   });
 
   it('should decode buffers that are not aligned on 4 bytes', () => {
-    const unaligned = (buffer: Buffer) => {
-      return Buffer.concat([Buffer.from([0]), buffer]).subarray(1);
-    };
-
     const { movements, states } = decodePlayerPositions({
       ...buildPackedMovements(1),
       ...buildPackedStates(1),

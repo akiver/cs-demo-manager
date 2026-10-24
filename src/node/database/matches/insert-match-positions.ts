@@ -85,16 +85,15 @@ async function insertInfernoPositions({ outputFolderPath, demoName }: InsertOpti
     tableName: 'inferno_positions',
     csvFilePath,
     columns: [
-      'frame',
-      'tick',
       'round_number',
+      'unique_id',
       'thrower_steam_id',
       'thrower_name',
-      'unique_id',
       'x',
       'y',
       'z',
-      'convex_hull_2d',
+      'ticks',
+      'convex_hulls_2d',
       'match_checksum',
     ],
   });
@@ -106,7 +105,7 @@ async function insertHostagePositions({ outputFolderPath, demoName }: InsertOpti
   await copyCsvIntoTable<HostagePositionTable>({
     tableName: 'hostage_positions',
     csvFilePath,
-    columns: ['frame', 'tick', 'round_number', 'x', 'y', 'z', 'state', 'match_checksum'],
+    columns: ['round_number', 'ticks', 'x', 'y', 'z', 'state_ticks', 'states', 'match_checksum'],
   });
 }
 

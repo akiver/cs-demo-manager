@@ -1,20 +1,7 @@
 import { describe, it, expect } from 'vite-plus/test';
+import { packInt32, packFloat32, unaligned } from 'csdm/node/database/pack-values';
 import { GrenadeName } from 'csdm/common/types/counter-strike';
 import { decodeGrenadePositions } from './decode-grenade-positions';
-
-function packInt32(values: number[]) {
-  const buffer = Buffer.alloc(values.length * 4);
-  values.forEach((value, index) => buffer.writeInt32BE(value, index * 4));
-
-  return buffer;
-}
-
-function packFloat32(values: number[]) {
-  const buffer = Buffer.alloc(values.length * 4);
-  values.forEach((value, index) => buffer.writeFloatBE(value, index * 4));
-
-  return buffer;
-}
 
 const thrower = {
   grenade_id: '10',
@@ -63,8 +50,6 @@ describe('decodeGrenadePositions', () => {
   });
 
   it('should decode buffers that are not aligned on 4 bytes', () => {
-    const unaligned = (buffer: Buffer) => Buffer.concat([Buffer.from([0]), buffer]).subarray(1);
-
     const { positions } = decodeGrenadePositions({
       ...thrower,
       ticks: unaligned(packInt32([42])),

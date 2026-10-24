@@ -5,7 +5,7 @@ import type { SmokeStart } from 'csdm/common/types/smoke-start';
 import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
 import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { useViewerContext } from '../use-viewer-context';
-import { findTimelinePositionIndexAtTick } from '../find-timeline-position-index-at-tick';
+import { findTimelineIndexAtTick } from '../find-timeline-index-at-tick';
 import { lastArrayItem } from 'csdm/common/array/last-array-item';
 
 type Position = {
@@ -80,7 +80,7 @@ export function useDrawGrenades() {
     };
 
     for (const { projectileId, grenadeName, positions } of grenadeTimelines) {
-      const index = findTimelinePositionIndexAtTick(positions, currentTick);
+      const index = findTimelineIndexAtTick(positions, currentTick);
       if (index === -1) {
         continue;
       }
