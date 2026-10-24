@@ -31,6 +31,7 @@ import { getFfmpegExecutablePath } from '../ffmpeg/ffmpeg-location';
 import { isBlankString } from 'csdm/common/string/is-empty-string';
 import { DisplayMode } from 'csdm/common/types/display-mode';
 import { replaceFilenamePlaceholders } from './replace-filename-placeholders';
+import { GameError } from 'csdm/node/counter-strike/launcher/errors/game-error';
 
 export type Parameters = {
   videoId: string;
@@ -45,6 +46,7 @@ export type Parameters = {
   width: number;
   height: number;
   closeGameAfterRecording: boolean;
+  keepRawFilesOnGameError: boolean;
   concatenateSequences: boolean;
   outputFileName: string;
   trueView: boolean;
@@ -159,6 +161,7 @@ export async function generateVideo(parameters: Parameters) {
     width,
     height,
     closeGameAfterRecording,
+    keepRawFilesOnGameError,
     tickrate,
     game,
     ffmpegSettings,
@@ -296,7 +299,13 @@ export async function generateVideo(parameters: Parameters) {
       throw abortError;
     }
 
-    await cleanupFiles();
+    if (keepRawFilesOnGameError && error instanceof GameError) {
+      logger.debug(`Keeping raw files of video with id ${videoId} because the game exited with an error`);
+      await deleteJsonActionsFile(demoPath);
+    } else {
+      await cleanupFiles();
+    }
+
     throw error;
   } finally {
     await uninstallCounterStrikeServerPlugin(game);

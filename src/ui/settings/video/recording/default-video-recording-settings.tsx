@@ -8,6 +8,7 @@ import { RecordingDeathNoticesDuration } from './recording-death-notices-duratio
 import { RecordingShowOnlyDeathNotices } from './recording-show-only-death-notices';
 import { RecordingAssists } from './recording-assists';
 import { RecordingAudio } from './recording-audio';
+import { RecordingKeepRawFilesOnGameError } from './recording-keep-raw-files-on-game-error';
 
 export function DefaultVideoRecordingSettings() {
   return (
@@ -24,6 +25,7 @@ export function DefaultVideoRecordingSettings() {
         <RecordingPlayerVoices />
         <RecordingShowOnlyDeathNotices />
         {window.csdm.isWindows && <RecordingDeathNoticesDuration />}
+        <RecordingKeepRawFilesOnGameError />
       </div>
     </div>
   );

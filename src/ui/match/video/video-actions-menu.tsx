@@ -30,6 +30,7 @@ function useGetVideoCommandConfig(): () => VideoCommandConfig {
       height: settings.height,
       framerate: settings.framerate,
       closeGameAfterRecording: settings.closeGameAfterRecording,
+      keepRawFilesOnGameError: settings.keepRawFilesOnGameError,
       trueView: settings.trueView,
       concatenateSequences: settings.concatenateSequences,
       ffmpegSettings: settings.ffmpegSettings,

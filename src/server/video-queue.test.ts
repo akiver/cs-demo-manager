@@ -41,6 +41,7 @@ function buildPayload(): AddVideoPayload {
     width: 1920,
     height: 1080,
     closeGameAfterRecording: true,
+    keepRawFilesOnGameError: false,
     concatenateSequences: false,
     outputFileName: 'sequence-{sequenceNumber}',
     ffmpegSettings: {

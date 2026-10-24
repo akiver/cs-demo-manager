@@ -157,6 +157,8 @@ export type VideoSettings = {
   width: number;
   height: number;
   closeGameAfterRecording: boolean;
+  // Do not delete the raw files (video, audio, images...) when the game exits with an error.
+  keepRawFilesOnGameError: boolean;
   showOnlyDeathNotices: boolean;
   showXRay: boolean;
   showAssists: boolean;

@@ -22,6 +22,7 @@ export type Video = {
   width: number;
   height: number;
   closeGameAfterRecording: boolean;
+  keepRawFilesOnGameError: boolean;
   concatenateSequences: boolean;
   outputFileName: string;
   ffmpegSettings: FfmpegSettings;

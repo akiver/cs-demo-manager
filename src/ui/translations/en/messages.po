@@ -5270,6 +5270,11 @@ msgstr "HLAE has been updated"
 msgid "An error occurred while updating HLAE"
 msgstr "An error occurred while updating HLAE"
 
+#: src/ui/match/video/keep-raw-files-on-game-error-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Keep recorded files if the game crashes"
+msgstr "Keep recorded files if the game crashes"
+
 #: src/ui/match/video/output-file-name-input.tsx
 msgid "Map name (e.g., de_dust2)"
 msgstr "Map name (e.g., de_dust2)"
@@ -8209,6 +8214,15 @@ msgstr "How long death notices are displayed during recording in seconds."
 msgctxt "Settings title"
 msgid "Death notices duration"
 msgstr "Death notices duration"
+
+#: src/ui/settings/video/recording/recording-keep-raw-files-on-game-error.tsx
+msgid "Keep the video, audio and image files recorded before the game crashed."
+msgstr "Keep the video, audio and image files recorded before the game crashed."
+
+#: src/ui/settings/video/recording/recording-keep-raw-files-on-game-error.tsx
+msgctxt "Settings title"
+msgid "Keep recorded files if the game crashes"
+msgstr "Keep recorded files if the game crashes"
 
 #: src/ui/settings/video/recording/recording-player-voices.tsx
 msgid "Listen to player voices during recording."

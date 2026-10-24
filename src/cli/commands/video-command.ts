@@ -46,6 +46,7 @@ export type VideoCommandConfig = {
   width?: number;
   height?: number;
   closeGameAfterRecording?: boolean;
+  keepRawFilesOnGameError?: boolean;
   trueView: boolean;
   concatenateSequences?: boolean;
   outputFileName?: string;
@@ -118,6 +119,11 @@ export class VideoCommand extends Command {
       type: 'boolean',
       negatable: true,
       description: 'Close the game once the recording is done.',
+    },
+    'keep-raw-files-on-game-error': {
+      type: 'boolean',
+      negatable: true,
+      description: 'Keep the recorded files if the game crashes.',
     },
     'concatenate-sequences': {
       type: 'boolean',
@@ -245,6 +251,7 @@ export class VideoCommand extends Command {
   private width: number | undefined;
   private height: number | undefined;
   private closeGameAfterRecording: boolean | undefined;
+  private keepRawFilesOnGameError: boolean | undefined;
   private concatenateSequences: boolean | undefined;
   private outputFileName: string | undefined;
   private trueView: boolean | undefined;
@@ -354,6 +361,7 @@ export class VideoCommand extends Command {
       width: this.width ?? settings.video.width,
       height: this.height ?? settings.video.height,
       closeGameAfterRecording: this.closeGameAfterRecording ?? settings.video.closeGameAfterRecording,
+      keepRawFilesOnGameError: this.keepRawFilesOnGameError ?? settings.video.keepRawFilesOnGameError,
       concatenateSequences: this.concatenateSequences ?? settings.video.concatenateSequences,
       outputFileName: this.outputFileName ?? settings.video.outputFileName,
       trueView: this.trueView ?? settings.video.trueView,
@@ -384,6 +392,7 @@ export class VideoCommand extends Command {
         height: config.height ?? parameters.height,
         trueView: config.trueView ?? parameters.trueView,
         closeGameAfterRecording: config.closeGameAfterRecording ?? parameters.closeGameAfterRecording,
+        keepRawFilesOnGameError: config.keepRawFilesOnGameError ?? parameters.keepRawFilesOnGameError,
         concatenateSequences: config.concatenateSequences ?? parameters.concatenateSequences,
         outputFileName: config.outputFileName ?? parameters.outputFileName,
         ffmpegSettings: config.ffmpegSettings ?? parameters.ffmpegSettings,
@@ -875,6 +884,7 @@ export class VideoCommand extends Command {
       this.height = height;
     }
     this.closeGameAfterRecording = values['close-game-after-recording'];
+    this.keepRawFilesOnGameError = values['keep-raw-files-on-game-error'];
     this.concatenateSequences = values['concatenate-sequences'];
     const outputFileName = values['output-file-name'];
     if (typeof outputFileName === 'string') {

@@ -9,6 +9,7 @@ import { VirtualDub } from './virtualdub/virtual-dub';
 import { WidthResolutionInput } from './width-resolution-input';
 import { HeightResolutionInput } from './height-resolution-input';
 import { CloseGameAfterRecordingCheckbox } from './close-game-after-recording-checkbox';
+import { KeepRawFilesOnGameErrorCheckbox } from './keep-raw-files-on-game-error-checkbox';
 import { OutputFolderPath } from './output-folder-path';
 import { EncoderSoftwareSelect } from './encoder-software-select';
 import { Ffmpeg } from './ffmpeg/ffmpeg';
@@ -65,6 +66,7 @@ export function MatchVideo() {
               <div>
                 {match.game !== Game.CSGO && <ToggleTrueView />}
                 <CloseGameAfterRecordingCheckbox />
+                <KeepRawFilesOnGameErrorCheckbox />
                 <ConcatenateSequencesCheckbox />
                 <OutputFileNameInput />
               </div>

@@ -81,6 +81,7 @@ export const defaultSettings: Settings = {
     recordingSystem: RecordingSystem.CounterStrike,
     recordingOutput: RecordingOutput.Video,
     closeGameAfterRecording: true,
+    keepRawFilesOnGameError: false,
     concatenateSequences: false,
     outputFileName: '',
     showXRay: true,

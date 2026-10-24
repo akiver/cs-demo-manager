@@ -17,6 +17,8 @@ const v14: Migration = {
     // Fresh installations enable it during the first launch.
     settings.startMinimizedAtLogin = false;
 
+    settings.video.keepRawFilesOnGameError = false;
+
     return Promise.resolve(settings);
   },
 };
