@@ -7,7 +7,6 @@ export type ChatMessageTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   message: string;
   sender_is_alive: boolean;
   sender_name: string;

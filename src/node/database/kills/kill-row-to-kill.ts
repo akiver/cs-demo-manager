@@ -7,7 +7,6 @@ export function killRowToKill(row: KillRow): Kill {
     matchChecksum: row.match_checksum,
     roundNumber: row.round_number,
     tick: row.tick,
-    frame: row.frame,
     weaponName: row.weapon_name,
     weaponType: row.weapon_type,
     isHeadshot: row.is_headshot,

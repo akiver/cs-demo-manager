@@ -7,7 +7,6 @@ export type ClutchTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   opponent_count: number;
   side: TeamNumber;
   won: boolean;

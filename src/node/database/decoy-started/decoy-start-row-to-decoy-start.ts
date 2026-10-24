@@ -4,7 +4,6 @@ import type { DecoyStartRow } from './decoy-start-table';
 export function decoyStartRowToDecoyStart(row: DecoyStartRow): DecoyStart {
   return {
     id: row.id,
-    frame: row.frame,
     tick: row.tick,
     roundNumber: row.round_number,
     grenadeId: row.grenade_id,

@@ -6,7 +6,6 @@ export type HostageRescuedTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   hostage_entity_id: number;
   player_steam_id: string;
   is_player_controlling_bot: boolean;

@@ -4,7 +4,6 @@ import type { ChickenDeath } from '../../../common/types/chicken-death';
 export function chickenDeathRowToChickenDeath(row: ChickenDeathRow): ChickenDeath {
   return {
     id: row.id,
-    frame: row.frame,
     tick: row.tick,
     matchChecksum: row.match_checksum,
     roundNumber: row.round_number,

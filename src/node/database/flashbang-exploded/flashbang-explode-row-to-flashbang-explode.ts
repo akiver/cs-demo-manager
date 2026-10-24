@@ -4,7 +4,6 @@ import type { FlashbangExplodeRow } from './flashbang-explode-table';
 export function flashbangExplodeRowToFlashbangExplode(row: FlashbangExplodeRow): FlashbangExplode {
   return {
     id: row.id,
-    frame: row.frame,
     tick: row.tick,
     roundNumber: row.round_number,
     grenadeId: row.grenade_id,

@@ -6,7 +6,6 @@ export function playerBlindRowToPlayerBlind(row: PlayerBlindRow): PlayerBlind {
     id: row.id,
     matchChecksum: row.match_checksum,
     tick: row.tick,
-    frame: row.frame,
     roundNumber: row.round_number,
     duration: row.duration,
     flashedName: row.flashed_name,

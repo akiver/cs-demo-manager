@@ -6,7 +6,6 @@ export type KillTable = {
   id: Generated<ColumnID>;
   match_checksum: string;
   tick: number;
-  frame: number;
   round_number: number;
   killer_steam_id: string;
   killer_name: string;

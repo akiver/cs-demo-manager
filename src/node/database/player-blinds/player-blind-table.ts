@@ -7,7 +7,6 @@ export type PlayerBlindTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   duration: number;
   flasher_steam_id: string;
   flasher_name: string;

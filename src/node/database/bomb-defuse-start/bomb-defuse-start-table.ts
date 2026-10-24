@@ -6,7 +6,6 @@ export type BombDefuseStartTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   defuser_steam_id: string;
   defuser_name: string;
   is_defuser_controlling_bot: boolean;

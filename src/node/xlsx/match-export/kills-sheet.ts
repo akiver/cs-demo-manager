@@ -18,10 +18,6 @@ export class KillsSheet extends SingleMatchExportSheet<Kill> {
         cellFormatter: (row) => row.tick,
       },
       {
-        name: 'frame',
-        cellFormatter: (row) => row.frame,
-      },
-      {
         name: 'killer_steam_id',
         cellFormatter: (row) => row.killerSteamId,
       },

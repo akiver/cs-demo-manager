@@ -18,24 +18,12 @@ export class RoundsSheet extends SingleMatchExportSheet<Round> {
         cellFormatter: (row) => row.startTick,
       },
       {
-        name: 'start_frame',
-        cellFormatter: (row) => row.startFrame,
-      },
-      {
         name: 'freeze_time_end_tick',
         cellFormatter: (row) => row.freezetimeEndTick,
       },
       {
-        name: 'freeze_time_end_frame',
-        cellFormatter: (row) => row.freezetimeEndFrame,
-      },
-      {
         name: 'end_tick',
         cellFormatter: (row) => row.endTick,
-      },
-      {
-        name: 'end_frame',
-        cellFormatter: (row) => row.endFrame,
       },
       {
         name: 'duration',

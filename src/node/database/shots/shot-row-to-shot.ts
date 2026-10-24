@@ -4,7 +4,6 @@ import type { ShotRow } from './shot-table';
 export function shotRowToShot(row: ShotRow): Shot {
   return {
     id: row.id,
-    frame: row.frame,
     tick: row.tick,
     roundNumber: row.round_number,
     weaponName: row.weapon_name,

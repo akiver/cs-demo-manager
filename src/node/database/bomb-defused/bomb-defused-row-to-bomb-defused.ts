@@ -6,7 +6,6 @@ export function bombDefusedRowToBombDefused(row: BombDefusedRow): BombDefused {
     id: row.id,
     matchChecksum: row.match_checksum,
     tick: row.tick,
-    frame: row.frame,
     roundNumber: row.round_number,
     isDefuserControllingBot: row.is_defuser_controlling_bot,
     defuserName: row.defuser_name,

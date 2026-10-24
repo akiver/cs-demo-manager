@@ -6,7 +6,6 @@ export type GrenadeProjectileDestroyTable = {
   id: ColumnID;
   round_number: number;
   tick: number;
-  frame: number;
   grenade_id: string;
   projectile_id: string;
   grenade_name: GrenadeName;

@@ -7,7 +7,6 @@ export type PlayerBuyTable = {
   match_checksum: string;
   round_number: number;
   tick: number;
-  frame: number;
   player_steam_id: string;
   player_name: string;
   player_side: TeamNumber;

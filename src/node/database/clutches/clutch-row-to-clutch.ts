@@ -4,7 +4,6 @@ import type { Clutch } from 'csdm/common/types/clutch';
 export function clutchRowToClutch(row: ClutchRow): Clutch {
   return {
     id: row.id,
-    frame: row.frame,
     matchChecksum: row.match_checksum,
     roundNumber: row.round_number,
     tick: row.tick,

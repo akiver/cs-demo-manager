@@ -5,7 +5,6 @@ import type { ColumnID } from 'csdm/common/types/column-id';
 export type SmokeStartTable = {
   id: Generated<ColumnID>;
   round_number: number;
-  frame: number;
   tick: number;
   grenade_id: string;
   projectile_id: string;

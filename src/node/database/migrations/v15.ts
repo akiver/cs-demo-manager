@@ -22,6 +22,42 @@ const v15: Migration = {
     // Redundant with shots_match_checksum_round_number_idx that can be used for queries filtering only on match_checksum.
     await transaction.schema.dropIndex('shots_match_checksum_idx').ifExists().execute();
 
+    // Frame columns are not used, ticks are enough.
+    const tablesWithFrame = [
+      'bombs_defuse_start',
+      'bombs_defused',
+      'bombs_exploded',
+      'bombs_plant_start',
+      'bombs_planted',
+      'chat_messages',
+      'chicken_deaths',
+      'clutches',
+      'damages',
+      'decoys_start',
+      'flashbangs_explode',
+      'grenade_bounces',
+      'grenade_projectiles_destroy',
+      'he_grenades_explode',
+      'hostage_pick_up_start',
+      'hostage_picked_up',
+      'hostage_rescued',
+      'kills',
+      'player_blinds',
+      'player_buys',
+      'shots',
+      'smokes_start',
+    ];
+    for (const table of tablesWithFrame) {
+      await transaction.schema.alterTable(table).dropColumn('frame').execute();
+    }
+    await transaction.schema
+      .alterTable('rounds')
+      .dropColumn('start_frame')
+      .dropColumn('freeze_time_end_frame')
+      .dropColumn('end_frame')
+      .dropColumn('end_officially_frame')
+      .execute();
+
     // Player positions are now stored as binary packed columns, see player-position-table.ts.
     // Existing positions are deleted, users have to generate them again.
     await transaction.schema.dropTable('player_positions').ifExists().execute();

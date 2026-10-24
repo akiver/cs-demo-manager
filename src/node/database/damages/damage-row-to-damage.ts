@@ -6,7 +6,6 @@ export function damageRowToDamage(row: DamageRow): Damage {
     id: row.id,
     matchChecksum: row.match_checksum,
     tick: row.tick,
-    frame: row.frame,
     roundNumber: row.round_number,
     armorDamage: row.armor_damage,
     healthDamage: row.health_damage,
