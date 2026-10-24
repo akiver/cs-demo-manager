@@ -1,17 +1,14 @@
 export async function fetchLastHlaeRelease() {
-  const response = await fetch('https://api.github.com/repos/advancedfx/advancedfx/releases', {
+  const response = await fetch('https://api.github.com/repos/advancedfx/advancedfx/releases/latest', {
     headers: {
       'User-Agent': 'CS:DM',
     },
   });
-  const releases: GitHubReleaseResponse[] = await response.json();
-  for (const release of releases) {
-    if (release.prerelease) {
-      continue;
-    }
-
-    return release;
+  if (!response.ok) {
+    throw new Error(`Failed to fetch the latest HLAE release, status: ${response.status}`);
   }
 
-  throw new Error('No HLAE releases found');
+  const release: GitHubReleaseResponse = await response.json();
+
+  return release;
 }
