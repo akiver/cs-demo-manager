@@ -8,6 +8,7 @@ import {
   generatePlayersDeathsSequences,
   generatePlayersKillsSequences,
   generatePlayersRoundsSequences,
+  playerSequencesOptionsChanged,
 } from './sequences/sequences-actions';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
@@ -27,6 +28,7 @@ import { ConfirmButton } from 'csdm/ui/components/buttons/confirm-button';
 import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
 import { RoundsSelect } from 'csdm/ui/components/inputs/select/rounds-select';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
+import { useVideoState } from './use-video-state';
 
 function getVisibleWeapons(event: PlayerSequenceEvent, steamIds: string[], match: Match) {
   if (steamIds.length === 0) {
@@ -48,6 +50,7 @@ function SelectPlayerDialog() {
   const dispatch = useDispatch();
   const match = useCurrentMatch();
   const { settings } = useVideoSettings();
+  const { playerSequencesOptionsByDemoFilePath } = useVideoState();
   const { hideDialog } = useDialog();
   const options: SelectOption[] = match.players.map((player) => {
     return {
@@ -69,20 +72,44 @@ function SelectPlayerDialog() {
       label: <Trans context="Select option">Round</Trans>,
     },
   ];
-  const [selectedSteamIds, setSelectedSteamIds] = useState(options.length > 0 ? [options[0].value] : []);
-  const [selectedEvent, setSelectedEvent] = useState<PlayerSequenceEvent>(PlayerSequenceEvent.Kills);
-  const [selectedRounds, setSelectedRounds] = useState<number[]>([]);
+  const lastOptions = playerSequencesOptionsByDemoFilePath[match.demoFilePath];
+  const [selectedSteamIds, setSelectedSteamIds] = useState(
+    lastOptions?.steamIds ?? (options.length > 0 ? [options[0].value] : []),
+  );
+  const [selectedEvent, setSelectedEvent] = useState<PlayerSequenceEvent>(
+    lastOptions?.event ?? PlayerSequenceEvent.Kills,
+  );
+  const [selectedRounds, setSelectedRounds] = useState<number[]>(lastOptions?.rounds ?? []);
   const visibleWeapons = getVisibleWeapons(selectedEvent, selectedSteamIds, match);
-  const [selectedWeapons, setSelectedWeapons] = useState<WeaponName[]>(visibleWeapons);
-  const [perspective, setPerspective] = useState<Perspective>(Perspective.Player);
-  const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(2);
-  const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(2);
-  const [preserveExistingSequences, setPreserveExistingSequences] = useState(false);
+  const [selectedWeapons, setSelectedWeapons] = useState<WeaponName[]>(lastOptions?.weapons ?? visibleWeapons);
+  const [perspective, setPerspective] = useState<Perspective>(lastOptions?.perspective ?? Perspective.Player);
+  const [startSecondsBeforeEvent, setStartSecondsBeforeEvent] = useState(lastOptions?.startSecondsBeforeEvent ?? 2);
+  const [endSecondsAfterEvent, setEndSecondsAfterEvent] = useState(lastOptions?.endSecondsAfterEvent ?? 2);
+  const [preserveExistingSequences, setPreserveExistingSequences] = useState(
+    lastOptions?.preserveExistingSequences ?? false,
+  );
+  const hasSelectedPlayers = selectedSteamIds.length > 0;
 
   const onConfirm = () => {
-    if (!selectedSteamIds) {
+    if (!hasSelectedPlayers) {
       return;
     }
+
+    dispatch(
+      playerSequencesOptionsChanged({
+        demoFilePath: match.demoFilePath,
+        options: {
+          event: selectedEvent,
+          steamIds: selectedSteamIds,
+          rounds: selectedRounds,
+          perspective,
+          weapons: selectedWeapons,
+          startSecondsBeforeEvent,
+          endSecondsAfterEvent,
+          preserveExistingSequences,
+        },
+      }),
+    );
 
     switch (selectedEvent) {
       case PlayerSequenceEvent.Deaths:
@@ -135,6 +162,16 @@ function SelectPlayerDialog() {
     hideDialog();
   };
 
+  const preserveExistingSequencesCheckbox = (
+    <Checkbox
+      label={<Trans context="Checkbox label">Preserve existing sequences</Trans>}
+      isChecked={preserveExistingSequences}
+      onChange={(event) => {
+        setPreserveExistingSequences(event.target.checked);
+      }}
+    />
+  );
+
   const renderSelectedEventOptions = () => {
     if (selectedEvent === PlayerSequenceEvent.Rounds) {
       return (
@@ -153,6 +190,7 @@ function SelectPlayerDialog() {
             defaultValue={endSecondsAfterEvent}
             onChange={setEndSecondsAfterEvent}
           />
+          {preserveExistingSequencesCheckbox}
         </>
       );
     }
@@ -203,13 +241,7 @@ function SelectPlayerDialog() {
           </p>
         )}
 
-        <Checkbox
-          label={<Trans context="Checkbox label">Preserve existing sequences</Trans>}
-          isChecked={preserveExistingSequences}
-          onChange={(event) => {
-            setPreserveExistingSequences(event.target.checked);
-          }}
-        />
+        {preserveExistingSequencesCheckbox}
 
         <div className="flex items-center gap-x-8">
           <ExclamationTriangleIcon className="size-20 text-orange-700" />
@@ -252,13 +284,6 @@ function SelectPlayerDialog() {
                 setSelectedEvent(event);
                 const selectedWeapons = getVisibleWeapons(event, selectedSteamIds, match);
                 setSelectedWeapons(selectedWeapons);
-                if (event === PlayerSequenceEvent.Rounds) {
-                  setStartSecondsBeforeEvent(0);
-                  setEndSecondsAfterEvent(2);
-                } else {
-                  setStartSecondsBeforeEvent(2);
-                  setEndSecondsAfterEvent(2);
-                }
               }}
             />
           </div>
@@ -267,7 +292,7 @@ function SelectPlayerDialog() {
         </div>
       </DialogContent>
       <DialogFooter>
-        <ConfirmButton onClick={onConfirm} />
+        <ConfirmButton onClick={onConfirm} isDisabled={!hasSelectedPlayers} />
         <CancelButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>

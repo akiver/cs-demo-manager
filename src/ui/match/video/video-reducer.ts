@@ -2,6 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { hlaeReducer } from 'csdm/ui/match/video/hlae/hlae-reducer';
 import { virtualDubReducer } from 'csdm/ui/match/video/virtualdub/virtual-dub-reducer';
 import { sequencesReducer } from 'csdm/ui/match/video/sequences/sequences-reducer';
+import { playerSequencesOptionsReducer } from 'csdm/ui/match/video/sequences/player-sequences-options-reducer';
 import { ffmpegReducer } from './ffmpeg/ffmpeg-reducer';
 
 export const videoReducer = combineReducers({
@@ -9,4 +10,5 @@ export const videoReducer = combineReducers({
   virtualDub: virtualDubReducer,
   ffmpeg: ffmpegReducer,
   sequencesByDemoFilePath: sequencesReducer,
+  playerSequencesOptionsByDemoFilePath: playerSequencesOptionsReducer,
 });
