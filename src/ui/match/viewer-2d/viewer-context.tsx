@@ -5,8 +5,8 @@ import type { BombDefused } from 'csdm/common/types/bomb-defused';
 import type { BombPlanted } from 'csdm/common/types/bomb-planted';
 import type { BombExploded } from 'csdm/common/types/bomb-exploded';
 import type { GrenadeTimeline } from 'csdm/common/types/grenade-timeline';
-import type { HostagePosition } from 'csdm/common/types/hostage-position';
-import type { InfernoPosition } from 'csdm/common/types/inferno-position';
+import type { HostageTimeline } from 'csdm/common/types/hostage-timeline';
+import type { InfernoTimeline } from 'csdm/common/types/inferno-timeline';
 import type { Kill } from 'csdm/common/types/kill';
 import type { Map } from 'csdm/common/types/map';
 import type { PlayerPosition } from 'csdm/common/types/player-position';
@@ -77,9 +77,9 @@ type ViewerContext = {
   smokesStart: SmokeStart[];
   decoysStart: DecoyStart[];
   hostagesPickedUp: HostagePickedUp[];
-  hostagePositions: HostagePosition[];
+  hostageTimelines: HostageTimeline[];
   grenadeTimelines: GrenadeTimeline[];
-  infernoPositions: InfernoPosition[];
+  infernoTimelines: InfernoTimeline[];
   chickenTimelines: ChickenTimeline[];
   bombsPlantStart: BombPlantStart[];
   bombsDefuseStart: BombDefuseStart[];
@@ -114,9 +114,9 @@ type Props = {
   playerTimelines: PlayerTimeline[];
   hostagesPickUpStart: HostagePickUpStart[];
   hostagesPickedUp: HostagePickedUp[];
-  hostagePositions: HostagePosition[];
+  hostageTimelines: HostageTimeline[];
   grenadeTimelines: GrenadeTimeline[];
-  infernoPositions: InfernoPosition[];
+  infernoTimelines: InfernoTimeline[];
   chickenTimelines: ChickenTimeline[];
   heGrenadesExplode: HeGrenadeExplode[];
   flashbangsExplode: FlashbangExplode[];
@@ -142,9 +142,9 @@ export function ViewerProvider({
   playerTimelines,
   hostagesPickUpStart,
   hostagesPickedUp,
-  hostagePositions,
+  hostageTimelines,
   grenadeTimelines,
-  infernoPositions,
+  infernoTimelines,
   chickenTimelines,
   bombsPlantStart,
   bombsDefuseStart,
@@ -284,9 +284,9 @@ export function ViewerProvider({
         flashbangsExplode,
         hostagesPickUpStart,
         hostagesPickedUp,
-        hostagePositions,
+        hostageTimelines,
         grenadeTimelines,
-        infernoPositions,
+        infernoTimelines,
         chickenTimelines,
         bombsPlantStart,
         bombsDefuseStart,

@@ -44,6 +44,7 @@ export type PlayerPositionTable = {
   is_defusing: Buffer;
   is_planting: Buffer;
   is_grabbing_hostage: Buffer;
+  // Weapon names of each state, weapon lists are comma-separated.
   active_weapon_name: string[];
   equipments: string[];
   grenades: string[];

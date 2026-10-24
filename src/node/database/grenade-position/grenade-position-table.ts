@@ -27,6 +27,7 @@ export type GrenadePositionTable = {
   thrower_velocity_z: number;
   thrower_yaw: number;
   thrower_pitch: number;
+  // Values packed as big-endian binary.
   ticks: Buffer;
   x: Buffer;
   y: Buffer;

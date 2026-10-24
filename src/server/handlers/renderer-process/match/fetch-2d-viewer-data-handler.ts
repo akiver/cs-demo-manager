@@ -4,11 +4,11 @@ import type { Round } from 'csdm/common/types/round';
 import type { PlayerTimeline } from 'csdm/common/types/player-timeline';
 import type { Kill } from 'csdm/common/types/kill';
 import { fetchRound } from 'csdm/node/database/rounds/fetch-round';
-import { fetchInfernoPositions } from 'csdm/node/database/inferno-position/fetch-inferno-positions';
-import type { InfernoPosition } from 'csdm/common/types/inferno-position';
+import { fetchInfernoTimelines } from 'csdm/node/database/inferno-position/fetch-inferno-timelines';
+import type { InfernoTimeline } from 'csdm/common/types/inferno-timeline';
 import { fetchPlayersTimelines } from 'csdm/node/database/player-position/fetch-players-timelines';
-import type { HostagePosition } from 'csdm/common/types/hostage-position';
-import { fetchHostagePositions } from 'csdm/node/database/hostage-position/fetch-hostage-positions';
+import type { HostageTimeline } from 'csdm/common/types/hostage-timeline';
+import { fetchHostageTimelines } from 'csdm/node/database/hostage-position/fetch-hostage-timelines';
 import type { BombExploded } from 'csdm/common/types/bomb-exploded';
 import { fetchBombExploded } from 'csdm/node/database/bomb-exploded/fetch-bomb-exploded';
 import type { GrenadeTimeline } from 'csdm/common/types/grenade-timeline';
@@ -52,10 +52,10 @@ export type Fetch2dViewerDataSuccessPayload = {
   round: Round | undefined;
   shots: Shot[];
   grenadeTimelines: GrenadeTimeline[];
-  infernoPositions: InfernoPosition[];
+  infernoTimelines: InfernoTimeline[];
   hostagesPickUpStart: HostagePickUpStart[];
   hostagesPickedUp: HostagePickedUp[];
-  hostagePositions: HostagePosition[];
+  hostageTimelines: HostageTimeline[];
   bombExploded: BombExploded | null;
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
@@ -82,10 +82,10 @@ export async function fetch2DViewerDataHandler({
       kills,
       shots,
       grenadeTimelines,
-      infernoPositions,
+      infernoTimelines,
       hostagesPickUpStart,
       hostagesPickedUp,
-      hostagePositions,
+      hostageTimelines,
       bombExploded,
       bombPlanted,
       bombDefused,
@@ -106,10 +106,10 @@ export async function fetch2DViewerDataHandler({
         roundNumber,
       }),
       fetchGrenadeTimelines(checksum, roundNumber),
-      fetchInfernoPositions(checksum, roundNumber),
+      fetchInfernoTimelines(checksum, roundNumber),
       fetchHostagesPickUpStart(checksum, roundNumber),
       fetchHostagesPickedUp(checksum, roundNumber),
-      fetchHostagePositions(checksum, roundNumber),
+      fetchHostageTimelines(checksum, roundNumber),
       fetchBombExploded(checksum, roundNumber),
       fetchBombPlanted(checksum, roundNumber),
       fetchBombDefused(checksum, roundNumber),
@@ -129,11 +129,11 @@ export async function fetch2DViewerDataHandler({
       shots,
       playerTimelines,
       grenadeTimelines,
-      infernoPositions,
+      infernoTimelines,
       chickenTimelines,
       hostagesPickUpStart,
       hostagesPickedUp,
-      hostagePositions,
+      hostageTimelines,
       bombsPlantStart,
       bombsDefuseStart,
       decoysStart,

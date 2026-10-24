@@ -19,9 +19,7 @@ const v15: Migration = {
       .columns(['match_checksum', 'number'])
       .execute();
 
-    // Players positions are stored as 1 row per player and round to reduce their size:
-    // - the movement (position, yaw...) of each tick
-    // - the state (health, weapons...) only when it changes, state_ticks contains the tick of each change
+    // Player positions are now stored as binary packed columns, see player-position-table.ts.
     // Existing positions are deleted, users have to generate them again.
     await transaction.schema.dropTable('player_positions').ifExists().execute();
 
@@ -38,7 +36,6 @@ const v15: Migration = {
       .addColumn('round_number', 'integer', (col) => col.notNull())
       .addColumn('player_steam_id', 'varchar', (col) => col.notNull())
       .addColumn('player_name', 'varchar', (col) => col.notNull())
-      // Movement values of each tick packed as big-endian binary.
       .addColumn('ticks', 'bytea', (col) => col.notNull())
       .addColumn('x', 'bytea', (col) => col.notNull())
       .addColumn('y', 'bytea', (col) => col.notNull())
@@ -47,7 +44,6 @@ const v15: Migration = {
       .addColumn('flash_duration_remaining', 'bytea', (col) => col.notNull())
       .addColumn('is_ducking', 'bytea', (col) => col.notNull())
       .addColumn('is_airborne', 'bytea', (col) => col.notNull())
-      // State values of each change packed the same way.
       .addColumn('state_ticks', 'bytea', (col) => col.notNull())
       .addColumn('is_alive', 'bytea', (col) => col.notNull())
       .addColumn('side', 'bytea', (col) => col.notNull())
@@ -61,7 +57,6 @@ const v15: Migration = {
       .addColumn('is_defusing', 'bytea', (col) => col.notNull())
       .addColumn('is_planting', 'bytea', (col) => col.notNull())
       .addColumn('is_grabbing_hostage', 'bytea', (col) => col.notNull())
-      // Weapon names of each state, weapon lists are comma-separated.
       .addColumn('active_weapon_name', sql`text[]`, (col) => col.notNull())
       .addColumn('equipments', sql`text[]`, (col) => col.notNull())
       .addColumn('grenades', sql`text[]`, (col) => col.notNull())
@@ -77,7 +72,7 @@ const v15: Migration = {
       .columns(['match_checksum', 'round_number'])
       .execute();
 
-    // Grenades positions are stored as 1 row per projectile, a position is stored only when it changes.
+    // Grenades positions are now stored as binary packed columns, see grenade-position-table.ts.
     // Existing positions are deleted, users have to generate them again.
     await transaction.schema.dropTable('grenade_positions').ifExists().execute();
 
@@ -99,13 +94,11 @@ const v15: Migration = {
       .addColumn('thrower_name', 'varchar', (col) => col.notNull())
       .addColumn('thrower_side', 'int2', (col) => col.notNull())
       .addColumn('thrower_team_name', 'varchar', (col) => col.notNull())
-      // Thrower values at the time of the throw
       .addColumn('thrower_velocity_x', 'real', (col) => col.notNull())
       .addColumn('thrower_velocity_y', 'real', (col) => col.notNull())
       .addColumn('thrower_velocity_z', 'real', (col) => col.notNull())
       .addColumn('thrower_yaw', 'real', (col) => col.notNull())
       .addColumn('thrower_pitch', 'real', (col) => col.notNull())
-      // Values packed as big-endian binary.
       .addColumn('ticks', 'bytea', (col) => col.notNull())
       .addColumn('x', 'bytea', (col) => col.notNull())
       .addColumn('y', 'bytea', (col) => col.notNull())
@@ -118,7 +111,67 @@ const v15: Migration = {
       .columns(['match_checksum', 'round_number'])
       .execute();
 
-    // Chickens positions are stored as 1 row per chicken and round, a position is stored only when it changes.
+    // Infernos positions are now stored as binary packed columns, see inferno-position-table.ts.
+    // Existing positions are deleted, users have to generate them again.
+    await transaction.schema.dropTable('inferno_positions').ifExists().execute();
+
+    await transaction.schema
+      .createTable('inferno_positions')
+      .addColumn('match_checksum', 'varchar', (col) => col.notNull())
+      .addForeignKeyConstraint(
+        'inferno_positions_match_checksum_fk',
+        ['match_checksum'],
+        'matches',
+        ['checksum'],
+        (cb) => cb.onDelete('cascade'),
+      )
+      .addColumn('round_number', 'integer', (col) => col.notNull())
+      .addColumn('unique_id', 'varchar', (col) => col.notNull())
+      .addColumn('thrower_steam_id', 'varchar', (col) => col.notNull())
+      .addColumn('thrower_name', 'varchar', (col) => col.notNull())
+      .addColumn('x', 'real', (col) => col.notNull())
+      .addColumn('y', 'real', (col) => col.notNull())
+      .addColumn('z', 'real', (col) => col.notNull())
+      .addColumn('ticks', 'bytea', (col) => col.notNull())
+      .addColumn('convex_hulls_2d', sql`text[]`, (col) => col.notNull())
+      .execute();
+
+    await transaction.schema
+      .createIndex('inferno_positions_match_checksum_round_number_idx')
+      .on('inferno_positions')
+      .columns(['match_checksum', 'round_number'])
+      .execute();
+
+    // Hostages positions are now stored as binary packed columns, see hostage-position-table.ts.
+    // Existing positions are deleted, users have to generate them again.
+    await transaction.schema.dropTable('hostage_positions').ifExists().execute();
+
+    await transaction.schema
+      .createTable('hostage_positions')
+      .addColumn('match_checksum', 'varchar', (col) => col.notNull())
+      .addForeignKeyConstraint(
+        'hostage_positions_match_checksum_fk',
+        ['match_checksum'],
+        'matches',
+        ['checksum'],
+        (cb) => cb.onDelete('cascade'),
+      )
+      .addColumn('round_number', 'integer', (col) => col.notNull())
+      .addColumn('ticks', 'bytea', (col) => col.notNull())
+      .addColumn('x', 'bytea', (col) => col.notNull())
+      .addColumn('y', 'bytea', (col) => col.notNull())
+      .addColumn('z', 'bytea', (col) => col.notNull())
+      .addColumn('state_ticks', 'bytea', (col) => col.notNull())
+      .addColumn('states', 'bytea', (col) => col.notNull())
+      .execute();
+
+    await transaction.schema
+      .createIndex('hostage_positions_match_checksum_round_number_idx')
+      .on('hostage_positions')
+      .columns(['match_checksum', 'round_number'])
+      .execute();
+
+    // Chickens positions are now stored as binary packed columns, see chicken-position-table.ts.
     // Existing positions are deleted, users have to generate them again.
     await transaction.schema.dropTable('chicken_positions').ifExists().execute();
 
@@ -133,7 +186,6 @@ const v15: Migration = {
         (cb) => cb.onDelete('cascade'),
       )
       .addColumn('round_number', 'integer', (col) => col.notNull())
-      // Values packed as big-endian binary, int32 for ticks and float32 for positions.
       .addColumn('ticks', 'bytea', (col) => col.notNull())
       .addColumn('x', 'bytea', (col) => col.notNull())
       .addColumn('y', 'bytea', (col) => col.notNull())

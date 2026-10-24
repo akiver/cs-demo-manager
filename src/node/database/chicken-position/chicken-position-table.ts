@@ -1,4 +1,4 @@
-// 1 row per chicken and round, positions are packed as big-endian binary: int32 for ticks and float32 for x, y, z.
+// 1 row per chicken and round, positions are packed as big-endian binary.
 // Columns are parallel arrays, the value at index i of x, y and z is the position at ticks[i]:
 //
 //   index | 0     | 1     | 2

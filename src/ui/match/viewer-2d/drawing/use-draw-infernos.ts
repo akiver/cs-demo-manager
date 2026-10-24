@@ -1,32 +1,34 @@
 import type { InteractiveCanvas } from '../../../hooks/use-interactive-map-canvas';
 import { useViewerContext } from '../use-viewer-context';
+import { findTimelineIndexAtTick } from '../find-timeline-index-at-tick';
 
 export function useDrawInfernos() {
-  const { infernoPositions, currentTick } = useViewerContext();
+  const { infernoTimelines, currentTick } = useViewerContext();
 
   const drawInfernos = (
     context: CanvasRenderingContext2D,
     { zoomedSize, zoomedToRadarX, zoomedToRadarY }: InteractiveCanvas,
   ) => {
-    const positions = infernoPositions.filter((position) => {
-      return position.tick === currentTick;
-    });
-
     context.lineWidth = zoomedSize(1);
     context.fillStyle = 'rgba(218, 123, 17, 0.5)';
     context.strokeStyle = '#da7b11';
 
-    for (const position of positions) {
-      const { convexHell2D, z } = position;
+    for (const { convexHulls, z } of infernoTimelines) {
+      const index = findTimelineIndexAtTick(convexHulls, currentTick);
+      if (index === -1) {
+        continue;
+      }
+
+      const { points } = convexHulls[index];
       // Ensure we have valid tuples [x,y, x,y, x,y ...]
-      if (convexHell2D.length < 2 || convexHell2D.length % 2 !== 0) {
+      if (points.length < 2 || points.length % 2 !== 0) {
         continue;
       }
 
       context.beginPath();
-      context.moveTo(zoomedToRadarX(convexHell2D[0], z), zoomedToRadarY(convexHell2D[1], z));
-      for (let index = 2; index < convexHell2D.length - 1; index += 2) {
-        context.lineTo(zoomedToRadarX(convexHell2D[index], z), zoomedToRadarY(convexHell2D[index + 1], z));
+      context.moveTo(zoomedToRadarX(points[0], z), zoomedToRadarY(points[1], z));
+      for (let pointIndex = 2; pointIndex < points.length - 1; pointIndex += 2) {
+        context.lineTo(zoomedToRadarX(points[pointIndex], z), zoomedToRadarY(points[pointIndex + 1], z));
       }
       context.closePath();
       context.fill();

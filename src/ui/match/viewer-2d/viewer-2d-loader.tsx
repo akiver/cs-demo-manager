@@ -11,9 +11,9 @@ import type { Round } from 'csdm/common/types/round';
 import type { Fetch2dViewerDataPayload } from 'csdm/server/handlers/renderer-process/match/fetch-2d-viewer-data-handler';
 import { useCurrentMatchMap } from '../use-current-match-map';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import type { InfernoPosition } from 'csdm/common/types/inferno-position';
+import type { InfernoTimeline } from 'csdm/common/types/inferno-timeline';
 import { useCurrentMatch } from '../use-current-match';
-import type { HostagePosition } from 'csdm/common/types/hostage-position';
+import type { HostageTimeline } from 'csdm/common/types/hostage-timeline';
 import { ViewerProvider } from './viewer-context';
 import type { BombExploded } from 'csdm/common/types/bomb-exploded';
 import type { GrenadeTimeline } from 'csdm/common/types/grenade-timeline';
@@ -47,11 +47,11 @@ type State = {
   smokesStart: SmokeStart[];
   decoysStart: DecoyStart[];
   grenadeTimelines: GrenadeTimeline[];
-  infernoPositions: InfernoPosition[];
+  infernoTimelines: InfernoTimeline[];
   chickenTimelines: ChickenTimeline[];
   hostagesPickUpStart: HostagePickUpStart[];
   hostagesPickedUp: HostagePickedUp[];
-  hostagePositions: HostagePosition[];
+  hostageTimelines: HostageTimeline[];
   bombsPlantStart: BombPlantStart[];
   bombsDefuseStart: BombDefuseStart[];
   bombExploded: BombExploded | null;
@@ -68,7 +68,7 @@ const defaultState: State = {
   shots: [],
   playerTimelines: [],
   grenadeTimelines: [],
-  infernoPositions: [],
+  infernoTimelines: [],
   chickenTimelines: [],
   decoysStart: [],
   heGrenadesExplode: [],
@@ -76,7 +76,7 @@ const defaultState: State = {
   smokesStart: [],
   hostagesPickUpStart: [],
   hostagesPickedUp: [],
-  hostagePositions: [],
+  hostageTimelines: [],
   bombsPlantStart: [],
   bombsDefuseStart: [],
   bombExploded: null,
@@ -258,9 +258,9 @@ export function Viewer2DLoader() {
       playerTimelines={state.playerTimelines}
       hostagesPickUpStart={state.hostagesPickUpStart}
       hostagesPickedUp={state.hostagesPickedUp}
-      hostagePositions={state.hostagePositions}
+      hostageTimelines={state.hostageTimelines}
       grenadeTimelines={state.grenadeTimelines}
-      infernoPositions={state.infernoPositions}
+      infernoTimelines={state.infernoTimelines}
       chickenTimelines={state.chickenTimelines}
       decoysStart={state.decoysStart}
       heGrenadesExplode={state.heGrenadesExplode}
