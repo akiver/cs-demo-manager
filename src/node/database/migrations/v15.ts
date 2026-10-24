@@ -19,6 +19,9 @@ const v15: Migration = {
       .columns(['match_checksum', 'number'])
       .execute();
 
+    // Redundant with shots_match_checksum_round_number_idx that can be used for queries filtering only on match_checksum.
+    await transaction.schema.dropIndex('shots_match_checksum_idx').ifExists().execute();
+
     // Player positions are now stored as binary packed columns, see player-position-table.ts.
     // Existing positions are deleted, users have to generate them again.
     await transaction.schema.dropTable('player_positions').ifExists().execute();
