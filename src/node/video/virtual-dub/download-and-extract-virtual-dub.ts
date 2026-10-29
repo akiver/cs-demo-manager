@@ -11,7 +11,7 @@ async function writeVersionFile(version: string) {
 }
 
 export async function downloadAndExtractVirtualDub() {
-  if (isWindows) {
+  if (!isWindows) {
     throw new Error('VirtualDub is available only on Windows');
   }
 
