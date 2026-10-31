@@ -8323,6 +8323,10 @@ msgid "Raw files not found."
 msgstr "Raw files not found."
 
 #: src/ui/shared/get-playback-error-from-error-code.tsx
+msgid "Make sure that Windows Security \"Controlled folder access\" (Ransomware protection) is not blocking the game or HLAE from writing to the output folder, or choose an output folder outside protected folders such as Documents and Videos."
+msgstr "Make sure that Windows Security \"Controlled folder access\" (Ransomware protection) is not blocking the game or HLAE from writing to the output folder, or choose an output folder outside protected folders such as Documents and Videos."
+
+#: src/ui/shared/get-playback-error-from-error-code.tsx
 msgid "The game crashed, please see <0>this documentation</0> for help."
 msgstr "The game crashed, please see <0>this documentation</0> for help."
 

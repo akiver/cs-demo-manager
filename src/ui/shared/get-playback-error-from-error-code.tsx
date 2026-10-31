@@ -154,9 +154,20 @@ export function getPlaybackErrorMessageFromErrorCode(errorCode: ErrorCode, game?
       );
     case ErrorCode.RawFilesNotFound:
       return (
-        <p>
-          <Trans>Raw files not found.</Trans>
-        </p>
+        <div>
+          <p>
+            <Trans>Raw files not found.</Trans>
+          </p>
+          {window.csdm.isWindows && (
+            <p>
+              <Trans>
+                Make sure that Windows Security "Controlled folder access" (Ransomware protection) is not blocking the
+                game or HLAE from writing to the output folder, or choose an output folder outside protected folders
+                such as Documents and Videos.
+              </Trans>
+            </p>
+          )}
+        </div>
       );
     case ErrorCode.GameError:
       return (
