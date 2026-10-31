@@ -26,6 +26,10 @@ const DATABASE_USERNAME = 'csdm';
 const EMBEDDED_POSTGRESQL_CONFIG_FILE_NAME = 'csdm.conf';
 // Port used by the server, it's also part of the Unix socket file name.
 const EMBEDDED_POSTGRESQL_SOCKET_PORT = 5432;
+// Port tried first when listening on TCP so that it's the same at each start, unless another program holds it.
+// Not 5432 (default port of a PostgreSQL server installed on the machine) and below the ephemeral range (49152 and
+// above on Windows) that the OS hands out to any program.
+const EMBEDDED_POSTGRESQL_PREFERRED_TCP_PORT = 25432;
 
 // Connection settings of the server started by this process, null when it has not been started or has been stopped.
 let connectionSettings: DatabaseConnectionSettings | null = null;
@@ -108,7 +112,7 @@ type EmbeddedPostgreSqlListenMode =
     }
   | {
       // TCP on the loopback interface, used on Windows where Unix sockets are not an option for the client, and as a
-      // fallback when the socket path is too long.
+      // fallback when the socket path is too long. The preferred port is tried first, a free one when it's taken.
       type: 'tcp';
       port: number;
     };
@@ -267,7 +271,7 @@ function findFreePort(): Promise<number> {
   });
 }
 
-async function resolveListenMode(): Promise<EmbeddedPostgreSqlListenMode> {
+function resolveListenMode(): EmbeddedPostgreSqlListenMode {
   const folderPath = getEmbeddedDatabaseFolderPath();
   if (canListenOnUnixSocket(folderPath)) {
     return { type: 'socket', folderPath };
@@ -277,7 +281,7 @@ async function resolveListenMode(): Promise<EmbeddedPostgreSqlListenMode> {
     logger.warn(`The Unix socket path would be too long in ${folderPath}, listening on TCP instead`);
   }
 
-  return { type: 'tcp', port: await findFreePort() };
+  return { type: 'tcp', port: EMBEDDED_POSTGRESQL_PREFERRED_TCP_PORT };
 }
 
 function writeConfigFile(dataFolderPath: string, mode: EmbeddedPostgreSqlListenMode) {
@@ -287,9 +291,9 @@ function writeConfigFile(dataFolderPath: string, mode: EmbeddedPostgreSqlListenM
   );
 }
 
-// The port found free by findFreePort() is released before the server binds it, another process may take it in
-// between. The server then logs (in English due to lc_messages=C) "could not bind IPv4 address" followed by this
-// fatal error that stops it.
+// The preferred port may be held by another program, and the port found free by findFreePort() is released before the
+// server binds it so another process may take it in between. The server then logs (in English due to lc_messages=C)
+// "could not bind IPv4 address" followed by this fatal error that stops it.
 function isPortInUseFailure(startFailure: string) {
   return startFailure.includes('could not create any TCP/IP sockets');
 }
@@ -379,13 +383,14 @@ async function start(): Promise<DatabaseConnectionSettings> {
   // Its configuration may be outdated and its TCP port unknown, replace it.
   await stopStrayServer('to start one with the current configuration');
 
-  let listenMode = await resolveListenMode();
+  let listenMode = resolveListenMode();
   await ensureConfigFileIncluded(dataFolderPath);
   // Unix socket connections are trusted (auth-local=trust), the password is only sent over TCP.
   const password = listenMode.type === 'tcp' ? await readPassword() : '';
   const logFilePath = getEmbeddedDatabaseLogFilePath();
 
-  // Bounded so that a machine where every port is taken as soon as it's found does not retry forever.
+  // First attempt on the preferred TCP port, then on free ones. Bounded so that a machine where every port is taken
+  // as soon as it's found does not retry forever.
   const maxStartAttempts = 3;
   for (let attempt = 1; ; attempt++) {
     await writeConfigFile(dataFolderPath, listenMode);
@@ -401,9 +406,7 @@ async function start(): Promise<DatabaseConnectionSettings> {
       throw new EmbeddedDatabaseStartError(startFailure);
     }
 
-    logger.warn(
-      `The TCP port ${listenMode.port} was taken before the embedded database server could bind it, retrying with another one`,
-    );
+    logger.warn(`The TCP port ${listenMode.port} is in use, retrying the embedded database server on a free one`);
     listenMode = { type: 'tcp', port: await findFreePort() };
   }
 }
