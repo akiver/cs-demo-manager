@@ -9,6 +9,7 @@ import { DemoNotFound } from 'csdm/node/counter-strike/launcher/errors/demo-not-
 import { getDemoInfoFilePath } from 'csdm/node/demo/get-demo-info-file-path';
 import { getValveMatchFromMatchInfoProtobufMesssage } from 'csdm/node/valve-match/get-valve-match-from-match-info-protobuf-message';
 import { unixTimestampToDate } from 'csdm/common/date/unix-timestamp-to-date';
+import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix-path-separator';
 
 function getDemoType(header: DemoHeader): DemoType {
   const serverName = header.serverName.toLowerCase();
@@ -200,7 +201,10 @@ async function buildDemoFromFilePath(filePath: string): Promise<Demo> {
 
   const demo: Demo = {
     checksum,
-    filePath,
+    // Demos are identified by their path in the renderer and in the demo_paths table. Paths come from different
+    // sources (folder scan through a glob that returns unix separators, downloads, CLI arguments...) so they are
+    // normalized to a single format here to prevent the same file from being seen as two different demos.
+    filePath: windowsToUnixPathSeparator(filePath),
     game,
     name,
     source,

@@ -11,7 +11,8 @@ export async function loadDemoByPath(demoPath: string): Promise<Demo> {
     demo = {
       ...demo,
       ...demoInDatabase,
-      filePath: demoPath,
+      // The database may know this demo under another path (copy of the same file), keep the requested one.
+      filePath: demo.filePath,
     };
   }
 

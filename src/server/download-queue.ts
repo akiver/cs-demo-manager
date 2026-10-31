@@ -23,6 +23,7 @@ import { insertDemos } from 'csdm/node/database/demos/insert-demos';
 import { ArchiveFormat } from 'csdm/common/types/archive-format';
 import { getArchiveFormatFromDemoUrl } from 'csdm/node/download/get-archive-format-from-demo-url';
 import { createDecompressStream } from 'csdm/node/demo/create-decompress-stream';
+import { glob } from 'csdm/node/filesystem/glob';
 const streamPipeline = util.promisify(pipeline);
 
 // Stream decompressing the downloaded demo on the fly.
@@ -44,6 +45,7 @@ class DownloadDemoQueue {
   private downloads: Download[] = [];
   private currentDownload: Download | undefined;
   private abortControllersPerMatchId: { [matchId: string]: AbortController | undefined } = {};
+  private readonly partialExtension = '.csdm-partial';
 
   public addDownload = async (download: Download) => {
     const downloadFolderPath = await this.getDownloadFolderPath();
@@ -181,8 +183,11 @@ class DownloadDemoQueue {
     this.abortControllersPerMatchId[currentDownload.matchId] = controller;
 
     const demoPath = this.buildDemoPath(downloadFolderPath, currentDownload.fileName);
+    const partialDemoPath = this.buildPartialDemoPath(demoPath);
     const infoPath = this.buildDemoInfoFilePath(demoPath);
     try {
+      await this.removeLeftoverPartialDownloads(downloadFolderPath);
+
       const url = new URL(currentDownload.demoUrl);
       const client = new Client(url.origin).compose(interceptors.redirect({ maxRedirections: 1 }));
       const response = await client.request({
@@ -229,10 +234,13 @@ class DownloadDemoQueue {
         }
       });
 
-      const out = fs.createWriteStream(demoPath);
+      // The demo is written under a temporary name and renamed once complete so a folder scan running during the
+      // download never sees an incomplete .dem file (its checksum depends on the file size and would be wrong).
+      const out = fs.createWriteStream(partialDemoPath);
       const transformStream = createDemoTransformStream(currentDownload.demoUrl);
 
       await streamPipeline(response.body, transformStream, out);
+      await fs.move(partialDemoPath, demoPath, { overwrite: true });
       if (currentDownload.source === DownloadSource.Valve) {
         const { protobufBytes } = currentDownload.match;
         if (protobufBytes !== undefined) {
@@ -280,10 +288,29 @@ class DownloadDemoQueue {
           payload: currentDownload.matchId,
         });
       }
+      await fs.remove(partialDemoPath);
       await fs.remove(demoPath);
       await fs.remove(infoPath);
     } finally {
       this.currentDownload = undefined;
+    }
+  };
+
+  // Partial downloads may be left behind if the app has been killed during a download.
+  // Downloads are sequential and this runs before the current one creates its file, so no in-progress file is removed.
+  private removeLeftoverPartialDownloads = async (downloadFolderPath: string) => {
+    try {
+      const partialDemoPaths = await glob(`*${this.partialExtension}`, {
+        cwd: downloadFolderPath,
+        absolute: true,
+      });
+      for (const partialDemoPath of partialDemoPaths) {
+        logger.log(`Removing leftover partial download ${partialDemoPath}`);
+        await fs.remove(partialDemoPath);
+      }
+    } catch (error) {
+      logger.error('Error while removing leftover partial downloads');
+      logger.error(error);
     }
   };
 
@@ -342,6 +369,11 @@ class DownloadDemoQueue {
 
   private buildDemoInfoFilePath(demoPath: string) {
     return `${demoPath}.info`;
+  }
+
+  // Not a .dem extension on purpose: demos folders are scanned with a *.dem glob that must ignore in-progress downloads.
+  private buildPartialDemoPath(demoPath: string) {
+    return `${demoPath}${this.partialExtension}`;
   }
 
   private loadDownloadedDemo = async (demoPath: string) => {

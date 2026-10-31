@@ -109,13 +109,21 @@ export const demosReducer = createReducer(initialState, (builder) => {
       state.fuzzySearchText = action.payload.text;
     })
     .addCase(demoDownloadedInCurrentFolderLoaded, (state, action) => {
-      const demo = state.entities.find((demo) => demo.filePath === action.payload.filePath);
-      if (demo === undefined) {
+      // The demo may already be listed if the folder has been loaded while the download was in progress. Its checksum
+      // depends on the file size, so the entry computed from the incomplete file must be replaced by the final one.
+      const demoIndex = state.entities.findIndex((demo) => demo.filePath === action.payload.filePath);
+      if (demoIndex === -1) {
         state.entities.push(action.payload);
+      } else {
+        state.entities[demoIndex] = action.payload;
       }
     })
     .addCase(insertMatchSuccess, (state, action) => {
-      const demos = state.entities.filter((demo) => demo.checksum === action.payload.checksum);
+      // The match may have been inserted under a checksum that differs from the listed one when the demo file changed
+      // after the folder has been loaded, matching by path keeps the entry in sync with the database in that case.
+      const demos = state.entities.filter((demo) => {
+        return demo.checksum === action.payload.checksum || demo.filePath === action.payload.demoFilePath;
+      });
       for (const demo of demos) {
         Object.assign(demo, action.payload);
       }
