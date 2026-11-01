@@ -1,7 +1,7 @@
 import { Game } from 'csdm/common/types/counter-strike';
 import { startCounterStrike } from './start-counter-strike';
 import { detectDemoGame } from './detect-demo-game';
-import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
+import { deletePlaybackFiles } from '../json-actions-file/delete-playback-files';
 import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
 import { db } from 'csdm/node/database/database';
 import { NoRoundsFound } from './errors/not-rounds-found';
@@ -9,7 +9,6 @@ import { generatePlayerRoundsJsonFile } from '../json-actions-file/generate-play
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
-import type { PlayerWatchInfo } from 'csdm/common/types/player-watch-info';
 
 export type Round = {
   number: number;
@@ -61,7 +60,7 @@ type Options = {
 
 export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Options) {
   const game = await detectDemoGame(demoPath);
-  await deleteJsonActionsFile(demoPath);
+  await deletePlaybackFiles(demoPath);
 
   const checksum = await getDemoChecksumFromDemoPath(demoPath);
   const rounds = await fetchRounds(checksum, steamId);
@@ -72,10 +71,9 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
   const settings = await getSettings();
   const { round, playerVoicesEnabled } = settings.playback;
   const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds, waitForRoundEnd } = round;
-  let players: PlayerWatchInfo[] = [];
   let playerId: number | string = steamId;
   if (game !== Game.CSGO) {
-    players = await fetchMatchPlayersSlots(checksum);
+    const players = await fetchMatchPlayersSlots(checksum);
     const player = players.find((player) => player.steamId === steamId);
     if (!player) {
       throw new NoRoundsFound();
@@ -94,7 +92,6 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
     afterDelaySeconds: afterRoundDelayInSeconds,
     waitForRoundEnd,
     playerVoicesEnabled,
-    players,
   });
 
   if (settings.playback.useHlae) {

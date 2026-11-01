@@ -49,7 +49,6 @@ describe(`Generate player's rounds JSON file`, () => {
       afterDelaySeconds: 6,
       game: Game.CSGO,
       playerVoicesEnabled: true,
-      players: [],
       waitForRoundEnd: false,
     });
 
@@ -100,7 +99,6 @@ describe(`Generate player's rounds JSON file`, () => {
       afterDelaySeconds: 6,
       game: Game.CS2,
       playerVoicesEnabled: true,
-      players: [],
       waitForRoundEnd: false,
     });
 

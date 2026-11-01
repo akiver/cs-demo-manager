@@ -408,6 +408,14 @@ msgstr "An error occurred while checking for new banned Steam accounts (code {er
 msgid "Counter-Strike starting…"
 msgstr "Counter-Strike starting…"
 
+#: src/ui/bootstrap/web-socket-listeners/use-register-game-video-sequence-listener.ts
+msgid "Sequence added, analyze the demo to see it in the video page of the match"
+msgstr "Sequence added, analyze the demo to see it in the video page of the match"
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-game-video-sequence-listener.ts
+msgid "Sequence added to the video page of the match"
+msgstr "Sequence added to the video page of the match"
+
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "The connection to the local server on port {port} failed with code {code}. The port might be reserved or blocked by another application. Restarting your computer or freeing the port may fix the issue."
 msgstr "The connection to the local server on port {port} failed with code {code}. The port might be reserved or blocked by another application. Restarting your computer or freeing the port may fix the issue."
@@ -7730,12 +7738,12 @@ msgid "If not using a custom build, you must select the CS2 beta branch <0>\"1.4
 msgstr "If not using a custom build, you must select the CS2 beta branch <0>\"1.41.1.2\"</0> in your Steam library to use this version."
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
-msgid "You selected a version compatible with CS2 from the {animgraph2UpdateDate} update up to the {update14168} update."
-msgstr "You selected a version compatible with CS2 from the {animgraph2UpdateDate} update up to the {update14168} update."
-
-#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
 msgstr "You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate} update."
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {animgraph2UpdateDate} update up to the {update14168} update."
+msgstr "You selected a version compatible with CS2 from the {animgraph2UpdateDate} update up to the {update14168} update."
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"

@@ -12,6 +12,7 @@ export const CliClientMessageName = {
   InstallHlae: 'cli-install-hlae',
   InstallVirtualDub: 'cli-install-virtual-dub',
   InstallFfmpeg: 'cli-install-ffmpeg',
+  WatchDemo: 'cli-watch-demo',
 } as const;
 
 export type CliClientMessageName = (typeof CliClientMessageName)[keyof typeof CliClientMessageName];

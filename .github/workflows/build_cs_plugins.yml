@@ -42,13 +42,13 @@ jobs:
           cd csgo-server-plugin/csgo-server-plugin
           make build
 
-      - name: Build CS2 binary
+      - name: Build CS2 binaries
         run: |
           docker run --rm \
             --volume "$GITHUB_WORKSPACE:/workspace" \
             --workdir /workspace/cs2-server-plugin/cs2-server-plugin \
             registry.gitlab.steamos.cloud/steamrt/sniper/sdk:latest \
-            bash -c "ldd --version && make build"
+            bash -c "ldd --version && apt-get update && apt-get install -y libvulkan-dev && make build"
 
       # Rely on Linux ELF binaries to detect changes since they are by default more deterministic than Windows PE binaries.
       # We have to check if the binaries have changed in this step rather than the next step because uploading/downloading
@@ -57,7 +57,7 @@ jobs:
         id: check-changes
         run: |
           git status
-          if git diff --quiet static/csdm_client.so static/cs2/libserver.so; then
+          if git diff --quiet static/csdm_client.so static/cs2/libserver.so static/cs2/libcsdm_vulkan_layer.so; then
             echo "No changes detected!"
             echo "changed=false" >> $GITHUB_OUTPUT
           else
@@ -72,12 +72,14 @@ jobs:
           name: csgo-linux
           path: static/csdm_client.so
 
-      - name: Upload CS2 binary
+      - name: Upload CS2 binaries
         if: steps.check-changes.outputs.changed == 'true'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: cs2-linux
-          path: static/cs2/libserver.so
+          path: |
+            static/cs2/libserver.so
+            static/cs2/libcsdm_vulkan_layer.so
 
   build-windows:
     name: Build Windows
@@ -143,6 +145,7 @@ jobs:
         run: |
           mv artifacts/csgo-linux/csdm_client.so static/
           mv artifacts/cs2-linux/libserver.so static/cs2/
+          mv artifacts/cs2-linux/libcsdm_vulkan_layer.so static/cs2/
           mv artifacts/csgo-windows/csdm.dll static/
           mv artifacts/cs2-windows/server.dll static/cs2/
           mv artifacts/csgo-macos/csdm.dylib static/
@@ -150,6 +153,7 @@ jobs:
           # Set correct permissions
           chmod 755 static/csdm_client.so
           chmod 755 static/cs2/libserver.so
+          chmod 755 static/cs2/libcsdm_vulkan_layer.so
           chmod 755 static/csdm.dylib
 
       - name: Create Pull Request

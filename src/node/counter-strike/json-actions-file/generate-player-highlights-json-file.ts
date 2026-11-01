@@ -1,5 +1,5 @@
 import { Perspective } from 'csdm/common/types/perspective';
-import type { Action } from 'csdm/node/database/watch/get-match-playback';
+import { maxSecondsBetweenPlaybackActions, type Action } from 'csdm/node/database/watch/get-match-playback';
 import { JSONActionsFileGenerator } from './json-actions-file-generator';
 import { Game } from 'csdm/common/types/counter-strike';
 
@@ -60,8 +60,10 @@ export async function generatePlayerHighlightsJsonFile({
   const tickBeforeDelayCount = Math.round(tickrate * beforeDelaySeconds);
   const tickNextDelayCount = Math.round(tickrate * nextDelaySeconds);
   const isPlayerPerspective = perspective === Perspective.Player;
-  const maxNextActionDelaySeconds = 15;
-  const maxNextActionDelayTickCount = Math.max(Math.round(tickrate * maxNextActionDelaySeconds), tickNextDelayCount);
+  const maxNextActionDelayTickCount = Math.max(
+    Math.round(tickrate * maxSecondsBetweenPlaybackActions),
+    tickNextDelayCount,
+  );
   let isFirstAction = true;
 
   for (const [index, action] of actions.entries()) {

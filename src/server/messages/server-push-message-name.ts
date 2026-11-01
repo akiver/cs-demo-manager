@@ -14,6 +14,7 @@ import type {
 import type { Video } from 'csdm/common/types/video';
 import type { ExportToXlsxProgressPayload, ExportToXlsxSuccessPayload } from 'csdm/common/types/xlsx';
 import type { CounterStrikeErrorPayload } from 'csdm/server/counter-strike';
+import type { GameVideoSequencePayload } from 'csdm/server/messages/game-client-message-name';
 
 // Message names pushed from the WebSocket server to the renderer Electron process and the connected CLI processes.
 export const ServerPushMessageName = {
@@ -55,6 +56,7 @@ export const ServerPushMessageName = {
   ResetTablesStateSuccess: 'reset-tables-state-success',
   IgnoredSteamAccountsChanged: 'ignored-steam-accounts-changed',
   TeamNamesUpdated: 'team-names-updated',
+  AddVideoSequence: 'add-video-sequence',
 } as const;
 
 export type ServerPushMessageName =
@@ -100,6 +102,7 @@ export interface ServerPushMessagePayload extends SharedServerMessagePayload {
   [ServerPushMessageName.ResetTablesStateSuccess]: void;
   [ServerPushMessageName.IgnoredSteamAccountsChanged]: void;
   [ServerPushMessageName.TeamNamesUpdated]: number;
+  [ServerPushMessageName.AddVideoSequence]: GameVideoSequencePayload;
 }
 
 export type ServerPushListener<MessageName extends ServerPushMessageName = ServerPushMessageName> = (

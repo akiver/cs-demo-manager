@@ -10,6 +10,7 @@ import { useArgument } from './use-argument';
 import { ArgumentName } from 'csdm/common/argument/argument-name';
 import { useNavigateToMatch } from 'csdm/ui/hooks/use-navigate-to-match';
 import { useNavigateToDemo } from 'csdm/ui/hooks/use-navigate-to-demo';
+import { useRegisterGameVideoSequenceListener } from './web-socket-listeners/use-register-game-video-sequence-listener';
 
 type Props = {
   children: ReactNode;
@@ -21,6 +22,8 @@ export function NavigationListener({ children }: Props) {
   const navigateToMatch = useNavigateToMatch();
   const navigateToDemo = useNavigateToDemo();
   const demoPathArgument = useArgument(ArgumentName.DemoPath);
+  // Registered here rather than with the other listeners because it navigates to the video page of the match.
+  useRegisterGameVideoSequenceListener(client);
 
   useEffect(() => {
     const navigateToBans = async () => {

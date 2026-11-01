@@ -115,7 +115,7 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
   return DemoSource.Unknown;
 }
 
-function getDemoMapNameFromHeader(demoHeader: DemoHeader): string {
+export function getDemoMapNameFromHeader(demoHeader: DemoHeader): string {
   // Remove potential "_scrimmagemap" suffix.
   // Noticed with a de_mirage demo, it could be related to the fact that de_mirage has been moved from competitive maps
   // to unranked maps (called "scrimmage" maps back in 2019). It may be the case with others maps too.

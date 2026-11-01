@@ -63,7 +63,7 @@ step-by-step wiring instructions.
 ## Project structure
 
 ```
-cs2-server-plugin/  # C++ CS2 server "plugin" to control the game
+cs2-server-plugin/  # C++ CS2 server "plugin" to control the game, see cs2-server-plugin/AGENTS.md
 csgo-server-plugin/  # C++ CS:GO server "plugin" to control the game
 src/
   cli/           # CLI related code
@@ -87,6 +87,9 @@ src/
     shared/      # UI utilities, colors, element IDs
     <feature>/   # One directory per feature (matches, demos, player, match, …)
 ```
+
+Read [`cs2-server-plugin/AGENTS.md`](cs2-server-plugin/AGENTS.md) before working on the CS2 plugin, or on the app code
+that installs it, writes its playback files or exchanges messages with it.
 
 ## Coding conventions
 

@@ -1,4 +1,4 @@
-import { exec } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
 import { isWindows } from 'csdm/node/os/is-windows';
@@ -9,7 +9,8 @@ import { abortError, throwIfAborted } from 'csdm/node/errors/abort-error';
 import { sleep } from 'csdm/common/sleep';
 import { UnsupportedGame } from './errors/unsupported-game';
 import { getCounterStrikeExecutablePath } from '../get-counter-strike-executable-path';
-import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
+import { deletePlaybackFiles } from 'csdm/node/counter-strike/json-actions-file/delete-playback-files';
+import { writePlaybackFiles } from 'csdm/node/counter-strike/json-actions-file/write-playback-files';
 import { isMac } from 'csdm/node/os/is-mac';
 import { assertSteamIsRunning } from './assert-steam-is-running';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
@@ -18,6 +19,7 @@ import { GameError } from './errors/game-error';
 import { AccessDeniedError } from './errors/access-denied-error';
 import { tryStartingDemoThroughWebSocket } from './try-starting-demo-through-web-socket';
 import { installCounterStrikeServerPlugin, uninstallCounterStrikeServerPlugin } from './cs-server-plugin';
+import { getCs2VulkanLayerEnv } from './cs2-server-plugin';
 import { getSteamFolderPath } from '../get-steam-folder-path';
 import { glob } from 'csdm/node/filesystem/glob';
 import { CounterStrikeExecutableNotFound } from './errors/counter-strike-executable-not-found';
@@ -28,6 +30,7 @@ import path from 'node:path';
 import { DisplayMode } from 'csdm/common/types/display-mode';
 import { enableFullscreenWindowed } from './video-config-file';
 import { getWebSocketServerPort, WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
+import { beginGameLaunch, isCurrentGameLaunch } from './game-launch';
 
 export type StartCounterStrikeOptions = {
   demoPath?: string;
@@ -124,26 +127,8 @@ async function buildCommand(executablePath: string, args: string, game: Game, se
 
 // Tip: to understand how Steam starts CS you can use the Steam client launch options: -dev -console
 // You would be able to see the command used to start CS in the console.
-export async function startCounterStrike(options: StartCounterStrikeOptions) {
+async function startCounterStrikeProcess(options: StartCounterStrikeOptions) {
   const { demoPath, game, signal, additionalLaunchParameters, mode, map } = options;
-
-  if (game === Game.CS2 && isMac) {
-    throw new UnsupportedGame(game);
-  }
-
-  await assertSteamIsRunning();
-
-  if (demoPath) {
-    assertDemoPathIsValid(demoPath, game);
-
-    try {
-      await tryStartingDemoThroughWebSocket(demoPath);
-      return;
-    } catch {
-      // It failed, start CS normally
-    }
-  }
-
   const executablePath = await getCounterStrikeExecutablePath(game);
   logger.debug('Found CS executable at:', executablePath);
   const settings = await getSettings();
@@ -247,6 +232,7 @@ echo "CS:DM config loaded"
 
   options.onGameStart?.();
 
+  const launchId = beginGameLaunch();
   const hasBeenKilled = await killCounterStrikeProcesses();
   // When we kill the process it may take a bit of time before the process actually releases files lock.
   // We wait a bit before starting the process again to avoid trying to start CS when it's still running. It would lead
@@ -258,28 +244,40 @@ echo "CS:DM config loaded"
 
   await installCounterStrikeServerPlugin(game);
   defineCfgFolderLocation();
+  const vulkanLayerEnv = game === Game.CS2 ? await getCs2VulkanLayerEnv() : {};
 
   return new Promise<void>((resolve, reject) => {
     const startTime = Date.now();
-    // Forward the resolved WebSocket server port so the game server plugin can connect to the WebSocket server.
-    const gameProcess = exec(command, {
+    const gameProcess = spawn(command, {
+      shell: true,
       windowsHide: true,
-      env: { ...process.env, [WEB_SOCKET_SERVER_PORT_ENV_NAME]: String(getWebSocketServerPort()) },
+      env: {
+        ...process.env,
+        ...vulkanLayerEnv,
+        [WEB_SOCKET_SERVER_PORT_ENV_NAME]: String(getWebSocketServerPort()),
+      },
     });
-    const chunks: string[] = [];
-    gameProcess.stdout?.on('data', (data: string) => {
-      chunks.push(data);
-    });
-
-    gameProcess.stderr?.on('data', (data: string) => {
-      chunks.push(data);
-    });
+    let output = '';
+    const maxGameOutputLength = 64 * 1024;
+    const onOutput = (data: string) => {
+      logger.debug('Game output:', data);
+      output = (output + data).slice(-maxGameOutputLength);
+    };
+    gameProcess.stdout.setEncoding('utf8');
+    gameProcess.stdout.on('data', onOutput);
+    gameProcess.stderr.setEncoding('utf8');
+    gameProcess.stderr.on('data', onOutput);
 
     gameProcess.on('exit', async (code) => {
       logger.debug('Game process exited with code', code);
 
+      if (!isCurrentGameLaunch(launchId)) {
+        logger.debug('Game process killed by a newer launch, leaving its files and the plugin to it');
+        return resolve();
+      }
+
       if (demoPath) {
-        await deleteJsonActionsFile(demoPath);
+        await deletePlaybackFiles(demoPath);
       }
       if (options.uninstallPluginOnExit !== false) {
         await uninstallCounterStrikeServerPlugin(game);
@@ -288,9 +286,6 @@ echo "CS:DM config loaded"
       if (signal?.aborted) {
         return reject(abortError);
       }
-
-      const output = chunks.join('\n');
-      logger.debug('Game output: \n', output);
 
       const hasRunLongEnough = Date.now() - startTime >= 2000;
       if (!hasBeenKilled && code !== 0) {
@@ -310,4 +305,45 @@ echo "CS:DM config loaded"
       return resolve();
     });
   });
+}
+
+export async function startCounterStrike(options: StartCounterStrikeOptions) {
+  const { demoPath, game } = options;
+
+  if (game === Game.CS2 && isMac) {
+    throw new UnsupportedGame(game);
+  }
+
+  await assertSteamIsRunning();
+
+  if (!demoPath) {
+    return startCounterStrikeProcess(options);
+  }
+
+  assertDemoPathIsValid(demoPath, game);
+  await writePlaybackFiles(demoPath, game);
+
+  let hasStartedThroughWebSocket = false;
+  try {
+    await tryStartingDemoThroughWebSocket(demoPath);
+    hasStartedThroughWebSocket = true;
+  } catch {
+    // It failed, start CS normally
+  }
+
+  if (hasStartedThroughWebSocket) {
+    // There is no game process to wait for on this path: the plugin has already read the files by the time it
+    // acknowledges the message, so delete them now instead of on exit.
+    await deletePlaybackFiles(demoPath);
+    return;
+  }
+
+  try {
+    await startCounterStrikeProcess(options);
+  } catch (error) {
+    // Anything that fails before the game process exits (executable lookup, abort, cfg writes, plugin install...)
+    // would otherwise leave the JSON files next to the demo since the process 'exit' handler never runs.
+    await deletePlaybackFiles(demoPath);
+    throw error;
+  }
 }

@@ -1,4 +1,5 @@
 import { WatchType } from 'csdm/common/types/watch-type';
+import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
 import { db } from '../database';
 
@@ -16,6 +17,10 @@ export type Action = {
   opponentSteamId: string | null;
 };
 
+export type PlaybackAction = Action & {
+  playerSide: TeamNumber;
+};
+
 export type PlaybackMatch = {
   checksum: string;
   demoPath: string;
@@ -24,7 +29,12 @@ export type PlaybackMatch = {
   actions: Action[];
 };
 
-async function fetchKills(checksum: string, steamId: string, type: WatchType): Promise<Action[]> {
+// Two actions of a player further apart than this are played as separate sequences.
+export const maxSecondsBetweenPlaybackActions = 15;
+
+// Without a Steam ID, the kills of every player are returned, team kills and suicides left out.
+async function fetchKills(checksum: string, type: WatchType, steamId?: string): Promise<PlaybackAction[]> {
+  const isHighlights = type === WatchType.Highlights;
   let killsQuery = db
     .selectFrom('kills')
     .select([
@@ -32,23 +42,28 @@ async function fetchKills(checksum: string, steamId: string, type: WatchType): P
       'round_number as roundNumber',
       'killer_steam_id as playerSteamId',
       'victim_steam_id as opponentSteamId',
+      isHighlights ? 'killer_side as playerSide' : 'victim_side as playerSide',
     ])
     .leftJoin('players as p1', function (qb) {
       return qb
         .onRef('p1.match_checksum', '=', 'kills.match_checksum')
-        .onRef('p1.steam_id', '=', type === WatchType.Highlights ? 'kills.killer_steam_id' : 'kills.victim_steam_id');
+        .onRef('p1.steam_id', '=', isHighlights ? 'kills.killer_steam_id' : 'kills.victim_steam_id');
     })
     .select(['p1.index as playerSlot'])
     .leftJoin('players as p2', function (qb) {
       return qb
         .onRef('p2.match_checksum', '=', 'kills.match_checksum')
-        .onRef('p2.steam_id', '=', type === WatchType.Highlights ? 'kills.victim_steam_id' : 'kills.killer_steam_id');
+        .onRef('p2.steam_id', '=', isHighlights ? 'kills.victim_steam_id' : 'kills.killer_steam_id');
     })
     .select(['p2.index as opponentSlot'])
     .where('kills.match_checksum', '=', checksum)
     .orderBy('tick', 'asc');
 
-  if (type === WatchType.Highlights) {
+  if (steamId === undefined) {
+    killsQuery = killsQuery
+      .whereRef('killer_steam_id', '<>', 'victim_steam_id')
+      .whereRef('killer_side', '<>', 'victim_side');
+  } else if (isHighlights) {
     killsQuery = killsQuery.where('killer_steam_id', '=', steamId).where('victim_steam_id', '<>', steamId);
   } else {
     killsQuery = killsQuery.where('victim_steam_id', '=', steamId).where('killer_steam_id', '<>', steamId);
@@ -58,7 +73,9 @@ async function fetchKills(checksum: string, steamId: string, type: WatchType): P
   return kills;
 }
 
-async function fetchDamages(checksum: string, steamId: string, type: WatchType): Promise<Action[]> {
+// Without a Steam ID, the heavy damages of every player are returned, team damages and self damages left out.
+async function fetchDamages(checksum: string, type: WatchType, steamId?: string): Promise<PlaybackAction[]> {
+  const isHighlights = type === WatchType.Highlights;
   let damagesQuery = db
     .selectFrom('damages')
     .select([
@@ -66,25 +83,18 @@ async function fetchDamages(checksum: string, steamId: string, type: WatchType):
       'round_number as roundNumber',
       'attacker_steam_id as playerSteamId',
       'victim_steam_id as opponentSteamId',
+      isHighlights ? 'attacker_side as playerSide' : 'victim_side as playerSide',
     ])
     .leftJoin('players as p1', function (qb) {
       return qb
         .onRef('p1.match_checksum', '=', 'damages.match_checksum')
-        .onRef(
-          'p1.steam_id',
-          '=',
-          type === WatchType.Highlights ? 'damages.attacker_steam_id' : 'damages.victim_steam_id',
-        );
+        .onRef('p1.steam_id', '=', isHighlights ? 'damages.attacker_steam_id' : 'damages.victim_steam_id');
     })
     .select(['p1.index as playerSlot'])
     .leftJoin('players as p2', function (qb) {
       return qb
         .onRef('p2.match_checksum', '=', 'damages.match_checksum')
-        .onRef(
-          'p2.steam_id',
-          '=',
-          type === WatchType.Highlights ? 'damages.victim_steam_id' : 'damages.attacker_steam_id',
-        );
+        .onRef('p2.steam_id', '=', isHighlights ? 'damages.victim_steam_id' : 'damages.attacker_steam_id');
     })
     .select(['p2.index as opponentSlot'])
     .where('damages.match_checksum', '=', checksum)
@@ -92,7 +102,11 @@ async function fetchDamages(checksum: string, steamId: string, type: WatchType):
     .where('victim_new_health', '>', 0) // Ignore damage resulting in a kill
     .orderBy('tick', 'asc');
 
-  if (type === WatchType.Highlights) {
+  if (steamId === undefined) {
+    damagesQuery = damagesQuery
+      .whereRef('attacker_steam_id', '<>', 'victim_steam_id')
+      .whereRef('attacker_side', '<>', 'victim_side');
+  } else if (isHighlights) {
     damagesQuery = damagesQuery.where('attacker_steam_id', '=', steamId).where('victim_steam_id', '<>', steamId);
   } else {
     damagesQuery = damagesQuery.where('victim_steam_id', '=', steamId).where('attacker_steam_id', '<>', steamId);
@@ -100,6 +114,36 @@ async function fetchDamages(checksum: string, steamId: string, type: WatchType):
   const damages = await damagesQuery.execute();
 
   return damages;
+}
+
+type ActionsOptions = {
+  checksum: string;
+  type: WatchType;
+  includeDamages: boolean;
+  // The player whose actions are wanted, every player's without it.
+  steamId?: string;
+};
+
+export async function fetchPlaybackActions({
+  checksum,
+  type,
+  includeDamages,
+  steamId,
+}: ActionsOptions): Promise<PlaybackAction[]> {
+  if (!includeDamages) {
+    return fetchKills(checksum, type, steamId);
+  }
+
+  const [kills, damages] = await Promise.all([
+    fetchKills(checksum, type, steamId),
+    fetchDamages(checksum, type, steamId),
+  ]);
+  const actions = [...kills, ...damages];
+  actions.sort((actionA, actionB) => {
+    return actionA.tick - actionB.tick;
+  });
+
+  return actions;
 }
 
 type Options = {
@@ -121,19 +165,7 @@ export async function getPlaybackMatch({ demoPath, steamId, type, includeDamages
     return undefined;
   }
 
-  let actions: Action[] = [];
-  if (includeDamages) {
-    const [kills, damages] = await Promise.all([
-      fetchKills(checksum, steamId, type),
-      fetchDamages(checksum, steamId, type),
-    ]);
-    actions = [...kills, ...damages];
-    actions.sort((actionA, actionB) => {
-      return actionA.tick - actionB.tick;
-    });
-  } else {
-    actions = await fetchKills(checksum, steamId, type);
-  }
+  const actions = await fetchPlaybackActions({ checksum, type, includeDamages, steamId });
 
   const playbackMatch: PlaybackMatch = {
     checksum: demo.checksum,

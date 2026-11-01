@@ -3,7 +3,6 @@ import type { DatabaseConnectionSettings, DatabaseSettings } from 'csdm/node/set
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { migrateDatabase } from 'csdm/node/database/migrations/migrate-database';
 import { createDatabaseIfNotExists } from 'csdm/node/database/create-database-if-not-exists';
-import { startBackgroundTasks } from 'csdm/server/start-background-tasks';
 import { DatabaseMode } from 'csdm/common/types/database-mode';
 import { startEmbeddedPostgreSql } from './embedded/embedded-postgresql';
 
@@ -36,5 +35,4 @@ export async function connectDatabase(databaseSettings?: DatabaseSettings) {
     }
     throw error;
   }
-  void startBackgroundTasks();
 }

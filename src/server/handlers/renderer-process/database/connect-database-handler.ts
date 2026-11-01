@@ -5,6 +5,7 @@ import { startDatabaseConnection } from 'csdm/server/ensure-database-connection'
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { DatabaseMode } from 'csdm/common/types/database-mode';
 import { stopEmbeddedPostgreSqlIfUnused } from 'csdm/server/stop-embedded-postgresql-if-unused';
+import { startBackgroundTasks } from 'csdm/server/start-background-tasks';
 
 export type ConnectDatabaseError = {
   code: ErrorCode;
@@ -21,6 +22,7 @@ export async function connectDatabaseHandler(databaseSettings: DatabaseSettings 
       await stopEmbeddedPostgreSqlIfUnused();
     }
     await startDatabaseConnection(databaseSettings);
+    void startBackgroundTasks();
   } catch (error) {
     logger.error('Error while connecting to the database');
     logger.error(error);

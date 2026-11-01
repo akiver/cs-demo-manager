@@ -142,11 +142,11 @@ void HandleWebSocketMessage(const string& message)
     }
 
     if (msg["name"] == "playdemo" && msg.contains("payload") && msg["payload"].is_string()) {
-        SendStatusOk();
-
         string demoPath = msg["payload"];
 
+        // Read the file written next to the demo before acknowledging: the app deletes it once it gets the status.
         LoadSequencesFile(demoPath);
+        SendStatusOk();
 
         std::lock_guard<mutex> lock(pendingCmdMutex);
         pendingCmd = "playdemo \"" + demoPath + "\"";
@@ -291,6 +291,8 @@ void ConnectToWebsocketServer() {
     while (ws->getReadyState() != WebSocket::CLOSED && !isQuitting) {
         ws->poll();
         ws->dispatch(HandleWebSocketMessage);
+        // poll() is non-blocking, the loop would spin on a core without this wait.
+        std::this_thread::sleep_for(milliseconds(5));
     }
 
     Log("Disconnected from WebSocket server.");

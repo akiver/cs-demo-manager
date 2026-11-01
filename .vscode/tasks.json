@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build CS2 plugin (Debug)",
+      "type": "process",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "msbuild",
+      "args": ["cs2-server-plugin.sln", "-p:Configuration=Debug", "-p:Platform=x64", "-m", "-v:m"],
+      "options": {
+        "cwd": "${workspaceFolder}/cs2-server-plugin"
+      },
+      "problemMatcher": "$msCompile",
+      "linux": {
+        "command": "make",
+        "args": ["DEV_COMMANDS=1", "build"],
+        "options": {
+          "cwd": "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin"
+        },
+        "problemMatcher": "$gcc"
+      },
+      "presentation": {
+        "clear": true
+      }
+    },
+    {
+      "label": "Build CS2 plugin (Release)",
+      "type": "process",
+      "group": "build",
+      "command": "msbuild",
+      "args": ["cs2-server-plugin.sln", "-p:Configuration=Release", "-p:Platform=x64", "-m", "-v:m"],
+      "options": {
+        "cwd": "${workspaceFolder}/cs2-server-plugin"
+      },
+      "problemMatcher": "$msCompile",
+      "linux": {
+        "command": "make",
+        "args": ["build"],
+        "options": {
+          "cwd": "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin"
+        },
+        "problemMatcher": "$gcc"
+      },
+      "presentation": {
+        "clear": true
+      }
+    }
+  ]
+}

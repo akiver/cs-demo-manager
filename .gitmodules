@@ -1,9 +1,9 @@
 [submodule "cs2-server-plugin/cs2-server-plugin/deps/easywsclient"]
 	path = cs2-server-plugin/cs2-server-plugin/deps/easywsclient
 	url = https://github.com/dhbaird/easywsclient
-[submodule "cs2-server-plugin/cs2-server-plugin/deps/hl2sdk"]
-	path = cs2-server-plugin/cs2-server-plugin/deps/hl2sdk
-	url = https://github.com/alliedmodders/hl2sdk
+[submodule "cs2-server-plugin/cs2-server-plugin/deps/s2sdk"]
+	path = cs2-server-plugin/cs2-server-plugin/deps/s2sdk
+	url = https://github.com/alliedmodders/s2sdk
 	branch = cs2
 [submodule "cs2-server-plugin/cs2-server-plugin/deps/json"]
 	path = cs2-server-plugin/cs2-server-plugin/deps/json
@@ -18,3 +18,6 @@
 [submodule "csgo-server-plugin/csgo-server-plugin/deps/json"]
 	path = csgo-server-plugin/csgo-server-plugin/deps/json
 	url = https://github.com/nlohmann/json
+[submodule "cs2-server-plugin/cs2-server-plugin/deps/imgui"]
+	path = cs2-server-plugin/cs2-server-plugin/deps/imgui
+	url = https://github.com/ocornut/imgui

@@ -6,11 +6,10 @@ import { NoDeathsFound } from 'csdm/node/counter-strike/launcher/errors/no-death
 import { getSettings } from 'csdm/node/settings/get-settings';
 import type { WatchPlayerOptions } from 'csdm/common/types/watch-player-options';
 import { WatchType } from 'csdm/common/types/watch-type';
-import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
+import { deletePlaybackFiles } from '../json-actions-file/delete-playback-files';
 import { generatePlayerLowlightsJsonFile } from '../json-actions-file/generate-player-lowlights-json-file';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 import { assertPlayersSlotsAreDefined } from './assert-players-slots-are-defined';
-import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
 
 function assertPlayerHasActions(match: PlaybackMatch) {
   if (match.actions.length === 0) {
@@ -20,7 +19,7 @@ function assertPlayerHasActions(match: PlaybackMatch) {
 
 export async function watchPlayerLowlights({ demoPath, steamId, perspective, onGameStart }: WatchPlayerOptions) {
   const game = await detectDemoGame(demoPath);
-  await deleteJsonActionsFile(demoPath);
+  await deletePlaybackFiles(demoPath);
 
   const launchParameters: string[] = [];
   const settings = await getSettings();
@@ -49,7 +48,6 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
           beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,
           nextDelaySeconds: lowlights.afterKillDelayInSeconds,
           playerVoicesEnabled,
-          players: [],
         });
       }
     } else {
@@ -63,7 +61,6 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
 
     assertPlayerHasActions(match);
     assertPlayersSlotsAreDefined(match.actions);
-    const players = await fetchMatchPlayersSlots(match.checksum);
 
     await generatePlayerLowlightsJsonFile({
       actions: match.actions,
@@ -75,7 +72,6 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
       beforeDelaySeconds: lowlights.beforeKillDelayInSeconds,
       nextDelaySeconds: lowlights.afterKillDelayInSeconds,
       playerVoicesEnabled,
-      players,
     });
   }
 

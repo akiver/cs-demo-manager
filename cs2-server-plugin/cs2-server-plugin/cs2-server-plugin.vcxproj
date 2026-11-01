@@ -43,7 +43,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -71,8 +71,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
     <TargetName>server</TargetName>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\static\cs2</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>server</TargetName>
@@ -113,16 +114,28 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <Optimization>Disabled</Optimization>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessorDefinitions>CSDM_DEV_COMMANDS=1;COMPILER_MSVC;COMPILER_MSVC64;_USRDLL;IMGUI_USE_WCHAR32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>sdk/public/tier1;sdk/public/tier0;sdk/public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4146</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>.;deps/s2sdk/public/tier1;deps/s2sdk/public/tier0;deps/s2sdk/public;deps/json/include;deps/s2sdk/public/mathlib;deps/s2sdk/game/shared;deps/easywsclient;protobuf;deps/s2sdk/thirdparty/protobuf-3.21.8/src;deps/imgui;deps/imgui/backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DisableSpecificWarnings>4146;4244;4267;4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>deps/s2sdk/lib/public/win64;deps/s2sdk/lib/public/win64/2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>tier0.lib;libprotobuf.lib;d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>MSVCRT</IgnoreSpecificDefaultLibraries>
     </Link>
+    <PostBuildEvent>
+      <Command>cd $(TargetDir)
+del *.exp
+del *.lib</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -130,23 +143,23 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;COMPILER_MSVC;COMPILER_MSVC64;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;COMPILER_MSVC;COMPILER_MSVC64;_USRDLL;IMGUI_USE_WCHAR32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>deps/hl2sdk/public/tier1;deps/hl2sdk/public/tier0;deps/hl2sdk/public;deps/json/include;deps/hl2sdk/public/mathlib;deps/easywsclient;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <DisableSpecificWarnings>4146</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>.;deps/s2sdk/public/tier1;deps/s2sdk/public/tier0;deps/s2sdk/public;deps/json/include;deps/s2sdk/public/mathlib;deps/s2sdk/game/shared;deps/easywsclient;protobuf;deps/s2sdk/thirdparty/protobuf-3.21.8/src;deps/imgui;deps/imgui/backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DisableSpecificWarnings>4146;4244;4267;4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>deps/hl2sdk/lib/public/win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>tier0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>deps/s2sdk/lib/public/win64;deps/s2sdk/lib/public/win64/2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>tier0.lib;libprotobuf.lib;d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>MSVCRT</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
       <Command>cd $(TargetDir)
@@ -156,12 +169,166 @@ del *.pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="plugin.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="log_file.h" />
+    <ClInclude Include="library.h" />
+    <ClInclude Include="vtable.h" />
+    <ClInclude Include="memory.h" />
+    <ClInclude Include="net_messages.h" />
+    <ClInclude Include="user_commands.h" />
+    <ClInclude Include="websocket.h" />
+    <ClInclude Include="sdl.h" />
+    <ClInclude Include="sequences.h" />
+    <ClInclude Include="settings.h" />
+    <ClInclude Include="overlay_positions.h" />
+    <ClInclude Include="gameinfo.h" />
+    <ClInclude Include="overlay.h" />
+    <ClInclude Include="ui\overlay_font.h" />
+    <ClInclude Include="buttons_overlay.h" />
+    <ClInclude Include="buttons_overlay_target.h" />
+    <ClInclude Include="ui\buttons_panel.h" />
+    <ClInclude Include="maths.h" />
+    <ClInclude Include="ui\overlay_palette.h" />
+    <ClInclude Include="string_utils.h" />
+    <ClInclude Include="ui\playback_controls.h" />
+    <ClInclude Include="ui\playback_timeline.h" />
+    <ClInclude Include="playback_overlay.h" />
+    <ClInclude Include="playback_overlay_state.h" />
+    <ClInclude Include="playback_cameras.h" />
+    <ClInclude Include="convars.h" />
+    <ClInclude Include="ui\playback_panel.h" />
+    <ClInclude Include="ui\playback_widgets.h" />
+    <ClInclude Include="ui\playback_state.h" />
+    <ClInclude Include="ui\playback_icons.h" />
+    <ClInclude Include="ui\playback_goto_menu.h" />
+    <ClInclude Include="ui\playback_menus.h" />
+    <ClInclude Include="ui\playback_settings_menu.h" />
+    <ClInclude Include="ui\playback_match_timeline.h" />
+    <ClInclude Include="ui\playback_round_timeline.h" />
+    <ClInclude Include="ui\playback_toolbar.h" />
+    <ClInclude Include="player_slots.h" />
+    <ClInclude Include="player_voices.h" />
+    <ClInclude Include="player_names.h" />
+    <ClInclude Include="voice_activity.h" />
+    <ClInclude Include="voice_indicator.h" />
+    <ClInclude Include="ui\voice_indicator_panel.h" />
+    <ClInclude Include="ui\overlay_toasts.h" />
     <ClInclude Include="cdll_interfaces.h" />
+    <ClInclude Include="player_controllers.h" />
+    <ClInclude Include="entity_system.h" />
+    <ClInclude Include="schema.h" />
+    <ClInclude Include="deps\imgui\imconfig.h" />
+    <ClInclude Include="deps\imgui\imgui.h" />
+    <ClInclude Include="deps\imgui\imgui_internal.h" />
+    <ClInclude Include="deps\imgui\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="deps\imgui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="protobuf\cs_usercmd.pb.h" />
+    <ClInclude Include="protobuf\netmessages.pb.h" />
+    <ClInclude Include="protobuf\network_connection.pb.h" />
+    <ClInclude Include="protobuf\networkbasetypes.pb.h" />
+    <ClInclude Include="protobuf\source2_steam_stats.pb.h" />
+    <ClInclude Include="protobuf\usercmd.pb.h" />
+    <ClInclude Include="protobuf\valveextensions.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="deps\easywsclient\easywsclient.cpp" />
-    <ClCompile Include="deps\hl2sdk\tier1\convar.cpp" />
+    <ClCompile Include="deps\s2sdk\tier0_perproject\convar.cpp" />
+    <ClCompile Include="deps\imgui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="deps\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="deps\imgui\imgui.cpp" />
+    <ClCompile Include="deps\imgui\imgui_draw.cpp" />
+    <ClCompile Include="deps\imgui\imgui_tables.cpp" />
+    <ClCompile Include="deps\imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="log.cpp" />
+    <ClCompile Include="library.cpp" />
+    <ClCompile Include="vtable.cpp" />
+    <ClCompile Include="memory.cpp" />
+    <ClCompile Include="overlay_windows.cpp" />
+    <ClCompile Include="ui\overlay_font.cpp" />
+    <ClCompile Include="buttons_overlay.cpp" />
+    <ClCompile Include="buttons_overlay_target.cpp" />
+    <ClCompile Include="ui\buttons_panel.cpp" />
+    <ClCompile Include="playback_overlay.cpp" />
+    <ClCompile Include="playback_overlay_windows.cpp" />
+    <ClCompile Include="playback_seek.cpp" />
+    <ClCompile Include="playback_sequence.cpp" />
+    <ClCompile Include="playback_timeline_file.cpp" />
+    <ClCompile Include="playback_cameras.cpp" />
+    <ClCompile Include="convars.cpp" />
+    <ClCompile Include="ui\playback_panel.cpp" />
+    <ClCompile Include="ui\playback_widgets.cpp" />
+    <ClCompile Include="ui\playback_state.cpp" />
+    <ClCompile Include="ui\playback_icons.cpp" />
+    <ClCompile Include="ui\playback_goto_menu.cpp" />
+    <ClCompile Include="ui\playback_menus.cpp" />
+    <ClCompile Include="ui\playback_settings_menu.cpp" />
+    <ClCompile Include="ui\playback_match_timeline.cpp" />
+    <ClCompile Include="ui\playback_round_timeline.cpp" />
+    <ClCompile Include="ui\playback_toolbar.cpp" />
+    <ClCompile Include="player_voices.cpp" />
+    <ClCompile Include="player_names.cpp" />
+    <ClCompile Include="voice_activity.cpp" />
+    <ClCompile Include="voice_indicator.cpp" />
+    <ClCompile Include="ui\voice_indicator_panel.cpp" />
+    <ClCompile Include="ui\overlay_toasts.cpp" />
+    <ClCompile Include="cvars\csdm_voice_indicator.cpp" />
+    <ClCompile Include="player_controllers.cpp" />
+    <ClCompile Include="entity_system.cpp" />
+    <ClCompile Include="schema.cpp" />
+    <ClCompile Include="net_messages.cpp" />
+    <ClCompile Include="user_commands.cpp" />
+    <ClCompile Include="websocket.cpp" />
+    <ClCompile Include="sequences.cpp" />
+    <ClCompile Include="settings.cpp" />
+    <ClCompile Include="gameinfo.cpp" />
+    <ClCompile Include="overlay_positions.cpp" />
+    <ClCompile Include="cvars\csdm_buttons_overlay_pos.cpp" />
+    <ClCompile Include="cvars\csdm_playback_overlay_pos.cpp" />
+    <ClCompile Include="cvars\csdm_voice_indicator_pos.cpp" />
+    <ClCompile Include="commands\csdm_info.cpp" />
+    <ClCompile Include="commands\csdm_dump_net_messages.cpp" />
+    <ClCompile Include="commands\csdm_dump_demoplayer_vtable.cpp" />
+    <ClCompile Include="commands\csdm_ui.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto.cpp" />
+    <ClCompile Include="commands\csdm_demo_loop.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_next_round.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_previous_round.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_round.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_next_kill.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_previous_kill.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_next_highlight.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_previous_highlight.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_next_lowlight.cpp" />
+    <ClCompile Include="commands\csdm_demo_goto_previous_lowlight.cpp" />
+    <ClCompile Include="commands\csdm_demo_skip.cpp" />
+    <ClCompile Include="commands\csdm_players.cpp" />
+    <ClCompile Include="commands\csdm_voice_mute.cpp" />
+    <ClCompile Include="commands\csdm_voice_unmute.cpp" />
+    <ClCompile Include="commands\csdm_replace_player_name.cpp" />
+    <ClCompile Include="commands\csdm_camera.cpp" />
+    <ClCompile Include="commands\csdm_camera_next.cpp" />
+    <ClCompile Include="commands\csdm_camera_previous.cpp" />
+    <ClCompile Include="commands\csdm_camera_off.cpp" />
+    <ClCompile Include="commands\csdm_cameras.cpp" />
+    <ClCompile Include="cvars\csdm_buttons_overlay.cpp" />
+    <ClCompile Include="cvars\csdm_match_timeline.cpp" />
+    <ClCompile Include="cvars\csdm_round_timeline.cpp" />
+    <ClCompile Include="cvars\csdm_round_timeline_spectated_only.cpp" />
+    <ClCompile Include="cvars\csdm_follow_killer.cpp" />
+    <ClCompile Include="cvars\csdm_overlay_background_opacity.cpp" />
+    <ClCompile Include="cvars\csdm_overlay_scale.cpp" />
+    <ClCompile Include="cvars\csdm_overlay_tooltips.cpp" />
+    <ClCompile Include="cvars\csdm_playback_overlay_auto_hide_delay.cpp" />
+    <ClCompile Include="cvars\csdm_playback_skip_seconds.cpp" />
+    <ClCompile Include="protobuf\cs_usercmd.pb.cc" />
+    <ClCompile Include="protobuf\netmessages.pb.cc" />
+    <ClCompile Include="protobuf\network_connection.pb.cc" />
+    <ClCompile Include="protobuf\networkbasetypes.pb.cc" />
+    <ClCompile Include="protobuf\source2_steam_stats.pb.cc" />
+    <ClCompile Include="protobuf\usercmd.pb.cc" />
+    <ClCompile Include="protobuf\valveextensions.pb.cc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
