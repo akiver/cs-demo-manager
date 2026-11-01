@@ -1,7 +1,7 @@
 // Default port used by the WebSocket server.
 // If the port is already in use by another application, the server falls back to a random port exposed to the other
 // processes through the CSDM_WS_PORT environment variable and the daemon info file.
-// ! Must be kept in sync with DEFAULT_WEB_SOCKET_SERVER_PORT in cs2-server-plugin/main.cpp and csgo-server-plugin/main.cpp.
+// ! Must be kept in sync with the CS2 and CS:GO plugins.
 const DEFAULT_WEB_SOCKET_SERVER_PORT = 4574;
 
 // Name of the environment variable holding the WebSocket server port resolved by the main process.

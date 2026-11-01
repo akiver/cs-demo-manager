@@ -1,8 +1,7 @@
 import { Perspective } from 'csdm/common/types/perspective';
-import type { Action } from 'csdm/node/database/watch/get-match-playback';
+import { maxSecondsBetweenPlaybackActions, type Action } from 'csdm/node/database/watch/get-match-playback';
 import { JSONActionsFileGenerator } from './json-actions-file-generator';
 import { Game } from 'csdm/common/types/counter-strike';
-import type { PlayerWatchInfo } from 'csdm/common/types/player-watch-info';
 
 function getSteamIdToFocusFromAction(isPlayerPerspective: boolean, action: Action) {
   return isPlayerPerspective
@@ -30,7 +29,6 @@ type Parameters = {
   beforeDelaySeconds: number;
   nextDelaySeconds: number;
   playerVoicesEnabled: boolean;
-  players: PlayerWatchInfo[];
 };
 
 export async function generatePlayerLowlightsJsonFile({
@@ -43,7 +41,6 @@ export async function generatePlayerLowlightsJsonFile({
   beforeDelaySeconds,
   nextDelaySeconds,
   playerVoicesEnabled,
-  players,
 }: Parameters) {
   const json = new JSONActionsFileGenerator(demoPath, game);
 
@@ -52,8 +49,6 @@ export async function generatePlayerLowlightsJsonFile({
   } else {
     json.disablePlayerVoices();
   }
-
-  json.generateVoiceAliases(players);
 
   if (nextDelaySeconds < 1) {
     nextDelaySeconds = 1;
@@ -64,8 +59,10 @@ export async function generatePlayerLowlightsJsonFile({
 
   const tickBeforeDelayCount = Math.round(tickrate * beforeDelaySeconds);
   const tickNextDelayCount = Math.round(tickrate * nextDelaySeconds);
-  const maxNextActionDelayInSeconds = 15;
-  const maxNextActionDelayTickCount = Math.max(Math.round(tickrate * maxNextActionDelayInSeconds), tickNextDelayCount);
+  const maxNextActionDelayTickCount = Math.max(
+    Math.round(tickrate * maxSecondsBetweenPlaybackActions),
+    tickNextDelayCount,
+  );
   const isPlayerPerspective = perspective === Perspective.Player;
   let isFirstAction = true;
 

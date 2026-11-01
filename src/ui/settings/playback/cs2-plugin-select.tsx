@@ -99,7 +99,7 @@ export function Cs2PluginSelect() {
         return (
           <p>
             <Trans>
-              You selected a version compatible with CS2 from the {animgraph2UpdateDate} update up to the {update14168}{' '}
+              You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate}{' '}
               update.
             </Trans>
           </p>
@@ -108,7 +108,7 @@ export function Cs2PluginSelect() {
         return (
           <p>
             <Trans>
-              You selected a version compatible with CS2 from the {update14112} update up to the {animgraph2UpdateDate}{' '}
+              You selected a version compatible with CS2 from the {animgraph2UpdateDate} update up to the {update14168}{' '}
               update.
             </Trans>
           </p>

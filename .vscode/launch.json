@@ -58,6 +58,27 @@
       "args": ["run", "${relativeFile}"],
       "smartStep": true,
       "console": "internalConsole"
+    },
+    {
+      "type": "cppvsdbg",
+      "request": "attach",
+      "name": "Attach to CS2 plugin (Windows)",
+      "processId": "${command:pickProcess}"
+    },
+    {
+      "type": "cppdbg",
+      "request": "attach",
+      "name": "Attach to CS2 plugin (Linux)",
+      "program": "${input:cs2LinuxExecutable}",
+      "processId": "${command:pickProcess}",
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
     }
   ],
   "compounds": [
@@ -73,6 +94,12 @@
       "type": "promptString",
       "description": "CLI arguments",
       "default": "analyze"
+    },
+    {
+      "id": "cs2LinuxExecutable",
+      "type": "promptString",
+      "description": "Path to the cs2 executable",
+      "default": "${env:HOME}/.steam/steam/steamapps/common/Counter-Strike Global Offensive/game/bin/linuxsteamrt64/cs2"
     }
   ]
 }

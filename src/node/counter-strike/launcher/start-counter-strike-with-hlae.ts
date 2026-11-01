@@ -1,4 +1,4 @@
-import { exec } from 'node:child_process';
+import { exec, spawn } from 'node:child_process';
 import path from 'node:path';
 import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
@@ -10,6 +10,8 @@ import { isCounterStrikeRunning } from 'csdm/node/counter-strike/is-counter-stri
 import { abortError } from 'csdm/node/errors/abort-error';
 import { getCounterStrikeExecutablePath } from '../get-counter-strike-executable-path';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
+import { writePlaybackFiles } from 'csdm/node/counter-strike/json-actions-file/write-playback-files';
+import { deletePlaybackFiles } from 'csdm/node/counter-strike/json-actions-file/delete-playback-files';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
 import { getHlaeExecutablePathOrThrow } from 'csdm/node/video/hlae/hlae-location';
 import { getRunningProcessExitCode } from 'csdm/node/os/get-running-process-exit-code/get-running-process-exit-code';
@@ -21,6 +23,7 @@ import { FfmpegNotInstalled } from 'csdm/node/video/errors/ffmpeg-not-installed'
 import { DisplayMode } from 'csdm/common/types/display-mode';
 import { enableFullscreenWindowed } from './video-config-file';
 import { getWebSocketServerPort, WEB_SOCKET_SERVER_PORT_ENV_NAME } from 'csdm/server/port';
+import { beginGameLaunch, isCurrentGameLaunch } from './game-launch';
 
 export type HlaeOptions = {
   game: Game;
@@ -78,18 +81,18 @@ async function startHlae({ command, signal, game }: StartHlaeOptions) {
 
   return new Promise<void>((resolve, reject) => {
     // Forward the resolved WebSocket server port so the game server plugin can connect to the WebSocket server.
-    const env = { ...process.env, [WEB_SOCKET_SERVER_PORT_ENV_NAME]: String(getWebSocketServerPort()) };
-    const hlaeProcess = exec(command, { windowsHide: true, env }, (error, stdout, stderr) => {
-      if (signal?.aborted) {
-        return;
-      }
-
-      if (stdout) {
-        logger.debug('HLAE stdout:', stdout);
-      }
-      if (stderr) {
-        logger.debug('HLAE stderr:', stderr);
-      }
+    const env = {
+      ...process.env,
+      [WEB_SOCKET_SERVER_PORT_ENV_NAME]: String(getWebSocketServerPort()),
+    };
+    const hlaeProcess = spawn(command, { shell: true, windowsHide: true, env });
+    hlaeProcess.stdout.setEncoding('utf8');
+    hlaeProcess.stdout.on('data', (data: string) => {
+      logger.debug('HLAE stdout:', data);
+    });
+    hlaeProcess.stderr.setEncoding('utf8');
+    hlaeProcess.stderr.on('data', (data: string) => {
+      logger.debug('HLAE stderr:', data);
     });
 
     hlaeProcess.on('exit', async (code) => {
@@ -143,6 +146,7 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
   }
 
   const hlaeExecutablePath = await getHlaeExecutablePathOrThrow();
+  const launchId = beginGameLaunch();
   const hasBeenKilled = await killCounterStrikeProcesses();
   const csExecutablePath = await getCounterStrikeExecutablePath(game);
   const settings = await getSettings();
@@ -231,13 +235,32 @@ export async function startCounterStrikeWithHlae(options: HlaeOptions) {
 
   const command = `"${hlaeExecutablePath}" ${hlaeParameters.join(' ')}`;
 
+  if (demoPath) {
+    await writePlaybackFiles(demoPath, game);
+  }
+
   options.onGameStart?.();
-  await startHlae({
-    command,
-    signal,
-    game,
-  });
-  if (options.uninstallPluginOnExit !== false) {
-    await uninstallCounterStrikeServerPlugin(game);
+  try {
+    await startHlae({
+      command,
+      signal,
+      game,
+    });
+  } catch (error) {
+    // The game exits with an error code when a newer launch kills it, that's not a game error.
+    if (!isCurrentGameLaunch(launchId) && !signal?.aborted) {
+      logger.debug('Game process killed by a newer launch, leaving its files and the plugin to it');
+      return;
+    }
+    throw error;
+  } finally {
+    if (isCurrentGameLaunch(launchId)) {
+      if (demoPath) {
+        await deletePlaybackFiles(demoPath);
+      }
+      if (options.uninstallPluginOnExit !== false) {
+        await uninstallCounterStrikeServerPlugin(game);
+      }
+    }
   }
 }

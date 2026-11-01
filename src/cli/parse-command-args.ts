@@ -14,6 +14,8 @@ export type CommandOption = {
   defaultValue?: string;
   // Boolean option that can be disabled with --no-<name>, used to override a value coming from the app settings.
   negatable?: boolean;
+  // String option that can be repeated, its values are collected in an array.
+  multiple?: boolean;
   // Title of the help section where the option is listed, "Options" by default.
   group?: string;
 };

@@ -5,7 +5,7 @@ import { getPlaybackMatch, type PlaybackMatch } from 'csdm/node/database/watch/g
 import { NoKillsFound } from 'csdm/node/counter-strike/launcher/errors/no-kills-found';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { WatchType } from 'csdm/common/types/watch-type';
-import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
+import { deletePlaybackFiles } from '../json-actions-file/delete-playback-files';
 import { generatePlayerHighlightsJsonFile } from '../json-actions-file/generate-player-highlights-json-file';
 import type { Perspective } from 'csdm/common/types/perspective';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
@@ -26,7 +26,7 @@ function assertPlayerHasActions(match: PlaybackMatch) {
 
 export async function watchPlayerHighlights({ demoPath, steamId, perspective, onGameStart }: Options) {
   const game = await detectDemoGame(demoPath);
-  await deleteJsonActionsFile(demoPath);
+  await deletePlaybackFiles(demoPath);
 
   const launchParameters: string[] = [];
   const settings = await getSettings();

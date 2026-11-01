@@ -20,5 +20,11 @@
     "csgo-server-plugin/csgo-server-plugin/deps": true
   },
   "tailwindCSS.rootFontSize": 14,
-  "js/ts.tsdk.path": "node_modules/typescript/lib"
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "[c]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  }
 }

@@ -1,4 +1,5 @@
 import { ensureDatabaseConnection } from 'csdm/server/ensure-database-connection';
+import { startBackgroundTasks } from 'csdm/server/start-background-tasks';
 
 export async function startMinimizedModeHandler(): Promise<void> {
   return new Promise((resolve) => {
@@ -8,6 +9,7 @@ export async function startMinimizedModeHandler(): Promise<void> {
       try {
         // A CLI command may have already connected the daemon to the database.
         await ensureDatabaseConnection();
+        void startBackgroundTasks();
         if (timer !== null) {
           globalThis.clearInterval(timer);
         }

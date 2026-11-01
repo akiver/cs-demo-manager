@@ -7,6 +7,7 @@ import { randomUUID } from 'node:crypto';
 import { rendererHandlers } from 'csdm/server/handlers/renderer-handlers-mapping';
 import { mainHandlers } from 'csdm/server/handlers/main-handlers-mapping';
 import { cliHandlers, probeHandlers } from 'csdm/server/handlers/cli-handlers-mapping';
+import { gameHandlers } from 'csdm/server/handlers/game-handlers-mapping';
 import type { MainClientMessageName } from 'csdm/server/messages/main-client-message-name';
 import { getWebSocketServerPort, WEB_SOCKET_SERVER_PORT_ENV_NAME } from './port';
 import type { SharedServerMessagePayload } from 'csdm/server/messages/shared-server-message-name';
@@ -437,6 +438,10 @@ class WebSocketServer {
           listener(payload);
         }
       }
+
+      const handler = gameHandlers[name as keyof typeof gameHandlers] as Handler<unknown> | undefined;
+      // The game doesn't wait for a reply, so nothing is sent back.
+      void handler?.(payload);
     } catch (error) {
       logger.error('WS:: game process request error');
       logger.error(error);

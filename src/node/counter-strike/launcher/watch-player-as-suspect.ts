@@ -1,6 +1,6 @@
 import { startCounterStrike } from './start-counter-strike';
 import { detectDemoGame } from './detect-demo-game';
-import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
+import { deletePlaybackFiles } from '../json-actions-file/delete-playback-files';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
@@ -12,7 +12,7 @@ type Options = {
 
 export async function watchPlayerAsSuspect({ demoPath, steamId, onGameStart }: Options) {
   const game = await detectDemoGame(demoPath);
-  await deleteJsonActionsFile(demoPath);
+  await deletePlaybackFiles(demoPath);
 
   const settings = await getSettings();
   const { useHlae } = settings.playback;

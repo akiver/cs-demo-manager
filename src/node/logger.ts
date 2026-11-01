@@ -4,7 +4,7 @@ import { format } from 'node:util';
 import fs from 'fs-extra';
 import type { FSWatcher } from 'chokidar';
 import { watch } from 'chokidar';
-import { getAppFolderPath } from 'csdm/node/filesystem/get-app-folder-path';
+import { getLogFolderPath } from 'csdm/node/filesystem/get-app-log-folder-path';
 
 export interface ILogger {
   debug: (...data: any[]) => void;
@@ -27,7 +27,7 @@ class Logger implements ILogger {
   private isVerbose = true;
 
   public constructor() {
-    this.logFolderPath = path.join(getAppFolderPath(), 'logs');
+    this.logFolderPath = getLogFolderPath();
     this.logFilePath = path.join(this.logFolderPath, 'csdm.log');
     // We only call the global Console methods when we are in development build or in the Electron renderer process
     // for the following reasons:

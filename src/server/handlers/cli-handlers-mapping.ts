@@ -20,6 +20,9 @@ import { resumeVideoQueueHandler } from './renderer-process/video/resume-video-q
 import { installHlaeHandler } from './renderer-process/video/install-hlae-handler';
 import { installVirtualDubHandler } from './renderer-process/video/install-virtual-dub-handler';
 import { installFfmpegHandler } from './renderer-process/video/install-ffmpeg-handler';
+import type { WatchDemoPayload } from './renderer-process/counter-strike/watch-demo-handler';
+import type { WatchDemoFromCliResult } from './cli-process/watch-demo-from-cli-handler';
+import { watchDemoFromCliHandler } from './cli-process/watch-demo-from-cli-handler';
 
 export interface CliMessageHandlers {
   [CliClientMessageName.GetDaemonStatus]: Handler<void, Daemon>;
@@ -34,6 +37,7 @@ export interface CliMessageHandlers {
   [CliClientMessageName.InstallHlae]: Handler<void, string>;
   [CliClientMessageName.InstallVirtualDub]: Handler<void, string>;
   [CliClientMessageName.InstallFfmpeg]: Handler<void, string>;
+  [CliClientMessageName.WatchDemo]: Handler<WatchDemoPayload, WatchDemoFromCliResult>;
 }
 
 // Mapping between message names and server handlers sent from the CLI process to the WebSocket server.
@@ -50,6 +54,7 @@ export const cliHandlers: CliMessageHandlers = {
   [CliClientMessageName.InstallHlae]: installHlaeHandler,
   [CliClientMessageName.InstallVirtualDub]: installVirtualDubHandler,
   [CliClientMessageName.InstallFfmpeg]: installFfmpegHandler,
+  [CliClientMessageName.WatchDemo]: watchDemoFromCliHandler,
 };
 
 // Probe sockets are short-lived connections used by processes about to spawn a daemon: they can only check that a

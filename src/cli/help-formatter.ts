@@ -169,6 +169,9 @@ export class HelpFormatter {
     if (option.defaultValue !== undefined) {
       description += `\nDefault: ${option.defaultValue}`;
     }
+    if (option.multiple) {
+      description += '\nCan be repeated.';
+    }
 
     return description;
   }

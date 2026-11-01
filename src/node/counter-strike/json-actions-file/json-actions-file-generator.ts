@@ -1,8 +1,6 @@
 import fs from 'fs-extra';
 import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix-path-separator';
-import { Game, TeamNumber } from 'csdm/common/types/counter-strike';
-import { generatePlayerVoicesValues } from 'csdm/node/counter-strike/launcher/generate-player-voices-values';
-import type { PlayerWatchInfo } from 'csdm/common/types/player-watch-info';
+import { Game } from 'csdm/common/types/counter-strike';
 import type { Camera } from 'csdm/common/types/camera';
 
 type Action = {
@@ -69,9 +67,19 @@ export class JSONActionsFileGenerator {
   }
 
   public addFocusCamera(tick: number, camera: Camera) {
+    const actionTick = this.getValidTick(tick);
+    if (this.game === Game.CS2) {
+      // Since the 2026-10-14 CS2 update the demo free camera keeps its own position and ignores the one spec_goto
+      // teleports the observer to, so it's turned off first.
+      // https://github.com/ValveSoftware/csgo-osx-linux/issues/4660
+      this.actions.push({
+        cmd: 'cl_demo_freecam 0',
+        tick: actionTick,
+      });
+    }
     this.actions.push({
       cmd: `spec_goto ${camera.x} ${camera.y} ${camera.z} ${camera.pitch} ${camera.yaw}`,
-      tick: this.getValidTick(tick),
+      tick: actionTick,
     });
   }
 
@@ -139,68 +147,6 @@ export class JSONActionsFileGenerator {
       });
       this.actions.push({
         cmd: 'tv_listen_voice_indices_h 0',
-        tick: actionTick,
-      });
-    }
-
-    return this;
-  }
-
-  // Generates aliases to control which player/team's voices are heard.
-  // CS2 only.
-  public generateVoiceAliases(players: PlayerWatchInfo[]) {
-    if (this.game === Game.CSGO) {
-      return this;
-    }
-
-    const actionTick = this.getValidTick(1);
-    const ctUserIds: number[] = [];
-    const tUserIds: number[] = [];
-    for (const { steamId, slot, side } of players) {
-      const userId = slot - 1;
-      if (side !== TeamNumber.CT && side !== TeamNumber.T) {
-        continue;
-      }
-
-      const target = side === TeamNumber.CT ? ctUserIds : tUserIds;
-      target.push(userId);
-
-      const { valueLow, valueHigh } = generatePlayerVoicesValues([userId]);
-      this.actions.push({
-        cmd: `alias "voice_${steamId}" "tv_listen_voice_indices ${valueLow}; tv_listen_voice_indices_h ${valueHigh}; echo Listening to player with steam id ${steamId}"`,
-        tick: actionTick,
-      });
-    }
-
-    this.actions.push({
-      cmd: `alias "voice_all" "tv_listen_voice_indices -1; tv_listen_voice_indices_h -1; echo Listening to all players"`,
-      tick: actionTick,
-    });
-    this.actions.push({
-      cmd: `echo "[CSDM] Type voice_all to listen to all players"`,
-      tick: actionTick,
-    });
-
-    if (ctUserIds.length > 0) {
-      const ctValues = generatePlayerVoicesValues(ctUserIds);
-      this.actions.push({
-        cmd: `alias "voice_ct" "tv_listen_voice_indices ${ctValues.valueLow}; tv_listen_voice_indices_h ${ctValues.valueHigh}; echo Listening to players that started in CT"`,
-        tick: actionTick,
-      });
-      this.actions.push({
-        cmd: `echo "[CSDM] Type voice_ct to listen to players that started in CT"`,
-        tick: actionTick,
-      });
-    }
-
-    if (tUserIds.length > 0) {
-      const tValues = generatePlayerVoicesValues(tUserIds);
-      this.actions.push({
-        cmd: `alias "voice_t" "tv_listen_voice_indices ${tValues.valueLow}; tv_listen_voice_indices_h ${tValues.valueHigh}; echo Listening to players that started in T"`,
-        tick: actionTick,
-      });
-      this.actions.push({
-        cmd: `echo "[CSDM] Type voice_t to listen to players that started in T"`,
         tick: actionTick,
       });
     }

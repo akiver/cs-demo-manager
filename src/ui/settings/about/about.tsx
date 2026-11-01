@@ -145,7 +145,7 @@ export function About() {
                 <ExternalLink href="https://github.com/GAMMACASE">@GAMMACASE</ExternalLink>,{' '}
                 <ExternalLink href="https://github.com/zer0k-z">@zer0.k</ExternalLink> and other AlliedModders
                 contributors to the{' '}
-                <ExternalLink href="https://github.com/alliedmodders/hl2sdk/tree/cs2">CS2 SDK</ExternalLink> internally
+                <ExternalLink href="https://github.com/alliedmodders/s2sdk/tree/cs2">CS2 SDK</ExternalLink> internally
                 used by CS Demo Manager.
               </Trans>
             </li>

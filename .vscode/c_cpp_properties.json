@@ -1,21 +1,84 @@
 {
   "configurations": [
     {
-      "name": "Linux",
-      "includePath": ["${workspaceFolder}/**"],
-      "compilerArgs": ["-Wall", "-Wno-infinite-recursion", "-shared", "-fPIC"],
-      "defines": [
-        "POSIX=1",
-        "NO_MALLOC_OVERRIDE=1",
-        "COMPILER_GCC=1",
-        "PLATFORM_POSIX=1",
-        "DX64BITS=1",
-        "PLATFORM_64BITS = 1",
-        "_LINUX=1"
+      // Must stay in sync with cs2-server-plugin/cs2-server-plugin/cs2-server-plugin.vcxproj
+      "name": "CS2 plugin (Windows)",
+      "includePath": [
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public/tier1",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public/tier0",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public/entity2",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/json/include",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public/mathlib",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/game/shared",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/easywsclient",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/protobuf",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/thirdparty/protobuf-3.21.8/src",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/imgui",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/imgui/backends"
       ],
-      "compilerPath": "/usr/bin/g++",
+      "defines": ["CSDM_DEV_COMMANDS=1", "COMPILER_MSVC", "COMPILER_MSVC64", "_USRDLL", "IMGUI_USE_WCHAR32"],
       "cStandard": "c17",
       "cppStandard": "c++17",
+      "intelliSenseMode": "windows-msvc-x64"
+    },
+    {
+      // Must stay in sync with cs2-server-plugin/cs2-server-plugin/Makefile
+      "name": "CS2 plugin (Linux)",
+      "includePath": [
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/json/include",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/easywsclient",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public/tier0",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public/tier1",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public/entity2",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/public/mathlib",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/game/shared",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/protobuf",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/s2sdk/thirdparty/protobuf-3.21.8/src",
+        // Vulkan layer only, see the vulkan-layer target of the Makefile.
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/imgui",
+        "${workspaceFolder}/cs2-server-plugin/cs2-server-plugin/deps/imgui/backends"
+      ],
+      "defines": [
+        "POSIX=1",
+        "COMPILER_GCC=1",
+        "PLATFORM_POSIX=1",
+        "X64BITS=1",
+        "PLATFORM_64BITS=1",
+        "LINUX=1",
+        "stricmp=strcasecmp",
+        "_GLIBCXX_USE_CXX11_ABI=0",
+        // Vulkan layer only.
+        "VK_NO_PROTOTYPES",
+        "IMGUI_IMPL_VULKAN_NO_PROTOTYPES",
+        "IMGUI_USE_WCHAR32"
+      ],
+      "compilerPath": "/usr/bin/g++",
+      "compilerArgs": ["-Wall"],
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "linux-gcc-x64"
+    },
+    {
+      // Must stay in sync with csgo-server-plugin/csgo-server-plugin/Makefile
+      "name": "CS:GO plugin (Linux)",
+      "includePath": [
+        "${workspaceFolder}/csgo-server-plugin/csgo-server-plugin",
+        "${workspaceFolder}/csgo-server-plugin/csgo-server-plugin/deps/hl2sdk/common",
+        "${workspaceFolder}/csgo-server-plugin/csgo-server-plugin/deps/hl2sdk/public",
+        "${workspaceFolder}/csgo-server-plugin/csgo-server-plugin/deps/hl2sdk/public/tier0",
+        "${workspaceFolder}/csgo-server-plugin/csgo-server-plugin/deps/hl2sdk/public/tier1",
+        "${workspaceFolder}/csgo-server-plugin/csgo-server-plugin/deps/json/include",
+        "${workspaceFolder}/csgo-server-plugin/csgo-server-plugin/deps/easywsclient"
+      ],
+      "defines": ["POSIX=1", "COMPILER_GCC=1", "PLATFORM_POSIX=1", "X64BITS=1", "PLATFORM_64BITS=1"],
+      "compilerPath": "/usr/bin/g++",
+      "compilerArgs": ["-Wall"],
+      "cStandard": "c17",
+      "cppStandard": "c++11",
       "intelliSenseMode": "linux-gcc-x64"
     }
   ],

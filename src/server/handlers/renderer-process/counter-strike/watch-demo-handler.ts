@@ -1,4 +1,4 @@
-import { watchDemo } from 'csdm/node/counter-strike/launcher/watch-demo';
+import { watchDemo, type TickCommand } from 'csdm/node/counter-strike/launcher/watch-demo';
 import { handleWatchDemoError, onGameStart } from 'csdm/server/counter-strike';
 
 export type WatchDemoPayload = {
@@ -6,6 +6,7 @@ export type WatchDemoPayload = {
   focusSteamId?: string;
   startTick?: number;
   additionalArguments?: string[];
+  commands?: TickCommand[];
 };
 
 export async function watchDemoHandler(payload: WatchDemoPayload) {

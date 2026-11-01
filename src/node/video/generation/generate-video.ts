@@ -15,7 +15,7 @@ import { sleep } from 'csdm/common/sleep';
 import { sortSequencesByStartTick } from 'csdm/common/video/sort-sequences-by-start-tick';
 import { createCs2VideoJsonFile } from 'csdm/node/video/generation/create-cs2-video-json-file';
 import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-counter-strike';
-import { deleteJsonActionsFile } from 'csdm/node/counter-strike/json-actions-file/delete-json-actions-file';
+import { deletePlaybackFiles } from 'csdm/node/counter-strike/json-actions-file/delete-playback-files';
 import { moveStartMovieFilesToOutputFolder } from 'csdm/node/video/generation/move-startmovie-files-to-output-folder';
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { FfmpegSettings } from 'csdm/node/settings/settings';
@@ -177,7 +177,7 @@ export async function generateVideo(parameters: Parameters) {
 
   const cleanupFiles = async () => {
     logger.debug(`Cleaning up files for video with id ${videoId}`);
-    await Promise.all([deleteJsonActionsFile(demoPath), deleteSequencesRawFiles(parameters)]);
+    await Promise.all([deletePlaybackFiles(demoPath), deleteSequencesRawFiles(parameters)]);
   };
 
   async function onAbort() {
@@ -301,7 +301,7 @@ export async function generateVideo(parameters: Parameters) {
 
     if (keepRawFilesOnGameError && error instanceof GameError) {
       logger.debug(`Keeping raw files of video with id ${videoId} because the game exited with an error`);
-      await deleteJsonActionsFile(demoPath);
+      await deletePlaybackFiles(demoPath);
     } else {
       await cleanupFiles();
     }

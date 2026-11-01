@@ -1,12 +1,18 @@
 import { startCounterStrike } from './start-counter-strike';
 import { JSONActionsFileGenerator } from '../json-actions-file/json-actions-file-generator';
 import { detectDemoGame } from './detect-demo-game';
-import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
+import { deletePlaybackFiles } from '../json-actions-file/delete-playback-files';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
 import { fetchMatchPlayersSlots } from 'csdm/node/database/match/fetch-match-players-slots';
-import { Game } from 'csdm/common/types/counter-strike';
+import type { Game } from 'csdm/common/types/counter-strike';
+
+// Console command executed by the plugin when the playback reaches the tick.
+export type TickCommand = {
+  tick: number;
+  cmd: string;
+};
 
 async function generateJsonActionsFile(
   demoPath: string,
@@ -14,6 +20,7 @@ async function generateJsonActionsFile(
   playerVoicesEnabled: boolean,
   startTick?: number,
   steamId?: string,
+  commands: TickCommand[] = [],
 ) {
   const json = new JSONActionsFileGenerator(demoPath, game);
 
@@ -27,18 +34,17 @@ async function generateJsonActionsFile(
     json.addGoToTick(0, startTick);
   }
 
-  if (steamId || game !== Game.CSGO) {
+  if (steamId) {
     const checksum = await getDemoChecksumFromDemoPath(demoPath);
     const players = await fetchMatchPlayersSlots(checksum);
-    if (game !== Game.CSGO) {
-      json.generateVoiceAliases(players);
+    const player = players.find((player) => player.steamId === steamId);
+    if (player) {
+      json.addSpecPlayer(startTick ?? 0, player.slot);
     }
-    if (steamId) {
-      const player = players.find((player) => player.steamId === steamId);
-      if (player) {
-        json.addSpecPlayer(startTick ?? 0, player.slot);
-      }
-    }
+  }
+
+  for (const { tick, cmd } of commands) {
+    json.addExecCommand(tick, cmd);
   }
 
   await json.write();
@@ -52,17 +58,18 @@ type Options = {
   focusSteamId?: string;
   startTick?: number;
   additionalArguments?: string[];
+  commands?: TickCommand[];
   onGameStart: () => void;
 };
 
 export async function watchDemo(options: Options) {
-  const { demoPath, startTick, focusSteamId } = options;
+  const { demoPath, startTick, focusSteamId, commands } = options;
   const game = await detectDemoGame(demoPath);
   const settings = await getSettings();
   const { playerVoicesEnabled, useHlae } = settings.playback;
 
-  await deleteJsonActionsFile(demoPath);
-  await generateJsonActionsFile(demoPath, game, playerVoicesEnabled, startTick, focusSteamId);
+  await deletePlaybackFiles(demoPath);
+  await generateJsonActionsFile(demoPath, game, playerVoicesEnabled, startTick, focusSteamId, commands);
 
   if (useHlae) {
     await watchDemoWithHlae({

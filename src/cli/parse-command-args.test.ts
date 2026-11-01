@@ -7,6 +7,7 @@ const options = {
   source: { type: 'string', choices: ['valve', 'esl'], description: 'Demo source.' },
   force: { type: 'boolean', description: 'Force.' },
   'show-x-ray': { type: 'boolean', negatable: true, description: 'Show the X-Ray.' },
+  exec: { type: 'string', multiple: true, description: 'Command.' },
 } satisfies CommandOptions;
 
 function getErrorMessage(args: string[], allowPositionals = true) {
@@ -36,6 +37,16 @@ describe('parseCommandArgs', () => {
     const { values } = parseCommandArgs(['--no-show-x-ray'], options, false);
 
     expect(values['show-x-ray']).toBe(false);
+  });
+
+  it('should collect the values of repeated multiple options', () => {
+    const { values } = parseCommandArgs(['--exec', '100:quit', '--exec=50:status'], options, false);
+
+    expect(values.exec).toEqual(['100:quit', '50:status']);
+  });
+
+  it('should reject multiple options without value', () => {
+    expect(getErrorMessage(['--exec', '100:quit', '--exec'])).toBe('Missing value for --exec');
   });
 
   it('should reject the --no- prefix on non-negatable options', () => {
