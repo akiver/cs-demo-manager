@@ -34,12 +34,16 @@
 #ifdef _WIN32
 #include <windows.h>
 #define SERVER_LIB_PATH "\\csgo\\bin\\win64\\server.dll"
+#define CLIENT_LIB_NAME "client.dll"
+#define CLIENT_LIB_PATH "\\csgo\\bin\\win64\\" CLIENT_LIB_NAME
 #else
 #include <unistd.h>
 
 #include <csignal>
 #include <cstdio>
 #define SERVER_LIB_PATH "/csgo/bin/linuxsteamrt64/libserver.so"
+#define CLIENT_LIB_NAME "libclient.so"
+#define CLIENT_LIB_PATH "/csgo/bin/linuxsteamrt64/" CLIENT_LIB_NAME
 #endif
 
 using nlohmann::json;
@@ -50,22 +54,17 @@ using std::string;
 typedef bool (*AppSystemConnectFn)(IAppSystem* appSystem, CreateInterfaceFn factory);
 typedef void (*AppSystemShutdownFn)(IAppSystem* appSystem);
 typedef void (*FrameStageNotifyFn)(void* thisptr, ClientFrameStage_t curStage);
-typedef void (*ClientFullyConnectFn)(void* thisptr, int playerSlot);
 
 AppSystemConnectFn serverConfigConnect = NULL;
-ClientFullyConnectFn originalClientFullyConnect = NULL;
 AppSystemShutdownFn serverConfigShutdown = NULL;
 CreateInterfaceFn serverCreateInterface = NULL;
 ISource2EngineToClient* engineToClient = NULL;
-ISource2Client* client = NULL;
 FrameStageNotifyFn originalFrameStageNotify = NULL;
 // Slot of ISource2Client::FrameStageNotify (cdll_interfaces.h). The method queues a lambda on the thread pool, and the
 // job class generated for that lambda is local to the method, so its typeinfo name embeds
 // "14CSource2Client16FrameStageNotifyE". The only CSource2Client virtual that references the vtable of that class,
 // i.e. constructs the job, is at this slot.
 constexpr int frameStageNotifyVtableIndex = 36;
-// Slot of ISource2GameClients::ClientFullyConnect, the method that fires the "player_connect_full" game event.
-constexpr int clientFullyConnectVtableIndex = 15;
 ICvar* g_pCVar = NULL;
 static const char* demoPath = NULL;
 std::atomic<bool> isQuitting{false};
@@ -135,6 +134,15 @@ void NewFrameStageNotify(void* thisptr, ClientFrameStage_t stage) {
         Log("Engine interface not found");
         originalFrameStageNotify(thisptr, stage);
         return;
+    }
+
+    // The client is up on the first frame, before the first packets of a demo carrying the button baselines are
+    // unserialized.
+    static bool isFirstFrame = true;
+    if (isFirstFrame) {
+        isFirstFrame = false;
+        HookNetMessageUnserialize();
+        HookFindOrCreateNetMessage();
     }
 
     // The overlay hooks are installed here, on the game thread once the client is up, the first time a panel has
@@ -223,10 +231,13 @@ void NewFrameStageNotify(void* thisptr, ClientFrameStage_t stage) {
         // To compare with the thread the network messages are unserialized on, see NewUnserializeMessageInternal.
         Log("Frame hook thread: %llu", (unsigned long long)std::hash<std::thread::id>()(std::this_thread::get_id()));
 
-        // Network messages may not be registered yet when the client connects, retry once playback starts.
+        // Network messages may not be registered yet on the first frame, retry once playback starts.
         HookNetMessageUnserialize();
         HookFindOrCreateNetMessage();
         ResetVoiceActivity();
+
+        // Required to unlock commands such as getposcopy. Loading a demo resets it, so it's set at each playback start.
+        engine->ExecuteClientCmd(0, "sv_cheats 1", true);
     } else if (!newIsPlayingDemo && isPlayingDemo) {
         Log("[%d] Demo playback stopped, sequences %d", newTick, GetSequenceCount());
         // Reset here rather than at the next playback start: the first packets of a demo, which carry the button
@@ -299,6 +310,45 @@ static void HandleWebSocketMessage(const std::string& message) {
     }
 }
 
+static ISource2Client* GetClientInterface() {
+    auto result = (ISource2Client*)FindInterface(CLIENT_LIB_NAME, "Source2Client002", factory);
+    if (result != NULL) {
+        Log("Client interface found");
+        return result;
+    }
+
+    string libPath = gameDirectory + CLIENT_LIB_PATH;
+    Log("Client interface not found, loading %s", libPath.c_str());
+    void* clientModule = LoadLib(libPath.c_str());
+    if (clientModule == NULL) {
+        Log("Could not load client lib %s: %s", libPath.c_str(), GetLastErrorString());
+        return NULL;
+    }
+
+    auto createInterface = (CreateInterfaceFn)GetLibAddress(clientModule, "CreateInterface");
+    if (createInterface == NULL) {
+        Log("CreateInterface not found in %s", libPath.c_str());
+        return NULL;
+    }
+
+    return (ISource2Client*)createInterface("Source2Client002", NULL);
+}
+
+static void HookFrameStageNotify() {
+    ISource2Client* client = GetClientInterface();
+    if (client == NULL) {
+        PluginError("Source2Client002 interface not found.");
+    }
+
+    Log("Hooking FrameStageNotify");
+    auto vtable = *(void***)client;
+    originalFrameStageNotify = (FrameStageNotifyFn)vtable[frameStageNotifyVtableIndex];
+    if (!PatchVTableEntry(vtable, frameStageNotifyVtableIndex, (void*)&NewFrameStageNotify)) {
+        PluginError("Hooking FrameStageNotify failed.");
+    }
+    Log("Hooked FrameStageNotify");
+}
+
 bool Connect(IAppSystem* appSystem, CreateInterfaceFn factoryFn) {
     Log("Connect called");
 
@@ -315,6 +365,15 @@ bool Connect(IAppSystem* appSystem, CreateInterfaceFn factoryFn) {
     UnhideCommandsAndCvars();
     ConVar_Register();
     LoadSettings();
+
+    HookFrameStageNotify();
+    // The queued commands run at the first frame, before the demo loads.
+    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default.
+    // We have to set the demo_ui_mode convar to 0 before starting the playback prevent the UI from being displayed.
+    QueueEngineCommand("demo_ui_mode 0");
+    // Make sure the number keys (1-0) are bound to spectate players, not to possible custom user key binds, otherwise
+    // the numbers in the players menu won't match the number keys that spectate them.
+    QueueEngineCommand("spec_usenumberkeys_nobinds 1");
 
     StartWebSocketConnection(HandleWebSocketMessage);
 
@@ -358,42 +417,6 @@ void AssertInsecureParameterIsPresent() {
     if (!found) {
         PluginError("Plugin loaded without the -insecure launch option.");
     }
-}
-
-void NewClientFullyConnect(void* thisptr, int playerSlot) {
-    Log("ClientFullyConnect: playerSlot=%d", playerSlot);
-    if (client != NULL) {
-        originalClientFullyConnect(thisptr, playerSlot);
-        return;
-    }
-
-    // Hook FrameStageNotify to call engine commands from the engine thread since it's not thread safe to call engine
-    // commands from another thread.
-    client = (ISource2Client*)factory("Source2Client002", NULL);
-    if (client == NULL) {
-        PluginError("Source2Client002 interface not found.");
-    }
-
-    Log("Hooking FrameStageNotify");
-    auto vtable = *(void***)client;
-    originalFrameStageNotify = (FrameStageNotifyFn)vtable[frameStageNotifyVtableIndex];
-    if (!PatchVTableEntry(vtable, frameStageNotifyVtableIndex, (void*)&NewFrameStageNotify)) {
-        PluginError("Hooking FrameStageNotify failed.");
-    }
-    Log("Hooked FrameStageNotify");
-
-    HookNetMessageUnserialize();
-    HookFindOrCreateNetMessage();
-
-    // Since the 23/05/2024 CS2 update, the demo playback UI is displayed by default.
-    // We have to set the demo_ui_mode convar to 0 before starting the playback prevent the UI from being displayed.
-    QueueEngineCommand("demo_ui_mode 0");
-    QueueEngineCommand("sv_cheats 1");  // required to unlock commands such as getposcopy
-    // Make sure the number keys (1-0) are bound to spectate players, not to possible custom user key binds, otherwise
-    // the numbers in the players menu won't match the number keys that spectate them.
-    QueueEngineCommand("spec_usenumberkeys_nobinds 1");
-
-    originalClientFullyConnect(thisptr, playerSlot);
 }
 
 // Dev builds only: when CSDM_WAIT_FOR_DEBUGGER is set, the first CreateInterface call waits for a debugger to attach.
@@ -486,11 +509,6 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode) {
         serverConfigShutdown = (AppSystemShutdownFn)vtable[4];
         if (!PatchVTableEntry(vtable, 0, (void*)&Connect) || !PatchVTableEntry(vtable, 4, (void*)&Shutdown)) {
             PluginError("Hooking Source2ServerConfig001 failed.");
-        }
-    } else if (strcmp(pName, "Source2GameClients001") == 0) {
-        originalClientFullyConnect = (ClientFullyConnectFn)vtable[clientFullyConnectVtableIndex];
-        if (!PatchVTableEntry(vtable, clientFullyConnectVtableIndex, (void*)&NewClientFullyConnect)) {
-            PluginError("Hooking ClientFullyConnect failed.");
         }
     }
 

@@ -67,7 +67,6 @@ Every raw index the plugin uses that a CS2 update can move:
 | Where                                         | Index                              | Interface                   | Implementation class, library     |
 | --------------------------------------------- | ---------------------------------- | --------------------------- | --------------------------------- |
 | `main.cpp`, `CreateInterface`                 | 0 `Connect`, 4 `Shutdown`          | `Source2ServerConfig001`    | real server library               |
-| `main.cpp`, `CreateInterface`                 | 15 `ClientFullyConnect`            | `Source2GameClients001`     | real server library               |
 | `main.cpp`, `frameStageNotifyVtableIndex`     | 36 `FrameStageNotify`              | `Source2Client002`          | `CSource2Client`, client          |
 | `net_messages.cpp`, `*VtableIndex`            | 2 `FindOrCreateNetMessage`, 4      | `NetworkMessagesVersion001` | `CNetworkMessages`, networksystem |
 | `cdll_interfaces.h`, `ISource2EngineToClient` | the `//:` comments                 | `Source2EngineToClient001`  | `CEngineClient`, engine2          |
