@@ -68,6 +68,8 @@ struct PlaybackPlayer {
     int slot;
     int team;
     bool isAlive;
+    // The number key that spectates the player, 1 to 9 then 0 for the tenth player, -1 without one.
+    int numberKey;
 };
 
 // Whether the player at `slot` is heard with these tv_listen_voice_indices/tv_listen_voice_indices_h values.

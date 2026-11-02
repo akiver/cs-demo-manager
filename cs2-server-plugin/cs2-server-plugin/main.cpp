@@ -389,6 +389,9 @@ void NewClientFullyConnect(void* thisptr, int playerSlot) {
     // We have to set the demo_ui_mode convar to 0 before starting the playback prevent the UI from being displayed.
     QueueEngineCommand("demo_ui_mode 0");
     QueueEngineCommand("sv_cheats 1");  // required to unlock commands such as getposcopy
+    // Make sure the number keys (1-0) are bound to spectate players, not to possible custom user key binds, otherwise
+    // the numbers in the players menu won't match the number keys that spectate them.
+    QueueEngineCommand("spec_usenumberkeys_nobinds 1");
 
     originalClientFullyConnect(thisptr, playerSlot);
 }

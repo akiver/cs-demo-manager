@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstdio>
 
+#include "imgui_internal.h"
 #include "overlay_palette.h"
 #include "playback_state.h"
 #include "playback_widgets.h"
@@ -212,6 +213,8 @@ void DrawPlayersMenu(const PlaybackPanelState& state, PlaybackPanelActions& acti
         ImGui::PushStyleColor(ImGuiCol_Header, overlayActiveColor.ToVec4());
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, overlayHoveredColor.ToVec4());
         ImGui::PushStyleColor(ImGuiCol_HeaderActive, overlayPressedColor.ToVec4());
+        float keyWidth = ImGui::CalcTextSize("0").x;
+        float spacing = ImGui::GetStyle().ItemSpacing.x;
         for (int group = 0; group < voiceMenuOthersGroup; group++) {
             ImGui::PushID(group);
             bool hasGroupHeader = false;
@@ -235,11 +238,23 @@ void DrawPlayersMenu(const PlaybackPanelState& state, PlaybackPanelActions& acti
                     ImGui::PushStyleColor(ImGuiCol_Text, overlayMutedTextColor.ToVec4());
                 }
                 bool isSpectated = player.slot == state.spectatedSlot && state.currentCameraIndex < 0;
+                // The number key that spectates the player is right-aligned like a menu shortcut.
+                ImVec2 position = ImGui::GetCursorScreenPos();
+                float rowWidth = ImGui::CalcTextSize(player.name).x + spacing + keyWidth;
+                float rowEnd = position.x + std::max(ImGui::GetContentRegionAvail().x, rowWidth);
                 // The menu stays open to switch between players.
-                if (ImGui::Selectable(player.name, isSpectated, ImGuiSelectableFlags_NoAutoClosePopups)) {
+                if (ImGui::Selectable(player.name, isSpectated,
+                                      ImGuiSelectableFlags_NoAutoClosePopups | ImGuiSelectableFlags_SpanAvailWidth,
+                                      ImVec2(rowWidth, 0.f))) {
                     PlaybackAction action = MakeAction(PLAYBACK_ACTION_SPECTATE_PLAYER);
                     action.slot = player.slot;
                     AddAction(actions, action);
+                }
+                if (player.numberKey >= 0) {
+                    char key[4];
+                    snprintf(key, sizeof(key), "%d", player.numberKey);
+                    ImGui::GetWindowDrawList()->AddText(ImVec2(rowEnd - ImGui::CalcTextSize(key).x, position.y),
+                                                        ImGui::GetColorU32(ImGuiCol_TextDisabled), key);
                 }
                 if (!player.isAlive) {
                     ImGui::PopStyleColor();

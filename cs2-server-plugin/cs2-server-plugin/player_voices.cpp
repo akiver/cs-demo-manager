@@ -48,14 +48,41 @@ bool ReadListenVoiceMask(uint32_t* maskLow, uint32_t* maskHigh) {
     return ReadConVarBits(listenVoiceIndicesConVar, maskLow) && ReadConVarBits(listenVoiceIndicesHighConVar, maskHigh);
 }
 
+// The number keys spectate the players of the HUD's team counter (CCSGO_HudTeamCounter in client.dll): the CTs first,
+// then the Ts, each team in slot order. Bots take keys too, so they're counted even though the menus leave them out.
+static int GetNumberKey(const PlayerController& controller, int ctCount, int* ctIndex, int* tIndex) {
+    int index = -1;
+    if (controller.team == CS_TEAM_CT) {
+        index = (*ctIndex)++;
+    } else if (controller.team == CS_TEAM_T) {
+        index = ctCount + (*tIndex)++;
+    }
+
+    return index >= 0 && index < 10 ? (index + 1) % 10 : -1;
+}
+
 static void RefreshPlayers() {
     PlayerController controllers[maxPlayerSlots];
     int controllerCount = ListPlayerControllers(controllers, maxPlayerSlots);
 
+    int ctCount = 0;
+    for (int i = 0; i < controllerCount; i++) {
+        if (!controllers[i].isHltv && controllers[i].team == CS_TEAM_CT) {
+            ctCount++;
+        }
+    }
+
     playerCount = 0;
+    int ctIndex = 0;
+    int tIndex = 0;
     for (int i = 0; i < controllerCount && playerCount < playbackMaxPlayers; i++) {
         const PlayerController& controller = controllers[i];
-        if (controller.isHltv || controller.steamId == 0) {
+        if (controller.isHltv) {
+            continue;
+        }
+
+        int numberKey = GetNumberKey(controller, ctCount, &ctIndex, &tIndex);
+        if (controller.steamId == 0) {
             continue;
         }
 
@@ -69,6 +96,7 @@ static void RefreshPlayers() {
         player.slot = slot;
         player.team = controller.team;
         player.isAlive = controller.isAlive;
+        player.numberKey = numberKey;
         if (controller.name[0] != '\0') {
             CopyUtf8Truncated(player.name, controller.name);
         } else {
