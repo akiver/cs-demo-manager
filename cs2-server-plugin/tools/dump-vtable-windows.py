@@ -4,7 +4,7 @@
 Usage:
   py -3 tools/dump-vtable-windows.py <lib.dll> <ClassName> [--disas N] [--contains ADDR] [--references TEXT]
 
-Example, checking the ClientFullyConnect index used by the plugin against the shipped binary:
+Example, finding the slot of ClientFullyConnect, the method that fires the player_connect_full event:
   py -3 tools/dump-vtable-windows.py "C:/Program Files (x86)/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/bin/win64/server.dll" CSource2GameClients --references player_connect_full
 
 Each vtable slot is printed with its index, its address and its RVA, the "engine2.dll+0x..." form the csdm_dump_*

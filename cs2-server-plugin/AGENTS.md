@@ -88,13 +88,13 @@ Unlike CS:GO, CS2 has no plugin system. The library is named like the game's own
 `libserver.so`) and installed in a folder that the app adds to the search paths of `gameinfo.gi` ahead of the `csgo`
 folder, so the game loads it in place of the real one. Its exported `CreateInterface` loads the real server library on
 the first call and forwards every call to it, which keeps the game working as before. On the way, it patches the
-vtables of two interfaces:
+vtable of `Source2ServerConfig001`:
 
-- `Source2ServerConfig001`: `Connect` is where the plugin starts, with the engine factory in hand. It fetches the
-  cvar interface, registers the commands and convars, loads the settings, starts the WebSocket connection and restores
-  `gameinfo.gi`. `Shutdown` saves the settings and removes the overlay.
-- `Source2GameClients001`: `ClientFullyConnect`, where the plugin gets the client interface and hooks its
-  `FrameStageNotify`.
+- `Connect` is where the plugin starts, with the engine factory in hand. It fetches the cvar interface, registers the
+  commands and convars, loads the settings, hooks `FrameStageNotify` of the client interface (`Source2Client002`),
+  starts the WebSocket connection and restores `gameinfo.gi`. The client library isn't loaded yet at that point, the
+  plugin loads it itself, and the engine gets the same module when it loads it later.
+- `Shutdown` saves the settings and removes the overlay.
 
 The frame hook is the plugin's game loop. CS:GO plugins got one from `IServerPluginCallbacks::GameFrame`, CS2 has no
 plugin interface, and the engine is not safe to call from the WebSocket thread where the messages arrive. So the
@@ -105,6 +105,7 @@ everything from there:
   can't be done from `Connect`.
 - At `FRAME_START`, it runs everything periodic: the engine commands queued by the WebSocket thread, the sequences, the
   panels and so on.
+- At each playback start, it sets `sv_cheats 1`.
 - At `FRAME_RENDER_START`, it writes the replaced player names, after the game has reapplied the network update that
   would otherwise overwrite them.
 
