@@ -1,5 +1,4 @@
 import React from 'react';
-import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { LaunchParameters } from './launch-parameters';
 import { CustomHighlights } from './custom-highlights';
 import { GameDisplayMode } from './game-display-mode';
@@ -25,7 +24,7 @@ import { WatchRoundWaitRoundEnd } from './watch-round-wait-round-end';
 
 export function PlaybackSettings() {
   return (
-    <SettingsView>
+    <>
       <GameWidth />
       <GameHeight />
       <GameDisplayMode />
@@ -56,6 +55,6 @@ export function PlaybackSettings() {
           <CsgoLocation />
         </>
       )}
-    </SettingsView>
+    </>
   );
 }

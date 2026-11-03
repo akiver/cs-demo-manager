@@ -149,6 +149,14 @@
     background-color: var(--blue-700);
   }
 
+  /*
+  * Page view transition
+  */
+  ::view-transition-old(.page),
+  ::view-transition-new(.page) {
+    animation-duration: var(--transition-duration-300);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * {
       animation: none !important;

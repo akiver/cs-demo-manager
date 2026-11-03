@@ -1,5 +1,4 @@
 import React from 'react';
-import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { DownloadFolderPath } from './download-folder-path';
 import { FaceitSettings } from './faceit-settings';
 import { ValveSettings } from './valve-settings';
@@ -8,14 +7,12 @@ import { RenownSettings } from './renown-settings';
 
 export function DownloadSettings() {
   return (
-    <SettingsView>
-      <div className="flex flex-col gap-y-12">
-        <DownloadFolderPath />
-        <ValveSettings />
-        <FaceitSettings />
-        <RenownSettings />
-        <FiveEPlaySettings />
-      </div>
-    </SettingsView>
+    <div className="flex flex-col gap-y-12">
+      <DownloadFolderPath />
+      <ValveSettings />
+      <FaceitSettings />
+      <RenownSettings />
+      <FiveEPlaySettings />
+    </div>
   );
 }

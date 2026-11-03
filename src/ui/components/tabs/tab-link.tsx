@@ -21,7 +21,6 @@ export function TabLink({ children, url, end = true }: Props) {
           isActive ? '' : 'opacity-60'
         }`;
       }}
-      viewTransition={true}
     >
       {children}
     </NavLink>

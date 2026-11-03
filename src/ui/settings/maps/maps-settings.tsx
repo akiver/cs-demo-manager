@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Game } from 'csdm/common/types/counter-strike';
-import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { Maps } from 'csdm/ui/settings/maps/maps';
 import { AddMapButton } from './add-map-button';
 import { ResetDefaultMapsButton } from './reset-default-maps-button';
@@ -13,7 +12,7 @@ export function MapsSettings() {
   const gameOptions = useGameOptions({ includeCs2LimitedTest: false });
 
   return (
-    <SettingsView>
+    <>
       <div className="mb-12 flex items-center gap-x-8">
         <Select
           label={<Trans context="Select label">Game</Trans>}
@@ -27,6 +26,6 @@ export function MapsSettings() {
         <ResetDefaultMapsButton game={game} />
       </div>
       <Maps game={game} />
-    </SettingsView>
+    </>
   );
 }

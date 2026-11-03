@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React, { startTransition, type ReactNode } from 'react';
 import clsx from 'clsx';
 import type { SettingsCategory } from './settings-category';
 import { useSettingsOverlay } from './use-settings-overlay';
@@ -12,7 +12,9 @@ export function SettingsCategoryButton({ children, category }: Props) {
   const { category: currentCategory, showCategory } = useSettingsOverlay();
 
   const onClick = () => {
-    showCategory(category);
+    startTransition(() => {
+      showCategory(category);
+    });
   };
   const isActive = currentCategory === category;
 

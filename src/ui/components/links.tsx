@@ -47,7 +47,6 @@ function NavigationLink({ children, ref, to, isDisabled }: NavigationLinkProps) 
       to={to}
       state={state}
       aria-disabled={isDisabled}
-      viewTransition={true}
     >
       {children}
     </Link>

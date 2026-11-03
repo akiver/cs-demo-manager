@@ -114,6 +114,7 @@
   --transition-property-stroke-dashoffset: stroke-dashoffset;
 
   --transition-duration-85: 85ms;
+  --transition-duration-300: 300ms;
   --transition-duration-850: 850ms;
 
   --animate-grow-height: grow-height 0.3s ease-in;

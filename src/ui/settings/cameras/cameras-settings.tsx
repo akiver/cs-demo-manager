@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Game } from 'csdm/common/types/counter-strike';
-import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { Cameras } from './cameras';
 import { AddCameraButton } from './add-camera-button';
 import { CamerasMapInput } from './cameras-map-input';
@@ -42,7 +41,7 @@ export function CamerasSettings() {
   };
 
   return (
-    <SettingsView>
+    <>
       <div className="mb-12 flex items-center gap-x-16">
         <CamerasGameInput
           game={game}
@@ -56,6 +55,6 @@ export function CamerasSettings() {
         {mapName && <AddCameraButton game={game} mapName={mapName} />}
       </div>
       {renderContent()}
-    </SettingsView>
+    </>
   );
 }

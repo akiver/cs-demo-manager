@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, ViewTransition } from 'react';
 import { LeftBar } from 'csdm/ui/left-bar/left-bar';
 import { AppWrapper } from './app-wrapper';
 import { AppContent } from './app-content';
@@ -34,9 +34,11 @@ export function App() {
         <ContextMenuProvider>
           <AppWrapper>
             <LeftBar />
-            <AppContent>
-              <Outlet />
-            </AppContent>
+            <ViewTransition default="page">
+              <AppContent>
+                <Outlet />
+              </AppContent>
+            </ViewTransition>
           </AppWrapper>
         </ContextMenuProvider>
       </DropZone>

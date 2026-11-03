@@ -1,5 +1,4 @@
 import React from 'react';
-import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { ThemeSelect } from 'csdm/ui/settings/ui/theme-select';
 import { LanguageSelect } from 'csdm/ui/settings/ui/language-select';
 import { SystemStartupBehavior } from './system-startup-behavior';
@@ -12,7 +11,7 @@ import { DateTimezoneInput } from './date-timezone-input';
 
 export function UiSettings() {
   return (
-    <SettingsView>
+    <>
       <ThemeSelect />
       <LanguageSelect />
       <DateFormatInput />
@@ -22,6 +21,6 @@ export function UiSettings() {
       <RedirectDemoToMatch />
       <EnableHardwareAcceleration />
       <ResetTablesState />
-    </SettingsView>
+    </>
   );
 }

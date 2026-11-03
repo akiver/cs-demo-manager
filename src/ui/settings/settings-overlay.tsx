@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { motion } from 'motion/react';
 import { Settings } from './settings';
+import { SettingsView } from './settings-view';
 import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
 import { SETTINGS_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 
@@ -27,7 +28,9 @@ export function SettingsOverlay({ onClose }: Props) {
       onKeyDown={onKeyDown}
       id={SETTINGS_ELEMENT_ID}
     >
-      <Settings />
+      <SettingsView>
+        <Settings />
+      </SettingsView>
     </motion.div>,
     document.body,
   );

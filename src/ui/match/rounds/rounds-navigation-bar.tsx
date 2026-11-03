@@ -20,7 +20,6 @@ function Link({ children, to, end }: LinkProps) {
       }}
       to={to}
       end={end}
-      viewTransition={true}
     >
       <div className="flex min-w-40 items-center justify-center px-8">{children}</div>
     </NavLink>
