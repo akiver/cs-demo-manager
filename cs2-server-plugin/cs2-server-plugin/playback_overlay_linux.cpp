@@ -105,6 +105,8 @@ void PushPanelState() {
     state.skipSeconds = skipSeconds;
     state.spectatedSteamId = spectatedSteamId;
     state.spectatedSlot = spectatedSlot;
+    state.lockedSteamId = lockedSteamId;
+    state.lockedSlot = lockedSlot;
     state.loopStartTick = loopStartTick;
     state.loopEndTick = loopEndTick;
     state.sequenceStartTick = sequenceStartTick;

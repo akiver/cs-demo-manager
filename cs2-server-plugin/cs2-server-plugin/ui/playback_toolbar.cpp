@@ -289,6 +289,32 @@ void DrawSpectatedPlayerButton(const PlaybackPanelState& state, ImVec2 size) {
     ImGui::PopStyleColor();
 }
 
+void DrawPlayerLockButton(const PlaybackPanelState& state, ImVec2 size, PlaybackPanelActions& actions) {
+    bool isLocked = state.lockedSteamId != 0;
+    const char* spectatedName = state.currentCameraIndex < 0 ? GetSpectatedPlayerName(state) : NULL;
+    bool isEnabled = isLocked || spectatedName != NULL;
+    bool isClicked = isEnabled ? ToggleButton("##lock", isLocked, size) : SkipButton("##lock", size, false);
+    if (isClicked) {
+        AddAction(actions, MakeAction(PLAYBACK_ACTION_TOGGLE_PLAYER_LOCK));
+    }
+    DrawLockIcon(ImGui::GetWindowDrawList(), ImGui::GetItemRectMin(), ImGui::GetItemRectSize(), isLocked,
+                 GetSkipIconColor(isEnabled));
+
+    if (ImGui::IsItemHovered()) {
+        const char* lockedName = isLocked ? GetPlayerName(state, state.lockedSlot) : NULL;
+        if (lockedName != NULL) {
+            SetPanelTooltip(state, "Camera locked on %s, they are spectated again when they respawn, click to unlock",
+                            lockedName);
+        } else if (isLocked) {
+            SetPanelTooltip(state, "Camera locked on a player who isn't in the game, click to unlock");
+        } else if (isEnabled) {
+            SetPanelTooltip(state, "Lock the camera on %s to spectate them again when they respawn", spectatedName);
+        } else {
+            SetPanelTooltip(state, "Spectate a player to lock the camera on them");
+        }
+    }
+}
+
 int DrawSpeedSlider(const PlaybackPanelState& state, PlaybackPanelActions& actions, float width, float height,
                     float scale) {
     ImVec2 position = ImGui::GetCursorScreenPos();

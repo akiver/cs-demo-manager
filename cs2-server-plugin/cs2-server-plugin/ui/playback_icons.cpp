@@ -191,6 +191,26 @@ void DrawRecordIcon(ImDrawList* drawList, ImVec2 position, ImVec2 size, bool isS
     }
 }
 
+void DrawLockIcon(ImDrawList* drawList, ImVec2 position, ImVec2 size, bool isLocked, ImU32 color) {
+    float centerX = position.x + size.x * 0.5f;
+    float bodyHalfWidth = size.y * 0.17f;
+    float bodyTop = position.y + size.y * 0.47f;
+    float bodyBottom = position.y + size.y * 0.75f;
+    drawList->AddRectFilled(ImVec2(centerX - bodyHalfWidth, bodyTop), ImVec2(centerX + bodyHalfWidth, bodyBottom),
+                            color, size.y * 0.04f);
+
+    // The shackle is an arch over the body. Open, it is lifted with its right leg out of the body.
+    float thickness = size.y * 0.07f;
+    float radius = size.y * 0.11f;
+    float archCenterY = position.y + size.y * (isLocked ? 0.36f : 0.29f);
+    drawList->PathArcTo(ImVec2(centerX, archCenterY), radius, 3.14159265f, 2.f * 3.14159265f, 12);
+    drawList->PathStroke(color, ImDrawFlags_None, thickness);
+    drawList->AddLine(ImVec2(centerX - radius, archCenterY), ImVec2(centerX - radius, bodyTop), color, thickness);
+    float rightLegBottom = isLocked ? bodyTop : archCenterY + size.y * 0.05f;
+    drawList->AddLine(ImVec2(centerX + radius, archCenterY), ImVec2(centerX + radius, rightLegBottom), color,
+                      thickness);
+}
+
 void DrawFrameStepIcon(ImDrawList* drawList, ImVec2 position, ImVec2 size, bool isNext, ImU32 color) {
     float top = position.y + size.y * 0.3f;
     float bottom = position.y + size.y * 0.7f;

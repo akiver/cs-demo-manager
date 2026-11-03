@@ -19,6 +19,8 @@ bool GoToPlaybackCamera(int index);
 bool GoToPlaybackCameraRelative(int offset);
 // Leaves the cameras to follow the players again. Safe to call from any thread.
 void LeavePlaybackCamera();
+// Whether the view is on a camera rather than following the players. Safe to call from any thread.
+bool IsOnPlaybackCamera();
 
 // The index of the camera matching `target`, its 1-based number or its name, or the start of it, ignoring case.
 // -1 when no camera matches.

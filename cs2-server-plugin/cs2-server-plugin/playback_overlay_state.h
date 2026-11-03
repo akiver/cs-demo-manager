@@ -50,6 +50,10 @@ extern std::atomic<int> spectatedSlot;
 extern std::mutex spectatedPlayerMutex;
 extern char spectatedPlayerName[playerNameSize];
 
+// The player the camera is locked on, 0 while unlocked, and their slot, -1 while they aren't in the game.
+extern std::atomic<uint64_t> lockedSteamId;
+extern std::atomic<int> lockedSlot;
+
 // Send state changes to the Linux overlay layer, in playback_overlay_linux.cpp. No-ops on Windows, where the panel
 // reads the globals every frame.
 void PushVoiceState();
@@ -65,6 +69,8 @@ void QueueSeek(int tick, uint64_t followSteamId);
 void EnforcePlaybackLoop(int tick, bool isPaused);
 // Drops the player a pending seek was to spectate.
 void ForgetPendingSpectate();
+// Whether a seek was issued and the demo hasn't reached its target yet.
+bool IsPlaybackSeekPending();
 
 // On until the spec_show_xray convar says otherwise, its default.
 bool ReadXrayEnabled();

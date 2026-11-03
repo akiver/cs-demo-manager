@@ -53,6 +53,7 @@ SRC_FILES = main.cpp \
 			playback_overlay.cpp \
 			playback_overlay_linux.cpp \
 			playback_seek.cpp \
+			playback_player_lock.cpp \
 			playback_sequence.cpp \
 			playback_timeline_file.cpp \
 			playback_cameras.cpp \
@@ -95,6 +96,8 @@ SRC_FILES = main.cpp \
 			./commands/csdm_camera_next.cpp \
 			./commands/csdm_camera_previous.cpp \
 			./commands/csdm_camera_off.cpp \
+			./commands/csdm_lock_player.cpp \
+			./commands/csdm_unlock_player.cpp \
 			./commands/csdm_cameras.cpp \
 			./cvars/csdm_buttons_overlay.cpp \
 			./cvars/csdm_buttons_overlay_pos.cpp \

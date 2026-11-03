@@ -34,6 +34,9 @@ struct PlaybackPanelState {
     PlaybackPlayer players[playbackMaxPlayers];
     uint64_t spectatedSteamId;
     int spectatedSlot;
+    // The player the camera is locked on, 0 while unlocked, and their slot, -1 while they aren't in the game.
+    uint64_t lockedSteamId;
+    int lockedSlot;
     int cameraCount;
     PlaybackCamera cameras[playbackMaxCameras];
     // The camera the view was last moved to, -1 when following the players.

@@ -1,7 +1,7 @@
-#include <chrono>
 #include <cstdio>
 #include <mutex>
 
+#include "clock.h"
 #include "log.h"
 #include "playback_cameras.h"
 #include "playback_overlay.h"
@@ -13,11 +13,6 @@ static std::atomic<int> pendingSeekTick{-1};
 static std::atomic<long long> seekIssuedMilliseconds{0};
 // The player to spectate once the pending seek lands, 0 for nobody.
 static std::atomic<uint64_t> pendingSpectateSteamId{0};
-
-static long long NowMilliseconds() {
-    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch())
-        .count();
-}
 
 static void BeginPendingSeek(int targetTick) {
     pendingSeekTick = targetTick;
@@ -52,28 +47,25 @@ static int ResolvePendingSeekTick(int tick, bool* hasLanded) {
 static void SpectatePlaybackPlayerBySteamId(uint64_t steamId) {
     PlayerController controllers[maxPlayerSlots];
     int controllerCount = ListPlayerControllers(controllers, maxPlayerSlots);
-    for (int i = 0; i < controllerCount; i++) {
-        if (controllers[i].steamId != steamId) {
-            continue;
-        }
-
-        int slot = controllers[i].entityIndex - 1;
-        // Already in their eyes: spectating them again would only reset the view mode.
-        if (steamId == spectatedSteamId) {
-            PlaybackCamera cameras[playbackMaxCameras];
-            int currentCameraIndex;
-            GetPlaybackCameras(cameras, &currentCameraIndex);
-            if (currentCameraIndex < 0) {
-                return;
-            }
-        }
-
-        Log("Seek landed, spectating slot %d, SteamID %llu", slot, (unsigned long long)steamId);
-        SpectatePlaybackPlayer(slot);
+    const PlayerController* controller = FindControllerBySteamId(controllers, controllerCount, steamId);
+    if (controller == NULL) {
+        Log("Seek landed, player with SteamID %llu not found", (unsigned long long)steamId);
         return;
     }
 
-    Log("Seek landed, player with SteamID %llu not found", (unsigned long long)steamId);
+    int slot = controller->entityIndex - 1;
+    // Already in their eyes: spectating them again would only reset the view mode.
+    if (steamId == spectatedSteamId) {
+        PlaybackCamera cameras[playbackMaxCameras];
+        int currentCameraIndex;
+        GetPlaybackCameras(cameras, &currentCameraIndex);
+        if (currentCameraIndex < 0) {
+            return;
+        }
+    }
+
+    Log("Seek landed, spectating slot %d, SteamID %llu", slot, (unsigned long long)steamId);
+    SpectatePlaybackPlayer(slot);
 }
 
 int ResolvePlaybackTick(int tick) {
@@ -93,6 +85,9 @@ void QueueSeek(int tick, uint64_t followSteamId) {
     int targetTick = tick < 0 ? 0 : tick;
     BeginPendingSeek(targetTick);
     pendingSpectateSteamId = followSteamId;
+    if (followSteamId != 0 && lockedSteamId != 0) {
+        SetPlaybackLockedPlayer(followSteamId);
+    }
     char command[64];
     snprintf(command, sizeof(command), "demo_gototick %d", targetTick);
     QueueEngineCommand(command);
@@ -110,6 +105,8 @@ void EnforcePlaybackLoop(int tick, bool isPaused) {
 }
 
 void ForgetPendingSpectate() { pendingSpectateSteamId = 0; }
+
+bool IsPlaybackSeekPending() { return pendingSeekTick >= 0; }
 
 static void SeekToTick(int tick) {
     PlaybackAction action = {};

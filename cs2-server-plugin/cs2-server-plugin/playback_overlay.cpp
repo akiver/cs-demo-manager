@@ -325,7 +325,16 @@ void ApplyPlaybackAction(const PlaybackAction& action) {
             break;
 
         case PLAYBACK_ACTION_SPECTATE_PLAYER:
+            NotePlaybackPlayerPicked(action.slot);
             SpectatePlaybackPlayer(action.slot);
+            break;
+
+        case PLAYBACK_ACTION_TOGGLE_PLAYER_LOCK:
+            if (lockedSteamId != 0) {
+                SetPlaybackLockedPlayer(0);
+            } else {
+                LockPlaybackSpectatedPlayer();
+            }
             break;
 
         case PLAYBACK_ACTION_SET_BACKGROUND_OPACITY:

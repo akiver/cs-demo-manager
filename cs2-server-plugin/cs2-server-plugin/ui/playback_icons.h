@@ -24,3 +24,5 @@ void DrawChevronIcon(ImDrawList* drawList, ImVec2 position, ImVec2 size, bool is
 void DrawLoopIcon(ImDrawList* drawList, ImVec2 position, ImVec2 size, ImU32 color);
 // A record dot in a ring, the dot becoming a stop square when `isStopping` is true.
 void DrawRecordIcon(ImDrawList* drawList, ImVec2 position, ImVec2 size, bool isStopping, ImU32 color);
+// A padlock, its shackle lifted open while `isLocked` is false.
+void DrawLockIcon(ImDrawList* drawList, ImVec2 position, ImVec2 size, bool isLocked, ImU32 color);

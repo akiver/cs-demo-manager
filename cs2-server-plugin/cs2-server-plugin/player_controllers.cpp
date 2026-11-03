@@ -338,6 +338,26 @@ int ListPlayerControllers(PlayerController* controllers, int maxCount) {
     return count;
 }
 
+const PlayerController* FindControllerBySteamId(const PlayerController* controllers, int count, uint64_t steamId) {
+    for (int i = 0; i < count; i++) {
+        if (controllers[i].steamId == steamId) {
+            return &controllers[i];
+        }
+    }
+
+    return NULL;
+}
+
+const PlayerController* FindControllerBySlot(const PlayerController* controllers, int count, int slot) {
+    for (int i = 0; i < count; i++) {
+        if (controllers[i].entityIndex - 1 == slot) {
+            return &controllers[i];
+        }
+    }
+
+    return NULL;
+}
+
 void LogPlayerControllersState() {
     uint8_t* entitySystem = GetEntitySystem();
     Log("Client entity system: %s", entitySystem != NULL ? "found" : "not found");

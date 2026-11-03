@@ -63,6 +63,8 @@ static std::atomic<float> playbackAutoHideDelay{playbackPanelDefaultAutoHideDela
 static std::atomic<int> playbackSkipSeconds{playbackDefaultSkipSeconds};
 static std::atomic<uint64_t> playbackSpectatedSteamId{0};
 static std::atomic<int> playbackSpectatedSlot{-1};
+static std::atomic<uint64_t> playbackLockedSteamId{0};
+static std::atomic<int> playbackLockedSlot{-1};
 static std::atomic<int> playbackLoopStartTick{-1};
 static std::atomic<int> playbackLoopEndTick{-1};
 static std::atomic<int> playbackSequenceStartTick{-1};
@@ -551,6 +553,8 @@ static void BuildFrame(const SwapchainInfo& info) {
         state.skipSeconds = playbackSkipSeconds;
         state.spectatedSteamId = playbackSpectatedSteamId;
         state.spectatedSlot = playbackSpectatedSlot;
+        state.lockedSteamId = playbackLockedSteamId;
+        state.lockedSlot = playbackLockedSlot;
         state.loopStartTick = playbackLoopStartTick;
         state.loopEndTick = playbackLoopEndTick;
         state.sequenceStartTick = playbackSequenceStartTick;
@@ -810,6 +814,8 @@ CSDM_LAYER_EXPORT void CsdmOverlaySetPlaybackState(const OverlayPlaybackState* s
     playbackSkipSeconds = state->skipSeconds;
     playbackSpectatedSteamId = state->spectatedSteamId;
     playbackSpectatedSlot = state->spectatedSlot;
+    playbackLockedSteamId = state->lockedSteamId;
+    playbackLockedSlot = state->lockedSlot;
     playbackLoopStartTick = state->loopStartTick;
     playbackLoopEndTick = state->loopEndTick;
     playbackSequenceStartTick = state->sequenceStartTick;

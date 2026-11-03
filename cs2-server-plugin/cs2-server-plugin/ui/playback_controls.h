@@ -106,6 +106,9 @@ struct OverlayPlaybackState {
     int skipSeconds;
     uint64_t spectatedSteamId;
     int spectatedSlot;
+    // The player the camera is locked on, 0 while unlocked, and their slot, -1 while they aren't in the game.
+    uint64_t lockedSteamId;
+    int lockedSlot;
     // The ticks the playback loops between, -1 while not set. The end is never set without the start.
     int loopStartTick;
     int loopEndTick;
@@ -228,6 +231,8 @@ enum PlaybackActionType {
     PLAYBACK_ACTION_GOTO_CAMERA,
     PLAYBACK_ACTION_SPECTATE_PLAYERS,
     PLAYBACK_ACTION_SPECTATE_PLAYER,
+    // Locks the camera on the spectated player, or unlocks it.
+    PLAYBACK_ACTION_TOGGLE_PLAYER_LOCK,
     PLAYBACK_ACTION_SET_BACKGROUND_OPACITY,
     PLAYBACK_ACTION_SET_TOOLTIPS_ENABLED,
     PLAYBACK_ACTION_SET_AUTO_HIDE_DELAY,
