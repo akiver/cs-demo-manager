@@ -41,6 +41,8 @@ void ResetSpectatedPlayer();
 bool GetPlayerPawnPosition(int controllerEntityIndex, uint64_t steamId, PawnPosition* position);
 
 int ListPlayerControllers(PlayerController* controllers, int maxCount);
+const PlayerController* FindControllerBySteamId(const PlayerController* controllers, int count, uint64_t steamId);
+const PlayerController* FindControllerBySlot(const PlayerController* controllers, int count, int slot);
 
 CEntityIdentity* FindPlayerController(int entityIndex, uint64_t steamId);
 

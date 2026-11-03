@@ -32,6 +32,9 @@ void DrawDragHandle(const PlaybackPanelState& state, ImVec2 size, ImVec2 panelPo
                     ImVec2 displaySize);
 // The button between the arrows: the name of the spectated player, and it opens the players menu.
 void DrawSpectatedPlayerButton(const PlaybackPanelState& state, ImVec2 size);
+// Locks the camera on the spectated player so they are spectated again when they respawn, or unlocks it. Inert while
+// unlocked with nobody spectated.
+void DrawPlayerLockButton(const PlaybackPanelState& state, ImVec2 size, PlaybackPanelActions& actions);
 // A track with a notch per playback speed the knob snaps to. Returns the index of the speed shown: while the knob is
 // dragged the dragged one rather than the game's, which lags behind by a frame or two.
 int DrawSpeedSlider(const PlaybackPanelState& state, PlaybackPanelActions& actions, float width, float height,

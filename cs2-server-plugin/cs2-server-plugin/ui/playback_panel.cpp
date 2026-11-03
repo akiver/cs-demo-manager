@@ -216,7 +216,7 @@ PlaybackPanelActions DrawPlaybackPanel(const PlaybackPanelState& state, const Pl
                              spacing + controlHeight + spacing + controlHeight + spacing + controlHeight +
                              groupSpacing + textWidth + roundClockWidth + groupSpacing + speedSliderWidth + spacing +
                              speedLabelWidth + groupSpacing + controlHeight + spacing + playersWidth + spacing +
-                             controlHeight + spacing + controlHeight;
+                             controlHeight + spacing + controlHeight + spacing + controlHeight;
 
             // With a timeline, the panel takes 75% of the display width so a whole match fits, with the controls
             // centered under it. The width is capped at its 16:9 value, otherwise on an ultrawide the bar would stretch
@@ -324,6 +324,9 @@ PlaybackPanelActions DrawPlaybackPanel(const PlaybackPanelState& state, const Pl
             ImVec2 playersAnchor = ImGui::GetItemRectMin();
             ImGui::SameLine(0.f, playersSpacing);
             DrawPlayerCycleButton("##next_player", state, true, ImVec2(controlHeight, controlHeight), actions);
+
+            ImGui::SameLine();
+            DrawPlayerLockButton(state, ImVec2(controlHeight, controlHeight), actions);
 
             ImGui::SameLine();
             if (ToggleButton("##voice", ImGui::IsPopupOpen("voice"), ImVec2(controlHeight, controlHeight))) {

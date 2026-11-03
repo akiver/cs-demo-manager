@@ -54,6 +54,8 @@ void PlaybackOverlayDrawFrame() {
     }
     state.spectatedSteamId = spectatedSteamId;
     state.spectatedSlot = spectatedSlot;
+    state.lockedSteamId = lockedSteamId;
+    state.lockedSlot = lockedSlot;
     state.cameraCount = GetPlaybackCameras(state.cameras, &state.currentCameraIndex);
     state.loopStartTick = loopStartTick;
     state.loopEndTick = loopEndTick;

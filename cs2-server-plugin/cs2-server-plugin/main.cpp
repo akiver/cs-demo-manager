@@ -248,6 +248,7 @@ void NewFrameStageNotify(void* thisptr, ClientFrameStage_t stage) {
         ResetPlayerVoicesState();
         ResetReplacedPlayerNames();
         ResetPlaybackSpectatedPlayer();
+        ResetPlaybackPlayerLock();
         ClearPlaybackLoop();
         ClearPlaybackSequenceStart();
     }
@@ -262,6 +263,7 @@ void NewFrameStageNotify(void* thisptr, ClientFrameStage_t stage) {
     UpdateButtonsOverlayTarget(newTick);
     UpdatePlayerVoicesState();
     UpdatePlaybackSpectatedPlayer();
+    UpdatePlaybackPlayerLock(newTick);
 
     ProcessSequences(engine, newTick);
 

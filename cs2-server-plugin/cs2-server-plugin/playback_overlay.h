@@ -55,10 +55,20 @@ void SetPlaybackPanelState(const PlaybackState& state);
 void UpdatePlaybackSpectatedPlayer();
 void ResetPlaybackSpectatedPlayer();
 void SpectatePlaybackPlayer(int slot);
+
+// Locks the camera on the player with this SteamID, 0 to unlock.
+void SetPlaybackLockedPlayer(uint64_t steamId);
+// False when nobody is spectated.
+bool LockPlaybackSpectatedPlayer();
+// Tells the lock the user picked the player at `slot` in the panel.
+void NotePlaybackPlayerPicked(int slot);
+// Called every frame with the demo tick, after the spectated player is updated.
+void UpdatePlaybackPlayerLock(int tick);
+void ResetPlaybackPlayerLock();
 void SetPlaybackDemoPath(const std::string& path);
 void SetPlaybackDemoChecksum(const std::string& checksum);
 void SetPlaybackVoiceState(uint32_t maskLow, uint32_t maskHigh, const PlaybackPlayer* players, int playerCount);
-// Queues the engine commands matching the action. Safe to call from any thread.
+// Queues the engine commands matching the action.
 void ApplyPlaybackAction(const PlaybackAction& action);
 void SetPlaybackTimeline(const PlaybackTimeline& timeline);
 // Loads the file containing the timeline data the app wrote to <demoPath>.timeline.json when the demo has been

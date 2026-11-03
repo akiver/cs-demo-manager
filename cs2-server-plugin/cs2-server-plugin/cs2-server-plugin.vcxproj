@@ -188,6 +188,7 @@ del *.pdb</Command>
     <ClInclude Include="buttons_overlay.h" />
     <ClInclude Include="buttons_overlay_target.h" />
     <ClInclude Include="ui\buttons_panel.h" />
+    <ClInclude Include="clock.h" />
     <ClInclude Include="maths.h" />
     <ClInclude Include="ui\overlay_palette.h" />
     <ClInclude Include="string_utils.h" />
@@ -253,6 +254,7 @@ del *.pdb</Command>
     <ClCompile Include="playback_overlay.cpp" />
     <ClCompile Include="playback_overlay_windows.cpp" />
     <ClCompile Include="playback_seek.cpp" />
+    <ClCompile Include="playback_player_lock.cpp" />
     <ClCompile Include="playback_sequence.cpp" />
     <ClCompile Include="playback_timeline_file.cpp" />
     <ClCompile Include="playback_cameras.cpp" />
@@ -311,6 +313,8 @@ del *.pdb</Command>
     <ClCompile Include="commands\csdm_camera_next.cpp" />
     <ClCompile Include="commands\csdm_camera_previous.cpp" />
     <ClCompile Include="commands\csdm_camera_off.cpp" />
+    <ClCompile Include="commands\csdm_lock_player.cpp" />
+    <ClCompile Include="commands\csdm_unlock_player.cpp" />
     <ClCompile Include="commands\csdm_cameras.cpp" />
     <ClCompile Include="cvars\csdm_buttons_overlay.cpp" />
     <ClCompile Include="cvars\csdm_match_timeline.cpp" />

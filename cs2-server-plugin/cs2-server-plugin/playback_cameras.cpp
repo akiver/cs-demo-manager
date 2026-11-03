@@ -153,6 +153,12 @@ void LeavePlaybackCamera() {
     PushCameras();
 }
 
+bool IsOnPlaybackCamera() {
+    std::lock_guard<std::mutex> lock(camerasMutex);
+
+    return currentCameraIndex >= 0;
+}
+
 int FindPlaybackCamera(const std::string& target) {
     std::lock_guard<std::mutex> lock(camerasMutex);
     if (IsDigits(target)) {
