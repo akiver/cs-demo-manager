@@ -327,11 +327,17 @@ export function VideoEntry({ video }: Props) {
                 if (firstCamera) {
                   firstCameraName = 'playerName' in firstCamera ? firstCamera.playerName : firstCamera.name;
                 }
+                const isCurrentSequence =
+                  video.status === VideoStatus.Converting && video.currentSequence === sequence.number;
 
                 return (
                   <li
                     key={sequence.number}
-                    className="grid grid-cols-[60px_100px_100px_100px_100px_100px_100px_100px_1fr] gap-4 border border-gray-200 p-4 last:rounded-b-4"
+                    aria-current={isCurrentSequence ? 'step' : undefined}
+                    className={clsx(
+                      'grid grid-cols-[60px_100px_100px_100px_100px_100px_100px_100px_1fr] gap-4 border border-gray-200 p-4 last:rounded-b-4',
+                      isCurrentSequence && 'bg-gray-300 text-body-strong',
+                    )}
                   >
                     <p>{sequence.number}</p>
                     <p>{sequence.startTick}</p>
