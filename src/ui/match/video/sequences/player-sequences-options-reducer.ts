@@ -14,6 +14,7 @@ export type PlayerSequencesOptions = {
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   preserveExistingSequences: boolean;
+  voiceSteamIds: string[];
 };
 
 export type PlayerSequencesOptionsByDemoFilePath = { [demoFilePath: string]: PlayerSequencesOptions | undefined };

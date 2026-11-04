@@ -235,4 +235,75 @@ describe('generate player kills sequences', () => {
 
     expect(sequences[0].endTick).toBe(100);
   });
+
+  describe('player voices', () => {
+    const teammateSteamId = 'teammate-steamId';
+    const teammate = {
+      steamId: teammateSteamId,
+      name: 'Teammate name',
+    } as MatchPlayer;
+    const kill = {
+      killerSteamId,
+      tick: 100,
+    } as Kill;
+    const match = {
+      ...baseMatch,
+      players: [killer, teammate],
+      kills: [kill],
+    } as Match;
+    const options: Omit<Parameters<typeof buildPlayersEventSequences>[0], 'settings'> = {
+      event: PlayerSequenceEvent.Kills,
+      match,
+      steamIds: [killerSteamId],
+      rounds: [],
+      perspective: Perspective.Player,
+      weapons: [],
+      startSecondsBeforeEvent: 5,
+      endSecondsAfterEvent: 2,
+      firstSequenceNumber: 1,
+    };
+
+    it('should enable all voices when the setting is enabled and no voice steam ids are provided', () => {
+      const [sequence] = buildPlayersEventSequences({
+        ...options,
+        settings: { ...defaultSettings.video, playerVoicesEnabled: true },
+      });
+
+      expect(sequence.playerVoicesEnabled).toBe(true);
+      expect(sequence.playersOptions.map((options) => options.isVoiceEnabled)).toEqual([true, true]);
+    });
+
+    it('should disable all voices when the setting is disabled and no voice steam ids are provided', () => {
+      const [sequence] = buildPlayersEventSequences({
+        ...options,
+        settings: { ...defaultSettings.video, playerVoicesEnabled: false },
+      });
+
+      expect(sequence.playerVoicesEnabled).toBe(false);
+      expect(sequence.playersOptions.map((options) => options.isVoiceEnabled)).toEqual([false, false]);
+    });
+
+    it('should enable only the voices of the provided steam ids', () => {
+      const [sequence] = buildPlayersEventSequences({
+        ...options,
+        settings: { ...defaultSettings.video, playerVoicesEnabled: false },
+        voiceSteamIds: [teammateSteamId],
+      });
+
+      expect(sequence.playerVoicesEnabled).toBe(true);
+      expect(sequence.playersOptions.find((options) => options.steamId === killerSteamId)?.isVoiceEnabled).toBe(false);
+      expect(sequence.playersOptions.find((options) => options.steamId === teammateSteamId)?.isVoiceEnabled).toBe(true);
+    });
+
+    it('should disable voices when the provided steam ids are empty even if the setting is enabled', () => {
+      const [sequence] = buildPlayersEventSequences({
+        ...options,
+        settings: { ...defaultSettings.video, playerVoicesEnabled: true },
+        voiceSteamIds: [],
+      });
+
+      expect(sequence.playerVoicesEnabled).toBe(false);
+      expect(sequence.playersOptions.map((options) => options.isVoiceEnabled)).toEqual([false, false]);
+    });
+  });
 });

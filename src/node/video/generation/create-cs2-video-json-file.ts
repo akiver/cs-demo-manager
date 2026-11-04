@@ -174,22 +174,24 @@ export async function createCs2VideoJsonFile({
           `mirv_deathmsg filter add attackerMatch=x${playerOptions.steamId} attackerIsLocal=${playerOptions.highlightKill ? '1' : '0'} block=0`,
         );
       }
+    }
 
-      if (playerOptions.isVoiceEnabled) {
-        const playersWithVoiceEnabled = sequence.playersOptions.filter((playerOptions) => playerOptions.isVoiceEnabled);
-        if (playersWithVoiceEnabled.length !== sequence.playersOptions.length) {
-          const userIds: number[] = [];
-          for (const playerOptions of playersWithVoiceEnabled) {
-            const player = players.find((player) => player.steamId === playerOptions.steamId);
-            if (player) {
-              userIds.push(player.userId);
-            }
-          }
-          const { valueLow, valueHigh } = generatePlayerVoicesValues(userIds);
-          json.addExecCommand(setupSequenceTick, `tv_listen_voice_indices ${valueLow}`);
-          json.addExecCommand(setupSequenceTick, `tv_listen_voice_indices_h ${valueHigh}`);
+    const playersWithVoiceEnabled = sequence.playersOptions.filter((playerOptions) => playerOptions.isVoiceEnabled);
+    if (
+      sequence.playerVoicesEnabled &&
+      playersWithVoiceEnabled.length > 0 &&
+      playersWithVoiceEnabled.length !== sequence.playersOptions.length
+    ) {
+      const userIds: number[] = [];
+      for (const playerOptions of playersWithVoiceEnabled) {
+        const player = players.find((player) => player.steamId === playerOptions.steamId);
+        if (player) {
+          userIds.push(player.userId);
         }
       }
+      const { valueLow, valueHigh } = generatePlayerVoicesValues(userIds);
+      json.addExecCommand(setupSequenceTick, `tv_listen_voice_indices ${valueLow}`);
+      json.addExecCommand(setupSequenceTick, `tv_listen_voice_indices_h ${valueHigh}`);
     }
 
     if (type === 'record') {

@@ -1,27 +1,12 @@
-import type { SequencePlayerOptions } from 'csdm/common/types/sequence-player-options';
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
-import type { MatchPlayer } from 'csdm/common/types/match-player';
 import type { WeaponName } from 'csdm/common/types/counter-strike';
 import { PlayerSequenceEvent } from 'csdm/common/types/player-sequence-event';
 import { Perspective } from 'csdm/common/types/perspective';
 import type { VideoSettings } from 'csdm/node/settings/settings';
 import type { Kill } from 'csdm/common/types/kill';
 import { lastArrayItem } from 'csdm/common/array/last-array-item';
-
-function buildPlayersOptions(players: MatchPlayer[], targetSteamIds: string[]) {
-  const options: SequencePlayerOptions[] = players.map((player) => {
-    return {
-      highlightKill: targetSteamIds.includes(player.steamId),
-      playerName: player.name,
-      showKill: true,
-      steamId: player.steamId,
-      isVoiceEnabled: true,
-    };
-  });
-
-  return options;
-}
+import { buildPlayersOptions } from './build-players-options';
 
 type PlayerEventType = typeof PlayerSequenceEvent.Kills | typeof PlayerSequenceEvent.Deaths;
 
@@ -39,6 +24,8 @@ type Options = {
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   firstSequenceNumber: number;
+  // Steam IDs of the players whose voices must be heard, falls back to the "player voices" setting when undefined.
+  voiceSteamIds?: string[];
 };
 
 function getSteamIdToFocus(
@@ -68,6 +55,7 @@ export function buildPlayersEventSequences({
   startSecondsBeforeEvent,
   endSecondsAfterEvent,
   firstSequenceNumber,
+  voiceSteamIds,
 }: Options) {
   const steamIdKey = event === PlayerSequenceEvent.Kills ? 'killerSteamId' : 'victimSteamId';
   let playerEvents = match.kills.filter((kill) => {
@@ -89,7 +77,13 @@ export function buildPlayersEventSequences({
   const minimumSecondsBetweenTwoEvents = 2;
   const maxSecondsBetweenEvents = 10;
 
-  const playersOptions = buildPlayersOptions(match.players, steamIds);
+  const playersOptions = buildPlayersOptions({
+    players: match.players,
+    highlightedSteamIds: steamIds,
+    voiceSteamIds,
+    playerVoicesEnabled: settings.playerVoicesEnabled,
+  });
+  const playerVoicesEnabled = playersOptions.some((options) => options.isVoiceEnabled);
   const sequences: Sequence[] = [];
   const ticksRequiredBetweenTwoSequences = Math.round(match.tickrate * minimumSecondsBetweenTwoEvents);
   const additionalTicksBeforeEvent = Math.round(match.tickrate * startSecondsBeforeEvent);
@@ -136,7 +130,7 @@ export function buildPlayersEventSequences({
       showXRay: settings.showXRay,
       showAssists: settings.showAssists,
       recordAudio: settings.recordAudio,
-      playerVoicesEnabled: settings.playerVoicesEnabled,
+      playerVoicesEnabled,
       playersOptions,
       playerCameras: [
         {

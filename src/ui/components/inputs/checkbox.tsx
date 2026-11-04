@@ -5,18 +5,25 @@ type Props = {
   name?: string | undefined;
   isChecked?: boolean;
   defaultChecked?: boolean;
+  // Visual "partially checked" state, it can only be set through the DOM property.
+  isIndeterminate?: boolean;
   isDisabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 };
 
-export function Checkbox({ label, isChecked, isDisabled, ...props }: Props) {
+export function Checkbox({ label, isChecked, isIndeterminate = false, isDisabled, ...props }: Props) {
   const id = useId();
 
   return (
     <div className="flex flex-none items-center gap-x-8">
       <input
         id={id}
+        ref={(input) => {
+          if (input) {
+            input.indeterminate = isIndeterminate;
+          }
+        }}
         type="checkbox"
         className="outline-offset-0 outline-gray-800 focus-visible:outline"
         checked={isChecked}

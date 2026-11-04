@@ -16,6 +16,7 @@ export type GeneratePlayersEventPayload = {
   startSecondsBeforeEvent: number;
   endSecondsAfterEvent: number;
   preserveExistingSequences: boolean;
+  voiceSteamIds?: string[];
 };
 
 export const addSequence = createAction<{ demoFilePath: string; sequence: Sequence }>('match/video/sequences/add');
@@ -46,6 +47,7 @@ export const generatePlayersRoundsSequences = createAction<{
   settings: VideoSettings;
   rounds: number[];
   preserveExistingSequences: boolean;
+  voiceSteamIds?: string[];
 }>('match/video/sequences/generatePlayersRounds');
 export const playerSequencesOptionsChanged = createAction<{ demoFilePath: string; options: PlayerSequencesOptions }>(
   'match/video/sequences/playerSequencesOptionsChanged',
