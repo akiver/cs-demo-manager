@@ -44,7 +44,20 @@ export type StartCounterStrikeOptions = {
   signal?: AbortSignal;
   onGameStart?: () => void;
   mode?: 'playback' | 'spectate'; // 'spectate' starts CS on the given map with the player in free-roam spectator mode.
+  // Executes the user's csdm.cfg when it exists, disabled during video generation to not alter recordings.
+  execUserCfg?: boolean;
 };
+
+const USER_CFG_FILE_NAME = 'csdm.cfg';
+
+async function userCfgExists(game: Game) {
+  const csgoFolderPath = await getCsgoFolderPath(game);
+  if (!csgoFolderPath) {
+    return false;
+  }
+
+  return fs.pathExists(path.join(csgoFolderPath, 'game', 'csgo', 'cfg', USER_CFG_FILE_NAME));
+}
 
 function buildUnixCommand(scriptPath: string, args: string, game: Game) {
   if (game === Game.CSGO) {
@@ -128,7 +141,7 @@ async function buildCommand(executablePath: string, args: string, game: Game, se
 // Tip: to understand how Steam starts CS you can use the Steam client launch options: -dev -console
 // You would be able to see the command used to start CS in the console.
 async function startCounterStrikeProcess(options: StartCounterStrikeOptions) {
-  const { demoPath, game, signal, additionalLaunchParameters, mode, map } = options;
+  const { demoPath, game, signal, additionalLaunchParameters, mode, map, execUserCfg = true } = options;
   const executablePath = await getCounterStrikeExecutablePath(game);
   logger.debug('Found CS executable at:', executablePath);
   const settings = await getSettings();
@@ -147,6 +160,9 @@ async function startCounterStrikeProcess(options: StartCounterStrikeOptions) {
     '-novid',
   ];
   if (demoPath) {
+    if (game === Game.CS2 && execUserCfg && (await userCfgExists(game))) {
+      launchParameters.push('+exec', USER_CFG_FILE_NAME);
+    }
     launchParameters.push('+playdemo', `"${demoPath}"`);
   } else if (map) {
     launchParameters.push(`+map`, map);

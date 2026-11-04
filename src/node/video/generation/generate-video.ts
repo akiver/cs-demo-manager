@@ -260,6 +260,7 @@ export async function generateVideo(parameters: Parameters) {
         height,
         signal,
         uninstallPluginOnExit: false,
+        execUserCfg: false,
         onGameStart: parameters.onGameStart,
       });
     }
