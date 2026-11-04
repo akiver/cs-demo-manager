@@ -29,6 +29,8 @@ import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
 import { RoundsSelect } from 'csdm/ui/components/inputs/select/rounds-select';
 import { Checkbox } from 'csdm/ui/components/inputs/checkbox';
 import { useVideoState } from './use-video-state';
+import { Game } from 'csdm/common/types/counter-strike';
+import { PlayerVoicesCheckbox } from './player-voices-checkbox';
 
 function getVisibleWeapons(event: PlayerSequenceEvent, steamIds: string[], match: Match) {
   if (steamIds.length === 0) {
@@ -88,6 +90,10 @@ function SelectPlayerDialog() {
   const [preserveExistingSequences, setPreserveExistingSequences] = useState(
     lastOptions?.preserveExistingSequences ?? false,
   );
+  const allSteamIds = match.players.map((player) => player.steamId);
+  const [voiceSteamIds, setVoiceSteamIds] = useState<string[]>(
+    lastOptions?.voiceSteamIds ?? (settings.playerVoicesEnabled ? allSteamIds : []),
+  );
   const hasSelectedPlayers = selectedSteamIds.length > 0;
 
   const onConfirm = () => {
@@ -107,6 +113,7 @@ function SelectPlayerDialog() {
           startSecondsBeforeEvent,
           endSecondsAfterEvent,
           preserveExistingSequences,
+          voiceSteamIds,
         },
       }),
     );
@@ -124,6 +131,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
+            voiceSteamIds,
           }),
         );
         break;
@@ -139,6 +147,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
+            voiceSteamIds,
           }),
         );
         break;
@@ -152,6 +161,7 @@ function SelectPlayerDialog() {
             startSecondsBeforeEvent,
             endSecondsAfterEvent,
             preserveExistingSequences,
+            voiceSteamIds,
           }),
         );
         break;
@@ -171,6 +181,24 @@ function SelectPlayerDialog() {
       }}
     />
   );
+
+  // Per player voice selection is only possible with CS2.
+  const playerVoicesSelect =
+    match.game === Game.CSGO ? (
+      <PlayerVoicesCheckbox
+        defaultChecked={voiceSteamIds.length > 0}
+        onChange={(isChecked) => {
+          setVoiceSteamIds(isChecked ? allSteamIds : []);
+        }}
+      />
+    ) : (
+      <PlayersSelect
+        label={<Trans context="Players filter category">Player voices</Trans>}
+        players={match.players}
+        selectedSteamIds={voiceSteamIds}
+        onChange={setVoiceSteamIds}
+      />
+    );
 
   const renderSelectedEventOptions = () => {
     if (selectedEvent === PlayerSequenceEvent.Rounds) {
@@ -288,6 +316,7 @@ function SelectPlayerDialog() {
             />
           </div>
           <RoundsSelect rounds={match.rounds} selectedRoundNumbers={selectedRounds} onChange={setSelectedRounds} />
+          {playerVoicesSelect}
           {renderSelectedEventOptions()}
         </div>
       </DialogContent>

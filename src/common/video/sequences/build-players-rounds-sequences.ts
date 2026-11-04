@@ -1,6 +1,7 @@
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { VideoSettings } from 'csdm/node/settings/settings';
+import { buildPlayersOptions } from './build-players-options';
 
 type Options = {
   match: Match;
@@ -13,6 +14,8 @@ type Options = {
     'showOnlyDeathNotices' | 'deathNoticesDuration' | 'showXRay' | 'showAssists' | 'recordAudio' | 'playerVoicesEnabled'
   >;
   firstSequenceNumber: number;
+  // Steam IDs of the players whose voices must be heard, falls back to the "player voices" setting when undefined.
+  voiceSteamIds?: string[];
 };
 
 export function buildPlayersRoundsSequences({
@@ -23,8 +26,16 @@ export function buildPlayersRoundsSequences({
   endSecondsAfterEvent,
   settings,
   firstSequenceNumber,
+  voiceSteamIds,
 }: Options) {
   const sequences: Sequence[] = [];
+  const playersOptions = buildPlayersOptions({
+    players: match.players,
+    highlightedSteamIds: steamIds,
+    voiceSteamIds,
+    playerVoicesEnabled: settings.playerVoicesEnabled,
+  });
+  const playerVoicesEnabled = playersOptions.some((options) => options.isVoiceEnabled);
   const startSecondsBeforeEventTick = startSecondsBeforeEvent;
   const endSecondsAfterEventTick = endSecondsAfterEvent;
 
@@ -48,8 +59,8 @@ export function buildPlayersRoundsSequences({
         showXRay: settings.showXRay,
         showAssists: settings.showAssists,
         recordAudio: settings.recordAudio,
-        playerVoicesEnabled: settings.playerVoicesEnabled,
-        playersOptions: [],
+        playerVoicesEnabled,
+        playersOptions,
         playerCameras: [
           {
             tick: startTick,

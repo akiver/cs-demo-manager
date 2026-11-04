@@ -5217,6 +5217,11 @@ msgid "Preserve existing sequences"
 msgstr "Preserve existing sequences"
 
 #: src/ui/match/video/generate-player-sequences-button.tsx
+msgctxt "Players filter category"
+msgid "Player voices"
+msgstr "Player voices"
+
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
 msgid "POV"
 msgstr "POV"
