@@ -2,6 +2,7 @@ export const HeatmapEvent = {
   Kills: 'kills',
   Deaths: 'deaths',
   Shots: 'shots',
+  Positions: 'positions',
   HeGrenade: 'heGrenade',
   Flashbang: 'flashbang',
   Smoke: 'smoke',

@@ -4,6 +4,7 @@ import type { MatchHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { db } from 'csdm/node/database/database';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
 import { RadarLevel } from 'csdm/ui/maps/radar-level';
+import { buildMatchHeatmapTimeConditions } from './build-match-heatmap-time-conditions';
 
 export async function fetchMatchGrenadePoints(filters: MatchHeatmapFilter): Promise<Point[]> {
   const grenadeNames: GrenadeName[] = [];
@@ -48,6 +49,9 @@ export async function fetchMatchGrenadePoints(filters: MatchHeatmapFilter): Prom
   }
   if (filters.teamNames.length > 0) {
     query = query.where('thrower_team_name', 'in', filters.teamNames);
+  }
+  for (const condition of buildMatchHeatmapTimeConditions(filters, 'grenade_projectiles_destroy')) {
+    query = query.where(condition);
   }
 
   const points = query.execute();

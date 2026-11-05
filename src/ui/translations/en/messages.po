@@ -1362,6 +1362,26 @@ msgctxt "Toast"
 msgid "Heatmap exported, click here to reveal the file"
 msgstr "Heatmap exported, click here to reveal the file"
 
+#: src/ui/components/heatmap/heatmap-plant-phase-select.tsx
+msgctxt "Heatmap bomb plant phase"
+msgid "Whole round"
+msgstr "Whole round"
+
+#: src/ui/components/heatmap/heatmap-plant-phase-select.tsx
+msgctxt "Heatmap bomb plant phase"
+msgid "Before the bomb plant"
+msgstr "Before the bomb plant"
+
+#: src/ui/components/heatmap/heatmap-plant-phase-select.tsx
+msgctxt "Heatmap bomb plant phase"
+msgid "After the bomb plant"
+msgstr "After the bomb plant"
+
+#: src/ui/components/heatmap/heatmap-plant-phase-select.tsx
+msgctxt "Input label"
+msgid "Bomb plant"
+msgstr "Bomb plant"
+
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
 msgid "Kills"
@@ -1376,6 +1396,11 @@ msgstr "Deaths"
 msgctxt "Heatmap event"
 msgid "Shots"
 msgstr "Shots"
+
+#: src/ui/components/heatmap/heatmap-select-event.tsx
+msgctxt "Heatmap event"
+msgid "Positions"
+msgstr "Positions"
 
 #: src/ui/components/heatmap/heatmap-select-event.tsx
 msgctxt "Heatmap event"
@@ -1412,6 +1437,15 @@ msgstr "Event"
 msgctxt "Input label"
 msgid "Map"
 msgstr "Map"
+
+#: src/ui/components/heatmap/heatmap-time-range-slider.tsx
+msgid "Bomb planted at {plantTime}"
+msgstr "Bomb planted at {plantTime}"
+
+#: src/ui/components/heatmap/heatmap-time-range-slider.tsx
+msgctxt "Input label"
+msgid "Time range"
+msgstr "Time range"
 
 #: src/ui/components/heatmap/heatmap.tsx
 msgid "Select a map."

@@ -4,6 +4,7 @@ import { fetchMatchKillsPoints } from 'csdm/node/database/heatmap/fetch-match-ki
 import { fetchMatchShotsPoints } from 'csdm/node/database/heatmap/fetch-match-shots-points';
 import type { Point } from 'csdm/common/types/point';
 import { fetchMatchGrenadePoints } from 'csdm/node/database/heatmap/fetch-match-grenade-points';
+import { fetchMatchPositionsPoints } from 'csdm/node/database/heatmap/fetch-match-positions-points';
 import { assertNever } from 'csdm/common/assert-never';
 import { handleError } from '../../handle-error';
 
@@ -17,6 +18,9 @@ export async function fetchMatchHeatmapPointsHandler(filter: MatchHeatmapFilter)
         break;
       case HeatmapEvent.Shots:
         points = await fetchMatchShotsPoints(filter);
+        break;
+      case HeatmapEvent.Positions:
+        points = await fetchMatchPositionsPoints(filter);
         break;
       case HeatmapEvent.Molotov:
       case HeatmapEvent.HeGrenade:
