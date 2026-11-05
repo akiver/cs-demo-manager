@@ -1,5 +1,7 @@
 import type { DemoSource, DemoType, Game, GameMode, TeamNumber } from 'csdm/common/types/counter-strike';
 import type { HeatmapEvent } from 'csdm/common/types/heatmap-event';
+import type { HeatmapTimeRange } from 'csdm/common/types/heatmap-time-range';
+import type { BombPlantPhase } from 'csdm/common/types/bomb-plant-phase';
 import type { RadarLevel } from 'csdm/ui/maps/radar-level';
 import type { PlayerResult } from './search/player-result';
 
@@ -12,6 +14,8 @@ export type MatchHeatmapFilter = {
   teamNames: string[];
   radarLevel: RadarLevel;
   thresholdZ: number | null;
+  timeRange: HeatmapTimeRange;
+  plantPhase: BombPlantPhase | null; // null => whole round
 };
 
 export type TeamHeatmapFilter = {

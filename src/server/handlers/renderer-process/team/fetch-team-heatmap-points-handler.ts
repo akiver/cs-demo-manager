@@ -25,6 +25,8 @@ export async function fetchTeamHeatmapPointsHandler(filter: TeamHeatmapFilter) {
       case HeatmapEvent.Decoy:
         points = await fetchTeamGrenadePoints(filter);
         break;
+      case HeatmapEvent.Positions:
+        throw new Error('Positions heatmap is not supported for team heatmaps');
       default:
         assertNever(filter.event, `Unsupported heatmap event: ${filter.event as string}`);
     }

@@ -21,7 +21,8 @@ export function MatchHeatmap() {
   const client = useWebSocketClient();
   const dispatch = useDispatch();
   const showToast = useShowToast();
-  const { alpha, blur, radius, event, sides, radarLevel, rounds, steamIds, teamNames } = useHeatmapState();
+  const { alpha, blur, radius, event, sides, radarLevel, rounds, steamIds, teamNames, timeRange, plantPhase } =
+    useHeatmapState();
   const [points, setPoints] = useState<Point[]>([]);
   const isInitialRender = useRef(true);
 
@@ -36,6 +37,8 @@ export function MatchHeatmap() {
         steamIds: filters?.steamIds ?? steamIds,
         radarLevel: filters?.radarLevel ?? radarLevel,
         thresholdZ: filters?.thresholdZ ?? map?.thresholdZ ?? null,
+        timeRange: filters?.timeRange ?? timeRange,
+        plantPhase: filters?.plantPhase === undefined ? plantPhase : filters.plantPhase,
       };
       const points = await client.send({
         name: RendererClientMessageName.FetchMatchHeatmapPoints,

@@ -7,9 +7,10 @@ import { Select } from 'csdm/ui/components/inputs/select';
 type Props = {
   event: HeatmapEvent;
   onChange: (event: HeatmapEvent) => void;
+  excludedEvents?: HeatmapEvent[];
 };
 
-export function HeatmapSelectEvent({ event, onChange }: Props) {
+export function HeatmapSelectEvent({ event, onChange, excludedEvents = [] }: Props) {
   const { t } = useLingui();
 
   const eventMessage: Record<HeatmapEvent, string> = {
@@ -24,6 +25,10 @@ export function HeatmapSelectEvent({ event, onChange }: Props) {
     [HeatmapEvent.Shots]: t({
       context: 'Heatmap event',
       message: 'Shots',
+    }),
+    [HeatmapEvent.Positions]: t({
+      context: 'Heatmap event',
+      message: 'Positions',
     }),
     [HeatmapEvent.HeGrenade]: t({
       context: 'Heatmap event',
@@ -47,12 +52,14 @@ export function HeatmapSelectEvent({ event, onChange }: Props) {
     }),
   };
 
-  const options: SelectOption<HeatmapEvent>[] = Object.values(HeatmapEvent).map((event) => {
-    return {
-      label: eventMessage[event],
-      value: event,
-    };
-  });
+  const options: SelectOption<HeatmapEvent>[] = Object.values(HeatmapEvent)
+    .filter((event) => !excludedEvents.includes(event))
+    .map((event) => {
+      return {
+        label: eventMessage[event],
+        value: event,
+      };
+    });
 
   return (
     <div className="flex flex-col gap-y-8">
