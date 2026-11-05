@@ -19,6 +19,7 @@ import { HeatmapFilters } from 'csdm/ui/components/heatmap/heatmap-filters';
 import { ResetZoomButton } from 'csdm/ui/components/heatmap/reset-zoom-button';
 import { HeatmapTimeRangeSlider } from 'csdm/ui/components/heatmap/heatmap-time-range-slider';
 import { HeatmapPlantPhaseSelect } from 'csdm/ui/components/heatmap/heatmap-plant-phase-select';
+import { getMaxRoundDurationSeconds } from './get-max-round-duration-seconds';
 
 export function MatchHeatmapFilters() {
   const dispatch = useDispatch();
@@ -26,18 +27,14 @@ export function MatchHeatmapFilters() {
   const { event, radarLevel, rounds, sides, teamNames, steamIds, timeRange, plantPhase } = useHeatmapState();
   const { mapName, game, fetchPoints } = useHeatmapContext<Partial<MatchHeatmapFilter>>();
 
-  const selectedRounds =
-    rounds.length > 0 ? match.rounds.filter((round) => rounds.includes(round.number)) : match.rounds;
-  const maxRoundDurationSeconds = Math.max(
-    0,
-    ...selectedRounds.map((round) => (round.endTick - round.freezetimeEndTick) / match.tickrate),
-  );
+  const maxRoundDurationSeconds = getMaxRoundDurationSeconds(match, rounds);
   // The bomb plant mark is relevant only when a single round is selected
   let bombPlantSeconds: number | null = null;
-  if (selectedRounds.length === 1) {
-    const [round] = selectedRounds;
-    const bombPlanted = match.bombsPlanted.find((bombPlanted) => bombPlanted.roundNumber === round.number);
-    if (bombPlanted !== undefined) {
+  if (rounds.length === 1) {
+    const [roundNumber] = rounds;
+    const round = match.rounds.find((round) => round.number === roundNumber);
+    const bombPlanted = match.bombsPlanted.find((bombPlanted) => bombPlanted.roundNumber === roundNumber);
+    if (round !== undefined && bombPlanted !== undefined) {
       bombPlantSeconds = (bombPlanted.tick - round.freezetimeEndTick) / match.tickrate;
     }
   }
