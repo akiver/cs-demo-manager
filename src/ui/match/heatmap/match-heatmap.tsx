@@ -14,6 +14,8 @@ import { fetchPointsSuccess } from './match-heatmap-actions';
 import { HeatmapProvider } from 'csdm/ui/components/heatmap/heatmap-provider';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { useCurrentMatchMap } from '../use-current-match-map';
+import { clampHeatmapTimeRange } from 'csdm/ui/components/heatmap/clamp-heatmap-time-range';
+import { getMaxRoundDurationSeconds } from './get-max-round-duration-seconds';
 
 export function MatchHeatmap() {
   const match = useCurrentMatch();
@@ -28,16 +30,21 @@ export function MatchHeatmap() {
 
   const fetchPoints = async (filters?: Partial<MatchHeatmapFilter>) => {
     try {
+      const selectedRounds = filters?.rounds ?? rounds;
       const payload: MatchHeatmapFilter = {
         checksum: match.checksum,
         event: filters?.event ?? event,
-        rounds: filters?.rounds ?? rounds,
+        rounds: selectedRounds,
         sides: filters?.sides ?? sides,
         teamNames: filters?.teamNames ?? teamNames,
         steamIds: filters?.steamIds ?? steamIds,
         radarLevel: filters?.radarLevel ?? radarLevel,
         thresholdZ: filters?.thresholdZ ?? map?.thresholdZ ?? null,
-        timeRange: filters?.timeRange ?? timeRange,
+        // The time range slider maximum follows the selected rounds, keep the range inside it
+        timeRange: clampHeatmapTimeRange(
+          filters?.timeRange ?? timeRange,
+          getMaxRoundDurationSeconds(match, selectedRounds),
+        ),
         plantPhase: filters?.plantPhase === undefined ? plantPhase : filters.plantPhase,
       };
       const points = await client.send({
