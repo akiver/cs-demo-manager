@@ -1,4 +1,4 @@
-import { Game } from 'csdm/common/types/counter-strike';
+import { Game } from '@akiver/cs-demo-analyzer';
 import type { InsertableMap } from './map-table';
 
 export function getDefaultMaps(game?: Game) {

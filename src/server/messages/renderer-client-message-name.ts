@@ -14,6 +14,7 @@ export const RendererClientMessageName = {
   FetchMatchDuelsMatrixRows: 'fetch-match-duels-matrix-rows',
   FetchMatchHeatmapPoints: 'fetch-match-heatmap-points',
   Fetch2DViewerData: 'fetch-2d-viewer-data',
+  FetchMapBombDamage: 'fetch-map-bomb-damage',
   UpdateComment: 'update-match-comment',
   UpdatePlayerComment: 'update-player-comment',
   UpdateRoundComment: 'update-round-comment',

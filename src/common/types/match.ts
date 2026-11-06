@@ -27,6 +27,7 @@ export type Match = {
   type: DemoType;
   serverName: string;
   clientName: string;
+  networkProtocol: number;
   tickCount: number;
   tickrate: number;
   frameRate: number;
