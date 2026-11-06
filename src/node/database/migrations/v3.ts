@@ -1,4 +1,4 @@
-import { getDefaultMaps } from '../maps/default-maps';
+import { getDefaultMaps } from 'csdm/node/database/maps/default-maps.mjs';
 import { tableHasColumn } from './introspection';
 import type { Migration } from './migration';
 

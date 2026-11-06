@@ -38,6 +38,10 @@ import { deleteDemoAudioOffset, persistDemoAudioOffset } from './audio/audio-off
 import type { DrawingTool } from './drawing/use-drawable-canvas';
 import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
 import { findBombCarrierPositions, getPlayersPositionsAtTick } from './players-timelines';
+import type { DecodedMapBombDamage } from './bomb-damage/decode-map-bomb-damage';
+
+const BOMB_DAMAGE_VISIBLE_STORAGE_KEY = '2d_viewer_bomb_damage_visible';
+const BOMB_DAMAGE_OPACITY_STORAGE_KEY = '2d_viewer_bomb_damage_opacity';
 
 type ViewerMode = 'drawing' | 'playback';
 
@@ -86,6 +90,14 @@ type ViewerContext = {
   bombExploded: BombExploded | null;
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
+  bombDamage: DecodedMapBombDamage | null;
+  // "baked": shockwave data baked into the map (CS2 since July 2026), "legacy": radial model (CS:GO, older CS2 demos
+  // and maps without baked data).
+  bombDamageModel: 'baked' | 'legacy';
+  isBombDamageVisible: boolean;
+  setIsBombDamageVisible: (isVisible: boolean) => void;
+  bombDamageOpacity: number;
+  setBombDamageOpacity: (opacity: number) => void;
   shouldDrawBombs: boolean;
   focusedPlayerId: string | undefined;
   updateFocusedPlayerId: (id: string) => void;
@@ -127,6 +139,7 @@ type Props = {
   bombExploded: BombExploded | null;
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
+  bombDamage: DecodedMapBombDamage | null;
   audio: HTMLAudioElement | null;
   audioBytes: Uint8Array<ArrayBuffer>;
   loadAudioFile: (audioFilePath: string) => Promise<void>;
@@ -151,6 +164,7 @@ export function ViewerProvider({
   bombExploded,
   bombPlanted,
   bombDefused,
+  bombDamage,
   decoysStart,
   heGrenadesExplode,
   smokesStart,
@@ -180,6 +194,13 @@ export function ViewerProvider({
   const [lowerRadarOpacity, setLowerRadarOpacity] = useState(() => {
     const value = window.localStorage.getItem(`${match.game}_${match.mapName}_lower_radar_opacity`);
     return value ? Number.parseFloat(value) : 1;
+  });
+  const [isBombDamageVisible, setIsBombDamageVisible] = useState(() => {
+    return window.localStorage.getItem(BOMB_DAMAGE_VISIBLE_STORAGE_KEY) !== 'false';
+  });
+  const [bombDamageOpacity, setBombDamageOpacity] = useState(() => {
+    const value = window.localStorage.getItem(BOMB_DAMAGE_OPACITY_STORAGE_KEY);
+    return value ? Number.parseFloat(value) : 0.8;
   });
   const remainingTickCount = round.endOfficiallyTick - currentTick;
   const tickrate = match.tickrate;
@@ -293,6 +314,18 @@ export function ViewerProvider({
         bombExploded,
         bombPlanted,
         bombDefused,
+        bombDamage,
+        bombDamageModel: bombDamage === null ? 'legacy' : 'baked',
+        isBombDamageVisible,
+        setIsBombDamageVisible: (isVisible: boolean) => {
+          window.localStorage.setItem(BOMB_DAMAGE_VISIBLE_STORAGE_KEY, String(isVisible));
+          setIsBombDamageVisible(isVisible);
+        },
+        bombDamageOpacity,
+        setBombDamageOpacity: (opacity: number) => {
+          window.localStorage.setItem(BOMB_DAMAGE_OPACITY_STORAGE_KEY, String(opacity));
+          setBombDamageOpacity(opacity);
+        },
         kills,
         shots,
         round,

@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 import { Game } from 'csdm/common/types/counter-strike';
-import { getCsgoFolderPath } from './get-csgo-folder-path';
+import { getCsgoFolderPath } from './steam-folders.mjs';
 
 /**
  * Detects and returns the "csgo" and "replays" folder where demos are stored.

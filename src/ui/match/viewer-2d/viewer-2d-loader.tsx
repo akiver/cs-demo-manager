@@ -1,4 +1,4 @@
-import React, { useState, useEffect, type ReactNode, useCallback } from 'react';
+import React, { useState, useEffect, type ReactNode, useCallback, useRef } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Status } from 'csdm/common/types/status';
 import { Viewer2D } from './viewer-2d';
@@ -35,6 +35,8 @@ import { NoPositionsFound } from './no-positions-found';
 import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { audioLoaded, resetAudioOffset } from './viewer-actions';
+import type { FetchMapBombDamagePayload } from 'csdm/server/handlers/renderer-process/match/fetch-map-bomb-damage-handler';
+import { decodeMapBombDamage, type DecodedMapBombDamage } from './bomb-damage/decode-map-bomb-damage';
 
 type State = {
   error: ReactNode | undefined;
@@ -57,6 +59,7 @@ type State = {
   bombExploded: BombExploded | null;
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
+  bombDamage: DecodedMapBombDamage | null;
   status: Status;
   audio: HTMLAudioElement | null; // the audio element used during playback
   audioBytes: Uint8Array<ArrayBuffer>; // the audio bytes used for the audio waveform
@@ -82,6 +85,7 @@ const defaultState: State = {
   bombExploded: null,
   bombPlanted: null,
   bombDefused: null,
+  bombDamage: null,
   round: undefined,
   status: Status.Loading,
   audio: null,
@@ -97,6 +101,41 @@ export function Viewer2DLoader() {
   const [state, setState] = useState<State>(defaultState);
   const showToast = useShowToast();
   const dispatch = useDispatch();
+  // The bomb damage data is per map and large (several MB on some maps), fetch and decode it once instead of on every
+  // round change.
+  const bombDamageCache = useRef<{ key: string; promise: Promise<DecodedMapBombDamage | null> } | null>(null);
+
+  const fetchBombDamage = useCallback(() => {
+    const payload: FetchMapBombDamagePayload = {
+      mapName: match.mapName,
+      game: match.game,
+      networkProtocol: match.networkProtocol,
+    };
+    const key = `${payload.game}_${payload.mapName}_${payload.networkProtocol}`;
+    if (bombDamageCache.current?.key === key) {
+      return bombDamageCache.current.promise;
+    }
+
+    const promise = (async () => {
+      try {
+        const data = await client.send({
+          name: RendererClientMessageName.FetchMapBombDamage,
+          payload,
+        });
+
+        return data ? decodeMapBombDamage(data) : null;
+      } catch (error) {
+        // Not blocking, the viewer falls back to the legacy radial model.
+        logger.error('Error fetching map bomb damage data');
+        logger.error(error);
+        bombDamageCache.current = null;
+        return null;
+      }
+    })();
+    bombDamageCache.current = { key, promise };
+
+    return promise;
+  }, [client, match.mapName, match.game, match.networkProtocol]);
 
   const loadAudioFile = useCallback(
     async (audioFilePath: string) => {
@@ -149,10 +188,13 @@ export function Viewer2DLoader() {
             status: Status.Loading,
           };
         });
-        const result = await client.send({
-          name: RendererClientMessageName.Fetch2DViewerData,
-          payload,
-        });
+        const [result, bombDamage] = await Promise.all([
+          client.send({
+            name: RendererClientMessageName.Fetch2DViewerData,
+            payload,
+          }),
+          fetchBombDamage(),
+        ]);
 
         if (result.audioFilePath) {
           try {
@@ -180,6 +222,7 @@ export function Viewer2DLoader() {
           return {
             ...state,
             ...result,
+            bombDamage,
             status: Status.Success,
           };
         });
@@ -207,6 +250,7 @@ export function Viewer2DLoader() {
     match.checksum,
     match.demoFilePath,
     match.tickrate,
+    fetchBombDamage,
     loadAudioFile,
   ]);
 
@@ -269,6 +313,7 @@ export function Viewer2DLoader() {
       bombExploded={state.bombExploded}
       bombPlanted={state.bombPlanted}
       bombDefused={state.bombDefused}
+      bombDamage={state.bombDamage}
       bombsDefuseStart={state.bombsDefuseStart}
       bombsPlantStart={state.bombsPlantStart}
       audio={state.audio}

@@ -17,6 +17,7 @@ import { useDrawMapRadar } from './drawing/use-draw-map-radar';
 import { FullscreenProvider } from './fullscreen-provider';
 import { useDrawDeaths } from './drawing/use-draw-deaths';
 import { useDrawBombs } from './drawing/use-draw-bombs';
+import { useDrawBombDamage } from './drawing/use-draw-bomb-damage';
 import { useDrawChickens } from './drawing/use-draw-chickens';
 import { useDrawableCanvas } from './drawing/use-drawable-canvas';
 import { isCtrlOrCmdEvent } from 'csdm/ui/keyboard/keyboard';
@@ -37,6 +38,7 @@ export function Viewer2D() {
   const { drawMapRadar } = useDrawMapRadar();
   const { drawDeaths } = useDrawDeaths();
   const { drawBombs } = useDrawBombs();
+  const { drawBombDamage } = useDrawBombDamage();
   const {
     toggleMode,
     speed,
@@ -82,6 +84,9 @@ export function Viewer2D() {
 
       context.clearRect(0, 0, canvasSize.width, canvasSize.height);
       drawMapRadar(context, interactiveCanvas);
+      if (shouldDrawBombs) {
+        drawBombDamage(context, interactiveCanvas);
+      }
       drawPlayers(context, interactiveCanvas);
       drawHostages(context, interactiveCanvas);
       drawShots(context, interactiveCanvas);

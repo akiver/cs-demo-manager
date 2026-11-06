@@ -16,6 +16,11 @@ import type {
   Fetch2dViewerDataSuccessPayload,
 } from './renderer-process/match/fetch-2d-viewer-data-handler';
 import { fetch2DViewerDataHandler } from './renderer-process/match/fetch-2d-viewer-data-handler';
+import {
+  fetchMapBombDamageHandler,
+  type FetchMapBombDamagePayload,
+} from './renderer-process/match/fetch-map-bomb-damage-handler';
+import type { MapBombDamage } from 'csdm/common/types/map-bomb-damage';
 import type { UpdateCommentPayload } from './renderer-process/match/update-comment-handler';
 import { updateCommentHandler } from './renderer-process/match/update-comment-handler';
 import type {
@@ -244,6 +249,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.FetchTeamHeatmapPoints]: Handler<TeamHeatmapFilter, Point[]>;
   [RendererClientMessageName.FetchPlayerHeatmapPoints]: Handler<PlayerHeatmapFilter, Point[]>;
   [RendererClientMessageName.Fetch2DViewerData]: Handler<Fetch2dViewerDataPayload, Fetch2dViewerDataSuccessPayload>;
+  [RendererClientMessageName.FetchMapBombDamage]: Handler<FetchMapBombDamagePayload, MapBombDamage | null>;
   [RendererClientMessageName.UpdateComment]: Handler<UpdateCommentPayload>;
   [RendererClientMessageName.UpdatePlayerComment]: Handler<UpdatePlayerCommentPayload>;
   [RendererClientMessageName.UpdateRoundComment]: Handler<UpdateRoundCommentPayload>;
@@ -373,6 +379,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.FetchTeamHeatmapPoints]: fetchTeamHeatmapPointsHandler,
   [RendererClientMessageName.FetchPlayerHeatmapPoints]: fetchPlayerHeatmapPointsHandler,
   [RendererClientMessageName.Fetch2DViewerData]: fetch2DViewerDataHandler,
+  [RendererClientMessageName.FetchMapBombDamage]: fetchMapBombDamageHandler,
   [RendererClientMessageName.UpdateComment]: updateCommentHandler,
   [RendererClientMessageName.UpdatePlayerComment]: updatePlayerCommentHandler,
   [RendererClientMessageName.UpdateRoundComment]: updateRoundCommentHandler,

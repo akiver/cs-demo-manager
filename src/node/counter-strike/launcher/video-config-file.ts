@@ -1,6 +1,6 @@
 import { isLinux } from 'csdm/node/os/is-linux';
 import path from 'node:path';
-import { getSteamFolderPath } from '../get-steam-folder-path';
+import { getSteamFolderPath } from '../steam-folders.mjs';
 import { glob } from 'csdm/node/filesystem/glob';
 import fs from 'fs-extra';
 import VDF from 'vdf-parser';

@@ -40,7 +40,8 @@
     "t": "vp run test",
     "tw": "vp run test:watch",
     "test": "vp test",
-    "test:watch": "vp test --watch"
+    "test:watch": "vp test --watch",
+    "update:bomb-damage": "node ./scripts/update-bomb-damage.mjs"
   },
   "devDependencies": {
     "@akiver/boiler-writter": "1.7.0",

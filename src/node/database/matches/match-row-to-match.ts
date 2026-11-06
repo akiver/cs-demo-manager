@@ -22,6 +22,7 @@ export async function matchRowToMatch(
     type: row.type,
     mapName: row.map_name,
     clientName: row.client_name,
+    networkProtocol: row.network_protocol,
     serverName: row.server_name,
     tickCount: row.tick_count,
     date: row.date.toISOString(),

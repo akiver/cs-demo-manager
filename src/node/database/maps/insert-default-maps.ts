@@ -1,6 +1,6 @@
 import type { Transaction } from 'kysely';
 import type { Database } from '../schema';
-import { getDefaultMaps } from './default-maps';
+import { getDefaultMaps } from './default-maps.mjs';
 
 export async function insertDefaultMaps(transaction: Transaction<Database>) {
   await transaction

@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
 import { isMac } from 'csdm/node/os/is-mac';
 import { isWindows } from 'csdm/node/os/is-windows';
-import { getCsgoFolderPath } from './get-csgo-folder-path';
+import { getCsgoFolderPath } from './steam-folders.mjs';
 import { CounterStrikeExecutableNotFound } from './launcher/errors/counter-strike-executable-not-found';
 import { getCustomCounterStrikeExecutablePath } from './get-custom-counter-strike-executable-path';
 
