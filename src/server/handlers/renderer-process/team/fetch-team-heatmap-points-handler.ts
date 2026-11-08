@@ -5,6 +5,7 @@ import { assertNever } from 'csdm/common/assert-never';
 import { fetchTeamKillsPoints } from 'csdm/node/database/heatmap/fetch-team-kills-points';
 import { fetchTeamShotsPoints } from 'csdm/node/database/heatmap/fetch-team-shots-points';
 import { fetchTeamGrenadePoints } from 'csdm/node/database/heatmap/fetch-team-grenade-points';
+import { fetchTeamPositionsPoints } from 'csdm/node/database/heatmap/fetch-team-positions-points';
 import { handleError } from '../../handle-error';
 
 export async function fetchTeamHeatmapPointsHandler(filter: TeamHeatmapFilter) {
@@ -26,7 +27,8 @@ export async function fetchTeamHeatmapPointsHandler(filter: TeamHeatmapFilter) {
         points = await fetchTeamGrenadePoints(filter);
         break;
       case HeatmapEvent.Positions:
-        throw new Error('Positions heatmap is not supported for team heatmaps');
+        points = await fetchTeamPositionsPoints(filter);
+        break;
       default:
         assertNever(filter.event, `Unsupported heatmap event: ${filter.event as string}`);
     }

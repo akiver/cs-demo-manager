@@ -6,6 +6,7 @@ import { handleError } from '../../handle-error';
 import { fetchPlayerKillsPoints } from 'csdm/node/database/heatmap/fetch-player-kills-points';
 import { fetchPlayerShotsPoints } from 'csdm/node/database/heatmap/fetch-player-shots-points';
 import { fetchPlayerGrenadePoints } from 'csdm/node/database/heatmap/fetch-player-grenade-points';
+import { fetchPlayerPositionsPoints } from 'csdm/node/database/heatmap/fetch-player-positions-points';
 
 export async function fetchPlayerHeatmapPointsHandler(filter: PlayerHeatmapFilter) {
   try {
@@ -26,7 +27,8 @@ export async function fetchPlayerHeatmapPointsHandler(filter: PlayerHeatmapFilte
         points = await fetchPlayerGrenadePoints(filter);
         break;
       case HeatmapEvent.Positions:
-        throw new Error('Positions heatmap is not supported for player heatmaps');
+        points = await fetchPlayerPositionsPoints(filter);
+        break;
       default:
         assertNever(filter.event, `Unsupported heatmap event: ${filter.event as string}`);
     }

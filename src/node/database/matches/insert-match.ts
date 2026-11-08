@@ -930,6 +930,7 @@ export async function insertMatch({ checksum, demoPath, outputFolderPath }: Inse
         demoName,
       }),
       insertMatchPositions({
+        checksum,
         demoName,
         outputFolderPath,
       }),

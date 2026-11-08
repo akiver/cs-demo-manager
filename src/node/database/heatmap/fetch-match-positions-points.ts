@@ -2,7 +2,7 @@ import type { MatchHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import type { Point } from 'csdm/common/types/point';
 import { BombPlantPhase } from 'csdm/common/types/bomb-plant-phase';
 import { db } from 'csdm/node/database/database';
-import { extractPositionPoints } from './extract-position-points';
+import { readPositionSamplePoints } from 'csdm/node/database/player-position-samples/read-position-sample-points';
 
 type TickWindow = {
   startTick: number;
@@ -71,36 +71,34 @@ export async function fetchMatchPositionsPoints(filters: MatchHeatmapFilter): Pr
   }
 
   let query = db
-    .selectFrom('player_positions')
+    .selectFrom('player_position_samples')
     .select([
-      'player_positions.round_number',
-      'player_positions.ticks',
-      'player_positions.x',
-      'player_positions.y',
-      'player_positions.z',
-      'player_positions.state_ticks',
-      'player_positions.is_alive',
-      'player_positions.side',
+      'player_position_samples.round_number',
+      'player_position_samples.ticks',
+      'player_position_samples.x',
+      'player_position_samples.y',
+      'player_position_samples.z',
     ])
-    .where('player_positions.match_checksum', '=', filters.checksum)
-    .where('player_positions.round_number', 'in', [...tickWindows.keys()]);
+    .where('player_position_samples.match_checksum', '=', filters.checksum)
+    .where('player_position_samples.round_number', 'in', [...tickWindows.keys()]);
 
+  if (filters.sides.length > 0) {
+    query = query.where('player_position_samples.side', 'in', filters.sides);
+  }
   if (filters.steamIds.length > 0) {
-    query = query.where('player_positions.player_steam_id', 'in', filters.steamIds);
+    query = query.where('player_position_samples.player_steam_id', 'in', filters.steamIds);
   }
   if (filters.teamNames.length > 0) {
     query = query
       .innerJoin('players', (join) => {
         return join
-          .onRef('players.match_checksum', '=', 'player_positions.match_checksum')
-          .onRef('players.steam_id', '=', 'player_positions.player_steam_id');
+          .onRef('players.match_checksum', '=', 'player_position_samples.match_checksum')
+          .onRef('players.steam_id', '=', 'player_position_samples.player_steam_id');
       })
       .where('players.team_name', 'in', filters.teamNames);
   }
 
   const rows = await query.execute();
-  // One position per second per player is enough for a heatmap and keeps the number of points reasonable.
-  const sampleInterval = Math.max(1, Math.round(demo.tickrate));
   // Maps without a lower level have a threshold of 0, it means no threshold like in the other heatmap queries.
   const thresholdZ = filters.thresholdZ || null;
   const points: Point[] = [];
@@ -110,13 +108,11 @@ export async function fetchMatchPositionsPoints(filters: MatchHeatmapFilter): Pr
       continue;
     }
     points.push(
-      ...extractPositionPoints(row, {
+      ...readPositionSamplePoints(row, {
         startTick: tickWindow.startTick,
         endTick: tickWindow.endTick,
-        sides: filters.sides,
         thresholdZ,
         radarLevel: filters.radarLevel,
-        sampleInterval,
       }),
     );
   }

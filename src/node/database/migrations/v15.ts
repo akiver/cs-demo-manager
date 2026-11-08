@@ -111,6 +111,37 @@ const v15: Migration = {
       .columns(['match_checksum', 'round_number'])
       .execute();
 
+    // Players positions sampled once per second for the positions heatmaps, see player-position-sample-table.ts.
+    await transaction.schema
+      .createTable('player_position_samples')
+      .addColumn('match_checksum', 'varchar', (col) => col.notNull())
+      .addForeignKeyConstraint(
+        'player_position_samples_match_checksum_fk',
+        ['match_checksum'],
+        'matches',
+        ['checksum'],
+        (cb) => cb.onDelete('cascade'),
+      )
+      .addColumn('round_number', 'integer', (col) => col.notNull())
+      .addColumn('player_steam_id', 'varchar', (col) => col.notNull())
+      .addColumn('side', 'int2', (col) => col.notNull())
+      .addColumn('ticks', 'bytea', (col) => col.notNull())
+      .addColumn('x', 'bytea', (col) => col.notNull())
+      .addColumn('y', 'bytea', (col) => col.notNull())
+      .addColumn('z', 'bytea', (col) => col.notNull())
+      .execute();
+
+    await transaction.schema
+      .createIndex('player_position_samples_match_checksum_round_number_idx')
+      .on('player_position_samples')
+      .columns(['match_checksum', 'round_number'])
+      .execute();
+    await transaction.schema
+      .createIndex('player_position_samples_player_steam_id_idx')
+      .on('player_position_samples')
+      .column('player_steam_id')
+      .execute();
+
     // Grenades positions are now stored as binary packed columns, see grenade-position-table.ts.
     // Existing positions are deleted, users have to generate them again.
     await transaction.schema.dropTable('grenade_positions').ifExists().execute();
