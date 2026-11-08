@@ -166,8 +166,7 @@ export function useDrawBombDamage() {
     bombExploded,
     bombDefused,
     bombDamage,
-    isBombDamageVisible,
-    bombDamageOpacity,
+    settings: { isBombDamageVisible, bombDamageOpacity },
   } = useViewerContext();
   const cache = useRef<LayerCanvasesCache>({ data: null, layers: [] });
 

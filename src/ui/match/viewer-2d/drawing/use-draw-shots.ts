@@ -10,13 +10,22 @@ type AnimatedShot = Shot & {
 };
 
 export function useDrawShots() {
-  const { shots, currentTick } = useViewerContext();
+  const {
+    shots,
+    currentTick,
+    settings: { showShots },
+  } = useViewerContext();
   const pendingAnimatedShotsRef = useRef<AnimatedShot[]>([]);
 
   const drawShots = (
     context: CanvasRenderingContext2D,
     { zoomedToRadarX, zoomedToRadarY, zoomedSize }: InteractiveCanvas,
   ) => {
+    if (!showShots) {
+      pendingAnimatedShotsRef.current = [];
+      return;
+    }
+
     const pendingAnimatedShots = pendingAnimatedShotsRef.current;
 
     for (const shot of pendingAnimatedShots) {

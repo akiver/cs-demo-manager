@@ -19,6 +19,16 @@ const v14: Migration = {
 
     settings.video.keepRawFilesOnGameError = false;
 
+    settings.viewer2D = {
+      showPlayerNames: true,
+      showChickens: true,
+      showDeaths: true,
+      showShots: true,
+      showKillsFeed: true,
+      isBombDamageVisible: true,
+      bombDamageOpacity: 0.8,
+    };
+
     return Promise.resolve(settings);
   },
 };

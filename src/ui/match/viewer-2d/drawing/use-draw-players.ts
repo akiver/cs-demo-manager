@@ -17,6 +17,7 @@ export function useDrawPlayers() {
     tickrate,
     hostagesPickUpStart,
     hostagesPickedUp,
+    settings: { showPlayerNames },
   } = useViewerContext();
   const bombImage = getBombImage();
 
@@ -93,10 +94,12 @@ export function useDrawPlayers() {
         context.drawImage(bombImage, bombOffsetX, y - bombOffsetY, zoomedSize(14), zoomedSize(14));
       }
 
-      context.font = `${zoomedSize(10)}px Inter var`;
-      context.fillStyle = 'white';
-      const playerNameOffset = zoomedSize(20);
-      context.fillText(position.playerName, x - playerNameOffset, y + playerNameOffset);
+      if (showPlayerNames) {
+        context.font = `${zoomedSize(10)}px Inter var`;
+        context.fillStyle = 'white';
+        const playerNameOffset = zoomedSize(20);
+        context.fillText(position.playerName, x - playerNameOffset, y + playerNameOffset);
+      }
 
       if (position.flashDurationRemaining > 0) {
         context.beginPath();

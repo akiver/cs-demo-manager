@@ -4995,6 +4995,7 @@ msgid "Damages"
 msgstr "Damages"
 
 #: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/viewer-2d/playback-bar/settings-button.tsx
 msgid "Shots"
 msgstr "Shots"
 
@@ -6163,29 +6164,29 @@ msgstr "Audio Files"
 msgid "Choose audio file…"
 msgstr "Choose audio file…"
 
-#: src/ui/match/viewer-2d/playback-bar/bomb-damage-button.tsx
+#: src/ui/match/viewer-2d/playback-bar/bomb-damage-settings.tsx
 msgid "{minDamage} to {maxDamage} HP of damage"
 msgstr "{minDamage} to {maxDamage} HP of damage"
 
-#: src/ui/match/viewer-2d/playback-bar/bomb-damage-button.tsx
+#: src/ui/match/viewer-2d/playback-bar/bomb-damage-settings.tsx
 msgid "Kills a player at 100 HP"
 msgstr "Kills a player at 100 HP"
 
-#: src/ui/match/viewer-2d/playback-bar/bomb-damage-button.tsx
+#: src/ui/match/viewer-2d/playback-bar/bomb-damage-settings.tsx
 msgid "Kills a player at 100 HP without armor"
 msgstr "Kills a player at 100 HP without armor"
 
-#: src/ui/match/viewer-2d/playback-bar/bomb-damage-button.tsx
+#: src/ui/match/viewer-2d/playback-bar/bomb-damage-settings.tsx
 msgid "Kills a player at 100 HP with armor"
 msgstr "Kills a player at 100 HP with armor"
 
-#: src/ui/match/viewer-2d/playback-bar/bomb-damage-button.tsx
+#: src/ui/match/viewer-2d/playback-bar/bomb-damage-settings.tsx
 msgid "Bomb damage"
 msgstr "Bomb damage"
 
-#: src/ui/match/viewer-2d/playback-bar/bomb-damage-button.tsx
-msgid "Show the C4 blast zones once the bomb is planted"
-msgstr "Show the C4 blast zones once the bomb is planted"
+#: src/ui/match/viewer-2d/playback-bar/bomb-damage-settings.tsx
+msgid "C4 blast zones once the bomb is planted"
+msgstr "C4 blast zones once the bomb is planted"
 
 #: src/ui/match/viewer-2d/playback-bar/bomb-exploded-indicator.tsx
 msgid "{time} Bomb planted by {planterName} exploded at site {site}"
@@ -6252,6 +6253,26 @@ msgstr "X"
 msgctxt "Input label"
 msgid "Y"
 msgstr "Y"
+
+#: src/ui/match/viewer-2d/playback-bar/settings-button.tsx
+msgid "Settings"
+msgstr "Settings"
+
+#: src/ui/match/viewer-2d/playback-bar/settings-button.tsx
+msgid "Player names"
+msgstr "Player names"
+
+#: src/ui/match/viewer-2d/playback-bar/settings-button.tsx
+msgid "Kills feed"
+msgstr "Kills feed"
+
+#: src/ui/match/viewer-2d/playback-bar/settings-button.tsx
+msgid "Death positions"
+msgstr "Death positions"
+
+#: src/ui/match/viewer-2d/playback-bar/settings-button.tsx
+msgid "Chickens"
+msgstr "Chickens"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading the audio file found for this match."

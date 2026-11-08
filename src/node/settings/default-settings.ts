@@ -170,4 +170,13 @@ export const defaultSettings: Settings = {
   ban: {
     ignoreBanBeforeFirstSeen: true,
   },
+  viewer2D: {
+    showPlayerNames: true,
+    showChickens: true,
+    showDeaths: true,
+    showShots: true,
+    showKillsFeed: true,
+    isBombDamageVisible: true,
+    bombDamageOpacity: 0.8,
+  },
 };

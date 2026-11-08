@@ -3,10 +3,18 @@ import { useViewerContext } from '../use-viewer-context';
 import { useDrawPlayerDeath } from 'csdm/ui/hooks/drawing/use-draw-player-death';
 
 export function useDrawDeaths() {
-  const { currentTick, kills } = useViewerContext();
+  const {
+    currentTick,
+    kills,
+    settings: { showDeaths },
+  } = useViewerContext();
   const drawPlayerDeath = useDrawPlayerDeath();
 
   const drawDeaths = (context: CanvasRenderingContext2D, interactiveCanvas: InteractiveCanvas) => {
+    if (!showDeaths) {
+      return;
+    }
+
     const killsToDraw = kills.filter((kill) => {
       return kill.tick <= currentTick;
     });

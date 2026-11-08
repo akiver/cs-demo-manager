@@ -11,7 +11,7 @@ import { AudioSelectorButton } from './audio-selector-button';
 import { useViewerContext } from '../use-viewer-context';
 import { DocumentationLink } from 'csdm/ui/components/links/documentation-link';
 import { DrawingButton } from './drawing-button';
-import { BombDamageButton } from './bomb-damage-button';
+import { SettingsButton } from './settings-button';
 import type { DrawableCanvas } from '../drawing/use-drawable-canvas';
 
 type Props = {
@@ -30,8 +30,8 @@ export function PlaybackBar({ drawing }: Props) {
       {audioBytes.length > 0 ? <AudioButton /> : <AudioSelectorButton loadAudioFile={loadAudioFile} />}
       <Timeline />
       <DrawingButton drawing={drawing} />
-      <BombDamageButton />
       <LowerRadarButton />
+      <SettingsButton />
       <FullscreenButton />
       <div className="flex items-center px-8">
         <DocumentationLink url="https://cs-demo-manager.com/docs/guides/2d-viewer" />

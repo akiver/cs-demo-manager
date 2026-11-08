@@ -179,6 +179,16 @@ type BanSettings = {
   ignoreBanBeforeFirstSeen: boolean;
 };
 
+export type Viewer2DSettings = {
+  showPlayerNames: boolean;
+  showChickens: boolean;
+  showDeaths: boolean;
+  showShots: boolean;
+  showKillsFeed: boolean;
+  isBombDamageVisible: boolean;
+  bombDamageOpacity: number;
+};
+
 export type Settings = {
   schemaVersion: number;
   autoDownloadUpdates: boolean;
@@ -203,4 +213,5 @@ export type Settings = {
   teams: TeamsSettings;
   teamProfile: TeamProfileSettings;
   ban: BanSettings;
+  viewer2D: Viewer2DSettings;
 };

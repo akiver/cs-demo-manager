@@ -26,8 +26,13 @@ function getVisibleKills(kills: Kill[], currentTick: number, tickrate: number) {
 }
 
 export function KillsFeed() {
-  const { kills, currentTick, tickrate } = useViewerContext();
-  const visibleKills = getVisibleKills(kills, currentTick, tickrate);
+  const {
+    kills,
+    currentTick,
+    tickrate,
+    settings: { showKillsFeed },
+  } = useViewerContext();
+  const visibleKills = showKillsFeed ? getVisibleKills(kills, currentTick, tickrate) : [];
 
   return (
     <div className="absolute top-32 right-16 flex flex-col">

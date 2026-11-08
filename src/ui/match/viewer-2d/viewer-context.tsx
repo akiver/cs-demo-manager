@@ -39,9 +39,10 @@ import type { DrawingTool } from './drawing/use-drawable-canvas';
 import { isDefuseMapFromName } from 'csdm/common/counter-strike/is-defuse-map-from-name';
 import { findBombCarrierPositions, getPlayersPositionsAtTick } from './players-timelines';
 import type { DecodedMapBombDamage } from './bomb-damage/decode-map-bomb-damage';
-
-const BOMB_DAMAGE_VISIBLE_STORAGE_KEY = '2d_viewer_bomb_damage_visible';
-const BOMB_DAMAGE_OPACITY_STORAGE_KEY = '2d_viewer_bomb_damage_opacity';
+import type { Viewer2DSettings } from 'csdm/node/settings/settings';
+import { defaultSettings } from 'csdm/node/settings/default-settings';
+import { useSettings } from 'csdm/ui/settings/use-settings';
+import { useUpdateSettings } from 'csdm/ui/settings/use-update-settings';
 
 type ViewerMode = 'drawing' | 'playback';
 
@@ -94,11 +95,10 @@ type ViewerContext = {
   // "baked": shockwave data baked into the map (CS2 since July 2026), "legacy": radial model (CS:GO, older CS2 demos
   // and maps without baked data).
   bombDamageModel: 'baked' | 'legacy';
-  isBombDamageVisible: boolean;
-  setIsBombDamageVisible: (isVisible: boolean) => void;
-  bombDamageOpacity: number;
-  setBombDamageOpacity: (opacity: number) => void;
   shouldDrawBombs: boolean;
+  settings: Viewer2DSettings;
+  updateSettings: (settings: Partial<Viewer2DSettings>) => Promise<void>;
+  resetSettings: () => Promise<void>;
   focusedPlayerId: string | undefined;
   updateFocusedPlayerId: (id: string) => void;
   lowerRadarOffsetX: number;
@@ -195,13 +195,8 @@ export function ViewerProvider({
     const value = window.localStorage.getItem(`${match.game}_${match.mapName}_lower_radar_opacity`);
     return value ? Number.parseFloat(value) : 1;
   });
-  const [isBombDamageVisible, setIsBombDamageVisible] = useState(() => {
-    return window.localStorage.getItem(BOMB_DAMAGE_VISIBLE_STORAGE_KEY) !== 'false';
-  });
-  const [bombDamageOpacity, setBombDamageOpacity] = useState(() => {
-    const value = window.localStorage.getItem(BOMB_DAMAGE_OPACITY_STORAGE_KEY);
-    return value ? Number.parseFloat(value) : 0.8;
-  });
+  const settings = useSettings().viewer2D;
+  const updateSettings = useUpdateSettings();
   const remainingTickCount = round.endOfficiallyTick - currentTick;
   const tickrate = match.tickrate;
   const timeRemaining = (remainingTickCount / tickrate) * 1000;
@@ -316,15 +311,23 @@ export function ViewerProvider({
         bombDefused,
         bombDamage,
         bombDamageModel: bombDamage === null ? 'legacy' : 'baked',
-        isBombDamageVisible,
-        setIsBombDamageVisible: (isVisible: boolean) => {
-          window.localStorage.setItem(BOMB_DAMAGE_VISIBLE_STORAGE_KEY, String(isVisible));
-          setIsBombDamageVisible(isVisible);
+        settings,
+        updateSettings: async (partialSettings: Partial<Viewer2DSettings>) => {
+          await updateSettings({ viewer2D: partialSettings });
         },
-        bombDamageOpacity,
-        setBombDamageOpacity: (opacity: number) => {
-          window.localStorage.setItem(BOMB_DAMAGE_OPACITY_STORAGE_KEY, String(opacity));
-          setBombDamageOpacity(opacity);
+        resetSettings: async () => {
+          const defaults = defaultSettings.viewer2D;
+          // Bomb damage settings are not displayed on maps without bombs, keep them untouched.
+          const newSettings: Partial<Viewer2DSettings> = shouldDrawBombs
+            ? defaults
+            : {
+                showPlayerNames: defaults.showPlayerNames,
+                showChickens: defaults.showChickens,
+                showDeaths: defaults.showDeaths,
+                showShots: defaults.showShots,
+                showKillsFeed: defaults.showKillsFeed,
+              };
+          await updateSettings({ viewer2D: newSettings });
         },
         kills,
         shots,

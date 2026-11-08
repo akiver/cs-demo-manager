@@ -1,11 +1,8 @@
 import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { ExplosionIcon } from 'csdm/ui/icons/explosion-icon';
 import { useViewerContext } from '../use-viewer-context';
-import { PlaybackBarButton } from './playback-bar-button';
 import { OpacityInput } from 'csdm/ui/components/inputs/opacity-input';
-import { Popover, PopoverContent, PopoverTrigger } from 'csdm/ui/components/popover/popover';
-import { Switch } from 'csdm/ui/components/inputs/switch';
+import { SettingSwitch } from './setting-switch';
 import {
   BOMB_DAMAGE_BANDS,
   BOMB_DAMAGE_LETHAL_BAND,
@@ -78,45 +75,30 @@ function LegacyLegend() {
   );
 }
 
-function BombDamagePopover() {
-  const { isBombDamageVisible, setIsBombDamageVisible, bombDamageOpacity, setBombDamageOpacity, bombDamageModel } =
-    useViewerContext();
-
-  return (
-    <div className="flex max-w-[320px] flex-col gap-y-8 rounded-8 bg-gray-100 p-8">
-      <p className="text-body-strong">
-        <Trans>Bomb damage</Trans>
-      </p>
-      <div className="flex items-center justify-between gap-x-8">
-        <label htmlFor="bomb-damage-visible" className="cursor-pointer">
-          <Trans>Show the C4 blast zones once the bomb is planted</Trans>
-        </label>
-        <Switch id="bomb-damage-visible" isChecked={isBombDamageVisible} onChange={setIsBombDamageVisible} />
-      </div>
-      <OpacityInput value={bombDamageOpacity} onChange={setBombDamageOpacity} />
-      {bombDamageModel === 'baked' ? <BakedLegend /> : <LegacyLegend />}
-    </div>
-  );
-}
-
-export function BombDamageButton() {
-  const { shouldDrawBombs } = useViewerContext();
+export function BombDamageSettings() {
+  const { shouldDrawBombs, settings, updateSettings, bombDamageModel } = useViewerContext();
 
   if (!shouldDrawBombs) {
     return null;
   }
 
   return (
-    <Popover openOnHover={true} closeDelay={300}>
-      <PopoverTrigger asChild={true}>
-        <PlaybackBarButton>
-          <ExplosionIcon className="w-20" />
-        </PlaybackBarButton>
-      </PopoverTrigger>
-
-      <PopoverContent>
-        <BombDamagePopover />
-      </PopoverContent>
-    </Popover>
+    <div className="flex flex-col gap-y-8 border-t border-t-gray-300 pt-8">
+      <p className="text-body-strong">
+        <Trans>Bomb damage</Trans>
+      </p>
+      <SettingSwitch
+        id="bomb-damage-visible"
+        isChecked={settings.isBombDamageVisible}
+        onChange={(isBombDamageVisible) => updateSettings({ isBombDamageVisible })}
+      >
+        <Trans>C4 blast zones once the bomb is planted</Trans>
+      </SettingSwitch>
+      <OpacityInput
+        value={settings.bombDamageOpacity}
+        onChange={(bombDamageOpacity) => updateSettings({ bombDamageOpacity })}
+      />
+      {bombDamageModel === 'baked' ? <BakedLegend /> : <LegacyLegend />}
+    </div>
   );
 }

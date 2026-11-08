@@ -12,13 +12,21 @@ function getChickenImage() {
 }
 
 export function useDrawChickens() {
-  const { chickenTimelines, currentTick } = useViewerContext();
+  const {
+    chickenTimelines,
+    currentTick,
+    settings: { showChickens },
+  } = useViewerContext();
   const chickenImage = getChickenImage();
 
   const drawChickens = (
     context: CanvasRenderingContext2D,
     { zoomedSize, zoomedToRadarX, zoomedToRadarY }: InteractiveCanvas,
   ) => {
+    if (!showChickens) {
+      return;
+    }
+
     const imageSize = zoomedSize(20);
 
     for (const { positions } of chickenTimelines) {
