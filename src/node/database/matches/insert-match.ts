@@ -35,6 +35,7 @@ import {
 } from './match-insertion';
 import { copyCsvIntoTable } from 'csdm/node/database/copy-csv-into-table';
 import { insertMatchPositions } from './insert-match-positions';
+import type { PlayerPositionSampleTable } from '../player-position-samples/player-position-sample-table';
 import { InsertRoundsError } from './errors/insert-rounds-error';
 import { DuplicatedMatchChecksum } from './errors/duplicated-match-checksum';
 import { db } from '../database';
@@ -714,6 +715,16 @@ async function insertChickenDeaths({ outputFolderPath, demoName }: InsertOptions
   });
 }
 
+async function insertPlayerPositionSamples({ outputFolderPath, demoName }: InsertOptions) {
+  const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_player_position_samples.csv');
+
+  await copyCsvIntoTable<PlayerPositionSampleTable>({
+    tableName: 'player_position_samples',
+    csvFilePath,
+    columns: ['round_number', 'player_steam_id', 'side', 'ticks', 'x', 'y', 'z', 'match_checksum'],
+  });
+}
+
 async function insertDemoFromCsv({ outputFolderPath, demoName }: InsertOptions) {
   return new Promise<void>((resolve, reject) => {
     const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_demo.csv');
@@ -929,8 +940,11 @@ export async function insertMatch({ checksum, demoPath, outputFolderPath }: Inse
         outputFolderPath,
         demoName,
       }),
+      insertPlayerPositionSamples({
+        outputFolderPath,
+        demoName,
+      }),
       insertMatchPositions({
-        checksum,
         demoName,
         outputFolderPath,
       }),

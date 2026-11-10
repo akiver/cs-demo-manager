@@ -5,7 +5,6 @@ import type { HostagePositionTable } from '../hostage-position/hostage-position-
 import type { ChickenPositionTable } from '../chicken-position/chicken-position-table';
 import { getCsvFilePath, type InsertOptions } from './match-insertion';
 import { copyCsvIntoTable } from 'csdm/node/database/copy-csv-into-table';
-import { insertPlayerPositionSamples } from 'csdm/node/database/player-position-samples/insert-player-position-samples';
 
 async function insertPlayersPositions({ outputFolderPath, demoName }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_positions.csv');
@@ -120,18 +119,12 @@ async function insertChickenPositions({ outputFolderPath, demoName }: InsertOpti
   });
 }
 
-type InsertMatchPositionsParameters = {
-  checksum: string;
-  demoName: string;
-  outputFolderPath: string;
-};
-
-export async function insertMatchPositions({ checksum, demoName, outputFolderPath }: InsertMatchPositionsParameters) {
+export async function insertMatchPositions({ demoName, outputFolderPath }: InsertOptions) {
   await Promise.all([
     insertPlayersPositions({
       outputFolderPath,
       demoName,
-    }).then(() => insertPlayerPositionSamples(checksum)),
+    }),
     insertGrenadePositions({
       outputFolderPath,
       demoName,
