@@ -22,6 +22,7 @@ import { useDatabaseSettings } from 'csdm/ui/settings/database/use-database-sett
 export function About() {
   const client = useWebSocketClient();
   const [migrations, setMigrations] = useState<Migration[]>([]);
+  const [postgresqlVersion, setPostgresqlVersion] = useState<string>();
   const info = window.csdm.getAppInformation();
   const { autoDownloadUpdates } = useSettings();
   const updateSettings = useUpdateSettings();
@@ -38,6 +39,20 @@ export function About() {
     })();
   }, [client]);
 
+  useEffect(() => {
+    void (async () => {
+      try {
+        const version = await client.send({
+          name: RendererClientMessageName.FetchPostgreSqlVersion,
+        });
+        setPostgresqlVersion(version);
+      } catch (error) {
+        logger.error('Failed to fetch PostgreSQL version');
+        logger.error(error);
+      }
+    })();
+  }, [client]);
+
   /* oxlint-disable lingui/no-unlocalized-strings */
   const data: string[] = [
     `Version: ${APP_VERSION}`,
@@ -47,6 +62,7 @@ export function About() {
     isEmbeddedDatabase
       ? 'Database: embedded'
       : `Database: external (${databaseSettings.hostname}:${databaseSettings.port})`,
+    `PostgreSQL: ${postgresqlVersion ?? 'unknown'}`,
     'Last database migrations:',
     ...migrations.map((migration) => `v${migration.version} - ${migration.date}`),
   ];

@@ -109,6 +109,7 @@ export const RendererClientMessageName = {
   SearchPlayers: 'search-players',
   SearchMaps: 'search-maps',
   FetchLastMigrations: 'fetch-last-migrations',
+  FetchPostgreSqlVersion: 'fetch-postgresql-version',
   ImportDataFromV2Backup: 'import-data-from-v2-backup',
   CapturePlayerView: 'capture-player-view',
 } as const;
