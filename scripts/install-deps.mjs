@@ -189,15 +189,17 @@ async function thinMacOsBinaries(folderPath, arch) {
   await walk(folderPath);
 }
 
+export const embeddedPostgreSqlFolderPath = path.join(staticFolderPath, 'postgres');
+// Written last by the installation, its presence means the folder is complete.
+const embeddedPostgreSqlMarkerFilePath = path.join(embeddedPostgreSqlFolderPath, 'VERSION');
+
 /**
- * Installs the PostgreSQL server binaries used by the embedded database in static/postgres.
- * They come from the @embedded-postgres npm packages (one per platform), downloaded from the npm registry rather
- * than installed as dependencies because packaging the app for another platform must be possible.
+ * Name of the @embedded-postgres npm package providing the binaries of a platform.
  *
  * @param {NodeJS.Platform} platform
  * @param {string} arch
  */
-export async function installEmbeddedPostgreSql(platform = process.platform, arch = process.arch) {
+function getEmbeddedPostgreSqlPackageName(platform, arch) {
   const packageNames = {
     'darwin-x64': 'darwin-x64',
     'darwin-arm64': 'darwin-arm64',
@@ -211,14 +213,43 @@ export async function installEmbeddedPostgreSql(platform = process.platform, arc
     throw new Error(`Unsupported platform: ${platformKey}`);
   }
 
-  const version = EMBEDDED_POSTGRESQL_PACKAGE_VERSION;
-  const installationId = `${packageName}-${version}`;
-  const destinationPath = path.join(staticFolderPath, 'postgres');
-  // Written last, its presence means the folder is complete and up to date.
-  const markerFilePath = path.join(destinationPath, 'VERSION');
-  if ((await fs.pathExists(markerFilePath)) && (await fs.readFile(markerFilePath, 'utf8')) === installationId) {
+  return packageName;
+}
+
+/**
+ * Whether static/postgres contains the binaries of the given platform in the version the app expects.
+ *
+ * @param {NodeJS.Platform} platform
+ * @param {string} arch
+ */
+export async function isEmbeddedPostgreSqlInstalled(platform = process.platform, arch = process.arch) {
+  try {
+    const installationId = `${getEmbeddedPostgreSqlPackageName(platform, arch)}-${EMBEDDED_POSTGRESQL_PACKAGE_VERSION}`;
+    const content = await fs.readFile(embeddedPostgreSqlMarkerFilePath, 'utf8');
+    return content === installationId;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Installs the PostgreSQL server binaries used by the embedded database in static/postgres.
+ * They come from the @embedded-postgres npm packages (one per platform), downloaded from the npm registry rather
+ * than installed as dependencies because packaging the app for another platform must be possible.
+ *
+ * @param {NodeJS.Platform} platform
+ * @param {string} arch
+ */
+export async function installEmbeddedPostgreSql(platform = process.platform, arch = process.arch) {
+  if (await isEmbeddedPostgreSqlInstalled(platform, arch)) {
     return;
   }
+
+  const packageName = getEmbeddedPostgreSqlPackageName(platform, arch);
+  const version = EMBEDDED_POSTGRESQL_PACKAGE_VERSION;
+  const installationId = `${packageName}-${version}`;
+  const destinationPath = embeddedPostgreSqlFolderPath;
+  const markerFilePath = embeddedPostgreSqlMarkerFilePath;
 
   const cacheFolderPath = path.join(projectPath, 'node_modules', '.cache', 'embedded-postgres');
   await fs.ensureDir(cacheFolderPath);

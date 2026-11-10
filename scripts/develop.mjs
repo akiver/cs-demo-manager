@@ -11,6 +11,7 @@ import { watch } from 'vite/rolldown';
 import nativeNodeModulesPlugin from './rolldown-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
 import { killDaemonProcess } from './kill-daemon-process.mjs';
+import { ensureEmbeddedPostgreSqlInstalled } from './ensure-embedded-postgresql-installed.mjs';
 import { resolveAppFolderPath } from '../src/node/filesystem/resolve-app-folder-path.mts';
 import { SERVER_INSPECTOR_PORT, RENDERER_REMOTE_DEBUGGING_PORT } from '../src/node/debug-ports.mts';
 
@@ -244,6 +245,7 @@ async function buildAndWatchMainProcessBundles() {
 
 try {
   await fs.ensureDir(outFolderPath);
+  await ensureEmbeddedPostgreSqlInstalled((message) => devLogger.info(message, { timestamp: true }));
 
   await Promise.all([buildAndWatchRendererProcessBundle(), buildAndWatchMainProcessBundles()]);
   if (!isRunningUnderVsCodeDebugger) {

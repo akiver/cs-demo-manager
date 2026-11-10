@@ -7,6 +7,7 @@ import { watch } from 'vite/rolldown';
 import nativeNodeModulesPlugin from './rolldown-native-node-modules-plugin.mjs';
 import { node } from './electron-vendors.mjs';
 import { killDaemonProcess } from './kill-daemon-process.mjs';
+import { ensureEmbeddedPostgreSqlInstalled } from './ensure-embedded-postgresql-installed.mjs';
 
 const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
 const outFolderPath = path.resolve(rootFolderPath, 'out');
@@ -41,6 +42,8 @@ const commonOutputOptions = {
   sourcemap: true,
   codeSplitting: false,
 };
+
+await ensureEmbeddedPostgreSqlInstalled();
 
 const watcher = watch([
   {
