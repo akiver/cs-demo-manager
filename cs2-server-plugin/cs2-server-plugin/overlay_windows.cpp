@@ -554,8 +554,37 @@ static void RemoveFactoryHooks() {
     originalCreateSwapChainForHwnd = NULL;
 }
 
+// The factory that created the adapter of the device, the one a swap chain for that device must be created with.
+static IDXGIFactory2* GetDeviceFactory(ID3D11Device* device) {
+    IDXGIDevice* dxgiDevice = NULL;
+    if (FAILED(device->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice)) || dxgiDevice == NULL) {
+        return NULL;
+    }
+
+    IDXGIAdapter* adapter = NULL;
+    HRESULT result = dxgiDevice->GetAdapter(&adapter);
+    dxgiDevice->Release();
+    if (FAILED(result) || adapter == NULL) {
+        return NULL;
+    }
+
+    IDXGIFactory2* factory = NULL;
+    result = adapter->GetParent(__uuidof(IDXGIFactory2), (void**)&factory);
+    adapter->Release();
+    if (FAILED(result)) {
+        return NULL;
+    }
+
+    return factory;
+}
+
 // The vtable of IDXGISwapChain lives in dxgi.dll and is shared by every swap chain of the process, so hooking the one
 // of a throwaway swap chain also hooks the one the game renders through, no signature scanning required.
+// The swap chain is created with CreateSwapChainForHwnd, never with CreateSwapChain or D3D11CreateDeviceAndSwapChain
+// (which calls CreateSwapChain): HLAE hooks CreateSwapChain and keeps a pointer, without a reference, to the last swap
+// chain created through it, which it uses to record videos and in its CreateRenderTargetView hook. A throwaway swap
+// chain going through it left HLAE with a dangling pointer that crashed the game at the first panel drawn. HLAE also
+// hooks D3D11CreateDevice, but only keeps the vtables of the device and its context, shared by every device.
 static void** GetSwapChainVTable() {
     HWND window =
         CreateWindowExA(0, "STATIC", "csdm", WS_OVERLAPPED, 0, 0, 2, 2, NULL, NULL, GetModuleHandleA(NULL), NULL);
@@ -564,24 +593,35 @@ static void** GetSwapChainVTable() {
         return NULL;
     }
 
-    DXGI_SWAP_CHAIN_DESC description = {};
-    description.BufferCount = 1;
-    description.BufferDesc.Width = 2;
-    description.BufferDesc.Height = 2;
-    description.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    description.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    description.OutputWindow = window;
+    D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_11_0;
+    ID3D11Device* temporaryDevice = NULL;
+    HRESULT result = D3D11CreateDevice(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, &featureLevel, 1, D3D11_SDK_VERSION,
+                                       &temporaryDevice, NULL, NULL);
+    if (FAILED(result) || temporaryDevice == NULL) {
+        Log("Overlay: temporary device creation failed: %#lx", result);
+        DestroyWindow(window);
+        return NULL;
+    }
+
+    IDXGIFactory2* factory = GetDeviceFactory(temporaryDevice);
+    if (factory == NULL) {
+        Log("Overlay: the DXGI factory of the temporary device isn't available");
+        temporaryDevice->Release();
+        DestroyWindow(window);
+        return NULL;
+    }
+
+    DXGI_SWAP_CHAIN_DESC1 description = {};
+    description.Width = 2;
+    description.Height = 2;
+    description.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
     description.SampleDesc.Count = 1;
-    description.Windowed = TRUE;
+    description.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+    description.BufferCount = 1;
     description.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 
-    D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_11_0;
-    IDXGISwapChain* swapChain = NULL;
-    ID3D11Device* temporaryDevice = NULL;
-    ID3D11DeviceContext* temporaryContext = NULL;
-    HRESULT result =
-        D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, &featureLevel, 1, D3D11_SDK_VERSION,
-                                      &description, &swapChain, &temporaryDevice, NULL, &temporaryContext);
+    IDXGISwapChain1* swapChain = NULL;
+    result = factory->CreateSwapChainForHwnd(temporaryDevice, window, &description, NULL, NULL, &swapChain);
 
     void** vtable = NULL;
     if (SUCCEEDED(result) && swapChain != NULL) {
@@ -590,15 +630,11 @@ static void** GetSwapChainVTable() {
         Log("Overlay: temporary swap chain creation failed: %#lx", result);
     }
 
-    if (temporaryContext != NULL) {
-        temporaryContext->Release();
-    }
     if (swapChain != NULL) {
         swapChain->Release();
     }
-    if (temporaryDevice != NULL) {
-        temporaryDevice->Release();
-    }
+    factory->Release();
+    temporaryDevice->Release();
     DestroyWindow(window);
 
     return vtable;
