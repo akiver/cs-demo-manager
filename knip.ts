@@ -6,9 +6,8 @@ const config: KnipConfig = {
   rules: {
     devDependencies: 'off',
   },
-  ignore: ['**/*/lingui.config.ts'],
   ignoreDependencies: ['@lingui/core'],
-  ignoreBinaries: ['tasklist', 'pgrep'],
+  ignoreBinaries: ['tasklist'],
 };
 
 export default config;

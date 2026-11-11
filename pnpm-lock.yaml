@@ -235,6 +235,9 @@ importers:
       '@lingui/format-json':
         specifier: 6.12.0
         version: 6.12.0
+      '@lingui/format-po':
+        specifier: 6.12.0
+        version: 6.12.0
       '@lingui/react':
         specifier: 6.12.0
         version: 6.12.0(@babel/core@7.29.7(supports-color@7.2.0))(react@19.3.1)
