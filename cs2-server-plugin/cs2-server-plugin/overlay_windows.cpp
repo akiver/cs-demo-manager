@@ -27,6 +27,7 @@
 
 static void InstallWindowProcedureHook();
 static void RemoveWindowProcedureHook();
+static void InstallCaptureHook();
 
 // IDXGISwapChain inherits IUnknown (3 methods), IDXGIObject (4) and IDXGIDeviceSubObject (1), so its own methods
 // start at 8, Present first. Inheritance chain and method order from the interface reference:
@@ -61,6 +62,26 @@ static HWND gameWindow = NULL;
 static bool isImGuiInitialized = false;
 // HLAE is injected when the game starts, before the overlay is initialized.
 static bool isHlaeLoaded = false;
+
+// ID3D11DeviceContext inherits IUnknown (3 methods) and ID3D11DeviceChild (4), Map is its 8th method.
+// https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nn-d3d11-id3d11devicecontext
+constexpr int mapVtableIndex = 14;
+
+typedef HRESULT(STDMETHODCALLTYPE* MapFn)(ID3D11DeviceContext* context, ID3D11Resource* resource, UINT subresource,
+                                          D3D11_MAP type, UINT flags, D3D11_MAPPED_SUBRESOURCE* mappedResource);
+
+static void** deviceContextVTable = NULL;
+static MapFn originalMap = NULL;
+// The thread calling Present, the only one the panels are built and drawn on.
+static std::atomic<DWORD> renderThreadId{0};
+static UINT backBufferWidth = 0;
+static UINT backBufferHeight = 0;
+// Whether the ImGui frame of the frame being rendered is built, by Present or by a frame capture before it.
+static bool isOverlayFrameBuilt = false;
+static std::atomic<bool> arePanelsDrawnInCaptures{true};
+// A copy of the captured frame the panels are drawn into, see NewMap.
+static ID3D11Texture2D* captureTarget = NULL;
+static ID3D11RenderTargetView* captureTargetView = NULL;
 
 struct MouseButtonEvent {
     ImGuiMouseButton button;
@@ -162,6 +183,9 @@ static bool InitializeImGui(IDXGISwapChain* swapChain) {
     ImGui_ImplWin32_Init(description.OutputWindow);
     ImGui_ImplDX11_Init(device, deviceContext);
     isHlaeLoaded = GetModuleHandleA("AfxHookSource2.dll") != NULL;
+    if (!isHlaeLoaded) {
+        InstallCaptureHook();
+    }
     isImGuiInitialized = true;
     Log(isHlaeLoaded ? "Overlay initialized, HLAE detected" : "Overlay initialized");
 
@@ -436,12 +460,9 @@ static bool IsGameFrameTarget(ID3D11RenderTargetView* target, ID3D11RenderTarget
     return isGameFrameTarget;
 }
 
-// Runs on the render thread.
-static void DrawOverlay(IDXGISwapChain* swapChain) {
-    if (!InitializeImGui(swapChain)) {
-        return;
-    }
-
+// Runs on the render thread, once per frame: when the game captures the frame or when it presents it, whichever comes
+// first.
+static void BuildOverlayFrame() {
     DrainInputEvents();
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
@@ -465,32 +486,64 @@ static void DrawOverlay(IDXGISwapChain* swapChain) {
                       playbackPanelSize);
 
     ImGui::Render();
+    isOverlayFrameBuilt = true;
+}
+
+// Draws the panels of the built frame into the target, and leaves the render targets of the game bound as they were.
+static void RenderOverlayInto(ID3D11RenderTargetView* target) {
+    ID3D11RenderTargetView* previousTargets[D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT] = {};
+    ID3D11DepthStencilView* previousDepthStencil = NULL;
+    deviceContext->OMGetRenderTargets(D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT, previousTargets, &previousDepthStencil);
+    deviceContext->OMSetRenderTargets(1, &target, NULL);
+    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+    deviceContext->OMSetRenderTargets(D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT, previousTargets, previousDepthStencil);
+    for (ID3D11RenderTargetView* previousTarget : previousTargets) {
+        if (previousTarget != NULL) {
+            previousTarget->Release();
+        }
+    }
+    if (previousDepthStencil != NULL) {
+        previousDepthStencil->Release();
+    }
+}
+
+// Runs on the render thread.
+static void DrawOverlay(IDXGISwapChain* swapChain) {
+    if (!InitializeImGui(swapChain)) {
+        return;
+    }
+
+    DXGI_SWAP_CHAIN_DESC description;
+    if (SUCCEEDED(swapChain->GetDesc(&description))) {
+        backBufferWidth = description.BufferDesc.Width;
+        backBufferHeight = description.BufferDesc.Height;
+    }
+
+    if (!isOverlayFrameBuilt) {
+        BuildOverlayFrame();
+    }
 
     ID3D11RenderTargetView* renderTargetView = CreateRenderTarget(swapChain);
     if (renderTargetView == NULL) {
         return;
     }
 
-    ID3D11RenderTargetView* previousRenderTarget = NULL;
-    ID3D11DepthStencilView* previousDepthStencil = NULL;
-    deviceContext->OMGetRenderTargets(1, &previousRenderTarget, &previousDepthStencil);
-    deviceContext->OMSetRenderTargets(1, &renderTargetView, NULL);
-    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-    if (isHlaeLoaded && IsGameFrameTarget(previousRenderTarget, renderTargetView)) {
-        deviceContext->OMSetRenderTargets(1, &previousRenderTarget, NULL);
-        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-    }
-    deviceContext->OMSetRenderTargets(1, &previousRenderTarget, previousDepthStencil);
-    if (previousRenderTarget != NULL) {
-        previousRenderTarget->Release();
-    }
-    if (previousDepthStencil != NULL) {
-        previousDepthStencil->Release();
+    RenderOverlayInto(renderTargetView);
+    if (isHlaeLoaded) {
+        ID3D11RenderTargetView* gameTarget = NULL;
+        deviceContext->OMGetRenderTargets(1, &gameTarget, NULL);
+        if (IsGameFrameTarget(gameTarget, renderTargetView)) {
+            RenderOverlayInto(gameTarget);
+        }
+        if (gameTarget != NULL) {
+            gameTarget->Release();
+        }
     }
     renderTargetView->Release();
 }
 
 static HRESULT STDMETHODCALLTYPE NewPresent(IDXGISwapChain* swapChain, UINT syncInterval, UINT flags) {
+    renderThreadId = GetCurrentThreadId();
     if (IsAnyPanelVisible()) {
         DrawOverlay(swapChain);
     } else {
@@ -498,8 +551,138 @@ static HRESULT STDMETHODCALLTYPE NewPresent(IDXGISwapChain* swapChain, UINT sync
         imguiWantsMouse = false;
         imguiWantsTextInput = false;
     }
+    isOverlayFrameBuilt = false;
 
     return originalPresent(swapChain, syncInterval, flags);
+}
+
+static bool IsRgba8Format(DXGI_FORMAT format) {
+    return format == DXGI_FORMAT_R8G8B8A8_TYPELESS || format == DXGI_FORMAT_R8G8B8A8_UNORM ||
+           format == DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+}
+
+// Whether the resource looks like the copy of the frame the game maps for movies and screenshots, see NewMap.
+// It's a CPU-readable staging texture the size of the screen.
+static bool IsFrameCapture(ID3D11Resource* resource) {
+    D3D11_RESOURCE_DIMENSION dimension;
+    resource->GetType(&dimension);
+    if (dimension != D3D11_RESOURCE_DIMENSION_TEXTURE2D) {
+        return false;
+    }
+
+    D3D11_TEXTURE2D_DESC description;
+    static_cast<ID3D11Texture2D*>(resource)->GetDesc(&description);
+
+    return description.Usage == D3D11_USAGE_STAGING && (description.CPUAccessFlags & D3D11_CPU_ACCESS_READ) != 0 &&
+           description.Width == backBufferWidth && description.Height == backBufferHeight &&
+           description.MipLevels == 1 && description.ArraySize == 1 && description.SampleDesc.Count == 1 &&
+           IsRgba8Format(description.Format);
+}
+
+// Kept across frames, unlike the view of the back buffer, since the swap chain doesn't own it.
+static bool PrepareCaptureTarget(UINT width, UINT height) {
+    if (captureTarget != NULL) {
+        D3D11_TEXTURE2D_DESC description;
+        captureTarget->GetDesc(&description);
+        if (description.Width == width && description.Height == height) {
+            return true;
+        }
+        captureTargetView->Release();
+        captureTargetView = NULL;
+        captureTarget->Release();
+        captureTarget = NULL;
+    }
+
+    D3D11_TEXTURE2D_DESC description = {};
+    description.Width = width;
+    description.Height = height;
+    description.MipLevels = 1;
+    description.ArraySize = 1;
+    // Typeless to be copyable from and to every RGBA8 format.
+    description.Format = DXGI_FORMAT_R8G8B8A8_TYPELESS;
+    description.SampleDesc.Count = 1;
+    description.Usage = D3D11_USAGE_DEFAULT;
+    description.BindFlags = D3D11_BIND_RENDER_TARGET;
+    if (FAILED(device->CreateTexture2D(&description, NULL, &captureTarget)) || captureTarget == NULL) {
+        captureTarget = NULL;
+        Log("Overlay: the texture to draw the panels in the captured frames can't be created");
+        return false;
+    }
+
+    // The bytes the panels write in the back buffer, which has a UNORM view, see CreateRenderTarget.
+    D3D11_RENDER_TARGET_VIEW_DESC viewDescription = {};
+    viewDescription.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+    viewDescription.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+    if (FAILED(device->CreateRenderTargetView(captureTarget, &viewDescription, &captureTargetView)) ||
+        captureTargetView == NULL) {
+        captureTargetView = NULL;
+        captureTarget->Release();
+        captureTarget = NULL;
+        Log("Overlay: the view to draw the panels in the captured frames can't be created");
+        return false;
+    }
+
+    return true;
+}
+
+static void DrawOverlayIntoCapture(ID3D11Texture2D* capture) {
+    D3D11_TEXTURE2D_DESC description;
+    capture->GetDesc(&description);
+    if (!PrepareCaptureTarget(description.Width, description.Height)) {
+        return;
+    }
+
+    if (!isOverlayFrameBuilt) {
+        BuildOverlayFrame();
+    }
+    // A staging texture can't be a render target, so the panels are drawn on a copy that replaces it.
+    deviceContext->CopyResource(captureTarget, capture);
+    RenderOverlayInto(captureTargetView);
+    deviceContext->CopyResource(capture, captureTarget);
+}
+
+// The game takes screenshots (startmovie) by copying the frame, HUD included, into a staging texture that it maps right
+// away, before the frame is composited into the back buffer and presented. The panels, drawn when Present is called,
+// would never be in the movies, so they are drawn into that texture just before the game reads it.
+// The copy is recorded on a deferred context, only the Map is done on the immediate one.
+// Not installed when HLAE is loaded, which records from the game's frame render target, see IsGameFrameTarget.
+static HRESULT STDMETHODCALLTYPE NewMap(ID3D11DeviceContext* context, ID3D11Resource* resource, UINT subresource,
+                                        D3D11_MAP type, UINT flags, D3D11_MAPPED_SUBRESOURCE* mappedResource) {
+    if (type == D3D11_MAP_READ && context == deviceContext && arePanelsDrawnInCaptures &&
+        GetCurrentThreadId() == renderThreadId && IsAnyPanelVisible() && IsFrameCapture(resource)) {
+        DrawOverlayIntoCapture(static_cast<ID3D11Texture2D*>(resource));
+    }
+
+    return originalMap(context, resource, subresource, type, flags, mappedResource);
+}
+
+// Map is hooked by patching the vtable of the game's immediate context. The vtable lives in d3d11.dll and is shared by
+// every immediate context of the process, but the game's is the only one, so the hook only sees the game's calls.
+static void InstallCaptureHook() {
+    if (originalMap != NULL) {
+        return;
+    }
+
+    deviceContextVTable = *(void***)deviceContext;
+    originalMap = (MapFn)deviceContextVTable[mapVtableIndex];
+    if (!PatchVTableEntry(deviceContextVTable, mapVtableIndex, (void*)&NewMap)) {
+        deviceContextVTable = NULL;
+        originalMap = NULL;
+        Log("Overlay: hooking Map failed, the panels won't be in the movies recorded by the game");
+    }
+}
+
+static void RemoveCaptureHook() {
+    if (deviceContextVTable == NULL) {
+        return;
+    }
+
+    if (!PatchVTableEntry(deviceContextVTable, mapVtableIndex, (void*)originalMap)) {
+        Log("Overlay: removing the Map hook failed");
+        return;
+    }
+    deviceContextVTable = NULL;
+    originalMap = NULL;
 }
 
 // The Steam overlay hooks the creation functions and patches whatever function the Present slot of each new swap chain
@@ -727,6 +910,7 @@ void RemoveOverlay() {
     SetVoiceIndicatorVisible(false);
     ButtonsOverlayCancelDrag();
     RemoveWindowProcedureHook();
+    RemoveCaptureHook();
 
     if (swapChainVTable == NULL) {
         return;
@@ -745,6 +929,8 @@ bool IsAnyPanelVisible() {
 }
 
 void ShowOverlayToast(const char* text) { QueueOverlayToast(text); }
+
+void SetOverlayDrawnInCaptures(bool isDrawn) { arePanelsDrawnInCaptures = isDrawn; }
 
 static std::atomic<float> backgroundOpacity{overlayDefaultBackgroundOpacity};
 

@@ -32,4 +32,7 @@ bool OverlayIsCursorVisible();
 // Cursor position in the client area of the game window, the same space ImGui draws in. False when the cursor is
 // hidden or the game window isn't in the foreground.
 bool OverlayGetCursorPositionInWindow(float* x, float* y);
+
+// Whether the panels are drawn in the frames the game captures (startmovie).
+void SetOverlayDrawnInCaptures(bool isDrawn);
 #endif
