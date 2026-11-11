@@ -59,6 +59,8 @@ static ID3D11Device* device = NULL;
 static ID3D11DeviceContext* deviceContext = NULL;
 static HWND gameWindow = NULL;
 static bool isImGuiInitialized = false;
+// HLAE is injected when the game starts, before the overlay is initialized.
+static bool isHlaeLoaded = false;
 
 struct MouseButtonEvent {
     ImGuiMouseButton button;
@@ -159,8 +161,9 @@ static bool InitializeImGui(IDXGISwapChain* swapChain) {
 
     ImGui_ImplWin32_Init(description.OutputWindow);
     ImGui_ImplDX11_Init(device, deviceContext);
+    isHlaeLoaded = GetModuleHandleA("AfxHookSource2.dll") != NULL;
     isImGuiInitialized = true;
-    Log("Overlay initialized");
+    Log(isHlaeLoaded ? "Overlay initialized, HLAE detected" : "Overlay initialized");
 
     return true;
 }
@@ -385,6 +388,54 @@ static void RemoveWindowProcedureHook() {
     }
 }
 
+static ID3D11Texture2D* GetViewTexture(ID3D11RenderTargetView* view) {
+    ID3D11Resource* resource = NULL;
+    view->GetResource(&resource);
+    if (resource == NULL) {
+        return NULL;
+    }
+
+    ID3D11Texture2D* texture = NULL;
+    if (FAILED(resource->QueryInterface(__uuidof(ID3D11Texture2D), (void**)&texture))) {
+        texture = NULL;
+    }
+    resource->Release();
+
+    return texture;
+}
+
+// The game draws each frame, HUD included, into a render target of its own, multisampled, and copies it into the back
+// buffer, which is what the target still bound when Present is called is. HLAE records videos from that render target,
+// not from the back buffer, after Present (by the game or by HLAE itself at the start of the next frame), so the panels
+// are drawn into it too to be in the videos. The game redraws it entirely at every frame and HLAE copies it into the
+// back buffer, so the panels don't show twice on screen.
+static bool IsGameFrameTarget(ID3D11RenderTargetView* target, ID3D11RenderTargetView* backBufferView) {
+    if (target == NULL) {
+        return false;
+    }
+
+    ID3D11Texture2D* targetTexture = GetViewTexture(target);
+    if (targetTexture == NULL) {
+        return false;
+    }
+    ID3D11Texture2D* backBuffer = GetViewTexture(backBufferView);
+    if (backBuffer == NULL) {
+        targetTexture->Release();
+        return false;
+    }
+
+    D3D11_TEXTURE2D_DESC targetDescription;
+    targetTexture->GetDesc(&targetDescription);
+    D3D11_TEXTURE2D_DESC backBufferDescription;
+    backBuffer->GetDesc(&backBufferDescription);
+    bool isGameFrameTarget = targetTexture != backBuffer && targetDescription.Width == backBufferDescription.Width &&
+                             targetDescription.Height == backBufferDescription.Height;
+    targetTexture->Release();
+    backBuffer->Release();
+
+    return isGameFrameTarget;
+}
+
 // Runs on the render thread.
 static void DrawOverlay(IDXGISwapChain* swapChain) {
     if (!InitializeImGui(swapChain)) {
@@ -425,6 +476,10 @@ static void DrawOverlay(IDXGISwapChain* swapChain) {
     deviceContext->OMGetRenderTargets(1, &previousRenderTarget, &previousDepthStencil);
     deviceContext->OMSetRenderTargets(1, &renderTargetView, NULL);
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+    if (isHlaeLoaded && IsGameFrameTarget(previousRenderTarget, renderTargetView)) {
+        deviceContext->OMSetRenderTargets(1, &previousRenderTarget, NULL);
+        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+    }
     deviceContext->OMSetRenderTargets(1, &previousRenderTarget, previousDepthStencil);
     if (previousRenderTarget != NULL) {
         previousRenderTarget->Release();

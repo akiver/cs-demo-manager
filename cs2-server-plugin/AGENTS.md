@@ -399,7 +399,11 @@ The panels are ImGui windows drawn on top of the game. How they get in front of 
 on the platform:
 
 - **Windows**: the plugin patches the vtable of `IDXGISwapChain`, which lives in `dxgi.dll` and is shared by every
-  swap chain of the process, so it is enough to hook the one of a throwaway swap chain.
+  swap chain of the process, so it is enough to hook the one of a throwaway swap chain. The throwaway swap chain must
+  not be created through `IDXGIFactory::CreateSwapChain` (which `D3D11CreateDeviceAndSwapChain` calls): HLAE keeps a
+  pointer to the last swap chain created that way. HLAE records videos from the game's own frame render target, not
+  from the back buffer, so when HLAE is loaded the panels are also drawn into that render target, the one still bound
+  when `Present` is called.
 - **Linux**: CS2 renders through Vulkan. The game resolves its functions with
   `vkGetInstanceProcAddr`/`vkGetDeviceProcAddr` into a table of its own at startup, before the plugin is loaded, so
   there is nothing left to patch. The panels are drawn by a Vulkan layer instead, built from
