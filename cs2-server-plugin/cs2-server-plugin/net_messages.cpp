@@ -18,31 +18,74 @@
 #else
 #define NETWORK_SYSTEM_LIB_NAME "libnetworksystem.so"
 #endif
-// Slots of INetworkMessages. Its virtual destructor is declared last, so these indexes are the same on Windows and
-// Linux.
+// Slots of INetworkMessages (NetworkMessagesVersion001). The 11/11/2026 CS2 update removed INetworkMessageInternal
+// and IProtobufBinding, and three virtuals with them, and moved FindOrCreateNetMessage. The SDK still declares the
+// previous layout, so the plugin calls these slots by index instead of through its declaration. Its virtual
+// destructor is declared last, so these indexes are the same on Windows and Linux.
 //
 // The slot owning the instruction that loads the "illegal to register new net messages after serialization" string.
-constexpr int findOrCreateNetMessageVtableIndex = 2;
-// Two slots past FindOrCreateNetMessage, after Serialize.
-constexpr int unserializeMessageInternalVtableIndex = 4;
+// The CNetMessagePB<T>::GetNetMessage functions call it to register their message.
+constexpr int findOrCreateNetMessageVtableIndex = 20;
+// The slot owning the instructions that load the "Protobuf parse failed" string. It follows Serialize (2), which ends
+// with a jump to SerializeMessageInternal (4).
+constexpr int unserializeMessageInternalVtableIndex = 3;
+// The second of the two lookups by name that walk the message map (exact at 9, partial at 10), the one comparing
+// names with a substring search.
+constexpr int findNetworkMessagePartialVtableIndex = 10;
+// The pair setting and reading the byte that Serialize and UnserializeFromStream clear.
+constexpr int allowAdditionalMessageRegistrationVtableIndex = 22;
+constexpr int isAdditionalMessageRegistrationAllowedVtableIndex = 23;
+// The lookup walking the message map that compares the message id at 0x18 of each entry.
+constexpr int findNetworkMessageByIdVtableIndex = 27;
 
 // svc_UserCmds, the id CSVCMsg_UserCommands is registered under, see SVC_Messages in netmessages.proto.
 constexpr int userCmdsMessageId = 76;
 // svc_VoiceData, the id CSVCMsg_VoiceData is registered under. Its packets tell who is talking.
 constexpr int voiceDataMessageId = 47;
 
-typedef bool (*NetMessageUnserializeFn)(void* thisptr, bf_read& buf, CNetMessage* msg);
-typedef INetworkMessageInternal* (*FindOrCreateNetMessageFn)(void* thisptr, int messageId,
-                                                             const IProtobufBinding* protoBinding,
-                                                             unsigned int messageSize,
-                                                             INetworkSerializerBindingBuildFilter* buildFilter,
-                                                             bool createIfNotFound, bool autoAssignId);
+// The NetMessageInfo_t of a message, what the lookups return and CNetMessage::GetNetMessage points to. There is one per
+// message, so the pointer identifies the message. Only its first member is read, the name, a CUtlString that holds a
+// single char pointer.
+struct NetMessageInfo {
+    const char* name;
+};
 
-static INetworkMessages* gNetworkMessages = NULL;
-static INetworkMessageInternal* userCmdsNetMessage = NULL;
-static INetworkMessageInternal* voiceDataNetMessage = NULL;
+// error receives the reason of a failure, the engine passes 4 as mode when it reads a demo.
+typedef bool (*NetMessageUnserializeFn)(void* thisptr, bf_read& buf, CNetMessage* msg, int mode, CUtlString* error);
+// allocateMessage returns a new message of the type to register, groupId is a network group id.
+typedef NetMessageInfo* (*FindOrCreateNetMessageFn)(void* thisptr, int messageId, CNetMessage* (*allocateMessage)(),
+                                                    int groupId, int bufType, bool unknown, bool cannotBeNetworked);
+typedef NetMessageInfo* (*FindNetworkMessagePartialFn)(void* thisptr, const char* partialName);
+typedef NetMessageInfo* (*FindNetworkMessageByIdFn)(void* thisptr, int messageId);
+typedef void (*AllowAdditionalMessageRegistrationFn)(void* thisptr, bool allow);
+typedef bool (*IsAdditionalMessageRegistrationAllowedFn)(void* thisptr);
+
+static void* gNetworkMessages = NULL;
+static NetMessageInfo* userCmdsNetMessage = NULL;
+static NetMessageInfo* voiceDataNetMessage = NULL;
 static NetMessageUnserializeFn originalUnserializeMessageInternal = NULL;
 static FindOrCreateNetMessageFn originalFindOrCreateNetMessage = NULL;
+
+template <typename Fn>
+static Fn GetNetworkMessagesFunction(void* networkMessages, int index) {
+    return (Fn)(*(void***)networkMessages)[index];
+}
+
+static const char* GetNetMessageName(const NetMessageInfo* message) {
+    return message->name != NULL ? message->name : "(null)";
+}
+
+static NetMessageInfo* FindNetworkMessageById(int id) {
+    auto find =
+        GetNetworkMessagesFunction<FindNetworkMessageByIdFn>(gNetworkMessages, findNetworkMessageByIdVtableIndex);
+    return find(gNetworkMessages, id);
+}
+
+static NetMessageInfo* FindNetworkMessagePartial(const char* partialName) {
+    auto find =
+        GetNetworkMessagesFunction<FindNetworkMessagePartialFn>(gNetworkMessages, findNetworkMessagePartialVtableIndex);
+    return find(gNetworkMessages, partialName);
+}
 
 // Avoids casting AsProto() onto our generated class: protobuf orders members by type, so a field Valve adds can shift
 // the offsets. Serializing the engine's object through its own virtuals and parsing the bytes doesn't depend on the
@@ -62,14 +105,15 @@ static bool CopyEngineMessage(const CNetMessage* msg, T* copy) {
     return copy->ParseFromString(bytes);
 }
 
-static bool NewUnserializeMessageInternal(void* thisptr, bf_read& buf, CNetMessage* msg) {
-    bool result = originalUnserializeMessageInternal(thisptr, buf, msg);
+static bool NewUnserializeMessageInternal(void* thisptr, bf_read& buf, CNetMessage* msg, int mode, CUtlString* error) {
+    bool result = originalUnserializeMessageInternal(thisptr, buf, msg, mode, error);
 
     if (!result || msg == NULL) {
         return result;
     }
 
-    INetworkMessageInternal* netMessage = msg->GetNetMessage();
+    // The SDK declares the NetMessageInfo_t of the message as an INetworkMessageInternal.
+    const void* netMessage = msg->GetNetMessage();
     if (voiceDataNetMessage != NULL && netMessage == voiceDataNetMessage) {
         CSVCMsg_VoiceData voiceData;
         if (CopyEngineMessage(msg, &voiceData)) {
@@ -93,21 +137,20 @@ static bool NewUnserializeMessageInternal(void* thisptr, bf_read& buf, CNetMessa
 // Finds a network message by its protocol id, falling back on its name. The id match is trusted only when the name
 // contains nameFragment: the hook parses the message as a concrete protobuf type, and a renumbering by Valve would
 // make the id resolve to another message.
-static INetworkMessageInternal* FindSvcNetMessage(const char* label, int id, const char* nameFragment) {
-    INetworkMessageInternal* message = gNetworkMessages->FindNetworkMessageById(id);
+static NetMessageInfo* FindSvcNetMessage(const char* label, int id, const char* nameFragment) {
+    NetMessageInfo* message = FindNetworkMessageById(id);
     if (message != NULL) {
-        const char* name = message->GetUnscopedName();
-        if (name != NULL && strstr(name, nameFragment) != NULL) {
+        const char* name = GetNetMessageName(message);
+        if (strstr(name, nameFragment) != NULL) {
             Log("%s message found by id %d: %s", label, id, name);
             return message;
         }
-        Log("%s message id %d resolves to %s, not a %s message", label, id, name != NULL ? name : "(null)",
-            nameFragment);
+        Log("%s message id %d resolves to %s, not a %s message", label, id, name, nameFragment);
     }
 
-    message = gNetworkMessages->FindNetworkMessagePartial(nameFragment);
+    message = FindNetworkMessagePartial(nameFragment);
     if (message != NULL) {
-        Log("%s message found by partial name: %s", label, message->GetUnscopedName());
+        Log("%s message found by partial name: %s", label, GetNetMessageName(message));
         return message;
     }
 
@@ -116,19 +159,18 @@ static INetworkMessageInternal* FindSvcNetMessage(const char* label, int id, con
     return NULL;
 }
 
-static INetworkMessageInternal* FindUserCmdsNetMessage() {
+static NetMessageInfo* FindUserCmdsNetMessage() {
     return FindSvcNetMessage("User commands", userCmdsMessageId, "UserCommands");
 }
 
 // The name fragment has to leave the client-to-server voice message, CCLCMsg_VoiceData, out.
-static INetworkMessageInternal* FindVoiceDataNetMessage() {
+static NetMessageInfo* FindVoiceDataNetMessage() {
     return FindSvcNetMessage("Voice data", voiceDataMessageId, "SVCMsg_VoiceData");
 }
 
-static INetworkMessages* GetNetworkMessages() {
+static void* GetNetworkMessages() {
     if (gNetworkMessages == NULL) {
-        gNetworkMessages =
-            (INetworkMessages*)GetLoadedLibInterface(NETWORK_SYSTEM_LIB_NAME, NETWORKMESSAGES_INTERFACE_VERSION);
+        gNetworkMessages = GetLoadedLibInterface(NETWORK_SYSTEM_LIB_NAME, NETWORKMESSAGES_INTERFACE_VERSION);
         if (gNetworkMessages == NULL) {
             Log("Network messages interface not found");
         }
@@ -138,7 +180,7 @@ static INetworkMessages* GetNetworkMessages() {
 }
 
 void HookNetMessageUnserialize() {
-    INetworkMessages* networkMessages = GetNetworkMessages();
+    void* networkMessages = GetNetworkMessages();
     if (networkMessages == NULL) {
         return;
     }
@@ -166,22 +208,22 @@ void HookNetMessageUnserialize() {
     Log("Hooked unserialize of network messages");
 }
 
-static INetworkMessageInternal* NewFindOrCreateNetMessage(void* thisptr, int messageId,
-                                                          const IProtobufBinding* protoBinding,
-                                                          unsigned int messageSize,
-                                                          INetworkSerializerBindingBuildFilter* buildFilter,
-                                                          bool createIfNotFound, bool autoAssignId) {
+static NetMessageInfo* NewFindOrCreateNetMessage(void* thisptr, int messageId, CNetMessage* (*allocateMessage)(),
+                                                 int groupId, int bufType, bool unknown, bool cannotBeNetworked) {
     // Reading a demo's message list disallows net message registration, and libmatchmaking registering its messages
     // when playback ends then aborts the game. The engine disallows it again on every serialize/read, so allow it
     // around each call, like the engine does for its own late registrations.
-    INetworkMessages* networkMessages = (INetworkMessages*)thisptr;
-    bool wasAllowed = networkMessages->IsAdditionalMessageRegistrationAllowed();
-    networkMessages->AllowAdditionalMessageRegistration(true);
+    auto isAllowed = GetNetworkMessagesFunction<IsAdditionalMessageRegistrationAllowedFn>(
+        thisptr, isAdditionalMessageRegistrationAllowedVtableIndex);
+    auto allow = GetNetworkMessagesFunction<AllowAdditionalMessageRegistrationFn>(
+        thisptr, allowAdditionalMessageRegistrationVtableIndex);
+    bool wasAllowed = isAllowed(thisptr);
+    allow(thisptr, true);
 
-    INetworkMessageInternal* message = originalFindOrCreateNetMessage(thisptr, messageId, protoBinding, messageSize,
-                                                                      buildFilter, createIfNotFound, autoAssignId);
+    NetMessageInfo* message = originalFindOrCreateNetMessage(thisptr, messageId, allocateMessage, groupId, bufType,
+                                                             unknown, cannotBeNetworked);
 
-    networkMessages->AllowAdditionalMessageRegistration(wasAllowed);
+    allow(thisptr, wasAllowed);
 
     return message;
 }
@@ -191,7 +233,7 @@ void HookFindOrCreateNetMessage() {
         return;
     }
 
-    INetworkMessages* networkMessages = GetNetworkMessages();
+    void* networkMessages = GetNetworkMessages();
     if (networkMessages == NULL) {
         return;
     }
@@ -217,19 +259,18 @@ void LogNetMessagesState() {
 
 #ifdef CSDM_DEV_COMMANDS
 void DumpNetworkMessages(int maxId) {
-    INetworkMessages* networkMessages = GetNetworkMessages();
-    if (networkMessages == NULL) {
+    if (GetNetworkMessages() == NULL) {
         return;
     }
 
     int count = 0;
     for (int id = 0; id <= maxId; id++) {
-        INetworkMessageInternal* message = networkMessages->FindNetworkMessageById(id);
+        NetMessageInfo* message = FindNetworkMessageById(id);
         if (message == NULL) {
             continue;
         }
 
-        Log("Message %d: %s", id, message->GetUnscopedName());
+        Log("Message %d: %s", id, GetNetMessageName(message));
         count++;
     }
 

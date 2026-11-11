@@ -7,6 +7,8 @@
 //===========================================================================//
 
 // Credits @dtugend https://github.com/advancedfx/advancedfx-prop/blob/prop/cs2/sdk_src/public/cdll_int.h
+#include <cmath>
+
 #include "interface.h"
 
 class KeyValues;
@@ -98,10 +100,12 @@ abstract_class ISource2EngineToClient {
     virtual void _Unknown_034(void) = 0;
     virtual void _Unknown_035(void) = 0;
     virtual void _Unknown_036(void) = 0;
-    virtual int GetMaxClients(void) = 0;  //: 037
-    virtual bool IsInGame(void) = 0;      //: 038
-    virtual bool IsConnected(void) = 0;   //: 039
-    virtual void _Unknown_040(void) = 0;
+    virtual int _Unknown_037(void) = 0;   // Returns an int of the client state, -1 without one
+    virtual int GetMaxClients(void) = 0;  //: 038 returns 1 without a client state
+    // Anchored by the signon state of the client state they compare: IsInGame needs SIGNONSTATE_FULL (6),
+    // IsConnected SIGNONSTATE_CONNECTED (2).
+    virtual bool IsInGame(void) = 0;     //: 039
+    virtual bool IsConnected(void) = 0;  //: 040
     virtual void _Unknown_041(void) = 0;
     virtual bool IsPlayingDemo(void) = 0;           //: 042
     virtual const char* GetDemoFilePath(void) = 0;  //: 043
@@ -112,8 +116,10 @@ abstract_class ISource2EngineToClient {
     virtual void _Unknown_048(void) = 0;
     virtual void _Unknown_049(void) = 0;
     virtual void _Unknown_050(void) = 0;
-    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands,
-                                  bool bUnk2SetToTrue) = 0;  //: 051
+    // flInputTime and nSDLTimestamp: engine time and SDL timestamp (ns) of the key press that issued the commands,
+    // NaN and 0 when they don't come from one.
+    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue,
+                                  double flInputTime = NAN, uint64 nSDLTimestamp = 0) = 0;  //: 051
     virtual void _Unknown_052(void) = 0;
     virtual void _Unknown_053(void) = 0;
     virtual void _Unknown_054(void) = 0;

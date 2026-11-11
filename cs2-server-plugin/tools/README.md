@@ -41,8 +41,9 @@ destructor in a Linux binary, which makes it an easy landmark.
 ## Small methods
 
 They are recognizable from `--disas` alone. A bool setter is a single `mov %sil, 0xNNN(%rdi); ret`, its getter the
-matching `movzbl 0xNNN(%rdi),%eax; ret` on the same offset. In `CNetworkMessages` that pair at slots 25/26 is
-`AllowAdditionalMessageRegistration`/`IsAdditionalMessageRegistrationAllowed`.
+matching `movzbl 0xNNN(%rdi),%eax; ret` on the same offset. In `CNetworkMessages` that pair is
+`AllowAdditionalMessageRegistration`/`IsAdditionalMessageRegistrationAllowed`, at slots 25/26 in that build and 22/23
+since the 11/11/2026 update.
 
 ## Big methods
 
