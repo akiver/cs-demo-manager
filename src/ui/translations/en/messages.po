@@ -7830,6 +7830,10 @@ msgid "You selected a version compatible with CS2 from the {animgraph2UpdateDate
 msgstr "You selected a version compatible with CS2 from the {animgraph2UpdateDate} update up to the {update14168} update."
 
 #: src/ui/settings/playback/cs2-plugin-select.tsx
+msgid "You selected a version compatible with CS2 from the {update14168} update up to the {update14196} update."
+msgstr "You selected a version compatible with CS2 from the {update14168} update up to the {update14196} update."
+
+#: src/ui/settings/playback/cs2-plugin-select.tsx
 msgid "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
 msgstr "Change this only if you want to watch old demos that are not compatible with the latest CS2 update!"
 

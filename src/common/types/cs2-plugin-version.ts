@@ -19,6 +19,9 @@ export const CS2PluginVersion = {
   // Support between "Animgraph 2" update (8th April 2026) and the 09/07/2026 update (1.41.6.8).
   // https://github.com/SteamTracking/GameTracking-CS2/commit/382cfd288910a2d774a6e6d10428a83416e60da2#diff-1590b30cfb9c4e3984a6ebef95e19ebce0ac0fb786fc22c6d6de4443a52a236f
   '14168': '14168',
+  // Support between the 09/07/2026 update and the 11/11/2026 update (1.41.9.6).
+  // https://github.com/SteamTracking/GameTracking-CS2/commit/82e2b9d62cc97f1358c68a220a4a392c9e41c509
+  '14196': '14196',
   latest: 'latest',
 } as const;
 
