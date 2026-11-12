@@ -52,6 +52,19 @@ struct DeviceDispatch {
     PFN_vkResetFences ResetFences;
     PFN_vkCreateSemaphore CreateSemaphore;
     PFN_vkDestroySemaphore DestroySemaphore;
+    PFN_vkCreateImage CreateImage;
+    PFN_vkDestroyImage DestroyImage;
+    PFN_vkGetImageMemoryRequirements GetImageMemoryRequirements;
+    PFN_vkAllocateMemory AllocateMemory;
+    PFN_vkFreeMemory FreeMemory;
+    PFN_vkBindImageMemory BindImageMemory;
+    PFN_vkCmdPipelineBarrier CmdPipelineBarrier;
+    PFN_vkCmdBlitImage CmdBlitImage;
+    PFN_vkCmdCopyImageToBuffer CmdCopyImageToBuffer;
+    PFN_vkCmdExecuteCommands CmdExecuteCommands;
+    // Instance functions, NULL when the instance of the device is unknown.
+    PFN_vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties;
+    PFN_vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties;
 };
 
 // What a swapchain was created with, kept because vkQueuePresentKHR only hands out its handle and an image index.
@@ -59,6 +72,12 @@ struct SwapchainInfo {
     VkFormat format;
     VkExtent2D extent;
     uint32_t minImageCount;
+};
+
+// An image the game could read its movie frames back from, see IsCaptureCandidate in vulkan_layer.cpp.
+struct CaptureCandidate {
+    VkFormat format;
+    VkExtent2D extent;
 };
 
 struct DeviceData {
@@ -73,6 +92,7 @@ struct DeviceData {
     // Filled when the game fetches its queues.
     std::map<VkQueue, uint32_t> queueFamilyByQueue;
     std::map<VkSwapchainKHR, SwapchainInfo> swapchainInfos;
+    std::map<VkImage, CaptureCandidate> captureCandidates;
 };
 
 // Locks the layer mutex, the game may fetch a queue while another thread presents.

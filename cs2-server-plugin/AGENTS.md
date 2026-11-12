@@ -417,6 +417,13 @@ on the platform:
   sets the variable the manifest enables the layer with. The plugin finds the loaded layer with
   `dlopen(RTLD_NOLOAD)` and pushes what to draw into it. The layer uses no game internals (no SDK, offsets or
   vtables) and doesn't link the Vulkan loader: everything it calls comes from the layer chain.
+  - The game's movies (`startmovie`) and screenshots are read back with `vkCmdCopyImageToBuffer` from an RGBA8 image
+    the size of the screen, recorded as the last command of its command buffer, before the frame is presented. The
+    game writes those bytes as they are into its TGA and JPG files, which expect BGRA, so on Linux the files have red
+    and blue swapped. The layer intercepts that copy: it blits the frame into a BGRA image of its own, which swaps the
+    bytes, draws the panels on it, except while the plugin captures the player view for a camera preview, and copies
+    it into the game's buffer instead. ImGui reuses the vertex buffers of that draw, so the layer also hooks
+    `vkQueueSubmit`, `vkCmdExecuteCommands` and `vkBeginCommandBuffer` to know when the game's command buffer is done.
 
 Mouse and keyboard reach ImGui from the window procedure on Windows and from an SDL event filter the plugin installs
 on Linux. While a text field has the keyboard, the keys are kept from the game.

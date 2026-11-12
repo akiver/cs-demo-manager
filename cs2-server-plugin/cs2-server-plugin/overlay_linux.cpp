@@ -118,6 +118,28 @@ static void ConnectLayerToasts(void* lib) {
     }
 }
 
+typedef void (*LayerSetDrawnInCapturesFn)(int isDrawn);
+static LayerSetDrawnInCapturesFn layerSetDrawnInCaptures = NULL;
+static std::atomic<bool> arePanelsDrawnInCaptures{true};
+
+void SetOverlayDrawnInCaptures(bool isDrawn) {
+    arePanelsDrawnInCaptures = isDrawn;
+    if (layerSetDrawnInCaptures != NULL) {
+        layerSetDrawnInCaptures(isDrawn ? 1 : 0);
+    }
+}
+
+static void ConnectLayerDrawnInCaptures(void* lib) {
+    layerSetDrawnInCaptures = (LayerSetDrawnInCapturesFn)dlsym(lib, "CsdmOverlaySetDrawnInCaptures");
+    if (layerSetDrawnInCaptures == NULL) {
+        Log("Overlay: the Vulkan layer loaded in the game doesn't support leaving the panels out of the captured "
+            "frames, they may be in the camera previews");
+        return;
+    }
+
+    layerSetDrawnInCaptures(arePanelsDrawnInCaptures ? 1 : 0);
+}
+
 typedef void (*LayerSetGameDirectoryFn)(const char* directory);
 
 static void ConnectLayerGameDirectory(void* lib) {
@@ -512,6 +534,7 @@ void InstallOverlay() {
         ConnectLayerScale(layerLib);
         ConnectLayerTooltipsEnabled(layerLib);
         ConnectLayerToasts(layerLib);
+        ConnectLayerDrawnInCaptures(layerLib);
 
         Log("Overlay: connected to the Vulkan layer");
     }
@@ -537,6 +560,7 @@ void RemoveOverlay() {
     layerSetScale = NULL;
     layerSetTooltipsEnabled = NULL;
     layerShowToast = NULL;
+    layerSetDrawnInCaptures = NULL;
     dlclose(layerLib);
     layerLib = NULL;
 }

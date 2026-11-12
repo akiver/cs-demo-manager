@@ -151,6 +151,16 @@ static void LoadDeviceDispatch(DeviceDispatch& dispatch, PFN_vkGetDeviceProcAddr
     LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, ResetFences);
     LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, CreateSemaphore);
     LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, DestroySemaphore);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, CreateImage);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, DestroyImage);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, GetImageMemoryRequirements);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, AllocateMemory);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, FreeMemory);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, BindImageMemory);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, CmdPipelineBarrier);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, CmdBlitImage);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, CmdCopyImageToBuffer);
+    LOAD_DEVICE_FUNCTION(dispatch, getDeviceProcAddr, device, CmdExecuteCommands);
 }
 
 static VKAPI_ATTR VkResult VKAPI_CALL NewCreateDevice(VkPhysicalDevice physicalDevice,
@@ -190,6 +200,14 @@ static VKAPI_ATTR VkResult VKAPI_CALL NewCreateDevice(VkPhysicalDevice physicalD
     data->nextGetInstanceProcAddr = nextGetInstanceProcAddr;
     data->nextGetDeviceProcAddr = nextGetDeviceProcAddr;
     LoadDeviceDispatch(data->dispatch, nextGetDeviceProcAddr, *device);
+    if (instance != VK_NULL_HANDLE) {
+        data->dispatch.GetPhysicalDeviceMemoryProperties =
+            (PFN_vkGetPhysicalDeviceMemoryProperties)nextGetInstanceProcAddr(instance,
+                                                                             "vkGetPhysicalDeviceMemoryProperties");
+        data->dispatch.GetPhysicalDeviceFormatProperties =
+            (PFN_vkGetPhysicalDeviceFormatProperties)nextGetInstanceProcAddr(instance,
+                                                                             "vkGetPhysicalDeviceFormatProperties");
+    }
 
     {
         std::lock_guard<std::mutex> lock(layerMutex);
@@ -354,6 +372,137 @@ static VKAPI_ATTR VkResult VKAPI_CALL NewQueuePresentKHR(VkQueue queue, const Vk
     return data->dispatch.QueuePresentKHR(queue, isDrawn ? &patched : presentInfo);
 }
 
+// The game's movies and screenshots (startmovie) are read back from an RGBA8 image the size of the screen, which is
+// neither the presented image nor in the same byte order as the image files the game writes. The copy only hands out
+// the image handle, so the images that could be one are remembered when they are created.
+static bool IsCaptureCandidate(const VkImageCreateInfo* createInfo) {
+    bool isRgba8 = createInfo->format == VK_FORMAT_R8G8B8A8_UNORM || createInfo->format == VK_FORMAT_R8G8B8A8_SRGB;
+
+    return isRgba8 && createInfo->imageType == VK_IMAGE_TYPE_2D && createInfo->extent.depth == 1 &&
+           createInfo->mipLevels == 1 && createInfo->arrayLayers == 1 && createInfo->samples == VK_SAMPLE_COUNT_1_BIT &&
+           createInfo->tiling == VK_IMAGE_TILING_OPTIMAL && (createInfo->usage & VK_IMAGE_USAGE_TRANSFER_SRC_BIT) != 0;
+}
+
+static VKAPI_ATTR VkResult VKAPI_CALL NewCreateImage(VkDevice device, const VkImageCreateInfo* createInfo,
+                                                     const VkAllocationCallbacks* allocator, VkImage* image) {
+    DeviceData* data = FindDeviceData(device);
+    if (data == NULL) {
+        return VK_ERROR_INITIALIZATION_FAILED;
+    }
+
+    VkResult result = data->dispatch.CreateImage(device, createInfo, allocator, image);
+    if (result == VK_SUCCESS && IsCaptureCandidate(createInfo)) {
+        CaptureCandidate candidate = {};
+        candidate.format = createInfo->format;
+        candidate.extent = {createInfo->extent.width, createInfo->extent.height};
+
+        std::lock_guard<std::mutex> lock(layerMutex);
+        data->captureCandidates[*image] = candidate;
+    }
+
+    return result;
+}
+
+static VKAPI_ATTR void VKAPI_CALL NewDestroyImage(VkDevice device, VkImage image,
+                                                  const VkAllocationCallbacks* allocator) {
+    DeviceData* data = FindDeviceData(device);
+    if (data == NULL) {
+        return;
+    }
+
+    // Before the handle is released, Vulkan may hand it out again for the next image.
+    {
+        std::lock_guard<std::mutex> lock(layerMutex);
+        data->captureCandidates.erase(image);
+    }
+
+    data->dispatch.DestroyImage(device, image, allocator);
+}
+
+// Whether the copy reads a whole frame of the size presented, as the game's movies and screenshots do.
+static bool FindCaptureCandidate(DeviceData* data, VkImage image, const VkBufferImageCopy& region,
+                                 CaptureCandidate* candidate) {
+    const VkImageSubresourceLayers& subresource = region.imageSubresource;
+    if (subresource.aspectMask != VK_IMAGE_ASPECT_COLOR_BIT || subresource.mipLevel != 0 ||
+        subresource.baseArrayLayer != 0 || subresource.layerCount != 1 || region.imageOffset.x != 0 ||
+        region.imageOffset.y != 0 || region.imageOffset.z != 0 || region.imageExtent.depth != 1) {
+        return false;
+    }
+
+    std::lock_guard<std::mutex> lock(layerMutex);
+    auto it = data->captureCandidates.find(image);
+    if (it == data->captureCandidates.end() || it->second.extent.width != region.imageExtent.width ||
+        it->second.extent.height != region.imageExtent.height) {
+        return false;
+    }
+
+    for (const auto& [swapchain, info] : data->swapchainInfos) {
+        if (info.extent.width == it->second.extent.width && info.extent.height == it->second.extent.height) {
+            *candidate = it->second;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+static VKAPI_ATTR void VKAPI_CALL NewCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage image,
+                                                          VkImageLayout layout, VkBuffer buffer, uint32_t regionCount,
+                                                          const VkBufferImageCopy* regions) {
+    DeviceData* data = FindDeviceData(commandBuffer);
+    if (data == NULL) {
+        return;
+    }
+
+    CaptureCandidate candidate;
+    if (regionCount == 1 && data->instance != VK_NULL_HANDLE &&
+        FindCaptureCandidate(data, image, regions[0], &candidate) &&
+        OverlayRecordCapture(data, commandBuffer, image, candidate, layout, buffer, regions[0])) {
+        return;
+    }
+
+    data->dispatch.CmdCopyImageToBuffer(commandBuffer, image, layout, buffer, regionCount, regions);
+}
+
+// The three hooks below let the overlay know when the panels drawn on a capture are done, see OverlayTrackSubmit.
+static VKAPI_ATTR VkResult VKAPI_CALL NewQueueSubmit(VkQueue queue, uint32_t submitCount, const VkSubmitInfo* submits,
+                                                     VkFence fence) {
+    DeviceData* data = FindDeviceData(queue);
+    if (data == NULL) {
+        return VK_ERROR_INITIALIZATION_FAILED;
+    }
+
+    VkResult result = data->dispatch.QueueSubmit(queue, submitCount, submits, fence);
+    if (result == VK_SUCCESS) {
+        OverlayTrackSubmit(data, queue, submitCount, submits);
+    }
+
+    return result;
+}
+
+static VKAPI_ATTR void VKAPI_CALL NewCmdExecuteCommands(VkCommandBuffer commandBuffer, uint32_t secondaryCount,
+                                                        const VkCommandBuffer* secondaries) {
+    DeviceData* data = FindDeviceData(commandBuffer);
+    if (data == NULL) {
+        return;
+    }
+
+    OverlayTrackExecuteCommands(data, commandBuffer, secondaryCount, secondaries);
+    data->dispatch.CmdExecuteCommands(commandBuffer, secondaryCount, secondaries);
+}
+
+static VKAPI_ATTR VkResult VKAPI_CALL NewBeginCommandBuffer(VkCommandBuffer commandBuffer,
+                                                            const VkCommandBufferBeginInfo* beginInfo) {
+    DeviceData* data = FindDeviceData(commandBuffer);
+    if (data == NULL) {
+        return VK_ERROR_INITIALIZATION_FAILED;
+    }
+
+    OverlayTrackBeginCommandBuffer(data, commandBuffer);
+
+    return data->dispatch.BeginCommandBuffer(commandBuffer, beginInfo);
+}
+
 static VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL NewGetDeviceProcAddr(VkDevice device, const char* name);
 static VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL NewGetInstanceProcAddr(VkInstance instance, const char* name);
 
@@ -377,6 +526,12 @@ static const InterceptedFunction DEVICE_FUNCTIONS[] = {
     {"vkCreateSwapchainKHR", (PFN_vkVoidFunction)&NewCreateSwapchainKHR},
     {"vkDestroySwapchainKHR", (PFN_vkVoidFunction)&NewDestroySwapchainKHR},
     {"vkQueuePresentKHR", (PFN_vkVoidFunction)&NewQueuePresentKHR},
+    {"vkCreateImage", (PFN_vkVoidFunction)&NewCreateImage},
+    {"vkDestroyImage", (PFN_vkVoidFunction)&NewDestroyImage},
+    {"vkCmdCopyImageToBuffer", (PFN_vkVoidFunction)&NewCmdCopyImageToBuffer},
+    {"vkQueueSubmit", (PFN_vkVoidFunction)&NewQueueSubmit},
+    {"vkCmdExecuteCommands", (PFN_vkVoidFunction)&NewCmdExecuteCommands},
+    {"vkBeginCommandBuffer", (PFN_vkVoidFunction)&NewBeginCommandBuffer},
 };
 
 static PFN_vkVoidFunction FindInterceptedFunction(const InterceptedFunction* functions, size_t count,

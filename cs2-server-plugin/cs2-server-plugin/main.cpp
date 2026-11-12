@@ -200,9 +200,7 @@ void NewFrameStageNotify(void* thisptr, ClientFrameStage_t stage) {
         if (elapsed >= 1000) {
             Log("Ending movie capture");
             engine->ExecuteClientCmd(0, "endmovie", true);
-#ifdef _WIN32
             SetOverlayDrawnInCaptures(true);
-#endif
             captureInProgress = false;
             json responseMsg;
             responseMsg["name"] = "capture-player-view-result";
@@ -306,10 +304,8 @@ static void HandleWebSocketMessage(const std::string& message) {
             // The "screenshot" command works only on Windows when the -tools launch option is set.
             // As a workaround, we use the startmovie command to take a screenshot.
             QueueEngineCommand("hideconsole");
-#ifdef _WIN32
             // The screenshot is the preview of a camera, it shows the game only.
             SetOverlayDrawnInCaptures(false);
-#endif
             QueueEngineCommand("startmovie csdmcamera jpg");
             captureStartTime = std::chrono::steady_clock::now();
             captureInProgress = true;

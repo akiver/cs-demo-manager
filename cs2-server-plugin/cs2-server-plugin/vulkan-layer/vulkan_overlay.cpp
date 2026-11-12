@@ -1,10 +1,12 @@
 #include "vulkan_overlay.h"
 
+#include <algorithm>
 #include <atomic>
 #include <cfloat>
 #include <chrono>
 #include <cstdio>
 #include <cstring>
+#include <deque>
 #include <mutex>
 #include <variant>
 #include <vector>
@@ -198,6 +200,7 @@ struct FrameResources {
 
 struct SwapchainResources {
     VkSwapchainKHR swapchain;
+    VkFormat format;
     VkRenderPass renderPass;
     VkCommandPool commandPool;
     VkExtent2D extent;
@@ -212,6 +215,46 @@ static bool isImGuiContextCreated = false;
 static bool isImGuiVulkanInitialized = false;
 // A swapchain the resources couldn't be built for, remembered so it isn't attempted again at every frame.
 static VkSwapchainKHR failedSwapchain = VK_NULL_HANDLE;
+
+// The image the frames the game captures are converted into and the panels drawn on, see OverlayRecordCapture. Kept
+// across captures, and across swapchains since it doesn't depend on them, and rebuilt when the frame size changes.
+struct CaptureResources {
+    DeviceData* deviceData;
+    VkFormat format;
+    VkExtent2D extent;
+    VkImage image;
+    VkDeviceMemory memory;
+    VkImageView imageView;
+    VkRenderPass renderPass;
+    VkFramebuffer framebuffer;
+};
+
+// ImGui cycles through drawSlotCount vertex and index buffers, one per RenderDrawData, and rewrites or reallocates the
+// next one right away. One entry per draw that may still read its buffers, oldest first, so the next draw reuses the
+// buffers of the first.
+struct DrawSlotUse {
+    // The game's command buffer the panels were drawn in for a capture, VK_NULL_HANDLE for a present.
+    VkCommandBuffer commandBuffer;
+    // Present: the swapchain image drawn on, whose fence signals once the panels are drawn.
+    uint32_t imageIndex;
+    // Capture: signals once the game's submission of the command buffer is done, VK_NULL_HANDLE until it is submitted.
+    VkFence fence;
+    // Capture: the draw is done, or will never run because the game recorded the command buffer again unsubmitted.
+    bool isDone;
+};
+
+static std::deque<DrawSlotUse> drawSlotUses;
+static uint32_t drawSlotCount = 0;
+static std::vector<VkFence> freeCaptureFences;
+// Read without the lock by the hooks on the game's hot paths, which have nothing to do while it is 0.
+static std::atomic<int> unsubmittedCaptureCount{0};
+
+static CaptureResources captureResources = {};
+// Whether captureResources couldn't be built for that size, remembered so it isn't attempted again at every frame.
+static bool hasCaptureFailed = false;
+static VkExtent2D failedCaptureExtent = {};
+// The camera previews show the game only, so the plugin turns the panels off while it takes one.
+static std::atomic<bool> arePanelsDrawnInCaptures{true};
 static std::chrono::steady_clock::time_point previousFrameTime;
 static bool hasPreviousFrameTime = false;
 
@@ -231,6 +274,76 @@ static PFN_vkVoidFunction LoadVulkanFunction(const char* name, void* userData) {
     return function;
 }
 
+static bool IsUnsubmittedCapture(const DrawSlotUse& use) {
+    return use.commandBuffer != VK_NULL_HANDLE && use.fence == VK_NULL_HANDLE && !use.isDone;
+}
+
+// Callers must hold overlayMutex.
+static bool WaitForDraw(DrawSlotUse& use) {
+    DeviceData* data = overlayDeviceData;
+    DeviceDispatch& dispatch = data->dispatch;
+    if (use.commandBuffer == VK_NULL_HANDLE) {
+        // A newer present on that image may have resubmitted the fence since, which signals after this draw anyway.
+        VkFence fence = overlayResources.frames[use.imageIndex].fence;
+        return dispatch.WaitForFences(data->device, 1, &fence, VK_TRUE, UINT64_MAX) == VK_SUCCESS;
+    }
+
+    if (use.isDone) {
+        return true;
+    }
+
+    // Not submitted yet, there is nothing to wait on.
+    if (use.fence == VK_NULL_HANDLE ||
+        dispatch.WaitForFences(data->device, 1, &use.fence, VK_TRUE, UINT64_MAX) != VK_SUCCESS ||
+        dispatch.ResetFences(data->device, 1, &use.fence) != VK_SUCCESS) {
+        return false;
+    }
+
+    freeCaptureFences.push_back(use.fence);
+    use.fence = VK_NULL_HANDLE;
+    use.isDone = true;
+
+    return true;
+}
+
+// Waits until the buffers the next RenderDrawData rewrites are no longer read. Returns false when that can't be known
+// yet, in which case the panels must not be drawn. Callers must hold overlayMutex.
+static bool ReserveDrawSlot() {
+    if (drawSlotUses.size() < drawSlotCount) {
+        return true;
+    }
+
+    if (!WaitForDraw(drawSlotUses.front())) {
+        static bool isLogged = false;
+        if (!isLogged) {
+            isLogged = true;
+            LayerLog("Overlay: the game hasn't submitted a frame it captures yet, the panels are skipped meanwhile");
+        }
+        return false;
+    }
+
+    drawSlotUses.pop_front();
+
+    return true;
+}
+
+// The device must be idle: every fence submitted has signalled. Callers must hold overlayMutex.
+static void ReleaseDrawSlots(DeviceData* data) {
+    for (const DrawSlotUse& use : drawSlotUses) {
+        if (use.fence != VK_NULL_HANDLE) {
+            data->dispatch.DestroyFence(data->device, use.fence, NULL);
+        }
+    }
+    for (VkFence fence : freeCaptureFences) {
+        data->dispatch.DestroyFence(data->device, fence, NULL);
+    }
+
+    drawSlotUses.clear();
+    freeCaptureFences.clear();
+    drawSlotCount = 0;
+    unsubmittedCaptureCount = 0;
+}
+
 static void DestroyResources() {
     DeviceData* data = overlayDeviceData;
     if (data == NULL) {
@@ -239,6 +352,7 @@ static void DestroyResources() {
 
     DeviceDispatch& dispatch = data->dispatch;
     dispatch.DeviceWaitIdle(data->device);
+    ReleaseDrawSlots(data);
 
     if (isImGuiVulkanInitialized) {
         ImGui_ImplVulkan_Shutdown();
@@ -421,7 +535,10 @@ static void InitializeImGui(DeviceData* data, VkQueue queue, uint32_t queueFamil
     // Lets the backend create its own descriptor pool for the font atlas.
     initInfo.DescriptorPoolSize = IMGUI_IMPL_VULKAN_MINIMUM_SAMPLED_IMAGE_POOL_SIZE;
     initInfo.MinImageCount = info.minImageCount < 2 ? 2 : info.minImageCount;
-    initInfo.ImageCount = imageCount < initInfo.MinImageCount ? initInfo.MinImageCount : imageCount;
+    // The vertex buffers ImGui cycles through, see DrawSlotUse. The captures can make two draws per frame, twice as
+    // many keep the presents from waiting on them.
+    initInfo.ImageCount = 2 * (imageCount < initInfo.MinImageCount ? initInfo.MinImageCount : imageCount);
+    drawSlotCount = initInfo.ImageCount;
     initInfo.PipelineInfoMain.RenderPass = overlayResources.renderPass;
     initInfo.PipelineInfoMain.Subpass = 0;
     initInfo.PipelineInfoMain.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
@@ -438,6 +555,7 @@ static bool CreateResources(DeviceData* data, VkQueue queue, VkSwapchainKHR swap
 
     overlayDeviceData = data;
     overlayResources.swapchain = swapchain;
+    overlayResources.format = info.format;
     overlayResources.extent = info.extent;
 
     if (!CreateRenderPass(data, info.format)) {
@@ -635,6 +753,10 @@ bool OverlayRender(DeviceData* data, VkQueue queue, VkSwapchainKHR swapchain, co
         return false;
     }
 
+    if (!ReserveDrawSlot()) {
+        return false;
+    }
+
     DeviceDispatch& dispatch = data->dispatch;
     FrameResources& frame = overlayResources.frames[imageIndex];
 
@@ -691,7 +813,308 @@ bool OverlayRender(DeviceData* data, VkQueue queue, VkSwapchainKHR swapchain, co
         return false;
     }
 
+    DrawSlotUse use = {};
+    use.imageIndex = imageIndex;
+    drawSlotUses.push_back(use);
+
     *renderFinishedSemaphore = frame.renderFinishedSemaphore;
+
+    return true;
+}
+
+static void DestroyCaptureResources() {
+    DeviceData* data = captureResources.deviceData;
+    if (data == NULL) {
+        return;
+    }
+
+    // Command buffers the game submitted may still copy from the image.
+    DeviceDispatch& dispatch = data->dispatch;
+    dispatch.DeviceWaitIdle(data->device);
+
+    if (captureResources.framebuffer != VK_NULL_HANDLE) {
+        dispatch.DestroyFramebuffer(data->device, captureResources.framebuffer, NULL);
+    }
+    if (captureResources.renderPass != VK_NULL_HANDLE) {
+        dispatch.DestroyRenderPass(data->device, captureResources.renderPass, NULL);
+    }
+    if (captureResources.imageView != VK_NULL_HANDLE) {
+        dispatch.DestroyImageView(data->device, captureResources.imageView, NULL);
+    }
+    if (captureResources.image != VK_NULL_HANDLE) {
+        dispatch.DestroyImage(data->device, captureResources.image, NULL);
+    }
+    if (captureResources.memory != VK_NULL_HANDLE) {
+        dispatch.FreeMemory(data->device, captureResources.memory, NULL);
+    }
+
+    captureResources = CaptureResources();
+}
+
+// The game writes the bytes of the frame as they are into its TGA and JPG files, which expect them in BGRA order.
+// On Vulkan the frame is RGBA, so a blit to the BGRA format with the same encoding swaps red and blue.
+static VkFormat GetCaptureFormat(VkFormat frameFormat) {
+    return frameFormat == VK_FORMAT_R8G8B8A8_SRGB ? VK_FORMAT_B8G8R8A8_SRGB : VK_FORMAT_B8G8R8A8_UNORM;
+}
+
+static bool IsCaptureSupported(DeviceData* data, VkFormat frameFormat, VkFormat captureFormat) {
+    if (data->dispatch.GetPhysicalDeviceFormatProperties == NULL ||
+        data->dispatch.GetPhysicalDeviceMemoryProperties == NULL) {
+        return false;
+    }
+
+    VkFormatProperties frameProperties = {};
+    VkFormatProperties captureProperties = {};
+    data->dispatch.GetPhysicalDeviceFormatProperties(data->physicalDevice, frameFormat, &frameProperties);
+    data->dispatch.GetPhysicalDeviceFormatProperties(data->physicalDevice, captureFormat, &captureProperties);
+
+    VkFormatFeatureFlags captureFeatures = VK_FORMAT_FEATURE_BLIT_DST_BIT | VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT;
+
+    return (frameProperties.optimalTilingFeatures & VK_FORMAT_FEATURE_BLIT_SRC_BIT) != 0 &&
+           (captureProperties.optimalTilingFeatures & captureFeatures) == captureFeatures;
+}
+
+static bool FindMemoryType(DeviceData* data, uint32_t memoryTypeBits, uint32_t* memoryTypeIndex) {
+    VkPhysicalDeviceMemoryProperties properties = {};
+    data->dispatch.GetPhysicalDeviceMemoryProperties(data->physicalDevice, &properties);
+
+    // Device local first, the image is only accessed by the GPU.
+    for (int isDeviceLocalRequired = 1; isDeviceLocalRequired >= 0; isDeviceLocalRequired--) {
+        for (uint32_t i = 0; i < properties.memoryTypeCount; i++) {
+            bool isDeviceLocal = (properties.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT) != 0;
+            if ((memoryTypeBits & (1u << i)) != 0 && (isDeviceLocal || !isDeviceLocalRequired)) {
+                *memoryTypeIndex = i;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+// Its layouts are the ones the capture is in around the panels: written by the blit before, read by the copy after.
+// Only the format and sample count make it compatible with the render pass the ImGui pipeline was built for.
+static bool CreateCaptureRenderPass(DeviceData* data, VkFormat format) {
+    VkAttachmentDescription attachment = {};
+    attachment.format = format;
+    attachment.samples = VK_SAMPLE_COUNT_1_BIT;
+    attachment.loadOp = VK_ATTACHMENT_LOAD_OP_LOAD;
+    attachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+    attachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+    attachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    attachment.initialLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+    attachment.finalLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+
+    VkAttachmentReference colorAttachment = {};
+    colorAttachment.attachment = 0;
+    colorAttachment.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+    VkSubpassDescription subpass = {};
+    subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+    subpass.colorAttachmentCount = 1;
+    subpass.pColorAttachments = &colorAttachment;
+
+    VkSubpassDependency dependencies[2] = {};
+    // The panels are blended over what the blit wrote.
+    dependencies[0].srcSubpass = VK_SUBPASS_EXTERNAL;
+    dependencies[0].dstSubpass = 0;
+    dependencies[0].srcStageMask = VK_PIPELINE_STAGE_TRANSFER_BIT;
+    dependencies[0].dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    dependencies[0].srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+    dependencies[0].dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+    // The copy to the game's buffer reads the panels.
+    dependencies[1].srcSubpass = 0;
+    dependencies[1].dstSubpass = VK_SUBPASS_EXTERNAL;
+    dependencies[1].srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    dependencies[1].dstStageMask = VK_PIPELINE_STAGE_TRANSFER_BIT;
+    dependencies[1].srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+    dependencies[1].dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+
+    VkRenderPassCreateInfo createInfo = {};
+    createInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+    createInfo.attachmentCount = 1;
+    createInfo.pAttachments = &attachment;
+    createInfo.subpassCount = 1;
+    createInfo.pSubpasses = &subpass;
+    createInfo.dependencyCount = 2;
+    createInfo.pDependencies = dependencies;
+
+    return data->dispatch.CreateRenderPass(data->device, &createInfo, NULL, &captureResources.renderPass) == VK_SUCCESS;
+}
+
+static bool CreateCaptureResources(DeviceData* data, VkFormat format, VkExtent2D extent) {
+    DeviceDispatch& dispatch = data->dispatch;
+    captureResources.deviceData = data;
+    captureResources.format = format;
+    captureResources.extent = extent;
+
+    VkImageCreateInfo imageCreateInfo = {};
+    imageCreateInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+    imageCreateInfo.imageType = VK_IMAGE_TYPE_2D;
+    imageCreateInfo.format = format;
+    imageCreateInfo.extent = {extent.width, extent.height, 1};
+    imageCreateInfo.mipLevels = 1;
+    imageCreateInfo.arrayLayers = 1;
+    imageCreateInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+    imageCreateInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+    imageCreateInfo.usage =
+        VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+    imageCreateInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+    imageCreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    if (dispatch.CreateImage(data->device, &imageCreateInfo, NULL, &captureResources.image) != VK_SUCCESS) {
+        return false;
+    }
+
+    VkMemoryRequirements requirements = {};
+    dispatch.GetImageMemoryRequirements(data->device, captureResources.image, &requirements);
+    VkMemoryAllocateInfo allocateInfo = {};
+    allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+    allocateInfo.allocationSize = requirements.size;
+    if (!FindMemoryType(data, requirements.memoryTypeBits, &allocateInfo.memoryTypeIndex) ||
+        dispatch.AllocateMemory(data->device, &allocateInfo, NULL, &captureResources.memory) != VK_SUCCESS ||
+        dispatch.BindImageMemory(data->device, captureResources.image, captureResources.memory, 0) != VK_SUCCESS) {
+        return false;
+    }
+
+    VkImageViewCreateInfo imageViewCreateInfo = {};
+    imageViewCreateInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    imageViewCreateInfo.image = captureResources.image;
+    imageViewCreateInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    imageViewCreateInfo.format = format;
+    imageViewCreateInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    imageViewCreateInfo.subresourceRange.levelCount = 1;
+    imageViewCreateInfo.subresourceRange.layerCount = 1;
+    if (dispatch.CreateImageView(data->device, &imageViewCreateInfo, NULL, &captureResources.imageView) != VK_SUCCESS ||
+        !CreateCaptureRenderPass(data, format)) {
+        return false;
+    }
+
+    VkFramebufferCreateInfo framebufferCreateInfo = {};
+    framebufferCreateInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+    framebufferCreateInfo.renderPass = captureResources.renderPass;
+    framebufferCreateInfo.attachmentCount = 1;
+    framebufferCreateInfo.pAttachments = &captureResources.imageView;
+    framebufferCreateInfo.width = extent.width;
+    framebufferCreateInfo.height = extent.height;
+    framebufferCreateInfo.layers = 1;
+
+    return dispatch.CreateFramebuffer(data->device, &framebufferCreateInfo, NULL, &captureResources.framebuffer) ==
+           VK_SUCCESS;
+}
+
+// Callers must hold overlayMutex.
+static bool PrepareCaptureResources(DeviceData* data, VkFormat frameFormat, VkExtent2D extent) {
+    VkFormat format = GetCaptureFormat(frameFormat);
+    if (captureResources.deviceData == data && captureResources.format == format &&
+        captureResources.extent.width == extent.width && captureResources.extent.height == extent.height) {
+        return true;
+    }
+
+    if (hasCaptureFailed && failedCaptureExtent.width == extent.width && failedCaptureExtent.height == extent.height) {
+        return false;
+    }
+
+    DestroyCaptureResources();
+    if (IsCaptureSupported(data, frameFormat, format) && CreateCaptureResources(data, format, extent)) {
+        hasCaptureFailed = false;
+        LayerLog("Overlay: the frames the game captures are converted and drawn on, %ux%u", extent.width,
+                 extent.height);
+        return true;
+    }
+
+    DestroyCaptureResources();
+    hasCaptureFailed = true;
+    failedCaptureExtent = extent;
+    LayerLog(
+        "Overlay: the frames the game captures can't be converted, the movies will have red and blue swapped and "
+        "no panels");
+
+    return false;
+}
+
+// Whether the panels of the last frame built can be drawn on the capture. The ImGui pipeline was built for the render
+// pass of the swapchain, so the capture must have its format.
+static bool CanDrawPanelsOnCapture(DeviceData* data) {
+    if (!arePanelsDrawnInCaptures || !IsOverlayVisible() || !isImGuiVulkanInitialized || overlayDeviceData != data ||
+        overlayResources.format != captureResources.format) {
+        return false;
+    }
+
+    ImDrawData* drawData = ImGui::GetDrawData();
+
+    return drawData != NULL && drawData->Valid && (int)drawData->DisplaySize.x == (int)captureResources.extent.width &&
+           (int)drawData->DisplaySize.y == (int)captureResources.extent.height;
+}
+
+static void RecordImageBarrier(DeviceData* data, VkCommandBuffer commandBuffer, VkImageLayout oldLayout,
+                               VkImageLayout newLayout, VkAccessFlags srcAccessMask, VkAccessFlags dstAccessMask) {
+    VkImageMemoryBarrier barrier = {};
+    barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+    barrier.srcAccessMask = srcAccessMask;
+    barrier.dstAccessMask = dstAccessMask;
+    barrier.oldLayout = oldLayout;
+    barrier.newLayout = newLayout;
+    barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    barrier.image = captureResources.image;
+    barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    barrier.subresourceRange.levelCount = 1;
+    barrier.subresourceRange.layerCount = 1;
+    data->dispatch.CmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0,
+                                      0, NULL, 0, NULL, 1, &barrier);
+}
+
+// The game records the copy as the last command of its command buffer, so the state ImGui binds is never used after.
+bool OverlayRecordCapture(DeviceData* data, VkCommandBuffer commandBuffer, VkImage image,
+                          const CaptureCandidate& candidate, VkImageLayout layout, VkBuffer buffer,
+                          const VkBufferImageCopy& region) {
+    std::lock_guard<std::mutex> lock(overlayMutex);
+
+    if (!PrepareCaptureResources(data, candidate.format, candidate.extent)) {
+        return false;
+    }
+
+    DeviceDispatch& dispatch = data->dispatch;
+
+    // The previous capture's copy may still read the image. Its content is overwritten, so it isn't kept.
+    RecordImageBarrier(data, commandBuffer, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 0,
+                       VK_ACCESS_TRANSFER_WRITE_BIT);
+
+    // The game already made the frame readable by a transfer in `layout` for its own copy.
+    VkImageBlit blit = {};
+    blit.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    blit.srcSubresource.layerCount = 1;
+    blit.srcOffsets[1] = {(int32_t)candidate.extent.width, (int32_t)candidate.extent.height, 1};
+    blit.dstSubresource = blit.srcSubresource;
+    blit.dstOffsets[1] = blit.srcOffsets[1];
+    dispatch.CmdBlitImage(commandBuffer, image, layout, captureResources.image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
+                          &blit, VK_FILTER_NEAREST);
+
+    if (CanDrawPanelsOnCapture(data) && ReserveDrawSlot()) {
+        // The render pass moves the image to the layout of the copy, see CreateCaptureRenderPass.
+        VkRenderPassBeginInfo renderPassBeginInfo = {};
+        renderPassBeginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+        renderPassBeginInfo.renderPass = captureResources.renderPass;
+        renderPassBeginInfo.framebuffer = captureResources.framebuffer;
+        renderPassBeginInfo.renderArea.extent = captureResources.extent;
+        dispatch.CmdBeginRenderPass(commandBuffer, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
+        ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
+        dispatch.CmdEndRenderPass(commandBuffer);
+
+        // Tracked until the game submits the command buffer, see OverlayTrackSubmit.
+        DrawSlotUse use = {};
+        use.commandBuffer = commandBuffer;
+        drawSlotUses.push_back(use);
+        unsubmittedCaptureCount++;
+    } else {
+        RecordImageBarrier(data, commandBuffer, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                           VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, VK_ACCESS_TRANSFER_WRITE_BIT,
+                           VK_ACCESS_TRANSFER_READ_BIT);
+    }
+
+    // Both formats have 4 bytes per pixel, so the region lays the bytes out in the buffer as the game expects.
+    dispatch.CmdCopyImageToBuffer(commandBuffer, captureResources.image, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, buffer,
+                                  1, &region);
 
     return true;
 }
@@ -715,6 +1138,103 @@ void OverlayReleaseDevice(DeviceData* data) {
         DestroyResources();
         failedSwapchain = VK_NULL_HANDLE;
     }
+
+    if (captureResources.deviceData == data) {
+        DestroyCaptureResources();
+        hasCaptureFailed = false;
+    }
+}
+
+static bool IsSubmitted(VkCommandBuffer commandBuffer, uint32_t submitCount, const VkSubmitInfo* submits) {
+    for (uint32_t i = 0; i < submitCount; i++) {
+        const VkCommandBuffer* begin = submits[i].pCommandBuffers;
+        const VkCommandBuffer* end = begin + submits[i].commandBufferCount;
+        if (std::find(begin, end, commandBuffer) != end) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void OverlayTrackSubmit(DeviceData* data, VkQueue queue, uint32_t submitCount, const VkSubmitInfo* submits) {
+    if (unsubmittedCaptureCount == 0) {
+        return;
+    }
+
+    std::lock_guard<std::mutex> lock(overlayMutex);
+    if (overlayDeviceData != data) {
+        return;
+    }
+
+    DeviceDispatch& dispatch = data->dispatch;
+    for (DrawSlotUse& use : drawSlotUses) {
+        if (!IsUnsubmittedCapture(use) || !IsSubmitted(use.commandBuffer, submitCount, submits)) {
+            continue;
+        }
+
+        VkFence fence = VK_NULL_HANDLE;
+        if (!freeCaptureFences.empty()) {
+            fence = freeCaptureFences.back();
+            freeCaptureFences.pop_back();
+        } else {
+            VkFenceCreateInfo createInfo = {};
+            createInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+            if (dispatch.CreateFence(data->device, &createInfo, NULL, &fence) != VK_SUCCESS) {
+                // Left to OverlayTrackBeginCommandBuffer.
+                continue;
+            }
+        }
+
+        // An empty submission signals its fence once everything submitted to the queue before it is done. The game
+        // holds the queue for the duration of its own submission.
+        if (dispatch.QueueSubmit(queue, 0, NULL, fence) != VK_SUCCESS) {
+            freeCaptureFences.push_back(fence);
+            continue;
+        }
+
+        use.fence = fence;
+        unsubmittedCaptureCount--;
+    }
+}
+
+void OverlayTrackExecuteCommands(DeviceData* data, VkCommandBuffer commandBuffer, uint32_t secondaryCount,
+                                 const VkCommandBuffer* secondaries) {
+    if (unsubmittedCaptureCount == 0) {
+        return;
+    }
+
+    std::lock_guard<std::mutex> lock(overlayMutex);
+    if (overlayDeviceData != data) {
+        return;
+    }
+
+    const VkCommandBuffer* end = secondaries + secondaryCount;
+    for (DrawSlotUse& use : drawSlotUses) {
+        if (IsUnsubmittedCapture(use) && std::find(secondaries, end, use.commandBuffer) != end) {
+            use.commandBuffer = commandBuffer;
+        }
+    }
+}
+
+void OverlayTrackBeginCommandBuffer(DeviceData* data, VkCommandBuffer commandBuffer) {
+    if (unsubmittedCaptureCount == 0) {
+        return;
+    }
+
+    std::lock_guard<std::mutex> lock(overlayMutex);
+    if (overlayDeviceData != data) {
+        return;
+    }
+
+    // A command buffer can't be recorded again while it is pending, so a capture in it that was never seen submitted
+    // was either discarded or submitted another way and is done.
+    for (DrawSlotUse& use : drawSlotUses) {
+        if (IsUnsubmittedCapture(use) && use.commandBuffer == commandBuffer) {
+            use.isDone = true;
+            unsubmittedCaptureCount--;
+        }
+    }
 }
 
 extern "C" {
@@ -731,6 +1251,9 @@ CSDM_LAYER_EXPORT void CsdmOverlaySetGameDirectory(const char* directory) {
 }
 
 CSDM_LAYER_EXPORT void CsdmOverlaySetVisible(int isVisible) { isOverlayVisible = isVisible != 0; }
+
+// Whether the panels are drawn on the frames the game captures (startmovie). The frames are converted either way.
+CSDM_LAYER_EXPORT void CsdmOverlaySetDrawnInCaptures(int isDrawn) { arePanelsDrawnInCaptures = isDrawn != 0; }
 
 CSDM_LAYER_EXPORT void CsdmOverlaySetPressedButtons(uint64_t buttons) { pressedButtons = buttons; }
 

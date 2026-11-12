@@ -24,6 +24,9 @@ bool AreOverlayTooltipsEnabled();
 // Shows a short message next to the playback panel for a few seconds. Safe to call from any thread.
 void ShowOverlayToast(const char* text);
 
+// Whether the panels are drawn in the frames the game captures (startmovie).
+void SetOverlayDrawnInCaptures(bool isDrawn);
+
 #ifdef _WIN32
 // The cursor can only point at a panel while it is visible, which is when a menu or the demo playback UI is open and
 // the mouse isn't driving the camera.
@@ -32,7 +35,4 @@ bool OverlayIsCursorVisible();
 // Cursor position in the client area of the game window, the same space ImGui draws in. False when the cursor is
 // hidden or the game window isn't in the foreground.
 bool OverlayGetCursorPositionInWindow(float* x, float* y);
-
-// Whether the panels are drawn in the frames the game captures (startmovie).
-void SetOverlayDrawnInCaptures(bool isDrawn);
 #endif
