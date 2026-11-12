@@ -34,4 +34,5 @@ minimumReleaseAgeExclude:
   - '@akiver/cs-demo-analyzer'
   - 'csgo-protobuf'
   - csgo-sharecode
+  - '@akiver/csgo-voice-extractor'
   - electron@45.3.0

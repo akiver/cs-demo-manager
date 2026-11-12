@@ -203,8 +203,8 @@ importers:
         specifier: 1.14.1
         version: 1.14.1
       '@akiver/csgo-voice-extractor':
-        specifier: 3.1.6
-        version: 3.1.6
+        specifier: 3.1.7
+        version: 3.1.7
       '@base-ui/react':
         specifier: 1.9.0
         version: 1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -498,8 +498,8 @@ packages:
     os: [darwin, linux, win32]
     hasBin: true
 
-  '@akiver/csgo-voice-extractor@3.1.6':
-    resolution: {integrity: sha512-vD6k1nlDzVVtpckYuNlL2lO5plYtAYX1cNj+y9+eVaAAjOb1DwsiiJTnWRqXMODpx0sD6cfc7k3u6jPciEjt3A==}
+  '@akiver/csgo-voice-extractor@3.1.7':
+    resolution: {integrity: sha512-5AnMeQSiQI2utJ1/g3RjSdznw1R+/flFytRu9+tKOy998zRIjWQMnbjZRNj+4RYB5VVl15gl9JWj8drWkZWOJg==}
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
 
@@ -6051,7 +6051,7 @@ snapshots:
 
   '@akiver/cs-demo-analyzer@1.14.1': {}
 
-  '@akiver/csgo-voice-extractor@3.1.6': {}
+  '@akiver/csgo-voice-extractor@3.1.7': {}
 
   '@alloc/quick-lru@5.3.0': {}
 
