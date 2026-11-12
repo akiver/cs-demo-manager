@@ -1,3 +1,4 @@
+import { compareVersions } from 'csdm/common/compare-versions';
 import { isMac } from 'csdm/node/os/is-mac';
 import { isWindows } from 'csdm/node/os/is-windows';
 
@@ -21,7 +22,7 @@ function findVersionFromGitHubRelease(release: GitHubReleaseResponse) {
     throw new Error('FFMpeg version not found');
   }
 
-  return versionsFound.sort().reverse()[0];
+  return versionsFound.sort(compareVersions).reverse()[0];
 }
 
 export async function fetchLastFfmpegVersion(): Promise<string> {

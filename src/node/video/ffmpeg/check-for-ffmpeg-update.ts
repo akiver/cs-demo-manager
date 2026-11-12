@@ -1,6 +1,7 @@
 import { isTimestampExpired } from 'csdm/node/database/timestamps/is-timestamp-expired';
 import { TimestampName } from 'csdm/node/database/timestamps/timestamp-name';
 import { updateTimestamp } from 'csdm/node/database/timestamps/update-timestamp';
+import { compareVersions } from 'csdm/common/compare-versions';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { fetchLastFfmpegVersion } from './fetch-last-ffmpeg-version';
 
@@ -23,7 +24,7 @@ export async function checkForFfmpegUpdate(currentVersion: string): Promise<bool
 
     await updateTimestamp(TimestampName.FfmpegUpdate);
 
-    return lastVersion > currentVersion;
+    return compareVersions(lastVersion, currentVersion) > 0;
   } catch (error) {
     logger.error('Error while checking for FFMpeg update');
     logger.error(error);
