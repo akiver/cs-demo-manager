@@ -1,6 +1,6 @@
 import util from 'node:util';
 import { pipeline } from 'node:stream';
-import { request } from 'undici';
+import { Agent, interceptors, request } from 'undici';
 import fs from 'fs-extra';
 import path from 'node:path';
 import { exec } from 'node:child_process';
@@ -9,18 +9,16 @@ const streamPipeline = util.promisify(pipeline);
 const execAsync = util.promisify(exec);
 
 export async function downloadAndExtractXzArchive(archiveUrl: string, destinationPath: string): Promise<void> {
-  let response = await request(archiveUrl);
-  const isRedirection = response.statusCode === 301 || response.statusCode === 302;
-  if (isRedirection && typeof response.headers.location === 'string') {
-    response = await request(response.headers.location);
+  const response = await request(archiveUrl, {
+    dispatcher: new Agent().compose(interceptors.redirect({ maxRedirections: 5 })),
+  });
+  if (response.statusCode !== 200) {
+    await response.body.dump();
+    throw new Error(`Error while downloading XZ archive, status code: ${response.statusCode}`);
   }
 
   const archivePath = path.join(getAppFolderPath(), path.basename(archiveUrl));
-  if (response.body) {
-    await streamPipeline(response.body, fs.createWriteStream(archivePath));
-  } else {
-    throw new Error('Error while downloading XZ archive');
-  }
+  await streamPipeline(response.body, fs.createWriteStream(archivePath));
 
   await fs.mkdirp(destinationPath);
   await execAsync(`tar -xJf ${archivePath} -C ${destinationPath} --strip=1`);

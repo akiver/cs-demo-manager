@@ -1,18 +1,16 @@
 import os from 'node:os';
-import { request } from 'undici';
+import { Agent, interceptors, request } from 'undici';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import StreamZip from 'node-stream-zip';
 
 export async function downloadAndExtractZipArchive(archiveUrl: string, destinationPath: string) {
-  let response = await request(archiveUrl);
-  if (response.body === null) {
-    throw new Error('Request body not defined while downloading zip archive');
-  }
-
-  const isRedirection = response.statusCode === 301 || response.statusCode === 302;
-  if (isRedirection && typeof response.headers.location === 'string') {
-    response = await request(response.headers.location);
+  const response = await request(archiveUrl, {
+    dispatcher: new Agent().compose(interceptors.redirect({ maxRedirections: 5 })),
+  });
+  if (response.statusCode !== 200) {
+    await response.body.dump();
+    throw new Error(`Error while downloading zip archive, status code: ${response.statusCode}`);
   }
 
   const filename = path.basename(archiveUrl);

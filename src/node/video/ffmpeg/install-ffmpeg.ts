@@ -25,7 +25,7 @@ function getArchiveUrl(archiveName: string) {
     case isMac:
       return `https://evermeet.cx/ffmpeg/${archiveName}.zip`;
     default:
-      return `https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/${archiveName}${isWindows ? '.zip' : '.tar.xz'}`;
+      return `https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/latest/${archiveName}${isWindows ? '.zip' : '.tar.xz'}`;
   }
 }
 

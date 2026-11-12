@@ -31,7 +31,7 @@ export async function fetchLastFfmpegVersion(): Promise<string> {
     const data: EvermeetResponse = await response.json();
     version = data.version;
   } else {
-    const response = await fetch('https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest');
+    const response = await fetch('https://api.github.com/repos/FFmpeg-Builds/FFmpeg-Builds/releases/tags/latest');
     const release: GitHubReleaseResponse = await response.json();
     version = findVersionFromGitHubRelease(release);
   }
