@@ -287,6 +287,9 @@ class CMsgSource2SystemSpecs :
     kGpuDriverNameFieldNumber = 43,
     kCpuModelFieldNumber = 3,
     kCpuNumPhysicalFieldNumber = 4,
+    kCpuNumLogicalFieldNumber = 5,
+    kCpuNumPerformanceFieldNumber = 6,
+    kCpuNumEfficiencyFieldNumber = 7,
     kRamPhysicalTotalMbFieldNumber = 21,
     kGpuVendorIdFieldNumber = 42,
     kGpuDriverVersionHighFieldNumber = 44,
@@ -295,6 +298,7 @@ class CMsgSource2SystemSpecs :
     kGpuTextureMemorySizeMbFieldNumber = 47,
     kBackbufferWidthFieldNumber = 51,
     kBackbufferHeightFieldNumber = 52,
+    kThreadPoolWorkersFieldNumber = 61,
   };
   // optional string cpu_id = 1;
   bool has_cpu_id() const;
@@ -392,6 +396,45 @@ class CMsgSource2SystemSpecs :
   private:
   uint32_t _internal_cpu_num_physical() const;
   void _internal_set_cpu_num_physical(uint32_t value);
+  public:
+
+  // optional uint32 cpu_num_logical = 5;
+  bool has_cpu_num_logical() const;
+  private:
+  bool _internal_has_cpu_num_logical() const;
+  public:
+  void clear_cpu_num_logical();
+  uint32_t cpu_num_logical() const;
+  void set_cpu_num_logical(uint32_t value);
+  private:
+  uint32_t _internal_cpu_num_logical() const;
+  void _internal_set_cpu_num_logical(uint32_t value);
+  public:
+
+  // optional uint32 cpu_num_performance = 6;
+  bool has_cpu_num_performance() const;
+  private:
+  bool _internal_has_cpu_num_performance() const;
+  public:
+  void clear_cpu_num_performance();
+  uint32_t cpu_num_performance() const;
+  void set_cpu_num_performance(uint32_t value);
+  private:
+  uint32_t _internal_cpu_num_performance() const;
+  void _internal_set_cpu_num_performance(uint32_t value);
+  public:
+
+  // optional uint32 cpu_num_efficiency = 7;
+  bool has_cpu_num_efficiency() const;
+  private:
+  bool _internal_has_cpu_num_efficiency() const;
+  public:
+  void clear_cpu_num_efficiency();
+  uint32_t cpu_num_efficiency() const;
+  void set_cpu_num_efficiency(uint32_t value);
+  private:
+  uint32_t _internal_cpu_num_efficiency() const;
+  void _internal_set_cpu_num_efficiency(uint32_t value);
   public:
 
   // optional uint32 ram_physical_total_mb = 21;
@@ -498,6 +541,19 @@ class CMsgSource2SystemSpecs :
   void _internal_set_backbuffer_height(uint32_t value);
   public:
 
+  // optional uint32 thread_pool_workers = 61;
+  bool has_thread_pool_workers() const;
+  private:
+  bool _internal_has_thread_pool_workers() const;
+  public:
+  void clear_thread_pool_workers();
+  uint32_t thread_pool_workers() const;
+  void set_thread_pool_workers(uint32_t value);
+  private:
+  uint32_t _internal_thread_pool_workers() const;
+  void _internal_set_thread_pool_workers(uint32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:CMsgSource2SystemSpecs)
  private:
   class _Internal;
@@ -514,6 +570,9 @@ class CMsgSource2SystemSpecs :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr gpu_driver_name_;
     uint32_t cpu_model_;
     uint32_t cpu_num_physical_;
+    uint32_t cpu_num_logical_;
+    uint32_t cpu_num_performance_;
+    uint32_t cpu_num_efficiency_;
     uint32_t ram_physical_total_mb_;
     uint32_t gpu_vendor_id_;
     uint32_t gpu_driver_version_high_;
@@ -522,6 +581,7 @@ class CMsgSource2SystemSpecs :
     uint32_t gpu_texture_memory_size_mb_;
     uint32_t backbuffer_width_;
     uint32_t backbuffer_height_;
+    uint32_t thread_pool_workers_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_source2_5fsteam_5fstats_2eproto;
@@ -5457,9 +5517,93 @@ inline void CMsgSource2SystemSpecs::set_cpu_num_physical(uint32_t value) {
   // @@protoc_insertion_point(field_set:CMsgSource2SystemSpecs.cpu_num_physical)
 }
 
+// optional uint32 cpu_num_logical = 5;
+inline bool CMsgSource2SystemSpecs::_internal_has_cpu_num_logical() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
+  return value;
+}
+inline bool CMsgSource2SystemSpecs::has_cpu_num_logical() const {
+  return _internal_has_cpu_num_logical();
+}
+inline void CMsgSource2SystemSpecs::clear_cpu_num_logical() {
+  _impl_.cpu_num_logical_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000040u;
+}
+inline uint32_t CMsgSource2SystemSpecs::_internal_cpu_num_logical() const {
+  return _impl_.cpu_num_logical_;
+}
+inline uint32_t CMsgSource2SystemSpecs::cpu_num_logical() const {
+  // @@protoc_insertion_point(field_get:CMsgSource2SystemSpecs.cpu_num_logical)
+  return _internal_cpu_num_logical();
+}
+inline void CMsgSource2SystemSpecs::_internal_set_cpu_num_logical(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000040u;
+  _impl_.cpu_num_logical_ = value;
+}
+inline void CMsgSource2SystemSpecs::set_cpu_num_logical(uint32_t value) {
+  _internal_set_cpu_num_logical(value);
+  // @@protoc_insertion_point(field_set:CMsgSource2SystemSpecs.cpu_num_logical)
+}
+
+// optional uint32 cpu_num_performance = 6;
+inline bool CMsgSource2SystemSpecs::_internal_has_cpu_num_performance() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
+  return value;
+}
+inline bool CMsgSource2SystemSpecs::has_cpu_num_performance() const {
+  return _internal_has_cpu_num_performance();
+}
+inline void CMsgSource2SystemSpecs::clear_cpu_num_performance() {
+  _impl_.cpu_num_performance_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000080u;
+}
+inline uint32_t CMsgSource2SystemSpecs::_internal_cpu_num_performance() const {
+  return _impl_.cpu_num_performance_;
+}
+inline uint32_t CMsgSource2SystemSpecs::cpu_num_performance() const {
+  // @@protoc_insertion_point(field_get:CMsgSource2SystemSpecs.cpu_num_performance)
+  return _internal_cpu_num_performance();
+}
+inline void CMsgSource2SystemSpecs::_internal_set_cpu_num_performance(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000080u;
+  _impl_.cpu_num_performance_ = value;
+}
+inline void CMsgSource2SystemSpecs::set_cpu_num_performance(uint32_t value) {
+  _internal_set_cpu_num_performance(value);
+  // @@protoc_insertion_point(field_set:CMsgSource2SystemSpecs.cpu_num_performance)
+}
+
+// optional uint32 cpu_num_efficiency = 7;
+inline bool CMsgSource2SystemSpecs::_internal_has_cpu_num_efficiency() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000100u) != 0;
+  return value;
+}
+inline bool CMsgSource2SystemSpecs::has_cpu_num_efficiency() const {
+  return _internal_has_cpu_num_efficiency();
+}
+inline void CMsgSource2SystemSpecs::clear_cpu_num_efficiency() {
+  _impl_.cpu_num_efficiency_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000100u;
+}
+inline uint32_t CMsgSource2SystemSpecs::_internal_cpu_num_efficiency() const {
+  return _impl_.cpu_num_efficiency_;
+}
+inline uint32_t CMsgSource2SystemSpecs::cpu_num_efficiency() const {
+  // @@protoc_insertion_point(field_get:CMsgSource2SystemSpecs.cpu_num_efficiency)
+  return _internal_cpu_num_efficiency();
+}
+inline void CMsgSource2SystemSpecs::_internal_set_cpu_num_efficiency(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000100u;
+  _impl_.cpu_num_efficiency_ = value;
+}
+inline void CMsgSource2SystemSpecs::set_cpu_num_efficiency(uint32_t value) {
+  _internal_set_cpu_num_efficiency(value);
+  // @@protoc_insertion_point(field_set:CMsgSource2SystemSpecs.cpu_num_efficiency)
+}
+
 // optional uint32 ram_physical_total_mb = 21;
 inline bool CMsgSource2SystemSpecs::_internal_has_ram_physical_total_mb() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
   return value;
 }
 inline bool CMsgSource2SystemSpecs::has_ram_physical_total_mb() const {
@@ -5467,7 +5611,7 @@ inline bool CMsgSource2SystemSpecs::has_ram_physical_total_mb() const {
 }
 inline void CMsgSource2SystemSpecs::clear_ram_physical_total_mb() {
   _impl_.ram_physical_total_mb_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000040u;
+  _impl_._has_bits_[0] &= ~0x00000200u;
 }
 inline uint32_t CMsgSource2SystemSpecs::_internal_ram_physical_total_mb() const {
   return _impl_.ram_physical_total_mb_;
@@ -5477,7 +5621,7 @@ inline uint32_t CMsgSource2SystemSpecs::ram_physical_total_mb() const {
   return _internal_ram_physical_total_mb();
 }
 inline void CMsgSource2SystemSpecs::_internal_set_ram_physical_total_mb(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000040u;
+  _impl_._has_bits_[0] |= 0x00000200u;
   _impl_.ram_physical_total_mb_ = value;
 }
 inline void CMsgSource2SystemSpecs::set_ram_physical_total_mb(uint32_t value) {
@@ -5555,7 +5699,7 @@ inline void CMsgSource2SystemSpecs::set_allocated_gpu_rendersystem_dll_name(std:
 
 // optional uint32 gpu_vendor_id = 42;
 inline bool CMsgSource2SystemSpecs::_internal_has_gpu_vendor_id() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
   return value;
 }
 inline bool CMsgSource2SystemSpecs::has_gpu_vendor_id() const {
@@ -5563,7 +5707,7 @@ inline bool CMsgSource2SystemSpecs::has_gpu_vendor_id() const {
 }
 inline void CMsgSource2SystemSpecs::clear_gpu_vendor_id() {
   _impl_.gpu_vendor_id_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000080u;
+  _impl_._has_bits_[0] &= ~0x00000400u;
 }
 inline uint32_t CMsgSource2SystemSpecs::_internal_gpu_vendor_id() const {
   return _impl_.gpu_vendor_id_;
@@ -5573,7 +5717,7 @@ inline uint32_t CMsgSource2SystemSpecs::gpu_vendor_id() const {
   return _internal_gpu_vendor_id();
 }
 inline void CMsgSource2SystemSpecs::_internal_set_gpu_vendor_id(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000080u;
+  _impl_._has_bits_[0] |= 0x00000400u;
   _impl_.gpu_vendor_id_ = value;
 }
 inline void CMsgSource2SystemSpecs::set_gpu_vendor_id(uint32_t value) {
@@ -5651,7 +5795,7 @@ inline void CMsgSource2SystemSpecs::set_allocated_gpu_driver_name(std::string* g
 
 // optional uint32 gpu_driver_version_high = 44;
 inline bool CMsgSource2SystemSpecs::_internal_has_gpu_driver_version_high() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000100u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000800u) != 0;
   return value;
 }
 inline bool CMsgSource2SystemSpecs::has_gpu_driver_version_high() const {
@@ -5659,7 +5803,7 @@ inline bool CMsgSource2SystemSpecs::has_gpu_driver_version_high() const {
 }
 inline void CMsgSource2SystemSpecs::clear_gpu_driver_version_high() {
   _impl_.gpu_driver_version_high_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000100u;
+  _impl_._has_bits_[0] &= ~0x00000800u;
 }
 inline uint32_t CMsgSource2SystemSpecs::_internal_gpu_driver_version_high() const {
   return _impl_.gpu_driver_version_high_;
@@ -5669,7 +5813,7 @@ inline uint32_t CMsgSource2SystemSpecs::gpu_driver_version_high() const {
   return _internal_gpu_driver_version_high();
 }
 inline void CMsgSource2SystemSpecs::_internal_set_gpu_driver_version_high(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000100u;
+  _impl_._has_bits_[0] |= 0x00000800u;
   _impl_.gpu_driver_version_high_ = value;
 }
 inline void CMsgSource2SystemSpecs::set_gpu_driver_version_high(uint32_t value) {
@@ -5679,7 +5823,7 @@ inline void CMsgSource2SystemSpecs::set_gpu_driver_version_high(uint32_t value) 
 
 // optional uint32 gpu_driver_version_low = 45;
 inline bool CMsgSource2SystemSpecs::_internal_has_gpu_driver_version_low() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00001000u) != 0;
   return value;
 }
 inline bool CMsgSource2SystemSpecs::has_gpu_driver_version_low() const {
@@ -5687,7 +5831,7 @@ inline bool CMsgSource2SystemSpecs::has_gpu_driver_version_low() const {
 }
 inline void CMsgSource2SystemSpecs::clear_gpu_driver_version_low() {
   _impl_.gpu_driver_version_low_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000200u;
+  _impl_._has_bits_[0] &= ~0x00001000u;
 }
 inline uint32_t CMsgSource2SystemSpecs::_internal_gpu_driver_version_low() const {
   return _impl_.gpu_driver_version_low_;
@@ -5697,7 +5841,7 @@ inline uint32_t CMsgSource2SystemSpecs::gpu_driver_version_low() const {
   return _internal_gpu_driver_version_low();
 }
 inline void CMsgSource2SystemSpecs::_internal_set_gpu_driver_version_low(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000200u;
+  _impl_._has_bits_[0] |= 0x00001000u;
   _impl_.gpu_driver_version_low_ = value;
 }
 inline void CMsgSource2SystemSpecs::set_gpu_driver_version_low(uint32_t value) {
@@ -5707,7 +5851,7 @@ inline void CMsgSource2SystemSpecs::set_gpu_driver_version_low(uint32_t value) {
 
 // optional uint32 gpu_dx_support_level = 46;
 inline bool CMsgSource2SystemSpecs::_internal_has_gpu_dx_support_level() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00002000u) != 0;
   return value;
 }
 inline bool CMsgSource2SystemSpecs::has_gpu_dx_support_level() const {
@@ -5715,7 +5859,7 @@ inline bool CMsgSource2SystemSpecs::has_gpu_dx_support_level() const {
 }
 inline void CMsgSource2SystemSpecs::clear_gpu_dx_support_level() {
   _impl_.gpu_dx_support_level_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000400u;
+  _impl_._has_bits_[0] &= ~0x00002000u;
 }
 inline uint32_t CMsgSource2SystemSpecs::_internal_gpu_dx_support_level() const {
   return _impl_.gpu_dx_support_level_;
@@ -5725,7 +5869,7 @@ inline uint32_t CMsgSource2SystemSpecs::gpu_dx_support_level() const {
   return _internal_gpu_dx_support_level();
 }
 inline void CMsgSource2SystemSpecs::_internal_set_gpu_dx_support_level(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000400u;
+  _impl_._has_bits_[0] |= 0x00002000u;
   _impl_.gpu_dx_support_level_ = value;
 }
 inline void CMsgSource2SystemSpecs::set_gpu_dx_support_level(uint32_t value) {
@@ -5735,7 +5879,7 @@ inline void CMsgSource2SystemSpecs::set_gpu_dx_support_level(uint32_t value) {
 
 // optional uint32 gpu_texture_memory_size_mb = 47;
 inline bool CMsgSource2SystemSpecs::_internal_has_gpu_texture_memory_size_mb() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000800u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00004000u) != 0;
   return value;
 }
 inline bool CMsgSource2SystemSpecs::has_gpu_texture_memory_size_mb() const {
@@ -5743,7 +5887,7 @@ inline bool CMsgSource2SystemSpecs::has_gpu_texture_memory_size_mb() const {
 }
 inline void CMsgSource2SystemSpecs::clear_gpu_texture_memory_size_mb() {
   _impl_.gpu_texture_memory_size_mb_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000800u;
+  _impl_._has_bits_[0] &= ~0x00004000u;
 }
 inline uint32_t CMsgSource2SystemSpecs::_internal_gpu_texture_memory_size_mb() const {
   return _impl_.gpu_texture_memory_size_mb_;
@@ -5753,7 +5897,7 @@ inline uint32_t CMsgSource2SystemSpecs::gpu_texture_memory_size_mb() const {
   return _internal_gpu_texture_memory_size_mb();
 }
 inline void CMsgSource2SystemSpecs::_internal_set_gpu_texture_memory_size_mb(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000800u;
+  _impl_._has_bits_[0] |= 0x00004000u;
   _impl_.gpu_texture_memory_size_mb_ = value;
 }
 inline void CMsgSource2SystemSpecs::set_gpu_texture_memory_size_mb(uint32_t value) {
@@ -5763,7 +5907,7 @@ inline void CMsgSource2SystemSpecs::set_gpu_texture_memory_size_mb(uint32_t valu
 
 // optional uint32 backbuffer_width = 51;
 inline bool CMsgSource2SystemSpecs::_internal_has_backbuffer_width() const {
-  bool value = (_impl_._has_bits_[0] & 0x00001000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00008000u) != 0;
   return value;
 }
 inline bool CMsgSource2SystemSpecs::has_backbuffer_width() const {
@@ -5771,7 +5915,7 @@ inline bool CMsgSource2SystemSpecs::has_backbuffer_width() const {
 }
 inline void CMsgSource2SystemSpecs::clear_backbuffer_width() {
   _impl_.backbuffer_width_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00001000u;
+  _impl_._has_bits_[0] &= ~0x00008000u;
 }
 inline uint32_t CMsgSource2SystemSpecs::_internal_backbuffer_width() const {
   return _impl_.backbuffer_width_;
@@ -5781,7 +5925,7 @@ inline uint32_t CMsgSource2SystemSpecs::backbuffer_width() const {
   return _internal_backbuffer_width();
 }
 inline void CMsgSource2SystemSpecs::_internal_set_backbuffer_width(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00001000u;
+  _impl_._has_bits_[0] |= 0x00008000u;
   _impl_.backbuffer_width_ = value;
 }
 inline void CMsgSource2SystemSpecs::set_backbuffer_width(uint32_t value) {
@@ -5791,7 +5935,7 @@ inline void CMsgSource2SystemSpecs::set_backbuffer_width(uint32_t value) {
 
 // optional uint32 backbuffer_height = 52;
 inline bool CMsgSource2SystemSpecs::_internal_has_backbuffer_height() const {
-  bool value = (_impl_._has_bits_[0] & 0x00002000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00010000u) != 0;
   return value;
 }
 inline bool CMsgSource2SystemSpecs::has_backbuffer_height() const {
@@ -5799,7 +5943,7 @@ inline bool CMsgSource2SystemSpecs::has_backbuffer_height() const {
 }
 inline void CMsgSource2SystemSpecs::clear_backbuffer_height() {
   _impl_.backbuffer_height_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00002000u;
+  _impl_._has_bits_[0] &= ~0x00010000u;
 }
 inline uint32_t CMsgSource2SystemSpecs::_internal_backbuffer_height() const {
   return _impl_.backbuffer_height_;
@@ -5809,12 +5953,40 @@ inline uint32_t CMsgSource2SystemSpecs::backbuffer_height() const {
   return _internal_backbuffer_height();
 }
 inline void CMsgSource2SystemSpecs::_internal_set_backbuffer_height(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00002000u;
+  _impl_._has_bits_[0] |= 0x00010000u;
   _impl_.backbuffer_height_ = value;
 }
 inline void CMsgSource2SystemSpecs::set_backbuffer_height(uint32_t value) {
   _internal_set_backbuffer_height(value);
   // @@protoc_insertion_point(field_set:CMsgSource2SystemSpecs.backbuffer_height)
+}
+
+// optional uint32 thread_pool_workers = 61;
+inline bool CMsgSource2SystemSpecs::_internal_has_thread_pool_workers() const {
+  bool value = (_impl_._has_bits_[0] & 0x00020000u) != 0;
+  return value;
+}
+inline bool CMsgSource2SystemSpecs::has_thread_pool_workers() const {
+  return _internal_has_thread_pool_workers();
+}
+inline void CMsgSource2SystemSpecs::clear_thread_pool_workers() {
+  _impl_.thread_pool_workers_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00020000u;
+}
+inline uint32_t CMsgSource2SystemSpecs::_internal_thread_pool_workers() const {
+  return _impl_.thread_pool_workers_;
+}
+inline uint32_t CMsgSource2SystemSpecs::thread_pool_workers() const {
+  // @@protoc_insertion_point(field_get:CMsgSource2SystemSpecs.thread_pool_workers)
+  return _internal_thread_pool_workers();
+}
+inline void CMsgSource2SystemSpecs::_internal_set_thread_pool_workers(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00020000u;
+  _impl_.thread_pool_workers_ = value;
+}
+inline void CMsgSource2SystemSpecs::set_thread_pool_workers(uint32_t value) {
+  _internal_set_thread_pool_workers(value);
+  // @@protoc_insertion_point(field_set:CMsgSource2SystemSpecs.thread_pool_workers)
 }
 
 // -------------------------------------------------------------------

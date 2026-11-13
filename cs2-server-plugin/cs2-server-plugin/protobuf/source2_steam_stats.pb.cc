@@ -30,6 +30,9 @@ PROTOBUF_CONSTEXPR CMsgSource2SystemSpecs::CMsgSource2SystemSpecs(
   , /*decltype(_impl_.gpu_driver_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.cpu_model_)*/0u
   , /*decltype(_impl_.cpu_num_physical_)*/0u
+  , /*decltype(_impl_.cpu_num_logical_)*/0u
+  , /*decltype(_impl_.cpu_num_performance_)*/0u
+  , /*decltype(_impl_.cpu_num_efficiency_)*/0u
   , /*decltype(_impl_.ram_physical_total_mb_)*/0u
   , /*decltype(_impl_.gpu_vendor_id_)*/0u
   , /*decltype(_impl_.gpu_driver_version_high_)*/0u
@@ -37,7 +40,8 @@ PROTOBUF_CONSTEXPR CMsgSource2SystemSpecs::CMsgSource2SystemSpecs(
   , /*decltype(_impl_.gpu_dx_support_level_)*/0u
   , /*decltype(_impl_.gpu_texture_memory_size_mb_)*/0u
   , /*decltype(_impl_.backbuffer_width_)*/0u
-  , /*decltype(_impl_.backbuffer_height_)*/0u} {}
+  , /*decltype(_impl_.backbuffer_height_)*/0u
+  , /*decltype(_impl_.thread_pool_workers_)*/0u} {}
 struct CMsgSource2SystemSpecsDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CMsgSource2SystemSpecsDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -413,6 +417,9 @@ const uint32_t TableStruct_source2_5fsteam_5fstats_2eproto::offsets[] PROTOBUF_S
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.cpu_brand_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.cpu_model_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.cpu_num_physical_),
+  PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.cpu_num_logical_),
+  PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.cpu_num_performance_),
+  PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.cpu_num_efficiency_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.ram_physical_total_mb_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.gpu_rendersystem_dll_name_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.gpu_vendor_id_),
@@ -423,20 +430,25 @@ const uint32_t TableStruct_source2_5fsteam_5fstats_2eproto::offsets[] PROTOBUF_S
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.gpu_texture_memory_size_mb_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.backbuffer_width_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.backbuffer_height_),
+  PROTOBUF_FIELD_OFFSET(::CMsgSource2SystemSpecs, _impl_.thread_pool_workers_),
   0,
   1,
   4,
   5,
   6,
-  2,
   7,
-  3,
   8,
   9,
+  2,
   10,
+  3,
   11,
   12,
   13,
+  14,
+  15,
+  16,
+  17,
   PROTOBUF_FIELD_OFFSET(::CMsgSource2VProfLiteReportItem, _impl_._has_bits_),
   PROTOBUF_FIELD_OFFSET(::CMsgSource2VProfLiteReportItem, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -825,22 +837,22 @@ const uint32_t TableStruct_source2_5fsteam_5fstats_2eproto::offsets[] PROTOBUF_S
   6,
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 20, -1, sizeof(::CMsgSource2SystemSpecs)},
-  { 34, 58, -1, sizeof(::CMsgSource2VProfLiteReportItem)},
-  { 76, 85, -1, sizeof(::CMsgSource2VProfLiteReport)},
-  { 88, 158, -1, sizeof(::CMsgSource2NetworkFlowQuality)},
-  { 222, 230, -1, sizeof(::CMsgSource2PerfIntervalSample_Tag)},
-  { 232, 244, -1, sizeof(::CMsgSource2PerfIntervalSample)},
-  { 250, 263, -1, sizeof(::CSource2Metrics_MatchPerfSummary_Notification_Client)},
-  { 270, 283, -1, sizeof(::CSource2Metrics_MatchPerfSummary_Notification)},
-  { 290, 298, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList_FieldDef)},
-  { 300, -1, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList_SteamIDList)},
-  { 307, 333, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList)},
-  { 353, 361, -1, sizeof(::CSource2Metrics_RecordPlayStats_Notification)},
-  { 363, 375, -1, sizeof(::CSource2Metrics_FetchMapData_Request)},
-  { 381, 390, -1, sizeof(::CSource2Metrics_FetchMapData_Response_MapData)},
-  { 393, -1, -1, sizeof(::CSource2Metrics_FetchMapData_Response)},
-  { 400, 413, -1, sizeof(::CUserMessage_UserSentBugBug)},
+  { 0, 24, -1, sizeof(::CMsgSource2SystemSpecs)},
+  { 42, 66, -1, sizeof(::CMsgSource2VProfLiteReportItem)},
+  { 84, 93, -1, sizeof(::CMsgSource2VProfLiteReport)},
+  { 96, 166, -1, sizeof(::CMsgSource2NetworkFlowQuality)},
+  { 230, 238, -1, sizeof(::CMsgSource2PerfIntervalSample_Tag)},
+  { 240, 252, -1, sizeof(::CMsgSource2PerfIntervalSample)},
+  { 258, 271, -1, sizeof(::CSource2Metrics_MatchPerfSummary_Notification_Client)},
+  { 278, 291, -1, sizeof(::CSource2Metrics_MatchPerfSummary_Notification)},
+  { 298, 306, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList_FieldDef)},
+  { 308, -1, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList_SteamIDList)},
+  { 315, 341, -1, sizeof(::CMsgSource2PlayStatsPackedRecordList)},
+  { 361, 369, -1, sizeof(::CSource2Metrics_RecordPlayStats_Notification)},
+  { 371, 383, -1, sizeof(::CSource2Metrics_FetchMapData_Request)},
+  { 389, 398, -1, sizeof(::CSource2Metrics_FetchMapData_Response_MapData)},
+  { 401, -1, -1, sizeof(::CSource2Metrics_FetchMapData_Response)},
+  { 408, 421, -1, sizeof(::CUserMessage_UserSentBugBug)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -863,156 +875,159 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_source2_5fsteam_5fstats_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\031source2_steam_stats.proto\"\222\003\n\026CMsgSour"
+  "\n\031source2_steam_stats.proto\"\201\004\n\026CMsgSour"
   "ce2SystemSpecs\022\016\n\006cpu_id\030\001 \001(\t\022\021\n\tcpu_br"
   "and\030\002 \001(\t\022\021\n\tcpu_model\030\003 \001(\r\022\030\n\020cpu_num_"
-  "physical\030\004 \001(\r\022\035\n\025ram_physical_total_mb\030"
-  "\025 \001(\r\022!\n\031gpu_rendersystem_dll_name\030) \001(\t"
-  "\022\025\n\rgpu_vendor_id\030* \001(\r\022\027\n\017gpu_driver_na"
-  "me\030+ \001(\t\022\037\n\027gpu_driver_version_high\030, \001("
-  "\r\022\036\n\026gpu_driver_version_low\030- \001(\r\022\034\n\024gpu"
-  "_dx_support_level\030. \001(\r\022\"\n\032gpu_texture_m"
-  "emory_size_mb\030/ \001(\r\022\030\n\020backbuffer_width\030"
-  "3 \001(\r\022\031\n\021backbuffer_height\0304 \001(\r\"\201\004\n\036CMs"
-  "gSource2VProfLiteReportItem\022\014\n\004name\030\001 \001("
-  "\t\022\026\n\016active_samples\030\002 \001(\r\022\036\n\026active_samp"
-  "les_1secmax\030\004 \001(\r\022\020\n\010usec_max\030\003 \001(\r\022\027\n\017u"
-  "sec_avg_active\030\013 \001(\r\022\027\n\017usec_p50_active\030"
-  "\014 \001(\r\022\027\n\017usec_p99_active\030\r \001(\r\022\024\n\014usec_a"
-  "vg_all\030\025 \001(\r\022\024\n\014usec_p50_all\030\026 \001(\r\022\024\n\014us"
-  "ec_p99_all\030\027 \001(\r\022\037\n\027usec_1secmax_avg_act"
-  "ive\030\037 \001(\r\022\037\n\027usec_1secmax_p50_active\030  \001"
-  "(\r\022\037\n\027usec_1secmax_p95_active\030! \001(\r\022\037\n\027u"
-  "sec_1secmax_p99_active\030\" \001(\r\022\034\n\024usec_1se"
-  "cmax_avg_all\030) \001(\r\022\034\n\024usec_1secmax_p50_a"
-  "ll\030* \001(\r\022\034\n\024usec_1secmax_p95_all\030+ \001(\r\022\034"
-  "\n\024usec_1secmax_p99_all\030, \001(\r\"\226\001\n\032CMsgSou"
-  "rce2VProfLiteReport\022.\n\005total\030\001 \001(\0132\037.CMs"
-  "gSource2VProfLiteReportItem\022.\n\005items\030\002 \003"
-  "(\0132\037.CMsgSource2VProfLiteReportItem\022\030\n\020d"
-  "iscarded_frames\030\003 \001(\r\"\304\016\n\035CMsgSource2Net"
-  "workFlowQuality\022\020\n\010duration\030\001 \001(\r\022\023\n\013byt"
-  "es_total\030\005 \001(\004\022\034\n\024bytes_total_reliable\030\006"
-  " \001(\004\022\031\n\021bytes_total_voice\030\007 \001(\004\022\025\n\rbytes"
-  "_sec_p95\030\n \001(\r\022\025\n\rbytes_sec_p99\030\013 \001(\r\022\030\n"
-  "\020enginemsgs_total\030\024 \001(\r\022\032\n\022enginemsgs_se"
-  "c_p95\030\025 \001(\r\022\032\n\022enginemsgs_sec_p99\030\026 \001(\r\022"
-  "\027\n\017netframes_total\030\036 \001(\r\022\031\n\021netframes_dr"
-  "opped\030\037 \001(\r\022\034\n\024netframes_outoforder\030  \001("
-  "\r\022\"\n\032netframes_size_exceeds_mtu\030\" \001(\r\022\032\n"
-  "\022netframes_size_p95\030# \001(\r\022\032\n\022netframes_s"
-  "ize_p99\030$ \001(\r\022\'\n\037netframes_size_uncompre"
-  "ssed_p50\030\014 \001(\r\022\'\n\037netframes_size_uncompr"
-  "essed_p95\030\r \001(\r\022\'\n\037netframes_size_uncomp"
-  "ressed_p99\030\016 \001(\r\022\'\n\037netframes_size_uncom"
-  "pressed_max\030\017 \001(\r\022\032\n\022netframes_msgs_p50\030"
-  "\020 \001(\r\022\032\n\022netframes_msgs_p95\030\021 \001(\r\022\032\n\022net"
-  "frames_msgs_p99\030\022 \001(\r\022\032\n\022netframes_msgs_"
-  "max\030\023 \001(\r\022\023\n\013ticks_total\030( \001(\r\022\022\n\nticks_"
-  "good\030) \001(\r\022\036\n\026ticks_good_almost_late\030* \001"
-  "(\r\022\033\n\023ticks_fixed_dropped\030+ \001(\r\022\030\n\020ticks"
-  "_fixed_late\030, \001(\r\022\031\n\021ticks_bad_dropped\030-"
-  " \001(\r\022\026\n\016ticks_bad_late\030. \001(\r\022\027\n\017ticks_ba"
-  "d_other\030/ \001(\r\022#\n\033tick_missrate_samples_t"
-  "otal\0302 \001(\r\022%\n\035tick_missrate_samples_perf"
-  "ect\0303 \001(\r\022(\n tick_missrate_samples_perfe"
-  "ctnet\0304 \001(\r\022 \n\030tick_missratenet_p75_x10\030"
-  "5 \001(\r\022 \n\030tick_missratenet_p95_x10\0306 \001(\r\022"
-  " \n\030tick_missratenet_p99_x10\0307 \001(\r\022\025\n\rrec"
-  "vmargin_p1\030= \001(\021\022\025\n\rrecvmargin_p5\030> \001(\021\022"
-  "\026\n\016recvmargin_p25\030\? \001(\021\022\026\n\016recvmargin_p5"
-  "0\030@ \001(\021\022\026\n\016recvmargin_p75\030A \001(\021\022\026\n\016recvm"
-  "argin_p95\030B \001(\021\022\033\n\023netframe_jitter_p50\030F"
-  " \001(\r\022\033\n\023netframe_jitter_p99\030G \001(\r\022\037\n\027int"
-  "erval_peakjitter_p50\030H \001(\r\022\037\n\027interval_p"
-  "eakjitter_p95\030I \001(\r\022&\n\036packet_misdeliver"
-  "y_rate_p50_x4\030J \001(\r\022&\n\036packet_misdeliver"
-  "y_rate_p95_x4\030K \001(\r\022\023\n\013net_ping_p5\030P \001(\r"
-  "\022\024\n\014net_ping_p50\030Q \001(\r\022\024\n\014net_ping_p95\030R"
-  " \001(\r\022\030\n\020msgproc_usec_p50\030Z \001(\r\022\030\n\020msgpro"
-  "c_usec_p95\030[ \001(\r\022\030\n\020msgproc_usec_p99\030\\ \001"
-  "(\r\022\030\n\020msgproc_usec_max\030] \001(\r\022\034\n\024msgproc_"
-  "usec_avg_p50\030^ \001(\r\022\034\n\024msgproc_usec_avg_p"
-  "95\030_ \001(\r\022\034\n\024msgproc_usec_avg_p99\030` \001(\r\022\034"
-  "\n\024msgproc_usec_avg_max\030a \001(\r\022\026\n\016queuedms"
-  "gs_p50\030d \001(\r\022\026\n\016queuedmsgs_p95\030e \001(\r\022\026\n\016"
-  "queuedmsgs_p99\030f \001(\r\022\026\n\016queuedmsgs_max\030g"
-  " \001(\r\"\373\001\n\035CMsgSource2PerfIntervalSample\022\031"
-  "\n\021frame_time_max_ms\030\001 \001(\002\022\031\n\021frame_time_"
-  "avg_ms\030\002 \001(\002\022\031\n\021frame_time_min_ms\030\003 \001(\002\022"
-  "\023\n\013frame_count\030\004 \001(\005\022\033\n\023frame_time_total"
-  "_ms\030\005 \001(\002\0220\n\004tags\030\006 \003(\0132\".CMsgSource2Per"
-  "fIntervalSample.Tag\032%\n\003Tag\022\013\n\003tag\030\001 \001(\t\022"
-  "\021\n\tmax_value\030\002 \001(\r\"\273\004\n-CSource2Metrics_M"
-  "atchPerfSummary_Notification\022\r\n\005appid\030\001 "
-  "\001(\r\022\021\n\tgame_mode\030\002 \001(\t\022\027\n\017server_build_i"
-  "d\030\003 \001(\r\022\024\n\014server_popid\030\004 \001(\007\0223\n\016server_"
-  "profile\030\n \001(\0132\033.CMsgSource2VProfLiteRepo"
-  "rt\022F\n\007clients\030\013 \003(\01325.CSource2Metrics_Ma"
-  "tchPerfSummary_Notification.Client\022\013\n\003ma"
-  "p\030\024 \001(\t\032\256\002\n\006Client\022-\n\014system_specs\030\001 \001(\013"
-  "2\027.CMsgSource2SystemSpecs\022,\n\007profile\030\002 \001"
-  "(\0132\033.CMsgSource2VProfLiteReport\022\020\n\010build"
-  "_id\030\003 \001(\r\0227\n\017downstream_flow\030\004 \001(\0132\036.CMs"
-  "gSource2NetworkFlowQuality\0225\n\rupstream_f"
-  "low\030\005 \001(\0132\036.CMsgSource2NetworkFlowQualit"
-  "y\022\017\n\007steamid\030\n \001(\006\0224\n\014perf_samples\030\013 \003(\013"
-  "2\036.CMsgSource2PerfIntervalSample\"\225\006\n$CMs"
-  "gSource2PlayStatsPackedRecordList\022\023\n\013rec"
-  "ord_name\030\001 \001(\t\022B\n\nfield_defs\030\002 \003(\0132..CMs"
-  "gSource2PlayStatsPackedRecordList.FieldD"
-  "ef\022\024\n\014record_count\030\003 \001(\r\022\027\n\013uint64_vals\030"
-  "\004 \003(\004B\002\020\001\022\027\n\013uint32_vals\030\005 \003(\rB\002\020\001\022\027\n\013ui"
-  "nt16_vals\030\006 \003(\rB\002\020\001\022\026\n\nuint8_vals\030\007 \003(\rB"
-  "\002\020\001\022\026\n\nint64_vals\030\010 \003(\003B\002\020\001\022\026\n\nint32_val"
-  "s\030\t \003(\005B\002\020\001\022\026\n\nint16_vals\030\n \003(\005B\002\020\001\022\025\n\ti"
-  "nt8_vals\030\013 \003(\005B\002\020\001\022\030\n\014float64_vals\030\014 \003(\001"
-  "B\002\020\001\022\030\n\014float32_vals\030\r \003(\002B\002\020\001\022\025\n\tbool_v"
-  "als\030\016 \003(\010B\002\020\001\022\023\n\013string_vals\030\017 \003(\t\022#\n\033lo"
-  "w_cardinality_string_vals\030\020 \003(\t\022\034\n\020utcda"
-  "tetime_vals\030\021 \003(\007B\002\020\001\022#\n\027steamidtrustbuc"
-  "ket_vals\030\022 \003(\006B\002\020\001\022K\n\020trustbucket_vals\030\023"
-  " \003(\01321.CMsgSource2PlayStatsPackedRecordL"
-  "ist.SteamIDList\022\030\n\014steamid_vals\030\024 \003(\004B\002\020"
-  "\001\032i\n\010FieldDef\022\022\n\nfield_name\030\001 \001(\t\022I\n\nfie"
-  "ld_type\030\002 \001(\0162\033.ESource2PlayStatsFieldTy"
-  "pe:\030Source2PlayStats_Invalid\032\"\n\013SteamIDL"
-  "ist\022\023\n\007steamid\030\001 \003(\006B\002\020\001\"z\n,CSource2Metr"
-  "ics_RecordPlayStats_Notification\022;\n\014reco"
-  "rd_types\030\001 \003(\0132%.CMsgSource2PlayStatsPac"
-  "kedRecordList\022\r\n\005appid\030\002 \001(\r\"\217\001\n$CSource"
-  "2Metrics_FetchMapData_Request\022\r\n\005appid\030\001"
-  " \001(\r\022\020\n\010map_name\030\002 \001(\t\022\021\n\tgame_type\030\003 \001("
-  "\r\022\021\n\tgame_mode\030\004 \001(\r\022\r\n\005param\030\005 \001(\t\022\021\n\tt"
-  "ime_span\030\006 \001(\r\"\235\001\n%CSource2Metrics_Fetch"
-  "MapData_Response\022\?\n\007results\030\001 \003(\0132..CSou"
-  "rce2Metrics_FetchMapData_Response.MapDat"
-  "a\0323\n\007MapData\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\t"
-  "\022\014\n\004data\030\003 \001(\t\"\306\001\n\033CUserMessage_UserSent"
-  "BugBug\022\024\n\014command_line\030\001 \001(\t\022\024\n\014autoexec"
-  "_cfg\030\002 \001(\t\022-\n\014system_specs\030\003 \001(\0132\027.CMsgS"
-  "ource2SystemSpecs\022\020\n\010build_id\030\004 \001(\r\022\021\n\to"
-  "sversion\030\005 \001(\005\022\024\n\014command_logs\030\006 \001(\t\022\021\n\t"
-  "bugbug_no\030\007 \001(\005*\320\004\n\032ESource2PlayStatsFie"
-  "ldType\022\034\n\030Source2PlayStats_Invalid\020\000\022\033\n\027"
-  "Source2PlayStats_UInt64\020\001\022\033\n\027Source2Play"
-  "Stats_UInt32\020\002\022\033\n\027Source2PlayStats_UInt1"
-  "6\020\003\022\032\n\026Source2PlayStats_UInt8\020\004\022\032\n\026Sourc"
-  "e2PlayStats_Int64\020\005\022\032\n\026Source2PlayStats_"
-  "Int32\020\006\022\032\n\026Source2PlayStats_Int16\020\007\022\031\n\025S"
-  "ource2PlayStats_Int8\020\010\022\034\n\030Source2PlaySta"
-  "ts_Float64\020\t\022\034\n\030Source2PlayStats_Float32"
-  "\020\n\022\031\n\025Source2PlayStats_Bool\020\013\022\033\n\027Source2"
-  "PlayStats_String\020\014\022)\n%Source2PlayStats_L"
-  "owCardinalityString\020\r\022 \n\034Source2PlayStat"
-  "s_UTCDateTime\020\016\022\'\n#Source2PlayStats_Stea"
-  "mIDTrustBucket\020\017\022*\n&Source2PlayStats_Ste"
-  "amIDTrustBucketMin\020\020\022\034\n\030Source2PlayStats"
-  "_SteamID\020\021"
+  "physical\030\004 \001(\r\022\027\n\017cpu_num_logical\030\005 \001(\r\022"
+  "\033\n\023cpu_num_performance\030\006 \001(\r\022\032\n\022cpu_num_"
+  "efficiency\030\007 \001(\r\022\035\n\025ram_physical_total_m"
+  "b\030\025 \001(\r\022!\n\031gpu_rendersystem_dll_name\030) \001"
+  "(\t\022\025\n\rgpu_vendor_id\030* \001(\r\022\027\n\017gpu_driver_"
+  "name\030+ \001(\t\022\037\n\027gpu_driver_version_high\030, "
+  "\001(\r\022\036\n\026gpu_driver_version_low\030- \001(\r\022\034\n\024g"
+  "pu_dx_support_level\030. \001(\r\022\"\n\032gpu_texture"
+  "_memory_size_mb\030/ \001(\r\022\030\n\020backbuffer_widt"
+  "h\0303 \001(\r\022\031\n\021backbuffer_height\0304 \001(\r\022\033\n\023th"
+  "read_pool_workers\030= \001(\r\"\201\004\n\036CMsgSource2V"
+  "ProfLiteReportItem\022\014\n\004name\030\001 \001(\t\022\026\n\016acti"
+  "ve_samples\030\002 \001(\r\022\036\n\026active_samples_1secm"
+  "ax\030\004 \001(\r\022\020\n\010usec_max\030\003 \001(\r\022\027\n\017usec_avg_a"
+  "ctive\030\013 \001(\r\022\027\n\017usec_p50_active\030\014 \001(\r\022\027\n\017"
+  "usec_p99_active\030\r \001(\r\022\024\n\014usec_avg_all\030\025 "
+  "\001(\r\022\024\n\014usec_p50_all\030\026 \001(\r\022\024\n\014usec_p99_al"
+  "l\030\027 \001(\r\022\037\n\027usec_1secmax_avg_active\030\037 \001(\r"
+  "\022\037\n\027usec_1secmax_p50_active\030  \001(\r\022\037\n\027use"
+  "c_1secmax_p95_active\030! \001(\r\022\037\n\027usec_1secm"
+  "ax_p99_active\030\" \001(\r\022\034\n\024usec_1secmax_avg_"
+  "all\030) \001(\r\022\034\n\024usec_1secmax_p50_all\030* \001(\r\022"
+  "\034\n\024usec_1secmax_p95_all\030+ \001(\r\022\034\n\024usec_1s"
+  "ecmax_p99_all\030, \001(\r\"\226\001\n\032CMsgSource2VProf"
+  "LiteReport\022.\n\005total\030\001 \001(\0132\037.CMsgSource2V"
+  "ProfLiteReportItem\022.\n\005items\030\002 \003(\0132\037.CMsg"
+  "Source2VProfLiteReportItem\022\030\n\020discarded_"
+  "frames\030\003 \001(\r\"\304\016\n\035CMsgSource2NetworkFlowQ"
+  "uality\022\020\n\010duration\030\001 \001(\r\022\023\n\013bytes_total\030"
+  "\005 \001(\004\022\034\n\024bytes_total_reliable\030\006 \001(\004\022\031\n\021b"
+  "ytes_total_voice\030\007 \001(\004\022\025\n\rbytes_sec_p95\030"
+  "\n \001(\r\022\025\n\rbytes_sec_p99\030\013 \001(\r\022\030\n\020enginems"
+  "gs_total\030\024 \001(\r\022\032\n\022enginemsgs_sec_p95\030\025 \001"
+  "(\r\022\032\n\022enginemsgs_sec_p99\030\026 \001(\r\022\027\n\017netfra"
+  "mes_total\030\036 \001(\r\022\031\n\021netframes_dropped\030\037 \001"
+  "(\r\022\034\n\024netframes_outoforder\030  \001(\r\022\"\n\032netf"
+  "rames_size_exceeds_mtu\030\" \001(\r\022\032\n\022netframe"
+  "s_size_p95\030# \001(\r\022\032\n\022netframes_size_p99\030$"
+  " \001(\r\022\'\n\037netframes_size_uncompressed_p50\030"
+  "\014 \001(\r\022\'\n\037netframes_size_uncompressed_p95"
+  "\030\r \001(\r\022\'\n\037netframes_size_uncompressed_p9"
+  "9\030\016 \001(\r\022\'\n\037netframes_size_uncompressed_m"
+  "ax\030\017 \001(\r\022\032\n\022netframes_msgs_p50\030\020 \001(\r\022\032\n\022"
+  "netframes_msgs_p95\030\021 \001(\r\022\032\n\022netframes_ms"
+  "gs_p99\030\022 \001(\r\022\032\n\022netframes_msgs_max\030\023 \001(\r"
+  "\022\023\n\013ticks_total\030( \001(\r\022\022\n\nticks_good\030) \001("
+  "\r\022\036\n\026ticks_good_almost_late\030* \001(\r\022\033\n\023tic"
+  "ks_fixed_dropped\030+ \001(\r\022\030\n\020ticks_fixed_la"
+  "te\030, \001(\r\022\031\n\021ticks_bad_dropped\030- \001(\r\022\026\n\016t"
+  "icks_bad_late\030. \001(\r\022\027\n\017ticks_bad_other\030/"
+  " \001(\r\022#\n\033tick_missrate_samples_total\0302 \001("
+  "\r\022%\n\035tick_missrate_samples_perfect\0303 \001(\r"
+  "\022(\n tick_missrate_samples_perfectnet\0304 \001"
+  "(\r\022 \n\030tick_missratenet_p75_x10\0305 \001(\r\022 \n\030"
+  "tick_missratenet_p95_x10\0306 \001(\r\022 \n\030tick_m"
+  "issratenet_p99_x10\0307 \001(\r\022\025\n\rrecvmargin_p"
+  "1\030= \001(\021\022\025\n\rrecvmargin_p5\030> \001(\021\022\026\n\016recvma"
+  "rgin_p25\030\? \001(\021\022\026\n\016recvmargin_p50\030@ \001(\021\022\026"
+  "\n\016recvmargin_p75\030A \001(\021\022\026\n\016recvmargin_p95"
+  "\030B \001(\021\022\033\n\023netframe_jitter_p50\030F \001(\r\022\033\n\023n"
+  "etframe_jitter_p99\030G \001(\r\022\037\n\027interval_pea"
+  "kjitter_p50\030H \001(\r\022\037\n\027interval_peakjitter"
+  "_p95\030I \001(\r\022&\n\036packet_misdelivery_rate_p5"
+  "0_x4\030J \001(\r\022&\n\036packet_misdelivery_rate_p9"
+  "5_x4\030K \001(\r\022\023\n\013net_ping_p5\030P \001(\r\022\024\n\014net_p"
+  "ing_p50\030Q \001(\r\022\024\n\014net_ping_p95\030R \001(\r\022\030\n\020m"
+  "sgproc_usec_p50\030Z \001(\r\022\030\n\020msgproc_usec_p9"
+  "5\030[ \001(\r\022\030\n\020msgproc_usec_p99\030\\ \001(\r\022\030\n\020msg"
+  "proc_usec_max\030] \001(\r\022\034\n\024msgproc_usec_avg_"
+  "p50\030^ \001(\r\022\034\n\024msgproc_usec_avg_p95\030_ \001(\r\022"
+  "\034\n\024msgproc_usec_avg_p99\030` \001(\r\022\034\n\024msgproc"
+  "_usec_avg_max\030a \001(\r\022\026\n\016queuedmsgs_p50\030d "
+  "\001(\r\022\026\n\016queuedmsgs_p95\030e \001(\r\022\026\n\016queuedmsg"
+  "s_p99\030f \001(\r\022\026\n\016queuedmsgs_max\030g \001(\r\"\373\001\n\035"
+  "CMsgSource2PerfIntervalSample\022\031\n\021frame_t"
+  "ime_max_ms\030\001 \001(\002\022\031\n\021frame_time_avg_ms\030\002 "
+  "\001(\002\022\031\n\021frame_time_min_ms\030\003 \001(\002\022\023\n\013frame_"
+  "count\030\004 \001(\005\022\033\n\023frame_time_total_ms\030\005 \001(\002"
+  "\0220\n\004tags\030\006 \003(\0132\".CMsgSource2PerfInterval"
+  "Sample.Tag\032%\n\003Tag\022\013\n\003tag\030\001 \001(\t\022\021\n\tmax_va"
+  "lue\030\002 \001(\r\"\273\004\n-CSource2Metrics_MatchPerfS"
+  "ummary_Notification\022\r\n\005appid\030\001 \001(\r\022\021\n\tga"
+  "me_mode\030\002 \001(\t\022\027\n\017server_build_id\030\003 \001(\r\022\024"
+  "\n\014server_popid\030\004 \001(\007\0223\n\016server_profile\030\n"
+  " \001(\0132\033.CMsgSource2VProfLiteReport\022F\n\007cli"
+  "ents\030\013 \003(\01325.CSource2Metrics_MatchPerfSu"
+  "mmary_Notification.Client\022\013\n\003map\030\024 \001(\t\032\256"
+  "\002\n\006Client\022-\n\014system_specs\030\001 \001(\0132\027.CMsgSo"
+  "urce2SystemSpecs\022,\n\007profile\030\002 \001(\0132\033.CMsg"
+  "Source2VProfLiteReport\022\020\n\010build_id\030\003 \001(\r"
+  "\0227\n\017downstream_flow\030\004 \001(\0132\036.CMsgSource2N"
+  "etworkFlowQuality\0225\n\rupstream_flow\030\005 \001(\013"
+  "2\036.CMsgSource2NetworkFlowQuality\022\017\n\007stea"
+  "mid\030\n \001(\006\0224\n\014perf_samples\030\013 \003(\0132\036.CMsgSo"
+  "urce2PerfIntervalSample\"\225\006\n$CMsgSource2P"
+  "layStatsPackedRecordList\022\023\n\013record_name\030"
+  "\001 \001(\t\022B\n\nfield_defs\030\002 \003(\0132..CMsgSource2P"
+  "layStatsPackedRecordList.FieldDef\022\024\n\014rec"
+  "ord_count\030\003 \001(\r\022\027\n\013uint64_vals\030\004 \003(\004B\002\020\001"
+  "\022\027\n\013uint32_vals\030\005 \003(\rB\002\020\001\022\027\n\013uint16_vals"
+  "\030\006 \003(\rB\002\020\001\022\026\n\nuint8_vals\030\007 \003(\rB\002\020\001\022\026\n\nin"
+  "t64_vals\030\010 \003(\003B\002\020\001\022\026\n\nint32_vals\030\t \003(\005B\002"
+  "\020\001\022\026\n\nint16_vals\030\n \003(\005B\002\020\001\022\025\n\tint8_vals\030"
+  "\013 \003(\005B\002\020\001\022\030\n\014float64_vals\030\014 \003(\001B\002\020\001\022\030\n\014f"
+  "loat32_vals\030\r \003(\002B\002\020\001\022\025\n\tbool_vals\030\016 \003(\010"
+  "B\002\020\001\022\023\n\013string_vals\030\017 \003(\t\022#\n\033low_cardina"
+  "lity_string_vals\030\020 \003(\t\022\034\n\020utcdatetime_va"
+  "ls\030\021 \003(\007B\002\020\001\022#\n\027steamidtrustbucket_vals\030"
+  "\022 \003(\006B\002\020\001\022K\n\020trustbucket_vals\030\023 \003(\01321.CM"
+  "sgSource2PlayStatsPackedRecordList.Steam"
+  "IDList\022\030\n\014steamid_vals\030\024 \003(\004B\002\020\001\032i\n\010Fiel"
+  "dDef\022\022\n\nfield_name\030\001 \001(\t\022I\n\nfield_type\030\002"
+  " \001(\0162\033.ESource2PlayStatsFieldType:\030Sourc"
+  "e2PlayStats_Invalid\032\"\n\013SteamIDList\022\023\n\007st"
+  "eamid\030\001 \003(\006B\002\020\001\"z\n,CSource2Metrics_Recor"
+  "dPlayStats_Notification\022;\n\014record_types\030"
+  "\001 \003(\0132%.CMsgSource2PlayStatsPackedRecord"
+  "List\022\r\n\005appid\030\002 \001(\r\"\217\001\n$CSource2Metrics_"
+  "FetchMapData_Request\022\r\n\005appid\030\001 \001(\r\022\020\n\010m"
+  "ap_name\030\002 \001(\t\022\021\n\tgame_type\030\003 \001(\r\022\021\n\tgame"
+  "_mode\030\004 \001(\r\022\r\n\005param\030\005 \001(\t\022\021\n\ttime_span\030"
+  "\006 \001(\r\"\235\001\n%CSource2Metrics_FetchMapData_R"
+  "esponse\022\?\n\007results\030\001 \003(\0132..CSource2Metri"
+  "cs_FetchMapData_Response.MapData\0323\n\007MapD"
+  "ata\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\022\014\n\004data\030"
+  "\003 \001(\t\"\306\001\n\033CUserMessage_UserSentBugBug\022\024\n"
+  "\014command_line\030\001 \001(\t\022\024\n\014autoexec_cfg\030\002 \001("
+  "\t\022-\n\014system_specs\030\003 \001(\0132\027.CMsgSource2Sys"
+  "temSpecs\022\020\n\010build_id\030\004 \001(\r\022\021\n\tosversion\030"
+  "\005 \001(\005\022\024\n\014command_logs\030\006 \001(\t\022\021\n\tbugbug_no"
+  "\030\007 \001(\005*\320\004\n\032ESource2PlayStatsFieldType\022\034\n"
+  "\030Source2PlayStats_Invalid\020\000\022\033\n\027Source2Pl"
+  "ayStats_UInt64\020\001\022\033\n\027Source2PlayStats_UIn"
+  "t32\020\002\022\033\n\027Source2PlayStats_UInt16\020\003\022\032\n\026So"
+  "urce2PlayStats_UInt8\020\004\022\032\n\026Source2PlaySta"
+  "ts_Int64\020\005\022\032\n\026Source2PlayStats_Int32\020\006\022\032"
+  "\n\026Source2PlayStats_Int16\020\007\022\031\n\025Source2Pla"
+  "yStats_Int8\020\010\022\034\n\030Source2PlayStats_Float6"
+  "4\020\t\022\034\n\030Source2PlayStats_Float32\020\n\022\031\n\025Sou"
+  "rce2PlayStats_Bool\020\013\022\033\n\027Source2PlayStats"
+  "_String\020\014\022)\n%Source2PlayStats_LowCardina"
+  "lityString\020\r\022 \n\034Source2PlayStats_UTCDate"
+  "Time\020\016\022\'\n#Source2PlayStats_SteamIDTrustB"
+  "ucket\020\017\022*\n&Source2PlayStats_SteamIDTrust"
+  "BucketMin\020\020\022\034\n\030Source2PlayStats_SteamID\020"
+  "\021"
   ;
 static ::_pbi::once_flag descriptor_table_source2_5fsteam_5fstats_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_source2_5fsteam_5fstats_2eproto = {
-    false, false, 5810, descriptor_table_protodef_source2_5fsteam_5fstats_2eproto,
+    false, false, 5921, descriptor_table_protodef_source2_5fsteam_5fstats_2eproto,
     "source2_steam_stats.proto",
     &descriptor_table_source2_5fsteam_5fstats_2eproto_once, nullptr, 0, 16,
     schemas, file_default_instances, TableStruct_source2_5fsteam_5fstats_2eproto::offsets,
@@ -1073,35 +1088,47 @@ class CMsgSource2SystemSpecs::_Internal {
   static void set_has_cpu_num_physical(HasBits* has_bits) {
     (*has_bits)[0] |= 32u;
   }
-  static void set_has_ram_physical_total_mb(HasBits* has_bits) {
+  static void set_has_cpu_num_logical(HasBits* has_bits) {
     (*has_bits)[0] |= 64u;
+  }
+  static void set_has_cpu_num_performance(HasBits* has_bits) {
+    (*has_bits)[0] |= 128u;
+  }
+  static void set_has_cpu_num_efficiency(HasBits* has_bits) {
+    (*has_bits)[0] |= 256u;
+  }
+  static void set_has_ram_physical_total_mb(HasBits* has_bits) {
+    (*has_bits)[0] |= 512u;
   }
   static void set_has_gpu_rendersystem_dll_name(HasBits* has_bits) {
     (*has_bits)[0] |= 4u;
   }
   static void set_has_gpu_vendor_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 128u;
+    (*has_bits)[0] |= 1024u;
   }
   static void set_has_gpu_driver_name(HasBits* has_bits) {
     (*has_bits)[0] |= 8u;
   }
   static void set_has_gpu_driver_version_high(HasBits* has_bits) {
-    (*has_bits)[0] |= 256u;
-  }
-  static void set_has_gpu_driver_version_low(HasBits* has_bits) {
-    (*has_bits)[0] |= 512u;
-  }
-  static void set_has_gpu_dx_support_level(HasBits* has_bits) {
-    (*has_bits)[0] |= 1024u;
-  }
-  static void set_has_gpu_texture_memory_size_mb(HasBits* has_bits) {
     (*has_bits)[0] |= 2048u;
   }
-  static void set_has_backbuffer_width(HasBits* has_bits) {
+  static void set_has_gpu_driver_version_low(HasBits* has_bits) {
     (*has_bits)[0] |= 4096u;
   }
-  static void set_has_backbuffer_height(HasBits* has_bits) {
+  static void set_has_gpu_dx_support_level(HasBits* has_bits) {
     (*has_bits)[0] |= 8192u;
+  }
+  static void set_has_gpu_texture_memory_size_mb(HasBits* has_bits) {
+    (*has_bits)[0] |= 16384u;
+  }
+  static void set_has_backbuffer_width(HasBits* has_bits) {
+    (*has_bits)[0] |= 32768u;
+  }
+  static void set_has_backbuffer_height(HasBits* has_bits) {
+    (*has_bits)[0] |= 65536u;
+  }
+  static void set_has_thread_pool_workers(HasBits* has_bits) {
+    (*has_bits)[0] |= 131072u;
   }
 };
 
@@ -1123,6 +1150,9 @@ CMsgSource2SystemSpecs::CMsgSource2SystemSpecs(const CMsgSource2SystemSpecs& fro
     , decltype(_impl_.gpu_driver_name_){}
     , decltype(_impl_.cpu_model_){}
     , decltype(_impl_.cpu_num_physical_){}
+    , decltype(_impl_.cpu_num_logical_){}
+    , decltype(_impl_.cpu_num_performance_){}
+    , decltype(_impl_.cpu_num_efficiency_){}
     , decltype(_impl_.ram_physical_total_mb_){}
     , decltype(_impl_.gpu_vendor_id_){}
     , decltype(_impl_.gpu_driver_version_high_){}
@@ -1130,7 +1160,8 @@ CMsgSource2SystemSpecs::CMsgSource2SystemSpecs(const CMsgSource2SystemSpecs& fro
     , decltype(_impl_.gpu_dx_support_level_){}
     , decltype(_impl_.gpu_texture_memory_size_mb_){}
     , decltype(_impl_.backbuffer_width_){}
-    , decltype(_impl_.backbuffer_height_){}};
+    , decltype(_impl_.backbuffer_height_){}
+    , decltype(_impl_.thread_pool_workers_){}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.cpu_id_.InitDefault();
@@ -1166,8 +1197,8 @@ CMsgSource2SystemSpecs::CMsgSource2SystemSpecs(const CMsgSource2SystemSpecs& fro
       _this->GetArenaForAllocation());
   }
   ::memcpy(&_impl_.cpu_model_, &from._impl_.cpu_model_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.backbuffer_height_) -
-    reinterpret_cast<char*>(&_impl_.cpu_model_)) + sizeof(_impl_.backbuffer_height_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.thread_pool_workers_) -
+    reinterpret_cast<char*>(&_impl_.cpu_model_)) + sizeof(_impl_.thread_pool_workers_));
   // @@protoc_insertion_point(copy_constructor:CMsgSource2SystemSpecs)
 }
 
@@ -1184,6 +1215,9 @@ inline void CMsgSource2SystemSpecs::SharedCtor(
     , decltype(_impl_.gpu_driver_name_){}
     , decltype(_impl_.cpu_model_){0u}
     , decltype(_impl_.cpu_num_physical_){0u}
+    , decltype(_impl_.cpu_num_logical_){0u}
+    , decltype(_impl_.cpu_num_performance_){0u}
+    , decltype(_impl_.cpu_num_efficiency_){0u}
     , decltype(_impl_.ram_physical_total_mb_){0u}
     , decltype(_impl_.gpu_vendor_id_){0u}
     , decltype(_impl_.gpu_driver_version_high_){0u}
@@ -1192,6 +1226,7 @@ inline void CMsgSource2SystemSpecs::SharedCtor(
     , decltype(_impl_.gpu_texture_memory_size_mb_){0u}
     , decltype(_impl_.backbuffer_width_){0u}
     , decltype(_impl_.backbuffer_height_){0u}
+    , decltype(_impl_.thread_pool_workers_){0u}
   };
   _impl_.cpu_id_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -1255,13 +1290,18 @@ void CMsgSource2SystemSpecs::Clear() {
   }
   if (cached_has_bits & 0x000000f0u) {
     ::memset(&_impl_.cpu_model_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&_impl_.gpu_vendor_id_) -
-        reinterpret_cast<char*>(&_impl_.cpu_model_)) + sizeof(_impl_.gpu_vendor_id_));
+        reinterpret_cast<char*>(&_impl_.cpu_num_performance_) -
+        reinterpret_cast<char*>(&_impl_.cpu_model_)) + sizeof(_impl_.cpu_num_performance_));
   }
-  if (cached_has_bits & 0x00003f00u) {
-    ::memset(&_impl_.gpu_driver_version_high_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&_impl_.backbuffer_height_) -
-        reinterpret_cast<char*>(&_impl_.gpu_driver_version_high_)) + sizeof(_impl_.backbuffer_height_));
+  if (cached_has_bits & 0x0000ff00u) {
+    ::memset(&_impl_.cpu_num_efficiency_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&_impl_.backbuffer_width_) -
+        reinterpret_cast<char*>(&_impl_.cpu_num_efficiency_)) + sizeof(_impl_.backbuffer_width_));
+  }
+  if (cached_has_bits & 0x00030000u) {
+    ::memset(&_impl_.backbuffer_height_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&_impl_.thread_pool_workers_) -
+        reinterpret_cast<char*>(&_impl_.backbuffer_height_)) + sizeof(_impl_.thread_pool_workers_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -1312,6 +1352,33 @@ const char* CMsgSource2SystemSpecs::_InternalParse(const char* ptr, ::_pbi::Pars
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
           _Internal::set_has_cpu_num_physical(&has_bits);
           _impl_.cpu_num_physical_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional uint32 cpu_num_logical = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          _Internal::set_has_cpu_num_logical(&has_bits);
+          _impl_.cpu_num_logical_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional uint32 cpu_num_performance = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+          _Internal::set_has_cpu_num_performance(&has_bits);
+          _impl_.cpu_num_performance_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional uint32 cpu_num_efficiency = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+          _Internal::set_has_cpu_num_efficiency(&has_bits);
+          _impl_.cpu_num_efficiency_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1412,6 +1479,15 @@ const char* CMsgSource2SystemSpecs::_InternalParse(const char* ptr, ::_pbi::Pars
         } else
           goto handle_unusual;
         continue;
+      // optional uint32 thread_pool_workers = 61;
+      case 61:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 232)) {
+          _Internal::set_has_thread_pool_workers(&has_bits);
+          _impl_.thread_pool_workers_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
       default:
         goto handle_unusual;
     }  // switch
@@ -1475,8 +1551,26 @@ uint8_t* CMsgSource2SystemSpecs::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_cpu_num_physical(), target);
   }
 
-  // optional uint32 ram_physical_total_mb = 21;
+  // optional uint32 cpu_num_logical = 5;
   if (cached_has_bits & 0x00000040u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(5, this->_internal_cpu_num_logical(), target);
+  }
+
+  // optional uint32 cpu_num_performance = 6;
+  if (cached_has_bits & 0x00000080u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(6, this->_internal_cpu_num_performance(), target);
+  }
+
+  // optional uint32 cpu_num_efficiency = 7;
+  if (cached_has_bits & 0x00000100u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(7, this->_internal_cpu_num_efficiency(), target);
+  }
+
+  // optional uint32 ram_physical_total_mb = 21;
+  if (cached_has_bits & 0x00000200u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(21, this->_internal_ram_physical_total_mb(), target);
   }
@@ -1492,7 +1586,7 @@ uint8_t* CMsgSource2SystemSpecs::_InternalSerialize(
   }
 
   // optional uint32 gpu_vendor_id = 42;
-  if (cached_has_bits & 0x00000080u) {
+  if (cached_has_bits & 0x00000400u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(42, this->_internal_gpu_vendor_id(), target);
   }
@@ -1508,39 +1602,45 @@ uint8_t* CMsgSource2SystemSpecs::_InternalSerialize(
   }
 
   // optional uint32 gpu_driver_version_high = 44;
-  if (cached_has_bits & 0x00000100u) {
+  if (cached_has_bits & 0x00000800u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(44, this->_internal_gpu_driver_version_high(), target);
   }
 
   // optional uint32 gpu_driver_version_low = 45;
-  if (cached_has_bits & 0x00000200u) {
+  if (cached_has_bits & 0x00001000u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(45, this->_internal_gpu_driver_version_low(), target);
   }
 
   // optional uint32 gpu_dx_support_level = 46;
-  if (cached_has_bits & 0x00000400u) {
+  if (cached_has_bits & 0x00002000u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(46, this->_internal_gpu_dx_support_level(), target);
   }
 
   // optional uint32 gpu_texture_memory_size_mb = 47;
-  if (cached_has_bits & 0x00000800u) {
+  if (cached_has_bits & 0x00004000u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(47, this->_internal_gpu_texture_memory_size_mb(), target);
   }
 
   // optional uint32 backbuffer_width = 51;
-  if (cached_has_bits & 0x00001000u) {
+  if (cached_has_bits & 0x00008000u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(51, this->_internal_backbuffer_width(), target);
   }
 
   // optional uint32 backbuffer_height = 52;
-  if (cached_has_bits & 0x00002000u) {
+  if (cached_has_bits & 0x00010000u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(52, this->_internal_backbuffer_height(), target);
+  }
+
+  // optional uint32 thread_pool_workers = 61;
+  if (cached_has_bits & 0x00020000u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(61, this->_internal_thread_pool_workers(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1599,62 +1699,86 @@ size_t CMsgSource2SystemSpecs::ByteSizeLong() const {
       total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_cpu_num_physical());
     }
 
-    // optional uint32 ram_physical_total_mb = 21;
+    // optional uint32 cpu_num_logical = 5;
     if (cached_has_bits & 0x00000040u) {
+      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_cpu_num_logical());
+    }
+
+    // optional uint32 cpu_num_performance = 6;
+    if (cached_has_bits & 0x00000080u) {
+      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_cpu_num_performance());
+    }
+
+  }
+  if (cached_has_bits & 0x0000ff00u) {
+    // optional uint32 cpu_num_efficiency = 7;
+    if (cached_has_bits & 0x00000100u) {
+      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_cpu_num_efficiency());
+    }
+
+    // optional uint32 ram_physical_total_mb = 21;
+    if (cached_has_bits & 0x00000200u) {
       total_size += 2 +
         ::_pbi::WireFormatLite::UInt32Size(
           this->_internal_ram_physical_total_mb());
     }
 
     // optional uint32 gpu_vendor_id = 42;
-    if (cached_has_bits & 0x00000080u) {
+    if (cached_has_bits & 0x00000400u) {
       total_size += 2 +
         ::_pbi::WireFormatLite::UInt32Size(
           this->_internal_gpu_vendor_id());
     }
 
-  }
-  if (cached_has_bits & 0x00003f00u) {
     // optional uint32 gpu_driver_version_high = 44;
-    if (cached_has_bits & 0x00000100u) {
+    if (cached_has_bits & 0x00000800u) {
       total_size += 2 +
         ::_pbi::WireFormatLite::UInt32Size(
           this->_internal_gpu_driver_version_high());
     }
 
     // optional uint32 gpu_driver_version_low = 45;
-    if (cached_has_bits & 0x00000200u) {
+    if (cached_has_bits & 0x00001000u) {
       total_size += 2 +
         ::_pbi::WireFormatLite::UInt32Size(
           this->_internal_gpu_driver_version_low());
     }
 
     // optional uint32 gpu_dx_support_level = 46;
-    if (cached_has_bits & 0x00000400u) {
+    if (cached_has_bits & 0x00002000u) {
       total_size += 2 +
         ::_pbi::WireFormatLite::UInt32Size(
           this->_internal_gpu_dx_support_level());
     }
 
     // optional uint32 gpu_texture_memory_size_mb = 47;
-    if (cached_has_bits & 0x00000800u) {
+    if (cached_has_bits & 0x00004000u) {
       total_size += 2 +
         ::_pbi::WireFormatLite::UInt32Size(
           this->_internal_gpu_texture_memory_size_mb());
     }
 
     // optional uint32 backbuffer_width = 51;
-    if (cached_has_bits & 0x00001000u) {
+    if (cached_has_bits & 0x00008000u) {
       total_size += 2 +
         ::_pbi::WireFormatLite::UInt32Size(
           this->_internal_backbuffer_width());
     }
 
+  }
+  if (cached_has_bits & 0x00030000u) {
     // optional uint32 backbuffer_height = 52;
-    if (cached_has_bits & 0x00002000u) {
+    if (cached_has_bits & 0x00010000u) {
       total_size += 2 +
         ::_pbi::WireFormatLite::UInt32Size(
           this->_internal_backbuffer_height());
+    }
+
+    // optional uint32 thread_pool_workers = 61;
+    if (cached_has_bits & 0x00020000u) {
+      total_size += 2 +
+        ::_pbi::WireFormatLite::UInt32Size(
+          this->_internal_thread_pool_workers());
     }
 
   }
@@ -1697,31 +1821,46 @@ void CMsgSource2SystemSpecs::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
       _this->_impl_.cpu_num_physical_ = from._impl_.cpu_num_physical_;
     }
     if (cached_has_bits & 0x00000040u) {
-      _this->_impl_.ram_physical_total_mb_ = from._impl_.ram_physical_total_mb_;
+      _this->_impl_.cpu_num_logical_ = from._impl_.cpu_num_logical_;
     }
     if (cached_has_bits & 0x00000080u) {
-      _this->_impl_.gpu_vendor_id_ = from._impl_.gpu_vendor_id_;
+      _this->_impl_.cpu_num_performance_ = from._impl_.cpu_num_performance_;
     }
     _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
-  if (cached_has_bits & 0x00003f00u) {
+  if (cached_has_bits & 0x0000ff00u) {
     if (cached_has_bits & 0x00000100u) {
-      _this->_impl_.gpu_driver_version_high_ = from._impl_.gpu_driver_version_high_;
+      _this->_impl_.cpu_num_efficiency_ = from._impl_.cpu_num_efficiency_;
     }
     if (cached_has_bits & 0x00000200u) {
-      _this->_impl_.gpu_driver_version_low_ = from._impl_.gpu_driver_version_low_;
+      _this->_impl_.ram_physical_total_mb_ = from._impl_.ram_physical_total_mb_;
     }
     if (cached_has_bits & 0x00000400u) {
-      _this->_impl_.gpu_dx_support_level_ = from._impl_.gpu_dx_support_level_;
+      _this->_impl_.gpu_vendor_id_ = from._impl_.gpu_vendor_id_;
     }
     if (cached_has_bits & 0x00000800u) {
-      _this->_impl_.gpu_texture_memory_size_mb_ = from._impl_.gpu_texture_memory_size_mb_;
+      _this->_impl_.gpu_driver_version_high_ = from._impl_.gpu_driver_version_high_;
     }
     if (cached_has_bits & 0x00001000u) {
-      _this->_impl_.backbuffer_width_ = from._impl_.backbuffer_width_;
+      _this->_impl_.gpu_driver_version_low_ = from._impl_.gpu_driver_version_low_;
     }
     if (cached_has_bits & 0x00002000u) {
+      _this->_impl_.gpu_dx_support_level_ = from._impl_.gpu_dx_support_level_;
+    }
+    if (cached_has_bits & 0x00004000u) {
+      _this->_impl_.gpu_texture_memory_size_mb_ = from._impl_.gpu_texture_memory_size_mb_;
+    }
+    if (cached_has_bits & 0x00008000u) {
+      _this->_impl_.backbuffer_width_ = from._impl_.backbuffer_width_;
+    }
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
+  }
+  if (cached_has_bits & 0x00030000u) {
+    if (cached_has_bits & 0x00010000u) {
       _this->_impl_.backbuffer_height_ = from._impl_.backbuffer_height_;
+    }
+    if (cached_has_bits & 0x00020000u) {
+      _this->_impl_.thread_pool_workers_ = from._impl_.thread_pool_workers_;
     }
     _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
@@ -1762,8 +1901,8 @@ void CMsgSource2SystemSpecs::InternalSwap(CMsgSource2SystemSpecs* other) {
       &other->_impl_.gpu_driver_name_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(CMsgSource2SystemSpecs, _impl_.backbuffer_height_)
-      + sizeof(CMsgSource2SystemSpecs::_impl_.backbuffer_height_)
+      PROTOBUF_FIELD_OFFSET(CMsgSource2SystemSpecs, _impl_.thread_pool_workers_)
+      + sizeof(CMsgSource2SystemSpecs::_impl_.thread_pool_workers_)
       - PROTOBUF_FIELD_OFFSET(CMsgSource2SystemSpecs, _impl_.cpu_model_)>(
           reinterpret_cast<char*>(&_impl_.cpu_model_),
           reinterpret_cast<char*>(&other->_impl_.cpu_model_));

@@ -9555,7 +9555,6 @@ class CSVCMsg_CreateStringTable :
     kUserDataFixedSizeFieldNumber = 3,
     kDataCompressedFieldNumber = 9,
     kUsingVarintBitcountsFieldNumber = 10,
-    kUncompressedSizeFieldNumber = 8,
   };
   // optional string name = 1;
   bool has_name() const;
@@ -9684,19 +9683,6 @@ class CSVCMsg_CreateStringTable :
   void _internal_set_using_varint_bitcounts(bool value);
   public:
 
-  // optional int32 uncompressed_size = 8;
-  bool has_uncompressed_size() const;
-  private:
-  bool _internal_has_uncompressed_size() const;
-  public:
-  void clear_uncompressed_size();
-  int32_t uncompressed_size() const;
-  void set_uncompressed_size(int32_t value);
-  private:
-  int32_t _internal_uncompressed_size() const;
-  void _internal_set_uncompressed_size(int32_t value);
-  public:
-
   // @@protoc_insertion_point(class_scope:CSVCMsg_CreateStringTable)
  private:
   class _Internal;
@@ -9716,7 +9702,6 @@ class CSVCMsg_CreateStringTable :
     bool user_data_fixed_size_;
     bool data_compressed_;
     bool using_varint_bitcounts_;
-    int32_t uncompressed_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_netmessages_2eproto;
@@ -23964,34 +23949,6 @@ inline void CSVCMsg_CreateStringTable::set_allocated_string_data(std::string* st
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:CSVCMsg_CreateStringTable.string_data)
-}
-
-// optional int32 uncompressed_size = 8;
-inline bool CSVCMsg_CreateStringTable::_internal_has_uncompressed_size() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
-  return value;
-}
-inline bool CSVCMsg_CreateStringTable::has_uncompressed_size() const {
-  return _internal_has_uncompressed_size();
-}
-inline void CSVCMsg_CreateStringTable::clear_uncompressed_size() {
-  _impl_.uncompressed_size_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000200u;
-}
-inline int32_t CSVCMsg_CreateStringTable::_internal_uncompressed_size() const {
-  return _impl_.uncompressed_size_;
-}
-inline int32_t CSVCMsg_CreateStringTable::uncompressed_size() const {
-  // @@protoc_insertion_point(field_get:CSVCMsg_CreateStringTable.uncompressed_size)
-  return _internal_uncompressed_size();
-}
-inline void CSVCMsg_CreateStringTable::_internal_set_uncompressed_size(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000200u;
-  _impl_.uncompressed_size_ = value;
-}
-inline void CSVCMsg_CreateStringTable::set_uncompressed_size(int32_t value) {
-  _internal_set_uncompressed_size(value);
-  // @@protoc_insertion_point(field_set:CSVCMsg_CreateStringTable.uncompressed_size)
 }
 
 // optional bool data_compressed = 9;

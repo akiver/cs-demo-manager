@@ -19,9 +19,10 @@
 #define NETWORK_SYSTEM_LIB_NAME "libnetworksystem.so"
 #endif
 // Slots of INetworkMessages (NetworkMessagesVersion001). The 11/11/2026 CS2 update removed INetworkMessageInternal
-// and IProtobufBinding, and three virtuals with them, and moved FindOrCreateNetMessage. The SDK still declares the
-// previous layout, so the plugin calls these slots by index instead of through its declaration. Its virtual
-// destructor is declared last, so these indexes are the same on Windows and Linux.
+// and IProtobufBinding, and three virtuals with them, and moved FindOrCreateNetMessage. The SDK declares that layout
+// since, but its UnserializeMessageInternal misses the mode argument, so the plugin keeps calling these slots by index
+// instead of through its declaration. Its virtual destructor is declared last, so these indexes are the same on
+// Windows and Linux.
 //
 // The slot owning the instruction that loads the "illegal to register new net messages after serialization" string.
 // The CNetMessagePB<T>::GetNetMessage functions call it to register their message.
@@ -50,11 +51,13 @@ struct NetMessageInfo {
     const char* name;
 };
 
-// error receives the reason of a failure, the engine passes 4 as mode when it reads a demo.
+// error receives the reason of a failure, the engine passes 4 as mode when it reads a demo. The function keeps both
+// the mode (ecx) and error (r8) registers on Linux, the SDK declaration lacks the mode.
 typedef bool (*NetMessageUnserializeFn)(void* thisptr, bf_read& buf, CNetMessage* msg, int mode, CUtlString* error);
 // allocateMessage returns a new message of the type to register, groupId is a network group id.
 typedef NetMessageInfo* (*FindOrCreateNetMessageFn)(void* thisptr, int messageId, CNetMessage* (*allocateMessage)(),
-                                                    int groupId, int bufType, bool unknown, bool cannotBeNetworked);
+                                                    int groupId, int bufType, bool okayToRedispatch,
+                                                    bool cannotBeNetworked);
 typedef NetMessageInfo* (*FindNetworkMessagePartialFn)(void* thisptr, const char* partialName);
 typedef NetMessageInfo* (*FindNetworkMessageByIdFn)(void* thisptr, int messageId);
 typedef void (*AllowAdditionalMessageRegistrationFn)(void* thisptr, bool allow);
@@ -112,7 +115,6 @@ static bool NewUnserializeMessageInternal(void* thisptr, bf_read& buf, CNetMessa
         return result;
     }
 
-    // The SDK declares the NetMessageInfo_t of the message as an INetworkMessageInternal.
     const void* netMessage = msg->GetNetMessage();
     if (voiceDataNetMessage != NULL && netMessage == voiceDataNetMessage) {
         CSVCMsg_VoiceData voiceData;
@@ -209,7 +211,8 @@ void HookNetMessageUnserialize() {
 }
 
 static NetMessageInfo* NewFindOrCreateNetMessage(void* thisptr, int messageId, CNetMessage* (*allocateMessage)(),
-                                                 int groupId, int bufType, bool unknown, bool cannotBeNetworked) {
+                                                 int groupId, int bufType, bool okayToRedispatch,
+                                                 bool cannotBeNetworked) {
     // Reading a demo's message list disallows net message registration, and libmatchmaking registering its messages
     // when playback ends then aborts the game. The engine disallows it again on every serialize/read, so allow it
     // around each call, like the engine does for its own late registrations.
@@ -221,7 +224,7 @@ static NetMessageInfo* NewFindOrCreateNetMessage(void* thisptr, int messageId, C
     allow(thisptr, true);
 
     NetMessageInfo* message = originalFindOrCreateNetMessage(thisptr, messageId, allocateMessage, groupId, bufType,
-                                                             unknown, cannotBeNetworked);
+                                                             okayToRedispatch, cannotBeNetworked);
 
     allow(thisptr, wasAllowed);
 
