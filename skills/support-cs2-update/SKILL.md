@@ -64,18 +64,21 @@ After the update, compare the message ids in
 
 Every raw index the plugin uses that a CS2 update can move:
 
-| Where                                         | Index                                 | Interface                   | Implementation class, library     |
-| --------------------------------------------- | ------------------------------------- | --------------------------- | --------------------------------- |
-| `main.cpp`, `CreateInterface`                 | 0 `Connect`, 4 `Shutdown`             | `Source2ServerConfig001`    | real server library               |
-| `main.cpp`, `frameStageNotifyVtableIndex`     | 36 `FrameStageNotify`                 | `Source2Client002`          | `CSource2Client`, client          |
-| `net_messages.cpp`, `*VtableIndex`            | 3, 10, 20 `FindOrCreate…`, 22, 23, 27 | `NetworkMessagesVersion001` | `CNetworkMessages`, networksystem |
-| `cdll_interfaces.h`, `ISource2EngineToClient` | the `//:` comments                    | `Source2EngineToClient001`  | `CEngineClient`, engine2          |
-| `cdll_interfaces.h`, `IDemoPlayer`            | the `//:` comments (Windows slots)    | from `GetDemoPlayer`        | `CDemoPlayer`, engine2            |
+| Where                                         | Index                              | Interface                   | Implementation class, library     |
+| --------------------------------------------- | ---------------------------------- | --------------------------- | --------------------------------- |
+| `main.cpp`, `CreateInterface`                 | 0 `Connect`, 4 `Shutdown`          | `Source2ServerConfig001`    | real server library               |
+| `main.cpp`, `frameStageNotifyVtableIndex`     | 36 `FrameStageNotify`              | `Source2Client002`          | `CSource2Client`, client          |
+| `net_messages.cpp`, `*VtableIndex`            | 3 `UnserializeMessageInternal`, 20 | `NetworkMessagesVersion001` | `CNetworkMessages`, networksystem |
+| `cdll_interfaces.h`, `ISource2EngineToClient` | the `//:` comments                 | `Source2EngineToClient001`  | `CEngineClient`, engine2          |
+| `cdll_interfaces.h`, `IDemoPlayer`            | the `//:` comments (Windows slots) | from `GetDemoPlayer`        | `CDemoPlayer`, engine2            |
 
 The DXGI indexes of `overlay_windows.cpp` are a COM ABI, not CS2's: they never move.
 
-`net_messages.cpp` calls `INetworkMessages` by index rather than through the SDK declaration, which may lag behind the
-game: check the SDK's `inetworkmessages.h` against the binary before going back to it.
+`net_messages.cpp` hooks slots 3 and 20 by index but calls the other `INetworkMessages` methods it needs through the
+SDK declaration (`FindNetworkMessagePartial` 10, `AllowAdditionalMessageRegistration` 22,
+`IsAdditionalMessageRegistrationAllowed` 23, `FindNetworkMessageById` 27): check the SDK's `inetworkmessages.h` against
+the binary too, it may lag behind the game. Until the SDK catches up, call the slots that moved by index, like the
+hooks. The typedefs of the two hooks copy the SDK signatures, check the arguments of those methods as well.
 
 For each interface:
 
