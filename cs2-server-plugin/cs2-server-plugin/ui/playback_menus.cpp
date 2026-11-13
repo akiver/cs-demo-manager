@@ -251,7 +251,7 @@ void DrawPlayersMenu(const PlaybackPanelState& state, PlaybackPanelActions& acti
                     AddAction(actions, action);
                 }
                 if (player.numberKey >= 0) {
-                    char key[4];
+                    char key[12];
                     snprintf(key, sizeof(key), "%d", player.numberKey);
                     ImGui::GetWindowDrawList()->AddText(ImVec2(rowEnd - ImGui::CalcTextSize(key).x, position.y),
                                                         ImGui::GetColorU32(ImGuiCol_TextDisabled), key);
