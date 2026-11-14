@@ -4241,6 +4241,19 @@ msgstr "Player flashed per throw"
 msgid "Average player flashed per round"
 msgstr "Average player flashed per round"
 
+#: src/ui/match/grenades/stats/labels/grenade-buy-labels.tsx
+msgid "Bought"
+msgstr "Bought"
+
+#: src/ui/match/grenades/stats/labels/grenade-buy-labels.tsx
+msgid "Percentage of bought grenades that have been thrown"
+msgstr "Percentage of bought grenades that have been thrown"
+
+#: src/ui/match/grenades/stats/labels/grenade-buy-labels.tsx
+msgctxt "Grenades usage"
+msgid "Usage"
+msgstr "Usage"
+
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
 msgid "Damages per round"
 msgstr "Damages per round"

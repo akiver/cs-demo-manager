@@ -17,6 +17,7 @@ import type { ChickenPosition } from './chicken-position';
 import type { BombExploded } from './bomb-exploded';
 import type { PlayerEconomy } from './player-economy';
 import type { TeamEconomyStats } from './team-economy-stats';
+import type { GrenadeBuy } from './grenade-buy';
 
 export type Match = {
   checksum: string;
@@ -51,6 +52,7 @@ export type Match = {
   bombsExploded: BombExploded[];
   chatMessages: ChatMessage[];
   playersEconomies: PlayerEconomy[];
+  grenadeBuys: GrenadeBuy[];
   playerPositions: PlayerPosition[];
   grenadePositions: GrenadePosition[];
   chickenPositions: ChickenPosition[];

@@ -5,6 +5,7 @@ import { FireLabels } from 'csdm/ui/match/grenades/stats/labels/fire-labels';
 import { HeGrenadeLabels } from 'csdm/ui/match/grenades/stats/labels/he-grenade-labels';
 import { GrenadeOption } from 'csdm/ui/match/grenades/stats/grenade-option';
 import { StatLabel } from 'csdm/ui/match/grenades/stats/labels/label';
+import { GrenadeBuyLabels } from 'csdm/ui/match/grenades/stats/labels/grenade-buy-labels';
 
 function renderLabelsForGrenade(grenade: GrenadeOption) {
   switch (grenade) {
@@ -29,6 +30,7 @@ type Props = {
 export function StatsLabel({ grenade }: Props) {
   return (
     <div className="col-start-2 row-start-2 mx-8 mt-auto">
+      <GrenadeBuyLabels />
       <StatLabel text={<Trans>Thrown</Trans>} />
       {renderLabelsForGrenade(grenade)}
     </div>

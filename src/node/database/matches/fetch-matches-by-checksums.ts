@@ -18,6 +18,7 @@ import { fetchBombsExploded } from '../bomb-exploded/fetch-bombs-exploded';
 import { fetchCollateralKillCountPerMatch } from './fetch-collateral-kill-count-per-match';
 import { fetchPlayersEconomies } from '../player-economies/fetch-player-economies';
 import { fetchMatchTeamsEconomyStats } from '../match/fetch-match-teams-economy-stats';
+import { fetchGrenadeBuys } from '../player-buy/fetch-grenade-buys';
 
 export async function fetchMatchesByChecksums(checksums: string[]) {
   const rows = await db
@@ -48,6 +49,7 @@ export async function fetchMatchesByChecksums(checksums: string[]) {
       damages,
       blinds,
       playersEconomies,
+      grenadeBuys,
       shots,
       chatMessages,
       chickenDeaths,
@@ -63,6 +65,7 @@ export async function fetchMatchesByChecksums(checksums: string[]) {
       fetchDamages(checksum),
       fetchPlayerBlinds(checksum),
       fetchPlayersEconomies(checksum),
+      fetchGrenadeBuys(checksum),
       fetchShots({
         checksum,
       }),
@@ -81,6 +84,7 @@ export async function fetchMatchesByChecksums(checksums: string[]) {
     match.damages = damages;
     match.blinds = blinds;
     match.playersEconomies = playersEconomies;
+    match.grenadeBuys = grenadeBuys;
     match.shots = shots;
     match.chatMessages = chatMessages;
     match.chickenDeaths = chickenDeaths;

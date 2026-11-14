@@ -54,6 +54,7 @@ export async function matchRowToMatch(
     kills: [],
     players: [],
     playersEconomies: [],
+    grenadeBuys: [],
     grenadePositions: [],
     playerPositions: [],
     chickenPositions: [],

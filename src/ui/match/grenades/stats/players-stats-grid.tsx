@@ -6,6 +6,7 @@ import { FlashbangCells } from 'csdm/ui/match/grenades/stats/cells/flashbang-cel
 import { FireCells } from 'csdm/ui/match/grenades/stats/cells/fire-cells';
 import { HeGrenadeCells } from 'csdm/ui/match/grenades/stats/cells/he-grenade-cells';
 import { SmokeCells } from 'csdm/ui/match/grenades/stats/cells/smoke-cells';
+import { GrenadeBuyCells } from 'csdm/ui/match/grenades/stats/cells/grenade-buy-cells';
 import { GrenadeOption } from 'csdm/ui/match/grenades/stats/grenade-option';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 
@@ -58,6 +59,7 @@ export function PlayersStatsGrid({ players, teamName, grenade }: Props) {
                   'border-r border-r-gray-300': !isLastPlayer,
                 })}
               >
+                <GrenadeBuyCells playerSteamId={player.steamId} grenade={grenade} />
                 {renderCellsForGrenade(grenade, player.steamId)}
               </div>
             </div>
