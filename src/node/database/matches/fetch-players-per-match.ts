@@ -4,20 +4,21 @@ import { db } from '../database';
 export async function fetchPlayersPerMatch(checksums: string[]): Promise<Record<string, MatchTablePlayer[]>> {
   const rows = await db
     .selectFrom('players')
-    .select(['steam_id as steamId', 'name', 'match_checksum as checksum'])
+    .select(['steam_id as steamId', 'name', 'team_name as teamName', 'match_checksum as checksum'])
     .where((eb) => eb('players.match_checksum', '=', eb.fn.any(eb.val(checksums))))
     .orderBy('players.name', 'asc')
     .execute();
 
   const playersPerMatch: Record<string, MatchTablePlayer[]> = {};
   for (const row of rows) {
-    const { checksum, steamId, name } = row;
+    const { checksum, steamId, name, teamName } = row;
     if (!playersPerMatch[checksum]) {
       playersPerMatch[checksum] = [];
     }
     playersPerMatch[checksum].push({
       steamId,
       name,
+      teamName,
     });
   }
   return playersPerMatch;

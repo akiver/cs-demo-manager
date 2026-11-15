@@ -247,7 +247,7 @@ export function useTable<DataType extends Data>({
     },
     getHideableColumns: () => {
       return columns.filter((column) => {
-        return column.allowHiding !== false;
+        return column.allowHiding !== false && column.visible !== false;
       });
     },
     getColumnWidth: (columnId) => {
@@ -261,6 +261,11 @@ export function useTable<DataType extends Data>({
       return sortedColumnRef.current.id === columnId ? sortedColumnRef.current.direction : undefined;
     },
     isColumnVisible: (columnId) => {
+      const column = columns.find((column) => column.id === columnId);
+      if (column?.visible === false) {
+        return false;
+      }
+
       return columnVisibilityRef.current[columnId] === undefined || columnVisibilityRef.current[columnId] === true;
     },
     isSelectionEnabled: () => {

@@ -13,12 +13,72 @@ import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { BansCell } from 'csdm/ui/components/matches/bans-cell';
 import { useGetGameModeTranslation } from 'csdm/ui/hooks/use-get-game-mode-translation';
 import { type GameMode } from 'csdm/common/types/counter-strike';
+import { buildFocusSortFunction, getFocusResult, getFocusScores, type MatchesFocus } from './matches-focus';
+import { FocusResultCell } from './focus-result-cell';
+import { FocusTeamScoreCell } from './focus-team-score-cell';
+import { FocusOpponentScoreCell } from './focus-opponent-score-cell';
+import { isBlankString } from 'csdm/common/string/is-empty-string';
 
-export function useMatchesColumns() {
+function useFocusTooltips(focus: MatchesFocus) {
+  const { t } = useLingui();
+
+  switch (focus.type) {
+    case 'pinned-player':
+      return {
+        result: t({
+          context: 'Table header tooltip',
+          message: 'Match result of the pinned player',
+        }),
+        score: t({
+          context: 'Table header tooltip',
+          message: "Score of the pinned player's team",
+        }),
+        opponentScore: t({
+          context: 'Table header tooltip',
+          message: "Score of the pinned player's opponent team",
+        }),
+      };
+    case 'player':
+      return {
+        result: t({
+          context: 'Table header tooltip',
+          message: 'Match result of the player',
+        }),
+        score: t({
+          context: 'Table header tooltip',
+          message: "Score of the player's team",
+        }),
+        opponentScore: t({
+          context: 'Table header tooltip',
+          message: "Score of the player's opponent team",
+        }),
+      };
+    case 'team':
+      return {
+        result: t({
+          context: 'Table header tooltip',
+          message: 'Match result of the team',
+        }),
+        score: t({
+          context: 'Table header tooltip',
+          message: 'Score of the team',
+        }),
+        opponentScore: t({
+          context: 'Table header tooltip',
+          message: 'Score of the opponent team',
+        }),
+      };
+  }
+}
+
+export function useMatchesColumns(focus: MatchesFocus) {
   const secondsToFormattedMinutes = useSecondsToFormattedMinutes();
   const formatDate = useFormatDate();
   const getGameModeTranslation = useGetGameModeTranslation();
   const { t } = useLingui();
+  const focusTooltips = useFocusTooltips(focus);
+  // Without a pinned player there is nothing to be relative to.
+  const areFocusColumnsVisible = focus.type !== 'pinned-player' || !isBlankString(focus.steamId);
 
   const columns: readonly Column<MatchTable>[] = [
     {
@@ -198,6 +258,62 @@ export function useMatchesColumns() {
       maxWidth: 100,
       textAlign: 'right',
       Cell: TeamBScoreCell,
+    },
+    {
+      id: 'focusResult',
+      accessor: (match) => getFocusResult(match, focus) ?? '',
+      headerText: t({
+        context: 'Table header',
+        message: 'Result',
+      }),
+      headerTooltip: focusTooltips.result,
+      visibilityText: t({
+        context: 'Dropdown column visibility',
+        message: 'Result',
+      }),
+      width: 50,
+      maxWidth: 100,
+      Cell: FocusResultCell,
+      visible: areFocusColumnsVisible,
+      sortFunction: buildFocusSortFunction((match) => getFocusResult(match, focus)),
+    },
+    {
+      id: 'focusTeamScore',
+      accessor: (match) => getFocusScores(match, focus)?.score ?? '',
+      headerText: t({
+        context: 'Table header score of the focused team',
+        message: 'ST',
+      }),
+      headerTooltip: focusTooltips.score,
+      visibilityText: t({
+        context: 'Dropdown column visibility',
+        message: 'Team score',
+      }),
+      width: 50,
+      maxWidth: 100,
+      textAlign: 'right',
+      Cell: FocusTeamScoreCell,
+      visible: areFocusColumnsVisible,
+      sortFunction: buildFocusSortFunction((match) => getFocusScores(match, focus)?.score),
+    },
+    {
+      id: 'focusOpponentScore',
+      accessor: (match) => getFocusScores(match, focus)?.opponentScore ?? '',
+      headerText: t({
+        context: 'Table header score of the opponent team',
+        message: 'SO',
+      }),
+      headerTooltip: focusTooltips.opponentScore,
+      visibilityText: t({
+        context: 'Dropdown column visibility',
+        message: 'Opponent score',
+      }),
+      width: 50,
+      maxWidth: 100,
+      textAlign: 'right',
+      Cell: FocusOpponentScoreCell,
+      visible: areFocusColumnsVisible,
+      sortFunction: buildFocusSortFunction((match) => getFocusScores(match, focus)?.opponentScore),
     },
     {
       id: 'killCount',

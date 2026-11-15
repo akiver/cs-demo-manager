@@ -34,6 +34,8 @@ export type Column<DataType extends Data = Data> = {
   headerText: string;
   headerTooltip: string;
   visibilityText?: string | undefined;
+  // When false, the column is neither rendered nor listed in the visibility dropdown, but its persisted state (order,
+  // width, visibility) is kept so that it's restored when the column becomes visible again.
   visible?: boolean | undefined;
   showTooltip?: boolean | undefined;
   allowHiding?: boolean | undefined;

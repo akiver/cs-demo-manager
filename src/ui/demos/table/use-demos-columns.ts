@@ -231,7 +231,6 @@ export function useDemosColumns() {
       width: 80,
       maxWidth: 120,
       textAlign: 'right',
-      visible: false,
     },
     {
       id: 'tickrate',

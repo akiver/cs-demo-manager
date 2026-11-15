@@ -1755,6 +1755,66 @@ msgstr "HS%"
 msgid "No maps stats found."
 msgstr "No maps stats found."
 
+#: src/ui/components/matches/focus-result-cell.tsx
+msgctxt "Match result tie"
+msgid "T"
+msgstr "T"
+
+#: src/ui/components/matches/focus-result-cell.tsx
+msgctxt "Match result win"
+msgid "W"
+msgstr "W"
+
+#: src/ui/components/matches/focus-result-cell.tsx
+msgctxt "Match result loss"
+msgid "L"
+msgstr "L"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Match result of the pinned player"
+msgstr "Match result of the pinned player"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Score of the pinned player's team"
+msgstr "Score of the pinned player's team"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Score of the pinned player's opponent team"
+msgstr "Score of the pinned player's opponent team"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Match result of the player"
+msgstr "Match result of the player"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Score of the player's team"
+msgstr "Score of the player's team"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Score of the player's opponent team"
+msgstr "Score of the player's opponent team"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Match result of the team"
+msgstr "Match result of the team"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Score of the team"
+msgstr "Score of the team"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Score of the opponent team"
+msgstr "Score of the opponent team"
+
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -1872,6 +1932,36 @@ msgstr "Score Team B"
 msgctxt "Dropdown column visibility"
 msgid "Score Team B"
 msgstr "Score Team B"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header"
+msgid "Result"
+msgstr "Result"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Dropdown column visibility"
+msgid "Result"
+msgstr "Result"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header score of the focused team"
+msgid "ST"
+msgstr "ST"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Dropdown column visibility"
+msgid "Team score"
+msgstr "Team score"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header score of the opponent team"
+msgid "SO"
+msgstr "SO"
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Dropdown column visibility"
+msgid "Opponent score"
+msgstr "Opponent score"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts

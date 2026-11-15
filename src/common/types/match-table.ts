@@ -3,6 +3,7 @@ import type { Match } from 'csdm/common/types/match';
 export type MatchTablePlayer = {
   steamId: string;
   name: string;
+  teamName: string;
 };
 
 export type MatchTable = Pick<

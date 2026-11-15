@@ -20,6 +20,9 @@ import { selectedMatchesChanged } from './matches-actions';
 import { useTableCommentWidgetVisibility } from '../components/table/use-table-comment-widget-visibility';
 import { useFuzzySearchText } from './use-fuzzy-search-text';
 import { MatchesTagsDialog } from './dialogs/tags-dialog';
+import { usePinnedPlayerSteamId } from 'csdm/ui/settings/use-pinned-player-steamid';
+import { MatchesFocusContext } from 'csdm/ui/components/matches/matches-focus-context';
+import type { MatchesFocus } from 'csdm/ui/components/matches/matches-focus';
 
 function getRowId(match: MatchTable): string {
   return match.checksum;
@@ -40,7 +43,9 @@ type Props = {
 };
 
 export function MatchesTableProvider({ children }: Props) {
-  const columns = useMatchesColumns();
+  const pinnedPlayerSteamId = usePinnedPlayerSteamId();
+  const focus: MatchesFocus = { type: 'pinned-player', steamId: pinnedPlayerSteamId };
+  const columns = useMatchesColumns(focus);
   const navigate = useNavigate();
   const { showContextMenu } = useContextMenu();
   const { showDialog } = useDialog();
@@ -120,7 +125,7 @@ export function MatchesTableProvider({ children }: Props) {
 
   return (
     <MatchesTableContext.Provider value={table}>
-      {children}
+      <MatchesFocusContext.Provider value={focus}>{children}</MatchesFocusContext.Provider>
       {isWidgetVisible && <MatchCommentWidget onClose={hideWidget} matches={table.getSelectedRows()} />}
     </MatchesTableContext.Provider>
   );

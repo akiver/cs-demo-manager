@@ -18,17 +18,20 @@ import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { DeleteMatchesDialog } from 'csdm/ui/components/dialogs/delete-matches-dialog';
 import { RenameMatchDialog } from 'csdm/ui/matches/dialogs/rename-match-dialog';
 import { MatchesTagsDialog } from 'csdm/ui/matches/dialogs/tags-dialog';
+import { MatchesFocusContext } from 'csdm/ui/components/matches/matches-focus-context';
+import type { MatchesFocus } from 'csdm/ui/components/matches/matches-focus';
 
 function getRowId(match: MatchTable) {
   return match.checksum;
 }
 
 export function TeamMatchesTable() {
-  const { matches } = useTeam();
+  const { matches, name } = useTeam();
   const dispatch = useDispatch();
   const navigateToMatch = useNavigateToMatch();
   const selectedChecksums = useSelectedMatchChecksums();
-  const columns = useMatchesColumns();
+  const focus: MatchesFocus = { type: 'team', teamName: name };
+  const columns = useMatchesColumns(focus);
   const { showDialog } = useDialog();
   const { showContextMenu } = useContextMenu();
   const {
@@ -95,7 +98,9 @@ export function TeamMatchesTable() {
 
   return (
     <>
-      <Table<MatchTable> table={table} />
+      <MatchesFocusContext.Provider value={focus}>
+        <Table<MatchTable> table={table} />
+      </MatchesFocusContext.Provider>
       {isWidgetVisible && <MatchCommentWidget onClose={hideWidget} matches={table.getSelectedRows()} />}
     </>
   );
