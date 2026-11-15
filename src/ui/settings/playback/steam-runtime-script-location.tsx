@@ -24,8 +24,8 @@ export function SteamRuntimeScriptLocation() {
           </p>
           <p>
             <Trans>
-              It should be located in the folder <code>steamapps/common/SteamLinuxRuntime_sniper</code> inside the
-              folder where Steam is installed.
+              It should be located in the folder <code>steamapps/common/SteamLinuxRuntime_sniper</code> inside one of
+              your Steam libraries, usually the one where CS2 is installed.
             </Trans>
           </p>
         </div>

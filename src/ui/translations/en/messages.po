@@ -8028,8 +8028,8 @@ msgid "As of September 2025, this script is named <0>_v2-entry-point</0> and use
 msgstr "As of September 2025, this script is named <0>_v2-entry-point</0> and uses the Steam runtime 3 \"Sniper\"."
 
 #: src/ui/settings/playback/steam-runtime-script-location.tsx
-msgid "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
-msgstr "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside the folder where Steam is installed."
+msgid "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside one of your Steam libraries, usually the one where CS2 is installed."
+msgstr "It should be located in the folder <0>steamapps/common/SteamLinuxRuntime_sniper</0> inside one of your Steam libraries, usually the one where CS2 is installed."
 
 #: src/ui/settings/playback/use-hlae.tsx
 msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"

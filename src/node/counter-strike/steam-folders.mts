@@ -7,7 +7,7 @@ import VDF from 'vdf-parser';
 import { Game } from '@akiver/cs-demo-analyzer';
 
 type LibraryFolders = {
-  libraryfolders: Record<string, { path: string; apps: Record<string, string> }>;
+  libraryfolders: Record<string, { path: string; apps?: Record<string, string> }>;
 };
 
 /**
@@ -60,9 +60,14 @@ export async function getSteamFolderPath() {
   return path.join(homedir(), '.local', 'share', 'Steam');
 }
 
+type SteamApp = {
+  appId: string;
+  folderName: string; // Folder name inside <library>/steamapps/common
+};
+
 // CS:GO is a standalone Steam app since Valve released it on the Steam store, other games are played from the CS2 app.
 // https://store.steampowered.com/app/4465480/CounterStrikeGlobal_Offensive/
-function getGameSteamApp(game: Game) {
+function getGameSteamApp(game: Game): SteamApp {
   if (game === Game.CSGO) {
     return { appId: '4465480', folderName: 'csgo legacy' };
   }
@@ -71,10 +76,42 @@ function getGameSteamApp(game: Game) {
 }
 
 /**
+ * Return the path to the folder where the given app is installed, looking at each Steam library listed in the file
+ * steamapps/libraryfolders.vdf of the given Steam folder.
+ * https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory
+ */
+async function findSteamAppFolderPath(steamFolderPath: string, app: SteamApp) {
+  const vdfPath = path.join(steamFolderPath, 'steamapps', 'libraryfolders.vdf');
+  const vdfFileExists = await fs.pathExists(vdfPath);
+  if (!vdfFileExists) {
+    logger.log(`Steam libraries file not found at ${vdfPath}`);
+    return;
+  }
+
+  const vdfContent = await fs.readFile(vdfPath, 'utf-8');
+  const data = VDF.parse<LibraryFolders>(vdfContent);
+  for (const index in data.libraryfolders) {
+    const entry = data.libraryfolders[index];
+    const hasApp = Object.keys(entry.apps ?? {}).includes(app.appId);
+    if (!hasApp) {
+      continue;
+    }
+
+    const appFolderPath = path.join(entry.path, 'steamapps', 'common', app.folderName);
+    const appFolderExists = await fs.pathExists(appFolderPath);
+    if (appFolderExists) {
+      return appFolderPath;
+    }
+  }
+
+  logger.log(`App ${app.appId} (${app.folderName}) folder not found in libraryfolders.vdf`);
+  logger.log(vdfContent);
+}
+
+/**
  * Return the path to the folder where the given game is installed through Steam.
  * CS2: "Counter-Strike Global Offensive"
  * CS:GO: "csgo legacy"
- * https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory
  */
 export async function getCsgoFolderPath(game: Game) {
   const steamFolderPath = await getSteamFolderPath();
@@ -82,30 +119,21 @@ export async function getCsgoFolderPath(game: Game) {
     return;
   }
 
-  const vdfPath = path.join(steamFolderPath, 'steamapps', 'libraryfolders.vdf');
-  const vdfFileExists = await fs.pathExists(vdfPath);
-  if (!vdfFileExists) {
+  return findSteamAppFolderPath(steamFolderPath, getGameSteamApp(game));
+}
+
+export async function getSteamLinuxRuntimeSniperFolderPath() {
+  const steamFolderPath = await getSteamFolderPath();
+  if (steamFolderPath === undefined) {
     return;
   }
 
-  const vdfContent = await fs.readFile(vdfPath, 'utf-8');
-  const data = VDF.parse<LibraryFolders>(vdfContent);
-  const { appId, folderName } = getGameSteamApp(game);
+  // Steam Linux Runtime 3.0 (sniper), the container used by Steam to run CS2 on Linux.
+  // Steam installs it as a regular app in one of the Steam libraries, usually the one where CS2 is installed.
+  const steamLinuxRuntimeSniperApp: SteamApp = {
+    appId: '1628350',
+    folderName: 'SteamLinuxRuntime_sniper',
+  };
 
-  for (const index in data.libraryfolders) {
-    const entry = data.libraryfolders[index];
-    const hasApp = Object.keys(entry.apps).includes(appId);
-    if (!hasApp) {
-      continue;
-    }
-
-    const gameFolderPath = path.join(entry.path, 'steamapps', 'common', folderName);
-    const gameFolderExists = await fs.pathExists(gameFolderPath);
-    if (gameFolderExists) {
-      return gameFolderPath;
-    }
-  }
-
-  logger.log(`${game} folder not found in libraryfolders.vdf`);
-  logger.log(vdfContent);
+  return findSteamAppFolderPath(steamFolderPath, steamLinuxRuntimeSniperApp);
 }

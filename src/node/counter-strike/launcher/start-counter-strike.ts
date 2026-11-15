@@ -20,7 +20,7 @@ import { AccessDeniedError } from './errors/access-denied-error';
 import { tryStartingDemoThroughWebSocket } from './try-starting-demo-through-web-socket';
 import { installCounterStrikeServerPlugin, uninstallCounterStrikeServerPlugin } from './cs-server-plugin';
 import { getCs2VulkanLayerEnv } from './cs2-server-plugin';
-import { getCsgoFolderPath, getSteamFolderPath } from '../steam-folders.mjs';
+import { getCsgoFolderPath, getSteamFolderPath, getSteamLinuxRuntimeSniperFolderPath } from '../steam-folders.mjs';
 import { glob } from 'csdm/node/filesystem/glob';
 import { CounterStrikeExecutableNotFound } from './errors/counter-strike-executable-not-found';
 import { isLinux } from 'csdm/node/os/is-linux';
@@ -66,46 +66,85 @@ function buildUnixCommand(scriptPath: string, args: string, game: Game) {
   return `${scriptPath} ${args}`;
 }
 
-async function buildLinuxCommand(scriptPath: string, args: string, game: Game, settings: PlaybackSettings) {
+async function findSteamRuntimeScriptInSteamFolder(scriptName: string, followSymbolicLinks: boolean) {
   const steamFolderPath = await getSteamFolderPath();
+  if (!steamFolderPath) {
+    return undefined;
+  }
+
+  const result = await glob(`**/${scriptName}`, {
+    cwd: steamFolderPath,
+    absolute: true,
+    followSymbolicLinks,
+  });
+  if (result.length === 0) {
+    logger.error(
+      `Cannot find the Steam Linux Runtime script "${scriptName}" in the Steam folder at ${steamFolderPath}`,
+    );
+    return undefined;
+  }
+
+  return result[0];
+}
+
+async function getCs2SteamRuntimeScriptPath(cs2ScriptPath: string, settings: PlaybackSettings) {
+  if (settings.customCs2SteamRuntimeScriptLocationEnabled && settings.cs2SteamRuntimeScriptPath) {
+    const customScriptPath = settings.cs2SteamRuntimeScriptPath;
+    const scriptExists = await fs.pathExists(customScriptPath);
+    if (!scriptExists) {
+      logger.error(`The provided Steam Linux Runtime script "${customScriptPath}" doesn't exist.`);
+      return undefined;
+    }
+
+    logger.debug(`Using custom Steam Linux Runtime script at "${customScriptPath}"`);
+    return customScriptPath;
+  }
+
+  const steamRuntimeScriptName = '_v2-entry-point';
+  // The runtime is usually installed in the same Steam library as CS2, it also covers custom CS2 locations:
+  // <library>/steamapps/common/Counter-Strike Global Offensive/game/cs2.sh
+  // <library>/steamapps/common/SteamLinuxRuntime_sniper/_v2-entry-point
+  const siblingScriptPath = path.join(
+    path.dirname(cs2ScriptPath),
+    '..',
+    '..',
+    'SteamLinuxRuntime_sniper',
+    steamRuntimeScriptName,
+  );
+  if (await fs.pathExists(siblingScriptPath)) {
+    return siblingScriptPath;
+  }
+
+  const runtimeFolderPath = await getSteamLinuxRuntimeSniperFolderPath();
+  if (runtimeFolderPath) {
+    const scriptPath = path.join(runtimeFolderPath, steamRuntimeScriptName);
+    if (await fs.pathExists(scriptPath)) {
+      return scriptPath;
+    }
+    logger.log(`Steam Linux Runtime script not found at "${scriptPath}"`);
+  }
+
+  return findSteamRuntimeScriptInSteamFolder(
+    `SteamLinuxRuntime_sniper/${steamRuntimeScriptName}`,
+    settings.followSymbolicLinks,
+  );
+}
+
+async function buildLinuxCommand(scriptPath: string, args: string, game: Game, settings: PlaybackSettings) {
   /**
    * On Linux CS must be launched through a Steam Linux Runtime script.
    * This script takes the path to the game's run script as parameter (csgo.sh for CSGO and cs2.sh for CS2).
    * Trying to run CS directly from the game script will not work because it doesn't export runtime libraries paths
    * that depend on the OS arch.
    */
-  const steamScriptName = game === Game.CS2 ? 'SteamLinuxRuntime_sniper/_v2-entry-point' : 'steam-runtime/run.sh';
-  let runSteamScriptPath: string | undefined;
-  if (game === Game.CS2 && settings.cs2SteamRuntimeScriptPath) {
-    runSteamScriptPath = settings.cs2SteamRuntimeScriptPath;
-    const scriptExists = await fs.pathExists(runSteamScriptPath);
-    if (!scriptExists) {
-      logger.error(`The provided Steam Linux Runtime script "${runSteamScriptPath}" doesn't exist.`);
-      throw new CounterStrikeExecutableNotFound(game);
-    }
-    logger.debug(`Using custom Steam Linux Runtime script at "${runSteamScriptPath}"`);
-  } else {
-    const result = await glob(`**/${steamScriptName}`, {
-      cwd: steamFolderPath,
-      absolute: true,
-      followSymbolicLinks: settings.followSymbolicLinks,
-    });
-    if (result.length === 0) {
-      logger.error(
-        `Cannot find the Steam Linux Runtime script "${steamScriptName}" in the Steam folder at ${steamFolderPath}`,
-      );
-      throw new CounterStrikeExecutableNotFound(game);
-    }
-
-    runSteamScriptPath = result[0];
-  }
-
+  const runSteamScriptPath =
+    game === Game.CS2
+      ? await getCs2SteamRuntimeScriptPath(scriptPath, settings)
+      : await findSteamRuntimeScriptInSteamFolder('steam-runtime/run.sh', settings.followSymbolicLinks);
   if (!runSteamScriptPath) {
-    logger.error(
-      `Cannot find the Steam Linux Runtime script "${steamScriptName}" in the Steam folder at ${steamFolderPath}`,
-    );
     throw new CounterStrikeExecutableNotFound(game);
   }
+  logger.debug(`Steam Linux Runtime script: "${runSteamScriptPath}"`);
 
   const scriptExists = await fs.pathExists(scriptPath);
   if (!scriptExists) {
