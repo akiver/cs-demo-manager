@@ -908,6 +908,11 @@ msgstr "Open Steam community profile"
 
 #: src/ui/components/context-menu/items/pin-player-item.tsx
 msgctxt "Context menu"
+msgid "Unpin this player"
+msgstr "Unpin this player"
+
+#: src/ui/components/context-menu/items/pin-player-item.tsx
+msgctxt "Context menu"
 msgid "Pin this player"
 msgstr "Pin this player"
 

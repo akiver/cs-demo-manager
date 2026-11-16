@@ -8,14 +8,16 @@ type Props = {
   tooltip: ReactNode;
   url: string;
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  onContextMenu?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 };
 
-export function LeftBarLink({ url, tooltip, icon, onClick }: Props) {
+export function LeftBarLink({ url, tooltip, icon, onClick, onContextMenu }: Props) {
   return (
     <LeftBarTooltip content={tooltip}>
       <NavLink
         to={url}
         onClick={onClick}
+        onContextMenu={onContextMenu}
         className={({ isActive }) => {
           return `flex flex-col items-center w-full no-underline hover:text-gray-900 duration-85 transition-all py-12 outline-hidden ${
             isActive ? 'text-gray-900' : 'text-gray-500'
