@@ -7637,6 +7637,15 @@ msgctxt "Input placeholder"
 msgid "ID"
 msgstr "ID"
 
+#: src/ui/settings/downloads/analyze-downloaded-demos.tsx
+msgid "Automatically analyze demos once they have been downloaded."
+msgstr "Automatically analyze demos once they have been downloaded."
+
+#: src/ui/settings/downloads/analyze-downloaded-demos.tsx
+msgctxt "Settings title"
+msgid "Analyze downloaded demos"
+msgstr "Analyze downloaded demos"
+
 #: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
 msgid "Automatically download {name} demos in the background."
 msgstr "Automatically download {name} demos in the background."

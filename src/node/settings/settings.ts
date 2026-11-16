@@ -130,6 +130,7 @@ export type DownloadSettings = {
   downloadRenownDemosInBackground: boolean;
   download5EPlayDemosAtStartup: boolean;
   download5EPlayDemosInBackground: boolean;
+  analyzeDownloadedDemos: boolean;
 };
 
 export type MatchesSettings = MatchFilters;

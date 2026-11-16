@@ -135,6 +135,7 @@ export const defaultSettings: Settings = {
     download5EPlayDemosInBackground: true,
     downloadRenownDemosAtStartup: true,
     downloadRenownDemosInBackground: true,
+    analyzeDownloadedDemos: false,
   },
   matches: {
     gameModes: [],

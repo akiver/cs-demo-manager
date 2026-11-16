@@ -24,6 +24,8 @@ import { ArchiveFormat } from 'csdm/common/types/archive-format';
 import { getArchiveFormatFromDemoUrl } from 'csdm/node/download/get-archive-format-from-demo-url';
 import { createDecompressStream } from 'csdm/node/demo/create-decompress-stream';
 import { glob } from 'csdm/node/filesystem/glob';
+import { analysesListener } from 'csdm/server/analyses-listener';
+import type { Demo } from 'csdm/common/types/demo';
 const streamPipeline = util.promisify(pipeline);
 
 // Stream decompressing the downloaded demo on the fly.
@@ -272,6 +274,10 @@ class DownloadDemoQueue {
       if (currentDemosFolderPath === downloadFolderPath) {
         await this.loadDownloadedDemo(demoPath);
       }
+
+      if (settings.download.analyzeDownloadedDemos) {
+        this.analyzeDownloadedDemo(demo);
+      }
     } catch (error) {
       if (error instanceof Error && error.name !== 'AbortError') {
         logger.error(error);
@@ -375,6 +381,14 @@ class DownloadDemoQueue {
   private buildPartialDemoPath(demoPath: string) {
     return `${demoPath}${this.partialExtension}`;
   }
+
+  // Not awaited on purpose, the next download must not wait for the analysis to be done.
+  private analyzeDownloadedDemo = (demo: Demo) => {
+    analysesListener.addDemosToAnalyses([demo]).catch((error) => {
+      logger.error('Error while adding downloaded demo to analyses');
+      logger.error(error);
+    });
+  };
 
   private loadDownloadedDemo = async (demoPath: string) => {
     try {
