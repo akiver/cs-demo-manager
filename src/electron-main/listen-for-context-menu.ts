@@ -3,11 +3,23 @@ import { clipboard, ClipboardItem, Menu } from 'electron';
 import { type Event } from 'electron';
 import { i18n } from '@lingui/core';
 
+function isAppPageLink(linkURL: string) {
+  try {
+    const url = new URL(linkURL);
+
+    // The app is loaded from a file:// URL in production and from the localhost dev server in development.
+    return url.protocol === 'file:' || url.hostname === 'localhost';
+  } catch {
+    return false;
+  }
+}
+
 export function listenForContextMenu(mainWindow: BrowserWindow) {
   const onContextMenu = (event: Event, { editFlags, isEditable, linkText, linkURL }: ContextMenuParams) => {
     const items: MenuItemConstructorOptions[] = [];
 
-    if (linkURL.length > 0) {
+    // Copying links to app pages is useless as they can't be opened outside of the app.
+    if (linkURL.length > 0 && !isAppPageLink(linkURL)) {
       items.push({
         id: 'copyLink',
         label: i18n.t({
