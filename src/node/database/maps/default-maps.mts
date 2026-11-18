@@ -281,9 +281,9 @@ export function getDefaultMaps(game?: Game) {
     {
       name: 'de_cbble',
       game: Game.CS2,
-      position_x: -3840,
-      position_y: 3072,
-      scale: 6,
+      position_x: -3615,
+      position_y: 2712,
+      scale: 4.724792,
       threshold_z: 0,
     },
     {
