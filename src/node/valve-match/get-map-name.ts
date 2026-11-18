@@ -42,7 +42,7 @@ export function getMapName(gameType: number) {
     [1 << 18]: 'de_fachwerk',
     [1 << 19]: 'cs_shelter',
     [1 << 20]: 'de_overpass',
-    [1 << 21]: 'de_cobblestone',
+    [1 << 21]: 'de_cbble',
     [1 << 22]: 'de_canals',
   } as const;
 
