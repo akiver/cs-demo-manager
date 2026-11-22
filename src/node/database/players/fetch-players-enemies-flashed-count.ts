@@ -18,6 +18,7 @@ export async function fetchPlayersEnemiesFlashedCount(filters: Filters): Promise
     .select(count<number>('player_blinds.id').as('enemiesFlashedCount'))
     .whereRef('player_blinds.flasher_side', '!=', 'player_blinds.flashed_side')
     .where('player_blinds.is_flasher_controlling_bot', '=', false)
+    .where('player_blinds.is_flashed_facing_flashbang', '=', true)
     .groupBy('flasher_steam_id');
 
   const checksums = filters.checksums ?? [];

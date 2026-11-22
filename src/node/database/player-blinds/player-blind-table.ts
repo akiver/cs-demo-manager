@@ -16,6 +16,7 @@ export type PlayerBlindTable = {
   flashed_name: string;
   flashed_side: TeamNumber;
   is_flashed_controlling_bot: boolean;
+  is_flashed_facing_flashbang: boolean;
 };
 
 export type PlayerBlindRow = Selectable<PlayerBlindTable>;

@@ -398,6 +398,7 @@ async function insertPlayersFlashedFromCsv({ outputFolderPath, demoName }: Inser
       'flasher_name',
       'flasher_side',
       'is_flasher_controlling_bot',
+      'is_flashed_facing_flashbang',
       'match_checksum',
     ],
   });
