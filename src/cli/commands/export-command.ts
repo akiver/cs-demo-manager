@@ -134,6 +134,9 @@ export abstract class ExportCommand extends Command {
         demoPath,
         outputFolderPath: this.temporaryFolderPath,
         analyzePositions: false,
+        onMapGeometryDownload: (mapName) => {
+          output.progress(`${progressPrefix} Downloading the map geometry of ${mapName}...`);
+        },
         onStart: () => {
           output.progress(`${progressPrefix} Analyzing ${path.basename(demoPath)}...`);
         },

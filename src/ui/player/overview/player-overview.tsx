@@ -9,6 +9,7 @@ import { VacPanel } from './vac-panel';
 import { KillsPanel } from 'csdm/ui/components/panels/kills-panel';
 import { usePlayer } from '../use-player';
 import { KastPanel } from 'csdm/ui/components/panels/kast-panel';
+import { AverageTimeToDamagePanel, AverageTimeToKillPanel } from 'csdm/ui/components/panels/time-to-damage-panels';
 import { HltvRating2Panel } from 'csdm/ui/components/panels/hltv-rating-2-panel';
 import { HeadshotPanel } from 'csdm/ui/components/panels/headshot-panel';
 import { AverageDamagesPerRoundPanel } from 'csdm/ui/components/panels/average-damages-per-round-panel';
@@ -46,6 +47,8 @@ export function PlayerOverview() {
     averageEnemiesFlashed,
     averageHeGrenadeDamage,
     averageSmokesThrownPerMatch,
+    averageTimeToDamage,
+    averageTimeToKill,
   } = usePlayer();
 
   return (
@@ -60,6 +63,10 @@ export function PlayerOverview() {
           </div>
           <div className="flex flex-col gap-y-8">
             <KastPanel kast={kast} />
+          </div>
+          <div className="flex flex-col gap-y-8">
+            <AverageTimeToDamagePanel milliseconds={averageTimeToDamage} />
+            <AverageTimeToKillPanel milliseconds={averageTimeToKill} />
           </div>
           <div className="flex flex-col gap-y-8">
             <KillDeathRatioPanel killDeathRatio={killDeathRatio} />

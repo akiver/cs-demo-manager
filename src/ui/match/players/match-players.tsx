@@ -14,6 +14,7 @@ import { KillDeathRatioPanel } from 'csdm/ui/components/panels/kill-death-ratio-
 import { AverageDamagesPerRoundPanel } from 'csdm/ui/components/panels/average-damages-per-round-panel';
 import { HeadshotPanel } from 'csdm/ui/components/panels/headshot-panel';
 import { KastPanel } from 'csdm/ui/components/panels/kast-panel';
+import { AverageTimeToDamagePanel, AverageTimeToKillPanel } from 'csdm/ui/components/panels/time-to-damage-panels';
 import { ObjectivesPanel } from 'csdm/ui/components/panels/objectives-panel';
 import { WeaponsPanel } from './weapons-panel';
 import { UtilitiesPanel } from './utilities-panel';
@@ -62,6 +63,10 @@ export function MatchPlayers() {
             </div>
             <div className="flex flex-col gap-y-8">
               <KastPanel kast={player.kast} />
+            </div>
+            <div className="flex flex-col gap-y-8">
+              <AverageTimeToDamagePanel milliseconds={player.averageTimeToDamage} />
+              <AverageTimeToKillPanel milliseconds={player.averageTimeToKill} />
             </div>
             <div className="flex flex-col gap-y-8">
               <AverageDamagesPerRoundPanel averageDamagePerRound={player.averageDamagePerRound} />

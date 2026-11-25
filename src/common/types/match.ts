@@ -69,5 +69,7 @@ export type Match = {
   tagIds: string[];
   shareCode: string;
   hasVacLiveBan: boolean;
+  // SHA-256 of the map geometry used to compute the time to damage/kill, empty if it was not available.
+  mapGeometryChecksum: string | null;
   teamsEconomyStats: TeamEconomyStats[];
 };

@@ -42,6 +42,7 @@ export async function matchRowToMatch(
     maxRounds: row.max_rounds,
     shareCode: row.share_code ?? '',
     hasVacLiveBan: row.has_vac_live_ban,
+    mapGeometryChecksum: row.map_geometry_checksum,
     teamA,
     teamB,
     blinds: [],

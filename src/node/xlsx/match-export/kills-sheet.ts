@@ -66,6 +66,10 @@ export class KillsSheet extends SingleMatchExportSheet<Kill> {
         cellFormatter: (row) => row.distance,
       },
       {
+        name: 'time_to_kill',
+        cellFormatter: (row) => row.timeToKill ?? '',
+      },
+      {
         name: 'is_headshot',
         cellFormatter: (row) => row.isHeadshot,
       },

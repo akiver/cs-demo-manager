@@ -45,5 +45,6 @@ export function killRowToKill(row: KillRow): Kill {
     isThroughSmoke: row.is_through_smoke,
     isNoScope: row.is_no_scope,
     distance: row.distance,
+    timeToKill: row.time_to_kill >= 0 ? row.time_to_kill : null,
   };
 }

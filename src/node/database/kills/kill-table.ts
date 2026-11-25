@@ -46,6 +46,8 @@ export type KillTable = {
   is_through_smoke: boolean;
   is_no_scope: boolean;
   distance: number;
+  // Milliseconds, -1 when not available.
+  time_to_kill: number;
 };
 
 export type KillRow = Selectable<KillTable>;

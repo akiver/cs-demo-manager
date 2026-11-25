@@ -50,6 +50,8 @@ export async function fetchMatchPlayers(checksum: string): Promise<MatchPlayer[]
       'players.color',
       'players.crosshair_share_code as crosshairShareCode',
       'players.inspect_weapon_count as inspectWeaponCount',
+      sql<number | null>`NULLIF(players.average_time_to_damage, -1)`.as('averageTimeToDamage'),
+      sql<number | null>`NULLIF(players.average_time_to_kill, -1)`.as('averageTimeToKill'),
     ])
     .innerJoin('demos', 'demos.checksum', 'players.match_checksum')
     .leftJoin('steam_accounts', 'steam_accounts.steam_id', 'players.steam_id')

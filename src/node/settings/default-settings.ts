@@ -48,6 +48,7 @@ export const defaultSettings: Settings = {
   analyze: {
     maxConcurrentAnalyses: 4,
     analyzePositions: false,
+    computeTimeToDamage: true,
   },
   playback: {
     width: 1024,

@@ -5,6 +5,7 @@ import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Panel } from 'csdm/ui/components/panel';
 import { KillFeedEntry } from 'csdm/ui/components/kill-feed-entry';
 import { PlayDemoAtTickButton } from '../play-demo-at-tick-button';
+import { TimeToKill } from 'csdm/ui/components/time-to-kill';
 
 export function KillFeed() {
   const currentRound = useCurrentRound();
@@ -27,14 +28,17 @@ export function KillFeed() {
                 roundFreezetimeEndTick: currentRound.freezetimeEndTick,
               }}
               right={
-                <PlayDemoAtTickButton
-                  demoPath={match.demoFilePath}
-                  game={match.game}
-                  tick={tick - match.tickrate * 5}
-                  size={20}
-                  focusSteamId={killerSteamId === null ? undefined : killerSteamId}
-                  tooltip={<Trans context="Tooltip">Watch kill</Trans>}
-                />
+                <div className="flex items-center gap-8">
+                  <TimeToKill timeToKill={kill.timeToKill} />
+                  <PlayDemoAtTickButton
+                    demoPath={match.demoFilePath}
+                    game={match.game}
+                    tick={tick - match.tickrate * 5}
+                    size={20}
+                    focusSteamId={killerSteamId === null ? undefined : killerSteamId}
+                    tooltip={<Trans context="Tooltip">Watch kill</Trans>}
+                  />
+                </div>
               }
             />
           );

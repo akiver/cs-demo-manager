@@ -241,6 +241,8 @@ async function insertPlayers({ outputFolderPath, demoName }: InsertOptions) {
       'crosshair_share_code',
       'color',
       'inspect_weapon_count',
+      'average_time_to_damage',
+      'average_time_to_kill',
       'match_checksum',
     ],
   });
@@ -313,6 +315,7 @@ async function insertDamages({ outputFolderPath, demoName }: InsertOptions) {
       'weapon_type',
       'hitgroup',
       'weapon_unique_id',
+      'time_to_damage',
       'match_checksum',
     ],
   });
@@ -452,6 +455,7 @@ async function insertKillsFromCsv({ outputFolderPath, demoName }: InsertOptions)
       'is_through_smoke',
       'is_no_scope',
       'distance',
+      'time_to_kill',
       'match_checksum',
     ],
   });
@@ -796,6 +800,7 @@ async function insertMatchFromCsv({ outputFolderPath, demoName }: InsertOptions)
         'overtime_count',
         'max_rounds',
         'has_vac_live_ban',
+        'map_geometry_checksum',
       ],
     });
   } catch (error) {

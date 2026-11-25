@@ -58,6 +58,9 @@ export type Player = {
   economyBan: EconomyBan;
   hasPrivateProfile: boolean;
   inspectWeaponCount: number;
+  // Milliseconds, null when not available.
+  averageTimeToDamage: number | null;
+  averageTimeToKill: number | null;
   deathWhileInspectingWeaponCount: number;
   openingDuelsStats: PlayerOpeningDuelsStats;
 } & PlayerUtilityStats;

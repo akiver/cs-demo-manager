@@ -18,6 +18,7 @@ export type MatchTable = {
   overtime_count: number;
   max_rounds: number;
   has_vac_live_ban: boolean;
+  map_geometry_checksum: string | null;
 };
 
 export type MatchRow = Selectable<MatchTable>;
