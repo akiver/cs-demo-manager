@@ -63,4 +63,7 @@ export type MatchPlayerTable = {
   crosshair_share_code: string;
   color: PlayerColor;
   inspect_weapon_count: number;
+  // Milliseconds, -1 when not available.
+  average_time_to_damage: number;
+  average_time_to_kill: number;
 };

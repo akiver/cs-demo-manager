@@ -10,6 +10,7 @@ import { fetchPlayerUtilityStats } from './fetch-player-utility-stats';
 import { fetchPlayerOpeningDuelsStats } from './fetch-player-opening-duels-stats';
 import { EconomyBan } from 'csdm/node/steam-web-api/steam-constants';
 import type { Player } from 'csdm/common/types/player';
+import { fetchPlayersAverageTimesToDamage } from '../players/fetch-players-average-times-to-damage';
 
 async function fetchPlayerRow(steamId: string, filters?: MatchFilters) {
   const { count, avg, sum } = db.fn;
@@ -126,6 +127,7 @@ export async function fetchPlayer(steamId: string, filters?: MatchFilters): Prom
     collateralKillCount,
     utilitiesStats,
     openingDuelsStats,
+    averageTimesToDamage,
   ] = await Promise.all([
     fetchPlayerRow(steamId, filters),
     fetchLastPlayerData(steamId, filters),
@@ -134,6 +136,7 @@ export async function fetchPlayer(steamId: string, filters?: MatchFilters): Prom
     fetchPlayerCollateralKillCount(steamId, filters),
     fetchPlayerUtilityStats(steamId, filters),
     fetchPlayerOpeningDuelsStats(steamId, filters),
+    fetchPlayersAverageTimesToDamage({ steamIds: [steamId], filters }),
   ]);
 
   const player: Player = {
@@ -154,6 +157,8 @@ export async function fetchPlayer(steamId: string, filters?: MatchFilters): Prom
     openingDuelsStats: openingDuelsStats.all,
     inspectWeaponCount: playerRow.inspectWeaponCount ?? 0,
     deathWhileInspectingWeaponCount: playerRow.deathWhileInspectingWeaponCount ?? 0,
+    averageTimeToDamage: averageTimesToDamage.get(steamId)?.averageTimeToDamage ?? null,
+    averageTimeToKill: averageTimesToDamage.get(steamId)?.averageTimeToKill ?? null,
   };
 
   return player;

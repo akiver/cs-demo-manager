@@ -1,4 +1,5 @@
 import type { TeamNumber } from 'csdm/common/types/counter-strike';
+import { sql } from 'kysely';
 import { db } from 'csdm/node/database/database';
 
 export type KillRow = {
@@ -26,6 +27,8 @@ export type KillRow = {
   isVictimBlinded: boolean;
   isNoScope: boolean;
   distance: number;
+  // Milliseconds, null when not available.
+  timeToKill: number | null;
   penetratedObjects: number;
   killerX: number;
   killerY: number;
@@ -69,6 +72,7 @@ export async function fetchKillsRows(checksums: string[]) {
       'is_killer_blinded as isKillerBlinded',
       'is_victim_blinded as isVictimBlinded',
       'distance',
+      sql<number | null>`NULLIF(time_to_kill, -1)`.as('timeToKill'),
       'penetrated_objects as penetratedObjects',
       'killer_x as killerX',
       'killer_y as killerY',

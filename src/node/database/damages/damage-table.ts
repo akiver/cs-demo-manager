@@ -26,6 +26,8 @@ export type DamageTable = {
   weapon_name: WeaponName;
   weapon_type: WeaponType;
   weapon_unique_id: string;
+  // Milliseconds, -1 when not available.
+  time_to_damage: number;
 };
 
 export type DamageRow = Selectable<DamageTable>;

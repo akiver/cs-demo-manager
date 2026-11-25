@@ -12,10 +12,13 @@ import { useCurrentMatch } from '../../use-current-match';
 import { CounterStrikeRunningDialog } from 'csdm/ui/components/dialogs/counter-strike-running-dialog';
 import { useTranslateTeamNumber } from 'csdm/ui/hooks/use-translate-team-number';
 import { KillAttributesCell } from 'csdm/ui/components/table/cells/kill-attributes-cell';
+import { nullableNumberSortFunction } from 'csdm/ui/components/table/nullable-number-sort-function';
+import { useFormatTimeToDamage } from 'csdm/ui/hooks/use-format-time-to-damage';
 
 function useColumns() {
   const { t } = useLingui();
   const translateTeam = useTranslateTeamNumber();
+  const formatTimeToDamage = useFormatTimeToDamage({ showUnit: false });
 
   const columns: readonly Column<Kill>[] = [
     {
@@ -103,6 +106,23 @@ function useColumns() {
       }),
       width: 150,
       maxWidth: 300,
+    },
+    {
+      id: 'timeToKill',
+      accessor: 'timeToKill',
+      headerText: t({
+        context: 'Table header time to kill',
+        message: 'TTK',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message: 'Time in milliseconds between the moment the killer saw the victim and the kill',
+      }),
+      width: 80,
+      maxWidth: 120,
+      textAlign: 'right',
+      formatter: formatTimeToDamage,
+      sortFunction: nullableNumberSortFunction,
     },
     {
       id: 'attributes',

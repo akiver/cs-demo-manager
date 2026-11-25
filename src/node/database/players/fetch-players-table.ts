@@ -6,6 +6,7 @@ import { BanFilter } from 'csdm/common/types/ban-filter';
 import { fetchPlayersTags } from 'csdm/node/database/tags/fetch-players-tags';
 import type { SteamAccountTagTable } from 'csdm/node/database/tags/steam-account-tag-table';
 import { fetchLastPlayersData, type LastPlayersData } from './fetch-last-players-data';
+import { fetchPlayersAverageTimesToDamage } from './fetch-players-average-times-to-damage';
 
 type PlayersStatsResult = {
   steamId: string;
@@ -106,6 +107,7 @@ function buildPlayersTable(
   playersStats: PlayersStatsResult[],
   lastPlayersData: LastPlayersData[],
   tags: SteamAccountTagTable[],
+  averageTimesToDamage: Awaited<ReturnType<typeof fetchPlayersAverageTimesToDamage>>,
 ): PlayerTable[] {
   const players: PlayerTable[] = [];
   for (const playerStats of playersStats) {
@@ -113,8 +115,11 @@ function buildPlayersTable(
       return row.steamId === playerStats.steamId;
     });
     if (lastPlayerData) {
+      const averages = averageTimesToDamage.get(playerStats.steamId);
       players.push({
         ...playerStats,
+        averageTimeToDamage: averages?.averageTimeToDamage ?? null,
+        averageTimeToKill: averages?.averageTimeToKill ?? null,
         name: lastPlayerData.lastKnownName ?? lastPlayerData.name,
         avatar: lastPlayerData.avatar,
         rank: lastPlayerData.rank,
@@ -142,8 +147,25 @@ function buildPlayersTable(
 export async function fetchPlayersTable(filter: PlayersTableFilter): Promise<PlayerTable[]> {
   const playersStats = await fetchPlayersStats(filter);
   const steamIds = playersStats.map((player) => player.steamId);
-  const [lastPlayersData, tags] = await Promise.all([fetchLastPlayersData(steamIds), fetchPlayersTags()]);
-  const players = buildPlayersTable(playersStats, lastPlayersData, tags);
+  const [lastPlayersData, tags, averageTimesToDamage] = await Promise.all([
+    fetchLastPlayersData(steamIds),
+    fetchPlayersTags(),
+    // The players tags and bans filters are applied by fetchPlayersStats, only the dates filter the matches.
+    fetchPlayersAverageTimesToDamage({
+      steamIds,
+      filters: {
+        startDate: filter.startDate,
+        endDate: filter.endDate,
+        demoSources: [],
+        demoTypes: [],
+        games: [],
+        gameModes: [],
+        tagIds: [],
+        maxRounds: [],
+      },
+    }),
+  ]);
+  const players = buildPlayersTable(playersStats, lastPlayersData, tags, averageTimesToDamage);
 
   return players;
 }

@@ -100,6 +100,14 @@ export class GeneralSheet extends SinglePlayerExportSheet<Player> {
         cellFormatter: (row) => roundNumber(row.averageDamagePerRound, 1),
       },
       {
+        name: 'average_time_to_damage',
+        cellFormatter: (row) => (row.averageTimeToDamage === null ? '' : roundNumber(row.averageTimeToDamage)),
+      },
+      {
+        name: 'average_time_to_kill',
+        cellFormatter: (row) => (row.averageTimeToKill === null ? '' : roundNumber(row.averageTimeToKill)),
+      },
+      {
         name: 'utility_damage',
         cellFormatter: (row) => row.utilityDamage,
       },

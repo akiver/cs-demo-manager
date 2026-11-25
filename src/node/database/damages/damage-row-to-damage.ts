@@ -25,5 +25,6 @@ export function damageRowToDamage(row: DamageRow): Damage {
     weaponType: row.weapon_type,
     hitgroup: row.hitgroup,
     weaponUniqueId: row.weapon_unique_id,
+    timeToDamage: row.time_to_damage >= 0 ? row.time_to_damage : null,
   };
 }

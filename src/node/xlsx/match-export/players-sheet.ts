@@ -1,4 +1,5 @@
 import type { MatchPlayer } from 'csdm/common/types/match-player';
+import { roundNumber } from 'csdm/common/math/round-number';
 import { playerColorToString } from 'csdm/node/demo-analyzer/player-color-to-string';
 import { fetchPlayersEnemiesFlashedCount } from 'csdm/node/database/players/fetch-players-enemies-flashed-count';
 import type { Column } from '../column';
@@ -90,6 +91,14 @@ export class PlayersSheet extends SingleMatchExportSheet<PlayerRow> {
       {
         name: 'adr',
         cellFormatter: (row) => row.averageDamagePerRound,
+      },
+      {
+        name: 'average_time_to_damage',
+        cellFormatter: (row) => (row.averageTimeToDamage === null ? '' : roundNumber(row.averageTimeToDamage)),
+      },
+      {
+        name: 'average_time_to_kill',
+        cellFormatter: (row) => (row.averageTimeToKill === null ? '' : roundNumber(row.averageTimeToKill)),
       },
       {
         name: 'utility_damage',

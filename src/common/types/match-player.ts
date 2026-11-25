@@ -62,6 +62,9 @@ export type MatchPlayer = {
   lastBanDate: string | null;
   crosshairShareCode: string | null;
   inspectWeaponCount: number;
+  // Milliseconds, null when not available.
+  averageTimeToDamage: number | null;
+  averageTimeToKill: number | null;
   deathWhileInspectingWeaponCount: number;
   color: PlayerColor;
   tagIds: string[];

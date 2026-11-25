@@ -2490,6 +2490,28 @@ msgctxt "Panel label"
 msgid "T"
 msgstr "T"
 
+#: src/ui/components/panels/time-to-damage-panels.tsx
+msgid "Only available for CS2 demos analyzed with the map geometry, analyze the demos again if they were analyzed with a previous version."
+msgstr "Only available for CS2 demos analyzed with the map geometry, analyze the demos again if they were analyzed with a previous version."
+
+#: src/ui/components/panels/time-to-damage-panels.tsx
+msgctxt "Panel title"
+msgid "Avg time to damage"
+msgstr "Avg time to damage"
+
+#: src/ui/components/panels/time-to-damage-panels.tsx
+msgid "Average time between the moment the player saw an enemy and the moment they damaged them."
+msgstr "Average time between the moment the player saw an enemy and the moment they damaged them."
+
+#: src/ui/components/panels/time-to-damage-panels.tsx
+msgctxt "Panel title"
+msgid "Avg time to kill"
+msgstr "Avg time to kill"
+
+#: src/ui/components/panels/time-to-damage-panels.tsx
+msgid "Average time between the moment the player saw an enemy and the moment they killed them."
+msgstr "Average time between the moment the player saw an enemy and the moment they killed them."
+
 #: src/ui/components/panels/utilities-panel.tsx
 #: src/ui/player/overview/player-utilities-panel.tsx
 msgctxt "Panel title"
@@ -2619,6 +2641,15 @@ msgstr "Edit tags"
 #: src/ui/match/rounds/round/round-tags.tsx
 msgid "No tags"
 msgstr "No tags"
+
+#: src/ui/components/time-to-kill.tsx
+msgid "Time between the moment the killer saw the victim and the kill"
+msgstr "Time between the moment the killer saw the victim and the kill"
+
+#: src/ui/components/time-to-kill.tsx
+msgctxt "Time to kill"
+msgid "TTK {formattedTimeToKill}"
+msgstr "TTK {formattedTimeToKill}"
 
 #: src/ui/components/timeline/timestamp-item.tsx
 msgctxt "Minutes timestamp in timelines"
@@ -4034,6 +4065,16 @@ msgctxt "Table header tooltip"
 msgid "Victim's side"
 msgstr "Victim's side"
 
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header time to kill"
+msgid "TTK"
+msgstr "TTK"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header tooltip"
+msgid "Time in milliseconds between the moment the killer saw the victim and the kill"
+msgstr "Time in milliseconds between the moment the killer saw the victim and the kill"
+
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "{openDuelWonPercentage}%"
 msgstr "{openDuelWonPercentage}%"
@@ -4620,6 +4661,42 @@ msgstr "Damages"
 msgctxt "Dropdown column visibility"
 msgid "Damages"
 msgstr "Damages"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header average time to damage"
+msgid "TTD"
+msgstr "TTD"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Average time in milliseconds between the moment the player saw an enemy and the moment they damaged them"
+msgstr "Average time in milliseconds between the moment the player saw an enemy and the moment they damaged them"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Average time to damage"
+msgstr "Average time to damage"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header average time to kill"
+msgid "TTK"
+msgstr "TTK"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Average time in milliseconds between the moment the player saw an enemy and the moment they killed them"
+msgstr "Average time in milliseconds between the moment the player saw an enemy and the moment they killed them"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Average time to kill"
+msgstr "Average time to kill"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -7230,6 +7307,14 @@ msgstr "Analyze player/grenade positions during analysis. Positions are required
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions"
 msgstr "Analyze player/grenade positions"
+
+#: src/ui/settings/analyze/toggle-compute-time-to-damage.tsx
+msgid "Compute the time between the moment players see an enemy and the moment they damage or kill them (CS2 only). It requires the collision geometry of the maps, downloaded the first time a demo is analyzed on a map (up to 40 MB per map)."
+msgstr "Compute the time between the moment players see an enemy and the moment they damage or kill them (CS2 only). It requires the collision geometry of the maps, downloaded the first time a demo is analyzed on a map (up to 40 MB per map)."
+
+#: src/ui/settings/analyze/toggle-compute-time-to-damage.tsx
+msgid "Compute time to damage/kill"
+msgstr "Compute time to damage/kill"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgctxt "Dialog title"

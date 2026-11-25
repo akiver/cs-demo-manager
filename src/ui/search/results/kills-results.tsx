@@ -11,6 +11,7 @@ import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
 import { RoundCommentIcon } from 'csdm/ui/match/rounds/round/round-comment-icon';
 import { Markdown } from 'csdm/ui/components/markdown';
 import type { KillResult } from 'csdm/common/types/search/kill-result';
+import { TimeToKill } from 'csdm/ui/components/time-to-kill';
 
 type Props = {
   kills: KillResult[];
@@ -46,6 +47,12 @@ export function KillsResults({ kills }: Props) {
                   <DotSeparator />
                   <RoundNumber roundNumber={kill.roundNumber} />
                   <DotSeparator />
+                  {isSingleKill && kill.kills[0].timeToKill !== null && (
+                    <>
+                      <TimeToKill timeToKill={kill.kills[0].timeToKill} />
+                      <DotSeparator />
+                    </>
+                  )}
 
                   {kill.kills.length > 1 && (
                     <>

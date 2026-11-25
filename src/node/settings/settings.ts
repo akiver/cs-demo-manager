@@ -51,6 +51,8 @@ type UISettings = {
 type AnalyzeSettings = {
   maxConcurrentAnalyses?: number;
   analyzePositions: boolean;
+  // Download the CS2 maps collision geometry to compute the time to damage/kill.
+  computeTimeToDamage: boolean;
 };
 
 export type HlaeSettings = {

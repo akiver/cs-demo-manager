@@ -28,6 +28,9 @@ export type PlayerTable = {
   isGameBanned: boolean;
   hltvRating: number;
   hltvRating2: number;
+  // Milliseconds, null when not available.
+  averageTimeToDamage: number | null;
+  averageTimeToKill: number | null;
   comment: string;
   tagIds: string[];
 };

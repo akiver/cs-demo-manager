@@ -166,6 +166,13 @@ class AnalysesListener {
         outputFolderPath: this.getAnalysisOutputFolderPath(analysis),
         source,
         analyzePositions: analysis.analyzePositions ?? analyzePositions,
+        onMapGeometryDownload: (mapName) => {
+          analysis.output += `Downloading the map geometry of ${mapName}...\n`;
+          server.sendPushMessage({
+            name: ServerPushMessageName.AnalysisUpdated,
+            payload: analysis,
+          });
+        },
         onStdout: (data) => {
           logger.log(data);
           analysis.output += data;

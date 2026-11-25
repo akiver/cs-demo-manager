@@ -2,7 +2,7 @@ import type { MatchRow } from 'csdm/node/database/matches/match-table';
 import type { DemoRow } from '../demos/demo-table';
 
 export type MatchTableRow = DemoRow &
-  MatchRow & {
+  Omit<MatchRow, 'map_geometry_checksum'> & {
     banned_player_count: number | null;
     comment: string | null;
     teamAName: string;

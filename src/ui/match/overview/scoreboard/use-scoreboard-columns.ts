@@ -9,9 +9,12 @@ import { ScoreboardAvatarCell } from './scoreboard-avatar-cell';
 import { BansCell } from './bans-cell';
 import { killDeathDiffSortFunction } from 'csdm/ui/components/table/kill-death-diff-sort-function';
 import { TagsCell } from 'csdm/ui/components/table/cells/tags-cell';
+import { nullableNumberSortFunction } from 'csdm/ui/components/table/nullable-number-sort-function';
+import { useFormatTimeToDamage } from 'csdm/ui/hooks/use-format-time-to-damage';
 
 export function useScoreboardColumns(isDefuseMap: boolean) {
   const { t } = useLingui();
+  const formatTimeToDamage = useFormatTimeToDamage({ showUnit: false });
 
   const columns: Column<MatchPlayer>[] = [
     {
@@ -219,6 +222,50 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
       formatter: (value: number) => {
         return roundNumber(value, 1);
       },
+    },
+    {
+      id: 'average-time-to-damage',
+      accessor: 'averageTimeToDamage',
+      headerText: t({
+        context: 'Table header average time to damage',
+        message: 'TTD',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message:
+          'Average time in milliseconds between the moment the player saw an enemy and the moment they damaged them',
+      }),
+      visibilityText: t({
+        context: 'Dropdown column visibility',
+        message: 'Average time to damage',
+      }),
+      width: 50,
+      maxWidth: 100,
+      textAlign: 'right',
+      formatter: formatTimeToDamage,
+      sortFunction: nullableNumberSortFunction,
+    },
+    {
+      id: 'average-time-to-kill',
+      accessor: 'averageTimeToKill',
+      headerText: t({
+        context: 'Table header average time to kill',
+        message: 'TTK',
+      }),
+      headerTooltip: t({
+        context: 'Table header tooltip',
+        message:
+          'Average time in milliseconds between the moment the player saw an enemy and the moment they killed them',
+      }),
+      visibilityText: t({
+        context: 'Dropdown column visibility',
+        message: 'Average time to kill',
+      }),
+      width: 50,
+      maxWidth: 100,
+      textAlign: 'right',
+      formatter: formatTimeToDamage,
+      sortFunction: nullableNumberSortFunction,
     },
     {
       id: 'adr',

@@ -38,6 +38,8 @@ export type Kill = BaseEvent & {
   isThroughSmoke: boolean;
   isNoScope: boolean;
   distance: number;
+  // Milliseconds between the moment the killer saw the victim and the kill, null when not available.
+  timeToKill: number | null;
   weaponName: WeaponName;
   weaponType: WeaponType;
 };

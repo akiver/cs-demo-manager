@@ -20,4 +20,7 @@ export type Damage = BaseEvent & {
   victimSide: TeamNumber;
   victimTeamName: string;
   weaponUniqueId: string;
+  // Milliseconds between the moment the attacker saw the victim and this damage, set only on the first damage of an
+  // engagement, null otherwise or when not available.
+  timeToDamage: number | null;
 };

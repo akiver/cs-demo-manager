@@ -9,6 +9,7 @@ type Options = {
   analyzePositions: boolean;
   onStdout?: (data: string) => void;
   onStderr?: (data: string) => void;
+  onMapGeometryDownload?: (mapName: string) => void;
 };
 
 export async function analyzeDemo({
@@ -18,6 +19,7 @@ export async function analyzeDemo({
   analyzePositions,
   onStdout,
   onStderr,
+  onMapGeometryDownload,
 }: Options) {
   await assertDemoExists(demoPath);
 
@@ -26,6 +28,7 @@ export async function analyzeDemo({
     demoPath,
     source,
     analyzePositions,
+    onMapGeometryDownload,
     onStart: (command) => {
       logger.log('starting demo analyzer with command', command);
     },
