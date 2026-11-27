@@ -69,7 +69,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7.0.1
 
-      - uses: voidzero-dev/setup-vp@v1.20.0
+      - uses: voidzero-dev/setup-vp@v1.22.0
         with:
           version-file: package.json
 
@@ -101,7 +101,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7.0.1
 
-      - uses: voidzero-dev/setup-vp@v1.20.0
+      - uses: voidzero-dev/setup-vp@v1.22.0
         with:
           version-file: package.json
 
@@ -130,7 +130,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7.0.1
 
-      - uses: voidzero-dev/setup-vp@v1.20.0
+      - uses: voidzero-dev/setup-vp@v1.22.0
         with:
           node-version-file: package.json
 
@@ -162,7 +162,7 @@ jobs:
           ssh-key: ${{ secrets.SSH_DEPLOYMENT_PRIVATE_KEY }}
           persist-credentials: true
 
-      - uses: voidzero-dev/setup-vp@v1.20.0
+      - uses: voidzero-dev/setup-vp@v1.22.0
         with:
           version-file: package.json
 
