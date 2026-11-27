@@ -292,6 +292,7 @@ del *.pdb</Command>
     <ClCompile Include="commands\csdm_info.cpp" />
     <ClCompile Include="commands\csdm_dump_net_messages.cpp" />
     <ClCompile Include="commands\csdm_dump_demoplayer_vtable.cpp" />
+    <ClCompile Include="commands\csdm_dump_models.cpp" />
     <ClCompile Include="commands\csdm_ui.cpp" />
     <ClCompile Include="commands\csdm_demo_goto.cpp" />
     <ClCompile Include="commands\csdm_demo_loop.cpp" />

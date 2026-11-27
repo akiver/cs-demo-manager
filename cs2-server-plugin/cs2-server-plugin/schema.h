@@ -1,5 +1,9 @@
 #pragma once
 
+class CSchemaClassInfo;
+class CSchemaSystemTypeScope;
+class ISchemaSystem;
+
 // Fields of the game's classes, looked up by name in the client schema so the offsets follow game updates. The enum of
 // ids and the lookup table are both generated from this list so they can't get out of order.
 #define SCHEMA_FIELDS(X)                                                                        \
@@ -44,3 +48,12 @@ const char* GetSchemaClassName(SchemaFieldId field);
 const char* GetSchemaFieldName(SchemaFieldId field);
 
 void LogSchemaFields();
+
+// The schema system of the game, NULL when it can't be found.
+ISchemaSystem* FindSchemaSystem();
+
+// True when the pointer looks like a class info whose fields can be read.
+bool IsSchemaClassInfo(const CSchemaClassInfo* classInfo);
+
+// The class declared in the scope, also tried with the C_ prefix of the client classes. NULL when not found.
+CSchemaClassInfo* FindSchemaClass(CSchemaSystemTypeScope* scope, const char* className);

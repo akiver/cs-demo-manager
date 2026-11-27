@@ -75,6 +75,7 @@ SRC_FILES = main.cpp \
 			./commands/csdm_info.cpp \
 			./commands/csdm_dump_net_messages.cpp \
 			./commands/csdm_dump_demoplayer_vtable.cpp \
+			./commands/csdm_dump_models.cpp \
 			./commands/csdm_ui.cpp \
 			./commands/csdm_demo_goto.cpp \
 			./commands/csdm_demo_loop.cpp \

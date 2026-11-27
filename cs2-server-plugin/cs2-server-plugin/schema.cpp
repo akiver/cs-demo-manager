@@ -73,29 +73,49 @@ static const char* GetFieldTypeName(const SchemaClassFieldData_t& field) {
     return IsReadableMemory(typeName, 1) ? typeName : NULL;
 }
 
-static bool IsSchemaClassInfo(const CSchemaClassInfo* classInfo) {
-    return IsReadableMemory(classInfo, sizeof(SchemaClassInfoData_t)) &&
-           classInfo->m_nNumFields <= MAX_SCHEMA_FIELD_COUNT &&
+ISchemaSystem* FindSchemaSystem() {
+    ISchemaSystem* schemaSystem =
+        (ISchemaSystem*)FindInterface(SCHEMA_SYSTEM_LIB_NAME, SCHEMASYSTEM_INTERFACE_VERSION, factory);
+
+    return IsObject(schemaSystem) ? schemaSystem : NULL;
+}
+
+bool IsSchemaClassInfo(const CSchemaClassInfo* classInfo) {
+    if (!IsReadableMemory(classInfo, sizeof(SchemaClassInfoData_t)) ||
+        classInfo->m_nNumFields > MAX_SCHEMA_FIELD_COUNT) {
+        return false;
+    }
+
+    // A class that only inherits its fields declares none and has no field array to read.
+    return classInfo->m_nNumFields == 0 ||
            IsReadableMemory(classInfo->m_pFields, classInfo->m_nNumFields * sizeof(SchemaClassFieldData_t));
 }
 
 // The client prefixes most classes it mirrors from the server with C_ (C_BasePlayerPawn for CBasePlayerPawn), but
-// player controllers and pawn components keep the server name, so both spellings are tried.
-static CSchemaClassInfo* FindSchemaClass(CSchemaSystemTypeScope* scope, const char* className) {
-    CSchemaClassInfo* classInfo = scope->FindDeclaredClass(className).Get();
-    if (IsSchemaClassInfo(classInfo)) {
-        return classInfo;
+// player controllers and pawn components keep the server name, so both spellings are tried. A server name class that
+// declares no fields doesn't stop the search: the C_ class may be the one that declares them.
+CSchemaClassInfo* FindSchemaClass(CSchemaSystemTypeScope* scope, const char* className) {
+    if (!IsObject(scope)) {
+        return NULL;
     }
 
-    if (className[0] != 'C' || className[1] == '_') {
-        return NULL;
+    CSchemaClassInfo* classInfo = scope->FindDeclaredClass(className).Get();
+    if (!IsSchemaClassInfo(classInfo)) {
+        classInfo = NULL;
+    }
+
+    if ((classInfo != NULL && classInfo->m_nNumFields > 0) || className[0] != 'C' || className[1] == '_') {
+        return classInfo;
     }
 
     char clientClassName[128];
     snprintf(clientClassName, sizeof(clientClassName), "C_%s", className + 1);
-    classInfo = scope->FindDeclaredClass(clientClassName).Get();
+    CSchemaClassInfo* clientClassInfo = scope->FindDeclaredClass(clientClassName).Get();
+    if (IsSchemaClassInfo(clientClassInfo) && (classInfo == NULL || clientClassInfo->m_nNumFields > 0)) {
+        return clientClassInfo;
+    }
 
-    return IsSchemaClassInfo(classInfo) ? classInfo : NULL;
+    return classInfo;
 }
 
 bool ResolveSchemaFields() {
@@ -103,9 +123,8 @@ bool ResolveSchemaFields() {
         return true;
     }
 
-    ISchemaSystem* schemaSystem =
-        (ISchemaSystem*)FindInterface(SCHEMA_SYSTEM_LIB_NAME, SCHEMASYSTEM_INTERFACE_VERSION, factory);
-    if (!IsObject(schemaSystem)) {
+    ISchemaSystem* schemaSystem = FindSchemaSystem();
+    if (schemaSystem == NULL) {
         if (!hasLoggedSchemaFailure) {
             hasLoggedSchemaFailure = true;
             Log("Schema: %s not found", SCHEMASYSTEM_INTERFACE_VERSION);
