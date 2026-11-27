@@ -2,7 +2,6 @@
 
 // Dev commands to explore how the models of the players and their hitboxes are laid out in memory.
 
-#include <cctype>
 #include <cmath>
 #include <cstdint>
 #include <cstdio>
@@ -23,86 +22,10 @@
 
 #ifdef _WIN32
 #define CompareIgnoringCase _stricmp
-static const char* schemaModules[] = {"client.dll",         "animationsystem.dll", "meshsystem.dll",   "modellib.dll",
-                                      "resourcesystem.dll", "scenesystem.dll",     "worldrenderer.dll"};
 #else
 #include <strings.h>
 #define CompareIgnoringCase strcasecmp
-static const char* schemaModules[] = {"libclient.so",       "libanimationsystem.so", "libmeshsystem.so",
-                                      "libmodellib.so",     "libresourcesystem.so",  "libscenesystem.so",
-                                      "libworldrenderer.so"};
 #endif
-
-// Finds the class in the given module, or in the first module that declares it.
-static CSchemaClassInfo* FindClass(const char* className, const char* moduleName, const char** foundModuleName) {
-    ISchemaSystem* schemaSystem = FindSchemaSystem();
-    if (schemaSystem == NULL) {
-        Log("Schema system not found");
-        return NULL;
-    }
-
-    if (moduleName != NULL) {
-        CSchemaSystemTypeScope* scope = schemaSystem->FindTypeScopeForModule(moduleName);
-        if (!IsObject(scope)) {
-            Log("No schema scope for module %s", moduleName);
-            return NULL;
-        }
-
-        *foundModuleName = moduleName;
-        return FindSchemaClass(scope, className);
-    }
-
-    for (const char* module : schemaModules) {
-        CSchemaClassInfo* classInfo = FindSchemaClass(schemaSystem->FindTypeScopeForModule(module), className);
-        if (classInfo != NULL) {
-            *foundModuleName = module;
-            return classInfo;
-        }
-    }
-
-    CSchemaClassInfo* classInfo = FindSchemaClass(schemaSystem->GlobalTypeScope(), className);
-    if (classInfo != NULL) {
-        *foundModuleName = "global";
-    }
-
-    return classInfo;
-}
-
-static const char* GetTypeName(const SchemaClassFieldData_t& field) {
-    const CSchemaType* type = field.m_pType;
-    if (!IsObject(type) || !IsReadableMemory(type, sizeof(CSchemaType))) {
-        return "?";
-    }
-
-    const char* typeName = type->m_sTypeName.Get();
-
-    return IsReadableMemory(typeName, 1) ? typeName : "?";
-}
-
-static void DumpClass(const CSchemaClassInfo* classInfo, int baseOffset, int depth) {
-    if (depth > 16 || !IsSchemaClassInfo(classInfo)) {
-        return;
-    }
-
-    const char* name = IsReadableMemory(classInfo->m_pName, 1) ? classInfo->m_pName : "?";
-    Log("%*sclass %s at %#x, size %#x, %d fields, %d bases", depth * 2, "", name, baseOffset, classInfo->m_nSizeOf,
-        classInfo->m_nNumFields, classInfo->m_nNumBaseClasses);
-
-    if (classInfo->m_nNumBaseClasses > 0 &&
-        IsReadableMemory(classInfo->m_pBaseClasses, classInfo->m_nNumBaseClasses * sizeof(SchemaBaseClassInfoData_t))) {
-        for (int i = 0; i < classInfo->m_nNumBaseClasses; i++) {
-            const SchemaBaseClassInfoData_t& base = classInfo->m_pBaseClasses[i];
-            DumpClass(base.m_pClass, baseOffset + (int)base.m_nOffset, depth + 1);
-        }
-    }
-
-    for (int i = 0; i < classInfo->m_nNumFields; i++) {
-        const SchemaClassFieldData_t& field = classInfo->m_pFields[i];
-        const char* fieldName = IsReadableMemory(field.m_pName, 1) ? field.m_pName : "?";
-        Log("%*s%#06x %s %s", depth * 2 + 2, "", baseOffset + field.m_nSingleInheritanceOffset, GetTypeName(field),
-            fieldName);
-    }
-}
 
 // Offset of the field in the class or one of its bases, -1 when not found.
 static int FindFieldOffset(const CSchemaClassInfo* classInfo, const char* fieldName, int depth = 0) {
@@ -133,7 +56,7 @@ static int FindFieldOffset(const CSchemaClassInfo* classInfo, const char* fieldN
 
 static int FindFieldOffset(const char* className, const char* fieldName) {
     const char* moduleName = NULL;
-    int offset = FindFieldOffset(FindClass(className, NULL, &moduleName), fieldName);
+    int offset = FindFieldOffset(FindSchemaClassInModules(className, NULL, &moduleName), fieldName);
     if (offset == -1) {
         Log("%s::%s not found", className, fieldName);
     }
@@ -180,25 +103,6 @@ static const uint8_t* ReadStringPointer(const void* address) {
     }
 
     return *(const uint8_t* const*)address;
-}
-
-// The string at the address when it looks like a printable C string of at least 3 characters.
-static bool ReadString(const uint8_t* address, char* string, size_t size) {
-    if (address == NULL || !IsReadableMemory(address, 4)) {
-        return false;
-    }
-
-    size_t length = 0;
-    while (length < size - 1 && IsReadableMemory(address + length, 1) && address[length] != 0) {
-        if (!isprint(address[length])) {
-            return false;
-        }
-        string[length] = (char)address[length];
-        length++;
-    }
-    string[length] = 0;
-
-    return length >= 3;
 }
 
 // Logs each 8-byte slot of the memory with what it looks like: a pointer to a string, a pointer, or 2 floats/ints.
@@ -286,7 +190,7 @@ static bool areHitBoxLayoutsResolved = false;
 
 // The class when its size is plausible, NULL otherwise.
 static const CSchemaClassInfo* FindLayoutClass(const char* className, const char** moduleName) {
-    const CSchemaClassInfo* classInfo = FindClass(className, NULL, moduleName);
+    const CSchemaClassInfo* classInfo = FindSchemaClassInModules(className, NULL, moduleName);
     if (classInfo == NULL) {
         Log("Schema class %s not found", className);
         return NULL;
@@ -462,23 +366,6 @@ static void SearchHitBoxes(const uint8_t* node, int depth, char* path, size_t pa
             path[length] = 0;
         }
     }
-}
-
-CON_COMMAND(csdm_dump_schema, "Prints the fields of a schema class, usage: csdm_dump_schema <class> [module]") {
-    if (args.ArgC() < 2) {
-        Log("Usage: csdm_dump_schema <class> [module]");
-        return;
-    }
-
-    const char* moduleName = NULL;
-    CSchemaClassInfo* classInfo = FindClass(args.Arg(1), args.ArgC() > 2 ? args.Arg(2) : NULL, &moduleName);
-    if (classInfo == NULL) {
-        Log("Schema class %s not found", args.Arg(1));
-        return;
-    }
-
-    Log("Schema class %s found in %s", args.Arg(1), moduleName);
-    DumpClass(classInfo, 0, 0);
 }
 
 static CEntityIdentity* FindPawn(int slot) {

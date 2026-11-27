@@ -1,5 +1,6 @@
 #include "schema.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <cstring>
 
@@ -13,9 +14,11 @@
 #ifdef _WIN32
 #define SCHEMA_SYSTEM_LIB_NAME "schemasystem.dll"
 #define CLIENT_SCHEMA_SCOPE_NAME "client.dll"
+#define SERVER_SCHEMA_SCOPE_NAME "server.dll"
 #else
 #define SCHEMA_SYSTEM_LIB_NAME "libschemasystem.so"
 #define CLIENT_SCHEMA_SCOPE_NAME "libclient.so"
+#define SERVER_SCHEMA_SCOPE_NAME "libserver.so"
 #endif
 
 // No schema class of the game comes near that many fields, a larger count means the pointer isn't a class info.
@@ -212,3 +215,115 @@ void LogSchemaFields() {
             lookup.typeName != NULL ? lookup.typeName : "unknown");
     }
 }
+
+#ifdef CSDM_DEV_COMMANDS
+// A scope whose name can't be read or doesn't lead back to it, which is what an SDK layout of CSchemaSystem or of the
+// scope that no longer matches the game gives.
+static bool IsListedScope(ISchemaSystem* schemaSystem, CSchemaSystemTypeScope* scope) {
+    if (!IsObject(scope) || !IsReadableMemory(scope->m_szScopeName, sizeof(scope->m_szScopeName))) {
+        return false;
+    }
+
+    size_t length = strnlen(scope->m_szScopeName, sizeof(scope->m_szScopeName));
+
+    return length > 0 && length < sizeof(scope->m_szScopeName) &&
+           schemaSystem->FindTypeScopeForModule(scope->m_szScopeName) == scope;
+}
+
+int ListSchemaScopes(CSchemaSystemTypeScope** scopes, int maxCount, int* skippedCount) {
+    *skippedCount = 0;
+    ISchemaSystem* schemaSystem = FindSchemaSystem();
+    if (schemaSystem == NULL || maxCount <= 0) {
+        return 0;
+    }
+
+    // Found by name, through the game, so it's there even when the scope table can't be walked.
+    int count = 0;
+    CSchemaSystemTypeScope* clientScope = schemaSystem->FindTypeScopeForModule(CLIENT_SCHEMA_SCOPE_NAME);
+    if (IsObject(clientScope)) {
+        scopes[count++] = clientScope;
+    }
+
+    // m_TypeScopes is a CUtlStringMap, whose first member is the vector of its values.
+    CSchemaSystemTypeScope* globalScope = schemaSystem->GlobalTypeScope();
+    const CUtlVector<CSchemaSystemTypeScope*>* table =
+        (const CUtlVector<CSchemaSystemTypeScope*>*)&static_cast<CSchemaSystem*>(schemaSystem)->m_TypeScopes;
+    if (!IsReadableMemory(table, sizeof(*table))) {
+        *skippedCount = 1;
+        return count;
+    }
+
+    int tableCount = table->Count();
+    CSchemaSystemTypeScope* const* entries = table->Base();
+    if (tableCount < 0 || tableCount > MAX_SCHEMA_SCOPES ||
+        (tableCount > 0 && !IsReadableMemory(entries, tableCount * sizeof(CSchemaSystemTypeScope*)))) {
+        *skippedCount = 1;
+        return count;
+    }
+
+    int firstSortedIndex = count;
+    for (int i = 0; i < tableCount && count < maxCount; i++) {
+        CSchemaSystemTypeScope* scope = entries[i];
+        if (scope == clientScope || scope == globalScope) {
+            continue;
+        }
+        if (!IsListedScope(schemaSystem, scope)) {
+            (*skippedCount)++;
+            continue;
+        }
+
+        scopes[count++] = scope;
+    }
+
+    std::sort(scopes + firstSortedIndex, scopes + count,
+              [](const CSchemaSystemTypeScope* left, const CSchemaSystemTypeScope* right) {
+                  return strcmp(left->m_szScopeName, right->m_szScopeName) < 0;
+              });
+
+    return count;
+}
+
+CSchemaClassInfo* FindSchemaClassInModules(const char* className, const char* moduleName,
+                                           const char** foundModuleName) {
+    ISchemaSystem* schemaSystem = FindSchemaSystem();
+    if (schemaSystem == NULL) {
+        Log("Schema system not found");
+        return NULL;
+    }
+
+    if (moduleName != NULL) {
+        CSchemaSystemTypeScope* scope = schemaSystem->FindTypeScopeForModule(moduleName);
+        if (!IsObject(scope)) {
+            Log("No schema scope for module %s", moduleName);
+            return NULL;
+        }
+
+        *foundModuleName = moduleName;
+        return FindSchemaClass(scope, className);
+    }
+
+    CSchemaSystemTypeScope* scopes[MAX_SCHEMA_SCOPES];
+    int skippedCount = 0;
+    int scopeCount = ListSchemaScopes(scopes, MAX_SCHEMA_SCOPES, &skippedCount);
+    for (int i = 0; i < scopeCount; i++) {
+        // The server declares many classes of the client under the same name, with the layout of its own entities,
+        // which the client's memory doesn't follow (CModelState is 0x290 bytes there, 0x2b0 in the client).
+        if (strcmp(scopes[i]->m_szScopeName, SERVER_SCHEMA_SCOPE_NAME) == 0) {
+            continue;
+        }
+
+        CSchemaClassInfo* classInfo = FindSchemaClass(scopes[i], className);
+        if (classInfo != NULL) {
+            *foundModuleName = scopes[i]->m_szScopeName;
+            return classInfo;
+        }
+    }
+
+    CSchemaClassInfo* classInfo = FindSchemaClass(schemaSystem->GlobalTypeScope(), className);
+    if (classInfo != NULL) {
+        *foundModuleName = "global";
+    }
+
+    return classInfo;
+}
+#endif

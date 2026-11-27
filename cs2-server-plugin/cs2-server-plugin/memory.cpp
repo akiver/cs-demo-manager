@@ -1,5 +1,6 @@
 #include "memory.h"
 
+#include <cctype>
 #include <cstdint>
 
 #ifdef _WIN32
@@ -72,3 +73,23 @@ bool IsReadableMemory(const void* address, size_t size) {
 bool IsObject(const void* object) {
     return IsReadableMemory(object, sizeof(void*)) && IsPlausiblePointer(*(void* const*)object);
 }
+
+#ifdef CSDM_DEV_COMMANDS
+bool ReadString(const uint8_t* address, char* string, size_t size) {
+    if (address == NULL || !IsReadableMemory(address, 4)) {
+        return false;
+    }
+
+    size_t length = 0;
+    while (length < size - 1 && IsReadableMemory(address + length, 1) && address[length] != 0) {
+        if (!isprint(address[length])) {
+            return false;
+        }
+        string[length] = (char)address[length];
+        length++;
+    }
+    string[length] = 0;
+
+    return length >= 3;
+}
+#endif

@@ -57,3 +57,18 @@ bool IsSchemaClassInfo(const CSchemaClassInfo* classInfo);
 
 // The class declared in the scope, also tried with the C_ prefix of the client classes. NULL when not found.
 CSchemaClassInfo* FindSchemaClass(CSchemaSystemTypeScope* scope, const char* className);
+
+#ifdef CSDM_DEV_COMMANDS
+constexpr int MAX_SCHEMA_SCOPES = 256;
+
+// The schema scopes of the modules, read from the scope table of the schema system: the client scope first, then the
+// others by name, without the global scope. skippedCount gets the entries that don't look like scopes, a sign that the
+// SDK layout of the table no longer matches the game, in which case only the client scope may be listed.
+int ListSchemaScopes(CSchemaSystemTypeScope** scopes, int maxCount, int* skippedCount);
+
+// Finds the class in the given module, or in the first scope of ListSchemaScopes that declares it, then in the global
+// scope. The server scope is only searched when given as the module: its classes have the layout of the server's
+// entities, not of the client's. The module it was found in ("global" for the global scope) is written to
+// foundModuleName.
+CSchemaClassInfo* FindSchemaClassInModules(const char* className, const char* moduleName, const char** foundModuleName);
+#endif
