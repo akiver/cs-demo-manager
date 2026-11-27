@@ -6,6 +6,7 @@ import { server } from 'csdm/server/server';
 import { writeDaemonInfoFile } from 'csdm/node/daemon/daemon-info-file';
 import { exitDaemon, isDaemonExiting } from 'csdm/server/exit-daemon';
 import { startIdleMonitor } from 'csdm/server/idle-monitor/idle-monitor';
+import { krispShotWorker } from 'csdm/server/krispshot/krispshot-worker';
 import pkg from '../../package.json' with { type: 'json' };
 
 process.on('uncaughtException', logger.error);
@@ -21,6 +22,8 @@ async function startServer() {
     });
 
     startIdleMonitor();
+    // KrispShot clip worker: waits for clip jobs from krispshot.in when enabled in Settings → KrispShot.
+    void krispShotWorker.start();
   } catch (error) {
     // Without the discovery file the daemon is unreachable but still holds the port, and the idle monitor may not be
     // running yet: exit instead of lingering as a zombie that would block every future daemon startup.

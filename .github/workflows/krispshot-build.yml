@@ -1,0 +1,38 @@
+# KrispShot build: builds the Windows installer of KrispShot Demo Manager (CS Demo Manager + the KrispShot clip worker).
+# GitHub → Actions → "Build KrispShot Demo Manager" → Run workflow. The installer is attached to the run as
+# "KrispShot-Demo-Manager-windows" (Artifacts at the bottom of the run page).
+name: Build KrispShot Demo Manager
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    name: Build Windows installer
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+
+      - uses: voidzero-dev/setup-vp@v1.22.0
+        with:
+          node-version-file: package.json
+
+      - name: Build and package
+        run: |
+          vp run build
+          vp run package --win --publish=never
+        env:
+          # Optional repository secrets. Without them the app works, players set their own keys in Settings.
+          STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
+          FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Upload the installer
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: KrispShot-Demo-Manager-windows
+          path: |
+            dist/*.exe
+          if-no-files-found: error

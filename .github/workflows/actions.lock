@@ -15,6 +15,10 @@ workflows:
     '.github/workflows/claude.yml':
         - 'actions/checkout@v7.0.1'
         - 'anthropics/claude-code-action@v1.0.290'
+    '.github/workflows/krispshot-build.yml':
+        - 'actions/checkout@v7.0.1'
+        - 'actions/upload-artifact@v7.0.2'
+        - 'voidzero-dev/setup-vp@v1.22.0'
     '.github/workflows/publish.yml':
         - 'actions/checkout@v7.0.1'
         - 'voidzero-dev/setup-vp@v1.22.0'

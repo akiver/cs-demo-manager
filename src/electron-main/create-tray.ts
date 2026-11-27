@@ -19,7 +19,7 @@ export function createTray() {
 
   const contextMenu = createTrayMenu();
   tray.setContextMenu(contextMenu);
-  tray.setToolTip('CS Demo Manager');
+  tray.setToolTip('KrispShot Demo Manager');
 
   return tray;
 }

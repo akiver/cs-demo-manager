@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KrispShot HUD renderer</title>
+<!--
+  The "HUD" lower third from Clutch Title Studio (Gold & Black), cut down to what the clip recorder needs.
+  Same drawing code and the same headless hook (window.__studio) as the Studio page:
+    __studio.set({ global: { color, size, hold, shake, glow }, per: { name, team, badge, badgeSub, kills, info, pos } })
+    __studio.total()                     -> seconds the card is on screen (6 + hold)
+    __studio.layerFrame(t)               -> PNG data URL of the transparent 1920x1080 frame at time t
+    __studio.cropFrame(t, y, h)          -> PNG data URL of rows y..y+h of that frame (what the recorder uses)
+  Fonts: drop the Studio's CTD fonts in hud/fonts/ (ctd-900.woff, ctd-700.woff, ctd-600.woff) for the exact look;
+  without them the card uses Windows' Bahnschrift.
+-->
+<style>
+@font-face{font-family:CTD;font-weight:900;src:url(fonts/ctd-900.woff) format('woff')}
+@font-face{font-family:CTD;font-weight:700;src:url(fonts/ctd-700.woff) format('woff')}
+@font-face{font-family:CTD;font-weight:600;src:url(fonts/ctd-600.woff) format('woff')}
+html,body{margin:0;background:transparent}
+canvas{display:block}
+</style>
+</head>
+<body>
+<canvas id="cv" width="1920" height="1080"></canvas>
+<script>
+const W = 1920, H = 1080, TAU = Math.PI * 2;
+const FONT_STACK = 'CTD, Bahnschrift, "Inter Display", Inter, "Segoe UI", Arial, sans-serif';
+const layer = document.getElementById('cv'); const lctx = layer.getContext('2d');
+const crop = document.createElement('canvas'), cctx = crop.getContext('2d');
+
+/* ---------- math ---------- */
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const lerp = (a, b, t) => a + (b - a) * t;
+const hash = x => { const s = Math.sin(x * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const E = {
+  outExpo: x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x),
+  inExpo: x => x <= 0 ? 0 : Math.pow(2, 10 * x - 10),
+  outCubic: x => 1 - Math.pow(1 - x, 3), inCubic: x => x * x * x,
+  outQuint: x => 1 - Math.pow(1 - x, 5),
+  outBack: x => { const c1 = 1.6, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); },
+};
+const pulse = (t, t0, d) => t >= t0 ? Math.exp(-(t - t0) / d) : 0;
+
+/* ---------- palette ---------- */
+let P = {};
+const hexRgb = h => { h = h.replace('#', ''); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+const mix = (a, b, f) => a.map((v, i) => Math.round(v + (b[i] - v) * f));
+const rgba = (c, a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+const hexOf = c => '#' + c.map(v => v.toString(16).padStart(2, '0')).join('');
+const cache = new Map();
+function setPalette(hex) {
+  const c = hexRgb(hex);
+  P = { key: hex, main: c, hl: mix(c, [255, 255, 255], .55), top: mix(c, [255, 255, 255], .16), deep: mix(c, [150, 62, 0], .5), dim: mix(c, [0, 0, 0], .55) };
+  cache.clear();
+}
+function cacheGet(k, make) { if (cache.has(k)) return cache.get(k); if (cache.size > 500) cache.clear(); const v = make(); cache.set(k, v); return v; }
+
+/* ---------- text sprites ---------- */
+function txt(o) {
+  if (!o || !o.t) return null;
+  const key = 'X' + JSON.stringify(o) + P.key;
+  return cacheGet(key, () => {
+    const c = document.createElement('canvas'), x = c.getContext('2d');
+    const font = `${o.w || 900} ${o.s}px ${FONT_STACK}`;
+    x.font = font;
+    const chars = [...o.t], sp = (o.tr || 0) * o.s, xs = [], cw = [];
+    let w = 0;
+    for (const ch of chars) { xs.push(w); const m = x.measureText(ch).width; cw.push(m); w += m + sp; }
+    w = Math.max(1, w - sp);
+    const capA = Math.ceil(x.measureText('H').actualBoundingBoxAscent || o.s * .73);
+    const mm = x.measureText(o.t);
+    const asc = Math.max(capA, Math.ceil(mm.actualBoundingBoxAscent || 0));
+    const desc = Math.max(0, Math.ceil(mm.actualBoundingBoxDescent || 0));
+    const k = Math.tan((o.sk || 0) * Math.PI / 180);
+    const pad = Math.ceil(o.s * .05) + 3, padX = pad + Math.ceil(k * (asc / 2 + desc + 2));
+    c.width = Math.ceil(w + padX * 2); c.height = Math.ceil(asc + desc + pad * 2);
+    const by = pad + asc;
+    x.font = font; x.textBaseline = 'alphabetic';
+    x.setTransform(1, 0, -k, 1, k * (by - asc / 2), 0);
+    if (o.fill === 'gold') {
+      const g = x.createLinearGradient(0, by - asc, 0, by + desc);
+      g.addColorStop(0, rgba(P.top)); g.addColorStop(.5, rgba(P.main)); g.addColorStop(1, rgba(P.deep));
+      x.fillStyle = g;
+    } else x.fillStyle = o.fill || '#fff';
+    chars.forEach((ch, i) => x.fillText(ch, padX + xs[i], by));
+    return { key, c, w: c.width, h: c.height, pad, padX, asc, desc, textW: w, xs, cw };
+  });
+}
+function glowSpr(s, blur, col) {
+  return cacheGet('G' + s.key + blur + col, () => {
+    const m = Math.ceil(blur * 1.7), c = document.createElement('canvas'), x = c.getContext('2d');
+    c.width = s.w + m * 2; c.height = s.h + m * 2;
+    x.shadowColor = col; x.shadowBlur = blur; x.shadowOffsetX = 30000; x.drawImage(s.c, m - 30000, m);
+    return { c, w: c.width, h: c.height };
+  });
+}
+function drawC(g, c, cx, cy, sc = 1, a = 1) { if (!c || a <= 0) return; g.globalAlpha = Math.min(1, a); g.drawImage(c.c, cx - c.w * sc / 2, cy - c.h * sc / 2, c.w * sc, c.h * sc); g.globalAlpha = 1; }
+const cxOfLeft = (s, x, sc = 1) => x - s.padX * sc + s.w * sc / 2;
+function bloomWide(g, s, cx, cy, sc, I) {
+  if (!s || I <= 0) return; g.save(); g.globalCompositeOperation = 'lighter';
+  drawC(g, glowSpr(s, Math.round(Math.max(12, s.h * .32)), rgba(P.main)), cx, cy, sc, I * .7);
+  if (I > 1) drawC(g, glowSpr(s, Math.round(Math.max(20, s.h * .7)), rgba(P.main)), cx, cy, sc, (I - 1) * .55);
+  g.restore();
+}
+function bloomTight(g, s, cx, cy, sc, I) {
+  if (!s || I <= 0) return; g.save(); g.globalCompositeOperation = 'lighter';
+  drawC(g, glowSpr(s, Math.round(Math.max(4, s.h * .06)), rgba(P.main)), cx, cy, sc, I * .5); g.restore();
+}
+const scratch = document.createElement('canvas'), sxx = scratch.getContext('2d');
+function drawGlint(g, s, cx, cy, sc, a, p) {
+  if (!s || a <= 0) return;
+  if (!(p > 0 && p < 1)) return drawC(g, s, cx, cy, sc, a);
+  if (scratch.width !== s.w || scratch.height !== s.h) { scratch.width = s.w; scratch.height = s.h; } else sxx.clearRect(0, 0, s.w, s.h);
+  sxx.globalCompositeOperation = 'source-over'; sxx.drawImage(s.c, 0, 0); sxx.globalCompositeOperation = 'source-atop';
+  const bx = lerp(-.2, 1.2, p) * s.w, bw = Math.max(30, s.h * .35);
+  const gr = sxx.createLinearGradient(bx - bw, 0, bx + bw * .4, s.h);
+  gr.addColorStop(0, 'rgba(255,255,255,0)'); gr.addColorStop(.5, 'rgba(255,252,240,.9)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  sxx.fillStyle = gr; sxx.fillRect(0, 0, s.w, s.h); sxx.globalCompositeOperation = 'source-over';
+  g.globalAlpha = a; g.drawImage(scratch, cx - s.w * sc / 2, cy - s.h * sc / 2, s.w * sc, s.h * sc); g.globalAlpha = 1;
+}
+
+/* ---------- fx ---------- */
+function rgbSplit(g, o, cx, cy, sc, amt, a = 1) {
+  if (amt < .5 || !o.t) return;
+  g.save(); g.globalCompositeOperation = 'lighter';
+  drawC(g, txt({ ...o, fill: '#ff2a1a' }), cx - amt, cy, sc, .55 * a);
+  drawC(g, txt({ ...o, fill: '#1ab8ff' }), cx + amt, cy, sc, .45 * a);
+  g.restore();
+}
+function glowDot(g, x, y, R, c, a) {
+  if (a <= 0) return; g.save(); g.globalCompositeOperation = 'lighter';
+  const gr = g.createRadialGradient(x, y, 0, x, y, R); gr.addColorStop(0, rgba(c, Math.min(1, a))); gr.addColorStop(.35, rgba(c, Math.min(1, a) * .3)); gr.addColorStop(1, rgba(c, 0));
+  g.fillStyle = gr; g.fillRect(x - R, y - R, R * 2, R * 2); g.restore();
+}
+function para(g, x, y, w, h, sk) { g.beginPath(); g.moveTo(x + sk, y); g.lineTo(x + w + sk, y); g.lineTo(x + w, y + h); g.lineTo(x, y + h); g.closePath(); }
+function glintP(ta, start, period, len) { const x = ta - start; if (x < 0) return -1; const m = x % period; return m < len ? m / len : -1; }
+
+const PIP = { w: 54, h: 12, gap: 10 };
+function drawPips(g, n, x0, y, tm, appear, fillT, out, gl, opt = {}) {
+  const w = opt.w || PIP.w, h = opt.h || PIP.h, gap = opt.gap || PIP.gap, sk = h * .5;
+  for (let i = 0; i < n; i++) {
+    const ap = E.outExpo(seg(tm, appear + i * .035, appear + .3 + i * .035)), o = seg(tm, out + i * .025, out + .2 + i * .025);
+    const a = ap * (1 - o); if (a <= 0) continue;
+    const x = x0 + i * (w + gap) + (1 - ap) * -20, ft = fillT(i), on = tm >= ft;
+    para(g, x, y - h / 2, w, h, sk);
+    if (on) {
+      const k = seg(tm, ft, ft + .18);
+      g.globalAlpha = a; g.fillStyle = opt.ink || rgba(P.main); g.fill();
+      if (k < 1) { g.fillStyle = `rgba(255,255,255,${(1 - k) * a})`; g.fill(); if (!opt.ink) glowDot(g, x + w / 2, y, 70, P.hl, (1 - k) * gl); }
+    } else { g.globalAlpha = a; g.lineWidth = 2; g.strokeStyle = opt.ink ? 'rgba(0,0,0,.45)' : hexOf(P.dim); g.stroke(); }
+    g.globalAlpha = 1;
+  }
+  return n * (w + gap) - gap;
+}
+
+/* =========================================================
+   LOWER THIRD — HUD (scoreboard card)   (unchanged from the Studio)
+   ========================================================= */
+const HUD = {
+  dur: 6.0, holdAt: 3.0,
+  defaults: { name: 'PLAYERNAME', team: 'TEAM NAME', badge: '1V4', badgeSub: 'CLUTCH', kills: 4, info: 'AK-47 · MIRAGE', pos: 'left' },
+  draw(g, tm, ta, s) {
+    const OUT = 5.1, gl = s.glow;
+    const nameO = { t: s.name, s: 58, w: 900, tr: 0, fill: '#ffffff', sk: 7 };
+    const name = txt(nameO), team = txt({ t: s.team, s: 17, w: 700, tr: .32, fill: 'gold' });
+    const bMO = { t: s.badge, s: 62, w: 900, tr: -.01, fill: 'gold', sk: 7 }, bM = txt(bMO), bS = txt({ t: s.badgeSub, s: 14, w: 700, tr: .42, fill: '#ffffff' });
+    const kills = Math.max(0, s.kills | 0), nP = Math.min(kills, 8);
+    const sTxt = txt({ t: `${kills} ${kills === 1 ? 'KILL' : 'KILLS'}` + (s.info ? '   ·   ' + s.info : ''), s: 17, w: 700, tr: .2, fill: '#0b0b0b' });
+    const barW = 6, boxH = 124, stripH = 38, padL = 34;
+    const leftW = Math.max(name ? name.textW : 160, team ? team.textW : 0);
+    const badgeW = Math.max(bM ? bM.textW : 0, bS ? bS.textW : 0);
+    const divX = barW + padL + leftW + 46, bx = divX + 40;
+    const boxW = bx + badgeW + 42 - barW;
+    const pipO = { w: 22, h: 8, gap: 6, ink: '#0b0b0b' };
+    const stripW = Math.max(boxW * .62, 22 + (sTxt ? sTxt.textW : 0) + 26 + (nP ? nP * 28 : 0) + 26);
+    const GW = barW + Math.max(boxW, stripW) + 20, sc = s.size;
+    const ax = s.pos === 'right' ? W - 100 - GW * sc : 100, ay = H - 92;
+    const top = -(boxH + stripH), boxB = -stripH;
+    const bump = 6 * pulse(tm, .56, .06) * s.shake;
+    g.save(); g.translate(ax + bump * Math.sin(ta * 90), ay + bump * Math.cos(ta * 77)); g.scale(sc, sc);
+    const bIn = E.outExpo(seg(tm, 0, .28)), bOut = E.inExpo(seg(tm, OUT + .5, OUT + .8)), bh = (boxH + stripH) * bIn * (1 - bOut);
+    if (bh > 1) { g.fillStyle = rgba(P.main); g.fillRect(0, -bh, barW, bh); glowDot(g, barW / 2, -bh / 2, 120, P.main, .25 * gl * (1 - bOut)); }
+    const pIn = E.outExpo(seg(tm, .08, .48)), pOut = E.inExpo(seg(tm, OUT + .25, OUT + .62));
+    if (pIn - pOut > .002) {
+      const X0 = barW, Wb = boxW;
+      g.save(); g.beginPath(); g.rect(X0 + Wb * pOut, top - 1, Wb * (pIn - pOut), boxH + 2); g.clip();
+      g.fillStyle = '#0c0c0d'; g.fillRect(X0, top, Wb, boxH);
+      g.fillStyle = '#1d1d20'; g.fillRect(X0, top, Wb, 1);
+      let sw = seg(tm, 1.3, 2.0); if (!(sw > 0 && sw < 1)) sw = tm < OUT ? glintP(ta, 2.0, 3.4, .8) : -1;
+      if (sw > 0) { const x = X0 + lerp(-200, Wb + 200, sw), gr = g.createLinearGradient(x - 180, 0, x + 180, 0); gr.addColorStop(0, rgba(P.main, 0)); gr.addColorStop(.5, rgba(P.main, .08)); gr.addColorStop(1, rgba(P.main, 0)); g.fillStyle = gr; g.fillRect(X0, top, Wb, boxH); }
+      const nk = E.outExpo(seg(tm, .26, .62)), no = E.inCubic(seg(tm, OUT + .1, OUT + .35));
+      if (team) drawC(g, team, cxOfLeft(team, barW + padL + (1 - nk) * -30), top + 32, 1, seg(tm, .34, .55) * (1 - no));
+      if (name) { const ny = top + 80 + (1 - nk) * 70 + no * 70; let gp = seg(tm, 1.4, 1.9); if (!(gp > 0 && gp < 1)) gp = tm < OUT ? glintP(ta, 1.9, 3.4, .5) : -1; drawGlint(g, name, cxOfLeft(name, barW + padL), ny, 1, 1, gp); }
+      const dh = (boxH - 44) * E.outExpo(seg(tm, .38, .62)) * (1 - no); g.fillStyle = '#2c2c30'; g.fillRect(divX, top + boxH / 2 - dh / 2, 2, dh);
+      if (bM) {
+        const k = seg(tm, .5, .7), ko = seg(tm, OUT, OUT + .2), bsc = lerp(1.5, 1, E.outExpo(k)) * (1 - E.inCubic(ko) * .4), a = clamp(k * 3) * (1 - ko);
+        const cx = bx + badgeW / 2, cy = top + 54, sp = pulse(tm, .56, .3);
+        bloomWide(g, bM, cx, cy, bsc, a * gl * (.45 + 1.8 * sp + .08 * Math.sin(ta * 3)));
+        rgbSplit(g, bMO, cx, cy, bsc, 10 * sp, a);
+        drawC(g, bM, cx, cy, bsc, a); bloomTight(g, bM, cx, cy, bsc, a * gl * (.3 + sp));
+        if (bS) drawC(g, bS, cx, top + 98, 1, seg(tm, .62, .8) * (1 - ko));
+      }
+      g.restore();
+      if (pIn < 1) { g.save(); g.globalCompositeOperation = 'lighter'; g.fillStyle = rgba(P.hl, 1 - pIn); g.fillRect(X0 + Wb * pIn - 3, top, 4, boxH); g.restore(); }
+    }
+    const sIn = E.outExpo(seg(tm, .42, .78)), sOut = E.inExpo(seg(tm, OUT, OUT + .32));
+    if (sIn - sOut > .002) {
+      g.save(); g.beginPath(); g.rect(barW + stripW * sOut, boxB - 1, stripW * (sIn - sOut) + 14, stripH + 2); g.clip();
+      para(g, barW, boxB, stripW, stripH, 0); g.beginPath(); g.moveTo(barW, boxB); g.lineTo(barW + stripW + 12, boxB); g.lineTo(barW + stripW, 0); g.lineTo(barW, 0); g.closePath();
+      const gr = g.createLinearGradient(0, boxB, 0, 0); gr.addColorStop(0, rgba(P.top)); gr.addColorStop(1, rgba(P.main)); g.fillStyle = gr; g.fill();
+      let x = barW + 22; const cy = boxB + stripH / 2, k = E.outExpo(seg(tm, .58, .85));
+      if (sTxt) { drawC(g, sTxt, cxOfLeft(sTxt, x + (1 - k) * -24), cy, 1, k); x += sTxt.textW + 26; }
+      if (nP) drawPips(g, nP, x, cy, tm, .7, i => .82 + i * .08, OUT, gl, pipO);
+      g.restore();
+    }
+    g.restore();
+  }
+};
+
+/* ---------- state + headless hook (same API as the Studio's window.__studio) ---------- */
+const state = { color: '#FFC24A', size: 1, hold: 0, shake: 1.2, glow: 1.1, per: { ...HUD.defaults } };
+const settings = () => ({ ...state.per, kills: +state.per.kills || 0, size: state.size, shake: state.shake, glow: state.glow });
+const totalT = () => HUD.dur + state.hold;
+const mapT = t => { const hp = HUD.holdAt, h = state.hold; return t < hp ? t : t < hp + h ? hp : t - h; };
+function renderFrame(t) {
+  lctx.setTransform(1, 0, 0, 1, 0, 0); lctx.globalAlpha = 1; lctx.globalCompositeOperation = 'source-over'; lctx.clearRect(0, 0, W, H);
+  lctx.save(); HUD.draw(lctx, mapT(t), t, settings()); lctx.restore();
+}
+window.__studio = {
+  set(o) {
+    const gset = o.global || {};
+    for (const k of ['color', 'size', 'hold', 'shake', 'glow']) if (gset[k] !== undefined) state[k] = gset[k];
+    if (o.per) Object.assign(state.per, o.per);
+    setPalette(state.color);
+  },
+  total: totalT,
+  render(tt) { renderFrame(tt); },
+  layerFrame(tt) { renderFrame(tt); return layer.toDataURL('image/png'); },
+  cropFrame(tt, y, h) {
+    renderFrame(tt);
+    if (crop.width !== W || crop.height !== h) { crop.width = W; crop.height = h; } else cctx.clearRect(0, 0, W, h);
+    cctx.drawImage(layer, 0, y, W, h, 0, 0, W, h);
+    return crop.toDataURL('image/png');
+  },
+};
+setPalette(state.color);
+Promise.all(['900 100px CTD', '700 30px CTD', '600 20px CTD'].map(f => document.fonts.load(f).catch(() => {})))
+  .then(() => document.fonts.ready)
+  .then(() => { cache.clear(); window.__ready = true; });
+</script>
+</body>
+</html>

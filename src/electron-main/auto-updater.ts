@@ -69,6 +69,13 @@ export function initialize(autoDownloadUpdates: boolean) {
     shouldDownloadUpdatesAutomatically = isEnabled;
   });
 
+  // KrispShot build: the updates published by CS Demo Manager are the upstream app without the KrispShot clip worker,
+  // installing one would replace this build. Updates come from rebuilding this fork instead.
+  const isKrispShotBuild = true;
+  if (isKrispShotBuild) {
+    return;
+  }
+
   const checkInterval = 1000 * 60 * 60 * 12; // 12 hours
   setInterval(async () => {
     if (!isDownloading) {

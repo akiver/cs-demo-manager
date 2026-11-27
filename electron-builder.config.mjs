@@ -27,7 +27,8 @@ if (shouldNotarize) {
 const config = {
   appId: 'com.akiver.csdm',
   copyright: 'Copyright © 2014-present AkiVer',
-  productName: 'CS Demo Manager',
+  // KrispShot build. appId is kept so installing it replaces an existing CS Demo Manager in place (same data).
+  productName: 'KrispShot Demo Manager',
   publish: {
     provider: 'github',
   },

@@ -12,6 +12,7 @@ export const SettingsCategory = {
   Ban: 'ban',
   About: 'about',
   Cameras: 'cameras',
+  KrispShot: 'krispshot',
 } as const;
 
 export type SettingsCategory = (typeof SettingsCategory)[keyof typeof SettingsCategory];

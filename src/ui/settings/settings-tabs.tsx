@@ -8,6 +8,7 @@ export function SettingsTabs() {
   return (
     <div className="flex h-full flex-col overflow-y-auto border-r border-r-gray-300 bg-gray-50 p-16">
       <CloseSettingsButton />
+      <SettingsCategoryButton category={SettingsCategory.KrispShot}>KrispShot</SettingsCategoryButton>
       <SettingsCategoryButton category={SettingsCategory.UI}>
         <Trans>UI</Trans>
       </SettingsCategoryButton>

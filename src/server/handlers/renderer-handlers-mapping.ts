@@ -99,6 +99,10 @@ import type { Map } from 'csdm/common/types/map';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import type { Tag } from 'csdm/common/types/tag';
 import type { Handler } from 'csdm/server/messages/handler';
+import type { KrispShotSettings, KrispShotState } from 'csdm/common/types/krispshot';
+import { getKrispShotStateHandler } from './renderer-process/krispshot/get-krispshot-state-handler';
+import { updateKrispShotSettingsHandler } from './renderer-process/krispshot/update-krispshot-settings-handler';
+import { testKrispShotConnectionHandler } from './renderer-process/krispshot/test-krispshot-connection-handler';
 import { resetMapsHandler } from './renderer-process/map/reset-maps-handler';
 import { resetTablesStateHandler } from './renderer-process/settings/reset-tables-state-handler';
 import { enableFfmpegCustomLocationHandler } from './renderer-process/settings/enable-ffmpeg-custom-location-handler';
@@ -364,6 +368,9 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.DeleteRenownAccount]: Handler<string, RenownAccount[]>;
   [RendererClientMessageName.UpdateCurrentRenownAccount]: Handler<string, RenownAccount[]>;
   [RendererClientMessageName.CapturePlayerView]: Handler<Game, CapturePlayerViewPayload>;
+  [RendererClientMessageName.GetKrispShotState]: Handler<void, KrispShotState>;
+  [RendererClientMessageName.UpdateKrispShotSettings]: Handler<Partial<KrispShotSettings>, KrispShotState>;
+  [RendererClientMessageName.TestKrispShotConnection]: Handler<Partial<KrispShotSettings>, string>;
 }
 
 // Mapping between message names and server handlers sent from the Electron renderer process to the WebSocket server.
@@ -480,4 +487,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.UpdateCurrentRenownAccount]: updateCurrentRenownAccountHandler,
   [RendererClientMessageName.WatchVideoSequences]: watchVideoSequencesHandler,
   [RendererClientMessageName.CapturePlayerView]: capturePlayerViewHandler,
+  [RendererClientMessageName.GetKrispShotState]: getKrispShotStateHandler,
+  [RendererClientMessageName.UpdateKrispShotSettings]: updateKrispShotSettingsHandler,
+  [RendererClientMessageName.TestKrispShotConnection]: testKrispShotConnectionHandler,
 };

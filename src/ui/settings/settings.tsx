@@ -15,6 +15,7 @@ import { BanSettings } from './bans/ban-settings';
 import { assertNever } from 'csdm/common/assert-never';
 import { About } from './about/about';
 import { CamerasSettings } from './cameras/cameras-settings';
+import { KrispShotSettings } from './krispshot/krispshot-settings';
 
 export function Settings() {
   const { category } = useSettingsOverlay();
@@ -46,6 +47,8 @@ export function Settings() {
       return <About />;
     case SettingsCategory.Cameras:
       return <CamerasSettings />;
+    case SettingsCategory.KrispShot:
+      return <KrispShotSettings />;
     default:
       return assertNever(category, `Unknown settings category: ${category as string}`);
   }

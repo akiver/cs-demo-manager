@@ -10,6 +10,9 @@ import { AbortError } from 'csdm/node/errors/abort-error';
 import { CommandError } from 'csdm/node/video/errors/command-error';
 import type { AddVideoPayload, Video } from 'csdm/common/types/video';
 
+// undefined = the video was removed from the queue (canceled).
+export type VideoQueueListener = (videoId: string, video: Video | undefined) => void;
+
 class VideoQueue {
   private videos: Video[] = [];
   private currentVideo: Video | undefined;
@@ -17,6 +20,27 @@ class VideoQueue {
   // Tracks which client connection queued a video so its videos can be canceled when it disconnects.
   private clientIdPerVideoId = new Map<string, string>();
   private isPaused = true;
+  // KrispShot: lets the clip worker follow the videos it queued (status changes and removals).
+  private readonly listeners = new Set<VideoQueueListener>();
+
+  public addListener(listener: VideoQueueListener) {
+    this.listeners.add(listener);
+  }
+
+  public removeListener(listener: VideoQueueListener) {
+    this.listeners.delete(listener);
+  }
+
+  private notifyListeners(videoId: string, video: Video | undefined) {
+    for (const listener of this.listeners) {
+      try {
+        listener(videoId, video);
+      } catch (error) {
+        logger.error('Video queue listener error');
+        logger.error(error);
+      }
+    }
+  }
 
   public resume() {
     if (!this.isPaused) {
@@ -45,6 +69,9 @@ class VideoQueue {
       name: ServerPushMessageName.VideosRemovedFromQueue,
       payload: ids,
     });
+    for (const id of ids) {
+      this.notifyListeners(id, undefined);
+    }
   }
 
   public removeVideosAddedByClient(clientId: string) {
@@ -211,6 +238,7 @@ class VideoQueue {
       name: ServerPushMessageName.VideoUpdated,
       payload: this.currentVideo,
     });
+    this.notifyListeners(this.currentVideo.id, this.currentVideo);
   };
 }
 

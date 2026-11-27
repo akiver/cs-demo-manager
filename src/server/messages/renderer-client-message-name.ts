@@ -112,6 +112,9 @@ export const RendererClientMessageName = {
   FetchPostgreSqlVersion: 'fetch-postgresql-version',
   ImportDataFromV2Backup: 'import-data-from-v2-backup',
   CapturePlayerView: 'capture-player-view',
+  GetKrispShotState: 'get-krispshot-state',
+  UpdateKrispShotSettings: 'update-krispshot-settings',
+  TestKrispShotConnection: 'test-krispshot-connection',
 } as const;
 
 export type RendererClientMessageName = (typeof RendererClientMessageName)[keyof typeof RendererClientMessageName];
