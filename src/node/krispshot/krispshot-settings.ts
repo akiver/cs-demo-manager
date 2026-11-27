@@ -10,8 +10,26 @@ function getSettingsFilePath() {
   return path.join(getAppFolderPath(), 'krispshot.json');
 }
 
-export function getKrispShotFolderPath() {
-  return path.join(getAppFolderPath(), 'krispshot');
+// CS2 gets the demo path through "+playdemo" and HLAE gets the recording folder through console commands: characters
+// such as ' " ; in a path (e.g. a Windows user named "Joshi'sRig") break them and the game stays on the main menu.
+const SAFE_PATH = /^[A-Za-z0-9 _.\-:\\/]+$/;
+
+export function isSafeGamePath(folderPath: string) {
+  return SAFE_PATH.test(folderPath);
+}
+
+/** Where demos and recordings go: the custom folder, else <app folder>\krispshot, else C:\KrispShot. */
+export function getKrispShotFolderPath(settings?: KrispShotSettings) {
+  const custom = settings?.workFolder ?? '';
+  if (custom !== '') {
+    return path.resolve(custom);
+  }
+  const inAppFolder = path.join(getAppFolderPath(), 'krispshot');
+  if (isSafeGamePath(inAppFolder) || process.platform !== 'win32') {
+    return inAppFolder;
+  }
+
+  return 'C:\\KrispShot';
 }
 
 export const defaultKrispShotSettings: KrispShotSettings = {
@@ -23,6 +41,7 @@ export const defaultKrispShotSettings: KrispShotSettings = {
   keepFiles: false,
   demoCacheSize: 5,
   browserPath: '',
+  workFolder: '',
 };
 
 function normalize(input: Partial<KrispShotSettings>): KrispShotSettings {
@@ -43,6 +62,10 @@ function normalize(input: Partial<KrispShotSettings>): KrispShotSettings {
     browserPath: String(s.browserPath ?? '')
       .trim()
       .replace(/^["']|["']$/g, ''),
+    workFolder: String(s.workFolder ?? '')
+      .trim()
+      .replace(/^["']|["']$/g, '')
+      .replace(/[\\/]+$/, ''),
   };
 }
 

@@ -36,6 +36,7 @@ import {
   getKrispShotFolderPath,
   getKrispShotSettings,
   isKrispShotConfigured,
+  isSafeGamePath,
   writeKrispShotSettings,
 } from 'csdm/node/krispshot/krispshot-settings';
 import { SiteApi, SiteApiError } from 'csdm/node/krispshot/site-api';
@@ -132,6 +133,7 @@ class KrispShotWorker {
       this.settings = await getKrispShotSettings();
       if (this.settings.enabled) {
         this.log(`Clip worker enabled · ${this.settings.siteUrl} as "${this.settings.workerName}"`);
+        this.log(`Work folder: ${getKrispShotFolderPath(this.settings)}`);
         this.ensureLoop();
       }
       this.pushStatus();
@@ -250,7 +252,8 @@ class KrispShotWorker {
     const { signal } = abortController;
     this.jobAbortController = abortController;
     this.jobAbortReason = null;
-    const jobFolderPath = path.join(getKrispShotFolderPath(), 'jobs', job.id);
+    const workFolderPath = getKrispShotFolderPath(this.settings);
+    const jobFolderPath = path.join(workFolderPath, 'jobs', job.id);
     const startedAt = Date.now();
     const clipSeconds = job.segments.reduce((sum, s) => sum + (s.endTick - s.startTick) / (job.tickrate || 64), 0);
     const current: KrispShotCurrentJob = {
@@ -305,12 +308,19 @@ class KrispShotWorker {
       await fs.remove(jobFolderPath);
       await fs.ensureDir(jobFolderPath);
 
+      if (!isSafeGamePath(workFolderPath)) {
+        throw new JobError(
+          `The work folder "${workFolderPath}" has characters CS2 can't open demos from (like ' or ;). Set another work folder in Settings → KrispShot, e.g. C:\\KrispShot.`,
+          false,
+        );
+      }
+
       // 1 — demo
       set('DOWNLOADING', 2, 'Downloading the demo');
       const { demoPath, cached } = await downloadMatchDemo({
         url: job.demoUrl,
         matchId: job.matchId,
-        demosFolderPath: path.join(getKrispShotFolderPath(), 'demos'),
+        demosFolderPath: path.join(workFolderPath, 'demos'),
         keep: this.settings.demoCacheSize,
         signal,
         onProgress: (bytes, total) => {

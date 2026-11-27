@@ -183,6 +183,12 @@ export function KrispShotSettings() {
           onChange={(event) => update('browserPath', event.target.value)}
         />
         <TextInput
+          label="Work folder for demos and recordings (empty = automatic, no ' or ; in the path)"
+          value={form.workFolder}
+          placeholder="C:\KrispShot"
+          onChange={(event) => update('workFolder', event.target.value)}
+        />
+        <TextInput
           label="Demos kept on disk"
           value={String(form.demoCacheSize)}
           onChange={(event) => update('demoCacheSize', Number(event.target.value) || 1)}

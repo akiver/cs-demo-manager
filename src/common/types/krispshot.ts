@@ -17,6 +17,8 @@ export type KrispShotSettings = {
   demoCacheSize: number;
   // Custom Edge / Chrome executable used to draw the HUD, auto-detected when empty.
   browserPath: string;
+  // Folder for the demos and recordings, empty = automatic (must be a path CS2 accepts: no ' " ; characters).
+  workFolder: string;
 };
 
 export const KrispShotWorkerState = {
