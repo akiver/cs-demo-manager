@@ -25,6 +25,7 @@ function useDemoSourceImageSrc(source: DemoSource) {
     case DemoSource.Renown:
     case DemoSource.Pracc:
     case DemoSource.Esportligaen:
+    case DemoSource.Xplay:
       fileName = isDarkTheme ? `${source}-white.png` : `${source}-black.png`;
       break;
     case DemoSource.Challengermode:

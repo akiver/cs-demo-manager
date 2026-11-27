@@ -29,6 +29,7 @@ export const SupportedDemoSourcesPerGame: Record<Game, DemoSource[]> = {
     DemoSource.Pracc,
     DemoSource.Renown,
     DemoSource.Valve,
+    DemoSource.Xplay,
   ],
   [Game.CS2LT]: [DemoSource.Challengermode, DemoSource.FaceIt, DemoSource.Valve],
 };

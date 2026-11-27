@@ -97,6 +97,11 @@ export function useGetDemoSourceName() {
           context: 'Demo source name',
           message: 'PRACC',
         });
+      case DemoSource.Xplay:
+        return t({
+          context: 'Demo source name',
+          message: 'XPLAY.GG',
+        });
       case DemoSource.Unknown:
         return t({
           context: 'Demo source name',
@@ -189,6 +194,10 @@ export function useDemoSources() {
     {
       value: DemoSource.Valve,
       name: getDemoSourceName(DemoSource.Valve),
+    },
+    {
+      value: DemoSource.Xplay,
+      name: getDemoSourceName(DemoSource.Xplay),
     },
     {
       value: DemoSource.Unknown,

@@ -3033,6 +3033,11 @@ msgstr "PRACC"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "XPLAY.GG"
+msgstr "XPLAY.GG"
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "Unknown"
 msgstr "Unknown"
 

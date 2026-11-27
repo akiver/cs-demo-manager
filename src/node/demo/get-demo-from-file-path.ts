@@ -92,6 +92,10 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.PerfectWorld;
   }
 
+  if (serverName.includes('xplay')) {
+    return DemoSource.Xplay;
+  }
+
   const fiveEPlayRegex = /^g\d+-(.*)[a-zA-Z0-9_]*$/;
   if (fiveEPlayRegex.exec(fileName) !== null) {
     return DemoSource.FiveEPlay;
