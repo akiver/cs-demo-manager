@@ -1,0 +1,26 @@
+# Fails when .github/workflows/actions.lock is out of sync with the
+# workflows or a locked pin no longer verifies upstream.
+
+name: Verify actions lockfile
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    # Weekly, to catch upstream tags re-pointed to another commit.
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: github/gh-actions-lock@verify/v0.5.1
